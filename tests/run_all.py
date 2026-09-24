@@ -18,7 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 # slowest first (measured); files not listed run afterwards, one process each
-GROUPS = [["test_universe"], ["test_research"], ["test_data_quality"], ["test_regime"],
+GROUPS = [["test_universe"], ["test_research"], ["test_data_quality"], ["test_regime"], ["test_positions"],
           ["test_features", "test_smc", "test_timeframes", "test_strategy_spec"]]
 
 

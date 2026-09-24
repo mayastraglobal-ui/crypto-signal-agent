@@ -35,6 +35,7 @@ MAX_RE = re.compile(r"^max\((.+),(.+)\)$")
 NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 PARAM_RE = re.compile(r"\{(\w+)\}")
 TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets"]
+CONFIRM_TFS = ["30m", "15m"]           # the 5-minute protocol (section 8) runs after a closed 15m / 30m trigger
 
 
 def _fmt(v):
@@ -212,8 +213,15 @@ def check(spec, labels, timeframes):
             errs.append(str(e))
     if not (isinstance(spec["time_stop_bars"], int) and spec["time_stop_bars"] > 0):
         errs.append("time_stop_bars must be a positive whole number")
-    if spec.get("confirm_5m"):
-        errs.append("confirm_5m: the 5-minute confirmation protocol arrives in Phase 10 - set it to false")
+    c5 = spec.get("confirm_5m", False)
+    if not isinstance(c5, bool):
+        errs.append("confirm_5m must be true or false")
+    elif c5:
+        if not set(spec["timeframes"]) <= set(CONFIRM_TFS):
+            errs.append(f"confirm_5m: the 5-minute protocol follows a 15m or 30m trigger - timeframes must be "
+                        f"within {CONFIRM_TFS}")
+        if not spec.get("control_twin"):
+            errs.append("confirm_5m: needs control_twin = the same strategy without the 5m check (section 8)")
     params = spec.get("params") or {}
     if not isinstance(params, dict):
         errs.append("params must be a list of name: number")
@@ -248,10 +256,27 @@ def load(items, labels, timeframes):
     for s in list(ok):
         bad = [f"{ref} '{s[ref]}' is not in strategies.yaml" for ref in ("control_twin", "twin_of")
                if s.get(ref) and s[ref] not in ids]
+        if not bad and s.get("confirm_5m"):
+            bad = confirm_twin_problems(s, next((x for x in ok if x["id"] == s["control_twin"]), None))
         if bad:
             problems.setdefault(s["id"], []).extend(bad)
             ok.remove(s)
     return ok, problems, idle
+
+
+def confirm_twin_problems(s, twin):
+    """A 5m-confirmed card must be its control twin + the 5m check, nothing else: same rules, stop, targets,
+    exits, hold time, gates (compared after the parameters are filled in), on timeframes the twin also runs."""
+    if twin is None:
+        return [f"control_twin '{s['control_twin']}' is not a runnable (FORMALIZED) card"]
+    if twin.get("confirm_5m"):
+        return ["the control twin of a 5m-confirmed card must not use the 5m check itself"]
+    diff = [k for k in LOGIC_KEYS if k not in ("confirm_5m", "timeframes") and s.get(k) != twin.get(k)]
+    if diff:
+        return [f"differs from its control twin in {diff} - only the 5m check may differ"]
+    if not set(s["timeframes"]) <= set(twin["timeframes"]):
+        return ["runs on timeframes its control twin does not run on"]
+    return []
 
 
 def _level(p, d, entry, R, t, cols):

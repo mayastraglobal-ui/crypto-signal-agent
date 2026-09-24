@@ -28,7 +28,9 @@ Status key: **NOT YET TESTED** · **RAW EVIDENCE** (candle-evidence table vs ran
 
 ## SMC strategies S5-S8 (Phase 7, strategy spec v3 - rules in `strategies.yaml`)
 All four start as **FORMALIZED v1.0, NOT YET TESTED on live data**. Each has a control twin with the same gates,
-regimes, exits and hold time but without the SMC ingredient. No 5m confirmation yet (Phase 10 adds it as v1.1).
+regimes, exits and hold time but without the SMC ingredient. Phase 10 adds **S5-S8 -5M** (new ids, v1.0): the
+same rules + the section 8 5-minute entry confirmation, each tested against its plain version (same period,
+same 5m bars) - NOT YET TESTED.
 
 | Strategy | Timeframes | Setup | Stop / targets | Control twin drops |
 |---|---|---|---|---|
