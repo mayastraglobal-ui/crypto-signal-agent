@@ -47,6 +47,10 @@ jobs:
         continue-on-error: true
         run: python notify.py
 
+      - name: Email data-quality alerts
+        continue-on-error: true
+        run: python notify.py system
+
       - name: Save reports
         run: |
           git config user.name "signal-bot"

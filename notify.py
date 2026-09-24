@@ -5,6 +5,7 @@ Email alerts for the Crypto Signal Agent (works without Claude).
   python notify.py          -> email any NEW signals from reports/latest.json
   python notify.py test     -> send a test email (to check your setup)
   python notify.py failed   -> email a warning that the scan failed
+  python notify.py system   -> email [SYSTEM] once when data turns UNSAFE, and once when it recovers
 
 Needs 2 GitHub secrets: GMAIL_USER and GMAIL_APP_PASSWORD
 (optional 3rd: ALERT_TO = a different address to receive alerts).
@@ -20,6 +21,7 @@ from email.message import EmailMessage
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 STATE = os.path.join(REPORTS, "notified.json")
+SYSTEM_STATE = os.path.join(REPORTS, "system_alert_state.json")
 
 
 def repo_link(path=""):
@@ -104,6 +106,40 @@ def signals_email():
         json.dump(seen, open(STATE, "w"))
 
 
+def system_email():
+    """[SYSTEM] data-quality alert. Sends only when the state CHANGES to or from UNSAFE,
+    so a long outage gives you 2 emails (start + recovery), not one every hour."""
+    path = os.path.join(REPORTS, "data_quality.json")
+    if not os.path.exists(path):
+        print("No data-quality report yet.")
+        return
+    q = json.load(open(path))
+    now = q["system_state"]
+    before = json.load(open(SYSTEM_STATE))["state"] if os.path.exists(SYSTEM_STATE) else "GOOD"
+    if (now == "UNSAFE") == (before == "UNSAFE"):
+        print(f"Data state {now} (was {before}) - no system email.")
+        return
+    if now == "UNSAFE":
+        bad = [f"- {coin}: " + "; ".join(f"{tf} {p}" for tf, r in c["timeframes"].items()
+                                          for p in r["problems"])
+               for coin, c in q["coins"].items() if c["state"] == "UNSAFE"]
+        bad += [f"- {coin}: download failed" for coin in q.get("failed_downloads", [])]
+        subject = "[SYSTEM] DATA_STALE / SIGNAL_DISABLED"
+        body = [f"Checked {q['checked_utc']} UTC. Market data failed the safety checks.",
+                f"Reason: {q['reason']}", "",
+                "What this means: the agent sends NO signals until the data is good again.",
+                "What you should do: nothing. Do not trade from this agent's old signals meanwhile.",
+                "", "Problems found:"] + bad
+    else:
+        subject = "[SYSTEM] Data recovered - signals allowed again"
+        body = [f"Checked {q['checked_utc']} UTC. Data state is now {now}: {q['reason']}.",
+                "Normal signal checks are running again."]
+    body += ["", "Details: " + repo_link("/blob/main/reports/latest.md"), "",
+             "Research signal. Not financial advice."]
+    if send(subject, "\n".join(body)):
+        json.dump({"state": now, "since_utc": q["checked_utc"]}, open(SYSTEM_STATE, "w"))
+
+
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "signals"
     try:
@@ -115,10 +151,12 @@ def main():
                 sys.exit("Test failed: add the GMAIL_USER and GMAIL_APP_PASSWORD secrets first.")
         elif mode == "failed":
             run = os.environ.get("GITHUB_RUN_ID", "")
-            send("Crypto Signal Agent - scan FAILED",
+            send("[SYSTEM] Crypto Signal Agent - scan FAILED",
                  "The hourly scan failed. It will try again next hour.\n"
                  "If this keeps happening, open this link, take a screenshot and show it to Claude:\n"
                  + repo_link(f"/actions/runs/{run}"))
+        elif mode == "system":
+            system_email()
         else:
             signals_email()
     except smtplib.SMTPAuthenticationError:

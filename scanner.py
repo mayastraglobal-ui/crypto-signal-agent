@@ -29,6 +29,8 @@ import pandas as pd
 import requests
 import yaml
 
+from engine import data_quality as dq
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 TF_MS = {"5m": 300_000, "15m": 900_000, "30m": 1_800_000, "1h": 3_600_000,
@@ -159,20 +161,28 @@ class OKX:
 
 
 def _finish(df, tf):
+    """Numbers only. Sorting, duplicates and unfinished candles are handled (and reported)
+    by engine/data_quality.py - always load candles through fetch_checked()."""
     df = df.astype(float)
     df["open_time"] = df["open_time"].astype("int64")
-    df = df.drop_duplicates("open_time").sort_values("open_time").reset_index(drop=True)
     df["close_time"] = df["open_time"] + TF_MS[tf] - 1
-    now_ms = int(time.time() * 1000)
-    return df[df["close_time"] < now_ms].reset_index(drop=True)   # only CLOSED candles
+    return df
+
+
+def fetch_checked(feed, symbol, tf, n, dq_cfg):
+    """Download candles and run the data-quality checks. Returns (clean_df, report).
+    clean_df has CLOSED candles only, sorted, without duplicates."""
+    raw = feed.klines(symbol, tf, n)
+    return dq.check_candles(raw, TF_MS[tf], int(time.time() * 1000), dq_cfg)
 
 
 class Synthetic:
     """Fake but realistic-looking prices, used only for --offline testing."""
     name = "Synthetic (offline test)"
 
-    def __init__(self, seed=7):
+    def __init__(self, seed=7, fault=None):
         self.seed = seed
+        self.fault = fault   # plant a data problem to test the safety checks (see --fault)
 
     def tickers(self):
         names = ["BTC", "ETH", "SOL", "BNB", "XRP", "ADA", "LINK", "AVAX", "DOGE", "FET",
@@ -198,6 +208,10 @@ class Synthetic:
         ot = now - TF_MS[tf] * np.arange(n, 0, -1)
         df = pd.DataFrame({"open_time": ot, "open": opn, "high": high, "low": low,
                            "close": close, "volume": volu})
+        if symbol == "BTCUSDT" and self.fault == "stale_btc":
+            df["open_time"] -= 10 * TF_MS[tf]          # feed stopped 10 candles ago
+        elif symbol == "ETHUSDT" and self.fault == "bad_prices":
+            df.loc[df.index[-5], "low"] = -1.0          # impossible negative price
         return _finish(df, tf)
 
 
@@ -496,16 +510,20 @@ def load_log():
     return pd.DataFrame(columns=LOG_COLS)
 
 
-def update_forward(logdf, data, feed, cfg):
-    """Replay candles after each OPEN signal using the exact same SL/TP rules."""
+def update_forward(logdf, data, quality, feed, cfg):
+    """Replay candles after each OPEN signal using the exact same SL/TP rules.
+    Signals whose candles are UNSAFE stay OPEN until the data is trustworthy again."""
     for i, row in logdf[logdf["status"] == "OPEN"].iterrows():
         sym, tf = row["coin"] + cfg["market"]["quote"], row["tf"]
         df = data.get((sym, tf))
+        rep = quality.get((row["coin"], tf))
         if df is None:
             try:
-                df = feed.klines(sym, tf, 1000)
+                df, rep = fetch_checked(feed, sym, tf, 1000, cfg.get("data_quality"))
             except Exception:
                 continue
+        if rep is None or rep["state"] == dq.UNSAFE:
+            continue
         st = int(pd.Timestamp(row["signal_time_utc"]).value // 1_000_000)
         after = df[df["open_time"] > st].reset_index(drop=True)
         if after.empty:
@@ -575,6 +593,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
     ap.add_argument("--coins", type=int, default=None, help="override number of coins")
+    ap.add_argument("--fault", choices=["stale_btc", "bad_prices"], default=None,
+                    help="offline only: plant a data problem to test the safety checks")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
@@ -586,7 +606,9 @@ def main():
     started = dt.datetime.now(dt.timezone.utc)
 
     # ---------- data source ----------
-    feeds = [Synthetic()] if args.offline else [Binance(), OKX()]
+    if args.fault and not args.offline:
+        sys.exit("--fault only works together with --offline")
+    feeds = [Synthetic(fault=args.fault)] if args.offline else [Binance(), OKX()]
     feed, universe = None, None
     for f in feeds:
         try:
@@ -596,28 +618,71 @@ def main():
         except Exception as e:
             log(f"{f.name} unavailable: {e}")
     if feed is None:
-        sys.exit("No market data source reachable.")
+        sys.exit("No market data source reachable.")   # workflow emails "[SYSTEM] scan FAILED"
     log(f"Data source: {feed.name}; candidate coins: {len(universe)}")
 
-    # ---------- download ----------
-    data, coins = {}, []
+    # ---------- second exchange, for the cross-venue price check ----------
+    dq_cfg = dq.settings(cfg.get("data_quality"))
+    second, second_name = None, None
+    for f in feeds:
+        if f is feed:
+            continue
+        try:
+            second = {t["symbol"]: t["last"] for t in f.tickers()}
+            second_name = f.name
+            break
+        except Exception as e:
+            log(f"cross-venue check: {f.name} unavailable ({e})")
+
+    # ---------- download + data-quality checks ----------
+    data, coins, quality, failed = {}, [], {}, []
     tfs = [tf for tf in TF_ORDER if tf in cfg["timeframes"]]
     for u in universe:
         if len(coins) >= cfg["market"]["top_n_coins"]:
             break
-        sym = u["symbol"]
+        sym, base = u["symbol"], u["base"]
         try:
-            daily = feed.klines(sym, "1d", 400)
+            daily, rep = fetch_checked(feed, sym, "1d", 400, dq_cfg)
             if len(daily) < cfg["market"]["min_listing_days"]:
                 log(f"skip {sym}: only {len(daily)} days of history")
                 continue
-            data[(sym, "1d")] = daily
+            got = {"1d": (daily, rep)}
             for tf in tfs:
-                data[(sym, tf)] = feed.klines(sym, tf, int(cfg["timeframes"][tf]))
-            coins.append(u)
-            log(f"loaded {sym}")
+                got[tf] = fetch_checked(feed, sym, tf, int(cfg["timeframes"][tf]), dq_cfg)
         except Exception as e:
             log(f"skip {sym}: {e}")
+            failed.append(base)
+            continue
+        for tf, (df_tf, rep) in got.items():
+            data[(sym, tf)] = df_tf
+            quality[(base, tf)] = rep
+            if rep["state"] != dq.GOOD:
+                log(f"data {rep['state']}: {sym} {tf}: {'; '.join(rep['problems'])}")
+        coins.append(u)
+        log(f"loaded {sym}")
+
+    # ---------- judge data quality: per coin, then the whole system ----------
+    cross = dq.cross_venue({c["base"]: c["last"] for c in coins},
+                           None if second is None else
+                           {c["base"]: second.get(c["symbol"]) for c in coins},
+                           dq_cfg["cross_venue_max_pct"])
+    coin_state = {c["base"]: dq.worst(cross[c["base"]]["state"],
+                                     *(quality[(c["base"], tf)]["state"] for tf in ["1d"] + tfs))
+                  for c in coins}
+    sys_state, sys_reason = dq.system_state(coin_state, "BTC", failed,
+                                            dq_cfg["system_unsafe_coin_share"])
+    log(f"Data quality: system {sys_state} - {sys_reason}")
+
+    def signals_allowed(base, tf):
+        """Only GOOD data may produce signals: the signal timeframe, its higher timeframe,
+        the cross-exchange price check, and the whole system."""
+        if sys_state == dq.UNSAFE or cross[base]["state"] != dq.GOOD:
+            return False
+        for t in (tf, HTF.get(tf)):
+            r = quality.get((base, t))
+            if t and (r is None or r["state"] != dq.GOOD):
+                return False
+        return True
 
     # ---------- backtest everything ----------
     per = {}       # (strategy, tf) -> {coin: trades}
@@ -628,8 +693,8 @@ def main():
         sym, base = u["symbol"], u["base"]
         for tf in tfs:
             df = data.get((sym, tf))
-            if df is None or len(df) < 300:
-                continue
+            if df is None or len(df) < 300 or quality[(base, tf)]["state"] == dq.UNSAFE:
+                continue    # never backtest on data we cannot trust
             df = add_htf(df.copy(), data.get((sym, HTF[tf])))
             ns = make_namespace(df)
             df["_atr"] = ns["atr"](14)
@@ -684,7 +749,7 @@ def main():
                     break
 
     # ---------- forward test (live proof) ----------
-    logdf = update_forward(load_log(), data, feed, cfg) if not args.offline else load_log()
+    logdf = update_forward(load_log(), data, quality, feed, cfg) if not args.offline else load_log()
     fwd = forward_stats(logdf)
 
     # ---------- judge each strategy x timeframe ----------
@@ -741,10 +806,13 @@ def main():
     tp = cfg["trade_plan"]
     acct = cfg["account"]["size_usdt"]
     risk_usd = acct * cfg["account"]["risk_per_trade_pct"] / 100
-    plans = []
+    plans, blocked = [], []
     for sgl in live:
         key = (sgl["strategy"], sgl["tf"])
         if verdict.get(key) != "WORKS":
+            continue
+        if not signals_allowed(sgl["coin"], sgl["tf"]):
+            blocked.append(f"{sgl['coin']} {sgl['tf']} {sgl['strategy']}")
             continue
         by_coin = per[key]
         pooled = stats([t for tr in by_coin.values() for t in tr])
@@ -810,6 +878,17 @@ def main():
             logdf = pd.concat([logdf, pd.DataFrame(new_rows)], ignore_index=True)
         logdf.to_csv(os.path.join(REPORTS, "signals_log.csv"), index=False)
 
+    # ---------- data-quality report ----------
+    dq_out = dict(
+        checked_utc=started.strftime("%Y-%m-%d %H:%M"), system_state=sys_state, reason=sys_reason,
+        status_code="DATA_STALE / SIGNAL_DISABLED" if sys_state == dq.UNSAFE else "SIGNALS_ALLOWED",
+        data_source=feed.name, second_exchange=second_name, failed_downloads=failed,
+        blocked_signals=blocked,
+        coins={c["base"]: dict(state=coin_state[c["base"]], cross_venue=cross[c["base"]],
+                               timeframes={tf: quality[(c["base"], tf)] for tf in ["1d"] + tfs})
+               for c in coins})
+    json.dump(dq_out, open(os.path.join(REPORTS, "data_quality.json"), "w"), indent=1, default=float)
+
     # ---------- write reports ----------
     closed = logdf[logdf["status"] != "OPEN"].dropna(subset=["result_r"])
     fwd_total = dict(signals=int(len(logdf)), closed=int(len(closed)),
@@ -824,7 +903,7 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
-               coin_snapshot=snap)
+               coin_snapshot=snap, data_quality=dq_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -835,6 +914,42 @@ def main():
         f"{sum(b['status'] == 'WORKS' for b in board)} WORK, {len(final)} signals")
 
 
+def render_dq(q, w):
+    w("## 0. Data check")
+    meaning = {dq.GOOD: "all data passed the checks - signals allowed",
+               dq.DEGRADED: "signals only from coins with GOOD data; the others are analysis-only",
+               dq.UNSAFE: "**`DATA_STALE / SIGNAL_DISABLED`** - no signals this run"}
+    w(f"- **System: {q['system_state']}** - {meaning[q['system_state']]} ({q['reason']})")
+    devs = [c["cross_venue"]["deviation_pct"] for c in q["coins"].values()
+            if c["cross_venue"]["deviation_pct"] is not None]
+    if q["second_exchange"] and devs:
+        w(f"- **Price cross-check** {q['data_source']} vs {q['second_exchange']}: "
+          f"largest difference {max(devs):.2f}% (limit 0.5%)")
+    else:
+        w("- **Price cross-check:** second exchange not available this run (not guessed)")
+    if q["failed_downloads"]:
+        w(f"- **Download failed:** {', '.join(q['failed_downloads'])}")
+    if q["blocked_signals"]:
+        w(f"- **Signals blocked by bad data:** {'; '.join(q['blocked_signals'])}")
+    rows = []
+    for coin, c in q["coins"].items():
+        why = [f"{tf}: {p}" for tf, r in c["timeframes"].items() for p in r["problems"]]
+        if c["cross_venue"]["state"] != dq.GOOD:
+            why.append(c["cross_venue"]["note"])
+        if why:
+            rows.append(f"| {coin} | **{c['state']}** | {'; '.join(why)} |")
+    if rows:
+        w("\n| Coin | Data state | Problem |\n|---|---|---|")
+        for r in rows:
+            w(r)
+    else:
+        w(f"- All {len(q['coins'])} coins passed every check on every timeframe.")
+    n_notes = sum(len(r["notes"]) for c in q["coins"].values() for r in c["timeframes"].values())
+    if n_notes:
+        w(f"- {n_notes} small note(s) (e.g. unfinished candles ignored) - see `reports/data_quality.json`")
+    w("")
+
+
 def render_md(o, cfg):
     L = []
     w = L.append
@@ -842,6 +957,7 @@ def render_md(o, cfg):
     w(f"**Updated:** {o['generated_beijing']} Beijing time ({o['generated_utc']} UTC) · "
       f"data: {o['data_source']} · {len(o['coins_scanned'])} coins scanned\n")
     w("> Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.\n")
+    render_dq(o["data_quality"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]

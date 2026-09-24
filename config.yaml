@@ -50,6 +50,19 @@ costs:                       # realistic trading costs - never set these to 0!
     funding_pct_per_8h: 0.01 # futures "funding" fee, paid every 8 hours while the trade is open.
                              # Real funding changes sign; we cautiously ALWAYS charge it to the short.
 
+data_quality:                # safety checks on the price data, every run (AGENT_PROMPT.md section 3)
+  # GOOD = signals allowed · DEGRADED = analysis only · UNSAFE = no signals
+  stale_periods: 2           # newest closed candle older than 2 candle-lengths -> UNSAFE
+  max_missing_pct: 1.0       # more than 1% of candles missing -> UNSAFE
+  recent_bars: 300           # any missing candle among the newest 300 -> DEGRADED
+  volume_median_bars: 50     # "normal volume" = median of the 50 candles before
+  volume_check_bars: 3       # check the newest 3 closed candles for volume spikes
+  volume_spike_warn: 10      # 10x normal volume -> note only (real breakouts do this)
+  volume_spike_degraded: 50  # 50x normal volume -> probably bad data -> DEGRADED
+  cross_venue_max_pct: 0.5   # Binance vs OKX price differ by more than 0.5% -> DEGRADED
+  system_unsafe_coin_share: 0.30   # BTC UNSAFE, or >30% of coins UNSAFE -> ALL signals stop
+                                   # (DATA_STALE / SIGNAL_DISABLED) + a [SYSTEM] email
+
 trade_plan:                  # the TP1 / TP2 / TP3 structure used for EVERY signal
   tp_r: [1.0, 2.0, 3.0]      # TP1 = 1R, TP2 = 2R, TP3 = 3R  (R = distance entry -> stop-loss)
   tp_split: [0.4, 0.3, 0.3]  # close 40% at TP1, 30% at TP2, 30% at TP3

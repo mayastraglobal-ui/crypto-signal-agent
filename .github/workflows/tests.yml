@@ -1,0 +1,31 @@
+name: Tests
+
+# Runs the automatic tests on every push and pull request.
+# Green tick = all tests passed. Red cross = something is broken; open the run to see which test.
+on:
+  push:
+    paths-ignore:
+      - "reports/**"          # the hourly report commits don't need testing
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Run tests (offline, synthetic data - no internet or secrets needed)
+        run: python -m unittest discover -s tests -v
