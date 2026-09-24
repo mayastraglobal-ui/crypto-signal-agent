@@ -90,6 +90,22 @@ features:                    # the feature engine (AGENT_PROMPT.md section 7). A
   pullback_min: 0.382        # pullback: gives back 38.2% - 61.8% of the impulse
   pullback_max: 0.618
 
+regime:                      # market regime per timeframe (AGENT_PROMPT.md section 6) - SHOWN ONLY for now;
+                             # strategies declare allowed regimes and permission becomes a gate in Phase 7
+  timeframes: [1w, 1d, 4h, 1h]
+  ema: [50, 200]             # EMA structure: close vs EMA50 vs EMA200 ...
+  ema_by_tf: {1w: [10, 40]}  # ... weekly uses 10/40 weeks (about the same calendar span as 50/200 days;
+                             #     200 weeks = 4 years of history, which many coins do not have). Operator OK 2026-09-24
+  slope_bars: 10             # EMA-fast slope over 10 candles; more than 1 ATR up = bull vote, down = bear vote
+  slope_atr: 1.0
+  adx_strong: 25             # ADX above 25 = strong trend
+  adx_weak: 20               # ADX below 20 = weak trend / ranging
+  expansion_bb_pct: 0.90     # EXPANSION: Bollinger width in its top 10%, a candle range >= 1.5x the ATR
+  expansion_range_atr: 1.5   #   before it, and a displacement / breakout - all in the last 3 candles
+  compression_bb_pct: 0.10   # COMPRESSION: width in its bottom 10%, ATR <= 0.8x normal, ADX below 20
+  compression_atr_x: 0.8
+  high_vol_atr_x: 1.3        # a range with ATR >= 1.3x normal = HIGH_VOL_RANGE
+
 evidence:                    # candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL
   stop_atr: 1.0              # hypothetical stop 1 ATR from the entry (next candle's open)
   targets_r: [1, 2, 3]       # how often +1R / +2R / +3R was reached AFTER costs, before the stop
