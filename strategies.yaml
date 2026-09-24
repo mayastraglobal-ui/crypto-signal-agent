@@ -1,15 +1,36 @@
 # =====================================================================
-#  STRATEGY LIBRARY
-#  Every strategy here is backtested automatically on every run.
-#  Strategies that FAIL the tests are ignored (no signals).
-#  To add a new idea: copy one block, change the name + rules, save.
+#  STRATEGY LIBRARY - spec v3 (AGENT_PROMPT.md section 10)
+#  Every FORMALIZED strategy is backtested automatically on every run, with fees.
+#  None is assumed to work. Only APPROVED versions (your "yes") ever send [ENTRY] emails.
 #
-#  HOW RULES WORK
-#  - "long:"  = list of conditions. ALL must be true on a closed candle -> BUY signal.
-#  - "short:" = same for SELL/short signals (futures only).
-#  - "exit_long"/"exit_short" (optional) = ALL true -> close the trade early.
-#  - stop_atr: stop-loss distance = this many ATRs (ATR = average candle size).
-#  - max_hold_bars: close the trade after this many candles if nothing else happened.
+#  EACH STRATEGY IS AN "ID CARD":
+#    id / version      name + version. A TESTED version never changes: to change the rules,
+#                      copy the block, raise the version ("1.0" -> "1.1"), add a changelog line.
+#                      (The engine refuses a tested version whose rules were edited.)
+#    status            what YOU set: IDEA (written down, not tested) | FORMALIZED (test it) |
+#                      RETIRED (archived, not tested). The engine sets BACKTESTING / VALIDATION /
+#                      FAILED / PAPER_TRADING itself (reports/latest.md, memory/strategy_registry.csv).
+#    family            trend_following (A) | momentum (B) | breakout (C) | mean_reversion (D) |
+#                      price_action (E) | mtf_pullback (F) | liquidity_reversal (G) | smc (H)
+#    gate              trend          = needs 2 of 1D/4H/1H in its direction, no trade against a
+#                                       STRONG weekly trend (weekly veto)
+#                      reversal       = needs 2 of 1D/4H/1H in its direction, no weekly veto
+#                      mean_reversion = only in its (range) regimes, never against a STRONG 1W/1D/4H trend
+#    regimes           allowed market regimes; outside them the strategy stands down.
+#                      Checked on 1D for 1D signals, 4H for 4H signals, 1H for 1H and below.
+#    long / short      conditions - ALL must be true on a CLOSED candle. Entry = next candle's open.
+#    exit_long/_short  (optional) ALL true -> close the trade early.
+#    stop              {method: atr, atr: 1.5}  -> stop 1.5 ATR away
+#                      {method: structure, long_level: <expression>, short_level: <expression>,
+#                       buffer_atr: 0.2, max_width_atr: 3.0} -> stop beyond that level + 0.2 ATR;
+#                       no trade when the stop would be wider than 3 ATR
+#    targets           (optional; default = config.yaml trade_plan: TP 1R/2R/3R, close 40/30/30%)
+#                      long / short: list of "2R", a column name, or "max(3R, column)" (the farther one)
+#                      split: share closed at each target (adds up to 1)
+#                      need: {long: column, short: column, min_r: 2.0} -> no trade unless that level
+#                      is at least 2R away
+#    time_stop_bars    close after this many candles; cooldown_bars = candles to wait after a trade
+#    control_twin      the same idea WITHOUT its special (e.g. SMC) ingredient - it must be beaten
 #
 #  BUILDING BLOCKS you can use inside rules:
 #    open high low close volume        -> candle prices
@@ -23,13 +44,29 @@
 #    supertrend_dir(10,3)               -> +1 up-trend, -1 down-trend
 #    pct_rank(x,100)                    -> 0..1, where x ranks vs last 100 values
 #    cross_up(a,b) cross_down(a,b)      -> a crossed above / below b on this candle
+#    within(x,n)                        -> x was true on this candle or one of the n-1 before
+#    bars_since(x)                      -> candles since x was last true (0 = this candle)
 #    htf_up / htf_down                  -> the HIGHER timeframe is trending up / down
 #                                          (5m,15m -> 1h | 30m,1h -> 4h | 4h -> 1d)
-#  status: active | candidate | off
+#    feature engine columns             -> displacement_up, bull_engulf, rel_vol, ... (engine/features.py)
+#    smc_* (this timeframe)             -> events: smc_sweep_bull/_bear, smc_bos_up/_down, smc_choch_up/_down,
+#                                          smc_fvg_retrace_bull/_bear; context: smc_range_pos (<0.5 = discount),
+#                                          smc_in_bull_ob / smc_in_bear_ob, smc_bull_ob_low/_high, smc_sweep_pdl /
+#                                          smc_sweep_pdh, smc_sweep_bull_low / smc_sweep_bear_high, smc_liq_above /
+#                                          smc_liq_below, smc_pdh / smc_pdl / smc_pd_mid, smc_kz_london /
+#                                          smc_kz_ny_am / smc_kz_silver_bullet / smc_kz_asia / smc_in_killzone
+#    h4_* (below 4H only)               -> the same SMC context from the newest CLOSED 4H candle,
+#                                          e.g. h4_bull_ob_low, h4_bull_ob_high, h4_range_low, h4_range_high
 # =====================================================================
 
-- name: trend_pullback
-  status: active
+- id: trend_pullback
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "In a trend confirmed by the higher timeframe, a pullback to the 20 EMA that closes strong again continues the trend."
   timeframes: ["4h", "1h", "30m", "15m"]
   description: "Buy the dip inside an up-trend: price pulls back to the 20 EMA and bounces."
   logic: >-
@@ -52,11 +89,21 @@
     - close < open
     - rsi(close,14) < 60
     - rsi(close,14) > 35
-  stop_atr: 1.5
-  max_hold_bars: 30
+  stop: {method: atr, atr: 1.5}
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: "Fails in ranges (every touch of the EMA looks like a pullback); late in a trend the bounce is often the last one."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
-- name: donchian_breakout
-  status: active
+- id: donchian_breakout
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A close beyond the 20-candle range with 1.5x volume and ADX > 20 starts a move that is worth following."
   timeframes: ["4h", "1h", "30m"]
   description: "Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume."
   logic: >-
@@ -77,11 +124,21 @@
     - close < prev(lowest(low,10))
   exit_short:
     - close > prev(highest(high,10))
-  stop_atr: 2.0
-  max_hold_bars: 60
+  stop: {method: atr, atr: 2.0}
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: "Many false breakouts in chop; wide stops; most of the profit comes from a few big trends."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
-- name: rsi2_dip_buy
-  status: active
+- id: rsi2_dip_buy
+  version: "1.0"
+  status: FORMALIZED
+  family: mean_reversion
+  gate: mean_reversion
+  regimes: [RANGE, HIGH_VOL_RANGE]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A sharp 1-2 candle dip (RSI(2) < 10) snaps back towards the short-term average."
   timeframes: ["4h", "1h", "30m", "15m"]
   description: "Connors RSI(2): in a long-term up-trend, buy a sharp 1-2 candle dip, sell the bounce."
   logic: >-
@@ -98,11 +155,21 @@
     - close > sma(close,5)
   exit_short:
     - close < sma(close,5)
-  stop_atr: 2.0
-  max_hold_bars: 15
+  stop: {method: atr, atr: 2.0}
+  time_stop_bars: 15
+  cooldown_bars: 0
+  known_weaknesses: "Catching a falling knife in a real breakdown; many small wins, rare large losses."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + mean_reversion gate."
 
-- name: bb_squeeze_breakout
-  status: active
+- id: bb_squeeze_breakout
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes: [COMPRESSION, EXPANSION, STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "After a volatility squeeze (bandwidth in its lowest 20%), a band break with volume in the higher-timeframe direction runs."
   timeframes: ["4h", "1h", "30m", "15m"]
   description: "Volatility squeeze: Bollinger Bands get very tight, then price breaks out with volume."
   logic: >-
@@ -119,11 +186,21 @@
     - close < bb_lower(close,20,2)
     - volume > vol_sma(20) * 1.3
     - htf_down
-  stop_atr: 1.5
-  max_hold_bars: 30
+  stop: {method: atr, atr: 1.5}
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: "Squeezes can break both ways (head fakes); rare signals."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
-- name: macd_trend_cross
-  status: active
+- id: macd_trend_cross
+  version: "1.0"
+  status: FORMALIZED
+  family: momentum
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A MACD cross below zero inside a 200-EMA trend marks the end of a pullback and momentum resuming."
   timeframes: ["4h", "1h", "30m"]
   description: "MACD crosses up below zero while price is above the 200 EMA (trend resumes after a pullback)."
   logic: >-
@@ -140,11 +217,21 @@
     - htf_down
     - cross_down(macd_line(close), macd_signal(close))
     - macd_line(close) > 0
-  stop_atr: 1.5
-  max_hold_bars: 40
+  stop: {method: atr, atr: 1.5}
+  time_stop_bars: 40
+  cooldown_bars: 0
+  known_weaknesses: "Lagging; in sideways markets the crosses whipsaw."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
-- name: supertrend_flip
-  status: active
+- id: supertrend_flip
+  version: "1.0"
+  status: FORMALIZED
+  family: trend_following
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A Supertrend flip in the higher-timeframe direction with ADX > 20 catches a new leg of the trend."
   timeframes: ["4h", "1h", "30m"]
   description: "Supertrend(10,3) flips to up-trend while ADX shows a real trend."
   logic: >-
@@ -165,11 +252,21 @@
     - supertrend_dir(10,3) == -1
   exit_short:
     - supertrend_dir(10,3) == 1
-  stop_atr: 2.0
-  max_hold_bars: 60
+  stop: {method: atr, atr: 2.0}
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: "Flips late; gives back a lot before the exit flip."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
-- name: liquidity_sweep_reversal
-  status: active
+- id: liquidity_sweep_reversal
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: reversal
+  regimes: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A wick through the 20-candle low (high) that closes back inside, with volume, means the stop-hunt failed and price reverses."
   timeframes: ["1h", "30m", "15m", "5m"]
   description: "Stop-hunt reversal: price dips below the 20-candle low, then closes back above it."
   logic: >-
@@ -188,11 +285,21 @@
     - close < open
     - volume > vol_sma(20) * 1.2
     - rsi(close,14) > 55
-  stop_atr: 1.0
-  max_hold_bars: 20
+  stop: {method: atr, atr: 1.0}
+  time_stop_bars: 20
+  cooldown_bars: 0
+  known_weaknesses: "Strong trends keep sweeping lows without reversing; low timeframes are expensive after fees."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + reversal gate."
 
-- name: ema_9_21_cross
-  status: active
+- id: ema_9_21_cross
+  version: "1.0"
+  status: FORMALIZED
+  family: trend_following
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "Existing library (before v3), re-versioned under spec v3"
+  hypothesis: "A 9/21 EMA cross with the 200 EMA trend and ADX > 20 catches trend moves."
   timeframes: ["1h", "30m", "15m", "5m"]
   description: "Classic 9/21 EMA crossover, only with the 200 EMA trend and ADX filter."
   logic: >-
@@ -211,10 +318,292 @@
     - cross_down(ema(close,9), ema(close,21))
   exit_short:
     - cross_up(ema(close,9), ema(close,21))
-  stop_atr: 1.5
-  max_hold_bars: 40
+  stop: {method: atr, atr: 1.5}
+  time_stop_bars: 40
+  cooldown_bars: 0
+  known_weaknesses: "Whipsaws a lot; kept mainly as a simple benchmark."
+  changelog:
+    - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
 # ---------------------------------------------------------------------
-# NEW IDEAS go below with status: candidate. They are tested exactly
-# like the others; if they pass, they start producing signals.
+# H. SMC / ICT research candidates S5-S8 (AGENT_PROMPT.md section 9) and their CONTROL TWINS.
+# A twin keeps the same gates, regimes, exits and hold time, but drops the SMC ingredient.
+# The SMC part is only kept if it beats its twin out of sample (Phase 8 checks this formally).
+# 5-minute confirmation (section 8) arrives in Phase 10 as a new version, tested against these.
+# ---------------------------------------------------------------------
+
+- id: S5-SWEEP-MSS-FVG
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "ICT material (CLAIM), AGENT_PROMPT.md section 9 S5"
+  hypothesis: "With the higher timeframes aligned, a sell-side sweep followed by a market-structure shift with displacement, entered on the first retrace into a fair value gap, continues to the opposing liquidity pool."
+  timeframes: ["30m", "15m"]
+  description: "Sweep of liquidity -> structure shift (CHoCH with displacement) -> first pullback into the gap."
+  logic: >-
+    Stops under a low are taken (sweep), then price breaks structure the other way with a strong
+    candle (market-structure shift). The gap that strong move leaves behind is where we enter, the
+    stop goes beyond the sweep's extreme, and the target is the next liquidity pool on the other side.
+  long:
+    - bars_since(smc_sweep_bull) <= 20
+    - bars_since(smc_choch_up) <= bars_since(smc_sweep_bull)
+    - bars_since(smc_choch_up) <= 10
+    - smc_fvg_retrace_bull
+  short:
+    - bars_since(smc_sweep_bear) <= 20
+    - bars_since(smc_choch_down) <= bars_since(smc_sweep_bear)
+    - bars_since(smc_choch_down) <= 10
+    - smc_fvg_retrace_bear
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  control_twin: S5-SWEEP-MSS-FVG-noSMC
+  known_weaknesses: "Needs a clean sweep and shift; in chop the shift fails. Low timeframes pay a lot of fees per R."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7). No 5m confirmation yet."
+
+- id: S5-SWEEP-MSS-FVG-noSMC
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "Control twin of S5 (AGENT_PROMPT.md section 9 control-twin rule)"
+  hypothesis: "Control: a plain displacement candle in the aligned direction, same exits. S5 must beat this to keep its SMC filter."
+  timeframes: ["30m", "15m"]
+  twin_of: S5-SWEEP-MSS-FVG
+  description: "S5 without the sweep, structure shift and gap: enter after any strong candle in the trend direction."
+  logic: >-
+    Same gates, stop placement idea, targets and hold time as S5, but no SMC pattern.
+  long:
+    - displacement_up
+  short:
+    - displacement_down
+  stop: {method: structure, long_level: "lowest(low,10)", short_level: "highest(high,10)", buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  known_weaknesses: "A benchmark, not an idea to trade."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7)."
+
+- id: S6-OB-FVG
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "ICT material (CLAIM), AGENT_PROMPT.md section 9 S6"
+  hypothesis: "HTF-aligned retracements into a 4H order block inside discount (premium for shorts), triggered by a 15m CHoCH, continue in the HTF direction."
+  timeframes: ["15m"]
+  description: "Price pulls back into a 4H order block in the cheap half of the 4H range, then 15m structure turns up."
+  logic: >-
+    A 4H order block (the last opposite candle before a strong move) marks where big orders sat.
+    If price returns there while it is in the cheap (discount) half of the 4H range, and the 15m
+    chart then shifts structure back in the trend direction, we join the trend.
+  long:
+    - h4_bull_ob_high < (h4_range_low + h4_range_high) / 2
+    - within(low <= h4_bull_ob_high, 20)
+    - close > h4_bull_ob_low
+    - smc_choch_up
+  short:
+    - h4_bear_ob_low > (h4_range_low + h4_range_high) / 2
+    - within(high >= h4_bear_ob_low, 20)
+    - close < h4_bear_ob_high
+    - smc_choch_down
+  stop: {method: structure, long_level: "lowest(low,10)", short_level: "highest(high,10)", buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: ["2R", "max(3R, smc_liq_above)"]
+    short: ["2R", "max(3R, smc_liq_below)"]
+    split: [0.5, 0.5]
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  control_twin: S6-OB-FVG-noSMC
+  known_weaknesses: "Fails in ranges; order blocks are easy to over-use."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7). No 5m confirmation yet (Phase 10)."
+
+- id: S6-OB-FVG-noSMC
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "Control twin of S6 (AGENT_PROMPT.md section 9 control-twin rule)"
+  hypothesis: "Control: the same 15m CHoCH without the 4H order-block / discount filter. S6 must beat this."
+  timeframes: ["15m"]
+  twin_of: S6-OB-FVG
+  description: "S6 without the 4H order block and discount filter."
+  logic: >-
+    Same gates, stop, targets and hold time as S6; only the 4H order-block location filter is removed.
+  long:
+    - smc_choch_up
+  short:
+    - smc_choch_down
+  stop: {method: structure, long_level: "lowest(low,10)", short_level: "highest(high,10)", buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: ["2R", "max(3R, smc_liq_above)"]
+    short: ["2R", "max(3R, smc_liq_below)"]
+    split: [0.5, 0.5]
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  known_weaknesses: "A benchmark, not an idea to trade."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7)."
+
+- id: S7-SILVER-BULLET
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "ICT Silver Bullet / killzone material (CLAIM), AGENT_PROMPT.md section 9 S7"
+  hypothesis: "Inside the London / New York killzones, a sweep followed by displacement and a first retrace into the new gap moves on to the next pool at least 2R away."
+  timeframes: ["15m"]
+  description: "Killzone only: liquidity sweep -> strong candle -> entry on the first pullback into its gap."
+  logic: >-
+    ICT teaches that the big moves of the day start in a few time windows (New York time). The
+    setup is the S5 idea compressed in time: a sweep, a strong candle the other way, then the
+    first pullback into the gap - but only inside London, NY AM or the Silver Bullet hour.
+  long:
+    - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
+    - bars_since(smc_sweep_bull) <= 8
+    - bars_since(displacement_up) <= bars_since(smc_sweep_bull)
+    - smc_fvg_retrace_bull
+  short:
+    - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
+    - bars_since(smc_sweep_bear) <= 8
+    - bars_since(displacement_down) <= bars_since(smc_sweep_bear)
+    - smc_fvg_retrace_bear
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  control_twin: S7-SILVER-BULLET-noSMC
+  known_weaknesses: "Few signals (short windows); 15m fees are large compared with the stop."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7)."
+
+- id: S7-SILVER-BULLET-noSMC
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "Control twin of S7 (AGENT_PROMPT.md section 9 control-twin rule)"
+  hypothesis: "Control: the same rules at any hour. S7 must beat this to keep its killzone filter."
+  timeframes: ["15m"]
+  twin_of: S7-SILVER-BULLET
+  description: "S7 without the killzone time filter."
+  logic: >-
+    Same as S7, but at any time of day.
+  long:
+    - bars_since(smc_sweep_bull) <= 8
+    - bars_since(displacement_up) <= bars_since(smc_sweep_bull)
+    - smc_fvg_retrace_bull
+  short:
+    - bars_since(smc_sweep_bear) <= 8
+    - bars_since(displacement_down) <= bars_since(smc_sweep_bear)
+    - smc_fvg_retrace_bear
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  known_weaknesses: "A benchmark, not an idea to trade."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7)."
+
+- id: S8-PDH-PDL-SWEEP
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: reversal
+  regimes: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
+  source: "ICT material (CLAIM), AGENT_PROMPT.md section 9 S8"
+  hypothesis: "A sweep of the prior-day low (high) that closes back inside the prior-day range reverses to the daily middle and then the opposite extreme."
+  timeframes: ["1h", "30m"]
+  description: "Price pokes below yesterday's low, then closes back inside yesterday's range: aim for the middle, then yesterday's high."
+  logic: >-
+    Many stops sit just beyond yesterday's high and low. When price runs them and closes back
+    inside the range, the move beyond was a stop-hunt. TP1 = middle of yesterday's range,
+    TP2 = the other end. No trade unless the middle is at least 1R away.
+  long:
+    - smc_sweep_pdl
+  short:
+    - smc_sweep_pdh
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_pd_mid, smc_pdh]
+    short: [smc_pd_mid, smc_pdl]
+    split: [0.5, 0.5]
+    need: {long: smc_pd_mid, short: smc_pd_mid, min_r: 1.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  control_twin: S8-PDH-PDL-SWEEP-noSMC
+  known_weaknesses: "Trend days break through yesterday's levels and never come back."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7). 'Middle at least 1R away' is our assumption (not in the source)."
+
+- id: S8-PDH-PDL-SWEEP-noSMC
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: reversal
+  regimes: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
+  source: "Control twin of S8 (AGENT_PROMPT.md section 9 control-twin rule)"
+  hypothesis: "Control: the same reversal from a plain 20-candle low (high) instead of the prior-day level. S8 must beat this."
+  timeframes: ["1h", "30m"]
+  twin_of: S8-PDH-PDL-SWEEP
+  description: "S8 with an ordinary 20-candle low/high instead of yesterday's low/high."
+  logic: >-
+    Same exits as S8; the level that gets swept is just the lowest low (highest high) of the last
+    20 candles.
+  long:
+    - low < prev(lowest(low,20))
+    - close > prev(lowest(low,20))
+  short:
+    - high > prev(highest(high,20))
+    - close < prev(highest(high,20))
+  stop: {method: structure, long_level: low, short_level: high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_pd_mid, smc_pdh]
+    short: [smc_pd_mid, smc_pdl]
+    split: [0.5, 0.5]
+    need: {long: smc_pd_mid, short: smc_pd_mid, min_r: 1.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: false
+  known_weaknesses: "A benchmark, not an idea to trade."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 7)."
+
+# ---------------------------------------------------------------------
+# NEW IDEAS go below. Write them as status: IDEA first; switch to FORMALIZED to have them tested
+# under exactly the same standards as everything above.
 # ---------------------------------------------------------------------

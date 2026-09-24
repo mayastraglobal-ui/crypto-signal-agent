@@ -5,9 +5,11 @@ Crypto Signal Agent - scanner + backtester
 Every run it:
   1. picks liquid, established coins (skips meme / AI / stable / brand-new coins)
   2. downloads candles for 4h, 1h, 30m, 15m, 5m
-  3. backtests every strategy in strategies.yaml (with fees + slippage)
-  4. keeps only strategies that pass the validation rules in config.yaml
-  5. finds fresh entry signals and builds a full trade plan (entry, SL, TP1/2/3, hold time)
+  3. backtests every strategy in strategies.yaml (spec v3, with fees + slippage), only in the
+     market regimes each strategy allows and with higher-timeframe permission
+  4. moves each strategy version along its lifecycle (BACKTESTING / VALIDATION / FAILED ...)
+  5. finds fresh entry signals and builds a full trade plan (entry, SL, targets, hold time);
+     only APPROVED strategies (operator's yes) give emailed signals
   6. tracks every past signal forward to see if it REALLY worked (live proof)
   7. writes reports/latest.md (for you) and reports/latest.json (for Claude)
 
@@ -33,14 +35,17 @@ import yaml
 from engine import data_quality as dq
 from engine import evidence as evid
 from engine import features as fe
+from engine import lifecycle as lc
 from engine import regime as rg
 from engine import smc
+from engine import strategy_spec as sspec
 from engine import timeframes as tfm
 from engine import universe as uni
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 MEMORY = os.path.join(ROOT, "memory")
+REGISTRY = os.path.join(MEMORY, "strategy_registry.csv")
 TF_MS = tfm.TF_MS
 HTF = tfm.LEGACY_HTF            # higher timeframe used by the current strategies' htf_up / htf_down
 TF_ORDER = tfm.TRADE_ORDER      # timeframes the strategies run on
@@ -414,6 +419,17 @@ def make_namespace(df, feats=None):
         pb = b.shift(1) if isinstance(b, pd.Series) else b
         return (a < b) & (a.shift(1) >= pb)
 
+    def within(x, n):
+        """x was true on this candle or one of the n-1 candles before."""
+        return x.astype(float).rolling(int(n), min_periods=1).max().fillna(0) > 0
+
+    def bars_since(x):
+        """Candles since x was last true (0 = this candle); NaN if never."""
+        b = x.astype("boolean").fillna(False).to_numpy(dtype=bool)
+        pos = np.arange(len(b))
+        last = np.maximum.accumulate(np.where(b, pos, -1))
+        return pd.Series(np.where(last >= 0, pos - last, np.nan), index=df.index)
+
     ns = dict(open=o, high=h, low=l, close=c, volume=v,
               htf_up=df.get("htf_up", pd.Series(True, index=df.index)),
               htf_down=df.get("htf_down", pd.Series(True, index=df.index)),
@@ -422,7 +438,7 @@ def make_namespace(df, feats=None):
               bb_upper=bb_upper, bb_lower=bb_lower, bb_width=bb_width, highest=highest,
               lowest=lowest, shift=shift, prev=prev, vol_sma=vol_sma, pct_rank=pct_rank,
               supertrend_dir=supertrend_dir, cross_up=cross_up, cross_down=cross_down,
-              abs=abs, min=min, max=max, np=np)
+              within=within, bars_since=bars_since, abs=abs, min=min, max=max, np=np)
     if feats is not None:
         for col in feats.columns:
             if col not in ns:           # never replace an existing building block (e.g. atr())
@@ -461,6 +477,41 @@ def add_htf(df, htf_df):
     return df
 
 
+H4_CONTEXT = ["range_low", "range_high", "range_pos", "bull_ob_low", "bull_ob_high", "bear_ob_low", "bear_ob_high",
+              "liq_above", "liq_below"]
+
+
+def add_h4_context(frames):
+    """Give every timeframe below 4H the SMC context of the newest CLOSED 4H candle as h4_* columns
+    (e.g. h4_bull_ob_low). No 4H data -> the columns are empty (NaN), so rules using them stay false."""
+    h4 = None
+    if "4h" in frames:
+        d4, f4 = frames["4h"]
+        h4 = pd.DataFrame({"close_time": d4["close_time"].to_numpy()})
+        for col in H4_CONTEXT:
+            h4[col] = f4["smc_" + col].to_numpy(dtype=float)
+    for tf, (df, feats) in frames.items():
+        if TF_MS[tf] >= TF_MS["4h"]:
+            continue
+        m = tfm.align_higher(df, h4, H4_CONTEXT)
+        for col in H4_CONTEXT:
+            feats["h4_" + col] = m[col].to_numpy(dtype=float)
+
+
+def regime_at(reg, tf, i):
+    """Label of the strategy's regime timeframe at candle i (None if unknown)."""
+    lab = reg[lc.regime_tf(tf)][0][i] if lc.regime_tf(tf) in reg else None
+    return lab if isinstance(lab, str) else None
+
+
+def level_array(expr, ns, n):
+    """A stop / target level used by a strategy (a column name or an expression), as floats."""
+    x = eval(str(expr), {"__builtins__": {}}, ns)   # comes from YOUR strategies.yaml
+    if isinstance(x, pd.Series):
+        return x.astype(float).to_numpy()
+    return np.full(n, float(x))
+
+
 # =====================================================================
 # 3. BACKTEST ENGINE
 # =====================================================================
@@ -475,16 +526,17 @@ def market_type(d):
     return "spot" if d == 1 else "futures only"
 
 
-def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None):
+def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None, tps=None, split=None):
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open.
+    tps / split: take-profit prices and the share closed at each (default: config trade plan 1R/2R/3R).
     Conservative: if stop and target are touched in the same candle we assume the STOP hit first.
     Funding (shorts) is charged on the part still open, for every candle held, at entry notional."""
     tp = cfg["trade_plan"]
     k = trade_costs(cfg, d)
     fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
     fund_bar = k["funding_8h"] * bar_hours / 8
-    tps = [entry + d * r * R for r in tp["tp_r"]]
-    split = tp["tp_split"]
+    if tps is None:
+        tps, split = [entry + d * r * R for r in tp["tp_r"]], tp["tp_split"]
     stop = entry - d * R
     remaining, pnl, fees, hit = 1.0, 0.0, fee_t * entry, 0
     n = len(c)
@@ -510,7 +562,7 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
             elif hit >= 2 and tp.get("move_stop_to_tp1_after_tp2", True):
                 stop = tps[hit - 2]
         if remaining <= 1e-9:
-            return dict(exit_idx=j, r=(pnl - fees) / R, reason="TP3", hit=hit, bars=j - j0 + 1)
+            return dict(exit_idx=j, r=(pnl - fees) / R, reason=f"TP{hit}", hit=hit, bars=j - j0 + 1)
         if hit > 0 and ((d == 1 and c[j] <= stop) or (d == -1 and c[j] >= stop)):
             px = stop * (1 - slip * d)       # came back through the moved stop in the same candle
             pnl += remaining * d * (px - entry)
@@ -527,25 +579,53 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     return None
 
 
-def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf):
+def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
+    """Stop distance R, take-profit prices and split for a trade planned at the close of candle t,
+    using only values known then (cols = level columns the strategy's stop / targets read).
+    None = no valid trade; the reason is counted in `skipped` (stop / target)."""
+    def skip(why):
+        if skipped is not None:
+            skipped[why] = skipped.get(why, 0) + 1
+        return None
+    if not np.isfinite(atr_t) or atr_t <= 0:
+        return skip("stop")
+    st = strat["stop"]
+    if st["method"] == "atr":
+        R = st["atr"] * atr_t
+    else:
+        lev = cols[st["long_level" if d == 1 else "short_level"]][t]
+        if not np.isfinite(lev):
+            return skip("stop")
+        R = d * (entry - (lev - d * st.get("buffer_atr", 0.2) * atr_t))
+        if R <= 0 or R > st.get("max_width_atr", 3.0) * atr_t:   # stop on the wrong side or too wide
+            return skip("stop")
+    tg = sspec.targets(strat, d, entry, R, t, cols, cfg["trade_plan"])
+    return skip("target") if tg is None else (R, tg[0], tg[1])
+
+
+def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None):
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     atr = df["_atr"].to_numpy()
     bar_hours = TF_MS[tf] / 3_600_000
     n, t, trades = len(c), 0, []
     while t < n - 1:
         d = 1 if sig_long[t] else (-1 if sig_short[t] else 0)
-        if d == 0 or not np.isfinite(atr[t]) or atr[t] <= 0:
+        if d == 0:
             t += 1
             continue
         entry = o[t + 1] * (1 + trade_costs(cfg, d)["slip"] * d)   # enter at NEXT candle open
-        R = strat["stop_atr"] * atr[t]
-        res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["max_hold_bars"], bar_hours,
-                             ex_long if d == 1 else ex_short)
+        plan = plan_trade(strat, t, d, entry, atr[t], cols or {}, cfg, skipped)
+        if plan is None:
+            t += 1
+            continue
+        R, tps, split = plan
+        res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["time_stop_bars"], bar_hours,
+                             ex_long if d == 1 else ex_short, tps, split)
         if res is None:
             break
         res.update(entry_idx=t + 1, dir=d)
         trades.append(res)
-        t = res["exit_idx"]
+        t = res["exit_idx"] + int(strat.get("cooldown_bars", 0))    # wait before the next trade
     return trades
 
 
@@ -566,13 +646,14 @@ def stats(trades):
 # 4. FORWARD TEST (did past signals really work?)
 # =====================================================================
 LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "entry", "stop",
-            "tp1", "tp2", "tp3", "max_hold_bars", "status", "result_r", "closed_time_utc"]
+            "tp1", "tp2", "tp3", "max_hold_bars", "status", "result_r", "closed_time_utc",
+            "version", "stage", "tp_split"]
 
 
 def load_log():
     p = os.path.join(REPORTS, "signals_log.csv")
     if os.path.exists(p):
-        df = pd.read_csv(p)
+        df = pd.read_csv(p, dtype={"version": str, "stage": str, "tp_split": str})
         for col in LOG_COLS:
             if col not in df:
                 df[col] = np.nan
@@ -601,9 +682,14 @@ def update_forward(logdf, data, quality, feed, cfg):
         d = 1 if row["direction"] == "LONG" else -1
         entry, stop = float(row["entry"]), float(row["stop"])
         R = abs(entry - stop)
+        tps = [float(row[k]) for k in ("tp1", "tp2", "tp3") if pd.notna(row[k]) and str(row[k]) != ""]
+        split = ([float(x) for x in str(row["tp_split"]).split("/")] if pd.notna(row["tp_split"])
+                 and str(row["tp_split"]) else list(cfg["trade_plan"]["tp_split"]))
+        if len(split) != len(tps):
+            tps, split = None, None                     # old rows: the config trade plan
         o, h, l, c = (after[k].to_numpy() for k in ("open", "high", "low", "close"))
         res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]),
-                             TF_MS[tf] / 3_600_000)
+                             TF_MS[tf] / 3_600_000, None, tps, split)
         if res:
             logdf.at[i, "status"] = res["reason"]
             logdf.at[i, "result_r"] = round(res["r"], 3)
@@ -613,11 +699,13 @@ def update_forward(logdf, data, quality, feed, cfg):
 
 
 def forward_stats(logdf):
-    closed = logdf[logdf["status"] != "OPEN"].dropna(subset=["result_r"])
+    """Live results per (strategy, version, timeframe). Rows from before spec v3 count as version 1.0."""
+    closed = logdf[logdf["status"] != "OPEN"].dropna(subset=["result_r"]).copy()
+    closed["version"] = closed["version"].fillna("1.0").astype(str)
     out = {}
-    for (s, tf), g in closed.groupby(["strategy", "tf"]):
+    for (s, v, tf), g in closed.groupby(["strategy", "version", "tf"]):
         r = g["result_r"].astype(float)
-        out[(s, tf)] = dict(n=len(r), win_rate=float((r > 0).mean()), exp_r=float(r.mean()))
+        out[(s, v, tf)] = dict(n=len(r), win_rate=float((r > 0).mean()), exp_r=float(r.mean()))
     return out
 
 
@@ -651,10 +739,24 @@ def main():
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
-    strategies = [s for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
-                  if s.get("status", "active") in ("active", "candidate")]
     os.makedirs(REPORTS, exist_ok=True)
     started = dt.datetime.now(dt.timezone.utc)
+
+    # ---------- strategy ID cards (spec v3) + the registry of tested versions ----------
+    strategies, spec_problems, idle = sspec.load(
+        yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml"))), rg.LABELS, TF_ORDER)
+    reg_path = os.path.join(REPORTS, "strategy_registry_offline.csv") if args.offline else REGISTRY
+    reg_src = reg_path if os.path.exists(reg_path) else REGISTRY      # offline starts from the real one
+    registry = (lc.registry_from_frame(pd.read_csv(reg_src, dtype={"version": str}))
+                if os.path.exists(reg_src) else lc.empty_registry())
+    fps = {sspec.key(x): sspec.fingerprint(x) for x in strategies}
+    for x in list(strategies):
+        msg = lc.immutable_problem(registry, x, fps[sspec.key(x)])
+        if msg:
+            spec_problems.setdefault(x["id"], []).append(msg)
+            strategies.remove(x)
+    for sid, errs in spec_problems.items():
+        log(f"STRATEGY NOT RUN {sid}: {'; '.join(errs)}")
 
     # ---------- data source ----------
     if (args.fault or args.scenario) and not args.offline:
@@ -800,19 +902,24 @@ def main():
                 return False
         return True
 
-    # ---------- backtest everything ----------
-    per = {}       # (strategy, tf) -> {coin: trades}
+    # ---------- per coin: features, SMC, regimes, market gates, backtests ----------
+    per = {}       # (id, version, tf) -> {coin: trades}
+    gate_counts = {}                        # (id, version, tf) -> signal candles blocked by each gate
+    rule_errors = {}                        # id@version -> problems while evaluating its rules
     live = []      # candidate signals
     snap = {}      # coin snapshot for report
     fe_cfg = fe.settings(cfg.get("features"))
     feat_last = {}                          # (coin, tf) -> features of the newest closed candles
-    feat_full = {}                          # (coin, tf) -> all features, kept for the regime engine
     smc_cfg = smc.settings(cfg.get("smc"))
     smc_res = {}                            # (coin, tf) -> SMC events, flags and state
     ev_frames = {tf: [] for tf in tfs}      # candle evidence input, per timeframe
+    rg_cfg = rg.settings(cfg.get("regime"))
+    regimes = {}
+    rg_series = {}                          # (coin, tf) -> (close_time array, label array) for stamping
     lb = int(cfg["signals"]["lookback_bars"])
     for u in coins:
         sym, base = u["symbol"], u["base"]
+        frames = {}                         # tf -> (candles, features incl. SMC columns)
         for tf in tfs:
             df = data.get((sym, tf))
             if df is None or len(df) < 300 or quality[(base, tf)]["state"] == dq.UNSAFE:
@@ -822,12 +929,38 @@ def main():
             feats.index = df.index
             res = smc.detect(df, feats, data.get((sym, "1d")), data.get((sym, "1w")), TF_MS[tf], smc_cfg)
             smc_res[(base, tf)] = res
-            for col in smc.EVENT_COLUMNS:          # SMC events join the features (rules + evidence)
+            for col in smc.EVENT_COLUMNS + smc.CONTEXT_COLUMNS:   # SMC joins the features (rules + evidence)
                 feats["smc_" + col] = res["series"][col].to_numpy()
             feat_last[(base, tf)] = feats.tail(3)
-            if tf in ("4h", "1h"):
-                feat_full[(base, tf)] = feats
             ev_frames[tf].append((base, df, feats))
+            frames[tf] = (df, feats)
+        add_h4_context(frames)
+
+        # market regime per timeframe: the report record, and the full history for the gates
+        recs, reg_hist = {}, {}
+        for rtf in rg_cfg["timeframes"]:
+            df_r, q = data.get((sym, rtf)), quality.get((base, rtf))
+            if df_r is None or len(df_r) == 0 or (q is not None and q["state"] == dq.UNSAFE):
+                recs[rtf] = dict(label="UNCLEAR", expansion_dir=None, confidence="weak", supporting=[],
+                                 contradicting=["price data UNSAFE or missing"],
+                                 states=dict(volatility="unknown", momentum="unknown", structure="unknown"),
+                                 values={})
+                continue
+            f_r = frames[rtf][1] if rtf in frames else fe.compute(df_r, TF_MS[rtf], fe_cfg)
+            r_r = rg.compute(df_r, rtf, f_r, rg_cfg)
+            recs[rtf] = rg.describe(r_r, -1, rg_cfg)
+            rg_series[(base, rtf)] = (df_r["close_time"].to_numpy(), r_r["label"].to_numpy())
+            reg_hist[rtf] = pd.DataFrame({"close_time": df_r["close_time"].to_numpy(),
+                                          "label": r_r["label"].to_numpy(dtype=object),
+                                          "exp_dir": r_r["expansion_dir"].to_numpy(dtype=object)})
+        verdict_now, reason = rg.permission(recs)
+        regimes[base] = dict(timeframes=recs, permission=verdict_now, permission_reason=reason)
+
+        for tf, (df, feats) in frames.items():
+            reg = {}                        # regime of every regime timeframe, as known at each candle
+            for rtf, hist in reg_hist.items():
+                m = tfm.align_higher(df, hist, ["label", "exp_dir"])
+                reg[rtf] = (m["label"].to_numpy(dtype=object), m["exp_dir"].to_numpy(dtype=object))
             ns = make_namespace(df, feats)
             df["_atr"] = ns["atr"](14)
             n = len(df)
@@ -837,24 +970,36 @@ def main():
                                   rsi_1h=float(ns["rsi"](ns["close"], 14).iloc[-1]),
                                   change_24h=u["change_pct"], vol_24h=u["quote_volume"])
             for s in strategies:
-                if tf not in s.get("timeframes", tfs):
+                if tf not in s["timeframes"]:
                     continue
+                k3 = (s["id"], s["version"], tf)
                 try:
                     L = eval_rules(s.get("long"), ns, df.index)
                     S = eval_rules(s.get("short"), ns, df.index) if cfg["signals"]["allow_shorts"] \
                         else np.zeros(n, bool)
                     XL = eval_rules(s.get("exit_long"), ns, df.index) if s.get("exit_long") else None
                     XS = eval_rules(s.get("exit_short"), ns, df.index) if s.get("exit_short") else None
+                    cols = {c: level_array(c, ns, n) for c in sspec.columns_needed(s)}
                 except Exception as e:
-                    log(f"RULE ERROR in {s['name']}: {e}")
+                    log(f"RULE ERROR in {s['id']} {tf}: {e}")
+                    rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
                     continue
                 L[:250] = False     # warm-up: let long indicators settle
                 S[:250] = False
-                tr = backtest(df, L, S, XL, XS, s, cfg, tf)
+                # market gates (sections 5 + 6): allowed regimes and higher-timeframe permission
+                gl, gs, reg_ok, perm_l, perm_s = lc.gate_arrays(s, tf, reg, n)
+                gc = gate_counts.setdefault(k3, dict(raw=0, regime=0, permission=0, stop=0, target=0))
+                raw = L | S
+                gc["raw"] += int(raw.sum())
+                gc["regime"] += int((raw & ~reg_ok).sum())
+                gc["permission"] += int(((L & reg_ok & ~perm_l) | (S & reg_ok & ~perm_s)).sum())
+                L &= gl
+                S &= gs
+                tr = backtest(df, L, S, XL, XS, s, cfg, tf, cols, gc)
                 split_idx = int(n * cfg["validation"]["in_sample_share"])
                 for t in tr:
                     t["oos"] = t["entry_idx"] >= split_idx
-                per.setdefault((s["name"], tf), {})[base] = tr
+                per.setdefault(k3, {})[base] = tr
                 # ---- fresh signals on the last closed candles ----
                 for k in range(lb):
                     t_i = n - 1 - k
@@ -863,22 +1008,28 @@ def main():
                         continue
                     a = df["_atr"].iloc[t_i]
                     entry = float(df["close"].iloc[-1]) if k == 0 else float(df["open"].iloc[t_i + 1])
-                    R = s["stop_atr"] * a
+                    plan = plan_trade(s, t_i, d, entry, a, cols, cfg)
+                    if plan is None:
+                        continue
+                    R, tps, split = plan
                     if k > 0:   # older signal: still valid only if no SL/TP1 hit and price near entry
                         seg = df.iloc[t_i + 1:]
-                        if (d == 1 and (seg["low"].min() <= entry - R or seg["high"].max() >= entry + R)) or \
-                           (d == -1 and (seg["high"].max() >= entry + R or seg["low"].min() <= entry - R)):
+                        if (d == 1 and (seg["low"].min() <= entry - R or seg["high"].max() >= tps[0])) or \
+                           (d == -1 and (seg["high"].max() >= entry + R or seg["low"].min() <= tps[0])):
                             continue
                         if abs(df["close"].iloc[-1] - entry) > 0.3 * R:
                             continue
-                    live.append(dict(coin=base, symbol=sym, tf=tf, strategy=s["name"], dir=d,
-                                     entry=entry, R=float(R), atr=float(a), age_bars=k,
+                    live.append(dict(coin=base, symbol=sym, tf=tf, strategy=s["id"], version=s["version"], dir=d,
+                                     entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
+                                     atr=float(a), age_bars=k,
                                      signal_time=int(df["close_time"].iloc[t_i]),
                                      htf_up=bool(df["htf_up"].iloc[t_i]),
                                      htf_down=bool(df["htf_down"].iloc[t_i]),
+                                     regime=regime_at(reg, tf, t_i),
                                      rsi=float(ns["rsi"](ns["close"], 14).iloc[t_i]),
                                      vol_ratio=float(df["volume"].iloc[t_i] / ns["vol_sma"](20).iloc[t_i])))
                     break
+        del frames
 
     # ---------- candle evidence: patterns vs random entries (research evidence, not a signal) ----------
     ev_cfg = evid.settings(cfg.get("evidence"))
@@ -889,74 +1040,65 @@ def main():
                 for tf in tfs if ev_frames[tf]}
     del ev_frames
 
-    # ---------- market regime per coin and timeframe (shown only; gates arrive in Phase 7) ----------
-    rg_cfg = rg.settings(cfg.get("regime"))
-    regimes = {}
-    rg_series = {}                          # (coin, tf) -> (close_time array, label array) for stamping
-    for u in coins:
-        sym, base = u["symbol"], u["base"]
-        recs = {}
-        for tf in rg_cfg["timeframes"]:
-            df_tf, q = data.get((sym, tf)), quality.get((base, tf))
-            if df_tf is None or len(df_tf) == 0 or (q is not None and q["state"] == dq.UNSAFE):
-                recs[tf] = dict(label="UNCLEAR", expansion_dir=None, confidence="weak", supporting=[],
-                                contradicting=["price data UNSAFE or missing"],
-                                states=dict(volatility="unknown", momentum="unknown", structure="unknown"),
-                                values={})
-                continue
-            f_tf = feat_full.get((base, tf))
-            if f_tf is None:
-                f_tf = fe.compute(df_tf, TF_MS[tf], fe_cfg)
-            r_tf = rg.compute(df_tf, tf, f_tf, rg_cfg)
-            recs[tf] = rg.describe(r_tf, -1, rg_cfg)
-            rg_series[(base, tf)] = (df_tf["close_time"].to_numpy(), r_tf["label"].to_numpy())
-        verdict, reason = rg.permission(recs)
-        regimes[base] = dict(timeframes=recs, permission=verdict, permission_reason=reason)
-    del feat_full
-
     # ---------- forward test (live proof) ----------
     logdf = update_forward(load_log(), data, quality, feed, cfg) if not args.offline else load_log()
     fwd = forward_stats(logdf)
 
-    # ---------- judge each strategy x timeframe ----------
+    # ---------- lifecycle: judge each strategy version x timeframe (AGENT_PROMPT.md section 12) ----------
     V = cfg["validation"]
     board = []
     verdict = {}
-    for (sname, tf), by_coin in per.items():
+    by_key = {sspec.key(x): x for x in strategies}
+    for (sid, ver, tf), by_coin in per.items():
+        strat = by_key[f"{sid}@{ver}"]
         allt = [t for tr in by_coin.values() for t in tr]
         st, ins, oos = stats(allt), stats([t for t in allt if not t["oos"]]), stats([t for t in allt if t["oos"]])
-        reasons = []
-        if st["n"] < V["min_trades"]:
-            reasons.append(f"only {st['n']} trades")
-        if st["exp_r"] < V["min_expectancy_r"]:
-            reasons.append(f"avg {st['exp_r']:+.2f}R/trade")
-        if st["pf"] < V["min_profit_factor"]:
-            reasons.append(f"profit factor {st['pf']:.2f}")
-        if oos["n"] < V["min_oos_trades"]:
-            reasons.append(f"only {oos['n']} unseen-test trades")
-        if ins["exp_r"] <= 0 or oos["exp_r"] <= 0:
-            reasons.append("not profitable in BOTH train and unseen test")
-        f = fwd.get((sname, tf))
-        if f and f["n"] >= V["forward_pause_after"] and f["exp_r"] < V["forward_pause_below_r"]:
-            reasons.append(f"LIVE results bad ({f['exp_r']:+.2f}R over {f['n']} signals)")
-        if not reasons:
-            status = "WORKS"
-        elif st["exp_r"] > 0 and oos["exp_r"] > 0 and not (f and f["n"] >= V["forward_pause_after"]
-                                                          and f["exp_r"] < V["forward_pause_below_r"]):
-            status = "WEAK"
-        else:
-            status = "FAILS"
-        verdict[(sname, tf)] = status
-        board.append(dict(strategy=sname, tf=tf, status=status, trades=st["n"],
+        f = fwd.get((sid, ver, tf))
+        status, reasons, need = lc.judge(st, ins, oos, f, V, lc.retune_penalty(registry, strat, V["retune_penalty_r"]))
+        verdict[(sid, ver, tf)] = status
+        gc = gate_counts.get((sid, ver, tf), dict(raw=0, regime=0, permission=0, stop=0, target=0))
+        board.append(dict(strategy=sid, version=ver, family=strat["family"], gate=strat["gate"], tf=tf,
+                          status=status, trades=st["n"],
                           win_rate=round(st["win_rate"] * 100, 1), avg_r=round(st["exp_r"], 3),
                           profit_factor=round(st["pf"], 2) if np.isfinite(st["pf"]) else 99,
                           max_dd_r=round(st["max_dd_r"], 1), train_avg_r=round(ins["exp_r"], 3),
                           test_avg_r=round(oos["exp_r"], 3), test_trades=oos["n"],
                           avg_hold=tf_to_text(tf, st["avg_bars"]) if st["n"] else "-",
+                          required_avg_r=round(need, 3), signal_candles=gc["raw"],
+                          blocked_by_regime=gc["regime"], blocked_by_permission=gc["permission"],
+                          skipped_stop=gc["stop"], skipped_target=gc["target"],
                           live_signals=f["n"] if f else 0,
                           live_avg_r=round(f["exp_r"], 3) if f else None,
+                          twin_of=strat.get("twin_of"), control_twin=strat.get("control_twin"),
                           why_not="; ".join(reasons)))
-    board.sort(key=lambda b: ({"WORKS": 0, "WEAK": 1, "FAILS": 2}[b["status"]], -b["avg_r"]))
+    rows = {(b["strategy"], b["tf"]): b for b in board}
+    for b in board:                         # control-twin comparison (section 9): must beat the twin
+        tw = rows.get((b["control_twin"], b["tf"])) if b["control_twin"] else None
+        b["twin_avg_r"] = tw["avg_r"] if tw else None
+        b["twin_test_avg_r"] = tw["test_avg_r"] if tw else None
+        enough = tw and min(b["trades"], tw["trades"]) >= V["min_trades"] \
+            and min(b["test_trades"], tw["test_trades"]) >= V["min_oos_trades"]
+        b["beats_twin"] = (None if not enough else
+                           bool(b["avg_r"] > tw["avg_r"] and b["test_avg_r"] > tw["test_avg_r"]))
+    order = {st: i for i, st in enumerate(["APPROVED", "PAPER_TRADING", "VALIDATION", "BACKTESTING", "FAILED"])}
+    board.sort(key=lambda b: (order[b["status"]], -b["avg_r"]))
+
+    # ---------- registry of tested versions, experiment log, lifecycle log ----------
+    now_txt = started.strftime("%Y-%m-%d %H:%M")
+    tested = [x for x in strategies if any(k[0] == x["id"] and k[1] == x["version"] for k in per)]
+    registry, new_exp, changes = lc.update(registry, tested, fps, verdict, now_txt)
+    for b in board:                         # latest metrics per version x timeframe
+        registry["cells"][f"{b['strategy']}@{b['version']}|{b['tf']}"].update(
+            {k: b[k] for k in ("trades", "avg_r", "profit_factor", "max_dd_r", "train_avg_r", "test_avg_r",
+                               "required_avg_r", "beats_twin")}, gates_failed=b["why_not"])
+    os.makedirs(os.path.dirname(reg_path), exist_ok=True)
+    lc.registry_to_frame(registry).to_csv(reg_path, index=False)
+    why = {(b["strategy"], b["version"], b["tf"]): b["why_not"] for b in board}
+    for c in changes:
+        c["why"] = why.get((c["key"].split("@")[0], c["key"].split("@")[1], c["tf"]), "")
+    if not args.offline:
+        write_experiments(new_exp, registry)
+        write_lifecycle_log(changes, started)
 
     # ---------- market mood ----------
     btc = {}
@@ -974,8 +1116,9 @@ def main():
     risk_usd = acct * cfg["account"]["risk_per_trade_pct"] / 100
     plans, blocked = [], []
     for sgl in live:
-        key = (sgl["strategy"], sgl["tf"])
-        if verdict.get(key) != "WORKS":
+        key = (sgl["strategy"], sgl["version"], sgl["tf"])
+        stage = verdict.get(key)
+        if stage not in ("VALIDATION", "APPROVED"):     # only versions that passed the backtest gate
             continue
         if sgl["coin"] not in signal_set:      # research-only coin: backtest only, never a signal
             continue
@@ -991,19 +1134,22 @@ def main():
         if shrunk <= V["min_expectancy_r"] or cst["exp_r"] <= 0:
             continue
         d, e, R = sgl["dir"], sgl["entry"], sgl["R"]
+        tps, split = sgl["tps"], sgl["split"]
         against_btc = (d == 1 and btc.get("4h") == "DOWN") or (d == -1 and btc.get("4h") == "UP")
         qty = risk_usd / R
-        strat = next(s for s in strategies if s["name"] == sgl["strategy"])
+        strat = by_key[f"{sgl['strategy']}@{sgl['version']}"]
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
+            version=sgl["version"], stage=stage, family=strat["family"],
             direction="LONG" if d == 1 else "SHORT", market=market_type(d),
             signal_time_utc=pd.to_datetime(sgl["signal_time"], unit="ms").strftime("%Y-%m-%d %H:%M"),
             signal_age_candles=sgl["age_bars"],
             entry=e, entry_zone=[e - 0.2 * R, e + 0.2 * R], stop=e - d * R,
-            tp1=e + d * tp["tp_r"][0] * R, tp2=e + d * tp["tp_r"][1] * R, tp3=e + d * tp["tp_r"][2] * R,
-            risk_pct_of_price=R / e * 100,
+            targets=[dict(price=px, r=round(abs(px - e) / R, 2), close_pct=round(x * 100)) for px, x in zip(tps, split)],
+            tp1=tps[0], tp2=tps[1] if len(tps) > 1 else None, tp3=tps[2] if len(tps) > 2 else None,
+            tp_split=split, risk_pct_of_price=R / e * 100,
             expected_hold=tf_to_text(sgl["tf"], cst["avg_bars"] or pooled["avg_bars"]),
-            max_hold=tf_to_text(sgl["tf"], strat["max_hold_bars"]), max_hold_bars=strat["max_hold_bars"],
+            max_hold=tf_to_text(sgl["tf"], strat["time_stop_bars"]), max_hold_bars=strat["time_stop_bars"],
             position_qty=qty, position_usdt=qty * e, leverage_needed=qty * e / acct, risk_usdt=risk_usd,
             backtest_coin=dict(trades=cst["n"], win_rate=cst["win_rate"], avg_r=cst["exp_r"]),
             backtest_all=dict(trades=pooled["n"], win_rate=pooled["win_rate"], avg_r=pooled["exp_r"],
@@ -1012,14 +1158,15 @@ def main():
             why=strat.get("logic", "").strip(), rules_met=strat["long" if d == 1 else "short"],
             exit_rule=strat.get("exit_long" if d == 1 else "exit_short"),
             context=dict(htf_trend="UP" if sgl["htf_up"] else "DOWN" if sgl["htf_down"] else "SIDEWAYS",
+                         regime=sgl["regime"], permission=regimes.get(sgl["coin"], {}).get("permission"),
                          rsi14=round(sgl["rsi"], 1), volume_vs_avg=round(sgl["vol_ratio"], 2),
                          btc_4h=btc.get("4h"), against_btc_trend=against_btc)))
-    # combine agreement / conflicts per coin
+    # combine agreement / conflicts per coin (APPROVED and VALIDATION kept apart)
     by = {}
     for p in plans:
-        by.setdefault(p["coin"], []).append(p)
+        by.setdefault((p["stage"], p["coin"]), []).append(p)
     final = []
-    for coin, ps in by.items():
+    for (_, coin), ps in by.items():
         dirs = {p["direction"] for p in ps}
         for p in ps:
             p["agreeing_signals"] = sum(q["direction"] == p["direction"] for q in ps)
@@ -1027,13 +1174,14 @@ def main():
             p["confidence_score"] += 0.03 * (p["agreeing_signals"] - 1) - (0.1 if p["conflict"] else 0)
         final.append(max(ps, key=lambda p: p["confidence_score"]))
     final.sort(key=lambda p: -p["confidence_score"])
-    final = final[: cfg["signals"]["max_in_report"]]
+    watch = [p for p in final if p["stage"] != "APPROVED"][: cfg["signals"]["max_in_report"]]
+    final = [p for p in final if p["stage"] == "APPROVED"][: cfg["signals"]["max_in_report"]]
 
     # ---------- log new signals for forward testing ----------
     if not args.offline:
         existing = set(logdf["id"].astype(str))
         new_rows = []
-        for p in final:
+        for p in final + watch:        # VALIDATION signals are logged (live proof) but never emailed
             sid = f"{p['coin']}-{p['timeframe']}-{p['strategy']}-{p['signal_time_utc']}"
             if sid in existing:
                 continue
@@ -1041,7 +1189,8 @@ def main():
                                  tf=p["timeframe"], strategy=p["strategy"], direction=p["direction"],
                                  entry=p["entry"], stop=p["stop"], tp1=p["tp1"], tp2=p["tp2"],
                                  tp3=p["tp3"], max_hold_bars=p["max_hold_bars"], status="OPEN",
-                                 result_r=np.nan, closed_time_utc=""))
+                                 result_r=np.nan, closed_time_utc="", version=p["version"], stage=p["stage"],
+                                 tp_split="/".join(f"{x:g}" for x in p["tp_split"])))
         if new_rows:
             logdf = pd.concat([logdf, pd.DataFrame(new_rows)], ignore_index=True)
         logdf.to_csv(os.path.join(REPORTS, "signals_log.csv"), index=False)
@@ -1085,7 +1234,8 @@ def main():
     # ---------- regime report + once-a-day regime log ----------
     order = (["BTC"] if "BTC" in regimes else []) + [b for b in regimes if b != "BTC"]
     rg_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), data_source=feed.name,
-                  note="Shown only - regimes do not block signals yet (strategy spec v3, Phase 7).",
+                  note="Regimes now gate every strategy: each trades only in its allowed regimes and with "
+                       "timeframe permission (strategy spec v3).",
                   settings=rg_cfg, coins={b: regimes[b] for b in order})
     json.dump(rg_out, open(os.path.join(REPORTS, "regime.json"), "w"), indent=1, default=str)
     rstate_path = os.path.join(REPORTS, "regime_state_offline.json" if args.offline else "regime_state.json")
@@ -1098,7 +1248,8 @@ def main():
 
     # ---------- SMC report + append-only live event log ----------
     smc_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), version=smc.VERSION,
-                   note="SMC = hypotheses to test, not doctrine. Nothing trades on SMC yet (Phase 7).",
+                   note="SMC = hypotheses to test, not doctrine. Strategies S5-S8 use these rules and are "
+                        "tested against control twins without SMC.",
                    killzone_now=smc.killzone(int(started.timestamp() * 1000), smc_cfg["killzones"]),
                    coins={})
     for (b, tf), res in smc_res.items():
@@ -1166,7 +1317,16 @@ def main():
                market=dict(btc_trend=btc, fear_greed=fg), settings=dict(
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
-               signals=final, strategy_scoreboard=board, forward_test=fwd_total,
+               signals=final, validation_signals=watch, strategy_scoreboard=board, forward_test=fwd_total,
+               lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
+                              changes=changes, not_run={k: sorted(v) for k, v in spec_problems.items()},
+                              rule_errors={k: sorted(v) for k, v in rule_errors.items()},
+                              idle=[dict(id=x["id"], version=x["version"], status=x["status"],
+                                         hypothesis=x["hypothesis"]) for x in idle],
+                              bar=dict(min_trades=V["min_trades"], min_expectancy_r=V["min_expectancy_r"],
+                                       min_profit_factor=V["min_profit_factor"],
+                                       max_drawdown_r=V["max_drawdown_r"],
+                                       retune_penalty_r=V["retune_penalty_r"])),
                coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out,
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
                candle_evidence=ev_out, regime=rg_out, smc=smc_out)
@@ -1177,7 +1337,46 @@ def main():
     open(os.path.join(REPORTS, "daily", started.strftime("%Y-%m-%d") + ".md"), "w").write(md)
     pd.DataFrame(board).to_csv(os.path.join(REPORTS, "strategy_scoreboard.csv"), index=False)
     log(f"Done: {len(coins)} coins, {len(board)} strategy/timeframe tests, "
-        f"{sum(b['status'] == 'WORKS' for b in board)} WORK, {len(final)} signals")
+        f"{sum(b['status'] == 'VALIDATION' for b in board)} in VALIDATION, {len(final)} signals, "
+        f"{len(watch)} validation signals (not emailed)")
+
+
+def write_experiments(new_exp, registry):
+    """memory/experiments.md: one line per strategy VERSION the first time it is tested (section 11
+    experiment count). Append-only."""
+    if not new_exp:
+        return
+    os.makedirs(MEMORY, exist_ok=True)
+    path = os.path.join(MEMORY, "experiments.md")
+    new = not os.path.exists(path)
+    with open(path, "a") as f:
+        if new:
+            f.write("# Experiments\n\nAppend-only count of every strategy version ever tested (AGENT_PROMPT.md "
+                    "section 11). Each new version of the same idea raises its bar by +0.02R per trade.\n\n"
+                    "| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |\n|---|---|---|---|---|---|\n")
+        for e in new_exp:
+            twin = f" (control twin of {e['twin_of']})" if e.get("twin_of") else ""
+            f.write(f"| EXP-{e['experiment']:04d} | {e['first_tested_utc']} | {e['key']}{twin} | {e['family']} | "
+                    f"{', '.join(e['timeframes'])} | {e['hypothesis']} |\n")
+
+
+def write_lifecycle_log(changes, when):
+    """memory/strategy_lifecycle.md: every status change of a strategy version x timeframe. Append-only."""
+    if not changes:
+        return
+    os.makedirs(MEMORY, exist_ok=True)
+    path = os.path.join(MEMORY, "strategy_lifecycle.md")
+    new = not os.path.exists(path)
+    with open(path, "a") as f:
+        if new:
+            f.write("# Strategy lifecycle log\n\nAppend-only (AGENT_PROMPT.md section 12). Written by the engine "
+                    "when a strategy version changes status on a timeframe.\nBACKTESTING = tested, not good enough "
+                    "yet · VALIDATION = passed the backtest gate (signals logged, not emailed) · FAILED = enough "
+                    "trades and losing · PAPER_TRADING needs the Phase 8 tests · APPROVED needs the operator's yes.\n")
+        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
+        for c in changes:
+            f.write(f"- **{c['key']} {c['tf']}**: {c['old']} → **{c['new']}**"
+                    + (f" ({c['why']})" if c.get("why") else "") + "\n")
 
 
 def write_universe_log(events, when):
@@ -1481,6 +1680,103 @@ def render_dq(q, w):
     w("")
 
 
+def render_plans(plans, settings, w):
+    w("| # | Coin | TF | Side | Market | Entry | Stop-loss | Targets | Expected hold | Score |")
+    w("|---|---|---|---|---|---|---|---|---|---|")
+    for i, p in enumerate(plans, 1):
+        tg = " / ".join(fmt_price(t["price"]) for t in p["targets"])
+        w(f"| {i} | **{p['coin']}** | {p['timeframe']} | {p['direction']} | {p['market']} | {fmt_price(p['entry'])} | "
+          f"{fmt_price(p['stop'])} | {tg} | {p['expected_hold']} | {p['confidence_score']:.2f} |")
+    w("")
+    for i, p in enumerate(plans, 1):
+        c = p["context"]
+        w(f"#### {i}. {p['coin']} {p['direction']} ({p['market']}) · {p['timeframe']} · "
+          f"`{p['strategy']}` v{p['version']} ({p['stage']})")
+        w(f"- **Signal candle closed:** {p['signal_time_utc']} UTC"
+          + (f" ({p['signal_age_candles']} candle(s) ago - still valid)" if p['signal_age_candles'] else ""))
+        w(f"- **Entry zone:** {fmt_price(min(p['entry_zone']))} - {fmt_price(max(p['entry_zone']))} "
+          f"(don't chase if price already left this zone)")
+        w(f"- **Stop-loss:** {fmt_price(p['stop'])} ({p['risk_pct_of_price']:.2f}% away)")
+        for j, t in enumerate(p["targets"], 1):
+            last = j == len(p["targets"])
+            after = ("close the rest" if last else f"close {t['close_pct']}%, " +
+                     ("move stop to entry (breakeven)" if j == 1 else "move stop to TP1"))
+            w(f"- **TP{j}:** {fmt_price(t['price'])} ({t['r']:.1f}R) -> {after}")
+        w(f"- **Hold time:** usually ~{p['expected_hold']}; close anyway after {p['max_hold']}")
+        if p.get("exit_rule"):
+            w(f"- **Early exit if:** {' AND '.join(map(str, p['exit_rule']))}")
+        w(f"- **Position size** (account {settings['account_usdt']} USDT, risk "
+          f"{settings['risk_pct']}% = {p['risk_usdt']:.2f} USDT): buy **{p['position_qty']:.6g} {p['coin']}** "
+          f"(~{p['position_usdt']:.0f} USDT" + (f", needs ~{p['leverage_needed']:.1f}x leverage"
+                                                if p['leverage_needed'] > 1 else "") + ")")
+        w(f"- **Why:** {p['why']}")
+        w(f"- **Rules that were true:** " + "; ".join(f"`{r}`" for r in p["rules_met"]))
+        w(f"- **Context:** regime {c.get('regime') or '?'}, {c.get('permission') or '?'}, higher-TF trend "
+          f"{c['htf_trend']}, RSI(14) {c['rsi14']}, volume {c['volume_vs_avg']}x average, "
+          f"BTC 4H {c['btc_4h']}" + (" ⚠️ AGAINST BTC trend" if c["against_btc_trend"] else "")
+          + (" ⚠️ other strategies disagree on direction" if p["conflict"] else "")
+          + (f" · {p['agreeing_signals']} strategies agree" if p["agreeing_signals"] > 1 else ""))
+        bc, ba = p["backtest_coin"], p["backtest_all"]
+        w(f"- **Backtest proof:** on {p['coin']}: {bc['trades']} trades, {bc['win_rate']*100:.0f}% win, "
+          f"{bc['avg_r']:+.2f}R avg · all coins: {ba['trades']} trades, {ba['win_rate']*100:.0f}% win, "
+          f"{ba['avg_r']:+.2f}R avg, PF {ba['pf']:.2f}\n")
+
+
+def render_scoreboard(o, w):
+    bar = o["lifecycle"]["bar"]
+    w("## 3. Strategy scoreboard (auto backtest, after fees)")
+    w(f"**VALIDATION** = passed the backtest gate: ≥ {bar['min_trades']} trades, ≥ {bar['min_expectancy_r']:+.2f}R "
+      f"per trade (+{bar['retune_penalty_r']:.2f}R for every re-tuned version), profit factor ≥ "
+      f"{bar['min_profit_factor']}, max drawdown ≤ {bar['max_drawdown_r']:g}R, profitable in both the train and the "
+      "unseen-test part · **BACKTESTING** = not good enough (yet) · **FAILED** = enough trades and losing. "
+      "Only trades inside each strategy's allowed regimes and with timeframe permission are counted; "
+      "**Stood down** = signal candles blocked by the regime / permission gate · **Skipped** = setups with no "
+      "valid stop (missing, or wider than the strategy allows) / no valid target (e.g. next pool closer than 2R).\n")
+    w("| Strategy | Ver | TF | Status | Trades | Win % | Avg R/trade | PF | Max DD | Train R | Unseen-test R "
+      "| Avg hold | Stood down (regime / permission) | Skipped (stop / target) | Live signals (avg R) | Why not |")
+    w("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    for b in o["strategy_scoreboard"]:
+        live = f"{b['live_signals']} ({b['live_avg_r']:+.2f})" if b["live_signals"] else "0"
+        w(f"| {b['strategy']} | {b['version']} | {b['tf']} | **{b['status']}** | {b['trades']} | {b['win_rate']} | "
+          f"{b['avg_r']:+.3f} | {b['profit_factor']} | {b['max_dd_r']}R | {b['train_avg_r']:+.3f} | "
+          f"{b['test_avg_r']:+.3f} | {b['avg_hold']} | {b['blocked_by_regime']} / {b['blocked_by_permission']} "
+          f"of {b['signal_candles']} | {b['skipped_stop']} / {b['skipped_target']} | {live} | {b['why_not']} |")
+    w("")
+
+
+def render_lifecycle(g, board, w):
+    w("### 3b. Strategy lifecycle and control twins")
+    w("IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING → APPROVED (your yes). "
+      "PAPER_TRADING needs the Phase 8 tests (walk-forward, costs +50%, ±20% parameters, beating the control "
+      f"twin), so no strategy can get there yet. Strategy versions tested so far: **{g['experiments']}** "
+      "(`memory/experiments.md`).\n")
+    twins = [b for b in board if b["control_twin"]]
+    if twins:
+        w("**SMC vs control twin** (the same idea without the SMC part; SMC is only kept if it wins out of sample):\n")
+        w("| Strategy | TF | Trades | Avg R | Unseen-test R | Twin avg R | Twin unseen-test R | Beats twin? |")
+        w("|---|---|---|---|---|---|---|---|")
+        num = lambda x: "-" if x is None else f"{x:+.3f}"
+        for b in twins:
+            beat = {True: "yes (overall and unseen test)", False: "no",
+                    None: "too few trades to compare"}[b["beats_twin"]]
+            w(f"| {b['strategy']} | {b['tf']} | {b['trades']} | {num(b['avg_r'])} | {num(b['test_avg_r'])} | "
+              f"{num(b['twin_avg_r'])} | {num(b['twin_test_avg_r'])} | {beat} |")
+        w("")
+    if g["changes"]:
+        ch = g["changes"]
+        w("**Status changes this run** (all of them in `memory/strategy_lifecycle.md`): " + "; ".join(
+            f"{c['key']} {c['tf']} {c['old']} → {c['new']}" for c in ch[:12])
+          + (f"; ... and {len(ch) - 12} more" if len(ch) > 12 else ""))
+    for sid, errs in g["not_run"].items():
+        w(f"- ⚠️ **{sid} not run:** {'; '.join(errs)}")
+    for sid, errs in g["rule_errors"].items():
+        w(f"- ⚠️ **{sid} rule error:** {'; '.join(errs)}")
+    if g["idle"]:
+        w("- **Not tested (IDEA / RETIRED):** " + "; ".join(f"{x['id']} v{x['version']} ({x['status']})"
+                                                            for x in g["idle"]))
+    w("")
+
+
 def render_md(o, cfg):
     L = []
     w = L.append
@@ -1506,55 +1802,18 @@ def render_md(o, cfg):
           "(extreme fear/greed = bigger, faster moves)")
     w("")
     w("## 2. Signals right now")
+    w("Only **APPROVED** strategy versions (your yes, after paper trading) give signals and emails.\n")
     if not o["signals"]:
         w("**No trade passes all the checks right now. That is normal - no trade is also a position.**\n")
     else:
-        w("| # | Coin | TF | Side | Market | Entry | Stop-loss | TP1 | TP2 | TP3 | Expected hold | Score |")
-        w("|---|---|---|---|---|---|---|---|---|---|---|---|")
-        for i, p in enumerate(o["signals"], 1):
-            w(f"| {i} | **{p['coin']}** | {p['timeframe']} | {p['direction']} | {p['market']} | {fmt_price(p['entry'])} | "
-              f"{fmt_price(p['stop'])} | {fmt_price(p['tp1'])} | {fmt_price(p['tp2'])} | {fmt_price(p['tp3'])} | "
-              f"{p['expected_hold']} | {p['confidence_score']:.2f} |")
-        w("")
-        split = o["settings"]["tp_split"]
-        for i, p in enumerate(o["signals"], 1):
-            c = p["context"]
-            w(f"### {i}. {p['coin']} {p['direction']} ({p['market']}) · {p['timeframe']} · strategy `{p['strategy']}`")
-            w(f"- **Signal candle closed:** {p['signal_time_utc']} UTC"
-              + (f" ({p['signal_age_candles']} candle(s) ago - still valid)" if p['signal_age_candles'] else ""))
-            w(f"- **Entry zone:** {fmt_price(min(p['entry_zone']))} - {fmt_price(max(p['entry_zone']))} "
-              f"(don't chase if price already left this zone)")
-            w(f"- **Stop-loss:** {fmt_price(p['stop'])} ({p['risk_pct_of_price']:.2f}% away)")
-            w(f"- **TP1:** {fmt_price(p['tp1'])} -> close {int(split[0]*100)}%, move stop to entry (breakeven)")
-            w(f"- **TP2:** {fmt_price(p['tp2'])} -> close {int(split[1]*100)}%, move stop to TP1")
-            w(f"- **TP3:** {fmt_price(p['tp3'])} -> close the rest")
-            w(f"- **Hold time:** usually ~{p['expected_hold']}; close anyway after {p['max_hold']}")
-            if p.get("exit_rule"):
-                w(f"- **Early exit if:** {' AND '.join(map(str, p['exit_rule']))}")
-            w(f"- **Position size** (account {o['settings']['account_usdt']} USDT, risk "
-              f"{o['settings']['risk_pct']}% = {p['risk_usdt']:.2f} USDT): buy **{p['position_qty']:.6g} {p['coin']}** "
-              f"(~{p['position_usdt']:.0f} USDT" + (f", needs ~{p['leverage_needed']:.1f}x leverage" if p['leverage_needed'] > 1 else "")
-              + ")")
-            w(f"- **Why:** {p['why']}")
-            w(f"- **Rules that were true:** " + "; ".join(f"`{r}`" for r in p["rules_met"]))
-            w(f"- **Context:** higher-TF trend {c['htf_trend']}, RSI(14) {c['rsi14']}, volume {c['volume_vs_avg']}x average, "
-              f"BTC 4H {c['btc_4h']}" + (" ⚠️ AGAINST BTC trend" if c["against_btc_trend"] else "")
-              + (" ⚠️ other strategies disagree on direction" if p["conflict"] else "")
-              + (f" · {p['agreeing_signals']} strategies agree" if p["agreeing_signals"] > 1 else ""))
-            bc, ba = p["backtest_coin"], p["backtest_all"]
-            w(f"- **Backtest proof:** on {p['coin']}: {bc['trades']} trades, {bc['win_rate']*100:.0f}% win, "
-              f"{bc['avg_r']:+.2f}R avg · all coins: {ba['trades']} trades, {ba['win_rate']*100:.0f}% win, "
-              f"{ba['avg_r']:+.2f}R avg, PF {ba['pf']:.2f}\n")
-    w("## 3. Strategy scoreboard (auto backtest)")
-    w("WORKS = passed every test -> can give signals · WEAK = positive but not proven -> watch only · "
-      "FAILS = ignored\n")
-    w("| Strategy | TF | Status | Trades | Win % | Avg R/trade | PF | Train R | Unseen-test R | Avg hold | Live signals (avg R) | Why not |")
-    w("|---|---|---|---|---|---|---|---|---|---|---|---|")
-    for b in o["strategy_scoreboard"]:
-        live = f"{b['live_signals']} ({b['live_avg_r']:+.2f})" if b["live_signals"] else "0"
-        w(f"| {b['strategy']} | {b['tf']} | **{b['status']}** | {b['trades']} | {b['win_rate']} | {b['avg_r']:+.3f} | "
-          f"{b['profit_factor']} | {b['train_avg_r']:+.3f} | {b['test_avg_r']:+.3f} | {b['avg_hold']} | {live} | {b['why_not']} |")
-    w("")
+        render_plans(o["signals"], o["settings"], w)
+    if o["validation_signals"]:
+        w("### 2b. Validation signals - NOT emailed, do not trade")
+        w("From strategy versions in VALIDATION (passed the backtest gate, not yet paper-traded or approved). "
+          "Logged in the live track record so their real results can be checked.\n")
+        render_plans(o["validation_signals"], o["settings"], w)
+    render_scoreboard(o, w)
+    render_lifecycle(o["lifecycle"], o["strategy_scoreboard"], w)
     f = o["forward_test"]
     w("## 4. Live track record (real signals, checked after they happened)")
     if f["closed"]:

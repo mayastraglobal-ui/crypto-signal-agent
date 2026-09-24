@@ -173,7 +173,8 @@ class Definitions(unittest.TestCase):
 
 class RuleLanguage(unittest.TestCase):
     def test_existing_strategies_unchanged_and_features_usable(self):
-        strategies = yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
+        strategies = [s for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
+                      if s["family"] != "smc"]          # the SMC strategies (Phase 7) need SMC columns
         df = scanner.add_htf(synthetic(n=1500), synthetic(tf="4h", n=600))
         feats = F.compute(df, H1)
         plain, rich = scanner.make_namespace(df), scanner.make_namespace(df, feats)
@@ -182,7 +183,7 @@ class RuleLanguage(unittest.TestCase):
                 if s.get(side):
                     np.testing.assert_array_equal(scanner.eval_rules(s[side], plain, df.index),
                                                   scanner.eval_rules(s[side], rich, df.index),
-                                                  err_msg=f"{s['name']} {side}")
+                                                  err_msg=f"{s['id']} {side}")
         self.assertTrue(callable(rich["atr"]))                    # building block not overwritten
         out = scanner.eval_rules(["bull_engulf", "close_loc > 0.5", "rel_vol > 0"], rich, df.index)
         self.assertEqual(out.sum(), (feats["bull_engulf"] & (feats["close_loc"] > 0.5)

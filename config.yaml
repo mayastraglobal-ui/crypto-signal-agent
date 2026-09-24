@@ -156,12 +156,14 @@ trade_plan:                  # the TP1 / TP2 / TP3 structure used for EVERY sign
   move_stop_to_breakeven_after_tp1: true
   move_stop_to_tp1_after_tp2: true
 
-validation:                  # rules a strategy must pass, or it is IGNORED
+validation:                  # the "-> VALIDATION" gate (AGENT_PROMPT.md section 12), per strategy version x timeframe
   in_sample_share: 0.7       # first 70% of history = "training", last 30% = "unseen test"
   min_trades: 30             # need at least 30 backtest trades (all coins together)
   min_oos_trades: 10         # at least 10 trades in the unseen test period
-  min_expectancy_r: 0.05     # must make on average +0.05R per trade AFTER fees
-  min_profit_factor: 1.15    # gross wins / gross losses
+  min_expectancy_r: 0.10     # must make on average +0.10R per trade AFTER fees (was 0.05 before spec v3)
+  min_profit_factor: 1.2     # gross wins / gross losses (was 1.15 before spec v3)
+  max_drawdown_r: 10         # worst peak-to-valley loss of the backtest, in R
+  retune_penalty_r: 0.02     # +0.02R on min_expectancy_r for every earlier version of the same idea (section 11)
   min_coin_trades: 5         # a coin needs 5+ trades with this strategy to be "proven" on it
   forward_pause_after: 20    # after 20 LIVE signals ...
   forward_pause_below_r: -0.10   # ... if live average is below -0.10R, pause the strategy

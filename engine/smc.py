@@ -35,6 +35,16 @@ DEFAULTS = dict(
 
 EVENT_COLUMNS = ["sweep_bull", "sweep_bear", "bos_up", "bos_down", "choch_up", "choch_down",
                  "fvg_retrace_bull", "fvg_retrace_bear"]
+# per-candle CONTEXT (Phase 7): what was known at the close of each candle, for strategy rules
+CONTEXT_COLUMNS = ["range_low", "range_high", "range_pos",           # active dealing range; pos < 0.5 = discount
+                   "bull_ob_low", "bull_ob_high", "bear_ob_low", "bear_ob_high",   # newest ACTIVE order blocks
+                   "in_bull_ob", "in_bear_ob",                        # this candle traded into an active OB
+                   "sweep_bull_low", "sweep_bear_high",               # extreme of the newest sweep (for stops)
+                   "sweep_pdl", "sweep_pdh",                          # this candle swept the prior-day low / high
+                   "liq_above", "liq_below",                          # nearest liquidity pool above / below close
+                   "pdh", "pdl", "pd_mid",                            # prior-day high / low / middle
+                   "kz_asia", "kz_london", "kz_ny_am", "kz_silver_bullet", "in_killzone"]
+KZ_COLUMNS = {"Asia": "kz_asia", "London": "kz_london", "NY AM": "kz_ny_am", "Silver Bullet": "kz_silver_bullet"}
 
 
 def settings(cfg_section):
@@ -51,6 +61,16 @@ def killzone(open_ms, zones=None):
         if a <= h < b:
             return name
     return None
+
+
+def killzone_hours(open_ms, zones=None):
+    """Vectorised killzone(): one name (or None) per candle start time."""
+    zones = zones or DEFAULTS["killzones"]
+    hours = pd.to_datetime(np.asarray(open_ms, dtype="int64"), unit="ms", utc=True).tz_convert(NY).hour.to_numpy()
+    out = np.full(len(hours), None, dtype=object)
+    for name, (a, b) in zones.items():
+        out[(hours >= a) & (hours < b)] = name
+    return out
 
 
 def previous_levels(df, higher):
@@ -74,7 +94,7 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
     df      : closed candles (open_time, close_time, open, high, low, close)
     feats   : engine.features.compute(df) (swings, ATR, displacement, consolidation)
     daily / weekly : closed 1D / 1W candles for PDH/PDL and PWH/PWL pools (optional)
-    Returns dict(events=[...], series=DataFrame of per-candle event flags, state=...)."""
+    Returns dict(events=[...], series=DataFrame of per-candle event flags + CONTEXT_COLUMNS, state=...)."""
     s = settings(s)
     df = df.reset_index(drop=True)
     f = feats.reset_index(drop=True)
@@ -101,6 +121,16 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
     last_sweep = {1: None, -1: None}
     ote = None
     known = {}          # PDH / PDL / PWH / PWL level currently in force (a pool only when it CHANGES)
+    ctx = {k: np.full(n, np.nan) for k in CONTEXT_COLUMNS}
+    for k in ("in_bull_ob", "in_bear_ob", "sweep_pdl", "sweep_pdh", "in_killzone") + tuple(KZ_COLUMNS.values()):
+        ctx[k] = np.zeros(n, bool)
+    ctx["pdh"], ctx["pdl"], ctx["pd_mid"] = pdh, pdl, (pdh + pdl) / 2
+    if kz_on and n:
+        kz = killzone_hours(ot, s["killzones"])
+        for name, col in KZ_COLUMNS.items():
+            ctx[col] = kz == name
+        ctx["in_killzone"] = kz != None      # noqa: E711 (element-wise on an object array)
+    sweep_ext = {1: np.nan, -1: np.nan}
 
     def add(t, event, d, level=None, lo=None, hi=None, size=None, info=""):
         events.append(dict(t=int(t), time=int(ct[t]), event=event, dir=int(d),
@@ -161,6 +191,11 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
                             info=f"{'buy' if side == 1 else 'sell'}-side liquidity swept ({', '.join(kinds)})")
                         flags["sweep_bull" if d == 1 else "sweep_bear"][t] = True
                         last_sweep[d] = t
+                        sweep_ext[d] = l[t] if d == 1 else h[t]
+                        if d == 1 and "PDL" in kinds:
+                            ctx["sweep_pdl"][t] = True
+                        if d == -1 and "PDH" in kinds:
+                            ctx["sweep_pdh"][t] = True
                 for p in through:
                     pools.remove(p)
 
@@ -271,6 +306,22 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
                 fvgs.append(dict(dir=-1, low=h[t], high=l[t - 2], born=t, retraced=False))
                 add(t, "FVG", -1, lo=h[t], hi=l[t - 2], size=(l[t - 2] - h[t]) / atr[t])
 
+        # ---------- 7. context known at the close of this candle ----------
+        ctx["sweep_bull_low"][t], ctx["sweep_bear_high"][t] = sweep_ext[1], sweep_ext[-1]
+        if last_sh and last_sl and last_sh["level"] > last_sl["level"]:
+            ctx["range_low"][t], ctx["range_high"][t] = last_sl["level"], last_sh["level"]
+            ctx["range_pos"][t] = (c[t] - last_sl["level"]) / (last_sh["level"] - last_sl["level"])
+        for side, name in ((1, "bull"), (-1, "bear")):
+            act = [ob for ob in obs if ob["dir"] == side and ob["state"] == "active"]
+            if act:
+                ctx[name + "_ob_low"][t], ctx[name + "_ob_high"][t] = act[-1]["low"], act[-1]["high"]
+            ctx["in_" + name + "_ob"][t] = any(ob["born"] < t and l[t] <= ob["high"] and h[t] >= ob["low"]
+                                               for ob in act)
+        up = [p["level"] for p in pools if p["side"] == 1 and p["level"] > c[t]]
+        dn = [p["level"] for p in pools if p["side"] == -1 and p["level"] < c[t]]
+        ctx["liq_above"][t] = min(up) if up else np.nan
+        ctx["liq_below"][t] = max(dn) if dn else np.nan
+
     # ---------- state at the newest candle ----------
     last = n - 1
     price = c[last] if n else np.nan
@@ -301,4 +352,7 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
                     for d in (1, -1)},
         killzone_now=killzone(int(ot[last]), s["killzones"]) if n and kz_on else None,
     )
-    return dict(events=events, series=pd.DataFrame(flags), state=state)
+    series = pd.DataFrame(flags)
+    for k in CONTEXT_COLUMNS:
+        series[k] = ctx[k]
+    return dict(events=events, series=series, state=state)
