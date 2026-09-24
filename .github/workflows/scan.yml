@@ -1,0 +1,40 @@
+name: Crypto Signal Scan
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Scan, backtest, find signals
+        run: python scanner.py
+
+      - name: Save reports
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add reports
+          git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
+          git pull --rebase --autostash || true
+          git push
