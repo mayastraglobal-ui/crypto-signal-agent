@@ -48,9 +48,13 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}   # only to read the repository size for the report
         run: python scanner.py
 
-      - name: Email new signals
+      - name: Email new signals and position updates ([ENTRY] / [EXIT])
         continue-on-error: true
         run: python notify.py
+
+      - name: Daily report email (first scan after 00:00 UTC = 08:00 Beijing)
+        continue-on-error: true
+        run: python notify.py daily
 
       - name: Email data-quality alerts
         continue-on-error: true

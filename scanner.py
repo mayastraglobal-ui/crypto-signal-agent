@@ -36,6 +36,8 @@ import yaml
 import publish_live
 
 from engine import attribution as att
+from engine import briefs
+from engine import charts
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import evidence as evid
@@ -1126,6 +1128,172 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
     return logdf, closed_now
 
 
+class EmailContext:
+    """Builds the section 20 email content during the scan (notify.py only sends it): [ENTRY] cards with a
+    chart for APPROVED signals, [EXIT] cards for APPROVED TP1 / closes, the daily block, [SYSTEM] reminders."""
+
+    def __init__(self, cfg, now, data, regimes, feat_last, coin_state, board, logdf, risk_pct, RK, acct, tf_ms, lb):
+        self.cfg, self.now, self.data, self.regimes, self.feat_last = cfg, now, data, regimes, feat_last
+        self.coin_state, self.logdf, self.risk_pct, self.RK, self.acct = coin_state, logdf, risk_pct, RK, acct
+        self.board = {(b["strategy"], str(b["version"]), b["tf"]): b for b in board}
+        self.quote, self.tf_ms, self.lb = cfg["market"]["quote"], tf_ms, lb
+        self.utc, self.bj = now.strftime("%Y-%m-%d %H:%M"), now.astimezone(BJ).strftime("%Y-%m-%d %H:%M")
+
+    def regime_row(self, coin):
+        out = {tf: r["label"] for tf, r in (self.regimes.get(coin, {}).get("timeframes") or {}).items()}
+        for tf in ("30m", "15m", "5m"):
+            f = self.feat_last.get((coin, tf))
+            if f is not None and len(f) and f["structure"].iloc[-1] in ("up", "down"):
+                out[tf] = f"structure {f['structure'].iloc[-1]}"
+        return out
+
+    def evidence(self, strategy, version, tf):
+        return briefs.evidence(self.board.get((strategy, str(version), tf)),
+                               briefs.record(self.logdf, strategy, version, tf, ["PAPER_TRADING", "VALIDATION"]),
+                               briefs.record(self.logdf, strategy, version, tf, ["APPROVED"]))
+
+    def chart(self, name, coin, tf, title, entry, stop, targets, entry_ms=None, exit_ms=None, exit_price=None,
+              current_stop=None):
+        df = self.data.get((coin + self.quote, tf))
+        if df is None or df.empty:
+            return None
+        safe = "".join(ch if ch.isalnum() or ch in "-_" else "_" for ch in name)
+        try:
+            return os.path.relpath(charts.trade_chart(df, os.path.join(REPORTS, "charts", safe + ".png"), title, entry,
+                                                      stop, targets, entry_ms, exit_ms, exit_price, current_stop), ROOT)
+        except Exception as e:                  # a chart must never stop an email
+            log(f"chart failed for {name}: {e}")
+            return None
+
+    def _card(self, **kw):
+        e = dict(quote=self.quote, utc=self.utc, beijing=self.bj, regimes=self.regime_row(kw["coin"]),
+                 data_state=self.coin_state.get(kw["coin"], "?"),
+                 evidence=self.evidence(kw["strategy"], kw["version"], kw["tf"]))
+        e.update(kw)
+        e.update(briefs.entry_email(e))
+        return e
+
+    def entry_from_plan(self, p):
+        exp = (self.now + dt.timedelta(milliseconds=self.tf_ms[p["timeframe"]])).strftime("%Y-%m-%d %H:%M")
+        e = self._card(coin=p["coin"], direction=p["direction"], market=p["market"], tf=p["timeframe"],
+                       strategy=p["strategy"], version=p["version"], stage=p["stage"], entry=p["entry"],
+                       entry_zone=p["entry_zone"], stop=p["stop"], targets=p["targets"], confirm_5m=None,
+                       size=dict(qty=p["position_qty"], usdt=p["position_usdt"], risk_usdt=p["risk_usdt"],
+                                 risk_pct=p["risk_pct"], capped=p["size_capped"]),
+                       expires=f"{exp} UTC - after that, or once price leaves the entry zone, skip it",
+                       why=briefs.why_points(1 if p["direction"] == "LONG" else -1, p["context"], p["facts"],
+                                             p["session"], p["conditions"]),
+                       invalidation=briefs.invalidation(p))
+        e["chart"] = self.chart(f"entry_{p['coin']}_{p['timeframe']}_{p['strategy']}_{p['signal_time_utc']}", p["coin"],
+                                p["timeframe"], e["subject"][8:], p["entry"], p["stop"],
+                                [t["price"] for t in p["targets"]], p["signal_ms"])
+        return e
+
+    def _row(self, rid):
+        m = self.logdf[self.logdf["id"] == rid]
+        return None if m.empty else m.iloc[-1]
+
+    def from_events(self, events):
+        """APPROVED state changes worth an email (operator decision): the 5m-confirmed entry, TP1, the close."""
+        out = []
+        for ev in events:
+            if ev["stage"] != "APPROVED" or ev["to_state"] not in (pos.ACTIVE, pos.TP1_HIT, pos.CLOSED):
+                continue
+            r = self._row(ev["id"])
+            if r is None:
+                continue
+            d = 1 if r["direction"] == "LONG" else -1
+            tps = [float(r[k]) for k in ("tp1", "tp2", "tp3") if pd.notna(r[k]) and str(r[k]) != ""]
+            stf = r["sim_tf"] if isinstance(r["sim_tf"], str) and r["sim_tf"] else r["tf"]
+            entry, stop = float(r["entry"]), float(r["stop"])
+            if ev["to_state"] == pos.ACTIVE:
+                if stf != "5m" or ev["from_state"] != pos.TRIGGERED:
+                    continue                     # plain entries are emailed from the plan (signals)
+                R = abs(entry - stop)
+                split = [float(x) for x in str(r["tp_split"]).split("/")] if pd.notna(r["tp_split"]) else []
+                z = rk.size(self.acct, self.risk_pct, entry, stop, self.RK["max_leverage"])
+                e = self._card(coin=r["coin"], direction=r["direction"], market=market_type(d), tf=r["tf"],
+                               strategy=r["strategy"], version=str(r["version"]), stage="APPROVED", entry=entry,
+                               entry_zone=[entry - 0.2 * R, entry + 0.2 * R], stop=stop,
+                               targets=[dict(price=t, r=abs(t - entry) / R, close_pct=round(x * 100))
+                                        for t, x in zip(tps, split or [1.0] * len(tps))],
+                               confirm_5m=r["confirm_5m_utc"], smc_5m=r["smc_5m"] if isinstance(r["smc_5m"], str) else "",
+                               size=dict(qty=z["qty"], usdt=z["notional"], risk_usdt=z["risk_usdt"],
+                                         risk_pct=self.risk_pct, capped=z["capped"]),
+                               expires="entered at the close of the confirming 5m bar",
+                               why=[f"{r['tf']} setup of {r['strategy']} confirmed by a closed 5m bar",
+                                    f"Regime at the trigger: {r['regime_at_entry'] or '?'}",
+                                    "Conditions at the trigger: " + (str(r["conditions"]).replace(";", ", ")
+                                                                     if isinstance(r["conditions"], str) and r["conditions"]
+                                                                     else "none flagged")],
+                               invalidation=briefs.invalidation(dict(stop=stop, exit_rule=None, confirm_5m=False,
+                                                                     max_hold=tf_to_text(r["tf"], int(r["max_hold_bars"])))))
+                e["chart"] = self.chart(f"entry_{ev['id']}", r["coin"], "5m", e["subject"][8:], entry, stop, tps,
+                                        ts_ms(r["entry_time_utc"]))
+                out.append(dict(key=f"{ev['id']}|ENTRY", kind="ENTRY", **{k: e[k] for k in ("subject", "lines", "chart")}))
+                continue
+            closed = ev["to_state"] == pos.CLOSED
+            x = dict(coin=r["coin"], quote=self.quote, direction=r["direction"], tf=r["tf"], strategy=r["strategy"],
+                     version=str(r["version"]), stage="APPROVED", kind=ev["to_state"], utc=self.utc, beijing=self.bj,
+                     close_reason=r["close_reason"] if closed else None,
+                     result_r=float(r["result_r"]) if closed and pd.notna(r["result_r"]) else 0.0, entry=entry,
+                     next_action=("none - the trade is closed" if closed else
+                                  f"stop moved to breakeven ({briefs.fmt(entry)}); keep the rest open for the next target"))
+            m = briefs.exit_email(x)
+            start = r["entry_time_utc"] if isinstance(r["entry_time_utc"], str) and r["entry_time_utc"] else r["signal_time_utc"]
+            m["chart"] = self.chart(f"exit_{ev['id']}_{ev['to_state']}", r["coin"], stf, m["subject"][7:], entry, stop,
+                                    tps, ts_ms(start),
+                                    ts_ms(r["closed_time_utc"]) - self.tf_ms[stf] + 60_000 if closed else None,
+                                    None, float(r["current_stop"]) if pd.notna(r["current_stop"]) else None)
+            out.append(dict(key=f"{ev['id']}|{ev['to_state']}", kind="EXIT", **m))
+        return out
+
+    def daily(self, coins, snap, watching, plans, book, btc, fg, data_state, changes, research_utc, risk_out,
+              n_signals=0):
+        """The block the 08:00 Beijing daily email is made from (notify.py daily)."""
+        rank = {pos.FORMING: 1, pos.WATCH: 2}
+        rows = []
+        for c in coins:
+            sn = snap.get(c, {})
+            rg = self.regime_row(c)
+            f30 = self.feat_last.get((c, "30m"))
+            roc = float(f30["roc"].iloc[-1]) if f30 is not None and len(f30) and pd.notna(f30["roc"].iloc[-1]) else None
+            st15 = "SIGNAL" if any(p["coin"] == c and p["timeframe"] == "15m" for p in plans) else min(
+                (w["state"] for w in watching if w["coin"] == c and w["tf"] == "15m"), key=lambda x: rank[x],
+                default="-")
+            aw = [a for a in book["awaiting"] if a["coin"] == c]
+            rows.append(dict(coin=c, price=sn.get("price", float("nan")), vol_24h_m=(sn.get("vol_24h") or 0) / 1e6,
+                             regimes=[rg.get(tf, "?") for tf in ("1w", "1d", "4h", "1h")],
+                             mom_30m="?" if roc is None else f"{roc:+.1f}% ROC",
+                             setup_15m=st15, trigger_5m=f"AWAITING {aw[0]['bars']}/6" if aw else "-"))
+        fresh = bool(research_utc) and (self.now - pd.Timestamp(research_utc, tz="UTC").to_pydatetime()
+                                        <= dt.timedelta(hours=24))
+        health = [f"{c['key']} {c['tf']}: {c['old']} -> {c['new']}" for c in (changes if fresh else [])]
+        health += [f"SUSPENDED {k}" for k in risk_out["suspended"]] + risk_out["halts_text"]
+        return dict(date=self.now.strftime("%Y-%m-%d"), utc=self.utc, beijing=self.bj, btc=btc, fear_greed=fg,
+                    data_state=data_state, matrix=rows, health=health, signals=n_signals,
+                    events=[f"{e['name']} {e['start_utc']} UTC" for e in risk_out["upcoming_events"]],
+                    calendar_warning=risk_out["calendar_warning"])
+
+    def reminders(self, board, scan_minutes):
+        """[SYSTEM] reminders sent once each (notify.py system): an APPROVED strategy while scans are hourly."""
+        appr = sorted({f"{b['strategy']}@{b['version']}|{b['tf']}" for b in board if b["status"] == "APPROVED"})
+        if appr and scan_minutes > 15:
+            return [dict(key="approved_while_hourly", subject="[SYSTEM] A strategy is APPROVED - scans are still hourly",
+                         lines=[f"APPROVED: {', '.join(appr)}.",
+                                f"The scan runs every {scan_minutes} minutes, so a live entry or exit alert can "
+                                "arrive up to that late (AGENT_PROMPT.md section 19 asks for every 15 minutes).",
+                                "Ask Claude to switch the scan to every 15 minutes (a one-line change)."])]
+        return []
+
+
+def not_actionable(new_rows, logdf):
+    """Ids of signals logged in THIS run whose trade already moved past the entry here (TP1, closed, expired,
+    invalidated, no trade): found up to an hour late, they are not worth an [ENTRY] or [EXIT] email."""
+    done = set(logdf.loc[~logdf["state"].isin([pos.ACTIVE, pos.AWAITING]), "id"])
+    return {r["id"] for r in new_rows} & done
+
+
 def apply_risk(plans, book):
     """Run every plan through the risk engine, best score first: an APPROVED plan that fails a step becomes
     NO_TRADE, one that passes takes its place in the book (the next plans see it); PAPER / VALIDATION plans are
@@ -1546,6 +1714,7 @@ def main():
                                      htf_down=bool(df["htf_down"].iloc[t_i]),
                                      regime=regime_at(reg, tf, t_i),
                                      conditions=att.conditions(ctx, t_i, d, s, att_cfg),
+                                     facts=briefs.facts_at(feats, t_i, d),
                                      levels=[float(feats[c].iloc[t_i]) for c in
                                              (("smc_liq_above", "resistance") if d == 1 else
                                               ("smc_liq_below", "support")) if c in feats],   # section 14 step 10
@@ -1663,7 +1832,7 @@ def main():
             max_hold=tf_to_text(sgl["tf"], strat["time_stop_bars"]), max_hold_bars=strat["time_stop_bars"],
             position_qty=sz["qty"], position_usdt=sz["notional"], leverage_needed=sz["leverage"],
             risk_usdt=sz["risk_usdt"], size_capped=sz["capped"], risk_pct=risk_pct,
-            signal_ms=int(sgl["signal_time"]), levels=sgl["levels"],
+            signal_ms=int(sgl["signal_time"]), levels=sgl["levels"], facts=sgl["facts"],
             cooldown_ms=int(strat.get("cooldown_bars", 0)) * TF_MS[sgl["tf"]],
             backtest_coin=dict(trades=cst["n"], win_rate=cst["win_rate"], avg_r=cst["exp_r"]),
             backtest_all=dict(trades=pooled["n"], win_rate=pooled["win_rate"], avg_r=pooled["exp_r"],
@@ -1757,6 +1926,20 @@ def main():
     json.dump(dict(generated_utc=now_txt, book=book, text=book_text, risk=risk_out, watching=watching,
                    events_this_run=events),
               open(log_path(args.offline, "positions.json"), "w"), indent=1, default=float)
+
+    # ---------- emails (section 20): entry / exit cards, charts, the daily block ----------
+    mail = EmailContext(cfg, started, data, regimes, feat_last, coin_state, board, logdf, risk_pct, RK, acct,
+                        TF_MS, lb)
+    # a signal found up to an hour late whose trade already ENDED in this same run is not actionable:
+    # neither an [ENTRY] nor an [EXIT] email (it stays in the log and the report)
+    over = not_actionable(new_rows, logdf)
+    final = [p for p in final if f"{p['coin']}-{p['timeframe']}-{p['strategy']}-{p['signal_time_utc']}" not in over]
+    for p in final:                                   # APPROVED entries at the signal candle
+        p["email"] = mail.entry_from_plan(p)
+    email_events = [e for e in mail.from_events(events)          # APPROVED: 5m-confirmed entries, TP1, closes
+                    if e["key"].split("|")[0] not in over]
+    daily = mail.daily(view["signal"], snap, watching, plans, book, btc, fg, sys_state,
+                       (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
 
     # ---------- data-quality report ----------
     dq_out = dict(
@@ -1881,7 +2064,10 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                position_book=book, position_book_text=book_text, risk=risk_out, watching=watching[:30],
-               state_changes=events,
+               state_changes=events, email_events=email_events, daily=daily,
+               daily_subject=briefs.daily_email(daily)["subject"], daily_lines=briefs.daily_email(daily)["lines"],
+               email_settings=dict(email_watching=bool(cfg["signals"].get("email_watching", False))),
+               reminders=mail.reminders(board, int(cfg["signals"].get("scan_interval_minutes", 60))),
                signals=final, validation_signals=watch, strategy_scoreboard=board, forward_test=fwd_total,
                lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
                               changes=(research or {}).get("changes", []),

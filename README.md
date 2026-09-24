@@ -219,12 +219,31 @@ or `EXPIRED` (no 5m confirmation) / `INVALIDATED` (stop or 5m structure broken b
 - **Open positions** are managed exactly like the backtest: stop, targets, breakeven after TP1, time stop and the
   strategy's exit rule. An opposite structure break, a strong opposite candle, a regime change or a volatility
   spike only adds a **"watch: ..."** note - they were never tested, so they never close a position.
-- **Position book:** the first thing in every report and `[ENTRY]` email - active (APPROVED) positions, setups
+- **Position book:** the first thing in every report and email - active (APPROVED) positions, setups
   awaiting 5m, paper positions, today's closed ones with R, and day / week R and heat against the limits
   (-3R / -6R / 3; shown now, enforced by the risk engine in Phase 11).
 
 The scan runs hourly, so each run replays the 5m and other candles since the previous run: the recorded result is
 exact, but a live alert can be up to an hour late (a faster schedule is a later decision).
+
+## Emails
+
+All emails are written by the engine itself (no AI), open with the position book and end with
+"Research signal. Not financial advice." (AGENT_PROMPT.md section 20; `notify.py`, content from `engine/briefs.py`).
+Setup: the `GMAIL_USER` / `GMAIL_APP_PASSWORD` secrets (see One-time setup). Without them nothing is sent and
+nothing breaks.
+
+| Email | When | What |
+|---|---|---|
+| `[ENTRY] LONG ETH/USDT \| 15m \| S6-OB-FVG v1.0 \| R:R 2.4` | a new signal of an **APPROVED** strategy passes the risk engine (-5M strategies: when the 5m bar confirms) | UTC + Beijing time, data state, spot / futures only, regime 1W → 5m, entry zone, stop, targets, R:R, 5m bar, size, expiry, 3-5 reasons measured at the signal, what cancels it, evidence (Layers A/B/C, paper, live), **chart image** |
+| `[EXIT] ETH/USDT LONG \| TP1 / TP2 / BE / TRAIL / SL / TIME / EXIT_RULE` | an APPROVED position reaches TP1 or closes | realised R, reason, next action, chart |
+| `[SYSTEM]` | data unsafe / recovered, scan or research failed, risk halt or suspension starts / ends, a strategy is APPROVED while scans are still hourly | what happened and what to do |
+| `[DAILY]` | first scan after 00:00 UTC (08:00 Beijing) | BTC context, the signal coins (price, 24h volume, regimes 1W/1D/4H/1H, 30m momentum, 15m setup, 5m trigger), position book, strategy status changes, event calendar |
+| `[WATCH]` | only if `signals` → `email_watching: true` | setups of APPROVED strategies that are forming or waiting for 5m - not signals |
+
+Each email is sent once. Waiting-for-5m, expired and invalidated setups are shown in the report only (no noisy
+alerts), and a signal found late whose trade already ended in the same run is not emailed. Chart images are email
+attachments only (not stored in the repository). The weekly email comes with the Claude tasks (Phase 14).
 
 ## Risk engine and news blackout
 

@@ -12,3 +12,5 @@ reports/research.json
 # files written only by --offline test runs
 reports/*_offline.json
 reports/*_offline.csv
+# chart images for email attachments (not committed)
+reports/charts/
