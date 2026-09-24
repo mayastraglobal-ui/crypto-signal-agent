@@ -71,6 +71,32 @@ timeframe_model:             # which timeframe does what (AGENT_PROMPT.md sectio
     C: {chain: [7d, 1d, 1h, 30m, 15m, 5m]}
     D: {chain: [1d, 2h, 30m, 15m, 5m]}                  # 2h is downloaded only once D is tested
 
+features:                    # the feature engine (AGENT_PROMPT.md section 7). ATR = average candle size (14)
+  swing_n: 3                 # swing high/low = highest/lowest point with 3 candles on each side
+                             # (it only "exists" once those 3 candles have closed)
+  rel_vol_n: 20              # relative volume = this candle / average of the previous 20
+  displacement_range_atr: 1.5  # displacement candle: range >= 1.5 x ATR,
+  displacement_body_pct: 0.6   # body >= 60% of the range,
+  displacement_rel_vol: 1.3    # and volume >= 1.3 x normal
+  rejection_wick_body_x: 2.0   # pin bar: wick >= 2 x body and >= 60% of the range,
+  rejection_wick_pct: 0.6      # close in the far third
+  consolidation_n: 20        # consolidation: the last 20 candles fit inside 3 x ATR
+  consolidation_atr: 3.0
+  breakout_n: 20             # breakout: close beyond the previous 20-candle high / low
+  retest_bars: 5             # retest: back to the broken level within 5 candles and holds
+  failed_bars: 3             # failed breakout: closes back inside within 3 candles
+  impulse_atr: 2.5           # impulse: a move of 2.5 x ATR within 5 candles
+  impulse_bars: 5
+  pullback_min: 0.382        # pullback: gives back 38.2% - 61.8% of the impulse
+  pullback_max: 0.618
+
+evidence:                    # candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL
+  stop_atr: 1.0              # hypothetical stop 1 ATR from the entry (next candle's open)
+  targets_r: [1, 2, 3]       # how often +1R / +2R / +3R was reached AFTER costs, before the stop
+  max_bars: 30               # give up after 30 candles
+  random_per_event: 10       # random baseline: 10 random entries per pattern entry
+  min_events: 30             # fewer entries than this = "too few to judge"
+
 costs:                       # realistic trading costs - never set these to 0!
   # Exchange not chosen yet, so we use Binance's standard (VIP 0, no BNB discount) fees.
   long:                      # LONG trades = buying on the SPOT market

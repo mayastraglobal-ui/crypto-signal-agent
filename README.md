@@ -44,9 +44,12 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/strategy_scoreboard.csv` | Pass/fail table for every strategy and timeframe | No |
 | `reports/data_quality.json` | Result of the data check, per coin and timeframe | No |
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
+| `reports/features.json` | Newest features per coin and timeframe | No |
+| `reports/feature_evidence.json` | Candle patterns vs random entries (research evidence, not a signal) | No |
+| `memory/feature_notes.md` | What each feature means and whether it has been proven useful | Read it |
 | `reports/universe_state.json` | The agent's memory of the 2-run counts | No |
 | `memory/universe_log.md` | Every coin that joined, left or was excluded, and why | Read it |
-| `engine/` | Parts of the engine (data check, coin selection, timeframes, and more later) | Not needed |
+| `engine/` | Parts of the engine (data check, coins, timeframes, features, evidence, more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
 
@@ -77,6 +80,19 @@ A timeframe is how long one candle lasts (1W = one week, 5m = five minutes). The
 - **Cross-check:** every bigger candle must agree with the smaller candles inside it (a 4H high must
   equal the highest of its four 1H highs). If not, that timeframe is DEGRADED - no signals from it.
 - The report section "0c. Timeframes loaded" shows the candle counts per coin and the cross-check.
+
+## Features and candle evidence
+
+- **Features** (`engine/features.py`, limits in `config.yaml` → `features`): exact measurements of each
+  closed candle - candle shape, momentum, relative volume, displacement / engulfing / pin-bar candles,
+  confirmed swings and HH/HL/LH/LL structure, support/resistance, breakouts, retests, impulses,
+  pullbacks, RSI divergence, and extra indicators (Stochastic RSI, ROC, Keltner, VWAP, OBV).
+  A swing only "exists" once the 3 candles after it have closed. Nothing trades on features yet;
+  report section "0d" shows them for the signal coins on 1H. Definitions: `memory/feature_notes.md`.
+- **Candle evidence** (report section "0e", `reports/feature_evidence.json`) - **research evidence, not a
+  signal**: after each displacement / engulfing / pin-bar candle, how often did price reach +1R / +2R /
+  +3R after costs before a 1-ATR stop - compared with the same test on **random** candles. Only a clear
+  gap over random ("beats chance") is interesting.
 
 ## Data check (every run)
 
