@@ -3,12 +3,13 @@
 This agent runs by itself on GitHub's free servers every hour, whether your PC is on or off. Each run it:
 
 1. **Picks coins.** It takes the ~25 highest-volume USDT coins and skips meme, AI and stable coins, plus any coin with less than 180 days of history.
-2. **Downloads charts.** It gets 4H, 1H, 30m, 15m and 5m candles for every coin.
-3. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage.
-4. **Throws away strategies that fail.** Each strategy has to be profitable in both the "training" period and an "unseen test" period, and has to pass the rules in `config.yaml`.
-5. **Gives signals** from the strategies that pass. Each signal has an entry zone, stop-loss, TP1, TP2, TP3, hold time, position size and the reasons behind it.
-6. **Checks old signals** against what the price actually did afterwards. A strategy whose real results turn bad gets paused automatically.
-7. **Writes the report** to `reports/latest.md`, which you can read on the GitHub website or app.
+2. **Downloads charts.** It gets 1D, 4H, 1H, 30m, 15m and 5m candles for every coin.
+3. **Checks the data is trustworthy** (see "Data check" below). Bad data = no signals.
+4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage.
+5. **Throws away strategies that fail.** Each strategy has to be profitable in both the "training" period and an "unseen test" period, and has to pass the rules in `config.yaml`.
+6. **Gives signals** from the strategies that pass. Each signal has an entry zone, stop-loss, TP1, TP2, TP3, hold time, position size and the reasons behind it.
+7. **Checks old signals** against what the price actually did afterwards. A strategy whose real results turn bad gets paused automatically.
+8. **Writes the report** to `reports/latest.md`, which you can read on the GitHub website or app.
 
 It **never trades for you** and never needs your exchange password or API keys.
 
@@ -34,13 +35,46 @@ It **never trades for you** and never needs your exchange password or API keys.
 
 | File | What it is | Should you edit it? |
 |---|---|---|
-| `config.yaml` | Account size, risk %, coin filters, fees, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
+| `config.yaml` | Account size, risk %, coin filters, fees, data checks, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | `reports/latest.json` | Same report in data form (for Claude) | No |
 | `reports/signals_log.csv` | Every signal ever given and how it ended | No, it's the live track record |
 | `reports/strategy_scoreboard.csv` | Pass/fail table for every strategy and timeframe | No |
+| `reports/data_quality.json` | Result of the data check, per coin and timeframe | No |
+| `engine/` | Parts of the engine (data check, and more later) | Not needed |
+| `tests/` | Automatic tests | Not needed |
+| `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
+
+## Data check (every run)
+
+Before anything else, every candle table is checked for missing, duplicate or unfinished
+candles, impossible prices (zero, negative, high below low), a feed that has stopped updating,
+freak volume, and a price difference of more than 0.5% between Binance and OKX.
+The result is one of three states, shown at the top of `reports/latest.md`:
+
+| State | Meaning |
+|---|---|
+| **GOOD** | Signals allowed |
+| **DEGRADED** | That coin/timeframe is analysis only - no signals from it |
+| **UNSAFE** | No signals from it. If BTC is UNSAFE, or more than 30% of coins are, **all** signals stop (`DATA_STALE / SIGNAL_DISABLED`) and you get one `[SYSTEM]` email - plus one more when the data recovers |
+
+The limits are in `config.yaml` → `data_quality`. Full details are in `reports/data_quality.json`.
+
+## Costs
+
+Every backtest pays realistic costs (`config.yaml` → `costs`): **LONG** trades use Binance
+**spot** fees; **SHORT** trades are **futures only** and use Binance futures fees plus a
+funding fee that is always counted against you.
+
+## Tests
+
+`python -m unittest discover -s tests -v` runs the automatic tests (no internet needed).
+They also run on GitHub on every push: see the **Tests** workflow in the Actions tab
+(green tick = OK, red cross = something broke).
+`python scanner.py --offline --fault stale_btc` shows what happens when data goes bad
+(offline test data only).
 
 ## Adding a strategy
 
