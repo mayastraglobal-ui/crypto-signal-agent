@@ -223,6 +223,16 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
 
+approval:                    # PAPER_TRADING -> APPROVED (AGENT_PROMPT.md section 12) - only the operator changes these
+  min_paper_signals: 20      # at least 20 closed paper signals ...
+  min_paper_avg_r: 0.0       # ... averaging 0R or better ...
+  max_divergence_r: 0.30     # ... and at most 0.30R below the backtest on unseen data (else "material divergence")
+# YOUR YES (section 12): a strategy version x timeframe goes live only when you add it here. The weekly email and
+# reports/approval/ show the approval pack of every eligible one, with the exact line to copy. The next daily
+# research run moves it to APPROVED; delete the line to take it back to paper. Example:
+#   - {strategy: S6-OB-FVG, version: "1.0", tf: 15m, date: 2026-10-04}
+approvals: []
+
 memory:                      # memory files (AGENT_PROMPT.md section 22): days until a record should be reviewed
   review_days: {lessons: 30, coin_notes: 30, research_sources: 90, failure_journal: 7, missed_trades: 7,
                 execution_notes: 30}

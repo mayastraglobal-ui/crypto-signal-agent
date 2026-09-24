@@ -8,6 +8,8 @@
 | `positions.json` - the position book now; `position_events.csv` - every state change | |
 | `strategy_scoreboard.csv` - status per strategy version and timeframe | |
 | `universe.json`, `*_state.json`, `notified.json` - small state the engine needs next run | |
+| `approval/` - approval packs of strategies ready for your yes / no (daily research run) | |
+| `claude/briefings|daily|weekly/` - Claude's task outputs, checked by the Brain guard; `claude/state.json` - the last push handled per task branch | |
 
 Why: the large files are rewritten completely every hour; committing them to main would make the repository
 grow by megabytes a day. `publish_live.py` puts them on `live-reports` as ONE commit (force-pushed, no history).

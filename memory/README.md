@@ -33,3 +33,9 @@ HYPOTHESIS · MODEL_OUTPUT · UNVERIFIED_OPINION. Records whose review date has 
 (section 3e) for the reviews. Review periods: `config.yaml` → `memory`.
 
 The engine writes **facts only**; it never writes lessons and never invents sources or citations.
+
+**Claude's tasks** (Phase 14, `tasks/`) add to the knowledge files only through the Brain guard (`brain_guard.py`,
+`engine/brain.py`): records added at the end of `lessons.md`, `failure_journal.md`, `missed_trades.md`,
+`research_sources.md`, `coin_notes.md`, `feature_notes.md`, `smc_research.md` and `experiments.md` - nothing else,
+never an edit. A lesson needs FACT / RESEARCH_FINDING / BACKTEST_EVIDENCE with counts. A review of a due record is
+a NEW record ("Review: <title>", CONFIRMED / REJECTED / KEEP); the old one stays.

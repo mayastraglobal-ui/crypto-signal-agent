@@ -10,6 +10,9 @@ Email alerts for the Crypto Signal Agent (works without Claude).
   python notify.py research_failed -> email a warning that the daily research run failed
   python notify.py system   -> email [SYSTEM] once when data turns UNSAFE, and once when it recovers;
                                also once when a risk halt / strategy suspension starts or ends (Phase 11)
+  python notify.py weekly   -> the [WEEKLY] email, once per week (Sunday, first scan from 04:00 UTC) (Phase 14)
+  python notify.py brain result.json -> [BRIEFING] emails for new Claude briefings the Brain guard applied, and a
+                               [SYSTEM] email when the guard refused a Claude task's push (Phase 14)
 
 Needs 2 GitHub secrets: GMAIL_USER and GMAIL_APP_PASSWORD
 (optional 3rd: ALERT_TO = a different address to receive alerts).
@@ -29,6 +32,8 @@ SYSTEM_STATE = os.path.join(REPORTS, "system_alert_state.json")
 RISK_SENT = os.path.join(REPORTS, "risk_alert_sent.json")
 DAILY_SENT = os.path.join(REPORTS, "daily_sent.json")
 REMINDERS_SENT = os.path.join(REPORTS, "reminders_sent.json")
+WEEKLY_SENT = os.path.join(REPORTS, "weekly_sent.json")
+BRAIN_SENT = os.path.join(REPORTS, "brain_sent.json")
 FOOTER = "Research signal. Not financial advice."
 
 
@@ -144,6 +149,59 @@ def daily_email():
         save(DAILY_SENT, {"date": d["date"]})
 
 
+def weekly_email():
+    """The weekly report (section 20): the scan builds it on Sunday from 04:00 UTC; sent once per ISO week."""
+    rep = load(os.path.join(REPORTS, "latest.json"), None)
+    w = (rep or {}).get("weekly")
+    if not w:
+        print("Not the weekly report time (Sunday from 04:00 UTC) - skipping.")
+        return
+    if load(WEEKLY_SENT, {}).get("week") == w["week"]:
+        print(f"Weekly email already sent for {w['week']} - skipping.")
+        return
+    if mail(rep, w["subject"], w["lines"]):
+        save(WEEKLY_SENT, {"week": w["week"]})
+
+
+def briefing_subject(path, text):
+    """reports/claude/briefings/2026-09-25-0820.md -> '[BRIEFING] 2026-09-25 08:20 Beijing - <first heading>'."""
+    name = os.path.basename(path)[:-3]
+    day, hm = name[:10], name[11:]
+    title = next((ln[2:].strip() for ln in text.splitlines() if ln.startswith("# ")), "")
+    return f"[BRIEFING] {day} {hm[:2]}:{hm[2:]} Beijing" + (f" - {title[:80]}" if title else "")
+
+
+def brain_email(result_path):
+    """After the Brain guard (brain_guard.py): one [BRIEFING] email per new briefing it applied, and one
+    [SYSTEM] email per refused task push (what was refused and why). Each only once."""
+    results = load(result_path, [])
+    rep = load(os.path.join(REPORTS, "latest.json"), {})
+    sent = load(BRAIN_SENT, [])
+    for r in results:
+        if r["status"] == "rejected":
+            key = f"rejected|{r['sha']}"
+            if key not in sent and mail(rep, f"[SYSTEM] Claude task refused by the guard: {r['branch']}",
+                                        [f"Claude's task pushed {r['sha'][:8]} ({r['subject']}) to {r['branch']}.",
+                                         "The Brain guard refused ALL of it - nothing reached main. Problems:"]
+                                        + [f"- {p}" for p in r["problems"][:30]]
+                                        + ["", "What this means: the engine and your emails are unaffected. The next "
+                                           "task run tries again; if this repeats, show this email to Claude in a "
+                                           "chat."]):
+                sent.append(key)
+            continue
+        for path in r["applied"]:
+            if not path.startswith("reports/claude/briefings/") or path in sent:
+                continue
+            with open(os.path.join(ROOT, path), encoding="utf-8") as f:
+                text = f.read()
+            body = [ln for ln in text.splitlines() if ln.strip().strip("*_ ") != FOOTER]   # mail() adds it once
+            lines = ["(Written by Claude from the engine's numbers and public news. The position book above is "
+                     "from the engine.)", ""] + body
+            if mail(rep, briefing_subject(path, text), lines):
+                sent.append(path)
+    save(BRAIN_SENT, sent[-500:])
+
+
 def reminders_email(rep):
     sent = load(REMINDERS_SENT, [])
     for r in (rep or {}).get("reminders", []):
@@ -229,12 +287,23 @@ def main():
                  "hourly scans and signals keep running. It will try again tomorrow.\n"
                  "If this keeps happening, open this link, take a screenshot and show it to Claude:\n"
                  + repo_link(f"/actions/runs/{run}"))
+        elif mode == "brain_failed":
+            run = os.environ.get("GITHUB_RUN_ID", "")
+            send("[SYSTEM] Crypto Signal Agent - Brain workflow FAILED",
+                 "The workflow that checks and saves the work of Claude's scheduled tasks failed.\n"
+                 "Signals, scans and emails from the engine are NOT affected. It tries again in 15 minutes.\n"
+                 "If this keeps happening, open this link, take a screenshot and show it to Claude:\n"
+                 + repo_link(f"/actions/runs/{run}"))
         elif mode == "system":
             system_email()
             risk_email()
             reminders_email(load(os.path.join(REPORTS, "latest.json"), None))
         elif mode == "daily":
             daily_email()
+        elif mode == "weekly":
+            weekly_email()
+        elif mode == "brain":
+            brain_email(sys.argv[2] if len(sys.argv) > 2 else "brain_result.json")
         else:
             signals_email()
     except smtplib.SMTPAuthenticationError:

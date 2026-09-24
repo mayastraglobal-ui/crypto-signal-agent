@@ -1,0 +1,16 @@
+# Append-only files (AGENT_PROMPT.md section 17; engine/memory.py APPEND_ONLY): when two runs add lines at the
+# same time (hourly scan, daily research, Claude's Brain workflow), git keeps BOTH sides' new lines instead of
+# stopping with a conflict. memory_guard.py still checks that no earlier line was changed or removed.
+memory/changelog.md merge=union
+memory/experiments.md merge=union
+memory/strategy_lifecycle.md merge=union
+memory/universe_log.md merge=union
+memory/market_regime_log.md merge=union
+memory/smc_events.csv merge=union
+memory/failure_journal.md merge=union
+memory/missed_trades.md merge=union
+memory/lessons.md merge=union
+memory/research_sources.md merge=union
+memory/coin_notes.md merge=union
+memory/execution_notes.md merge=union
+reports/position_events.csv merge=union
