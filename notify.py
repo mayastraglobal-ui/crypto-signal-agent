@@ -81,7 +81,8 @@ def signals_email():
     for i, p in enumerate(new, 1):
         z = sorted(p["entry_zone"])
         lines += [
-            f"=== {i}. {p['coin']} {p['direction']} | {p['timeframe']} | {p['strategy']} ===",
+            f"=== {i}. {p['coin']} {p['direction']} ({p.get('market', '?')}) | {p['timeframe']} | "
+            f"{p['strategy']} ===",
             f"Entry zone : {fmt(z[0])} - {fmt(z[1])}   (skip if price already left it)",
             f"Stop-loss  : {fmt(p['stop'])}  ({p['risk_pct_of_price']:.2f}% away)",
             f"TP1        : {fmt(p['tp1'])}  -> close {int(split[0]*100)}%, move stop to entry",

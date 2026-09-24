@@ -6,7 +6,8 @@
 
 account:
   size_usdt: 1000            # your trading account size (used for position-size examples)
-  risk_per_trade_pct: 1.0    # max you lose if the stop-loss is hit. Beginners: 0.5 - 1.0
+  risk_per_trade_pct: 0.5    # max you lose if the stop-loss is hit. TradeSentry v3: 0.5% while
+                             # validating and in the first live month, never above 1%
   max_open_trades: 3         # never hold more than this many trades at once
 
 market:
@@ -37,9 +38,17 @@ timeframes:
   "5m": 2000     # ~7 days
 
 costs:                       # realistic trading costs - never set these to 0!
-  taker_fee_pct: 0.10        # market order fee (Binance spot = 0.10%, futures ~0.05%)
-  maker_fee_pct: 0.10        # limit order fee (Binance spot = 0.10%, futures ~0.02%)
-  slippage_pct: 0.05         # price moves against you when a market order fills
+  # Exchange not chosen yet, so we use Binance's standard (VIP 0, no BNB discount) fees.
+  long:                      # LONG trades = buying on the SPOT market
+    taker_fee_pct: 0.10      # market order fee (Binance spot)
+    maker_fee_pct: 0.10      # limit order fee (Binance spot)
+    slippage_pct: 0.05       # price moves against you when a market order fills
+  short:                     # SHORT trades = FUTURES ONLY (you cannot short on spot)
+    taker_fee_pct: 0.05      # market order fee (Binance USDT-M futures)
+    maker_fee_pct: 0.02      # limit order fee (Binance USDT-M futures)
+    slippage_pct: 0.05
+    funding_pct_per_8h: 0.01 # futures "funding" fee, paid every 8 hours while the trade is open.
+                             # Real funding changes sign; we cautiously ALWAYS charge it to the short.
 
 trade_plan:                  # the TP1 / TP2 / TP3 structure used for EVERY signal
   tp_r: [1.0, 2.0, 3.0]      # TP1 = 1R, TP2 = 2R, TP3 = 3R  (R = distance entry -> stop-loss)

@@ -380,19 +380,32 @@ def add_htf(df, htf_df):
 # =====================================================================
 # 3. BACKTEST ENGINE
 # =====================================================================
-def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, exit_arr=None):
+def trade_costs(cfg, d):
+    """Costs as fractions for one direction: longs = SPOT costs, shorts = FUTURES costs + funding."""
+    c = cfg["costs"]["long" if d == 1 else "short"]
+    return dict(taker=c["taker_fee_pct"] / 100, maker=c["maker_fee_pct"] / 100,
+                slip=c["slippage_pct"] / 100, funding_8h=c.get("funding_pct_per_8h", 0.0) / 100)
+
+
+def market_type(d):
+    return "spot" if d == 1 else "futures only"
+
+
+def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None):
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open.
-    Conservative: if stop and target are touched in the same candle we assume the STOP hit first."""
+    Conservative: if stop and target are touched in the same candle we assume the STOP hit first.
+    Funding (shorts) is charged on the part still open, for every candle held, at entry notional."""
     tp = cfg["trade_plan"]
-    fee_t = cfg["costs"]["taker_fee_pct"] / 100
-    fee_m = cfg["costs"]["maker_fee_pct"] / 100
-    slip = cfg["costs"]["slippage_pct"] / 100
+    k = trade_costs(cfg, d)
+    fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
+    fund_bar = k["funding_8h"] * bar_hours / 8
     tps = [entry + d * r * R for r in tp["tp_r"]]
     split = tp["tp_split"]
     stop = entry - d * R
     remaining, pnl, fees, hit = 1.0, 0.0, fee_t * entry, 0
     n = len(c)
     for j in range(j0, n):
+        fees += remaining * fund_bar * entry
         # --- stop-loss first (worst case) ---
         if (d == 1 and l[j] <= stop) or (d == -1 and h[j] >= stop):
             px = o[j] if ((d == 1 and o[j] < stop) or (d == -1 and o[j] > stop)) else stop
@@ -430,19 +443,19 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, exit_arr=None):
     return None
 
 
-def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg):
+def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf):
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     atr = df["_atr"].to_numpy()
-    slip = cfg["costs"]["slippage_pct"] / 100
+    bar_hours = TF_MS[tf] / 3_600_000
     n, t, trades = len(c), 0, []
     while t < n - 1:
         d = 1 if sig_long[t] else (-1 if sig_short[t] else 0)
         if d == 0 or not np.isfinite(atr[t]) or atr[t] <= 0:
             t += 1
             continue
-        entry = o[t + 1] * (1 + slip * d)          # enter at NEXT candle open
+        entry = o[t + 1] * (1 + trade_costs(cfg, d)["slip"] * d)   # enter at NEXT candle open
         R = strat["stop_atr"] * atr[t]
-        res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["max_hold_bars"],
+        res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["max_hold_bars"], bar_hours,
                              ex_long if d == 1 else ex_short)
         if res is None:
             break
@@ -501,7 +514,8 @@ def update_forward(logdf, data, feed, cfg):
         entry, stop = float(row["entry"]), float(row["stop"])
         R = abs(entry - stop)
         o, h, l, c = (after[k].to_numpy() for k in ("open", "high", "low", "close"))
-        res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]))
+        res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]),
+                             TF_MS[tf] / 3_600_000)
         if res:
             logdf.at[i, "status"] = res["reason"]
             logdf.at[i, "result_r"] = round(res["r"], 3)
@@ -639,7 +653,7 @@ def main():
                     continue
                 L[:250] = False     # warm-up: let long indicators settle
                 S[:250] = False
-                tr = backtest(df, L, S, XL, XS, s, cfg)
+                tr = backtest(df, L, S, XL, XS, s, cfg, tf)
                 split_idx = int(n * cfg["validation"]["in_sample_share"])
                 for t in tr:
                     t["oos"] = t["entry_idx"] >= split_idx
@@ -746,7 +760,7 @@ def main():
         strat = next(s for s in strategies if s["name"] == sgl["strategy"])
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
-            direction="LONG" if d == 1 else "SHORT",
+            direction="LONG" if d == 1 else "SHORT", market=market_type(d),
             signal_time_utc=pd.to_datetime(sgl["signal_time"], unit="ms").strftime("%Y-%m-%d %H:%M"),
             signal_age_candles=sgl["age_bars"],
             entry=e, entry_zone=[e - 0.2 * R, e + 0.2 * R], stop=e - d * R,
@@ -842,17 +856,17 @@ def render_md(o, cfg):
     if not o["signals"]:
         w("**No trade passes all the checks right now. That is normal - no trade is also a position.**\n")
     else:
-        w("| # | Coin | TF | Side | Entry | Stop-loss | TP1 | TP2 | TP3 | Expected hold | Score |")
-        w("|---|---|---|---|---|---|---|---|---|---|---|")
+        w("| # | Coin | TF | Side | Market | Entry | Stop-loss | TP1 | TP2 | TP3 | Expected hold | Score |")
+        w("|---|---|---|---|---|---|---|---|---|---|---|---|")
         for i, p in enumerate(o["signals"], 1):
-            w(f"| {i} | **{p['coin']}** | {p['timeframe']} | {p['direction']} | {fmt_price(p['entry'])} | "
+            w(f"| {i} | **{p['coin']}** | {p['timeframe']} | {p['direction']} | {p['market']} | {fmt_price(p['entry'])} | "
               f"{fmt_price(p['stop'])} | {fmt_price(p['tp1'])} | {fmt_price(p['tp2'])} | {fmt_price(p['tp3'])} | "
               f"{p['expected_hold']} | {p['confidence_score']:.2f} |")
         w("")
         split = o["settings"]["tp_split"]
         for i, p in enumerate(o["signals"], 1):
             c = p["context"]
-            w(f"### {i}. {p['coin']} {p['direction']} · {p['timeframe']} · strategy `{p['strategy']}`")
+            w(f"### {i}. {p['coin']} {p['direction']} ({p['market']}) · {p['timeframe']} · strategy `{p['strategy']}`")
             w(f"- **Signal candle closed:** {p['signal_time_utc']} UTC"
               + (f" ({p['signal_age_candles']} candle(s) ago - still valid)" if p['signal_age_candles'] else ""))
             w(f"- **Entry zone:** {fmt_price(min(p['entry_zone']))} - {fmt_price(max(p['entry_zone']))} "
@@ -893,9 +907,11 @@ def render_md(o, cfg):
     if f["closed"]:
         w(f"- {f['signals']} signals logged · {f['closed']} finished · {f['open']} still open")
         w(f"- Win rate **{f['win_rate']*100:.0f}%**, average **{f['avg_r']:+.2f}R** per trade, total **{f['total_r']:+.1f}R** "
-          f"(at 1% risk, +1R = +1% of account)")
+          f"(at {o['settings']['risk_pct']}% risk, +1R = +{o['settings']['risk_pct']}% of account)")
     else:
         w(f"- {f['signals']} signals logged, none finished yet. Give it a few weeks before trusting anything.")
+    w("\n**Costs used in every backtest:** LONG = spot fees; SHORT = futures fees + funding "
+      "(shorts are **futures only**). Details in `config.yaml` → `costs`.")
     w("\n---\n*R = your risk on the trade. +2R means you made twice what you risked. "
       "Full explanation in the beginner guide.*")
     return "\n".join(L)
