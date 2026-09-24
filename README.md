@@ -5,9 +5,9 @@ This agent runs by itself on GitHub's free servers every hour, whether your PC i
 1. **Picks coins.** 7 "signal" coins + 3 "research" coins (see "Which coins" below). It skips meme, AI, stable, wrapped, gold and leveraged coins, coins with less than 180 days of history, and coins that fail the volume, spread, order-book or ±25% rules.
 2. **Downloads charts.** It gets 1W, 1D, 4H, 1H, 30m, 15m and 5m candles for every coin, and builds rolling 7-day candles (see "Timeframes" below).
 3. **Checks the data is trustworthy** (see "Data check" below). Bad data = no signals.
-4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage.
-5. **Throws away strategies that fail.** Each strategy has to be profitable in both the "training" period and an "unseen test" period, and has to pass the rules in `config.yaml`.
-6. **Gives signals** from the strategies that pass. Each signal has an entry zone, stop-loss, TP1, TP2, TP3, hold time, position size and the reasons behind it.
+4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage - but only in the market regimes each strategy allows, and only when the bigger timeframes agree (see "Strategies" below).
+5. **Moves each strategy along its lifecycle.** A strategy has to be profitable in both the "training" period and an "unseen test" period and pass the bar in `config.yaml` → `validation` to reach VALIDATION. Everything else stays BACKTESTING or FAILED.
+6. **Gives signals only from strategies you APPROVED** (after paper trading - not possible before Phase 8). Strategies in VALIDATION show "validation signals" in the report, which are logged but never emailed. Each signal has an entry zone, stop-loss, targets, hold time, position size and the reasons behind it.
 7. **Checks old signals** against what the price actually did afterwards. A strategy whose real results turn bad gets paused automatically.
 8. **Writes the report** to `reports/latest.md`, which you can read on the GitHub website or app.
 
@@ -41,7 +41,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | `reports/latest.json` | Same report in data form (for Claude) | No |
 | `reports/signals_log.csv` | Every signal ever given and how it ended | No, it's the live track record |
-| `reports/strategy_scoreboard.csv` | Pass/fail table for every strategy and timeframe | No |
+| `reports/strategy_scoreboard.csv` | Status table for every strategy version and timeframe | No |
 | `reports/data_quality.json` | Result of the data check, per coin and timeframe | No |
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
 | `reports/features.json` | Newest features per coin and timeframe | No |
@@ -106,8 +106,8 @@ HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION or UN
 for and against, and a confidence of strong / moderate / weak (never a %). **Permission:** LONG needs at
 least 2 of 1D/4H/1H bullish and no STRONG_BEAR on 1W; SHORT is the mirror image; otherwise NO TRADE.
 Report section "0f"; full evidence in `reports/regime.json`; one entry per day in
-`memory/market_regime_log.md`. For now regimes are **shown only** - they become gates for strategies in
-Phase 7. Rules and limits: `config.yaml` → `regime`.
+`memory/market_regime_log.md`. Regimes and permission **gate every strategy** (see "Strategies").
+Rules and limits: `config.yaml` → `regime`.
 
 ## SMC (Smart Money Concepts) - hypotheses, not doctrine
 
@@ -117,7 +117,8 @@ killzones (New York time) and power of 3 - each an exact rule on closed candles
 (`engine/smc.py`, limits in `config.yaml` → `smc`, definitions in `memory/smc_research.md`).
 Every detection on the signal coins (4H/1H/30m/15m) is logged live in `memory/smc_events.csv`, so no
 label can be drawn in afterwards. Report section "0g" shows the current SMC picture; sweeps, BOS, CHoCH
-and FVG retraces also appear in the candle-evidence table vs random entries. Nothing trades on SMC yet.
+and FVG retraces also appear in the candle-evidence table vs random entries. Strategies S5-S8 are built
+from these rules and must beat a "control twin" (the same idea without the SMC part).
 
 ## Data check (every run)
 
@@ -148,13 +149,34 @@ They also run on GitHub on every push: see the **Tests** workflow in the Actions
 `python scanner.py --offline --fault stale_btc` shows what happens when data goes bad
 (offline test data only).
 
+## Strategies (spec v3)
+
+Every strategy in `strategies.yaml` is an "ID card": id, version, family, the idea it tests (hypothesis),
+allowed market regimes, a gate type, rules, stop, targets, time stop, cooldown, known weaknesses and a
+changelog. The comments at the top of the file explain every field.
+
+- **Lifecycle:** IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING → APPROVED. You set IDEA,
+  FORMALIZED or RETIRED; the engine sets the rest per version and timeframe, every run
+  (`memory/strategy_registry.csv`, changes in `memory/strategy_lifecycle.md`). PAPER_TRADING needs the
+  Phase 8 tests; **APPROVED always needs your yes**. Only APPROVED strategies send `[ENTRY]` emails.
+- **Market gates:** a strategy only trades in the regimes it lists. Trend, breakout and SMC strategies
+  need 2 of 1D/4H/1H in their direction and never trade against a STRONG weekly trend; reversal types
+  skip the weekly veto; mean-reversion strategies trade only in ranges and never against a STRONG
+  1W/1D/4H trend.
+- **Pass bar (VALIDATION):** ≥ 30 trades, ≥ +0.10R per trade after fees, profit factor ≥ 1.2, max
+  drawdown ≤ 10R, profitable in both the training and the unseen-test part. Each re-tuned version of the
+  same idea needs +0.02R more (`memory/experiments.md` counts every version tested).
+- **A tested version never changes.** To change rules, copy the block, raise the version
+  ("1.0" → "1.1") and add a changelog line. If a tested version's rules are edited in place, the engine
+  refuses to run it and the report says why.
+
 ## Adding a strategy
 
 1. Open `strategies.yaml` → click the pencil icon ✏️.
-2. Copy an existing block to the bottom, give it a new `name`, set `status: candidate`, and change the rules.
-3. Commit. The next hourly run backtests it. If it passes, it starts giving signals. If not, the scoreboard tells you why.
+2. Copy an existing block to the bottom, give it a new `id`, `version: "1.0"`, `status: FORMALIZED`, fill in the card and change the rules.
+3. Commit. The next hourly run backtests it and the scoreboard tells you its status and why.
 
-If a rule has a typo, the run log (Actions tab) shows `RULE ERROR` and the strategy is skipped. Nothing else breaks.
+If a card is incomplete, the report lists it under "not run". If a rule has a typo, the run log (Actions tab) shows `RULE ERROR` and the strategy is skipped. Nothing else breaks.
 
 ## Notes
 

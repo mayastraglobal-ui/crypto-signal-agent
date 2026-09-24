@@ -81,8 +81,11 @@ class SafetyGuards(unittest.TestCase):
     def test_validation_bar_not_lowered(self):
         v = CFG["validation"]
         self.assertGreaterEqual(v["min_trades"], 30)
-        self.assertGreaterEqual(v["min_expectancy_r"], 0.05)
-        self.assertGreaterEqual(v["min_profit_factor"], 1.15)
+        self.assertGreaterEqual(v["min_expectancy_r"], 0.10)       # section 12 "-> VALIDATION" (Phase 7)
+        self.assertGreaterEqual(v["min_profit_factor"], 1.2)
+        self.assertLessEqual(v["max_drawdown_r"], 10)
+        self.assertGreaterEqual(v["retune_penalty_r"], 0.02)
+        self.assertGreaterEqual(v["min_oos_trades"], 10)
 
 
 if __name__ == "__main__":

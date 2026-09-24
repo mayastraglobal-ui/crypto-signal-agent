@@ -65,6 +65,20 @@ def signal_id(p):
     return f"{p['coin']}-{p['timeframe']}-{p['strategy']}-{p['signal_time_utc']}"
 
 
+def target_lines(p, split):
+    """TP1..TPn lines. Spec v3 plans carry their own targets; older reports used TP1-TP3 + the config split."""
+    tg = p.get("targets") or [dict(price=p[k], close_pct=int(x * 100))
+                              for k, x in zip(("tp1", "tp2", "tp3"), split) if p.get(k) is not None]
+    out = []
+    for j, t in enumerate(tg, 1):
+        if j == len(tg):
+            what = "close the rest"
+        else:
+            what = f"close {t['close_pct']}%, " + ("move stop to entry" if j == 1 else "move stop to TP1")
+        out.append(f"TP{j}        : {fmt(t['price'])}  -> {what}")
+    return out
+
+
 def signals_email():
     path = os.path.join(REPORTS, "latest.json")
     if not os.path.exists(path):
@@ -84,12 +98,10 @@ def signals_email():
         z = sorted(p["entry_zone"])
         lines += [
             f"=== {i}. {p['coin']} {p['direction']} ({p.get('market', '?')}) | {p['timeframe']} | "
-            f"{p['strategy']} ===",
+            f"{p['strategy']} v{p.get('version', '1.0')} ===",
             f"Entry zone : {fmt(z[0])} - {fmt(z[1])}   (skip if price already left it)",
             f"Stop-loss  : {fmt(p['stop'])}  ({p['risk_pct_of_price']:.2f}% away)",
-            f"TP1        : {fmt(p['tp1'])}  -> close {int(split[0]*100)}%, move stop to entry",
-            f"TP2        : {fmt(p['tp2'])}  -> close {int(split[1]*100)}%, move stop to TP1",
-            f"TP3        : {fmt(p['tp3'])}  -> close the rest",
+            *target_lines(p, split),
             f"Hold       : ~{p['expected_hold']} (max {p['max_hold']})",
             f"Size       : {p['position_qty']:.6g} {p['coin']} (~{p['position_usdt']:.0f} USDT, "
             f"risk {p['risk_usdt']:.2f} USDT)",
@@ -100,7 +112,7 @@ def signals_email():
             ""]
     lines += ["Full report: " + repo_link("/blob/main/reports/latest.md"), "",
               "Signals only - not financial advice. Check the news and your checklist before any trade."]
-    subject = "Crypto signal: " + ", ".join(f"{p['coin']} {p['direction']} {p['timeframe']}" for p in new[:3])
+    subject = "[ENTRY] Crypto signal: " + ", ".join(f"{p['coin']} {p['direction']} {p['timeframe']}" for p in new[:3])
     if send(subject, "\n".join(l for l in lines if l is not None)):
         seen = (seen + [signal_id(p) for p in new])[-1000:]
         json.dump(seen, open(STATE, "w"))
