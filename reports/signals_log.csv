@@ -1,1 +1,1 @@
-id,signal_time_utc,coin,tf,strategy,direction,entry,stop,tp1,tp2,tp3,max_hold_bars,status,result_r,closed_time_utc,version,stage,tp_split
+id,signal_time_utc,coin,tf,strategy,direction,entry,stop,tp1,tp2,tp3,max_hold_bars,status,result_r,closed_time_utc,version,stage,tp_split,conditions,regime_at_entry,session,mae_r,mfe_r,tags
