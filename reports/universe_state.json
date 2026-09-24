@@ -3,8 +3,8 @@
   "BTC",
   "ETH",
   "ZEC",
-  "SOL",
   "XRP",
+  "SOL",
   "BNB",
   "UNI"
  ],
@@ -13,7 +13,7 @@
  "suspended": {
   "ONDO": "2026-09-24"
  },
- "runs": 5,
+ "runs": 6,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -34,7 +34,8 @@
   ],
   "BNB": [],
   "UNI": [],
-  "SUI": []
+  "SUI": [],
+  "AVAX": []
  },
  "last_flags": {
   "BTC": [],
@@ -49,6 +50,7 @@
   "ONDO": [],
   "BNB": [],
   "UNI": [],
-  "SUI": []
+  "SUI": [],
+  "AVAX": []
  }
 }
