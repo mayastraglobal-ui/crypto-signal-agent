@@ -46,7 +46,7 @@ class Library(unittest.TestCase):
     def test_every_card_is_valid(self):
         ok, problems, idle = SP.load(RAW, RG.LABELS, scanner.TF_ORDER)
         self.assertEqual(problems, {})
-        self.assertEqual(len(ok), 16)
+        self.assertEqual(len(ok), 20)
         ids = {s["id"] for s in ok}
         for sid in ("S5-SWEEP-MSS-FVG", "S6-OB-FVG", "S7-SILVER-BULLET", "S8-PDH-PDL-SWEEP"):
             self.assertIn(sid, ids)
@@ -63,7 +63,7 @@ class Library(unittest.TestCase):
     def test_every_smc_strategy_has_a_matching_control_twin(self):
         ok, _, _ = SP.load(RAW, RG.LABELS, scanner.TF_ORDER)
         by = {s["id"]: s for s in ok}
-        mains = [s for s in ok if s["family"] == "smc" and not s.get("twin_of")]
+        mains = [s for s in ok if s["family"] == "smc" and not s.get("twin_of") and not s.get("confirm_5m")]
         self.assertEqual(len(mains), 4)
         for s in mains:
             tw = by[s["control_twin"]]
@@ -77,9 +77,9 @@ class Library(unittest.TestCase):
             if s.get("gate") == "mean_reversion":
                 self.assertTrue(set(s["regimes"]) <= {"RANGE", "HIGH_VOL_RANGE"}, s["id"])
 
-    def test_no_5m_for_smc_and_no_5m_confirmation_yet(self):   # operator decisions 4 + 5
+    def test_no_5m_for_smc_and_5m_confirmation_only_on_the_5m_versions(self):   # operator decisions 4 + 5
         for s in RAW:
-            self.assertFalse(s.get("confirm_5m"), s["id"])
+            self.assertEqual(bool(s.get("confirm_5m")), s["id"].endswith("-5M"), s["id"])   # Phase 10
             if s["family"] == "smc":
                 self.assertNotIn("5m", s["timeframes"], s["id"])
 

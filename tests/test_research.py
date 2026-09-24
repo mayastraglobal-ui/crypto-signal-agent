@@ -30,7 +30,7 @@ CFG = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
 R, V = CFG["research"], CFG["validation"]
 RAW = yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
 DAY, H1 = 86_400_000, 3_600_000
-# fingerprints of the 16 tested v1.0 cards (Phase 7). Turning numbers into {params} must not change them.
+# fingerprints of the tested v1.0 cards (Phase 7 + 10). Turning numbers into {params} must not change them.
 FROZEN = {
     "trend_pullback@1.0": "8a44ad271501a1e0", "donchian_breakout@1.0": "16bf4b27106859c9",
     "rsi2_dip_buy@1.0": "80f89b0ee2f96e4e", "bb_squeeze_breakout@1.0": "7ed0a9a3cc499679",
@@ -40,6 +40,9 @@ FROZEN = {
     "S6-OB-FVG@1.0": "7cd5cecc6e32325b", "S6-OB-FVG-noSMC@1.0": "3625bec421c0fc06",
     "S7-SILVER-BULLET@1.0": "898cf8575314471e", "S7-SILVER-BULLET-noSMC@1.0": "afa15a7a4ae803d4",
     "S8-PDH-PDL-SWEEP@1.0": "742b8bd48603d659", "S8-PDH-PDL-SWEEP-noSMC@1.0": "651c1e2ec3e0594c",
+    # Phase 10: the 5-minute confirmation versions
+    "S5-SWEEP-MSS-FVG-5M@1.0": "f9d1c2e50f046b7d", "S6-OB-FVG-5M@1.0": "a9e6bcfa6fe62d0c",
+    "S7-SILVER-BULLET-5M@1.0": "40a897f8c1b3aed2", "S8-PDH-PDL-SWEEP-5M@1.0": "f0aeec94c99360d9",
 }
 
 

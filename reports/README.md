@@ -4,7 +4,8 @@
 |---|---|
 | `latest.md` - the newest report | `latest.json` - the whole report as data |
 | `daily/YYYY-MM-DD.md` - the last report of each day | `data_quality.json`, `features.json`, `feature_evidence.json`, `regime.json`, `smc.json` |
-| `signals_log.csv` - every signal and how it ended | `research.json` - the daily research run |
+| `signals_log.csv` - every signal, its state and how it ended | `research.json` - the daily research run |
+| `positions.json` - the position book now; `position_events.csv` - every state change | |
 | `strategy_scoreboard.csv` - status per strategy version and timeframe | |
 | `universe.json`, `*_state.json`, `notified.json` - small state the engine needs next run | |
 

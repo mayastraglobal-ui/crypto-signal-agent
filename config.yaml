@@ -217,7 +217,15 @@ attribution:                 # failure attribution (AGENT_PROMPT.md section 17) 
   missed_lookback_hours: 24  # ... in the last 24 hours (checked once a day)
   signal_window_bars: 3      # a signal up to 3 hours before the move started counts as "identifiable"
 
+confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md section 8), for cards with confirm_5m: true
+  bars: 6                    # scan up to 6 closed 5m bars after the 15m / 30m trigger, else EXPIRED (no entry)
+  min_body_pct: 0.5          # confirming bar closes in the trade direction with a body >= 50% of its range
+  min_rel_vol: 1.0           # ... relative volume >= 1.0
+  zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
+
 signals:
   lookback_bars: 2           # a signal stays valid for this many closed candles
+  scan_interval_minutes: 60  # the scan runs hourly: every candle closed since the previous run is looked at
+                             # (15m: 4 candles, 5m: 12), so no trigger falls between two runs
   max_in_report: 10          # show the best N signals
   allow_shorts: true         # false = long only (spot traders cannot short)

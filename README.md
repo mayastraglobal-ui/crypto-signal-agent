@@ -40,7 +40,9 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | [`reports/latest.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/latest.json) ⓛ | Same report in data form (for Claude) | No |
-| `reports/signals_log.csv` | Every signal ever given and how it ended | No, it's the live track record |
+| `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
+| `reports/positions.json` | The position book right now (active, awaiting 5m, paper, closed today) + what is being watched | No |
+| `reports/position_events.csv` | Every state change of every signal, one line each (never rewritten) | No |
 | `reports/strategy_scoreboard.csv` | Status table for every strategy version and timeframe | No |
 | [`reports/data_quality.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/data_quality.json) ⓛ | Result of the data check, per coin and timeframe | No |
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
@@ -61,8 +63,8 @@ It **never trades for you** and never needs your exchange password or API keys.
 
 ⓛ = **on the branch `live-reports`**, not on main. These large files are fully replaced every run, so they are
 published there as one single commit (`publish_live.py`) and do not pile up in the repository's history.
-Main keeps the history that matters: `memory/`, `reports/signals_log.csv`, `reports/strategy_scoreboard.csv`,
-`reports/daily/` and `reports/latest.md`. The report's top line shows the repository size.
+Main keeps the history that matters: `memory/`, `reports/signals_log.csv`, `reports/position_events.csv`,
+`reports/positions.json`, `reports/strategy_scoreboard.csv`, `reports/daily/` and `reports/latest.md`. The report's top line shows the repository size.
 
 ## Which coins (every run)
 
@@ -190,13 +192,38 @@ tests every strategy version on every timeframe on years of history (AGENT_PROMP
 | **Costs +50%** | Still profitable when fees, slippage and funding are 50% higher? |
 | **±20% test** | Still profitable when each number in the rules (and the stop and hold time) is moved 20% down or up, one at a time? |
 | **Coins / overfitting** | Profitable on ≥ 3 coins, and no more than half of the profit from one coin or one window |
-| **Control twin** | For SMC strategies: better than the same idea without the SMC part, overall and in the validate part |
+| **Control twin** | For SMC strategies: better than the same idea without the SMC part, overall and in the validate part. For `-5M` strategies: better than the same strategy without the 5m check (tested on the 90 days of 5m history, which also sets their develop / validate split and walk-forward windows) |
 
 Passing everything moves a strategy to **PAPER_TRADING** automatically: its signals are logged as paper trades,
 never emailed. A paper strategy is **RETIRED** if its last 20 paper signals average below -0.10R or it loses more
 than 8R, and leaves paper if it fails Layer B two days in a row. **APPROVED** only ever comes from you.
 Results: report sections 3 / 3b / 3c and `reports/research.json`. Long price history is kept in GitHub's Actions
 cache (not in the repo) and only new candles are downloaded each day. Settings: `config.yaml` → `research`.
+
+## Signal states, 5-minute confirmation and the position book
+
+Every signal of a strategy in VALIDATION or higher is followed through fixed states (AGENT_PROMPT.md
+sections 8, 13, 16; `engine/positions.py`, `engine/confirm5m.py`):
+
+`WATCH → SETUP_FORMING → AWAITING_5M → ENTRY_TRIGGERED → POSITION_ACTIVE → TP1_HIT (stop to breakeven) → CLOSED`,
+or `EXPIRED` (no 5m confirmation) / `INVALIDATED` (stop or 5m structure broken before entry).
+
+- **WATCH / SETUP_FORMING** (report section 2c only): the strategy's trend / regime filters are open, or all its
+  entry rules but one are true - the missing rule is shown.
+- **5-minute confirmation:** strategies whose card says `confirm_5m: true` (the `-5M` versions of S5-S8) do not
+  enter at the 15m / 30m candle. They wait up to 6 closed 5m bars for one that closes in the trade direction
+  (body ≥ 50%, volume ≥ average, price still within entry ± 0.2R); none → EXPIRED, no trade. Each is compared
+  with the same strategy without the check, over the same period on the same 5m bars - the check is kept only if
+  it helps. Settings: `config.yaml` → `confirm_5m`.
+- **Open positions** are managed exactly like the backtest: stop, targets, breakeven after TP1, time stop and the
+  strategy's exit rule. An opposite structure break, a strong opposite candle, a regime change or a volatility
+  spike only adds a **"watch: ..."** note - they were never tested, so they never close a position.
+- **Position book:** the first thing in every report and `[ENTRY]` email - active (APPROVED) positions, setups
+  awaiting 5m, paper positions, today's closed ones with R, and day / week R and heat against the limits
+  (-3R / -6R / 3; shown now, enforced by the risk engine in Phase 11).
+
+The scan runs hourly, so each run replays the 5m and other candles since the previous run: the recorded result is
+exact, but a live alert can be up to an hour late (a faster schedule is a later decision).
 
 ## Why trades lose (failure attribution)
 

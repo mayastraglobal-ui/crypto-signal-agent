@@ -93,7 +93,9 @@ def signals_email():
         return
     split = rep["settings"]["tp_split"]
     bt = rep["market"]["btc_trend"]
-    lines = [f"{len(new)} new signal(s) - {rep['generated_beijing']} Beijing time", "",
+    book = rep.get("position_book_text") or []           # section 16: every email opens with the position book
+    lines = [*book, *([""] if book else []),
+             f"{len(new)} new signal(s) - {rep['generated_beijing']} Beijing time", "",
              f"BTC trend: daily {bt.get('1d', '?')}, 4H {bt.get('4h', '?')}", ""]
     for i, p in enumerate(new, 1):
         z = sorted(p["entry_zone"])
@@ -112,7 +114,7 @@ def signals_email():
             ("WARNING    : against BTC trend" if p["context"]["against_btc_trend"] else ""),
             ""]
     lines += ["Full report: " + repo_link("/blob/main/reports/latest.md"), "",
-              "Signals only - not financial advice. Check the news and your checklist before any trade."]
+              "Research signal. Not financial advice. Check the news and your checklist before any trade."]
     subject = "[ENTRY] Crypto signal: " + ", ".join(f"{p['coin']} {p['direction']} {p['timeframe']}" for p in new[:3])
     if send(subject, "\n".join(l for l in lines if l is not None)):
         seen = (seen + [signal_id(p) for p in new])[-1000:]

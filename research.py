@@ -8,6 +8,9 @@ For every strategy version x timeframe, on the research coins of the last hourly
   costs     - cost viability (stop >= 4x the round-trip cost) and a stress test with costs +50%
   +-20%     - every parameter moved down and up, one at a time
   coins     - edge on >= 3 coins; overfitting flag; control-twin comparison
+  5m check  - strategies with confirm_5m (section 8) are backtested through the 5-minute protocol; their
+              control twin is the SAME strategy without the check, run over the same period on the same
+              5m bars (a fair comparison - Phase 10)
 Then every version x timeframe moves along its lifecycle (BACKTESTING / VALIDATION / FAILED /
 PAPER_TRADING / RETIRED). APPROVED is never set by the engine - it needs the operator's yes.
 
@@ -31,6 +34,7 @@ import yaml
 
 import scanner as sc
 from engine import attribution as att
+from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import history
 from engine import lifecycle as lc
@@ -169,6 +173,8 @@ def main():
         f"{sum(len(v) for v in variants.values())} ±{R['perturb_pct']}% variants")
 
     per, stress, var = {}, {}, {}            # (id, version, tf) -> {coin: trades} (var: -> {label: {coin: ...}})
+    plain5 = {}                               # 5m-confirmed cells: the same signals WITHOUT the 5m check
+    S5 = c5m.settings(cfg.get("confirm_5m"))
     spans, hist, skipped, rule_errors = {}, {}, {}, {}
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
@@ -188,6 +194,7 @@ def main():
             skipped[base] = f"download failed: {e}"
             continue
         pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg)
+        m5 = sc.m5_arrays(pc["frames"])
         moves = []
         if "1h" in pc["frames"]:
             f1 = pc["frames"]["1h"]
@@ -216,9 +223,13 @@ def main():
                     rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
                     continue
                 for cf, store in ((cfg, per), (cfg_stress, stress)):
-                    tr = sc.backtest(df, L, S, XL, XS, s, cf, tf, cols)
-                    sc.mark_oos(tr, n, cfg)
+                    tr = sc.run_backtest(df, L, S, XL, XS, s, cf, tf, cols, None, m5, S5)
+                    sc.mark_oos_for(s, tr, n, cfg, m5)
                     store.setdefault(k3, {})[base] = tr
+                if s.get("confirm_5m"):
+                    tr = sc.backtest_5m(df, L, S, XL, XS, s, cfg, tf, cols, m5, False, None, S5)
+                    sc.mark_oos_for(s, tr, n, cfg, m5)
+                    plain5.setdefault(k3, {})[base] = tr
                 for t in per[k3][base]:                    # section 17: why did each trade win or lose?
                     att.tag_trade(ctx, t, s, lc.regime_tf(tf), A)
                 if moves:
@@ -231,16 +242,20 @@ def main():
                         except Exception as e:
                             rule_errors.setdefault(sspec.key(s), set()).add(f"{tf} variant {label}: {e}")
                             sig = (np.zeros(n, bool), np.zeros(n, bool), None, None, cols)
-                    tv = sc.backtest(df, *sig[:4], v, cfg, tf, sig[4])
+                    tv = sc.run_backtest(df, *sig[:4], v, cfg, tf, sig[4], None, m5, S5)
                     # only the count and the total R are kept (all trades of 160+ variants would not fit in memory)
                     var.setdefault(k3, {}).setdefault(label, {})[base] = (len(tv), float(sum(t["r"] for t in tv)))
         log(f"researched {sym}")
-        del pc, data
+        del pc, data, m5
 
     # ---------- evidence per strategy version x timeframe ----------
     wins = {tf: rs.windows(min(a for a, _ in sp), max(b for _, b in sp), int(R["walk_forward_windows"]))
             for tf, sp in spans.items()}
-    evals = {k3: rs.evaluate(per[k3], stress.get(k3, {}), var.get(k3, {}), wins[k3[2]], R, V["min_coin_trades"])
+    confirm_keys = {sspec.key(x) for x in strategies if x.get("confirm_5m")}
+
+    def wins_for(k3):               # 5m-confirmed cells: walk-forward windows over the 5m period (their only data)
+        return wins.get("5m", wins[k3[2]]) if f"{k3[0]}@{k3[1]}" in confirm_keys else wins[k3[2]]
+    evals = {k3: rs.evaluate(per[k3], stress.get(k3, {}), var.get(k3, {}), wins_for(k3), R, V["min_coin_trades"])
              for k3 in per}
     logdf = sc.load_log()
     fwd = sc.forward_stats(logdf)
@@ -256,7 +271,11 @@ def main():
                                               lc.retune_penalty(registry, s, V["retune_penalty_r"]),
                                               ev["median_cost_r"])
         twin = None
-        if s.get("control_twin"):
+        if s.get("confirm_5m"):               # the fair twin: same signals, no 5m check, same period, same 5m bars
+            twin = rs.evaluate(plain5.get(k3, {}), {}, {}, wins_for(k3), R, V["min_coin_trades"]) if k3 in plain5 else None
+            if twin:
+                twin.pop("_raw")
+        elif s.get("control_twin"):
             twin = next((e for k, e in evals.items() if k[0] == s["control_twin"] and k[2] == tf), None)
         paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R)
         if s.get("control_twin") and twin is None:
@@ -271,6 +290,8 @@ def main():
                          reasons=reasons, paper_gate_failed=paper_reasons if base_status == "VALIDATION" else [],
                          note=note, failed_runs=failed, required_avg_r=round(need, 3),
                          beats_twin=lc.twin_compare(ev, twin, R) if twin else None,
+                         twin_same_window=dict(all=twin["all"], validate=twin["validate"])
+                         if twin and s.get("confirm_5m") else None,
                          history_from=fmt_day(min(t["entry_time"] for tr in per[k3].values() for t in tr))
                          if any(per[k3].values()) else None,
                          paper=rec, evidence=ev)

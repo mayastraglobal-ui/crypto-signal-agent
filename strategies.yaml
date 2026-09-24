@@ -341,7 +341,7 @@
 # H. SMC / ICT research candidates S5-S8 (AGENT_PROMPT.md section 9) and their CONTROL TWINS.
 # A twin keeps the same gates, regimes, exits and hold time, but drops the SMC ingredient.
 # The SMC part is only kept if it beats its twin out of sample (Phase 8 checks this formally).
-# 5-minute confirmation (section 8) arrives in Phase 10 as a new version, tested against these.
+# The 5-minute confirmation (section 8) versions S5-S8 -5M are at the end, tested against these.
 # ---------------------------------------------------------------------
 
 - id: S5-SWEEP-MSS-FVG
@@ -619,6 +619,163 @@
   known_weaknesses: "A benchmark, not an idea to trade."
   changelog:
     - "1.0 (2026-09-24): first version (Phase 7)."
+
+# ---------------------------------------------------------------------
+# 5-MINUTE CONFIRMATION versions (AGENT_PROMPT.md section 8) - Phase 10.
+# Each is EXACTLY its control twin (the plain strategy above) plus the 5m entry check: after the
+# 15m / 30m trigger closes, wait up to 6 closed 5m bars for a bar in the trade direction (body >= 50%,
+# volume >= average, price within entry +- 0.2R); none -> EXPIRED, no trade. Stop and target prices stay.
+# The engine checks the rules really are identical, and compares both over the same period on the same
+# 5m bars: the 5m check is only worth keeping if it beats the plain version out of sample.
+# 5m history is 90 days (research), so these have few trades for a while.
+# ---------------------------------------------------------------------
+- id: S5-SWEEP-MSS-FVG-5M
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S5-SWEEP-MSS-FVG v1.0"
+  hypothesis: "Waiting for a closed 5m bar that confirms the direction (section 8) improves S5-SWEEP-MSS-FVG: fewer false entries and a better price, enough to beat the same strategy without the 5m check."
+  timeframes: ["30m", "15m"]
+  description: "S5-SWEEP-MSS-FVG + 5-minute entry confirmation."
+  logic: >-
+    The same setup as S5-SWEEP-MSS-FVG. Instead of entering at once, we wait up to 30 minutes for
+    a 5-minute candle that closes firmly in our direction on normal-or-better volume while
+    price is still near the planned entry. No such candle -> no trade.
+  params: {sweep_bars: 20, mss_bars: 10}
+  long:
+    - bars_since(smc_sweep_bull) <= {sweep_bars}
+    - bars_since(smc_choch_up) <= bars_since(smc_sweep_bull)
+    - bars_since(smc_choch_up) <= {mss_bars}
+    - smc_fvg_retrace_bull
+  short:
+    - bars_since(smc_sweep_bear) <= {sweep_bars}
+    - bars_since(smc_choch_down) <= bars_since(smc_sweep_bear)
+    - bars_since(smc_choch_down) <= {mss_bars}
+    - smc_fvg_retrace_bear
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: true
+  control_twin: S5-SWEEP-MSS-FVG
+  known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 10) - S5-SWEEP-MSS-FVG v1.0 + the section 8 5m check."
+
+- id: S6-OB-FVG-5M
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+  source: "AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S6-OB-FVG v1.0"
+  hypothesis: "Waiting for a closed 5m bar that confirms the direction (section 8) improves S6-OB-FVG: fewer false entries and a better price, enough to beat the same strategy without the 5m check."
+  timeframes: ["15m"]
+  description: "S6-OB-FVG + 5-minute entry confirmation."
+  logic: >-
+    The same setup as S6-OB-FVG. Instead of entering at once, we wait up to 30 minutes for
+    a 5-minute candle that closes firmly in our direction on normal-or-better volume while
+    price is still near the planned entry. No such candle -> no trade.
+  params: {ob_bars: 20}
+  long:
+    - h4_bull_ob_high < (h4_range_low + h4_range_high) / 2
+    - within(low <= h4_bull_ob_high, {ob_bars})
+    - close > h4_bull_ob_low
+    - smc_choch_up
+  short:
+    - h4_bear_ob_low > (h4_range_low + h4_range_high) / 2
+    - within(high >= h4_bear_ob_low, {ob_bars})
+    - close < h4_bear_ob_high
+    - smc_choch_down
+  stop: {method: structure, long_level: "lowest(low,10)", short_level: "highest(high,10)", buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: ["2R", "max(3R, smc_liq_above)"]
+    short: ["2R", "max(3R, smc_liq_below)"]
+    split: [0.5, 0.5]
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: true
+  control_twin: S6-OB-FVG
+  known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 10) - S6-OB-FVG v1.0 + the section 8 5m check."
+
+- id: S7-SILVER-BULLET-5M
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
+  source: "AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S7-SILVER-BULLET v1.0"
+  hypothesis: "Waiting for a closed 5m bar that confirms the direction (section 8) improves S7-SILVER-BULLET: fewer false entries and a better price, enough to beat the same strategy without the 5m check."
+  timeframes: ["15m"]
+  description: "S7-SILVER-BULLET + 5-minute entry confirmation."
+  logic: >-
+    The same setup as S7-SILVER-BULLET. Instead of entering at once, we wait up to 30 minutes for
+    a 5-minute candle that closes firmly in our direction on normal-or-better volume while
+    price is still near the planned entry. No such candle -> no trade.
+  params: {sweep_bars: 8}
+  long:
+    - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
+    - bars_since(smc_sweep_bull) <= {sweep_bars}
+    - bars_since(displacement_up) <= bars_since(smc_sweep_bull)
+    - smc_fvg_retrace_bull
+  short:
+    - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
+    - bars_since(smc_sweep_bear) <= {sweep_bars}
+    - bars_since(displacement_down) <= bars_since(smc_sweep_bear)
+    - smc_fvg_retrace_bear
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_liq_above]
+    short: [smc_liq_below]
+    split: [1.0]
+    need: {long: smc_liq_above, short: smc_liq_below, min_r: 2.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: true
+  control_twin: S7-SILVER-BULLET
+  known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 10) - S7-SILVER-BULLET v1.0 + the section 8 5m check."
+
+- id: S8-PDH-PDL-SWEEP-5M
+  version: "1.0"
+  status: FORMALIZED
+  family: smc
+  gate: reversal
+  regimes: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
+  source: "AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S8-PDH-PDL-SWEEP v1.0"
+  hypothesis: "Waiting for a closed 5m bar that confirms the direction (section 8) improves S8-PDH-PDL-SWEEP: fewer false entries and a better price, enough to beat the same strategy without the 5m check."
+  timeframes: ["30m"]
+  description: "S8-PDH-PDL-SWEEP + 5-minute entry confirmation."
+  logic: >-
+    The same setup as S8-PDH-PDL-SWEEP. Instead of entering at once, we wait up to 30 minutes for
+    a 5-minute candle that closes firmly in our direction on normal-or-better volume while
+    price is still near the planned entry. No such candle -> no trade.
+  long:
+    - smc_sweep_pdl
+  short:
+    - smc_sweep_pdh
+  stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
+  targets:
+    long: [smc_pd_mid, smc_pdh]
+    short: [smc_pd_mid, smc_pdl]
+    split: [0.5, 0.5]
+    need: {long: smc_pd_mid, short: smc_pd_mid, min_r: 1.0}
+  time_stop_bars: 30
+  cooldown_bars: 4
+  confirm_5m: true
+  control_twin: S8-PDH-PDL-SWEEP
+  known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  changelog:
+    - "1.0 (2026-09-24): first version (Phase 10) - S8-PDH-PDL-SWEEP v1.0 + the section 8 5m check."
 
 # ---------------------------------------------------------------------
 # NEW IDEAS go below. Write them as status: IDEA first; switch to FORMALIZED to have them tested
