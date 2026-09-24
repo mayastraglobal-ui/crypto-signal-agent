@@ -158,3 +158,29 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Append-only guard** (section 17): new `memory_guard.py` runs in both workflows before `git add`; any append-only file (`engine/memory.py` → `APPEND_ONLY`, incl. `reports/position_events.csv`) whose earlier lines changed or that was deleted stops the run - nothing is committed, the failure email goes out. Registry, signals log and the living definition files (`feature_notes.md`, `smc_research.md`) may change by design.
 - **Reviews due:** review dates (config `memory.review_days`: lessons / coin notes 30, sources 90, failure journal / missed trades 7, execution notes 30); report section **3e. Memory** lists the files (size, records, newest) and the records whose review date has passed.
 - Tests: `tests/test_memory.py` (record format and parsing, bad evidence class / unknown fields, headers never overwritten, due reviews, the guard in a real git repository incl. allowed in-place files, workflow order, every section 22 file known, each writer's records, start / end-only notes, fee change, Sunday-only coin notes, 90-day facts, sources back-filled once with no invented URLs, evidence classes).
+
+## 2026-09-25 · Claude (BUILD mode, operator-approved plan) · Phase 14 — Claude daily / weekly tasks, weekly email, approval packs
+- **Claude's scheduled tasks (§19), instructions in the new `tasks/` folder:** `briefing.md` (08:20 / 14:20 / 21:20 Beijing), `daily_review.md` (23:30 Beijing) and `weekly_research.md` (Sunday 10:00 Beijing), with shared rules in `COMMON.md`. Claude explains and researches. Every number comes from the engine: the new `brain_pack.py` prints the fact sheet (position book, market, signals, risk, closed results with LIVE / PAPER / VALIDATION kept apart, loss tags, lifecycle, missed moves, failing cells with their diagnosis, approval packs, reviews due, existing lessons) and the only file name the run may write.
+- **Brain guard (new `engine/brain.py`, `brain_guard.py`, workflow `brain.yml`, every 15 min, always run from main):** tasks push to their own branch (`claude/brain-briefing`, `-daily`, `-weekly`), never to main.
+  - Allowed: new files in `reports/claude/briefings|daily|weekly/` with the expected name, and section 22 records added at the end of 8 knowledge files.
+  - Refused: code, config, `strategies.yaml`, workflows, engine files, edits or deletions of earlier lines, records without all fields, lessons without FACT / RESEARCH_FINDING / BACKTEST_EVIDENCE plus counts, and profit promises or trade win probabilities (§25).
+  - One problem refuses the whole push, and one `[SYSTEM]` email says why. Additions are copied onto the newest main. `reports/claude/state.json` stops a push being applied twice.
+  - New strategy versions arrive as pull requests for the operator (decision 2026-09-25).
+- **Union merge for append-only files (new `.gitattributes`):** when the hourly scan, the research run and the Brain workflow append to the same memory file at the same time, git keeps both sides' lines instead of failing the push. `memory_guard.py` still checks that nothing earlier changed.
+- **Approval packs and the operator's yes (§12, §21; new `engine/approval.py`, run by the daily research run):**
+  - Eligible = PAPER_TRADING, ≥ 20 closed paper signals, paper average ≥ 0R, and at most 0.30R below the backtest on unseen data (`config.yaml` → `approval`).
+  - Each eligible version × timeframe gets a pack in `reports/approval/`: definition and lineage, Layers A/B/C, walk-forward, paper, control twin, ±20%, cost stress, risk, failure attribution, limitations, and the exact line to copy.
+  - **APPROVED is set only when the operator adds that line to `config.yaml` → `approvals:`.** Deleting the line returns it to PAPER_TRADING. An approval of a version that isn't eligible is not applied, with a warning.
+  - **Gap closed:** there was no way to say yes before this.
+  - The paper record of an approved version now continues with its live results, so the retirement limits (§12) keep applying after approval.
+- **Emails:**
+  - New `[WEEKLY]` (`notify.py weekly`, Sunday, first scan from 04:00 UTC, once per ISO week). It is built by the engine: results of the week (LIVE / PAPER / VALIDATION apart), scoreboard, lifecycle changes, loss tags and candidate lessons, SMC control-twin findings, missed moves, approval packs with the yes/no question, then Claude's weekly research if the file exists ("not available" otherwise).
+  - New `[BRIEFING]` (`notify.py brain`, after the guard applies a briefing): the engine adds the position book and the disclaimer.
+  - `[DAILY]` now shows the summary of yesterday's Claude daily review, marked as AI-written.
+- **Operator decisions (2026-09-25):** new strategies from the research come as pull requests; briefings 3× daily with email; Claude creates the three Routines after the merge.
+- Tests: `tests/test_brain.py`.
+  - Guard: allowed names; never overwrite; append onto the newest main; edit, delete and prefix changes; lesson evidence; record fields; code, config, strategies and workflows; all-or-nothing; file limit; honesty phrases incl. allowed negations and macro odds.
+  - End to end on a real git repository: apply once, idempotent, refusal leaves main unchanged, union merge keeps both sides.
+  - Approval: settings, parsing, eligibility edges incl. exactly 0.30R, only the operator approves, removal, retired; the pack has every §21 part and its line parses back; stale packs removed.
+  - Weekly: timing, stages kept apart, window, lifecycle blocks, every section, the Claude part or "not available".
+  - Daily Claude summary; notify weekly-once, briefing and refusal emails once with one disclaimer; the fact sheet's file names match the guard and the weekly email.

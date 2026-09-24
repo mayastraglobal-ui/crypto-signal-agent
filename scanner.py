@@ -40,6 +40,7 @@ from engine import briefs
 from engine import charts
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import digest
 from engine import evidence as evid
 from engine import features as fe
 from engine import lifecycle as lc
@@ -1956,6 +1957,9 @@ def main():
                     if e["key"].split("|")[0] not in over]
     daily = mail.daily(view["signal"], snap, watching, plans, book, btc, fg, sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
+    daily["claude_review"] = claude_review(started)          # Phase 14: yesterday's Claude daily review, if any
+    weekly = (digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
+                            *claude_weekly(started)) if digest.is_weekly_time(started) else None)
 
     # ---------- data-quality report ----------
     dq_out = dict(
@@ -2082,11 +2086,13 @@ def main():
                position_book=book, position_book_text=book_text, risk=risk_out, watching=watching[:30],
                memory=memory_out, state_changes=events, email_events=email_events, daily=daily,
                daily_subject=briefs.daily_email(daily)["subject"], daily_lines=briefs.daily_email(daily)["lines"],
+               weekly=weekly,
                email_settings=dict(email_watching=bool(cfg["signals"].get("email_watching", False))),
                reminders=mail.reminders(board, int(cfg["signals"].get("scan_interval_minutes", 60))),
                signals=final, validation_signals=watch, strategy_scoreboard=board, forward_test=fwd_total,
                lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
                               changes=(research or {}).get("changes", []),
+                              approval=(research or {}).get("approval") or {},
                               research_run=(research or {}).get("run_utc"),
                               candidate_lessons=(research or {}).get("candidate_lessons", []),
                               missed_moves=(research or {}).get("missed_moves", []),
@@ -2249,6 +2255,26 @@ def write_experiments(new_exp, registry):
             twin = f" (control twin of {e['twin_of']})" if e.get("twin_of") else ""
             f.write(f"| EXP-{e['experiment']:04d} | {e['first_tested_utc']} | {e['key']}{twin} | {e['family']} | "
                     f"{', '.join(e['timeframes'])} | {e['hypothesis']} |\n")
+
+
+def read_text(path):
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def claude_review(now):
+    """Section 19: the daily review runs at 23:30 Beijing (15:30 UTC) - the morning email shows yesterday's."""
+    day = (now - dt.timedelta(days=1)).strftime("%Y-%m-%d")
+    rel = f"reports/claude/daily/{day}.md"
+    return digest.claude_summary(read_text(os.path.join(ROOT, rel)), rel, day)
+
+
+def claude_weekly(now):
+    """Section 19: the weekly research of this Sunday (or, if it is missing, none - never an old week's)."""
+    rel = f"reports/claude/weekly/{now.strftime('%Y-%m-%d')}.md"
+    return read_text(os.path.join(ROOT, rel)), rel
 
 
 def write_lifecycle_log(changes, when):
@@ -2746,6 +2772,13 @@ def render_lifecycle(g, board, w):
         w("**Status changes in the last research run** (all of them in `memory/strategy_lifecycle.md`): " + "; ".join(
             f"{c['key']} {c['tf']} {c['old']} → {c['new']}" for c in ch[:12])
           + (f"; ... and {len(ch) - 12} more" if len(ch) > 12 else ""))
+    appr = g.get("approval") or {}
+    for p in appr.get("eligible") or []:
+        w(f"- 🗳 **Approval pack ready: {p['strategy']} v{p['version']} {p['tf']}** - {p['paper_signals']} paper signals, "
+          f"average {p['paper_avg_r']:+.2f}R. Approve for live emails? (yes/no) - read `{p['pack']}`; to say yes, copy "
+          "its line into `config.yaml` → `approvals:`.")
+    for x in appr.get("warnings") or []:
+        w(f"- ⚠️ **Approval:** {x}")
     for sid, errs in g["not_run"].items():
         w(f"- ⚠️ **{sid} not run:** {'; '.join(errs)}")
     for sid, errs in g["rule_errors"].items():

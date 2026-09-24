@@ -29,7 +29,8 @@ It **never trades for you** and never needs your exchange password or API keys.
 5. Go to the **Actions** tab. If asked, click **I understand my workflows, go ahead and enable them**.
 6. Click **Crypto Signal Scan → Run workflow** to start the first run now. It takes about 3–6 minutes.
 7. Open `reports/latest.md` to see your first report. From now on it updates every hour.
-8. Send Claude your repo link (`https://github.com/<your-username>/crypto-signal-agent`). Claude will then set up your news and market briefings.
+8. Send Claude your repo link (`https://github.com/<your-username>/crypto-signal-agent`). Claude then sets up its
+   three scheduled tasks for you (briefings, daily review, weekly research - see "Claude's tasks" below).
 
 ## Files
 
@@ -40,6 +41,10 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | [`reports/latest.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/latest.json) ⓛ | Same report in data form (for Claude) | No |
+| `tasks/` | What Claude's scheduled tasks do (briefing, daily review, weekly research) + their rules | Read it |
+| `reports/claude/` | Claude's briefings, daily reviews and weekly research (checked by the Brain guard) | No |
+| `reports/approval/` | Approval packs of strategies ready for your yes / no | Read it |
+| `brain_guard.py`, `brain_pack.py` | The guard that checks Claude's work before main; the fact sheet Claude reads | Not needed |
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
 | `reports/positions.json` | The position book right now (active, awaiting 5m, paper, closed today) + what is being watched | No |
 | `reports/position_events.csv` | Every state change of every signal, one line each (never rewritten) | No |
@@ -252,10 +257,55 @@ nothing breaks.
 | `[SYSTEM]` | data unsafe / recovered, scan or research failed, risk halt or suspension starts / ends, a strategy is APPROVED while scans are still hourly | what happened and what to do |
 | `[DAILY]` | first scan after 00:00 UTC (08:00 Beijing) | BTC context, the signal coins (price, 24h volume, regimes 1W/1D/4H/1H, 30m momentum, 15m setup, 5m trigger), position book, strategy status changes, event calendar |
 | `[WATCH]` | only if `signals` → `email_watching: true` | setups of APPROVED strategies that are forming or waiting for 5m - not signals |
+| `[WEEKLY] 2026-W39 - live ... paper ...` | Sunday, first scan from 04:00 UTC (12:00 Beijing) | results of the week (LIVE / PAPER / VALIDATION apart), scoreboard, lifecycle changes, why trades lost, SMC control-twin findings, missed moves, **approval packs with the yes/no question**, then Claude's weekly research (if it ran) |
+| `[BRIEFING] 2026-09-25 08:20 Beijing - ...` | after each Claude briefing (08:20 / 14:20 / 21:20 Beijing, about 15-30 min later) | written by Claude: position book, regime, news with sources, signals explained, do / don't today |
 
 Each email is sent once. Waiting-for-5m, expired and invalidated setups are shown in the report only (no noisy
 alerts), and a signal found late whose trade already ended in the same run is not emailed. Chart images are email
-attachments only (not stored in the repository). The weekly email comes with the Claude tasks (Phase 14).
+attachments only (not stored in the repository). `[DAILY]` also shows the summary of yesterday's Claude daily
+review, marked as written by the AI. Everything except `[BRIEFING]` and Claude's part of `[WEEKLY]` works without
+Claude.
+
+## Claude's tasks (the "Brain")
+
+Three scheduled Claude tasks (Routines in your Claude account; AGENT_PROMPT.md section 19). Claude **explains and
+researches**; every number comes from the engine (`brain_pack.py` prints the fact sheet it must quote).
+
+| Task | When | Instructions | Output |
+|---|---|---|---|
+| Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + `[BRIEFING]` email |
+| Daily review | 23:30 Beijing | `tasks/daily_review.md` | `reports/claude/daily/` (summary in the next `[DAILY]`), memory records: root causes, reviews due, validated lessons, queued refinements (max one per failing strategy) |
+| Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **as pull requests for you to merge** |
+
+**How Claude's work reaches main safely:** a task never writes to main. It pushes to its own branch
+(`claude/brain-briefing`, `-daily`, `-weekly`). Every 15 minutes the **Brain workflow** (`brain.yml`, always run
+from main) checks new pushes with `brain_guard.py`:
+- allowed: new files in `reports/claude/` with the expected name, and new records **added at the end** of the
+  knowledge files (lessons, failure journal, missed trades, sources, coin notes, feature notes, SMC research,
+  experiments);
+- refused: any code, `config.yaml`, `strategies.yaml`, workflow or engine file; any change or deletion of an
+  earlier line; records without the section 22 fields; lessons without strong evidence and counts; profit
+  promises or win probabilities ("guaranteed", "risk-free", "high probability", "70% chance this trade wins").
+
+One problem refuses the whole push - nothing is half-applied - and you get one `[SYSTEM]` email saying why.
+New strategy ideas never enter testing by themselves: they arrive as pull requests, tested only after you merge.
+Two runs adding to the same memory file at the same time keep both sides' lines (`.gitattributes`, union merge).
+
+## Approving a strategy (your yes)
+
+A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,
+21). The daily research run writes an **approval pack** (`reports/approval/`) for every PAPER_TRADING strategy
+version × timeframe with at least 20 closed paper signals, a paper average of 0R or better, and a paper average
+no more than 0.30R below the backtest on unseen data (`config.yaml` → `approval`). The pack shows the rules and
+lineage, Layers A/B/C, walk-forward, paper results, the control twin, the ±20% test, the cost stress test, risk,
+why it loses and its limitations. The `[WEEKLY]` email asks *"Approve S6-OB-FVG v1.0 15m for live emails?
+(yes/no)"*.
+
+- **Yes:** copy the line from the pack into `config.yaml` → `approvals:` (on GitHub: open the file, pencil icon,
+  commit). The next daily research run moves it to APPROVED and logs it in `memory/strategy_lifecycle.md`.
+- **No:** do nothing. **Changed your mind:** delete the line - it goes back to PAPER_TRADING.
+- An approval for a strategy that is not (or no longer) eligible is not applied; the report says why. The
+  retirement rules keep watching approved strategies, now on their live results too.
 
 ## Risk engine and news blackout
 

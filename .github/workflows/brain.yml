@@ -1,0 +1,67 @@
+name: Brain (apply Claude's task work)
+
+# Phase 14 (AGENT_PROMPT.md sections 2, 17, 19). Claude's scheduled tasks (tasks/*.md) never write to main:
+# each pushes to its own branch (claude/brain-briefing, claude/brain-daily, claude/brain-weekly). This workflow
+# runs FROM MAIN on a schedule (so a task branch can never change the rules that check it), picks up new pushes,
+# lets brain_guard.py refuse anything that is not allowed, copies the rest onto main and sends the [BRIEFING]
+# emails. A refused push gives one [SYSTEM] email and changes nothing.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # every 15 minutes (a quick check; most runs find nothing new and stop)
+  workflow_dispatch:         # lets you press "Run workflow" by hand
+
+permissions:
+  contents: write            # needed to save Claude's checked work onto main
+
+concurrency:
+  group: brain               # its own group: it never cancels a waiting hourly scan
+  cancel-in-progress: false
+
+jobs:
+  brain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ALERT_TO: ${{ secrets.ALERT_TO }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0           # full history: needed to find where each task branch started
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check and apply Claude's work (brain_guard.py)
+        run: python brain_guard.py --out "$RUNNER_TEMP/brain_result.json"
+
+      - name: Memory guard (append-only files may only grow - section 17)
+        run: python memory_guard.py
+
+      - name: Restore the latest report (for the position book in emails)
+        run: python publish_live.py --restore
+
+      - name: Email new briefings ([BRIEFING]) and refused pushes ([SYSTEM])
+        continue-on-error: true
+        run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
+
+      - name: Save
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add reports/claude memory reports/brain_sent.json 2>/dev/null || git add reports/claude memory
+          if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
+          git commit -m "Brain: Claude task work $(date -u +'%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3 4; do
+            git pull --rebase && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: Email if the Brain workflow failed
+        if: ${{ failure() }}
+        run: python3 notify.py brain_failed

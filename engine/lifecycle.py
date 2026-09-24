@@ -140,10 +140,10 @@ def paper_record(results_r):
     """Closed PAPER signals of one cell, oldest first -> n, average of the last 20, drawdown."""
     r = np.asarray(results_r, dtype=float)
     if not len(r):
-        return dict(n=0, last_avg_r=None, max_dd_r=0.0)
+        return dict(n=0, avg_r=None, last_avg_r=None, max_dd_r=0.0)
     eq = np.cumsum(r)
     dd = float((np.maximum.accumulate(np.r_[0, eq]) - np.r_[0, eq]).max())
-    return dict(n=len(r), last_avg_r=float(r[-20:].mean()), max_dd_r=dd)
+    return dict(n=len(r), avg_r=float(r.mean()), last_avg_r=float(r[-20:].mean()), max_dd_r=dd)
 
 
 def next_status(prev, base, paper_ok, paper, failed_runs, R):

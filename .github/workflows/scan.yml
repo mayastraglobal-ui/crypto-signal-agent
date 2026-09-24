@@ -56,6 +56,10 @@ jobs:
         continue-on-error: true
         run: python notify.py daily
 
+      - name: Weekly report email (Sunday, first scan from 04:00 UTC = 12:00 Beijing)
+        continue-on-error: true
+        run: python notify.py weekly
+
       - name: Email data-quality alerts
         continue-on-error: true
         run: python notify.py system

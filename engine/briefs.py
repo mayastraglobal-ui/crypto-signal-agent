@@ -216,4 +216,10 @@ def daily_email(dly):
     L += ["", "EVENT CALENDAR (next 7 days)"] + ([f"  - {e}" for e in dly["events"]] or ["  none listed"])
     if dly.get("calendar_warning"):
         L.append(f"  ! {dly['calendar_warning']}")
+    cr = dly.get("claude_review")
+    L += ["", "CLAUDE DAILY REVIEW (written by the AI from the engine's numbers - the numbers above are the facts)"]
+    if cr:
+        L += [f"  {ln}" if ln else "" for ln in cr["lines"]] + [f"  Full review: {cr['file']}"]
+    else:
+        L.append("  no review for yesterday (the task did not run or was refused by the guard)")
     return dict(subject=subject, lines=L)

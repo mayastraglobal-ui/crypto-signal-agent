@@ -33,6 +33,7 @@ import pandas as pd
 import yaml
 
 import scanner as sc
+from engine import approval as ap
 from engine import attribution as att
 from engine import confirm5m as c5m
 from engine import data_quality as dq
@@ -80,11 +81,12 @@ def load_registry(offline):
 
 
 def paper_results(logdf):
-    """Closed PAPER signals per (strategy, version, tf), oldest first."""
+    """Closed PAPER signals per (strategy, version, tf), oldest first - followed by its live (APPROVED) signals,
+    so the retirement limits keep watching a version after the operator's yes (section 12)."""
     out = {}
     if logdf.empty:
         return out
-    d = logdf[(logdf["stage"] == "PAPER_TRADING") & (logdf["status"] != "OPEN")].dropna(subset=["result_r"]).copy()
+    d = logdf[logdf["stage"].isin(["PAPER_TRADING", "APPROVED"]) & (logdf["status"] != "OPEN")].dropna(subset=["result_r"]).copy()
     d["version"] = d["version"].fillna("1.0").astype(str)
     for (s, v, tf), g in d.sort_values("closed_time_utc").groupby(["strategy", "version", "tf"]):
         out[(s, v, tf)] = g["result_r"].astype(float).tolist()
@@ -160,11 +162,55 @@ def write_sources(strategies, when, days=90):
         have += text
 
 
+def approval_step(ck, status, note, rec, ev, approvals, AP, warnings, eligible_cells):
+    """Section 12: after the automatic lifecycle move, the operator's approvals list (config.yaml) is applied.
+    Collects the cells that meet the numbers (for the packs) and the approvals that could not be applied."""
+    ok, why_not = ap.eligible(status, rec, ev["validate"]["avg_r"] if ev["validate"]["n"] else None, AP)
+    new_status, ap_note, warn = ap.decide(status, approvals.get(ck), ok, why_not)
+    if warn:
+        warnings.append(f"{ck}: {warn}")
+    if ok and new_status == "PAPER_TRADING":
+        eligible_cells.append(ck)
+    return (new_status, ap_note) if new_status != status else (status, note)
+
+
+def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline):
+    """Section 21: one approval pack per PAPER_TRADING version x timeframe that meets the section 12 numbers
+    (reports/approval/). Packs of cells that are no longer eligible are removed (the report, not memory)."""
+    folder = os.path.join(sc.REPORTS, "approval_offline" if offline else "approval")
+    os.makedirs(folder, exist_ok=True)
+    bpath = os.path.join(sc.REPORTS, "strategy_scoreboard.csv")
+    board = pd.read_csv(bpath, dtype={"version": str}) if os.path.exists(bpath) else pd.DataFrame()
+    out, keep = [], set()
+    for ck in sorted(eligible_cells):
+        c = cells[ck]
+        spec = by_key[f"{c['strategy']}@{c['version']}"]
+        lineage = [(v["version"], str(v.get("first_tested_utc") or "-")[:10],
+                    (registry["cells"].get(f"{k}|{c['tf']}") or {}).get("status") or "not on this timeframe")
+                   for k, v in sorted(registry["versions"].items(), key=lambda x: x[1]["experiment"])
+                   if v["id"] == c["strategy"]]
+        row = {}
+        if not board.empty:
+            m = board[(board["strategy"] == c["strategy"]) & (board["version"] == c["version"]) & (board["tf"] == c["tf"])]
+            row = {k: (None if pd.isna(v) else v) for k, v in m.iloc[0].items()} if len(m) else {}
+        name = ap.filename(c["strategy"], c["version"], c["tf"])
+        with open(os.path.join(folder, name), "w") as f:
+            f.write("\n".join(ap.pack(c, spec, lineage, row, AP, now_txt)) + "\n")
+        keep.add(name)
+        out.append(dict(key=ck, strategy=c["strategy"], version=c["version"], tf=c["tf"],
+                        pack=f"reports/{os.path.basename(folder)}/{name}", paper_signals=c["paper"]["n"],
+                        paper_avg_r=c["paper"]["avg_r"], backtest_validate_avg_r=c["evidence"]["validate"]["avg_r"]))
+    for old in os.listdir(folder):
+        if old.endswith(".md") and old not in keep:
+            os.remove(os.path.join(folder, old))
+    return out
+
+
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
-    ap.add_argument("--coins", type=int, default=None, help="only the first N research coins (test runs)")
-    args = ap.parse_args()
+    ap_ = argparse.ArgumentParser()
+    ap_.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
+    ap_.add_argument("--coins", type=int, default=None, help="only the first N research coins (test runs)")
+    args = ap_.parse_args()
 
     t_start = time.time()
     cfg = yaml.safe_load(open(os.path.join(sc.ROOT, "config.yaml")))
@@ -287,6 +333,9 @@ def main():
     logdf = sc.load_log()
     fwd = sc.forward_stats(logdf)
     paper = paper_results(logdf)
+    AP = ap.settings(cfg.get("approval"))
+    approvals, approval_problems = ap.parse_approvals(cfg.get("approvals"))
+    approval_warnings, eligible_cells = [], []
 
     # ---------- lifecycle ----------
     results, cells = {}, {}
@@ -312,6 +361,7 @@ def main():
         rec = lc.paper_record(paper.get(k3, []))
         status, note, failed = lc.next_status(prev.get("status"), base_status, paper_ok, rec,
                                               int(prev.get("failed_runs") or 0), R)
+        status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells)
         results[k3] = status
         cells[ck] = dict(strategy=sid, version=ver, tf=tf, status=status, base_status=base_status,
                          reasons=reasons, paper_gate_failed=paper_reasons if base_status == "VALIDATION" else [],
@@ -374,6 +424,11 @@ def main():
             paper_signals=c["paper"]["n"], failed_runs=c["failed_runs"])
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
+    packs = write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, args.offline)
+    approval_out = dict(eligible=packs, approved=sorted(ck for ck, c in cells.items() if c["status"] == "APPROVED"),
+                        listed=sorted(approvals), warnings=approval_warnings + approval_problems
+                        + [f"{k}: approval listed but this strategy version / timeframe was not researched this run"
+                           for k in sorted(set(approvals) - set(cells))], settings=AP)
     if not args.offline:
         sc.write_experiments(new_exp, registry)
         sc.write_lifecycle_log(changes, started)
@@ -393,7 +448,7 @@ def main():
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
-               cells=cells)
+               approval=approval_out, cells=cells)
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
     n_status = pd.Series(list(results.values())).value_counts().to_dict() if results else {}
