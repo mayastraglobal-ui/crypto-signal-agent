@@ -55,7 +55,7 @@ jobs:
         run: |
           git config user.name "signal-bot"
           git config user.email "signal-bot@users.noreply.github.com"
-          git add reports
+          git add reports memory
           git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
           git pull --rebase --autostash || true
           git push

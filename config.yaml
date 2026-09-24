@@ -12,10 +12,8 @@ account:
 
 market:
   quote: USDT
-  top_n_coins: 25            # scan the N highest-volume coins that pass the filters
-  min_24h_volume_usdt: 30000000   # $30M+ traded in 24h = real, liquid market
   min_listing_days: 180      # coin must have 180+ days of price history (skips brand-new coins)
-  always_include: [BTC, ETH, SOL, BNB, XRP]
+  always_include: [BTC, ETH] # always in the signal list when they pass every rule (AGENT_PROMPT.md §4)
 
   # ---- Coins the agent will NEVER trade. Add or remove tickers freely. ----
   exclude_meme: [DOGE, SHIB, PEPE, FLOKI, BONK, WIF, BOME, MEME, PEOPLE, TURBO, NEIRO,
@@ -24,9 +22,32 @@ market:
                  LUNC, USTC, NOT, HMSTR, CATI, BANANA, SLERF, MEW, BRETT, MOG, GIGA, WLFI]
   exclude_ai:   [FET, AGIX, OCEAN, TAO, RNDR, RENDER, WLD, ARKM, AI, NFP, AIXBT, VIRTUAL,
                  COOKIE, IO, PHB, CGPT, AI16Z, GRIFFAIN, KAITO, SAHARA, ALCH, VANA, AIOZ,
-                 GLM, AKT, ATH, NMR, IQ, THETA, SWARMS, ZEREBRO, HOOK, MDT, ORAI]
+                 GLM, AKT, ATH, NMR, IQ, THETA, SWARMS, ZEREBRO, HOOK, MDT, ORAI,
+                 NEAR]       # NEAR: markets itself as "the blockchain for AI" (operator decision 2026-09-24)
   exclude_other: [USDC, FDUSD, TUSD, USDP, DAI, BUSD, EUR, AEUR, EURI, USD1, USDE, XUSD,
-                  BFUSD, PAXG, WBTC, WBETH, BNSOL, STETH, USDS, RLUSD, PYUSD, EURC]
+                  BFUSD, WBTC, WBETH, BNSOL, STETH, USDS, RLUSD, PYUSD, EURC]
+  exclude_gold:  [PAXG, XAUT]
+  # Unknown stablecoins are ALSO caught by behaviour: see universe -> stablecoin_band_pct.
+
+universe:                    # which coins the agent watches (AGENT_PROMPT.md section 4)
+  signal_coins: 7            # top 7 eligible coins by 24h volume: the ONLY coins that can give signals
+  research_coins: 10         # the 7 + the next 3: those 3 are backtested only, never a signal
+  hysteresis_runs: 2         # a new coin must be in the top 7 for 2 runs in a row to join,
+                             # and a member outside the top 7 for 2 runs in a row leaves.
+                             # A member that breaks a rule below leaves IMMEDIATELY.
+  candidate_pool: 20         # how many high-volume coins get the detailed checks each run
+  # --- eligibility rules: ALL must pass ---
+  min_24h_volume_usdt: 50000000     # $50M+ traded in the last 24h
+  min_7d_avg_volume_usdt: 50000000  # ... and $50M+ per day on average over 7 days
+  max_volume_spike_x: 3      # 24h volume above 3x the 7-day average = a one-day spike -> not eligible
+  max_abs_24h_move_pct: 25   # moved more than ±25% in 24h -> suspended for the rest of the UTC day
+  max_spread_pct: 0.10       # gap between best buy and best sell price
+  min_depth_usdt_1pct: 250000  # at least $250k of orders on EACH side within 1% of the price
+  stablecoin_band_pct: 2     # price stayed within ±2% for 30 days = behaves like a stablecoin
+  stablecoin_days: 30
+  wash_volume_flag_ratio: 1000 # 24h volume > 1000x the 1% order-book depth = "possible wash volume".
+                               # FLAG ONLY for now (operator decision): review after a week of data.
+
 
 # How many candles (bars) of history to download for each timeframe.
 # More bars = more backtest trades = more reliable results (but slower).
