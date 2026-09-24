@@ -223,6 +223,10 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
 
+memory:                      # memory files (AGENT_PROMPT.md section 22): days until a record should be reviewed
+  review_days: {lessons: 30, coin_notes: 30, research_sources: 90, failure_journal: 7, missed_trades: 7,
+                execution_notes: 30}
+
 risk:                        # the risk engine (AGENT_PROMPT.md section 15) - only the operator changes these
   blackout_minutes: 60       # no live entry within +-60 min of a high-impact event (list below)
   day_limit_r: -3            # closed live results today at or below -3R -> no new live entries until tomorrow (UTC)

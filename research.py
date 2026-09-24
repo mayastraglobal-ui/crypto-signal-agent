@@ -38,6 +38,7 @@ from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import history
 from engine import lifecycle as lc
+from engine import memory as mem
 from engine import regime as rg
 from engine import research as rs
 from engine import strategy_spec as sspec
@@ -112,27 +113,51 @@ def fmt_day(ms):
     return pd.to_datetime(int(ms), unit="ms").strftime("%Y-%m-%d")
 
 
-def write_missed(missed, when, A):
+def write_missed(missed, when, A, days=7):
     """memory/missed_trades.md (section 17.4): strong moves of the last day and whether they were
-    identifiable beforehand. Append-only; nothing is written on a day without strong moves."""
-    if not missed:
-        return
-    os.makedirs(sc.MEMORY, exist_ok=True)
-    path = os.path.join(sc.MEMORY, "missed_trades.md")
-    new = not os.path.exists(path)
-    with open(path, "a") as f:
-        if new:
-            f.write("# Missed trades\n\nAppend-only (AGENT_PROMPT.md section 17.4), written by the daily research run. "
-                    f"A strong move = at least {A['strong_move_atr']:g}x the 1H ATR within {A['strong_move_bars']} hours "
-                    "on a research coin. For each: did any strategy have a signal up to "
-                    f"{A['signal_window_bars']} hours before it started - and if it was filtered out, by what?\n"
-                    "**Never change a rule just because a missed move became large.**\n")
-        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
-        for m in missed:
-            f.write(f"- **{m['coin']}** {m['direction']} {m['pct']:+.1f}% ({m['size_atr']}x ATR), {m['start_utc']} → "
-                    f"{m['end_utc']}{'' if m['signal_coin'] else ' (research-only coin)'}: {m['verdict']}\n")
-            for k, v in m["findings"].items():
-                f.write(f"  - {k}: {v}\n")
+    identifiable beforehand - one section 22 record per move. Append-only; nothing on a day without strong moves."""
+    for m in missed:
+        mem.append(sc.MEMORY, "missed_trades.md", mem.record(
+            f"{m['coin']} {m['direction']} {m['pct']:+.1f}% ({m['size_atr']}x ATR), {m['start_utc']} -> {m['end_utc']}",
+            [f"- verdict: {m['verdict']}" + ("" if m["signal_coin"] else " (research-only coin)")]
+            + [f"- {k}: {v}" for k, v in m["findings"].items()],
+            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source="engine: daily research run",
+            evidence=f"FACT: move of {m['size_atr']}x the 1H ATR within {A['strong_move_bars']} hours; "
+                     f"{m['strategies_checked']} strategy / timeframe tests checked",
+            confidence="measured on closed candles", strategy="all", asset=m["coin"], timeframe="1h",
+            regime=m.get("regime") or "-", review=mem.plus_days(when, days)))
+
+
+def write_sources(strategies, when, days=90):
+    """memory/research_sources.md (section 18): one record per strategy version, the first time it is tested
+    (older versions are back-filled once). Only what the card says - a URL only if the card has `source_url`."""
+    path = os.path.join(sc.MEMORY, "research_sources.md")
+    have = ""
+    if os.path.exists(path):
+        with open(path) as f:
+            have = f.read()
+    for s in strategies:
+        key = f"{s['id']}@{s['version']}"
+        if f"### {key} " in have:
+            continue
+        # SMC / ICT ideas (and their -5M versions) are CLAIMs from that material; the older indicator strategies
+        # and the control twins are our own HYPOTHESES (operator decision, Phase 13)
+        cls = s.get("evidence_class") or ("CLAIM" if s["family"] == "smc" and not s.get("twin_of") else "HYPOTHESIS")
+        text = mem.record(
+            f"{key} - {s.get('description') or s['id']}",
+            [f"- title / source: {s.get('source') or '-'}", f"- URL: {s.get('source_url') or 'none recorded'}",
+             f"- claim: {s['hypothesis']}",
+             f"- derived hypothesis (tested): {key} makes money after fees in regimes {', '.join(s['regimes'])} on "
+             f"{', '.join(s['timeframes'])}" + (f", and beats its control twin {s['control_twin']}"
+                                                  if s.get("control_twin") else ""),
+             f"- limitations: {s.get('known_weaknesses') or '-'}",
+             "- test results: `memory/strategy_registry.csv` / report section 3"],
+            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source=f"strategies.yaml card {key}",
+            evidence=cls + (": control twin - a benchmark, not an idea" if s.get("twin_of") else ": not tested when recorded"),
+            confidence="untested idea", strategy=f"{s['id']} v{s['version']}", asset="research coins",
+            timeframe=", ".join(s["timeframes"]), regime=", ".join(s["regimes"]), review=mem.plus_days(when, days))
+        mem.append(sc.MEMORY, "research_sources.md", text)
+        have += text
 
 
 def main():
@@ -200,7 +225,9 @@ def main():
             f1 = pc["frames"]["1h"]
             moves = att.strong_moves(f1["df"], f1["df"]["_atr"].to_numpy(), now_ms, A)
             for m in moves:
-                m.update(coin=base, signal_coin=base in signal_coins, key=f"{base}|{m['start_ms']}|{m['dir']}")
+                i0 = int(np.searchsorted(f1["df"]["close_time"].to_numpy(), m["start_ms"], side="right")) - 1
+                m.update(coin=base, signal_coin=base in signal_coins, key=f"{base}|{m['start_ms']}|{m['dir']}",
+                         regime=sc.regime_at(f1["reg"], "1h", i0) if i0 >= 0 else None)   # known before the move
             moves_all += moves
         for tf in tfs:
             if tf not in pc["frames"]:
@@ -319,7 +346,7 @@ def main():
     missed = []
     for m in moves_all:
         found = move_found.get(m["key"], {})
-        missed.append(dict(coin=m["coin"], signal_coin=m["signal_coin"], direction="up" if m["dir"] == 1 else "down",
+        missed.append(dict(coin=m["coin"], signal_coin=m["signal_coin"], regime=m.get("regime"), direction="up" if m["dir"] == 1 else "down",
                            size_atr=m["size_atr"], pct=m["pct"],
                            start_utc=pd.to_datetime(m["start_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"),
                            end_utc=pd.to_datetime(m["end_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"),
@@ -350,7 +377,8 @@ def main():
     if not args.offline:
         sc.write_experiments(new_exp, registry)
         sc.write_lifecycle_log(changes, started)
-        write_missed(missed, started, A)
+        write_missed(missed, started, A, mem.review_days(cfg.get("memory"), "missed_trades"))
+        write_sources(tested, started, mem.review_days(cfg.get("memory"), "research_sources"))
 
     # ---------- report ----------
     history_out = {}

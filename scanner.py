@@ -43,6 +43,7 @@ from engine import data_quality as dq
 from engine import evidence as evid
 from engine import features as fe
 from engine import lifecycle as lc
+from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
 from engine import risk as rk
@@ -1913,7 +1914,9 @@ def main():
     logdf.to_csv(log_path(args.offline), index=False)
     write_events(events, args.offline)
     if not args.offline:
-        write_failure_journal(logdf.loc[[i for i in closed_now if float(logdf.at[i, "result_r"]) < 0]], started)
+        mem.ensure(MEMORY)                 # every section 22 knowledge file exists, with its header
+        write_failure_journal(logdf.loc[[i for i in closed_now if float(logdf.at[i, "result_r"]) < 0]], started,
+                              mem.review_days(cfg.get("memory"), "failure_journal"))
     quote = cfg["market"]["quote"]
     prices = {(sym[: -len(quote)], tf): float(d["close"].iloc[-1]) for (sym, tf), d in data.items()
               if d is not None and len(d) and sym.endswith(quote)}
@@ -1926,6 +1929,19 @@ def main():
     json.dump(dict(generated_utc=now_txt, book=book, text=book_text, risk=risk_out, watching=watching,
                    events_this_run=events),
               open(log_path(args.offline, "positions.json"), "w"), indent=1, default=float)
+
+    # ---------- memory (section 22): execution notes when data problems start / end, weekly coin facts ----------
+    if not args.offline:
+        md = cfg.get("memory")
+        iss, fees = execution_issues(quality, cross, failed, cfg)
+        write_execution_notes(iss, fees, started, os.path.join(REPORTS, "execution_state.json"),
+                              mem.review_days(md, "execution_notes"))
+        write_coin_notes(view["signal"], lambda: {
+            c: coin_facts(c, data.get((c + quote, "1d")), rg_series.get((c, "1d")), groups.get(c, c),
+                          snap.get(c, {}).get("vol_24h"), cells, V["min_coin_trades"], started)
+            for c in view["signal"]}, started, os.path.join(REPORTS, "coin_notes_state.json"),
+            mem.review_days(md, "coin_notes"))
+    memory_out = mem.status(MEMORY, started)
 
     # ---------- emails (section 20): entry / exit cards, charts, the daily block ----------
     mail = EmailContext(cfg, started, data, regimes, feat_last, coin_state, board, logdf, risk_pct, RK, acct,
@@ -2064,7 +2080,7 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                position_book=book, position_book_text=book_text, risk=risk_out, watching=watching[:30],
-               state_changes=events, email_events=email_events, daily=daily,
+               memory=memory_out, state_changes=events, email_events=email_events, daily=daily,
                daily_subject=briefs.daily_email(daily)["subject"], daily_lines=briefs.daily_email(daily)["lines"],
                email_settings=dict(email_watching=bool(cfg["signals"].get("email_watching", False))),
                reminders=mail.reminders(board, int(cfg["signals"].get("scan_interval_minutes", 60))),
@@ -2100,29 +2116,120 @@ def main():
         f"{len(watch)} paper/validation signals (not emailed)")
 
 
-def write_failure_journal(rows, when):
-    """memory/failure_journal.md (section 17): every logged signal that closed with a loss, with its
-    conditions at entry, what happened (tags) and how far it went both ways (MAE / MFE). Append-only."""
+def write_failure_journal(rows, when, days=7):
+    """memory/failure_journal.md (section 17): every logged signal that closed with a loss - one section 22 record
+    with its conditions at entry, what happened (tags) and how far it went both ways (MAE / MFE). Append-only."""
     if rows is None or rows.empty:
         return
-    os.makedirs(MEMORY, exist_ok=True)
-    path = os.path.join(MEMORY, "failure_journal.md")
-    new = not os.path.exists(path)
     txt = lambda x: x if isinstance(x, str) and x else "-"
-    with open(path, "a") as f:
-        if new:
-            f.write("# Failure journal\n\nAppend-only (AGENT_PROMPT.md section 17), written by the engine. One entry per "
-                    "logged signal (validation / paper / live) that closed with a loss. Tags are measured by fixed rules "
-                    "(`engine/attribution.py`); root causes and fixes are added by the reviews - never by changing "
-                    "rules mid-trade. MAE / MFE = worst / best point of the trade, in R.\n")
-        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
-        for _, r in rows.iterrows():
-            f.write(f"- **{r['coin']} {r['direction']} {r['tf']}** · `{r['strategy']}` v{txt(r['version'])} "
-                    f"({txt(r['stage'])}) · signal {r['signal_time_utc']} UTC → {r['status']} {float(r['result_r']):+.2f}R "
-                    f"(closed {r['closed_time_utc']}) · MAE {float(r['mae_r']):+.2f}R / MFE {float(r['mfe_r']):+.2f}R\n"
-                    f"  - at entry: regime {txt(r['regime_at_entry'])}, session {txt(r['session'])}, "
-                    f"conditions: {txt(r['conditions']).replace(';', ', ')}\n"
-                    f"  - what happened: {txt(r['tags']).replace(';', ', ')}\n")
+    for _, r in rows.iterrows():
+        mem.append(MEMORY, "failure_journal.md", mem.record(
+            f"{r['coin']} {r['direction']} {r['tf']} {r['strategy']} v{txt(r['version'])} - {r['status']} "
+            f"{float(r['result_r']):+.2f}R",
+            [f"- signal {r['signal_time_utc']} UTC, closed {r['closed_time_utc']} UTC, stage {txt(r['stage'])}",
+             f"- MAE {float(r['mae_r']):+.2f}R / MFE {float(r['mfe_r']):+.2f}R",
+             f"- at entry: session {txt(r['session'])}, conditions: {txt(r['conditions']).replace(';', ', ')}",
+             f"- what happened: {txt(r['tags']).replace(';', ', ')}",
+             "- root cause / fix: (review)"],
+            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source="engine: hourly scan (reports/signals_log.csv)",
+            evidence=f"FACT: {txt(r['stage'])} result {float(r['result_r']):+.2f}R after costs; tags by fixed rules",
+            confidence="one trade - an example, not a pattern", strategy=f"{r['strategy']} v{txt(r['version'])}",
+            asset=r["coin"], timeframe=r["tf"], regime=txt(r["regime_at_entry"]), review=mem.plus_days(when, days)))
+
+
+def execution_issues(quality, cross, failed, cfg):
+    """Data problems of this run as {key: text} (section 22 execution notes) + a fingerprint of the fee settings."""
+    out = {}
+    for (coin, tf), r in quality.items():
+        if r.get("state") in (dq.DEGRADED, dq.UNSAFE):
+            out[f"data|{coin}|{tf}"] = f"{coin} {tf} data: " + ("; ".join(r.get("problems") or []) or r["state"])
+    for coin, c in (cross or {}).items():
+        if c.get("state") in (dq.DEGRADED, dq.UNSAFE):
+            out[f"cross|{coin}"] = (f"{coin} price differs between exchanges ({c['state']}"
+                                    + (f", {c['deviation_pct']:.2f}%" if c.get("deviation_pct") is not None else "") + ")")
+    for coin in failed or []:
+        out[f"download|{coin}"] = f"{coin} download failed"
+    fees = json.dumps(cfg["costs"], sort_keys=True)
+    return out, fees
+
+
+def write_execution_notes(issues, fees, when, state_path, days=30):
+    """memory/execution_notes.md: a record when a data problem STARTS and when it ENDS (not every hour), and
+    when the fee settings change (the first run records the fees in use). Returns what was written."""
+    prev = {}
+    if os.path.exists(state_path):
+        with open(state_path) as f:
+            prev = json.load(f)
+    old = prev.get("issues", {})
+    stamp = dict(timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source="engine: hourly scan (data check)",
+                 strategy="-", timeframe="-", regime="-", review=mem.plus_days(when, days))
+    written = []
+    for k in sorted(set(issues) - set(old)):
+        written.append(mem.record(f"START {issues[k]}", ["- signals from this data are blocked while it lasts"],
+                                  evidence="FACT: measured by engine/data_quality.py", confidence="measured",
+                                  asset=k.split("|")[1], **stamp))
+    for k in sorted(set(old) - set(issues)):
+        written.append(mem.record(f"END {old[k]}", [f"- problem first seen {prev.get('since', {}).get(k, '?')} UTC"],
+                                  evidence="FACT: the data passes the checks again", confidence="measured",
+                                  asset=k.split("|")[1], **stamp))
+    if prev.get("fees") != fees:
+        written.append(mem.record("Fee settings " + ("in use" if "fees" not in prev else "CHANGED"),
+                                  [f"- costs: {fees}"] + ([f"- before: {prev['fees']}"] if "fees" in prev else []),
+                                  evidence="FACT: config.yaml -> costs", confidence="configured, not observed",
+                                  asset="all", **stamp))
+    for t in written:
+        mem.append(MEMORY, "execution_notes.md", t)
+    since = {k: prev.get("since", {}).get(k, stamp["timestamp"]) for k in issues}
+    with open(state_path, "w") as f:
+        json.dump(dict(issues=issues, since=since, fees=fees), f, indent=1)
+    return written
+
+
+def coin_facts(coin, daily_df, rg_1d, group, vol_24h, cells, min_trades, now):
+    """Measured facts about one coin for memory/coin_notes.md (no interpretation)."""
+    facts = []
+    if daily_df is not None and len(daily_df) > 30:
+        d = daily_df.tail(90)
+        rng = ((d["high"] - d["low"]) / d["close"] * 100)
+        facts.append(f"- daily range (last 90 days): median {rng.median():.1f}%, 90th percentile {rng.quantile(0.9):.1f}%")
+    if rg_1d is not None and len(rg_1d[1]):
+        labs = pd.Series(rg_1d[1][-90:]).value_counts(normalize=True)
+        facts.append("- 1D regime (last 90 days): " + ", ".join(f"{k} {v * 100:.0f}%" for k, v in labs.items()))
+    facts.append(f"- moves with (1h correlation >= 0.7): {group if '+' in str(group) else 'no other signal coin'}")
+    if vol_24h:
+        facts.append(f"- 24h volume now: {vol_24h / 1e6:,.0f}M")
+    good = []
+    for ck, c in (cells or {}).items():
+        x = (c.get("evidence") or {}).get("by_coin", {}).get(coin)
+        if x and x["n"] >= min_trades and x["avg_r"] > 0:
+            good.append(f"{ck.replace('|', ' ')} ({x['n']} trades, {x['avg_r']:+.2f}R)")
+    facts.append("- strategies profitable on it in the research run (>= "
+                 f"{min_trades} trades): " + ("; ".join(sorted(good)[:8]) or "none"))
+    return facts
+
+
+def write_coin_notes(coins, facts_by_coin, when, state_path, days=30):
+    """memory/coin_notes.md: one facts record per signal coin, once a week (first scan on Sunday UTC).
+    facts_by_coin: {coin: [lines]} or a function returning it (only called when the notes are due)."""
+    prev = {}
+    if os.path.exists(state_path):
+        with open(state_path) as f:
+            prev = json.load(f)
+    today = when.strftime("%Y-%m-%d")
+    if when.weekday() != 6 or prev.get("last") == today:
+        return False
+    if callable(facts_by_coin):
+        facts_by_coin = facts_by_coin()
+    for c in coins:
+        mem.append(MEMORY, "coin_notes.md", mem.record(
+            f"{c} - weekly facts {today}", facts_by_coin.get(c, []) + ["- interpretation: (review)"],
+            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source="engine: hourly scan + daily research run",
+            evidence="FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines",
+            confidence="measured", strategy="-", asset=c, timeframe="1d, 1h", regime="-",
+            review=mem.plus_days(when, days)))
+    with open(state_path, "w") as f:
+        json.dump(dict(last=today), f)
+    return True
 
 
 def write_experiments(new_exp, registry):
@@ -2516,6 +2623,22 @@ def render_plans(plans, settings, w):
           f"{ba['avg_r']:+.2f}R avg, PF {ba['pf']:.2f}\n")
 
 
+def render_memory(m, w):
+    if not m:
+        return
+    w("### 3e. Memory (section 22)")
+    w("| File | Size | Records | Newest record |")
+    w("|---|---|---|---|")
+    for f in m["files"]:
+        w(f"| `memory/{f['file']}` | {f['kb']} KB | {f['records'] or '-'} | {f['last'] or '-'} |")
+    if m["missing"]:
+        w(f"\nNot created yet: {', '.join(m['missing'])}")
+    w(f"\n**Reviews due** (review date passed; for the reviews): " + (
+        "; ".join(f"`{d['file']}` {d['title']} ({d['review']})" for d in m["due"][:10])
+        + (f" … and {len(m['due']) - 10} more" if len(m["due"]) > 10 else "") if m["due"] else "none"))
+    w("Append-only files may only grow: `memory_guard.py` stops the run before anything else is saved.\n")
+
+
 def render_risk(r, w):
     if not r:
         return
@@ -2750,6 +2873,7 @@ def render_md(o, cfg):
     render_lifecycle(o["lifecycle"], o["strategy_scoreboard"], w)
     render_research(o["lifecycle"], w)
     render_attribution(o["lifecycle"], o["strategy_scoreboard"], w)
+    render_memory(o.get("memory"), w)
     f = o["forward_test"]
     w("## 4. Live track record (real signals, checked after they happened)")
     if f["closed"]:

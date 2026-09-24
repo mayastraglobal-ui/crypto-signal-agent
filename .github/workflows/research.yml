@@ -46,6 +46,9 @@ jobs:
       - name: Research (Layers B/C, stress, +-20%, lifecycle)
         run: python research.py
 
+      - name: Memory guard (append-only files may only grow - section 17)
+        run: python memory_guard.py
+
       - name: Save results (small history on main)
         run: |
           git config user.name "signal-bot"

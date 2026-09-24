@@ -60,6 +60,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `engine/` | Parts of the engine (data check, coins, timeframes, features, evidence, regime, SMC, more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
+| `memory/README.md` | Index of every memory file: contents, who writes it, when, append-only or not | Read it |
 | [`reports/research.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/research.json) ⓛ | Daily research run: Layers A/B/C, stress, ±20%, why trades lose, missed moves | No |
 
 ⓛ = **on the branch `live-reports`**, not on main. These large files are fully replaced every run, so they are
@@ -225,6 +226,17 @@ or `EXPIRED` (no 5m confirmation) / `INVALIDATED` (stop or 5m structure broken b
 
 The scan runs hourly, so each run replays the 5m and other candles since the previous run: the recorded result is
 exact, but a live alert can be up to an hour late (a faster schedule is a later decision).
+
+## Memory
+
+What the agent remembers is in `memory/` (AGENT_PROMPT.md section 22; index: `memory/README.md`). The engine
+writes facts only - losing signals (`failure_journal.md`), missed strong moves (`missed_trades.md`), the source
+and claim behind every strategy version (`research_sources.md`, never an invented citation), data problems when
+they start and end plus fee settings (`execution_notes.md`) and weekly measured facts per signal coin
+(`coin_notes.md`). `lessons.md` is written only after a review (Claude or you), never automatically. Each of these
+entries carries timestamp, source, evidence class, confidence, strategy, coin, timeframe, regime and a review date;
+report section 3e lists the files and the reviews that are due. **Append-only files can only grow:**
+`memory_guard.py` stops a run before anything is committed if an earlier line was changed or removed.
 
 ## Emails
 
