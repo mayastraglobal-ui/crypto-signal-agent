@@ -21,3 +21,14 @@ Newest entries at the bottom. Format: date · who · what · why.
 - Thresholds in `config.yaml` → `data_quality`. Refinement vs the plan: old gaps (outside the newest 300 candles, under 1% of history) are only a note, because they do not affect current indicators.
 - Workflows: `scan.yml` runs `notify.py system`; new `tests.yml` runs all tests on every push/PR.
 - Tests: `tests/test_data_quality.py` (planted faults, look-ahead tests, end-to-end offline runs, email once-only behaviour).
+
+## 2026-09-24 · Claude (BUILD mode, operator-approved plan) · Phase 2 — tradable universe
+- New `engine/universe.py` (AGENT_PROMPT.md §4): **7 signal coins** (only these can give signals) + **3 research-only coins** (backtested, never a signal), ranked by 24h quote volume; BTC and ETH always included when eligible.
+- **Eligibility** (all must pass; limits in `config.yaml` → `universe`): ≥ 180 days history · 24h volume ≥ $50M · 7-day average volume ≥ $50M · 24h volume ≤ 3× the 7-day average · 24h move within ±25% (else suspended for the rest of the UTC day) · spread ≤ 0.10% · ≥ $250k order-book depth within 1% on each side · daily price data not UNSAFE · not on an exclusion list · does not behave like a stablecoin (price within ±2% for 30 days — measurable, not by name).
+- **Hysteresis:** a newcomer must rank top 7 for 2 runs in a row to join; a member must rank outside the top 7 for 2 runs in a row to leave. A member that breaks a rule, or whose data turns UNSAFE, leaves at once. A freed slot stays empty until a coin qualifies (BTC/ETH re-join at once).
+- **Operator decisions (2026-09-24):** NEAR added to `exclude_ai` ("the blockchain for AI"); a member with DEGRADED data stays in the list but gets no signals (Phase 1 gate); suspected wash volume (24h volume > 1000× the 1% depth) is **flag only** for now — review the threshold after a week of live data.
+- Config: `always_include` reduced to BTC, ETH (SOL, BNB, XRP must now earn their place); `top_n_coins` and `market.min_24h_volume_usdt` ($30M) replaced by the `universe` section ($50M); new `exclude_gold` (PAXG moved there, XAUT added).
+- Engine: only the 10 research coins get full downloads (was ~25 coins) → faster runs, fewer backtest trades; the validation bar is unchanged, so passing is slightly harder.
+- New outputs: report section "0b. Coins this run", `reports/universe.json`, `reports/universe_state.json`, append-only `memory/universe_log.md` (changes only). `scan.yml` now also saves `memory/`.
+- Offline test feed: extra coins (a hidden stablecoin FAKEUSD, a +40% mover PUMP), `--scenario` option, deterministic random numbers.
+- Tests: `tests/test_universe.py` (22 tests: every rule, hysteresis sequences, log-only-changes, 3-run end-to-end rotation).

@@ -2,7 +2,7 @@
 
 This agent runs by itself on GitHub's free servers every hour, whether your PC is on or off. Each run it:
 
-1. **Picks coins.** It takes the ~25 highest-volume USDT coins and skips meme, AI and stable coins, plus any coin with less than 180 days of history.
+1. **Picks coins.** 7 "signal" coins + 3 "research" coins (see "Which coins" below). It skips meme, AI, stable, wrapped, gold and leveraged coins, coins with less than 180 days of history, and coins that fail the volume, spread, order-book or ±25% rules.
 2. **Downloads charts.** It gets 1D, 4H, 1H, 30m, 15m and 5m candles for every coin.
 3. **Checks the data is trustworthy** (see "Data check" below). Bad data = no signals.
 4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage.
@@ -35,7 +35,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 
 | File | What it is | Should you edit it? |
 |---|---|---|
-| `config.yaml` | Account size, risk %, coin filters, fees, data checks, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
+| `config.yaml` | Account size, risk %, coin rules, fees, data checks, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
@@ -43,9 +43,26 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/signals_log.csv` | Every signal ever given and how it ended | No, it's the live track record |
 | `reports/strategy_scoreboard.csv` | Pass/fail table for every strategy and timeframe | No |
 | `reports/data_quality.json` | Result of the data check, per coin and timeframe | No |
-| `engine/` | Parts of the engine (data check, and more later) | Not needed |
+| `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
+| `reports/universe_state.json` | The agent's memory of the 2-run counts | No |
+| `memory/universe_log.md` | Every coin that joined, left or was excluded, and why | Read it |
+| `engine/` | Parts of the engine (data check, coin selection, and more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
+
+## Which coins (every run)
+
+- **Signal coins (7):** the 7 eligible coins with the most trading in the last 24 hours.
+  Only these can give signals. BTC and ETH are always included when eligible.
+- **Research coins (3 more):** the next 3. They are backtested, but never give a signal.
+- **Eligible** means ALL of: 180+ days of history · $50M+ volume in 24h and on average over 7 days ·
+  no one-day volume spike (24h > 3x the 7-day average) · moved less than ±25% in 24h (otherwise
+  suspended for the rest of the UTC day) · spread ≤ 0.10% · $250k+ of orders within 1% of the price
+  on each side · price data not UNSAFE · not on an exclusion list · does not behave like a stablecoin.
+- **No jumping around:** a new coin must be in the top 7 for **2 runs in a row** to join, and a member
+  must be outside the top 7 for 2 runs in a row to leave. A member that breaks a rule leaves at once.
+- Every join, leave and exclusion is written to `memory/universe_log.md` with its reason.
+  The limits are in `config.yaml` → `universe`.
 
 ## Data check (every run)
 

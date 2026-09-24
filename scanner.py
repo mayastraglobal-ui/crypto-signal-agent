@@ -23,6 +23,7 @@ import math
 import os
 import sys
 import time
+import zlib
 
 import numpy as np
 import pandas as pd
@@ -30,9 +31,11 @@ import requests
 import yaml
 
 from engine import data_quality as dq
+from engine import universe as uni
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
+MEMORY = os.path.join(ROOT, "memory")
 TF_MS = {"5m": 300_000, "15m": 900_000, "30m": 1_800_000, "1h": 3_600_000,
          "4h": 14_400_000, "1d": 86_400_000}
 HTF = {"5m": "1h", "15m": "1h", "30m": "4h", "1h": "4h", "4h": "1d"}
@@ -81,8 +84,14 @@ class Binance:
         for t in self._get("/api/v3/ticker/24hr"):
             out.append({"symbol": t["symbol"], "last": float(t["lastPrice"]),
                         "change_pct": float(t["priceChangePercent"]),
-                        "quote_volume": float(t["quoteVolume"])})
+                        "quote_volume": float(t["quoteVolume"]),
+                        "bid": float(t.get("bidPrice") or 0), "ask": float(t.get("askPrice") or 0)})
         return out
+
+    def depth(self, symbol):
+        d = self._get("/api/v3/depth", {"symbol": symbol, "limit": 1000})
+        return ([(float(p), float(q)) for p, q in d["bids"]],
+                [(float(p), float(q)) for p, q in d["asks"]])
 
     def klines(self, symbol, tf, n):
         rows, end = [], None
@@ -101,8 +110,8 @@ class Binance:
             time.sleep(0.05)
         if not rows:
             return pd.DataFrame()
-        df = pd.DataFrame([r[:6] for r in rows],
-                          columns=["open_time", "open", "high", "low", "close", "volume"])
+        df = pd.DataFrame([r[:6] + [r[7]] for r in rows],
+                          columns=["open_time", "open", "high", "low", "close", "volume", "quote_volume"])
         return _finish(df, tf)
 
 
@@ -134,8 +143,14 @@ class OKX:
             last, op = float(t["last"] or 0), float(t["open24h"] or 0)
             out.append({"symbol": base + quote, "last": last,
                         "change_pct": (last / op - 1) * 100 if op else 0.0,
-                        "quote_volume": float(t["volCcy24h"] or 0)})
+                        "quote_volume": float(t["volCcy24h"] or 0),
+                        "bid": float(t.get("bidPx") or 0), "ask": float(t.get("askPx") or 0)})
         return out
+
+    def depth(self, symbol):
+        d = self._get("/api/v5/market/books", {"instId": symbol[:-4] + "-" + symbol[-4:], "sz": 400})[0]
+        return ([(float(r[0]), float(r[1])) for r in d["bids"]],
+                [(float(r[0]), float(r[1])) for r in d["asks"]])
 
     def klines(self, symbol, tf, n):
         inst = symbol[:-4] + "-" + symbol[-4:]
@@ -155,8 +170,8 @@ class OKX:
         if not rows:
             return pd.DataFrame()
         rows = [r for r in rows if len(r) < 9 or r[8] == "1"]   # confirmed candles only
-        df = pd.DataFrame([r[:6] for r in rows],
-                          columns=["open_time", "open", "high", "low", "close", "volume"])
+        df = pd.DataFrame([r[:6] + [r[7] if len(r) > 7 else np.nan] for r in rows],
+                          columns=["open_time", "open", "high", "low", "close", "volume", "quote_volume"])
         return _finish(df, tf)
 
 
@@ -177,37 +192,64 @@ def fetch_checked(feed, symbol, tf, n, dq_cfg):
 
 
 class Synthetic:
-    """Fake but realistic-looking prices, used only for --offline testing."""
+    """Fake but realistic-looking prices, used only for --offline testing.
+    A scenario (dict, see --scenario) can set per-coin 24h volume, 24h change, order-book depth,
+    a daily-volume factor (for volume-spike tests) and extra coins."""
     name = "Synthetic (offline test)"
+    NAMES = ["BTC", "ETH", "SOL", "BNB", "XRP", "ADA", "LINK", "AVAX", "DOGE", "FET", "USDC",
+             "DOT", "LTC", "TRX", "ATOM", "NEWCOIN", "FAKEUSD", "PUMP"]
 
-    def __init__(self, seed=7, fault=None):
+    def __init__(self, seed=7, fault=None, scenario=None):
         self.seed = seed
         self.fault = fault   # plant a data problem to test the safety checks (see --fault)
+        sc = scenario or {}
+        self.sc = sc
+        rng = np.random.default_rng(seed)
+        names = self.NAMES + sc.get("extra_coins", [])
+        self.vol24 = {n: float(sc.get("quote_volume", {}).get(n, rng.uniform(1e8, 2e9))) for n in names}
+        self.change = {n: float(sc.get("change_pct", {}).get(n, 40.0 if n == "PUMP" else rng.normal(0, 3)))
+                       for n in names}
+
+    def _rng(self, *key):
+        return np.random.default_rng(zlib.crc32(repr((key, self.seed)).encode()))
 
     def tickers(self):
-        names = ["BTC", "ETH", "SOL", "BNB", "XRP", "ADA", "LINK", "AVAX", "DOGE", "FET",
-                 "USDC", "DOT", "LTC", "NEWCOIN"]
-        rng = np.random.default_rng(self.seed)
-        return [{"symbol": n + "USDT", "last": 1.0, "change_pct": float(rng.normal(0, 3)),
-                 "quote_volume": float(rng.uniform(5e7, 2e9))} for n in names]
+        return [{"symbol": n + "USDT", "last": 1.0, "change_pct": self.change[n],
+                 "quote_volume": self.vol24[n], "bid": 0.9999, "ask": 1.0001} for n in self.vol24]
+
+    def depth(self, symbol):
+        per_side = float(self.sc.get("depth_usd", {}).get(symbol[:-4], 5e6))
+        levels = 50
+        bids = [(100 * (1 - 0.0001 * (i + 1)), per_side / levels / 100) for i in range(levels)]
+        asks = [(100 * (1 + 0.0001 * (i + 1)), per_side / levels / 100) for i in range(levels)]
+        return bids, asks
 
     def klines(self, symbol, tf, n):
-        if symbol == "NEWCOINUSDT" and tf == "1d":
+        coin = symbol[:-4]
+        if coin == "NEWCOIN" and tf == "1d":
             n = 40
-        rng = np.random.default_rng(abs(hash((symbol, tf, self.seed))) % 2**32)
+        rng = self._rng(symbol, tf)
         vol = {"5m": .003, "15m": .005, "30m": .007, "1h": .01, "4h": .02, "1d": .04}[tf]
+        if coin == "FAKEUSD":
+            vol = 0.0005       # behaves like a stablecoin
         regime = np.repeat(rng.choice([-1, 0, 1], size=n // 150 + 1), 150)[:n]
-        ret = rng.standard_t(4, n) * vol * 0.7 + regime * vol * 0.12
-        close = 100 * np.exp(np.cumsum(ret))
+        ret = rng.standard_t(4, n) * vol * 0.7 + (0 if coin == "FAKEUSD" else regime * vol * 0.12)
+        if coin == "FAKEUSD":
+            close = 100 * (1 + np.clip(ret, -0.005, 0.005))
+        else:
+            close = 100 * np.exp(np.cumsum(ret))
         opn = np.r_[close[0], close[:-1]]
         spread = np.abs(rng.normal(0, vol * 0.6, n)) * close
         high = np.maximum(opn, close) + spread
         low = np.minimum(opn, close) - spread
         volu = rng.lognormal(10, 0.5, n) * (1 + 3 * np.abs(ret) / vol / 10)
+        # quote volume: on average matches the 24h ticker volume (scaled to the candle length)
+        daily = self.vol24.get(coin, 1e8) * float(self.sc.get("daily_volume_factor", {}).get(coin, 1.0))
+        qvol = volu / volu.mean() * daily * TF_MS[tf] / TF_MS["1d"]
         now = int(time.time() * 1000) // TF_MS[tf] * TF_MS[tf]
         ot = now - TF_MS[tf] * np.arange(n, 0, -1)
         df = pd.DataFrame({"open_time": ot, "open": opn, "high": high, "low": low,
-                           "close": close, "volume": volu})
+                           "close": close, "volume": volu, "quote_volume": qvol})
         if symbol == "BTCUSDT" and self.fault == "stale_btc":
             df["open_time"] -= 10 * TF_MS[tf]          # feed stopped 10 candles ago
         elif symbol == "ETHUSDT" and self.fault == "bad_prices":
@@ -566,60 +608,41 @@ def tf_to_text(tf, bars):
     return f"{mins/60:.1f} h" if mins >= 120 else f"{mins:.0f} min"
 
 
-def pick_universe(feed, cfg):
-    m = cfg["market"]
-    q = m["quote"]
-    excluded = {x.upper() for x in m["exclude_meme"] + m["exclude_ai"] + m["exclude_other"]}
-    rows = []
-    for t in feed.tickers():
-        s = t["symbol"]
-        if not s.endswith(q):
-            continue
-        base = s[: -len(q)]
-        if (base in excluded or base.endswith(("UP", "DOWN", "BULL", "BEAR"))
-                or base.startswith("1000") or t["quote_volume"] < m["min_24h_volume_usdt"]):
-            continue
-        rows.append(dict(t, base=base))
-    rows.sort(key=lambda r: -r["quote_volume"])
-    must = [r for r in rows if r["base"] in m["always_include"]]
-    rest = [r for r in rows if r["base"] not in m["always_include"]]
-    return (must + rest)[: m["top_n_coins"] + 5]   # a few spare for the age filter
-
-
 # =====================================================================
 # 6. MAIN
 # =====================================================================
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
-    ap.add_argument("--coins", type=int, default=None, help="override number of coins")
+    ap.add_argument("--coins", type=int, default=None,
+                    help="override the number of research coins (test runs)")
     ap.add_argument("--fault", choices=["stale_btc", "bad_prices"], default=None,
                     help="offline only: plant a data problem to test the safety checks")
+    ap.add_argument("--scenario", default=None,
+                    help="offline only: JSON file with per-coin volumes / moves / depth (tests)")
     args = ap.parse_args()
 
     cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
     strategies = [s for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
                   if s.get("status", "active") in ("active", "candidate")]
-    if args.coins:
-        cfg["market"]["top_n_coins"] = args.coins
     os.makedirs(REPORTS, exist_ok=True)
     started = dt.datetime.now(dt.timezone.utc)
 
     # ---------- data source ----------
-    if args.fault and not args.offline:
-        sys.exit("--fault only works together with --offline")
-    feeds = [Synthetic(fault=args.fault)] if args.offline else [Binance(), OKX()]
-    feed, universe = None, None
+    if (args.fault or args.scenario) and not args.offline:
+        sys.exit("--fault and --scenario only work together with --offline")
+    scenario = json.load(open(args.scenario)) if args.scenario else None
+    feeds = [Synthetic(fault=args.fault, scenario=scenario)] if args.offline else [Binance(), OKX()]
+    feed, tickers = None, None
     for f in feeds:
         try:
-            universe = pick_universe(f, cfg)
+            tickers = f.tickers()
             feed = f
             break
         except Exception as e:
             log(f"{f.name} unavailable: {e}")
     if feed is None:
         sys.exit("No market data source reachable.")   # workflow emails "[SYSTEM] scan FAILED"
-    log(f"Data source: {feed.name}; candidate coins: {len(universe)}")
 
     # ---------- second exchange, for the cross-venue price check ----------
     dq_cfg = dq.settings(cfg.get("data_quality"))
@@ -634,28 +657,74 @@ def main():
         except Exception as e:
             log(f"cross-venue check: {f.name} unavailable ({e})")
 
-    # ---------- download + data-quality checks ----------
-    data, coins, quality, failed = {}, [], {}, []
-    tfs = [tf for tf in TF_ORDER if tf in cfg["timeframes"]]
-    for u in universe:
-        if len(coins) >= cfg["market"]["top_n_coins"]:
-            break
+    # ---------- universe: which coins may we look at? (AGENT_PROMPT.md section 4) ----------
+    U = uni.settings(cfg.get("universe"))
+    if args.coins:
+        U["research_coins"] = args.coins
+        U["signal_coins"] = min(U["signal_coins"], args.coins)
+    mkt = cfg["market"]
+    always = set(mkt.get("always_include", []))
+    state_path = os.path.join(REPORTS, "universe_state_offline.json" if args.offline
+                              else "universe_state.json")
+    ustate = json.load(open(state_path)) if os.path.exists(state_path) else uni.empty_state()
+    prev_members = list(ustate["members"])
+    cands, name_excluded = uni.prefilter(tickers, mkt, U)
+    pool = uni.candidate_pool(cands, always | set(prev_members), U["candidate_pool"])
+    log(f"Data source: {feed.name}; {len(cands)} coins over the volume floor, checking {len(pool)}")
+    ustate, suspended = uni.update_suspensions(
+        ustate, {c["base"]: c["change_pct"] for c in pool}, U, started.strftime("%Y-%m-%d"))
+
+    daily_data, measures, elig, quality, failed = {}, {}, {}, {}, []
+    for u in pool:
         sym, base = u["symbol"], u["base"]
         try:
             daily, rep = fetch_checked(feed, sym, "1d", 400, dq_cfg)
-            if len(daily) < cfg["market"]["min_listing_days"]:
-                log(f"skip {sym}: only {len(daily)} days of history")
-                continue
-            got = {"1d": (daily, rep)}
-            for tf in tfs:
-                got[tf] = fetch_checked(feed, sym, tf, int(cfg["timeframes"][tf]), dq_cfg)
         except Exception as e:
             log(f"skip {sym}: {e}")
             failed.append(base)
             continue
+        try:
+            depth = feed.depth(sym)
+        except Exception as e:
+            log(f"order book {sym} not available: {e}")
+            depth = None
+        book = (u["bid"], u["ask"]) if u.get("bid") and u.get("ask") else None
+        measures[base] = uni.measure(u, daily, book, depth, U)
+        elig[base] = uni.eligibility(measures[base], U, mkt["min_listing_days"], rep["state"],
+                                     base in suspended)
+        daily_data[base] = daily
+        quality[(base, "1d")] = rep
+    vol = {c["base"]: c["quote_volume"] for c in pool}
+    ranked = uni.rank(sorted((b for b, r in elig.items() if r["ok"]), key=lambda b: -vol[b]), always)
+    not_elig = {b: r["reasons"] for b, r in elig.items() if not r["ok"]}
+    for b in prev_members:
+        if b not in elig:
+            not_elig[b] = [name_excluded.get(b) or ("download failed" if b in failed else
+                           f"24h volume below {uni.usd(U['min_24h_volume_usdt'])} or no longer listed")]
+    ustate, u_events = uni.eligibility_changes(ustate, elig)
+    ustate, m_events, view = uni.update_membership(ustate, ranked, U, always, not_elig)
+    u_events += m_events
+    log(f"Signal coins: {', '.join(view['signal'])} | research only: {', '.join(view['research_only'])}")
+
+    # ---------- download every timeframe for the research coins ----------
+    data, coins = {}, []
+    by_base = {c["base"]: c for c in pool}
+    tfs = [tf for tf in TF_ORDER if tf in cfg["timeframes"]]
+    for base in view["research"]:
+        u = by_base[base]
+        sym = u["symbol"]
+        try:
+            got = {tf: fetch_checked(feed, sym, tf, int(cfg["timeframes"][tf]), dq_cfg) for tf in tfs}
+        except Exception as e:
+            log(f"skip {sym}: {e}")
+            failed.append(base)
+            continue
+        data[(sym, "1d")] = daily_data[base]
         for tf, (df_tf, rep) in got.items():
             data[(sym, tf)] = df_tf
             quality[(base, tf)] = rep
+        for tf in ["1d"] + tfs:
+            rep = quality[(base, tf)]
             if rep["state"] != dq.GOOD:
                 log(f"data {rep['state']}: {sym} {tf}: {'; '.join(rep['problems'])}")
         coins.append(u)
@@ -669,13 +738,29 @@ def main():
     coin_state = {c["base"]: dq.worst(cross[c["base"]]["state"],
                                      *(quality[(c["base"], tf)]["state"] for tf in ["1d"] + tfs))
                   for c in coins}
-    sys_state, sys_reason = dq.system_state(coin_state, "BTC", failed,
+    watched = always | set(prev_members) | set(view["research"])
+    for b in watched:     # coins we should be watching but could not trust
+        if b not in coin_state and (b, "1d") in quality and quality[(b, "1d")]["state"] == dq.UNSAFE:
+            coin_state[b] = dq.UNSAFE
+    sys_state, sys_reason = dq.system_state(coin_state, "BTC", [b for b in failed if b in watched],
                                             dq_cfg["system_unsafe_coin_share"])
     log(f"Data quality: system {sys_state} - {sys_reason}")
+
+    # a signal coin whose data turned UNSAFE on any timeframe leaves the list at once
+    unsafe_members = {b: "price data UNSAFE: " + "; ".join(
+                          f"{tf} {p}" for tf in ["1d"] + tfs for p in quality.get((b, tf), {}).get("problems", []))
+                      for b in view["signal"] if coin_state.get(b) == dq.UNSAFE}
+    if unsafe_members:
+        ustate, ev = uni.remove_members(ustate, unsafe_members)
+        u_events += ev
+        view["signal"] = [b for b in view["signal"] if b not in unsafe_members]
+    signal_set = set(view["signal"])
 
     def signals_allowed(base, tf):
         """Only GOOD data may produce signals: the signal timeframe, its higher timeframe,
         the cross-exchange price check, and the whole system."""
+        if base not in signal_set:              # research-only coins never give signals
+            return False
         if sys_state == dq.UNSAFE or cross[base]["state"] != dq.GOOD:
             return False
         for t in (tf, HTF.get(tf)):
@@ -811,6 +896,8 @@ def main():
         key = (sgl["strategy"], sgl["tf"])
         if verdict.get(key) != "WORKS":
             continue
+        if sgl["coin"] not in signal_set:      # research-only coin: backtest only, never a signal
+            continue
         if not signals_allowed(sgl["coin"], sgl["tf"]):
             blocked.append(f"{sgl['coin']} {sgl['tf']} {sgl['strategy']}")
             continue
@@ -887,7 +974,40 @@ def main():
         coins={c["base"]: dict(state=coin_state[c["base"]], cross_venue=cross[c["base"]],
                                timeframes={tf: quality[(c["base"], tf)] for tf in ["1d"] + tfs})
                for c in coins})
+    for b in elig:        # candidates whose daily data failed the checks (not downloaded further)
+        r = quality[(b, "1d")]
+        if b not in dq_out["coins"] and r["state"] != dq.GOOD:
+            dq_out["coins"][b] = dict(state=r["state"], cross_venue=dict(state=dq.GOOD, deviation_pct=None,
+                                                                         note="not checked"),
+                                      timeframes={"1d": r})
     json.dump(dq_out, open(os.path.join(REPORTS, "data_quality.json"), "w"), indent=1, default=float)
+
+    # ---------- universe report, memory of streaks, and the append-only universe log ----------
+    rank_vol = {c["base"]: i + 1 for i, c in enumerate(cands)}
+    cand_rows = []
+    for c in pool:
+        b = c["base"]
+        status = ("SIGNAL" if b in signal_set else "RESEARCH" if b in view["research_only"]
+                  else "WAITING" if b in view["waiting"] else
+                  "ELIGIBLE" if b in elig and elig[b]["ok"] else "EXCLUDED")
+        r = elig.get(b, dict(ok=False, reasons=["download failed"], flags=[]))
+        row = dict(measures.get(b, {}), coin=b, status=status, volume_rank=rank_vol.get(b),
+                   eligible=r["ok"], reasons=r["reasons"], flags=r["flags"],
+                   in_streak=ustate["in_streak"].get(b, 0), out_streak=ustate["out_streak"].get(b, 0))
+        cand_rows.append(row)
+    u_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), run=ustate["runs"],
+                 signal=view["signal"], research_only=view["research_only"], waiting=view["waiting"],
+                 leaving=view["leaving"], empty_slots=U["signal_coins"] - len(view["signal"]),
+                 rules=dict(signal_coins=U["signal_coins"], research_coins=U["research_coins"],
+                            hysteresis_runs=U["hysteresis_runs"]),
+                 events=u_events, candidates=cand_rows, excluded_by_list=name_excluded)
+    json.dump(u_out, open(os.path.join(REPORTS, "universe.json"), "w"), indent=1, default=float)
+    json.dump(ustate, open(state_path, "w"), indent=1)
+    if u_events:
+        for e in u_events:
+            log(f"universe {e['action']}: {e['coin']} - {e['why']}")
+        if not args.offline:
+            write_universe_log(u_events, started)
 
     # ---------- write reports ----------
     closed = logdf[logdf["status"] != "OPEN"].dropna(subset=["result_r"])
@@ -903,7 +1023,7 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
-               coin_snapshot=snap, data_quality=dq_out)
+               coin_snapshot=snap, data_quality=dq_out, universe=u_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -912,6 +1032,57 @@ def main():
     pd.DataFrame(board).to_csv(os.path.join(REPORTS, "strategy_scoreboard.csv"), index=False)
     log(f"Done: {len(coins)} coins, {len(board)} strategy/timeframe tests, "
         f"{sum(b['status'] == 'WORKS' for b in board)} WORK, {len(final)} signals")
+
+
+def write_universe_log(events, when):
+    """Append-only log of every join / leave / exclusion change (memory/universe_log.md)."""
+    os.makedirs(MEMORY, exist_ok=True)
+    path = os.path.join(MEMORY, "universe_log.md")
+    new = not os.path.exists(path)
+    with open(path, "a") as f:
+        if new:
+            f.write("# Universe log\n\nAppend-only record of which coins the agent watches, and why "
+                    "(AGENT_PROMPT.md section 4). Written by the engine; only CHANGES are logged.\n"
+                    "JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · "
+                    "FLAG = worth knowing, not excluded.\n")
+        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
+        for e in events:
+            f.write(f"- **{e['action']}** {e['coin']} - {e['why']}\n")
+
+
+def render_universe(u, w):
+    w("## 0b. Coins this run")
+    n = u["rules"]["signal_coins"]
+    w(f"- **Signal coins ({len(u['signal'])}/{n})** - only these can give signals: "
+      + (", ".join(f"**{c}**" for c in u["signal"]) or "none"))
+    if u["empty_slots"] > 0:
+        w(f"- {u['empty_slots']} empty slot(s): waiting for a coin to hold a top-{n} rank for "
+          f"{u['rules']['hysteresis_runs']} runs in a row")
+    w(f"- **Research only** - backtested, never a signal: " + (", ".join(u["research_only"]) or "none"))
+    if u["waiting"]:
+        w("- **Waiting to join:** " + ", ".join(f"{c} ({k}/{u['rules']['hysteresis_runs']} runs)"
+                                                for c, k in u["waiting"].items()))
+    if u["leaving"]:
+        w("- **Outside the top, may leave:** " + ", ".join(f"{c} ({k}/{u['rules']['hysteresis_runs']} runs)"
+                                                          for c, k in u["leaving"].items()))
+    if u["events"]:
+        w("- **Changes this run** (also written to `memory/universe_log.md`):")
+        for e in u["events"]:
+            w(f"  - **{e['action']}** {e['coin']} - {e['why']}")
+    rows = [c for c in u["candidates"] if c["status"] == "EXCLUDED"]
+    flagged = [c for c in u["candidates"] if any("not available" not in f for f in c["flags"])]
+    if rows:
+        w("\n| Not eligible | 24h volume | Why |\n|---|---|---|")
+        for c in rows:
+            v = uni.usd(c["vol_24h"]) if c.get("vol_24h") is not None else "-"
+            w(f"| {c['coin']} | {v} | {'; '.join(c['reasons'])} |")
+    if flagged:
+        w("\n**Flags (not excluded):** " + "; ".join(
+            f"{c['coin']}: " + ", ".join(f for f in c["flags"] if "not available" not in f) for c in flagged))
+    if u["excluded_by_list"]:
+        w(f"\n*Skipped by your exclusion lists:* " + ", ".join(
+            f"{c}" for c in sorted(u["excluded_by_list"])) + " (see `config.yaml`)")
+    w("")
 
 
 def render_dq(q, w):
@@ -958,6 +1129,7 @@ def render_md(o, cfg):
       f"data: {o['data_source']} · {len(o['coins_scanned'])} coins scanned\n")
     w("> Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.\n")
     render_dq(o["data_quality"], w)
+    render_universe(o["universe"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]
