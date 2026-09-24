@@ -22,7 +22,7 @@ from engine import lifecycle as LC  # noqa: E402
 from engine import regime as RG  # noqa: E402
 from engine import smc as SMC  # noqa: E402
 from engine import strategy_spec as SP  # noqa: E402
-from test_data_quality import run_copy  # noqa: E402
+from test_data_quality import run_copy, shared_offline_run  # noqa: E402
 
 CFG = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
 RAW = yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
@@ -349,8 +349,8 @@ class EndToEnd(unittest.TestCase):
     """The hourly scan with the Phase 7 gates (the research run itself: tests/test_research.py)."""
 
     def test_offline_scan_gates_and_report(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            p = run_copy(tmp, "scanner.py", "--offline", "--coins", "4")
+        tmp, p = shared_offline_run()          # one plain offline scan, shared (read-only)
+        if True:
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             with open(os.path.join(tmp, "reports", "latest.json")) as f:
                 out = json.load(f)
@@ -368,7 +368,9 @@ class EndToEnd(unittest.TestCase):
             with open(os.path.join(tmp, "reports", "latest.md")) as f:
                 md = f.read()
             for text in ("## 3. Strategy scoreboard", "### 3b. Strategy lifecycle", "SMC vs control twin",
-                         "waiting for the first daily research run"):
+                         "waiting for the first daily research run",
+                         "**Storage:** repository not checked (offline)", "branch `live-reports`",
+                         "/blob/live-reports/reports/latest.json"):
                 self.assertIn(text, md)
 
 

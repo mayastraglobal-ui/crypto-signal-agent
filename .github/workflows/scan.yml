@@ -40,7 +40,12 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt
 
+      - name: Restore the daily research results (branch live-reports)
+        run: python publish_live.py --restore
+
       - name: Scan, backtest, find signals
+        env:
+          GITHUB_TOKEN: ${{ github.token }}   # only to read the repository size for the report
         run: python scanner.py
 
       - name: Email new signals
@@ -59,6 +64,9 @@ jobs:
           git commit -m "Scan $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
           git pull --rebase --autostash || true
           git push
+
+      - name: Publish the large report files (branch live-reports, one commit, no history)
+        run: python publish_live.py
 
       - name: Email if the scan failed
         if: ${{ failure() }}

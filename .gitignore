@@ -1,3 +1,14 @@
 __pycache__/
 *.pyc
 data/
+# large report files replaced every run: published to branch live-reports (publish_live.py), not main
+reports/latest.json
+reports/smc.json
+reports/features.json
+reports/regime.json
+reports/feature_evidence.json
+reports/data_quality.json
+reports/research.json
+# files written only by --offline test runs
+reports/*_offline.json
+reports/*_offline.csv

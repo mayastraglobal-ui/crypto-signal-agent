@@ -3,6 +3,7 @@
 Each test plants ONE problem in clean synthetic candles and checks it is caught.
 Run:  python -m unittest discover -s tests -v
 """
+import atexit
 import json
 import os
 import shutil
@@ -209,12 +210,26 @@ class CrossVenueAndSystem(unittest.TestCase):
 
 def run_copy(tmp, *args):
     """Run scanner.py in a throw-away copy of the repo, so real reports/ are never touched."""
-    for name in ("scanner.py", "notify.py", "config.yaml", "strategies.yaml"):
+    for name in ("scanner.py", "notify.py", "config.yaml", "strategies.yaml", "publish_live.py"):
         shutil.copy(os.path.join(ROOT, name), tmp)
     if not os.path.exists(os.path.join(tmp, "engine")):
         shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(tmp, "engine"),
                         ignore=shutil.ignore_patterns("__pycache__"))
     return subprocess.run([sys.executable, *args], cwd=tmp, capture_output=True, text=True, timeout=600)
+
+
+_SHARED = {}
+
+
+def shared_offline_run():
+    """ONE plain `scanner.py --offline` run per test process, shared by the tests that only READ its
+    output (features, SMC, timeframes, strategy gates). Returns (folder, finished process).
+    Tests that plant faults, change files or need several runs keep their own run_copy()."""
+    if "run" not in _SHARED:
+        tmp = tempfile.mkdtemp(prefix="shared_scan_")
+        atexit.register(shutil.rmtree, tmp, True)
+        _SHARED["run"] = (tmp, run_copy(tmp, "scanner.py", "--offline"))
+    return _SHARED["run"]
 
 
 class EndToEnd(unittest.TestCase):

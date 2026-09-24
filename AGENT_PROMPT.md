@@ -665,6 +665,7 @@ Then ask for an explicit **yes/no**.
 | `memory/changelog.md` | Every prompt, rule or config change (who, when, why) |
 | `reports/signals_log.csv` | Every signal: state history and outcome, tagged backtest / paper / live |
 | `reports/positions.json` | The live position book |
+| branch `live-reports` | The newest copy of the large report files replaced every run (`reports/latest.json`, `smc.json`, `features.json`, `regime.json`, `feature_evidence.json`, `data_quality.json`, `research.json`): one force-pushed commit, no history. Read them there, not on main |
 
 Every memory record has: timestamp, source, evidence, confidence, strategy/version, asset, timeframe, regime and review date. **Read memory before every decision.** Failed experiments are valuable knowledge.
 

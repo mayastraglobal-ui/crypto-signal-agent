@@ -39,24 +39,30 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
-| `reports/latest.json` | Same report in data form (for Claude) | No |
+| [`reports/latest.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/latest.json) ⓛ | Same report in data form (for Claude) | No |
 | `reports/signals_log.csv` | Every signal ever given and how it ended | No, it's the live track record |
 | `reports/strategy_scoreboard.csv` | Status table for every strategy version and timeframe | No |
-| `reports/data_quality.json` | Result of the data check, per coin and timeframe | No |
+| [`reports/data_quality.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/data_quality.json) ⓛ | Result of the data check, per coin and timeframe | No |
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
-| `reports/features.json` | Newest features per coin and timeframe | No |
-| `reports/regime.json` | Market regime per coin and timeframe, with evidence | No |
-| `reports/smc.json` | SMC state and newest events per coin and timeframe | No |
+| [`reports/features.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/features.json) ⓛ | Newest features per coin and timeframe | No |
+| [`reports/regime.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/regime.json) ⓛ | Market regime per coin and timeframe, with evidence | No |
+| [`reports/smc.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/smc.json) ⓛ | SMC state and newest events per coin and timeframe | No |
 | `memory/smc_events.csv` | Every SMC detection, logged live when it happened | Read it |
 | `memory/smc_research.md` | Exact SMC definitions and what has been proven | Read it |
 | `memory/market_regime_log.md` | One regime entry per day, BTC context first | Read it |
-| `reports/feature_evidence.json` | Candle patterns vs random entries (research evidence, not a signal) | No |
+| [`reports/feature_evidence.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/feature_evidence.json) ⓛ | Candle patterns vs random entries (research evidence, not a signal) | No |
 | `memory/feature_notes.md` | What each feature means and whether it has been proven useful | Read it |
 | `reports/universe_state.json` | The agent's memory of the 2-run counts | No |
 | `memory/universe_log.md` | Every coin that joined, left or was excluded, and why | Read it |
 | `engine/` | Parts of the engine (data check, coins, timeframes, features, evidence, regime, SMC, more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
+| [`reports/research.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/research.json) ⓛ | Daily research run: Layers A/B/C, stress, ±20%, why trades lose, missed moves | No |
+
+ⓛ = **on the branch `live-reports`**, not on main. These large files are fully replaced every run, so they are
+published there as one single commit (`publish_live.py`) and do not pile up in the repository's history.
+Main keeps the history that matters: `memory/`, `reports/signals_log.csv`, `reports/strategy_scoreboard.csv`,
+`reports/daily/` and `reports/latest.md`. The report's top line shows the repository size.
 
 ## Which coins (every run)
 
@@ -143,7 +149,8 @@ funding fee that is always counted against you.
 
 ## Tests
 
-`python -m unittest discover -s tests -v` runs the automatic tests (no internet needed).
+`python tests/run_all.py` runs the automatic tests, several test files at a time (about 3 minutes; no
+internet needed). `python -m unittest discover -s tests -v` runs the same tests one after another.
 They also run on GitHub on every push: see the **Tests** workflow in the Actions tab
 (green tick = OK, red cross = something broke).
 `python scanner.py --offline --fault stale_btc` shows what happens when data goes bad

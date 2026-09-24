@@ -46,7 +46,7 @@ jobs:
       - name: Research (Layers B/C, stress, +-20%, lifecycle)
         run: python research.py
 
-      - name: Save results
+      - name: Save results (small history on main)
         run: |
           git config user.name "signal-bot"
           git config user.email "signal-bot@users.noreply.github.com"
@@ -54,6 +54,9 @@ jobs:
           git commit -m "Research $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
           git pull --rebase --autostash || true
           git push
+
+      - name: Publish the large report files (branch live-reports, one commit, no history)
+        run: python publish_live.py
 
       - name: Email if the research run failed
         if: ${{ failure() }}

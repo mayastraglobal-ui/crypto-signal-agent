@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scanner  # noqa: E402
 from engine import features as F  # noqa: E402
 from engine import smc as S  # noqa: E402
-from test_data_quality import run_copy  # noqa: E402
+from test_data_quality import run_copy, shared_offline_run  # noqa: E402
 
 H1, D1 = 3_600_000, 86_400_000
 T0 = pd.Timestamp("2025-01-06", tz="UTC").value // 1_000_000        # a Monday 00:00 UTC
@@ -272,8 +272,8 @@ class EventLog(unittest.TestCase):
         self.assertEqual(log["engine"].iloc[0], S.VERSION)
 
     def test_offline_run_reports_smc_and_never_logs(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            p = run_copy(tmp, "scanner.py", "--offline")
+        tmp, p = shared_offline_run()          # one plain offline scan, shared (read-only)
+        if True:
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             self.assertFalse(os.path.exists(os.path.join(tmp, "memory", "smc_events.csv")))
             with open(os.path.join(tmp, "reports", "latest.md")) as f:
