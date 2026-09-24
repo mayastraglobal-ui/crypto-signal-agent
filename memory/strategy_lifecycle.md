@@ -1,0 +1,47 @@
+# Strategy lifecycle log
+
+Append-only (AGENT_PROMPT.md section 12). Written by the engine when a strategy version changes status on a timeframe.
+BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest gate (signals logged, not emailed) · FAILED = enough trades and losing · PAPER_TRADING needs the Phase 8 tests · APPROVED needs the operator's yes.
+
+## 2026-09-24 20:19 UTC
+- **S5-SWEEP-MSS-FVG@1.0 15m**: FORMALIZED → **BACKTESTING** (only 1 trades; avg -1.32R/trade (needs +0.10R); profit factor 0.00; only 1 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S5-SWEEP-MSS-FVG@1.0 30m**: FORMALIZED → **BACKTESTING** (only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S5-SWEEP-MSS-FVG-noSMC@1.0 15m**: FORMALIZED → **BACKTESTING** (only 2 trades; avg +0.05R/trade (needs +0.10R); profit factor 1.09; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S5-SWEEP-MSS-FVG-noSMC@1.0 30m**: FORMALIZED → **BACKTESTING** (only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S6-OB-FVG@1.0 15m**: FORMALIZED → **BACKTESTING** (only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S6-OB-FVG-noSMC@1.0 15m**: FORMALIZED → **BACKTESTING** (only 6 trades; avg -0.27R/trade (needs +0.10R); profit factor 0.59; only 4 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S7-SILVER-BULLET@1.0 15m**: FORMALIZED → **BACKTESTING** (only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S7-SILVER-BULLET-noSMC@1.0 15m**: FORMALIZED → **BACKTESTING** (only 2 trades; only 2 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S8-PDH-PDL-SWEEP@1.0 1h**: FORMALIZED → **BACKTESTING** (only 5 trades; avg -1.41R/trade (needs +0.10R); profit factor 0.00; only 3 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S8-PDH-PDL-SWEEP@1.0 30m**: FORMALIZED → **BACKTESTING** (only 7 trades; avg -1.20R/trade (needs +0.10R); profit factor 0.03; only 2 unseen-test trades; not profitable in BOTH train and unseen test)
+- **S8-PDH-PDL-SWEEP-noSMC@1.0 1h**: FORMALIZED → **BACKTESTING** (only 24 trades; not profitable in BOTH train and unseen test)
+- **S8-PDH-PDL-SWEEP-noSMC@1.0 30m**: FORMALIZED → **BACKTESTING** (only 28 trades; avg -0.27R/trade (needs +0.10R); profit factor 0.71; max drawdown 11.5R; not profitable in BOTH train and unseen test)
+- **bb_squeeze_breakout@1.0 15m**: FORMALIZED → **FAILED** (avg -0.64R/trade (needs +0.10R); profit factor 0.30; max drawdown 27.8R; not profitable in BOTH train and unseen test)
+- **bb_squeeze_breakout@1.0 1h**: FORMALIZED → **BACKTESTING** (only 21 trades)
+- **bb_squeeze_breakout@1.0 30m**: FORMALIZED → **FAILED** (avg -0.25R/trade (needs +0.10R); profit factor 0.59; not profitable in BOTH train and unseen test)
+- **bb_squeeze_breakout@1.0 4h**: FORMALIZED → **BACKTESTING** (only 7 trades; avg -0.13R/trade (needs +0.10R); profit factor 0.79; only 4 unseen-test trades; not profitable in BOTH train and unseen test)
+- **donchian_breakout@1.0 1h**: FORMALIZED → **VALIDATION**
+- **donchian_breakout@1.0 30m**: FORMALIZED → **FAILED** (not profitable in BOTH train and unseen test)
+- **donchian_breakout@1.0 4h**: FORMALIZED → **VALIDATION**
+- **ema_9_21_cross@1.0 15m**: FORMALIZED → **BACKTESTING** (only 24 trades; avg -0.01R/trade (needs +0.10R); profit factor 0.97; not profitable in BOTH train and unseen test)
+- **ema_9_21_cross@1.0 1h**: FORMALIZED → **BACKTESTING** (only 7 trades; avg -0.83R/trade (needs +0.10R); profit factor 0.05; only 5 unseen-test trades; not profitable in BOTH train and unseen test)
+- **ema_9_21_cross@1.0 30m**: FORMALIZED → **BACKTESTING** (only 11 trades; avg -0.25R/trade (needs +0.10R); profit factor 0.60; only 7 unseen-test trades; not profitable in BOTH train and unseen test)
+- **ema_9_21_cross@1.0 5m**: FORMALIZED → **FAILED** (avg -0.93R/trade (needs +0.10R); profit factor 0.18; max drawdown 27.9R; only 6 unseen-test trades; not profitable in BOTH train and unseen test)
+- **liquidity_sweep_reversal@1.0 15m**: FORMALIZED → **FAILED** (avg -0.55R/trade (needs +0.10R); profit factor 0.37; max drawdown 18.3R; not profitable in BOTH train and unseen test)
+- **liquidity_sweep_reversal@1.0 1h**: FORMALIZED → **BACKTESTING** (only 7 trades; avg -0.64R/trade (needs +0.10R); profit factor 0.28; only 6 unseen-test trades; not profitable in BOTH train and unseen test)
+- **liquidity_sweep_reversal@1.0 30m**: FORMALIZED → **BACKTESTING** (only 20 trades; avg -0.62R/trade (needs +0.10R); profit factor 0.16; max drawdown 13.0R; only 8 unseen-test trades; not profitable in BOTH train and unseen test)
+- **liquidity_sweep_reversal@1.0 5m**: FORMALIZED → **FAILED** (avg -1.34R/trade (needs +0.10R); profit factor 0.10; max drawdown 107.1R; not profitable in BOTH train and unseen test)
+- **macd_trend_cross@1.0 1h**: FORMALIZED → **BACKTESTING** (only 2 trades; only 1 unseen-test trades; not profitable in BOTH train and unseen test)
+- **macd_trend_cross@1.0 30m**: FORMALIZED → **BACKTESTING** (only 15 trades; avg -0.41R/trade (needs +0.10R); profit factor 0.38; only 3 unseen-test trades; not profitable in BOTH train and unseen test)
+- **macd_trend_cross@1.0 4h**: FORMALIZED → **BACKTESTING** (only 2 trades; avg -1.04R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test)
+- **rsi2_dip_buy@1.0 15m**: FORMALIZED → **FAILED** (avg -0.22R/trade (needs +0.10R); profit factor 0.31; max drawdown 15.9R; only 6 unseen-test trades; not profitable in BOTH train and unseen test)
+- **rsi2_dip_buy@1.0 1h**: FORMALIZED → **FAILED** (avg -0.33R/trade (needs +0.10R); profit factor 0.20; max drawdown 56.3R; not profitable in BOTH train and unseen test)
+- **rsi2_dip_buy@1.0 30m**: FORMALIZED → **FAILED** (avg -0.20R/trade (needs +0.10R); profit factor 0.42; max drawdown 19.2R; not profitable in BOTH train and unseen test)
+- **rsi2_dip_buy@1.0 4h**: FORMALIZED → **FAILED** (avg -0.11R/trade (needs +0.10R); profit factor 0.60; max drawdown 15.9R; not profitable in BOTH train and unseen test)
+- **supertrend_flip@1.0 1h**: FORMALIZED → **BACKTESTING** (only 7 trades; only 6 unseen-test trades; not profitable in BOTH train and unseen test)
+- **supertrend_flip@1.0 30m**: FORMALIZED → **BACKTESTING** (only 9 trades; avg -0.28R/trade (needs +0.10R); profit factor 0.55; only 6 unseen-test trades; not profitable in BOTH train and unseen test)
+- **supertrend_flip@1.0 4h**: FORMALIZED → **BACKTESTING** (only 2 trades; only 2 unseen-test trades; not profitable in BOTH train and unseen test)
+- **trend_pullback@1.0 15m**: FORMALIZED → **FAILED** (avg -0.12R/trade (needs +0.10R); profit factor 0.81; max drawdown 21.6R; not profitable in BOTH train and unseen test)
+- **trend_pullback@1.0 1h**: FORMALIZED → **FAILED** (avg -0.28R/trade (needs +0.10R); profit factor 0.59; max drawdown 41.8R; not profitable in BOTH train and unseen test)
+- **trend_pullback@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.02; max drawdown 13.4R; not profitable in BOTH train and unseen test)
+- **trend_pullback@1.0 4h**: FORMALIZED → **FAILED** (avg -0.37R/trade (needs +0.10R); profit factor 0.43; max drawdown 24.5R; not profitable in BOTH train and unseen test)

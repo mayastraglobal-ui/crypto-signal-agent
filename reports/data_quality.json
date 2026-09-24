@@ -1,5 +1,5 @@
 {
- "checked_utc": "2026-09-24 19:16",
+ "checked_utc": "2026-09-24 20:19",
  "system_state": "GOOD",
  "reason": "all checks passed",
  "status_code": "SIGNALS_ALLOWED",
@@ -12,7 +12,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.006,
+    "deviation_pct": 0.013,
     "note": ""
    },
    "timeframes": {
@@ -41,7 +41,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -50,7 +50,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -59,7 +59,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -68,7 +68,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -77,7 +77,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -85,7 +85,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.015,
+    "deviation_pct": 0.003,
     "note": ""
    },
    "timeframes": {
@@ -114,7 +114,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -123,7 +123,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -132,7 +132,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -141,7 +141,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -150,7 +150,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -158,7 +158,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.015,
+    "deviation_pct": 0.019,
     "note": ""
    },
    "timeframes": {
@@ -187,7 +187,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -196,7 +196,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -205,7 +205,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -214,7 +214,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -223,7 +223,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -231,7 +231,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.0,
+    "deviation_pct": 0.013,
     "note": ""
    },
    "timeframes": {
@@ -260,7 +260,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -269,7 +269,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -278,7 +278,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -287,7 +287,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -296,7 +296,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -333,7 +333,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -342,7 +342,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -351,7 +351,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -360,7 +360,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -369,7 +369,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -377,7 +377,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.005,
+    "deviation_pct": 0.063,
     "note": ""
    },
    "timeframes": {
@@ -406,7 +406,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -415,7 +415,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -424,7 +424,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -433,7 +433,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -442,7 +442,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -450,7 +450,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.011,
+    "deviation_pct": 0.0,
     "note": ""
    },
    "timeframes": {
@@ -479,7 +479,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -488,7 +488,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -497,7 +497,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -506,7 +506,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -515,7 +515,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },
@@ -523,7 +523,7 @@
    "state": "GOOD",
    "cross_venue": {
     "state": "GOOD",
-    "deviation_pct": 0.04,
+    "deviation_pct": 0.019,
     "note": ""
    },
    "timeframes": {
@@ -552,7 +552,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1499,
-     "last_close_ms": 1790265599999
+     "last_close_ms": 1790279999999
     },
     "1h": {
      "state": "GOOD",
@@ -561,7 +561,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "30m": {
      "state": "GOOD",
@@ -570,7 +570,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790276399999
+     "last_close_ms": 1790279999999
     },
     "15m": {
      "state": "GOOD",
@@ -579,7 +579,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     },
     "5m": {
      "state": "GOOD",
@@ -588,7 +588,7 @@
       "1 unfinished candle(s) ignored (UNCONFIRMED)"
      ],
      "bars": 1999,
-     "last_close_ms": 1790277299999
+     "last_close_ms": 1790280899999
     }
    }
   },

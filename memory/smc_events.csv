@@ -1,3 +1,7 @@
 known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,htf,htf_regime,details,engine,source
 2026-09-24 18:45,ETH,15m,FVG,bull,,2675.72,2679.23,0.256,,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-24 18:45,BNB,15m,FVG_RETRACE,bear,,781.33,782.43,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-24 20:00,ZEC,4h,FVG_RETRACE,bear,,1570.0,1602.59,,,1d,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-24 20:00,ZEC,4h,FVG_FILLED,bear,,1529.96,1547.71,,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-09-24 20:15,ZEC,15m,WEAK_BREAK,bear,1548.47,,,0.144,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-24 19:30,UNI,15m,WEAK_BREAK,bull,9.29,,,0.374,,1h,RANGE,no displacement,smc-1.0,Binance
