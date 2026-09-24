@@ -30,6 +30,7 @@ import pandas as pd
 import yaml
 
 import scanner as sc
+from engine import attribution as att
 from engine import data_quality as dq
 from engine import history
 from engine import lifecycle as lc
@@ -85,8 +86,49 @@ def paper_results(logdf):
     return out
 
 
+def move_findings(moves, s, tf, fr, detail, L, S, cols, cfg, A, found):
+    """Section 17.4: what this strategy on this timeframe did around each strong move of the coin."""
+    df, n = fr["df"], fr["n"]
+    ct, o, c, atr = (df["close_time"].to_numpy(), df["open"].to_numpy(), df["close"].to_numpy(),
+                     df["_atr"].to_numpy())
+    for m in moves:
+        a = m["start_ms"] - int(A["signal_window_bars"]) * 3_600_000
+        idx = np.flatnonzero((ct >= a) & (ct < m["start_ms"] + 3_600_000))
+        fin_l, fin_s = L.copy(), S.copy()
+        for t in idx:                    # a gated signal only counts if it had a valid stop and target
+            for d, arr in ((1, fin_l), (-1, fin_s)):
+                if arr[t] and sc.plan_trade(s, t, d, o[t + 1] if t + 1 < n else c[t], atr[t], cols, cfg) is None:
+                    arr[t] = False
+        found.setdefault(m["key"], {})[f"{s['id']} v{s['version']} {tf}"] = att.check_move(
+            m, ct, detail["raw_l"], detail["raw_s"], detail["reg_ok"], detail["perm_l"], detail["perm_s"],
+            fin_l, fin_s, A)
+
+
 def fmt_day(ms):
     return pd.to_datetime(int(ms), unit="ms").strftime("%Y-%m-%d")
+
+
+def write_missed(missed, when, A):
+    """memory/missed_trades.md (section 17.4): strong moves of the last day and whether they were
+    identifiable beforehand. Append-only; nothing is written on a day without strong moves."""
+    if not missed:
+        return
+    os.makedirs(sc.MEMORY, exist_ok=True)
+    path = os.path.join(sc.MEMORY, "missed_trades.md")
+    new = not os.path.exists(path)
+    with open(path, "a") as f:
+        if new:
+            f.write("# Missed trades\n\nAppend-only (AGENT_PROMPT.md section 17.4), written by the daily research run. "
+                    f"A strong move = at least {A['strong_move_atr']:g}x the 1H ATR within {A['strong_move_bars']} hours "
+                    "on a research coin. For each: did any strategy have a signal up to "
+                    f"{A['signal_window_bars']} hours before it started - and if it was filtered out, by what?\n"
+                    "**Never change a rule just because a missed move became large.**\n")
+        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
+        for m in missed:
+            f.write(f"- **{m['coin']}** {m['direction']} {m['pct']:+.1f}% ({m['size_atr']}x ATR), {m['start_utc']} → "
+                    f"{m['end_utc']}{'' if m['signal_coin'] else ' (research-only coin)'}: {m['verdict']}\n")
+            for k, v in m["findings"].items():
+                f.write(f"  - {k}: {v}\n")
 
 
 def main():
@@ -98,6 +140,7 @@ def main():
     t_start = time.time()
     cfg = yaml.safe_load(open(os.path.join(sc.ROOT, "config.yaml")))
     R, V = cfg["research"], cfg["validation"]
+    A = att.settings(cfg.get("attribution"))
     started = dt.datetime.now(dt.timezone.utc)
     now_ms = int(started.timestamp() * 1000)
     now_txt = started.strftime("%Y-%m-%d %H:%M")
@@ -127,6 +170,9 @@ def main():
 
     per, stress, var = {}, {}, {}            # (id, version, tf) -> {coin: trades} (var: -> {label: {coin: ...}})
     spans, hist, skipped, rule_errors = {}, {}, {}, {}
+    moves_all, move_found = [], {}           # missed-move learning (section 17.4)
+    signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
+        if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
     for base in coins:
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
@@ -142,20 +188,29 @@ def main():
             skipped[base] = f"download failed: {e}"
             continue
         pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg)
+        moves = []
+        if "1h" in pc["frames"]:
+            f1 = pc["frames"]["1h"]
+            moves = att.strong_moves(f1["df"], f1["df"]["_atr"].to_numpy(), now_ms, A)
+            for m in moves:
+                m.update(coin=base, signal_coin=base in signal_coins, key=f"{base}|{m['start_ms']}|{m['dir']}")
+            moves_all += moves
         for tf in tfs:
             if tf not in pc["frames"]:
                 skipped.setdefault(base, "")
                 skipped[base] += f"{tf} not researched (data {quality[(base, tf)]['state']}); "
         for tf, fr in pc["frames"].items():
             df, n = fr["df"], fr["n"]
+            ctx = att.context(df, fr["feats"], fr["reg"], sc.TF_MS[tf])
             hist.setdefault(tf, {})[base] = (int(df["open_time"].iloc[0]), int(df["close_time"].iloc[-1]), n)
             spans.setdefault(tf, []).append((int(df["open_time"].iloc[min(250, n - 1)]), int(df["close_time"].iloc[-1])))
             for s in strategies:
                 if tf not in s["timeframes"]:
                     continue
                 k3 = (s["id"], s["version"], tf)
+                detail = {}
                 try:
-                    L, S, XL, XS, cols = sc.strategy_signals(s, tf, fr, cfg)
+                    L, S, XL, XS, cols = sc.strategy_signals(s, tf, fr, cfg, detail=detail)
                 except Exception as e:
                     log(f"RULE ERROR in {s['id']} {tf}: {e}")
                     rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
@@ -164,6 +219,10 @@ def main():
                     tr = sc.backtest(df, L, S, XL, XS, s, cf, tf, cols)
                     sc.mark_oos(tr, n, cfg)
                     store.setdefault(k3, {})[base] = tr
+                for t in per[k3][base]:                    # section 17: why did each trade win or lose?
+                    att.tag_trade(ctx, t, s, lc.regime_tf(tf), A)
+                if moves:
+                    move_findings(moves, s, tf, fr, detail, L, S, cols, cfg, A, move_found)
                 for label, v, rules_changed in variants[sspec.key(s)]:
                     sig = (L, S, XL, XS, cols)
                     if rules_changed:
@@ -216,6 +275,37 @@ def main():
                          if any(per[k3].values()) else None,
                          paper=rec, evidence=ev)
 
+    # ---------- failure attribution per strategy version x timeframe (section 17) ----------
+    for ck, cell in cells.items():
+        k3 = (cell["strategy"], cell["version"], cell["tf"])
+        a = att.summarize([t for tr in per[k3].values() for t in tr], A)
+        dev, val = cell["evidence"]["develop"], cell["evidence"]["validate"]
+        a["strategy_level"] = (["structural_change: profitable in the develop part, losing in the validate part"]
+                               if min(dev["n"], val["n"]) >= 10 and dev["avg_r"] > 0 > val["avg_r"] else [])
+        cell["attribution"] = a
+    for ck, cell in cells.items():
+        others = {c["tf"]: c["evidence"]["all"]["avg_r"] for c in cells.values()
+                  if c["strategy"] == cell["strategy"] and c["version"] == cell["version"] and c["tf"] != cell["tf"]
+                  and c["evidence"]["all"]["n"] >= V["min_trades"]}
+        stops = [v for v in cell["evidence"]["perturbation"]["variants"] if v["change"].startswith("stop")]
+        cell["attribution"]["diagnosis"] = att.diagnose(cell["attribution"], others, A, stops)
+    lessons = {}
+    for ck, cell in cells.items():
+        for tag in cell["attribution"]["systematic"]:
+            lessons.setdefault(tag, []).append(ck)
+    candidate_lessons = [dict(tag=t, cells=v, evidence=f"systematic in {len(v)} strategy/timeframe tests")
+                         for t, v in sorted(lessons.items(), key=lambda x: -len(x[1])) if len(v) >= 2]
+    missed = []
+    for m in moves_all:
+        found = move_found.get(m["key"], {})
+        missed.append(dict(coin=m["coin"], signal_coin=m["signal_coin"], direction="up" if m["dir"] == 1 else "down",
+                           size_atr=m["size_atr"], pct=m["pct"],
+                           start_utc=pd.to_datetime(m["start_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"),
+                           end_utc=pd.to_datetime(m["end_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"),
+                           verdict=att.move_verdict(found),
+                           findings={k: v for k, v in sorted(found.items()) if v not in ("no setup", "no candles")},
+                           strategies_checked=len(found)))
+
     tested = [x for x in strategies if any(k[0] == x["id"] and k[1] == x["version"] for k in per)]
     registry, new_exp, changes = lc.update(registry, tested, fps, results, now_txt)
     for c in changes:
@@ -239,6 +329,7 @@ def main():
     if not args.offline:
         sc.write_experiments(new_exp, registry)
         sc.write_lifecycle_log(changes, started)
+        write_missed(missed, started, A)
 
     # ---------- report ----------
     history_out = {}
@@ -252,6 +343,7 @@ def main():
                skipped=skipped, history=history_out, settings=R, changes=changes,
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
+               attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                cells=cells)
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")
     json.dump(out, open(path, "w"), indent=1, default=float)

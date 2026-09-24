@@ -32,6 +32,7 @@ import pandas as pd
 import requests
 import yaml
 
+from engine import attribution as att
 from engine import data_quality as dq
 from engine import evidence as evid
 from engine import features as fe
@@ -550,9 +551,10 @@ def prepare_coin(sym, base, data, quality, tfs, cfg):
     return dict(frames=frames, smc=smc_out, recs=recs, rg_series=rg_ser)
 
 
-def strategy_signals(s, tf, fr, cfg, gc=None):
+def strategy_signals(s, tf, fr, cfg, gc=None, detail=None):
     """Entry signals of one strategy on one prepared timeframe, AFTER the warm-up and the market gates
-    (allowed regimes + timeframe permission). gc (optional) counts the candles each gate stood down.
+    (allowed regimes + timeframe permission). gc (optional) counts the candles each gate stood down;
+    detail (optional dict) receives the raw signals and each gate's verdict (missed-move learning).
     Returns (long, short, exit_long, exit_short, level columns). Raises on a rule error."""
     ns, n, idx = fr["ns"], fr["n"], fr["df"].index
     L = eval_rules(s.get("long"), ns, idx)
@@ -563,6 +565,8 @@ def strategy_signals(s, tf, fr, cfg, gc=None):
     L[:250] = False     # warm-up: let long indicators settle
     S[:250] = False
     gl, gs, reg_ok, perm_l, perm_s = lc.gate_arrays(s, tf, fr["reg"], n)
+    if detail is not None:
+        detail.update(raw_l=L.copy(), raw_s=S.copy(), reg_ok=reg_ok, perm_l=perm_l, perm_s=perm_s)
     if gc is not None:
         raw = L | S
         gc["raw"] += int(raw.sum())
@@ -611,8 +615,22 @@ def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
                 live_signals=live["n"] if live else 0, live_avg_r=round(live["exp_r"], 3) if live else None,
                 twin_of=x.get("twin_of"), control_twin=x.get("control_twin"),
                 note=(rc or {}).get("note", ""),
+                attribution=_attribution_brief((rc or {}).get("attribution")),
                 why_not="; ".join((rc or {}).get("reasons", []) + (rc or {}).get("paper_gate_failed", []))
                 if rc else "waiting for the first daily research run (Layers B/C)")
+
+
+def _attribution_brief(a):
+    """The part of a research cell's failure attribution the report shows (full detail: research.json)."""
+    if not a:
+        return None
+    # common among losers AND (for tags winners can have too) clearly more common than among winners
+    frequent = sorted(((k, v["loss_share"]) for k, v in a["tags"].items() if v["loss_share"] >= 0.25 and
+                       (v["kind"] == "losers only" or v["loss_share"] >= v["win_share"] + 0.05)),
+                      key=lambda x: -x[1])
+    return dict(losses=a["losses"], wins=a["wins"], systematic=a["systematic"], frequent=frequent[:4],
+                mae_mfe=a["mae_mfe"], gross_avg_r=a["gross_avg_r"], avg_r=a["avg_r"],
+                strategy_level=a.get("strategy_level", []), diagnosis=a.get("diagnosis", []))
 
 
 def evidence_for(rc, per_coin, coin):
@@ -666,7 +684,9 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open.
     tps / split: take-profit prices and the share closed at each (default: config trade plan 1R/2R/3R).
     Conservative: if stop and target are touched in the same candle we assume the STOP hit first.
-    Funding (shorts) is charged on the part still open, for every candle held, at entry notional."""
+    Funding (shorts) is charged on the part still open, for every candle held, at entry notional.
+    Also measured: MAE / MFE = the worst / best price reached while the trade was open, in R
+    (Phase 9 failure attribution), and the funding paid, in R."""
     tp = cfg["trade_plan"]
     k = trade_costs(cfg, d)
     fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
@@ -674,18 +694,25 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     if tps is None:
         tps, split = [entry + d * r * R for r in tp["tp_r"]], tp["tp_split"]
     stop = entry - d * R
-    remaining, pnl, fees, hit = 1.0, 0.0, fee_t * entry, 0
+    remaining, pnl, fees, funding, hit = 1.0, 0.0, fee_t * entry, 0.0, 0
+    mae = mfe = 0.0
     n = len(c)
+
+    def done(j, reason):
+        return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1,
+                    mae_r=mae / R, mfe_r=mfe / R, funding_r=funding / R)
     for j in range(j0, n):
         fees += remaining * fund_bar * entry
+        funding += remaining * fund_bar * entry
+        worst, best = (l[j], h[j]) if d == 1 else (h[j], l[j])
+        mae, mfe = min(mae, d * (worst - entry)), max(mfe, d * (best - entry))
         # --- stop-loss first (worst case) ---
         if (d == 1 and l[j] <= stop) or (d == -1 and h[j] >= stop):
             px = o[j] if ((d == 1 and o[j] < stop) or (d == -1 and o[j] > stop)) else stop
             px *= (1 - slip * d)
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
-            reason = "SL" if hit == 0 else f"TP{hit}+stop"
-            return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1)
+            return done(j, "SL" if hit == 0 else f"TP{hit}+stop")
         # --- take-profits ---
         while hit < len(tps) and ((d == 1 and h[j] >= tps[hit]) or (d == -1 and l[j] <= tps[hit])):
             frac = split[hit] if hit < len(tps) - 1 else remaining
@@ -698,20 +725,19 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
             elif hit >= 2 and tp.get("move_stop_to_tp1_after_tp2", True):
                 stop = tps[hit - 2]
         if remaining <= 1e-9:
-            return dict(exit_idx=j, r=(pnl - fees) / R, reason=f"TP{hit}", hit=hit, bars=j - j0 + 1)
+            return done(j, f"TP{hit}")
         if hit > 0 and ((d == 1 and c[j] <= stop) or (d == -1 and c[j] >= stop)):
             px = stop * (1 - slip * d)       # came back through the moved stop in the same candle
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
-            return dict(exit_idx=j, r=(pnl - fees) / R, reason=f"TP{hit}+stop", hit=hit, bars=j - j0 + 1)
+            return done(j, f"TP{hit}+stop")
         # --- early exit rule / time stop (at candle close) ---
         rule_exit = exit_arr is not None and exit_arr[j]
         if rule_exit or (j - j0 + 1) >= max_hold:
             px = c[j] * (1 - slip * d)
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
-            return dict(exit_idx=j, r=(pnl - fees) / R, reason="exit-rule" if rule_exit else "time",
-                        hit=hit, bars=j - j0 + 1)
+            return done(j, "exit-rule" if rule_exit else "time")
     return None
 
 
@@ -761,8 +787,8 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
         if res is None:
             break
         k = trade_costs(cfg, d)
-        res.update(entry_idx=t + 1, dir=d, entry_time=int(ot[t + 1]),
-                   cost_r=float(entry * 2 * (k["taker"] + k["slip"]) / R))   # round-trip fees + slippage, in R
+        res.update(entry_idx=t + 1, signal_idx=t, dir=d, entry_time=int(ot[t + 1]), entry=float(entry), R=float(R),
+                   tp1=float(tps[0]), cost_r=float(entry * 2 * (k["taker"] + k["slip"]) / R))   # round trip, in R
         trades.append(res)
         t = res["exit_idx"] + int(strat.get("cooldown_bars", 0))    # wait before the next trade
     return trades
@@ -776,13 +802,15 @@ stats = rs.stats          # summary of trades (engine/research.py), in time orde
 # =====================================================================
 LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "entry", "stop",
             "tp1", "tp2", "tp3", "max_hold_bars", "status", "result_r", "closed_time_utc",
-            "version", "stage", "tp_split"]
+            "version", "stage", "tp_split",
+            "conditions", "regime_at_entry", "session", "mae_r", "mfe_r", "tags"]     # Phase 9 attribution
+TEXT_COLS = ["version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags"]
 
 
 def load_log():
     p = os.path.join(REPORTS, "signals_log.csv")
     if os.path.exists(p):
-        df = pd.read_csv(p, dtype={"version": str, "stage": str, "tp_split": str})
+        df = pd.read_csv(p, dtype={c: str for c in TEXT_COLS})
         for col in LOG_COLS:
             if col not in df:
                 df[col] = np.nan
@@ -790,9 +818,15 @@ def load_log():
     return pd.DataFrame(columns=LOG_COLS)
 
 
-def update_forward(logdf, data, quality, feed, cfg):
+def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None):
     """Replay candles after each OPEN signal using the exact same SL/TP rules.
-    Signals whose candles are UNSAFE stay OPEN until the data is trustworthy again."""
+    Signals whose candles are UNSAFE stay OPEN until the data is trustworthy again.
+    A signal that closes gets its MAE / MFE and its section 17 reason tags (cards = strategy cards by
+    'id@version', rg_series = regime history per coin). Returns (log, rows closed in this run)."""
+    closed_now = []
+    for c in TEXT_COLS:                   # an all-empty column is read as numbers; text must fit in it
+        if c in logdf:
+            logdf[c] = logdf[c].astype(object)
     for i, row in logdf[logdf["status"] == "OPEN"].iterrows():
         sym, tf = row["coin"] + cfg["market"]["quote"], row["tf"]
         df = data.get((sym, tf))
@@ -805,7 +839,8 @@ def update_forward(logdf, data, quality, feed, cfg):
         if rep is None or rep["state"] == dq.UNSAFE:
             continue
         st = int(pd.Timestamp(row["signal_time_utc"]).value // 1_000_000)
-        after = df[df["open_time"] > st].reset_index(drop=True)
+        pos0 = int(np.searchsorted(df["open_time"].to_numpy(), st, side="right"))   # first candle after the signal
+        after = df.iloc[pos0:].reset_index(drop=True)
         if after.empty:
             continue
         d = 1 if row["direction"] == "LONG" else -1
@@ -824,7 +859,37 @@ def update_forward(logdf, data, quality, feed, cfg):
             logdf.at[i, "result_r"] = round(res["r"], 3)
             logdf.at[i, "closed_time_utc"] = pd.to_datetime(
                 after["close_time"].iloc[res["exit_idx"]], unit="ms").strftime("%Y-%m-%d %H:%M")
-    return logdf
+            logdf.at[i, "mae_r"], logdf.at[i, "mfe_r"] = round(res["mae_r"], 3), round(res["mfe_r"], 3)
+            ver = str(row["version"]) if pd.notna(row["version"]) else "1.0"
+            strat = (cards or {}).get(f"{row['strategy']}@{ver}")
+            if strat is not None and pos0 >= 1:
+                try:
+                    tags = live_outcome_tags(df, pos0, res, d, entry, R, tps[0] if tps else entry + d * R,
+                                             row["coin"], tf, strat, cfg, rg_series or {})
+                    logdf.at[i, "tags"] = ";".join(tags)
+                except Exception as e:           # attribution must never stop the forward test
+                    log(f"attribution failed for {row['id']}: {e}")
+            closed_now.append(i)
+    return logdf, closed_now
+
+
+def live_outcome_tags(df, pos0, res, d, entry, R, tp1, coin, tf, strat, cfg, rg_series):
+    """Section 17 tags of a closed paper / live signal - the same rules as for backtest trades."""
+    A = att.settings(cfg.get("attribution"))
+    feats = fe.compute(df, TF_MS[tf], fe.settings(cfg.get("features")))
+    feats.index = df.index
+    reg = {}
+    for rtf in lc.PERMISSION_TFS + ["1w"]:
+        ser = rg_series.get((coin, rtf))
+        if ser is not None:
+            hist = pd.DataFrame({"close_time": ser[0], "label": ser[1], "exp_dir": [None] * len(ser[0])})
+            m = tfm.align_higher(df, hist, ["label", "exp_dir"])
+            reg[rtf] = (m["label"].to_numpy(dtype=object), m["exp_dir"].to_numpy(dtype=object))
+    ctx = att.context(df, feats, reg, TF_MS[tf])
+    k = trade_costs(cfg, d)
+    tr = dict(res, dir=d, signal_idx=pos0 - 1, entry_idx=pos0, exit_idx=pos0 + res["exit_idx"], entry=entry, R=R,
+              tp1=tp1, cost_r=entry * 2 * (k["taker"] + k["slip"]) / R)
+    return att.outcome_tags(ctx, tr, dict(strat, _A=A), lc.regime_tf(tf))
 
 
 def forward_stats(logdf):
@@ -1046,6 +1111,7 @@ def main():
     regimes = {}
     rg_series = {}                          # (coin, tf) -> (close_time array, label array) for stamping
     lb = int(cfg["signals"]["lookback_bars"])
+    att_cfg = att.settings(cfg.get("attribution"))
     for u in coins:
         sym, base = u["symbol"], u["base"]
         pc = prepare_coin(sym, base, data, quality, tfs, cfg)
@@ -1054,6 +1120,7 @@ def main():
         regimes[base] = dict(timeframes=pc["recs"], permission=verdict_now, permission_reason=reason)
         for tf, fr in pc["frames"].items():
             df, feats, ns, reg, n = fr["df"], fr["feats"], fr["ns"], fr["reg"], fr["n"]
+            ctx = None                      # attribution context, built only when a signal needs it
             smc_res[(base, tf)] = pc["smc"][tf]
             feat_last[(base, tf)] = feats[[c for c in feats.columns if not c.startswith("h4_")]].tail(3)
             ev_frames[tf].append((base, df, feats))
@@ -1088,6 +1155,8 @@ def main():
                     if plan is None:
                         continue
                     R, tps, split = plan
+                    if ctx is None:
+                        ctx = att.context(df, feats, reg, TF_MS[tf])
                     if k > 0:   # older signal: still valid only if no SL/TP1 hit and price near entry
                         seg = df.iloc[t_i + 1:]
                         if (d == 1 and (seg["low"].min() <= entry - R or seg["high"].max() >= tps[0])) or \
@@ -1102,6 +1171,8 @@ def main():
                                      htf_up=bool(df["htf_up"].iloc[t_i]),
                                      htf_down=bool(df["htf_down"].iloc[t_i]),
                                      regime=regime_at(reg, tf, t_i),
+                                     conditions=att.conditions(ctx, t_i, d, s, att_cfg),
+                                     session=ctx["kz"][t_i] or ("outside killzones" if ctx["intraday"] else "n/a"),
                                      rsi=float(ns["rsi"](ns["close"], 14).iloc[t_i]),
                                      vol_ratio=float(df["volume"].iloc[t_i] / ns["vol_sma"](20).iloc[t_i])))
                     break
@@ -1117,7 +1188,9 @@ def main():
     del ev_frames
 
     # ---------- forward test (live proof) ----------
-    logdf = update_forward(load_log(), data, quality, feed, cfg) if not args.offline else load_log()
+    cards = {sspec.key(x): x for x in strategies}
+    logdf, closed_now = (update_forward(load_log(), data, quality, feed, cfg, cards, rg_series)
+                         if not args.offline else (load_log(), []))
     fwd = forward_stats(logdf)
 
     # ---------- scoreboard: status + Layers B/C from the daily research run, Layer A from this run ----------
@@ -1182,6 +1255,7 @@ def main():
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
             version=sgl["version"], stage=stage, family=strat["family"],
+            conditions=sgl["conditions"], session=sgl["session"],
             direction="LONG" if d == 1 else "SHORT", market=market_type(d),
             signal_time_utc=pd.to_datetime(sgl["signal_time"], unit="ms").strftime("%Y-%m-%d %H:%M"),
             signal_age_candles=sgl["age_bars"],
@@ -1231,10 +1305,13 @@ def main():
                                  entry=p["entry"], stop=p["stop"], tp1=p["tp1"], tp2=p["tp2"],
                                  tp3=p["tp3"], max_hold_bars=p["max_hold_bars"], status="OPEN",
                                  result_r=np.nan, closed_time_utc="", version=p["version"], stage=p["stage"],
-                                 tp_split="/".join(f"{x:g}" for x in p["tp_split"])))
+                                 tp_split="/".join(f"{x:g}" for x in p["tp_split"]),
+                                 conditions=";".join(p["conditions"]), regime_at_entry=p["context"]["regime"] or "",
+                                 session=p["session"] or ""))
         if new_rows:
             logdf = pd.concat([logdf, pd.DataFrame(new_rows)], ignore_index=True)
         logdf.to_csv(os.path.join(REPORTS, "signals_log.csv"), index=False)
+        write_failure_journal(logdf.loc[[i for i in closed_now if float(logdf.at[i, "result_r"]) < 0]], started)
 
     # ---------- data-quality report ----------
     dq_out = dict(
@@ -1362,6 +1439,8 @@ def main():
                lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
                               changes=(research or {}).get("changes", []),
                               research_run=(research or {}).get("run_utc"),
+                              candidate_lessons=(research or {}).get("candidate_lessons", []),
+                              missed_moves=(research or {}).get("missed_moves", []),
                               research_history=(research or {}).get("history", {}),
                               not_run={k: sorted(v) for k, v in spec_problems.items()},
                               rule_errors={k: sorted(v) for k, v in rule_errors.items()},
@@ -1385,6 +1464,31 @@ def main():
         f"{sum(b['status'] == 'VALIDATION' for b in board)} in VALIDATION, "
         f"{sum(b['status'] == 'PAPER_TRADING' for b in board)} in PAPER_TRADING, {len(final)} signals, "
         f"{len(watch)} paper/validation signals (not emailed)")
+
+
+def write_failure_journal(rows, when):
+    """memory/failure_journal.md (section 17): every logged signal that closed with a loss, with its
+    conditions at entry, what happened (tags) and how far it went both ways (MAE / MFE). Append-only."""
+    if rows is None or rows.empty:
+        return
+    os.makedirs(MEMORY, exist_ok=True)
+    path = os.path.join(MEMORY, "failure_journal.md")
+    new = not os.path.exists(path)
+    txt = lambda x: x if isinstance(x, str) and x else "-"
+    with open(path, "a") as f:
+        if new:
+            f.write("# Failure journal\n\nAppend-only (AGENT_PROMPT.md section 17), written by the engine. One entry per "
+                    "logged signal (validation / paper / live) that closed with a loss. Tags are measured by fixed rules "
+                    "(`engine/attribution.py`); root causes and fixes are added by the reviews - never by changing "
+                    "rules mid-trade. MAE / MFE = worst / best point of the trade, in R.\n")
+        f.write(f"\n## {when.strftime('%Y-%m-%d %H:%M')} UTC\n")
+        for _, r in rows.iterrows():
+            f.write(f"- **{r['coin']} {r['direction']} {r['tf']}** · `{r['strategy']}` v{txt(r['version'])} "
+                    f"({txt(r['stage'])}) · signal {r['signal_time_utc']} UTC → {r['status']} {float(r['result_r']):+.2f}R "
+                    f"(closed {r['closed_time_utc']}) · MAE {float(r['mae_r']):+.2f}R / MFE {float(r['mfe_r']):+.2f}R\n"
+                    f"  - at entry: regime {txt(r['regime_at_entry'])}, session {txt(r['session'])}, "
+                    f"conditions: {txt(r['conditions']).replace(';', ', ')}\n"
+                    f"  - what happened: {txt(r['tags']).replace(';', ', ')}\n")
 
 
 def write_experiments(new_exp, registry):
@@ -1847,6 +1951,51 @@ def render_lifecycle(g, board, w):
     w("")
 
 
+def render_attribution(g, board, w):
+    w("### 3d. Why trades lose (failure attribution)")
+    rows = [b for b in board if b.get("attribution") and b["trades"] and b["trades"] >= 30]
+    if not g.get("research_run"):
+        w("Filled in by the daily research run.\n")
+        return
+    w("Every backtest trade gets reason tags by fixed rules (section 17; rules and numbers in `config.yaml` → "
+      "`attribution`). A tag is **systematic** (✓) only if it is clearly more common among losing trades than "
+      "among winning ones (more than 2 standard errors, at least 30 losses) - or, for tags that only exist for "
+      "losers, if it is in at least 25% of them. **Best point of losers** (MFE) = how far the typical loser was "
+      "in profit first; **worst point of winners** (MAE) = how much heat the typical winner took. Only strategy / "
+      "timeframe tests with 30+ trades are shown.\n")
+    if rows:
+        w("| Strategy | TF | Status | Trades (losers) | Systematic causes ✓ | Common in losers (more than in winners) "
+          "| Losers' best point "
+          "| Winners' worst point | R before / after costs |")
+        w("|---|---|---|---|---|---|---|---|---|")
+        num = lambda x: "-" if x is None else f"{x:+.2f}"
+        for b in rows:
+            a = b["attribution"]
+            sysc = ", ".join(a["systematic"] + [x.split(":")[0] for x in a["strategy_level"]]) or "none"
+            freq = ", ".join(f"{k} {v * 100:.0f}%" for k, v in a["frequent"]) or "-"
+            w(f"| {b['strategy']} | {b['tf']} | {b['status']} | {a['losses'] + a['wins']} ({a['losses']}) | {sysc} | "
+              f"{freq} | {num(a['mae_mfe']['losers_mfe_median'])}R | {num(a['mae_mfe']['winners_mae_median'])}R | "
+              f"{num(a['gross_avg_r'])} / {num(a['avg_r'])} |")
+        w("")
+    else:
+        w("No strategy / timeframe test has 30+ trades yet.\n")
+    if g.get("candidate_lessons"):
+        w("**Candidate lessons** (systematic in 2+ tests - NOT yet lessons: they need a review before anything "
+          "changes, and any change is a new version): " + "; ".join(
+              f"`{x['tag']}` ({x['evidence']})" for x in g["candidate_lessons"]))
+    missed = g.get("missed_moves") or []
+    if missed:
+        w("\n**Missed moves** (last 24h, ≥ 5x the 1H ATR within 12 hours; also in `memory/missed_trades.md`). "
+          "Never change a rule just because a missed move became large:")
+        for m in missed:
+            w(f"- {m['coin']} {m['direction']} {m['pct']:+.1f}% ({m['start_utc']} → {m['end_utc']} UTC): {m['verdict']}")
+    else:
+        w("\n**Missed moves:** no strong move in the last 24 hours at the last research run.")
+    w("\n*The 8 questions of section 17.3 (wrong strategy? wrong regime? timing? stop / target? sample size? costs? "
+      "other timeframe? systematic or random?) are answered per test in `reports/research.json` → "
+      "`cells` → `attribution` → `diagnosis`. Losing paper / live signals: `memory/failure_journal.md`.*\n")
+
+
 def render_research(g, w):
     w("### 3c. Research layers (daily run)")
     if not g.get("research_run"):
@@ -1903,6 +2052,7 @@ def render_md(o, cfg):
     render_scoreboard(o, w)
     render_lifecycle(o["lifecycle"], o["strategy_scoreboard"], w)
     render_research(o["lifecycle"], w)
+    render_attribution(o["lifecycle"], o["strategy_scoreboard"], w)
     f = o["forward_test"]
     w("## 4. Live track record (real signals, checked after they happened)")
     if f["closed"]:

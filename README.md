@@ -191,6 +191,19 @@ than 8R, and leaves paper if it fails Layer B two days in a row. **APPROVED** on
 Results: report sections 3 / 3b / 3c and `reports/research.json`. Long price history is kept in GitHub's Actions
 cache (not in the repo) and only new candles are downloaded each day. Settings: `config.yaml` → `research`.
 
+## Why trades lose (failure attribution)
+
+Every backtest trade, and every logged paper / live signal, gets **reason tags** by fixed rules
+(AGENT_PROMPT.md section 17; `engine/attribution.py`, numbers in `config.yaml` → `attribution`): the market
+at entry (choppy, against a strong higher timeframe, low volume, overextended, late, no strong candle, outside the
+main sessions) and what happened (stopped then reversed, target nearly reached, false breakout, regime flipped,
+volatility spike, fees ate it, ...). A tag only counts as a **systematic** cause when it is clearly more common
+among losing trades than among winners. Also measured: **MAE / MFE** (how far each trade went against / for you),
+results by regime, session and direction, and the 8 questions of section 17.3 per strategy (report section 3d,
+`reports/research.json`). Losing paper / live signals are written to `memory/failure_journal.md`; strong moves
+the strategies missed (≥ 5x the 1H ATR within 12 hours) to `memory/missed_trades.md`. Turning this into lessons
+and new versions is a review step - rules are never changed automatically.
+
 ## Adding a strategy
 
 1. Open `strategies.yaml` → click the pencil icon ✏️.
