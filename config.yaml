@@ -195,6 +195,28 @@ research:                    # daily research run (research.py, workflow "Resear
   paper_retire_below_r: -0.10    # ... below -0.10R
   paper_max_dd_r: 8              # ... or the paper record loses more than 8R from its best point
 
+attribution:                 # failure attribution (AGENT_PROMPT.md section 17) - engine/attribution.py
+  range_adx: 20              # range_market: ADX(14) on the trade's own timeframe below 20 (choppy)
+  low_rel_vol: 0.8           # low_relative_volume: signal-candle volume below 0.8x normal
+  overextended_atr: 2.0      # overextended_entry: close >= 2 ATR beyond EMA20 in the trade direction ...
+  overextended_rsi: 75       # ... or RSI(14) >= 75 (long) / <= 25 (short)
+  late_move_atr: 3.0         # late_entry: price already moved >= 3 ATR the trade's way ...
+  late_move_bars: 10         # ... in the 10 candles before the signal
+  displacement_bars: 3       # no_displacement: no strong candle in the trade direction in the last 3 (breakout/momentum/SMC)
+  wide_stop_atr: 2.5         # stop_too_wide: stop wider than 2.5 ATR
+  bad_target_share: 0.8      # bad_target: got 80% of the way to TP1, never hit it
+  false_breakout_bars: 5     # false_breakout: closed back inside within 5 candles (breakout/momentum)
+  spike_atr: 3.0             # volatility_spike: a candle >= 3 ATR big during the trade
+  lag_mfe_r: 0.25            # indicator_lag: a trend/momentum trade that never got past +0.25R
+  main_sessions: ["London", "NY AM", "Silver Bullet"]   # wrong_session: intraday entry outside these
+  min_losses: 30             # a tag is only called systematic with >= 30 losing trades ...
+  frequent_share: 0.25       # ... (loser-only tags: in >= 25% of the losses; the others: more common among
+                             #     losers than winners by more than 2 standard errors)
+  strong_move_atr: 5.0       # missed moves: >= 5x the 1H ATR ...
+  strong_move_bars: 12       # ... within 12 hours ...
+  missed_lookback_hours: 24  # ... in the last 24 hours (checked once a day)
+  signal_window_bars: 3      # a signal up to 3 hours before the move started counts as "identifiable"
+
 signals:
   lookback_bars: 2           # a signal stays valid for this many closed candles
   max_in_report: 10          # show the best N signals

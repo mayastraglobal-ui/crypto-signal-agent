@@ -320,6 +320,13 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(len(cell["evidence"]["walk_forward"]["windows"]), R["walk_forward_windows"])
             self.assertEqual(len(cell["evidence"]["perturbation"]["variants"]), 18)
             self.assertIn(cell["status"], LC.ENGINE_STATUSES)
+            a = cell["attribution"]                                   # Phase 9: why trades lose
+            self.assertEqual(a["losses"] + a["wins"], cell["evidence"]["all"]["n"])
+            self.assertGreaterEqual(len(a["diagnosis"]), 6)
+            for k in ("tags", "systematic", "mae_mfe", "by_regime", "by_session", "by_direction", "not_measurable"):
+                self.assertIn(k, a)
+            self.assertIn("missed_moves", res)
+            self.assertIn("candidate_lessons", res)
             self.assertFalse(any(c["status"] == "APPROVED" for c in res["cells"].values()))
             reg = pd.read_csv(os.path.join(tmp, "reports", "strategy_registry_offline.csv"), dtype={"version": str})
             self.assertEqual(len(reg), len(res["cells"]))
@@ -338,6 +345,7 @@ class EndToEnd(unittest.TestCase):
             with open(os.path.join(tmp, "reports", "latest.md")) as f:
                 md = f.read()
             self.assertIn("### 3c. Research layers (daily run)", md)
+            self.assertIn("### 3d. Why trades lose", md)
             self.assertIn("Layer A", md)
 
             # a tested version edited in place is refused by BOTH runs
