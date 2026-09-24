@@ -27,4 +27,4 @@ liquidity_sweep_reversal,30m,FAILS,797,40.3,-0.466,0.39,373.1,-0.435,-0.528,263,
 ema_9_21_cross,5m,FAILS,267,35.6,-0.549,0.37,150.1,-0.55,-0.545,80,43 min,0,,avg -0.55R/trade; profit factor 0.37; not profitable in BOTH train and unseen test
 bb_squeeze_breakout,15m,FAILS,330,34.5,-0.556,0.33,183.5,-0.538,-0.59,114,93 min,0,,avg -0.56R/trade; profit factor 0.33; not profitable in BOTH train and unseen test
 liquidity_sweep_reversal,15m,FAILS,755,37.1,-0.608,0.32,461.7,-0.657,-0.537,306,76 min,0,,avg -0.61R/trade; profit factor 0.32; not profitable in BOTH train and unseen test
-liquidity_sweep_reversal,5m,FAILS,710,30.8,-0.787,0.25,558.5,-0.863,-0.622,224,23 min,0,,avg -0.79R/trade; profit factor 0.25; not profitable in BOTH train and unseen test
+liquidity_sweep_reversal,5m,FAILS,712,30.9,-0.786,0.25,559.5,-0.857,-0.631,225,23 min,0,,avg -0.79R/trade; profit factor 0.25; not profitable in BOTH train and unseen test

@@ -1,6 +1,6 @@
 # Crypto Signal Report
 
-**Updated:** 2026-09-24 16:23 Beijing time (2026-09-24 08:23 UTC) · data: Binance · 23 coins scanned
+**Updated:** 2026-09-24 16:27 Beijing time (2026-09-24 08:27 UTC) · data: Binance · 23 coins scanned
 
 > Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.
 
@@ -44,7 +44,7 @@ WORKS = passed every test -> can give signals · WEAK = positive but not proven 
 | ema_9_21_cross | 5m | **FAILS** | 267 | 35.6 | -0.549 | 0.37 | -0.550 | -0.545 | 43 min | 0 | avg -0.55R/trade; profit factor 0.37; not profitable in BOTH train and unseen test |
 | bb_squeeze_breakout | 15m | **FAILS** | 330 | 34.5 | -0.556 | 0.33 | -0.538 | -0.590 | 93 min | 0 | avg -0.56R/trade; profit factor 0.33; not profitable in BOTH train and unseen test |
 | liquidity_sweep_reversal | 15m | **FAILS** | 755 | 37.1 | -0.608 | 0.32 | -0.657 | -0.537 | 76 min | 0 | avg -0.61R/trade; profit factor 0.32; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 5m | **FAILS** | 710 | 30.8 | -0.787 | 0.25 | -0.863 | -0.622 | 23 min | 0 | avg -0.79R/trade; profit factor 0.25; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 5m | **FAILS** | 712 | 30.9 | -0.786 | 0.25 | -0.857 | -0.631 | 23 min | 0 | avg -0.79R/trade; profit factor 0.25; not profitable in BOTH train and unseen test |
 
 ## 4. Live track record (real signals, checked after they happened)
 - 0 signals logged, none finished yet. Give it a few weeks before trusting anything.
