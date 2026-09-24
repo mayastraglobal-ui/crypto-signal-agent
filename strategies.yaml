@@ -1,0 +1,220 @@
+# =====================================================================
+#  STRATEGY LIBRARY
+#  Every strategy here is backtested automatically on every run.
+#  Strategies that FAIL the tests are ignored (no signals).
+#  To add a new idea: copy one block, change the name + rules, save.
+#
+#  HOW RULES WORK
+#  - "long:"  = list of conditions. ALL must be true on a closed candle -> BUY signal.
+#  - "short:" = same for SELL/short signals (futures only).
+#  - "exit_long"/"exit_short" (optional) = ALL true -> close the trade early.
+#  - stop_atr: stop-loss distance = this many ATRs (ATR = average candle size).
+#  - max_hold_bars: close the trade after this many candles if nothing else happened.
+#
+#  BUILDING BLOCKS you can use inside rules:
+#    open high low close volume        -> candle prices
+#    ema(close,20) sma(close,50)        -> moving averages
+#    rsi(close,14)  atr(14)  adx(14)    -> momentum / volatility / trend strength
+#    macd_line(close) macd_signal(close) macd_hist(close)
+#    bb_upper(close,20,2) bb_lower(close,20,2) bb_mid(close,20) bb_width(close,20,2)
+#    highest(high,20) lowest(low,20)    -> highest high / lowest low of last N candles
+#    prev(x) or shift(x,n)              -> value 1 or n candles ago
+#    vol_sma(20)                        -> average volume
+#    supertrend_dir(10,3)               -> +1 up-trend, -1 down-trend
+#    pct_rank(x,100)                    -> 0..1, where x ranks vs last 100 values
+#    cross_up(a,b) cross_down(a,b)      -> a crossed above / below b on this candle
+#    htf_up / htf_down                  -> the HIGHER timeframe is trending up / down
+#                                          (5m,15m -> 1h | 30m,1h -> 4h | 4h -> 1d)
+#  status: active | candidate | off
+# =====================================================================
+
+- name: trend_pullback
+  status: active
+  timeframes: ["4h", "1h", "30m", "15m"]
+  description: "Buy the dip inside an up-trend: price pulls back to the 20 EMA and bounces."
+  logic: >-
+    Trends tend to continue. Instead of chasing a big green candle, we wait for price to
+    come back to the 20 EMA (a 'value' area) while the higher timeframe is still trending,
+    then enter when the candle closes strong again. RSI 40-65 means momentum reset but not weak.
+  long:
+    - htf_up
+    - ema(close,20) > ema(close,50)
+    - low <= ema(close,20) * 1.002
+    - close > ema(close,20)
+    - close > open
+    - rsi(close,14) > 40
+    - rsi(close,14) < 65
+  short:
+    - htf_down
+    - ema(close,20) < ema(close,50)
+    - high >= ema(close,20) * 0.998
+    - close < ema(close,20)
+    - close < open
+    - rsi(close,14) < 60
+    - rsi(close,14) > 35
+  stop_atr: 1.5
+  max_hold_bars: 30
+
+- name: donchian_breakout
+  status: active
+  timeframes: ["4h", "1h", "30m"]
+  description: "Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume."
+  logic: >-
+    Breakouts of a 20-candle range with 1.5x normal volume show new buyers stepping in.
+    ADX > 20 confirms the market is trending, not chopping. This is the family of rules
+    with the best published long-term evidence in crypto (trend following).
+  long:
+    - htf_up
+    - close > prev(highest(high,20))
+    - volume > vol_sma(20) * 1.5
+    - adx(14) > 20
+  short:
+    - htf_down
+    - close < prev(lowest(low,20))
+    - volume > vol_sma(20) * 1.5
+    - adx(14) > 20
+  exit_long:
+    - close < prev(lowest(low,10))
+  exit_short:
+    - close > prev(highest(high,10))
+  stop_atr: 2.0
+  max_hold_bars: 60
+
+- name: rsi2_dip_buy
+  status: active
+  timeframes: ["4h", "1h", "30m", "15m"]
+  description: "Connors RSI(2): in a long-term up-trend, buy a sharp 1-2 candle dip, sell the bounce."
+  logic: >-
+    When price is above the 200 EMA (long-term up-trend) but RSI(2) drops under 10, the
+    market is short-term oversold. Such dips often snap back within a few candles. We exit
+    as soon as price closes back above the 5-period average.
+  long:
+    - close > ema(close,200)
+    - rsi(close,2) < 10
+  short:
+    - close < ema(close,200)
+    - rsi(close,2) > 90
+  exit_long:
+    - close > sma(close,5)
+  exit_short:
+    - close < sma(close,5)
+  stop_atr: 2.0
+  max_hold_bars: 15
+
+- name: bb_squeeze_breakout
+  status: active
+  timeframes: ["4h", "1h", "30m", "15m"]
+  description: "Volatility squeeze: Bollinger Bands get very tight, then price breaks out with volume."
+  logic: >-
+    Quiet markets are followed by big moves. When the Bollinger Band width is in its lowest
+    20% of the last 100 candles, energy is building. We join the breakout direction only when
+    volume confirms and the higher timeframe agrees.
+  long:
+    - pct_rank(prev(bb_width(close,20,2)),100) < 0.2
+    - close > bb_upper(close,20,2)
+    - volume > vol_sma(20) * 1.3
+    - htf_up
+  short:
+    - pct_rank(prev(bb_width(close,20,2)),100) < 0.2
+    - close < bb_lower(close,20,2)
+    - volume > vol_sma(20) * 1.3
+    - htf_down
+  stop_atr: 1.5
+  max_hold_bars: 30
+
+- name: macd_trend_cross
+  status: active
+  timeframes: ["4h", "1h", "30m"]
+  description: "MACD crosses up below zero while price is above the 200 EMA (trend resumes after a pullback)."
+  logic: >-
+    A MACD cross below the zero line inside an up-trend means the pullback is ending and
+    momentum is turning back in the trend direction. The 200 EMA and higher timeframe filter
+    remove most counter-trend crosses, which are the ones that usually fail.
+  long:
+    - close > ema(close,200)
+    - htf_up
+    - cross_up(macd_line(close), macd_signal(close))
+    - macd_line(close) < 0
+  short:
+    - close < ema(close,200)
+    - htf_down
+    - cross_down(macd_line(close), macd_signal(close))
+    - macd_line(close) > 0
+  stop_atr: 1.5
+  max_hold_bars: 40
+
+- name: supertrend_flip
+  status: active
+  timeframes: ["4h", "1h", "30m"]
+  description: "Supertrend(10,3) flips to up-trend while ADX shows a real trend."
+  logic: >-
+    Supertrend is an ATR-based trailing line. When it flips, the short-term trend has
+    changed. We only take flips in the direction of the higher timeframe and when ADX > 20,
+    and we exit when Supertrend flips back.
+  long:
+    - supertrend_dir(10,3) == 1
+    - prev(supertrend_dir(10,3)) == -1
+    - adx(14) > 20
+    - htf_up
+  short:
+    - supertrend_dir(10,3) == -1
+    - prev(supertrend_dir(10,3)) == 1
+    - adx(14) > 20
+    - htf_down
+  exit_long:
+    - supertrend_dir(10,3) == -1
+  exit_short:
+    - supertrend_dir(10,3) == 1
+  stop_atr: 2.0
+  max_hold_bars: 60
+
+- name: liquidity_sweep_reversal
+  status: active
+  timeframes: ["1h", "30m", "15m", "5m"]
+  description: "Stop-hunt reversal: price dips below the 20-candle low, then closes back above it."
+  logic: >-
+    Many traders keep stop-losses just under recent lows. Big players push price there to
+    fill orders ('liquidity grab'), then price snaps back. A candle that breaks the low but
+    CLOSES back above it, with above-average volume, shows the sellers failed.
+  long:
+    - low < prev(lowest(low,20))
+    - close > prev(lowest(low,20))
+    - close > open
+    - volume > vol_sma(20) * 1.2
+    - rsi(close,14) < 45
+  short:
+    - high > prev(highest(high,20))
+    - close < prev(highest(high,20))
+    - close < open
+    - volume > vol_sma(20) * 1.2
+    - rsi(close,14) > 55
+  stop_atr: 1.0
+  max_hold_bars: 20
+
+- name: ema_9_21_cross
+  status: active
+  timeframes: ["1h", "30m", "15m", "5m"]
+  description: "Classic 9/21 EMA crossover, only with the 200 EMA trend and ADX filter."
+  logic: >-
+    The simplest trend-following signal (the one from our first lesson). On its own it
+    gets whipsawed; the 200 EMA and ADX > 20 filters try to keep it only for trending markets.
+    Kept here so you can SEE how it compares to the others.
+  long:
+    - cross_up(ema(close,9), ema(close,21))
+    - close > ema(close,200)
+    - adx(14) > 20
+  short:
+    - cross_down(ema(close,9), ema(close,21))
+    - close < ema(close,200)
+    - adx(14) > 20
+  exit_long:
+    - cross_down(ema(close,9), ema(close,21))
+  exit_short:
+    - cross_up(ema(close,9), ema(close,21))
+  stop_atr: 1.5
+  max_hold_bars: 40
+
+# ---------------------------------------------------------------------
+# NEW IDEAS go below with status: candidate. They are tested exactly
+# like the others; if they pass, they start producing signals.
+# ---------------------------------------------------------------------

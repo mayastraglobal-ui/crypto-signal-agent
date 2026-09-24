@@ -1,0 +1,63 @@
+# =====================================================================
+#  CRYPTO SIGNAL AGENT - SETTINGS
+#  This is the file you edit to change how the agent behaves.
+#  Lines starting with # are notes and are ignored by the program.
+# =====================================================================
+
+account:
+  size_usdt: 1000            # your trading account size (used for position-size examples)
+  risk_per_trade_pct: 1.0    # max you lose if the stop-loss is hit. Beginners: 0.5 - 1.0
+  max_open_trades: 3         # never hold more than this many trades at once
+
+market:
+  quote: USDT
+  top_n_coins: 25            # scan the N highest-volume coins that pass the filters
+  min_24h_volume_usdt: 30000000   # $30M+ traded in 24h = real, liquid market
+  min_listing_days: 180      # coin must have 180+ days of price history (skips brand-new coins)
+  always_include: [BTC, ETH, SOL, BNB, XRP]
+
+  # ---- Coins the agent will NEVER trade. Add or remove tickers freely. ----
+  exclude_meme: [DOGE, SHIB, PEPE, FLOKI, BONK, WIF, BOME, MEME, PEOPLE, TURBO, NEIRO,
+                 1000SATS, DOGS, PNUT, ACT, TRUMP, BANANAS31, BROCCOLI714, 1MBABYDOGE,
+                 MUBARAK, TST, CHEEMS, POPCAT, MOODENG, PENGU, FARTCOIN, SPX, GOAT, BABYDOGE,
+                 LUNC, USTC, NOT, HMSTR, CATI, BANANA, SLERF, MEW, BRETT, MOG, GIGA, WLFI]
+  exclude_ai:   [FET, AGIX, OCEAN, TAO, RNDR, RENDER, WLD, ARKM, AI, NFP, AIXBT, VIRTUAL,
+                 COOKIE, IO, PHB, CGPT, AI16Z, GRIFFAIN, KAITO, SAHARA, ALCH, VANA, AIOZ,
+                 GLM, AKT, ATH, NMR, IQ, THETA, SWARMS, ZEREBRO, HOOK, MDT, ORAI]
+  exclude_other: [USDC, FDUSD, TUSD, USDP, DAI, BUSD, EUR, AEUR, EURI, USD1, USDE, XUSD,
+                  BFUSD, PAXG, WBTC, WBETH, BNSOL, STETH, USDS, RLUSD, PYUSD, EURC]
+
+# How many candles (bars) of history to download for each timeframe.
+# More bars = more backtest trades = more reliable results (but slower).
+timeframes:
+  "4h": 1500     # ~250 days
+  "1h": 2000     # ~83 days
+  "30m": 2000    # ~42 days
+  "15m": 2000    # ~21 days
+  "5m": 2000     # ~7 days
+
+costs:                       # realistic trading costs - never set these to 0!
+  taker_fee_pct: 0.10        # market order fee (Binance spot = 0.10%, futures ~0.05%)
+  maker_fee_pct: 0.10        # limit order fee (Binance spot = 0.10%, futures ~0.02%)
+  slippage_pct: 0.05         # price moves against you when a market order fills
+
+trade_plan:                  # the TP1 / TP2 / TP3 structure used for EVERY signal
+  tp_r: [1.0, 2.0, 3.0]      # TP1 = 1R, TP2 = 2R, TP3 = 3R  (R = distance entry -> stop-loss)
+  tp_split: [0.4, 0.3, 0.3]  # close 40% at TP1, 30% at TP2, 30% at TP3
+  move_stop_to_breakeven_after_tp1: true
+  move_stop_to_tp1_after_tp2: true
+
+validation:                  # rules a strategy must pass, or it is IGNORED
+  in_sample_share: 0.7       # first 70% of history = "training", last 30% = "unseen test"
+  min_trades: 30             # need at least 30 backtest trades (all coins together)
+  min_oos_trades: 10         # at least 10 trades in the unseen test period
+  min_expectancy_r: 0.05     # must make on average +0.05R per trade AFTER fees
+  min_profit_factor: 1.15    # gross wins / gross losses
+  min_coin_trades: 5         # a coin needs 5+ trades with this strategy to be "proven" on it
+  forward_pause_after: 20    # after 20 LIVE signals ...
+  forward_pause_below_r: -0.10   # ... if live average is below -0.10R, pause the strategy
+
+signals:
+  lookback_bars: 2           # a signal stays valid for this many closed candles
+  max_in_report: 10          # show the best N signals
+  allow_shorts: true         # false = long only (spot traders cannot short)
