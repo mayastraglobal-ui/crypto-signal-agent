@@ -34,6 +34,7 @@ from engine import data_quality as dq
 from engine import evidence as evid
 from engine import features as fe
 from engine import regime as rg
+from engine import smc
 from engine import timeframes as tfm
 from engine import universe as uni
 
@@ -806,6 +807,8 @@ def main():
     fe_cfg = fe.settings(cfg.get("features"))
     feat_last = {}                          # (coin, tf) -> features of the newest closed candles
     feat_full = {}                          # (coin, tf) -> all features, kept for the regime engine
+    smc_cfg = smc.settings(cfg.get("smc"))
+    smc_res = {}                            # (coin, tf) -> SMC events, flags and state
     ev_frames = {tf: [] for tf in tfs}      # candle evidence input, per timeframe
     lb = int(cfg["signals"]["lookback_bars"])
     for u in coins:
@@ -817,6 +820,10 @@ def main():
             df = add_htf(df.copy(), data.get((sym, HTF[tf])))
             feats = fe.compute(df, TF_MS[tf], fe_cfg)
             feats.index = df.index
+            res = smc.detect(df, feats, data.get((sym, "1d")), data.get((sym, "1w")), TF_MS[tf], smc_cfg)
+            smc_res[(base, tf)] = res
+            for col in smc.EVENT_COLUMNS:          # SMC events join the features (rules + evidence)
+                feats["smc_" + col] = res["series"][col].to_numpy()
             feat_last[(base, tf)] = feats.tail(3)
             if tf in ("4h", "1h"):
                 feat_full[(base, tf)] = feats
@@ -876,13 +883,16 @@ def main():
     # ---------- candle evidence: patterns vs random entries (research evidence, not a signal) ----------
     ev_cfg = evid.settings(cfg.get("evidence"))
     costs_by_dir = {1: trade_costs(cfg, 1), -1: trade_costs(cfg, -1)}
-    evidence = {tf: evid.study(ev_frames[tf], costs_by_dir, TF_MS[tf] / 3_600_000, ev_cfg, seed_key=tf)
+    ev_patterns = dict(evid.PATTERNS, **SMC_PATTERNS)
+    evidence = {tf: evid.study(ev_frames[tf], costs_by_dir, TF_MS[tf] / 3_600_000, ev_cfg, seed_key=tf,
+                               patterns=ev_patterns)
                 for tf in tfs if ev_frames[tf]}
     del ev_frames
 
     # ---------- market regime per coin and timeframe (shown only; gates arrive in Phase 7) ----------
     rg_cfg = rg.settings(cfg.get("regime"))
     regimes = {}
+    rg_series = {}                          # (coin, tf) -> (close_time array, label array) for stamping
     for u in coins:
         sym, base = u["symbol"], u["base"]
         recs = {}
@@ -897,7 +907,9 @@ def main():
             f_tf = feat_full.get((base, tf))
             if f_tf is None:
                 f_tf = fe.compute(df_tf, TF_MS[tf], fe_cfg)
-            recs[tf] = rg.describe(rg.compute(df_tf, tf, f_tf, rg_cfg), -1, rg_cfg)
+            r_tf = rg.compute(df_tf, tf, f_tf, rg_cfg)
+            recs[tf] = rg.describe(r_tf, -1, rg_cfg)
+            rg_series[(base, tf)] = (df_tf["close_time"].to_numpy(), r_tf["label"].to_numpy())
         verdict, reason = rg.permission(recs)
         regimes[base] = dict(timeframes=recs, permission=verdict, permission_reason=reason)
     del feat_full
@@ -1084,6 +1096,18 @@ def main():
             write_regime_log(rg_out, started)
         json.dump({"last_logged_date": today}, open(rstate_path, "w"))
 
+    # ---------- SMC report + append-only live event log ----------
+    smc_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), version=smc.VERSION,
+                   note="SMC = hypotheses to test, not doctrine. Nothing trades on SMC yet (Phase 7).",
+                   killzone_now=smc.killzone(int(started.timestamp() * 1000), smc_cfg["killzones"]),
+                   coins={})
+    for (b, tf), res in smc_res.items():
+        smc_out["coins"].setdefault(b, {})[tf] = dict(state=res["state"], recent_events=res["events"][-10:])
+    json.dump(smc_out, open(os.path.join(REPORTS, "smc.json"), "w"), indent=1, default=float)
+    if not args.offline:
+        write_smc_log(smc_res, [c for c in view["signal"]], smc_cfg, rg_series, started, feed.name)
+    del smc_res
+
     # ---------- timeframes report ----------
     models = cfg.get("timeframe_model", {}).get("models", tfm.DEFAULT_MODELS)
     active = cfg.get("timeframe_model", {}).get("active", "B")
@@ -1145,7 +1169,7 @@ def main():
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
                coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out,
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
-               candle_evidence=ev_out, regime=rg_out)
+               candle_evidence=ev_out, regime=rg_out, smc=smc_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -1208,6 +1232,84 @@ def render_universe(u, w):
 
 
 REGIME_TFS = ["1w", "1d", "4h", "1h"]
+SMC_PATTERNS = {"smc_sweep_bull": 1, "smc_sweep_bear": -1, "smc_bos_up": 1, "smc_bos_down": -1,
+                "smc_choch_up": 1, "smc_choch_down": -1, "smc_fvg_retrace_bull": 1, "smc_fvg_retrace_bear": -1}
+SMC_HTF = {"4h": "1d", "1h": "4h", "30m": "1h", "15m": "1h", "5m": "1h"}   # regime stamped on each event
+SMC_LOG_COLS = ["known_utc", "coin", "tf", "event", "direction", "level", "zone_low", "zone_high", "size_atr",
+                "killzone_ny", "htf", "htf_regime", "details", "engine", "source"]
+
+
+def write_smc_log(smc_res, coins, s, rg_series, started, source):
+    """Append NEW SMC events (known after the last logged candle) to memory/smc_events.csv.
+    Signal coins and s["log_timeframes"] only. The first live run starts the log one hour back
+    (no backfill of old history). Watermarks per coin/timeframe live in reports/smc_state.json."""
+    state_path = os.path.join(REPORTS, "smc_state.json")
+    st = json.load(open(state_path)) if os.path.exists(state_path) else {}
+    start_ms = int(started.timestamp() * 1000) - 3_600_000
+    rows = []
+    for coin in coins:
+        for tf in s.get("log_timeframes", ["4h", "1h", "30m", "15m"]):
+            res = smc_res.get((coin, tf))
+            if res is None:
+                continue
+            key = f"{coin}|{tf}"
+            mark = st.get(key, start_ms)
+            ser = rg_series.get((coin, SMC_HTF.get(tf)))
+            for e in res["events"]:
+                if e["time"] <= mark:
+                    continue
+                reg = None
+                if ser is not None:
+                    i = np.searchsorted(ser[0], e["time"], side="right") - 1
+                    reg = ser[1][i] if i >= 0 else None
+                rows.append(dict(known_utc=pd.to_datetime(e["time"] + 1, unit="ms").strftime("%Y-%m-%d %H:%M"),
+                                 coin=coin, tf=tf, event=e["event"], direction="bull" if e["dir"] == 1 else "bear",
+                                 level=e["level"], zone_low=e["zone_low"], zone_high=e["zone_high"],
+                                 size_atr=e["size_atr"], killzone_ny=e["killzone"] or "", htf=SMC_HTF.get(tf),
+                                 htf_regime=reg or "", details=e["info"], engine=smc.VERSION, source=source))
+            if res["events"] or key not in st:
+                st[key] = max([mark] + [e["time"] for e in res["events"]])
+    if rows:
+        os.makedirs(MEMORY, exist_ok=True)
+        path = os.path.join(MEMORY, "smc_events.csv")
+        pd.DataFrame(rows, columns=SMC_LOG_COLS).to_csv(path, mode="a", header=not os.path.exists(path),
+                                                        index=False)
+    json.dump(st, open(state_path, "w"), indent=1)
+    return len(rows)
+
+
+def render_smc(g, signal, w):
+    w("## 0g. SMC now (Smart Money Concepts - hypotheses to test, not doctrine)")
+    w(f"Killzone right now (New York time): **{g['killzone_now'] or 'none'}**. Nothing trades on SMC yet; "
+      "every detection is logged live in `memory/smc_events.csv` (signal coins, 4H/1H/30m/15m). "
+      "Liquidity = where stop-losses likely sit. Discount = lower half of the 1H dealing range.\n")
+    w("| Coin | 15m trend (last break) | Last 15m sweep | Newest open 15m gap (FVG) | 4H order block "
+      "| 1H range position | Liquidity above (1H) | Liquidity below (1H) |")
+    w("|---|---|---|---|---|---|---|---|")
+    fp = lambda x: fmt_price(x) if x is not None else "-"
+    for coin in signal:
+        c = g["coins"].get(coin, {})
+        m15, h4, h1 = (c.get(tf, {}).get("state") for tf in ("15m", "4h", "1h"))
+        if not m15:
+            w(f"| {coin} | no 15m data | | | | | | |")
+            continue
+        lb = m15["last_break"]
+        trend = f"{m15['trend'] or 'not set'}" + (f" ({lb['kind']} {lb['candles_ago']} candles ago)" if lb else "")
+        sw = {k: v for k, v in m15["last_sweep"].items() if v is not None}
+        sweep = (f"{'sell-side (bullish idea)' if min(sw, key=sw.get) == 'bull' else 'buy-side (bearish idea)'} "
+                 f"{min(sw.values())} candles ago") if sw else "-"
+        open_g = [x for x in m15["open_fvgs"]]
+        fvg = (f"{'bull' if open_g[-1]['dir'] == 1 else 'bear'} {fp(open_g[-1]['low'])}-{fp(open_g[-1]['high'])}"
+               f"{' (retraced)' if open_g[-1]['retraced'] else ''}") if open_g else "-"
+        act = [x for x in (h4 or {}).get("order_blocks", []) if x["state"] == "active"]
+        ob = (f"{'bull' if act[-1]['dir'] == 1 else 'bear'} {fp(act[-1]['low'])}-{fp(act[-1]['high'])}") if act else "-"
+        rngs = (h1 or {}).get("dealing_range")
+        pos = f"{rngs['zone']} ({rngs['position'] * 100:.0f}%)" if rngs else "-"
+        liq = lambda lst: (f"{lst[0]['kind']} {fp(lst[0]['level'])} ({lst[0]['dist_atr']} ATR)" if lst else "-")
+        w(f"| **{coin}** | {trend} | {sweep} | {fvg} | {ob} | {pos} | {liq((h1 or {}).get('liquidity_above', []))} "
+          f"| {liq((h1 or {}).get('liquidity_below', []))} |")
+    w("\n*Full SMC state and the newest events per coin and timeframe: `reports/smc.json`. "
+      "Definitions: `memory/smc_research.md`.*\n")
 
 
 def regime_cell(r):
@@ -1290,6 +1392,8 @@ def render_features(fs, w):
 def render_evidence(e, w):
     w("## 0e. Candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL")
     st = e["settings"]
+    w("Patterns: candle patterns (displacement, engulfing, pin bar) and SMC events (smc_*: sweep of sell-side "
+      "(bull) / buy-side (bear) liquidity, BOS, CHoCH with displacement, first retrace into a fair value gap).\n")
     w(f"If you had entered at the NEXT candle's open after each pattern, with a stop {st['stop_atr']:g} ATR away: "
       f"how often did price reach +1R / +2R / +3R **after costs** before the stop (max {st['max_bars']} candles)? "
       f"**Random** = the same test on random candles (same coins, same direction, "
@@ -1390,6 +1494,7 @@ def render_md(o, cfg):
     render_features(o["features_1h"], w)
     render_evidence(o["candle_evidence"], w)
     render_regime(o["regime"], w)
+    render_smc(o["smc"], o["universe"]["signal"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]

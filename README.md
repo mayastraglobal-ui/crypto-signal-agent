@@ -46,12 +46,15 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
 | `reports/features.json` | Newest features per coin and timeframe | No |
 | `reports/regime.json` | Market regime per coin and timeframe, with evidence | No |
+| `reports/smc.json` | SMC state and newest events per coin and timeframe | No |
+| `memory/smc_events.csv` | Every SMC detection, logged live when it happened | Read it |
+| `memory/smc_research.md` | Exact SMC definitions and what has been proven | Read it |
 | `memory/market_regime_log.md` | One regime entry per day, BTC context first | Read it |
 | `reports/feature_evidence.json` | Candle patterns vs random entries (research evidence, not a signal) | No |
 | `memory/feature_notes.md` | What each feature means and whether it has been proven useful | Read it |
 | `reports/universe_state.json` | The agent's memory of the 2-run counts | No |
 | `memory/universe_log.md` | Every coin that joined, left or was excluded, and why | Read it |
-| `engine/` | Parts of the engine (data check, coins, timeframes, features, evidence, regime, more later) | Not needed |
+| `engine/` | Parts of the engine (data check, coins, timeframes, features, evidence, regime, SMC, more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
 
@@ -105,6 +108,16 @@ least 2 of 1D/4H/1H bullish and no STRONG_BEAR on 1W; SHORT is the mirror image;
 Report section "0f"; full evidence in `reports/regime.json`; one entry per day in
 `memory/market_regime_log.md`. For now regimes are **shown only** - they become gates for strategies in
 Phase 7. Rules and limits: `config.yaml` → `regime`.
+
+## SMC (Smart Money Concepts) - hypotheses, not doctrine
+
+Liquidity pools (swing highs/lows, equal highs/lows, previous day/week high/low), sweeps, BOS, CHoCH
+(needs a displacement candle), fair value gaps, order blocks, breakers, premium/discount, OTE,
+killzones (New York time) and power of 3 - each an exact rule on closed candles
+(`engine/smc.py`, limits in `config.yaml` → `smc`, definitions in `memory/smc_research.md`).
+Every detection on the signal coins (4H/1H/30m/15m) is logged live in `memory/smc_events.csv`, so no
+label can be drawn in afterwards. Report section "0g" shows the current SMC picture; sweeps, BOS, CHoCH
+and FVG retraces also appear in the candle-evidence table vs random entries. Nothing trades on SMC yet.
 
 ## Data check (every run)
 
