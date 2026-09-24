@@ -1,0 +1,51 @@
+{
+ "members": [
+  "BTC",
+  "ETH",
+  "ZEC",
+  "XRP",
+  "SOL",
+  "BNB",
+  "UNI"
+ ],
+ "in_streak": {},
+ "out_streak": {},
+ "suspended": {},
+ "runs": 1,
+ "last_eligibility": {
+  "BTC": [],
+  "ETH": [],
+  "ZEC": [],
+  "XRP": [],
+  "SOL": [],
+  "PROVE": [
+   "thin_book",
+   "volume_7d"
+  ],
+  "LTC": [
+   "volume_7d"
+  ],
+  "ONDO": [
+   "thin_book",
+   "volume_7d"
+  ],
+  "BNB": [],
+  "UNI": [],
+  "SUI": []
+ },
+ "last_flags": {
+  "BTC": [],
+  "ETH": [],
+  "ZEC": [],
+  "XRP": [],
+  "SOL": [],
+  "PROVE": [
+   "data_degraded"
+  ],
+  "LTC": [],
+  "ONDO": [],
+  "BNB": [],
+  "UNI": [],
+  "SUI": []
+ }
+}

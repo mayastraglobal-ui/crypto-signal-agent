@@ -1,0 +1,300 @@
+{
+ "checked_utc": "2026-09-24 18:21",
+ "run": 1,
+ "signal": [
+  "BTC",
+  "ETH",
+  "ZEC",
+  "XRP",
+  "SOL",
+  "BNB",
+  "UNI"
+ ],
+ "research_only": [
+  "SUI"
+ ],
+ "waiting": {},
+ "leaving": {},
+ "empty_slots": 0,
+ "rules": {
+  "signal_coins": 7,
+  "research_coins": 10,
+  "hysteresis_runs": 2
+ },
+ "events": [
+  {
+   "coin": "PROVE",
+   "action": "EXCLUDED",
+   "why": "7-day average volume $36M < $50M; order book too thin: $64k within 1% (need $250k)"
+  },
+  {
+   "coin": "PROVE",
+   "action": "FLAG",
+   "why": "price data DEGRADED - stays in the list, but no signals"
+  },
+  {
+   "coin": "LTC",
+   "action": "EXCLUDED",
+   "why": "7-day average volume $34M < $50M"
+  },
+  {
+   "coin": "ONDO",
+   "action": "EXCLUDED",
+   "why": "7-day average volume $30M < $50M; order book too thin: $181k within 1% (need $250k)"
+  },
+  {
+   "coin": "BTC",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #1"
+  },
+  {
+   "coin": "ETH",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #2"
+  },
+  {
+   "coin": "ZEC",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #3"
+  },
+  {
+   "coin": "XRP",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #4"
+  },
+  {
+   "coin": "SOL",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #5"
+  },
+  {
+   "coin": "BNB",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #6"
+  },
+  {
+   "coin": "UNI",
+   "action": "JOIN",
+   "why": "starting list (no members yet): rank #7"
+  }
+ ],
+ "candidates": [
+  {
+   "coin": "BTC",
+   "vol_24h": 1542243705.7208545,
+   "change_24h": 0.276,
+   "listing_days": 999,
+   "vol_7d_avg": 1559125903.1663384,
+   "stable_dev_pct": 9.33097826457152,
+   "spread_pct": 1.1848621297104488e-05,
+   "depth_bid_usdt": 10459795.402052607,
+   "depth_ask_usdt": 7778341.846173806,
+   "status": "SIGNAL",
+   "volume_rank": 1,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "ETH",
+   "vol_24h": 670404534.248169,
+   "change_24h": 0.747,
+   "listing_days": 999,
+   "vol_7d_avg": 889074973.1720709,
+   "stable_dev_pct": 10.606310316851818,
+   "spread_pct": 0.0003731712277431736,
+   "depth_bid_usdt": 8224874.161937,
+   "depth_ask_usdt": 6988097.176680001,
+   "status": "SIGNAL",
+   "volume_rank": 2,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "ZEC",
+   "vol_24h": 298142768.7576,
+   "change_24h": 3.27,
+   "listing_days": 999,
+   "vol_7d_avg": 460535081.63701713,
+   "stable_dev_pct": 44.64805309396836,
+   "spread_pct": 0.000639196146925045,
+   "depth_bid_usdt": 4022511.1523499987,
+   "depth_ask_usdt": 2271143.297459999,
+   "status": "SIGNAL",
+   "volume_rank": 3,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "XRP",
+   "vol_24h": 297956893.63895,
+   "change_24h": 2.871,
+   "listing_days": 999,
+   "vol_7d_avg": 336480724.6065229,
+   "stable_dev_pct": 12.460491879084934,
+   "spread_pct": 0.00653530699604542,
+   "depth_bid_usdt": 1983012.8924199995,
+   "depth_ask_usdt": 2584383.5209800005,
+   "status": "SIGNAL",
+   "volume_rank": 4,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "SOL",
+   "vol_24h": 290027496.52528,
+   "change_24h": 2.816,
+   "listing_days": 999,
+   "vol_7d_avg": 361493988.3600729,
+   "stable_dev_pct": 13.726940563565293,
+   "spread_pct": 0.008532059212483175,
+   "depth_bid_usdt": 3756205.2944800025,
+   "depth_ask_usdt": 4922480.902080003,
+   "status": "SIGNAL",
+   "volume_rank": 5,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "PROVE",
+   "vol_24h": 180322210.67234,
+   "change_24h": -0.865,
+   "listing_days": 415,
+   "vol_7d_avg": 35595786.65193572,
+   "stable_dev_pct": 26.346255042974896,
+   "spread_pct": 0.0872219799389471,
+   "depth_bid_usdt": 63547.96348,
+   "depth_ask_usdt": 79617.61086,
+   "status": "EXCLUDED",
+   "volume_rank": 6,
+   "eligible": false,
+   "reasons": [
+    "7-day average volume $36M < $50M",
+    "order book too thin: $64k within 1% (need $250k)"
+   ],
+   "flags": [
+    "price data DEGRADED - stays in the list, but no signals"
+   ],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "LTC",
+   "vol_24h": 142489101.76313,
+   "change_24h": 18.896,
+   "listing_days": 999,
+   "vol_7d_avg": 34080275.66615143,
+   "stable_dev_pct": 17.792283090504423,
+   "spread_pct": 0.013903371567612255,
+   "depth_bid_usdt": 455280.5923200001,
+   "depth_ask_usdt": 360156.98572,
+   "status": "EXCLUDED",
+   "volume_rank": 7,
+   "eligible": false,
+   "reasons": [
+    "7-day average volume $34M < $50M"
+   ],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "ONDO",
+   "vol_24h": 106582006.46632,
+   "change_24h": 23.12,
+   "listing_days": 531,
+   "vol_7d_avg": 30264524.836948574,
+   "stable_dev_pct": 23.184117077370047,
+   "spread_pct": 0.019706375012314314,
+   "depth_bid_usdt": 181351.03172999993,
+   "depth_ask_usdt": 187979.88917,
+   "status": "EXCLUDED",
+   "volume_rank": 8,
+   "eligible": false,
+   "reasons": [
+    "7-day average volume $30M < $50M",
+    "order book too thin: $181k within 1% (need $250k)"
+   ],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "BNB",
+   "vol_24h": 99326647.915,
+   "change_24h": 1.956,
+   "listing_days": 999,
+   "vol_7d_avg": 139847698.76900142,
+   "stable_dev_pct": 9.7392227474272,
+   "spread_pct": 0.0012817144212086446,
+   "depth_bid_usdt": 2956042.297469997,
+   "depth_ask_usdt": 3380978.453910001,
+   "status": "SIGNAL",
+   "volume_rank": 9,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "UNI",
+   "vol_24h": 98526234.17048,
+   "change_24h": 1.525,
+   "listing_days": 999,
+   "vol_7d_avg": 146209762.47954002,
+   "stable_dev_pct": 55.14468640322043,
+   "spread_pct": 0.01080905799060933,
+   "depth_bid_usdt": 484495.8113699999,
+   "depth_ask_usdt": 500718.7337399999,
+   "status": "SIGNAL",
+   "volume_rank": 10,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "SUI",
+   "vol_24h": 71233801.9373,
+   "change_24h": 3.817,
+   "listing_days": 999,
+   "vol_7d_avg": 120756951.18493286,
+   "stable_dev_pct": 32.62809777193614,
+   "spread_pct": 0.009964625579192763,
+   "depth_bid_usdt": 553721.6089700002,
+   "depth_ask_usdt": 661557.24588,
+   "status": "RESEARCH",
+   "volume_rank": 11,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 0,
+   "out_streak": 0
+  }
+ ],
+ "excluded_by_list": {
+  "USDC": "stablecoin / wrapped / staked token (exclusion list)",
+  "DOGE": "meme coin (exclusion list)",
+  "NEAR": "AI/compute-narrative token (exclusion list)",
+  "PEPE": "meme coin (exclusion list)",
+  "WLD": "AI/compute-narrative token (exclusion list)",
+  "USD1": "stablecoin / wrapped / staked token (exclusion list)",
+  "RLUSD": "stablecoin / wrapped / staked token (exclusion list)"
+ }
+}
