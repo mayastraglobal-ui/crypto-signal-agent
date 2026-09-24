@@ -9,7 +9,8 @@
 #                      (The engine refuses a tested version whose rules were edited.)
 #    status            what YOU set: IDEA (written down, not tested) | FORMALIZED (test it) |
 #                      RETIRED (archived, not tested). The engine sets BACKTESTING / VALIDATION /
-#                      FAILED / PAPER_TRADING itself (reports/latest.md, memory/strategy_registry.csv).
+#                      FAILED / PAPER_TRADING / RETIRED itself, once a day (reports/latest.md,
+#                      memory/strategy_registry.csv). APPROVED only ever comes from you.
 #    family            trend_following (A) | momentum (B) | breakout (C) | mean_reversion (D) |
 #                      price_action (E) | mtf_pullback (F) | liquidity_reversal (G) | smc (H)
 #    gate              trend          = needs 2 of 1D/4H/1H in its direction, no trade against a
@@ -31,6 +32,9 @@
 #                      is at least 2R away
 #    time_stop_bars    close after this many candles; cooldown_bars = candles to wait after a trade
 #    control_twin      the same idea WITHOUT its special (e.g. SMC) ingredient - it must be beaten
+#    params            the numbers the rules use, by name: write {fast} in a rule and fast: 20 under params.
+#                      The daily research run moves each one -20% and +20% (one at a time, plus the stop
+#                      size and the time stop); a real edge must stay profitable (AGENT_PROMPT.md section 11).
 #
 #  BUILDING BLOCKS you can use inside rules:
 #    open high low close volume        -> candle prices
@@ -73,22 +77,23 @@
     Trends tend to continue. Instead of chasing a big green candle, we wait for price to
     come back to the 20 EMA (a 'value' area) while the higher timeframe is still trending,
     then enter when the candle closes strong again. RSI 40-65 means momentum reset but not weak.
+  params: {fast: 20, slow: 50, rsi_n: 14, long_rsi_lo: 40, long_rsi_hi: 65, short_rsi_hi: 60, short_rsi_lo: 35}
   long:
     - htf_up
-    - ema(close,20) > ema(close,50)
-    - low <= ema(close,20) * 1.002
-    - close > ema(close,20)
+    - ema(close,{fast}) > ema(close,{slow})
+    - low <= ema(close,{fast}) * 1.002
+    - close > ema(close,{fast})
     - close > open
-    - rsi(close,14) > 40
-    - rsi(close,14) < 65
+    - rsi(close,{rsi_n}) > {long_rsi_lo}
+    - rsi(close,{rsi_n}) < {long_rsi_hi}
   short:
     - htf_down
-    - ema(close,20) < ema(close,50)
-    - high >= ema(close,20) * 0.998
-    - close < ema(close,20)
+    - ema(close,{fast}) < ema(close,{slow})
+    - high >= ema(close,{fast}) * 0.998
+    - close < ema(close,{fast})
     - close < open
-    - rsi(close,14) < 60
-    - rsi(close,14) > 35
+    - rsi(close,{rsi_n}) < {short_rsi_hi}
+    - rsi(close,{rsi_n}) > {short_rsi_lo}
   stop: {method: atr, atr: 1.5}
   time_stop_bars: 30
   cooldown_bars: 0
@@ -110,20 +115,21 @@
     Breakouts of a 20-candle range with 1.5x normal volume show new buyers stepping in.
     ADX > 20 confirms the market is trending, not chopping. This is the family of rules
     with the best published long-term evidence in crypto (trend following).
+  params: {n: 20, vol_x: 1.5, adx_min: 20, exit_n: 10}
   long:
     - htf_up
-    - close > prev(highest(high,20))
-    - volume > vol_sma(20) * 1.5
-    - adx(14) > 20
+    - close > prev(highest(high,{n}))
+    - volume > vol_sma(20) * {vol_x}
+    - adx(14) > {adx_min}
   short:
     - htf_down
-    - close < prev(lowest(low,20))
-    - volume > vol_sma(20) * 1.5
-    - adx(14) > 20
+    - close < prev(lowest(low,{n}))
+    - volume > vol_sma(20) * {vol_x}
+    - adx(14) > {adx_min}
   exit_long:
-    - close < prev(lowest(low,10))
+    - close < prev(lowest(low,{exit_n}))
   exit_short:
-    - close > prev(highest(high,10))
+    - close > prev(highest(high,{exit_n}))
   stop: {method: atr, atr: 2.0}
   time_stop_bars: 60
   cooldown_bars: 0
@@ -145,16 +151,17 @@
     When price is above the 200 EMA (long-term up-trend) but RSI(2) drops under 10, the
     market is short-term oversold. Such dips often snap back within a few candles. We exit
     as soon as price closes back above the 5-period average.
+  params: {trend_n: 200, rsi_n: 2, lo: 10, hi: 90, exit_n: 5}
   long:
-    - close > ema(close,200)
-    - rsi(close,2) < 10
+    - close > ema(close,{trend_n})
+    - rsi(close,{rsi_n}) < {lo}
   short:
-    - close < ema(close,200)
-    - rsi(close,2) > 90
+    - close < ema(close,{trend_n})
+    - rsi(close,{rsi_n}) > {hi}
   exit_long:
-    - close > sma(close,5)
+    - close > sma(close,{exit_n})
   exit_short:
-    - close < sma(close,5)
+    - close < sma(close,{exit_n})
   stop: {method: atr, atr: 2.0}
   time_stop_bars: 15
   cooldown_bars: 0
@@ -176,15 +183,16 @@
     Quiet markets are followed by big moves. When the Bollinger Band width is in its lowest
     20% of the last 100 candles, energy is building. We join the breakout direction only when
     volume confirms and the higher timeframe agrees.
+  params: {bb_n: 20, bb_k: 2, rank_n: 100, squeeze: 0.2, vol_x: 1.3}
   long:
-    - pct_rank(prev(bb_width(close,20,2)),100) < 0.2
-    - close > bb_upper(close,20,2)
-    - volume > vol_sma(20) * 1.3
+    - pct_rank(prev(bb_width(close,{bb_n},{bb_k})),{rank_n}) < {squeeze}
+    - close > bb_upper(close,{bb_n},{bb_k})
+    - volume > vol_sma(20) * {vol_x}
     - htf_up
   short:
-    - pct_rank(prev(bb_width(close,20,2)),100) < 0.2
-    - close < bb_lower(close,20,2)
-    - volume > vol_sma(20) * 1.3
+    - pct_rank(prev(bb_width(close,{bb_n},{bb_k})),{rank_n}) < {squeeze}
+    - close < bb_lower(close,{bb_n},{bb_k})
+    - volume > vol_sma(20) * {vol_x}
     - htf_down
   stop: {method: atr, atr: 1.5}
   time_stop_bars: 30
@@ -207,13 +215,14 @@
     A MACD cross below the zero line inside an up-trend means the pullback is ending and
     momentum is turning back in the trend direction. The 200 EMA and higher timeframe filter
     remove most counter-trend crosses, which are the ones that usually fail.
+  params: {trend_n: 200}
   long:
-    - close > ema(close,200)
+    - close > ema(close,{trend_n})
     - htf_up
     - cross_up(macd_line(close), macd_signal(close))
     - macd_line(close) < 0
   short:
-    - close < ema(close,200)
+    - close < ema(close,{trend_n})
     - htf_down
     - cross_down(macd_line(close), macd_signal(close))
     - macd_line(close) > 0
@@ -238,20 +247,21 @@
     Supertrend is an ATR-based trailing line. When it flips, the short-term trend has
     changed. We only take flips in the direction of the higher timeframe and when ADX > 20,
     and we exit when Supertrend flips back.
+  params: {st_n: 10, st_k: 3, adx_min: 20}
   long:
-    - supertrend_dir(10,3) == 1
-    - prev(supertrend_dir(10,3)) == -1
-    - adx(14) > 20
+    - supertrend_dir({st_n},{st_k}) == 1
+    - prev(supertrend_dir({st_n},{st_k})) == -1
+    - adx(14) > {adx_min}
     - htf_up
   short:
-    - supertrend_dir(10,3) == -1
-    - prev(supertrend_dir(10,3)) == 1
-    - adx(14) > 20
+    - supertrend_dir({st_n},{st_k}) == -1
+    - prev(supertrend_dir({st_n},{st_k})) == 1
+    - adx(14) > {adx_min}
     - htf_down
   exit_long:
-    - supertrend_dir(10,3) == -1
+    - supertrend_dir({st_n},{st_k}) == -1
   exit_short:
-    - supertrend_dir(10,3) == 1
+    - supertrend_dir({st_n},{st_k}) == 1
   stop: {method: atr, atr: 2.0}
   time_stop_bars: 60
   cooldown_bars: 0
@@ -273,18 +283,19 @@
     Many traders keep stop-losses just under recent lows. Big players push price there to
     fill orders ('liquidity grab'), then price snaps back. A candle that breaks the low but
     CLOSES back above it, with above-average volume, shows the sellers failed.
+  params: {n: 20, vol_x: 1.2, rsi_n: 14, long_rsi_max: 45, short_rsi_min: 55}
   long:
-    - low < prev(lowest(low,20))
-    - close > prev(lowest(low,20))
+    - low < prev(lowest(low,{n}))
+    - close > prev(lowest(low,{n}))
     - close > open
-    - volume > vol_sma(20) * 1.2
-    - rsi(close,14) < 45
+    - volume > vol_sma(20) * {vol_x}
+    - rsi(close,{rsi_n}) < {long_rsi_max}
   short:
-    - high > prev(highest(high,20))
-    - close < prev(highest(high,20))
+    - high > prev(highest(high,{n}))
+    - close < prev(highest(high,{n}))
     - close < open
-    - volume > vol_sma(20) * 1.2
-    - rsi(close,14) > 55
+    - volume > vol_sma(20) * {vol_x}
+    - rsi(close,{rsi_n}) > {short_rsi_min}
   stop: {method: atr, atr: 1.0}
   time_stop_bars: 20
   cooldown_bars: 0
@@ -306,18 +317,19 @@
     The simplest trend-following signal (the one from our first lesson). On its own it
     gets whipsawed; the 200 EMA and ADX > 20 filters try to keep it only for trending markets.
     Kept here so you can SEE how it compares to the others.
+  params: {fast: 9, slow: 21, trend_n: 200, adx_min: 20}
   long:
-    - cross_up(ema(close,9), ema(close,21))
-    - close > ema(close,200)
-    - adx(14) > 20
+    - cross_up(ema(close,{fast}), ema(close,{slow}))
+    - close > ema(close,{trend_n})
+    - adx(14) > {adx_min}
   short:
-    - cross_down(ema(close,9), ema(close,21))
-    - close < ema(close,200)
-    - adx(14) > 20
+    - cross_down(ema(close,{fast}), ema(close,{slow}))
+    - close < ema(close,{trend_n})
+    - adx(14) > {adx_min}
   exit_long:
-    - cross_down(ema(close,9), ema(close,21))
+    - cross_down(ema(close,{fast}), ema(close,{slow}))
   exit_short:
-    - cross_up(ema(close,9), ema(close,21))
+    - cross_up(ema(close,{fast}), ema(close,{slow}))
   stop: {method: atr, atr: 1.5}
   time_stop_bars: 40
   cooldown_bars: 0
@@ -346,15 +358,16 @@
     Stops under a low are taken (sweep), then price breaks structure the other way with a strong
     candle (market-structure shift). The gap that strong move leaves behind is where we enter, the
     stop goes beyond the sweep's extreme, and the target is the next liquidity pool on the other side.
+  params: {sweep_bars: 20, mss_bars: 10}
   long:
-    - bars_since(smc_sweep_bull) <= 20
+    - bars_since(smc_sweep_bull) <= {sweep_bars}
     - bars_since(smc_choch_up) <= bars_since(smc_sweep_bull)
-    - bars_since(smc_choch_up) <= 10
+    - bars_since(smc_choch_up) <= {mss_bars}
     - smc_fvg_retrace_bull
   short:
-    - bars_since(smc_sweep_bear) <= 20
+    - bars_since(smc_sweep_bear) <= {sweep_bars}
     - bars_since(smc_choch_down) <= bars_since(smc_sweep_bear)
-    - bars_since(smc_choch_down) <= 10
+    - bars_since(smc_choch_down) <= {mss_bars}
     - smc_fvg_retrace_bear
   stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
   targets:
@@ -414,14 +427,15 @@
     A 4H order block (the last opposite candle before a strong move) marks where big orders sat.
     If price returns there while it is in the cheap (discount) half of the 4H range, and the 15m
     chart then shifts structure back in the trend direction, we join the trend.
+  params: {ob_bars: 20}
   long:
     - h4_bull_ob_high < (h4_range_low + h4_range_high) / 2
-    - within(low <= h4_bull_ob_high, 20)
+    - within(low <= h4_bull_ob_high, {ob_bars})
     - close > h4_bull_ob_low
     - smc_choch_up
   short:
     - h4_bear_ob_low > (h4_range_low + h4_range_high) / 2
-    - within(high >= h4_bear_ob_low, 20)
+    - within(high >= h4_bear_ob_low, {ob_bars})
     - close < h4_bear_ob_high
     - smc_choch_down
   stop: {method: structure, long_level: "lowest(low,10)", short_level: "highest(high,10)", buffer_atr: 0.2, max_width_atr: 3.0}
@@ -480,14 +494,15 @@
     ICT teaches that the big moves of the day start in a few time windows (New York time). The
     setup is the S5 idea compressed in time: a sweep, a strong candle the other way, then the
     first pullback into the gap - but only inside London, NY AM or the Silver Bullet hour.
+  params: {sweep_bars: 8}
   long:
     - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
-    - bars_since(smc_sweep_bull) <= 8
+    - bars_since(smc_sweep_bull) <= {sweep_bars}
     - bars_since(displacement_up) <= bars_since(smc_sweep_bull)
     - smc_fvg_retrace_bull
   short:
     - smc_kz_london | smc_kz_ny_am | smc_kz_silver_bullet
-    - bars_since(smc_sweep_bear) <= 8
+    - bars_since(smc_sweep_bear) <= {sweep_bars}
     - bars_since(displacement_down) <= bars_since(smc_sweep_bear)
     - smc_fvg_retrace_bear
   stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
@@ -517,12 +532,13 @@
   description: "S7 without the killzone time filter."
   logic: >-
     Same as S7, but at any time of day.
+  params: {sweep_bars: 8}
   long:
-    - bars_since(smc_sweep_bull) <= 8
+    - bars_since(smc_sweep_bull) <= {sweep_bars}
     - bars_since(displacement_up) <= bars_since(smc_sweep_bull)
     - smc_fvg_retrace_bull
   short:
-    - bars_since(smc_sweep_bear) <= 8
+    - bars_since(smc_sweep_bear) <= {sweep_bars}
     - bars_since(displacement_down) <= bars_since(smc_sweep_bear)
     - smc_fvg_retrace_bear
   stop: {method: structure, long_level: smc_sweep_bull_low, short_level: smc_sweep_bear_high, buffer_atr: 0.2, max_width_atr: 3.0}
@@ -584,12 +600,13 @@
   logic: >-
     Same exits as S8; the level that gets swept is just the lowest low (highest high) of the last
     20 candles.
+  params: {n: 20}
   long:
-    - low < prev(lowest(low,20))
-    - close > prev(lowest(low,20))
+    - low < prev(lowest(low,{n}))
+    - close > prev(lowest(low,{n}))
   short:
-    - high > prev(highest(high,20))
-    - close < prev(highest(high,20))
+    - high > prev(highest(high,{n}))
+    - close < prev(highest(high,{n}))
   stop: {method: structure, long_level: low, short_level: high, buffer_atr: 0.2, max_width_atr: 3.0}
   targets:
     long: [smc_pd_mid, smc_pdh]

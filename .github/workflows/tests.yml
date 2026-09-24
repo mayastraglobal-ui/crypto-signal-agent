@@ -5,7 +5,8 @@ name: Tests
 on:
   push:
     paths-ignore:
-      - "reports/**"          # the hourly report commits don't need testing
+      - "reports/**"          # the hourly / daily report commits don't need testing
+      - "memory/**"           # ... nor the engine's memory logs (a pull request still runs every test)
   pull_request:
   workflow_dispatch:
 
@@ -15,7 +16,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 

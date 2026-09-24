@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scanner  # noqa: E402
 from engine import evidence as E  # noqa: E402
 from engine import features as F  # noqa: E402
+from engine import strategy_spec as SP  # noqa: E402
 from test_data_quality import run_copy  # noqa: E402
 
 H1 = 3_600_000
@@ -173,7 +174,7 @@ class Definitions(unittest.TestCase):
 
 class RuleLanguage(unittest.TestCase):
     def test_existing_strategies_unchanged_and_features_usable(self):
-        strategies = [s for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
+        strategies = [SP.render(s) for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
                       if s["family"] != "smc"]          # the SMC strategies (Phase 7) need SMC columns
         df = scanner.add_htf(synthetic(n=1500), synthetic(tf="4h", n=600))
         feats = F.compute(df, H1)

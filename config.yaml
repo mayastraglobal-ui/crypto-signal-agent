@@ -58,7 +58,7 @@ timeframes:
   "1h": 2000     # ~83 days
   "30m": 2000    # ~42 days
   "15m": 2000    # ~21 days
-  "5m": 2000     # ~7 days
+  "5m": 5000     # ~17 days (Layer A needs the last 15 days)
 
 timeframe_model:             # which timeframe does what (AGENT_PROMPT.md section 5)
   # chain = from slow to fast. The last 3 are: setup -> trigger -> entry (execution);
@@ -164,9 +164,36 @@ validation:                  # the "-> VALIDATION" gate (AGENT_PROMPT.md section
   min_profit_factor: 1.2     # gross wins / gross losses (was 1.15 before spec v3)
   max_drawdown_r: 10         # worst peak-to-valley loss of the backtest, in R
   retune_penalty_r: 0.02     # +0.02R on min_expectancy_r for every earlier version of the same idea (section 11)
+  max_cost_to_r: 0.25        # cost viability: fees + slippage per trade <= 0.25R, i.e. stop >= 4x the round-trip cost
   min_coin_trades: 5         # a coin needs 5+ trades with this strategy to be "proven" on it
   forward_pause_after: 20    # after 20 LIVE signals ...
   forward_pause_below_r: -0.10   # ... if live average is below -0.10R, pause the strategy
+
+research:                    # daily research run (research.py, workflow "Research") - AGENT_PROMPT.md sections 11-12
+  history_bars:              # how much history Layer B / C use (fewer when a coin is younger)
+    1w: 1000
+    1d: 5000                 # everything since listing (Binance starts in 2017)
+    4h: 30000                # everything since listing
+    1h: 100000               # everything since listing
+    30m: 35040               # 2 years
+    15m: 35040               # 1 year
+    5m: 25920                # 90 days
+  offline_history_bars: 6000 # --offline tests only (synthetic data)
+  layer_a_days: 15           # Layer A = the last 15 days ...
+  layer_a_split_day: 10      # ... shown as days 1-10 vs days 11-15
+  walk_forward_windows: 6    # the history in 6 equal time windows; the first only warms up
+  walk_forward_min_positive: 3   # pass: at least 3 of the other 5 windows profitable ...
+  walk_forward_min_trades: 5     # ... (a window with fewer trades = no information) and all 5 together profitable
+  cost_stress_x: 1.5         # stress test: fees, slippage and funding +50% - must stay profitable
+  perturb_pct: 20            # every parameter -20% / +20%, one at a time - every variant must stay profitable
+  min_positive_coins: 3      # edge (profitable, >= min_coin_trades trades) on at least 3 coins
+  overfit_max_share: 0.5     # HIGH OVERFITTING RISK if > 50% of the profit comes from one coin or one window
+  twin_min_trades: 30        # control-twin comparison needs this many trades on both sides ...
+  twin_min_validate_trades: 10   # ... and this many in the validate part
+  demote_after_failed_runs: 2    # a PAPER strategy that fails the long-history bar 2 runs in a row leaves paper
+  paper_retire_last_n: 20        # RETIRED if the last 20 paper signals average ...
+  paper_retire_below_r: -0.10    # ... below -0.10R
+  paper_max_dd_r: 8              # ... or the paper record loses more than 8R from its best point
 
 signals:
   lookback_bars: 2           # a signal stays valid for this many closed candles

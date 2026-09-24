@@ -5,6 +5,7 @@ Email alerts for the Crypto Signal Agent (works without Claude).
   python notify.py          -> email any NEW signals from reports/latest.json
   python notify.py test     -> send a test email (to check your setup)
   python notify.py failed   -> email a warning that the scan failed
+  python notify.py research_failed -> email a warning that the daily research run failed
   python notify.py system   -> email [SYSTEM] once when data turns UNSAFE, and once when it recovers
 
 Needs 2 GitHub secrets: GMAIL_USER and GMAIL_APP_PASSWORD
@@ -165,6 +166,13 @@ def main():
             run = os.environ.get("GITHUB_RUN_ID", "")
             send("[SYSTEM] Crypto Signal Agent - scan FAILED",
                  "The hourly scan failed. It will try again next hour.\n"
+                 "If this keeps happening, open this link, take a screenshot and show it to Claude:\n"
+                 + repo_link(f"/actions/runs/{run}"))
+        elif mode == "research_failed":
+            run = os.environ.get("GITHUB_RUN_ID", "")
+            send("[SYSTEM] Crypto Signal Agent - daily research FAILED",
+                 "The daily research run (long-history tests) failed. Strategy statuses stay as they were;\n"
+                 "hourly scans and signals keep running. It will try again tomorrow.\n"
                  "If this keeps happening, open this link, take a screenshot and show it to Claude:\n"
                  + repo_link(f"/actions/runs/{run}"))
         elif mode == "system":

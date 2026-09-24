@@ -3,7 +3,6 @@
 
 Run:  python -m unittest discover -s tests -v
 """
-import copy
 import json
 import os
 import sys
@@ -347,46 +346,30 @@ class NoLookAhead(unittest.TestCase):
 
 
 class EndToEnd(unittest.TestCase):
-    def test_offline_run_lifecycle_registry_and_edits(self):
+    """The hourly scan with the Phase 7 gates (the research run itself: tests/test_research.py)."""
+
+    def test_offline_scan_gates_and_report(self):
         with tempfile.TemporaryDirectory() as tmp:
             p = run_copy(tmp, "scanner.py", "--offline", "--coins", "4")
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
-            out = json.load(open(os.path.join(tmp, "reports", "latest.json")))
+            with open(os.path.join(tmp, "reports", "latest.json")) as f:
+                out = json.load(f)
             board = out["strategy_scoreboard"]
             self.assertTrue(board)
-            self.assertTrue({b["status"] for b in board} <= set(LC.ENGINE_STATUSES))
-            self.assertFalse(any(b["status"] in ("PAPER_TRADING", "APPROVED") for b in board))
-            self.assertEqual(out["signals"], [])                             # nothing is APPROVED
-            self.assertTrue(all(p["stage"] == "VALIDATION" for p in out["validation_signals"]))
+            # no research run yet: every version waits as FORMALIZED and nothing can signal
+            self.assertEqual({b["status"] for b in board}, {"FORMALIZED"})
+            self.assertEqual(out["signals"], [])
+            self.assertEqual(out["validation_signals"], [])
             self.assertTrue(any(b["strategy"].startswith("S5") for b in board))
             self.assertTrue(any(b["blocked_by_regime"] + b["blocked_by_permission"] > 0 for b in board))
             self.assertEqual(out["lifecycle"]["not_run"], {})
             self.assertEqual(out["lifecycle"]["rule_errors"], {})
-            reg = pd.read_csv(os.path.join(tmp, "reports", "strategy_registry_offline.csv"), dtype={"version": str})
-            self.assertEqual(out["lifecycle"]["experiments"], len(set(zip(reg["id"], reg["version"]))))
-            self.assertEqual(len(reg), len(board))                         # one row per version x timeframe
-            self.assertTrue(reg["fingerprint"].notna().all() and reg["status"].notna().all())
             self.assertFalse(os.path.exists(os.path.join(tmp, "memory")))   # offline never writes memory/
-            md = open(os.path.join(tmp, "reports", "latest.md")).read()
-            for text in ("## 3. Strategy scoreboard", "### 3b. Strategy lifecycle", "SMC vs control twin"):
+            with open(os.path.join(tmp, "reports", "latest.md")) as f:
+                md = f.read()
+            for text in ("## 3. Strategy scoreboard", "### 3b. Strategy lifecycle", "SMC vs control twin",
+                         "waiting for the first daily research run"):
                 self.assertIn(text, md)
-
-            # edit a tested version's rules WITHOUT a new version number -> refused, engine keeps running
-            raw = yaml.safe_load(open(os.path.join(tmp, "strategies.yaml")))
-            edited = copy.deepcopy(raw)
-            edited[0]["long"].append("volume > 0")
-            yaml.safe_dump(edited, open(os.path.join(tmp, "strategies.yaml"), "w"), sort_keys=False)
-            p = scanner_rerun(tmp)
-            self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
-            out = json.load(open(os.path.join(tmp, "reports", "latest.json")))
-            self.assertIn(raw[0]["id"], out["lifecycle"]["not_run"])
-            self.assertFalse(any(b["strategy"] == raw[0]["id"] for b in out["strategy_scoreboard"]))
-
-
-def scanner_rerun(tmp):
-    import subprocess
-    return subprocess.run([sys.executable, "scanner.py", "--offline", "--coins", "4"], cwd=tmp,
-                          capture_output=True, text=True, timeout=600)
 
 
 if __name__ == "__main__":

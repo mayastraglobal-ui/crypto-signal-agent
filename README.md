@@ -6,8 +6,8 @@ This agent runs by itself on GitHub's free servers every hour, whether your PC i
 2. **Downloads charts.** It gets 1W, 1D, 4H, 1H, 30m, 15m and 5m candles for every coin, and builds rolling 7-day candles (see "Timeframes" below).
 3. **Checks the data is trustworthy** (see "Data check" below). Bad data = no signals.
 4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage - but only in the market regimes each strategy allows, and only when the bigger timeframes agree (see "Strategies" below).
-5. **Moves each strategy along its lifecycle.** A strategy has to be profitable in both the "training" period and an "unseen test" period and pass the bar in `config.yaml` → `validation` to reach VALIDATION. Everything else stays BACKTESTING or FAILED.
-6. **Gives signals only from strategies you APPROVED** (after paper trading - not possible before Phase 8). Strategies in VALIDATION show "validation signals" in the report, which are logged but never emailed. Each signal has an entry zone, stop-loss, targets, hold time, position size and the reasons behind it.
+5. **Once a day, tests every strategy on years of history** (see "Daily research run" below) and moves it along its lifecycle: BACKTESTING, VALIDATION, FAILED, PAPER_TRADING or RETIRED.
+6. **Gives signals only from strategies you APPROVED** (after paper trading). Strategies in PAPER_TRADING or VALIDATION show "paper / validation signals" in the report, which are logged but never emailed. Each signal has an entry zone, stop-loss, targets, hold time, position size and the reasons behind it.
 7. **Checks old signals** against what the price actually did afterwards. A strategy whose real results turn bad gets paused automatically.
 8. **Writes the report** to `reports/latest.md`, which you can read on the GitHub website or app.
 
@@ -156,19 +156,40 @@ allowed market regimes, a gate type, rules, stop, targets, time stop, cooldown, 
 changelog. The comments at the top of the file explain every field.
 
 - **Lifecycle:** IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING → APPROVED. You set IDEA,
-  FORMALIZED or RETIRED; the engine sets the rest per version and timeframe, every run
-  (`memory/strategy_registry.csv`, changes in `memory/strategy_lifecycle.md`). PAPER_TRADING needs the
-  Phase 8 tests; **APPROVED always needs your yes**. Only APPROVED strategies send `[ENTRY]` emails.
+  FORMALIZED or RETIRED; the engine sets the rest per version and timeframe, once a day
+  (`memory/strategy_registry.csv`, changes in `memory/strategy_lifecycle.md`). **APPROVED always needs your
+  yes**. Only APPROVED strategies send `[ENTRY]` emails.
 - **Market gates:** a strategy only trades in the regimes it lists. Trend, breakout and SMC strategies
   need 2 of 1D/4H/1H in their direction and never trade against a STRONG weekly trend; reversal types
   skip the weekly veto; mean-reversion strategies trade only in ranges and never against a STRONG
   1W/1D/4H trend.
-- **Pass bar (VALIDATION):** ≥ 30 trades, ≥ +0.10R per trade after fees, profit factor ≥ 1.2, max
-  drawdown ≤ 10R, profitable in both the training and the unseen-test part. Each re-tuned version of the
-  same idea needs +0.02R more (`memory/experiments.md` counts every version tested).
+- **Pass bar (VALIDATION):** see "Daily research run". Each re-tuned version of the same idea needs +0.02R
+  more (`memory/experiments.md` counts every version tested). **params:** the numbers in a rule have names
+  (`{fast}` with `fast: 20`) so the research run can move them ±20%.
 - **A tested version never changes.** To change rules, copy the block, raise the version
   ("1.0" → "1.1") and add a changelog line. If a tested version's rules are edited in place, the engine
   refuses to run it and the report says why.
+
+## Daily research run
+
+Once a day (00:40 UTC, workflow **Research** - you can also start it by hand in the Actions tab), `research.py`
+tests every strategy version on every timeframe on years of history (AGENT_PROMPT.md sections 11-12):
+
+| Test | What it asks |
+|---|---|
+| **Layer A** (hourly) | How did it do in the last 15 days (days 1-10 vs 11-15)? Shown only - never enough alone |
+| **Layer B** | On all history since the coin was listed (1D/4H/1H; 30m 2 years, 15m 1 year, 5m 90 days): ≥ 30 trades, ≥ +0.10R per trade, PF ≥ 1.2, drawdown ≤ 10R, profitable in the first 70% ("develop") AND the last 30% ("validate") of every coin, and fees ≤ 1/4 of the stop |
+| **Layer C** (walk-forward) | History cut into 6 time windows (the first only warms up): at least 3 of the other 5 profitable, and all 5 together |
+| **Costs +50%** | Still profitable when fees, slippage and funding are 50% higher? |
+| **±20% test** | Still profitable when each number in the rules (and the stop and hold time) is moved 20% down or up, one at a time? |
+| **Coins / overfitting** | Profitable on ≥ 3 coins, and no more than half of the profit from one coin or one window |
+| **Control twin** | For SMC strategies: better than the same idea without the SMC part, overall and in the validate part |
+
+Passing everything moves a strategy to **PAPER_TRADING** automatically: its signals are logged as paper trades,
+never emailed. A paper strategy is **RETIRED** if its last 20 paper signals average below -0.10R or it loses more
+than 8R, and leaves paper if it fails Layer B two days in a row. **APPROVED** only ever comes from you.
+Results: report sections 3 / 3b / 3c and `reports/research.json`. Long price history is kept in GitHub's Actions
+cache (not in the repo) and only new candles are downloaded each day. Settings: `config.yaml` → `research`.
 
 ## Adding a strategy
 

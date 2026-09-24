@@ -1,0 +1,60 @@
+name: Research
+
+# Daily research run (AGENT_PROMPT.md sections 11-12): long-history backtests (Layer B), walk-forward
+# (Layer C), costs +50%, +-20% parameter test, and the strategy lifecycle (who reaches PAPER_TRADING).
+# Long candle history is kept in the GitHub Actions cache (never committed); each run downloads only
+# the new candles.
+
+on:
+  schedule:
+    - cron: "40 0 * * *"    # every day at 00:40 UTC (08:40 Beijing). GitHub may start it a few minutes late.
+  workflow_dispatch:         # lets you press "Run workflow" by hand
+
+permissions:
+  contents: write            # needed to save the results back into the repo
+
+concurrency:
+  group: scan                # never at the same time as the hourly scan (both save files)
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ALERT_TO: ${{ secrets.ALERT_TO }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Long candle history (cache)
+        uses: actions/cache@v4
+        with:
+          path: data/history
+          key: history-${{ github.run_id }}
+          restore-keys: history-
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Research (Layers B/C, stress, +-20%, lifecycle)
+        run: python research.py
+
+      - name: Save results
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add reports memory
+          git commit -m "Research $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
+          git pull --rebase --autostash || true
+          git push
+
+      - name: Email if the research run failed
+        if: ${{ failure() }}
+        run: python3 notify.py research_failed
