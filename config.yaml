@@ -249,6 +249,7 @@ events: []
 
 signals:
   lookback_bars: 2           # a signal stays valid for this many closed candles
+  email_watching: false      # true = also email SETUP_FORMING / AWAITING_5M setups of APPROVED strategies ([WATCH])
   scan_interval_minutes: 60  # the scan runs hourly: every candle closed since the previous run is looked at
                              # (15m: 4 candles, 5m: 12), so no trigger falls between two runs
   max_in_report: 10          # show the best N signals

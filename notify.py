@@ -2,7 +2,9 @@
 """
 Email alerts for the Crypto Signal Agent (works without Claude).
 
-  python notify.py          -> email any NEW signals from reports/latest.json
+  python notify.py          -> email NEW [ENTRY] signals (one email each, with a chart) and [EXIT] updates
+                               of APPROVED positions from reports/latest.json (+ [WATCH] if email_watching)
+  python notify.py daily    -> the daily report email, once per UTC day (first scan after 00:00 UTC = 08:00 Beijing)
   python notify.py test     -> send a test email (to check your setup)
   python notify.py failed   -> email a warning that the scan failed
   python notify.py research_failed -> email a warning that the daily research run failed
@@ -25,6 +27,9 @@ REPORTS = os.path.join(ROOT, "reports")
 STATE = os.path.join(REPORTS, "notified.json")
 SYSTEM_STATE = os.path.join(REPORTS, "system_alert_state.json")
 RISK_SENT = os.path.join(REPORTS, "risk_alert_sent.json")
+DAILY_SENT = os.path.join(REPORTS, "daily_sent.json")
+REMINDERS_SENT = os.path.join(REPORTS, "reminders_sent.json")
+FOOTER = "Research signal. Not financial advice."
 
 
 def repo_link(path=""):
@@ -33,21 +38,34 @@ def repo_link(path=""):
     return f"{server}/{repo}{path}" if repo else ""
 
 
-def fmt(x):
-    x = float(x)
-    if x >= 1000:
-        return f"{x:,.2f}"
-    if x >= 1:
-        return f"{x:,.4f}"
-    return f"{x:.6g}"
+def load(path, default):
+    if not os.path.exists(path):
+        return default
+    with open(path) as f:
+        return json.load(f)
 
 
-def send(subject, body):
+def save(path, obj):
+    with open(path, "w") as f:
+        json.dump(obj, f)
+
+
+def mail(rep, subject, lines, attachments=()):
+    """Section 20: every email opens with the position book and ends with the research disclaimer."""
+    book = rep.get("position_book_text") or []
+    body = [*book, *([""] if book else []), *lines, "", "Full report: " + repo_link("/blob/main/reports/latest.md"),
+            "", FOOTER]
+    files = [os.path.join(ROOT, a) for a in attachments if a and os.path.exists(os.path.join(ROOT, a))]
+    return send(subject, "\n".join(body), files)
+
+
+def send(subject, body, attachments=()):
     user = os.environ.get("GMAIL_USER", "").strip()
     pw = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "").strip()
     to = os.environ.get("ALERT_TO", "").strip() or user
     if os.environ.get("DRY_RUN"):
-        print(f"--- DRY RUN (not sent) ---\nTo: {to}\nSubject: {subject}\n\n{body}")
+        print(f"--- DRY RUN (not sent) ---\nTo: {to}\nSubject: {subject}\n"
+              + "".join(f"Attachment: {os.path.basename(a)}\n" for a in attachments) + f"\n{body}")
         return True
     if not user or not pw:
         print("Email alerts not set up (no GMAIL_USER / GMAIL_APP_PASSWORD secret) - skipping.")
@@ -57,6 +75,9 @@ def send(subject, body):
     msg["To"] = to
     msg["Subject"] = subject
     msg.set_content(body)
+    for a in attachments:
+        with open(a, "rb") as f:
+            msg.add_attachment(f.read(), maintype="image", subtype="png", filename=os.path.basename(a))
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context(), timeout=30) as s:
         s.login(user, pw)
         s.send_message(msg)
@@ -68,59 +89,67 @@ def signal_id(p):
     return f"{p['coin']}-{p['timeframe']}-{p['strategy']}-{p['signal_time_utc']}"
 
 
-def target_lines(p, split):
-    """TP1..TPn lines. Spec v3 plans carry their own targets; older reports used TP1-TP3 + the config split."""
-    tg = p.get("targets") or [dict(price=p[k], close_pct=int(x * 100))
-                              for k, x in zip(("tp1", "tp2", "tp3"), split) if p.get(k) is not None]
-    out = []
-    for j, t in enumerate(tg, 1):
-        if j == len(tg):
-            what = "close the rest"
-        else:
-            what = f"close {t['close_pct']}%, " + ("move stop to entry" if j == 1 else "move stop to TP1")
-        out.append(f"TP{j}        : {fmt(t['price'])}  -> {what}")
-    return out
-
-
 def signals_email():
-    path = os.path.join(REPORTS, "latest.json")
-    if not os.path.exists(path):
+    """[ENTRY] (one email per new APPROVED signal, with its chart), [EXIT] (TP1 / close of an APPROVED position,
+    and the 5m-confirmed entries) and, if email_watching is on, one [WATCH] digest. Each only once."""
+    rep = load(os.path.join(REPORTS, "latest.json"), None)
+    if rep is None:
         print("No report yet.")
         return
-    rep = json.load(open(path))
-    seen = json.load(open(STATE)) if os.path.exists(STATE) else []
-    new = [p for p in rep.get("signals", []) if signal_id(p) not in seen]
-    if not new:
-        print("No new signals - no email.")
+    seen = load(STATE, [])
+    sent = 0
+    for p in rep.get("signals", []):
+        if signal_id(p) in seen or not p.get("email"):
+            continue
+        e = p["email"]
+        if mail(rep, e["subject"], e["lines"], [e.get("chart")]):
+            seen.append(signal_id(p))
+            sent += 1
+    for ev in rep.get("email_events", []):
+        if ev["key"] in seen:
+            continue
+        if mail(rep, ev["subject"], ev["lines"], [ev.get("chart")]):
+            seen.append(ev["key"])
+            sent += 1
+    if (rep.get("email_settings") or {}).get("email_watching"):
+        items = [(f"watch|{w['coin']}|{w['tf']}|{w['strategy']}|{w['direction']}|{rep['generated_utc'][:13]}",
+                  f"{w['coin']} {w['direction']} {w['tf']} {w['strategy']}: {w['state']}"
+                  + (f" - missing `{w['missing']}`" if w.get("missing") else ""))
+                 for w in rep.get("watching", []) if w["stage"] == "APPROVED" and w["state"] == "SETUP_FORMING"]
+        items += [(f"watch|{a['id']}", f"{a['coin']} {a['direction']} {a['tf']} {a['strategy']}: AWAITING_5M "
+                   f"({a['bars']}/6 bars)") for a in rep["position_book"]["awaiting"] if a["stage"] == "APPROVED"]
+        new = [x for x in items if x[0] not in seen]
+        if new and mail(rep, f"[WATCH] {len(new)} setup(s) forming - no entry yet",
+                        ["Setups of APPROVED strategies that are NOT signals yet (email_watching is on):"]
+                        + [f"- {t}" for _, t in new]):
+            seen += [k for k, _ in new]
+            sent += 1
+    save(STATE, seen[-3000:])
+    print(f"{sent} email(s) sent." if sent else "No new signals or position updates - no email.")
+
+
+def daily_email():
+    """The daily report (section 20, 08:00 Beijing): sent by the first scan of each UTC day (before 06:00 UTC,
+    so a late-merged change never sends one in the middle of the day)."""
+    rep = load(os.path.join(REPORTS, "latest.json"), None)
+    d = (rep or {}).get("daily")
+    if not d:
+        print("No daily block in the report.")
         return
-    split = rep["settings"]["tp_split"]
-    bt = rep["market"]["btc_trend"]
-    book = rep.get("position_book_text") or []           # section 16: every email opens with the position book
-    lines = [*book, *([""] if book else []),
-             f"{len(new)} new signal(s) - {rep['generated_beijing']} Beijing time", "",
-             f"BTC trend: daily {bt.get('1d', '?')}, 4H {bt.get('4h', '?')}", ""]
-    for i, p in enumerate(new, 1):
-        z = sorted(p["entry_zone"])
-        lines += [
-            f"=== {i}. {p['coin']} {p['direction']} ({p.get('market', '?')}) | {p['timeframe']} | "
-            f"{p['strategy']} v{p.get('version', '1.0')} ===",
-            f"Entry zone : {fmt(z[0])} - {fmt(z[1])}   (skip if price already left it)",
-            f"Stop-loss  : {fmt(p['stop'])}  ({p['risk_pct_of_price']:.2f}% away)",
-            *target_lines(p, split),
-            f"Hold       : ~{p['expected_hold']} (max {p['max_hold']})",
-            f"Size       : {p['position_qty']:.6g} {p['coin']} (~{p['position_usdt']:.0f} USDT, "
-            f"risk {p['risk_usdt']:.2f} USDT)",
-            f"Why        : {p['why']}",
-            f"Backtest   : {p['backtest_coin']['trades']} trades on {p['coin']}, "
-            f"{p['backtest_coin']['win_rate']*100:.0f}% win, {p['backtest_coin']['avg_r']:+.2f}R avg",
-            ("WARNING    : against BTC trend" if p["context"]["against_btc_trend"] else ""),
-            ""]
-    lines += ["Full report: " + repo_link("/blob/main/reports/latest.md"), "",
-              "Research signal. Not financial advice. Check the news and your checklist before any trade."]
-    subject = "[ENTRY] Crypto signal: " + ", ".join(f"{p['coin']} {p['direction']} {p['timeframe']}" for p in new[:3])
-    if send(subject, "\n".join(l for l in lines if l is not None)):
-        seen = (seen + [signal_id(p) for p in new])[-1000:]
-        json.dump(seen, open(STATE, "w"))
+    if load(DAILY_SENT, {}).get("date") == d["date"] or int(d["utc"][11:13]) >= 6:
+        print(f"Daily email already sent for {d['date']} or not the morning run - skipping.")
+        return
+    lines = rep.get("daily_lines") or []
+    if mail(rep, rep.get("daily_subject") or f"[DAILY] {d['date']}", lines):
+        save(DAILY_SENT, {"date": d["date"]})
+
+
+def reminders_email(rep):
+    sent = load(REMINDERS_SENT, [])
+    for r in (rep or {}).get("reminders", []):
+        if r["key"] not in sent and mail(rep, r["subject"], r["lines"]):
+            sent.append(r["key"])
+    save(REMINDERS_SENT, sent)
 
 
 def system_email():
@@ -151,9 +180,7 @@ def system_email():
         subject = "[SYSTEM] Data recovered - signals allowed again"
         body = [f"Checked {q['checked_utc']} UTC. Data state is now {now}: {q['reason']}.",
                 "Normal signal checks are running again."]
-    body += ["", "Details: " + repo_link("/blob/main/reports/latest.md"), "",
-             "Research signal. Not financial advice."]
-    if send(subject, "\n".join(body)):
+    if mail(load(os.path.join(REPORTS, "latest.json"), {}), subject, body):
         json.dump({"state": now, "since_utc": q["checked_utc"]}, open(SYSTEM_STATE, "w"))
 
 
@@ -172,13 +199,11 @@ def risk_email():
         return
     starts = [t for t in tr if t["kind"] == "start"]
     subject = "[SYSTEM] Risk " + ("HALT: " if starts else "halt lifted: ") + ", ".join(t["what"] for t in tr[:3])
-    body = [*(rep.get("position_book_text") or []), "",
-            f"Risk engine, {rep['generated_utc']} UTC:"] + [f"- {t['text']}" for t in tr]
+    body = [f"Risk engine, {rep['generated_utc']} UTC:"] + [f"- {t['text']}" for t in tr]
     if starts:
         body += ["", "What this means: no new live entries from the affected part until the halt ends.",
                  "Open positions keep their stops and targets. Do not add trades by hand to 'win it back'."]
-    body += ["", "Details: " + repo_link("/blob/main/reports/latest.md"), "", "Research signal. Not financial advice."]
-    if send(subject, "\n".join(body)):
+    if mail(rep, subject, body):
         json.dump({"run": rep["generated_utc"]}, open(RISK_SENT, "w"))
 
 
@@ -207,6 +232,9 @@ def main():
         elif mode == "system":
             system_email()
             risk_email()
+            reminders_email(load(os.path.join(REPORTS, "latest.json"), None))
+        elif mode == "daily":
+            daily_email()
         else:
             signals_email()
     except smtplib.SMTPAuthenticationError:
