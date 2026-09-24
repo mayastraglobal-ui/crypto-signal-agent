@@ -43,6 +43,7 @@ from engine import features as fe
 from engine import lifecycle as lc
 from engine import positions as pos
 from engine import regime as rg
+from engine import risk as rk
 from engine import research as rs
 from engine import smc
 from engine import strategy_spec as sspec
@@ -942,10 +943,11 @@ LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "ent
             "version", "stage", "tp_split",
             "conditions", "regime_at_entry", "session", "mae_r", "mfe_r", "tags",      # Phase 9 attribution
             "state", "state_note", "planned_entry", "entry_time_utc", "sim_tf", "bars_5m",  # Phase 10 states
-            "confirm_5m_utc", "smc_5m", "close_reason", "current_stop", "warnings", "next_action"]
+            "confirm_5m_utc", "smc_5m", "close_reason", "current_stop", "warnings", "next_action",
+            "risk_blocks"]                                                                  # Phase 11 risk engine
 TEXT_COLS = ["closed_time_utc", "version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags",
              "state", "state_note", "entry_time_utc", "sim_tf", "confirm_5m_utc", "smc_5m", "close_reason",
-             "warnings", "next_action"]
+             "warnings", "next_action", "risk_blocks"]
 EVENT_COLS = ["time_utc", "id", "coin", "tf", "strategy", "version", "stage", "from_state", "to_state", "price", "note"]
 
 
@@ -1122,6 +1124,68 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
                 log(f"attribution failed for {row['id']}: {e}")
         closed_now.append(i)
     return logdf, closed_now
+
+
+def apply_risk(plans, book):
+    """Run every plan through the risk engine, best score first: an APPROVED plan that fails a step becomes
+    NO_TRADE, one that passes takes its place in the book (the next plans see it); PAPER / VALIDATION plans are
+    only marked with the steps that WOULD block them live (they never take a place)."""
+    for p in sorted(plans, key=lambda p: -p["confidence_score"]):
+        p["risk_blocks"] = book.check(p, p.get("cooldown_ms", 0))
+        p["no_trade"] = p["stage"] == "APPROVED" and bool(p["risk_blocks"])
+        if p["stage"] == "APPROVED" and not p["no_trade"]:
+            book.accept(p)
+    return plans
+
+
+def risk_summary(logdf, now, RK, groups, pct, pct_note, calendar_problem, plans, state_path):
+    """Section 15 state after this run: day / week R, halts, suspended strategies, correlation groups, the event
+    calendar, and what changed since the previous run (transitions -> one [SYSTEM] email each, notify.py)."""
+    b = rk.Book(logdf, now, RK, groups)
+    now_ms = int(now.timestamp() * 1000)
+    halts, suspended = b.halts(), b.suspended()
+    nxt = rk.upcoming(RK["events"], now_ms, RK["calendar_horizon_days"])
+    active = rk.blackout(now_ms, RK["events"], RK["blackout_minutes"])
+    warn = (f"event calendar has an error: {calendar_problem}" if calendar_problem else
+            f"calendar not maintained - no event listed for the next {RK['calendar_horizon_days']} days "
+            "(config.yaml -> events)" if not nxt else None)
+    prev = {}
+    if os.path.exists(state_path):
+        try:
+            with open(state_path) as f:
+                prev = json.load(f)
+        except ValueError:
+            prev = {}
+    transitions = []
+    for h in halts:
+        if h not in prev.get("halts", []):
+            transitions.append(dict(kind="start", what=h, text=rk.STEPS[h]))
+    for h in prev.get("halts", []):
+        if h not in halts:
+            transitions.append(dict(kind="end", what=h, text=rk.STEPS[h].split(" - ")[0] + " - lifted"))
+    for k in suspended:
+        if k not in prev.get("suspended", []):
+            transitions.append(dict(kind="start", what=k, text=f"{k} SUSPENDED: live drawdown {b.dd[k]:.1f}R "
+                                    f"> {RK['strategy_max_dd_r']:g}R. Resume only by adding it to config.yaml -> "
+                                    "risk -> resume with today's date"))
+    for k in prev.get("suspended", []):
+        if k not in suspended:
+            transitions.append(dict(kind="end", what=k, text=f"{k} resumed (config.yaml -> risk -> resume)"))
+    with open(state_path, "w") as f:
+        json.dump(dict(updated_utc=now.strftime("%Y-%m-%d %H:%M"), halts=halts, suspended=suspended), f, indent=1)
+    fmt_e = [dict(start_utc=fmt_ms(e[0]), end_utc=fmt_ms(e[1]), type=e[2], name=e[3]) for e in nxt]
+    return dict(day_r=b.day_r, week_r=b.week_r, halts=halts, halts_text=[rk.STEPS[h] for h in halts],
+                suspended=suspended, drawdowns=b.dd, risk_pct=pct, risk_note=pct_note,
+                groups=sorted(set(v for v in groups.values() if "+" in v)),
+                blackout_now=[e[3] for e in active], upcoming_events=fmt_e,
+                next_event=(f"{fmt_e[0]['name']} {fmt_e[0]['start_utc']} UTC" if fmt_e else None),
+                calendar_warning=warn, transitions=transitions,
+                no_trade=[dict(coin=p["coin"], tf=p["timeframe"], strategy=p["strategy"], direction=p["direction"],
+                               steps=[rk.STEPS[x] for x in p["risk_blocks"]]) for p in plans if p.get("no_trade")],
+                limits=dict(day_r=RK["day_limit_r"], week_r=RK["week_limit_r"], positions=RK["max_positions"],
+                            per_coin=RK["max_per_coin"], strategy_dd_r=RK["strategy_max_dd_r"],
+                            blackout_minutes=RK["blackout_minutes"], min_tp1_r=RK["min_tp1_r"],
+                            max_leverage=RK["max_leverage"], corr_threshold=RK["corr_threshold"]))
 
 
 def write_events(events, offline):
@@ -1482,6 +1546,9 @@ def main():
                                      htf_down=bool(df["htf_down"].iloc[t_i]),
                                      regime=regime_at(reg, tf, t_i),
                                      conditions=att.conditions(ctx, t_i, d, s, att_cfg),
+                                     levels=[float(feats[c].iloc[t_i]) for c in
+                                             (("smc_liq_above", "resistance") if d == 1 else
+                                              ("smc_liq_below", "support")) if c in feats],   # section 14 step 10
                                      session=ctx["kz"][t_i] or ("outside killzones" if ctx["intraday"] else "n/a"),
                                      rsi=float(ns["rsi"](ns["close"], 14).iloc[t_i]),
                                      vol_ratio=float(df["volume"].iloc[t_i] / ns["vol_sma"](20).iloc[t_i])))
@@ -1542,10 +1609,22 @@ def main():
             btc[tf] = "UP" if c.iloc[-1] > e50 > e200 else "DOWN" if c.iloc[-1] < e50 < e200 else "SIDEWAYS"
     fg = fear_greed(args.offline)
 
+    # ---------- risk engine settings (section 15; engine/risk.py) ----------
+    calendar_problem = None
+    try:
+        RK = rk.settings(cfg.get("risk"), cfg.get("events"))
+    except ValueError as e:                  # a broken calendar entry is reported, never silently skipped
+        calendar_problem = str(e)
+        RK = rk.settings(cfg.get("risk"), [])
+    quote = cfg["market"]["quote"]
+    closes_1h = {b: data[(b + quote, "1h")].set_index("close_time")["close"]
+                 for b in view["signal"] if data.get((b + quote, "1h")) is not None}
+    groups = rk.corr_groups(closes_1h, RK["corr_threshold"], RK["corr_bars"])
+    risk_pct, risk_note = rk.risk_pct(cfg["account"]["risk_per_trade_pct"], logdf, started, RK)
+
     # ---------- build trade plans ----------
     tp = cfg["trade_plan"]
     acct = cfg["account"]["size_usdt"]
-    risk_usd = acct * cfg["account"]["risk_per_trade_pct"] / 100
     plans, blocked = [], []
     for sgl in live:
         key = (sgl["strategy"], sgl["version"], sgl["tf"])
@@ -1566,7 +1645,7 @@ def main():
         d, e, R = sgl["dir"], sgl["entry"], sgl["R"]
         tps, split = sgl["tps"], sgl["split"]
         against_btc = (d == 1 and btc.get("4h") == "DOWN") or (d == -1 and btc.get("4h") == "UP")
-        qty = risk_usd / R
+        sz = rk.size(acct, risk_pct, e, e - d * R, RK["max_leverage"])
         strat = by_key[f"{sgl['strategy']}@{sgl['version']}"]
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
@@ -1582,7 +1661,10 @@ def main():
             tp_split=split, risk_pct_of_price=R / e * 100,
             expected_hold=tf_to_text(sgl["tf"], cst["avg_bars"] or pooled["avg_bars"]),
             max_hold=tf_to_text(sgl["tf"], strat["time_stop_bars"]), max_hold_bars=strat["time_stop_bars"],
-            position_qty=qty, position_usdt=qty * e, leverage_needed=qty * e / acct, risk_usdt=risk_usd,
+            position_qty=sz["qty"], position_usdt=sz["notional"], leverage_needed=sz["leverage"],
+            risk_usdt=sz["risk_usdt"], size_capped=sz["capped"], risk_pct=risk_pct,
+            signal_ms=int(sgl["signal_time"]), levels=sgl["levels"],
+            cooldown_ms=int(strat.get("cooldown_bars", 0)) * TF_MS[sgl["tf"]],
             backtest_coin=dict(trades=cst["n"], win_rate=cst["win_rate"], avg_r=cst["exp_r"]),
             backtest_all=dict(trades=pooled["n"], win_rate=pooled["win_rate"], avg_r=pooled["exp_r"],
                               pf=pooled["pf"]),
@@ -1606,10 +1688,13 @@ def main():
             p["confidence_score"] += 0.03 * (p["agreeing_signals"] - 1) - (0.1 if p["conflict"] else 0)
         final.append(max(ps, key=lambda p: p["confidence_score"]))
     final.sort(key=lambda p: -p["confidence_score"])
+    # risk engine (section 14 steps 9-13, section 15): APPROVED plans that fail a step become NO_TRADE; every
+    # plan (paper too) records which steps would block it (risk_blocks), so each rule's value can be measured
+    apply_risk(plans, rk.Book(logdf, started, RK, groups))
     # emailed: APPROVED entries. An APPROVED 5m-confirmed setup waits for its 5m bar first (AWAITING_5M,
     # in the position book); emails on its later state changes arrive with Phase 12.
-    emailable = [p for p in final if p["stage"] == "APPROVED" and not p["confirm_5m"]]
-    watch = [p for p in final if p not in emailable][: cfg["signals"]["max_in_report"]]   # paper + validation + 5m
+    emailable = [p for p in final if p["stage"] == "APPROVED" and not p["confirm_5m"] and not p["no_trade"]]
+    watch = [p for p in final if p not in emailable and not p["no_trade"]][: cfg["signals"]["max_in_report"]]
     final = emailable[: cfg["signals"]["max_in_report"]]
 
     # ---------- log new signals and move them through their states ----------
@@ -1630,12 +1715,18 @@ def main():
                    tp_split="/".join(f"{x:g}" for x in p["tp_split"]),
                    conditions=";".join(p["conditions"]), regime_at_entry=p["context"]["regime"] or "",
                    session=p["session"] or "", state=p["state"], planned_entry=p["entry"],
+                   risk_blocks=";".join(p["risk_blocks"]),
                    entry_time_utc="" if p["confirm_5m"] else p["signal_time_utc"],
                    sim_tf="5m" if p["confirm_5m"] else p["timeframe"], bars_5m=0 if p["confirm_5m"] else np.nan,
                    current_stop=p["stop"],
                    state_note="waiting for a 5m confirmation" if p["confirm_5m"] else "entry at the signal candle close",
                    next_action="wait for the 5m bar" if p["confirm_5m"] else pos.next_action(pos.ACTIVE, []))
-        if p["confirm_5m"]:
+        if p["no_trade"]:
+            why = "; ".join(rk.STEPS[x] for x in p["risk_blocks"])
+            row.update(state=pos.NO_TRADE, status=pos.NO_TRADE, close_reason=pos.NO_TRADE, closed_time_utc=now_txt,
+                       state_note=why, next_action="none - risk engine said no", entry_time_utc="")
+            _event(events, now_txt, row, None, pos.NO_TRADE, p["entry"], why)
+        elif p["confirm_5m"]:
             _event(events, now_txt, row, None, pos.AWAITING, p["entry"], f"{p['timeframe']} trigger closed")
         else:
             _event(events, now_txt, row, None, pos.TRIGGERED, p["entry"], f"{p['timeframe']} signal candle closed")
@@ -1657,9 +1748,13 @@ def main():
     quote = cfg["market"]["quote"]
     prices = {(sym[: -len(quote)], tf): float(d["close"].iloc[-1]) for (sym, tf), d in data.items()
               if d is not None and len(d) and sym.endswith(quote)}
-    book = pos.build(logdf, started, prices)
+    risk_out = risk_summary(logdf, started, RK, groups, risk_pct, risk_note, calendar_problem, plans,
+                            log_path(args.offline, "risk_state.json"))
+    book = pos.build(logdf, started, prices, dict(day_r=RK["day_limit_r"], week_r=RK["week_limit_r"],
+                                                  heat=RK["max_positions"]))
+    book_text = pos.lines(book, S5["bars"], risk_out)
     watching.sort(key=lambda x: (x["state"] != pos.FORMING, x["coin"], x["tf"]))
-    json.dump(dict(generated_utc=now_txt, book=book, text=pos.lines(book, S5["bars"]), watching=watching,
+    json.dump(dict(generated_utc=now_txt, book=book, text=book_text, risk=risk_out, watching=watching,
                    events_this_run=events),
               open(log_path(args.offline, "positions.json"), "w"), indent=1, default=float)
 
@@ -1785,7 +1880,7 @@ def main():
                market=dict(btc_trend=btc, fear_greed=fg), settings=dict(
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
-               position_book=book, position_book_text=pos.lines(book, S5["bars"]), watching=watching[:30],
+               position_book=book, position_book_text=book_text, risk=risk_out, watching=watching[:30],
                state_changes=events,
                signals=final, validation_signals=watch, strategy_scoreboard=board, forward_test=fwd_total,
                lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
@@ -2215,9 +2310,13 @@ def render_plans(plans, settings, w):
         if p.get("exit_rule"):
             w(f"- **Early exit if:** {' AND '.join(map(str, p['exit_rule']))}")
         w(f"- **Position size** (account {settings['account_usdt']} USDT, risk "
-          f"{settings['risk_pct']}% = {p['risk_usdt']:.2f} USDT): buy **{p['position_qty']:.6g} {p['coin']}** "
-          f"(~{p['position_usdt']:.0f} USDT" + (f", needs ~{p['leverage_needed']:.1f}x leverage"
-                                                if p['leverage_needed'] > 1 else "") + ")")
+          f"{p.get('risk_pct', settings['risk_pct']):g}% = {p['risk_usdt']:.2f} USDT): buy **{p['position_qty']:.6g} "
+          f"{p['coin']}** (~{p['position_usdt']:.0f} USDT" + (f", needs ~{p['leverage_needed']:.1f}x leverage"
+                                                if p['leverage_needed'] > 1 else "") + ")"
+          + (" - **made smaller: more would need over 3x leverage**" if p.get("size_capped") else ""))
+        if p.get("risk_blocks"):
+            w("- **Risk engine" + (" said NO (logged as NO_TRADE):** " if p.get("no_trade") else " would block it live:** ")
+              + "; ".join(rk.STEPS[x] for x in p["risk_blocks"]))
         w(f"- **Why:** {p['why']}")
         w(f"- **Rules that were true:** " + "; ".join(f"`{r}`" for r in p["rules_met"]))
         w(f"- **Context:** regime {c.get('regime') or '?'}, {c.get('permission') or '?'}, higher-TF trend "
@@ -2229,6 +2328,31 @@ def render_plans(plans, settings, w):
         w(f"- **Backtest proof:** on {p['coin']}: {bc['trades']} trades, {bc['win_rate']*100:.0f}% win, "
           f"{bc['avg_r']:+.2f}R avg · all coins: {ba['trades']} trades, {ba['win_rate']*100:.0f}% win, "
           f"{ba['avg_r']:+.2f}R avg, PF {ba['pf']:.2f}\n")
+
+
+def render_risk(r, w):
+    if not r:
+        return
+    L = r["limits"]
+    w("### 2d. Risk engine (section 15 - independent of the strategies)")
+    w(f"- **Live results:** today {r['day_r']:+.2f}R (limit {L['day_r']:g}R), this week {r['week_r']:+.2f}R "
+      f"(limit {L['week_r']:g}R) · **halts:** " + ("; ".join(r["halts_text"]) or "none"))
+    w(f"- **Suspended strategies** (live drawdown > {L['strategy_dd_r']:g}R): " + (", ".join(r["suspended"]) or "none"))
+    w(f"- **Risk per trade:** {r['risk_pct']:g}%" + (f" ({r['risk_note']})" if r["risk_note"] else "")
+      + f" · leverage never above {L['max_leverage']:g}x (the position is made smaller instead)")
+    w(f"- **Heat:** max {L['positions']} positions, {L['per_coin']} per coin, 1 per group of correlated coins and "
+      f"direction (1h correlation ≥ {L['corr_threshold']:g}) · groups now: " + (", ".join(r["groups"]) or "none"))
+    w(f"- **Every live entry also needs:** reward to TP1 ≥ {L['min_tp1_r']:g}R, no opposing level before TP1, no "
+      f"high-impact event within ±{L['blackout_minutes']} min, no duplicate")
+    ev = r["upcoming_events"]
+    w("- **Event calendar (next 7 days):** " + (", ".join(f"{e['name']} {e['start_utc']} UTC" for e in ev) or "none listed")
+      + (f" · **BLACKOUT NOW:** {', '.join(r['blackout_now'])}" if r["blackout_now"] else ""))
+    if r["calendar_warning"]:
+        w(f"- ⚠️ **{r['calendar_warning']}**")
+    if r["no_trade"]:
+        w("- **NO_TRADE this run** (APPROVED signals the risk engine refused): " + "; ".join(
+            f"{x['coin']} {x['direction']} {x['tf']} {x['strategy']}: {', '.join(x['steps'])}" for x in r["no_trade"]))
+    w("")
 
 
 def render_watching(rows, w):
@@ -2402,9 +2526,9 @@ def render_md(o, cfg):
         for line in o["position_book_text"]:
             w(line)
         w("```")
-        w("Paper = signals of PAPER_TRADING / VALIDATION versions (tracked, never emailed). Day / week limits "
-          "and heat are shown only; the risk engine enforces them from Phase 11. Every state change: "
-          "`reports/position_events.csv`.\n")
+        w("Paper = signals of PAPER_TRADING / VALIDATION versions (tracked, never emailed). The day / week limits, "
+          "heat and event blackout are enforced on live (APPROVED) entries by the risk engine (section 2d). Every "
+          "state change: `reports/position_events.csv`.\n")
     render_dq(o["data_quality"], w)
     render_universe(o["universe"], w)
     render_timeframes(o["timeframes"], w)
@@ -2435,6 +2559,7 @@ def render_md(o, cfg):
           "checked.\n")
         render_plans(o["validation_signals"], o["settings"], w)
     render_watching(o.get("watching") or [], w)
+    render_risk(o.get("risk"), w)
     render_scoreboard(o, w)
     render_lifecycle(o["lifecycle"], o["strategy_scoreboard"], w)
     render_research(o["lifecycle"], w)

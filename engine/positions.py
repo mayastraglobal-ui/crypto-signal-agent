@@ -4,6 +4,7 @@ Signal state machine and position book (AGENT_PROMPT.md sections 13 and 16) - Ph
   NO_SETUP -> WATCH -> SETUP_FORMING -> AWAITING_5M -> ENTRY_TRIGGERED -> POSITION_ACTIVE
      -> TP1_HIT (stop -> breakeven) -> CLOSED (TP / BE / SL / TIME / EXIT_RULE)
   side exits: EXPIRED (no 5m confirmation in 6 bars) · INVALIDATED (structure broken before entry)
+  NO_TRADE: an APPROVED signal the risk engine did not allow (Phase 11) - logged with the failed step
 
 WATCH and SETUP_FORMING are shown in the report only; every tracked signal (a row of
 reports/signals_log.csv) starts at AWAITING_5M (strategies with confirm_5m) or at ENTRY_TRIGGERED.
@@ -18,14 +19,14 @@ import pandas as pd
 
 WATCH, FORMING = "WATCH", "SETUP_FORMING"
 AWAITING, TRIGGERED, ACTIVE, TP1_HIT, CLOSED = "AWAITING_5M", "ENTRY_TRIGGERED", "POSITION_ACTIVE", "TP1_HIT", "CLOSED"
-EXPIRED, INVALIDATED = "EXPIRED", "INVALIDATED"
+EXPIRED, INVALIDATED, NO_TRADE = "EXPIRED", "INVALIDATED", "NO_TRADE"
 OPEN_STATES = [AWAITING, ACTIVE, TP1_HIT]        # rows the next run still has to look at
-FINAL_STATES = [CLOSED, EXPIRED, INVALIDATED]
+FINAL_STATES = [CLOSED, EXPIRED, INVALIDATED, NO_TRADE]
 # which state may follow which (anything else is a bug and raises)
-NEXT = {None: {AWAITING, TRIGGERED}, AWAITING: {AWAITING, TRIGGERED, EXPIRED, INVALIDATED},
+NEXT = {None: {AWAITING, TRIGGERED, NO_TRADE}, AWAITING: {AWAITING, TRIGGERED, EXPIRED, INVALIDATED},
         TRIGGERED: {ACTIVE, TP1_HIT, CLOSED}, ACTIVE: {ACTIVE, TP1_HIT, CLOSED}, TP1_HIT: {TP1_HIT, CLOSED}}
 BJ = dt.timezone(dt.timedelta(hours=8))
-LIMITS = dict(day_r=-3.0, week_r=-6.0, heat=3)     # section 15 - shown here, enforced in Phase 11
+LIMITS = dict(day_r=-3.0, week_r=-6.0, heat=3)     # section 15 - enforced by engine/risk.py
 
 
 def check_move(old, new):
@@ -92,7 +93,7 @@ def _fmt(x):
     return f"{x:,.2f}" if x >= 1000 else f"{x:,.4f}" if x >= 1 else f"{x:.6g}"
 
 
-def build(logdf, now, prices=None):
+def build(logdf, now, prices=None, limits=None):
     """The position book (section 16) from the signals log. prices: {(coin, tf) or coin: newest close}, for
     the open R (read on the timeframe the position is managed on).
     APPROVED rows are real positions (Active); PAPER_TRADING / VALIDATION rows are the paper record."""
@@ -120,7 +121,7 @@ def build(logdf, now, prices=None):
                         else next_action(st, []))
             (active if live else paper).append(item)
         closed_day = str(r.get("closed_time_utc") or "")[:10]
-        if st in FINAL_STATES and closed_day == today:
+        if st in FINAL_STATES and st != NO_TRADE and closed_day == today:
             res = float(r["result_r"]) if pd.notna(r.get("result_r")) else None
             item.update(reason=r.get("close_reason") or r.get("status"), result_r=res, live=live)
             closed.append(item)
@@ -135,11 +136,11 @@ def build(logdf, now, prices=None):
     return dict(utc=now.strftime("%Y-%m-%d %H:%M"), beijing=now.astimezone(BJ).strftime("%Y-%m-%d %H:%M"),
                 active=active, awaiting=awaiting, paper=paper, closed_today=closed,
                 day_r=round(day_r, 2), week_r=round(week_r, 2), paper_day_r=round(paper_day_r, 2),
-                heat=len(active), limits=LIMITS,
+                heat=len(active), limits=limits or LIMITS,
                 empty=not (active or awaiting or paper or closed))
 
 
-def lines(book, bars_5m=6):
+def lines(book, bars_5m=6, risk=None):
     """The book as text (section 16 layout) - the first thing in every report and email."""
     def pos(p):
         opr = "?" if p["open_r"] is None else f"{p['open_r']:+.2f}"
@@ -162,4 +163,9 @@ def lines(book, bars_5m=6):
     out.append(f"Day: {book['day_r']:+.2f}R (limit {L['day_r']:g}R) · Week: {book['week_r']:+.2f}R "
                f"(limit {L['week_r']:g}R) · Heat: {book['heat']}/{L['heat']}"
                + (f" · paper today {book['paper_day_r']:+.2f}R" if book["paper_day_r"] else ""))
+    if risk is not None:
+        out.append("Risk:      " + ("; ".join(risk["halts_text"] + [f"SUSPENDED {k}" for k in risk["suspended"]])
+                                    or "no halt") + f" · risk per trade {risk['risk_pct']:g}%"
+                   + (" · NEXT EVENT " + risk["next_event"] if risk.get("next_event") else "")
+                   + (" · ⚠ " + risk["calendar_warning"] if risk.get("calendar_warning") else ""))
     return out
