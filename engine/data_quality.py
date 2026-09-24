@@ -158,6 +158,13 @@ def _report(state, problems, notes, bars, last_close_ms=None):
     return dict(state=state, problems=problems, notes=notes, bars=bars, last_close_ms=last_close_ms)
 
 
+def add_problem(report, state, text):
+    """Add a problem found by a later check (e.g. the cross-timeframe check) to a report."""
+    report["state"] = worst(report["state"], state)
+    report["problems"].append(f"{state}: {text}")
+    return report
+
+
 def cross_venue(primary, secondary, max_pct=DEFAULTS["cross_venue_max_pct"]):
     """Compare last prices of the same coins on two exchanges.
 

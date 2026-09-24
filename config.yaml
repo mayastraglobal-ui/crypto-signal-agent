@@ -52,11 +52,24 @@ universe:                    # which coins the agent watches (AGENT_PROMPT.md se
 # How many candles (bars) of history to download for each timeframe.
 # More bars = more backtest trades = more reliable results (but slower).
 timeframes:
+  "1w": 500      # ~10 years, or since the coin was listed (higher-timeframe context)
+  "1d": 1000     # ~2.7 years (higher-timeframe context + later long backtests)
   "4h": 1500     # ~250 days
   "1h": 2000     # ~83 days
   "30m": 2000    # ~42 days
   "15m": 2000    # ~21 days
   "5m": 2000     # ~7 days
+
+timeframe_model:             # which timeframe does what (AGENT_PROMPT.md section 5)
+  # chain = from slow to fast. The last 3 are: setup -> trigger -> entry (execution);
+  # the ones before them give permission (bias). veto = a timeframe that can block a trade.
+  # This is a HYPOTHESIS: models A-D are compared with identical tests in later phases.
+  active: B
+  models:
+    A: {chain: [7d, 1d, 4h, 1h, 15m, 5m]}
+    B: {chain: [1d, 4h, 1h, 30m, 15m, 5m], veto: 1w}    # default
+    C: {chain: [7d, 1d, 1h, 30m, 15m, 5m]}
+    D: {chain: [1d, 2h, 30m, 15m, 5m]}                  # 2h is downloaded only once D is tested
 
 costs:                       # realistic trading costs - never set these to 0!
   # Exchange not chosen yet, so we use Binance's standard (VIP 0, no BNB discount) fees.

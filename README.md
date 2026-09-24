@@ -3,7 +3,7 @@
 This agent runs by itself on GitHub's free servers every hour, whether your PC is on or off. Each run it:
 
 1. **Picks coins.** 7 "signal" coins + 3 "research" coins (see "Which coins" below). It skips meme, AI, stable, wrapped, gold and leveraged coins, coins with less than 180 days of history, and coins that fail the volume, spread, order-book or ±25% rules.
-2. **Downloads charts.** It gets 1D, 4H, 1H, 30m, 15m and 5m candles for every coin.
+2. **Downloads charts.** It gets 1W, 1D, 4H, 1H, 30m, 15m and 5m candles for every coin, and builds rolling 7-day candles (see "Timeframes" below).
 3. **Checks the data is trustworthy** (see "Data check" below). Bad data = no signals.
 4. **Backtests every strategy** in `strategies.yaml` on every coin, including fees and slippage.
 5. **Throws away strategies that fail.** Each strategy has to be profitable in both the "training" period and an "unseen test" period, and has to pass the rules in `config.yaml`.
@@ -46,7 +46,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
 | `reports/universe_state.json` | The agent's memory of the 2-run counts | No |
 | `memory/universe_log.md` | Every coin that joined, left or was excluded, and why | Read it |
-| `engine/` | Parts of the engine (data check, coin selection, and more later) | Not needed |
+| `engine/` | Parts of the engine (data check, coin selection, timeframes, and more later) | Not needed |
 | `tests/` | Automatic tests | Not needed |
 | `memory/changelog.md` | Log of every rule / setting change | Read it; Claude updates it |
 
@@ -63,6 +63,20 @@ It **never trades for you** and never needs your exchange password or API keys.
   must be outside the top 7 for 2 runs in a row to leave. A member that breaks a rule leaves at once.
 - Every join, leave and exclusion is written to `memory/universe_log.md` with its reason.
   The limits are in `config.yaml` → `universe`.
+
+## Timeframes
+
+A timeframe is how long one candle lasts (1W = one week, 5m = five minutes). The agent works
+**top-down**: slow timeframes give **permission** (which direction is allowed), fast timeframes give
+**timing** (when to act). The default model (Model B, `config.yaml` → `timeframe_model`) is:
+**1W veto → 1D → 4H → 1H → 30m setup → 15m trigger → 5m entry**.
+
+- A candle only ever uses higher-timeframe candles that had **already closed** (a Wednesday candle
+  sees last week's weekly candle, never the unfinished current week). Tests check this every push.
+- **7D** = a rolling "week" that ends today, built from the daily candles.
+- **Cross-check:** every bigger candle must agree with the smaller candles inside it (a 4H high must
+  equal the highest of its four 1H highs). If not, that timeframe is DEGRADED - no signals from it.
+- The report section "0c. Timeframes loaded" shows the candle counts per coin and the cross-check.
 
 ## Data check (every run)
 

@@ -31,15 +31,16 @@ import requests
 import yaml
 
 from engine import data_quality as dq
+from engine import timeframes as tfm
 from engine import universe as uni
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 MEMORY = os.path.join(ROOT, "memory")
-TF_MS = {"5m": 300_000, "15m": 900_000, "30m": 1_800_000, "1h": 3_600_000,
-         "4h": 14_400_000, "1d": 86_400_000}
-HTF = {"5m": "1h", "15m": "1h", "30m": "4h", "1h": "4h", "4h": "1d"}
-TF_ORDER = ["4h", "1h", "30m", "15m", "5m"]
+TF_MS = tfm.TF_MS
+HTF = tfm.LEGACY_HTF            # higher timeframe used by the current strategies' htf_up / htf_down
+TF_ORDER = tfm.TRADE_ORDER      # timeframes the strategies run on
+CONTEXT = tfm.CONTEXT_TFS       # 1w, 1d: downloaded for higher-timeframe context
 BJ = dt.timezone(dt.timedelta(hours=8))
 
 
@@ -118,7 +119,7 @@ class Binance:
 class OKX:
     name = "OKX"
     BASE = "https://www.okx.com"
-    BAR = {"5m": "5m", "15m": "15m", "30m": "30m", "1h": "1H", "4h": "4H", "1d": "1Dutc"}
+    BAR = {"5m": "5m", "15m": "15m", "30m": "30m", "1h": "1H", "4h": "4H", "1d": "1Dutc", "1w": "1Wutc"}
 
     def __init__(self):
         self.s = requests.Session()
@@ -191,6 +192,24 @@ def fetch_checked(feed, symbol, tf, n, dq_cfg):
     return dq.check_candles(raw, TF_MS[tf], int(time.time() * 1000), dq_cfg)
 
 
+def cross_timeframe_check(data, sym, base, quality):
+    """Each higher candle must agree with the lower candles inside it (e.g. 4H high = highest of
+    its four 1H highs). A disagreement makes the HIGHER timeframe DEGRADED (no signals from it).
+    Returns {"1h>4h": {checked, mismatches, examples}, ...}."""
+    out = {}
+    for lo_tf, hi_tf in tfm.CONSISTENCY_PAIRS:
+        lo, hi = data.get((sym, lo_tf)), data.get((sym, hi_tf))
+        if lo is None or hi is None:
+            continue
+        r = tfm.consistency(lo, hi, TF_MS[lo_tf], TF_MS[hi_tf])
+        out[f"{lo_tf}>{hi_tf}"] = r
+        if r["mismatches"] and (base, hi_tf) in quality:
+            dq.add_problem(quality[(base, hi_tf)], dq.DEGRADED,
+                           f"{r['mismatches']} of {r['checked']} candle(s) disagree with the {lo_tf} "
+                           f"candles inside them ({'; '.join(r['examples'])})")
+    return out
+
+
 class Synthetic:
     """Fake but realistic-looking prices, used only for --offline testing.
     A scenario (dict, see --scenario) can set per-coin 24h volume, 24h change, order-book depth,
@@ -229,7 +248,7 @@ class Synthetic:
         if coin == "NEWCOIN" and tf == "1d":
             n = 40
         rng = self._rng(symbol, tf)
-        vol = {"5m": .003, "15m": .005, "30m": .007, "1h": .01, "4h": .02, "1d": .04}[tf]
+        vol = {"5m": .003, "15m": .005, "30m": .007, "1h": .01, "4h": .02, "1d": .04, "1w": .1}[tf]
         if coin == "FAKEUSD":
             vol = 0.0005       # behaves like a stablecoin
         regime = np.repeat(rng.choice([-1, 0, 1], size=n // 150 + 1), 150)[:n]
@@ -426,10 +445,9 @@ def add_htf(df, htf_df):
     t = pd.DataFrame({"close_time": htf_df["close_time"],
                       "htf_up": (hc > e50) & (e20 > e50),
                       "htf_down": (hc < e50) & (e20 < e50)})
-    m = pd.merge_asof(df[["close_time"]].astype("int64"), t.astype({"close_time": "int64"}),
-                      on="close_time", direction="backward")
-    df["htf_up"] = m["htf_up"].fillna(False).astype(bool).to_numpy()
-    df["htf_down"] = m["htf_down"].fillna(False).astype(bool).to_numpy()
+    m = tfm.align_higher(df, t, ["htf_up", "htf_down"])
+    df["htf_up"] = m["htf_up"].astype("boolean").fillna(False).astype(bool).to_numpy()
+    df["htf_down"] = m["htf_down"].astype("boolean").fillna(False).astype(bool).to_numpy()
     return df
 
 
@@ -678,7 +696,7 @@ def main():
     for u in pool:
         sym, base = u["symbol"], u["base"]
         try:
-            daily, rep = fetch_checked(feed, sym, "1d", 400, dq_cfg)
+            daily, rep = fetch_checked(feed, sym, "1d", int(cfg["timeframes"].get("1d", 1000)), dq_cfg)
         except Exception as e:
             log(f"skip {sym}: {e}")
             failed.append(base)
@@ -707,23 +725,26 @@ def main():
     log(f"Signal coins: {', '.join(view['signal'])} | research only: {', '.join(view['research_only'])}")
 
     # ---------- download every timeframe for the research coins ----------
-    data, coins = {}, []
+    data, coins, xtf = {}, [], {}
     by_base = {c["base"]: c for c in pool}
     tfs = [tf for tf in TF_ORDER if tf in cfg["timeframes"]]
     for base in view["research"]:
         u = by_base[base]
         sym = u["symbol"]
         try:
-            got = {tf: fetch_checked(feed, sym, tf, int(cfg["timeframes"][tf]), dq_cfg) for tf in tfs}
+            got = {tf: fetch_checked(feed, sym, tf, int(cfg["timeframes"][tf]), dq_cfg)
+                   for tf in ["1w"] + tfs}
         except Exception as e:
             log(f"skip {sym}: {e}")
             failed.append(base)
             continue
         data[(sym, "1d")] = daily_data[base]
+        data[(sym, "7d")] = tfm.rolling_7d(daily_data[base])     # built from checked daily candles
         for tf, (df_tf, rep) in got.items():
             data[(sym, tf)] = df_tf
             quality[(base, tf)] = rep
-        for tf in ["1d"] + tfs:
+        xtf[base] = None if args.offline else cross_timeframe_check(data, sym, base, quality)
+        for tf in CONTEXT + tfs:
             rep = quality[(base, tf)]
             if rep["state"] != dq.GOOD:
                 log(f"data {rep['state']}: {sym} {tf}: {'; '.join(rep['problems'])}")
@@ -736,7 +757,7 @@ def main():
                            {c["base"]: second.get(c["symbol"]) for c in coins},
                            dq_cfg["cross_venue_max_pct"])
     coin_state = {c["base"]: dq.worst(cross[c["base"]]["state"],
-                                     *(quality[(c["base"], tf)]["state"] for tf in ["1d"] + tfs))
+                                     *(quality[(c["base"], tf)]["state"] for tf in CONTEXT + tfs))
                   for c in coins}
     watched = always | set(prev_members) | set(view["research"])
     for b in watched:     # coins we should be watching but could not trust
@@ -748,7 +769,7 @@ def main():
 
     # a signal coin whose data turned UNSAFE on any timeframe leaves the list at once
     unsafe_members = {b: "price data UNSAFE: " + "; ".join(
-                          f"{tf} {p}" for tf in ["1d"] + tfs for p in quality.get((b, tf), {}).get("problems", []))
+                          f"{tf} {p}" for tf in CONTEXT + tfs for p in quality.get((b, tf), {}).get("problems", []))
                       for b in view["signal"] if coin_state.get(b) == dq.UNSAFE}
     if unsafe_members:
         ustate, ev = uni.remove_members(ustate, unsafe_members)
@@ -972,7 +993,7 @@ def main():
         data_source=feed.name, second_exchange=second_name, failed_downloads=failed,
         blocked_signals=blocked,
         coins={c["base"]: dict(state=coin_state[c["base"]], cross_venue=cross[c["base"]],
-                               timeframes={tf: quality[(c["base"], tf)] for tf in ["1d"] + tfs})
+                               timeframes={tf: quality[(c["base"], tf)] for tf in CONTEXT + tfs})
                for c in coins})
     for b in elig:        # candidates whose daily data failed the checks (not downloaded further)
         r = quality[(b, "1d")]
@@ -981,6 +1002,24 @@ def main():
                                                                          note="not checked"),
                                       timeframes={"1d": r})
     json.dump(dq_out, open(os.path.join(REPORTS, "data_quality.json"), "w"), indent=1, default=float)
+
+    # ---------- timeframes report ----------
+    models = cfg.get("timeframe_model", {}).get("models", tfm.DEFAULT_MODELS)
+    active = cfg.get("timeframe_model", {}).get("active", "B")
+    available = set(CONTEXT + tfs + ["7d"])
+    tf_out = dict(active_model=active, active_chain=tfm.describe(models[active]),
+                  missing_for_active=tfm.missing_timeframes(models[active], available),
+                  models={k: dict(chain=tfm.describe(m), missing=tfm.missing_timeframes(m, available))
+                          for k, m in models.items()},
+                  coins={})
+    for c in coins:
+        sym, b = c["symbol"], c["base"]
+        bars = {tf: int(len(data[(sym, tf)])) if data.get((sym, tf)) is not None else 0
+                for tf in ["1w", "1d", "7d"] + tfs}
+        w = data.get((sym, "1w"))
+        since = (pd.to_datetime(int(w["open_time"].iloc[0]), unit="ms").strftime("%Y-%m")
+                 if w is not None and len(w) else None)
+        tf_out["coins"][b] = dict(bars=bars, weekly_history_from=since, cross_check=xtf.get(b))
 
     # ---------- universe report, memory of streaks, and the append-only universe log ----------
     rank_vol = {c["base"]: i + 1 for i, c in enumerate(cands)}
@@ -1023,7 +1062,7 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
-               coin_snapshot=snap, data_quality=dq_out, universe=u_out)
+               coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -1085,6 +1124,37 @@ def render_universe(u, w):
     w("")
 
 
+def render_timeframes(t, w):
+    w("## 0c. Timeframes loaded")
+    w(f"- **Timeframe model {t['active_model']} (active):** {t['active_chain']}. "
+      "Higher timeframes give permission, lower ones give timing; a candle only ever uses "
+      "higher-timeframe candles that had already closed.")
+    if t["missing_for_active"]:
+        w(f"- ⚠️ Model {t['active_model']} needs timeframes that are not downloaded: "
+          + ", ".join(t["missing_for_active"]))
+    later = [f"{k} (needs {', '.join(m['missing'])})" for k, m in t["models"].items() if m["missing"]]
+    if later:
+        w("- Models to test later: " + "; ".join(later))
+    if not t["coins"]:
+        w("")
+        return
+    cols = list(next(iter(t["coins"].values()))["bars"])
+    w("\n| Coin | " + " | ".join(c.upper() for c in cols) + " | Weekly history from | Cross-check |")
+    w("|---|" + "---|" * (len(cols) + 2))
+    for coin, c in t["coins"].items():
+        x = c["cross_check"]
+        if x is None:
+            check = "not run (offline test data)"
+        else:
+            bad = [f"{k}: {v['mismatches']}" for k, v in x.items() if v["mismatches"]]
+            n = sum(v["checked"] for v in x.values())
+            check = ("⚠️ disagree: " + ", ".join(bad)) if bad else f"OK ({n} candles)"
+        w(f"| {coin} | " + " | ".join(str(c["bars"][k]) for k in cols)
+          + f" | {c['weekly_history_from'] or '-'} | {check} |")
+    w("\n*Candle counts per timeframe. 7D = rolling 7-day candles built from the daily candles. "
+      "Cross-check = do the bigger candles agree with the smaller candles inside them?*\n")
+
+
 def render_dq(q, w):
     w("## 0. Data check")
     meaning = {dq.GOOD: "all data passed the checks - signals allowed",
@@ -1130,6 +1200,7 @@ def render_md(o, cfg):
     w("> Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.\n")
     render_dq(o["data_quality"], w)
     render_universe(o["universe"], w)
+    render_timeframes(o["timeframes"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]
