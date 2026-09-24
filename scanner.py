@@ -31,6 +31,8 @@ import requests
 import yaml
 
 from engine import data_quality as dq
+from engine import evidence as evid
+from engine import features as fe
 from engine import timeframes as tfm
 from engine import universe as uni
 
@@ -294,8 +296,10 @@ def _wilder(x, n):
     return x.ewm(alpha=1 / n, adjust=False, min_periods=n).mean()
 
 
-def make_namespace(df):
-    """Everything a strategy rule can use. Results are cached per candle table."""
+def make_namespace(df, feats=None):
+    """Everything a strategy rule can use. Results are cached per candle table.
+    feats (engine.features.compute) adds the feature engine's columns by name, e.g.
+    displacement_up, bull_engulf, close_loc, rel_vol, structure_up, stoch_rsi_k, vwap, obv."""
     cache = {}
     o, h, l, c, v = (df[k] for k in ("open", "high", "low", "close", "volume"))
 
@@ -417,6 +421,10 @@ def make_namespace(df):
               lowest=lowest, shift=shift, prev=prev, vol_sma=vol_sma, pct_rank=pct_rank,
               supertrend_dir=supertrend_dir, cross_up=cross_up, cross_down=cross_down,
               abs=abs, min=min, max=max, np=np)
+    if feats is not None:
+        for col in feats.columns:
+            if col not in ns:           # never replace an existing building block (e.g. atr())
+                ns[col] = pd.Series(feats[col].to_numpy(), index=df.index)
     return ns
 
 
@@ -794,6 +802,9 @@ def main():
     per = {}       # (strategy, tf) -> {coin: trades}
     live = []      # candidate signals
     snap = {}      # coin snapshot for report
+    fe_cfg = fe.settings(cfg.get("features"))
+    feat_last = {}                          # (coin, tf) -> features of the newest closed candles
+    ev_frames = {tf: [] for tf in tfs}      # candle evidence input, per timeframe
     lb = int(cfg["signals"]["lookback_bars"])
     for u in coins:
         sym, base = u["symbol"], u["base"]
@@ -802,7 +813,11 @@ def main():
             if df is None or len(df) < 300 or quality[(base, tf)]["state"] == dq.UNSAFE:
                 continue    # never backtest on data we cannot trust
             df = add_htf(df.copy(), data.get((sym, HTF[tf])))
-            ns = make_namespace(df)
+            feats = fe.compute(df, TF_MS[tf], fe_cfg)
+            feats.index = df.index
+            feat_last[(base, tf)] = feats.tail(3)
+            ev_frames[tf].append((base, df, feats))
+            ns = make_namespace(df, feats)
             df["_atr"] = ns["atr"](14)
             n = len(df)
             if tf == "1h":
@@ -853,6 +868,13 @@ def main():
                                      rsi=float(ns["rsi"](ns["close"], 14).iloc[t_i]),
                                      vol_ratio=float(df["volume"].iloc[t_i] / ns["vol_sma"](20).iloc[t_i])))
                     break
+
+    # ---------- candle evidence: patterns vs random entries (research evidence, not a signal) ----------
+    ev_cfg = evid.settings(cfg.get("evidence"))
+    costs_by_dir = {1: trade_costs(cfg, 1), -1: trade_costs(cfg, -1)}
+    evidence = {tf: evid.study(ev_frames[tf], costs_by_dir, TF_MS[tf] / 3_600_000, ev_cfg, seed_key=tf)
+                for tf in tfs if ev_frames[tf]}
+    del ev_frames
 
     # ---------- forward test (live proof) ----------
     logdf = update_forward(load_log(), data, quality, feed, cfg) if not args.offline else load_log()
@@ -1003,6 +1025,25 @@ def main():
                                       timeframes={"1d": r})
     json.dump(dq_out, open(os.path.join(REPORTS, "data_quality.json"), "w"), indent=1, default=float)
 
+    # ---------- features + candle evidence reports ----------
+    EVENT_COLS = ["displacement_up", "displacement_down", "bull_engulf", "bear_engulf", "bull_reject",
+                  "bear_reject", "breakout_up", "breakout_down", "retest_up", "retest_down",
+                  "failed_breakout_up", "failed_breakout_down", "bull_div", "bear_div"]
+    feat_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), coins={})
+    for (b, tf), last in feat_last.items():
+        row = last.iloc[-1]
+        vals = {k: (None if isinstance(x, float) and not np.isfinite(x) else
+                    bool(x) if isinstance(x, (bool, np.bool_)) else
+                    float(x) if isinstance(x, (int, float, np.integer, np.floating)) else x)
+                for k, x in row.items()}
+        vals["recent_events"] = [e for e in EVENT_COLS if last[e].any()]
+        feat_out["coins"].setdefault(b, {})[tf] = vals
+    json.dump(feat_out, open(os.path.join(REPORTS, "features.json"), "w"), indent=1, default=str)
+    ev_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"),
+                  label="RESEARCH EVIDENCE, NOT A SIGNAL", settings=ev_cfg,
+                  coins=[c["base"] for c in coins], timeframes=evidence)
+    json.dump(ev_out, open(os.path.join(REPORTS, "feature_evidence.json"), "w"), indent=1, default=float)
+
     # ---------- timeframes report ----------
     models = cfg.get("timeframe_model", {}).get("models", tfm.DEFAULT_MODELS)
     active = cfg.get("timeframe_model", {}).get("active", "B")
@@ -1062,7 +1103,9 @@ def main():
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
-               coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out)
+               coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out,
+               features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
+               candle_evidence=ev_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -1121,6 +1164,50 @@ def render_universe(u, w):
     if u["excluded_by_list"]:
         w(f"\n*Skipped by your exclusion lists:* " + ", ".join(
             f"{c}" for c in sorted(u["excluded_by_list"])) + " (see `config.yaml`)")
+    w("")
+
+
+def render_features(fs, w):
+    w("## 0d. Market features now (1H, newest closed candle)")
+    w("Measurements only - nothing trades on these yet. Structure = the last confirmed swing labels "
+      "(HH/HL = up, LH/LL = down). Close location: 0 = closed at the low, 1 = at the high.\n")
+    w("| Coin | Structure | Last swing high / low | Close location | Volume vs normal | Candle size vs normal "
+      "| Last 3 candles |")
+    w("|---|---|---|---|---|---|---|")
+    num = lambda x, f="{:.2f}": "-" if x is None else f.format(x)
+    for coin, f in fs.items():
+        if not f:
+            w(f"| {coin} | no 1H data | | | | | |")
+            continue
+        st = f.get("structure") or "not enough swings"
+        labels = f"{f.get('swing_high_label') or '-'}/{f.get('swing_low_label') or '-'}"
+        w(f"| {coin} | {st} ({labels}) | {num(f.get('last_swing_high'), '{:,.6g}')} / "
+          f"{num(f.get('last_swing_low'), '{:,.6g}')} | {num(f.get('close_loc'))} | "
+          f"{num(f.get('rel_vol'), '{:.2f}x')} | {num(f.get('atr_ratio'), '{:.2f}x')} | "
+          f"{', '.join(f['recent_events']) or '-'} |")
+    w("")
+
+
+def render_evidence(e, w):
+    w("## 0e. Candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL")
+    st = e["settings"]
+    w(f"If you had entered at the NEXT candle's open after each pattern, with a stop {st['stop_atr']:g} ATR away: "
+      f"how often did price reach +1R / +2R / +3R **after costs** before the stop (max {st['max_bars']} candles)? "
+      f"**Random** = the same test on random candles (same coins, same direction, "
+      f"{st['random_per_event']}x as many). **Verdict** compares +1R with random: 'beats chance' only if "
+      "better by more than 2 standard errors. **Stopped** = the stop was hit within the time limit "
+      "(it can happen after +1R was reached, so the columns can add up to more than 100%). "
+      "Many rows are compared at once, so an occasional "
+      "'beats chance' can still be luck - and none of this includes the other rules a real strategy needs.\n")
+    w("| TF | Pattern | Entries | +1R | +2R | +3R | Stopped | Random +1R | Random +2R | Verdict | Cost per trade |")
+    w("|---|---|---|---|---|---|---|---|---|---|---|")
+    pct = lambda x: "-" if x is None else f"{x * 100:.0f}%"
+    for tf, pats in e["timeframes"].items():
+        for pat, r in pats.items():
+            cost = "-" if r["cost_r"] is None else f"{r['cost_r']:.2f}R"
+            w(f"| {tf} | {pat} | {r['events']} | {pct(r['reached'][0])} | {pct(r['reached'][1])} | "
+              f"{pct(r['reached'][2])} | {pct(r['stopped'])} | {pct(r['random_reached'][0])} | "
+              f"{pct(r['random_reached'][1])} | {r['verdict']} | {cost} |")
     w("")
 
 
@@ -1201,6 +1288,8 @@ def render_md(o, cfg):
     render_dq(o["data_quality"], w)
     render_universe(o["universe"], w)
     render_timeframes(o["timeframes"], w)
+    render_features(o["features_1h"], w)
+    render_evidence(o["candle_evidence"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]
