@@ -1,6 +1,6 @@
 # Crypto Signal Report
 
-**Updated:** 2026-09-24 16:09 Beijing time (2026-09-24 08:09 UTC) · data: Binance · 23 coins scanned
+**Updated:** 2026-09-24 16:23 Beijing time (2026-09-24 08:23 UTC) · data: Binance · 23 coins scanned
 
 > Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.
 
@@ -32,19 +32,19 @@ WORKS = passed every test -> can give signals · WEAK = positive but not proven 
 | trend_pullback | 4h | **FAILS** | 824 | 42.7 | -0.226 | 0.64 | -0.279 | -0.139 | 41.0 h | 0 | avg -0.23R/trade; profit factor 0.64; not profitable in BOTH train and unseen test |
 | trend_pullback | 30m | **FAILS** | 1259 | 46.0 | -0.238 | 0.63 | -0.276 | -0.171 | 4.8 h | 0 | avg -0.24R/trade; profit factor 0.63; not profitable in BOTH train and unseen test |
 | macd_trend_cross | 1h | **FAILS** | 441 | 44.9 | -0.251 | 0.62 | -0.381 | +0.047 | 10.3 h | 0 | avg -0.25R/trade; profit factor 0.62; not profitable in BOTH train and unseen test |
-| rsi2_dip_buy | 15m | **FAILS** | 1821 | 40.5 | -0.263 | 0.31 | -0.304 | -0.186 | 49 min | 0 | avg -0.26R/trade; profit factor 0.31; not profitable in BOTH train and unseen test |
+| rsi2_dip_buy | 15m | **FAILS** | 1820 | 40.4 | -0.261 | 0.31 | -0.301 | -0.185 | 49 min | 0 | avg -0.26R/trade; profit factor 0.31; not profitable in BOTH train and unseen test |
 | macd_trend_cross | 30m | **FAILS** | 436 | 45.2 | -0.301 | 0.55 | -0.322 | -0.248 | 5.1 h | 0 | avg -0.30R/trade; profit factor 0.55; not profitable in BOTH train and unseen test |
 | ema_9_21_cross | 1h | **FAILS** | 374 | 40.6 | -0.312 | 0.53 | -0.386 | -0.163 | 9.0 h | 0 | avg -0.31R/trade; profit factor 0.53; not profitable in BOTH train and unseen test |
 | trend_pullback | 1h | **FAILS** | 1444 | 43.1 | -0.328 | 0.52 | -0.424 | -0.136 | 9.6 h | 0 | avg -0.33R/trade; profit factor 0.52; not profitable in BOTH train and unseen test |
 | bb_squeeze_breakout | 30m | **FAILS** | 314 | 39.5 | -0.360 | 0.5 | -0.436 | -0.220 | 3.1 h | 0 | avg -0.36R/trade; profit factor 0.50; not profitable in BOTH train and unseen test |
-| trend_pullback | 15m | **FAILS** | 1585 | 43.2 | -0.371 | 0.49 | -0.460 | -0.186 | 2.4 h | 0 | avg -0.37R/trade; profit factor 0.49; not profitable in BOTH train and unseen test |
+| trend_pullback | 15m | **FAILS** | 1585 | 43.1 | -0.374 | 0.49 | -0.461 | -0.191 | 2.4 h | 0 | avg -0.37R/trade; profit factor 0.49; not profitable in BOTH train and unseen test |
 | liquidity_sweep_reversal | 1h | **FAILS** | 745 | 41.1 | -0.413 | 0.43 | -0.398 | -0.439 | 5.3 h | 0 | avg -0.41R/trade; profit factor 0.43; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 15m | **FAILS** | 293 | 39.6 | -0.464 | 0.4 | -0.525 | -0.326 | 2.2 h | 0 | avg -0.46R/trade; profit factor 0.40; not profitable in BOTH train and unseen test |
 | liquidity_sweep_reversal | 30m | **FAILS** | 797 | 40.3 | -0.466 | 0.39 | -0.435 | -0.528 | 2.6 h | 0 | avg -0.47R/trade; profit factor 0.39; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 15m | **FAILS** | 292 | 39.4 | -0.466 | 0.4 | -0.533 | -0.315 | 2.2 h | 0 | avg -0.47R/trade; profit factor 0.40; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 5m | **FAILS** | 267 | 35.6 | -0.549 | 0.37 | -0.546 | -0.554 | 43 min | 0 | avg -0.55R/trade; profit factor 0.37; not profitable in BOTH train and unseen test |
-| bb_squeeze_breakout | 15m | **FAILS** | 330 | 34.5 | -0.556 | 0.33 | -0.547 | -0.573 | 93 min | 0 | avg -0.56R/trade; profit factor 0.33; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 5m | **FAILS** | 267 | 35.6 | -0.549 | 0.37 | -0.550 | -0.545 | 43 min | 0 | avg -0.55R/trade; profit factor 0.37; not profitable in BOTH train and unseen test |
+| bb_squeeze_breakout | 15m | **FAILS** | 330 | 34.5 | -0.556 | 0.33 | -0.538 | -0.590 | 93 min | 0 | avg -0.56R/trade; profit factor 0.33; not profitable in BOTH train and unseen test |
 | liquidity_sweep_reversal | 15m | **FAILS** | 755 | 37.1 | -0.608 | 0.32 | -0.657 | -0.537 | 76 min | 0 | avg -0.61R/trade; profit factor 0.32; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 5m | **FAILS** | 709 | 30.9 | -0.784 | 0.25 | -0.863 | -0.611 | 23 min | 0 | avg -0.78R/trade; profit factor 0.25; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 5m | **FAILS** | 710 | 30.8 | -0.787 | 0.25 | -0.863 | -0.622 | 23 min | 0 | avg -0.79R/trade; profit factor 0.25; not profitable in BOTH train and unseen test |
 
 ## 4. Live track record (real signals, checked after they happened)
 - 0 signals logged, none finished yet. Give it a few weeks before trusting anything.
