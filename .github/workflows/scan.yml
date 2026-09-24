@@ -1,4 +1,49 @@
-name: Email new signals
+name: Crypto Signal Scan
+
+on:
+  schedule:
+    - cron: "7 * * * *"     # every hour at minute 7 (UTC). GitHub may start it a few minutes late.
+  workflow_dispatch:         # lets you press "Run workflow" by hand
+    inputs:
+      test_email:
+        description: "Send a test email"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write            # needed to save the reports back into the repo
+
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ALERT_TO: ${{ secrets.ALERT_TO }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Test email
+        if: ${{ inputs.test_email }}
+        run: python notify.py test
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Scan, backtest, find signals
+        run: python scanner.py
+
+      - name: Email new signals
         continue-on-error: true
         run: python notify.py
 
