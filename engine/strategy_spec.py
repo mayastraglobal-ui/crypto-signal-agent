@@ -33,6 +33,94 @@ VERSION_RE = re.compile(r"^\d+\.\d+$")
 R_RE = re.compile(r"^(\d+(?:\.\d+)?)R$")
 MAX_RE = re.compile(r"^max\((.+),(.+)\)$")
 NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+PARAM_RE = re.compile(r"\{(\w+)\}")
+TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets"]
+
+
+def _fmt(v):
+    return str(int(v)) if isinstance(v, int) and not isinstance(v, bool) else repr(float(v))
+
+
+def _fill(x, p):
+    if isinstance(x, str):
+        return PARAM_RE.sub(lambda m: _fmt(p[m.group(1)]), x)
+    if isinstance(x, list):
+        return [_fill(v, p) for v in x]
+    if isinstance(x, dict):
+        return {k: _fill(v, p) for k, v in x.items()}
+    return x
+
+
+def placeholders(spec):
+    """Names used as {name} in the rules, stop and targets."""
+    found = set()
+
+    def walk(x):
+        if isinstance(x, str):
+            found.update(PARAM_RE.findall(x))
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+        elif isinstance(x, dict):
+            for v in x.values():
+                walk(v)
+    for k in TEMPLATE_KEYS:
+        walk(spec.get(k))
+    return found
+
+
+def render(spec, params=None, stop=None, time_stop_bars=None):
+    """The card with every {name} replaced by its value (params overrides the card's own params).
+    The engine always runs rendered cards; the fingerprint is taken from the rendered rules."""
+    p = dict(spec.get("params") or {})
+    p.update(params or {})
+    out = dict(spec)
+    for k in TEMPLATE_KEYS:
+        if k in out and out[k] is not None:
+            out[k] = _fill(out[k], p)
+    if stop:
+        out["stop"] = dict(out["stop"], **stop)
+    if time_stop_bars:
+        out["time_stop_bars"] = int(time_stop_bars)
+    out["params"] = p
+    return out
+
+
+def nudge(v, factor):
+    """v moved by factor (e.g. 0.8 / 1.2). Whole numbers stay whole and always move by at least 1."""
+    if isinstance(v, int) and not isinstance(v, bool):
+        new = int(round(v * factor))
+        if new == v:
+            new = v + (1 if factor > 1 else -1)
+        return max(1, new)
+    return round(float(v) * factor, 6)
+
+
+def variants(spec, pct):
+    """The +-pct% robustness test (AGENT_PROMPT.md section 11): every parameter moved down and up,
+    ONE AT A TIME - the card's params plus the stop size and the time stop.
+    spec: a loaded card (with '_raw'). Returns [(label, rendered card, entry rules changed?)]."""
+    raw = spec.get("_raw", spec)
+    out = []
+    for f in (1 - pct / 100, 1 + pct / 100):
+        for name, v in (raw.get("params") or {}).items():
+            nv = nudge(v, f)
+            out.append((f"{name} {_fmt(v)}→{_fmt(nv)}", _finish(render(raw, {name: nv}), raw), True))
+        st = raw["stop"]
+        for k in (("atr",) if st["method"] == "atr" else ("buffer_atr", "max_width_atr")):
+            v = st.get(k, 0.2 if k == "buffer_atr" else 3.0)
+            nv = nudge(float(v), f)
+            out.append((f"stop {k} {_fmt(float(v))}→{_fmt(nv)}", _finish(render(raw, stop={k: nv}), raw), False))
+        tb = int(raw["time_stop_bars"])
+        nv = nudge(tb, f)
+        out.append((f"time_stop_bars {tb}→{nv}", _finish(render(raw, time_stop_bars=nv), raw), False))
+    return out
+
+
+def _finish(card, raw):
+    card = dict(card, version=str(raw["version"]), cooldown_bars=int(raw.get("cooldown_bars", 0) or 0))
+    card["_raw"] = raw
+    return card
 
 
 def key(spec):
@@ -41,7 +129,7 @@ def key(spec):
 
 def fingerprint(spec):
     """Short hash of the trade-deciding parts of a card."""
-    core = {k: spec.get(k) for k in LOGIC_KEYS}
+    core = {k: spec.get(k) for k in LOGIC_KEYS}      # call it on RENDERED cards (see render)
     return hashlib.sha256(json.dumps(core, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
 
@@ -83,7 +171,7 @@ def columns_needed(spec):
 
 
 def check(spec, labels, timeframes):
-    """List of problems with one card (empty = fine)."""
+    """List of problems with one card (empty = fine). spec = the card as written (with {params})."""
     errs = [f"missing '{k}'" for k in REQUIRED if spec.get(k) in (None, "", [])]
     if errs:
         return errs
@@ -126,6 +214,18 @@ def check(spec, labels, timeframes):
         errs.append("time_stop_bars must be a positive whole number")
     if spec.get("confirm_5m"):
         errs.append("confirm_5m: the 5-minute confirmation protocol arrives in Phase 10 - set it to false")
+    params = spec.get("params") or {}
+    if not isinstance(params, dict):
+        errs.append("params must be a list of name: number")
+        return errs
+    bad = [k for k, v in params.items() if isinstance(v, bool) or not isinstance(v, (int, float)) or v <= 0]
+    if bad:
+        errs.append(f"params {bad} must be positive numbers")
+    used = placeholders(spec)
+    if used - set(params):
+        errs.append(f"rules use {sorted(used - set(params))} but params does not define them")
+    if set(params) - used:
+        errs.append(f"params {sorted(set(params) - used)} are not used in any rule")
     return errs
 
 
@@ -140,7 +240,8 @@ def load(items, labels, timeframes):
         if errs:
             problems[name] = errs
             continue
-        s = dict(s, version=str(s["version"]), cooldown_bars=int(s.get("cooldown_bars", 0) or 0))
+        raw = dict(s, version=str(s["version"]))
+        s = _finish(render(raw), raw)
         seen.add(key(s))
         (ok if s["status"] == "FORMALIZED" else idle).append(s)
     ids = {s["id"] for s in ok + idle}

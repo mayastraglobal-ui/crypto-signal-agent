@@ -5,9 +5,10 @@ Strategy lifecycle, promotion gates and market gates (AGENT_PROMPT.md sections 5
                                     \\-> FAILED                        -> RETIRED / REVISED
 
 - The AUTHOR sets IDEA / FORMALIZED / RETIRED in strategies.yaml.
-- The ENGINE sets BACKTESTING / VALIDATION / FAILED per strategy version and timeframe, every run.
-- PAPER_TRADING needs the Phase 8 tests (walk-forward windows, costs +50%, +-20% parameters,
-  beating the control twin), so nothing can reach it yet. APPROVED always needs the operator's yes.
+- The ENGINE sets BACKTESTING / VALIDATION / FAILED / PAPER_TRADING / RETIRED per strategy version and
+  timeframe, once a day (research.py). PAPER_TRADING needs every Phase 8 test (walk-forward, costs +50%,
+  +-20% parameters, >= 3 coins, no overfitting flag, beating the control twin). APPROVED always needs
+  the operator's yes - the engine never sets it.
 
 Market gates (applied to every candle, in backtests AND live, using closed candles only):
 - regime gate: the strategy trades only in the regimes it lists (on its regime timeframe);
@@ -20,7 +21,7 @@ import pandas as pd
 
 from engine import regime as rg
 
-ENGINE_STATUSES = ["BACKTESTING", "VALIDATION", "FAILED", "PAPER_TRADING", "APPROVED"]
+ENGINE_STATUSES = ["BACKTESTING", "VALIDATION", "FAILED", "PAPER_TRADING", "APPROVED", "RETIRED"]
 PERMISSION_TFS = ["1d", "4h", "1h"]
 
 
@@ -67,12 +68,17 @@ def gate_arrays(spec, tf, reg, n):
     return regime_ok & perm_long, regime_ok & perm_short, regime_ok, perm_long, perm_short
 
 
-def judge(st, ins, oos, live, V, penalty_r=0.0):
+def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None):
     """Section 12 '-> VALIDATION' gate on one strategy version x timeframe (all coins pooled).
     st / ins / oos: stats of all / develop (first 70%) / unseen test (last 30%) trades.
-    live: forward-test stats or None. Returns (status, reasons, required expectancy)."""
+    live: forward-test stats or None. median_cost_r: typical round-trip cost in R (section 11 cost
+    viability: the stop must be >= 4x the round-trip cost, i.e. cost <= 0.25R). None = not checked.
+    Returns (status, reasons, required expectancy)."""
     need = V["min_expectancy_r"] + penalty_r
     reasons = []
+    if median_cost_r is not None and median_cost_r > V["max_cost_to_r"]:
+        reasons.append(f"not cost-viable: fees + slippage {median_cost_r:.2f}R per trade "
+                       f"(stop must be ≥ {1 / V['max_cost_to_r']:.0f}x the round-trip cost)")
     if st["n"] < V["min_trades"]:
         reasons.append(f"only {st['n']} trades")
     if st["exp_r"] < need:
@@ -95,13 +101,84 @@ def judge(st, ins, oos, live, V, penalty_r=0.0):
     return "BACKTESTING", reasons, need
 
 
+def paper_gate(status, ev, twin, R):
+    """Section 12 '-> PAPER_TRADING' (automatic). ev = research.evaluate() of this cell;
+    twin = its control twin's evaluate() or None (only strategies that HAVE a twin need one).
+    Returns (passed, reasons)."""
+    reasons = []
+    if status != "VALIDATION":
+        reasons.append("not in VALIDATION")
+    wf = ev["walk_forward"]
+    if not wf["passed"]:
+        reasons.append(f"walk-forward: {wf['positive']} of {wf['judged']} windows profitable, "
+                       f"together {wf['pooled_avg_r']:+.2f}R")
+    if len(ev["positive_coins"]) < R["min_positive_coins"]:
+        reasons.append(f"edge on {len(ev['positive_coins'])} coin(s), needs {R['min_positive_coins']}")
+    if ev["stress"]["avg_r"] <= 0:
+        reasons.append(f"costs +50%: {ev['stress']['avg_r']:+.2f}R per trade")
+    if not ev["perturbation"]["stable"]:
+        w = ev["perturbation"]["worst"]
+        reasons.append("±20% test: " + (f"{w['change']} gives {w['avg_r']:+.2f}R" if w else "not run"))
+    if ev["overfit"]:
+        reasons.append("HIGH OVERFITTING RISK: " + "; ".join(ev["overfit"]))
+    if twin is not None:
+        cmp = twin_compare(ev, twin, R)
+        if cmp is not True:
+            reasons.append("control twin: " + ("too few trades to compare" if cmp is None else "does not beat it"))
+    return not reasons, reasons
+
+
+def twin_compare(ev, twin, R):
+    """True = beats the twin overall AND in the validate part; None = too few trades to tell."""
+    a, b = ev["all"], twin["all"]
+    if min(a["n"], b["n"]) < R["twin_min_trades"] or min(ev["validate"]["n"], twin["validate"]["n"]) < R["twin_min_validate_trades"]:
+        return None
+    return bool(a["avg_r"] > b["avg_r"] and ev["validate"]["avg_r"] > twin["validate"]["avg_r"])
+
+
+def paper_record(results_r):
+    """Closed PAPER signals of one cell, oldest first -> n, average of the last 20, drawdown."""
+    r = np.asarray(results_r, dtype=float)
+    if not len(r):
+        return dict(n=0, last_avg_r=None, max_dd_r=0.0)
+    eq = np.cumsum(r)
+    dd = float((np.maximum.accumulate(np.r_[0, eq]) - np.r_[0, eq]).max())
+    return dict(n=len(r), last_avg_r=float(r[-20:].mean()), max_dd_r=dd)
+
+
+def next_status(prev, base, paper_ok, paper, failed_runs, R):
+    """The lifecycle move for one strategy version x timeframe after a research run.
+    prev: status before; base: judge() result on Layer B; paper_ok: paper_gate() passed;
+    paper: paper_record(); failed_runs: consecutive runs that failed the VALIDATION gate while in paper.
+    Returns (status, note, failed_runs). The engine never sets APPROVED."""
+    if prev == "RETIRED":
+        return "RETIRED", "retired - only a new version can be tested again", 0
+    if prev in ("PAPER_TRADING", "APPROVED"):
+        if paper["n"] >= R["paper_retire_last_n"] and paper["last_avg_r"] < R["paper_retire_below_r"]:
+            return "RETIRED", (f"last {R['paper_retire_last_n']} paper signals average "
+                               f"{paper['last_avg_r']:+.2f}R (limit {R['paper_retire_below_r']:+.2f}R)"), 0
+        if paper["max_dd_r"] > R["paper_max_dd_r"]:
+            return "RETIRED", f"paper drawdown {paper['max_dd_r']:.1f}R (limit {R['paper_max_dd_r']}R)", 0
+        if base != "VALIDATION":
+            failed_runs += 1
+            if failed_runs >= R["demote_after_failed_runs"]:
+                return base, f"failed the long-history test {failed_runs} runs in a row - leaves {prev}", 0
+            return prev, f"failed the long-history test ({failed_runs} of {R['demote_after_failed_runs']} runs)", failed_runs
+        return prev, "", 0
+    if base == "VALIDATION" and paper_ok:
+        return "PAPER_TRADING", "passed every Phase 8 test - paper signals start (logged, never emailed)", 0
+    return base, "", 0
+
+
 def empty_registry():
     return dict(versions={}, cells={})
 
 
 VERSION_COLS = ["id", "version", "family", "fingerprint", "experiment", "first_tested_utc", "hypothesis"]
 CELL_COLS = ["tf", "status", "since_utc", "last_checked_utc", "trades", "avg_r", "profit_factor", "max_dd_r",
-             "train_avg_r", "test_avg_r", "required_avg_r", "beats_twin", "gates_failed"]
+             "train_avg_r", "test_avg_r", "required_avg_r", "beats_twin", "gates_failed",
+             "history_from", "walk_forward", "stress_avg_r", "perturb_worst", "positive_coins",
+             "median_cost_r", "overfit", "paper_gate_failed", "paper_signals", "failed_runs"]
 
 
 def registry_to_frame(reg):
@@ -120,9 +197,9 @@ def registry_from_frame(df):
     for r in df.to_dict("records"):
         r = {k: (None if isinstance(x, float) and np.isnan(x) else x) for k, x in r.items()}
         k = f"{r['id']}@{r['version']}"
-        reg["versions"][k] = {c: r[c] for c in VERSION_COLS}
+        reg["versions"][k] = {c: r.get(c) for c in VERSION_COLS}      # older files lack newer columns
         reg["versions"][k]["experiment"] = int(r["experiment"])
-        reg["cells"][f"{k}|{r['tf']}"] = {c: r[c] for c in CELL_COLS if c != "tf"}
+        reg["cells"][f"{k}|{r['tf']}"] = {c: r.get(c) for c in CELL_COLS if c != "tf"}
     return reg
 
 
