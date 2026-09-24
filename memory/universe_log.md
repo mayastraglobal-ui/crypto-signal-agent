@@ -15,3 +15,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **JOIN** SOL - starting list (no members yet): rank #5
 - **JOIN** BNB - starting list (no members yet): rank #6
 - **JOIN** UNI - starting list (no members yet): rank #7
+
+## 2026-09-24 19:16 UTC
+- **EXCLUDED** ONDO - 7-day average volume $30M < $50M; 24h move +25.5% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $199k within 1% (need $250k)

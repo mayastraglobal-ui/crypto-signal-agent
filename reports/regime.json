@@ -1,0 +1,1013 @@
+{
+ "checked_utc": "2026-09-24 19:16",
+ "data_source": "Binance",
+ "note": "Shown only - regimes do not block signals yet (strategy spec v3, Phase 7).",
+ "settings": {
+  "timeframes": [
+   "1w",
+   "1d",
+   "4h",
+   "1h"
+  ],
+  "ema": [
+   50,
+   200
+  ],
+  "ema_by_tf": {
+   "1w": [
+    10,
+    40
+   ]
+  },
+  "slope_bars": 10,
+  "slope_atr": 1.0,
+  "adx_n": 14,
+  "adx_strong": 25,
+  "adx_weak": 20,
+  "adx_borderline": 2,
+  "bb_n": 20,
+  "bb_k": 2.0,
+  "bb_rank_n": 100,
+  "expansion_bb_pct": 0.9,
+  "expansion_range_atr": 1.5,
+  "compression_bb_pct": 0.1,
+  "compression_atr_x": 0.8,
+  "high_vol_atr_x": 1.3,
+  "low_vol_atr_x": 0.8,
+  "recent_bars": 3,
+  "low_volume_x": 0.7
+ },
+ "coins": {
+  "BTC": {
+   "timeframes": {
+    "1w": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "EMA-fast rising (+1.1 ATR in 10 candles)",
+      "swing structure down (LH/LL)",
+      "ADX 27 = strong trend",
+      "candle size 0.72x normal, Bollinger width above 52% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "ADX 27 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 26.947639562056338,
+      "atr_ratio": 0.7244545770038356,
+      "bb_pct": 0.52,
+      "slope_atr": 1.10414523604646,
+      "rsi": 58.728989210578995,
+      "rel_vol5": 1.0466901642840922,
+      "score": 0
+     }
+    },
+    "1d": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "strong",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.0 ATR in 10 candles)",
+      "swing structure down (LH/LL)",
+      "ADX 45 = strong trend",
+      "candle size 1.18x normal, Bollinger width above 78% of the last 100 candles"
+     ],
+     "contradicting": [],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 44.50511967951678,
+      "atr_ratio": 1.1793158095999838,
+      "bb_pct": 0.78,
+      "slope_atr": 1.024074446479403,
+      "rsi": 65.49104980261338,
+      "rel_vol5": 1.308092938420741,
+      "score": 1
+     }
+    },
+    "4h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "strong",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.0 ATR in 10 candles)",
+      "swing structure down (LH/LL)",
+      "ADX 34 = strong trend",
+      "candle size 1.30x normal, Bollinger width above 55% of the last 100 candles"
+     ],
+     "contradicting": [],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 34.12112620238911,
+      "atr_ratio": 1.2973486870145565,
+      "bb_pct": 0.55,
+      "slope_atr": 1.0028613166362008,
+      "rsi": 53.3162530553218,
+      "rel_vol5": 0.7634056593394325,
+      "score": 1
+     }
+    },
+    "1h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "ADX 27 = strong trend",
+      "candle size 1.17x normal, Bollinger width above 27% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "EMA-fast flat (-0.4 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 27 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 26.95357081681989,
+      "atr_ratio": 1.1734442712881137,
+      "bb_pct": 0.27,
+      "slope_atr": -0.424433929868619,
+      "rsi": 51.97807712790994,
+      "rel_vol5": 1.5286661561120793,
+      "score": 0
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)"
+  },
+  "ETH": {
+   "timeframes": {
+    "1w": {
+     "label": "UNCLEAR",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "candle size 0.59x normal, Bollinger width above 28% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "EMA-fast rising (+1.6 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 24 = in between (20-25)",
+      "ADX 24 is close to a threshold",
+      "signals are mixed and trend strength is in between"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 23.744937952199535,
+      "atr_ratio": 0.589675271057276,
+      "bb_pct": 0.28,
+      "slope_atr": 1.6292075517510083,
+      "rsi": 62.609541538299986,
+      "rel_vol5": 1.2162020553451578,
+      "score": 1
+     }
+    },
+    "1d": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.1 ATR in 10 candles)",
+      "ADX 47 = strong trend",
+      "volume 1.03x normal"
+     ],
+     "contradicting": [
+      "swing structure mixed (neutral)",
+      "candle size 1.31x normal, Bollinger width above 54% of the last 100 candles (unusually wild for a trend)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 47.26212349309495,
+      "atr_ratio": 1.3102181861821833,
+      "bb_pct": 0.54,
+      "slope_atr": 1.0780853003786661,
+      "rsi": 63.24885084501136,
+      "rel_vol5": 1.031564781206198,
+      "score": 2
+     }
+    },
+    "4h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure down (LH/LL)",
+      "ADX 31 = strong trend",
+      "candle size 1.20x normal, Bollinger width above 43% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.6 ATR in 10 candles)"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 30.58795525366478,
+      "atr_ratio": 1.200113102916786,
+      "bb_pct": 0.43,
+      "slope_atr": 0.5720838903252161,
+      "rsi": 50.62356788289756,
+      "rel_vol5": 0.6342718930302231,
+      "score": 0
+     }
+    },
+    "1h": {
+     "label": "UNCLEAR",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "candle size 1.19x normal, Bollinger width above 31% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "EMA-fast flat (-0.4 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 23 = in between (20-25)",
+      "ADX 23 is close to a threshold",
+      "signals are mixed and trend strength is in between"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 23.04396602742381,
+      "atr_ratio": 1.1927654253658484,
+      "bb_pct": 0.31,
+      "slope_atr": -0.44771814371624713,
+      "rsi": 53.19895694926991,
+      "rel_vol5": 1.7598363218084667,
+      "score": 0
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H UNCLEAR)"
+  },
+  "ZEC": {
+   "timeframes": {
+    "1w": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+2.4 ATR in 10 candles)",
+      "ADX 36 = strong trend",
+      "volume 1.10x normal"
+     ],
+     "contradicting": [
+      "swing structure mixed (neutral)",
+      "candle size 8.39x normal, Bollinger width above 83% of the last 100 candles (unusually wild for a trend)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 35.593324618767255,
+      "atr_ratio": 8.38692306161533,
+      "bb_pct": 0.83,
+      "slope_atr": 2.410387860660916,
+      "rsi": 76.65345115804423,
+      "rel_vol5": 1.1007872454534062,
+      "score": 2
+     }
+    },
+    "1d": {
+     "label": "STRONG_BULL",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.6 ATR in 10 candles)",
+      "swing structure up (HH/HL)",
+      "ADX 59 = strong trend",
+      "volume 1.03x normal"
+     ],
+     "contradicting": [
+      "candle size 2.97x normal, Bollinger width above 69% of the last 100 candles (unusually wild for a trend)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 59.11377756769655,
+      "atr_ratio": 2.9667336836337026,
+      "bb_pct": 0.69,
+      "slope_atr": 1.5666150317391527,
+      "rsi": 63.69698860208938,
+      "rel_vol5": 1.0276995297046863,
+      "score": 3
+     }
+    },
+    "4h": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure up (HH/HL)",
+      "ADX 28 = strong trend",
+      "candle size 1.14x normal, Bollinger width above 37% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.7 ATR in 10 candles) (neutral)",
+      "volume only 0.57x normal (weak participation)"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 28.275577701886263,
+      "atr_ratio": 1.1389330633103025,
+      "bb_pct": 0.37,
+      "slope_atr": 0.6720511751040847,
+      "rsi": 50.46525840910176,
+      "rel_vol5": 0.5688226205604628,
+      "score": 2
+     }
+    },
+    "1h": {
+     "label": "RANGE",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "EMA-fast flat (-0.2 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 19 = weak trend / ranging",
+      "candle size 1.16x normal, Bollinger width above 25% of the last 100 candles"
+     ],
+     "contradicting": [
+      "close above EMA-fast above EMA-slow",
+      "ADX 19 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 19.132994632099944,
+      "atr_ratio": 1.1623291254416337,
+      "bb_pct": 0.25,
+      "slope_atr": -0.23556365374022906,
+      "rsi": 58.217296641973675,
+      "rel_vol5": 1.7860699381088707,
+      "score": 1
+     }
+    }
+   },
+   "permission": "LONG allowed",
+   "permission_reason": "1D/4H bullish, 1W WEAK_BULL"
+  },
+  "XRP": {
+   "timeframes": {
+    "1w": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "ADX 29 = strong trend",
+      "candle size 0.51x normal, Bollinger width above 35% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "EMA-fast flat (+0.5 ATR in 10 candles)",
+      "swing structure mixed"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "neutral",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 29.30235734374465,
+      "atr_ratio": 0.5135283177616089,
+      "bb_pct": 0.35,
+      "slope_atr": 0.4710663440924412,
+      "rsi": 52.38233400617603,
+      "rel_vol5": 1.9491345667523157,
+      "score": 0
+     }
+    },
+    "1d": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "ADX 39 = strong trend",
+      "candle size 1.87x normal, Bollinger width above 72% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "EMA-fast flat (+0.5 ATR in 10 candles)",
+      "swing structure mixed"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 38.63993500788267,
+      "atr_ratio": 1.8677347543351503,
+      "bb_pct": 0.72,
+      "slope_atr": 0.5029347477274312,
+      "rsi": 59.856703009307864,
+      "rel_vol5": 1.6555846906157554,
+      "score": 0
+     }
+    },
+    "4h": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure up (HH/HL)",
+      "ADX 38 = strong trend"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.7 ATR in 10 candles) (neutral)",
+      "candle size 1.42x normal, Bollinger width above 54% of the last 100 candles (unusually wild for a trend)",
+      "volume only 0.64x normal (weak participation)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "neutral",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 37.68042114257314,
+      "atr_ratio": 1.4248892552093446,
+      "bb_pct": 0.54,
+      "slope_atr": 0.7151892268745734,
+      "rsi": 53.3794334376672,
+      "rel_vol5": 0.6373650948200094,
+      "score": 2
+     }
+    },
+    "1h": {
+     "label": "UNCLEAR",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "candle size 1.05x normal, Bollinger width above 42% of the last 100 candles"
+     ],
+     "contradicting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast flat (-0.3 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 25 = in between (20-25)",
+      "ADX 25 is close to a threshold",
+      "signals are mixed and trend strength is in between"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 24.70292227601732,
+      "atr_ratio": 1.0455131697107727,
+      "bb_pct": 0.42,
+      "slope_atr": -0.29623801882170814,
+      "rsi": 59.221241009548024,
+      "rel_vol5": 1.6221475791875115,
+      "score": 1
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D TRANSITION, 4H WEAK_BULL, 1H UNCLEAR)"
+  },
+  "SOL": {
+   "timeframes": {
+    "1w": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "EMA-fast rising (+1.2 ATR in 10 candles)",
+      "ADX 28 = strong trend",
+      "candle size 0.43x normal, Bollinger width above 36% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up",
+      "swing structure mixed"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 28.059330983153863,
+      "atr_ratio": 0.4320483626774773,
+      "bb_pct": 0.36,
+      "slope_atr": 1.2128636090160674,
+      "rsi": 61.00144123110338,
+      "rel_vol5": 1.2648429621739339,
+      "score": 1
+     }
+    },
+    "1d": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "strong",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.1 ATR in 10 candles)",
+      "swing structure down (LH/LL)",
+      "ADX 45 = strong trend",
+      "candle size 1.35x normal, Bollinger width above 70% of the last 100 candles"
+     ],
+     "contradicting": [],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 44.698603256077796,
+      "atr_ratio": 1.3499695121073536,
+      "bb_pct": 0.7,
+      "slope_atr": 1.0777062727206348,
+      "rsi": 63.641892238940706,
+      "rel_vol5": 1.323227088216403,
+      "score": 1
+     }
+    },
+    "4h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure down (LH/LL)",
+      "ADX 27 = strong trend",
+      "candle size 1.27x normal, Bollinger width above 37% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.8 ATR in 10 candles)"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 27.029347474683917,
+      "atr_ratio": 1.2702009646460506,
+      "bb_pct": 0.37,
+      "slope_atr": 0.8266364754802178,
+      "rsi": 56.276438252258515,
+      "rel_vol5": 0.657397943761392,
+      "score": 0
+     }
+    },
+    "1h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure down (LH/LL)",
+      "ADX 26 = strong trend",
+      "candle size 1.10x normal, Bollinger width above 58% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (-0.1 ATR in 10 candles)",
+      "ADX 26 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 26.461991354225,
+      "atr_ratio": 1.10025431892923,
+      "bb_pct": 0.58,
+      "slope_atr": -0.1277618788664208,
+      "rsi": 62.1449758979673,
+      "rel_vol5": 1.7253828111629723,
+      "score": 0
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)"
+  },
+  "BNB": {
+   "timeframes": {
+    "1w": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.2 ATR in 10 candles)",
+      "candle size 0.84x normal, Bollinger width above 50% of the last 100 candles",
+      "volume 1.19x normal"
+     ],
+     "contradicting": [
+      "swing structure mixed (neutral)",
+      "ADX 21 = in between (20-25)",
+      "ADX 21 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 20.89627265432518,
+      "atr_ratio": 0.8442598434446725,
+      "bb_pct": 0.5,
+      "slope_atr": 1.1996732855499914,
+      "rsi": 61.43172820075444,
+      "rel_vol5": 1.1946658985799306,
+      "score": 2
+     }
+    },
+    "1d": {
+     "label": "STRONG_BULL",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.1 ATR in 10 candles)",
+      "swing structure up (HH/HL)",
+      "ADX 39 = strong trend",
+      "volume 1.19x normal"
+     ],
+     "contradicting": [
+      "candle size 1.33x normal, Bollinger width above 68% of the last 100 candles (unusually wild for a trend)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 39.04475842703262,
+      "atr_ratio": 1.3315633308054247,
+      "bb_pct": 0.68,
+      "slope_atr": 1.0994703964347217,
+      "rsi": 60.42250421899612,
+      "rel_vol5": 1.1859949799793212,
+      "score": 3
+     }
+    },
+    "4h": {
+     "label": "UNCLEAR",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "candle size 1.23x normal, Bollinger width above 50% of the last 100 candles"
+     ],
+     "contradicting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast flat (+0.4 ATR in 10 candles)",
+      "swing structure down (LH/LL)",
+      "ADX 24 = in between (20-25)",
+      "ADX 24 is close to a threshold",
+      "signals are mixed and trend strength is in between"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 23.986069476375683,
+      "atr_ratio": 1.233727483225332,
+      "bb_pct": 0.5,
+      "slope_atr": 0.4168495002579668,
+      "rsi": 53.94929707968212,
+      "rel_vol5": 0.5963659301366938,
+      "score": 0
+     }
+    },
+    "1h": {
+     "label": "UNCLEAR",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "candle size 0.98x normal, Bollinger width above 33% of the last 100 candles"
+     ],
+     "contradicting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast flat (-0.0 ATR in 10 candles)",
+      "swing structure mixed",
+      "ADX 24 = in between (20-25)",
+      "ADX 24 is close to a threshold",
+      "signals are mixed and trend strength is in between"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 23.88918756874101,
+      "atr_ratio": 0.9849432007205324,
+      "bb_pct": 0.33,
+      "slope_atr": -0.04728131513322237,
+      "rsi": 59.69668594149788,
+      "rel_vol5": 1.646515130469313,
+      "score": 1
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D STRONG_BULL, 4H UNCLEAR, 1H UNCLEAR)"
+  },
+  "UNI": {
+   "timeframes": {
+    "1w": {
+     "label": "EXPANSION",
+     "expansion_dir": "up",
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+2.0 ATR in 10 candles)",
+      "ADX 26 = strong trend",
+      "candle size 0.63x normal, Bollinger width above 92% of the last 100 candles",
+      "volume 2.01x normal",
+      "range expansion + displacement / breakout up in the last 3 candles"
+     ],
+     "contradicting": [
+      "swing structure mixed (neutral)",
+      "ADX 26 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 26.25330671527524,
+      "atr_ratio": 0.6316200188285194,
+      "bb_pct": 0.92,
+      "slope_atr": 2.0431111276827263,
+      "rsi": 71.66721739263986,
+      "rel_vol5": 2.0111330345814915,
+      "score": 2
+     }
+    },
+    "1d": {
+     "label": "STRONG_BULL",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "EMA-fast rising (+1.3 ATR in 10 candles)",
+      "swing structure up (HH/HL)",
+      "ADX 59 = strong trend",
+      "volume 1.35x normal"
+     ],
+     "contradicting": [
+      "candle size 3.63x normal, Bollinger width above 89% of the last 100 candles (unusually wild for a trend)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 58.885092078689055,
+      "atr_ratio": 3.6341238662792543,
+      "bb_pct": 0.89,
+      "slope_atr": 1.3023430750131333,
+      "rsi": 68.78370738491742,
+      "rel_vol5": 1.3521085118332834,
+      "score": 3
+     }
+    },
+    "4h": {
+     "label": "WEAK_BULL",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure up (HH/HL)",
+      "ADX 38 = strong trend"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.9 ATR in 10 candles) (neutral)",
+      "candle size 1.66x normal, Bollinger width above 69% of the last 100 candles (unusually wild for a trend)",
+      "volume only 0.65x normal (weak participation)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "neutral",
+      "structure": "up"
+     },
+     "values": {
+      "adx": 38.0528369095888,
+      "atr_ratio": 1.659796515732279,
+      "bb_pct": 0.69,
+      "slope_atr": 0.8813042487461575,
+      "rsi": 52.36626582152032,
+      "rel_vol5": 0.652375261080949,
+      "score": 2
+     }
+    },
+    "1h": {
+     "label": "RANGE",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "EMAs not lined up",
+      "EMA-fast flat (-0.4 ATR in 10 candles)",
+      "ADX 17 = weak trend / ranging",
+      "candle size 0.94x normal, Bollinger width above 46% of the last 100 candles"
+     ],
+     "contradicting": [
+      "swing structure down (LH/LL)"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "neutral",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 17.22680354849085,
+      "atr_ratio": 0.9363090744281801,
+      "bb_pct": 0.46,
+      "slope_atr": -0.4066478631181331,
+      "rsi": 49.9439222619656,
+      "rel_vol5": 1.090638309820638,
+      "score": -1
+     }
+    }
+   },
+   "permission": "LONG allowed",
+   "permission_reason": "1D/4H bullish, 1W EXPANSION"
+  },
+  "SUI": {
+   "timeframes": {
+    "1w": {
+     "label": "RANGE",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "EMAs not lined up",
+      "EMA-fast flat (-0.2 ATR in 10 candles)",
+      "ADX 20 = weak trend / ranging",
+      "candle size 0.27x normal, Bollinger width above 26% of the last 100 candles"
+     ],
+     "contradicting": [
+      "swing structure down (LH/LL)",
+      "ADX 20 is close to a threshold"
+     ],
+     "states": {
+      "volatility": "low",
+      "momentum": "neutral",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 19.67346670458112,
+      "atr_ratio": 0.2689420579794113,
+      "bb_pct": 0.26,
+      "slope_atr": -0.2173973879593226,
+      "rsi": 49.06905531847103,
+      "rel_vol5": 1.8532851627350386,
+      "score": -1
+     }
+    },
+    "1d": {
+     "label": "EXPANSION",
+     "expansion_dir": "up",
+     "confidence": "weak",
+     "supporting": [
+      "ADX 30 = strong trend",
+      "candle size 1.48x normal, Bollinger width above 100% of the last 100 candles",
+      "volume 1.83x normal",
+      "range expansion + displacement / breakout up in the last 3 candles"
+     ],
+     "contradicting": [
+      "EMAs not lined up (neutral)",
+      "EMA-fast flat (+0.6 ATR in 10 candles) (neutral)",
+      "swing structure down (LH/LL)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 30.196215537295924,
+      "atr_ratio": 1.483110312994691,
+      "bb_pct": 1.0,
+      "slope_atr": 0.5501275351436741,
+      "rsi": 65.10879579945879,
+      "rel_vol5": 1.8281888194769476,
+      "score": -1
+     }
+    },
+    "4h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "moderate",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "swing structure down (LH/LL)",
+      "ADX 35 = strong trend",
+      "candle size 1.69x normal, Bollinger width above 47% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.9 ATR in 10 candles)"
+     ],
+     "states": {
+      "volatility": "high",
+      "momentum": "up",
+      "structure": "down"
+     },
+     "values": {
+      "adx": 35.27394540278084,
+      "atr_ratio": 1.6923447218539842,
+      "bb_pct": 0.47,
+      "slope_atr": 0.9430614550399304,
+      "rsi": 61.04628993619929,
+      "rel_vol5": 0.49984487447019116,
+      "score": 0
+     }
+    },
+    "1h": {
+     "label": "TRANSITION",
+     "expansion_dir": null,
+     "confidence": "weak",
+     "supporting": [
+      "close above EMA-fast above EMA-slow",
+      "ADX 31 = strong trend",
+      "candle size 0.95x normal, Bollinger width above 52% of the last 100 candles"
+     ],
+     "contradicting": [
+      "EMA-fast flat (+0.1 ATR in 10 candles)",
+      "swing structure mixed"
+     ],
+     "states": {
+      "volatility": "normal",
+      "momentum": "up",
+      "structure": "mixed"
+     },
+     "values": {
+      "adx": 31.404394370826953,
+      "atr_ratio": 0.9467174214703353,
+      "bb_pct": 0.52,
+      "slope_atr": 0.055361989860542006,
+      "rsi": 61.59212323187185,
+      "rel_vol5": 2.2225572587016162,
+      "score": 1
+     }
+    }
+   },
+   "permission": "NO TRADE",
+   "permission_reason": "timeframes disagree (1D EXPANSION, 4H TRANSITION, 1H TRANSITION)"
+  }
+ }
+}

@@ -1,6 +1,6 @@
 strategy,tf,status,trades,win_rate,avg_r,profit_factor,max_dd_r,train_avg_r,test_avg_r,test_trades,avg_hold,live_signals,live_avg_r,why_not
-bb_squeeze_breakout,1h,WEAK,108,57.4,0.011,1.02,12.5,-0.044,0.16,29,8.9 h,0,,avg +0.01R/trade; profit factor 1.02; not profitable in BOTH train and unseen test
-donchian_breakout,30m,FAILS,196,54.1,0.09,1.18,15.5,0.205,-0.123,69,4.9 h,0,,not profitable in BOTH train and unseen test
+bb_squeeze_breakout,1h,WEAK,109,57.8,0.013,1.02,12.4,-0.044,0.161,30,8.9 h,0,,avg +0.01R/trade; profit factor 1.02; not profitable in BOTH train and unseen test
+donchian_breakout,30m,FAILS,197,53.8,0.083,1.16,16.8,0.205,-0.138,70,4.9 h,0,,not profitable in BOTH train and unseen test
 donchian_breakout,1h,FAILS,184,50.5,0.004,1.01,16.1,0.017,-0.02,63,11.5 h,0,,avg +0.00R/trade; profit factor 1.01; not profitable in BOTH train and unseen test
 rsi2_dip_buy,4h,FAILS,440,56.8,-0.061,0.73,27.7,-0.041,-0.099,153,14.4 h,0,,avg -0.06R/trade; profit factor 0.73; not profitable in BOTH train and unseen test
 supertrend_flip,1h,FAILS,53,52.8,-0.071,0.87,10.2,-0.296,0.301,20,12.5 h,0,,avg -0.07R/trade; profit factor 0.87; not profitable in BOTH train and unseen test
@@ -8,23 +8,23 @@ donchian_breakout,4h,FAILS,128,42.2,-0.099,0.83,16.1,-0.131,-0.057,55,44.8 h,0,,
 macd_trend_cross,4h,FAILS,124,42.7,-0.144,0.77,20.8,-0.238,0.032,43,40.8 h,0,,avg -0.14R/trade; profit factor 0.77; not profitable in BOTH train and unseen test
 rsi2_dip_buy,30m,FAILS,592,47.5,-0.187,0.39,113.6,-0.194,-0.177,225,97 min,0,,avg -0.19R/trade; profit factor 0.39; not profitable in BOTH train and unseen test
 bb_squeeze_breakout,4h,FAILS,83,45.8,-0.188,0.68,17.9,-0.157,-0.235,33,36.0 h,0,,avg -0.19R/trade; profit factor 0.68; not profitable in BOTH train and unseen test
-rsi2_dip_buy,1h,FAILS,620,44.4,-0.206,0.36,128.0,-0.208,-0.201,210,3.5 h,0,,avg -0.21R/trade; profit factor 0.36; not profitable in BOTH train and unseen test
+rsi2_dip_buy,1h,FAILS,620,44.4,-0.206,0.36,127.9,-0.208,-0.201,210,3.5 h,0,,avg -0.21R/trade; profit factor 0.36; not profitable in BOTH train and unseen test
 macd_trend_cross,1h,FAILS,159,46.5,-0.22,0.66,39.2,-0.227,-0.206,56,10.7 h,0,,avg -0.22R/trade; profit factor 0.66; not profitable in BOTH train and unseen test
+rsi2_dip_buy,15m,FAILS,631,37.4,-0.236,0.32,151.3,-0.242,-0.225,228,50 min,0,,avg -0.24R/trade; profit factor 0.32; not profitable in BOTH train and unseen test
 ema_9_21_cross,15m,FAILS,87,47.1,-0.236,0.61,30.7,-0.242,-0.222,27,2.4 h,0,,avg -0.24R/trade; profit factor 0.61; not profitable in BOTH train and unseen test
-rsi2_dip_buy,15m,FAILS,635,37.5,-0.241,0.32,155.0,-0.249,-0.226,229,49 min,0,,avg -0.24R/trade; profit factor 0.32; not profitable in BOTH train and unseen test
 trend_pullback,4h,FAILS,292,41.8,-0.242,0.61,71.7,-0.352,-0.075,116,39.3 h,0,,avg -0.24R/trade; profit factor 0.61; not profitable in BOTH train and unseen test
 supertrend_flip,30m,FAILS,58,43.1,-0.244,0.62,19.9,-0.164,-0.33,28,7.6 h,0,,avg -0.24R/trade; profit factor 0.62; not profitable in BOTH train and unseen test
 ema_9_21_cross,30m,FAILS,110,40.0,-0.245,0.62,35.3,-0.332,-0.093,40,4.0 h,0,,avg -0.25R/trade; profit factor 0.62; not profitable in BOTH train and unseen test
-trend_pullback,30m,FAILS,434,44.2,-0.25,0.62,113.4,-0.279,-0.192,146,4.8 h,0,,avg -0.25R/trade; profit factor 0.62; not profitable in BOTH train and unseen test
-macd_trend_cross,30m,FAILS,146,46.6,-0.269,0.57,42.2,-0.253,-0.305,46,5.9 h,0,,avg -0.27R/trade; profit factor 0.57; not profitable in BOTH train and unseen test
-bb_squeeze_breakout,30m,FAILS,122,37.7,-0.317,0.55,41.7,-0.41,-0.14,42,3.4 h,0,,avg -0.32R/trade; profit factor 0.55; not profitable in BOTH train and unseen test
-trend_pullback,15m,FAILS,548,44.5,-0.329,0.53,187.8,-0.366,-0.257,186,2.3 h,0,,avg -0.33R/trade; profit factor 0.53; not profitable in BOTH train and unseen test
+trend_pullback,30m,FAILS,431,44.5,-0.248,0.62,111.9,-0.277,-0.192,146,4.8 h,0,,avg -0.25R/trade; profit factor 0.62; not profitable in BOTH train and unseen test
+macd_trend_cross,30m,FAILS,145,46.9,-0.263,0.58,41.0,-0.244,-0.305,46,6.0 h,0,,avg -0.26R/trade; profit factor 0.58; not profitable in BOTH train and unseen test
+bb_squeeze_breakout,30m,FAILS,122,38.5,-0.304,0.57,40.1,-0.39,-0.14,42,3.4 h,0,,avg -0.30R/trade; profit factor 0.57; not profitable in BOTH train and unseen test
+trend_pullback,15m,FAILS,546,44.5,-0.328,0.53,186.7,-0.359,-0.267,185,2.3 h,0,,avg -0.33R/trade; profit factor 0.53; not profitable in BOTH train and unseen test
 ema_9_21_cross,1h,FAILS,124,39.5,-0.331,0.51,41.5,-0.37,-0.261,44,9.0 h,0,,avg -0.33R/trade; profit factor 0.51; not profitable in BOTH train and unseen test
 supertrend_flip,4h,FAILS,41,39.0,-0.332,0.49,15.3,-0.356,-0.266,11,73.8 h,0,,avg -0.33R/trade; profit factor 0.49; not profitable in BOTH train and unseen test
-liquidity_sweep_reversal,1h,FAILS,251,40.2,-0.343,0.51,87.0,-0.285,-0.45,88,5.5 h,0,,avg -0.34R/trade; profit factor 0.51; not profitable in BOTH train and unseen test
+liquidity_sweep_reversal,1h,FAILS,251,40.2,-0.343,0.51,87.0,-0.269,-0.485,86,5.5 h,0,,avg -0.34R/trade; profit factor 0.51; not profitable in BOTH train and unseen test
 trend_pullback,1h,FAILS,512,39.1,-0.397,0.45,205.6,-0.465,-0.241,155,9.1 h,0,,avg -0.40R/trade; profit factor 0.45; not profitable in BOTH train and unseen test
-liquidity_sweep_reversal,30m,FAILS,268,38.4,-0.403,0.45,108.3,-0.338,-0.552,81,2.6 h,0,,avg -0.40R/trade; profit factor 0.45; not profitable in BOTH train and unseen test
-liquidity_sweep_reversal,15m,FAILS,300,39.3,-0.482,0.43,146.3,-0.588,-0.29,107,76 min,0,,avg -0.48R/trade; profit factor 0.43; not profitable in BOTH train and unseen test
+liquidity_sweep_reversal,30m,FAILS,270,38.9,-0.398,0.45,107.7,-0.326,-0.561,83,2.6 h,0,,avg -0.40R/trade; profit factor 0.45; not profitable in BOTH train and unseen test
+liquidity_sweep_reversal,15m,FAILS,300,40.0,-0.463,0.44,140.9,-0.572,-0.273,109,77 min,0,,avg -0.46R/trade; profit factor 0.44; not profitable in BOTH train and unseen test
 bb_squeeze_breakout,15m,FAILS,132,36.4,-0.512,0.37,68.7,-0.367,-0.802,44,87 min,0,,avg -0.51R/trade; profit factor 0.37; not profitable in BOTH train and unseen test
-ema_9_21_cross,5m,FAILS,75,34.7,-0.536,0.39,40.5,-0.537,-0.533,25,47 min,0,,avg -0.54R/trade; profit factor 0.39; not profitable in BOTH train and unseen test
-liquidity_sweep_reversal,5m,FAILS,305,28.5,-0.853,0.23,264.6,-0.936,-0.684,100,25 min,0,,avg -0.85R/trade; profit factor 0.23; not profitable in BOTH train and unseen test
+ema_9_21_cross,5m,FAILS,74,33.8,-0.565,0.37,42.1,-0.581,-0.533,25,45 min,0,,avg -0.56R/trade; profit factor 0.37; not profitable in BOTH train and unseen test
+liquidity_sweep_reversal,5m,FAILS,305,28.5,-0.852,0.23,264.1,-0.941,-0.671,101,25 min,0,,avg -0.85R/trade; profit factor 0.23; not profitable in BOTH train and unseen test

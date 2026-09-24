@@ -10,8 +10,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 1,
+ "suspended": {
+  "ONDO": "2026-09-24"
+ },
+ "runs": 2,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,6 +28,7 @@
    "volume_7d"
   ],
   "ONDO": [
+   "big_move",
    "thin_book",
    "volume_7d"
   ],
