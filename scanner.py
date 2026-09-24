@@ -33,6 +33,7 @@ import yaml
 from engine import data_quality as dq
 from engine import evidence as evid
 from engine import features as fe
+from engine import regime as rg
 from engine import timeframes as tfm
 from engine import universe as uni
 
@@ -804,6 +805,7 @@ def main():
     snap = {}      # coin snapshot for report
     fe_cfg = fe.settings(cfg.get("features"))
     feat_last = {}                          # (coin, tf) -> features of the newest closed candles
+    feat_full = {}                          # (coin, tf) -> all features, kept for the regime engine
     ev_frames = {tf: [] for tf in tfs}      # candle evidence input, per timeframe
     lb = int(cfg["signals"]["lookback_bars"])
     for u in coins:
@@ -816,6 +818,8 @@ def main():
             feats = fe.compute(df, TF_MS[tf], fe_cfg)
             feats.index = df.index
             feat_last[(base, tf)] = feats.tail(3)
+            if tf in ("4h", "1h"):
+                feat_full[(base, tf)] = feats
             ev_frames[tf].append((base, df, feats))
             ns = make_namespace(df, feats)
             df["_atr"] = ns["atr"](14)
@@ -875,6 +879,28 @@ def main():
     evidence = {tf: evid.study(ev_frames[tf], costs_by_dir, TF_MS[tf] / 3_600_000, ev_cfg, seed_key=tf)
                 for tf in tfs if ev_frames[tf]}
     del ev_frames
+
+    # ---------- market regime per coin and timeframe (shown only; gates arrive in Phase 7) ----------
+    rg_cfg = rg.settings(cfg.get("regime"))
+    regimes = {}
+    for u in coins:
+        sym, base = u["symbol"], u["base"]
+        recs = {}
+        for tf in rg_cfg["timeframes"]:
+            df_tf, q = data.get((sym, tf)), quality.get((base, tf))
+            if df_tf is None or len(df_tf) == 0 or (q is not None and q["state"] == dq.UNSAFE):
+                recs[tf] = dict(label="UNCLEAR", expansion_dir=None, confidence="weak", supporting=[],
+                                contradicting=["price data UNSAFE or missing"],
+                                states=dict(volatility="unknown", momentum="unknown", structure="unknown"),
+                                values={})
+                continue
+            f_tf = feat_full.get((base, tf))
+            if f_tf is None:
+                f_tf = fe.compute(df_tf, TF_MS[tf], fe_cfg)
+            recs[tf] = rg.describe(rg.compute(df_tf, tf, f_tf, rg_cfg), -1, rg_cfg)
+        verdict, reason = rg.permission(recs)
+        regimes[base] = dict(timeframes=recs, permission=verdict, permission_reason=reason)
+    del feat_full
 
     # ---------- forward test (live proof) ----------
     logdf = update_forward(load_log(), data, quality, feed, cfg) if not args.offline else load_log()
@@ -1044,6 +1070,20 @@ def main():
                   coins=[c["base"] for c in coins], timeframes=evidence)
     json.dump(ev_out, open(os.path.join(REPORTS, "feature_evidence.json"), "w"), indent=1, default=float)
 
+    # ---------- regime report + once-a-day regime log ----------
+    order = (["BTC"] if "BTC" in regimes else []) + [b for b in regimes if b != "BTC"]
+    rg_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), data_source=feed.name,
+                  note="Shown only - regimes do not block signals yet (strategy spec v3, Phase 7).",
+                  settings=rg_cfg, coins={b: regimes[b] for b in order})
+    json.dump(rg_out, open(os.path.join(REPORTS, "regime.json"), "w"), indent=1, default=str)
+    rstate_path = os.path.join(REPORTS, "regime_state_offline.json" if args.offline else "regime_state.json")
+    rstate = json.load(open(rstate_path)) if os.path.exists(rstate_path) else {}
+    today = started.strftime("%Y-%m-%d")
+    if regimes and rstate.get("last_logged_date") != today:
+        if not args.offline:
+            write_regime_log(rg_out, started)
+        json.dump({"last_logged_date": today}, open(rstate_path, "w"))
+
     # ---------- timeframes report ----------
     models = cfg.get("timeframe_model", {}).get("models", tfm.DEFAULT_MODELS)
     active = cfg.get("timeframe_model", {}).get("active", "B")
@@ -1105,7 +1145,7 @@ def main():
                signals=final, strategy_scoreboard=board, forward_test=fwd_total,
                coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out,
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
-               candle_evidence=ev_out)
+               candle_evidence=ev_out, regime=rg_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
@@ -1165,6 +1205,65 @@ def render_universe(u, w):
         w(f"\n*Skipped by your exclusion lists:* " + ", ".join(
             f"{c}" for c in sorted(u["excluded_by_list"])) + " (see `config.yaml`)")
     w("")
+
+
+REGIME_TFS = ["1w", "1d", "4h", "1h"]
+
+
+def regime_cell(r):
+    lab = r["label"] + (f" {r['expansion_dir']}" if r.get("expansion_dir") else "")
+    return f"{lab} ({r['confidence']})"
+
+
+def write_regime_log(rg_out, when):
+    """Append today's regimes to memory/market_regime_log.md (once per UTC day)."""
+    os.makedirs(MEMORY, exist_ok=True)
+    path = os.path.join(MEMORY, "market_regime_log.md")
+    new = not os.path.exists(path)
+    with open(path, "a") as f:
+        if new:
+            f.write("# Market regime log\n\nAppend-only, one entry per UTC day (AGENT_PROMPT.md section 6). "
+                    "Written by the engine from closed candles; confidence is evidence-based, never a %.\n"
+                    "Permission: LONG needs 2 of 1D/4H/1H bullish and no 1W STRONG_BEAR (SHORT: mirror).\n")
+        f.write(f"\n## {when.strftime('%Y-%m-%d')} (logged {when.strftime('%H:%M')} UTC · source "
+                f"{rg_out['data_source']})\n")
+        btc = rg_out["coins"].get("BTC")
+        if btc:
+            f.write("BTC context: " + " · ".join(f"{tf.upper()} {regime_cell(btc['timeframes'][tf])}"
+                                                 for tf in REGIME_TFS if tf in btc["timeframes"])
+                    + f" → {btc['permission']}\n")
+        f.write("\n| Coin | 1W | 1D | 4H | 1H | Permission |\n|---|---|---|---|---|---|\n")
+        for coin, c in rg_out["coins"].items():
+            f.write(f"| {coin} | " + " | ".join(regime_cell(c["timeframes"][tf]) if tf in c["timeframes"]
+                                                else "-" for tf in REGIME_TFS)
+                    + f" | {c['permission']} |\n")
+
+
+def render_regime(g, w):
+    w("## 0f. Market regime")
+    w("The market's 'mood' per timeframe, from closed candles. Confidence = how much of the evidence agrees "
+      "(strong / moderate / weak - never a %). **Permission:** LONG needs at least 2 of 1D/4H/1H bullish and "
+      "no STRONG_BEAR on 1W (weekly veto); SHORT is the mirror image. "
+      f"*{g['note']}*\n")
+    if not g["coins"]:
+        w("No coin data.\n")
+        return
+    w("| Coin | 1W | 1D | 4H | 1H | Permission |")
+    w("|---|---|---|---|---|---|")
+    for coin, c in g["coins"].items():
+        w(f"| **{coin}** | " + " | ".join(regime_cell(c["timeframes"][tf]) if tf in c["timeframes"] else "-"
+                                          for tf in REGIME_TFS)
+          + f" | {c['permission']} ({c['permission_reason']}) |")
+    btc = g["coins"].get("BTC")
+    if btc:
+        w("\n**BTC evidence** (most coins follow BTC):")
+        for tf in REGIME_TFS:
+            r = btc["timeframes"].get(tf)
+            if not r:
+                continue
+            w(f"- **{tf.upper()} {regime_cell(r)}** - for: {'; '.join(r['supporting']) or '-'} · "
+              f"against: {'; '.join(r['contradicting']) or '-'}")
+    w("\n*Full evidence for every coin: `reports/regime.json`. Daily history: `memory/market_regime_log.md`.*\n")
 
 
 def render_features(fs, w):
@@ -1290,6 +1389,7 @@ def render_md(o, cfg):
     render_timeframes(o["timeframes"], w)
     render_features(o["features_1h"], w)
     render_evidence(o["candle_evidence"], w)
+    render_regime(o["regime"], w)
     m = o["market"]
     w("## 1. Market mood")
     bt = m["btc_trend"]
