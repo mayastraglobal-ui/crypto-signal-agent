@@ -1,0 +1,51 @@
+{
+ "generated_utc": "2026-09-24 22:18",
+ "book": {
+  "utc": "2026-09-24 22:18",
+  "beijing": "2026-09-25 06:18",
+  "active": [],
+  "awaiting": [],
+  "paper": [],
+  "closed_today": [],
+  "day_r": 0.0,
+  "week_r": 0.0,
+  "paper_day_r": 0.0,
+  "heat": 0,
+  "limits": {
+   "day_r": -3.0,
+   "week_r": -6.0,
+   "heat": 3
+  },
+  "empty": true
+ },
+ "text": [
+  "POSITION BOOK \u2014 2026-09-24 22:18 UTC / 2026-09-25 06:18 Beijing",
+  "No open or pending positions.",
+  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3"
+ ],
+ "watching": [
+  {
+   "coin": "UNI",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  }
+ ],
+ "events_this_run": []
+}
