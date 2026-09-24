@@ -61,15 +61,16 @@ def outcome(o, h, l, c, t, d, atr_t, costs, bar_hours, s):
     return best, first_stop < len(hs), float(cost[0] / R)
 
 
-def study(frames, costs_by_dir, bar_hours, s=None, seed_key=""):
+def study(frames, costs_by_dir, bar_hours, s=None, seed_key="", patterns=None):
     """Run every pattern + its random baseline over several candle tables of ONE timeframe.
 
     frames: list of (coin, candles_df, features_df) - features from engine.features.compute
     costs_by_dir: {1: cost dict, -1: cost dict} (taker, slip, funding_8h as fractions)
+    patterns: {column: direction}; default PATTERNS (candle patterns)
     Returns {pattern: {...counts and shares...}}."""
     s = settings(s)
     out = {}
-    for pat, d in PATTERNS.items():
+    for pat, d in (patterns or PATTERNS).items():
         res = dict(events=0, reached=[0] * len(s["targets_r"]), stopped=0, cost_r=[],
                    rnd_events=0, rnd_reached=[0] * len(s["targets_r"]), rnd_stopped=0)
         for coin, df, f in frames:
