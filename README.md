@@ -43,6 +43,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
 | `reports/positions.json` | The position book right now (active, awaiting 5m, paper, closed today) + what is being watched | No |
 | `reports/position_events.csv` | Every state change of every signal, one line each (never rewritten) | No |
+| `reports/risk_state.json` | Current risk halts and suspended strategies (so each change is emailed once) | No |
 | `reports/strategy_scoreboard.csv` | Status table for every strategy version and timeframe | No |
 | [`reports/data_quality.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/data_quality.json) ⓛ | Result of the data check, per coin and timeframe | No |
 | `reports/universe.json` | Every candidate coin this run: rank, numbers, pass/fail reasons | No |
@@ -224,6 +225,34 @@ or `EXPIRED` (no 5m confirmation) / `INVALIDATED` (stop or 5m structure broken b
 
 The scan runs hourly, so each run replays the 5m and other candles since the previous run: the recorded result is
 exact, but a live alert can be up to an hour late (a faster schedule is a later decision).
+
+## Risk engine and news blackout
+
+A separate part of the engine (`engine/risk.py`, AGENT_PROMPT.md sections 14-15; settings `config.yaml` → `risk`)
+decides whether the account may take a live trade **now** and how big it may be. It never changes a strategy.
+
+| Rule | What happens |
+|---|---|
+| High-impact event within ±60 min | no live entry (calendar: `config.yaml` → `events`) |
+| Today's closed live results ≤ −3R / this week's ≤ −6R | no new live entries for the rest of the day / week; one `[SYSTEM]` email when it starts and one when it ends |
+| A live strategy (version × timeframe) more than 8R below its best | SUSPENDED until you add it to `risk` → `resume` with a date |
+| Heat | at most 3 open live positions, 1 per coin, 1 per direction in a group of coins that move together (1h correlation ≥ 0.7 over 30 days) |
+| Reward to TP1 | at least 2R - the stop is never widened to get there |
+| Path to TP1 | no opposing liquidity pool or support / resistance level before TP1 |
+| Duplicate | not while the same strategy / coin / timeframe is open or in its cooldown |
+| Size | account × risk% ÷ distance to the stop; risk 0.5% until 30 days after the first live entry, never above 1%; never more than 3x leverage (the position is made smaller instead) |
+
+An APPROVED signal that fails a rule is logged as **NO_TRADE** with the reason and is not emailed. Paper and
+validation signals are still logged in full (their record must stay comparable with the backtest); the
+`risk_blocks` column notes which rules would have blocked them live, so each rule's value can be measured.
+Report section 2d and the "Risk:" line of the position book show the state.
+
+**Keep the event calendar filled in.** The agent does not invent dates. Add US CPI, NFP (bls.gov schedule), FOMC
+(federalreserve.gov) and exchange incidents to `config.yaml` → `events` in UTC; the report warns
+"calendar not maintained" when nothing is listed for the next 7 days.
+
+Note: the older strategies take their first target at 1R, so none of them can send a live signal until a new
+version with TP1 at 2R or more is written and tested.
 
 ## Why trades lose (failure attribution)
 

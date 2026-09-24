@@ -8,7 +8,7 @@ account:
   size_usdt: 1000            # your trading account size (used for position-size examples)
   risk_per_trade_pct: 0.5    # max you lose if the stop-loss is hit. TradeSentry v3: 0.5% while
                              # validating and in the first live month, never above 1%
-  max_open_trades: 3         # never hold more than this many trades at once
+  max_open_trades: 3         # (the risk engine uses risk -> max_positions below)
 
 market:
   quote: USDT
@@ -222,6 +222,30 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_body_pct: 0.5          # confirming bar closes in the trade direction with a body >= 50% of its range
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
+
+risk:                        # the risk engine (AGENT_PROMPT.md section 15) - only the operator changes these
+  blackout_minutes: 60       # no live entry within +-60 min of a high-impact event (list below)
+  day_limit_r: -3            # closed live results today at or below -3R -> no new live entries until tomorrow (UTC)
+  week_limit_r: -6           # this week (Mon-Sun UTC) at or below -6R -> no new live entries this week
+  strategy_max_dd_r: 8       # a live strategy (version x timeframe) more than 8R below its best -> SUSPENDED
+  max_positions: 3           # portfolio heat: at most 3 open live positions ...
+  max_per_coin: 1            # ... at most 1 per coin ...
+  corr_threshold: 0.7        # ... and 1 per direction in a group of coins whose 1h returns correlate >= 0.7
+  corr_bars: 720             #     (over the last 720 hourly candles = 30 days)
+  min_tp1_r: 2.0             # section 14 step 9: reward to TP1 at least 2R (never widen the stop for it)
+  max_risk_pct: 1.0          # account.risk_per_trade_pct is capped here ...
+  first_month_risk_pct: 0.5  # ... and at 0.5% until 30 days after the first live entry
+  max_leverage: 3            # never more than 3x: the position is made smaller instead
+  calendar_horizon_days: 7   # the report warns when no event is listed for the next 7 days
+  resume: {}                 # resume a SUSPENDED strategy: "id@version|tf": "YYYY-MM-DD" (its drawdown then
+                             # counts only trades closed from that date). Example: {"S6-OB-FVG@1.0|15m": "2026-10-01"}
+
+# High-impact events (section 14 step 11): no live entry from 60 min before to 60 min after.
+# Times in UTC. Keep the next weeks filled in (official sources: bls.gov schedule for CPI / NFP,
+# federalreserve.gov for FOMC). Exchange incidents: use from / until. Examples:
+#   - {utc: "2026-10-14 12:30", type: CPI, name: "US CPI"}
+#   - {from: "2026-10-02 08:00", until: "2026-10-02 11:00", type: exchange_incident, name: "Binance withdrawals paused"}
+events: []
 
 signals:
   lookback_bars: 2           # a signal stays valid for this many closed candles

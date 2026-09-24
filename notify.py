@@ -6,7 +6,8 @@ Email alerts for the Crypto Signal Agent (works without Claude).
   python notify.py test     -> send a test email (to check your setup)
   python notify.py failed   -> email a warning that the scan failed
   python notify.py research_failed -> email a warning that the daily research run failed
-  python notify.py system   -> email [SYSTEM] once when data turns UNSAFE, and once when it recovers
+  python notify.py system   -> email [SYSTEM] once when data turns UNSAFE, and once when it recovers;
+                               also once when a risk halt / strategy suspension starts or ends (Phase 11)
 
 Needs 2 GitHub secrets: GMAIL_USER and GMAIL_APP_PASSWORD
 (optional 3rd: ALERT_TO = a different address to receive alerts).
@@ -23,6 +24,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 STATE = os.path.join(REPORTS, "notified.json")
 SYSTEM_STATE = os.path.join(REPORTS, "system_alert_state.json")
+RISK_SENT = os.path.join(REPORTS, "risk_alert_sent.json")
 
 
 def repo_link(path=""):
@@ -155,6 +157,31 @@ def system_email():
         json.dump({"state": now, "since_utc": q["checked_utc"]}, open(SYSTEM_STATE, "w"))
 
 
+def risk_email():
+    """[SYSTEM] risk alert (section 15): the scan lists what started or ended THIS run (daily / weekly loss halt,
+    strategy suspension), so each change gives exactly one email."""
+    path = os.path.join(REPORTS, "latest.json")
+    if not os.path.exists(path):
+        return
+    rep = json.load(open(path))
+    risk = rep.get("risk") or {}
+    tr = risk.get("transitions") or []
+    sent = json.load(open(RISK_SENT)).get("run") if os.path.exists(RISK_SENT) else None
+    if not tr or sent == rep["generated_utc"]:
+        print("No risk halt / suspension change - no risk email.")
+        return
+    starts = [t for t in tr if t["kind"] == "start"]
+    subject = "[SYSTEM] Risk " + ("HALT: " if starts else "halt lifted: ") + ", ".join(t["what"] for t in tr[:3])
+    body = [*(rep.get("position_book_text") or []), "",
+            f"Risk engine, {rep['generated_utc']} UTC:"] + [f"- {t['text']}" for t in tr]
+    if starts:
+        body += ["", "What this means: no new live entries from the affected part until the halt ends.",
+                 "Open positions keep their stops and targets. Do not add trades by hand to 'win it back'."]
+    body += ["", "Details: " + repo_link("/blob/main/reports/latest.md"), "", "Research signal. Not financial advice."]
+    if send(subject, "\n".join(body)):
+        json.dump({"run": rep["generated_utc"]}, open(RISK_SENT, "w"))
+
+
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "signals"
     try:
@@ -179,6 +206,7 @@ def main():
                  + repo_link(f"/actions/runs/{run}"))
         elif mode == "system":
             system_email()
+            risk_email()
         else:
             signals_email()
     except smtplib.SMTPAuthenticationError:
