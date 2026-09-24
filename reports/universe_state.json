@@ -3,8 +3,8 @@
   "BTC",
   "ETH",
   "ZEC",
-  "XRP",
   "SOL",
+  "XRP",
   "BNB",
   "UNI"
  ],
@@ -13,7 +13,7 @@
  "suspended": {
   "ONDO": "2026-09-24"
  },
- "runs": 3,
+ "runs": 4,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -21,6 +21,7 @@
   "XRP": [],
   "SOL": [],
   "PROVE": [
+   "spread",
    "thin_book",
    "volume_7d"
   ],
