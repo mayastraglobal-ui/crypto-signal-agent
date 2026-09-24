@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scanner  # noqa: E402
 from engine import data_quality as dq  # noqa: E402
 from engine import timeframes as T  # noqa: E402
-from test_data_quality import run_copy  # noqa: E402
+from test_data_quality import run_copy, shared_offline_run  # noqa: E402
 
 M5, H1, H4, D1, W1 = (T.TF_MS[k] for k in ("5m", "1h", "4h", "1d", "1w"))
 MONDAY = pd.Timestamp("2025-01-06", tz="UTC").value // 1_000_000     # a Monday 00:00 UTC
@@ -233,8 +233,8 @@ class Model(unittest.TestCase):
 
 class EndToEnd(unittest.TestCase):
     def test_offline_report_shows_all_timeframes(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            p = run_copy(tmp, "scanner.py", "--offline")
+        tmp, p = shared_offline_run()          # one plain offline scan, shared (read-only)
+        if True:
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             with open(os.path.join(tmp, "reports", "latest.json")) as f:
                 t = json.load(f)["timeframes"]

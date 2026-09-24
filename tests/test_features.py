@@ -20,7 +20,7 @@ import scanner  # noqa: E402
 from engine import evidence as E  # noqa: E402
 from engine import features as F  # noqa: E402
 from engine import strategy_spec as SP  # noqa: E402
-from test_data_quality import run_copy  # noqa: E402
+from test_data_quality import run_copy, shared_offline_run  # noqa: E402
 
 H1 = 3_600_000
 T0 = 1_750_000_000_000 // H1 * H1
@@ -290,8 +290,8 @@ class EvidenceStudy(unittest.TestCase):
 
 class EndToEnd(unittest.TestCase):
     def test_offline_report_has_features_and_evidence(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            p = run_copy(tmp, "scanner.py", "--offline")
+        tmp, p = shared_offline_run()          # one plain offline scan, shared (read-only)
+        if True:
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             with open(os.path.join(tmp, "reports", "latest.md")) as f:
                 md = f.read()

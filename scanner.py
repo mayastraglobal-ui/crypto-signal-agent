@@ -32,6 +32,8 @@ import pandas as pd
 import requests
 import yaml
 
+import publish_live
+
 from engine import attribution as att
 from engine import data_quality as dq
 from engine import evidence as evid
@@ -906,6 +908,31 @@ def forward_stats(logdf):
 # =====================================================================
 # 5. HELPERS
 # =====================================================================
+def repo_slug():
+    return os.environ.get("GITHUB_REPOSITORY", "mayastraglobal-ui/crypto-signal-agent")
+
+
+def storage_info(offline):
+    """Repository size (GitHub's own number, updated with some delay) and the size of this run's large
+    files, which go to branch live-reports (replaced every run) instead of main's history."""
+    live = {os.path.basename(p): os.path.getsize(os.path.join(ROOT, p)) for p in publish_live.LIVE_FILES
+            if os.path.exists(os.path.join(ROOT, p))}
+    repo_kb = None
+    if not offline:
+        try:
+            headers = {"Accept": "application/vnd.github+json"}
+            if os.environ.get("GITHUB_TOKEN"):
+                headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
+            r = requests.get(f"https://api.github.com/repos/{repo_slug()}", headers=headers, timeout=10)
+            r.raise_for_status()
+            repo_kb = int(r.json()["size"])
+        except Exception as e:
+            log(f"repository size not available: {e}")
+    return dict(repo_size_mb=None if repo_kb is None else round(repo_kb / 1024, 1),
+                live_files_kb={k: round(v / 1024) for k, v in live.items()},
+                live_total_mb=round(sum(live.values()) / 1024 / 1024, 2), live_branch=publish_live.BRANCH)
+
+
 def fmt_price(x):
     if x == 0 or not np.isfinite(x):
         return "0"
@@ -1455,6 +1482,7 @@ def main():
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
                candle_evidence=ev_out, regime=rg_out, smc=smc_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
+    out["storage"] = storage_info(args.offline)          # measured after latest.json exists
     md = render_md(out, cfg)
     open(os.path.join(REPORTS, "latest.md"), "w").write(md)
     os.makedirs(os.path.join(REPORTS, "daily"), exist_ok=True)
@@ -2020,6 +2048,11 @@ def render_md(o, cfg):
     w(f"**Updated:** {o['generated_beijing']} Beijing time ({o['generated_utc']} UTC) · "
       f"data: {o['data_source']} · {len(o['coins_scanned'])} coins scanned\n")
     w("> Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.\n")
+    st = o.get("storage")
+    if st:
+        w(f"**Storage:** repository {'not checked (offline)' if st['repo_size_mb'] is None else str(st['repo_size_mb']) + ' MB (GitHub)'}"
+          f" · large files of this run {st['live_total_mb']:.1f} MB, published to branch `{st['live_branch']}` "
+          "(replaced every run, no history)\n")
     render_dq(o["data_quality"], w)
     render_universe(o["universe"], w)
     render_timeframes(o["timeframes"], w)
@@ -2063,6 +2096,9 @@ def render_md(o, cfg):
         w(f"- {f['signals']} signals logged, none finished yet. Give it a few weeks before trusting anything.")
     w("\n**Costs used in every backtest:** LONG = spot fees; SHORT = futures fees + funding "
       "(shorts are **futures only**). Details in `config.yaml` → `costs`.")
+    base = f"https://github.com/{repo_slug()}/blob/{publish_live.BRANCH}/"
+    w("\n**Full data** (branch `" + publish_live.BRANCH + "`, newest copy only): " + " · ".join(
+        f"[{os.path.basename(p)}]({base}{p})" for p in publish_live.LIVE_FILES))
     w("\n---\n*R = your risk on the trade. +2R means you made twice what you risked. "
       "Full explanation in the beginner guide.*")
     return "\n".join(L)
