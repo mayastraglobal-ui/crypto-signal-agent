@@ -255,10 +255,8 @@ risk:                        # the risk engine (AGENT_PROMPT.md section 15) - on
                              # counts only trades closed from that date). Example: {"S6-OB-FVG@1.0|15m": "2026-10-01"}
 
 # High-impact events (section 14 step 11): no live entry from 60 min before to 60 min after.
-# Times in UTC. Keep the next weeks filled in (official sources: bls.gov schedule for CPI / NFP,
-# federalreserve.gov for FOMC). Exchange incidents: use from / until. Examples:
-#   - {utc: "2026-10-14 12:30", type: CPI, name: "US CPI"}
-#   - {from: "2026-10-02 08:00", until: "2026-10-02 11:00", type: exchange_incident, name: "Binance withdrawals paused"}
+# The calendar lives in events.yaml (repository root) - read together with this list, which stays for one-off
+# additions. Times in UTC. Example: - {utc: "2026-10-14 12:30", type: CPI, name: "US CPI"}
 events: []
 
 signals:

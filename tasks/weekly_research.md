@@ -26,31 +26,56 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-weekly`
    - Use only the building blocks listed at the top of `strategies.yaml`, and add a control twin when there
      is a special ingredient.
    - A new version changes exactly ONE thing and gets a changelog line.
-   - Open **one pull request per candidate**, changing only `strategies.yaml`, from the branch
-     `claude/strategy-<id>-v<version>`.
-   - In simple words, the PR says: what it tests, why, which source, and which experiment-queue item it
-     answers.
+   - Write each candidate's exact `strategies.yaml` card in your file, marked **PROPOSED - not opened** (your
+     session can only push to `claude/brain-weekly`; the operator or the build session opens the pull
+     request).
+   - In simple words, say what it tests, why, which source, and which experiment-queue item it answers.
    - Never loosen fees, risk or gates to make a candidate pass.
-4. **Divergence review.** Compare backtest, paper and live results per strategy, from the fact sheet. Name
+4. **Event calendar (`events.yaml`).** Keep the next **90 days** filled with the US high-impact releases:
+   - the jobs report (NFP), CPI, PCE, FOMC decisions (and GDP if you can);
+   - also exchange incidents announced by the exchange.
+
+   How to do it:
+   1. Check each date on the official calendars:
+      - https://www.bls.gov/schedule/news_release/empsit.htm (NFP)
+      - https://www.bls.gov/schedule/news_release/cpi.htm (CPI)
+      - https://www.bea.gov/news/schedule (PCE and GDP)
+      - https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm (FOMC)
+   2. Convert New York time to **UTC**:
+      - 8:30 a.m. = 12:30 UTC in US summer time, 13:30 UTC in winter time;
+      - an FOMC statement at 2:00 p.m. = 18:00 UTC in summer, 19:00 UTC in winter;
+      - US summer time runs from the 2nd Sunday of March to the 1st Sunday of November.
+   3. Append only the events that are missing, with `check`:
+      - `official_page` if you opened the page itself;
+      - `official_search` if you only saw it through a search restricted to that site;
+      - `indirect` if only a related official release supports it.
+   4. Never guess, and never edit existing entries.
+   5. In the weekly file, under `## Event calendar`:
+      - list what you added;
+      - list which dates you could **not** confirm;
+      - list any existing entry that looks **wrong** on the official page (the operator fixes it). Mention the
+        entries marked `official_search`, `indirect` or `operator` that you re-checked on the page.
+5. **Divergence review.** Compare backtest, paper and live results per strategy, from the fact sheet. Name
    any strategy where paper or live is clearly worse than the backtest, and what it may mean.
-5. **Timeframe models.** Say which timeframes work for which strategy families, from the scoreboard numbers,
+6. **Timeframe models.** Say which timeframes work for which strategy families, from the scoreboard numbers,
    and where the sample is still too small.
-6. **Approval packs.** For each eligible strategy in the fact sheet:
+7. **Approval packs.** For each eligible strategy in the fact sheet:
    - summarise its pack in 5 plain lines: strengths, weaknesses, and what could go wrong;
    - repeat the question: *"Approve <id> v<ver> <tf> for live emails? (yes/no)"*.
 
    **Never recommend approving it**: present the evidence, and the operator decides.
-7. **Write the weekly research** to the path the fact sheet gives. Use these headings:
+8. **Write the weekly research** to the path the fact sheet gives. Use these headings:
    - `# Weekly research <date>`
    - `## Summary`
    - `## Research log (sources)`
    - `## Strategy idea`
    - `## SMC/ICT concept`
    - `## How traders lose money`
-   - `## Candidates opened as pull requests`
+   - `## Candidates (PROPOSED - not opened)`
+   - `## Event calendar`
    - `## Backtest vs paper vs live`
    - `## Timeframe models`
    - `## Approval packs`
    - `## Experiment queue for next week`
    - End with: **Research signal. Not financial advice.**
-8. Run the end commands from COMMON.md.
+9. Run the end commands from COMMON.md.

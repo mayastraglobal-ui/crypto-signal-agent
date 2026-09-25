@@ -9,6 +9,8 @@ allowed onto the newest main:
   * NEW text files in reports/claude/briefings|daily|weekly/ with the expected file name
   * ADDITIONS at the end of the knowledge files (lessons, failure journal, missed trades, research sources,
     coin notes, feature notes, SMC research, experiments), written as section 22 records
+  * NEW entries at the end of the event calendar events.yaml (weekly research): complete, official https source,
+    a check mark, no duplicate - the operator corrects or deletes entries
 
 Everything else is refused - code, config.yaml, strategies.yaml (new strategy versions go through a pull request
 the operator merges), workflows, the engine's ledgers, or any edit / deletion of an earlier line. Lessons need
@@ -17,7 +19,10 @@ probabilities are refused (section 25). One problem refuses the whole push: noth
 
 Pure functions; the git work is in brain_guard.py.
 """
+import datetime as dt
 import re
+
+import yaml
 
 from engine import memory as mem
 
@@ -33,6 +38,12 @@ KNOWLEDGE = ["memory/lessons.md", "memory/failure_journal.md", "memory/missed_tr
 LESSON_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE"]      # section 17.7: validated lessons only
 MAX_KB = 64                                              # per new file / per addition
 MAX_FILES = 12
+CALENDAR = "events.yaml"                                  # the event calendar: new entries only (weekly research)
+EVENT_TYPES = {"NFP", "CPI", "PCE", "FOMC", "GDP", "PPI", "RETAIL_SALES", "JOLTS", "FOMC_MINUTES", "FED_SPEECH",
+               "ECB", "BOJ", "exchange_incident"}
+OFFICIAL_DOMAINS = ("bls.gov", "bea.gov", "federalreserve.gov", "census.gov", "treasury.gov", "ecb.europa.eu",
+                    "boj.or.jp", "binance.com")
+CHECKS = {"official_page", "official_search", "indirect"}      # "operator" is the operator's own mark
 _NEG = r"(?<!not )(?<!no )(?<!never )(?<!n't )(?<!without )"
 FORBIDDEN = [                                            # section 25: never promise profits or state a win probability
     (re.compile(_NEG + r"\bguarantee(d|s)?\b", re.I), "profit promise ('guaranteed')"),
@@ -88,6 +99,52 @@ def check_records(added, path):
     return probs
 
 
+def _events(text):
+    doc = yaml.safe_load(text or "") or {}
+    items = doc.get("events") if isinstance(doc, dict) else None
+    if not isinstance(items, list):
+        raise ValueError("no 'events:' list")
+    return items
+
+
+def check_calendar(base, new, current):
+    """events.yaml additions: parseable, earlier entries untouched, each new entry complete, with an official
+    source and a check mark, not a duplicate, and the result still parses on the newest main."""
+    try:
+        old_items, new_items = _events(base), _events(new)
+    except (yaml.YAMLError, ValueError) as e:
+        return [f"not a valid calendar ({e})"]
+    if new_items[:len(old_items)] != old_items:
+        return ["earlier entries changed - calendar entries are only added (the operator corrects them)"]
+    probs, seen = [], {(str(e.get("utc")), e.get("type")) for e in old_items}
+    for e in new_items[len(old_items):]:
+        tag = f"event {e.get('name') or e.get('utc')!r}"
+        try:
+            dt.datetime.strptime(str(e.get("utc")), "%Y-%m-%d %H:%M")
+        except ValueError:
+            probs.append(f"{tag}: utc must be 'YYYY-MM-DD HH:MM' (UTC)")
+        if e.get("type") not in EVENT_TYPES:
+            probs.append(f"{tag}: type must be one of {sorted(EVENT_TYPES)}")
+        if not str(e.get("name") or "").strip():
+            probs.append(f"{tag}: name missing")
+        src = str(e.get("source") or "")
+        host = re.sub(r"^https://([^/]+).*$", r"\1", src) if src.startswith("https://") else ""
+        if not any(host == d or host.endswith("." + d) for d in OFFICIAL_DOMAINS):
+            probs.append(f"{tag}: source must be an https page on an official site {OFFICIAL_DOMAINS}")
+        if e.get("check") not in CHECKS:
+            probs.append(f"{tag}: check must be one of {sorted(CHECKS)}")
+        k = (str(e.get("utc")), e.get("type"))
+        if k in seen:
+            probs.append(f"{tag}: already in the calendar")
+        seen.add(k)
+    if not probs and current is not None:
+        try:
+            _events(apply_text(current, dict(kind="append", text=new[len(base):])))
+        except (yaml.YAMLError, ValueError) as e:
+            probs.append(f"the addition does not fit the newest calendar on main ({e})")
+    return probs
+
+
 def allowed_new(path):
     for folder, rx in NEW_FILES.items():
         if path.startswith(folder) and rx.match(path[len(folder):]):
@@ -133,6 +190,20 @@ def review(changes, main_files):
                 continue
             probs += [f"{p}: {x}" for x in lint(added)]
             probs += [f"{p}: {x}" for x in check_records(added, p)]
+            applies.append(dict(path=p, kind="append", text=added))
+        elif st == "M" and p == CALENDAR:
+            why = mem.append_only_problems(c.get("base") or "", new)
+            if why:
+                probs.append(f"{p}: {why} - calendar entries are only added (the operator corrects them)")
+                continue
+            added = new[len(c.get("base") or ""):]
+            if not added.strip():
+                continue
+            if cur is not None and cur.endswith(added):
+                skipped.append(p)
+                continue
+            probs += [f"{p}: {x}" for x in lint(added)]
+            probs += [f"{p}: {x}" for x in check_calendar(c.get("base") or "", new, cur)]
             applies.append(dict(path=p, kind="append", text=added))
         elif p in KNOWLEDGE:
             probs.append(f"{p}: {'deleted' if st == 'D' else 'created or renamed'} - knowledge files may only grow")

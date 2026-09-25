@@ -591,3 +591,153 @@ class FactSheet(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+CAL = ("# calendar\nevents:\n"
+       "  - {utc: \"2026-10-02 12:30\", type: NFP, name: \"US jobs\", source: \"https://www.bls.gov/x\", check: official_page}\n")
+
+
+def ev_line(utc="2026-11-06 13:30", typ="NFP", src="https://www.bls.gov/schedule/news_release/empsit.htm",
+            check="official_page", name="US jobs report (Oct data)"):
+    return f"  - {{utc: \"{utc}\", type: {typ}, name: \"{name}\", source: \"{src}\", check: {check}}}\n"
+
+
+class CalendarGuard(unittest.TestCase):
+    """events.yaml: the weekly research may only ADD complete, officially sourced entries."""
+
+    def review(self, new, base=CAL, cur=None):
+        return B.review([dict(path="events.yaml", status="M", base=base, new=new)],
+                        {"events.yaml": base if cur is None else cur})
+
+    def test_a_checked_addition_is_applied(self):
+        applies, probs, _ = self.review(CAL + ev_line())
+        self.assertEqual(probs, [])
+        self.assertEqual(applies, [dict(path="events.yaml", kind="append", text=ev_line())])
+
+    def test_refusals(self):
+        cases = [(CAL.replace("12:30", "13:30") + ev_line(), "only added"),                 # edited an entry
+                 ("# calendar\nevents: []\n", "only"),                                         # deleted
+                 (CAL + ev_line(src="https://example.com/cal"), "official site"),
+                 (CAL + ev_line(src="http://www.bls.gov/x"), "official site"),
+                 (CAL + ev_line(src="https://bls.gov.evil.io/x"), "official site"),
+                 (CAL + ev_line(check="operator"), "check must be"),
+                 (CAL + ev_line(check="guess"), "check must be"),
+                 (CAL + ev_line(typ="RUMOUR"), "type must be"),
+                 (CAL + ev_line(utc="2026-11-06"), "utc must be"),
+                 (CAL + ev_line(utc="2026-10-02 12:30"), "already in the calendar"),
+                 (CAL + ev_line(name=""), "name missing"),
+                 (CAL + "  - {utc: [broken\n", "not a valid calendar"),
+                 (CAL + ev_line(name="a guaranteed move"), "profit promise"),
+                 (CAL + "events: []\n", "earlier entries changed"),     # looks appended, silently wipes the list
+                 (CAL + "events:\n" + ev_line(), "earlier entries changed")]
+        for new, needle in cases:
+            applies, probs, _ = self.review(new)
+            self.assertEqual(applies, [], needle)
+            self.assertIn(needle, "\n".join(probs), needle)
+
+    def test_addition_fits_the_newest_main(self):
+        cur = CAL + ev_line(utc="2026-10-14 12:30", typ="CPI", name="US CPI")         # the operator added one
+        applies, probs, _ = self.review(CAL + ev_line(), cur=cur)
+        self.assertEqual(probs, [])
+        merged = B.apply_text(cur, applies[0])
+        self.assertEqual([e["type"] for e in yaml.safe_load(merged)["events"]], ["NFP", "CPI", "NFP"])
+        applies, probs, _ = self.review(CAL + ev_line(), cur=CAL + "other_key: 1\n")  # events no longer last
+        self.assertIn("does not fit", "\n".join(probs))
+
+    def test_real_calendar_is_accepted_by_its_own_rules(self):
+        """Every entry of the committed events.yaml meets the rules the guard applies to new ones
+        (the operator's 'operator' mark aside)."""
+        text = read(os.path.join(ROOT, "events.yaml"))
+        items = yaml.safe_load(text)["events"]
+        self.assertGreaterEqual(len(items), 10)
+        for e in items:
+            one = "events:\n  - " + json.dumps({k: (v if k != "check" or v != "operator" else "indirect")
+                                                for k, v in e.items()}) + "\n"
+            self.assertEqual(B.check_calendar("events: []\n", one, None), [], e)
+
+
+class CalendarFile(unittest.TestCase):
+    """events.yaml (the engine's calendar): times follow the US summer / winter time rule."""
+
+    def test_times_and_weekdays(self):
+        import engine.risk as RK
+        items = RK.load_calendar(os.path.join(ROOT, "events.yaml"))
+        self.assertEqual(len(RK.parse_events(items)), len(items))
+        for e in items:
+            t = dt.datetime.strptime(e["utc"], "%Y-%m-%d %H:%M")
+            self.assertLess(t.weekday(), 5, e)                                              # never a weekend
+            summer = dt.datetime(2026, 3, 8, 7) <= t < dt.datetime(2026, 11, 1, 6)       # US summer time 2026
+            if e["type"] in ("NFP", "CPI", "PCE", "GDP", "PPI"):
+                self.assertEqual(t.strftime("%H:%M"), "12:30" if summer else "13:30", e)  # 8:30 a.m. New York
+            if e["type"] == "FOMC":
+                self.assertEqual(t.strftime("%H:%M"), "18:00" if summer else "19:00", e)  # 2:00 p.m. New York
+            self.assertIn(e["check"], {"official_page", "official_search", "indirect", "operator"})
+        self.assertEqual({(e["utc"], e["type"]) for e in items if e["type"] == "FOMC"},
+                         {("2026-10-28 18:00", "FOMC"), ("2026-12-09 19:00", "FOMC")})
+
+    def test_loader(self):
+        import engine.risk as RK
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp, True)
+        self.assertEqual(RK.load_calendar(os.path.join(tmp, "none.yaml")), [])
+        for text, ok in (("events: []\n", True), ("# only comments\n", True), ("events: {a: 1}\n", False),
+                         ("events: [1, 2]\n", False), ("events: [\n", False)):
+            p = os.path.join(tmp, "e.yaml")
+            with open(p, "w") as f:
+                f.write(text)
+            if ok:
+                self.assertEqual(RK.load_calendar(p), [])
+            else:
+                with self.assertRaises(ValueError):
+                    RK.load_calendar(p)
+
+    def test_scan_reads_the_calendar_file(self):
+        src = read(os.path.join(ROOT, "scanner.py"))
+        self.assertIn('rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE))', src)
+        lines = brain_pack.calendar_lines(dt.datetime(2026, 9, 27, tzinfo=UTC))
+        self.assertIn("events.yaml", lines[1])
+        self.assertTrue(any("2026-10-02 12:30 UTC NFP" in ln for ln in lines))
+        self.assertTrue(any(ln.startswith("- 2026-11: no NFP") for ln in lines))      # the gap is shown
+        self.assertFalse(any(ln.startswith("- 2026-09:") for ln in lines))            # not the current month
+
+
+class Workflows(unittest.TestCase):
+    def test_pinned_runner_and_node24_actions(self):
+        folder = os.path.join(ROOT, ".github", "workflows")
+        for name in sorted(os.listdir(folder)):
+            wf = yaml.safe_load(read(os.path.join(folder, name)))
+            for job in wf["jobs"].values():
+                self.assertEqual(job["runs-on"], "ubuntu-24.04", name)
+                uses = [s["uses"] for s in job["steps"] if "uses" in s]
+                self.assertNotIn("actions/checkout@v4", uses, name)
+                self.assertNotIn("actions/setup-python@v5", uses, name)
+                self.assertTrue(any(u == "actions/checkout@v5" for u in uses), name)
+
+    def test_brain_save_step_without_reports_claude(self):
+        """The Save step must not fail when reports/claude does not exist yet (nothing applied so far)."""
+        wf = yaml.safe_load(read(os.path.join(ROOT, ".github", "workflows", "brain.yml")))
+        steps = wf["jobs"]["brain"]["steps"]
+        save = next(s for s in steps if s.get("name") == "Save")["run"]
+        self.assertIn("pip install pyyaml", next(s for s in steps if s.get("name", "").startswith("Install"))["run"])
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp, True)
+        origin, work = os.path.join(tmp, "o.git"), os.path.join(tmp, "w")
+        git(tmp, "init", "-q", "--bare", "-b", "main", origin)
+        git(tmp, "clone", "-q", origin, work)
+        for c in (["config", "user.email", "t@t"], ["config", "user.name", "t"]):
+            git(work, *c)
+        os.makedirs(os.path.join(work, "memory"))
+        with open(os.path.join(work, "memory", "lessons.md"), "w") as f:
+            f.write("x\n")
+        git(work, "add", "-A")
+        git(work, "commit", "-qm", "start")
+        git(work, "push", "-q", "-u", "origin", "main")
+        run = lambda: subprocess.run(["bash", "-e", "-c", save], cwd=work, capture_output=True, text=True)
+        p = run()
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)                       # nothing new: still green
+        self.assertIn("Nothing new", p.stdout)
+        with open(os.path.join(work, "memory", "lessons.md"), "a") as f:
+            f.write("y\n")
+        p = run()
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)                       # a change: committed + pushed
+        self.assertEqual(git(work, "rev-list", "--count", "origin/main"), "2")
