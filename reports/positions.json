@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-25 05:17",
+ "generated_utc": "2026-09-25 06:23",
  "book": {
-  "utc": "2026-09-25 05:17",
-  "beijing": "2026-09-25 13:17",
+  "utc": "2026-09-25 06:23",
+  "beijing": "2026-09-25 14:23",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,10 +19,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-09-25 05:17 UTC / 2026-09-25 13:17 Beijing",
+  "POSITION BOOK \u2014 2026-09-25 06:23 UTC / 2026-09-25 14:23 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 \u26a0 calendar not maintained - no event listed for the next 7 days (config.yaml -> events)"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -37,9 +37,16 @@
    "BNB+BTC+ETH+SOL+XRP"
   ],
   "blackout_now": [],
-  "upcoming_events": [],
-  "next_event": null,
-  "calendar_warning": "calendar not maintained - no event listed for the next 7 days (config.yaml -> events)",
+  "upcoming_events": [
+   {
+    "start_utc": "2026-09-30 12:30",
+    "end_utc": "2026-09-30 12:30",
+    "type": "PCE",
+    "name": "US PCE / Personal Income and Outlays (Aug data)"
+   }
+  ],
+  "next_event": "US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC",
+  "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
   "limits": {
