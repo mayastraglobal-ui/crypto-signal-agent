@@ -1,84 +1,138 @@
-# Curriculum - one short lesson a day
+# Curriculum - the agent's rotating reading plan
 
-The [DAILY] email carries the next lesson (reports/curriculum_sent.json remembers which ones you had; after the last
-one it starts again). Each lesson is tied to something you can see in THIS system. Written for a beginner; nothing
-here is financial advice. The operator may edit, reorder or add lessons (keep the `## Lxx · title` headings).
+The daily review studies ONE item per day (the fact sheet names today's item: the first one not studied yet, then the
+one studied longest ago). For that item it:
+1. finds and opens the real source (papers: the journal or an open preprint such as SSRN / arXiv; books: public
+   summaries, reviews or the author's own papers - never copied text; post-mortems: official reports or reputable
+   reporting);
+2. writes ONE record in `memory/research_sources.md` with a title starting `[Cxx]`, the URL it opened, the claim, the
+   evidence class and what it means for this system;
+3. writes AT MOST ONE testable hypothesis into `memory/experiments.md` (evidence `HYPOTHESIS`), if the item suggests one.
 
-## L01 · What "R" means
-R is the amount you risk on one trade: the distance from your entry to your stop-loss.
-A trade that wins +2R made twice what it risked; -1R means the stop was hit.
-Measuring everything in R lets us compare coins and strategies of any price.
-Try it: in reports/latest.md, section 3, the "Avg R" column is the average result per trade, in R.
+**References below are written from the build session's memory and have NOT been opened.** Check the title, authors,
+year and venue on the real source before recording anything. If the source cannot be found or opened, record that
+("not opened") and do not cite it. Operator: add, remove or reorder items freely (keep the `## Cxx · kind · title` lines).
+Kinds: paper · book · exchange_research · post_mortem · interview.
 
-## L02 · The stop-loss comes first
-The stop-loss is the price where the idea is wrong and the trade closes with a small loss.
-Every signal here has its stop decided BEFORE entry; it never moves further away.
-Without a stop, one bad trade can wipe out many good ones.
-Try it: an [ENTRY] email shows entry, stop and targets - the stop is always there.
+## C01 · paper · Time series momentum
+- read: Moskowitz, Ooi, Pedersen - "Time Series Momentum", Journal of Financial Economics (2012).
+- look for: does a market's own past 12-month return predict its next month, across asset classes? How big, how costly?
+- for us: the trend-following family (donchian_breakout, supertrend_flip) - which lookbacks and holding periods?
 
-## L03 · Targets and taking profit in parts
-A target (take-profit, TP) is where part of the trade is closed in profit.
-Closing in parts (e.g. 40% / 30% / 30% at 1R / 2R / 3R) locks in some profit and lets the rest run.
-New lab strategies must have their first target at least 2R away.
-Try it: config.yaml -> trade_plan shows the default split.
+## C02 · paper · Risks and returns of cryptocurrency
+- read: Liu, Tsyvinski - "Risks and Returns of Cryptocurrency", Review of Financial Studies (2021).
+- look for: time-series momentum and investor attention as predictors of crypto returns; which horizons.
+- for us: which of our timeframes match the horizons where they found predictability?
 
-## L04 · Fees eat small edges
-Every trade pays fees and slippage (the price moving while your order fills).
-Cost in R = cost / stop distance: the tighter the stop, the bigger the bite.
-The engine refuses strategies whose costs are over 1/4 of the stop, and tests them again with costs +50%.
-Try it: the "Cost" column in report section 3.
+## C03 · paper · Common risk factors in cryptocurrency
+- read: Liu, Tsyvinski, Wu - "Common Risk Factors in Cryptocurrency", Journal of Finance (2022).
+- look for: market, size and momentum factors in the cross-section of coins.
+- for us: cross-coin ideas (idea factory f) - do stronger coins keep outperforming?
 
-## L05 · Backtest, paper, live - never add them up
-Backtest = the rules run on past data. Paper = live signals that are only logged. Live = APPROVED signals you get emailed.
-Each stage is a harder test; results are always shown apart.
-A great backtest with bad paper results usually means the backtest was lucky or unrealistic.
-Try it: the [WEEKLY] email section 1 keeps LIVE / PAPER / VALIDATION apart.
+## C04 · paper · The deflated Sharpe ratio
+- read: Bailey, Lopez de Prado - "The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting and
+  Non-Normality", Journal of Portfolio Management (2014).
+- look for: how the number of trials should raise the bar for a backtest.
+- for us: compare with our Bonferroni trials bar (memory/trials.csv) - too strict, too loose?
 
-## L06 · Luck looks like skill when you test many ideas
-Test 100 random strategies and a few will look great by chance.
-That is why the trials counter raises the bar as more ideas are tested (now about 3 "standard errors").
-A strategy must beat that bar, not just be positive.
-Try it: report section 3b, "Trials counter".
+## C05 · paper · Multiple testing in factor research
+- read: Harvey, Liu, Zhu - "... and the Cross-Section of Expected Returns", Review of Financial Studies (2016).
+- look for: why a t-statistic of 2 is not enough after hundreds of tested factors.
+- for us: the same problem for strategy ideas and the lab.
 
-## L07 · Market regime
-A regime is the market's current "weather": strong up-trend, range, high volatility, and so on.
-Most strategies only work in some regimes; the engine lets each one trade only in the regimes it lists.
-Try it: memory/playbook.md shows, per regime, what made and lost money in the backtests.
+## C06 · paper · Arbitrage and price differences between crypto exchanges
+- read: Makarov, Schoar - "Trading and Arbitrage in Cryptocurrency Markets", Journal of Financial Economics (2020).
+- look for: how prices differ across exchanges and countries, and why they persist.
+- for us: our data comes from one exchange at a time (Binance, OKX fallback) - what can differ?
 
-## L08 · The control twin
-A fancy ingredient (like an SMC pattern or a 5-minute check) must prove it adds something.
-So each such strategy is compared with a "twin": the same idea WITHOUT the ingredient.
-If the twin does as well, the ingredient is only decoration.
-Try it: report section 3b, "SMC vs control twin".
+## C07 · paper · Market liquidity and funding liquidity
+- read: Brunnermeier, Pedersen - "Market Liquidity and Funding Liquidity", Review of Financial Studies (2009).
+- look for: how margin calls and funding stress create spirals of selling.
+- for us: liquidation cascades and funding (memory/market_mechanics.md); the funding / open-interest building blocks.
 
-## L09 · The edge block: why should this make money?
-Every idea must say who is on the other side of the trade and why they lose, what market behaviour drives it,
-when it should fail, and what result would kill it.
-An idea without a clear edge is a pattern, not a strategy.
-Try it: strategies.yaml -> any card's `edge:` block; approval packs show it at the top.
+## C08 · paper · A century of trend following
+- read: Hurst, Ooi, Pedersen - "A Century of Evidence on Trend-Following Investing", Journal of Portfolio Management (2017).
+- look for: in which market conditions trend following made and lost money.
+- for us: the playbook - do our trend families fail in the same regimes?
 
-## L10 · Risk per trade and position size
-Risk per trade = how much of the account you lose if the stop is hit (0.5% for the first 30 days, then at most 1%).
-Position size = risk in dollars / stop distance. A wide stop means a smaller position, not a bigger risk.
-Try it: an [ENTRY] email shows the position size and the dollars at risk.
+## C09 · paper · Foundations of technical analysis
+- read: Lo, Mamaysky, Wang - "Foundations of Technical Analysis", Journal of Finance (2000).
+- look for: a statistical test of chart patterns; which patterns carried information.
+- for us: candle / SMC pattern evidence vs random entries (reports/feature_evidence.json).
 
-## L11 · "No trade" is a result
-Most hours there is no good setup. Forcing trades is how accounts lose money.
-When no strategy has shown an edge in the current regime, standing aside IS the plan.
-Try it: memory/playbook.md - regimes where "NOTHING made money".
+## C10 · paper · Simple technical trading rules
+- read: Brock, Lakonishok, LeBaron - "Simple Technical Trading Rules and the Stochastic Properties of Stock Returns",
+  Journal of Finance (1992).
+- look for: moving-average and range-breakout rules; later studies on whether the effect survived costs.
+- for us: ema_9_21_cross and donchian_breakout - did the edge disappear after publication and costs?
 
-## L12 · News and event risk
-Big scheduled releases (CPI, jobs report, FOMC) can move crypto sharply in minutes.
-The engine blocks live entries from 60 minutes before to 60 minutes after each one.
-Try it: events.yaml lists them in UTC; the briefing names the next ones.
+## C11 · book · Market Wizards (principles)
+- read: Schwager - "Market Wizards" (1989): public summaries and reviews only, never copied text.
+- look for: principles most of the interviewed traders share (risk control, cutting losses, position size).
+- for us: which principle does this system already enforce, and which one is missing?
 
-## L13 · How to read an approval pack - and say no
-Before any strategy sends live emails, you get an approval pack: its edge, backtest, walk-forward, paper results,
-twin comparison and weaknesses. Saying nothing = no.
-Look for: enough paper signals, paper close to the backtest, and weaknesses you understand.
-Try it: reports/approval/ (empty until a strategy qualifies - that is normal).
+## C12 · book · Trading and Exchanges (who is on the other side)
+- read: Harris - "Trading and Exchanges: Market Microstructure for Practitioners" (2003): summaries, lecture notes.
+- look for: the types of traders (informed, liquidity, noise) and who profits from whom.
+- for us: the edge blocks' "who_pays" lines - are they realistic?
 
-## L14 · Headlines are claims, not evidence
-A news headline tells you what someone says happened, not what the price will do.
-The briefings quote headlines with their source and never use them as a reason to trade.
-Try it: the "Outside feeds" part of a briefing, and memory/market_mechanics.md for how markets really move.
+## C13 · book · Evidence-Based Technical Analysis
+- read: Aronson - "Evidence-Based Technical Analysis" (2006): summaries, reviews, the author's articles.
+- look for: data-mining bias and how to test many rules honestly.
+- for us: the variant search (idea factory e) and the trials counter.
+
+## C14 · book · Fooled by Randomness
+- read: Taleb - "Fooled by Randomness" (2001): summaries and reviews.
+- look for: luck mistaken for skill; survivorship; rare large losses.
+- for us: rsi2_dip_buy's "many small wins, rare large losses" - is the drawdown test enough?
+
+## C15 · exchange_research · Options expiries and max pain
+- read: exchange or data-provider research on BTC / ETH options expiries (e.g. Deribit's own articles).
+- look for: does price behave differently around large expiries? What evidence, how measured?
+- for us: the Deribit expiry data in reports/feeds.json - worth a testable filter?
+
+## C16 · exchange_research · Funding rates and crowded positioning
+- read: exchange research (e.g. Binance Research) or data providers on perpetual funding and open interest.
+- look for: what extreme funding or rising open interest has been followed by.
+- for us: the funding_z / oi_chg building blocks (Part C) - a hypothesis to test.
+
+## C17 · exchange_research · Liquidity and order books
+- read: a crypto market-data provider's research on order-book depth and slippage (e.g. Kaiko).
+- look for: how depth changes by hour, weekday and around news.
+- for us: our slippage assumption (config.yaml costs) - realistic for the signal coins?
+
+## C18 · post_mortem · LTCM (1998)
+- read: public accounts of Long-Term Capital Management's collapse (reports, reputable reporting, book summaries).
+- look for: leverage, correlated positions, liquidity drying up.
+- for us: correlated positions (the risk engine's correlation groups) - is the limit tight enough?
+
+## C19 · post_mortem · 12 March 2020 crypto crash
+- read: reputable reporting / exchange post-mortems on the March 2020 crash and the liquidation cascade.
+- look for: how liquidations, exchange outages and funding interacted.
+- for us: data-quality halts and the volatility_spike loss tag - would they have protected us?
+
+## C20 · post_mortem · Terra / LUNA (May 2022)
+- read: reputable reporting and published analyses of the UST de-peg.
+- look for: how a "stable" asset lost its peg and what warning signs existed.
+- for us: stablecoin risk to the USDT pairs we trade - anything to monitor?
+
+## C21 · post_mortem · FTX (November 2022)
+- read: official filings / reputable reporting on the FTX collapse.
+- look for: exchange counterparty risk; how quickly withdrawals stopped.
+- for us: exchange incidents in events.yaml and the data-source fallback.
+
+## C22 · post_mortem · Three Arrows Capital (2022)
+- read: reputable reporting / court documents on 3AC's failure.
+- look for: leverage, illiquid positions, correlated bets.
+- for us: never scale risk after wins - check the risk engine's limits.
+
+## C23 · interview · A systematic trader on process
+- read / listen: one long interview with a professional systematic or crypto trader (a well-known podcast or
+  published interview). Note who, where, when.
+- look for: how they decide an edge is dead; how they size positions.
+- for us: compare with our kill rules and the paper retirement limits.
+
+## C24 · interview · A discretionary trader on risk
+- read / listen: one interview with a professional discretionary trader. Note who, where, when.
+- look for: how they handle losing streaks and news events.
+- for us: the risk engine's daily / weekly loss limits - explain them in plain words to the operator.

@@ -40,6 +40,7 @@ from engine import briefs
 from engine import charts
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import derivs as dv
 from engine import digest
 from engine import evidence as evid
 from engine import features as fe
@@ -456,6 +457,27 @@ def make_namespace(df, feats=None):
         for col in feats.columns:
             if col not in ns:           # never replace an existing building block (e.g. atr())
                 ns[col] = pd.Series(feats[col].to_numpy(), index=df.index)
+    # Phase 17 C: futures market structure + BTC lead (prepare_coin attaches them as known at each candle close;
+    # unknown = NaN, so a rule using them is false)
+    def _col(k):
+        return df[k].astype(float) if k in df else pd.Series(np.nan, index=df.index)
+    fr, oi_, btc = _col("_funding_rate"), _col("_oi"), _col("_btc_close")
+
+    def funding_z(n=200):
+        """How unusual the funding rate is vs its last n candles (z-score)."""
+        n = int(n)
+        m, sd = fr.rolling(n, min_periods=max(2, n // 2)).mean(), fr.rolling(n, min_periods=max(2, n // 2)).std()
+        return (fr - m) / sd.replace(0, np.nan)
+
+    def oi_chg(n=24):
+        """Open interest change over the last n candles, in %."""
+        return (oi_ / oi_.shift(int(n)) - 1) * 100
+
+    def btc_ret(n=1):
+        """BTC's return over its last n closed candles of this timeframe, in % (known at this candle's close)."""
+        return (btc / btc.shift(int(n)) - 1) * 100
+    ns.update(funding_rate=fr, oi=oi_, ls_ratio=_col("_ls_ratio"), taker_ratio=_col("_taker_ratio"),
+              funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret)
     return ns
 
 
@@ -511,7 +533,49 @@ def add_h4_context(frames):
             feats["h4_" + col] = m[col].to_numpy(dtype=float)
 
 
-def prepare_coin(sym, base, data, quality, tfs, cfg):
+def load_derivs(offline, bases, now_ms):
+    """Phase 17 C: {coin: (hourly rows, funding rows)} - the recorded history (derivs.py) with impossible values
+    removed, or synthetic data for offline test runs."""
+    if offline:
+        return {b: dv.synthetic(b, now_ms - 4 * 365 * 86_400_000, now_ms) for b in bases}
+    h = dv.read(os.path.join(REPORTS, "derivs_hourly.csv.gz"), dv.HOURLY_COLS)
+    f = dv.read(os.path.join(REPORTS, "funding.csv.gz"), dv.FUNDING_COLS)
+    h, f = dv.clean(h, f)
+    return {b: (h[h["coin"] == b], f[f["coin"] == b]) for b in bases}
+
+
+def btc_frames(data, quote, tfs):
+    """BTC's closes per timeframe (close_time, close) for the btc_ret building block."""
+    out = {}
+    for tf in tfs:
+        d = data.get(("BTC" + quote, tf))
+        if d is not None and len(d):
+            out[tf] = d[["close_time", "close"]]
+    return out
+
+
+def attach_market(df, derivs, btc):
+    """Phase 17 C: the futures data (engine/derivs.align - as known at each close) and BTC's close on the same
+    timeframe as columns of the candle table. Missing data -> NaN (the building blocks read 'unknown')."""
+    h, f = derivs if derivs is not None else (pd.DataFrame(columns=dv.HOURLY_COLS), pd.DataFrame(columns=dv.FUNDING_COLS))
+    a = dv.align(df["close_time"].to_numpy(), df["open_time"].to_numpy(), h, f)
+    for k in ("funding_rate", "oi", "ls_ratio", "taker_ratio"):
+        df["_" + k] = a[k]
+    df["_fund_short"] = a["_fund_short"]
+    df["_btc_close"] = np.nan
+    if btc is not None and len(btc):
+        ct = btc["close_time"].to_numpy(dtype=np.int64)
+        idx = np.searchsorted(ct, df["close_time"].to_numpy(dtype=np.int64), side="right") - 1
+        ok = idx >= 0
+        vals = np.full(len(df), np.nan)
+        vals[ok] = btc["close"].to_numpy(dtype=float)[idx[ok]]
+        same = np.zeros(len(df), bool)                    # only the SAME closed candle counts (no stale BTC price)
+        same[ok] = ct[idx[ok]] == df["close_time"].to_numpy(dtype=np.int64)[ok]
+        df["_btc_close"] = np.where(same, vals, np.nan)
+    return df
+
+
+def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None):
     """Everything the strategies of ONE coin need, per trade timeframe: candles (+ higher-timeframe
     trend), features incl. SMC columns (+ h4_* context), the rule namespace, ATR, and the regime of
     every regime timeframe as it was known at each candle. Used by the hourly scan AND the research run.
@@ -524,6 +588,7 @@ def prepare_coin(sym, base, data, quality, tfs, cfg):
         if df is None or len(df) < 300 or quality[(base, tf)]["state"] == dq.UNSAFE:
             continue    # never backtest on data we cannot trust
         df = add_htf(df.copy(), data.get((sym, HTF[tf])))
+        df = attach_market(df, derivs, (btc or {}).get(tf))
         feats = fe.compute(df, TF_MS[tf], fe_cfg)
         feats.index = df.index
         res = smc.detect(df, feats, data.get((sym, "1d")), data.get((sym, "1w")), TF_MS[tf], smc_cfg)
@@ -767,18 +832,21 @@ def market_type(d):
 
 
 def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None, tps=None, split=None,
-                   info=None):
+                   info=None, fund_real=None):
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open
     (then `info`, if given, receives the targets hit so far and the current stop - the position book).
     tps / split: take-profit prices and the share closed at each (default: config trade plan 1R/2R/3R).
     Conservative: if stop and target are touched in the same candle we assume the STOP hit first.
-    Funding (shorts) is charged on the part still open, for every candle held, at entry notional.
+    Funding (shorts) is charged on the part still open, for every candle held, at entry notional: the config rate,
+    or where the real funding history is known (fund_real: the fraction per 8 hours a short paid) the HIGHER of the
+    two - money received from funding is never counted (Phase 17 C).
     Also measured: MAE / MFE = the worst / best price reached while the trade was open, in R
     (Phase 9 failure attribution), and the funding paid, in R."""
     tp = cfg["trade_plan"]
     k = trade_costs(cfg, d)
     fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
     fund_bar = k["funding_8h"] * bar_hours / 8
+    real_x = float(cfg["costs"]["short"].get("funding_real_x", 1.0))   # Phase 17 C: real funding (shorts), never less
     if tps is None:
         tps, split = [entry + d * r * R for r in tp["tp_r"]], tp["tp_split"]
     stop = entry - d * R
@@ -790,8 +858,10 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
         return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1,
                     mae_r=mae / R, mfe_r=mfe / R, funding_r=funding / R)
     for j in range(j0, n):
-        fees += remaining * fund_bar * entry
-        funding += remaining * fund_bar * entry
+        fb = fund_bar if (fund_real is None or d == 1) else \
+            max(k["funding_8h"], float(fund_real[j]) * real_x) * bar_hours / 8
+        fees += remaining * fb * entry
+        funding += remaining * fb * entry
         worst, best = (l[j], h[j]) if d == 1 else (h[j], l[j])
         mae, mfe = min(mae, d * (worst - entry)), max(mfe, d * (best - entry))
         # --- stop-loss first (worst case) ---
@@ -857,6 +927,7 @@ def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
 
 def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None):
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
+    fund_real = df["_fund_short"].to_numpy() if "_fund_short" in df else None
     ot = df["open_time"].to_numpy()
     atr = df["_atr"].to_numpy()
     bar_hours = TF_MS[tf] / 3_600_000
@@ -873,7 +944,7 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             continue
         R, tps, split = plan
         res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["time_stop_bars"], bar_hours,
-                             ex_long if d == 1 else ex_short, tps, split)
+                             ex_long if d == 1 else ex_short, tps, split, fund_real=fund_real)
         if res is None:
             break
         k = trade_costs(cfg, d)
@@ -943,7 +1014,7 @@ def backtest_5m(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols
         if js >= n5:
             break
         res = simulate_trade(o5, h5, l5, cl5, js, d, entry, R, cfg, max_hold, TF_MS["5m"] / 3_600_000,
-                             ex5[d], tps, split)
+                             ex5[d], tps, split, fund_real=m5.get("fund_short"))
         if res is None:
             break
         entry_idx = int(np.searchsorted(ot, ot5[js], side="right") - 1)       # trigger candle holding the 5m bar
@@ -961,7 +1032,12 @@ def backtest_5m(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols
 def m5_arrays(frames):
     """The 5-minute protocol's input for one coin (None when there is no trustworthy 5m data)."""
     fr = frames.get("5m")
-    return c5m.arrays(fr["df"], fr["feats"]) if fr else None
+    if not fr:
+        return None
+    arr = c5m.arrays(fr["df"], fr["feats"])
+    if arr is not None and "_fund_short" in fr["df"]:
+        arr["fund_short"] = fr["df"]["_fund_short"].to_numpy()        # real funding for 5m-simulated shorts
+    return arr
 
 
 def run_backtest(df, L, S, XL, XS, strat, cfg, tf, cols=None, skipped=None, m5=None, S5=None):
@@ -1124,7 +1200,8 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
         o, h, l, c = (after[k].to_numpy() for k in ("open", "high", "low", "close"))
         info = {}
         res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]) * (TF_MS[tf] // TF_MS[stf]),
-                             TF_MS[stf] / 3_600_000, exit_arr, tps, split, info)
+                             TF_MS[stf] / 3_600_000, exit_arr, tps, split, info,
+                             fund_real=after["_fund_short"].to_numpy() if "_fund_short" in after else None)
         if not res:
             new = pos.TP1_HIT if info.get("hit", 0) >= 1 else pos.ACTIVE
             m = (mon or {}).get((coin, tf))
@@ -1671,9 +1748,11 @@ def main():
     mon = {}                                # (coin, tf) -> what the section 16 warnings read
     watching = []                           # WATCH / SETUP_FORMING (report only)
     dash_candles = {}                       # coin -> tf -> newest candles, for the dashboard charts (Phase 16)
+    derivs_by_coin = load_derivs(args.offline, [u["base"] for u in coins], int(started.timestamp() * 1000))
+    btc_by_tf = btc_frames(data, cfg["market"]["quote"], tfs)
     for u in coins:
         sym, base = u["symbol"], u["base"]
-        pc = prepare_coin(sym, base, data, quality, tfs, cfg)
+        pc = prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
         m5 = m5_arrays(pc["frames"])
         if m5 is not None:
             m5_by_coin[base] = m5
@@ -2154,6 +2233,7 @@ def main():
                                        retune_penalty_r=V["retune_penalty_r"], max_cost_to_r=V["max_cost_to_r"],
                                        research=RC)),
                coin_snapshot=snap, data_quality=dq_out, universe=u_out, timeframes=tf_out,
+               derivs=derivs_report(args.offline),
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
                candle_evidence=ev_out, regime=rg_out, smc=smc_out)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
@@ -2609,6 +2689,37 @@ def render_timeframes(t, w):
       "Cross-check = do the bigger candles agree with the smaller candles inside them?*\n")
 
 
+def derivs_report(offline):
+    """reports/derivs_quality.json (derivs.py, this hour) for the report and Claude's fact sheet."""
+    p = os.path.join(REPORTS, "derivs_quality.json")
+    if offline or not os.path.exists(p):
+        return None
+    try:
+        with open(p) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def render_derivs(d, w):
+    w("### 0b. Futures market data (funding, open interest, long/short, taker) - Phase 17 C")
+    if not d:
+        w("Not recorded yet (the hourly step `derivs.py` writes it). Rules using these building blocks read "
+          "'unknown' until there is data.\n")
+        return
+    w(f"Checked {d['checked_utc']} UTC. History is saved every hour from now on (exchanges keep only ~30 days).\n")
+    w("| Coin | State | Source | History | Funding now | Long/short | Taker buy/sell | Problems |")
+    w("|---|---|---|---|---|---|---|---|")
+    num = lambda x, f: "-" if x is None or x != x else f.format(x)
+    for c, x in d["coins"].items():
+        last = x.get("last") or {}
+        w(f"| {c} | {x['state']} | {(x.get('fetch') or {}).get('source') or '-'} | {x.get('hours', 0)} h"
+          + (f" since {x['first_utc']}" if x.get("first_utc") else "") + f" | {num(last.get('funding_pct'), '{:+.4f}%')} | "
+          f"{num(last.get('ls_ratio'), '{:.2f}')} | {num(last.get('taker_ratio'), '{:.2f}')} | "
+          f"{'; '.join((x.get('problems') or []) + ((x.get('fetch') or {}).get('errors') or []))[:160] or '-'} |")
+    w("")
+
+
 def render_dq(q, w):
     w("## 0. Data check")
     meaning = {dq.GOOD: "all data passed the checks - signals allowed",
@@ -2934,6 +3045,7 @@ def render_md(o, cfg):
           "heat and event blackout are enforced on live (APPROVED) entries by the risk engine (section 2d). Every "
           "state change: `reports/position_events.csv`.\n")
     render_dq(o["data_quality"], w)
+    render_derivs(o.get("derivs"), w)
     render_universe(o["universe"], w)
     render_timeframes(o["timeframes"], w)
     render_features(o["features_1h"], w)

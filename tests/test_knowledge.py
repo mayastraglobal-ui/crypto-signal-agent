@@ -40,7 +40,9 @@ class EdgeBlock(unittest.TestCase):
             if c.get("twin_of"):
                 continue
             self.assertEqual(SS.edge_problems(c), [], c["id"])
-            self.assertEqual(len(SS.edge_lines(c)), 4)
+            self.assertIn(c["edge"]["type"], SS.EDGE_TYPES)
+            self.assertEqual(len(SS.edge_lines(c)), 6)
+            self.assertEqual(c["edge"]["works_in"], c["regimes"])
 
     def test_edge_is_not_part_of_the_rules(self):
         c = SS.render(test_lab.lib("trend_pullback"))
@@ -50,11 +52,16 @@ class EdgeBlock(unittest.TestCase):
     def test_rules_for_the_block(self):
         self.assertIn("edge block missing", SS.edge_problems({})[0])
         e = dict(test_lab.lib("trend_pullback")["edge"])
-        self.assertEqual(SS.edge_problems({"edge": e}), [])
+        tp = test_lab.lib("trend_pullback")
+        self.assertEqual(SS.edge_problems(tp), [])
+        for bad, why in ((dict(e, type="luck"), "edge.type"), (dict(e, works_in=[]), "edge.works_in"),
+                         (dict(e, works_in=["RANGE"]), "not in the card's regimes")):
+            card = dict(test_lab.lib("trend_pullback"), edge=bad)
+            self.assertIn(why, " ".join(SS.edge_problems(card)))
         for k in SS.EDGE_KEYS:
             short = dict(e, **{k: "too short"})
-            self.assertEqual(len(SS.edge_problems({"edge": short})), 1, k)
-            self.assertIn(f"edge.{k}", SS.edge_problems({"edge": {x: v for x, v in e.items() if x != k}})[0])
+            self.assertEqual(len(SS.edge_problems(dict(tp, edge=short))), 1, k)
+            self.assertIn(f"edge.{k}", SS.edge_problems(dict(tp, edge={x: v for x, v in e.items() if x != k}))[0])
 
     def test_lab_card_without_an_edge_is_refused_but_a_twin_is_not(self):
         card = {k: v for k, v in test_lab.v11().items() if k != "edge"}
@@ -103,7 +110,8 @@ class MarketMechanics(unittest.TestCase):
 
     def test_tasks_may_add_a_record(self):
         base = read(os.path.join(ROOT, self.PATH))
-        add = test_brain.rec("Review: Options expiries (Deribit)", ev="RESEARCH_FINDING: 1 paper")
+        add = test_brain.rec("Review: Options expiries (Deribit)", ev="RESEARCH_FINDING: 1 paper").replace(
+            "  details\n", "  - mechanism: hedging flows\n  - strategies: none yet\n")
         applies, probs, _ = B.review([test_brain.change(self.PATH, "M", base, base + add)], {self.PATH: base})
         self.assertEqual(probs, [])
         applies, probs, _ = B.review([test_brain.change(self.PATH, "M", base, base.replace("Open interest", "OI"))],
@@ -157,6 +165,17 @@ class Playbook(unittest.TestCase):
         self.assertNotIn("COMPRESSION", text)
         self.assertIn("not available yet", "\n".join(brain_pack.playbook_lines(rep, {})))
 
+    def test_family_timeframe_matrix(self):
+        mx = PB.matrix(self.cells, self.fam)
+        self.assertEqual(mx["breakout|1h"]["RANGE"], [40, 0.2])
+        self.assertEqual(mx["breakout|4h"], {"RANGE": [60, -0.15], "BULL": [29, 2.0]})
+        self.assertEqual(mx["mean_reversion|1h"]["RANGE"], [100, 0.002])
+        text = "\n".join(PB.matrix_lines(mx))
+        self.assertIn("| breakout | 1h | -0.30R (100) ✗ | - | +0.20R (40) ✓ | - |", text)
+        self.assertIn("| breakout | 4h | +2.00R (29) | - | -0.15R (60) ✗ | - |", text)      # 29 trades: no mark
+        self.assertEqual(set(PB.GROUPS), {"BULL", "BEAR", "RANGE", "TRANSITION"})
+        self.assertEqual(sorted(x for v in PB.GROUPS.values() for x in v), sorted(rg.LABELS))
+
     def test_committed_playbook_and_files(self):
         text = read(os.path.join(ROOT, "memory", "playbook.md"))
         self.assertTrue(text.startswith("# Regime playbook (generated - do not edit)"))
@@ -167,7 +186,7 @@ class Playbook(unittest.TestCase):
 
 class Curriculum(unittest.TestCase):
     def test_lessons(self):
-        lessons = CUR.parse(read(os.path.join(ROOT, "memory", "curriculum.md")))
+        lessons = CUR.parse(read(os.path.join(ROOT, "memory", "beginner_course.md")))
         self.assertGreaterEqual(len(lessons), 12)
         self.assertEqual([x["id"] for x in lessons], [f"L{i:02d}" for i in range(1, len(lessons) + 1)])
         for x in lessons:
@@ -219,6 +238,59 @@ class Curriculum(unittest.TestCase):
             notify.daily_email()
         self.assertEqual(len(sent_mail), 3)
         self.assertNotIn("LESSON", sent_mail[2][1])
+
+
+class ReadingPlan(unittest.TestCase):
+    def test_plan_file(self):
+        plan = CUR.parse_plan(read(os.path.join(ROOT, "memory", "curriculum.md")))
+        self.assertGreaterEqual(len(plan), 20)
+        self.assertEqual([x["id"] for x in plan], [f"C{i:02d}" for i in range(1, len(plan) + 1)])
+        self.assertEqual({x["kind"] for x in plan}, set(CUR.KINDS))           # every kind the plan asks for
+        for x in plan:
+            self.assertTrue(any(ln.startswith("- read:") or ln.startswith("- read / listen:") for ln in x["lines"]))
+            self.assertTrue(any(ln.startswith("- for us:") for ln in x["lines"]), x["id"])
+            self.assertNotIn("http", " ".join(x["lines"]), "no URL from memory - the task opens the real source")
+        self.assertIn("have NOT been opened", read(os.path.join(ROOT, "memory", "curriculum.md")))
+
+    def test_rotation(self):
+        plan = [dict(id=f"C0{i}", kind="paper", title=str(i), lines=[]) for i in (1, 2, 3)]
+        src = ("\n### [C02] something\n- timestamp: 2026-09-20 15:30 UTC · source: x\n"
+               "\n### [C01] other\n- timestamp: 2026-09-21 15:30 UTC · source: x\n"
+               "\n### [C01] again\n- timestamp: 2026-09-24 15:30 UTC · source: x\n### unrelated\n")
+        done = CUR.studied(src)
+        self.assertEqual(done, {"C02": "2026-09-20 15:30 UTC", "C01": "2026-09-24 15:30 UTC"})
+        self.assertEqual(CUR.next_item(plan, done)["id"], "C03")                  # never studied first
+        done["C03"] = "2026-09-25 15:30 UTC"
+        self.assertEqual(CUR.next_item(plan, done)["id"], "C02")                  # then the oldest
+        self.assertIsNone(CUR.next_item([], {}))
+
+    def test_fact_sheet_names_todays_item(self):
+        tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, tmp, True)
+        shutil.copy(os.path.join(ROOT, "memory", "curriculum.md"), tmp)
+        with open(os.path.join(tmp, "research_sources.md"), "w") as f:
+            f.write("\n### [C01] Time series momentum\n- timestamp: 2026-09-24 15:30 UTC · source: daily\n")
+        with mock.patch.object(brain_pack, "MEMORY", tmp):
+            text = "\n".join(brain_pack.curriculum_lines())
+        self.assertIn("- C02 (paper): Risks and returns of cryptocurrency - not studied yet", text)
+        self.assertIn("1 studied at least once", text)
+        daily = read(os.path.join(ROOT, "tasks", "daily_review.md"))
+        self.assertIn("Curriculum (one item a day)", daily)
+        self.assertIn("At most ONE testable hypothesis", daily)
+
+
+class MechanicsRule(unittest.TestCase):
+    def test_records_name_mechanism_and_strategies(self):
+        base = read(os.path.join(ROOT, "memory", "market_mechanics.md"))
+        good = test_brain.rec("Basis trade", ev="CLAIM: blog").replace("  details\n", "  - mechanism: spot vs futures "
+                                                                        "spread\n  - strategies: none yet\n")
+        applies, probs, _ = B.review([test_brain.change(B.MECHANICS, "M", base, base + good)], {B.MECHANICS: base})
+        self.assertEqual(probs, [])
+        bad = test_brain.rec("Basis trade", ev="CLAIM: blog")
+        applies, probs, _ = B.review([test_brain.change(B.MECHANICS, "M", base, base + bad)], {B.MECHANICS: base})
+        self.assertEqual(applies, [])
+        self.assertEqual(sum("needs a detail line" in p for p in probs), 2)
+        self.assertEqual(B.check_mechanics(base[base.index("### Index: which strategies"):].join(["\n", ""])), [])
 
 
 class Tasks(unittest.TestCase):

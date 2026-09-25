@@ -64,3 +64,18 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   What: net money into spot bitcoin / ether ETFs and new stablecoin supply are watched as demand signals.
   Evidence that they predict the next day's price is weak and disputed; news headlines about them are CLAIMs.
   Not in the engine (no data source); the feeds give headlines only.
+
+### Index: which strategies use which mechanism
+- timestamp: 2026-09-25 14:00 UTC · source: Claude build session (Phase 17 B corrections) · evidence: FACT: read from strategies.yaml and the engine's rules · confidence: high · strategy: all · asset: all · timeframe: all · regime: - · review: 2026-10-25
+  - mechanism: (index of the records above - their mechanism and the strategies that use them; the rule 'every record names its mechanism and strategies' starts with this record)
+  - strategies: see each line below
+  - Perpetual futures funding: mechanism = funding payments between longs and shorts; strategies = none yet (funding_rate / funding_z building blocks: Part C); every backtest charges funding as a cost
+  - Liquidation cascades: mechanism = forced market orders from liquidated leverage; strategies = liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S8-PDH-PDL-SWEEP (their stops and targets sit where cascades run)
+  - Open interest: mechanism = new vs closing positions; strategies = none yet (oi_chg building block: Part C)
+  - Options expiries (Deribit): mechanism = hedging flows around large expiries; strategies = none yet (context in the briefing)
+  - Stop clusters and liquidity pools: mechanism = stops resting beyond obvious highs / lows; strategies = liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET, S8-PDH-PDL-SWEEP (+ their -5M versions)
+  - Trading sessions and weekends: mechanism = volume concentrated in session overlaps; strategies = S7-SILVER-BULLET (killzones); all intraday cards via the wrong_session tag
+  - Scheduled macro releases: mechanism = repricing at fixed release times; strategies = all live entries (the risk engine's +-60 minute blackout)
+  - Exchange listings, delistings and maintenance: mechanism = liquidity arriving or leaving a coin; strategies = none yet (context in the briefing)
+  - Fees and slippage measured in R: mechanism = cost as a share of the risk; strategies = all cards (cost viability and the costs +50% test)
+  - Spot ETF and stablecoin flows: mechanism = new money entering or leaving; strategies = none (no data source)

@@ -43,6 +43,10 @@ jobs:
       - name: Restore the daily research results (branch live-reports)
         run: python publish_live.py --restore
 
+      - name: Record futures data (funding, open interest, long/short, taker - history grows hourly; never stops the run)
+        continue-on-error: true
+        run: python derivs.py
+
       - name: Scan, backtest, find signals
         env:
           GITHUB_TOKEN: ${{ github.token }}   # only to read the repository size for the report

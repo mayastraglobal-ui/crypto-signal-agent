@@ -136,6 +136,9 @@ costs:                       # realistic trading costs - never set these to 0!
     slippage_pct: 0.05
     funding_pct_per_8h: 0.01 # futures "funding" fee, paid every 8 hours while the trade is open.
                              # Real funding changes sign; we cautiously ALWAYS charge it to the short.
+    funding_real_x: 1.0      # Phase 17 C: where the REAL funding history is known (reports/funding.csv.gz), a short
+                             # pays max(0.01%, the real rate it would have paid) per 8 hours - never less than above;
+                             # money RECEIVED from funding is never counted. The costs +50% test raises this to 1.5.
 
 data_quality:                # safety checks on the price data, every run (AGENT_PROMPT.md section 3)
   # GOOD = signals allowed · DEGRADED = analysis only · UNSAFE = no signals
@@ -197,6 +200,19 @@ research:                    # daily research run (research.py, workflow "Resear
   trials_alpha: 0.05             # trials counter (memory/trials.csv, Phase 17): PAPER_TRADING also needs the average
                                  # trade's t-statistic >= z(1 - 0.05 / number of trials ever tested) - Bonferroni.
                                  # More ideas tested -> a higher bar, so luck does not make "winners". Never raise it.
+
+derivs:                      # Phase 17 C: futures market-structure data (derivs.py, hourly; engine/derivs.py)
+  backfill_days: 365         # back-fill this many days of history from data.binance.vision ...
+  backfill_per_run: 4        # ... a few days per coin per hourly run (so a run stays short)
+
+lab:                         # Phase 17 C: idea factories - new strategy cards per factory per 7 days (strategies_lab.yaml)
+  factory_quota:
+    literature: 2            # a) papers, books (from the reading plan)
+    failure: 3               # b) loss tags with >= 30 losing trades
+    missed_move: 2           # c) strong moves no strategy caught
+    market_structure: 2      # d) funding / open interest / long-short / taker data
+    variant_search: 3        # e) the ENGINE's one-change variants of the best BACKTESTING cells (research run)
+    lead_lag: 1              # f) cross-coin: BTC moves first, alts follow?
 
 attribution:                 # failure attribution (AGENT_PROMPT.md section 17) - engine/attribution.py
   range_adx: 20              # range_market: ADX(14) on the trade's own timeframe below 20 (choppy)

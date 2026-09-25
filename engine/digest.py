@@ -119,6 +119,17 @@ def trials_lines(trials_text, alpha, since, board):
     return L
 
 
+def factory_lines(research):
+    """Phase 17 C: pass rate per idea factory (lab cards -> cells that reached VALIDATION or better)."""
+    st = (research or {}).get("factories") or {}
+    if not st:
+        return []
+    parts = [f"{f} {x['passed']}/{x['cells']}" + (f" ({x['pass_rate'] * 100:.0f}%)" if x.get("pass_rate") is not None
+                                                  else "") for f, x in st.items() if x.get("cards")]
+    return ["  Idea factories (lab cards -> strategy/timeframe cells that reached VALIDATION or better): "
+            + ("; ".join(parts) if parts else "no lab card from any factory yet")]
+
+
 def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05):
     """The [WEEKLY] email of the week ending now (dict: week, subject, lines)."""
     a, b = pd.Timestamp(now - dt.timedelta(days=7)), pd.Timestamp(now)
@@ -150,6 +161,7 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
     if not top:
         L.append("  No strategy has passed the backtest bar yet - no paper or live signals. That is a result too.")
     L += trials_lines(trials_text, alpha, f"{a:%Y-%m-%d %H:%M}", board)
+    L += factory_lines(research)
     life = lifecycle_between(lifecycle_text, a, b)
     L += ["", "3. LIFECYCLE CHANGES THIS WEEK"] + ([f"  - {x}" for x in life[:25]] or ["  none"])
     if len(life) > 25:

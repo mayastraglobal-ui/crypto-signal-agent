@@ -1,5 +1,5 @@
 """
-The regime playbook (Phase 17 B) - memory/playbook.md, rewritten by every daily research run.
+The regime playbook (Phase 17 B) - memory/playbook.md, rewritten once a week (the Sunday research run).
 
 For each market regime: which strategy families and which strategy / timeframe cells made money in it, which lost,
 and what "no trade" means there. Built ONLY from measured numbers: the research run's backtest trades (all coins,
@@ -12,6 +12,10 @@ before it sends an email. Pure functions; research.py writes the file.
 MIN_N = 30                 # trades in a regime before a cell or family is listed at all
 AVOID_R = -0.10            # average R at or below this with MIN_N trades -> "lost money here"
 TOP = 6                    # cells listed per regime and side
+
+GROUPS = {"BULL": ["STRONG_BULL", "WEAK_BULL"], "BEAR": ["STRONG_BEAR", "WEAK_BEAR"],
+          "RANGE": ["RANGE", "HIGH_VOL_RANGE", "COMPRESSION"], "TRANSITION": ["TRANSITION", "EXPANSION", "UNCLEAR"]}
+WORKS_R = 0.005            # pooled average R that counts as "made money" (rounds to +0.01R)
 
 NO_TRADE = {
     "STRONG_BULL": "no long setup from a strategy that fits, or price far above its averages (chasing)",
@@ -49,6 +53,40 @@ def build(cells, family_of, labels):
     return out
 
 
+def matrix(cells, family_of):
+    """Family x timeframe x regime group (BULL / BEAR / RANGE / TRANSITION): pooled backtest trades of every cell of
+    that family on that timeframe whose entry regime is in the group. {"family|tf": {group: [n, avg R]}}."""
+    acc = {}
+    for c in cells.values():
+        fam = family_of.get(f"{c['strategy']}@{c['version']}", "?")
+        for label, seg in (((c.get("attribution") or {}).get("by_regime")) or {}).items():
+            g = next((k for k, v in GROUPS.items() if label in v), None)
+            if g is None or not seg["n"]:
+                continue
+            n0, s0 = acc.setdefault(f"{fam}|{c['tf']}", {}).get(g, (0, 0.0))
+            acc[f"{fam}|{c['tf']}"][g] = (n0 + seg["n"], s0 + seg["n"] * seg["avg_r"])
+    return {k: {g: [n, round(s / n, 3)] for g, (n, s) in v.items()} for k, v in sorted(acc.items())}
+
+
+def matrix_lines(mx):
+    """The family x timeframe table: average R (trades) per regime group; ✓ = made money with 30+ trades."""
+    L = ["## Which families work where (family x timeframe x regime group)", "",
+         "| Family | TF | " + " | ".join(GROUPS) + " |", "|---|---|" + "---|" * len(GROUPS)]
+    for key, row in mx.items():
+        fam, tf = key.split("|")
+        cells_ = []
+        for g in GROUPS:
+            if g not in row:
+                cells_.append("-")
+                continue
+            n, a = row[g]
+            mark = " ✓" if n >= MIN_N and a >= WORKS_R else (" ✗" if n >= MIN_N and a <= AVOID_R else "")
+            cells_.append(f"{a:+.2f}R ({n}){mark}")
+        L.append(f"| {fam} | {tf} | " + " | ".join(cells_) + " |")
+    return L + ["", f"✓ = made money with {MIN_N}+ trades · ✗ = lost {AVOID_R:+.2f}R or worse · fewer than "
+                f"{MIN_N} trades = no mark (too few to say).", ""]
+
+
 def _r(x):
     return f"{x:+.2f}R"
 
@@ -56,7 +94,7 @@ def _r(x):
 def section(label, pb):
     """The playbook lines of one regime."""
     p = pb.get(label)
-    L = [f"## {label}"]
+    L = [f"### {label}"]
     if not p or not p["cells_seen"]:
         return L + [f"- no strategy has {MIN_N}+ backtest trades in this regime yet - no evidence either way",
                     f"- no trade looks like: {NO_TRADE.get(label, '-')}", ""]
@@ -71,14 +109,16 @@ def section(label, pb):
     return L + [""]
 
 
-def render(pb, run_utc, labels):
+def render(pb, run_utc, labels, mx=None):
     head = ["# Regime playbook (generated - do not edit)", "",
-            f"Written by the daily research run {run_utc} UTC from backtest trades only (all coins, all history, "
+            f"Written by the Sunday research run {run_utc} UTC (updated weekly) from backtest trades only (all coins, all history, "
             "fees included), split by the market regime at entry. A cell or family needs "
             f"{MIN_N}+ trades in a regime to be listed. [status] = its lifecycle status now.", "",
             "**A map, not a signal.** \"Made money here\" is measured history, not a forecast, and is not "
             "significance-tested per regime; only APPROVED strategies send emails. Nothing here is advice.", ""]
-    body = []
+    body = matrix_lines(mx) if mx else []
+    body.append("## Each regime")
+    body.append("")
     for label in labels:
         body += section(label, pb)
     return "\n".join(head + body)

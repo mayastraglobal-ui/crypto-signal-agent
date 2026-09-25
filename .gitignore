@@ -10,6 +10,8 @@ reports/feature_evidence.json
 reports/data_quality.json
 reports/research.json
 reports/dashboard_data.json
+reports/derivs_hourly.csv.gz
+reports/funding.csv.gz
 # files written only by --offline test runs
 reports/*_offline.json
 reports/*_offline.csv

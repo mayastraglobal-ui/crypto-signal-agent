@@ -34,7 +34,7 @@ DAILY_SENT = os.path.join(REPORTS, "daily_sent.json")
 REMINDERS_SENT = os.path.join(REPORTS, "reminders_sent.json")
 WEEKLY_SENT = os.path.join(REPORTS, "weekly_sent.json")
 BRAIN_SENT = os.path.join(REPORTS, "brain_sent.json")
-CURRICULUM = os.path.join(ROOT, "memory", "curriculum.md")
+CURRICULUM = os.path.join(ROOT, "memory", "beginner_course.md")      # the operator's lessons (not the reading plan)
 CURRICULUM_SENT = os.path.join(REPORTS, "curriculum_sent.json")
 FOOTER = "Research signal. Not financial advice."
 
@@ -157,7 +157,7 @@ def daily_email():
 
 
 def lesson_of_the_day():
-    """The next beginner lesson (memory/curriculum.md) for the daily email - never stops the email."""
+    """The next beginner lesson (memory/beginner_course.md) for the daily email - never stops the email."""
     try:
         from engine import curriculum as cur
         with open(CURRICULUM, encoding="utf-8") as f:
