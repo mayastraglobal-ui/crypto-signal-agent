@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-25 00:26",
+ "generated_utc": "2026-09-25 01:17",
  "book": {
-  "utc": "2026-09-25 00:26",
-  "beijing": "2026-09-25 08:26",
+  "utc": "2026-09-25 01:17",
+  "beijing": "2026-09-25 09:17",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,7 +19,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-09-25 00:26 UTC / 2026-09-25 08:26 Beijing",
+  "POSITION BOOK \u2014 2026-09-25 01:17 UTC / 2026-09-25 09:17 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 \u26a0 calendar not maintained - no event listed for the next 7 days (config.yaml -> events)"
@@ -54,18 +54,6 @@
    "corr_threshold": 0.7
   }
  },
- "watching": [
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  }
- ],
+ "watching": [],
  "events_this_run": []
 }

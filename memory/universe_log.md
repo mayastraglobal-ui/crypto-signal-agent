@@ -28,3 +28,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-25 00:26 UTC
 - **EXCLUDED** PROVE - order book too thin: $63k within 1% (need $250k)
 - **ELIGIBLE** LTC - passes every rule again
+
+## 2026-09-25 01:17 UTC
+- **EXCLUDED** PROVE - spread 0.129% > 0.1%; order book too thin: $57k within 1% (need $250k)
+- **LEAVE** UNI - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** LTC - in the top 7 for 2 runs in a row (now #6)
