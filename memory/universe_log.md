@@ -61,3 +61,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **FLAG** BABY - price data DEGRADED - stays in the list, but no signals
 - **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** SUI - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-09-25 12:23 UTC
+- **EXCLUDED** XPL - 7-day average volume $18M < $50M; 24h move +26.7% is beyond ±25% - suspended for the rest of the UTC day
+- **EXCLUDED** AVAX - order book too thin: $243k within 1% (need $250k)
