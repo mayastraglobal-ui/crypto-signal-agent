@@ -200,6 +200,17 @@ research:                    # daily research run (research.py, workflow "Resear
   trials_alpha: 0.05             # trials counter (memory/trials.csv, Phase 17): PAPER_TRADING also needs the average
                                  # trade's t-statistic >= z(1 - 0.05 / number of trials ever tested) - Bonferroni.
                                  # More ideas tested -> a higher bar, so luck does not make "winners". Never raise it.
+  # Phase 18 B - operator-owned: stronger tests, so a "winning" strategy is really winning (never loosen them)
+  monte_carlo_runs: 1000         # every cell's trades shuffled into 1000 random orders (same trades, other order) ->
+  monte_carlo_max_dd_r: 8        # PAPER_TRADING also needs the 95% worst drawdown <= 8R. Never above
+                                 # risk.strategy_max_dd_r (the live suspension limit) - the engine uses the lower one.
+  bias_check:                    # lookahead + recursive check on the first research coin (BTC); a card that fails
+    lookahead_cuts: 6            # is BIASED: FAILED on every timeframe, for good. History cut after 6 signal candles:
+    recursive_drop: 500          # every rule must answer the same; history started 500 candles later ...
+    recursive_settle: 1000       # ... compared after 1000 settling candles ...
+    recursive_tolerance_pct: 0.1 # ... at most 0.1% of the candles may flip (rounding)
+  time_budget_min: 90            # the research run must finish within 90 minutes: after 60% of it, the rule
+                                 # significance test (one entry rule removed at a time) is skipped for the other coins
 
 derivs:                      # Phase 17 C: futures market-structure data (derivs.py, hourly; engine/derivs.py)
                              # ONE series per source, never mixed: OKX = the main series every building block reads

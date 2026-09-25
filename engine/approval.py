@@ -183,12 +183,26 @@ def pack(cell, spec, lineage, board_row, S, now_txt, risk=None):
           f"- {'stable: every variant stays profitable' if pv['stable'] else 'NOT stable'}"
           + (f" · worst: {pv['worst']['change']} {_f(pv['worst']['avg_r'], '+.3f')}" if pv["worst"] else "")]
     L += [f"  - {v['change']}: {v['n']} trades, {_f(v['avg_r'], '+.3f')}" for v in pv["variants"]]
+    rules = ev.get("rules") or []
+    L += ["", "## 6b. Rule significance (the card with ONE entry rule removed at a time)"]
+    L += [f"- {r['label']} ({r['rule']}): {r['n']} trades, {_f(r['avg_r'], '+.3f')} - "
+          + {True: "the rule improves the result", False: "ADDS NOTHING - the simpler card does at least as well",
+             None: "too few trades to judge"}[r["adds"]] for r in rules] or ["- nothing to remove (one rule per side)"]
     L += ["", "## 7. Cost stress test",
           f"- fees, slippage and funding +50%: {_stat(ev['stress'])}",
           f"- median cost per trade: {_f(ev['median_cost_r'], '.3f')}"]
     L += ["", "## 8. Risk metrics",
           f"- max drawdown (backtest): {ev['all']['max_dd_r']:.1f}R · average hold {ev['all']['avg_bars']:.0f} candles",
           "- live risk per trade: 0.5% of the account for the first 30 days, then at most 1% (risk engine, section 15)"]
+    mc = ev.get("monte_carlo")
+    if mc:
+        L += [f"- Monte Carlo ({mc['runs']} random orders of the same {mc['n']} trades): 95% worst drawdown "
+              f"{mc['dd95_r']:.1f}R (median {mc['dd_median_r']:.1f}R, as it happened {mc['dd_r']:.1f}R)",
+              f"- **expected worst losing streak: {mc['streak95']} losses in a row** (95% of the random orders stay at "
+              f"or below it; median {mc['streak_median']}, as it happened {mc['streak']}) - expect it before you judge "
+              "the strategy broken"]
+    L.append(f"- lookahead / recursive check: {('BIASED - ' + cell['bias']) if cell.get('bias') else 'passed'}"
+             if "bias" in cell else "- lookahead / recursive check: not run")
     tags = sorted(((t, v) for t, v in (att.get("tags") or {}).items() if v.get("losers")),
                   key=lambda x: -x[1]["losers"])[:6]
     L += ["", "## 9. Why it loses (failure attribution)",

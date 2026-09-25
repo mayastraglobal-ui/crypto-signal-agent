@@ -101,12 +101,21 @@ def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None):
     return "BACKTESTING", reasons, need
 
 
-def paper_gate(status, ev, twin, R, trial_bar=None):
+def paper_gate(status, ev, twin, R, trial_bar=None, mc_limit_r=None, bias_checked=None):
     """Section 12 '-> PAPER_TRADING' (automatic). ev = research.evaluate() of this cell;
     twin = its control twin's evaluate() or None (only strategies that HAVE a twin need one);
-    trial_bar = (t needed, trials so far) from the trials counter (Phase 17) or None.
+    trial_bar = (t needed, trials so far) from the trials counter (Phase 17) or None;
+    mc_limit_r = the drawdown limit for ev['monte_carlo'] (Phase 18 B) or None = not checked;
+    bias_checked = False when the lookahead / recursive check did not run on this card (Phase 18 B).
     Returns (passed, reasons)."""
+    from engine import research as rs
     reasons = []
+    if mc_limit_r is not None:
+        ok, why = rs.mc_gate(ev.get("monte_carlo"), mc_limit_r)
+        if not ok:
+            reasons.append(why)
+    if bias_checked is False:
+        reasons.append("lookahead / recursive check did not run on this card")
     if trial_bar is not None:
         t, (need, n) = ev.get("t_stat"), trial_bar
         if t is None or t < need:
@@ -152,6 +161,14 @@ def paper_record(results_r):
     return dict(n=len(r), avg_r=float(r.mean()), last_avg_r=float(r[-20:].mean()), max_dd_r=dd)
 
 
+def biased_status(status, bias):
+    """Phase 18 B: a BIASED card (it used the future, or depends on where history starts) is FAILED on every
+    timeframe and can never pass - only a new version can be tested again. RETIRED stays RETIRED."""
+    if not bias:
+        return status, ""
+    return ("RETIRED" if status == "RETIRED" else "FAILED"), f"BIASED - {bias}"
+
+
 def next_status(prev, base, paper_ok, paper, failed_runs, R):
     """The lifecycle move for one strategy version x timeframe after a research run.
     prev: status before; base: judge() result on Layer B; paper_ok: paper_gate() passed;
@@ -184,7 +201,8 @@ VERSION_COLS = ["id", "version", "family", "fingerprint", "experiment", "first_t
 CELL_COLS = ["tf", "status", "since_utc", "last_checked_utc", "trades", "avg_r", "profit_factor", "max_dd_r",
              "train_avg_r", "test_avg_r", "required_avg_r", "beats_twin", "gates_failed",
              "history_from", "walk_forward", "stress_avg_r", "perturb_worst", "positive_coins",
-             "median_cost_r", "overfit", "paper_gate_failed", "paper_signals", "failed_runs"]
+             "median_cost_r", "overfit", "paper_gate_failed", "paper_signals", "failed_runs",
+             "bias", "mc_dd95_r", "mc_streak95", "rules_adding_nothing"]
 
 
 def registry_to_frame(reg):

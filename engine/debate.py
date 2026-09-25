@@ -54,6 +54,16 @@ def cell_cases(cell):
     elif cell.get("beats_twin") is False:
         bear.append("does NOT beat its control twin (the special ingredient adds nothing measurable)")
     bear.append(f"worst drawdown in the backtest: {a['max_dd_r']:.1f}R · wins {a['win_rate']:.0f}% of trades")
+    mc = ev.get("monte_carlo")
+    if mc:
+        bear.append(f"by bad luck alone (Monte Carlo): 95% worst drawdown {mc['dd95_r']:.1f}R, expected worst losing "
+                    f"streak {mc['streak95']} in a row")
+    idle = [r for r in ev.get("rules") or [] if r.get("adds") is False]
+    if idle:
+        bear.append(f"{len(idle)} entry rule(s) add nothing (the card does as well without them): "
+                    + "; ".join(r["rule"] for r in idle[:2]))
+    if cell.get("bias"):
+        bear.append(f"BIASED: {cell['bias']}")
     if att.get("systematic"):
         bear.append(f"systematic loss tags: {', '.join(att['systematic'])} ({att.get('losses', 0)} losing trades)")
     bear += [f"overfitting flag: {o}" for o in ev.get("overfit") or []]

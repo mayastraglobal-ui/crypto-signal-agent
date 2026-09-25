@@ -49,6 +49,7 @@ from engine import lifecycle as lc
 from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
+from engine import bias
 from engine import report_card as rcard
 from engine import research_loop as rloop
 from engine import risk as rk
@@ -2235,6 +2236,7 @@ def main():
                               changes=(research or {}).get("changes", []),
                               approval=(research or {}).get("approval") or {},
                               trials=(research or {}).get("trials"),
+                              robustness=bias.report_lines(research),
                               lab_cards=sum(bool(x.get("lab")) for x in strategies),
                               research_run=(research or {}).get("run_utc"),
                               candidate_lessons=(research or {}).get("candidate_lessons", []),
@@ -2956,6 +2958,8 @@ def render_lifecycle(g, board, w):
           f"The more ideas are tested, the more one looks good by luck, so PAPER_TRADING now also needs a t-statistic "
           f"of the average trade ≥ **{tr['need_t']:.2f}** (Bonferroni: family-wise false-winner rate "
           f"{tr['alpha']:g} over {tr['total']} trials; with 1 trial it would be {tr['need_t_one']:.2f}).\n")
+    for ln in g.get("robustness") or []:               # Phase 18 B: duration, lookahead, Monte Carlo, rule test
+        w(ln)
     if g.get("lab_cards"):
         w(f"🧪 **Strategy lab:** {g['lab_cards']} card(s) from `strategies_lab.yaml` (written by Claude's reviews). "
           "They are tested exactly like the library and can reach PAPER_TRADING, but never send emails and are never "

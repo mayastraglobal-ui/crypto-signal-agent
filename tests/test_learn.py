@@ -417,7 +417,9 @@ class ReferenceProjects(unittest.TestCase):
         self.assertEqual(B.check_records("\n### [R1]" + src.split("\n### [R1]", 1)[1], "memory/research_sources.md"),
                          [], "the build session's records pass the guard's own record rules")
         text = "\n".join(brain_pack.project_lines())
-        self.assertIn("- R3: freqtrade", text)
+        nxt = CU.next_item(CU.parse_projects(test_brain.read(os.path.join(ROOT, "memory", "curriculum.md"))), done)
+        self.assertNotIn(nxt["id"], done, "the weekly research studies a project not studied yet")
+        self.assertIn(f"- {nxt['id']}: {nxt['title']}", text)
         self.assertIn("what we deliberately do NOT take", text)
 
 

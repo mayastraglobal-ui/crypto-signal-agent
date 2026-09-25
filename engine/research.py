@@ -7,6 +7,8 @@ Research layers and promotion evidence (AGENT_PROMPT.md sections 11 and 12).
   (Nothing is fitted to the data, so every window after the warm-up one is out of sample.)
 - cost viability (stop >= 4x the round-trip cost), costs +50%, +-20% parameter changes,
   edge on >= 3 coins, overfitting flag, control twin.
+- Phase 18 B: Monte Carlo trade-order shuffling (95% worst drawdown, longest losing streak) and rule significance
+  (does each entry rule improve the result?) - ideas from Jesse (R5), rewritten; no code copied.
 
 Pure functions only: no internet, no files.
 """
@@ -122,3 +124,65 @@ def evaluate(per_coin, stress_per_coin, variant_results, wins, cfg_r, min_coin_t
                                                                                       for v in var_rows)),
                 median_cost_r=round(float(np.median(costs)), 3) if costs else None,
                 overfit=overfit, _raw=dict(st=st, dev=dev, val=val))
+
+
+def monte_carlo(r, runs=1000, seed=7, chunk=100):
+    """Trade-order shuffling (Phase 18 B): the same trades in `runs` random orders. The results of the trades stay
+    the same - only their order changes - so this shows how deep a drawdown and how long a losing streak the SAME
+    edge can produce by bad luck. r: trade results in R (any order). Deterministic (fixed seed).
+    Returns dict(runs, n, dd_r, dd_median_r, dd95_r, streak, streak_median, streak95) or None (< 2 trades)."""
+    r = np.asarray(r, dtype=float)
+    n = len(r)
+    if n < 2:
+        return None
+    rng = np.random.default_rng(seed)
+    dd, st = np.empty(runs), np.empty(runs, dtype=int)
+    for a in range(0, runs, chunk):
+        k = min(chunk, runs - a)
+        m = rng.permuted(np.broadcast_to(r, (k, n)), axis=1)
+        dd[a:a + k] = _max_dd(m)
+        st[a:a + k] = _max_streak(m < 0)
+    return dict(runs=int(runs), n=int(n), dd_r=round(float(_max_dd(r[None, :])[0]), 1),
+                dd_median_r=round(float(np.median(dd)), 1), dd95_r=round(float(np.percentile(dd, 95)), 1),
+                streak=int(_max_streak(r[None, :] < 0)[0]), streak_median=int(np.median(st)),
+                streak95=int(np.ceil(np.percentile(st, 95))))
+
+
+def _max_dd(m):
+    """Largest fall from a peak of the running total, per row (the start counts as a peak at 0)."""
+    eq = np.cumsum(m, axis=1)
+    eq = np.concatenate([np.zeros((len(m), 1)), eq], axis=1)
+    return (np.maximum.accumulate(eq, axis=1) - eq).max(axis=1)
+
+
+def _max_streak(loss):
+    """Longest run of True per row."""
+    c = np.cumsum(loss, axis=1)
+    last_reset = np.maximum.accumulate(np.where(loss, 0, c), axis=1)
+    return (c - last_reset).max(axis=1)
+
+
+def mc_gate(mc, limit_r):
+    """PAPER_TRADING also needs the 95% worst drawdown within the risk limit. (passed, reason or None)."""
+    if mc is None:
+        return False, "Monte Carlo: fewer than 2 trades"
+    if mc["dd95_r"] > limit_r:
+        return False, (f"Monte Carlo: 95% worst drawdown {mc['dd95_r']:.1f}R over {mc['runs']} shuffles of "
+                       f"{mc['n']} trades - above the {limit_r:g}R limit")
+    return True, None
+
+
+def rule_significance(base, drops, min_trades):
+    """Does each entry rule improve the result? base = stats of the card as written (short()); drops = {label:
+    (rule text, {coin: (trades, total R)})} for the card with that rule removed. A rule 'adds nothing' when the
+    card without it has at least min_trades trades and an average per trade at least as good (after costs).
+    Returns [dict(label, rule, n, avg_r, adds)] - adds None = too few trades to judge."""
+    out = []
+    for label, (rule, pc) in drops.items():
+        n = sum(x[0] for x in pc.values())
+        avg = round(sum(x[1] for x in pc.values()) / n, 3) if n else None
+        adds = None
+        if n >= min_trades and base["n"] >= min_trades:
+            adds = bool(base["avg_r"] > avg)
+        out.append(dict(label=label, rule=rule, n=int(n), avg_r=avg, adds=adds))
+    return out

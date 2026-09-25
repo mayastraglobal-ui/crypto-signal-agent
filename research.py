@@ -39,6 +39,7 @@ from engine import attribution as att
 from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import bias
 from engine import debate
 from engine import history
 from engine import ideas
@@ -322,6 +323,10 @@ def main():
             strategies.remove(x)
     by_key = {sspec.key(x): x for x in strategies}
     variants = {k: sspec.variants(x, R["perturb_pct"]) for k, x in by_key.items()}
+    drops = {k: sspec.rule_drops(x) for k, x in by_key.items()}      # Phase 18 B: one entry rule removed at a time
+    BS = bias.settings(R.get("bias_check"))
+    budget_s = float(R.get("time_budget_min", 90)) * 60
+    bias_out, rules_skipped = None, []
 
     feed = sc.Synthetic() if args.offline else sc.Binance()     # long history only from the main exchange
     cache = None if args.offline else CACHE
@@ -336,6 +341,7 @@ def main():
         f"{sum(len(v) for v in variants.values())} ±{R['perturb_pct']}% variants")
 
     per, stress, var = {}, {}, {}            # (id, version, tf) -> {coin: trades} (var: -> {label: {coin: ...}})
+    dropped = {}                              # (id, version, tf) -> {label: (rule, {coin: (trades, total R)})}
     plain5 = {}                               # 5m-confirmed cells: the same signals WITHOUT the 5m check
     S5 = c5m.settings(cfg.get("confirm_5m"))
     spans, hist, skipped, rule_errors = {}, {}, {}, {}
@@ -359,6 +365,19 @@ def main():
         if base == "BTC":
             btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
         pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        if bias_out is None:                        # Phase 18 B: lookahead + recursive check on the first coin (BTC)
+            try:
+                bias_out = bias.check_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, pc,
+                                           strategies, sc.prepare_coin, sc.eval_rules, sc.level_array,
+                                           sspec.columns_needed, BS)
+                log(f"Bias check on {base}: {len(bias_out['checked'])} cards checked, "
+                    f"{len(bias_out['findings'])} BIASED, {bias_out['seconds']} s")
+            except Exception as e:
+                log(f"Bias check on {base} failed: {e}")
+                bias_out = dict(coin=base, error=str(e), cuts=[], findings={}, checked={}, seconds=0)
+        run_drops = time.time() - t_start < 0.6 * budget_s     # the rule test is the first to go when time runs out
+        if not run_drops:
+            rules_skipped.append(base)
         if base != "BTC" and "1h" in pc["frames"]:
             lead_lag[base] = ideas.lead_lag(pc["frames"]["1h"]["df"])
         m5 = sc.m5_arrays(pc["frames"])
@@ -414,6 +433,15 @@ def main():
                     tv = sc.run_backtest(df, *sig[:4], v, cfg, tf, sig[4], None, m5, S5)
                     # only the count and the total R are kept (all trades of 160+ variants would not fit in memory)
                     var.setdefault(k3, {}).setdefault(label, {})[base] = (len(tv), float(sum(t["r"] for t in tv)))
+                for label, v, _, rule in (drops[sspec.key(s)] if run_drops else []):
+                    try:
+                        sig = sc.strategy_signals(v, tf, fr, cfg)
+                    except Exception as e:
+                        rule_errors.setdefault(sspec.key(s), set()).add(f"{tf} {label}: {e}")
+                        continue
+                    tv = sc.run_backtest(df, *sig[:4], v, cfg, tf, sig[4], None, m5, S5)
+                    dropped.setdefault(k3, {}).setdefault(label, (rule, {}))[1][base] = (len(tv),
+                                                                                        float(sum(t["r"] for t in tv)))
         log(f"researched {sym}")
         del pc, data, m5
 
@@ -426,6 +454,13 @@ def main():
         return wins.get("5m", wins[k3[2]]) if f"{k3[0]}@{k3[1]}" in confirm_keys else wins[k3[2]]
     evals = {k3: rs.evaluate(per[k3], stress.get(k3, {}), var.get(k3, {}), wins_for(k3), R, V["min_coin_trades"])
              for k3 in per}
+    mc_runs = int(R.get("monte_carlo_runs", 1000))
+    mc_limit = min(float(R.get("monte_carlo_max_dd_r", cfg["risk"]["strategy_max_dd_r"])),
+                   float(cfg["risk"]["strategy_max_dd_r"]))           # never looser than the risk engine's limit
+    for k3, ev in evals.items():                     # Phase 18 B: trade-order shuffling + rule significance
+        ev["monte_carlo"] = rs.monte_carlo([t["r"] for tr in per[k3].values() for t in tr], mc_runs)
+        ev["rules"] = rs.rule_significance(ev["all"], dropped.get(k3, {}), V["min_trades"])
+    bias_found = {k: v for k, v in (bias_out or {}).get("findings", {}).items()}
     logdf = sc.load_log()
     fwd = sc.forward_stats(logdf)
     paper = paper_results(logdf)
@@ -455,7 +490,8 @@ def main():
                 twin.pop("_raw")
         elif s.get("control_twin"):
             twin = next((e for k, e in evals.items() if k[0] == s["control_twin"] and k[2] == tf), None)
-        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R, trial_bar)
+        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R, trial_bar, mc_limit,
+                                                bias_checked=f"{sid}@{ver}" in (bias_out or {}).get("checked", {}))
         if s.get("control_twin") and twin is None:
             paper_ok, paper_reasons = False, paper_reasons + ["control twin was not tested"]
         ck = f"{sid}@{ver}|{tf}"
@@ -465,6 +501,13 @@ def main():
                                               int(prev.get("failed_runs") or 0), R)
         status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells,
                                      bool(s.get("lab")))
+        bias_txt = "; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3]) or next(
+            (c["bias"] for k2, c in registry["cells"].items() if k2.split("|")[0] == f"{sid}@{ver}" and c.get("bias")), "")
+        if bias_txt:                                  # sticky: a BIASED version never passes again
+            status, note = lc.biased_status(status, bias_txt)
+            if ck in eligible_cells:
+                eligible_cells.remove(ck)
+            reasons = [note] + reasons
         results[k3] = status
         cells[ck] = dict(strategy=sid, version=ver, tf=tf, status=status, base_status=base_status, lab=bool(s.get("lab")),
                          t_stat=ev["t_stat"], need_t=round(trial_bar[0], 3),
@@ -475,7 +518,8 @@ def main():
                          if twin and s.get("confirm_5m") else None,
                          history_from=fmt_day(min(t["entry_time"] for tr in per[k3].values() for t in tr))
                          if any(per[k3].values()) else None,
-                         paper=rec, evidence=ev)
+                         paper=rec, evidence=ev, bias=bias_txt or None,
+                         rules_adding_nothing=[r for r in ev["rules"] if r["adds"] is False])
 
     # ---------- failure attribution per strategy version x timeframe (section 17) ----------
     for ck, cell in cells.items():
@@ -525,7 +569,9 @@ def main():
                            if ev["perturbation"]["worst"] else None),
             positive_coins=len(ev["positive_coins"]), median_cost_r=ev["median_cost_r"],
             overfit="; ".join(ev["overfit"]) or None, paper_gate_failed="; ".join(c["paper_gate_failed"]) or None,
-            paper_signals=c["paper"]["n"], failed_runs=c["failed_runs"])
+            paper_signals=c["paper"]["n"], failed_runs=c["failed_runs"], bias=c["bias"],
+            mc_dd95_r=(ev.get("monte_carlo") or {}).get("dd95_r"), mc_streak95=(ev.get("monte_carlo") or {}).get("streak95"),
+            rules_adding_nothing="; ".join(f"{r['label']} ({r['rule']})" for r in c["rules_adding_nothing"]) or None)
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
     packs = write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, args.offline,
@@ -594,7 +640,9 @@ def main():
     week = [c for c in lab_now or [] if c.get("factory") == "variant_search"
             and str(c.get("added") or "") >= (started - dt.timedelta(days=6)).strftime("%Y-%m-%d")]
     left = 0 if lab_now is None else max(0, int(quota["variant_search"]) - len(week))
-    new_variants = ideas.variant_cards(cells, by_key, started.date(), left, rg.LABELS, sc.TF_ORDER)
+    simpler, not_queued = ideas.simpler_cards(cells, by_key, started.date(), left, rg.LABELS, sc.TF_ORDER)  # 18 B
+    new_variants = simpler + ideas.variant_cards(cells, by_key, started.date(), left - len(simpler), rg.LABELS,
+                                                 sc.TF_ORDER)
     if new_variants and not args.offline:
         append_lab(lab_path, new_variants)
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
@@ -615,6 +663,12 @@ def main():
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
                factories=factories, lead_lag=lead_lag, cleanup=cleanup_out,
+               robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
+                               rules_skipped_coins=rules_skipped, time_budget_min=round(budget_s / 60),
+                               simpler_queued=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
+                                               for c in simpler], simpler_not_queued=not_queued,
+                               rules_adding_nothing={ck: c["rules_adding_nothing"] for ck, c in cells.items()
+                                                     if c["rules_adding_nothing"]}),
                variant_search=dict(allowed=left, quota=quota["variant_search"],
                                    new=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
                                         for c in new_variants]),

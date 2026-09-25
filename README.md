@@ -389,6 +389,22 @@ and the bar.
   `memory/research_sources.md` (link, commit studied, what we take, what we do NOT take, licence). R1, R2 and R8 were
   studied when Part A was built. Ideas only: freqtrade and backtesting.py are GPL / AGPL and are never copied.
 
+## Stronger tests (Phase 18 B)
+- **Lookahead + recursive check** (idea from freqtrade, GPL - rewritten, no code copied; `engine/bias.py`). On the first
+  research coin (BTC), the history is cut right after 6 signal candles and everything is computed again: every entry /
+  exit rule and every stop / target level of every card must give exactly the same answer on every candle. Then the
+  history starts 500 candles later: after 1000 settling candles at most 0.1% of candles may flip. A card that fails is
+  **BIASED** - FAILED on every timeframe, for good (registry column `bias`; report section 3b). If the check cannot
+  run, no card reaches PAPER_TRADING.
+- **Monte Carlo** (idea from Jesse): each cell's trades are shuffled into 1000 random orders. PAPER_TRADING also
+  needs the 95% worst drawdown ≤ `research.monte_carlo_max_dd_r` (8R, never above `risk.strategy_max_dd_r`). Approval
+  packs show the **expected worst losing streak**.
+- **Rule significance**: each card is re-tested with one entry rule removed at a time. A rule whose removal gives at
+  least as good an average trade (30+ trades) "adds nothing"; the simpler card is queued in the lab as an engine card
+  (`factory: variant_search`, `parent: result: ...`), within that factory's weekly quota.
+- The research run reports its duration (budget `research.time_budget_min`, 90 min); after 60% of the budget the rule
+  test is skipped for the remaining coins.
+
 ## Approving a strategy (your yes)
 
 A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,

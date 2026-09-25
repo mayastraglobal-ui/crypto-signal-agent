@@ -6,7 +6,9 @@ Idea factories (Phase 17 C, item 9): where new strategy cards come from, and how
   c) missed_move       - Claude, from strong moves no strategy caught
   d) market_structure  - Claude, from the futures data (funding, open interest, long/short, taker)
   e) variant_search    - THE ENGINE: one-change variants of the best BACKTESTING cells (variant_cards below), at most
-                         the factory quota per 7 days; every one is tested and counted in memory/trials.csv like any card
+                         the factory quota per 7 days; every one is tested and counted in memory/trials.csv like any card.
+                         Phase 18 B: the simpler version of a card whose entry rule adds nothing (simpler_cards) comes
+                         first, from the same quota
   f) lead_lag          - Claude, from the BTC -> alt lead-lag measurement (lead_lag below)
 
 Every lab card names its factory (strategy_spec.factory_problems); the weekly email shows the pass rate per factory.
@@ -149,3 +151,59 @@ def variant_cards(cells, cards, today, n_max, labels, trade_order):
         if len(out) >= n_max:
             break
     return out
+
+
+def simpler_cards(cells, cards, today, n_max, labels, trade_order):
+    """Phase 18 B (rule significance): for a cell where removing ONE entry rule gave at least as good an average per
+    trade (with enough trades), queue the simpler card - the same card without that rule - as a lab card (factory
+    variant_search, parent = that result). The strongest evidence first; one card per parent; every card passes the
+    same checks as a Claude card (a parent whose first target is below 2R cannot be queued - it would need a second
+    change). Returns (new cards (at most n_max), {cell key: why its simpler card was not queued})."""
+    skipped = {}
+    ids = {c["id"] for c in cards.values()}
+    rows = [(cell, r) for cell in cells.values() for r in cell.get("rules_adding_nothing") or []
+            if cell.get("status") not in ("FAILED", "RETIRED") and not cell.get("bias")]
+    rows.sort(key=lambda x: (-(x[1]["avg_r"] - x[0]["evidence"]["all"]["avg_r"]), -x[1]["n"]))
+    by_id = {c["id"]: c for c in cards.values()}
+    out, parents = [], set()
+    for cell, r in rows:
+        key = f"{cell['strategy']}@{cell['version']}"
+        parent = cards.get(key)
+        ck = f"{key}|{cell['tf']}"
+        if parent is None or key in parents or parent.get("twin_of") or sspec.special(parent):
+            skipped.setdefault(ck, "a control twin / SMC or 5m card needs its own twin - not queued automatically"
+                               if parent is not None and key not in parents else "one simpler card per strategy a run")
+            continue
+        if len(out) >= n_max:
+            skipped.setdefault(ck, "the week's variant_search quota is used up - queued again next run")
+            continue
+        raw = {k: copy.deepcopy(v) for k, v in (parent.get("_raw") or parent).items()
+               if not k.startswith("_") and k not in ("lab", "control_twin", "twin_of")}
+        drop = next((d for d in sspec.rule_drops(dict(parent, _raw=raw)) if d[0] == r["label"]), None)
+        if drop is None:
+            continue
+        nraw = drop[2]
+        vid = f"{parent['id']}-S{r['label'].split()[-1]}"
+        if vid in ids:
+            skipped.setdefault(ck, f"{vid} is already in the lab")
+            continue
+        ev = cell["evidence"]["all"]
+        card = dict(nraw, id=vid, version="1.0", status="FORMALIZED", added=str(today), factory="variant_search",
+                    variant_of=key, parent=f"result: {key} {cell['tf']}", evidence_class="BACKTEST_EVIDENCE",
+                    source=f"engine rule-significance test: {key} without one entry rule",
+                    factory_evidence=(f"{key} {cell['tf']}: with the rule {ev['n']} trades avg {ev['avg_r']:+.3f}R; "
+                                      f"{r['label']} ({r['rule']}): {r['n']} trades avg {r['avg_r']:+.3f}R - the rule "
+                                      "does not improve the result"),
+                    hypothesis=(f"The rule '{r['rule']}' adds nothing to {key}: the simpler card without it should do "
+                                "at least as well on new data (fewer rules = less room for overfitting)."),
+                    changelog=[f"1.0 ({today}): {key} without entry rule '{r['rule']}' (rule significance test)"])
+        others = {k: v for k, v in by_id.items() if k != vid}
+        probs = (sspec.lab_card_problems(card, others, labels, trade_order) + sspec.factory_problems(card, [], engine=True)
+                 or (["more than one change"] if len(sspec.change_count(raw, card)) != 1 else []))
+        if probs:
+            skipped.setdefault(ck, f"the simpler card would break a lab rule: {probs[0]}")
+            continue
+        out.append(card)
+        ids.add(vid)
+        parents.add(key)
+    return out, skipped
