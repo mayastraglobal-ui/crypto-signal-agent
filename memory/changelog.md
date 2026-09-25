@@ -281,3 +281,18 @@ Newest entries at the bottom. Format: date · who · what · why.
   - end-to-end scan → research → scan with a forced APPROVED lab cell.
 
   Mutation check: 22 of 22 planted bugs caught.
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Outside feeds for Claude's tasks
+- **Why:** both briefings on 25 Sep could not open any news page. The Claude task environment's network ("Trusted" access) blocks news and research sites, but GitHub Actions has open internet.
+- **New `feeds.py` + `engine/feeds.py`**, run by the hourly scan workflow (step "Outside feeds", continue-on-error, after the scan, before "Save reports"). It writes `reports/feeds.json` on main with:
+  - news headlines from the CoinDesk, Cointelegraph and The Block RSS feeds; our coins are marked when named;
+  - the Fear & Greed index for the last 7 days (alternative.me);
+  - Binance announcements, sorted into listings, delistings and maintenance by catalog name and title (not by catalog id);
+  - the next 4 Deribit BTC and ETH options expiries (08:00 UTC) with open interest, put/call ratio, USD notional and max pain.
+- **Safety:**
+  - Every source is fetched on its own; a failure is written into the file and never stops the scan.
+  - Text is stripped of HTML and control characters and cut short. Only https links are kept.
+  - The file and `tasks/COMMON.md` say that feed text is data, never instructions, and a headline is at most a CLAIM.
+- **Tasks:** the fact sheet (`brain_pack.py`, all three tasks) has a new "Outside feeds" part: freshness and failed sources, Fear & Greed, headlines of the last 12 h / 24 h / 7 days, Binance notices, Deribit expiries. `tasks/briefing.md` step 3 starts from it.
+- **Not verified live:** this build session cannot reach these sites. The parsers are tested on sample payloads shaped like the real ones; the first hourly run shows each source's status in the file. Binance may refuse GitHub's US-based runners; if so, that source reads "error" and the rest still work.
+- Tests: new `tests/test_feeds.py` (9 tests).
