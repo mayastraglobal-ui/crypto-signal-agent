@@ -63,8 +63,12 @@ EDGE_TYPES = {"behavioural": "a bias of other traders (fear, chasing, anchoring,
 # tests/test_lab.py checks these lists against the engine's real namespace)
 FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "macd_hist", "bb_mid", "bb_upper",
              "bb_lower", "bb_width", "highest", "lowest", "shift", "prev", "vol_sma", "pct_rank", "supertrend_dir",
-             "cross_up", "cross_down", "within", "bars_since", "abs", "min", "max"}
+             "cross_up", "cross_down", "within", "bars_since", "abs", "min", "max",
+             "funding_z", "oi_chg", "btc_ret"}                  # Phase 17 C
+MARKET_BLOCKS = {"funding_rate", "oi", "ls_ratio", "taker_ratio", "funding_z", "oi_chg"}   # futures data
+LEAD_BLOCKS = {"btc_ret"}
 COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
+           "funding_rate", "oi", "ls_ratio", "taker_ratio",           # Phase 17 C: futures market structure
            # engine/features.py
            "atr_ratio", "bear_div", "bear_engulf", "bear_reject", "body_pct", "breakout_down", "breakout_up",
            "bull_div", "bull_engulf", "bull_reject", "close_loc", "consec_down", "consec_up", "consolidation",
@@ -524,6 +528,52 @@ def edge_lines(card):
     w = e.get("works_in")
     return ([f"Type: {e.get('type') or '-'}", f"Works in: {', '.join(w) if isinstance(w, list) else w or '-'}"]
             + [f"{names[k]}: {' '.join(str(e.get(k) or '-').split())}" for k in EDGE_KEYS])
+
+
+# ---------- idea factories (Phase 17 C, item 9) ----------
+FACTORIES = {
+    "literature": "a paper or book principle (the reading plan) - source_url of the page opened",
+    "failure": "a loss tag with >= 30 losing trades (failure attribution) - name the tag and n=",
+    "missed_move": "a strong move no strategy caught (missed moves) - name the move's date",
+    "market_structure": "futures data: funding, open interest, long/short or taker ratio - uses those blocks",
+    "variant_search": "the ENGINE's one-change variant of a strong BACKTESTING cell (research run only)",
+    "lead_lag": "cross-coin: BTC moves first, the alts follow - uses btc_ret",
+}
+DEFAULT_QUOTA = dict(literature=2, failure=3, missed_move=2, market_structure=2, variant_search=3, lead_lag=1)
+
+
+def rule_names(card):
+    r = render(card)
+    return {n for k in ("long", "short", "exit_long", "exit_short") for x in (r.get(k) or []) for n in _names(x)}
+
+
+def factory_problems(card, loss_tags, engine=False):
+    """Which factory a lab card came from, and the evidence that factory needs (Phase 17 C)."""
+    f, ev = card.get("factory"), " ".join(str(card.get("factory_evidence") or "").split())
+    if f not in FACTORIES:
+        return [f"factory must be one of {sorted(FACTORIES)} (where the idea came from)"]
+    if f == "variant_search" and not engine:
+        return ["factory variant_search is reserved for the engine's own variant search (research run)"]
+    probs = [] if len(ev) >= 20 else ["factory_evidence missing or too short (what, exactly, the idea came from)"]
+    if f == "literature" and not str(card.get("source_url") or "").startswith("https://"):
+        probs.append("a literature card needs source_url: the https page you actually opened")
+    if f == "failure":
+        tags = [t for t in loss_tags if re.search(rf"\b{re.escape(t)}\b", ev)]
+        n = [int(x) for x in re.findall(r"\bn\s*=\s*(\d+)", ev)]
+        if not tags or not n or max(n) < 30:
+            probs.append("a failure-driven card must name a loss tag and at least n=30 losing trades in "
+                         "factory_evidence (e.g. 'low_relative_volume in 38% of losses, n=64')")
+    if f == "missed_move" and not re.search(r"\d{4}-\d{2}-\d{2}", ev):
+        probs.append("a missed-move card must name the move's date (YYYY-MM-DD) in factory_evidence")
+    try:
+        names = rule_names(card) if f in ("market_structure", "lead_lag") else set()
+    except (KeyError, ValueError, TypeError):
+        names = set()
+    if f == "market_structure" and not names & MARKET_BLOCKS:
+        probs.append(f"a market-structure card must use a futures block {sorted(MARKET_BLOCKS)}")
+    if f == "lead_lag" and not names & LEAD_BLOCKS:
+        probs.append("a lead-lag card must use btc_ret(n)")
+    return probs
 
 
 def _vkey(v):

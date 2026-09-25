@@ -28,7 +28,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 BRANCH = "live-reports"
 LIVE_FILES = ["reports/latest.json", "reports/smc.json", "reports/features.json", "reports/regime.json",
               "reports/feature_evidence.json", "reports/data_quality.json", "reports/research.json",
-              "reports/dashboard_data.json"]
+              "reports/dashboard_data.json",
+              "reports/derivs_hourly.csv.gz", "reports/funding.csv.gz"]   # Phase 17 C: growing history, carried over
 README = """# live-reports
 
 The newest copy of the large report files of the Crypto Signal Agent, replaced on every run
@@ -43,6 +44,8 @@ The newest copy of the large report files of the Crypto Signal Agent, replaced o
 | reports/regime.json | hourly scan | market regime per coin and timeframe, with evidence |
 | reports/smc.json | hourly scan | SMC state and newest events |
 | reports/research.json | daily research run | Layers A/B/C, stress, +-20%, failure attribution, missed moves |
+| reports/derivs_hourly.csv.gz | hourly scan (derivs.py) | futures data history: open interest, long/short, taker ratio |
+| reports/funding.csv.gz | hourly scan (derivs.py) | funding rate history (every settlement) |
 
 The history that matters (memory/, signals_log.csv, strategy_scoreboard.csv, daily reports, latest.md)
 is on the main branch.

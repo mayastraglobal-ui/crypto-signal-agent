@@ -63,6 +63,13 @@
 #                                          smc_sweep_pdh, smc_sweep_bull_low / smc_sweep_bear_high, smc_liq_above /
 #                                          smc_liq_below, smc_pdh / smc_pdl / smc_pd_mid, smc_kz_london /
 #                                          smc_kz_ny_am / smc_kz_silver_bullet / smc_kz_asia / smc_in_killzone
+#    funding_rate  funding_z(200)       -> futures funding (% per settlement) and how unusual it is (z-score over n
+#                                          candles); e.g. funding_z(200) > 2 = crowded longs (Phase 17 C)
+#    oi  oi_chg(24)                     -> open interest (USD) and its % change over n candles
+#    ls_ratio  taker_ratio              -> long/short account ratio; taker buy / sell volume ratio (per hour)
+#    btc_ret(4)                         -> BTC's % return over its last n candles (lead-lag ideas)
+#                                          (futures data is recorded hourly since Phase 17 C: history is short at
+#                                          first; unknown values make a rule false)
 #    h4_* (below 4H only)               -> the same SMC context from the newest CLOSED 4H candle,
 #                                          e.g. h4_bull_ob_low, h4_bull_ob_high, h4_range_low, h4_range_high
 # =====================================================================

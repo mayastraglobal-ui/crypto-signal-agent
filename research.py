@@ -39,6 +39,7 @@ from engine import attribution as att
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import history
+from engine import ideas
 from engine import lifecycle as lc
 from engine import playbook as pbk
 from engine import regime as rg
@@ -56,7 +57,7 @@ def stressed(cfg, x):
     """The config with fees, slippage and funding multiplied by x (costs +50% = 1.5)."""
     c = copy.deepcopy(cfg)
     for side in ("long", "short"):
-        for k in ("taker_fee_pct", "maker_fee_pct", "slippage_pct", "funding_pct_per_8h"):
+        for k in ("taker_fee_pct", "maker_fee_pct", "slippage_pct", "funding_pct_per_8h", "funding_real_x"):
             if k in c["costs"][side]:
                 c["costs"][side][k] *= x
     return c
@@ -108,6 +109,20 @@ def update_trials(registry, tested, now_txt, offline):
             with open(path, "a") as f:
                 f.write(("" if text.endswith("\n") else "\n") + trl.to_csv(new, False))
     return rows + new, new
+
+
+class _NoAliases(yaml.SafeDumper):
+    def ignore_aliases(self, data):
+        return True
+
+
+def append_lab(path, cards):
+    """Append the engine's variant cards at the END of strategies_lab.yaml (append-only, like every lab addition)."""
+    text = yaml.dump(cards, Dumper=_NoAliases, sort_keys=False, allow_unicode=True, width=110)
+    with open(path) as f:
+        ends = f.read().endswith("\n")
+    with open(path, "a") as f:
+        f.write(("" if ends else "\n") + text)
 
 
 def paper_results(logdf):
@@ -289,6 +304,9 @@ def main():
                  else int(R["history_bars"][tf])) for tf in ["1w", "1d"] + tfs}
     cfg_stress = stressed(cfg, R["cost_stress_x"])
     coins = research_coins(args.offline, args.coins)
+    coins = sorted(coins, key=lambda c: c != "BTC")          # BTC first: the others read its closes (btc_ret)
+    derivs_by_coin = sc.load_derivs(args.offline, coins, now_ms)
+    btc_by_tf, lead_lag = {}, {}
     log(f"Research run: {len(coins)} coins ({', '.join(coins)}), {len(strategies)} strategy versions, "
         f"{sum(len(v) for v in variants.values())} ±{R['perturb_pct']}% variants")
 
@@ -313,7 +331,11 @@ def main():
             log(f"skip {sym}: {e}")
             skipped[base] = f"download failed: {e}"
             continue
-        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg)
+        if base == "BTC":
+            btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
+        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        if base != "BTC" and "1h" in pc["frames"]:
+            lead_lag[base] = ideas.lead_lag(pc["frames"]["1h"]["df"])
         m5 = sc.m5_arrays(pc["frames"])
         moves = []
         if "1h" in pc["frames"]:
@@ -504,6 +526,26 @@ def main():
         with open(pb_path, "w") as f:
             f.write(pbk.render(playbook, now_txt, rg.LABELS, pb_matrix) + "\n")
 
+    # ---------- idea factories (Phase 17 C): pass rate per factory, the engine's variant search ----------
+    factories = ideas.factory_stats(cells, by_key)
+    lab_now = []
+    lab_path = os.path.join(sc.ROOT, sspec.LAB_FILE)
+    if os.path.exists(lab_path):
+        try:
+            with open(lab_path) as f:
+                lab_now = [c for c in (yaml.safe_load(f) or []) if isinstance(c, dict)]
+        except yaml.YAMLError:
+            lab_now = None                                     # unreadable: no variants this run
+    quota = dict(sspec.DEFAULT_QUOTA, **((cfg.get("lab") or {}).get("factory_quota") or {}))
+    week = [c for c in lab_now or [] if c.get("factory") == "variant_search"
+            and str(c.get("added") or "") >= (started - dt.timedelta(days=6)).strftime("%Y-%m-%d")]
+    left = 0 if lab_now is None else max(0, int(quota["variant_search"]) - len(week))
+    new_variants = ideas.variant_cards(cells, by_key, started.date(), left, rg.LABELS, sc.TF_ORDER)
+    if new_variants and not args.offline:
+        append_lab(lab_path, new_variants)
+    log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
+        + (" - offline: not written" if args.offline and new_variants else ""))
+
     # ---------- report ----------
     history_out = {}
     for tf, h in hist.items():
@@ -518,6 +560,10 @@ def main():
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
+               factories=factories, lead_lag=lead_lag,
+               variant_search=dict(allowed=left, quota=quota["variant_search"],
+                                   new=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
+                                        for c in new_variants]),
                trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
                            file=os.path.relpath(TRIALS, sc.ROOT)),
                lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),

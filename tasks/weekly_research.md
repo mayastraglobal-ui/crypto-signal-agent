@@ -24,6 +24,9 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
 3. **Candidates: 1-2 new strategies or new versions** at most (plus their control twins).
    - Choose from the experiments queue and today's research.
    - Each must follow the pipeline: SOURCE → CLAIM → FORMAL DEFINITION → RULES.
+   - Use the idea factories (fact sheet "Idea factories": what each needs, its quota left, its pass rate so far):
+     literature, failure, missed_move, market_structure (the futures data), lead_lag (the BTC lead-lag table).
+     Prefer the factory with the best pass rate that still has quota; say which factory each card came from.
    - **Append each card to `strategies_lab.yaml`** (COMMON.md rule 4): building blocks only, first target >= 2R,
      a control twin when there is a special ingredient, `source` + `evidence_class`, `added` = today. A new
      version changes exactly ONE thing and gets a changelog line. The daily research run tests it from the next

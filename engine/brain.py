@@ -27,6 +27,7 @@ import re
 
 import yaml
 
+from engine import attribution as att
 from engine import memory as mem
 from engine import regime as rg
 from engine import strategy_spec as sspec
@@ -170,7 +171,10 @@ def _day(x):
         return None
 
 
-def check_lab(base, new, current, library, now):
+LOSS_TAGS = att.CONDITIONS + att.PATH_TAGS + att.LOSER_TAGS
+
+
+def check_lab(base, new, current, library, now, quota=None):
     """strategies_lab.yaml additions: earlier cards untouched; each new card a checked, runnable FORMALIZED card
     (strategy_spec.lab_card_problems + version_problems) dated today; the day / week limits; and the addition
     still parses on the newest main. library = strategies.yaml on main."""
@@ -203,7 +207,10 @@ def check_lab(base, new, current, library, now):
         others = {k: v for k, v in by_id.items() if k != c.get("id")}
         probs += [f"{tag}: {x}" for x in sspec.lab_card_problems(c, others, rg.LABELS, tfm.TRADE_ORDER)]
         probs += [f"{tag}: {x}" for x in sspec.version_problems(c, earlier + added[:i])]
-    days = [_day(c.get("added")) for c in cur + added if isinstance(c, dict)]
+        probs += [f"{tag}: {x}" for x in sspec.factory_problems(c, LOSS_TAGS)]
+    # Claude's own limits: the engine's variant-search cards do not use them up (they have their own quota)
+    mine = [c for c in cur + added if isinstance(c, dict) and c.get("factory") != "variant_search"]
+    days = [_day(c.get("added")) for c in mine]
     for d in sorted({_day(c.get("added")) for c in added if isinstance(c, dict)} - {None}):
         n = sum(x == d for x in days)
         if n > LAB_PER_DAY:
@@ -212,6 +219,12 @@ def check_lab(base, new, current, library, now):
     if n > LAB_PER_WEEK:
         probs.append(f"{n} lab cards in the last 7 days - at most {LAB_PER_WEEK} (testing more ideas raises the "
                      "bar for all of them)")
+    q = dict(sspec.DEFAULT_QUOTA, **(quota or {}))
+    for f in sorted({c.get("factory") for c in added if isinstance(c, dict)} & set(q)):
+        k = sum(1 for c in cur + added if isinstance(c, dict) and c.get("factory") == f and _day(c.get("added"))
+                and today - dt.timedelta(days=6) <= _day(c.get("added")) <= today)
+        if k > int(q[f]):
+            probs.append(f"{k} '{f}' cards in the last 7 days - that factory's quota is {q[f]} (config.yaml lab)")
     if not probs and current is not None:
         try:
             if _cards(apply_text(current, dict(kind="append", text=new[len(base):]))) != cur + added:
@@ -245,7 +258,7 @@ def allowed_new(path):
     return False
 
 
-def review(changes, main_files, now=None, branch=None):
+def review(changes, main_files, now=None, branch=None, quota=None):
     """changes: [dict(path, status 'A'/'M'/'D'/..., base=text or None, new=text or None)] = the task branch vs the
     main it started from; main_files: {path: text or None} on the newest main (+ strategies.yaml);
     now: the guard's time (UTC); branch: the task branch (lab cards only from the daily and weekly tasks).
@@ -320,7 +333,7 @@ def review(changes, main_files, now=None, branch=None):
                 continue
             probs += [f"{p}: {x}" for x in lint(added)]
             probs += [f"{p}: {x}" for x in check_lab(c.get("base") or "", new, cur,
-                                                     main_files.get(sspec.LIBRARY_FILE), now)]
+                                                     main_files.get(sspec.LIBRARY_FILE), now, quota)]
             applies.append(dict(path=p, kind="append", text=added))
         elif p in KNOWLEDGE:
             probs.append(f"{p}: {'deleted' if st == 'D' else 'created or renamed'} - knowledge files may only grow")

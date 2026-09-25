@@ -56,6 +56,15 @@ def changes_of(sha):
     return out
 
 
+def factory_quota():
+    """config.yaml -> lab.factory_quota (new cards per idea factory per 7 days); the defaults when unreadable."""
+    try:
+        import yaml
+        return ((yaml.safe_load(read("config.yaml") or "") or {}).get("lab") or {}).get("factory_quota") or {}
+    except Exception:
+        return {}
+
+
 def handle(branch, state, now):
     if git("fetch", "--quiet", "origin", branch, check=False).returncode != 0:
         return None                                        # the task has never pushed
@@ -65,7 +74,8 @@ def handle(branch, state, now):
     subject = git("log", "-1", "--format=%s", sha).stdout.strip()
     changes = changes_of(sha)
     paths = {c["path"] for c in changes} | {brain.sspec.LIBRARY_FILE}      # the library: lab cards are checked against it
-    applies, probs, skipped = brain.review(changes, {p: read(p) for p in paths}, dt.datetime.now(dt.timezone.utc), branch)
+    applies, probs, skipped = brain.review(changes, {p: read(p) for p in paths}, dt.datetime.now(dt.timezone.utc), branch,
+                                           factory_quota())
     for a in applies:
         full = os.path.join(ROOT, a["path"])
         os.makedirs(os.path.dirname(full), exist_ok=True)

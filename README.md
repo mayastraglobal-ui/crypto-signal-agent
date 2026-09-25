@@ -52,6 +52,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `memory/market_mechanics.md` | How crypto markets move (funding, liquidations, expiries, liquidity, sessions ...), each entry with its evidence class | Read it; the weekly research adds sourced records |
 | `memory/curriculum.md` | The agent's rotating reading plan (papers, book principles, exchange research, blow-up post-mortems, trader interviews) - the daily review studies one item a day | Yes - add or reorder items |
 | `memory/beginner_course.md` | Beginner lessons for you - one arrives with each [DAILY] email | Yes - edit or add lessons |
+| `derivs.py` | Records futures data every hour (funding, open interest, long/short, taker) | Not needed |
 | `reports/feeds.json` | Outside feeds for Claude's tasks, fetched every hour by GitHub (`feeds.py`): news headlines (CoinDesk, Cointelegraph, The Block), Fear & Greed, Binance listings / delistings / maintenance, next Deribit options expiries | No, it's generated |
 | `brain_guard.py`, `brain_pack.py` | The guard that checks Claude's work before main; the fact sheet Claude reads | Not needed |
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
@@ -339,6 +340,22 @@ and the bar.
   `research_sources` record (`[Cxx] ...`) and at most one hypothesis into `experiments.md`.
 - **`memory/beginner_course.md`:** 14 short lessons for you (R, stops, fees, overfitting, regimes, twins, edges ...),
   one per [DAILY] email.
+
+## Futures data and idea factories (Phase 17 C)
+
+- **Futures market data, recorded every hour** (`derivs.py`, before the scan): funding rate, open interest, long/short
+  account ratio and taker buy/sell ratio for every signal and research coin. Binance futures first, OKX when Binance
+  refuses; older days are back-filled from data.binance.vision a few at a time. The history grows on the
+  live-reports branch (`reports/derivs_hourly.csv.gz`, `reports/funding.csv.gz`), because exchanges keep only ~30
+  days. Data checks per coin (freshness, gaps, impossible values, mixed sources): report section 0b.
+- **New building blocks:** `funding_rate`, `funding_z(n)`, `oi`, `oi_chg(n)`, `ls_ratio`, `taker_ratio`, `btc_ret(n)` -
+  each as it was known at the candle close; unknown or stale = the rule is false.
+- **Real funding in short costs:** where the funding history is known, a short pays the HIGHER of the config rate
+  (0.01% per 8 h) and the real rate it would have paid; funding received is never counted. Costs only go up.
+- **Six idea factories**, each with a weekly quota (`config.yaml` → `lab.factory_quota`): literature, failure-driven,
+  missed moves, market structure, the engine's own **variant search** (one-change variants of the strongest
+  BACKTESTING cells, written into the lab by the research run and counted in the trials counter) and **lead-lag**
+  (does BTC move first?). Every lab card names its factory; the weekly email shows the pass rate per factory.
 
 ## Approving a strategy (your yes)
 

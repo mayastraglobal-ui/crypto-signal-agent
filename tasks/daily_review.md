@@ -28,7 +28,8 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - Write it as a **hypothesis** with exactly one change: "v1.1: add rel_vol > 1.5 because
      low_relative_volume is systematic in 38% of losses (n = 64)".
    - Queue it as a record in `memory/experiments.md` (evidence `HYPOTHESIS`).
-   - If it is strong enough to test now, ALSO append it as a card to `strategies_lab.yaml` (COMMON.md rule 4:
+   - If it is strong enough to test now, ALSO append it as a card to `strategies_lab.yaml` (`factory: failure`, or
+     `missed_move` for step 3's moves; COMMON.md rule 4:
      a new version changing exactly that one thing, `added` = today). Stay within the limits the fact sheet
      shows; leave room for the weekly research (usually at most 1 card a day from the daily review).
 6. **Curriculum (one item a day).** The fact sheet names today's item from `memory/curriculum.md` (a paper, the

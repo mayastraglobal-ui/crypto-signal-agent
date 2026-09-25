@@ -277,6 +277,56 @@ def curriculum_lines():
     return out
 
 
+def market_data_lines(rep):
+    """Phase 17 C: the futures data the engine recorded this hour (funding, open interest, long/short, taker)."""
+    d = (rep or {}).get("derivs")
+    out = ["", "## Futures market data (reports/derivs_quality.json - recorded hourly; building blocks funding_rate, "
+           "funding_z(n), oi, oi_chg(n), ls_ratio, taker_ratio, btc_ret(n))"]
+    if not d:
+        return out + ["- not recorded yet - rules using these blocks read 'unknown'"]
+    num = lambda x, f: "-" if x is None or x != x else f.format(x)
+    for c, x in d["coins"].items():
+        last = x.get("last") or {}
+        out.append(f"- {c}: {x['state']} · {x.get('hours', 0)} h of history · funding {num(last.get('funding_pct'), '{:+.4f}%')}"
+                   f" · long/short {num(last.get('ls_ratio'), '{:.2f}')} · taker buy/sell {num(last.get('taker_ratio'), '{:.2f}')}"
+                   + (f" · ! {'; '.join(x['problems'])}" if x.get("problems") else ""))
+    return out
+
+
+def factory_lines(now, research):
+    """Phase 17 C: the idea factories - what each needs, how many cards each may still add this week, pass rates,
+    the engine's variant search and the BTC lead-lag measurement."""
+    import yaml
+    from engine import brain
+    from engine import strategy_spec as sspec
+    try:
+        cfg = yaml.safe_load(read(os.path.join(ROOT, "config.yaml")) or "") or {}
+        lab = brain._cards(read(os.path.join(ROOT, sspec.LAB_FILE)))
+    except (yaml.YAMLError, ValueError):
+        cfg, lab = {}, []
+    quota = dict(sspec.DEFAULT_QUOTA, **((cfg.get("lab") or {}).get("factory_quota") or {}))
+    today = now.date()
+    stats = (research or {}).get("factories") or {}
+    out = ["", "## Idea factories (every lab card names its `factory` + `factory_evidence`; quota = cards per 7 days)"]
+    for f, what in sspec.FACTORIES.items():
+        used = sum(1 for c in lab if isinstance(c, dict) and c.get("factory") == f and brain._day(c.get("added"))
+                   and today - dt.timedelta(days=6) <= brain._day(c.get("added")) <= today)
+        st = stats.get(f) or {}
+        rate = (f"{st['passed']}/{st['cells']} cells reached VALIDATION+" if st.get("cells") else "nothing tested yet")
+        out.append(f"- {f}: {what} · this week {used}/{quota[f]}"
+                   + (" (engine only)" if f == "variant_search" else f" · you may add {max(0, int(quota[f]) - used)}")
+                   + f" · {rate}")
+    vs = (research or {}).get("variant_search") or {}
+    out += [f"- engine variant search, last run: " + ("; ".join(f"{x['id']} ({x['evidence']})" for x in vs.get("new") or [])
+                                                    or "no new variant")]
+    ll = (research or {}).get("lead_lag") or {}
+    rows = [(c, k, v) for c, x in ll.items() if x for k, v in (x.get("lags") or {}).items() if v.get("clear")]
+    out.append("- BTC lead-lag (1h; corr of the coin's return with BTC's return k hours earlier; clear = |corr| > 2/sqrt(n)): "
+               + ("; ".join(f"{c} lag {k}h corr {v['corr']:+.3f} (n={v['n']})" for c, k, v in rows)
+                  or "no clear lead-lag measured" if ll else "not measured yet"))
+    return out
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -315,6 +365,7 @@ def pack(kind, now, live=None):
             f"- next events: {'; '.join(map(str, risk.get('upcoming_events') or [])) or 'none listed'}"
             + (f" (! {risk['calendar_warning']})" if risk.get("calendar_warning") else "")]
     out += feed_lines(now, kind)
+    out += market_data_lines(rep)
     out += playbook_lines(rep, research)
     if kind == "briefing":
         out += ["", "## Your earlier outputs (read the newest for continuity)"] + [f"- {p}" for p in
@@ -366,6 +417,7 @@ def pack(kind, now, live=None):
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
     out += edge_lines_for(research)
     out += lab_lines(now, research)
+    out += factory_lines(now, research)
     if kind == "daily":
         out += curriculum_lines()
     if kind == "weekly":

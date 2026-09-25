@@ -88,6 +88,12 @@ the end of the fact sheet.
      of edge it is, the regimes it should work in (from the card's regimes), who is on the other side of the trade
      and why they lose, what market behaviour drives it, when it should stop working, and the result that would
      prove it wrong. A card without it is refused. Use `memory/market_mechanics.md` for the mechanism.
+   - Which **idea factory** it came from: `factory: literature | failure | missed_move | market_structure |
+     lead_lag` and `factory_evidence: "..."` (what exactly). Each factory has a weekly quota (`config.yaml` → `lab`;
+     the fact sheet shows what is left) and needs its own evidence: literature = `source_url` of the page you
+     opened; failure = a loss tag and `n=` at least 30 losing trades; missed_move = the move's date; market_structure
+     = uses a futures block (`funding_rate`, `funding_z(n)`, `oi`, `oi_chg(n)`, `ls_ratio`, `taker_ratio`);
+     lead_lag = uses `btc_ret(n)`. (`variant_search` is the engine's own factory.)
    - `targets` with the **first target at least 2R** (`"2R"`, `"max(2R, smc_liq_above)"`, or a level with
      `need.min_r: 2.0`) - the config default (TP 1R) is not accepted for lab cards.
    - A card whose entry rules use SMC / ICT building blocks (`smc_*`, `h4_*`) or `confirm_5m: true` needs

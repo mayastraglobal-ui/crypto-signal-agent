@@ -348,3 +348,30 @@ Newest entries at the bottom. Format: date · who · what · why.
   - References are from the build session's memory, are marked as not opened, and contain no URLs; the task checks them on the real source before citing.
 - The beginner lessons for the operator moved to `memory/beginner_course.md` and still come with the [DAILY] email.
 - Tests: test_knowledge.py now has 21 tests (reading plan, rotation, mechanics rule, edge type / works_in, playbook matrix).
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Phase 17 part C - futures data, real funding costs, idea factories
+- **Futures data recorded every hour** (new `derivs.py` + `engine/derivs.py`), in the scan workflow before the scan, with continue-on-error.
+  - What: funding rate history, and hourly open interest (USD), long/short account ratio and taker buy/sell ratio, for every signal and research coin.
+  - Sources: Binance USDT-M futures API first, the OKX public API when Binance refuses (US servers). Older days are back-filled from data.binance.vision daily metrics and monthly funding files, 4 days per coin per run, up to 365 days (`config.yaml` → `derivs`).
+  - Storage: the history is appended to `reports/derivs_hourly.csv.gz` and `reports/funding.csv.gz` on the live-reports branch, carried over every run. History is never shrunk or replaced: an unreadable file stops the step instead.
+  - Data checks per coin: freshness (> 3 h = STALE), gaps in 7 days, impossible values (ignored), mixed sources. They are shown in `reports/derivs_quality.json` and report section 0b.
+  - Not verified live: this session cannot reach the exchanges. The parsers are tested on sample payloads; the first hourly run shows each coin's source and errors.
+- **New building blocks**, each value as KNOWN at the candle close (an hourly row counts from the end of its hour; unknown or too old = NaN, so the rule is false): `funding_rate`, `funding_z(n)`, `oi`, `oi_chg(n)`, `ls_ratio`, `taker_ratio`, and `btc_ret(n)` (BTC's return on the same timeframe; only the same closed candle is used).
+- **Real funding in short costs:** where the funding history is known, a short pays max(config 0.01% per 8 h, the real rate it would have paid) × `funding_real_x` (1.0; the costs +50% test makes it 1.5). Funding received is never counted, so backtest costs only go up.
+- **Six idea factories** (`engine/ideas.py`, `strategy_spec.factory_problems`):
+  - Every lab card names its `factory` and `factory_evidence`. The Brain guard checks each factory's evidence:
+    - literature: needs a source_url;
+    - failure: needs a loss tag and n >= 30 losing trades;
+    - missed_move: needs the move's date;
+    - market_structure: must use a futures block;
+    - lead_lag: must use btc_ret.
+  - Each factory has a weekly quota (`config.yaml` → `lab.factory_quota`: 2 / 3 / 2 / 2 / 3 / 1).
+  - variant_search is reserved for the engine. The engine's variant cards do not use up Claude's 3-a-day / 10-a-week limits.
+- **Engine variant search (factory e):** the research run appends up to 3 cards per 7 days to strategies_lab.yaml. Each is a one-change variant of the strongest BACKTESTING cells (30+ trades, best unseen-data average first).
+  - The variants tried: 2R/3R targets when the first target is below 2R, dropping regimes that lost (-0.10R or worse over 30+ trades), an ADX or relative-volume filter, or a neighbouring timeframe.
+  - Every variant passes the same card checks, is tested like any card, and is counted in trials.csv.
+  - SMC / 5m parents and control twins are skipped, because a variant of them would need its own twin.
+  - research.yml now commits strategies_lab.yaml; `.gitattributes` union-merges it.
+- **Lead-lag measurement (factory f):** per alt, the correlation of its 1h return with BTC's return 1-3 hours earlier, marked "clear" when |corr| > 2/sqrt(n). It is shown in the fact sheet.
+- **Pass rate per factory:** lab cards → strategy/timeframe cells that reached VALIDATION or better. Shown in `research.json`, the [WEEKLY] email and the fact sheet, along with the quota left per factory.
+- Tests: new `tests/test_ideas.py` (20 tests). They cover the parsers (Binance, OKX, data.binance.vision), the history merge and source preference, the data checks, no look-ahead, the building blocks, real funding never below the config rate, factory evidence and quotas, variant search, lead-lag, pass rates, and the recorder end to end with fallback, back-fill and history protection. Mutation check: 11 of 12 planted bugs caught; the survivor is a redundant second lock.
