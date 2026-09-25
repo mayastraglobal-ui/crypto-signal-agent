@@ -36,6 +36,7 @@ import pine_export
 import scanner as sc
 from engine import approval as ap
 from engine import attribution as att
+from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import history
@@ -275,6 +276,7 @@ def main():
     ap_ = argparse.ArgumentParser()
     ap_.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
     ap_.add_argument("--coins", type=int, default=None, help="only the first N research coins (test runs)")
+    ap_.add_argument("--cleanup", action="store_true", help="run the monthly clean-up now (it runs on the 1st anyway)")
     args = ap_.parse_args()
 
     t_start = time.time()
@@ -526,6 +528,34 @@ def main():
         with open(pb_path, "w") as f:
             f.write(pbk.render(playbook, now_txt, rg.LABELS, pb_matrix) + "\n")
 
+    # ---------- monthly clean-up (Phase 17 D): add only - retire dead cards, list duplicate / old lessons ----------
+    cleanup_out = None
+    if started.day == 1 or args.cleanup:
+        def _text(p):
+            if not os.path.exists(p):
+                return ""
+            with open(p) as f:
+                return f.read()
+        ret_path = os.path.join(sc.MEMORY, "retired_cards.csv")
+        cleanup_out = cln.run(registry, _text(ret_path), _text(os.path.join(sc.MEMORY, "lessons.md")),
+                              dict(cells=cells), started)
+        if args.offline:
+            with open(os.path.join(sc.REPORTS, "cleanup_offline.json"), "w") as f:
+                json.dump(cleanup_out, f, indent=1)
+        else:
+            os.makedirs(sc.MEMORY, exist_ok=True)
+            if cleanup_out["dead"]:
+                with open(ret_path, "a") as f:
+                    f.write(cln.retired_rows(cleanup_out, not os.path.exists(ret_path)))
+            log_path = os.path.join(sc.MEMORY, "cleanup_log.md")
+            with open(log_path, "a") as f:
+                f.write(("" if os.path.exists(log_path) and os.path.getsize(log_path) else
+                         "# Monthly clean-up log\n\nAppend-only (Phase 17 D). What the monthly clean-up retired and "
+                         "which lessons it asks the daily review to merge or re-check. Nothing is ever deleted.\n")
+                        + cln.log_text(cleanup_out))
+        log(f"Monthly clean-up: {len(cleanup_out['dead'])} dead card(s) retired, "
+            f"{len(cleanup_out['duplicates'])} possible duplicate lesson pair(s), {len(cleanup_out['rechecks'])} re-check(s)")
+
     # ---------- idea factories (Phase 17 C): pass rate per factory, the engine's variant search ----------
     factories = ideas.factory_stats(cells, by_key)
     lab_now = []
@@ -560,7 +590,7 @@ def main():
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
-               factories=factories, lead_lag=lead_lag,
+               factories=factories, lead_lag=lead_lag, cleanup=cleanup_out,
                variant_search=dict(allowed=left, quota=quota["variant_search"],
                                    new=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
                                         for c in new_variants]),

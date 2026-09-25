@@ -88,5 +88,9 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
    - `## Timeframe models`
    - `## Approval packs`
    - `## Experiment queue for next week`
+   - `## Process improvement`: exactly ONE change to how this agent works, based on the fact sheet's "Agent
+     report card" (e.g. "the daily review adds 3 lab cards a week but none gets past BACKTESTING - spend the
+     failure quota on cells with 100+ trades"). Say what to change, why (the numbers), and how to tell if it
+     helped. It is a proposal: the operator decides; never change the rules yourself.
    - End with: **Research signal. Not financial advice.**
 10. Run the end commands from COMMON.md.

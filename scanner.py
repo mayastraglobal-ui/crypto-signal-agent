@@ -38,6 +38,7 @@ import publish_live
 from engine import attribution as att
 from engine import briefs
 from engine import charts
+from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import derivs as dv
@@ -48,6 +49,7 @@ from engine import lifecycle as lc
 from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
+from engine import report_card as rcard
 from engine import risk as rk
 from engine import research as rs
 from engine import smc
@@ -707,6 +709,12 @@ def load_cards():
         except yaml.YAMLError as e:
             lab_problem = f"not readable ({str(e).splitlines()[0]})"
     ok, problems, idle, moved = sspec.load_library(main, lab, rg.LABELS, TF_ORDER)
+    ret_path = os.path.join(MEMORY, "retired_cards.csv")        # Phase 17 D: retired by the monthly clean-up
+    if os.path.exists(ret_path):
+        with open(ret_path) as f:
+            gone = cln.retired(f.read())
+        idle += [dict(x, status="RETIRED (monthly clean-up)") for x in ok if sspec.key(x) in gone]
+        ok = [x for x in ok if sspec.key(x) not in gone]
     if lab_problem:
         problems[sspec.LAB_FILE] = [lab_problem + " - no lab card was run"]
     return ok, problems, idle, moved
@@ -2082,7 +2090,7 @@ def main():
     daily["claude_review"] = claude_review(started)          # Phase 14: yesterday's Claude daily review, if any
     weekly = (digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
                             *claude_weekly(started), read_text(os.path.join(MEMORY, "trials.csv")),
-                            float(cfg["research"].get("trials_alpha", 0.05)))
+                            float(cfg["research"].get("trials_alpha", 0.05)), report_card_lines(started, research, logdf))
               if digest.is_weekly_time(started) else None)
 
     # ---------- data-quality report ----------
@@ -2396,6 +2404,15 @@ def claude_review(now):
     day = (now - dt.timedelta(days=1)).strftime("%Y-%m-%d")
     rel = f"reports/claude/daily/{day}.md"
     return digest.claude_summary(read_text(os.path.join(ROOT, rel)), rel, day)
+
+
+def report_card_lines(now, research, logdf):
+    """Phase 17 D: the agent's weekly report card (engine/report_card.py) - never stops the weekly email."""
+    try:
+        return rcard.lines(rcard.collect(ROOT, now, research, logdf))
+    except Exception as e:
+        log(f"report card failed: {e}")
+        return [f"AGENT REPORT CARD: could not be built this week ({type(e).__name__}: {e})"]
 
 
 def claude_weekly(now):

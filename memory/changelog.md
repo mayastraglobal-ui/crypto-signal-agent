@@ -375,3 +375,24 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Lead-lag measurement (factory f):** per alt, the correlation of its 1h return with BTC's return 1-3 hours earlier, marked "clear" when |corr| > 2/sqrt(n). It is shown in the fact sheet.
 - **Pass rate per factory:** lab cards → strategy/timeframe cells that reached VALIDATION or better. Shown in `research.json`, the [WEEKLY] email and the fact sheet, along with the quota left per factory.
 - Tests: new `tests/test_ideas.py` (20 tests). They cover the parsers (Binance, OKX, data.binance.vision), the history merge and source preference, the data checks, no look-ahead, the building blocks, real funding never below the config rate, factory evidence and quotas, variant search, lead-lag, pass rates, and the recorder end to end with fallback, back-fill and history protection. Mutation check: 11 of 12 planted bugs caught; the survivor is a redundant second lock.
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Phase 17 part D - the agent's report card, monthly clean-up
+- **Weekly agent report card** (`engine/report_card.py`) in the [WEEKLY] email, just before Claude's weekly research, and in the weekly research's fact sheet. It is measured from the engine's own files, so it is complete even if Claude did not run. It has 11 items:
+  1. ideas researched (new research_sources records, lab cards by factory);
+  2. lab cells tested for the first time (trials.csv);
+  3. pass rate per factory;
+  4. days from a card's `added` date to its first test (median, longest, cards still waiting);
+  5. paper vs backtest-unseen gap for cells with 5+ closed paper signals;
+  6. late signals (expired before entry, or tagged late_entry) and false signals (lost without ever reaching +0.25R), per stage;
+  7. missed moves by verdict;
+  8. news-feed sources failing now, plus the pages Claude listed as not opened;
+  9. Claude task runs delivered vs expected (21 briefings / 7 daily / 1 weekly), median run time from each output's run log, reported problems (usage limit ...), and pushes refused by the guard;
+  10. lab slots used vs allowed per factory;
+  11. ONE process improvement from the weekly research's `## Process improvement` section - a proposal; the operator decides.
+- `tasks/COMMON.md`: every output ends with `## Pages that failed to open` and `## Run log` (start / finish time, problems). The weekly research writes one `## Process improvement` from the report card.
+- `brain_guard.py` appends every push it handles to `reports/claude/runs.csv` (append-only, union merge).
+- **Monthly clean-up** (`engine/cleanup.py`) runs in the research run on the 1st (`--cleanup` forces it). It only adds; nothing is deleted.
+  - Versions FAILED or RETIRED on every tested timeframe for 30+ days are appended to `memory/retired_cards.csv`. They are no longer re-tested (they show as "RETIRED (monthly clean-up)"), but the cards stay in their files; deleting the line brings one back.
+  - Possible duplicate lessons (title word overlap >= 0.6, pairs not already merged) and re-checks of lessons 30+ days old (is their loss tag still systematic in 2+ of today's tests?) go into `memory/cleanup_log.md` (append-only).
+  - The engine never writes lessons (section 17.7). In the first 3 days of the month the daily review's fact sheet lists that work, and the review writes one `Merged:` / `Re-check:` record each (new step 7).
+- Tests: new `tests/test_report_card.py` (12 tests). Mutation check: 10 of 10 planted bugs caught.

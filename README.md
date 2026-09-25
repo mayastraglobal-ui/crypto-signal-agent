@@ -357,6 +357,20 @@ and the bar.
   BACKTESTING cells, written into the lab by the research run and counted in the trials counter) and **lead-lag**
   (does BTC move first?). Every lab card names its factory; the weekly email shows the pass rate per factory.
 
+## The agent's report card and the monthly clean-up (Phase 17 D)
+
+- **Weekly report card** (in the Sunday [WEEKLY] email; measured by the engine, so it works even if Claude did not
+  run): ideas researched, lab cards tested, pass rate per idea factory, days from idea to test result, backtest vs
+  paper gap, late / false signals, missed moves, pages that failed to open, Claude task runs (delivered vs expected,
+  run time, refused pushes - a missing run usually means a usage limit), lab slots used per factory, and ONE process
+  improvement proposed by the weekly research - you decide. Claude's outputs end with a short `## Run log` and
+  `## Pages that failed to open`; the Brain guard logs every push in `reports/claude/runs.csv`.
+- **Monthly clean-up** (the research run on the 1st; add only, nothing is deleted): strategy versions FAILED or
+  RETIRED on every timeframe for 30+ days go into `memory/retired_cards.csv` and are no longer re-tested (the cards
+  stay in their files - delete the line to bring one back); possible duplicate lessons and old lessons (30+ days)
+  with today's numbers go into `memory/cleanup_log.md`, and the next daily review writes the `Merged:` /
+  `Re-check:` records into `lessons.md` (the engine never writes lessons itself).
+
 ## Approving a strategy (your yes)
 
 A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,

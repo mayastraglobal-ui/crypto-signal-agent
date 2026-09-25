@@ -39,20 +39,25 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - Write ONE record in `memory/research_sources.md` titled `[<id>] <title>`, with the URL you opened, the claim,
      its evidence class and what it means for this system. Could not open it? Write that, and cite nothing.
    - At most ONE testable hypothesis from it into `memory/experiments.md` (evidence `HYPOTHESIS`).
-7. **Memory reviews due.** For each record the fact sheet lists, add a NEW record to the same file:
+7. **Monthly clean-up (first 3 days of a month only - the fact sheet shows it).** The engine retired dead cards
+   and measured which lessons look duplicated or need a re-check. Add, never edit or delete:
+   - one `Merged: <title>` record in `memory/lessons.md` per duplicate pair (both old titles, the combined lesson);
+   - one `Re-check: <title>` record per old lesson: CONFIRMED / WEAKENED / REJECTED, with the engine's numbers.
+   Write `## Monthly clean-up` in your review (or "not this month").
+8. **Memory reviews due.** For each record the fact sheet lists, add a NEW record to the same file:
    - title `Review: <old title>`;
    - status CONFIRMED, REJECTED or KEEP, with what today's evidence says;
    - a new review date.
 
    Never edit the old record.
-8. **Candidate lessons.** A candidate becomes a lesson in `memory/lessons.md` only if all of these hold:
+9. **Candidate lessons.** A candidate becomes a lesson in `memory/lessons.md` only if all of these hold:
    - it is systematic in 2 or more tests;
    - the numbers are in the fact sheet;
    - no existing lesson already says it.
 
    The evidence field then reads `BACKTEST_EVIDENCE: <tests> tests, <trades> trades`, with the cells listed
    in the details. Otherwise, say in the review why it is not a lesson yet.
-9. **Write the review** to the path the fact sheet gives. Use these headings:
+10. **Write the review** to the path the fact sheet gives. Use these headings:
    - `# Daily review <date>`
    - `## Summary`: 3-8 lines, the most important first.
    - `## Results (LIVE / PAPER / VALIDATION)`
@@ -61,8 +66,9 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - `## Regime`
    - `## Refinements queued` (and the lab cards you added, if any)
    - `## Curriculum` (today's item: what you read, the record, the hypothesis if any)
+   - `## Monthly clean-up` (first 3 days of a month: the Merged / Re-check records; otherwise "not this month")
    - `## Reviews done`
    - `## Lessons`
    - `## Tomorrow`: what to watch, and what NOT to do.
    - End with: **Research signal. Not financial advice.**
-10. Run the end commands from COMMON.md.
+11. Run the end commands from COMMON.md.

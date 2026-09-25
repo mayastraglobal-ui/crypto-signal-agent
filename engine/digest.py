@@ -130,7 +130,8 @@ def factory_lines(research):
             + ("; ".join(parts) if parts else "no lab card from any factory yet")]
 
 
-def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05):
+def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05,
+           card_lines=None):
     """The [WEEKLY] email of the week ending now (dict: week, subject, lines)."""
     a, b = pd.Timestamp(now - dt.timedelta(days=7)), pd.Timestamp(now)
     rows = closed_between(logdf, a, b)
@@ -199,6 +200,8 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
     if not appr.get("eligible"):
         L.append("  none - no strategy has 20+ paper signals that meet the section 12 numbers yet")
     L += [f"  ! {w}" for w in (appr.get("warnings") or [])[:6]]
+    if card_lines:
+        L += [""] + list(card_lines)                          # Phase 17 D: the agent's report card
     L += ["", "8. CLAUDE'S WEEKLY RESEARCH (written by the AI - sources, ideas and the experiment queue; ideas are "
           "not evidence until backtested)"]
     if claude_text:
