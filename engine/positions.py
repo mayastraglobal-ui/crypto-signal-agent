@@ -116,6 +116,9 @@ def build(logdf, now, prices=None, limits=None):
             px = prices.get((r["coin"], stf), prices.get(r["coin"]))
             cur = r.get("current_stop")
             item.update(entry=float(r["entry"]), stop=float(cur) if pd.notna(cur) and cur != "" else float(r["stop"]),
+                        tp1=float(r["tp1"]) if pd.notna(r.get("tp1")) and r.get("tp1") != "" else None,
+                        sim_tf=stf, since=r.get("entry_time_utc") if isinstance(r.get("entry_time_utc"), str)
+                        and r.get("entry_time_utc") else r["signal_time_utc"],
                         open_r=round(open_r(d, float(r["entry"]), float(r["stop"]), px), 2) if px else None,
                         next_action=r.get("next_action") if isinstance(r.get("next_action"), str) and r.get("next_action")
                         else next_action(st, []))

@@ -49,6 +49,15 @@ jobs:
         continue-on-error: true
         run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
 
+      - name: Dashboard (GitHub Pages - shows the new briefing; never stops the run)
+        continue-on-error: true
+        run: |
+          if python -c "import json,sys; sys.exit(0 if any(r['status'] == 'applied' for r in json.load(open(sys.argv[1]))) else 1)" "$RUNNER_TEMP/brain_result.json"; then
+            python build_dashboard.py --publish
+          else
+            echo "No new Claude work - dashboard unchanged"
+          fi
+
       - name: Save
         run: |
           git config user.name "signal-bot"

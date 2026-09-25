@@ -44,6 +44,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `tasks/` | What Claude's scheduled tasks do (briefing, daily review, weekly research) + their rules | Read it |
 | `reports/claude/` | Claude's briefings, daily reviews and weekly research (checked by the Brain guard) | No |
 | `reports/approval/` | Approval packs of strategies ready for your yes / no | Read it |
+| `build_dashboard.py` | Builds the dashboard page (published to the branch `gh-pages`) | Not needed |
 | `reports/pine/` | TradingView Pine scripts of strategies (APPROVED ones daily, others when you ask) | Paste into TradingView |
 | `brain_guard.py`, `brain_pack.py` | The guard that checks Claude's work before main; the fact sheet Claude reads | Not needed |
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
@@ -307,6 +308,29 @@ why it loses and its limitations. The `[WEEKLY]` email asks *"Approve S6-OB-FVG 
 - **No:** do nothing. **Changed your mind:** delete the line - it goes back to PAPER_TRADING.
 - An approval for a strategy that is not (or no longer) eligible is not applied; the report says why. The
   retirement rules keep watching approved strategies, now on their live results too.
+
+## Dashboard (web page)
+
+Everything at a glance, readable on a phone: **https://mayastraglobal-ui.github.io/crypto-signal-agent/**
+
+1. **Position book**: open and pending trades (LIVE and PAPER labelled), today's / this week's R vs the limits,
+   heat, closed today, and a chart of each open trade with its entry, stop and TP1.
+2. **Market**: BTC context and the signal coins (price, 24h volume, regimes 1W/1D/4H/1H, 30m momentum, 15m setup,
+   5m trigger), with a 1h chart of the last 5 days for each coin.
+3. **Signals**: LIVE (emailed), PAPER / VALIDATION (logged, not for trading) and watched setups.
+4. **Strategies**: the scoreboard (BACKTEST and LIVE columns kept apart) and the last status changes.
+5. **Approval**: approval packs with the yes/no question, and the TradingView scripts.
+6. **Risk**: halts, suspended strategies, event blackout, upcoming events, coin groups, limits.
+7. **Claude**: the newest briefing and daily review, marked as written by the AI.
+
+The top bar shows when the engine report was made; in your browser it turns **red ("STALE")** when that is more
+than 2 hours old - then do not act on the page. Built by code only (`build_dashboard.py`, `engine/dashboard.py`)
+from the report files, after every hourly scan, daily research run and applied Claude briefing, and published to
+the branch `gh-pages` (one commit, no history). One self-contained file: no external scripts, fonts or trackers.
+It is public like the repository (it only shows what the repository already shows).
+
+**One-time setup:** GitHub → **Settings → Pages** → Source **"Deploy from a branch"** → branch **gh-pages**, folder
+**/ (root)** → **Save**. The branch appears after the next hourly scan; the page is live a minute after you save.
 
 ## Checking a strategy on TradingView (Pine Script)
 

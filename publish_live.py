@@ -25,7 +25,8 @@ import tempfile
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BRANCH = "live-reports"
 LIVE_FILES = ["reports/latest.json", "reports/smc.json", "reports/features.json", "reports/regime.json",
-              "reports/feature_evidence.json", "reports/data_quality.json", "reports/research.json"]
+              "reports/feature_evidence.json", "reports/data_quality.json", "reports/research.json",
+              "reports/dashboard_data.json"]
 README = """# live-reports
 
 The newest copy of the large report files of the Crypto Signal Agent, replaced on every run
@@ -54,9 +55,9 @@ def git(*args, env=None, check=True, data=None):
     return p
 
 
-def fetch_previous(remote):
-    """True when the live branch exists (it is then in FETCH_HEAD)."""
-    return git("fetch", "--depth=1", remote, BRANCH, check=False).returncode == 0
+def fetch_previous(remote, branch=BRANCH):
+    """True when the branch exists (it is then in FETCH_HEAD)."""
+    return git("fetch", "--depth=1", remote, branch, check=False).returncode == 0
 
 
 def previous_blob(path):
@@ -83,23 +84,26 @@ def restore(remote="origin", files=LIVE_FILES):
     return done
 
 
-def publish(remote="origin", files=LIVE_FILES, when=None):
-    """One parentless commit with this run's files (+ the previous copy of the missing ones), force-pushed."""
-    had_previous = fetch_previous(remote)
+def publish(remote="origin", files=LIVE_FILES, when=None, branch=BRANCH, readme=README, title="Live reports",
+            strip=""):
+    """One parentless commit with this run's files (+ the previous copy of the missing ones), force-pushed.
+    strip: a folder prefix removed from the published paths (the dashboard's site/ goes to the branch root)."""
+    had_previous = fetch_previous(remote, branch)
     entries, sources = [], {}
     for path in files:
         full = os.path.join(ROOT, path)
+        dest = path[len(strip):] if strip and path.startswith(strip) else path
         if os.path.exists(full):
             blob = git("hash-object", "-w", full).stdout.strip()
-            sources[path] = "this run"
-        elif had_previous and previous_blob(path):
-            blob = previous_blob(path)
-            sources[path] = "kept from the previous copy"
+            sources[dest] = "this run"
+        elif had_previous and previous_blob(dest):
+            blob = previous_blob(dest)
+            sources[dest] = "kept from the previous copy"
         else:
             continue
-        entries.append((blob, path))
-    readme = git("hash-object", "-w", "--stdin", data=README).stdout.strip()
-    entries.append((readme, "README.md"))
+        entries.append((blob, dest))
+    readme_blob = git("hash-object", "-w", "--stdin", data=readme).stdout.strip()
+    entries.append((readme_blob, "README.md"))
     with tempfile.TemporaryDirectory() as tmp:
         env = dict(os.environ, GIT_INDEX_FILE=os.path.join(tmp, "index"),
                    GIT_AUTHOR_NAME="signal-bot", GIT_AUTHOR_EMAIL="signal-bot@users.noreply.github.com",
@@ -108,11 +112,11 @@ def publish(remote="origin", files=LIVE_FILES, when=None):
             git("update-index", "--add", "--cacheinfo", f"100644,{blob},{path}", env=env)
         tree = git("write-tree", env=env).stdout.strip()
         when = when or dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M")
-        commit = git("commit-tree", tree, "-m", f"Live reports {when} UTC (replaced every run)", env=env).stdout.strip()
-    git("push", "--force", remote, f"{commit}:refs/heads/{BRANCH}")
+        commit = git("commit-tree", tree, "-m", f"{title} {when} UTC (replaced every run)", env=env).stdout.strip()
+    git("push", "--force", remote, f"{commit}:refs/heads/{branch}")
     for path, how in sources.items():
         print(f"{path}: {how}")
-    print(f"published {len(sources)} file(s) to {BRANCH} as one commit ({commit[:8]})")
+    print(f"published {len(sources)} file(s) to {branch} as one commit ({commit[:8]})")
     return commit
 
 

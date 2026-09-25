@@ -61,6 +61,12 @@ jobs:
       - name: Publish the large report files (branch live-reports, one commit, no history)
         run: python publish_live.py
 
+      - name: Dashboard (GitHub Pages, branch gh-pages - never stops the run)
+        continue-on-error: true
+        run: |
+          python publish_live.py --restore
+          python build_dashboard.py --publish
+
       - name: Email if the research run failed
         if: ${{ failure() }}
         run: python3 notify.py research_failed
