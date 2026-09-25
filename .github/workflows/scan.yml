@@ -64,6 +64,10 @@ jobs:
         continue-on-error: true
         run: python notify.py system
 
+      - name: Outside feeds for Claude's tasks (news, Fear & Greed, Binance notices, Deribit expiries - never stops the run)
+        continue-on-error: true
+        run: python feeds.py
+
       - name: Memory guard (append-only files may only grow - section 17)
         run: python memory_guard.py
 

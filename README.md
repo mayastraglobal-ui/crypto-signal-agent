@@ -48,6 +48,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `reports/approval/` | Approval packs of strategies ready for your yes / no | Read it |
 | `build_dashboard.py` | Builds the dashboard page (published to the branch `gh-pages`) | Not needed |
 | `reports/pine/` | TradingView Pine scripts of strategies (APPROVED ones daily, others when you ask) | Paste into TradingView |
+| `reports/feeds.json` | Outside feeds for Claude's tasks, fetched every hour by GitHub (`feeds.py`): news headlines (CoinDesk, Cointelegraph, The Block), Fear & Greed, Binance listings / delistings / maintenance, next Deribit options expiries | No, it's generated |
 | `brain_guard.py`, `brain_pack.py` | The guard that checks Claude's work before main; the fact sheet Claude reads | Not needed |
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
 | `reports/positions.json` | The position book right now (active, awaiting 5m, paper, closed today) + what is being watched | No |

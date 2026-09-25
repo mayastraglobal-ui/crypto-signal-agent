@@ -124,6 +124,42 @@ def lab_lines(now, research):
     return out
 
 
+def feed_lines(now, kind):
+    """reports/feeds.json (fetched hourly by GitHub Actions - this environment cannot open news sites)."""
+    f = load_json("feeds.json")
+    out = ["", "## Outside feeds (reports/feeds.json - fetched by GitHub Actions every hour)"]
+    if f is None:
+        return out + ["- not available yet (the hourly scan writes it) - say so; do not guess the news"]
+    age = (now - pd.Timestamp(f["generated_utc"], tz="UTC").to_pydatetime()).total_seconds() / 3600
+    out += [f"- fetched {f['generated_utc']} UTC ({age:.1f} hours ago)" + (" - STALE: say so" if age > 2.5 else ""),
+            f"- ! {f.get('note')}"]
+    out += [f"- source {k}: {v['status']}" + (f" ({v.get('error')})" if v.get("error") else "")
+            for k, v in (f.get("sources") or {}).items() if v["status"] != "ok"]
+    fg = f.get("fear_greed")
+    out.append(f"- Fear & Greed: {fg['value']} ({fg['label']}), yesterday {fg.get('yesterday')}; last 7 days "
+               + ", ".join(str(d["value"]) for d in fg.get("last_7_days") or []) if fg else "- Fear & Greed: not available")
+    hours = 12 if kind == "briefing" else 24 if kind == "daily" else 24 * 7
+    since = (now - dt.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%M")
+    news = [x for x in f.get("news") or [] if (x.get("utc") or "") >= since][:25 if kind != "weekly" else 40]
+    out += [f"### Headlines, last {hours} hours (CLAIMs - quote with source and link, never as evidence)"]
+    out += [f"- {x['utc']} {x['source']}: {x['title']}" + (f" [coins: {', '.join(x['coins'])}]" if x.get("coins") else "")
+            + (f" - {x['link']}" if x.get("link") else "") for x in news] or ["- none in this period"]
+    b = f.get("binance") or {}
+    out += ["### Binance announcements (newest first)"]
+    for k in ("listing", "delisting", "maintenance"):
+        out += [f"- {k}: {x['utc']} {x['title']}" + (f" [coins: {', '.join(x['coins'])}]" if x.get("coins") else "")
+                + (f" - {x['link']}" if x.get("link") else "") for x in (b.get(k) or [])[:5]]
+    if not any(b.get(k) for k in ("listing", "delisting", "maintenance")):
+        out.append("- none (or not available - see the sources above)")
+    out += ["### Deribit options: next expiries (08:00 UTC; open interest in coins; max pain = the strike where "
+            "option buyers would get the least)"]
+    out += [f"- {x['currency']} {x['expiry_utc']} ({x['hours_left']:.0f} h): open interest {x['open_interest']:,} "
+            f"(calls {x['calls']:,} / puts {x['puts']:,}, put/call {x['put_call']}), "
+            + (f"~${x['notional_usd'] / 1e9:.2f}bn, " if x.get("notional_usd") else "") + f"max pain {x['max_pain']:,.0f}"
+            for x in f.get("deribit") or []] or ["- not available"]
+    return out
+
+
 def pack(kind, now):
     rep, research = load_json("latest.json"), load_json("research.json")
     out = [f"# Fact sheet for the {kind} task - {now:%Y-%m-%d %H:%M} UTC",
@@ -155,6 +191,7 @@ def pack(kind, now):
             f"- suspended strategies: {', '.join(map(str, risk.get('suspended') or [])) or 'none'}",
             f"- next events: {'; '.join(map(str, risk.get('upcoming_events') or [])) or 'none listed'}"
             + (f" (! {risk['calendar_warning']})" if risk.get("calendar_warning") else "")]
+    out += feed_lines(now, kind)
     if kind == "briefing":
         out += ["", "## Your earlier outputs (read the newest for continuity)"] + [f"- {p}" for p in
                                                                                     recent_files("briefings", 2)]
