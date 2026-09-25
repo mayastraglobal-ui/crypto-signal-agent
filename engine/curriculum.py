@@ -45,26 +45,34 @@ ITEM = re.compile(r"^## (C\d+) · ([a-z_]+) · (.+)$")
 KINDS = ["paper", "book", "exchange_research", "post_mortem", "interview"]
 
 
-def parse_plan(text):
+def parse_plan(text, rx=ITEM):
     """The reading plan: [dict(id, kind, title, lines)] from `## Cxx · kind · title` blocks."""
     out = []
     for line in (text or "").splitlines():
-        m = ITEM.match(line.strip())
+        m = rx.match(line.strip())
         if m:
             out.append(dict(id=m.group(1), kind=m.group(2), title=m.group(3).strip(), lines=[]))
-        elif line.startswith("## "):
+        elif line.startswith("#"):                             # any other heading ends the item
             out.append(None)
         elif out and out[-1] is not None and line.strip():
             out[-1]["lines"].append(line.strip())
     return [x for x in out if x]
 
 
+PROJECT = re.compile(r"^## (R\d+) · (project) · (.+)$")
+
+
+def parse_projects(text):
+    """Phase 18: the reference projects (weekly research, one a week) - `## Rx · project · title` blocks."""
+    return parse_plan(text, PROJECT)
+
+
 def studied(sources_text):
-    """{item id: newest timestamp} of the reading-plan items already recorded in memory/research_sources.md (records
-    whose title starts with '[Cxx]')."""
+    """{item id: newest timestamp} of the reading-plan items (Cxx) and reference projects (Rx) already recorded in
+    memory/research_sources.md (records whose title starts with '[Cxx]' / '[Rx]')."""
     out, cur = {}, None
     for line in (sources_text or "").splitlines():
-        m = re.match(r"^### \[(C\d+)\]", line)
+        m = re.match(r"^### \[([CR]\d+)\]", line)
         if m:
             cur = m.group(1)
             continue

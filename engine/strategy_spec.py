@@ -481,6 +481,7 @@ def lab_card_problems(card, others, labels, timeframes):
         probs.append(f"changelog needs a line starting with \"{card['version']}\" (what this version is / changes)")
     if not card.get("twin_of"):                                 # a control twin is a benchmark, not an idea
         probs += edge_problems(card)
+        probs += parent_problems(card, others, timeframes)
     ing = None if card.get("twin_of") else special(card)       # a control twin is itself the benchmark
     twin = others.get(card.get("control_twin")) if card.get("control_twin") else None
     if ing and not card.get("control_twin"):
@@ -528,6 +529,54 @@ def edge_lines(card):
     w = e.get("works_in")
     return ([f"Type: {e.get('type') or '-'}", f"Works in: {', '.join(w) if isinstance(w, list) else w or '-'}"]
             + [f"{names[k]}: {' '.join(str(e.get(k) or '-').split())}" for k in EDGE_KEYS])
+
+
+# ---------- the research loop (Phase 18 A item 1): what led to each lab card ----------
+PARENT_KINDS = {
+    "result": "a strategy result: '<id>@<version> <timeframe>' (a cell in the registry)",
+    "card": "an earlier card: '<id>@<version>'",
+    "lesson": "a record title in memory/lessons.md",
+    "failure": "a record title in memory/failure_journal.md, or a loss tag with its count (n=...)",
+    "missed_move": "a missed strong move: coin and date YYYY-MM-DD",
+    "experiment": "a record title in memory/experiments.md (e.g. 'Feedback: <id>@<version>')",
+    "source": "a record title in memory/research_sources.md (e.g. '[C04] ...')",
+}
+PARENT_HELP = ("parent: '<kind>: <reference>' - kind one of " + ", ".join(PARENT_KINDS)
+               + " (e.g. parent: \"result: donchian_breakout@1.0 1h\")")
+
+
+def parse_parent(x):
+    """'lesson: Breakouts fail in chop' -> ('lesson', 'Breakouts fail in chop'); None when it is not 'kind: ref'."""
+    if not isinstance(x, str) or ":" not in x:
+        return None
+    kind, ref = x.split(":", 1)
+    kind, ref = kind.strip().lower(), " ".join(ref.split())
+    return (kind, ref) if kind in PARENT_KINDS and ref else None
+
+
+def parent_problems(card, others=None, timeframes=None):
+    """A lab card names its parent: the result, lesson or failure record that led to it (the research loop)."""
+    p = card.get("parent")
+    if p in (None, "", []):
+        return [f"parent missing - name what led to this card: {PARENT_HELP}"]
+    pp = parse_parent(p)
+    if pp is None:
+        return [f"parent {p!r} is not '<kind>: <reference>' - {PARENT_HELP}"]
+    kind, ref = pp
+    if len(ref) < 4:
+        return [f"parent reference {ref!r} is too short ({PARENT_KINDS[kind]})"]
+    ids = set(others or {}) | {card.get("id")}
+    if kind in ("result", "card"):
+        m = re.match(r"^(\S+)@(\d+(?:\.\d+)*)" + (r"\s+(\S+)$" if kind == "result" else "$"), ref)
+        if not m:
+            return [f"parent {kind} must be {PARENT_KINDS[kind]}"]
+        if others is not None and m.group(1) not in ids:
+            return [f"parent {kind} '{m.group(1)}' is not a card in strategies.yaml or strategies_lab.yaml"]
+        if kind == "result" and timeframes and m.group(3) not in timeframes:
+            return [f"parent result timeframe '{m.group(3)}' must be one of {list(timeframes)}"]
+    if kind == "missed_move" and not re.search(r"\d{4}-\d{2}-\d{2}", ref):
+        return ["parent missed_move must name the move's date (YYYY-MM-DD)"]
+    return []
 
 
 # ---------- idea factories (Phase 17 C, item 9) ----------

@@ -30,6 +30,7 @@ import yaml
 from engine import attribution as att
 from engine import memory as mem
 from engine import regime as rg
+from engine import research_loop as rloop
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
 
@@ -174,7 +175,7 @@ def _day(x):
 LOSS_TAGS = att.CONDITIONS + att.PATH_TAGS + att.LOSER_TAGS
 
 
-def check_lab(base, new, current, library, now, quota=None):
+def check_lab(base, new, current, library, now, quota=None, memory=None):
     """strategies_lab.yaml additions: earlier cards untouched; each new card a checked, runnable FORMALIZED card
     (strategy_spec.lab_card_problems + version_problems) dated today; the day / week limits; and the addition
     still parses on the newest main. library = strategies.yaml on main."""
@@ -208,6 +209,8 @@ def check_lab(base, new, current, library, now, quota=None):
         probs += [f"{tag}: {x}" for x in sspec.lab_card_problems(c, others, rg.LABELS, tfm.TRADE_ORDER)]
         probs += [f"{tag}: {x}" for x in sspec.version_problems(c, earlier + added[:i])]
         probs += [f"{tag}: {x}" for x in sspec.factory_problems(c, LOSS_TAGS)]
+        if memory is not None and not c.get("twin_of"):         # Phase 18 A: the parent record must exist
+            probs += [f"{tag}: {x}" for x in rloop.parent_exists_problems(c, memory, LOSS_TAGS)]
     # Claude's own limits: the engine's variant-search cards do not use them up (they have their own quota)
     mine = [c for c in cur + added if isinstance(c, dict) and c.get("factory") != "variant_search"]
     days = [_day(c.get("added")) for c in mine]
@@ -235,6 +238,25 @@ def check_lab(base, new, current, library, now, quota=None):
 
 
 MECHANICS = "memory/market_mechanics.md"
+EXPERIMENTS = "memory/experiments.md"
+DEBATE_LINES = ("Bull case", "Bear case", "Risk manager")
+
+
+def check_briefing(text):
+    """Phase 18 A item 2: a briefing has a '## Bull vs bear' section with the three lines, and the risk manager's
+    line says VETO or no veto (copied from the fact sheet)."""
+    if "\n## Bull vs bear" not in "\n" + text:
+        return ["no '## Bull vs bear' section (Bull case / Bear case / Risk manager lines from the fact sheet)"]
+    part = ("\n" + text).split("\n## Bull vs bear", 1)[1].split("\n## ", 1)[0]
+    lines = [ln.strip().lstrip("-*• ").replace("**", "") for ln in part.splitlines()]
+    probs = [f"'## Bull vs bear' needs a line starting '{k}:'" for k in DEBATE_LINES
+             if not any(ln.startswith(k + ":") for ln in lines)]
+    rm = next((ln for ln in lines if ln.startswith("Risk manager:")), "")
+    if rm and not re.search(r"\bVETO\b|\bno veto\b", rm):
+        probs.append("the 'Risk manager:' line must say VETO (with the reasons) or 'no veto', as the fact sheet does")
+    return probs
+
+
 
 
 def check_mechanics(added):
@@ -266,6 +288,11 @@ def review(changes, main_files, now=None, branch=None, quota=None):
     skipped = changes already on main (a re-run). Any problem -> apply nothing."""
     applies, probs, skipped = [], [], []
     now = now or dt.datetime.now(dt.timezone.utc)
+    memory = {}                                              # parent records: main + this push's additions
+    for path in rloop.FILES.values():
+        c = next((c for c in changes if c["path"] == path and c["status"] == "M"), None)
+        add = (c.get("new") or "")[len(c.get("base") or ""):] if c else ""
+        memory[path] = (main_files.get(path) or "") + "\n" + add
     if len(changes) > MAX_FILES:
         probs.append(f"{len(changes)} files changed - at most {MAX_FILES} per task run")
     for c in changes:
@@ -282,6 +309,8 @@ def review(changes, main_files, now=None, branch=None, quota=None):
                                                                     "overwritten (use a new file name)"))
                 continue
             probs += [f"{p}: {x}" for x in lint(new)]
+            if p.startswith("reports/claude/briefings/"):
+                probs += [f"{p}: {x}" for x in check_briefing(new)]
             applies.append(dict(path=p, kind="new", text=new))
         elif st == "M" and p in KNOWLEDGE:
             why = mem.append_only_problems(c.get("base") or "", new)
@@ -300,6 +329,8 @@ def review(changes, main_files, now=None, branch=None, quota=None):
             probs += [f"{p}: {x}" for x in check_records(added, p)]
             if p == MECHANICS:
                 probs += [f"{p}: {x}" for x in check_mechanics(added)]
+            if p == EXPERIMENTS:
+                probs += [f"{p}: {x}" for x in rloop.feedback_problems(added)]
             applies.append(dict(path=p, kind="append", text=added))
         elif st == "M" and p == CALENDAR:
             why = mem.append_only_problems(c.get("base") or "", new)
@@ -333,7 +364,7 @@ def review(changes, main_files, now=None, branch=None, quota=None):
                 continue
             probs += [f"{p}: {x}" for x in lint(added)]
             probs += [f"{p}: {x}" for x in check_lab(c.get("base") or "", new, cur,
-                                                     main_files.get(sspec.LIBRARY_FILE), now, quota)]
+                                                     main_files.get(sspec.LIBRARY_FILE), now, quota, memory)]
             applies.append(dict(path=p, kind="append", text=added))
         elif p in KNOWLEDGE:
             probs.append(f"{p}: {'deleted' if st == 'D' else 'created or renamed'} - knowledge files may only grow")

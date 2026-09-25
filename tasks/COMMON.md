@@ -88,6 +88,11 @@ the end of the fact sheet.
      of edge it is, the regimes it should work in (from the card's regimes), who is on the other side of the trade
      and why they lose, what market behaviour drives it, when it should stop working, and the result that would
      prove it wrong. A card without it is refused. Use `memory/market_mechanics.md` for the mechanism.
+   - Its **parent** (Phase 18, the research loop): `parent: "<kind>: <reference>"` = what led to this card.
+     Kinds: `result: <id>@<version> <tf>` (a tested cell), `card: <id>@<version>`, `lesson: <title>`,
+     `failure: <failure_journal title>` (or a loss tag with `n=`), `missed_move: <coin, date YYYY-MM-DD>`,
+     `experiment: <experiments.md title, e.g. Feedback: X@1.0>`, `source: <research_sources title, e.g. [C04] ...>`.
+     Copy the record title exactly - the guard refuses a parent it cannot find (a control twin needs none).
    - Which **idea factory** it came from: `factory: literature | failure | missed_move | market_structure |
      lead_lag` and `factory_evidence: "..."` (what exactly). Each factory has a weekly quota (`config.yaml` → `lab`;
      the fact sheet shows what is left) and needs its own evidence: literature = `source_url` of the page you

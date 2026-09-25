@@ -373,6 +373,22 @@ and the bar.
   with today's numbers go into `memory/cleanup_log.md`, and the next daily review writes the `Merged:` /
   `Re-check:` records into `lessons.md` (the engine never writes lessons itself).
 
+## Learning from professional projects (Phase 18 A)
+- **The research loop** (idea from Microsoft RD-Agent, rewritten - no code copied). Every lab card names its
+  `parent:` - the result, lesson, failure, missed move, experiment or source that led to it (`engine/strategy_spec.py`
+  checks the format, the Brain guard checks the record exists). After the research run tests a lab card, the daily
+  review writes one `Feedback: <id>@<version>` record in `memory/experiments.md`: hypothesis -> result (the engine's
+  numbers) -> what it teaches -> the next hypothesis, or "stop this line" (`engine/research_loop.py`). The fact sheet
+  lists the results waiting for feedback; the weekly email shows the idea chains.
+- **Bull vs bear** (idea from TradingAgents). Every approval pack (section 0) and every briefing shows a Bull case and
+  a Bear case - only the engine's numbers - and a **Risk manager** line (`engine/debate.py`). It says VETO when a
+  high-impact event is within 60 minutes, the heat is full, the regime is against, the data is not GOOD (or the hourly
+  report is stale / missing), or the day / week loss limit is 75% used or a halt is on. A veto means "not now"; no
+  veto is never a reason to say yes. The guard refuses a briefing without the three lines.
+- **Reference projects R1-R8** (`memory/curriculum.md`): the weekly research studies one a week and records it in
+  `memory/research_sources.md` (link, commit studied, what we take, what we do NOT take, licence). R1, R2 and R8 were
+  studied when Part A was built. Ideas only: freqtrade and backtesting.py are GPL / AGPL and are never copied.
+
 ## Approving a strategy (your yes)
 
 A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,

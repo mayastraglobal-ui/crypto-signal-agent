@@ -50,6 +50,7 @@ from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
 from engine import report_card as rcard
+from engine import research_loop as rloop
 from engine import risk as rk
 from engine import research as rs
 from engine import smc
@@ -2097,7 +2098,8 @@ def main():
     daily["claude_review"] = claude_review(started)          # Phase 14: yesterday's Claude daily review, if any
     weekly = (digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
                             *claude_weekly(started), read_text(os.path.join(MEMORY, "trials.csv")),
-                            float(cfg["research"].get("trials_alpha", 0.05)), report_card_lines(started, research, logdf))
+                            float(cfg["research"].get("trials_alpha", 0.05)), report_card_lines(started, research, logdf),
+                            idea_chain_lines())
               if digest.is_weekly_time(started) else None)
 
     # ---------- data-quality report ----------
@@ -2388,11 +2390,14 @@ def write_experiments(new_exp, registry):
     os.makedirs(MEMORY, exist_ok=True)
     path = os.path.join(MEMORY, "experiments.md")
     new = not os.path.exists(path)
+    head = "| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |\n|---|---|---|---|---|---|\n"
+    last = "" if new else next((ln for ln in reversed(read_text(path).splitlines()) if ln.strip()), "")
     with open(path, "a") as f:
         if new:
             f.write("# Experiments\n\nAppend-only count of every strategy version ever tested (AGENT_PROMPT.md "
-                    "section 11). Each new version of the same idea raises its bar by +0.02R per trade.\n\n"
-                    "| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |\n|---|---|---|---|---|---|\n")
+                    "section 11). Each new version of the same idea raises its bar by +0.02R per trade.\n\n" + head)
+        elif not last.startswith("|"):          # the reviews' records came after the table: start a new table
+            f.write("\n" + head)
         for e in new_exp:
             twin = f" (control twin of {e['twin_of']})" if e.get("twin_of") else ""
             f.write(f"| EXP-{e['experiment']:04d} | {e['first_tested_utc']} | {e['key']}{twin} | {e['family']} | "
@@ -2420,6 +2425,15 @@ def report_card_lines(now, research, logdf):
     except Exception as e:
         log(f"report card failed: {e}")
         return [f"AGENT REPORT CARD: could not be built this week ({type(e).__name__}: {e})"]
+
+
+def idea_chain_lines():
+    """Phase 18 A: the research loop's idea chains (engine/research_loop.py) - never stops the weekly email."""
+    try:
+        return rloop.chain_lines(*rloop.load(ROOT))
+    except Exception as e:
+        log(f"idea chains failed: {e}")
+        return [f"  could not be built this week ({type(e).__name__}: {e})"]
 
 
 def claude_weekly(now):

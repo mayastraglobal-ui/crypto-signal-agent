@@ -39,6 +39,7 @@ from engine import attribution as att
 from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import debate
 from engine import history
 from engine import ideas
 from engine import lifecycle as lc
@@ -240,9 +241,29 @@ def export_approved(cells, per, by_key, cfg, now_txt, folder):
     return out
 
 
-def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline):
+def hourly_report(offline):
+    """reports/latest.json of the newest hourly scan (the risk manager's conditions, Phase 18 A). It lives on the
+    live-reports branch, so a live run fetches it first. None when it cannot be had (the risk manager then vetoes)."""
+    path = os.path.join(sc.REPORTS, "latest.json")
+    if not offline and not os.path.exists(path):
+        try:
+            import publish_live
+            publish_live.restore(files=["reports/latest.json"])
+        except Exception as e:
+            log(f"could not fetch reports/latest.json for the risk manager: {e}")
+    if offline or not os.path.exists(path):
+        return None
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline, rep=None, now=None):
     """Section 21: one approval pack per PAPER_TRADING version x timeframe that meets the section 12 numbers
-    (reports/approval/). Packs of cells that are no longer eligible are removed (the report, not memory)."""
+    (reports/approval/). Packs of cells that are no longer eligible are removed (the report, not memory).
+    rep = the newest hourly report: the pack's risk manager checks today's conditions on it (Phase 18 A)."""
     folder = os.path.join(sc.REPORTS, "approval_offline" if offline else "approval")
     os.makedirs(folder, exist_ok=True)
     bpath = os.path.join(sc.REPORTS, "strategy_scoreboard.csv")
@@ -260,12 +281,14 @@ def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline):
             m = board[(board["strategy"] == c["strategy"]) & (board["version"] == c["version"]) & (board["tf"] == c["tf"])]
             row = {k: (None if pd.isna(v) else v) for k, v in m.iloc[0].items()} if len(m) else {}
         name = ap.filename(c["strategy"], c["version"], c["tf"])
+        rm = debate.risk_manager(rep, now or dt.datetime.now(dt.timezone.utc), regimes=spec.get("regimes"), tf=c["tf"])
         with open(os.path.join(folder, name), "w") as f:
-            f.write("\n".join(ap.pack(c, spec, lineage, row, AP, now_txt)) + "\n")
+            f.write("\n".join(ap.pack(c, spec, lineage, row, AP, now_txt, rm)) + "\n")
         keep.add(name)
         out.append(dict(key=ck, strategy=c["strategy"], version=c["version"], tf=c["tf"],
                         pack=f"reports/{os.path.basename(folder)}/{name}", paper_signals=c["paper"]["n"],
-                        paper_avg_r=c["paper"]["avg_r"], backtest_validate_avg_r=c["evidence"]["validate"]["avg_r"]))
+                        paper_avg_r=c["paper"]["avg_r"], backtest_validate_avg_r=c["evidence"]["validate"]["avg_r"],
+                        risk=debate.risk_line(rm)))
     for old in os.listdir(folder):
         if old.endswith(".md") and old not in keep:
             os.remove(os.path.join(folder, old))
@@ -505,7 +528,8 @@ def main():
             paper_signals=c["paper"]["n"], failed_runs=c["failed_runs"])
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
-    packs = write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, args.offline)
+    packs = write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, args.offline,
+                        hourly_report(args.offline) if eligible_cells else None, started)
     approval_out = dict(eligible=packs, approved=sorted(ck for ck, c in cells.items() if c["status"] == "APPROVED"),
                         listed=sorted(approvals), warnings=approval_warnings + approval_problems
                         + [f"{k}: approval listed but this strategy version / timeframe was not researched this run"
