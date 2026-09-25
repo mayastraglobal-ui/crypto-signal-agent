@@ -8,14 +8,18 @@
   "SUI",
   "BNB"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "ENA": 1
+ },
+ "out_streak": {
+  "BNB": 1
+ },
  "suspended": {
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 23,
+ "runs": 24,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
