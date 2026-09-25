@@ -52,3 +52,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 09:18 UTC
 - **EXCLUDED** XPL - 7-day average volume $18M < $50M; 24h move +33.8% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $54k within 1% (need $250k)
+
+## 2026-09-25 10:18 UTC
+- **EXCLUDED** VTHO - 7-day average volume $4M < $50M; spread 0.133% > 0.1%; order book too thin: $76k within 1% (need $250k)
