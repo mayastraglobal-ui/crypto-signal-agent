@@ -15,3 +15,7 @@
 Why: the large files are rewritten completely every hour; committing them to main would make the repository
 grow by megabytes a day. `publish_live.py` puts them on `live-reports` as ONE commit (force-pushed, no history).
 Links: https://github.com/mayastraglobal-ui/crypto-signal-agent/tree/live-reports/reports
+
+The dashboard page (`build_dashboard.py`) is published to its own branch `gh-pages` the same way (one commit,
+no history) and shown at https://mayastraglobal-ui.github.io/crypto-signal-agent/ ; its chart candles come from
+`dashboard_data.json` on `live-reports`.

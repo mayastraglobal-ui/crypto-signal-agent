@@ -206,3 +206,17 @@ Newest entries at the bottom. Format: date · who · what · why.
   - **Equivalence:** the translated tree evaluated with Pine semantics equals the engine bar by bar, for every rule of every RULES card on 3 synthetic coins and timeframes, plus 12 indicator values and the higher-timeframe trend with no look-ahead.
   - Every card × timeframe builds a structurally sound script; costs, plan, split, structure-stop width and embedded entries are checked; offline export end to end; workflow input safety.
   - TradingView's own compiler is not available offline: the operator's first paste is the final check.
+
+## 2026-09-25 · Claude (BUILD mode, operator-approved plan) · Phase 16 (optional part: web dashboard only)
+- **New web dashboard** (`engine/dashboard.py`, `build_dashboard.py`) at https://mayastraglobal-ui.github.io/crypto-signal-agent/. It is one self-contained HTML page: no external scripts, styles, fonts or images. Charts are inline SVG drawn by Python. It is readable on a phone and follows light / dark mode. The page is built by code only and shows the engine's numbers; it computes nothing new.
+- **Sections:** position book (LIVE / PAPER labelled, day / week R vs limits, heat, closed today, a chart per open trade with entry / stop / TP1); market (BTC context, signal-coin matrix, a 1h chart of the last 5 days per coin); signals (LIVE / PAPER-VALIDATION / watching); strategies (BACKTEST and LIVE columns kept apart); approval packs and Pine scripts; risk (halts, suspensions, blackout, events, groups, limits); Claude's newest briefing and daily review, marked AI.
+- **Stale warning in the browser:** the top bar turns red when the engine report is more than 2 hours old.
+- **Safety:** all text from files is HTML-escaped. Claude's markdown gets a small safe renderer that only links http(s).
+- **Publishing:**
+  - The page goes to the branch `gh-pages` as one parentless commit (`publish_live.publish` gained branch / readme / title / strip). It is rebuilt after every hourly scan, after the daily research run, and after the Brain workflow applies Claude work. The Brain workflow never rebuilds it on its empty 15-minute checks.
+  - Every dashboard step is continue-on-error, so it never stops a run.
+  - The scan writes `reports/dashboard_data.json` (last 120 candles per signal coin and timeframe) to `live-reports` only.
+  - Position book entries now also carry TP1, the managed timeframe and the start time.
+- **Operator decisions (2026-09-25):** dashboard only (no database, no streaming); rebuilt after scan + research + briefing; charts = 7 coins on 1h + each open trade.
+- **One-time operator step:** Settings → Pages → Deploy from a branch → gh-pages / (root).
+- Tests: `tests/test_dashboard.py`. Built from a real offline scan: every section, a chart per coin, self-contained, only repository links, size, stale script. LIVE / PAPER labels are never mixed; everything is escaped (script / javascript: / img); Claude marked AI; approval and risk. Chart labels never overlap and levels stay inside the plot; flat and missing candles are handled; markdown. The build survives missing or broken files and picks the newest briefing. Publishing to gh-pages was tested in a real git repository: one commit at the root, main untouched. Workflow order and continue-on-error. Checked visually in headless Chromium at desktop width and 390 px phone width.

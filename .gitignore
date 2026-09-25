@@ -9,6 +9,7 @@ reports/regime.json
 reports/feature_evidence.json
 reports/data_quality.json
 reports/research.json
+reports/dashboard_data.json
 # files written only by --offline test runs
 reports/*_offline.json
 reports/*_offline.csv
@@ -16,3 +17,4 @@ reports/*_offline.csv
 reports/charts/
 reports/approval_offline/
 reports/pine_offline/
+site/

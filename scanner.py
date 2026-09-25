@@ -59,6 +59,7 @@ REPORTS = os.path.join(ROOT, "reports")
 MEMORY = os.path.join(ROOT, "memory")
 REGISTRY = os.path.join(MEMORY, "strategy_registry.csv")
 TF_MS = tfm.TF_MS
+DASH_BARS = 120                    # candles per coin and timeframe kept for the dashboard charts (1h = 5 days)
 HTF = tfm.LEGACY_HTF            # higher timeframe used by the current strategies' htf_up / htf_down
 TF_ORDER = tfm.TRADE_ORDER      # timeframes the strategies run on
 CONTEXT = tfm.CONTEXT_TFS       # 1w, 1d: downloaded for higher-timeframe context
@@ -1636,6 +1637,7 @@ def main():
     exits = {}                              # (coin, tf, id@version) -> exit rules, for open positions
     mon = {}                                # (coin, tf) -> what the section 16 warnings read
     watching = []                           # WATCH / SETUP_FORMING (report only)
+    dash_candles = {}                       # coin -> tf -> newest candles, for the dashboard charts (Phase 16)
     for u in coins:
         sym, base = u["symbol"], u["base"]
         pc = prepare_coin(sym, base, data, quality, tfs, cfg)
@@ -1652,6 +1654,10 @@ def main():
             feat_last[(base, tf)] = feats[[c for c in feats.columns if not c.startswith("h4_")]].tail(3)
             ev_frames[tf].append((base, df, feats))
             if base in signal_set:
+                k = df.tail(DASH_BARS)
+                dash_candles.setdefault(base, {})[tf] = [
+                    [int(a), float(b), float(c), float(d), float(e)] for a, b, c, d, e in
+                    zip(k["open_time"], k["open"], k["high"], k["low"], k["close"])]
                 tail = slice(max(0, n - 500), n)
                 mon[(base, tf)] = dict(ct=df["close_time"].to_numpy()[tail], atr=df["_atr"].to_numpy()[tail],
                                        reg_now=regime_at(reg, tf, n - 1),
@@ -1930,6 +1936,8 @@ def main():
     json.dump(dict(generated_utc=now_txt, book=book, text=book_text, risk=risk_out, watching=watching,
                    events_this_run=events),
               open(log_path(args.offline, "positions.json"), "w"), indent=1, default=float)
+    with open(os.path.join(REPORTS, "dashboard_data.json"), "w") as f:       # large-ish: branch live-reports only
+        json.dump(dict(generated_utc=now_txt, tf_ms={t: TF_MS[t] for t in tfs}, candles=dash_candles), f)
 
     # ---------- memory (section 22): execution notes when data problems start / end, weekly coin facts ----------
     if not args.offline:
