@@ -464,16 +464,22 @@ def make_namespace(df, feats=None):
     def _col(k):
         return df[k].astype(float) if k in df else pd.Series(np.nan, index=df.index)
     fr, oi_, btc = _col("_funding_rate"), _col("_oi"), _col("_btc_close")
+    hsrc, fsrc = _col("_hsrc").fillna(0), _col("_fsrc").fillna(0)
 
     def funding_z(n=200):
-        """How unusual the funding rate is vs its last n candles (z-score)."""
+        """How unusual the funding rate is vs its last n candles (z-score). Unknown when the window holds values from
+        two sources (never compared across exchanges)."""
         n = int(n)
         m, sd = fr.rolling(n, min_periods=max(2, n // 2)).mean(), fr.rolling(n, min_periods=max(2, n // 2)).std()
-        return (fr - m) / sd.replace(0, np.nan)
+        one = (fsrc.rolling(n, min_periods=1).min() == fsrc.rolling(n, min_periods=1).max()) & (fsrc > 0)
+        return ((fr - m) / sd.replace(0, np.nan)).where(one)
 
     def oi_chg(n=24):
-        """Open interest change over the last n candles, in %."""
-        return (oi_ / oi_.shift(int(n)) - 1) * 100
+        """Open interest change over the last n candles, in %. Unknown when the two values come from different
+        sources (a change across exchanges is not a change)."""
+        n = int(n)
+        same = (hsrc == hsrc.shift(n)) & (hsrc > 0)
+        return ((oi_ / oi_.shift(n) - 1) * 100).where(same)
 
     def btc_ret(n=1):
         """BTC's return over its last n closed candles of this timeframe, in % (known at this candle's close)."""
@@ -563,6 +569,7 @@ def attach_market(df, derivs, btc):
     a = dv.align(df["close_time"].to_numpy(), df["open_time"].to_numpy(), h, f)
     for k in ("funding_rate", "oi", "ls_ratio", "taker_ratio"):
         df["_" + k] = a[k]
+    df["_hsrc"], df["_fsrc"] = a["_hsrc"], a["_fsrc"]      # which source each value came from (0 = unknown)
     df["_fund_short"] = a["_fund_short"]
     df["_btc_close"] = np.nan
     if btc is not None and len(btc):
@@ -2725,7 +2732,9 @@ def render_derivs(d, w):
           "'unknown' until there is data.\n")
         return
     w(f"Checked {d['checked_utc']} UTC. History is saved every hour from now on (exchanges keep only ~30 days).\n")
-    w("| Coin | State | Source | History | Funding now | Long/short | Taker buy/sell | Problems |")
+    w("Every building block reads ONE series, the main source (OKX), in backtests and live; Binance is kept as a separate "
+      "research series and never mixed in (their levels differ).\n")
+    w("| Coin | State | Main source | Main history | Funding now | Long/short | Taker buy/sell | Problems |")
     w("|---|---|---|---|---|---|---|---|")
     num = lambda x, f: "-" if x is None or x != x else f.format(x)
     for c, x in d["coins"].items():

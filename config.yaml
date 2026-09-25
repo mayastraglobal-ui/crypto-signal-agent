@@ -202,6 +202,8 @@ research:                    # daily research run (research.py, workflow "Resear
                                  # More ideas tested -> a higher bar, so luck does not make "winners". Never raise it.
 
 derivs:                      # Phase 17 C: futures market-structure data (derivs.py, hourly; engine/derivs.py)
+                             # ONE series per source, never mixed: OKX = the main series every building block reads
+                             # (backtest and live); Binance (API + data.binance.vision files) = research only
   backfill_days: 365         # back-fill this many days of history from data.binance.vision ...
   backfill_per_run: 4        # ... a few days per coin per hourly run (so a run stays short)
 

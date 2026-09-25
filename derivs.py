@@ -8,7 +8,9 @@ the live-reports branch (publish_live.py) - the history is kept from now on, bec
 days of hourly open interest. Older days are back-filled from data.binance.vision files, a few per run.
 Writes reports/derivs_quality.json (small, on main) for the report and Claude's fact sheet.
 
-Order of sources: Binance futures API -> OKX public API. A failure is recorded and never stops the scan.
+Two SEPARATE series (never mixed - their levels differ): OKX = the main series, the only one the building blocks read;
+Binance (its API when reachable + data.binance.vision files) = research only. A failure is recorded and never stops
+the scan.
 
   python derivs.py                 fetch, append, check (run by the hourly scan workflow before scanner.py)
 """
@@ -64,29 +66,40 @@ def coins():
         return ["BTC", "ETH"]
 
 
+def fetch_okx(coin, fetch=get):
+    """The MAIN series (every building block reads only this): OKX rubik hourly stats + funding history."""
+    inst, q = f"{coin}-USDT-SWAP", dict(ccy=coin, period="1H")
+    hourly = D.okx_hourly(coin, fetch(OKX + "/api/v5/rubik/stat/contracts/open-interest-volume", q),
+                          fetch(OKX + "/api/v5/rubik/stat/contracts/long-short-account-ratio", q),
+                          fetch(OKX + "/api/v5/rubik/stat/taker-volume", dict(q, instType="CONTRACTS")))
+    funding = D.okx_funding(coin, fetch(OKX + "/api/v5/public/funding-rate-history", dict(instId=inst, limit=100)))
+    return hourly, funding
+
+
+def fetch_binance(coin, fetch=get):
+    """A RESEARCH series only (kept separately, never mixed with the main one): Binance USDT-M futures API."""
+    sym, p = coin + "USDT", dict(symbol=coin + "USDT", period="1h", limit=500)
+    hourly = D.binance_hourly(coin, fetch(FAPI + "/futures/data/openInterestHist", p),
+                              fetch(FAPI + "/futures/data/globalLongShortAccountRatio", p),
+                              fetch(FAPI + "/futures/data/takerlongshortRatio", p))
+    funding = D.binance_funding(coin, fetch(FAPI + "/fapi/v1/fundingRate", dict(symbol=sym, limit=1000)))
+    return hourly, funding
+
+
 def fetch_live(coin, fetch=get):
-    """(hourly rows, funding rows, source, errors) - Binance first, OKX when Binance refuses."""
-    sym, errs = coin + "USDT", []
-    try:
-        p = dict(symbol=sym, period="1h", limit=500)
-        hourly = D.binance_hourly(coin, fetch(FAPI + "/futures/data/openInterestHist", p),
-                                  fetch(FAPI + "/futures/data/globalLongShortAccountRatio", p),
-                                  fetch(FAPI + "/futures/data/takerlongshortRatio", p))
-        funding = D.binance_funding(coin, fetch(FAPI + "/fapi/v1/fundingRate", dict(symbol=sym, limit=1000)))
-        return hourly, funding, "binance", errs
-    except Exception as e:
-        errs.append(f"binance: {type(e).__name__}: {str(e)[:120]}")
-    try:
-        inst, q = f"{coin}-USDT-SWAP", dict(ccy=coin, period="1H")
-        hourly = D.okx_hourly(coin, fetch(OKX + "/api/v5/rubik/stat/contracts/open-interest-volume", q),
-                              fetch(OKX + "/api/v5/rubik/stat/contracts/long-short-account-ratio", q),
-                              fetch(OKX + "/api/v5/rubik/stat/taker-volume", dict(q, instType="CONTRACTS")))
-        funding = D.okx_funding(coin, fetch(OKX + "/api/v5/public/funding-rate-history",
-                                            dict(instId=inst, limit=100)))
-        return hourly, funding, "okx", errs
-    except Exception as e:
-        errs.append(f"okx: {type(e).__name__}: {str(e)[:120]}")
-    return [], [], None, errs
+    """(hourly rows, funding rows, {source: ok?}, errors) - both series, each on its own; one failing never
+    replaces the other (the main series simply has a gap, which the building blocks read as 'unknown')."""
+    rows_h, rows_f, got, errs = [], [], {}, []
+    for name, fn in ((D.MAIN_SOURCE, fetch_okx), ("binance", fetch_binance)):
+        try:
+            h, f = fn(coin, fetch)
+            rows_h += h
+            rows_f += f
+            got[name] = True
+        except Exception as e:
+            got[name] = False
+            errs.append(f"{name}: {type(e).__name__}: {str(e)[:120]}")
+    return rows_h, rows_f, got, errs
 
 
 def backfill(coin, hourly_hist, funding_hist, now, S, fetch=get):
@@ -128,11 +141,12 @@ def run(now, fetch=get, coin_list=None):
     n_before = (len(hourly), len(funding))
     status = {}
     for c in coin_list or coins():
-        h, f, src, errs = fetch_live(c, fetch)
-        bh, bf, berr = backfill(c, hourly, funding, now, S, fetch)
+        h, f, got, errs = fetch_live(c, fetch)
+        bh, bf, berr = backfill(c, D.series(hourly, "binance_files"), D.series(funding, "binance_files"), now, S, fetch)
         hourly = D.merge(hourly, h + bh, "ts")
         funding = D.merge(funding, f + bf, "time")
-        status[c] = dict(source=src, new_hourly=len(h), backfilled_hours=len(bh), errors=errs + berr)
+        status[c] = dict(source=D.MAIN_SOURCE if got.get(D.MAIN_SOURCE) else None, sources=got,
+                         new_hourly=len(h), backfilled_hours=len(bh), errors=errs + berr)
     if len(hourly) < n_before[0] or len(funding) < n_before[1]:
         raise RuntimeError("history would shrink - nothing written")              # never lose history
     os.makedirs(REPORTS, exist_ok=True)
@@ -149,7 +163,8 @@ def run(now, fetch=get, coin_list=None):
 def main():
     q = run(dt.datetime.now(dt.timezone.utc))
     for c, x in q.items():
-        print(f"{c}: {x['state']} · source {x['fetch']['source']} · {x.get('hours', 0)} hours of history"
+        print(f"{c}: {x['state']} · main {D.MAIN_SOURCE} {'ok' if x['fetch']['source'] else 'FAILED'} · "
+              f"{x.get('hours', 0)} hours of main history · research rows {x.get('research_rows', {})}"
               + "".join(f"\n  ! {p}" for p in x.get("problems", []) + x["fetch"]["errors"]))
     if not any(x["fetch"]["source"] for x in q.values()):
         sys.exit(1)                                   # nothing fetched: a failed (continue-on-error) step
