@@ -39,6 +39,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `config.yaml` | Account size, risk %, coin rules, fees, data checks, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
 | `events.yaml` | High-impact event calendar (CPI, NFP, PCE, FOMC) in UTC - no live entry ±60 min around each | Yes - correct or delete entries here; the weekly research only adds |
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
+| `strategies_lab.yaml` | The strategy lab: new cards added by Claude's daily review / weekly research, tested like `strategies.yaml` but never emailed or approved | Correct or delete cards here; to approve one, move it into `strategies.yaml` |
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | [`reports/latest.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/latest.json) ⓛ | Same report in data form (for Claude) | No |
@@ -278,21 +279,44 @@ researches**; every number comes from the engine (`brain_pack.py` prints the fac
 |---|---|---|---|
 | Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + `[BRIEFING]` email |
 | Daily review | 23:30 Beijing | `tasks/daily_review.md` | `reports/claude/daily/` (summary in the next `[DAILY]`), memory records: root causes, reviews due, validated lessons, queued refinements (max one per failing strategy) |
-| Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **as pull requests for you to merge** |
+| Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **added to the strategy lab**, event calendar entries |
 
 **How Claude's work reaches main safely:** a task never writes to main. It pushes to its own branch
 (`claude/brain-briefing`, `-daily`, `-weekly`). Every 15 minutes the **Brain workflow** (`brain.yml`, always run
 from main) checks new pushes with `brain_guard.py`:
-- allowed: new files in `reports/claude/` with the expected name, and new records **added at the end** of the
+- allowed: new files in `reports/claude/` with the expected name, new records **added at the end** of the
   knowledge files (lessons, failure journal, missed trades, sources, coin notes, feature notes, SMC research,
-  experiments);
+  experiments), checked entries added to `events.yaml` (weekly), and checked strategy cards added to
+  `strategies_lab.yaml` (daily + weekly - see "The strategy lab");
 - refused: any code, `config.yaml`, `strategies.yaml`, workflow or engine file; any change or deletion of an
   earlier line; records without the section 22 fields; lessons without strong evidence and counts; profit
   promises or win probabilities ("guaranteed", "risk-free", "high probability", "70% chance this trade wins").
 
 One problem refuses the whole push - nothing is half-applied - and you get one `[SYSTEM]` email saying why.
-New strategy ideas never enter testing by themselves: they arrive as pull requests, tested only after you merge.
+New strategy ideas go into the strategy lab: tested automatically, but never emailed or approved (below).
 Two runs adding to the same memory file at the same time keep both sides' lines (`.gitattributes`, union merge).
+
+## The strategy lab and the trials counter
+
+Claude's daily review and weekly research may **add** new strategy cards to `strategies_lab.yaml` (never edit or
+delete one). The Brain guard refuses the whole push unless every new card:
+- is `FORMALIZED`, a new id or a new version that changes **exactly one thing** (with a changelog line);
+- uses only the building blocks listed in `strategies.yaml` - the engine runs these rules, so anything else (other
+  code, `np.`, `.shift()`, text, `**`) is refused;
+- has its first target at least **2R** away, a `source` and an `evidence_class`, and `added:` = today;
+- has a **control twin** (`twin_of`) when it uses an SMC / ICT building block or the 5m check;
+- keeps within **3 new cards a day and 10 in 7 days** (both tasks together; a twin counts).
+
+The daily research run tests lab cards exactly like the library (same fees, gates and tests). A lab card can reach
+BACKTESTING / VALIDATION / PAPER_TRADING by itself, is marked 🧪 in the report, **never sends an email and is
+never APPROVED** (an `approvals:` line for it is refused with a warning). To approve one: copy the card unchanged
+into `strategies.yaml` by pull request (same id and version, so its results carry over), then say yes as below.
+
+**Trials counter** (`memory/trials.csv`): every strategy version × timeframe ever tested is one trial. The more
+ideas are tested, the more likely one looks good by pure luck, so PAPER_TRADING also needs the average trade's
+t-statistic to reach z(1 - 0.05 / trials) (Bonferroni; `config.yaml` → `research.trials_alpha`): 1.64 with one
+trial, 3.09 with 50, 3.29 with 100, 3.72 with 500. The report (section 3b) and the `[WEEKLY]` email show the count
+and the bar.
 
 ## Approving a strategy (your yes)
 

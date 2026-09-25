@@ -11,6 +11,9 @@ allowed onto the newest main:
     coin notes, feature notes, SMC research, experiments), written as section 22 records
   * NEW entries at the end of the event calendar events.yaml (weekly research): complete, official https source,
     a check mark, no duplicate - the operator corrects or deletes entries
+  * NEW strategy cards at the end of strategies_lab.yaml (daily review + weekly research, Phase 17): FORMALIZED,
+    a new id or a new version changing exactly one thing, building blocks only, first target >= 2R, a control twin
+    for an SMC / 5m ingredient, source + evidence class, at most 3 cards a day and 10 in 7 days
 
 Everything else is refused - code, config.yaml, strategies.yaml (new strategy versions go through a pull request
 the operator merges), workflows, the engine's ledgers, or any edit / deletion of an earlier line. Lessons need
@@ -25,6 +28,9 @@ import re
 import yaml
 
 from engine import memory as mem
+from engine import regime as rg
+from engine import strategy_spec as sspec
+from engine import timeframes as tfm
 
 BRANCHES = ["claude/brain-briefing", "claude/brain-daily", "claude/brain-weekly"]
 NEW_FILES = {                                            # folder -> allowed file names
@@ -44,6 +50,9 @@ EVENT_TYPES = {"NFP", "CPI", "PCE", "FOMC", "GDP", "PPI", "RETAIL_SALES", "JOLTS
 OFFICIAL_DOMAINS = ("bls.gov", "bea.gov", "federalreserve.gov", "census.gov", "treasury.gov", "ecb.europa.eu",
                     "boj.or.jp", "binance.com")
 CHECKS = {"official_page", "official_search", "indirect"}      # "operator" is the operator's own mark
+LAB = sspec.LAB_FILE                                      # the strategy lab: new cards only (daily + weekly)
+LAB_BRANCHES = ["claude/brain-daily", "claude/brain-weekly"]
+LAB_PER_DAY, LAB_PER_WEEK = 3, 10                         # new cards per UTC day / per 7 days (control twins count)
 _NEG = r"(?<!not )(?<!no )(?<!never )(?<!n't )(?<!without )"
 FORBIDDEN = [                                            # section 25: never promise profits or state a win probability
     (re.compile(_NEG + r"\bguarantee(d|s)?\b", re.I), "profit promise ('guaranteed')"),
@@ -145,6 +154,73 @@ def check_calendar(base, new, current):
     return probs
 
 
+def _cards(text):
+    doc = yaml.safe_load(text or "")
+    if doc is None:
+        return []
+    if not isinstance(doc, list):
+        raise ValueError("the file must be a list of cards ('- id: ...')")
+    return doc
+
+
+def _day(x):
+    try:
+        return dt.date.fromisoformat(str(x))
+    except ValueError:
+        return None
+
+
+def check_lab(base, new, current, library, now):
+    """strategies_lab.yaml additions: earlier cards untouched; each new card a checked, runnable FORMALIZED card
+    (strategy_spec.lab_card_problems + version_problems) dated today; the day / week limits; and the addition
+    still parses on the newest main. library = strategies.yaml on main."""
+    try:
+        old, allc, lib = _cards(base), _cards(new), _cards(library)
+    except (yaml.YAMLError, ValueError) as e:
+        return [f"not a valid card list ({e})"]
+    if allc[:len(old)] != old:
+        return ["earlier cards changed - lab cards are only added (the operator corrects them)"]
+    added = allc[len(old):]
+    if not added:
+        return []
+    try:
+        cur = _cards(current)
+    except (yaml.YAMLError, ValueError):
+        cur = old
+    today = now.date()
+    earlier = [c for c in lib + cur if isinstance(c, dict)]
+    by_id = {c.get("id"): c for c in earlier + [c for c in added if isinstance(c, dict)]}
+    probs = []
+    for i, c in enumerate(added):
+        tag = f"card {c.get('id')}@{c.get('version')}" if isinstance(c, dict) else f"new card #{i + 1}"
+        if not isinstance(c, dict):
+            probs.append(f"{tag}: not a strategy card")
+            continue
+        if c.get("status") != "FORMALIZED":
+            probs.append(f"{tag}: status must be FORMALIZED (the engine tests it; IDEAs go into memory/experiments.md)")
+        if _day(c.get("added")) not in (today, today - dt.timedelta(days=1)):
+            probs.append(f"{tag}: added must be today's UTC date \"{today}\"")
+        others = {k: v for k, v in by_id.items() if k != c.get("id")}
+        probs += [f"{tag}: {x}" for x in sspec.lab_card_problems(c, others, rg.LABELS, tfm.TRADE_ORDER)]
+        probs += [f"{tag}: {x}" for x in sspec.version_problems(c, earlier + added[:i])]
+    days = [_day(c.get("added")) for c in cur + added if isinstance(c, dict)]
+    for d in sorted({_day(c.get("added")) for c in added if isinstance(c, dict)} - {None}):
+        n = sum(x == d for x in days)
+        if n > LAB_PER_DAY:
+            probs.append(f"{n} lab cards dated {d} - at most {LAB_PER_DAY} a day (choose the best candidates)")
+    n = sum(x is not None and today - dt.timedelta(days=6) <= x <= today for x in days)
+    if n > LAB_PER_WEEK:
+        probs.append(f"{n} lab cards in the last 7 days - at most {LAB_PER_WEEK} (testing more ideas raises the "
+                     "bar for all of them)")
+    if not probs and current is not None:
+        try:
+            if _cards(apply_text(current, dict(kind="append", text=new[len(base):]))) != cur + added:
+                probs.append("the addition does not fit the newest lab file on main")
+        except (yaml.YAMLError, ValueError) as e:
+            probs.append(f"the addition does not fit the newest lab file on main ({e})")
+    return probs
+
+
 def allowed_new(path):
     for folder, rx in NEW_FILES.items():
         if path.startswith(folder) and rx.match(path[len(folder):]):
@@ -152,12 +228,14 @@ def allowed_new(path):
     return False
 
 
-def review(changes, main_files):
+def review(changes, main_files, now=None, branch=None):
     """changes: [dict(path, status 'A'/'M'/'D'/..., base=text or None, new=text or None)] = the task branch vs the
-    main it started from; main_files: {path: text or None} on the newest main.
+    main it started from; main_files: {path: text or None} on the newest main (+ strategies.yaml);
+    now: the guard's time (UTC); branch: the task branch (lab cards only from the daily and weekly tasks).
     Returns (applies, problems, skipped): applies = [dict(path, kind 'new'/'append', text)] (to copy onto main),
     skipped = changes already on main (a re-run). Any problem -> apply nothing."""
     applies, probs, skipped = [], [], []
+    now = now or dt.datetime.now(dt.timezone.utc)
     if len(changes) > MAX_FILES:
         probs.append(f"{len(changes)} files changed - at most {MAX_FILES} per task run")
     for c in changes:
@@ -205,14 +283,35 @@ def review(changes, main_files):
             probs += [f"{p}: {x}" for x in lint(added)]
             probs += [f"{p}: {x}" for x in check_calendar(c.get("base") or "", new, cur)]
             applies.append(dict(path=p, kind="append", text=added))
+        elif st in ("M", "A") and p == LAB:
+            if branch is not None and branch not in LAB_BRANCHES:
+                probs.append(f"{p}: only the daily review and the weekly research add strategy cards")
+                continue
+            why = mem.append_only_problems(c.get("base") or "", new)
+            if why:
+                probs.append(f"{p}: {why} - lab cards are only added (the operator corrects them)")
+                continue
+            added = new[len(c.get("base") or ""):]
+            if not added.strip():
+                continue
+            if len(added.encode()) > MAX_KB * 1024:
+                probs.append(f"{p}: addition larger than {MAX_KB} KB")
+            if cur is not None and cur.endswith(added):
+                skipped.append(p)
+                continue
+            probs += [f"{p}: {x}" for x in lint(added)]
+            probs += [f"{p}: {x}" for x in check_lab(c.get("base") or "", new, cur,
+                                                     main_files.get(sspec.LIBRARY_FILE), now)]
+            applies.append(dict(path=p, kind="append", text=added))
         elif p in KNOWLEDGE:
             probs.append(f"{p}: {'deleted' if st == 'D' else 'created or renamed'} - knowledge files may only grow")
         elif p == "strategies.yaml":
-            probs.append(f"{p}: new strategy versions go through a pull request for the operator, not this branch")
+            probs.append(f"{p}: new cards go into {LAB} (the operator moves approved ones into strategies.yaml "
+                         "by pull request)")
         else:
-            probs.append(f"{p}: not allowed ({st}) - Claude's tasks may only add reports/claude/ files and records "
-                         "at the end of the knowledge files; code, config, workflows and the engine's files are "
-                         "changed only through a pull request the operator merges")
+            probs.append(f"{p}: not allowed ({st}) - Claude's tasks may only add reports/claude/ files, records at "
+                         "the end of the knowledge files, calendar entries and lab strategy cards; code, config, "
+                         "workflows and the engine's files are changed only through a pull request the operator merges")
     return ([] if probs else applies), probs, skipped
 
 

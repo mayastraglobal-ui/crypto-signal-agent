@@ -2,6 +2,7 @@
 
 Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-weekly`. Your fact sheet is
 `python brain_pack.py weekly`. Your file goes into the Sunday [WEEKLY] email, under the engine's own numbers.
+You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `events.yaml` (step 4).
 
 ## Steps
 1. Run the start commands from COMMON.md. Read the fact sheet, the last week's daily reviews, your last
@@ -20,16 +21,16 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-weekly`
    - the title, the URL and the date;
    - the claim and its evidence class. Most internet claims are `CLAIM` or `UNVERIFIED_OPINION`.
    - the hypothesis you derive from it, and its limitations.
-3. **Candidates: 1-2 new strategies or new versions** at most.
+3. **Candidates: 1-2 new strategies or new versions** at most (plus their control twins).
    - Choose from the experiments queue and today's research.
    - Each must follow the pipeline: SOURCE → CLAIM → FORMAL DEFINITION → RULES.
-   - Use only the building blocks listed at the top of `strategies.yaml`, and add a control twin when there
-     is a special ingredient.
-   - A new version changes exactly ONE thing and gets a changelog line.
-   - Write each candidate's exact `strategies.yaml` card in your file, marked **PROPOSED - not opened** (your
-     session can only push to `claude/brain-weekly`; the operator or the build session opens the pull
-     request).
-   - In simple words, say what it tests, why, which source, and which experiment-queue item it answers.
+   - **Append each card to `strategies_lab.yaml`** (COMMON.md rule 4): building blocks only, first target >= 2R,
+     a control twin when there is a special ingredient, `source` + `evidence_class`, `added` = today. A new
+     version changes exactly ONE thing and gets a changelog line. The daily research run tests it from the next
+     day on, exactly like the library; it can never send emails.
+   - Stay within the limits in the fact sheet (3 a day, 10 in 7 days, together with the daily review).
+   - In your file, under `## Candidates (added to the lab)`, copy each card and say in simple words what it
+     tests, why, which source, and which experiment-queue item it answers.
    - Never loosen fees, risk or gates to make a candidate pass.
 4. **Event calendar (`events.yaml`).** Keep the next **90 days** filled with the US high-impact releases:
    - the jobs report (NFP), CPI, PCE, FOMC decisions (and GDP if you can);
@@ -71,7 +72,7 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-weekly`
    - `## Strategy idea`
    - `## SMC/ICT concept`
    - `## How traders lose money`
-   - `## Candidates (PROPOSED - not opened)`
+   - `## Candidates (added to the lab)`
    - `## Event calendar`
    - `## Backtest vs paper vs live`
    - `## Timeframe models`

@@ -7,8 +7,14 @@ known weaknesses and a changelog. This module reads and checks the cards, finger
 that decide trades (a tested version may never change - section 10), and turns stop / target
 settings into prices.
 
+Phase 17: strategies_lab.yaml holds the cards Claude's daily review and weekly research add (append-only, checked
+by the Brain guard). The engine tests them exactly like strategies.yaml, but a lab card can never be APPROVED:
+the operator moves it into strategies.yaml by pull request first. Lab rules are run by the engine, so they may
+only use the building blocks below (lab_card_problems / expr_problems) - nothing else a Python expression could do.
+
 Pure functions only: no internet, no files.
 """
+import ast
 import hashlib
 import json
 import math
@@ -36,6 +42,44 @@ NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 PARAM_RE = re.compile(r"\{(\w+)\}")
 TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets"]
 CONFIRM_TFS = ["30m", "15m"]           # the 5-minute protocol (section 8) runs after a closed 15m / 30m trigger
+
+# ---------- the strategy lab (Phase 17) ----------
+LIBRARY_FILE, LAB_FILE = "strategies.yaml", "strategies_lab.yaml"
+EVIDENCE_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE", "CLAIM", "HYPOTHESIS", "MODEL_OUTPUT",
+                    "UNVERIFIED_OPINION"]           # = engine/memory.py (section 22)
+MIN_TP1_R = 2.0                                     # a lab card's first target is at least 2R away
+# the building blocks a rule may use (the rule namespace of scanner.make_namespace + the feature / SMC columns;
+# tests/test_lab.py checks these lists against the engine's real namespace)
+FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "macd_hist", "bb_mid", "bb_upper",
+             "bb_lower", "bb_width", "highest", "lowest", "shift", "prev", "vol_sma", "pct_rank", "supertrend_dir",
+             "cross_up", "cross_down", "within", "bars_since", "abs", "min", "max"}
+COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
+           # engine/features.py
+           "atr_ratio", "bear_div", "bear_engulf", "bear_reject", "body_pct", "breakout_down", "breakout_up",
+           "bull_div", "bull_engulf", "bull_reject", "close_loc", "consec_down", "consec_up", "consolidation",
+           "contraction", "displacement_down", "displacement_up", "expansion", "failed_breakout_down",
+           "failed_breakout_up", "impulse_down", "impulse_up", "keltner_lower", "keltner_mid", "keltner_upper",
+           "last_swing_high", "last_swing_low", "lower_wick_pct", "momentum_persist", "obv", "pullback_down",
+           "pullback_up", "range_atr", "rel_vol", "resistance", "resistance_dist_atr", "resistance_touches",
+           "retest_down", "retest_up", "roc", "stoch_rsi_d", "stoch_rsi_k", "structure", "structure_down",
+           "structure_up", "support", "support_dist_atr", "support_touches", "swing_high", "swing_high_label",
+           "swing_high_price", "swing_low", "swing_low_label", "swing_low_price", "upper_wick_pct", "vol_accel",
+           "vwap",
+           # engine/smc.py (this timeframe)
+           "smc_bear_ob_high", "smc_bear_ob_low", "smc_bos_down", "smc_bos_up", "smc_bull_ob_high",
+           "smc_bull_ob_low", "smc_choch_down", "smc_choch_up", "smc_fvg_retrace_bear", "smc_fvg_retrace_bull",
+           "smc_in_bear_ob", "smc_in_bull_ob", "smc_in_killzone", "smc_kz_asia", "smc_kz_london", "smc_kz_ny_am",
+           "smc_kz_silver_bullet", "smc_liq_above", "smc_liq_below", "smc_pd_mid", "smc_pdh", "smc_pdl",
+           "smc_range_high", "smc_range_low", "smc_range_pos", "smc_sweep_bear", "smc_sweep_bear_high",
+           "smc_sweep_bull", "smc_sweep_bull_low", "smc_sweep_pdh", "smc_sweep_pdl"}
+H4_COLUMNS = {"h4_bear_ob_high", "h4_bear_ob_low", "h4_bull_ob_high", "h4_bull_ob_low", "h4_liq_above",
+              "h4_liq_below", "h4_range_high", "h4_range_low", "h4_range_pos"}     # only below 4H
+H4_TFS = ["1h", "30m", "15m", "5m"]
+SPECIAL_PREFIXES = ("smc_", "h4_")         # the SMC / ICT ingredient: a card using it needs a control twin
+_OPS = (ast.Expression, ast.BoolOp, ast.BinOp, ast.UnaryOp, ast.Compare, ast.Call, ast.Name, ast.Load,
+        ast.Constant, ast.keyword, ast.And, ast.Or, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.FloorDiv,
+        ast.BitAnd, ast.BitOr, ast.BitXor, ast.Not, ast.Invert, ast.USub, ast.UAdd, ast.Eq, ast.NotEq, ast.Lt,
+        ast.LtE, ast.Gt, ast.GtE)
 
 
 def _fmt(v):
@@ -254,7 +298,7 @@ def load(items, labels, timeframes):
         (ok if s["status"] == "FORMALIZED" else idle).append(s)
     ids = {s["id"] for s in ok + idle}
     for s in list(ok):
-        bad = [f"{ref} '{s[ref]}' is not in strategies.yaml" for ref in ("control_twin", "twin_of")
+        bad = [f"{ref} '{s[ref]}' is not in strategies.yaml or strategies_lab.yaml" for ref in ("control_twin", "twin_of")
                if s.get(ref) and s[ref] not in ids]
         if not bad and s.get("confirm_5m"):
             bad = confirm_twin_problems(s, next((x for x in ok if x["id"] == s["control_twin"]), None))
@@ -310,3 +354,195 @@ def targets(spec, d, entry, R, t, cols, trade_plan):
         prices.append(px)
         last = px
     return prices, list(tg["split"])
+
+
+# ---------- the strategy lab (Phase 17) ----------
+def _names(expr):
+    try:
+        return {n.id for n in ast.walk(ast.parse(str(expr), mode="eval")) if isinstance(n, ast.Name)}
+    except SyntaxError:
+        return set()
+
+
+def expr_problems(expr, tfs):
+    """A rule or level of a LAB card: only the building blocks - known column names, numbers, arithmetic,
+    comparisons, & | ~, and calls of the known functions. No attribute access, indexing, text, powers or
+    anything else (the engine evaluates these rules; they come from an automated task)."""
+    try:
+        tree = ast.parse(str(expr), mode="eval")
+    except SyntaxError as e:
+        return [f"{expr!r}: not a valid rule ({e.msg})"]
+    probs, calls = [], set()
+    for node in ast.walk(tree):
+        if not isinstance(node, _OPS):
+            probs.append(f"{expr!r}: '{type(node).__name__}' is not allowed (only building blocks, numbers and "
+                         "operators)")
+        elif isinstance(node, ast.Constant) and (isinstance(node.value, bool) or not isinstance(node.value, (int, float))):
+            probs.append(f"{expr!r}: only numbers may be written as values")
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name):
+                calls.add(id(node.func))
+            if not isinstance(node.func, ast.Name) or node.func.id not in FUNCTIONS:
+                probs.append(f"{expr!r}: unknown function "
+                             f"{node.func.id if isinstance(node.func, ast.Name) else ast.unparse(node.func)!r}")
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and id(node) not in calls:
+            if node.id in H4_COLUMNS:
+                if not set(tfs) <= set(H4_TFS):
+                    probs.append(f"{expr!r}: {node.id} exists only below 4H (timeframes {H4_TFS})")
+            elif node.id not in COLUMNS:
+                probs.append(f"{expr!r}: unknown building block {node.id!r}"
+                             + (" (a function - call it, e.g. ema(close,20))" if node.id in FUNCTIONS else ""))
+    return list(dict.fromkeys(probs))
+
+
+def _entry_rules(card):
+    return [r for k in ("long", "short") for r in (card.get(k) or [])]
+
+
+def smc_blocks(card):
+    return {n for r in _entry_rules(card) for n in _names(r) if n.startswith(SPECIAL_PREFIXES)}
+
+
+def special(card):
+    """The special ingredient a control twin must isolate: SMC / ICT building blocks in the entry rules, or the
+    5-minute confirmation. None = a plain indicator card."""
+    if card.get("confirm_5m"):
+        return "the 5-minute confirmation"
+    used = sorted(smc_blocks(card))
+    return f"SMC building blocks ({', '.join(used)})" if used else None
+
+
+def tp1_r(card, side):
+    """How far the first target is, in R, at least (None = not known in advance / not >= a fixed R)."""
+    tg = card.get("targets") or {}
+    first = (tg.get(side) or [None])[0]
+    if first is None:
+        return None
+    p = parse_target(first)
+    if p[0] == "r":
+        return p[1]
+    if p[0] == "max":                       # the farther of the two: at least the R part
+        return max([q[1] for q in p[1] if q[0] == "r"], default=None)
+    need = tg.get("need") or {}             # a column target: only when `need` demands it is min_r away
+    return float(need.get("min_r") or 0) if need.get(side) == p[1] else None
+
+
+def lab_card_problems(card, others, labels, timeframes):
+    """Everything a LAB card must meet on its own (and against the cards it names). others = {id: card} of every
+    other card in strategies.yaml and strategies_lab.yaml. [] = fine."""
+    if not isinstance(card, dict):
+        return ["not a strategy card (a block of 'name: value' lines)"]
+    probs = check(card, labels, timeframes)
+    if probs:
+        return probs
+    try:
+        r = render(card)
+    except KeyError as e:
+        return [f"rule uses {{{e.args[0]}}} but params does not define it"]
+    tfs = card["timeframes"]
+    for k in ("long", "short", "exit_long", "exit_short"):
+        for rule in r.get(k) or []:
+            probs += expr_problems(rule, tfs)
+    st = r["stop"]
+    if st.get("method") == "structure":
+        probs += expr_problems(st["long_level"], tfs) + expr_problems(st["short_level"], tfs)
+    for c in columns_needed(r) - {st.get("long_level"), st.get("short_level")}:
+        probs += expr_problems(c, tfs)
+    if not card.get("targets"):
+        probs.append(f"targets missing - the config default takes profit at 1R; a lab card's first target must be "
+                     f">= {MIN_TP1_R:g}R")
+    else:
+        for side in ("long", "short"):
+            x = tp1_r(r, side)
+            if x is None or x < MIN_TP1_R:
+                probs.append(f"first {side} target must be >= {MIN_TP1_R:g}R (e.g. \"2R\", \"max(2R, smc_liq_above)\", or "
+                             f"a level with need.min_r >= {MIN_TP1_R:g})")
+    cls = str(card.get("evidence_class") or "").split(":")[0].strip()
+    if cls not in EVIDENCE_CLASSES:
+        probs.append(f"evidence_class must be one of {EVIDENCE_CLASSES} (how strong the source is)")
+    log = card.get("changelog")
+    if not isinstance(log, list) or not any(str(x).startswith(str(card["version"])) for x in log):
+        probs.append(f"changelog needs a line starting with \"{card['version']}\" (what this version is / changes)")
+    ing = None if card.get("twin_of") else special(card)       # a control twin is itself the benchmark
+    twin = others.get(card.get("control_twin")) if card.get("control_twin") else None
+    if ing and not card.get("control_twin"):
+        probs.append(f"uses {ing} - needs control_twin: the same card without it (it must be beaten)")
+    elif card.get("control_twin") and twin is None:
+        probs.append(f"control_twin '{card['control_twin']}' is not in strategies.yaml or strategies_lab.yaml")
+    elif twin is not None and not card.get("confirm_5m"):
+        if twin.get("twin_of") != card["id"]:
+            probs.append(f"control_twin '{card['control_twin']}' must be written as this card's twin "
+                         f"(twin_of: {card['id']})")
+        if ing and not smc_blocks(twin) < smc_blocks(card):
+            probs.append(f"control_twin '{card['control_twin']}' keeps the whole special ingredient - the twin must "
+                         "be the same idea WITHOUT it")
+    if card.get("twin_of") and card["twin_of"] not in others:
+        probs.append(f"twin_of '{card['twin_of']}' is not in strategies.yaml or strategies_lab.yaml")
+    return list(dict.fromkeys(probs))
+
+
+def _vkey(v):
+    return tuple(int(x) for x in str(v).split("."))
+
+
+def change_count(old, new):
+    """How many things a new version changes vs the version before (section 10: exactly ONE per version).
+    Entry rules (long + short together), exits, stop, targets, time stop, cooldown, regimes, timeframes, gate,
+    family and the 5m check each count once; each parameter whose value changed counts once (a parameter that
+    comes or goes with a rule change belongs to that change)."""
+    groups = [("long", "short"), ("exit_long", "exit_short"), ("stop",), ("targets",), ("time_stop_bars",),
+              ("cooldown_bars",), ("regimes",), ("timeframes",), ("gate",), ("family",), ("confirm_5m",)]
+    norm = {"cooldown_bars": 0, "confirm_5m": False}
+    diff = [g for g in groups if any(old.get(k, norm.get(k)) != new.get(k, norm.get(k)) for k in g)]
+    po, pn = old.get("params") or {}, new.get("params") or {}
+    diff += [(f"params.{k}",) for k in sorted(set(po) & set(pn)) if po[k] != pn[k]]
+    if ("long", "short") not in diff and set(po) != set(pn):
+        diff.append(("params",))
+    return ["/".join(g) for g in diff]
+
+
+def version_problems(card, earlier):
+    """A lab card is a NEW id, or a NEW version of an existing id that changes exactly one thing vs its latest
+    version. earlier = every card already in strategies.yaml / strategies_lab.yaml (and earlier in this push)."""
+    same = [c for c in earlier if isinstance(c, dict) and c.get("id") == card.get("id")]
+    if not same:
+        return []
+    v = str(card.get("version"))
+    if any(str(c.get("version")) == v for c in same):
+        return [f"{card['id']}@{v} already exists - a card is never changed; write a new version"]
+    try:
+        last = max(same, key=lambda c: _vkey(c.get("version")))
+        if _vkey(v) <= _vkey(last.get("version")):
+            return [f"version {v} must be higher than the latest {card['id']} version {last['version']}"]
+    except ValueError:
+        return [f"version {v!r} must look like \"1.1\""]
+    diff = change_count(last, card)
+    if len(diff) != 1:
+        return [f"a new version changes exactly ONE thing vs v{last['version']} - this one changes "
+                f"{len(diff)}: {', '.join(diff) or 'nothing'}"]
+    return []
+
+
+def load_library(main_items, lab_items, labels, timeframes):
+    """strategies.yaml + strategies_lab.yaml, checked. Lab cards are marked lab=True and must also pass
+    lab_card_problems (building blocks only). A lab card whose id@version is also in strategies.yaml has been moved
+    there by the operator: the strategies.yaml copy is used. Returns (runnable, problems, idle, moved keys)."""
+    main_items = [x for x in (main_items or [])]
+    main_keys = {f"{x.get('id')}@{x.get('version')}" for x in main_items if isinstance(x, dict)}
+    everything = {x.get("id"): x for x in main_items + list(lab_items or []) if isinstance(x, dict)}
+    items, bad, moved = list(main_items), {}, []
+    for i, c in enumerate(lab_items or [], 1):
+        name = f"lab: {c.get('id') if isinstance(c, dict) and c.get('id') else f'#{i}'}"
+        if isinstance(c, dict) and f"{c.get('id')}@{c.get('version')}" in main_keys:
+            moved.append(f"{c['id']}@{c['version']}")
+            continue
+        others = {k: v for k, v in everything.items() if k != (c.get("id") if isinstance(c, dict) else None)}
+        errs = lab_card_problems(c, others, labels, timeframes)
+        if errs:
+            bad[name] = errs
+            continue
+        items.append(dict(c, lab=True))
+    ok, problems, idle = load(items, labels, timeframes)
+    problems.update(bad)
+    return ok, problems, idle, moved

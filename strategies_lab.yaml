@@ -1,0 +1,20 @@
+# =====================================================================
+#  STRATEGY LAB (Phase 17) - new strategy cards written by Claude's daily review and weekly research
+#
+#  Same card format as strategies.yaml (read its header for every field and the building blocks).
+#  The daily research run tests these cards EXACTLY like strategies.yaml: same fees, same gates, same
+#  walk-forward / costs +50% / +-20% / control-twin tests, same trials counter. A lab card may reach
+#  BACKTESTING / VALIDATION / PAPER_TRADING on its own, but it NEVER sends live emails and is never APPROVED:
+#  to approve one, copy the card unchanged into strategies.yaml by pull request, then add the approvals line.
+#  (Once the same id + version is in strategies.yaml, the copy here is ignored.)
+#
+#  Rules for additions (the Brain guard refuses the whole push otherwise):
+#    * cards are only ADDED at the end - never change or delete one (the operator corrects the file);
+#    * status FORMALIZED; a NEW id, or a NEW version of an existing id that changes exactly ONE thing
+#      (with a changelog line);
+#    * only the building blocks of strategies.yaml (no other code); first target >= 2R;
+#    * a control twin (twin_of: this id) when the card uses an SMC / ICT ingredient or the 5m check;
+#    * source + evidence_class (FACT / RESEARCH_FINDING / BACKTEST_EVIDENCE / CLAIM / HYPOTHESIS /
+#      MODEL_OUTPUT / UNVERIFIED_OPINION) and added: "YYYY-MM-DD" (today, UTC);
+#    * at most 3 new cards per day and 10 per 7 days (a control twin counts as a card).
+# =====================================================================

@@ -179,10 +179,10 @@ class GuardOnGit(unittest.TestCase):
         git(self.tmp, "clone", "-q", self.origin, self.main)
         for c in (["config", "user.email", "t@t"], ["config", "user.name", "t"]):
             git(self.main, *c)
-        os.makedirs(os.path.join(self.main, "engine"))
+        shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(self.main, "engine"),
+                        ignore=shutil.ignore_patterns("__pycache__"))
         os.makedirs(os.path.join(self.main, "memory"))
-        for f in ["brain_guard.py", "memory_guard.py", ".gitattributes", "engine/__init__.py", "engine/brain.py",
-                  "engine/memory.py"]:
+        for f in ["brain_guard.py", "memory_guard.py", ".gitattributes"]:
             shutil.copy(os.path.join(ROOT, f), os.path.join(self.main, f))
         self.write(self.main, "memory/lessons.md", BASE)
         self.write(self.main, "memory/failure_journal.md", BASE)
@@ -718,7 +718,10 @@ class Workflows(unittest.TestCase):
         wf = yaml.safe_load(read(os.path.join(ROOT, ".github", "workflows", "brain.yml")))
         steps = wf["jobs"]["brain"]["steps"]
         save = next(s for s in steps if s.get("name") == "Save")["run"]
-        self.assertIn("pip install pyyaml", next(s for s in steps if s.get("name", "").startswith("Install"))["run"])
+        # the guard checks lab strategy cards with the engine's card checker (numpy / pandas): full requirements
+        self.assertIn("pip install -r requirements.txt",
+                      next(s for s in steps if s.get("name", "").startswith("Install"))["run"])
+        self.assertIn("strategies_lab.yaml", save)
         tmp = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, tmp, True)
         origin, work = os.path.join(tmp, "o.git"), os.path.join(tmp, "w")

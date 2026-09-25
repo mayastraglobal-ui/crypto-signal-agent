@@ -251,3 +251,33 @@ Newest entries at the bottom. Format: date · who · what · why.
   - calendar guard (applied, 13 refusals, fits the newest main, the committed calendar meets the rules);
   - calendar file (weekdays, 8:30 / 2:00 p.m. New York → UTC incl. the 1 Nov switch, FOMC dates, loader errors, scanner reads it, fact-sheet gaps);
   - workflows (pinned runner, Node 24 actions, the Save step in a real git repository with and without changes).
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Phase 17 part A - close the learning loop
+- **New `strategies_lab.yaml` (the strategy lab).** Claude's daily review and weekly research may now ADD strategy cards there, instead of writing "PROPOSED" cards into their reports.
+  - The Brain guard (`engine/brain.py` `check_lab`, card rules in `engine/strategy_spec.py`) accepts additions only, and only from `claude/brain-daily` and `claude/brain-weekly`. It refuses the whole push unless every new card:
+    - is FORMALIZED, a new id or a new version that changes exactly ONE thing vs the latest version (with a changelog line);
+    - uses only the engine's building blocks. The rules are parsed, never run, during the check: only known column names, known functions, numbers and operators. No attribute access, indexing, text, powers or other code - the engine evaluates these rules. The lists are tested against the engine's real rule namespace;
+    - has its first target >= 2R, a source, an evidence class and `added:` = today (UTC);
+    - has a control twin (`twin_of` this id, without the ingredient) when its entry rules use SMC / ICT blocks, or it uses the 5m check;
+    - keeps within 3 new cards per UTC day and 10 per 7 days (both tasks together; twins count).
+  - Earlier cards can never be edited, even by an indented "addition". An addition must still fit the newest lab file on main.
+  - brain.yml now installs requirements.txt (the guard uses the engine's card checker) and saves `strategies_lab.yaml`.
+- **Lab cards in the engine:** `scanner.load_cards()` reads `strategies.yaml` + the lab. Lab cards are tested exactly like the library (same fees, gates, walk-forward, costs +50%, ±20%, control twin) and may reach BACKTESTING / VALIDATION / PAPER_TRADING automatically.
+  - They are never APPROVED. `approval.decide(lab=True)` refuses an approvals line with a warning. The scan caps a lab cell at PAPER_TRADING, and the [ENTRY] email filter excludes lab plans (a second lock).
+  - To approve one, the operator copies the card unchanged into `strategies.yaml` by pull request; the lab copy is then ignored and the results carry over (same id, version and fingerprint). Its approval pack says so first.
+  - A broken lab file is reported ("not run") and never stops the library. Lab cards are marked 🧪 in the report.
+- **Trials counter (`memory/trials.csv`, `engine/trials.py`):** one row per strategy version × timeframe the first time it is tested. The file is append-only and back-filled from the registry on the first run (46 cells today).
+  - PAPER_TRADING now also needs the average trade's t-statistic >= z(1 - alpha / trials). This is Bonferroni, one-sided, with `research.trials_alpha: 0.05`. With 46 trials the bar is 3.07; it rises as more ideas are tested.
+  - The bar is shown in the report (section 3b), the research cells (`t_stat`, `need_t`), the fact sheets and the [WEEKLY] email ("Trials counter").
+  - This bar is added on top of every earlier test; nothing was loosened. Fees, risk limits, gates and the other pass rules are unchanged.
+- Tasks: `tasks/COMMON.md` rule 4 (the lab rules); the daily review may add a lab card for a queued refinement; the weekly research adds its 1-2 candidates to the lab (heading "Candidates (added to the lab)"). The fact sheet shows the cards left today / this week, the existing ids with their latest versions, the lab cells and the trials bar.
+- Tests: new `tests/test_lab.py` - 34 tests covering:
+  - building blocks vs the real namespace, and unsafe rules;
+  - card rules and the one-change rule;
+  - guard refusals and limits;
+  - the guard on real git;
+  - never approved or emailed;
+  - trials, the fact sheet and the weekly email;
+  - end-to-end scan → research → scan with a forced APPROVED lab cell.
+
+  Mutation check: 22 of 22 planted bugs caught.

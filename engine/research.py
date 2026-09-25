@@ -12,6 +12,8 @@ Pure functions only: no internet, no files.
 """
 import numpy as np
 
+from engine import trials
+
 DAY_MS = 86_400_000
 
 
@@ -111,6 +113,7 @@ def evaluate(per_coin, stress_per_coin, variant_results, wins, cfg_r, min_coin_t
     if st["exp_r"] > 0 and win_share > limit:
         overfit.append(f"{win_share * 100:.0f}% of the profit from {top_win}")
     return dict(all=short(st), develop=short(dev), validate=short(val),
+                t_stat=(lambda x: None if x is None else round(x, 3))(trials.t_stat([t["r"] for t in allt])),
                 long=short(stats([t for t in allt if t["dir"] == 1])),
                 short=short(stats([t for t in allt if t["dir"] == -1])),
                 by_coin=coins, positive_coins=pos_coins, walk_forward=wf,

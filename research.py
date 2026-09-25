@@ -41,11 +41,12 @@ from engine import data_quality as dq
 from engine import history
 from engine import lifecycle as lc
 from engine import memory as mem
-from engine import regime as rg
 from engine import research as rs
 from engine import strategy_spec as sspec
+from engine import trials as trl
 
 CACHE = os.path.join(sc.ROOT, "data", "history")
+TRIALS = os.path.join(sc.MEMORY, "trials.csv")
 log = sc.log
 
 
@@ -79,6 +80,32 @@ def load_registry(offline):
     reg = (lc.registry_from_frame(pd.read_csv(src, dtype={"version": str}))
            if os.path.exists(src) else lc.empty_registry())
     return reg, path
+
+
+def update_trials(registry, tested, now_txt, offline):
+    """Phase 17: memory/trials.csv gets one row per strategy version x timeframe the first time it is tested (the
+    file only grows). Created from the registry the first time. Offline runs write reports/trials_offline.csv.
+    tested: [(id, version, tf, origin)]. Returns (all rows, rows added this run)."""
+    path = os.path.join(sc.REPORTS, "trials_offline.csv") if offline else TRIALS
+    src = path if os.path.exists(path) else TRIALS
+    text = ""
+    if os.path.exists(src):
+        with open(src) as f:
+            text = f.read()
+    rows = trl.parse(text)
+    head = not rows
+    if not rows:
+        rows = trl.number(trl.backfill(registry), 0)
+    new = trl.additions(rows, tested, now_txt)
+    if head or new or src != path:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        if head or src != path:
+            with open(path, "w") as f:
+                f.write(trl.to_csv(rows + new, True))
+        else:
+            with open(path, "a") as f:
+                f.write(("" if text.endswith("\n") else "\n") + trl.to_csv(new, False))
+    return rows + new, new
 
 
 def paper_results(logdf):
@@ -155,7 +182,8 @@ def write_sources(strategies, when, days=90):
                                                   if s.get("control_twin") else ""),
              f"- limitations: {s.get('known_weaknesses') or '-'}",
              "- test results: `memory/strategy_registry.csv` / report section 3"],
-            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"), source=f"strategies.yaml card {key}",
+            timestamp=when.strftime("%Y-%m-%d %H:%M UTC"),
+            source=f"{sspec.LAB_FILE if s.get('lab') else sspec.LIBRARY_FILE} card {key}",
             evidence=cls + (": control twin - a benchmark, not an idea" if s.get("twin_of") else ": not tested when recorded"),
             confidence="untested idea", strategy=f"{s['id']} v{s['version']}", asset="research coins",
             timeframe=", ".join(s["timeframes"]), regime=", ".join(s["regimes"]), review=mem.plus_days(when, days))
@@ -163,11 +191,12 @@ def write_sources(strategies, when, days=90):
         have += text
 
 
-def approval_step(ck, status, note, rec, ev, approvals, AP, warnings, eligible_cells):
+def approval_step(ck, status, note, rec, ev, approvals, AP, warnings, eligible_cells, lab=False):
     """Section 12: after the automatic lifecycle move, the operator's approvals list (config.yaml) is applied.
-    Collects the cells that meet the numbers (for the packs) and the approvals that could not be applied."""
+    Collects the cells that meet the numbers (for the packs) and the approvals that could not be applied.
+    lab: a strategies_lab.yaml card - never APPROVED (Phase 17)."""
     ok, why_not = ap.eligible(status, rec, ev["validate"]["avg_r"] if ev["validate"]["n"] else None, AP)
-    new_status, ap_note, warn = ap.decide(status, approvals.get(ck), ok, why_not)
+    new_status, ap_note, warn = ap.decide(status, approvals.get(ck), ok, why_not, lab)
     if warn:
         warnings.append(f"{ck}: {warn}")
     if ok and new_status == "PAPER_TRADING":
@@ -241,8 +270,7 @@ def main():
     dq_cfg = dq.settings(cfg.get("data_quality"))
     tfs = [tf for tf in sc.TF_ORDER if tf in cfg["timeframes"]]
 
-    strategies, problems, _ = sspec.load(yaml.safe_load(open(os.path.join(sc.ROOT, "strategies.yaml"))),
-                                         rg.LABELS, sc.TF_ORDER)
+    strategies, problems, _, moved = sc.load_cards()          # strategies.yaml + strategies_lab.yaml (Phase 17)
     registry, reg_path = load_registry(args.offline)
     fps = {sspec.key(x): sspec.fingerprint(x) for x in strategies}
     for x in list(strategies):
@@ -355,6 +383,12 @@ def main():
     AP = ap.settings(cfg.get("approval"))
     approvals, approval_problems = ap.parse_approvals(cfg.get("approvals"))
     approval_warnings, eligible_cells = [], []
+    trial_rows, trial_new = update_trials(registry, [(k[0], k[1], k[2], "lab" if by_key[f"{k[0]}@{k[1]}"].get("lab")
+                                                      else "library") for k in sorted(per)], now_txt, args.offline)
+    alpha = float(R.get("trials_alpha", 0.05))
+    trial_bar = (trl.need_t(len(trial_rows), alpha), len(trial_rows))
+    log(f"Trials counter: {len(trial_rows)} strategy / version / timeframe tests ({len(trial_new)} new) - "
+        f"PAPER_TRADING needs t >= {trial_bar[0]:.2f}")
 
     # ---------- lifecycle ----------
     results, cells = {}, {}
@@ -372,7 +406,7 @@ def main():
                 twin.pop("_raw")
         elif s.get("control_twin"):
             twin = next((e for k, e in evals.items() if k[0] == s["control_twin"] and k[2] == tf), None)
-        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R)
+        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R, trial_bar)
         if s.get("control_twin") and twin is None:
             paper_ok, paper_reasons = False, paper_reasons + ["control twin was not tested"]
         ck = f"{sid}@{ver}|{tf}"
@@ -380,9 +414,11 @@ def main():
         rec = lc.paper_record(paper.get(k3, []))
         status, note, failed = lc.next_status(prev.get("status"), base_status, paper_ok, rec,
                                               int(prev.get("failed_runs") or 0), R)
-        status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells)
+        status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells,
+                                     bool(s.get("lab")))
         results[k3] = status
-        cells[ck] = dict(strategy=sid, version=ver, tf=tf, status=status, base_status=base_status,
+        cells[ck] = dict(strategy=sid, version=ver, tf=tf, status=status, base_status=base_status, lab=bool(s.get("lab")),
+                         t_stat=ev["t_stat"], need_t=round(trial_bar[0], 3),
                          reasons=reasons, paper_gate_failed=paper_reasons if base_status == "VALIDATION" else [],
                          note=note, failed_runs=failed, required_avg_r=round(need, 3),
                          beats_twin=lc.twin_compare(ev, twin, R) if twin else None,
@@ -470,7 +506,11 @@ def main():
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
-               approval=approval_out, cells=cells)
+               approval=approval_out, cells=cells,
+               trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
+                           file=os.path.relpath(TRIALS, sc.ROOT)),
+               lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),
+                        moved_to_library=moved))
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
     n_status = pd.Series(list(results.values())).value_counts().to_dict() if results else {}

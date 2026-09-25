@@ -101,11 +101,17 @@ def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None):
     return "BACKTESTING", reasons, need
 
 
-def paper_gate(status, ev, twin, R):
+def paper_gate(status, ev, twin, R, trial_bar=None):
     """Section 12 '-> PAPER_TRADING' (automatic). ev = research.evaluate() of this cell;
-    twin = its control twin's evaluate() or None (only strategies that HAVE a twin need one).
+    twin = its control twin's evaluate() or None (only strategies that HAVE a twin need one);
+    trial_bar = (t needed, trials so far) from the trials counter (Phase 17) or None.
     Returns (passed, reasons)."""
     reasons = []
+    if trial_bar is not None:
+        t, (need, n) = ev.get("t_stat"), trial_bar
+        if t is None or t < need:
+            reasons.append(f"multiple-testing bar: t-statistic {'-' if t is None else f'{t:.2f}'} of the average "
+                           f"trade, needs {need:.2f} after {n} trials")
     if status != "VALIDATION":
         reasons.append("not in VALIDATION")
     wf = ev["walk_forward"]

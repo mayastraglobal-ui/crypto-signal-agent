@@ -7,8 +7,10 @@ section 1). This prints every number a task needs, taken from the engine's own f
 
   python publish_live.py --restore      (first: fetch the large report files, e.g. latest.json, research.json)
   python brain_pack.py briefing         (position book, market, signals, risk, events)
-  python brain_pack.py daily            (+ last 24 hours: closed signals, losses and tags, lifecycle, reviews due)
-  python brain_pack.py weekly           (+ last 7 days, missed moves, candidate lessons, approval packs, SMC twins)
+  python brain_pack.py daily            (+ last 24 hours: closed signals, losses and tags, lifecycle, reviews due,
+                                          the strategy lab and the trials counter)
+  python brain_pack.py weekly           (+ last 7 days, missed moves, candidate lessons, approval packs, SMC twins,
+                                          the lab, the event calendar)
 
 Read-only: it writes nothing.
 """
@@ -78,6 +80,47 @@ def calendar_lines(now, days=90):
         miss = [t for t in ("NFP", "CPI", "PCE") if t not in have]
         if miss:
             out.append(f"- {m}: no {', '.join(miss)} entry yet (FOMC meets 8 times a year - check its calendar)")
+    return out
+
+
+def lab_lines(now, research):
+    """Phase 17: where candidates go (strategies_lab.yaml), how many may still be added, what exists already, the
+    trials counter, and how the lab cards are doing."""
+    import yaml
+    from engine import brain
+    from engine import strategy_spec as sspec
+    out = ["", "## Strategy lab (strategies_lab.yaml) - where your candidate cards go"]
+    try:
+        lab = brain._cards(read(os.path.join(ROOT, sspec.LAB_FILE)))
+        lib = brain._cards(read(os.path.join(ROOT, sspec.LIBRARY_FILE)))
+    except (yaml.YAMLError, ValueError) as e:
+        return out + [f"- ! the lab or library file is not readable ({e}) - add no card, say so in your output"]
+    days = [brain._day(c.get("added")) for c in lab if isinstance(c, dict)]
+    today = now.date()
+    n_day = sum(d == today for d in days)
+    n_week = sum(d is not None and today - dt.timedelta(days=6) <= d <= today for d in days)
+    left = max(0, min(brain.LAB_PER_DAY - n_day, brain.LAB_PER_WEEK - n_week))
+    out += [f"- cards in the lab: {len(lab)} · added today: {n_day} of {brain.LAB_PER_DAY} · last 7 days: {n_week} of "
+            f"{brain.LAB_PER_WEEK} · you may add at most {left} card(s) now (a control twin counts)",
+            f"- write each card with added: \"{today}\", status: FORMALIZED, evidence_class, source, targets (first "
+            f">= {sspec.MIN_TP1_R:g}R), a changelog line, and a control twin (twin_of) for an SMC / 5m ingredient"]
+    latest = {}
+    for c, where in [(c, "library") for c in lib] + [(c, "lab") for c in lab]:
+        if isinstance(c, dict) and c.get("id"):
+            old = latest.get(c["id"])
+            try:
+                if old is None or sspec._vkey(c.get("version")) > sspec._vkey(old[0]):
+                    latest[c["id"]] = (str(c.get("version")), where)
+            except ValueError:
+                pass
+    out += ["- existing ids (latest version): " + "; ".join(f"{k} v{v} ({w})" for k, (v, w) in sorted(latest.items()))]
+    tr = (research or {}).get("trials")
+    out += [f"- trials counter: {tr['total']} tests so far; PAPER_TRADING needs t >= {tr['need_t']:.2f} - every new "
+            "card raises this bar for all" if tr else "- trials counter: not available yet (next research run)"]
+    cells = [(k, c) for k, c in ((research or {}).get("cells") or {}).items() if c.get("lab")]
+    out += [f"- lab cell {k}: {c['status']} · {c['evidence']['all']['n']} trades, {fmt_r(c['evidence']['all']['avg_r'])}"
+            f" · t {c.get('t_stat') if c.get('t_stat') is not None else '-'}" for k, c in sorted(cells)[:30]] \
+        or ["- no lab card has been researched yet"]
     return out
 
 
@@ -160,6 +203,7 @@ def pack(kind, now):
         out += ["### Control-twin comparisons (does the special ingredient add anything?)"]
         out += [f"- {k}: {'beats' if c.get('beats_twin') else 'does not beat' if c.get('beats_twin') is False else 'too few trades vs'} "
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
+    out += lab_lines(now, research)
     if kind == "weekly":
         out += calendar_lines(now)
     st = mem.status(MEMORY, now)

@@ -14,6 +14,8 @@ import re
 
 import pandas as pd
 
+from engine import trials as trl
+
 WEEKLY_FROM_HOUR = 4          # Sunday, first scan from 04:00 UTC (12:00 Beijing) - after Claude's weekly research
 STAGES = [("APPROVED", "LIVE (approved strategies)"), ("PAPER_TRADING", "PAPER"), ("VALIDATION", "VALIDATION")]
 
@@ -98,7 +100,26 @@ def lifecycle_between(text, a, b):
     return out
 
 
-def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path):
+def trials_lines(trials_text, alpha, since, board):
+    """The trials counter (Phase 17) and the strategy lab, for the weekly email."""
+    rows = trl.parse(trials_text)
+    if not rows:
+        return ["  Trials counter: starts with the next daily research run (memory/trials.csv)."]
+    t = trl.summary(rows, alpha, since)
+    L = [f"  Trials counter: {t['total']} strategy / version / timeframe tests so far ({t['new']} new this week, "
+         f"{t['lab']} of them from the lab). Testing more ideas raises the bar: PAPER_TRADING now needs a "
+         f"t-statistic of the average trade >= {t['need_t']:.2f} (with 1 trial it would be {t['need_t_one']:.2f})."]
+    lab = [x for x in board if x.get("lab")]
+    if lab:
+        cnt = {}
+        for x in lab:
+            cnt[x["status"]] = cnt.get(x["status"], 0) + 1
+        L.append(f"  Strategy lab (strategies_lab.yaml, tested like the library, never emailed): {len(lab)} "
+                 "version/timeframe cells - " + " · ".join(f"{k} {v}" for k, v in sorted(cnt.items())))
+    return L
+
+
+def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05):
     """The [WEEKLY] email of the week ending now (dict: week, subject, lines)."""
     a, b = pd.Timestamp(now - dt.timedelta(days=7)), pd.Timestamp(now)
     rows = closed_between(logdf, a, b)
@@ -128,6 +149,7 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
                  + (f" · live signals {x['live_signals']}" if x.get("live_signals") else ""))
     if not top:
         L.append("  No strategy has passed the backtest bar yet - no paper or live signals. That is a result too.")
+    L += trials_lines(trials_text, alpha, f"{a:%Y-%m-%d %H:%M}", board)
     life = lifecycle_between(lifecycle_text, a, b)
     L += ["", "3. LIFECYCLE CHANGES THIS WEEK"] + ([f"  - {x}" for x in life[:25]] or ["  none"])
     if len(life) > 25:
