@@ -8,14 +8,18 @@
   "SUI",
   "LTC"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "BNB": 1
+ },
+ "out_streak": {
+  "LTC": 1
+ },
  "suspended": {
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 19,
+ "runs": 20,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -34,9 +38,7 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [
-   "thin_book"
-  ],
+  "AVAX": [],
   "ENA": [],
   "SAGA": [
    "big_move",

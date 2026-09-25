@@ -65,3 +65,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-25 12:23 UTC
 - **EXCLUDED** XPL - 7-day average volume $18M < $50M; 24h move +26.7% is beyond ±25% - suspended for the rest of the UTC day
 - **EXCLUDED** AVAX - order book too thin: $243k within 1% (need $250k)
+
+## 2026-09-25 13:20 UTC
+- **ELIGIBLE** AVAX - passes every rule again

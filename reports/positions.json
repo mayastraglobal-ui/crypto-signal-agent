@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-25 12:23",
+ "generated_utc": "2026-09-25 13:20",
  "book": {
-  "utc": "2026-09-25 12:23",
-  "beijing": "2026-09-25 20:23",
+  "utc": "2026-09-25 13:20",
+  "beijing": "2026-09-25 21:20",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,7 +19,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-09-25 12:23 UTC / 2026-09-25 20:23 Beijing",
+  "POSITION BOOK \u2014 2026-09-25 13:20 UTC / 2026-09-25 21:20 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC"
@@ -43,6 +43,12 @@
     "end_utc": "2026-09-30 12:30",
     "type": "PCE",
     "name": "US PCE / Personal Income and Outlays (Aug data)"
+   },
+   {
+    "start_utc": "2026-10-02 12:30",
+    "end_utc": "2026-10-02 12:30",
+    "type": "NFP",
+    "name": "US jobs report / Employment Situation (Sep data)"
    }
   ],
   "next_event": "US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC",
