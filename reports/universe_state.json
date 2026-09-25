@@ -11,9 +11,10 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "ONDO": "2026-09-25"
+  "ONDO": "2026-09-25",
+  "SAGA": "2026-09-25"
  },
- "runs": 10,
+ "runs": 11,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,9 +33,13 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
+   "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ],

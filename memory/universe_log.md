@@ -38,3 +38,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** PROVE - order book too thin: $67k within 1% (need $250k)
 - **EXCLUDED** SAGA - 7-day average volume $21M < $50M; order book too thin: $19k within 1% (need $250k)
 - **EXCLUDED** LINK - 7-day average volume $44M < $50M
+
+## 2026-09-25 04:18 UTC
+- **EXCLUDED** SAGA - 7-day average volume $21M < $50M; 24h move -33.3% is beyond ±25% - suspended for the rest of the UTC day; spread 0.131% > 0.1%; order book too thin: $6k within 1% (need $250k)
+- **EXCLUDED** AVAX - order book too thin: $231k within 1% (need $250k)

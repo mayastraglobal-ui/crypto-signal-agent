@@ -153,3 +153,24 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 03:00,BNB,15m,CHOCH,bear,776.03,,,1.095,Asia,1h,UNCLEAR,with displacement,smc-1.0,Binance
 2026-09-25 03:00,BNB,15m,ORDER_BLOCK,bear,,778.11,780.0,,Asia,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
 2026-09-25 03:00,BNB,15m,FVG,bear,,776.3,777.26,0.487,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 03:30,BTC,30m,FVG,bear,,84328.01,84572.0,0.739,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 04:00,BTC,30m,FVG_RETRACE,bear,,84328.01,84572.0,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 03:45,BTC,15m,FVG_RETRACE,bear,,84328.01,84404.01,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-25 04:00,ETH,1h,SWEEP,bull,2676.03,,,0.141,Asia,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-25 03:30,ETH,30m,BOS,bear,2676.03,,,0.036,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-25 03:30,ETH,30m,FVG,bear,,2679.82,2688.81,0.721,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-25 04:00,ETH,30m,FVG_RETRACE,bear,,2679.82,2688.81,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 03:30,XRP,30m,BREAKER_RETEST,bear,,1.5322,1.539,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-25 03:30,XRP,30m,FVG,bear,,1.5329,1.541,0.588,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-09-25 04:00,XRP,30m,FVG_RETRACE,bear,,1.5329,1.541,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-25 03:45,XRP,15m,FVG_RETRACE,bear,,1.533,1.541,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-25 04:00,SOL,4h,OB_RETEST,bear,,117.85,119.66,,,1d,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-25 04:00,SOL,30m,FVG_FILLED,bull,,116.61,116.97,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-25 03:45,ZEC,15m,FVG_FILLED,bear,,1540.51,1553.11,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-25 04:00,LTC,4h,BREAKER_RETEST,bull,,68.31,70.36,,,1d,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-25 04:00,BNB,1h,FVG_FILLED,bull,,771.78,774.5,,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 04:00,BNB,1h,FVG,bear,,774.8,776.03,0.261,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 03:30,BNB,30m,FVG_FILLED,bull,,771.78,774.11,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 03:30,BNB,30m,FVG,bear,,774.8,777.26,0.809,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 03:30,BNB,15m,OB_RETEST,bull,,769.57,771.78,,Asia,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-25 03:30,BNB,15m,FVG_FILLED,bull,,771.45,774.23,,Asia,1h,UNCLEAR,,smc-1.0,Binance
