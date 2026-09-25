@@ -6,20 +6,16 @@
   "SOL",
   "ZEC",
   "SUI",
-  "BNB"
+  "ENA"
  ],
- "in_streak": {
-  "ENA": 1
- },
- "out_streak": {
-  "BNB": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 24,
+ "runs": 25,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -38,7 +34,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",
@@ -50,6 +48,7 @@
   ],
   "XPL": [
    "big_move",
+   "thin_book",
    "volume_7d"
   ],
   "VTHO": [

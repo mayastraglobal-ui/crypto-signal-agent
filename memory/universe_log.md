@@ -79,3 +79,9 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 16:20 UTC
 - **ELIGIBLE** AVAX - passes every rule again
+
+## 2026-09-25 18:20 UTC
+- **EXCLUDED** XPL - 7-day average volume $18M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $169k within 1% (need $250k)
+- **EXCLUDED** AVAX - order book too thin: $227k within 1% (need $250k)
+- **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** ENA - in the top 7 for 2 runs in a row (now #7)
