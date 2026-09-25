@@ -91,3 +91,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 20:17 UTC
 - **EXCLUDED** ONDO - 7-day average volume $43M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today)
+
+## 2026-09-25 21:18 UTC
+- **EXCLUDED** ONDO - 7-day average volume $43M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $220k within 1% (need $250k)
