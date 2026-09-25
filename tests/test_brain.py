@@ -37,6 +37,10 @@ REC = ("\n### {title}\n- timestamp: 2026-09-25 15:30 UTC · source: Claude daily
        "  details\n")
 
 
+DEBATE = ("## Bull vs bear\n- Bull case: 1D WEAK_BULL (ADX 44)\n- Bear case: 1H RANGE\n"
+          "- Risk manager: no veto (heat 0 of 3)\n")          # Phase 18 A: every briefing has it
+
+
 def rec(title="A lesson", ev="BACKTEST_EVIDENCE: 3 tests, 412 trades", rv="2026-10-25"):
     return REC.format(title=title, ev=ev, rv=rv)
 
@@ -65,7 +69,7 @@ class Guard(unittest.TestCase):
         for p in ["reports/claude/briefings/2026-09-25-0820.md", "reports/claude/briefings/2026-09-25-1420.md",
                   "reports/claude/briefings/2026-09-25-2120.md", "reports/claude/daily/2026-09-25.md",
                   "reports/claude/weekly/2026-09-27.md"]:
-            applies, _ = self.ok([change(p, "A", None, "# Title\n## Summary\nfine\n")], {p: None})
+            applies, _ = self.ok([change(p, "A", None, "# Title\n## Summary\nfine\n" + DEBATE)], {p: None})
             self.assertEqual(applies[0]["kind"], "new")
         for p in ["reports/claude/briefings/2026-09-25-0900.md", "reports/claude/daily/today.md",
                   "reports/claude/other/2026-09-25.md", "reports/latest.md", "reports/claude/daily/2026-09-25.txt"]:

@@ -74,6 +74,7 @@ def handle(branch, state, now):
     subject = git("log", "-1", "--format=%s", sha).stdout.strip()
     changes = changes_of(sha)
     paths = {c["path"] for c in changes} | {brain.sspec.LIBRARY_FILE}      # the library: lab cards are checked against it
+    paths |= set(brain.rloop.FILES.values())               # Phase 18 A: the records a lab card's parent may name
     applies, probs, skipped = brain.review(changes, {p: read(p) for p in paths}, dt.datetime.now(dt.timezone.utc), branch,
                                            factory_quota())
     for a in applies:

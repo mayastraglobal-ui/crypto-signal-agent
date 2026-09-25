@@ -131,7 +131,7 @@ def factory_lines(research):
 
 
 def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05,
-           card_lines=None):
+           card_lines=None, chain_lines=None):
     """The [WEEKLY] email of the week ending now (dict: week, subject, lines)."""
     a, b = pd.Timestamp(now - dt.timedelta(days=7)), pd.Timestamp(now)
     rows = closed_between(logdf, a, b)
@@ -163,6 +163,9 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
         L.append("  No strategy has passed the backtest bar yet - no paper or live signals. That is a result too.")
     L += trials_lines(trials_text, alpha, f"{a:%Y-%m-%d %H:%M}", board)
     L += factory_lines(research)
+    if chain_lines:                                           # Phase 18 A: the research loop's idea chains
+        L += ["", "IDEA CHAINS (the research loop: what led to each lab card -> its results -> the next hypothesis)"]
+        L += list(chain_lines)
     life = lifecycle_between(lifecycle_text, a, b)
     L += ["", "3. LIFECYCLE CHANGES THIS WEEK"] + ([f"  - {x}" for x in life[:25]] or ["  none"])
     if len(life) > 25:
@@ -197,6 +200,7 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
               f"    paper {p['paper_signals']} signals, average {p['paper_avg_r']:+.2f}R; backtest unseen "
               f"{p['backtest_validate_avg_r']:+.2f}R. Pack: {p['pack']}",
               "    To say yes: copy the line from the pack into `approvals:` in config.yaml. No reply = no."]
+        L += [f"    {p['risk']}"] if p.get("risk") else []          # Phase 18 A: the risk manager's veto, if any
     if not appr.get("eligible"):
         L.append("  none - no strategy has 20+ paper signals that meet the section 12 numbers yet")
     L += [f"  ! {w}" for w in (appr.get("warnings") or [])[:6]]

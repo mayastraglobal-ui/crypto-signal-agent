@@ -32,6 +32,11 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefin
      the regimes right now" (what made and lost money in each regime in the backtests - if NOTHING made money, say
      that standing aside is the plan). Explain in plain words what
      the regime means for the kind of trades that fit.
+   - `## Bull vs bear`: copy the fact sheet's "Bull vs bear" part for the verdict you give (the whole market, and
+     the coins you name): a line `Bull case: ...`, a line `Bear case: ...` (each ONLY with the engine's numbers from
+     the fact sheet - no opinion, no news) and a line `Risk manager: ...` saying **VETO** with its reasons or
+     **no veto**, exactly as the fact sheet says. A veto cannot be argued away: it means "not now". No veto is never
+     a reason to trade. The guard refuses a briefing without these three lines.
    - `## News and events`: each item gets a date, a one-line summary, why it matters, and its source URL.
      Also list the upcoming events from the calendar.
    - `## Signals explained`: for each live signal, paper or validation signal, or watched setup in the fact
@@ -39,7 +44,8 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefin
      - say what it is, in numbered reasons;
      - say what would cancel it;
      - say whether it is a **setup** or an actual **entry trigger** (section 23 q17);
-     - name its stage: LIVE (APPROVED), PAPER or VALIDATION. Only LIVE signals are meant for acting on.
+     - name its stage: LIVE (APPROVED), PAPER or VALIDATION. Only LIVE signals are meant for acting on;
+     - give its `Bull case:`, `Bear case:` and `Risk manager:` lines from the fact sheet.
 
      If there are none, say "No signal - no trade is a valid result."
    - `## Do and don't today`: 3-5 bullets each. Examples: respect the event blackout; no trades from

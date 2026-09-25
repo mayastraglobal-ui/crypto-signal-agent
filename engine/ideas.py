@@ -128,7 +128,7 @@ def variant_cards(cells, cards, today, n_max, labels, trade_order):
                 edge["works_in"] = [g for g in edge["works_in"] if g in card["regimes"]] or list(card["regimes"])
             card.update(
                 id=vid, version="1.0", status="FORMALIZED", added=str(today), factory="variant_search",
-                variant_of=key, edge=edge, evidence_class="BACKTEST_EVIDENCE",
+                variant_of=key, parent=f"result: {key} {cell['tf']}", edge=edge, evidence_class="BACKTEST_EVIDENCE",
                 source=f"engine variant search: one change to {key}",
                 factory_evidence=(f"{key} {cell['tf']}: {ev['all']['n']} trades, avg {ev['all']['avg_r']:+.3f}R, "
                                   f"unseen part {ev['validate']['avg_r']:+.3f}R ({ev['validate']['n']} trades); "

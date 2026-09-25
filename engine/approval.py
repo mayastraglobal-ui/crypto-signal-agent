@@ -17,6 +17,7 @@ Pure functions; no internet.
 import datetime as dt
 import re
 
+from engine import debate
 from engine import strategy_spec as sspec
 
 DEFAULTS = dict(min_paper_signals=20, min_paper_avg_r=0.0, max_divergence_r=0.30)
@@ -113,10 +114,11 @@ def _stat(st):
             f"profit factor {st['pf']:.2f} · max drawdown {st['max_dd_r']:.1f}R")
 
 
-def pack(cell, spec, lineage, board_row, S, now_txt):
+def pack(cell, spec, lineage, board_row, S, now_txt, risk=None):
     """The approval pack (section 21) of one strategy version x timeframe as markdown lines.
     cell = research.json cell; spec = the strategy card; lineage = [(version, first tested, status)] of the same
-    idea; board_row = its scoreboard row (Layer A) or {}."""
+    idea; board_row = its scoreboard row (Layer A) or {}; risk = debate.risk_manager() on today's hourly report
+    (None = conditions unknown, which is a veto)."""
     ev, att, paper = cell["evidence"], cell.get("attribution") or {}, cell.get("paper") or {}
     k = f"{cell['strategy']} v{cell['version']} {cell['tf']}"
     L = [f"# Approval pack: {k}", "",
@@ -134,6 +136,10 @@ def pack(cell, spec, lineage, board_row, S, now_txt):
          f"`{cell['strategy']}` / `{cell['version']}` / `{cell['tf']}`, then paste `reports/pine/"
          f"{re.sub(r'[^A-Za-z0-9_.-]+', '_', cell['strategy'] + '_v' + cell['version'] + '_' + cell['tf'])}.pine` into "
          "TradingView's Pine Editor.", "",
+         "## 0. Bull vs bear (the engine's numbers only - Phase 18)",
+         *[f"- {x}" for x in debate.case_lines(*debate.cell_cases(cell), risk or debate.risk_manager(None, None))],
+         "- A veto means \"not now\": wait until the risk manager has no veto before you say yes. No veto is never "
+         "a reason to say yes - the decision stays yours.", "",
          "## 1. Definition and lineage",
          f"- family: {spec.get('family', '-')} · gate: {spec.get('gate', '-')} · regimes: "
          f"{', '.join(spec.get('regimes') or []) or '-'}",

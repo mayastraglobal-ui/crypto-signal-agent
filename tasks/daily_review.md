@@ -32,6 +32,15 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
      `missed_move` for step 3's moves; COMMON.md rule 4:
      a new version changing exactly that one thing, `added` = today). Stay within the limits the fact sheet
      shows; leave room for the weekly research (usually at most 1 card a day from the daily review).
+5b. **Research loop: feedback (Phase 18).** For each card in the fact sheet's "Research loop: results waiting for
+   feedback", append ONE record to `memory/experiments.md` titled `Feedback: <id>@<version>` (the section 22 line,
+   evidence `BACKTEST_EVIDENCE: <cells>, <trades>`), with five detail lines:
+   - `- parent: ...` (the card's parent, copied), `- hypothesis: ...` (the card's hypothesis),
+   - `- result: ...` (the engine's numbers from the fact sheet: status, trades, average R, unseen part),
+   - `- teaches: ...` (what the result teaches - one or two sentences),
+   - `- next: ...` the next hypothesis (it may become a lab card with `parent: "experiment: Feedback: <id>@<version>"`),
+     or `stop this line` when the idea failed its test and a further change would only be curve-fitting.
+   Every new lab card names its `parent` (COMMON.md rule 4). Write `## Research loop` in your review.
 6. **Curriculum (one item a day).** The fact sheet names today's item from `memory/curriculum.md` (a paper, the
    principles of a trading book from public summaries - never copied text, exchange research, a post-mortem of a
    blow-up, or an interview with a professional trader).
@@ -64,7 +73,8 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - `## Losses and why`
    - `## Missed moves`
    - `## Regime`
-   - `## Refinements queued` (and the lab cards you added, if any)
+   - `## Refinements queued` (and the lab cards you added, if any, each with its parent)
+   - `## Research loop` (the Feedback records you wrote, or "no result waiting")
    - `## Curriculum` (today's item: what you read, the record, the hypothesis if any)
    - `## Monthly clean-up` (first 3 days of a month: the Merged / Re-check records; otherwise "not this month")
    - `## Reviews done`

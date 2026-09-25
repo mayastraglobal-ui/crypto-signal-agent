@@ -277,6 +277,25 @@ def curriculum_lines():
     return out
 
 
+def project_lines():
+    """Phase 18 A item 3: this week's reference project (memory/curriculum.md, R1-R8) for the weekly research."""
+    from engine import curriculum as cur
+    text = read(os.path.join(MEMORY, "curriculum.md"))
+    plan = cur.parse_projects(text)
+    done = cur.studied(read(os.path.join(MEMORY, "research_sources.md")))
+    item = cur.next_item(plan, done)
+    out = ["", "## This week's reference project (memory/curriculum.md - study it, then ONE research_sources record "
+           "titled '[Rx] <project>' and at most ONE hypothesis in experiments.md; ideas only, never copy code)"]
+    if item is None:
+        return out + ["- no reference project in the plan"]
+    out += [f"- {item['id']}: {item['title']}" + (f" - studied before on {done[item['id']]}" if item["id"] in done
+                                                   else " - not studied yet")]
+    out += [f"  {ln}" for ln in item["lines"]]
+    out.append("- the record names: the link you opened, the date and commit / release studied, what we take, what "
+               "we deliberately do NOT take, and the licence. Could not open it? Say so and cite nothing.")
+    return out
+
+
 def market_data_lines(rep):
     """Phase 17 C: the futures data the engine recorded this hour (funding, open interest, long/short, taker)."""
     d = (rep or {}).get("derivs")
@@ -341,6 +360,60 @@ def cleanup_lines(now):
             "numbers below"] + [f"  {ln}" for ln in part.splitlines()[1:] if ln.strip()]
 
 
+def debate_lines(rep, research, now):
+    """Phase 18 A item 2: the bull case, the bear case (engine numbers only) and the risk manager's veto checks - for
+    the market verdict per signal coin and for every signal / watched setup. Copy them; never soften a veto."""
+    from engine import debate
+    out = ["", "## Bull vs bear (copy into '## Bull vs bear' and under each signal; engine numbers only - a VETO "
+           "cannot be argued away, it means 'not now')"]
+    base = debate.risk_manager(rep, now)
+    out.append("- whole market: " + debate.risk_line(base))
+    rc = (rep.get("regime") or {}).get("coins") or {}
+    for c in (rep.get("universe") or {}).get("signal") or []:
+        bull, bear = debate.regime_cases(rc.get(c) or {})
+        out.append(f"- {c}:")
+        out += [f"  - Bull case: {'; '.join(bull) or 'no bullish timeframe'}",
+                f"  - Bear case: {'; '.join(bear) or 'no bearish timeframe'}"]
+        out += [f"  - {d}: " + debate.risk_line(debate.risk_manager(rep, now, coin=c, direction=d))
+                for d in ("LONG", "SHORT")]
+    cells = (research or {}).get("cells") or {}
+    sigs = [(p, "LIVE") for p in rep.get("signals") or []] + \
+        [(p, p.get("stage") or "PAPER") for p in rep.get("validation_signals") or []]
+    sigs += [(dict(coin=w["coin"], direction=w["direction"], timeframe=w["tf"], strategy=w["strategy"],
+                   version=w.get("version")), f"watching {w.get('stage')}") for w in rep.get("watching") or []]
+    for p, stage in sigs[:12]:
+        d = str(p.get("direction") or "").upper()
+        cell = cells.get(f"{p.get('strategy')}@{p.get('version')}|{p.get('timeframe')}") or next(
+            (x for k, x in cells.items() if x["strategy"] == p.get("strategy") and x["tf"] == p.get("timeframe")), None)
+        bull, bear = debate.cell_cases(cell) if cell else ([], ["no research numbers for this strategy / timeframe"])
+        out.append(f"- signal {p.get('coin')} {d} {p.get('timeframe')} {p.get('strategy')} ({stage}):")
+        out += [f"  - {x}" for x in debate.case_lines(bull, bear, debate.risk_manager(rep, now, coin=p.get("coin"),
+                                                                                       direction=d))]
+    if not sigs:
+        out.append("- no signal or watched setup this run")
+    return out
+
+
+def research_loop_lines(kind):
+    """Phase 18 A item 1: results waiting for a feedback record (daily) and the idea chains (daily + weekly)."""
+    from engine import research_loop as rloop
+    cards, rows, fb = rloop.load(ROOT)
+    out = []
+    if kind == "daily":
+        due = rloop.feedback_due(cards, rows, fb)
+        out += ["", "## Research loop: results waiting for feedback (write ONE 'Feedback: <id>@<version>' record in "
+                "memory/experiments.md per card - hypothesis -> result -> teaches -> next / 'stop this line')"]
+        for d in due[:10]:
+            out += [f"- {d['key']} (parent: {d['parent']})" + (f" - last feedback {d['last_feedback']}, a cell changed "
+                                                              "status since" if d["last_feedback"] else ""),
+                    f"  - hypothesis: {d['hypothesis']}", f"  - result: {'; '.join(d['cells'])}"]
+            out += [f"  - failed gates: {g}" for g in d["gates"]]
+        if not due:
+            out.append("- none (no lab card was tested since its last feedback)")
+    out += ["", "## Idea chains (parent -> card [results] -> next)"] + rloop.chain_lines(cards, rows, fb, indent="")
+    return out
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -382,6 +455,7 @@ def pack(kind, now, live=None):
     out += market_data_lines(rep)
     out += playbook_lines(rep, research)
     if kind == "briefing":
+        out += debate_lines(rep, research, now)
         out += ["", "## Your earlier outputs (read the newest for continuity)"] + [f"- {p}" for p in
                                                                                     recent_files("briefings", 2)]
         return out
@@ -422,7 +496,9 @@ def pack(kind, now, live=None):
         out += [f"- {k}: {c['evidence']['all']['n']} trades, {fmt_r(c['evidence']['all']['avg_r'])}; systematic tags: "
                 f"{', '.join(att.get('systematic') or []) or 'none'}"] + [f"  - {d}" for d in (att.get("diagnosis") or [])[:4]]
     appr = research.get("approval") or {}
-    out += ["### Approval packs"] + ([f"- {p['key']}: {p['pack']}" for p in appr.get("eligible") or []] or ["- none eligible"])
+    out += ["### Approval packs (each pack starts with Bull case / Bear case / Risk manager - copy them)"] + (
+        [f"- {p['key']}: {p['pack']}" + (f" · {p['risk']}" if p.get("risk") else "") for p in appr.get("eligible") or []]
+        or ["- none eligible"])
     out += [f"- ! {w}" for w in appr.get("warnings") or []]
     if kind == "weekly":
         cells = research.get("cells") or {}
@@ -432,10 +508,12 @@ def pack(kind, now, live=None):
     out += edge_lines_for(research)
     out += lab_lines(now, research)
     out += factory_lines(now, research)
+    out += research_loop_lines(kind)
     if kind == "daily":
         out += curriculum_lines()
         out += cleanup_lines(now)
     if kind == "weekly":
+        out += project_lines()
         out += calendar_lines(now)
         from engine import report_card as rcard
         try:

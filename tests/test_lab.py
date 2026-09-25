@@ -54,6 +54,7 @@ def v11(**over):
     """trend_pullback v1.1: exactly one change (targets 2R / 3R) - a valid lab card."""
     c = lib("trend_pullback")
     c.update(version="1.1", evidence_class="HYPOTHESIS", added=str(NOW.date()), factory="failure",
+             parent="result: trend_pullback@1.0 1h",
              factory_evidence="bad_target in 41% of losses, n=64 (trend_pullback v1.0 1h)",
              targets={"long": ["2R", "3R"], "short": ["2R", "3R"], "split": [0.5, 0.5]},
              changelog=["1.1 (2026-09-25): targets 2R / 3R instead of the config default."])
@@ -70,6 +71,7 @@ def smc_pair(added=None):
                 stop={"method": "atr", "atr": 1.5}, targets={"long": ["2R"], "short": ["2R"], "split": [1.0]},
                 time_stop_bars=20, known_weaknesses="untested", changelog=["1.0 (2026-09-25): first version."])
     card = dict(base, id="LAB-SWEEP-RSI", version="1.0", hypothesis="A sweep with RSI reset continues.",
+                parent="missed_move: BTC up 6x ATR on 2026-09-20",
                 edge=dict(type="forced_flow", works_in=["STRONG_BULL", "WEAK_BULL"],
                           who_pays="traders stopped out below the swept low", mechanism="forced selling ends after the "
                           "sweep and momentum turns up", fails_when="strong down-trends that keep sweeping lows",

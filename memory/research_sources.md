@@ -183,3 +183,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): S8-PDH-PDL-SWEEP-5M@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION on 30m, and beats its control twin S8-PDH-PDL-SWEEP
   - limitations: Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [R1] Microsoft RD-Agent - the research loop (hypothesis -> experiment -> feedback -> next hypothesis)
+- timestamp: 2026-09-25 16:00 UTC · source: https://github.com/microsoft/RD-Agent (commit 484776c211e4fbbeef03e0ec00d6bbee7362a4f4, 2026-09-23) · evidence: FACT: read in the project's own code and docs at that commit · confidence: high for what the code does; its results were not checked · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-24
+  - opened (Phase 18 build session): the repository at the commit above - docs/scens/quant_agent_fin.rst, rdagent/core/proposal.py, rdagent/scenarios/qlib/proposal/bandit.py and quant_proposal.py. NOT opened: the paper arxiv.org/abs/2505.15155 and the readthedocs page (this environment could not reach them) - nothing from them is cited.
+  - what it does (code): a Hypothesis has a reason; after each experiment a HypothesisFeedback records observations, an evaluation of the hypothesis, a new hypothesis, a decision (yes / no) and a reason. A Trace keeps every experiment with links to its parent experiments (a tree), so the next idea starts from a known result. In the finance scenario a bandit (Thompson sampling) chooses whether the next step works on factors or on the model.
+  - what we take (Phase 18 A): every lab card names its `parent:`; after a card is tested the daily review writes a `Feedback: <id>@<version>` record in memory/experiments.md (hypothesis -> result -> what it teaches -> next hypothesis or "stop this line"); the weekly email shows the chains.
+  - what we deliberately do NOT take: code written by a language model and run automatically; machine-learning forecast models; the bandit choosing the next step by itself (our idea factories keep the operator's quotas); any copied code (none was copied).
+  - licence: MIT.
+
+### [R2] TradingAgents (Tauric Research) - bull vs bear debate and a risk team
+- timestamp: 2026-09-25 16:00 UTC · source: https://github.com/TauricResearch/TradingAgents (commit 35543d0248bf89fcb92b17a15858ad0c0e940687, 2026-09-24) · evidence: FACT: read in the project's own code at that commit · confidence: high for what the code does; its results were not checked · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-24
+  - opened (Phase 18 build session): tradingagents/agents/researchers/bull_researcher.py and bear_researcher.py, managers/research_manager.py and portfolio_manager.py, the risk_mgmt folder (aggressive, conservative and neutral debators), graph/conditional_logic.py. NOT opened: the paper arxiv.org/abs/2412.20138 (not reachable from this environment) - nothing from it is cited.
+  - what it does (code): a bull analyst and a bear analyst (language-model prompts) argue in turns for a set number of rounds; a research manager judges the debate and gives a rating (Buy / Overweight / Hold / Underweight / Sell); then three risk debators argue and a portfolio manager makes the final rating. The risk team debates - it has no hard veto; the manager weighs it.
+  - what we take (Phase 18 A): every briefing verdict and every approval pack shows a Bull case and a Bear case, and a Risk manager line.
+  - what we deliberately do NOT take: free-text arguments and ratings from a language model - our cases contain ONLY the engine's numbers; news / sentiment analysts as evidence; a manager who can overrule risk - our risk manager is a fixed VETO (event within 60 min, heat full, regime against, data not GOOD, day / week limit near) that only ever says "not now"; any copied code (none was copied).
+  - licence: Apache-2.0.
+
+### [R8] Microsoft Qlib - how professionals organise factor research (reading only)
+- timestamp: 2026-09-25 16:00 UTC · source: https://github.com/microsoft/qlib (commit be725493eb1a6bbb42bf11b37aa7669f59610ff1, 2026-09-16) · evidence: FACT: read in the project's README and code at that commit · confidence: high for what the project describes; its results were not checked · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-24
+  - opened (Phase 18 build session): README.md and qlib/workflow/recorder.py.
+  - what it does: `qrun` runs a whole research workflow (dataset, model, backtest, analysis) from ONE config file; a Recorder logs every experiment with its parameters, metrics, files and a status (SCHEDULED, RUNNING, FINISHED, FAILED), modelled on mlflow; the README lists a point-in-time database so old data is seen as it was known then.
+  - what we take: nothing new to build in Part A - it confirms our design: every test is recorded with its exact rules (memory/strategy_registry.csv, fingerprinted), counted (memory/trials.csv) and linked to where it came from (the research loop's `parent:`).
+  - what we deliberately do NOT take: forecasting models (LightGBM and the neural networks), the Alpha158 feature set as a black box, mlflow as a dependency; any copied code (none was copied).
+  - licence: MIT.
