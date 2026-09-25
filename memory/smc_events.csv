@@ -44,3 +44,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-24 22:30,UNI,15m,FVG,bear,,9.158,9.176,0.252,,1h,RANGE,,smc-1.0,Binance
 2026-09-24 22:45,UNI,15m,FVG_RETRACE,bear,,9.158,9.176,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-09-24 23:15,UNI,15m,FVG_FILLED,bear,,9.158,9.176,,,1h,RANGE,,smc-1.0,Binance
+2026-09-25 00:00,BTC,30m,FVG,bull,,84277.32,84380.01,0.293,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 00:15,BTC,15m,SWEEP,bear,84660.0,,,0.307,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-25 00:15,BTC,15m,WEAK_BREAK,bull,84501.16,,,0.83,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-25 00:15,ETH,15m,WEAK_BREAK,bull,2693.02,,,0.266,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-25 00:15,XRP,15m,BOS,bull,1.5481,,,0.024,Asia,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-09-25 00:15,XRP,15m,ORDER_BLOCK,bull,,1.5322,1.5364,,Asia,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-25 00:15,ZEC,15m,BOS,bull,1551.7,,,0.631,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-09-25 00:15,ZEC,15m,ORDER_BLOCK,bull,,1543.15,1550.85,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-25 00:00,SOL,30m,FVG,bull,,116.61,116.97,0.498,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-24 23:45,SOL,15m,FVG,bull,,116.84,116.97,0.296,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 00:15,SOL,15m,BOS,bull,117.3,,,0.81,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-24 23:30,BNB,30m,FVG_RETRACE,bear,,777.32,778.6,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-25 00:15,BNB,15m,FVG_RETRACE,bear,,778.64,779.85,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-25 00:15,BNB,15m,FVG_FILLED,bear,,778.64,779.85,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 00:15,BNB,15m,FVG_FILLED,bear,,777.24,778.6,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 00:15,UNI,15m,SWEEP,bear,9.197,,,0.422,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance

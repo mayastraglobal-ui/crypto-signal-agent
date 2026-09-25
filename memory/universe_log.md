@@ -24,3 +24,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-24 22:18 UTC
 - **EXCLUDED** PROVE - 7-day average volume $36M < $50M; order book too thin: $66k within 1% (need $250k)
+
+## 2026-09-25 00:26 UTC
+- **EXCLUDED** PROVE - order book too thin: $63k within 1% (need $250k)
+- **ELIGIBLE** LTC - passes every rule again

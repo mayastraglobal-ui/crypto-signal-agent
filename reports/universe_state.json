@@ -2,18 +2,22 @@
  "members": [
   "BTC",
   "ETH",
-  "ZEC",
   "XRP",
+  "ZEC",
   "SOL",
   "BNB",
   "UNI"
  ],
- "in_streak": {},
- "out_streak": {},
- "suspended": {
-  "ONDO": "2026-09-24"
+ "in_streak": {
+  "LTC": 1
  },
- "runs": 6,
+ "out_streak": {
+  "UNI": 1
+ },
+ "suspended": {
+  "ONDO": "2026-09-25"
+ },
+ "runs": 7,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -21,12 +25,9 @@
   "XRP": [],
   "SOL": [],
   "PROVE": [
-   "thin_book",
-   "volume_7d"
+   "thin_book"
   ],
-  "LTC": [
-   "volume_7d"
-  ],
+  "LTC": [],
   "ONDO": [
    "big_move",
    "thin_book",
