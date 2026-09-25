@@ -1,0 +1,63 @@
+name: Pine export
+
+# Phase 15 (AGENT_PROMPT.md section 2 "Eyes"): turn one strategy into a TradingView Pine Script to check it
+# with your own eyes. Press "Run workflow", type the strategy id, version and timeframe (as in strategies.yaml),
+# wait about 2 minutes, then open reports/pine/<id>_v<version>_<tf>.pine, copy everything and paste it into
+# TradingView -> Pine Editor -> "Add to chart" (on a BINANCE:<COIN>USDT chart of that timeframe).
+# APPROVED strategies are exported automatically by the daily research run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      strategy:
+        description: "Strategy id (e.g. donchian_breakout)"
+        required: true
+      version:
+        description: "Version (e.g. 1.0)"
+        required: true
+        default: "1.0"
+      tf:
+        description: "Timeframe (5m, 15m, 30m, 1h, 4h)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pine
+  cancel-in-progress: false
+
+jobs:
+  pine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Export (engine backtest on the newest candles + Pine script)
+        env:
+          STRATEGY: ${{ inputs.strategy }}
+          VERSION: ${{ inputs.version }}
+          TF: ${{ inputs.tf }}
+        run: python pine_export.py "$STRATEGY" "$VERSION" "$TF"
+
+      - name: Save
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add reports/pine
+          if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
+          git commit -m "Pine export ${{ inputs.strategy }} v${{ inputs.version }} ${{ inputs.tf }}"
+          for i in 1 2 3 4; do
+            git pull --rebase && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

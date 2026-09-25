@@ -32,6 +32,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
+import pine_export
 import scanner as sc
 from engine import approval as ap
 from engine import attribution as att
@@ -172,6 +173,24 @@ def approval_step(ck, status, note, rec, ev, approvals, AP, warnings, eligible_c
     if ok and new_status == "PAPER_TRADING":
         eligible_cells.append(ck)
     return (new_status, ap_note) if new_status != status else (status, note)
+
+
+def export_approved(cells, per, by_key, cfg, now_txt, folder):
+    """Phase 15: every APPROVED version x timeframe as a TradingView Pine script, with the engine's research
+    trades embedded. A failed export is reported, never fatal."""
+    out = []
+    for ck, c in sorted(cells.items()):
+        if c["status"] != "APPROVED":
+            continue
+        k3 = (c["strategy"], c["version"], c["tf"])
+        try:
+            path, info = pine_export.write(by_key[f"{k3[0]}@{k3[1]}"], k3[2], cfg, per.get(k3, {}), now_txt, folder,
+                                           "research history of " + ", ".join(sorted(per.get(k3, {}))))
+            out.append(dict(key=ck, file=os.path.relpath(path, sc.ROOT), mode=info["mode"]))
+        except Exception as e:
+            log(f"Pine export of {ck} failed: {e}")
+            out.append(dict(key=ck, error=str(e)))
+    return out
 
 
 def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline):
@@ -429,6 +448,9 @@ def main():
                         listed=sorted(approvals), warnings=approval_warnings + approval_problems
                         + [f"{k}: approval listed but this strategy version / timeframe was not researched this run"
                            for k in sorted(set(approvals) - set(cells))], settings=AP)
+    pine_out = export_approved(cells, per, by_key, cfg, now_txt,
+                               os.path.join(sc.REPORTS, "pine_offline" if args.offline else "pine"))
+    approval_out["pine"] = pine_out
     if not args.offline:
         sc.write_experiments(new_exp, registry)
         sc.write_lifecycle_log(changes, started)

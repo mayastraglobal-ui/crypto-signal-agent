@@ -8,6 +8,7 @@
 | `positions.json` - the position book now; `position_events.csv` - every state change | |
 | `strategy_scoreboard.csv` - status per strategy version and timeframe | |
 | `universe.json`, `*_state.json`, `notified.json` - small state the engine needs next run | |
+| `pine/` - TradingView Pine scripts (APPROVED strategies daily; others via Actions → Pine export) | |
 | `approval/` - approval packs of strategies ready for your yes / no (daily research run) | |
 | `claude/briefings|daily|weekly/` - Claude's task outputs, checked by the Brain guard; `claude/state.json` - the last push handled per task branch | |
 

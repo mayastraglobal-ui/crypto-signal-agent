@@ -184,3 +184,25 @@ Newest entries at the bottom. Format: date · who · what · why.
   - Approval: settings, parsing, eligibility edges incl. exactly 0.30R, only the operator approves, removal, retired; the pack has every §21 part and its line parses back; stale packs removed.
   - Weekly: timing, stages kept apart, window, lifecycle blocks, every section, the Claude part or "not available".
   - Daily Claude summary; notify weekly-once, briefing and refusal emails once with one disclaimer; the fact sheet's file names match the guard and the weekly email.
+
+## 2026-09-25 · Claude (BUILD mode, operator-approved plan) · Phase 15 — Pine Script export for TradingView
+- **New `engine/pine.py`** turns a strategy card into a TradingView **Pine Script v6 strategy**, as a visual cross-check (§2 "Eyes"). It is deterministic (no AI) and TradingView never sends signals.
+- **RULES mode:** used when every building block has an exact translation. The rules, ATR / structure stop, R-multiple targets, split, break-even and TP1 stop moves, time stop, exit rule and cooldown are all translated.
+  - Every function call is hoisted into its own line, because Pine v6 evaluates `and` / `or` lazily and stateful functions must run on every candle.
+  - Custom Pine functions copy the engine's exact formulas where TradingView's built-ins differ: EMA / RMA seeding, RSI, ATR, ADX, supertrend (TradingView uses the opposite sign) and percent rank.
+  - The higher-timeframe trend uses the newest higher candle closed by the lower candle's close, as in `timeframes.align_higher`, with no look-ahead.
+- **REPLAY mode:** used for SMC detectors, feature-engine columns and level targets, which have no exact translation. Re-writing them would create a second, different engine. Pine instead enters on the engine's embedded signals with the engine's stop and target prices, and TradingView manages the trades independently.
+- **Engine entries** (newest 300 per coin, including stop and targets) are embedded as markers, with a matched / only engine / only Pine table.
+- **Costs:** one commission per side (long taker fee + slippage), fills at the next open, 1% risk per trade (so the tester reads in R). The known differences are written in each script's header.
+- **Output:**
+  - APPROVED version × timeframe: exported automatically by the daily research run to `reports/pine/`, listed in research.json and the report.
+  - Any card: `pine_export.py <id> <version> <tf>` (engine backtest on the newest candles of the signal coins), or the new manual workflow `pine.yml`. Its inputs go through env, never straight into the shell.
+  - Approval packs explain how to look at the strategy on TradingView first.
+- Backtest trades now keep all their target prices (`tps`), which REPLAY needs. Results and fingerprints are unchanged.
+- **Operator decisions (2026-09-25):** a strategy script with the tester plus markers; APPROVED exported automatically, others by hand.
+- Tests: `tests/test_pine.py`.
+  - Translation of every block, defaults, hoisting, computed-once, and refusal by name.
+  - Mode per card; the custom Pine functions pinned to the engine's formulas.
+  - **Equivalence:** the translated tree evaluated with Pine semantics equals the engine bar by bar, for every rule of every RULES card on 3 synthetic coins and timeframes, plus 12 indicator values and the higher-timeframe trend with no look-ahead.
+  - Every card × timeframe builds a structurally sound script; costs, plan, split, structure-stop width and embedded entries are checked; offline export end to end; workflow input safety.
+  - TradingView's own compiler is not available offline: the operator's first paste is the final check.

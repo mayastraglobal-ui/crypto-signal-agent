@@ -117,7 +117,11 @@ def pack(cell, spec, lineage, board_row, S, now_txt):
          "To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):",
          "```", f"  - {{strategy: {cell['strategy']}, version: \"{cell['version']}\", tf: {cell['tf']}, "
                 f"date: {now_txt[:10]}}}", "```",
-         "The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.", "",
+         "The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.",
+         "To look at it on TradingView first: GitHub → Actions → \"Pine export\" → Run workflow with "
+         f"`{cell['strategy']}` / `{cell['version']}` / `{cell['tf']}`, then paste `reports/pine/"
+         f"{re.sub(r'[^A-Za-z0-9_.-]+', '_', cell['strategy'] + '_v' + cell['version'] + '_' + cell['tf'])}.pine` into "
+         "TradingView's Pine Editor.", "",
          "## 1. Definition and lineage",
          f"- family: {spec.get('family', '-')} · gate: {spec.get('gate', '-')} · regimes: "
          f"{', '.join(spec.get('regimes') or []) or '-'}",
