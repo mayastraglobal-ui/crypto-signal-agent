@@ -1,7 +1,8 @@
 # Task: weekly research (Sunday 10:00 Beijing = 02:00 UTC; AGENT_PROMPT.md sections 12, 17, 18, 19, 21)
 
 Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-weekly`. Your fact sheet is
-`python brain_pack.py weekly`. Your file goes into the Sunday [WEEKLY] email, under the engine's own numbers.
+`python brain_pack.py weekly`. Your `## Email summary` block goes into the Sunday WEEKLY REPORT email, next to the
+engine's own numbers; the whole file becomes the "Full weekly research" page on the dashboard.
 You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `events.yaml` (step 4).
 
 ## Steps
@@ -89,6 +90,7 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
 9. **Write the weekly research** to the path the fact sheet gives. Use these headings:
    - `# Weekly research <date>`
    - `## Summary`
+   - `## Email summary`: `headline`, `sub`, `next`, `improvement` (COMMON.md rule 1)
    - `## Research log (sources)`
    - `## Strategy idea`
    - `## SMC/ICT concept`

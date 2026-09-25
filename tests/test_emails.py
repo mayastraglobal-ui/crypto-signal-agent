@@ -191,13 +191,16 @@ class FromEvents(unittest.TestCase):
                                  self.ev(P.ACTIVE, P.CLOSED, "PAPER_TRADING", "p"),           # paper: no email
                                  self.ev(None, P.TRIGGERED), self.ev(P.TRIGGERED, P.ACTIVE),   # plain entry: no
                                  self.ev(P.AWAITING, P.TRIGGERED, rid="f"), self.ev(P.TRIGGERED, P.ACTIVE, rid="f"),
-                                 self.ev(None, P.AWAITING), self.ev(P.AWAITING, P.EXPIRED)])     # report only
+                                 self.ev(None, P.AWAITING), self.ev(P.AWAITING, P.EXPIRED)])     # cancelled
             self.assertEqual([(o["key"], o["subject"]) for o in out],
-                             [("ETH-15m-S-t|TP1_HIT", "[EXIT] ETH/USDT LONG | TP1"),
-                              ("c|CLOSED", "[EXIT] ETH/USDT LONG | SL"),
-                              ("f|ENTRY", "[ENTRY] LONG ETH/USDT | 15m | S v1.0 | R:R 1.7")])
-            self.assertIn("5m confirm : bar closed 2023-11-14 22:24 UTC", "\n".join(out[2]["lines"]))
-            for o in out:
+                             [("ETH-15m-S-t|TP1_HIT", "✓ TP1 hit · ETH LONG +2.0R · move stop to entry"),
+                              ("c|CLOSED", "✕ Stop hit · ETH LONG −1.0R · trade closed"),
+                              ("f|ENTRY", "▲ LONG ETH · 15M · Enter 99.40–101.60 · Stop 95.00"),
+                              ("ETH-15m-S-t|EXPIRED", "⊘ Cancelled · ETH LONG · no 5m confirmation")])
+            self.assertIn("Enter now: the 5m bar confirmed it", out[2]["text"])
+            self.assertIn("1. Close 50% at 110.00", out[0]["text"])
+            self.assertIsNone(out[3]["chart"])                                     # no chart for a cancelled signal
+            for o in out[:3]:
                 with open(os.path.join(ROOT, o["chart"]) if not os.path.isabs(o["chart"]) else o["chart"], "rb") as f:
                     self.assertEqual(f.read(8), PNG)
 
@@ -226,14 +229,15 @@ class Notify(unittest.TestCase):
         self.tmp = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, self.tmp, True)
         shutil.copy(os.path.join(ROOT, "notify.py"), self.tmp)
+        shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(self.tmp, "engine"),
+                        ignore=shutil.ignore_patterns("__pycache__"))
         os.makedirs(os.path.join(self.tmp, "reports", "charts"))
         with open(os.path.join(self.tmp, "reports", "charts", "a.png"), "wb") as f:
             f.write(PNG)
 
     def write(self, **kw):
-        rep = dict(generated_utc="2026-09-24 00:07", position_book_text=["POSITION BOOK — test", "No open or pending positions."],
-                   signals=[], email_events=[], position_book=dict(awaiting=[]), watching=[], reminders=[],
-                   email_settings=dict(email_watching=False), daily=None)
+        rep = dict(generated_utc="2026-09-24 00:07", signals=[], email_events=[], position_book=dict(awaiting=[]),
+                   watching=[], reminders=[], email_settings=dict(email_watching=False), daily=None)
         rep.update(kw)
         with open(os.path.join(self.tmp, "reports", "latest.json"), "w") as f:
             json.dump(rep, f)
@@ -250,32 +254,23 @@ class Notify(unittest.TestCase):
         return re.findall(r"Subject: (.*)", out)
 
     def sig(self, coin):
+        m = scanner.emx.entry(dict(card(coin=coin), chart_cid="chart"))
         return dict(coin=coin, timeframe="15m", strategy="S", signal_time_utc="2026-09-24 00:00",
-                    email=dict(subject=f"[ENTRY] LONG {coin}/USDT | 15m | S v1.0 | R:R 2.0", lines=["body"],
-                               chart="reports/charts/a.png"))
+                    email=dict(m, chart="reports/charts/a.png"))
 
-    def test_one_email_per_signal_book_first_footer_last_and_only_once(self):
+    def test_one_email_per_signal_with_its_chart_and_only_once(self):
         self.write(signals=[self.sig("ETH"), self.sig("BTC")],
-                   email_events=[dict(key="x|CLOSED", subject="[EXIT] ETH/USDT LONG | SL", lines=["b"], chart=None)])
+                   email_events=[dict(key="x|CLOSED", subject="✕ Stop hit · ETH LONG −1.0R · trade closed",
+                                      text="t", html="<p>h</p>", chart=None)])
         out = self.run_notify()
-        self.assertEqual(self.emails(out), ["[ENTRY] LONG ETH/USDT | 15m | S v1.0 | R:R 2.0",
-                                            "[ENTRY] LONG BTC/USDT | 15m | S v1.0 | R:R 2.0", "[EXIT] ETH/USDT LONG | SL"])
-        self.assertEqual(out.count("Attachment: a.png"), 2)
+        self.assertEqual(self.emails(out), ["▲ LONG ETH · 15M · Enter 99.00–101.00 · Stop 95.00",
+                                            "▲ LONG BTC · 15M · Enter 99.00–101.00 · Stop 95.00",
+                                            "✕ Stop hit · ETH LONG −1.0R · trade closed"])
+        self.assertEqual(out.count("Inline image: a.png"), 2)
         first = out.split("--- DRY RUN (not sent) ---")[1]
-        body = first.split("\n\n", 1)[1].strip().splitlines()
-        self.assertEqual(body[0], "POSITION BOOK — test")
-        self.assertEqual(body[-1], "Research signal. Not financial advice.")
+        self.assertIn("ENTRY SIGNAL · LIVE", first)
+        self.assertIn("not financial advice", first.strip().splitlines()[-1])
         self.assertEqual(self.emails(self.run_notify()), [])                     # never twice
-
-    def test_daily_once_per_day_and_only_in_the_morning(self):
-        daily = dict(date="2026-09-24", utc="2026-09-24 00:07")
-        self.write(daily=daily, daily_subject="[DAILY] Crypto signal report 2026-09-24", daily_lines=["x"])
-        self.assertEqual(self.emails(self.run_notify("daily")), ["[DAILY] Crypto signal report 2026-09-24"])
-        self.assertEqual(self.emails(self.run_notify("daily")), [])
-        self.write(daily=dict(date="2026-09-25", utc="2026-09-25 13:07"), daily_subject="[DAILY] d", daily_lines=[])
-        self.assertEqual(self.emails(self.run_notify("daily")), [])               # mid-day: skip
-        self.write(daily=dict(date="2026-09-25", utc="2026-09-25 05:07"), daily_subject="[DAILY] d", daily_lines=[])
-        self.assertEqual(self.emails(self.run_notify("daily")), ["[DAILY] d"])     # 00:07 run failed: 05:07 sends
 
     def test_watch_only_when_enabled(self):
         w = [dict(coin="ETH", tf="15m", strategy="S", direction="LONG", stage="APPROVED", state="SETUP_FORMING",
@@ -286,14 +281,14 @@ class Notify(unittest.TestCase):
         self.assertEqual(self.emails(self.run_notify()), [])
         self.write(watching=w, email_settings=dict(email_watching=True))
         out = self.run_notify()
-        self.assertEqual(self.emails(out), ["[WATCH] 1 setup(s) forming - no entry yet"])
+        self.assertEqual(self.emails(out), ["◇ Watch · 1 setup forming · no entry yet"])
         self.assertNotIn("BTC", out.split("Subject:")[1])
         self.assertEqual(self.emails(self.run_notify()), [])
 
     def test_reminder_once_and_no_secrets_never_breaks(self):
         self.write(reminders=[dict(key="approved_while_hourly", subject="[SYSTEM] A strategy is APPROVED", lines=["x"])])
-        self.assertIn("[SYSTEM] A strategy is APPROVED", self.emails(self.run_notify("system")))
-        self.assertNotIn("[SYSTEM] A strategy is APPROVED", self.emails(self.run_notify("system")))
+        self.assertIn("! Reminder · A strategy is APPROVED", self.emails(self.run_notify("system")))
+        self.assertNotIn("! Reminder · A strategy is APPROVED", self.emails(self.run_notify("system")))
         self.write(signals=[self.sig("ETH")])
         out = self.run_notify(dry=False)                                         # no secrets, no dry run
         self.assertIn("not set up", out)

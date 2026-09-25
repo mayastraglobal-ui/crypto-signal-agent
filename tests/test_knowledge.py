@@ -207,37 +207,34 @@ class Curriculum(unittest.TestCase):
         self.assertEqual(CUR.email_lines(second, lessons)[1], "LESSON 2 of 2: B")
 
     def test_daily_email_carries_one_lesson_and_remembers_it(self):
+        """Email redesign: each DAILY REVIEW email links the next beginner lesson, published as a page."""
         tmp = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, tmp, True)
-        rep = os.path.join(tmp, "latest.json")
         sent_mail = []
-        patches = [mock.patch.object(notify, "REPORTS", tmp),
-                   mock.patch.object(notify, "DAILY_SENT", os.path.join(tmp, "daily_sent.json")),
+        patches = [mock.patch.object(notify, "ROOT", tmp),
+                   mock.patch.object(notify, "REPORTS", os.path.join(tmp, "reports")),
+                   mock.patch.object(notify, "LESSONS", os.path.join(tmp, "reports", "claude", "lessons")),
                    mock.patch.object(notify, "CURRICULUM_SENT", os.path.join(tmp, "curriculum_sent.json")),
-                   mock.patch.object(notify, "send", lambda s, b, a=(): sent_mail.append((s, b)) or True)]
+                   mock.patch.object(notify, "pages_base", lambda: "https://o.github.io/r/"),
+                   mock.patch.object(notify, "send_mail", lambda m: sent_mail.append((m["subject"], m["text"])) or True)]
         for p in patches:
             p.start()
             self.addCleanup(p.stop)
-
-        def day(d):
-            test_brain.dump(dict(generated_utc=f"{d} 00:07", position_book_text=["BOOK"],
-                                 daily=dict(date=d, utc=f"{d} 00:07"), daily_lines=["DAILY BODY"]), rep)
-        day("2026-09-26")
-        notify.daily_email()
-        notify.daily_email()                                                   # same day: nothing new
-        self.assertEqual(len(sent_mail), 1)
-        self.assertIn("LESSON 1 of", sent_mail[0][1])
-        self.assertIn("What \"R\" means", sent_mail[0][1])
-        day("2026-09-27")
-        notify.daily_email()
-        self.assertIn("LESSON 2 of", sent_mail[1][1])
+        rep = dict(generated_utc="2026-09-26 15:50")
+        notify.send_daily_review(None, rep, "2026-09-26", rep["generated_utc"])
+        self.assertIn("Beginner lesson: https://o.github.io/r/claude/lessons/2026-09-26.html", sent_mail[0][1])
+        page = read(os.path.join(tmp, "reports", "claude", "lessons", "2026-09-26.md"))
+        self.assertTrue(page.startswith("# Beginner lesson 1 of"))
+        self.assertIn("What \"R\" means", page)
+        notify.send_daily_review(None, rep, "2026-09-27", rep["generated_utc"])
+        self.assertTrue(read(os.path.join(tmp, "reports", "claude", "lessons", "2026-09-27.md")).startswith(
+            "# Beginner lesson 2 of"))
         self.assertEqual(test_brain.json.loads(read(os.path.join(tmp, "curriculum_sent.json"))), ["L01", "L02"])
         # a broken lesson file never stops the daily email
         with mock.patch.object(notify, "CURRICULUM", os.path.join(tmp, "missing.md")):
-            day("2026-09-28")
-            notify.daily_email()
+            notify.send_daily_review(None, rep, "2026-09-28", rep["generated_utc"])
         self.assertEqual(len(sent_mail), 3)
-        self.assertNotIn("LESSON", sent_mail[2][1])
+        self.assertNotIn("Beginner lesson:", sent_mail[2][1])
 
 
 class ReadingPlan(unittest.TestCase):

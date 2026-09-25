@@ -255,8 +255,9 @@ class Links(unittest.TestCase):
         self.assertEqual(len(out), 2)
         for o in out:
             self.assertTrue(o["chart"] and o["chart"].endswith(".png"), "the chart image stays")
-            self.assertTrue(any(ln.startswith("Backtest chart of this strategy: https://") and "chart.html#s=S&v=1.0"
-                                in ln and "&c=ETH" in ln for ln in o["lines"]), o["lines"])
+            self.assertTrue(any(ln.startswith("Backtest chart: https://") and "chart.html#s=S&v=1.0" in ln
+                                and "&c=ETH" in ln for ln in o["text"].splitlines()), o["text"])
+            self.assertIn("cid:chart", o["html"])                                   # the image inside the email
 
 
 class Research(unittest.TestCase):
@@ -283,6 +284,13 @@ class Research(unittest.TestCase):
         cell = res["cells"][f"{c['strategy']}@{c['version']}|{c['tf']}"]
         self.assertEqual(doc["n"], cell["evidence"]["by_coin"][coin]["n"], "the same trades as the research")
         self.assertIn("backtest_charts_offline/", test_brain.read(os.path.join(ROOT, ".gitignore")))
+        n = res["counts"]                                    # email redesign: what the run did, for the emails
+        self.assertEqual(n["coins"], 2)
+        self.assertEqual(n["backtests"], sum(n["per_coin"].values()))
+        self.assertEqual(n["tests"], len(res["cells"]))
+        self.assertEqual(n["backtests"], sum(len(c["evidence"]["by_coin"]) for c in res["cells"].values()))
+        hist = json.loads(test_brain.read(os.path.join(tmp, "reports", "research_counts_offline.json")))
+        self.assertEqual(hist[-1]["backtests"], n["backtests"])
 
 
 if __name__ == "__main__":

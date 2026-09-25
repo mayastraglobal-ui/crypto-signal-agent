@@ -39,6 +39,14 @@ REC = ("\n### {title}\n- timestamp: 2026-09-25 15:30 UTC · source: Claude daily
 
 DEBATE = ("## Bull vs bear\n- Bull case: 1D WEAK_BULL (ADX 44)\n- Bear case: 1H RANGE\n"
           "- Risk manager: no veto (heat 0 of 3)\n")          # Phase 18 A: every briefing has it
+EMAIL = {"briefings": "## Email summary\n- headline: Quiet.\n- sub: Nothing moves.\n- do: Wait.\n- dont: Don't chase.\n",
+         "daily": "## Email summary\n- lesson: Small samples mislead.\n- tomorrow: Watch PCE.\n",
+         "weekly": "## Email summary\n- headline: Quiet week.\n- sub: No decision.\n- next: Test the queue.\n"
+                   "- improvement: Fewer cards.\n"}      # the email redesign: every Claude report has its block
+
+
+def email_block(path):
+    return next(v for k, v in EMAIL.items() if f"/{k}/" in path)
 
 
 def rec(title="A lesson", ev="BACKTEST_EVIDENCE: 3 tests, 412 trades", rv="2026-10-25"):
@@ -69,7 +77,8 @@ class Guard(unittest.TestCase):
         for p in ["reports/claude/briefings/2026-09-25-0820.md", "reports/claude/briefings/2026-09-25-1420.md",
                   "reports/claude/briefings/2026-09-25-2120.md", "reports/claude/daily/2026-09-25.md",
                   "reports/claude/weekly/2026-09-27.md"]:
-            applies, _ = self.ok([change(p, "A", None, "# Title\n## Summary\nfine\n" + DEBATE)], {p: None})
+            applies, _ = self.ok([change(p, "A", None, "# Title\n## Summary\nfine\n" + email_block(p) + DEBATE)],
+                                 {p: None})
             self.assertEqual(applies[0]["kind"], "new")
         for p in ["reports/claude/briefings/2026-09-25-0900.md", "reports/claude/daily/today.md",
                   "reports/claude/other/2026-09-25.md", "reports/latest.md", "reports/claude/daily/2026-09-25.txt"]:
@@ -126,7 +135,7 @@ class Guard(unittest.TestCase):
         self.refused([change("strategies.yaml", "M", "a\n", "a\nb\n")], {"strategies.yaml": "a\n"}, "pull request")
 
     def test_one_problem_refuses_the_whole_push(self):
-        good = change("reports/claude/daily/2026-09-25.md", "A", None, "# ok\n")
+        good = change("reports/claude/daily/2026-09-25.md", "A", None, "# ok\n" + EMAIL["daily"])
         probs = self.refused([good, change("config.yaml", "M", "a\n", "b\n")],
                              {"reports/claude/daily/2026-09-25.md": None, "config.yaml": "a\n"}, "config.yaml")
         self.assertEqual(len(probs), 1)
@@ -226,7 +235,8 @@ class GuardOnGit(unittest.TestCase):
         return json.loads(read(out))
 
     def test_applies_onto_newest_main_once_and_refuses_bad_pushes(self):
-        self.push_task("claude/brain-daily", {"reports/claude/daily/2026-09-25.md": "# Daily\n## Summary\nok\n"},
+        self.push_task("claude/brain-daily", {"reports/claude/daily/2026-09-25.md": "# Daily\n## Summary\nok\n"
+                                                                                    + EMAIL["daily"]},
                        {"memory/lessons.md": rec()})
         # meanwhile the engine appended to the failure journal on main (the task branch does not have it)
         self.write(self.main, "memory/failure_journal.md", rec("engine loss", ev="FACT: -1R"), "a")
@@ -518,7 +528,10 @@ class NotifyModes(unittest.TestCase):
         p.start()
         self.addCleanup(p.stop)
         self.sent = []
-        p = mock.patch.object(notify, "send", lambda s, b, a=(): self.sent.append((s, b)) or True)
+        p = mock.patch.object(notify, "send_mail", lambda m: self.sent.append((m["subject"], m["text"])) or True)
+        p.start()
+        self.addCleanup(p.stop)
+        p = mock.patch.object(notify, "pages_base", lambda: "https://o.github.io/r/")
         p.start()
         self.addCleanup(p.stop)
 
@@ -531,8 +544,9 @@ class NotifyModes(unittest.TestCase):
         notify.weekly_email()
         notify.weekly_email()
         self.assertEqual(len(self.sent), 1)
-        self.assertTrue(self.sent[0][1].startswith("POSITION BOOK"))
-        self.assertTrue(self.sent[0][1].endswith(notify.FOOTER))
+        self.assertTrue(self.sent[0][0].startswith("Week 39 · "))
+        self.assertTrue(self.sent[0][1].startswith("WEEKLY REPORT · WEEK 39"))
+        self.assertIn("Not financial advice.", self.sent[0][1])
         self.latest(weekly=None)
         notify.weekly_email()
         self.assertEqual(len(self.sent), 1)
@@ -541,7 +555,8 @@ class NotifyModes(unittest.TestCase):
         self.latest()
         p = "reports/claude/briefings/2026-09-25-0820.md"
         with open(os.path.join(self.tmp, p), "w") as f:
-            f.write("# BTC holds its range\n## Summary\nquiet\n\n**Research signal. Not financial advice.**\n")
+            f.write("# BTC holds its range\n## Summary\nquiet\n" + EMAIL["briefings"]
+                    + "\n**Research signal. Not financial advice.**\n")
         res = [dict(branch="claude/brain-briefing", sha="a" * 40, subject="Briefing", status="applied", problems=[],
                     applied=[p, "memory/research_sources.md"], skipped=[]),
                dict(branch="claude/brain-daily", sha="b" * 40, subject="Daily", status="rejected",
@@ -550,12 +565,11 @@ class NotifyModes(unittest.TestCase):
         dump(res, path)
         notify.brain_email(path)
         notify.brain_email(path)
-        self.assertEqual([s for s, _ in self.sent],
-                         ["[BRIEFING] 2026-09-25 08:20 Beijing - BTC holds its range",
-                          "[SYSTEM] Claude task refused by the guard: claude/brain-daily"])
+        self.assertEqual([s for s, _ in self.sent], ["08:20 · Calm · – signals",
+                                                     "! Action needed · Claude task refused (brain-daily)"])
         body = self.sent[0][1]
-        self.assertEqual(body.count(notify.FOOTER), 1)
-        self.assertTrue(body.startswith("POSITION BOOK"))
+        self.assertIn("Quiet.", body)
+        self.assertIn("https://o.github.io/r/claude/briefings/2026-09-25-0820.html", body)
         self.assertIn("config.yaml: not allowed", self.sent[1][1])
 
 

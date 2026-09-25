@@ -276,11 +276,11 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             out = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env, capture_output=True,
                                  text=True).stdout
-            self.assertIn("Subject: [SYSTEM] Risk HALT: day_halt", out)
-            self.assertIn("POSITION BOOK", out)
+            self.assertIn("Subject: ! Risk halt · day_halt", out)
+            self.assertIn("15 daily loss limit reached", out)
             out = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env, capture_output=True,
                                  text=True).stdout
-            self.assertNotIn("[SYSTEM] Risk", out)                                  # same run: never twice
+            self.assertNotIn("Risk halt", out)                                      # same run: never twice
             with open(os.path.join(tmp, "config.yaml")) as f:
                 cfg = yaml.safe_load(f)
             soon = (pd.Timestamp.now(tz="UTC") + pd.Timedelta(minutes=30)).strftime("%Y-%m-%d %H:%M")
@@ -302,7 +302,7 @@ class EndToEnd(unittest.TestCase):
                 self.assertIn("### 2d. Risk engine", f.read())
             out = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env, capture_output=True,
                                  text=True).stdout
-            self.assertNotIn("[SYSTEM] Risk", out)                                  # no change -> no email
+            self.assertNotIn("Risk halt", out)                                      # no change -> no email
 
 if __name__ == "__main__":
     unittest.main()

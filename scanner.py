@@ -43,6 +43,7 @@ from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import derivs as dv
 from engine import digest
+from engine import emails as emx
 from engine import evidence as evid
 from engine import features as fe
 from engine import lifecycle as lc
@@ -1274,6 +1275,10 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
     return logdf, closed_now
 
 
+def chart_title(e):
+    return f"{e['direction']} {e['coin']}/{e.get('quote', 'USDT')} | {e['tf']} | {e['strategy']} v{e['version']}"
+
+
 class EmailContext:
     """Builds the section 20 email content during the scan (notify.py only sends it): [ENTRY] cards with a
     chart for APPROVED signals, [EXIT] cards for APPROVED TP1 / closes, the daily block, [SYSTEM] reminders."""
@@ -1285,6 +1290,37 @@ class EmailContext:
         self.quote, self.tf_ms, self.lb = cfg["market"]["quote"], tf_ms, lb
         self.utc, self.bj = now.strftime("%Y-%m-%d %H:%M"), now.astimezone(BJ).strftime("%Y-%m-%d %H:%M")
         self.pages = btcharts.pages_base(cfg)
+        self.book, self.risk, self.prices = {}, {}, {}
+
+    def set_state(self, book, risk_out, prices):
+        """The position book, the risk summary and the newest prices of this run (open trades, day / week R and the
+        price now in the emails)."""
+        self.book, self.risk, self.prices = book or {}, risk_out or {}, prices or {}
+
+    def status(self):
+        lim = (self.book.get("limits") or {}).get("heat", self.RK.get("max_positions") if isinstance(self.RK, dict) else None)
+        return dict(open=self.book.get("heat"), max_open=lim, day_r=self.book.get("day_r"), week_r=self.book.get("week_r"))
+
+    def backtest(self, strategy, version, tf):
+        """The research numbers of this strategy x timeframe for the email: trades, average R after fees, the 95%
+        worst losing streak of the trade-order shuffles (Phase 18 B)."""
+        b = self.board.get((strategy, str(version), tf)) or {}
+
+        def num(x):
+            try:
+                x = float(x)
+            except (TypeError, ValueError):
+                return None
+            return x if math.isfinite(x) else None
+        n, streak = num(b.get("trades")), num(b.get("mc_streak95"))
+        return dict(trades=int(n) if n is not None else None, avg_r=num(b.get("avg_r")),
+                    streak95=int(streak) if streak is not None else None)
+
+    def render_entry(self, e):
+        """The ENTRY SIGNAL email (engine/emails.py) of a card; the chart image is shown inline."""
+        e["chart_cid"] = "chart" if e.get("chart") else None
+        e.update(emx.entry(e))
+        return e
 
     def bt_url(self, strategy, version, tf, coin):
         """Phase 18 D: the strategy's backtest chart page on the dashboard (the email keeps its chart image)."""
@@ -1317,12 +1353,16 @@ class EmailContext:
             return None
 
     def _card(self, **kw):
+        st = self.status()
         e = dict(quote=self.quote, utc=self.utc, beijing=self.bj, regimes=self.regime_row(kw["coin"]),
                  data_state=self.coin_state.get(kw["coin"], "?"),
                  evidence=self.evidence(kw["strategy"], kw["version"], kw["tf"]),
+                 backtest=self.backtest(kw["strategy"], kw["version"], kw["tf"]), account=self.acct,
+                 live_chart=emx.tradingview(kw["coin"], self.quote, kw["tf"], kw["direction"] == "SHORT"),
+                 checks=dict(open=st["open"], max_open=st["max_open"], no_event=not self.risk.get("blackout_now"),
+                             risk_ok=True),
                  backtest_chart=self.bt_url(kw["strategy"], kw["version"], kw["tf"], kw["coin"]))
         e.update(kw)
-        e.update(briefs.entry_email(e))
         return e
 
     def entry_from_plan(self, p):
@@ -1333,23 +1373,29 @@ class EmailContext:
                        size=dict(qty=p["position_qty"], usdt=p["position_usdt"], risk_usdt=p["risk_usdt"],
                                  risk_pct=p["risk_pct"], capped=p["size_capped"]),
                        expires=f"{exp} UTC - after that, or once price leaves the entry zone, skip it",
+                       valid_until_utc=exp,
                        why=briefs.why_points(1 if p["direction"] == "LONG" else -1, p["context"], p["facts"],
                                              p["session"], p["conditions"]),
                        invalidation=briefs.invalidation(p))
+        blocks = p.get("risk_blocks") or []
+        e["checks"].update(no_event="blackout" not in blocks and not self.risk.get("blackout_now"),
+                           risk_ok=not p.get("no_trade") and not blocks)
         e["chart"] = self.chart(f"entry_{p['coin']}_{p['timeframe']}_{p['strategy']}_{p['signal_time_utc']}", p["coin"],
-                                p["timeframe"], e["subject"][8:], p["entry"], p["stop"],
+                                p["timeframe"], chart_title(e), p["entry"], p["stop"],
                                 [t["price"] for t in p["targets"]], p["signal_ms"])
-        return e
+        return self.render_entry(e)
 
     def _row(self, rid):
         m = self.logdf[self.logdf["id"] == rid]
         return None if m.empty else m.iloc[-1]
 
     def from_events(self, events):
-        """APPROVED state changes worth an email (operator decision): the 5m-confirmed entry, TP1, the close."""
+        """APPROVED state changes worth an email (operator decision): the 5m-confirmed entry, TP1, the close, and a
+        signal cancelled before its entry (no 5m confirmation / structure broken) - each a TRADE UPDATE email."""
         out = []
         for ev in events:
-            if ev["stage"] != "APPROVED" or ev["to_state"] not in (pos.ACTIVE, pos.TP1_HIT, pos.CLOSED):
+            if ev["stage"] != "APPROVED" or ev["to_state"] not in (pos.ACTIVE, pos.TP1_HIT, pos.CLOSED, pos.EXPIRED,
+                                                                   pos.INVALIDATED):
                 continue
             r = self._row(ev["id"])
             if r is None:
@@ -1358,11 +1404,11 @@ class EmailContext:
             tps = [float(r[k]) for k in ("tp1", "tp2", "tp3") if pd.notna(r[k]) and str(r[k]) != ""]
             stf = r["sim_tf"] if isinstance(r["sim_tf"], str) and r["sim_tf"] else r["tf"]
             entry, stop = float(r["entry"]), float(r["stop"])
+            split = [float(x) for x in str(r["tp_split"]).split("/")] if pd.notna(r["tp_split"]) else []
             if ev["to_state"] == pos.ACTIVE:
                 if stf != "5m" or ev["from_state"] != pos.TRIGGERED:
                     continue                     # plain entries are emailed from the plan (signals)
                 R = abs(entry - stop)
-                split = [float(x) for x in str(r["tp_split"]).split("/")] if pd.notna(r["tp_split"]) else []
                 z = rk.size(self.acct, self.risk_pct, entry, stop, self.RK["max_leverage"])
                 e = self._card(coin=r["coin"], direction=r["direction"], market=market_type(d), tf=r["tf"],
                                strategy=r["strategy"], version=str(r["version"]), stage="APPROVED", entry=entry,
@@ -1373,32 +1419,47 @@ class EmailContext:
                                size=dict(qty=z["qty"], usdt=z["notional"], risk_usdt=z["risk_usdt"],
                                          risk_pct=self.risk_pct, capped=z["capped"]),
                                expires="entered at the close of the confirming 5m bar",
-                               why=[f"{r['tf']} setup of {r['strategy']} confirmed by a closed 5m bar",
-                                    f"Regime at the trigger: {r['regime_at_entry'] or '?'}",
-                                    "Conditions at the trigger: " + (str(r["conditions"]).replace(";", ", ")
-                                                                     if isinstance(r["conditions"], str) and r["conditions"]
-                                                                     else "none flagged")],
+                               valid_note="Enter now: the 5m bar confirmed it",
+                               why=[f"Setup: {r['tf']} setup of {r['strategy']} confirmed by a closed 5m bar",
+                                    f"Trend: regime at the trigger {r['regime_at_entry'] or '?'}",
+                                    ] + (["Caution: " + str(r["conditions"]).replace(";", ", ")]
+                                         if isinstance(r["conditions"], str) and r["conditions"] else []),
                                invalidation=briefs.invalidation(dict(stop=stop, exit_rule=None, confirm_5m=False,
                                                                      max_hold=tf_to_text(r["tf"], int(r["max_hold_bars"])))))
-                e["chart"] = self.chart(f"entry_{ev['id']}", r["coin"], "5m", e["subject"][8:], entry, stop, tps,
+                e["chart"] = self.chart(f"entry_{ev['id']}", r["coin"], "5m", chart_title(e), entry, stop, tps,
                                         ts_ms(r["entry_time_utc"]))
-                out.append(dict(key=f"{ev['id']}|ENTRY", kind="ENTRY", **{k: e[k] for k in ("subject", "lines", "chart")}))
+                e = self.render_entry(e)
+                out.append(dict(key=f"{ev['id']}|ENTRY", kind="ENTRY",
+                                **{k: e[k] for k in ("subject", "text", "html", "chart")}))
                 continue
             closed = ev["to_state"] == pos.CLOSED
+            cancelled = ev["to_state"] in (pos.EXPIRED, pos.INVALIDATED)
+            R = abs(entry - stop)
+            cur = float(r["current_stop"]) if pd.notna(r["current_stop"]) and str(r["current_stop"]) != "" else None
+            st = self.status()
             x = dict(coin=r["coin"], quote=self.quote, direction=r["direction"], tf=r["tf"], strategy=r["strategy"],
-                     version=str(r["version"]), stage="APPROVED", kind=ev["to_state"], utc=self.utc, beijing=self.bj,
+                     version=str(r["version"]), stage="APPROVED", utc=self.utc,
+                     kind="CANCELLED" if cancelled else ev["to_state"],
                      close_reason=r["close_reason"] if closed else None,
-                     result_r=float(r["result_r"]) if closed and pd.notna(r["result_r"]) else 0.0, entry=entry,
-                     next_action=("none - the trade is closed" if closed else
-                                  f"stop moved to breakeven ({briefs.fmt(entry)}); keep the rest open for the next target"),
-                     backtest_chart=self.bt_url(r["strategy"], str(r["version"]), r["tf"], r["coin"]))
-            m = briefs.exit_email(x)
+                     result_r=float(r["result_r"]) if closed and pd.notna(r["result_r"]) else None, entry=entry,
+                     stop_now=cur if cur is not None else stop, targets=tps,
+                     tp_split=[round(v * 100) for v in split], tp1_r=abs(tps[0] - entry) / R if tps and R > 0 else None,
+                     price_now=self.prices.get((r["coin"], stf), self.prices.get((r["coin"], r["tf"]))),
+                     entered_utc=r["entry_time_utc"] if isinstance(r["entry_time_utc"], str) and r["entry_time_utc"]
+                     else r["signal_time_utc"],
+                     cancel_reason={pos.EXPIRED: "no 5m confirmation",
+                                    pos.INVALIDATED: "structure broke before entry"}.get(ev["to_state"]),
+                     live_chart=emx.tradingview(r["coin"], self.quote, r["tf"], d == -1),
+                     backtest_chart=self.bt_url(r["strategy"], str(r["version"]), r["tf"], r["coin"]), **st)
             start = r["entry_time_utc"] if isinstance(r["entry_time_utc"], str) and r["entry_time_utc"] else r["signal_time_utc"]
-            m["chart"] = self.chart(f"exit_{ev['id']}_{ev['to_state']}", r["coin"], stf, m["subject"][7:], entry, stop,
-                                    tps, ts_ms(start),
-                                    ts_ms(r["closed_time_utc"]) - self.tf_ms[stf] + 60_000 if closed else None,
-                                    None, float(r["current_stop"]) if pd.notna(r["current_stop"]) else None)
-            out.append(dict(key=f"{ev['id']}|{ev['to_state']}", kind="EXIT", **m))
+            x["chart"] = None if cancelled else self.chart(
+                f"exit_{ev['id']}_{ev['to_state']}", r["coin"], stf,
+                f"{r['direction']} {r['coin']}/{self.quote} | {r['tf']} | {ev['to_state']}", entry, stop, tps, ts_ms(start),
+                ts_ms(r["closed_time_utc"]) - self.tf_ms[stf] + 60_000 if closed else None, None, cur)
+            x["chart_cid"] = "chart" if x["chart"] else None
+            m = emx.update(x)
+            out.append(dict(key=f"{ev['id']}|{ev['to_state']}", kind="EXIT", chart=x["chart"],
+                            **{k: m[k] for k in ("subject", "text", "html")}))
         return out
 
     def daily(self, coins, snap, watching, plans, book, btc, fg, data_state, changes, research_utc, risk_out,
@@ -1418,6 +1479,7 @@ class EmailContext:
             rows.append(dict(coin=c, price=sn.get("price", float("nan")), vol_24h_m=(sn.get("vol_24h") or 0) / 1e6,
                              regimes=[rg.get(tf, "?") for tf in ("1w", "1d", "4h", "1h")],
                              mom_30m="?" if roc is None else f"{roc:+.1f}% ROC",
+                             move_30m=None if roc is None else round(roc, 2),
                              setup_15m=st15, trigger_5m=f"AWAITING {aw[0]['bars']}/6" if aw else "-"))
         fresh = bool(research_utc) and (self.now - pd.Timestamp(research_utc, tz="UTC").to_pydatetime()
                                         <= dt.timedelta(hours=24))
@@ -2108,6 +2170,7 @@ def main():
     # ---------- emails (section 20): entry / exit cards, charts, the daily block ----------
     mail = EmailContext(cfg, started, data, regimes, feat_last, coin_state, board, logdf, risk_pct, RK, acct,
                         TF_MS, lb)
+    mail.set_state(book, risk_out, prices)
     # a signal found up to an hour late whose trade already ENDED in this same run is not actionable:
     # neither an [ENTRY] nor an [EXIT] email (it stays in the log and the report)
     over = not_actionable(new_rows, logdf)
@@ -2119,11 +2182,13 @@ def main():
     daily = mail.daily(view["signal"], snap, watching, plans, book, btc, fg, sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
     daily["claude_review"] = claude_review(started)          # Phase 14: yesterday's Claude daily review, if any
-    weekly = (digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
-                            *claude_weekly(started), read_text(os.path.join(MEMORY, "trials.csv")),
-                            float(cfg["research"].get("trials_alpha", 0.05)), report_card_lines(started, research, logdf),
-                            idea_chain_lines())
-              if digest.is_weekly_time(started) else None)
+    weekly = None
+    if digest.is_weekly_time(started):
+        card_lines, card = report_card(started, research, logdf, sys_state)
+        weekly = digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
+                               *claude_weekly(started), read_text(os.path.join(MEMORY, "trials.csv")),
+                               float(cfg["research"].get("trials_alpha", 0.05)), card_lines, idea_chain_lines())
+        weekly["card"] = card                                 # email redesign: the report card rows of the email
 
     # ---------- data-quality report ----------
     dq_out = dict(
@@ -2442,13 +2507,18 @@ def claude_review(now):
     return digest.claude_summary(read_text(os.path.join(ROOT, rel)), rel, day)
 
 
-def report_card_lines(now, research, logdf):
-    """Phase 17 D: the agent's weekly report card (engine/report_card.py) - never stops the weekly email."""
+def report_card(now, research, logdf, data_state=None):
+    """Phase 17 D: the agent's weekly report card (engine/report_card.py) - never stops the weekly email.
+    Returns (lines, the email's rows: sources read, Claude tasks delivered of expected, data source problems)."""
     try:
-        return rcard.lines(rcard.collect(ROOT, now, research, logdf))
+        rc = rcard.collect(ROOT, now, research, logdf)
     except Exception as e:
         log(f"report card failed: {e}")
-        return [f"AGENT REPORT CARD: could not be built this week ({type(e).__name__}: {e})"]
+        return [f"AGENT REPORT CARD: could not be built this week ({type(e).__name__}: {e})"], None
+    runs = [v for v in rc["runs"].values() if isinstance(v, dict)]
+    problems = [x.split(":")[0] for x in rc["failed"]["feeds"]] + ([f"market data {data_state}"] if data_state not in (None, "GOOD") else [])
+    return rcard.lines(rc), dict(sources=rc["ideas"]["sources"], tasks_done=sum(v["delivered"] for v in runs),
+                                 tasks_expected=sum(v["expected"] for v in runs), data_problems=problems)
 
 
 def idea_chain_lines():

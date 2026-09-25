@@ -302,6 +302,44 @@ def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline, r
     return out
 
 
+COUNTS_KEEP = 60                             # days of research counts kept (the weekly email sums the last 7)
+
+
+def run_counts(started, runs_per_coin, tested, per, lab_cards, cells):
+    """What this research run did, for the daily and weekly emails: backtests (strategy x timeframe x coin runs),
+    runs per coin, strategies applied, strategy x timeframe tests, coins tested, and the lab cards dated today."""
+    today = started.strftime("%Y-%m-%d")
+    new_cards = []
+    for c in lab_cards:
+        if not isinstance(c, dict) or str(c.get("added") or "") != today:
+            continue
+        st = [x["status"] for x in cells.values() if x["strategy"] == c.get("id") and str(x["version"]) == str(c.get("version"))]
+        new_cards.append(dict(id=c.get("id"), version=str(c.get("version")), timeframes=list(c.get("timeframes") or []),
+                              factory=c.get("factory"), source=str(c.get("source") or "")[:200],
+                              what=str(c.get("description") or c.get("hypothesis") or "")[:200], statuses=st))
+    return dict(date=today, run_utc=started.strftime("%Y-%m-%d %H:%M"), backtests=int(sum(runs_per_coin.values())),
+                per_coin=dict(sorted(runs_per_coin.items())), strategies=len(tested), tests=len(per),
+                tests_per_coin=max(runs_per_coin.values()) if runs_per_coin else 0, coins=len(runs_per_coin),
+                new_cards=new_cards)
+
+
+def save_counts(counts, offline):
+    """reports/research_counts.json: one entry per research day (the newest run of a day wins), last COUNTS_KEEP days."""
+    path = os.path.join(sc.REPORTS, "research_counts_offline.json" if offline else "research_counts.json")
+    old = []
+    if os.path.exists(path):
+        try:
+            with open(path) as f:
+                old = json.load(f)
+        except ValueError:
+            old = []
+    keep = [x for x in old if isinstance(x, dict) and x.get("date") != counts["date"]] + [
+        {k: v for k, v in counts.items() if k != "new_cards"} | dict(new_cards=len(counts["new_cards"]))]
+    keep = sorted(keep, key=lambda x: x["date"])[-COUNTS_KEEP:]
+    with open(path, "w") as f:
+        json.dump(keep, f, indent=1)
+
+
 def main():
     ap_ = argparse.ArgumentParser()
     ap_.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
@@ -356,6 +394,7 @@ def main():
     plain5 = {}                               # 5m-confirmed cells: the same signals WITHOUT the 5m check
     S5 = c5m.settings(cfg.get("confirm_5m"))
     spans, hist, skipped, rule_errors = {}, {}, {}, {}
+    runs_per_coin = {}                        # email redesign: backtests (strategy x timeframe) run per coin today
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
         if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
@@ -421,6 +460,7 @@ def main():
                     log(f"RULE ERROR in {s['id']} {tf}: {e}")
                     rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
                     continue
+                runs_per_coin[base] = runs_per_coin.get(base, 0) + 1
                 for cf, store in ((cfg, per), (cfg_stress, stress)):
                     tr = sc.run_backtest(df, L, S, XL, XS, s, cf, tf, cols, None, m5, S5)
                     sc.mark_oos_for(s, tr, n, cfg, m5)
@@ -687,6 +727,13 @@ def main():
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
         + (" - offline: not written" if args.offline and new_variants else ""))
 
+    # ---------- counts for the daily and weekly emails (email redesign) ----------
+    counts = run_counts(started, runs_per_coin, tested, per, (lab_now or []) + new_variants, cells)
+    try:
+        save_counts(counts, args.offline)
+    except OSError as e:
+        log(f"research counts not saved: {e}")
+
     # ---------- report ----------
     history_out = {}
     for tf, h in hist.items():
@@ -701,7 +748,7 @@ def main():
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
-               factories=factories, lead_lag=lead_lag, cleanup=cleanup_out,
+               factories=factories, lead_lag=lead_lag, cleanup=cleanup_out, counts=counts,
                robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
                                rules_skipped_coins=rules_skipped, time_budget_min=round(budget_s / 60),
                                simpler_queued=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
