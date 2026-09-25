@@ -48,7 +48,8 @@ the end of the fact sheet.
    - Put a `## Summary` section near the top: 3-8 short lines. The daily summary goes into the morning email.
 2. **New records at the END** of these knowledge files, never anywhere else:
    - `memory/lessons.md`, `failure_journal.md`, `missed_trades.md`, `research_sources.md`, `coin_notes.md`,
-     `feature_notes.md`, `smc_research.md`, `experiments.md`.
+     `feature_notes.md`, `smc_research.md`, `experiments.md`, `market_mechanics.md` (how markets move: funding,
+     liquidations, expiries, liquidity, sessions ...).
    - **Never change or delete an existing line.**
    - Each record looks exactly like this (all 9 fields, in this order, `-` when not applicable):
      ```
@@ -81,6 +82,10 @@ the end of the fact sheet.
      that changes **exactly ONE thing** and has a changelog line starting with its version.
    - Only the building blocks listed at the top of `strategies.yaml` (the guard refuses anything else, e.g.
      `np.`, `.shift()`, text, `**`).
+   - An **edge block** (not needed on a control twin): `edge: {who_pays: ..., mechanism: ..., fails_when: ...,
+     kill_rule: ...}` - who is on the other side of the trade and why they lose, what market behaviour drives it,
+     when it should NOT work, and the result that would show the edge is gone. One real sentence each; a card
+     without it is refused. Use `memory/market_mechanics.md` for the mechanism.
    - `targets` with the **first target at least 2R** (`"2R"`, `"max(2R, smc_liq_above)"`, or a level with
      `need.min_r: 2.0`) - the config default (TP 1R) is not accepted for lab cards.
    - A card whose entry rules use SMC / ICT building blocks (`smc_*`, `h4_*`) or `confirm_5m: true` needs

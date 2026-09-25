@@ -28,7 +28,9 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefin
    - `# <one-line headline>`
    - `## Summary`: 3-6 lines. This is the most important part.
    - `## Position book`: copy the engine's book exactly as it is.
-   - `## Market regime`: BTC and the top coins, taken from the engine's matrix. Explain in plain words what
+   - `## Market regime`: BTC and the top coins, taken from the engine's matrix, plus the fact sheet's "Playbook for
+     the regimes right now" (what made and lost money in each regime in the backtests - if NOTHING made money, say
+     that standing aside is the plan). Explain in plain words what
      the regime means for the kind of trades that fit.
    - `## News and events`: each item gets a date, a one-line summary, why it matters, and its source URL.
      Also list the upcoming events from the calendar.

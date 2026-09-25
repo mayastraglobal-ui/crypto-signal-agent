@@ -13,6 +13,7 @@ reports/dashboard_data.json
 # files written only by --offline test runs
 reports/*_offline.json
 reports/*_offline.csv
+reports/*_offline.md
 # chart images for email attachments (not committed)
 reports/charts/
 reports/approval_offline/

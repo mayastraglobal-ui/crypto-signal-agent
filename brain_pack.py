@@ -213,6 +213,52 @@ def stale_warnings(rep, md_text, live):
     return w
 
 
+def playbook_lines(rep, research):
+    """Phase 17 B: the playbook (measured results per regime) for the regimes our signal coins are in now."""
+    from engine import playbook as pbk
+    now_labels = {}
+    coins = ((rep.get("regime") or {}).get("coins") or {})
+    for c in (rep.get("universe") or {}).get("signal") or []:
+        for tf in ("4h", "1h"):
+            lab = (((coins.get(c) or {}).get("timeframes") or {}).get(tf) or {}).get("label")
+            if lab:
+                now_labels.setdefault(lab, []).append(f"{c} {tf}")
+    out = ["", "## Playbook for the regimes right now (memory/playbook.md - backtest facts per regime, not signals)"]
+    pb = (research or {}).get("playbook")
+    if not pb:
+        return out + ["- not available yet (written by the daily research run)"]
+    for lab, where in sorted(now_labels.items(), key=lambda x: -len(x[1])):
+        out += [f"### {lab} - now on {', '.join(where)}"] + pbk.section(lab, pb)[1:-1]
+    return out if now_labels else out + ["- no regime information in the engine report"]
+
+
+def edge_lines_for(research, statuses=("VALIDATION", "PAPER_TRADING", "APPROVED")):
+    """Phase 17 B: the edge blocks (why it should work) of the cards that are furthest along, and of lab cards."""
+    import yaml
+    from engine import strategy_spec as sspec
+    cards = {}
+    for name in (sspec.LIBRARY_FILE, sspec.LAB_FILE):
+        try:
+            for c in yaml.safe_load(read(os.path.join(ROOT, name)) or "") or []:
+                if isinstance(c, dict):
+                    cards[f"{c.get('id')}@{c.get('version')}"] = c
+        except yaml.YAMLError:
+            pass
+    cells = (research or {}).get("cells") or {}
+    keys = sorted({f"{c['strategy']}@{c['version']}" for c in cells.values()
+                   if c.get("status") in statuses or c.get("lab")})
+    out = ["", "## Edge blocks (why each strategy should work - hypotheses; the engine's numbers test them)"]
+    for k in keys:
+        c = cards.get(k) or {}
+        e = sspec.edge_lines(c)
+        out += [f"- {k}:"] + ([f"  - {x}" for x in e] or ["  - NO EDGE BLOCK - say so; a strategy without an edge is "
+                                                          "a pattern, not an idea"])
+    missing = sorted(k for k, c in cards.items() if not c.get("twin_of") and not sspec.edge_lines(c))
+    if missing:
+        out.append("- cards without an edge block: " + ", ".join(missing))
+    return out if len(out) > 2 else out + ["- no strategy in VALIDATION / PAPER / APPROVED and no lab card yet"]
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -251,6 +297,7 @@ def pack(kind, now, live=None):
             f"- next events: {'; '.join(map(str, risk.get('upcoming_events') or [])) or 'none listed'}"
             + (f" (! {risk['calendar_warning']})" if risk.get("calendar_warning") else "")]
     out += feed_lines(now, kind)
+    out += playbook_lines(rep, research)
     if kind == "briefing":
         out += ["", "## Your earlier outputs (read the newest for continuity)"] + [f"- {p}" for p in
                                                                                     recent_files("briefings", 2)]
@@ -299,6 +346,7 @@ def pack(kind, now, live=None):
         out += ["### Control-twin comparisons (does the special ingredient add anything?)"]
         out += [f"- {k}: {'beats' if c.get('beats_twin') else 'does not beat' if c.get('beats_twin') is False else 'too few trades vs'} "
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
+    out += edge_lines_for(research)
     out += lab_lines(now, research)
     if kind == "weekly":
         out += calendar_lines(now)

@@ -56,16 +56,22 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
       - list which dates you could **not** confirm;
       - list any existing entry that looks **wrong** on the official page (the operator fixes it). Mention the
         entries marked `official_search`, `indirect` or `operator` that you re-checked on the page.
-5. **Divergence review.** Compare backtest, paper and live results per strategy, from the fact sheet. Name
+5. **Market mechanics.** Take ONE record of `memory/market_mechanics.md` that is still an unsourced CLAIM (or is due
+   for review) and check it against a source you actually open. Add a NEW record `Review: <title>` saying
+   CONFIRMED / REJECTED / KEEP with the source URL and its evidence class. If the source adds something new (a
+   mechanism, a number), write it as its own record. Never edit the old record.
+   Also check that every strategy in VALIDATION / PAPER has an edge block (fact sheet "Edge blocks") and that its
+   numbers still fit it; say so under `## Market mechanics and edges`.
+6. **Divergence review.** Compare backtest, paper and live results per strategy, from the fact sheet. Name
    any strategy where paper or live is clearly worse than the backtest, and what it may mean.
-6. **Timeframe models.** Say which timeframes work for which strategy families, from the scoreboard numbers,
+7. **Timeframe models.** Say which timeframes work for which strategy families, from the scoreboard numbers,
    and where the sample is still too small.
-7. **Approval packs.** For each eligible strategy in the fact sheet:
+8. **Approval packs.** For each eligible strategy in the fact sheet:
    - summarise its pack in 5 plain lines: strengths, weaknesses, and what could go wrong;
    - repeat the question: *"Approve <id> v<ver> <tf> for live emails? (yes/no)"*.
 
    **Never recommend approving it**: present the evidence, and the operator decides.
-8. **Write the weekly research** to the path the fact sheet gives. Use these headings:
+9. **Write the weekly research** to the path the fact sheet gives. Use these headings:
    - `# Weekly research <date>`
    - `## Summary`
    - `## Research log (sources)`
@@ -74,9 +80,10 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
    - `## How traders lose money`
    - `## Candidates (added to the lab)`
    - `## Event calendar`
+   - `## Market mechanics and edges`
    - `## Backtest vs paper vs live`
    - `## Timeframe models`
    - `## Approval packs`
    - `## Experiment queue for next week`
    - End with: **Research signal. Not financial advice.**
-9. Run the end commands from COMMON.md.
+10. Run the end commands from COMMON.md.

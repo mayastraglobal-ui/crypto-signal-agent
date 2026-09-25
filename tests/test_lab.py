@@ -68,6 +68,9 @@ def smc_pair(added=None):
                 stop={"method": "atr", "atr": 1.5}, targets={"long": ["2R"], "short": ["2R"], "split": [1.0]},
                 time_stop_bars=20, known_weaknesses="untested", changelog=["1.0 (2026-09-25): first version."])
     card = dict(base, id="LAB-SWEEP-RSI", version="1.0", hypothesis="A sweep with RSI reset continues.",
+                edge=dict(who_pays="traders stopped out below the swept low", mechanism="forced selling ends after the "
+                          "sweep and momentum turns up", fails_when="strong down-trends that keep sweeping lows",
+                          kill_rule="unseen-data average below 0R or it no longer beats its control twin"),
                 long=["bars_since(smc_sweep_bull) <= 5", "rsi(close,14) > 50"],
                 short=["bars_since(smc_sweep_bear) <= 5", "rsi(close,14) < 50"], control_twin="LAB-SWEEP-RSI-noSMC")
     twin = dict(base, id="LAB-SWEEP-RSI-noSMC", version="1.0", hypothesis="Control: RSI alone.",
@@ -571,6 +574,9 @@ class EndToEnd(unittest.TestCase):
             if c["status"] == "PAPER_TRADING":
                 self.assertGreaterEqual(c["t_stat"], c["need_t"])
         self.assertFalse(os.path.exists(os.path.join(tmp, "memory")))    # offline never writes memory/
+        pb = read(os.path.join(tmp, "reports", "playbook_offline.md"))      # Phase 17 B: the regime playbook
+        self.assertTrue(pb.startswith("# Regime playbook"))
+        self.assertEqual(sorted(res["playbook"]), sorted(rg.LABELS))
 
         # force the lab cell to APPROVED and list it in config.yaml -> both runs keep it in paper
         reg_p = os.path.join(tmp, "reports", "strategy_registry_offline.csv")

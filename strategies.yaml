@@ -32,6 +32,9 @@
 #                      is at least 2R away
 #    time_stop_bars    close after this many candles; cooldown_bars = candles to wait after a trade
 #    control_twin      the same idea WITHOUT its special (e.g. SMC) ingredient - it must be beaten
+#    edge              WHY it should make money (hypothesis, not proof): who_pays (who is on the other side and why
+#                      they lose), mechanism, fails_when, kill_rule. Not part of the rules (no new version needed);
+#                      the engine shows the measured evidence next to it. Required on lab cards.
 #    params            the numbers the rules use, by name: write {fast} in a rule and fast: 20 under params.
 #                      The daily research run moves each one -20% and +20% (one at a time, plus the stop
 #                      size and the time stop); a real edge must stay profitable (AGENT_PROMPT.md section 11).
@@ -98,6 +101,11 @@
   time_stop_bars: 30
   cooldown_bars: 0
   known_weaknesses: "Fails in ranges (every touch of the EMA looks like a pullback); late in a trend the bounce is often the last one."
+  edge:
+    who_pays: "late buyers who sold the dip into a trend that the higher timeframe still supports"
+    mechanism: "trends persist; a pullback to the 20 EMA resets momentum and new buyers step in at 'value'"
+    fails_when: "ranges and the last leg of a mature trend (the bounce fails)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -134,6 +142,11 @@
   time_stop_bars: 60
   cooldown_bars: 0
   known_weaknesses: "Many false breakouts in chop; wide stops; most of the profit comes from a few big trends."
+  edge:
+    who_pays: "traders fading the breakout (short at the range top) whose stops then add fuel to the move"
+    mechanism: "a close outside a 20-candle range with 1.5x volume marks new participation; trend-following has the longest published record of the idea families"
+    fails_when: "choppy ranges and low volume: most breakouts fall back inside"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -166,6 +179,11 @@
   time_stop_bars: 15
   cooldown_bars: 0
   known_weaknesses: "Catching a falling knife in a real breakdown; many small wins, rare large losses."
+  edge:
+    who_pays: "short-term sellers who panic-sell a two-day drop inside a range"
+    mechanism: "extreme short-term oversold readings in a range tend to snap back toward the middle (mean reversion)"
+    fails_when: "real breakdowns and strong down-trends (catching a falling knife)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + mean_reversion gate."
 
@@ -198,6 +216,11 @@
   time_stop_bars: 30
   cooldown_bars: 0
   known_weaknesses: "Squeezes can break both ways (head fakes); rare signals."
+  edge:
+    who_pays: "traders positioned for the quiet range to continue, stopped out when volatility expands"
+    mechanism: "low volatility clusters and is followed by expansion; the first strong close outside the bands shows the direction"
+    fails_when: "head fakes: the squeeze breaks one way, then reverses"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -230,6 +253,11 @@
   time_stop_bars: 40
   cooldown_bars: 0
   known_weaknesses: "Lagging; in sideways markets the crosses whipsaw."
+  edge:
+    who_pays: "counter-trend traders still betting on the old direction when momentum turns"
+    mechanism: "a MACD cross in the higher-timeframe direction marks momentum turning with the trend"
+    fails_when: "sideways markets, where crosses whipsaw back and forth"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -266,6 +294,11 @@
   time_stop_bars: 60
   cooldown_bars: 0
   known_weaknesses: "Flips late; gives back a lot before the exit flip."
+  edge:
+    who_pays: "traders holding the old trend who exit late, after the flip"
+    mechanism: "an ATR-based trailing line flips only after a real move, so it catches the middle of trends"
+    fails_when: "ranges (frequent false flips) and sharp V-reversals"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -300,6 +333,11 @@
   time_stop_bars: 20
   cooldown_bars: 0
   known_weaknesses: "Strong trends keep sweeping lows without reversing; low timeframes are expensive after fees."
+  edge:
+    who_pays: "breakout traders who bought the new low's stop run, and stop-losses taken below the obvious low"
+    mechanism: "stops cluster below obvious lows; once they are taken and price closes back inside, the forced selling is over"
+    fails_when: "strong trends that keep sweeping lows without reversing"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + reversal gate."
 
@@ -334,6 +372,11 @@
   time_stop_bars: 40
   cooldown_bars: 0
   known_weaknesses: "Whipsaws a lot; kept mainly as a simple benchmark."
+  edge:
+    who_pays: "late momentum traders; this card is mainly a simple benchmark"
+    mechanism: "a fast / slow EMA cross follows short-term momentum"
+    fails_when: "sideways markets (whipsaw); the edge is expected to be small or absent"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-09-24): re-versioned under spec v3. Rules, stop and hold time unchanged; new: allowed regimes + trend gate."
 
@@ -380,6 +423,11 @@
   confirm_5m: false
   control_twin: S5-SWEEP-MSS-FVG-noSMC
   known_weaknesses: "Needs a clean sweep and shift; in chop the shift fails. Low timeframes pay a lot of fees per R."
+  edge:
+    who_pays: "stop-losses below a swing low and breakout sellers trapped when structure shifts up"
+    mechanism: "a sweep takes liquidity, a displacement shows real buying, and the first retrace into the gap is where late sellers cover"
+    fails_when: "chop, where structure shifts fail; low timeframes where fees are large per R"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats its control twin (S5-SWEEP-MSS-FVG-noSMC)"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 7). No 5m confirmation yet."
 
@@ -448,6 +496,11 @@
   confirm_5m: false
   control_twin: S6-OB-FVG-noSMC
   known_weaknesses: "Fails in ranges; order blocks are easy to over-use."
+  edge:
+    who_pays: "sellers who pushed price into a higher-timeframe demand zone that larger buyers defend"
+    mechanism: "a 4H order block in the lower half of the range plus a 15m change of character marks buyers returning at value"
+    fails_when: "ranges and down-trends, where order blocks are over-used and break"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats its control twin (S6-OB-FVG-noSMC)"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 7). No 5m confirmation yet (Phase 10)."
 
@@ -516,6 +569,11 @@
   confirm_5m: false
   control_twin: S7-SILVER-BULLET-noSMC
   known_weaknesses: "Few signals (short windows); 15m fees are large compared with the stop."
+  edge:
+    who_pays: "traders caught by the stop run in the London / New York session windows"
+    mechanism: "session windows concentrate volume; a sweep followed by displacement and a gap retrace shows direction for the session"
+    fails_when: "quiet sessions and news days; few signals, so the sample stays small"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats its control twin (S7-SILVER-BULLET-noSMC)"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 7)."
 
@@ -583,6 +641,11 @@
   confirm_5m: false
   control_twin: S8-PDH-PDL-SWEEP-noSMC
   known_weaknesses: "Trend days break through yesterday's levels and never come back."
+  edge:
+    who_pays: "breakout traders who bought above yesterday's high or sold below yesterday's low"
+    mechanism: "yesterday's high / low hold many stops; a sweep that closes back inside often returns to the middle of the range"
+    fails_when: "trend days that break through yesterday's levels and never come back"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats its control twin (S8-PDH-PDL-SWEEP-noSMC)"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 7). 'Middle at least 1R away' is our assumption (not in the source)."
 
@@ -665,6 +728,11 @@
   confirm_5m: true
   control_twin: S5-SWEEP-MSS-FVG
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  edge:
+    who_pays: "stop-losses below a swing low and breakout sellers trapped when structure shifts up; the 5m check avoids entries that are immediately wrong"
+    mechanism: "the same setup as S5-SWEEP-MSS-FVG, entered only after a closed 5m candle confirms the direction near the planned price"
+    fails_when: "chop, where structure shifts fail; low timeframes where fees are large per R; fast moves that never look back (the 5m check misses them)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats S5-SWEEP-MSS-FVG over the same 5m period"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 10) - S5-SWEEP-MSS-FVG v1.0 + the section 8 5m check."
 
@@ -703,6 +771,11 @@
   confirm_5m: true
   control_twin: S6-OB-FVG
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  edge:
+    who_pays: "sellers who pushed price into a higher-timeframe demand zone that larger buyers defend; the 5m check avoids entries that are immediately wrong"
+    mechanism: "the same setup as S6-OB-FVG, entered only after a closed 5m candle confirms the direction near the planned price"
+    fails_when: "ranges and down-trends, where order blocks are over-used and break; fast moves that never look back (the 5m check misses them)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats S6-OB-FVG over the same 5m period"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 10) - S6-OB-FVG v1.0 + the section 8 5m check."
 
@@ -742,6 +815,11 @@
   confirm_5m: true
   control_twin: S7-SILVER-BULLET
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  edge:
+    who_pays: "traders caught by the stop run in the London / New York session windows; the 5m check avoids entries that are immediately wrong"
+    mechanism: "the same setup as S7-SILVER-BULLET, entered only after a closed 5m candle confirms the direction near the planned price"
+    fails_when: "quiet sessions and news days; few signals, so the sample stays small; fast moves that never look back (the 5m check misses them)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats S7-SILVER-BULLET over the same 5m period"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 10) - S7-SILVER-BULLET v1.0 + the section 8 5m check."
 
@@ -774,6 +852,11 @@
   confirm_5m: true
   control_twin: S8-PDH-PDL-SWEEP
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
+  edge:
+    who_pays: "breakout traders who bought above yesterday's high or sold below yesterday's low; the 5m check avoids entries that are immediately wrong"
+    mechanism: "the same setup as S8-PDH-PDL-SWEEP, entered only after a closed 5m candle confirms the direction near the planned price"
+    fails_when: "trend days that break through yesterday's levels and never come back; fast moves that never look back (the 5m check misses them)"
+    kill_rule: "retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when the unseen-data part of the backtest turns negative, or when it no longer beats S8-PDH-PDL-SWEEP over the same 5m period"
   changelog:
     - "1.0 (2026-09-24): first version (Phase 10) - S8-PDH-PDL-SWEEP v1.0 + the section 8 5m check."
 

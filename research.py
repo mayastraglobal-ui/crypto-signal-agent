@@ -40,6 +40,8 @@ from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import history
 from engine import lifecycle as lc
+from engine import playbook as pbk
+from engine import regime as rg
 from engine import memory as mem
 from engine import research as rs
 from engine import strategy_spec as sspec
@@ -493,6 +495,13 @@ def main():
         write_missed(missed, started, A, mem.review_days(cfg.get("memory"), "missed_trades"))
         write_sources(tested, started, mem.review_days(cfg.get("memory"), "research_sources"))
 
+    # ---------- regime playbook (Phase 17 B): measured results per regime -> memory/playbook.md ----------
+    playbook = pbk.build(cells, {k: x["family"] for k, x in by_key.items()}, rg.LABELS)
+    pb_path = os.path.join(sc.REPORTS, "playbook_offline.md") if args.offline else os.path.join(sc.MEMORY, "playbook.md")
+    os.makedirs(os.path.dirname(pb_path), exist_ok=True)
+    with open(pb_path, "w") as f:
+        f.write(pbk.render(playbook, now_txt, rg.LABELS) + "\n")
+
     # ---------- report ----------
     history_out = {}
     for tf, h in hist.items():
@@ -506,7 +515,7 @@ def main():
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
-               approval=approval_out, cells=cells,
+               approval=approval_out, cells=cells, playbook=playbook,
                trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
                            file=os.path.relpath(TRIALS, sc.ROOT)),
                lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),

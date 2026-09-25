@@ -311,3 +311,22 @@ Newest entries at the bottom. Format: date · who · what · why.
   - `--refresh` gets the new copy, and the warning is gone;
   - the warning rules work without a live branch;
   - the start commands use `--refresh`.
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Phase 17 part B - edge, mechanics, playbook, curriculum
+- The operator's Part B text was not in this session: only the four names. I built the reading I proposed on 25 Sep. Any part can be changed in review.
+- **Edge block** (`engine/strategy_spec.py`): `edge: {who_pays, mechanism, fails_when, kill_rule}` on a card.
+  - It is a hypothesis, not proof, and it is not one of the rule keys, so the fingerprints are unchanged and no version change is needed.
+  - Written for all 16 non-twin library cards. The -5M cards say why the 5m check should help. Every kill rule names the engine's retirement rules and, for SMC cards, beating the control twin.
+  - Required on lab cards: the Brain guard refuses a card without all four lines (at least 20 characters each). Control twins are exempt.
+  - The approval pack shows the edge in section 1, before the numbers, or "NOT WRITTEN". The fact sheet lists the edges of VALIDATION / PAPER / APPROVED and lab cards, and names the cards that have none.
+- **`memory/market_mechanics.md`** (new knowledge file, append-only, union merge; tasks may add records): 10 records seeded by the build session.
+  - They cover funding, liquidations, open interest, Deribit expiries, stop clusters, sessions, macro releases, listings, fees in R, and ETF / stablecoin flows.
+  - No source could be opened from this session, so general knowledge is labelled `CLAIM` (unsourced). Only what the engine itself measures or enforces is labelled `FACT`.
+  - The weekly research must confirm or reject one CLAIM a week with a real source (new step 5).
+- **`memory/playbook.md`** (`engine/playbook.py`): rewritten by every daily research run, and also stored in `research.json` → `playbook`. It is built from backtest trades split by the regime at entry.
+  - For each regime it lists the families (trade-weighted average R), the cells that made money (30+ trades, at least +0.01R), the cells that lost money (at most -0.10R), and what "no trade" looks like.
+  - It says "NOTHING made money - standing aside IS the playbook" when that is the measured truth.
+  - The first version is written from the 25 Sep research run. It currently shows no tested strategy making money in RANGE, HIGH_VOL_RANGE or COMPRESSION.
+  - The fact sheet shows the playbook for the regimes the signal coins are in right now, and the briefing's regime section uses it. Claude's tasks cannot write it.
+- **`memory/curriculum.md`** (`engine/curriculum.py`): 14 beginner lessons. Each [DAILY] email carries the next one, remembered in `reports/curriculum_sent.json`; the course starts again after the last lesson. A broken lesson file never stops the daily email.
+- Tests: new `tests/test_knowledge.py` (16 tests). `tests/test_lab.py` end-to-end now also checks the offline playbook. Mutation check: 12 of 12 planted bugs caught.
