@@ -15,7 +15,7 @@
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 21,
+ "runs": 22,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -34,7 +34,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",

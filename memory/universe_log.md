@@ -73,3 +73,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** XLM - 7-day average volume $32M < $50M
 - **LEAVE** LTC - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** BNB - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-09-25 15:20 UTC
+- **EXCLUDED** AVAX - order book too thin: $245k within 1% (need $250k)
