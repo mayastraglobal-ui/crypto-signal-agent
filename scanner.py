@@ -843,7 +843,7 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             break
         k = trade_costs(cfg, d)
         res.update(entry_idx=t + 1, signal_idx=t, dir=d, entry_time=int(ot[t + 1]), entry=float(entry), R=float(R),
-                   tp1=float(tps[0]), cost_r=float(entry * 2 * (k["taker"] + k["slip"]) / R))   # round trip, in R
+                   tp1=float(tps[0]), tps=[float(x) for x in tps], cost_r=float(entry * 2 * (k["taker"] + k["slip"]) / R))   # round trip, in R
         trades.append(res)
         t = res["exit_idx"] + int(strat.get("cooldown_bars", 0))    # wait before the next trade
     return trades
@@ -915,7 +915,7 @@ def backtest_5m(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols
         exit_idx = int(np.searchsorted(ot, ot5[res["exit_idx"]], side="right") - 1)
         entry_idx = max(entry_idx, t + 1)
         res.update(exit_idx=exit_idx, entry_idx=entry_idx, bars=max(1, exit_idx - entry_idx + 1), signal_idx=t, dir=d, entry_time=int(ot5[js]),
-                   entry=float(entry), R=float(R), tp1=float(tps[0]),
+                   entry=float(entry), R=float(R), tp1=float(tps[0]), tps=[float(x) for x in tps],
                    cost_r=float(entry * 2 * (k["taker"] + k["slip"]) / R),
                    confirm_bars=info5["bars"], smc_5m=info5["smc"])
         trades.append(res)
@@ -2779,6 +2779,10 @@ def render_lifecycle(g, board, w):
           "its line into `config.yaml` → `approvals:`.")
     for x in appr.get("warnings") or []:
         w(f"- ⚠️ **Approval:** {x}")
+    for x in appr.get("pine") or []:
+        w(f"- 📈 **TradingView script ({x['key']}):** " + (f"`{x['file']}` ({x['mode']} mode) - paste it into TradingView's "
+                                                          "Pine Editor to check it with your own eyes"
+                                                          if x.get("file") else f"export failed: {x.get('error')}"))
     for sid, errs in g["not_run"].items():
         w(f"- ⚠️ **{sid} not run:** {'; '.join(errs)}")
     for sid, errs in g["rule_errors"].items():

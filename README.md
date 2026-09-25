@@ -44,6 +44,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | `tasks/` | What Claude's scheduled tasks do (briefing, daily review, weekly research) + their rules | Read it |
 | `reports/claude/` | Claude's briefings, daily reviews and weekly research (checked by the Brain guard) | No |
 | `reports/approval/` | Approval packs of strategies ready for your yes / no | Read it |
+| `reports/pine/` | TradingView Pine scripts of strategies (APPROVED ones daily, others when you ask) | Paste into TradingView |
 | `brain_guard.py`, `brain_pack.py` | The guard that checks Claude's work before main; the fact sheet Claude reads | Not needed |
 | `reports/signals_log.csv` | Every signal ever given, its current state and how it ended | No, it's the live track record |
 | `reports/positions.json` | The position book right now (active, awaiting 5m, paper, closed today) + what is being watched | No |
@@ -306,6 +307,36 @@ why it loses and its limitations. The `[WEEKLY]` email asks *"Approve S6-OB-FVG 
 - **No:** do nothing. **Changed your mind:** delete the line - it goes back to PAPER_TRADING.
 - An approval for a strategy that is not (or no longer) eligible is not applied; the report says why. The
   retirement rules keep watching approved strategies, now on their live results too.
+
+## Checking a strategy on TradingView (Pine Script)
+
+TradingView (free) is your "eyes" (AGENT_PROMPT.md section 2): a strategy can be exported as a **Pine Script**
+to look at it on a real chart. It is a **cross-check only** - TradingView never sends signals, and the engine's
+numbers stay the reference.
+
+- **APPROVED** strategies are exported automatically by the daily research run: `reports/pine/<id>_v<version>_<tf>.pine`.
+- **Any other strategy** (e.g. before you approve it): GitHub → **Actions → Pine export → Run workflow**, type the
+  id, version and timeframe (as in `strategies.yaml`), wait about 2 minutes.
+- **In TradingView:** open a chart of the coin (e.g. `BINANCE:BTCUSDT`) on **the same timeframe**, click
+  **Pine Editor**, delete what is there, paste the whole file, click **Add to chart**. The **Strategy Tester** tab
+  shows TradingView's own rough backtest (1% risk per trade, fees included).
+
+What you see:
+- 🟢 / 🔴 triangles = where **the engine** entered (its backtest on the newest candles, embedded in the script);
+- TradingView's own entries and exits, with the stop and TP1 lines;
+- a table: **matched / only engine / only Pine**.
+
+Two modes, chosen automatically:
+- **RULES** (strategies built from indicators, e.g. `donchian_breakout`): Pine recomputes the rules with the
+  engine's exact formulas (tested bar by bar against the engine). "Only Pine" entries are normal - Pine cannot
+  apply the engine's regime gate, data checks or risk engine.
+- **REPLAY** (SMC strategies, feature-engine columns, level targets): these have no exact Pine translation, and
+  a second, different version in Pine could quietly disagree. So Pine enters on the engine's own signals with the
+  engine's stop and targets, and TradingView manages the trades independently.
+
+Small differences are expected: entries fill at the next open without slippage (costs are one commission per side),
+when a stop and a target are hit in the same candle the engine assumes the stop, and averages can differ in the very
+first candles of a chart.
 
 ## Risk engine and news blackout
 
