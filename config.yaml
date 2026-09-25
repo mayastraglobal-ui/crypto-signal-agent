@@ -298,3 +298,7 @@ signals:
                              # (15m: 4 candles, 5m: 12), so no trigger falls between two runs
   max_in_report: 10          # show the best N signals
   allow_shorts: true         # false = long only (spot traders cannot short)
+
+dashboard:                   # Phase 18 D: the web dashboard (build_dashboard.py -> GitHub Pages, branch gh-pages)
+  url: null                  # null = https://<owner>.github.io/<repo>/ ; the backtest chart links in approval packs
+                             # and [ENTRY] / [EXIT] emails point there (set it if you use another address)

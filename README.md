@@ -420,6 +420,21 @@ and the bar.
   lab unchanged (only `added`), within the literature quota (2 a week): about 5 weeks for all 10. The guard refuses a
   changed copy.
 
+## Backtest chart page (Phase 18 D)
+- `chart.html` on the dashboard shows any strategy × timeframe × coin: the newest 1500 candles with the backtest's
+  buy / sell arrows and exits (green = won, red = lost), the chosen trade's entry, stop and targets as lines (◀ ▶ steps
+  through the trades), and under it the equity curve and drawdown of every backtest trade on that coin (layout idea
+  from backtesting.py, R6).
+- Drawn with TradingView Lightweight Charts™ 5.2.1 (R7, Apache-2.0), bundled unchanged in
+  `vendor/lightweight-charts/` with its licence and notice and published with the page - nothing is loaded from outside;
+  the page shows the attribution with a link to tradingview.com.
+- The daily research run writes the data (`reports/backtest_charts/`, not committed); the dashboard publishes it to
+  gh-pages, and the hourly rebuilds keep the published copy.
+- Links: the dashboard's strategy table ("chart"), every approval pack ("Check the trades before you say yes": the
+  chart page and the Pine script, now written for every eligible cell), and every [ENTRY] / [EXIT] email (one line
+  at the end; the chart image stays). Address: `config.yaml` → `dashboard.url` (default: GitHub Pages of the repo).
+  GitHub Pages must be switched on once (Settings → Pages → Deploy from a branch → gh-pages / root).
+
 ## Approving a strategy (your yes)
 
 A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,

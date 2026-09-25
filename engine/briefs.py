@@ -176,6 +176,8 @@ def entry_email(e):
     L += ["", "Why this signal exists:"] + [f"  - {w}" for w in e["why"]]
     L += ["", "What cancels it:"] + [f"  - {w}" for w in e["invalidation"]]
     L += ["", "Evidence:"] + [f"  - {w}" for w in e["evidence"]]
+    if e.get("backtest_chart"):                        # Phase 18 D: every backtest trade of this strategy on the chart
+        L += ["", f"Backtest chart of this strategy: {e['backtest_chart']}"]
     return dict(subject=subject, lines=L)
 
 
@@ -197,6 +199,8 @@ def exit_email(x):
          f"Time: {x['utc']} UTC / {x['beijing']} Beijing", "", head,
          f"Entry {fmt(x['entry'])}" + (f" · exit {fmt(x['exit_price'])}" if x.get("exit_price") else ""),
          f"Next action: {x['next_action']}"]
+    if x.get("backtest_chart"):
+        L += ["", f"Backtest chart of this strategy: {x['backtest_chart']}"]
     return dict(subject=subject, lines=L)
 
 
