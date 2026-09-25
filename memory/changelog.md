@@ -347,4 +347,4 @@ Newest entries at the bottom. Format: date · who · what · why.
   - For each item the review writes one research_sources record and at most one hypothesis.
   - References are from the build session's memory, are marked as not opened, and contain no URLs; the task checks them on the real source before citing.
 - The beginner lessons for the operator moved to `memory/beginner_course.md` and still come with the [DAILY] email.
-- Tests: test_knowledge.py now has 23 tests (reading plan, rotation, mechanics rule, edge type / works_in, playbook matrix).
+- Tests: test_knowledge.py now has 21 tests (reading plan, rotation, mechanics rule, edge type / works_in, playbook matrix).
