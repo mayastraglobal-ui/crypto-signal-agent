@@ -22,6 +22,9 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
    - the claim and its evidence class. Most internet claims are `CLAIM` or `UNVERIFIED_OPINION`.
    - the hypothesis you derive from it, and its limitations.
 3. **Candidates: 1-2 new strategies or new versions** at most (plus their control twins).
+   - **First the idea queue** (fact sheet "Idea queue"): paste the card(s) marked NEXT at the end of
+     `strategies_lab.yaml` exactly as shown (only `added` is today). They use the same quota and limits; the guard
+     refuses a queued card that was changed. Say under `## Candidates (added to the lab)` which queued cards you added.
    - Choose from the experiments queue and today's research.
    - Each must follow the pipeline: SOURCE → CLAIM → FORMAL DEFINITION → RULES.
    - Use the idea factories (fact sheet "Idea factories": what each needs, its quota left, its pass rate so far):

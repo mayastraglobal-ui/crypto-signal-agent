@@ -40,7 +40,9 @@ DEFAULTS = dict(
     stoch_rsi=[14, 14, 3, 3],   # RSI length, stochastic length, K smoothing, D smoothing
     roc_n=10,
     keltner=[20, 10, 2.0],      # EMA length, ATR length, multiplier
+    ichimoku=[9, 26, 52],       # Phase 18 C: tenkan, kijun, senkou B lengths (the cloud is drawn kijun candles ahead)
 )
+FIB_LEVELS = (0.382, 0.5, 0.618, 0.786)
 
 BOOL_FEATURES = ["expansion", "contraction", "displacement_up", "displacement_down", "bull_engulf",
                  "bear_engulf", "bull_reject", "bear_reject", "swing_high", "swing_low",
@@ -80,6 +82,56 @@ def _run_length(cond):
     for i, x in enumerate(c):
         run = run + 1 if x else 0
         out[i] = run
+    return out
+
+
+def volume_profile(tp, v, n, bins=24, area=0.70, chunk=20000):
+    """Rolling volume profile over the last n candles: (poc, vah, val) arrays; NaN for the first n-1 candles.
+    Candle i's volume counts at its typical price tp[i]; bins span the window's lowest to highest typical price."""
+    m = len(tp)
+    poc, vah, val = (np.full(m, np.nan) for _ in range(3))
+    if m < n or n < 2:
+        return poc, vah, val
+    from numpy.lib.stride_tricks import sliding_window_view
+    P, V = sliding_window_view(tp, n), sliding_window_view(v, n)          # row j = candles j .. j+n-1
+    for a in range(0, len(P), chunk):
+        p, w = P[a:a + chunk], V[a:a + chunk]
+        lo, hi = p.min(axis=1), p.max(axis=1)
+        width = np.where(hi > lo, (hi - lo) / bins, np.nan)
+        b = np.clip(np.floor((p - lo[:, None]) / width[:, None]), 0, bins - 1)
+        b = np.nan_to_num(b, nan=0).astype(int)
+        hist = np.zeros((len(p), bins))
+        np.add.at(hist, (np.repeat(np.arange(len(p)), n), b.ravel()), w.ravel())
+        top = hist.argmax(axis=1)
+        order = np.argsort(-hist, axis=1, kind="stable")
+        cum = np.cumsum(np.take_along_axis(hist, order, axis=1), axis=1)
+        tot = cum[:, -1:]
+        keep = np.arange(bins)[None, :] <= (cum < area * tot).sum(axis=1)[:, None]
+        top_bin = np.where(keep, order, -10**9).max(axis=1)
+        low_bin = np.where(keep, order, 10**9).min(axis=1)
+        ok = np.isfinite(width) & (tot[:, 0] > 0)
+        rows = slice(a + n - 1, a + n - 1 + len(p))
+        poc[rows] = np.where(ok, lo + (top + 0.5) * width, np.where(hi == lo, lo, np.nan))
+        vah[rows] = np.where(ok, lo + (top_bin + 1) * width, np.where(hi == lo, lo, np.nan))
+        val[rows] = np.where(ok, lo + low_bin * width, np.where(hi == lo, lo, np.nan))
+    return poc, vah, val
+
+
+def _anchored_vwap(tp, v, anchor):
+    """VWAP from the anchor candle (e.g. the last confirmed swing) to each candle; NaN before the first anchor.
+    Summed per anchor window (not as a difference of running totals), so it does not depend on where history starts."""
+    n = len(tp)
+    out = np.full(n, np.nan)
+    a = np.where(np.isfinite(anchor), anchor, -1).astype(int)
+    starts = np.flatnonzero(np.r_[True, a[1:] != a[:-1]])
+    ends = np.r_[starts[1:], n]
+    for s0, e0 in zip(starts, ends):
+        if a[s0] < 0:
+            continue
+        pv, vol = np.cumsum(tp[a[s0]:e0] * v[a[s0]:e0]), np.cumsum(v[a[s0]:e0])
+        k0 = s0 - a[s0]
+        with np.errstate(invalid="ignore", divide="ignore"):
+            out[s0:e0] = pv[k0:] / np.where(vol[k0:] > 0, vol[k0:], np.nan)
     return out
 
 
@@ -298,6 +350,30 @@ def compute(df, tf_ms, s=None):
         f["vwap"] = (tp * v).groupby(day).cumsum() / v.groupby(day).cumsum().replace(0, np.nan)
     else:
         f["vwap"] = np.nan                                            # not meaningful on 1D and above
+    f["avwap_day"] = f["vwap"]                                        # Phase 18 C: VWAP anchored at the daily open
+
+    # ---------- Phase 18 C: Fibonacci, VWAP anchored at the last swing, Ichimoku (all from closed candles) ----------
+    pos = np.arange(n)
+    hi_at = pd.Series(np.where(f["swing_high"].fillna(False).to_numpy(dtype=bool), pos - k, np.nan)).ffill().to_numpy()
+    lo_at = pd.Series(np.where(f["swing_low"].fillna(False).to_numpy(dtype=bool), pos - k, np.nan)).ffill().to_numpy()
+    H, L = f["last_swing_high"].to_numpy(dtype=float), f["last_swing_low"].to_numpy(dtype=float)
+    known = np.isfinite(hi_at) & np.isfinite(lo_at)
+    up_leg = known & (hi_at > lo_at)                  # the newest confirmed swing is a high: the last leg went UP
+    f["fib_dir"] = np.where(known, np.where(up_leg, 1.0, -1.0), np.nan)
+    for r in FIB_LEVELS:                              # retracement of the last leg (up: measured down from the high)
+        f[f"fib_{int(round(r * 1000)):03d}"] = np.where(known, np.where(up_leg, H - r * (H - L), L + r * (H - L)), np.nan)
+    tp_ = ((h + l + c) / 3).to_numpy(dtype=float)
+    vv = v.to_numpy(dtype=float)
+    for name, at in (("avwap_swing_high", hi_at), ("avwap_swing_low", lo_at)):
+        f[name] = _anchored_vwap(tp_, vv, at)
+    tn, kjn, sbn = s["ichimoku"]
+    mid = lambda m: (h.rolling(m, min_periods=m).max() + l.rolling(m, min_periods=m).min()) / 2
+    f["ichi_tenkan"], f["ichi_kijun"] = mid(tn), mid(kjn)
+    f["ichi_span_a"] = ((f["ichi_tenkan"] + f["ichi_kijun"]) / 2).shift(kjn)   # computed kijun candles AGO
+    f["ichi_span_b"] = mid(sbn).shift(kjn)
+    f["ichi_cloud_top"] = np.fmax(f["ichi_span_a"], f["ichi_span_b"])
+    f["ichi_cloud_bottom"] = np.fmin(f["ichi_span_a"], f["ichi_span_b"])
+    # (the chikou span - the close drawn kijun candles BACK - is left out on purpose: in a backtest it is lookahead)
 
     for col in BOOL_FEATURES + ["structure_up", "structure_down"]:
         f[col] = f[col].fillna(False).astype(bool)

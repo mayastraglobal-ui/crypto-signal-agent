@@ -30,6 +30,7 @@ import yaml
 from engine import attribution as att
 from engine import memory as mem
 from engine import regime as rg
+from engine import idea_queue as iq
 from engine import research_loop as rloop
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
@@ -211,6 +212,8 @@ def check_lab(base, new, current, library, now, quota=None, memory=None):
         probs += [f"{tag}: {x}" for x in sspec.factory_problems(c, LOSS_TAGS)]
         if memory is not None and not c.get("twin_of"):         # Phase 18 A: the parent record must exist
             probs += [f"{tag}: {x}" for x in rloop.parent_exists_problems(c, memory, LOSS_TAGS)]
+        if memory is not None:                                  # Phase 18 C: a queued card is copied unchanged
+            probs += [f"{tag}: {x}" for x in iq.copy_problems(c, iq.parse(memory.get(rloop.FILES["experiment"])))]
     # Claude's own limits: the engine's variant-search cards do not use them up (they have their own quota)
     mine = [c for c in cur + added if isinstance(c, dict) and c.get("factory") != "variant_search"]
     days = [_day(c.get("added")) for c in mine]

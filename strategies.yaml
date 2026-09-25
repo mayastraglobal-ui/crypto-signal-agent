@@ -67,6 +67,16 @@
 #                                          candles); e.g. funding_z(200) > 2 = crowded longs (Phase 17 C)
 #    oi  oi_chg(24)                     -> open interest (USD) and its % change over n candles
 #    ls_ratio  taker_ratio              -> long/short account ratio; taker buy / sell volume ratio (per hour)
+#    fib_382 fib_500 fib_618 fib_786    -> Fibonacci retracement levels of the last confirmed swing leg; fib_dir =
+#                                          +1 when that leg went up (levels measured down from its high), -1 down
+#    avwap_day                          -> VWAP anchored at the daily open (00:00 UTC; the same as vwap)
+#    avwap_swing_low avwap_swing_high   -> VWAP anchored at the last confirmed swing low / high
+#    vp_poc(100) vp_vah(100) vp_val(100) -> volume profile of the last n candles: point of control, value area
+#                                          high / low (70% of the volume)
+#    ichi_tenkan ichi_kijun             -> Ichimoku (9 / 26); ichi_span_a ichi_span_b ichi_cloud_top ichi_cloud_bottom
+#                                          = the cloud at this candle (computed 26 candles earlier - no chikou span,
+#                                          which would look into the future)
+#                                          (Phase 18 C - all from closed candles only)
 #    btc_ret(4)                         -> BTC's % return over its last n candles (lead-lag ideas)
 #                                          (futures data is recorded hourly since Phase 17 C: history is short at
 #                                          first; unknown values make a rule false)

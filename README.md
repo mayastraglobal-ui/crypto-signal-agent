@@ -405,6 +405,21 @@ and the bar.
 - The research run reports its duration (budget `research.time_budget_min`, 90 min); after 60% of the budget the rule
   test is skipped for the remaining coins.
 
+## More ideas and tools (Phase 18 C)
+- **New building blocks** (engine/features.py, scanner.make_namespace; documented at the top of `strategies.yaml`),
+  all from closed candles only (tested: the same values when later candles are removed, and when history starts later):
+  - Fibonacci retracements of the last confirmed swing leg: `fib_382`, `fib_500`, `fib_618`, `fib_786`, `fib_dir`
+    (+1 = the leg went up);
+  - anchored VWAP: `avwap_day` (from the daily open), `avwap_swing_low` / `avwap_swing_high` (from the last swing);
+  - volume profile of the last n candles: `vp_poc(n)`, `vp_vah(n)`, `vp_val(n)` (point of control, 70% value area);
+  - Ichimoku: `ichi_tenkan`, `ichi_kijun`, `ichi_span_a`, `ichi_span_b`, `ichi_cloud_top`, `ichi_cloud_bottom` (the
+    cloud as known at the candle; no chikou span - it looks into the future).
+- **Idea queue**: 10 well-known ideas from freqtrade-strategies (R4, GPL - rewritten, no code copied) are queued in
+  `memory/experiments.md` (`Queue: R4-...` records): BbandRsi, ClucMay72018, hlhb, AwesomeMacd, VolatilitySystem,
+  TrendFollowingStrategy, Supertrend, Strategy001, AdxSmas, Simple. The weekly research pastes the next ones into the
+  lab unchanged (only `added`), within the literature quota (2 a week): about 5 weeks for all 10. The guard refuses a
+  changed copy.
+
 ## Approving a strategy (your yes)
 
 A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,
