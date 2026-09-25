@@ -174,3 +174,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 03:30,BNB,30m,FVG,bear,,774.8,777.26,0.809,Asia,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-25 03:30,BNB,15m,OB_RETEST,bull,,769.57,771.78,,Asia,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
 2026-09-25 03:30,BNB,15m,FVG_FILLED,bull,,771.45,774.23,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 04:45,ETH,15m,FVG_RETRACE,bear,,2684.01,2688.81,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 05:00,ETH,15m,FVG,bull,,2676.99,2678.8,0.251,,1h,RANGE,,smc-1.0,Binance
+2026-09-25 05:15,ETH,15m,FVG_RETRACE,bull,,2676.99,2678.8,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 05:00,XRP,30m,FVG_FILLED,bear,,1.5329,1.541,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-25 04:45,XRP,15m,WEAK_BREAK,bull,1.5345,,,0.589,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-25 04:45,XRP,15m,OB_RETEST,bear,,1.541,1.5538,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-25 04:45,XRP,15m,FVG_FILLED,bear,,1.533,1.541,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-25 04:30,LTC,15m,SWEEP,bull,70.21,,,0.403,,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-25 04:30,LTC,15m,FVG_FILLED,bull,,70.0,70.53,,,1h,WEAK_BULL,,smc-1.0,Binance

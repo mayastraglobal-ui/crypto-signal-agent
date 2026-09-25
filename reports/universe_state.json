@@ -14,7 +14,7 @@
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25"
  },
- "runs": 11,
+ "runs": 12,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -33,13 +33,10 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [
-   "thin_book"
-  ],
+  "AVAX": [],
   "ENA": [],
   "SAGA": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ],
