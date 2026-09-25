@@ -626,6 +626,39 @@ def load_research(offline=False):
         return None
 
 
+def load_cards():
+    """strategies.yaml + strategies_lab.yaml (Phase 17), checked. A broken lab file is reported and skipped - the
+    library still runs. Returns (runnable cards, problems, idle cards, lab cards moved into strategies.yaml)."""
+    with open(os.path.join(ROOT, sspec.LIBRARY_FILE)) as f:
+        main = yaml.safe_load(f)
+    lab, lab_problem = [], None
+    path = os.path.join(ROOT, sspec.LAB_FILE)
+    if os.path.exists(path):
+        try:
+            with open(path) as f:
+                lab = yaml.safe_load(f) or []
+            if not isinstance(lab, list):
+                lab, lab_problem = [], "the file must be a list of cards"
+        except yaml.YAMLError as e:
+            lab_problem = f"not readable ({str(e).splitlines()[0]})"
+    ok, problems, idle, moved = sspec.load_library(main, lab, rg.LABELS, TF_ORDER)
+    if lab_problem:
+        problems[sspec.LAB_FILE] = [lab_problem + " - no lab card was run"]
+    return ok, problems, idle, moved
+
+
+def emailable_now(plans):
+    """[ENTRY] emails at the signal candle: APPROVED, not waiting for its 5m bar, not refused by the risk engine -
+    and never a lab card (Phase 17; lab_status already keeps them out of APPROVED - this is the second lock)."""
+    return [p for p in plans if p["stage"] == "APPROVED" and not p.get("lab") and not p["confirm_5m"]
+            and not p["no_trade"]]
+
+
+def lab_status(spec, status):
+    """A lab card is never APPROVED (the operator moves it into strategies.yaml first): it stays in paper."""
+    return "PAPER_TRADING" if spec.get("lab") and status == "APPROVED" else status
+
+
 def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
     """One scoreboard line: lifecycle status, Layers B/C from research (rc), Layer A from this run."""
     gc = gc or dict(raw=0, regime=0, permission=0, stop=0, target=0)
@@ -635,6 +668,7 @@ def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
     wf = ev.get("walk_forward", {})
     pert = ev.get("perturbation", {})
     return dict(strategy=x["id"], version=x["version"], family=x["family"], gate=x["gate"], tf=tf, status=status,
+                lab=bool(x.get("lab")),
                 status_since=reg_cell.get("since_utc"), researched=rc is not None,
                 history_from=(rc or {}).get("history_from"),
                 trades=b_all.get("n"), win_rate=b_all.get("win_rate"), avg_r=b_all.get("avg_r"),
@@ -1455,9 +1489,8 @@ def main():
     os.makedirs(REPORTS, exist_ok=True)
     started = dt.datetime.now(dt.timezone.utc)
 
-    # ---------- strategy ID cards (spec v3) + the registry of tested versions ----------
-    strategies, spec_problems, idle = sspec.load(
-        yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml"))), rg.LABELS, TF_ORDER)
+    # ---------- strategy ID cards (spec v3; strategies.yaml + the lab) + the registry of tested versions ----------
+    strategies, spec_problems, idle, _ = load_cards()
     reg_path = os.path.join(REPORTS, "strategy_registry_offline.csv") if args.offline else REGISTRY
     reg_src = reg_path if os.path.exists(reg_path) else REGISTRY      # offline starts from the real one
     registry = (lc.registry_from_frame(pd.read_csv(reg_src, dtype={"version": str}))
@@ -1688,7 +1721,7 @@ def main():
                 per.setdefault(k3, {})[base] = tr
                 if base in signal_set and (XL is not None or XS is not None):
                     exits[(base, tf, sspec.key(s))] = (df["close_time"].to_numpy(), XL, XS)
-                tracked = registry["cells"].get(f"{sspec.key(s)}|{tf}", {}).get("status")
+                tracked = lab_status(s, registry["cells"].get(f"{sspec.key(s)}|{tf}", {}).get("status"))
                 if base in signal_set and tracked in ("VALIDATION", "PAPER_TRADING", "APPROVED"):
                     watching += setup_states(s, tf, fr, cfg, base, tracked)
                 # ---- fresh signals on the last closed candles (all candles since the previous hourly run) ----
@@ -1759,7 +1792,7 @@ def main():
     for x in strategies:
         for tf in [t for t in tfs if t in x["timeframes"]]:
             k3, ck = (x["id"], x["version"], tf), f"{x['id']}@{x['version']}|{tf}"
-            status = registry["cells"].get(ck, {}).get("status") or "FORMALIZED"
+            status = lab_status(x, registry["cells"].get(ck, {}).get("status") or "FORMALIZED")
             verdict[k3] = status
             board.append(board_row(x, tf, status, registry["cells"].get(ck, {}), cells.get(ck),
                                    per.get(k3, {}), gate_counts.get(k3), fwd.get(k3), now_ms, RC))
@@ -1827,7 +1860,8 @@ def main():
         strat = by_key[f"{sgl['strategy']}@{sgl['version']}"]
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
-            version=sgl["version"], stage=stage, family=strat["family"], confirm_5m=sgl["confirm_5m"],
+            version=sgl["version"], stage=stage, lab=bool(strat.get("lab")), family=strat["family"],
+            confirm_5m=sgl["confirm_5m"],
             state=pos.AWAITING if sgl["confirm_5m"] else pos.ACTIVE,
             conditions=sgl["conditions"], session=sgl["session"],
             direction="LONG" if d == 1 else "SHORT", market=market_type(d),
@@ -1871,7 +1905,7 @@ def main():
     apply_risk(plans, rk.Book(logdf, started, RK, groups))
     # emailed: APPROVED entries. An APPROVED 5m-confirmed setup waits for its 5m bar first (AWAITING_5M,
     # in the position book); emails on its later state changes arrive with Phase 12.
-    emailable = [p for p in final if p["stage"] == "APPROVED" and not p["confirm_5m"] and not p["no_trade"]]
+    emailable = emailable_now(final)
     watch = [p for p in final if p not in emailable and not p["no_trade"]][: cfg["signals"]["max_in_report"]]
     final = emailable[: cfg["signals"]["max_in_report"]]
 
@@ -1968,7 +2002,9 @@ def main():
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
     daily["claude_review"] = claude_review(started)          # Phase 14: yesterday's Claude daily review, if any
     weekly = (digest.weekly(started, logdf, board, research, read_text(os.path.join(MEMORY, "strategy_lifecycle.md")),
-                            *claude_weekly(started)) if digest.is_weekly_time(started) else None)
+                            *claude_weekly(started), read_text(os.path.join(MEMORY, "trials.csv")),
+                            float(cfg["research"].get("trials_alpha", 0.05)))
+              if digest.is_weekly_time(started) else None)
 
     # ---------- data-quality report ----------
     dq_out = dict(
@@ -2102,6 +2138,8 @@ def main():
                lifecycle=dict(registry=os.path.relpath(REGISTRY, ROOT), experiments=len(registry["versions"]),
                               changes=(research or {}).get("changes", []),
                               approval=(research or {}).get("approval") or {},
+                              trials=(research or {}).get("trials"),
+                              lab_cards=sum(bool(x.get("lab")) for x in strategies),
                               research_run=(research or {}).get("run_utc"),
                               candidate_lessons=(research or {}).get("candidate_lessons", []),
                               missed_moves=(research or {}).get("missed_moves", []),
@@ -2744,7 +2782,8 @@ def render_scoreboard(o, w):
         stable = "-" if b["perturb_stable"] is None else ("stable" if b["perturb_stable"] else "✗ ") + \
             (f" {b['perturb_worst']}" if not b["perturb_stable"] and b["perturb_worst"] else "")
         wf = "-" if b["walk_forward"] is None else b["walk_forward"] + ("" if b["walk_forward_passed"] else " ✗")
-        w(f"| {b['strategy']} | {b['version']} | {b['tf']} | **{b['status']}** | {num(b['trades'], '{}')} | "
+        w(f"| {b['strategy']}{' 🧪 lab' if b.get('lab') else ''} | {b['version']} | {b['tf']} | **{b['status']}** | "
+          f"{num(b['trades'], '{}')} | "
           f"{num(b['win_rate'], '{}')} | {num(b['avg_r'], '{:+.3f}')} | {num(b['profit_factor'], '{}')} | "
           f"{num(b['max_dd_r'], '{}R')} | {num(b['develop_avg_r'])} / {num(b['validate_avg_r'])} | "
           f"{num(b['long_avg_r'])} / {num(b['short_avg_r'])} | {wf} | {num(b['stress_avg_r'])} | {stable} | "
@@ -2760,6 +2799,16 @@ def render_lifecycle(g, board, w):
     w("IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING (automatic) → APPROVED (only with your yes). "
       f"Strategy versions tested so far: **{g['experiments']}** (`memory/experiments.md`); full record per version "
       "and timeframe in `memory/strategy_registry.csv`.\n")
+    tr = g.get("trials")
+    if tr:
+        w(f"**Trials counter:** {tr['total']} strategy / version / timeframe tests so far (`memory/trials.csv`). "
+          f"The more ideas are tested, the more one looks good by luck, so PAPER_TRADING now also needs a t-statistic "
+          f"of the average trade ≥ **{tr['need_t']:.2f}** (Bonferroni: family-wise false-winner rate "
+          f"{tr['alpha']:g} over {tr['total']} trials; with 1 trial it would be {tr['need_t_one']:.2f}).\n")
+    if g.get("lab_cards"):
+        w(f"🧪 **Strategy lab:** {g['lab_cards']} card(s) from `strategies_lab.yaml` (written by Claude's reviews). "
+          "They are tested exactly like the library and can reach PAPER_TRADING, but never send emails and are never "
+          "APPROVED - to approve one, move the card into `strategies.yaml` by pull request.\n")
     twins = [b for b in board if b["control_twin"]]
     if twins:
         w("**SMC vs control twin** (the same idea without the SMC part; SMC is only kept if it wins overall AND in the "

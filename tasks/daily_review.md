@@ -2,6 +2,7 @@
 
 Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-daily`. Your fact sheet is
 `python brain_pack.py daily`. The `## Summary` of your file goes into the next morning's [DAILY] email.
+You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
 
 ## Steps
 1. Run the start commands from COMMON.md. Read the fact sheet, then your last daily reviews, then
@@ -27,7 +28,9 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-daily`.
    - Write it as a **hypothesis** with exactly one change: "v1.1: add rel_vol > 1.5 because
      low_relative_volume is systematic in 38% of losses (n = 64)".
    - Queue it as a record in `memory/experiments.md` (evidence `HYPOTHESIS`).
-   - Do NOT open a pull request for it here. The weekly research picks from the queue.
+   - If it is strong enough to test now, ALSO append it as a card to `strategies_lab.yaml` (COMMON.md rule 4:
+     a new version changing exactly that one thing, `added` = today). Stay within the limits the fact sheet
+     shows; leave room for the weekly research (usually at most 1 card a day from the daily review).
 6. **Memory reviews due.** For each record the fact sheet lists, add a NEW record to the same file:
    - title `Review: <old title>`;
    - status CONFIRMED, REJECTED or KEEP, with what today's evidence says;
@@ -48,7 +51,7 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-daily`.
    - `## Losses and why`
    - `## Missed moves`
    - `## Regime`
-   - `## Refinements queued`
+   - `## Refinements queued` (and the lab cards you added, if any)
    - `## Reviews done`
    - `## Lessons`
    - `## Tomorrow`: what to watch, and what NOT to do.

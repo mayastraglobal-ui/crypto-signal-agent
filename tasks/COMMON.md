@@ -14,7 +14,8 @@ output and carry on.
   - invent citations. A source needs a real URL you actually opened in this run. If you could not fetch it,
     say so.
   - mix BACKTEST, PAPER and LIVE results. Always name which one a number is.
-  - change code, `config.yaml`, `strategies.yaml`, workflows, fees, risk limits or gates (section 17).
+  - change code, `config.yaml`, `strategies.yaml`, workflows, fees, risk limits or gates (section 17). New
+    strategy ideas go into `strategies_lab.yaml` (rule 4 below).
 - **The operator is a beginner** (section 24). Use simple English and short sentences. Explain each term the
   first time you use it. Number your reasons. Say clearly what to do and what **not** to do. "No trade" is a
   valid result.
@@ -61,15 +62,32 @@ the end of the fact sheet.
    - `source` must be an https page on an official site: bls.gov, bea.gov, federalreserve.gov, census.gov,
      treasury.gov, ecb.europa.eu, boj.or.jp, or binance.com for exchange incidents.
    - Never add a date you could not see on or through that official site. Say in your output what is missing.
-4. **Nothing else.**
-   - A new strategy idea or a new version: your session can only push to your task branch, so write the exact
-     new `strategies.yaml` card (a new version, a changelog line, exactly ONE change per version) in your output
-     under "Candidates", marked **PROPOSED - not opened**. The operator (or the build session) opens the pull
-     request; it is not tested before the operator merges it.
+4. **Daily review and weekly research only: new strategy cards at the END of `strategies_lab.yaml`** (the
+   strategy lab, Phase 17). The engine tests them exactly like `strategies.yaml` (same fees, gates and tests) and
+   they may reach PAPER_TRADING on their own - but they never send emails and are never APPROVED; the operator
+   moves a card into `strategies.yaml` by pull request to approve it.
+   - Only add; never change or delete a card (the operator corrects the file).
+   - Write the card exactly like the cards in `strategies.yaml` (read its header), plus three fields:
+     `evidence_class` (the class of its source, e.g. `CLAIM` or `RESEARCH_FINDING`), `source_url` (a URL you
+     opened, or leave it out) and `added: "YYYY-MM-DD"` (today, UTC).
+   - `status: FORMALIZED`. A NEW id, or a NEW version of an existing id (the fact sheet lists the latest versions)
+     that changes **exactly ONE thing** and has a changelog line starting with its version.
+   - Only the building blocks listed at the top of `strategies.yaml` (the guard refuses anything else, e.g.
+     `np.`, `.shift()`, text, `**`).
+   - `targets` with the **first target at least 2R** (`"2R"`, `"max(2R, smc_liq_above)"`, or a level with
+     `need.min_r: 2.0`) - the config default (TP 1R) is not accepted for lab cards.
+   - A card whose entry rules use SMC / ICT building blocks (`smc_*`, `h4_*`) or `confirm_5m: true` needs
+     `control_twin:` = a card with `twin_of: <this id>` that is the same idea WITHOUT that ingredient (add the twin
+     in the same push if it does not exist).
+   - At most **3 new cards per UTC day and 10 per 7 days**, both tasks together (the fact sheet says how many are
+     left). A control twin counts. Fewer, better ideas: every test raises the pass bar for all (trials counter).
+   - Never loosen fees, risk or gates to make a card pass.
+5. **Nothing else.** (Code, `config.yaml`, `strategies.yaml`, workflows and the engine's own files are changed only
+   through a pull request the operator merges.)
 
 ## End of every run
 ```bash
-git add <your file> memory/        # weekly research: also events.yaml when you added entries
+git add <your file> memory/        # + events.yaml (weekly) / strategies_lab.yaml when you added to them
 git commit -m "<Briefing|Daily review|Weekly research> <date>"
 git push -f origin <your task branch>
 ```

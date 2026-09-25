@@ -6,7 +6,8 @@ Run by the Brain workflow (.github/workflows/brain.yml) in a checkout of main. F
 (claude/brain-briefing, claude/brain-daily, claude/brain-weekly) with a new commit since the last run:
 
   1. compare the branch with the main it started from (git merge-base)
-  2. engine/brain.review(): only new reports/claude/ files and record additions to the knowledge files pass
+  2. engine/brain.review(): only new reports/claude/ files, record additions to the knowledge files, calendar
+     entries (events.yaml) and lab strategy cards (strategies_lab.yaml) pass
   3. all good -> copy them onto THIS (newest) main: new files are written, additions appended at the end
      any problem -> nothing from that push is applied, and the problems go into the [SYSTEM] email
 
@@ -63,7 +64,8 @@ def handle(branch, state, now):
         return None                                        # already handled
     subject = git("log", "-1", "--format=%s", sha).stdout.strip()
     changes = changes_of(sha)
-    applies, probs, skipped = brain.review(changes, {c["path"]: read(c["path"]) for c in changes})
+    paths = {c["path"] for c in changes} | {brain.sspec.LIBRARY_FILE}      # the library: lab cards are checked against it
+    applies, probs, skipped = brain.review(changes, {p: read(p) for p in paths}, dt.datetime.now(dt.timezone.utc), branch)
     for a in applies:
         full = os.path.join(ROOT, a["path"])
         os.makedirs(os.path.dirname(full), exist_ok=True)

@@ -8,6 +8,7 @@ stops the run if an earlier line was changed or removed (section 17).
 |---|---|---|---|---|
 | `strategy_registry.csv` | Per strategy version × timeframe: status, metrics, gates, dates | engine (research run) | daily | no - statuses update |
 | `experiments.md` | Every strategy version ever tested (EXP-ID, hypothesis) | engine (research run) | first test of a version | yes |
+| `trials.csv` | Every strategy version × timeframe ever tested (one row each) - the trials counter that raises the PAPER_TRADING bar | engine (research run) | first test of a cell | yes |
 | `strategy_lifecycle.md` | Every status change and why | engine (research run) | on change | yes |
 | `failure_journal.md` | Every logged signal that lost: conditions, tags, MAE / MFE | engine (hourly scan) + reviews | on a loss | yes |
 | `missed_trades.md` | Strong moves and whether they were identifiable before | engine (research run) | daily, if any | yes |

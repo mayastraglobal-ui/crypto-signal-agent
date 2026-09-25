@@ -74,9 +74,15 @@ def eligible(status, paper, backtest_avg_r, S):
     return not reasons, reasons
 
 
-def decide(status, listed, ok, reasons):
+def decide(status, listed, ok, reasons, lab=False):
     """The status after the operator's approvals list is applied (after the automatic lifecycle move).
-    listed = this cell's approvals entry or None. Returns (status, note, warning)."""
+    listed = this cell's approvals entry or None; lab = a strategies_lab.yaml card (Phase 17), which is never
+    approved - the operator moves it into strategies.yaml by pull request first. Returns (status, note, warning)."""
+    if lab:
+        if status == "APPROVED":
+            status = "PAPER_TRADING"
+        return status, "", ("approval not applied - a lab card (strategies_lab.yaml) is never approved: copy the card "
+                            "unchanged into strategies.yaml by pull request first" if listed else None)
     if status == "PAPER_TRADING" and listed:
         if ok:
             return "APPROVED", f"operator approved on {listed['date']}", None
@@ -114,6 +120,10 @@ def pack(cell, spec, lineage, board_row, S, now_txt):
     L = [f"# Approval pack: {k}", "",
          f"Written by the engine on {now_txt} UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.",
          "", "**Question: Approve " + k + " for live emails? (yes/no)**", "",
+         *(["**This is a LAB card** (`strategies_lab.yaml`, written by Claude's reviews). A lab card never sends "
+            "emails and is never approved. To say yes: FIRST copy the card unchanged into `strategies.yaml` by pull "
+            "request (same id and version - its results carry over), THEN add the line below.", ""]
+           if spec.get("lab") else []),
          "To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):",
          "```", f"  - {{strategy: {cell['strategy']}, version: \"{cell['version']}\", tf: {cell['tf']}, "
                 f"date: {now_txt[:10]}}}", "```",

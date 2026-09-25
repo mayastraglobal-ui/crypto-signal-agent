@@ -194,6 +194,9 @@ research:                    # daily research run (research.py, workflow "Resear
   paper_retire_last_n: 20        # RETIRED if the last 20 paper signals average ...
   paper_retire_below_r: -0.10    # ... below -0.10R
   paper_max_dd_r: 8              # ... or the paper record loses more than 8R from its best point
+  trials_alpha: 0.05             # trials counter (memory/trials.csv, Phase 17): PAPER_TRADING also needs the average
+                                 # trade's t-statistic >= z(1 - 0.05 / number of trials ever tested) - Bonferroni.
+                                 # More ideas tested -> a higher bar, so luck does not make "winners". Never raise it.
 
 attribution:                 # failure attribution (AGENT_PROMPT.md section 17) - engine/attribution.py
   range_adx: 20              # range_market: ADX(14) on the trade's own timeframe below 20 (choppy)
