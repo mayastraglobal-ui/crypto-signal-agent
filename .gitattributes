@@ -17,3 +17,6 @@ reports/position_events.csv merge=union
 memory/trials.csv merge=union
 memory/market_mechanics.md merge=union
 strategies_lab.yaml merge=union
+reports/claude/runs.csv merge=union
+memory/retired_cards.csv merge=union
+memory/cleanup_log.md merge=union

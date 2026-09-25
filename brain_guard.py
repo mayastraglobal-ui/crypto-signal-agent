@@ -86,7 +86,24 @@ def handle(branch, state, now):
                status="rejected" if probs else "applied", problems=probs,
                applied=[a["path"] for a in applies], skipped=skipped)
     state[branch] = {k: res[k] for k in ("sha", "subject", "when", "status", "problems", "applied")}
+    log_run(res)
     return res
+
+
+RUNS = os.path.join(ROOT, "reports", "claude", "runs.csv")
+
+
+def log_run(res):
+    """reports/claude/runs.csv (append-only): every task push the guard handled - for the weekly report card."""
+    import csv
+    new = not os.path.exists(RUNS)
+    os.makedirs(os.path.dirname(RUNS), exist_ok=True)
+    with open(RUNS, "a", newline="") as f:
+        w = csv.writer(f, lineterminator="\n")
+        if new:
+            w.writerow(["when", "branch", "sha", "status", "problems", "applied"])
+        w.writerow([res["when"], res["branch"], res["sha"][:8], res["status"], len(res["problems"]),
+                    len(res["applied"])])
 
 
 def main():

@@ -327,6 +327,20 @@ def factory_lines(now, research):
     return out
 
 
+def cleanup_lines(now):
+    """Phase 17 D: in the first 3 days of a month, the monthly clean-up's lesson work for the daily review."""
+    text = read(os.path.join(MEMORY, "cleanup_log.md")) or ""
+    head = f"## {now:%Y-%m} clean-up"
+    if now.day > 3 or head not in text:
+        return []
+    part = text[text.rindex(head):].split("\n## ", 1)[0]
+    return ["", "## Monthly clean-up (do it in this review - add records only, never edit or delete)",
+            "- for each duplicate pair: ONE record 'Merged: <title>' in lessons.md naming both old titles and the "
+            "combined lesson (evidence from the fact sheet)",
+            "- for each re-check: ONE record 'Re-check: <title>' with status CONFIRMED / WEAKENED / REJECTED and the "
+            "numbers below"] + [f"  {ln}" for ln in part.splitlines()[1:] if ln.strip()]
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -420,8 +434,15 @@ def pack(kind, now, live=None):
     out += factory_lines(now, research)
     if kind == "daily":
         out += curriculum_lines()
+        out += cleanup_lines(now)
     if kind == "weekly":
         out += calendar_lines(now)
+        from engine import report_card as rcard
+        try:
+            out += ["", "## Agent report card (the engine's numbers - base your ONE process improvement on them)"]
+            out += rcard.lines(rcard.collect(ROOT, now, research, logdf))
+        except Exception as e:
+            out.append(f"- report card not available ({type(e).__name__}: {e})")
     st = mem.status(MEMORY, now)
     out += ["", "## Memory reviews due (write a NEW review record for each; never edit the old one)"]
     out += [f"- {d['file']}: {d['title']} (due {d['review']})" for d in st["due"][:30]] or ["- none"]

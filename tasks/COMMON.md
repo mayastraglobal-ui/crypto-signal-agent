@@ -114,4 +114,12 @@ git push -f origin <your task branch>
 Within about 15 minutes, the Brain workflow checks your push, copies it to main and emails briefings. If it
 refuses the push, the operator gets a [SYSTEM] email with the reasons, and nothing from this run is saved.
 
-Every output ends with: **Research signal. Not financial advice.**
+Every output ends with two short sections (the engine's weekly report card reads them - Phase 17 D), then the
+disclaimer:
+```
+## Pages that failed to open
+- <URL> (<why: blocked / 404 / paywall / timeout>)        or: - none
+## Run log
+- run: started 2026-09-27 01:53 UTC, finished 2026-09-27 02:31 UTC; problems: none   (or: usage limit / tool error ...)
+```
+**Research signal. Not financial advice.**

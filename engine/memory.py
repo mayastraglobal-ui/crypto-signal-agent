@@ -60,7 +60,8 @@ APPEND_ONLY = ["memory/changelog.md", "memory/experiments.md", "memory/strategy_
                "memory/market_regime_log.md", "memory/smc_events.csv", "memory/failure_journal.md",
                "memory/missed_trades.md", "memory/lessons.md", "memory/research_sources.md", "memory/coin_notes.md",
                "memory/execution_notes.md", "reports/position_events.csv", "memory/trials.csv", "strategies_lab.yaml",
-               "memory/market_mechanics.md"]
+               "memory/market_mechanics.md", "reports/claude/runs.csv", "memory/retired_cards.csv",
+               "memory/cleanup_log.md"]
 LINE_RE = re.compile(r"^- timestamp: (.*)$")
 
 
