@@ -27,9 +27,13 @@ output and carry on.
 ```bash
 git fetch origin main && git checkout -B <your task branch> origin/main   # always start from the newest main
 pip install -q -r requirements.txt 2>/dev/null || true                    # only needed once per machine
-python publish_live.py --restore                                         # the large engine files (latest.json, research.json)
+python publish_live.py --refresh                                         # the NEWEST large engine files (latest.json, research.json) -
+                                                                         # always overwrites: this session keeps files from earlier runs
 python brain_pack.py <briefing|daily|weekly>                             # your fact sheet: all the numbers + WHERE TO WRITE
 ```
+If the fact sheet starts with **"!!! STALE ENGINE FILES"**, run `python publish_live.py --refresh` again and
+rebuild the fact sheet. If the warning stays, say so at the top of your output and do not present the numbers as
+current.
 The task branch is:
 - `claude/brain-briefing` for briefings;
 - `claude/brain-daily` for the daily review;

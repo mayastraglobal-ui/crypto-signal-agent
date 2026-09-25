@@ -296,3 +296,18 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Tasks:** the fact sheet (`brain_pack.py`, all three tasks) has a new "Outside feeds" part: freshness and failed sources, Fear & Greed, headlines of the last 12 h / 24 h / 7 days, Binance notices, Deribit expiries. `tasks/briefing.md` step 3 starts from it.
 - **Not verified live:** this build session cannot reach these sites. The parsers are tested on sample payloads shaped like the real ones; the first hourly run shows each source's status in the file. Binance may refuse GitHub's US-based runners; if so, that source reads "error" and the rest still work.
 - Tests: new `tests/test_feeds.py` (9 tests).
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Claude tasks always use the newest engine files
+- **Bug:** Claude's task sessions are persistent, and `publish_live.py --restore` only copies files that are missing. So later runs kept old copies: the 14:20 Beijing briefing used the 00:26 UTC `latest.json`, although scans had run at 05:18 and 06:24.
+- **Fix 1:** new `python publish_live.py --refresh`, which always overwrites `reports/` with the newest live-reports copy. The start commands in `tasks/COMMON.md` (all three tasks) now use it. The workflows keep `--restore`, which never replaces a file of the current run.
+- **Fix 2:** `brain_pack.py` checks the local engine files before anything else. The fact sheet starts with "!!! STALE ENGINE FILES" when:
+  - `latest.json` is older than the "Updated" time in `reports/latest.md` on main;
+  - any engine file differs from the newest live-reports commit, compared by git blob hash;
+  - an engine file is missing locally.
+
+  The task must then refresh again, or say so at the top of its output.
+- **Tests** (`tests/test_publish.py`): a second run in the same session, on real git repositories:
+  - `--restore` keeps the old copy, and the warning shows;
+  - `--refresh` gets the new copy, and the warning is gone;
+  - the warning rules work without a live branch;
+  - the start commands use `--refresh`.
