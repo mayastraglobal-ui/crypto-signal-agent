@@ -40,7 +40,7 @@ NEW_FILES = {                                            # folder -> allowed fil
 }
 KNOWLEDGE = ["memory/lessons.md", "memory/failure_journal.md", "memory/missed_trades.md",
              "memory/research_sources.md", "memory/coin_notes.md", "memory/feature_notes.md",
-             "memory/smc_research.md", "memory/experiments.md"]
+             "memory/smc_research.md", "memory/experiments.md", "memory/market_mechanics.md"]
 LESSON_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE"]      # section 17.7: validated lessons only
 MAX_KB = 64                                              # per new file / per addition
 MAX_FILES = 12

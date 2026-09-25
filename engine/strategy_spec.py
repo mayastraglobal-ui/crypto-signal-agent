@@ -48,6 +48,13 @@ LIBRARY_FILE, LAB_FILE = "strategies.yaml", "strategies_lab.yaml"
 EVIDENCE_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE", "CLAIM", "HYPOTHESIS", "MODEL_OUTPUT",
                     "UNVERIFIED_OPINION"]           # = engine/memory.py (section 22)
 MIN_TP1_R = 2.0                                     # a lab card's first target is at least 2R away
+# the edge block (Phase 17 B): WHY a strategy should make money, in four plain lines. Required on lab cards (not on
+# control twins, which are benchmarks). The engine adds the measured evidence next to it; it never proves the edge.
+EDGE_KEYS = {"who_pays": "who is on the other side of the trade, and why they lose",
+             "mechanism": "what market behaviour makes the move happen",
+             "fails_when": "the regimes / conditions where it should NOT work",
+             "kill_rule": "the result that would show the edge is gone"}
+EDGE_MIN_CHARS = 20
 # the building blocks a rule may use (the rule namespace of scanner.make_namespace + the feature / SMC columns;
 # tests/test_lab.py checks these lists against the engine's real namespace)
 FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "macd_hist", "bb_mid", "bb_upper",
@@ -464,6 +471,8 @@ def lab_card_problems(card, others, labels, timeframes):
     log = card.get("changelog")
     if not isinstance(log, list) or not any(str(x).startswith(str(card["version"])) for x in log):
         probs.append(f"changelog needs a line starting with \"{card['version']}\" (what this version is / changes)")
+    if not card.get("twin_of"):                                 # a control twin is a benchmark, not an idea
+        probs += edge_problems(card)
     ing = None if card.get("twin_of") else special(card)       # a control twin is itself the benchmark
     twin = others.get(card.get("control_twin")) if card.get("control_twin") else None
     if ing and not card.get("control_twin"):
@@ -480,6 +489,24 @@ def lab_card_problems(card, others, labels, timeframes):
     if card.get("twin_of") and card["twin_of"] not in others:
         probs.append(f"twin_of '{card['twin_of']}' is not in strategies.yaml or strategies_lab.yaml")
     return list(dict.fromkeys(probs))
+
+
+def edge_problems(card):
+    """The edge block: edge: {who_pays, mechanism, fails_when, kill_rule}, each a real sentence."""
+    e = card.get("edge")
+    if not isinstance(e, dict):
+        return ["edge block missing - edge: {" + ", ".join(f"{k}: <{v}>" for k, v in EDGE_KEYS.items()) + "}"]
+    return [f"edge.{k} missing or too short ({EDGE_KEYS[k]}; at least {EDGE_MIN_CHARS} characters)"
+            for k in EDGE_KEYS if len(" ".join(str(e.get(k) or "").split())) < EDGE_MIN_CHARS]
+
+
+def edge_lines(card):
+    """The edge block as plain lines ([] when the card has none)."""
+    e = card.get("edge")
+    if not isinstance(e, dict):
+        return []
+    names = {"who_pays": "Who pays", "mechanism": "Mechanism", "fails_when": "Fails when", "kill_rule": "Kill rule"}
+    return [f"{names[k]}: {' '.join(str(e.get(k) or '-').split())}" for k in EDGE_KEYS]
 
 
 def _vkey(v):

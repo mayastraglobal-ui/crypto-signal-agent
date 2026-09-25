@@ -17,6 +17,8 @@ Pure functions; no internet.
 import datetime as dt
 import re
 
+from engine import strategy_spec as sspec
+
 DEFAULTS = dict(min_paper_signals=20, min_paper_avg_r=0.0, max_divergence_r=0.30)
 
 
@@ -142,6 +144,8 @@ def pack(cell, spec, lineage, board_row, S, now_txt):
          f"- stop: {_kv(spec.get('stop'))} · targets: {_kv(spec.get('targets')) if spec.get('targets') else 'config default'} · "
          f"5m confirmation: {'yes' if spec.get('confirm_5m') else 'no'}",
          "- lineage: " + ("; ".join(f"v{v} first tested {d} ({s})" for v, d, s in lineage) or "this is the first version"),
+         "- edge (why it should work - a hypothesis; sections 2-7 test it): "
+         + (" · ".join(sspec.edge_lines(spec)) or "NOT WRITTEN - ask for an edge block before saying yes"),
          "", "## 2. Backtest (Layers A / B)",
          "- Layer B, whole history: " + _stat(ev["all"]),
          "- Layer B, develop part (first 70%): " + _stat(ev["develop"]),

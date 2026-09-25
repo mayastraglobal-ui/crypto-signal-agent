@@ -34,6 +34,8 @@ DAILY_SENT = os.path.join(REPORTS, "daily_sent.json")
 REMINDERS_SENT = os.path.join(REPORTS, "reminders_sent.json")
 WEEKLY_SENT = os.path.join(REPORTS, "weekly_sent.json")
 BRAIN_SENT = os.path.join(REPORTS, "brain_sent.json")
+CURRICULUM = os.path.join(ROOT, "memory", "curriculum.md")
+CURRICULUM_SENT = os.path.join(REPORTS, "curriculum_sent.json")
 FOOTER = "Research signal. Not financial advice."
 
 
@@ -144,9 +146,27 @@ def daily_email():
     if load(DAILY_SENT, {}).get("date") == d["date"] or int(d["utc"][11:13]) >= 6:
         print(f"Daily email already sent for {d['date']} or not the morning run - skipping.")
         return
-    lines = rep.get("daily_lines") or []
+    lines = list(rep.get("daily_lines") or [])
+    lesson, sent_after = lesson_of_the_day()
+    if lesson:
+        lines += lesson
     if mail(rep, rep.get("daily_subject") or f"[DAILY] {d['date']}", lines):
         save(DAILY_SENT, {"date": d["date"]})
+        if lesson:
+            save(CURRICULUM_SENT, sent_after)
+
+
+def lesson_of_the_day():
+    """The next beginner lesson (memory/curriculum.md) for the daily email - never stops the email."""
+    try:
+        from engine import curriculum as cur
+        with open(CURRICULUM, encoding="utf-8") as f:
+            lessons = cur.parse(f.read())
+        lesson, after = cur.next_lesson(lessons, load(CURRICULUM_SENT, []))
+        return (cur.email_lines(lesson, lessons), after) if lesson else (None, None)
+    except Exception as e:                       # a broken lesson file is not a reason to miss the daily email
+        print(f"curriculum skipped: {e}")
+        return None, None
 
 
 def weekly_email():
