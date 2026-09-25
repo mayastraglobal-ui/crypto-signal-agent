@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "XRP",
   "SOL",
+  "XRP",
   "ZEC",
   "LTC",
   "BNB"
@@ -14,7 +14,7 @@
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25"
  },
- "runs": 13,
+ "runs": 14,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
