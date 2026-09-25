@@ -330,3 +330,21 @@ Newest entries at the bottom. Format: date · who · what · why.
   - The fact sheet shows the playbook for the regimes the signal coins are in right now, and the briefing's regime section uses it. Claude's tasks cannot write it.
 - **`memory/curriculum.md`** (`engine/curriculum.py`): 14 beginner lessons. Each [DAILY] email carries the next one, remembered in `reports/curriculum_sent.json`; the course starts again after the last lesson. A broken lesson file never stops the daily email.
 - Tests: new `tests/test_knowledge.py` (16 tests). `tests/test_lab.py` end-to-end now also checks the offline playbook. Mutation check: 12 of 12 planted bugs caught.
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Phase 17 part B corrections (the operator's full plan)
+- The operator pasted the full Phase 17 plan. Part B had been built from the four names only, and three things differed. They are corrected here:
+- **Edge block:**
+  - It now also needs `type` (behavioural / forced_flow / risk_premium / structural) and `works_in` (the regimes it should work in; a subset of the card's regimes).
+  - Added to all 16 library edge blocks. `works_in` = the card's regimes. Rules and fingerprints are unchanged.
+- **market_mechanics.md:**
+  - New records must name the mechanism and the strategies that use it, as detail lines `- mechanism:` and `- strategies:`; the Brain guard checks this.
+  - The first 10 records are append-only, so they are not edited. A new "Index" record maps each of them to its mechanism and the strategies that use it.
+- **playbook.md:**
+  - It now starts with the table the plan asks for: strategy family × timeframe × BULL / BEAR / RANGE / TRANSITION, with average R and trade count, ✓ for made money and ✗ for lost money.
+  - It is rewritten weekly (the Sunday research run, or when the file is missing); the per-regime detail follows.
+- **curriculum.md is now the agent's rotating reading plan** (24 items: 10 papers, 4 books via public summaries, 3 exchange / data-provider research topics, 5 blow-up post-mortems, 2 interviews).
+  - The daily review studies one item a day (new step 6). The fact sheet names today's item: the first not studied yet, then the one studied longest ago, tracked through `[Cxx]` record titles in research_sources.md.
+  - For each item the review writes one research_sources record and at most one hypothesis.
+  - References are from the build session's memory, are marked as not opened, and contain no URLs; the task checks them on the real source before citing.
+- The beginner lessons for the operator moved to `memory/beginner_course.md` and still come with the [DAILY] email.
+- Tests: test_knowledge.py now has 23 tests (reading plan, rotation, mechanics rule, edge type / works_in, playbook matrix).

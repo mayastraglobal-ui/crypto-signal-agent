@@ -495,12 +495,14 @@ def main():
         write_missed(missed, started, A, mem.review_days(cfg.get("memory"), "missed_trades"))
         write_sources(tested, started, mem.review_days(cfg.get("memory"), "research_sources"))
 
-    # ---------- regime playbook (Phase 17 B): measured results per regime -> memory/playbook.md ----------
-    playbook = pbk.build(cells, {k: x["family"] for k, x in by_key.items()}, rg.LABELS)
+    # ---------- regime playbook (Phase 17 B): measured results per regime -> memory/playbook.md (weekly) ----------
+    fam_of = {k: x["family"] for k, x in by_key.items()}
+    playbook, pb_matrix = pbk.build(cells, fam_of, rg.LABELS), pbk.matrix(cells, fam_of)
     pb_path = os.path.join(sc.REPORTS, "playbook_offline.md") if args.offline else os.path.join(sc.MEMORY, "playbook.md")
-    os.makedirs(os.path.dirname(pb_path), exist_ok=True)
-    with open(pb_path, "w") as f:
-        f.write(pbk.render(playbook, now_txt, rg.LABELS) + "\n")
+    if args.offline or started.weekday() == 6 or not os.path.exists(pb_path):       # Sundays (and the first time)
+        os.makedirs(os.path.dirname(pb_path), exist_ok=True)
+        with open(pb_path, "w") as f:
+            f.write(pbk.render(playbook, now_txt, rg.LABELS, pb_matrix) + "\n")
 
     # ---------- report ----------
     history_out = {}
@@ -515,7 +517,7 @@ def main():
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
-               approval=approval_out, cells=cells, playbook=playbook,
+               approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
                trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
                            file=os.path.relpath(TRIALS, sc.ROOT)),
                lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),

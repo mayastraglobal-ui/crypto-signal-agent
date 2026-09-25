@@ -68,7 +68,8 @@ def smc_pair(added=None):
                 stop={"method": "atr", "atr": 1.5}, targets={"long": ["2R"], "short": ["2R"], "split": [1.0]},
                 time_stop_bars=20, known_weaknesses="untested", changelog=["1.0 (2026-09-25): first version."])
     card = dict(base, id="LAB-SWEEP-RSI", version="1.0", hypothesis="A sweep with RSI reset continues.",
-                edge=dict(who_pays="traders stopped out below the swept low", mechanism="forced selling ends after the "
+                edge=dict(type="forced_flow", works_in=["STRONG_BULL", "WEAK_BULL"],
+                          who_pays="traders stopped out below the swept low", mechanism="forced selling ends after the "
                           "sweep and momentum turns up", fails_when="strong down-trends that keep sweeping lows",
                           kill_rule="unseen-data average below 0R or it no longer beats its control twin"),
                 long=["bars_since(smc_sweep_bull) <= 5", "rsi(close,14) > 50"],

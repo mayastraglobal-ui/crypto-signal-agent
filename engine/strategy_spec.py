@@ -55,6 +55,10 @@ EDGE_KEYS = {"who_pays": "who is on the other side of the trade, and why they lo
              "fails_when": "the regimes / conditions where it should NOT work",
              "kill_rule": "the result that would show the edge is gone"}
 EDGE_MIN_CHARS = 20
+EDGE_TYPES = {"behavioural": "a bias of other traders (fear, chasing, anchoring, over-reaction)",
+              "forced_flow": "trades others MUST make (liquidations, funding, stop-losses, rebalancing, expiries)",
+              "risk_premium": "being paid for carrying a risk others avoid",
+              "structural": "how the market is built (sessions, listings, fees, exchange rules)"}
 # the building blocks a rule may use (the rule namespace of scanner.make_namespace + the feature / SMC columns;
 # tests/test_lab.py checks these lists against the engine's real namespace)
 FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "macd_hist", "bb_mid", "bb_upper",
@@ -492,12 +496,23 @@ def lab_card_problems(card, others, labels, timeframes):
 
 
 def edge_problems(card):
-    """The edge block: edge: {who_pays, mechanism, fails_when, kill_rule}, each a real sentence."""
+    """The edge block: edge: {type, who_pays, mechanism, works_in, fails_when, kill_rule}.
+    type: one of EDGE_TYPES; works_in: the regimes it should work in (a subset of the card's regimes); the other four
+    a real sentence each."""
     e = card.get("edge")
     if not isinstance(e, dict):
-        return ["edge block missing - edge: {" + ", ".join(f"{k}: <{v}>" for k, v in EDGE_KEYS.items()) + "}"]
-    return [f"edge.{k} missing or too short ({EDGE_KEYS[k]}; at least {EDGE_MIN_CHARS} characters)"
-            for k in EDGE_KEYS if len(" ".join(str(e.get(k) or "").split())) < EDGE_MIN_CHARS]
+        return ["edge block missing - edge: {type: <" + " | ".join(EDGE_TYPES) + ">, works_in: [<regimes>], "
+                + ", ".join(f"{k}: <{v}>" for k, v in EDGE_KEYS.items()) + "}"]
+    probs = [f"edge.{k} missing or too short ({EDGE_KEYS[k]}; at least {EDGE_MIN_CHARS} characters)"
+             for k in EDGE_KEYS if len(" ".join(str(e.get(k) or "").split())) < EDGE_MIN_CHARS]
+    if e.get("type") not in EDGE_TYPES:
+        probs.append(f"edge.type must be one of {sorted(EDGE_TYPES)} (who is on the other side and why they lose)")
+    w = e.get("works_in")
+    if not isinstance(w, list) or not w:
+        probs.append("edge.works_in must list the regimes it should work in, e.g. [STRONG_BULL, WEAK_BULL]")
+    elif set(w) - set(card.get("regimes") or []):
+        probs.append(f"edge.works_in {sorted(set(w) - set(card.get('regimes') or []))} are not in the card's regimes")
+    return probs
 
 
 def edge_lines(card):
@@ -506,7 +521,9 @@ def edge_lines(card):
     if not isinstance(e, dict):
         return []
     names = {"who_pays": "Who pays", "mechanism": "Mechanism", "fails_when": "Fails when", "kill_rule": "Kill rule"}
-    return [f"{names[k]}: {' '.join(str(e.get(k) or '-').split())}" for k in EDGE_KEYS]
+    w = e.get("works_in")
+    return ([f"Type: {e.get('type') or '-'}", f"Works in: {', '.join(w) if isinstance(w, list) else w or '-'}"]
+            + [f"{names[k]}: {' '.join(str(e.get(k) or '-').split())}" for k in EDGE_KEYS])
 
 
 def _vkey(v):

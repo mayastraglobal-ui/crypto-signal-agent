@@ -221,6 +221,23 @@ def check_lab(base, new, current, library, now):
     return probs
 
 
+MECHANICS = "memory/market_mechanics.md"
+
+
+def check_mechanics(added):
+    """memory/market_mechanics.md records (Phase 17 B item 6) also name the mechanism and the strategies that use it:
+    detail lines '- mechanism: ...' and '- strategies: ...' ('none yet' is allowed)."""
+    probs = []
+    for block in ("\n" + added).split("\n### ")[1:]:
+        title = block.splitlines()[0].strip()
+        body = [ln.strip().lower() for ln in block.splitlines()[2:]]
+        for key in ("mechanism", "strategies"):
+            if not any(ln.startswith(f"- {key}:") for ln in body):
+                probs.append(f"record {title!r}: needs a detail line '- {key}: ...' (market_mechanics records name the "
+                             "mechanism and the strategies that use it)")
+    return probs
+
+
 def allowed_new(path):
     for folder, rx in NEW_FILES.items():
         if path.startswith(folder) and rx.match(path[len(folder):]):
@@ -268,6 +285,8 @@ def review(changes, main_files, now=None, branch=None):
                 continue
             probs += [f"{p}: {x}" for x in lint(added)]
             probs += [f"{p}: {x}" for x in check_records(added, p)]
+            if p == MECHANICS:
+                probs += [f"{p}: {x}" for x in check_mechanics(added)]
             applies.append(dict(path=p, kind="append", text=added))
         elif st == "M" and p == CALENDAR:
             why = mem.append_only_problems(c.get("base") or "", new)

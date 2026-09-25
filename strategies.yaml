@@ -32,7 +32,8 @@
 #                      is at least 2R away
 #    time_stop_bars    close after this many candles; cooldown_bars = candles to wait after a trade
 #    control_twin      the same idea WITHOUT its special (e.g. SMC) ingredient - it must be beaten
-#    edge              WHY it should make money (hypothesis, not proof): who_pays (who is on the other side and why
+#    edge              WHY it should make money (hypothesis, not proof): type (behavioural / forced_flow /
+#                      risk_premium / structural), works_in (regimes), who_pays (who is on the other side and why
 #                      they lose), mechanism, fails_when, kill_rule. Not part of the rules (no new version needed);
 #                      the engine shows the measured evidence next to it. Required on lab cards.
 #    params            the numbers the rules use, by name: write {fast} in a rule and fast: 20 under params.
@@ -102,6 +103,8 @@
   cooldown_bars: 0
   known_weaknesses: "Fails in ranges (every touch of the EMA looks like a pullback); late in a trend the bounce is often the last one."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
     who_pays: "late buyers who sold the dip into a trend that the higher timeframe still supports"
     mechanism: "trends persist; a pullback to the 20 EMA resets momentum and new buyers step in at 'value'"
     fails_when: "ranges and the last leg of a mature trend (the bounce fails)"
@@ -143,6 +146,8 @@
   cooldown_bars: 0
   known_weaknesses: "Many false breakouts in chop; wide stops; most of the profit comes from a few big trends."
   edge:
+    type: forced_flow
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION]
     who_pays: "traders fading the breakout (short at the range top) whose stops then add fuel to the move"
     mechanism: "a close outside a 20-candle range with 1.5x volume marks new participation; trend-following has the longest published record of the idea families"
     fails_when: "choppy ranges and low volume: most breakouts fall back inside"
@@ -180,6 +185,8 @@
   cooldown_bars: 0
   known_weaknesses: "Catching a falling knife in a real breakdown; many small wins, rare large losses."
   edge:
+    type: behavioural
+    works_in: [RANGE, HIGH_VOL_RANGE]
     who_pays: "short-term sellers who panic-sell a two-day drop inside a range"
     mechanism: "extreme short-term oversold readings in a range tend to snap back toward the middle (mean reversion)"
     fails_when: "real breakdowns and strong down-trends (catching a falling knife)"
@@ -217,6 +224,8 @@
   cooldown_bars: 0
   known_weaknesses: "Squeezes can break both ways (head fakes); rare signals."
   edge:
+    type: forced_flow
+    works_in: [COMPRESSION, EXPANSION, STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
     who_pays: "traders positioned for the quiet range to continue, stopped out when volatility expands"
     mechanism: "low volatility clusters and is followed by expansion; the first strong close outside the bands shows the direction"
     fails_when: "head fakes: the squeeze breaks one way, then reverses"
@@ -254,6 +263,8 @@
   cooldown_bars: 0
   known_weaknesses: "Lagging; in sideways markets the crosses whipsaw."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
     who_pays: "counter-trend traders still betting on the old direction when momentum turns"
     mechanism: "a MACD cross in the higher-timeframe direction marks momentum turning with the trend"
     fails_when: "sideways markets, where crosses whipsaw back and forth"
@@ -295,6 +306,8 @@
   cooldown_bars: 0
   known_weaknesses: "Flips late; gives back a lot before the exit flip."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "traders holding the old trend who exit late, after the flip"
     mechanism: "an ATR-based trailing line flips only after a real move, so it catches the middle of trends"
     fails_when: "ranges (frequent false flips) and sharp V-reversals"
@@ -334,6 +347,8 @@
   cooldown_bars: 0
   known_weaknesses: "Strong trends keep sweeping lows without reversing; low timeframes are expensive after fees."
   edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
     who_pays: "breakout traders who bought the new low's stop run, and stop-losses taken below the obvious low"
     mechanism: "stops cluster below obvious lows; once they are taken and price closes back inside, the forced selling is over"
     fails_when: "strong trends that keep sweeping lows without reversing"
@@ -373,6 +388,8 @@
   cooldown_bars: 0
   known_weaknesses: "Whipsaws a lot; kept mainly as a simple benchmark."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "late momentum traders; this card is mainly a simple benchmark"
     mechanism: "a fast / slow EMA cross follows short-term momentum"
     fails_when: "sideways markets (whipsaw); the edge is expected to be small or absent"
@@ -424,6 +441,8 @@
   control_twin: S5-SWEEP-MSS-FVG-noSMC
   known_weaknesses: "Needs a clean sweep and shift; in chop the shift fails. Low timeframes pay a lot of fees per R."
   edge:
+    type: forced_flow
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "stop-losses below a swing low and breakout sellers trapped when structure shifts up"
     mechanism: "a sweep takes liquidity, a displacement shows real buying, and the first retrace into the gap is where late sellers cover"
     fails_when: "chop, where structure shifts fail; low timeframes where fees are large per R"
@@ -497,6 +516,8 @@
   control_twin: S6-OB-FVG-noSMC
   known_weaknesses: "Fails in ranges; order blocks are easy to over-use."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
     who_pays: "sellers who pushed price into a higher-timeframe demand zone that larger buyers defend"
     mechanism: "a 4H order block in the lower half of the range plus a 15m change of character marks buyers returning at value"
     fails_when: "ranges and down-trends, where order blocks are over-used and break"
@@ -570,6 +591,8 @@
   control_twin: S7-SILVER-BULLET-noSMC
   known_weaknesses: "Few signals (short windows); 15m fees are large compared with the stop."
   edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "traders caught by the stop run in the London / New York session windows"
     mechanism: "session windows concentrate volume; a sweep followed by displacement and a gap retrace shows direction for the session"
     fails_when: "quiet sessions and news days; few signals, so the sample stays small"
@@ -642,6 +665,8 @@
   control_twin: S8-PDH-PDL-SWEEP-noSMC
   known_weaknesses: "Trend days break through yesterday's levels and never come back."
   edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
     who_pays: "breakout traders who bought above yesterday's high or sold below yesterday's low"
     mechanism: "yesterday's high / low hold many stops; a sweep that closes back inside often returns to the middle of the range"
     fails_when: "trend days that break through yesterday's levels and never come back"
@@ -729,6 +754,8 @@
   control_twin: S5-SWEEP-MSS-FVG
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
   edge:
+    type: forced_flow
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "stop-losses below a swing low and breakout sellers trapped when structure shifts up; the 5m check avoids entries that are immediately wrong"
     mechanism: "the same setup as S5-SWEEP-MSS-FVG, entered only after a closed 5m candle confirms the direction near the planned price"
     fails_when: "chop, where structure shifts fail; low timeframes where fees are large per R; fast moves that never look back (the 5m check misses them)"
@@ -772,6 +799,8 @@
   control_twin: S6-OB-FVG
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
   edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
     who_pays: "sellers who pushed price into a higher-timeframe demand zone that larger buyers defend; the 5m check avoids entries that are immediately wrong"
     mechanism: "the same setup as S6-OB-FVG, entered only after a closed 5m candle confirms the direction near the planned price"
     fails_when: "ranges and down-trends, where order blocks are over-used and break; fast moves that never look back (the 5m check misses them)"
@@ -816,6 +845,8 @@
   control_twin: S7-SILVER-BULLET
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
   edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION]
     who_pays: "traders caught by the stop run in the London / New York session windows; the 5m check avoids entries that are immediately wrong"
     mechanism: "the same setup as S7-SILVER-BULLET, entered only after a closed 5m candle confirms the direction near the planned price"
     fails_when: "quiet sessions and news days; few signals, so the sample stays small; fast moves that never look back (the 5m check misses them)"
@@ -853,6 +884,8 @@
   control_twin: S8-PDH-PDL-SWEEP
   known_weaknesses: "Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller."
   edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION]
     who_pays: "breakout traders who bought above yesterday's high or sold below yesterday's low; the 5m check avoids entries that are immediately wrong"
     mechanism: "the same setup as S8-PDH-PDL-SWEEP, entered only after a closed 5m candle confirms the direction near the planned price"
     fails_when: "trend days that break through yesterday's levels and never come back; fast moves that never look back (the 5m check misses them)"

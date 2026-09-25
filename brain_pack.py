@@ -259,6 +259,24 @@ def edge_lines_for(research, statuses=("VALIDATION", "PAPER_TRADING", "APPROVED"
     return out if len(out) > 2 else out + ["- no strategy in VALIDATION / PAPER / APPROVED and no lab card yet"]
 
 
+def curriculum_lines():
+    """Phase 17 B item 8: today's reading-plan item (memory/curriculum.md) for the daily review."""
+    from engine import curriculum as cur
+    plan = cur.parse_plan(read(os.path.join(MEMORY, "curriculum.md")))
+    done = cur.studied(read(os.path.join(MEMORY, "research_sources.md")))
+    item = cur.next_item(plan, done)
+    out = ["", "## Today's curriculum item (memory/curriculum.md - study it, then ONE research_sources record titled "
+           "'[id] ...' and at most ONE hypothesis in experiments.md)"]
+    if item is None:
+        return out + ["- the reading plan is empty"]
+    out += [f"- {item['id']} ({item['kind']}): {item['title']}" + (f" - studied before on {done[item['id']]}"
+                                                                   if item["id"] in done else " - not studied yet")]
+    out += [f"  {ln}" for ln in item["lines"]]
+    out.append(f"- plan: {len(plan)} items, {sum(x['id'] in done for x in plan)} studied at least once. The reference "
+               "is from memory: check it on the real source; if you cannot open it, say so and do not cite it.")
+    return out
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -348,6 +366,8 @@ def pack(kind, now, live=None):
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
     out += edge_lines_for(research)
     out += lab_lines(now, research)
+    if kind == "daily":
+        out += curriculum_lines()
     if kind == "weekly":
         out += calendar_lines(now)
     st = mem.status(MEMORY, now)

@@ -31,20 +31,27 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - If it is strong enough to test now, ALSO append it as a card to `strategies_lab.yaml` (COMMON.md rule 4:
      a new version changing exactly that one thing, `added` = today). Stay within the limits the fact sheet
      shows; leave room for the weekly research (usually at most 1 card a day from the daily review).
-6. **Memory reviews due.** For each record the fact sheet lists, add a NEW record to the same file:
+6. **Curriculum (one item a day).** The fact sheet names today's item from `memory/curriculum.md` (a paper, the
+   principles of a trading book from public summaries - never copied text, exchange research, a post-mortem of a
+   blow-up, or an interview with a professional trader).
+   - Find and open the real source. The reference in the plan is from memory: check title, authors, year.
+   - Write ONE record in `memory/research_sources.md` titled `[<id>] <title>`, with the URL you opened, the claim,
+     its evidence class and what it means for this system. Could not open it? Write that, and cite nothing.
+   - At most ONE testable hypothesis from it into `memory/experiments.md` (evidence `HYPOTHESIS`).
+7. **Memory reviews due.** For each record the fact sheet lists, add a NEW record to the same file:
    - title `Review: <old title>`;
    - status CONFIRMED, REJECTED or KEEP, with what today's evidence says;
    - a new review date.
 
    Never edit the old record.
-7. **Candidate lessons.** A candidate becomes a lesson in `memory/lessons.md` only if all of these hold:
+8. **Candidate lessons.** A candidate becomes a lesson in `memory/lessons.md` only if all of these hold:
    - it is systematic in 2 or more tests;
    - the numbers are in the fact sheet;
    - no existing lesson already says it.
 
    The evidence field then reads `BACKTEST_EVIDENCE: <tests> tests, <trades> trades`, with the cells listed
    in the details. Otherwise, say in the review why it is not a lesson yet.
-8. **Write the review** to the path the fact sheet gives. Use these headings:
+9. **Write the review** to the path the fact sheet gives. Use these headings:
    - `# Daily review <date>`
    - `## Summary`: 3-8 lines, the most important first.
    - `## Results (LIVE / PAPER / VALIDATION)`
@@ -52,8 +59,9 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
    - `## Missed moves`
    - `## Regime`
    - `## Refinements queued` (and the lab cards you added, if any)
+   - `## Curriculum` (today's item: what you read, the record, the hypothesis if any)
    - `## Reviews done`
    - `## Lessons`
    - `## Tomorrow`: what to watch, and what NOT to do.
    - End with: **Research signal. Not financial advice.**
-9. Run the end commands from COMMON.md.
+10. Run the end commands from COMMON.md.
