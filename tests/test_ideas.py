@@ -83,30 +83,43 @@ class Parsers(unittest.TestCase):
         self.assertEqual(f2[0]["rate"], -0.0001)
 
 
+def okx_rows(n=3, start=T0, level=1e9, coin="BTC"):
+    return D.okx_hourly(coin, {"data": [[str(start + i * H), str(level + i), "1"] for i in range(n)]},
+                        {"data": [[str(start + i * H), "1.5"] for i in range(n)]},
+                        {"data": [[str(start + i * H), "100", "110"] for i in range(n)]})
+
+
 class History(unittest.TestCase):
-    def test_merge_prefers_binance_and_never_shrinks(self):
+    def test_one_series_per_source_and_never_shrinks(self):
         a = D.merge(None, D.okx_hourly("BTC", {"data": [[str(T0), "5", "1"]]}, {}, {}), "ts")
         b = D.merge(a, D.binance_hourly("BTC", *bn_rows(2)), "ts")
-        self.assertEqual(list(b["source"]), ["binance", "binance"])
+        self.assertEqual(sorted(b["source"]), ["binance", "binance", "okx"])     # both kept, side by side
+        self.assertEqual(len(D.series(b)), 1)                                   # the main series: OKX only
+        self.assertEqual(D.series(b)["oi_usd"].tolist(), [5.0])
         c = D.merge(b, [], "ts")
-        self.assertEqual(len(c), 2)
-        d = D.merge(c, D.okx_hourly("BTC", {"data": [[str(T0), "5", "1"]]}, {}, {}), "ts")
-        self.assertEqual(list(d["source"]), ["binance", "binance"])             # a worse source never replaces
+        self.assertEqual(len(c), 3)
+        d = D.merge(c, D.okx_hourly("BTC", {"data": [[str(T0), "6", "1"]]}, {}, {}), "ts")
+        self.assertEqual(D.series(d)["oi_usd"].tolist(), [5.0])                 # first seen kept, nothing replaced
 
     def test_quality(self):
-        h = D.merge(None, D.binance_hourly("BTC", *bn_rows(3)), "ts")
-        f = D.merge(None, [dict(time=T0 + 2 * H, coin="BTC", source="binance", rate=0.0001)], "time")
+        h = D.merge(D.merge(None, okx_rows(3), "ts"), D.binance_hourly("BTC", *bn_rows(3)), "ts")
+        f = D.merge(None, [dict(time=T0 + 2 * H, coin="BTC", source="okx", rate=0.0001)], "time")
         q = D.quality(h, f, ["BTC", "SOL"], T0 + 3 * H)
-        self.assertEqual(q["BTC"]["state"], "GOOD")
+        self.assertEqual(q["BTC"]["state"], "GOOD")                             # Binance kept aside: not mixed
+        self.assertEqual((q["BTC"]["main_source"], q["BTC"]["research_rows"]), ("okx", {"binance": 3}))
+        self.assertEqual(q["BTC"]["hours"], 3)
+        only_bn = D.quality(D.merge(None, D.binance_hourly("BTC", *bn_rows(3)), "ts"), f, ["BTC"], T0 + 3 * H)
+        self.assertEqual(only_bn["BTC"]["state"], "MISSING")                     # research data never stands in
         self.assertEqual(q["SOL"]["state"], "MISSING")
         late = D.quality(h, f, ["BTC"], T0 + 10 * H)["BTC"]
         self.assertEqual(late["state"], "STALE")
         bad = h.copy()
-        bad.loc[0, "ls_ratio"] = -1
+        bad.loc[bad["source"] == "okx", "ls_ratio"] = [-1, 1.5, 1.5]
         self.assertEqual(D.quality(bad, f, ["BTC"], T0 + 3 * H)["BTC"]["invalid"], 1)
-        self.assertTrue(np.isnan(D.clean(bad, f)[0].loc[0, "ls_ratio"]))
-        mixed = D.merge(h, D.okx_hourly("BTC", {"data": [[str(T0 + 3 * H), "5", "1"]]}, {}, {}), "ts")
-        self.assertIn("mixed sources", " ".join(D.quality(mixed, f, ["BTC"], T0 + 4 * H)["BTC"]["problems"]))
+        self.assertTrue(D.clean(bad, f)[0]["ls_ratio"].isna().any())
+        mixed = D.quality(h, f, ["BTC"], T0 + 3 * H, main=None)["BTC"]          # a series holding two sources
+        self.assertEqual(mixed["state"], "DEGRADED")
+        self.assertIn("mixed sources", " ".join(mixed["problems"]))
 
     def test_synthetic_is_repeatable(self):
         a, b = D.synthetic("SOL", T0, T0 + 50 * H), D.synthetic("SOL", T0, T0 + 50 * H)
@@ -119,7 +132,7 @@ class NoLookAhead(unittest.TestCase):
         h = D.merge(None, D.binance_hourly("BTC", *bn_rows(3)), "ts")     # rows for hours T0, T0+H, T0+2H
         f = pd.DataFrame([dict(time=T0 + H, coin="BTC", source="binance", rate=-0.0003)])
         close = np.array([T0 + H - 1, T0 + H, T0 + 2 * H + 30 * 60_000, T0 + 20 * H])
-        a = D.align(close, close - 15 * 60_000, h, f)
+        a = D.align(close, close - 15 * 60_000, h, f, source="binance")
         # the hour starting at T0 is known only from its END (T0 + 1h)
         self.assertTrue(np.isnan(a["oi"][0]))
         self.assertEqual(a["oi"][1], 1e9)
@@ -157,6 +170,61 @@ class NoLookAhead(unittest.TestCase):
     def test_rules_with_the_new_blocks(self):
         for r in ("funding_z(200) > 2", "oi_chg(24) > 5", "ls_ratio > 2", "taker_ratio < 0.8", "btc_ret(4) > 1"):
             self.assertEqual(SS.expr_problems(r, ["1h"]), [], r)
+
+
+class BoundaryJump(unittest.TestCase):
+    """OKX history, then Binance files at twice the level: a mixed series would show a fake +100% open-interest jump."""
+
+    def setUp(self):
+        n = 60
+        self.df = pd.DataFrame(dict(open_time=T0 + np.arange(n) * H, close_time=T0 + np.arange(n) * H + H - 1,
+                                    open=100.0, high=101.0, low=99.0, close=100.0, volume=1.0))
+        self.hourly = D.merge(D.merge(None, okx_rows(30, T0 - H, 1e9), "ts"),
+                              [dict(r, source="binance_files") for r in okx_rows(30, T0 + 29 * H, 2e9)], "ts")
+        self.funding = pd.DataFrame(
+            [dict(time=T0 + k * 8 * H, coin="BTC", source="okx", rate=0.0001 + k * 1e-6) for k in range(4)]
+            + [dict(time=T0 + k * 8 * H, coin="BTC", source="binance_files", rate=0.0009) for k in range(4, 8)])
+
+    def test_main_series_only(self):
+        df = scanner.attach_market(self.df.copy(), (self.hourly, self.funding), None)
+        ns = scanner.make_namespace(df)
+        oi = ns["oi"]
+        self.assertTrue(np.isfinite(oi.iloc[5]))
+        self.assertLess(oi.max(), 1.5e9, "a Binance level leaked into the OKX series")
+        self.assertTrue(oi.iloc[40:].isna().all())                              # OKX ended: unknown, no stand-in
+        chg = ns["oi_chg"](1)
+        self.assertLess(chg.abs().max(), 1.0)                                   # no fake +100% jump anywhere
+        self.assertEqual(set(df["_hsrc"].unique()) - {0.0}, {float(D.SOURCE_CODE["okx"])})
+
+    def test_no_change_across_two_sources(self):
+        """Even when a series DOES hold two sources (the guard behind the main-series rule), a change or z-score
+        spanning the boundary is unknown, while changes inside one source stay measured."""
+        a = D.align(self.df["close_time"], self.df["open_time"], self.hourly, self.funding, source=None)
+        df = self.df.copy()
+        for k in ("oi", "funding_rate"):
+            df["_" + k] = a[k]
+        df["_hsrc"], df["_fsrc"] = a["_hsrc"], a["_fsrc"]
+        ns = scanner.make_namespace(df)
+        chg = ns["oi_chg"](1)
+        boundary = int(np.argmax(df["_hsrc"].to_numpy() == D.SOURCE_CODE["binance_files"]))
+        self.assertTrue(np.isnan(chg.iloc[boundary]))                           # 1e9 -> 2e9 across sources: unknown
+        self.assertTrue(np.isfinite(chg.iloc[boundary - 1]) and np.isfinite(chg.iloc[boundary + 1]))
+        self.assertLess(chg.abs().max(), 1.0)
+        z = ns["funding_z"](10)
+        fb = int(np.argmax(df["_fsrc"].to_numpy() == D.SOURCE_CODE["binance_files"]))
+        self.assertTrue(z.iloc[fb:fb + 10].isna().all())                       # window spans both sources
+
+    def test_mixed_series_is_degraded_not_good(self):
+        q = D.quality(self.hourly, self.funding, ["BTC"], T0 + 59 * H, main=None)["BTC"]
+        self.assertEqual(q["state"], "DEGRADED")
+        self.assertEqual(D.quality(self.hourly, self.funding, ["BTC"], T0 + 29 * H)["BTC"]["state"], "GOOD")
+
+    def test_costs_take_the_highest_real_funding(self):
+        f = pd.DataFrame([dict(time=T0, coin="BTC", source="okx", rate=0.0001),        # shorts receive on OKX
+                          dict(time=T0, coin="BTC", source="binance_files", rate=-0.0005)])   # shorts pay on Binance
+        a = D.align(np.array([T0 + H]), np.array([T0 + 1]), D.merge(None, okx_rows(2), "ts"), f)
+        self.assertAlmostEqual(a["_fund_short"][0], 0.0005)
+        self.assertAlmostEqual(a["funding_rate"][0], 0.01)                      # the building block: OKX only
 
 
 class RealFunding(unittest.TestCase):
@@ -348,6 +416,7 @@ class Recorder(unittest.TestCase):
         fetch, now = self.fake(binance_ok=False)
         q = derivs.run(now, fetch, ["BTC"])
         self.assertEqual(q["BTC"]["fetch"]["source"], "okx")
+        self.assertEqual(q["BTC"]["fetch"]["sources"], {"okx": True, "binance": False})
         self.assertIn("451", " ".join(q["BTC"]["fetch"]["errors"]))
         h = D.read(derivs.HOURLY, D.HOURLY_COLS)
         self.assertEqual(set(h["source"]), {"okx", "binance_files"})
@@ -357,7 +426,11 @@ class Recorder(unittest.TestCase):
         n1 = len(h)
         fetch2, _ = self.fake(binance_ok=True)
         q2 = derivs.run(now, fetch2, ["BTC"])
-        self.assertEqual(q2["BTC"]["fetch"]["source"], "binance")
+        self.assertEqual(q2["BTC"]["fetch"]["source"], "okx")                  # the main series stays OKX
+        self.assertEqual(q2["BTC"]["fetch"]["sources"], {"okx": True, "binance": True})
+        h2 = D.read(derivs.HOURLY, D.HOURLY_COLS)
+        self.assertEqual(set(h2["source"]), {"okx", "binance", "binance_files"})
+        self.assertEqual(q2["BTC"]["state"], "GOOD")                             # separate series: not mixed
         self.assertGreater(len(D.read(derivs.HOURLY, D.HOURLY_COLS)), n1)          # history only grows
 
     def test_unreadable_history_is_never_replaced(self):

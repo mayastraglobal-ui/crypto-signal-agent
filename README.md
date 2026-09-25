@@ -344,8 +344,10 @@ and the bar.
 ## Futures data and idea factories (Phase 17 C)
 
 - **Futures market data, recorded every hour** (`derivs.py`, before the scan): funding rate, open interest, long/short
-  account ratio and taker buy/sell ratio for every signal and research coin. Binance futures first, OKX when Binance
-  refuses; older days are back-filled from data.binance.vision a few at a time. The history grows on the
+  account ratio and taker buy/sell ratio for every signal and research coin. **One series per source, never mixed**
+  (their levels differ): OKX is the main series - every building block reads only it, in backtests and live;
+  Binance (its API when reachable, and data.binance.vision files back-filled a few days at a time) is kept separately
+  for research only. A change is never computed across two sources (it reads "unknown"); a mixed series is DEGRADED. The history grows on the
   live-reports branch (`reports/derivs_hourly.csv.gz`, `reports/funding.csv.gz`), because exchanges keep only ~30
   days. Data checks per coin (freshness, gaps, impossible values, mixed sources): report section 0b.
 - **New building blocks:** `funding_rate`, `funding_z(n)`, `oi`, `oi_chg(n)`, `ls_ratio`, `taker_ratio`, `btc_ret(n)` -

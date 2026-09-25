@@ -396,3 +396,18 @@ Newest entries at the bottom. Format: date · who · what · why.
   - Possible duplicate lessons (title word overlap >= 0.6, pairs not already merged) and re-checks of lessons 30+ days old (is their loss tag still systematic in 2+ of today's tests?) go into `memory/cleanup_log.md` (append-only).
   - The engine never writes lessons (section 17.7). In the first 3 days of the month the daily review's fact sheet lists that work, and the review writes one `Merged:` / `Re-check:` record each (new step 7).
 - Tests: new `tests/test_report_card.py` (12 tests). Mutation check: 10 of 10 planted bugs caught.
+
+## 2026-09-25 · Claude (BUILD mode, operator correction) · Phase 17 C fix - one futures-data series per source
+- **Problem (found by the operator):** the history merged Binance files and OKX rows into one line per coin and hour. Their open-interest and long/short levels are not comparable, so building blocks could jump at the boundary: a fake open-interest change, or a z-score mixing two exchanges.
+- **Fix:**
+  - The history keeps **one series per source**: rows are unique per coin, source and time, and are never merged across sources.
+  - **OKX is the main series** (`engine/derivs.MAIN_SOURCE`). `oi`, `oi_chg`, `ls_ratio`, `taker_ratio`, `funding_rate` and `funding_z` read only it, in backtests and live alike. Binance (API + data.binance.vision files) is recorded as a separate research series; it never stands in for missing OKX data (missing = unknown).
+  - The recorder fetches OKX and Binance independently each hour; a Binance failure no longer changes the source of anything.
+- **Guard:** `align()` returns each candle's source code. `oi_chg(n)` returns unknown when the two compared values come from different sources, and `funding_z(n)` when its window holds more than one source.
+- **Quality:** a main series holding more than one source is **DEGRADED**, never GOOD. Research rows are only counted (`research_rows`). A coin with Binance data but no OKX data is MISSING, not GOOD.
+- **Costs** are not a building block: a short still pays the HIGHEST real funding any recorded exchange charged, and never less than the config rate.
+- Tests (test_ideas.py, 24 tests), including the boundary jump: OKX history, then Binance files at twice the level.
+  - The main series never shows the Binance level, and `oi_chg` never shows the fake +100%.
+  - A series forced to hold both sources gives unknown at the boundary and measured changes on both sides.
+  - It is DEGRADED, and costs take the highest real funding.
+  - Mutation check: 6 of 6 planted bugs caught.
