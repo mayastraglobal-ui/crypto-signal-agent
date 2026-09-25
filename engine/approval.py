@@ -114,11 +114,27 @@ def _stat(st):
             f"profit factor {st['pf']:.2f} · max drawdown {st['max_dd_r']:.1f}R")
 
 
-def pack(cell, spec, lineage, board_row, S, now_txt, risk=None):
+def _look_first(cell, links):
+    """Phase 18 D: check the trades before you say yes - the backtest chart page and the Pine script."""
+    L = ["**Check the trades before you say yes:**"]
+    L.append(f"- backtest chart (every trade on the candles, stop and targets, equity and drawdown): {links['chart']}"
+             if links.get("chart") else "- backtest chart: not available for this run")
+    pine = links.get("pine_path") or ("reports/pine/" + re.sub(r"[^A-Za-z0-9_.-]+", "_", cell["strategy"] + "_v"
+                                                             + cell["version"] + "_" + cell["tf"]) + ".pine")
+    L.append(f"- TradingView: open {links['pine']} (`{pine}`), copy it into TradingView's Pine Editor and add it to a "
+             "chart - it draws the same signals and trades" if links.get("pine") else
+             "- TradingView: GitHub → Actions → \"Pine export\" → Run workflow with "
+             f"`{cell['strategy']}` / `{cell['version']}` / `{cell['tf']}`, then paste `{pine}` into TradingView's Pine "
+             "Editor")
+    return L
+
+
+def pack(cell, spec, lineage, board_row, S, now_txt, risk=None, links=None):
     """The approval pack (section 21) of one strategy version x timeframe as markdown lines.
     cell = research.json cell; spec = the strategy card; lineage = [(version, first tested, status)] of the same
     idea; board_row = its scoreboard row (Layer A) or {}; risk = debate.risk_manager() on today's hourly report
-    (None = conditions unknown, which is a veto)."""
+    (None = conditions unknown, which is a veto); links = dict(chart=url of the backtest chart page, pine=url of the
+    Pine script, pine_path) (Phase 18 D)."""
     ev, att, paper = cell["evidence"], cell.get("attribution") or {}, cell.get("paper") or {}
     k = f"{cell['strategy']} v{cell['version']} {cell['tf']}"
     L = [f"# Approval pack: {k}", "",
@@ -132,10 +148,7 @@ def pack(cell, spec, lineage, board_row, S, now_txt, risk=None):
          "```", f"  - {{strategy: {cell['strategy']}, version: \"{cell['version']}\", tf: {cell['tf']}, "
                 f"date: {now_txt[:10]}}}", "```",
          "The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.",
-         "To look at it on TradingView first: GitHub → Actions → \"Pine export\" → Run workflow with "
-         f"`{cell['strategy']}` / `{cell['version']}` / `{cell['tf']}`, then paste `reports/pine/"
-         f"{re.sub(r'[^A-Za-z0-9_.-]+', '_', cell['strategy'] + '_v' + cell['version'] + '_' + cell['tf'])}.pine` into "
-         "TradingView's Pine Editor.", "",
+         *_look_first(cell, links or {}), "",
          "## 0. Bull vs bear (the engine's numbers only - Phase 18)",
          *[f"- {x}" for x in debate.case_lines(*debate.cell_cases(cell), risk or debate.risk_manager(None, None))],
          "- A veto means \"not now\": wait until the risk manager has no veto before you say yes. No veto is never "

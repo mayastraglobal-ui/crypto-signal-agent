@@ -40,6 +40,7 @@ from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import bias
+from engine import btcharts as btc_mod
 from engine import debate
 from engine import history
 from engine import ideas
@@ -261,7 +262,8 @@ def hourly_report(offline):
         return None
 
 
-def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline, rep=None, now=None):
+def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline, rep=None, now=None, base_url=None,
+                pine_for=None):
     """Section 21: one approval pack per PAPER_TRADING version x timeframe that meets the section 12 numbers
     (reports/approval/). Packs of cells that are no longer eligible are removed (the report, not memory).
     rep = the newest hourly report: the pack's risk manager checks today's conditions on it (Phase 18 A)."""
@@ -283,13 +285,17 @@ def write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, offline, r
             row = {k: (None if pd.isna(v) else v) for k, v in m.iloc[0].items()} if len(m) else {}
         name = ap.filename(c["strategy"], c["version"], c["tf"])
         rm = debate.risk_manager(rep, now or dt.datetime.now(dt.timezone.utc), regimes=spec.get("regimes"), tf=c["tf"])
+        pine_path = pine_for(ck) if pine_for else None
+        links = dict(chart=btc_mod.page_url(base_url, c["strategy"], c["version"], c["tf"]) if base_url else None,
+                     pine=(f"https://github.com/{os.environ.get('GITHUB_REPOSITORY') or 'mayastraglobal-ui/crypto-signal-agent'}"
+                           f"/blob/main/{pine_path}") if pine_path else None, pine_path=pine_path)
         with open(os.path.join(folder, name), "w") as f:
-            f.write("\n".join(ap.pack(c, spec, lineage, row, AP, now_txt, rm)) + "\n")
+            f.write("\n".join(ap.pack(c, spec, lineage, row, AP, now_txt, rm, links)) + "\n")
         keep.add(name)
         out.append(dict(key=ck, strategy=c["strategy"], version=c["version"], tf=c["tf"],
                         pack=f"reports/{os.path.basename(folder)}/{name}", paper_signals=c["paper"]["n"],
                         paper_avg_r=c["paper"]["avg_r"], backtest_validate_avg_r=c["evidence"]["validate"]["avg_r"],
-                        risk=debate.risk_line(rm)))
+                        risk=debate.risk_line(rm), chart=links["chart"], pine=pine_path))
     for old in os.listdir(folder):
         if old.endswith(".md") and old not in keep:
             os.remove(os.path.join(folder, old))
@@ -327,6 +333,11 @@ def main():
     BS = bias.settings(R.get("bias_check"))
     budget_s = float(R.get("time_budget_min", 90)) * 60
     bias_out, rules_skipped = None, []
+    try:                                              # Phase 18 D: the backtest chart page's data (never fatal)
+        charts_w = btc_mod.Writer(os.path.join(sc.REPORTS, "backtest_charts_offline" if args.offline else "backtest_charts"))
+    except OSError as e:
+        log(f"backtest chart data: {e}")
+        charts_w = None
 
     feed = sc.Synthetic() if args.offline else sc.Binance()     # long history only from the main exchange
     cache = None if args.offline else CACHE
@@ -442,6 +453,16 @@ def main():
                     tv = sc.run_backtest(df, *sig[:4], v, cfg, tf, sig[4], None, m5, S5)
                     dropped.setdefault(k3, {}).setdefault(label, (rule, {}))[1][base] = (len(tv),
                                                                                         float(sum(t["r"] for t in tv)))
+        if charts_w is not None:                      # Phase 18 D: data of the backtest chart page
+            try:
+                for tf, fr in pc["frames"].items():
+                    charts_w.candles(base, tf, fr["df"])
+                    for k3 in [k for k in per if k[2] == tf and base in per[k]]:
+                        charts_w.trades(k3[0], k3[1], tf, base, per[k3][base], fr["df"]["open_time"].to_numpy(),
+                                        btc_mod.FIVE_MIN if by_key[f"{k3[0]}@{k3[1]}"].get("confirm_5m") else None)
+            except Exception as e:
+                log(f"backtest chart data for {base} failed: {e}")
+                charts_w = None
         log(f"researched {sym}")
         del pc, data, m5
 
@@ -574,8 +595,26 @@ def main():
             rules_adding_nothing="; ".join(f"{r['label']} ({r['rule']})" for r in c["rules_adding_nothing"]) or None)
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
+    if charts_w is not None:
+        try:
+            charts_w.finish(cells, now_txt)
+        except Exception as e:
+            log(f"backtest chart index failed: {e}")
+    base_url = btc_mod.pages_base(cfg)
+    pine_dir = os.path.join(sc.REPORTS, "pine_offline" if args.offline else "pine")
+
+    def pine_for(ck):                                  # Phase 18 D: every approval pack links its Pine script
+        c = cells[ck]
+        try:
+            path, _ = pine_export.write(by_key[f"{c['strategy']}@{c['version']}"], c["tf"], cfg,
+                                        per.get((c["strategy"], c["version"], c["tf"]), {}), now_txt, pine_dir,
+                                        "research history (approval pack)")
+            return os.path.relpath(path, sc.ROOT)
+        except Exception as e:
+            log(f"Pine export for the pack of {ck} failed: {e}")
+            return None
     packs = write_packs(cells, eligible_cells, by_key, registry, AP, now_txt, args.offline,
-                        hourly_report(args.offline) if eligible_cells else None, started)
+                        hourly_report(args.offline) if eligible_cells else None, started, base_url, pine_for)
     approval_out = dict(eligible=packs, approved=sorted(ck for ck, c in cells.items() if c["status"] == "APPROVED"),
                         listed=sorted(approvals), warnings=approval_warnings + approval_problems
                         + [f"{k}: approval listed but this strategy version / timeframe was not researched this run"

@@ -418,7 +418,10 @@ class ReferenceProjects(unittest.TestCase):
                          [], "the build session's records pass the guard's own record rules")
         text = "\n".join(brain_pack.project_lines())
         nxt = CU.next_item(CU.parse_projects(test_brain.read(os.path.join(ROOT, "memory", "curriculum.md"))), done)
-        self.assertNotIn(nxt["id"], done, "the weekly research studies a project not studied yet")
+        todo = [x for x in CU.parse_projects(test_brain.read(os.path.join(ROOT, "memory", "curriculum.md")))
+                if x["id"] not in done]
+        self.assertEqual(nxt["id"], todo[0]["id"] if todo else min(done, key=lambda k: (done[k], k)),
+                         "the first project not studied yet, else the one studied longest ago")
         self.assertIn(f"- {nxt['id']}: {nxt['title']}", text)
         self.assertIn("what we deliberately do NOT take", text)
 

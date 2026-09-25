@@ -50,6 +50,7 @@ from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
 from engine import bias
+from engine import btcharts
 from engine import report_card as rcard
 from engine import research_loop as rloop
 from engine import risk as rk
@@ -1283,6 +1284,11 @@ class EmailContext:
         self.board = {(b["strategy"], str(b["version"]), b["tf"]): b for b in board}
         self.quote, self.tf_ms, self.lb = cfg["market"]["quote"], tf_ms, lb
         self.utc, self.bj = now.strftime("%Y-%m-%d %H:%M"), now.astimezone(BJ).strftime("%Y-%m-%d %H:%M")
+        self.pages = btcharts.pages_base(cfg)
+
+    def bt_url(self, strategy, version, tf, coin):
+        """Phase 18 D: the strategy's backtest chart page on the dashboard (the email keeps its chart image)."""
+        return btcharts.page_url(self.pages, strategy, version, tf, coin)
 
     def regime_row(self, coin):
         out = {tf: r["label"] for tf, r in (self.regimes.get(coin, {}).get("timeframes") or {}).items()}
@@ -1313,7 +1319,8 @@ class EmailContext:
     def _card(self, **kw):
         e = dict(quote=self.quote, utc=self.utc, beijing=self.bj, regimes=self.regime_row(kw["coin"]),
                  data_state=self.coin_state.get(kw["coin"], "?"),
-                 evidence=self.evidence(kw["strategy"], kw["version"], kw["tf"]))
+                 evidence=self.evidence(kw["strategy"], kw["version"], kw["tf"]),
+                 backtest_chart=self.bt_url(kw["strategy"], kw["version"], kw["tf"], kw["coin"]))
         e.update(kw)
         e.update(briefs.entry_email(e))
         return e
@@ -1383,7 +1390,8 @@ class EmailContext:
                      close_reason=r["close_reason"] if closed else None,
                      result_r=float(r["result_r"]) if closed and pd.notna(r["result_r"]) else 0.0, entry=entry,
                      next_action=("none - the trade is closed" if closed else
-                                  f"stop moved to breakeven ({briefs.fmt(entry)}); keep the rest open for the next target"))
+                                  f"stop moved to breakeven ({briefs.fmt(entry)}); keep the rest open for the next target"),
+                     backtest_chart=self.bt_url(r["strategy"], str(r["version"]), r["tf"], r["coin"]))
             m = briefs.exit_email(x)
             start = r["entry_time_utc"] if isinstance(r["entry_time_utc"], str) and r["entry_time_utc"] else r["signal_time_utc"]
             m["chart"] = self.chart(f"exit_{ev['id']}_{ev['to_state']}", r["coin"], stf, m["subject"][7:], entry, stop,

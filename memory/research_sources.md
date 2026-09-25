@@ -231,3 +231,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - what we deliberately do NOT take: any code (GPL-3.0 - nothing was copied); the files' hyperopted ROI tables and wide stops (-25% and more); ideas needing indicators we do not have (CCI, MFI, CMF, Fisher RSI, TEMA, candle-pattern libraries: CCIStrategy, Strategy002-005, Quickie, SwingHighToSky); the files in the repository's own lookahead_bias folder, which it keeps as examples of biased strategies.
   - how we test them: exactly like every idea - lab limits (the literature quota, 2 a week), the trials counter, the lookahead / recursive check, Monte Carlo and the rule-significance test (Phase 18 B).
   - licence: GPL-3.0 (ideas only).
+
+### [R6] backtesting.py - how a backtest trade chart is laid out (ideas only, AGPL-3.0)
+- timestamp: 2026-09-25 19:10 UTC · source: https://github.com/kernc/backtesting.py (commit ca2e2611621e472542ba90f7243a1fa06a7d7108, 2026-08-05) · evidence: FACT: read in the project's own code at that commit · confidence: high for what the code draws · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-24
+  - opened (Phase 18 D build session): backtesting/_plotting.py (the plot() function and its options).
+  - what it does: one figure with linked panes that share the time axis - the equity curve (optionally drawdown), the profit / loss of each trade, the price candles with every trade drawn from entry to exit (coloured by win / loss), then volume.
+  - what we take (Phase 18 D): the layout idea only - the price chart with the trades on it, and the equity curve and drawdown in panes under it (our chart page, drawn with Lightweight Charts, R7).
+  - what we deliberately do NOT take: any code (AGPL-3.0 - nothing was copied), its Bokeh charts, its optimiser.
+  - licence: AGPL-3.0 (ideas only).
+
+### [R7] TradingView Lightweight Charts - the chart library of the backtest chart page (bundled, Apache-2.0)
+- timestamp: 2026-09-25 19:10 UTC · source: https://github.com/tradingview/lightweight-charts (release v5.2.1, tag commit b2ce010e4ad59f6556c9ed60e2b2b30feccdd2d1; npm package lightweight-charts 5.2.1) · evidence: FACT: the package and its README / licence read at that release · confidence: high · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-24
+  - opened (Phase 18 D build session): the npm package (integrity checked against the registry: sha512-IVwoK1RL...), its README (licence and attribution section), LICENSE, and the NOTICE file of the v5.2.1 tag.
+  - what we take: the library file dist/lightweight-charts.standalone.production.js, unchanged, bundled in vendor/lightweight-charts/ and published with the dashboard - candlesticks, arrow markers, price lines for entry / stop / targets, line and area series for equity and drawdown.
+  - licence duties we meet: the Apache-2.0 licence and the NOTICE text are published next to the file; the page shows the attribution notice with a link to https://www.tradingview.com/ and keeps the library's attribution logo on, as its README asks.
+  - what we deliberately do NOT take: loading it from a CDN (nothing is loaded from outside), TradingView's other (non-open) charting products.
+  - licence: Apache-2.0.

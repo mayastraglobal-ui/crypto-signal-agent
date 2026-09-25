@@ -194,7 +194,7 @@ def render(inp):
             f'<span id="age" class="badge ok" data-utc="{esc(gen)}">updated {esc(gen)} UTC</span></div>'
             '<nav><a href="#book">Positions</a><a href="#market">Market</a><a href="#signals">Signals</a>'
             '<a href="#strategies">Strategies</a><a href="#approval">Approval</a><a href="#risk">Risk</a>'
-            '<a href="#claude">Claude</a></nav></header>')
+            '<a href="#claude">Claude</a><a href="chart.html">Backtest charts</a></nav></header>')
     if not rep:
         S.append('<section><h2>No engine report yet</h2><p>The hourly scan has not published '
                  '<code>reports/latest.json</code> yet. This page fills in after the next scan.</p></section>')
@@ -299,15 +299,22 @@ def render(inp):
           + '</p><p class="small mut">BACKTEST = history (Layer B, all coins together). LIVE = real signals of approved '
             "strategies. They are never added together.</p>"]
     order = lambda x: (STATUS_ORDER.index(x["status"]) if x["status"] in STATUS_ORDER else 99, x["strategy"], x["tf"])
+    charted = {(c["strategy"], str(c["version"]), c["tf"]) for c in (inp.get("charts") or {}).get("cells") or []}
+
+    def chart_link(x):                                # Phase 18 D: the backtest chart page of this cell
+        k = (x["strategy"], str(x["version"]), x["tf"])
+        return (f'<a href="chart.html#s={esc(k[0])}&amp;v={esc(k[1])}&amp;tf={esc(k[2])}">chart</a>' if k in charted
+                else '<span class="mut">-</span>')
     rows = []
     for x in sorted(board, key=order):
         rows.append([f'{esc(x["strategy"])} v{esc(x["version"])}', esc(x["tf"]), esc(x["status"]),
                      fnum(x.get("trades"), "{:.0f}"), f'<span class="{_rclass(x.get("avg_r"))}">{fr(x.get("avg_r"))}</span>',
                      fnum(x.get("profit_factor"), "{:.2f}"), esc(x.get("walk_forward") or "-"),
-                     esc(x.get("live_signals") or 0), fr(x.get("live_avg_r"))])
+                     esc(x.get("live_signals") or 0), fr(x.get("live_avg_r")), chart_link(x)])
     top = [r for r, x in zip(rows, sorted(board, key=order)) if x["status"] in ("APPROVED", "PAPER_TRADING", "VALIDATION")]
     rest = [r for r, x in zip(rows, sorted(board, key=order)) if x["status"] not in ("APPROVED", "PAPER_TRADING", "VALIDATION")]
-    hdr = ["Strategy", "TF", "Status", "BACKTEST trades", "BACKTEST avg", "PF", "Walk-forward", "LIVE signals", "LIVE avg"]
+    hdr = ["Strategy", "TF", "Status", "BACKTEST trades", "BACKTEST avg", "PF", "Walk-forward", "LIVE signals", "LIVE avg",
+           "Backtest chart"]
     st.append(table(hdr, top) if top else "<p>No strategy has passed the backtest bar yet - no paper or live signals.</p>")
     if rest:
         st.append(f"<details><summary>All other strategy versions ({len(rest)})</summary>{table(hdr, rest)}</details>")
@@ -325,8 +332,10 @@ def render(inp):
         ap.append(f'<div class="card"><b>Approve {esc(p["strategy"])} v{esc(p["version"])} {esc(p["tf"])} for live emails? '
                   f'(yes/no)</b><br><span class="small">PAPER {esc(p["paper_signals"])} signals, average '
                   f'{fr(p.get("paper_avg_r"))} · BACKTEST unseen {fr(p.get("backtest_validate_avg_r"))} · '
-                  f'<a href="{esc(blob(p["pack"]))}">read the pack</a> · to say yes, copy its line into '
-                  '<code>config.yaml</code> → <code>approvals:</code></span></div>')
+                  f'<a href="{esc(blob(p["pack"]))}">read the pack</a> · '
+                  f'<a href="chart.html#s={esc(p["strategy"])}&amp;v={esc(p["version"])}&amp;tf={esc(p["tf"])}">backtest '
+                  'chart</a>' + (f' · <a href="{esc(blob(p["pine"]))}">Pine script</a>' if p.get("pine") else "")
+                  + ' · to say yes, copy its line into <code>config.yaml</code> → <code>approvals:</code></span></div>')
     if not appr.get("eligible"):
         ap.append("<p>No strategy is ready: an approval pack appears after 20+ paper signals that meet the section 12 "
                   "numbers.</p>")

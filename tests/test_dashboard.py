@@ -80,7 +80,7 @@ class FromOfflineScan(unittest.TestCase):
         self.assertNotIn("@import", self.page)
         self.assertNotRegex(self.page, r"<img[^>]+src=\"https?:")
         for url in re.findall(r'href="([^"]+)"', self.page):
-            self.assertTrue(url.startswith(("#", "https://github.com/o/r/")), url)
+            self.assertTrue(url.startswith(("#", "https://github.com/o/r/", "chart.html")), url)   # + the chart page
 
     def test_stale_warning_in_the_browser(self):
         self.assertIn(f'data-utc="{self.latest["generated_utc"]}"', self.page)
@@ -219,9 +219,10 @@ class Build(unittest.TestCase):
             self.assertEqual(inp["briefing"][0], "reports/claude/briefings/2026-09-25-0820.md")
             self.assertIsNone(inp["latest"])                             # a broken file never stops the page
             self.assertIsNone(inp["review"])
-            page = build_dashboard.build(dt.datetime(2026, 9, 25, tzinfo=dt.timezone.utc))
+            files = build_dashboard.build(dt.datetime(2026, 9, 25, tzinfo=dt.timezone.utc), prev=lambda: None)
         self.assertTrue(os.path.exists(os.path.join(site, ".nojekyll")))
-        self.assertEqual(read(os.path.join(site, "index.html")), page)
+        self.assertEqual(files[:3], ["site/index.html", "site/.nojekyll", "site/chart.html"])   # + the chart library
+        page = read(os.path.join(site, "index.html"))
         self.assertIn("No engine report yet", page)
         self.assertIn("newest one", page)
 
