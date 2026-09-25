@@ -177,6 +177,29 @@ def variants(spec, pct):
     return out
 
 
+def rule_drops(spec):
+    """Rule significance (Phase 18 B, idea from Jesse R5): the card with ONE entry rule removed at a time - rule i
+    goes from the long AND the short list (they are written as mirror images). A side with a single rule keeps it
+    (a card with no rule left would trade every candle). spec: a loaded card (with '_raw').
+    Returns [(label, rendered card, the raw card without the rule, rule text)]."""
+    raw = spec.get("_raw", spec)
+    lo, sh = list(raw.get("long") or []), list(raw.get("short") or [])
+    out = []
+    for i in range(max(len(lo), len(sh))):
+        if (len(lo) <= 1 or i >= len(lo)) and (len(sh) <= 1 or i >= len(sh)):
+            continue
+        nraw = dict(raw, long=[r for j, r in enumerate(lo) if j != i or len(lo) <= 1],
+                    short=[r for j, r in enumerate(sh) if j != i or len(sh) <= 1])
+        if raw.get("params"):                  # a parameter only the removed rule used goes with it (one change)
+            used = placeholders(nraw)
+            nraw["params"] = {k: v for k, v in raw["params"].items() if k in used}
+        rl, rs_ = spec.get("long") or lo, spec.get("short") or sh          # the rendered text (numbers filled in)
+        rule = " / ".join(str(x) for x in (rl[i] if i < len(rl) and len(lo) > 1 else None,
+                                           rs_[i] if i < len(rs_) and len(sh) > 1 else None) if x)
+        out.append((f"without rule {i + 1}", _finish(render(nraw), nraw), nraw, rule))
+    return out
+
+
 def _finish(card, raw):
     card = dict(card, version=str(raw["version"]), cooldown_bars=int(raw.get("cooldown_bars", 0) or 0))
     card["_raw"] = raw
