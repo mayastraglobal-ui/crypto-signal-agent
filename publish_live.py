@@ -11,6 +11,8 @@ reports/daily/, latest.md); `live-reports` keeps only the newest copy of the big
                                     over from the current live-reports branch
   python publish_live.py --restore  copy the files from live-reports into reports/ when they are not
                                     there yet (the hourly scan needs the daily research.json)
+  python publish_live.py --refresh  ALWAYS overwrite reports/ with the newest live-reports copy (Claude's task
+                                    sessions are persistent: an old copy from an earlier run must be replaced)
 
 It only uses git plumbing inside this checkout (so the workflow's push credentials apply) and never
 touches main or the working tree's index.
@@ -65,22 +67,24 @@ def previous_blob(path):
     return p.stdout.strip() if p.returncode == 0 else None
 
 
-def restore(remote="origin", files=LIVE_FILES):
-    """Copy live files that are missing locally from the live branch. Returns the paths restored."""
+def restore(remote="origin", files=LIVE_FILES, overwrite=False):
+    """Copy live files from the live branch: only the missing ones (the workflows: never replace a file of this
+    run), or all of them with overwrite=True (--refresh: Claude's persistent task sessions). Returns the paths."""
     if not fetch_previous(remote):
         print(f"{BRANCH} does not exist yet - nothing to restore")
         return []
     done = []
     for path in files:
         full = os.path.join(ROOT, path)
-        if os.path.exists(full) or previous_blob(path) is None:
+        if (os.path.exists(full) and not overwrite) or previous_blob(path) is None:
             continue
         os.makedirs(os.path.dirname(full), exist_ok=True)
         with open(full, "wb") as f:
             f.write(subprocess.run(["git", "cat-file", "blob", f"FETCH_HEAD:{path}"], cwd=ROOT,
                                    capture_output=True, check=True).stdout)
         done.append(path)
-    print("restored: " + (", ".join(done) or "nothing"))
+    when = git("log", "-1", "--format=%s", "FETCH_HEAD", check=False).stdout.strip()
+    print(("refreshed" if overwrite else "restored") + ": " + (", ".join(done) or "nothing") + f" (from: {when})")
     return done
 
 
@@ -123,10 +127,15 @@ def publish(remote="origin", files=LIVE_FILES, when=None, branch=BRANCH, readme=
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--restore", action="store_true", help="copy missing live files from the live branch")
+    ap.add_argument("--refresh", action="store_true",
+                    help="overwrite the live files with the newest copy from the live branch (task sessions)")
     ap.add_argument("--remote", default="origin")
     args = ap.parse_args()
     try:
-        restore(args.remote) if args.restore else publish(args.remote)
+        if args.refresh or args.restore:
+            restore(args.remote, overwrite=args.refresh)
+        else:
+            publish(args.remote)
     except RuntimeError as e:
         sys.exit(str(e))
 

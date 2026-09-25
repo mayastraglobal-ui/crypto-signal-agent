@@ -5,18 +5,21 @@ The fact sheet for Claude's scheduled tasks (Phase 14; tasks/*.md).
 Claude explains and researches - it never computes prices, results or statistics itself (AGENT_PROMPT.md
 section 1). This prints every number a task needs, taken from the engine's own files:
 
-  python publish_live.py --restore      (first: fetch the large report files, e.g. latest.json, research.json)
+  python publish_live.py --refresh      (first: fetch the NEWEST large report files, e.g. latest.json, research.json)
   python brain_pack.py briefing         (position book, market, signals, risk, events)
   python brain_pack.py daily            (+ last 24 hours: closed signals, losses and tags, lifecycle, reviews due,
                                           the strategy lab and the trials counter)
   python brain_pack.py weekly           (+ last 7 days, missed moves, candidate lessons, approval packs, SMC twins,
                                           the lab, the event calendar)
 
-Read-only: it writes nothing.
+Read-only: it writes nothing (it only fetches the live-reports branch to check that the local copies are the newest).
+If they are not, the fact sheet starts with "!!! STALE ENGINE FILES".
 """
 import datetime as dt
 import json
 import os
+import re
+import subprocess
 import sys
 
 import pandas as pd
@@ -31,11 +34,17 @@ MEMORY = os.path.join(ROOT, "memory")
 
 def load_json(name):
     p = os.path.join(REPORTS, name)
-    return json.load(open(p)) if os.path.exists(p) else None
+    if not os.path.exists(p):
+        return None
+    with open(p) as f:
+        return json.load(f)
 
 
 def read(path):
-    return open(path, encoding="utf-8", errors="replace").read() if os.path.exists(path) else None
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
 
 
 def recent_files(folder, n=3):
@@ -160,13 +169,63 @@ def feed_lines(now, kind):
     return out
 
 
-def pack(kind, now):
+LIVE_FILES = ["reports/latest.json", "reports/research.json", "reports/smc.json", "reports/regime.json",
+              "reports/features.json", "reports/data_quality.json", "reports/feature_evidence.json"]
+
+
+def live_status(root=ROOT, remote="origin", branch="live-reports"):
+    """The newest live-reports commit vs the local copies: dict(commit, differs=[paths], missing=[paths]),
+    or None when the branch cannot be fetched."""
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=root, capture_output=True, text=True)
+    if git("fetch", "--quiet", "--depth=1", remote, branch).returncode != 0:
+        return None
+    out = dict(commit=git("log", "-1", "--format=%s", "FETCH_HEAD").stdout.strip(), differs=[], missing=[])
+    for path in LIVE_FILES:
+        remote_blob = git("rev-parse", "--verify", "--quiet", f"FETCH_HEAD:{path}").stdout.strip()
+        if not remote_blob:
+            continue
+        if not os.path.exists(os.path.join(root, path)):
+            out["missing"].append(path)
+        elif git("hash-object", path).stdout.strip() != remote_blob:
+            out["differs"].append(path)
+    return out
+
+
+def md_updated(text):
+    """'2026-09-25 10:18' from the '**Updated:** ... (2026-09-25 10:18 UTC)' line of reports/latest.md."""
+    m = re.search(r"\*\*Updated:\*\*.*?\((\d{4}-\d{2}-\d{2} \d{2}:\d{2}) UTC\)", text or "")
+    return m.group(1) if m else None
+
+
+def stale_warnings(rep, md_text, live):
+    """Why the local engine files may be old copies (Claude's task sessions keep files from earlier runs)."""
+    w = []
+    gen, upd = (rep or {}).get("generated_utc"), md_updated(md_text)
+    if rep is not None and gen and upd and upd > gen:
+        w.append(f"reports/latest.json is from {gen} UTC, but reports/latest.md on main was updated {upd} UTC - "
+                 "the local latest.json is an OLD copy")
+    if live:
+        for p in live["differs"]:
+            w.append(f"{p} is not the newest copy on live-reports ({live['commit']})")
+        for p in live["missing"]:
+            w.append(f"{p} is missing locally but exists on live-reports ({live['commit']})")
+    return w
+
+
+def pack(kind, now, live=None):
+    """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
-    out = [f"# Fact sheet for the {kind} task - {now:%Y-%m-%d %H:%M} UTC",
+    warn = stale_warnings(rep, read(os.path.join(REPORTS, "latest.md")), live)
+    head = (["!!! STALE ENGINE FILES - read this first !!!"] + [f"!!! {x}" for x in warn]
+            + [f"!!! Run `python publish_live.py --refresh`, then `python brain_pack.py {kind}` again. If this "
+               "stays, say so at the top of your output and do not present these numbers as current.", ""]
+            if warn else [])
+    out = head + [f"# Fact sheet for the {kind} task - {now:%Y-%m-%d %H:%M} UTC",
            "All numbers below come from the engine. Quote them; never recompute or invent numbers.",
            f"WRITE YOUR OUTPUT TO: {target(kind, now)}", ""]
     if rep is None:
-        return out + ["reports/latest.json is missing - run `python publish_live.py --restore` first. "
+        return out + ["reports/latest.json is missing - run `python publish_live.py --refresh` first. "
                       "If it is still missing, say in your output that the engine report was not available."]
     age_h = (now - pd.Timestamp(rep["generated_utc"], tz="UTC").to_pydatetime()).total_seconds() / 3600
     out += [f"Engine report: {rep['generated_utc']} UTC ({age_h:.1f} hours old)"
@@ -257,7 +316,12 @@ def main():
     kind = sys.argv[1] if len(sys.argv) > 1 else "briefing"
     if kind not in ("briefing", "daily", "weekly"):
         sys.exit("usage: python brain_pack.py briefing|daily|weekly")
-    print("\n".join(pack(kind, dt.datetime.now(dt.timezone.utc))))
+    live = live_status()
+    lines = pack(kind, dt.datetime.now(dt.timezone.utc), live)
+    if live is None:
+        lines.insert(lines.index(next(x for x in lines if x.startswith("# Fact sheet"))) + 1,
+                     "(could not reach the live-reports branch to check that the engine files are the newest)")
+    print("\n".join(lines))
 
 
 if __name__ == "__main__":
