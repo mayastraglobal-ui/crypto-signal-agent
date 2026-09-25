@@ -58,6 +58,29 @@ def target(kind, now):
     return f"reports/claude/{kind}/{now:%Y-%m-%d}.md"
 
 
+def calendar_lines(now, days=90):
+    """events.yaml as the weekly task needs it: what is listed for the next 90 days, how each date was checked,
+    and which months have no NFP / CPI / PCE / FOMC entry yet."""
+    from engine import risk as rk
+    out = ["", f"## Event calendar (events.yaml) - next {days} days, and what looks missing"]
+    try:
+        items = rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE))
+    except ValueError as e:
+        return out + [f"- ! {e}"]
+    t0, t1 = now.strftime("%Y-%m-%d"), (now + dt.timedelta(days=days)).strftime("%Y-%m-%d")
+    listed = [e for e in items if t0 <= str(e.get("utc", ""))[:10] <= t1]
+    out += [f"- {e.get('utc')} UTC {e.get('type')}: {e.get('name')} (check: {e.get('check', '-')})" for e in listed] \
+        or ["- nothing listed"]
+    months = sorted({(now + dt.timedelta(days=d)).strftime("%Y-%m") for d in range(0, days + 1, 7)}
+                    - {now.strftime("%Y-%m")})             # the current month may already be past its releases
+    for m in months:
+        have = {e.get("type") for e in items if str(e.get("utc", "")).startswith(m)}
+        miss = [t for t in ("NFP", "CPI", "PCE") if t not in have]
+        if miss:
+            out.append(f"- {m}: no {', '.join(miss)} entry yet (FOMC meets 8 times a year - check its calendar)")
+    return out
+
+
 def pack(kind, now):
     rep, research = load_json("latest.json"), load_json("research.json")
     out = [f"# Fact sheet for the {kind} task - {now:%Y-%m-%d %H:%M} UTC",
@@ -137,6 +160,8 @@ def pack(kind, now):
         out += ["### Control-twin comparisons (does the special ingredient add anything?)"]
         out += [f"- {k}: {'beats' if c.get('beats_twin') else 'does not beat' if c.get('beats_twin') is False else 'too few trades vs'} "
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
+    if kind == "weekly":
+        out += calendar_lines(now)
     st = mem.status(MEMORY, now)
     out += ["", "## Memory reviews due (write a NEW review record for each; never edit the old one)"]
     out += [f"- {d['file']}: {d['title']} (due {d['review']})" for d in st["due"][:30]] or ["- none"]

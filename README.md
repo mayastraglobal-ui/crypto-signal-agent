@@ -37,6 +37,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 | File | What it is | Should you edit it? |
 |---|---|---|
 | `config.yaml` | Account size, risk %, coin rules, fees, data checks, TP1/2/3 split, pass/fail rules | Yes, this is your control panel |
+| `events.yaml` | High-impact event calendar (CPI, NFP, PCE, FOMC) in UTC - no live entry ±60 min around each | Yes - correct or delete entries here; the weekly research only adds |
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `scanner.py` | The engine | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
@@ -369,7 +370,7 @@ decides whether the account may take a live trade **now** and how big it may be.
 
 | Rule | What happens |
 |---|---|
-| High-impact event within ±60 min | no live entry (calendar: `config.yaml` → `events`) |
+| High-impact event within ±60 min | no live entry (calendar: `events.yaml`) |
 | Today's closed live results ≤ −3R / this week's ≤ −6R | no new live entries for the rest of the day / week; one `[SYSTEM]` email when it starts and one when it ends |
 | A live strategy (version × timeframe) more than 8R below its best | SUSPENDED until you add it to `risk` → `resume` with a date |
 | Heat | at most 3 open live positions, 1 per coin, 1 per direction in a group of coins that move together (1h correlation ≥ 0.7 over 30 days) |
@@ -384,7 +385,7 @@ validation signals are still logged in full (their record must stay comparable w
 Report section 2d and the "Risk:" line of the position book show the state.
 
 **Keep the event calendar filled in.** The agent does not invent dates. Add US CPI, NFP (bls.gov schedule), FOMC
-(federalreserve.gov) and exchange incidents to `config.yaml` → `events` in UTC; the report warns
+(federalreserve.gov) and exchange incidents to `events.yaml` in UTC (the weekly research appends checked dates); the report warns
 "calendar not maintained" when nothing is listed for the next 7 days.
 
 Note: the older strategies take their first target at 1R, so none of them can send a live signal until a new

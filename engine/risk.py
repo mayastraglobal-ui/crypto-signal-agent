@@ -5,7 +5,7 @@ Independent of signal generation: the strategies find signals, this module decid
 may take one NOW and how big it may be. Fixed rules only; it never changes a strategy, never increases a
 size because of "confidence", and never looks at earlier wins or losses to size a trade.
 
-  blackout        no entry within +-60 min of a high-impact event (calendar in config.yaml -> events)
+  blackout        no entry within +-60 min of a high-impact event (calendar: events.yaml + config.yaml -> events)
   day / week      closed LIVE results today <= -3R or this week <= -6R -> no new entries
   suspended       a strategy version x timeframe whose live drawdown exceeds 8R (until the operator resumes it)
   heat            <= 3 open live positions, <= 1 per coin, <= 1 per group of correlated coins and direction
@@ -18,6 +18,7 @@ leverage capped at 3x by making the position SMALLER.
 Pure functions: no internet, no files.
 """
 import datetime as dt
+import os
 
 import numpy as np
 import pandas as pd
@@ -65,6 +66,28 @@ def settings(risk_section, events=None):
 
 def _ms(txt):
     return int(pd.Timestamp(str(txt), tz="UTC").value // 1_000_000)
+
+
+CALENDAR_FILE = "events.yaml"       # the event calendar file at the repository root (read with config.yaml -> events)
+
+
+def load_calendar(path):
+    """The events list of events.yaml ([] when the file does not exist). A file that cannot be read raises
+    ValueError, which the scan reports (the blackout is then off - never silently)."""
+    import yaml
+    if not os.path.exists(path):
+        return []
+    try:
+        with open(path) as f:
+            doc = yaml.safe_load(f) or {}
+    except yaml.YAMLError as e:
+        raise ValueError(f"{os.path.basename(path)} is not valid YAML: {e}")
+    items = doc.get("events") if isinstance(doc, dict) else None
+    if items is None:
+        return []
+    if not isinstance(items, list) or not all(isinstance(e, dict) for e in items):
+        raise ValueError(f"{os.path.basename(path)}: 'events' must be a list of {{utc, type, name}} entries")
+    return items
 
 
 def parse_events(items):

@@ -220,3 +220,34 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Operator decisions (2026-09-25):** dashboard only (no database, no streaming); rebuilt after scan + research + briefing; charts = 7 coins on 1h + each open trade.
 - **One-time operator step:** Settings → Pages → Deploy from a branch → gh-pages / (root).
 - Tests: `tests/test_dashboard.py`. Built from a real offline scan: every section, a chart per coin, self-contained, only repository links, size, stale script. LIVE / PAPER labels are never mixed; everything is escaped (script / javascript: / img); Claude marked AI; approval and risk. Chart labels never overlap and levels stay inside the plot; flat and missing candles are handled; markdown. The build survives missing or broken files and picks the newest briefing. Publishing to gh-pages was tested in a real git repository: one commit at the root, main untouched. Workflow order and continue-on-error. Checked visually in headless Chromium at desktop width and 390 px phone width.
+
+## 2026-09-25 · Claude (BUILD mode, operator request) · Event calendar, weekly calendar upkeep, workflow fixes, -5M review
+- **New `events.yaml` (the event calendar, read together with `config.yaml` → `events`)** with the US high-impact releases through December 2026, in UTC:
+  - PCE: 30 Sep, 29 Oct, 25 Nov, 23 Dec.
+  - Jobs report (NFP): 2 Oct.
+  - CPI: 14 Oct, 10 Nov, 10 Dec.
+  - FOMC decisions: 28 Oct 18:00, 9 Dec 19:00.
+  - US data at 8:30 a.m. New York = 12:30 UTC until 1 Nov, 13:30 UTC after it.
+- **How the dates were checked:** the official pages (bls.gov, bea.gov, federalreserve.gov) are blocked by this environment's network, so every date was read through a web search restricted to that official site, and each entry says so (`check: official_search`).
+  - CPI 10 Nov is `indirect`: the official regional CPI releases for October are dated 10 Nov.
+  - CPI 10 Dec is `operator`: given by the operator, not confirmed.
+  - **The November and December jobs reports are NOT listed:** their dates could not be confirmed, and none is invented. The weekly research flags the gap.
+  - BLS also has a notice about revised dates after the 2025 **and 2026** lapses in appropriations: dates can move.
+- **The weekly research keeps the calendar filled** (`tasks/weekly_research.md` step 4): the next 90 days, checked on the official calendars, converted to UTC, only appended.
+  - The Brain guard accepts `events.yaml` **additions only**. Each new entry needs a valid UTC time, a known type, a name, an https source on an official site and a check mark, and must not be a duplicate. The result must still parse on the newest main. Edits and deletions stay the operator's.
+  - The fact sheet shows the listed events and the missing NFP / CPI / PCE per month.
+  - Candidates are now written as PROPOSED cards in the weekly file: the task session can only push its own branch.
+- **brain.yml:**
+  - "Save" no longer fails when `reports/claude` (or `reports/brain_sent.json`) does not exist yet; it adds only paths that exist.
+  - pyyaml is installed for the guard.
+- **All workflows:** `actions/checkout@v5` and `actions/setup-python@v6` (Node 24); `runs-on: ubuntu-24.04` pinned, because ubuntu-latest moves to Ubuntu 26 on 19 Oct 2026. `actions/cache@v4` (research) is unchanged.
+- **-5M strategies with 0 research trades - finding** (first research run, 25 Sep): the 5-minute check is not the main cause.
+  - Over the same 90 days of 5m history, the plain versions without the check made S5 15m 1, S5 30m 0, S6 0 and S7 1 trades. Over a full year of 15m history the plain versions made S5 4 / 6 (15m / 30m), S6 0 and S7 3 trades.
+  - Most raw signals are blocked by the market gates. S5 15m: 51 signal candles, 34 blocked by regime, 11 by permission. S6: 6 signal candles, all blocked.
+  - S6's combination (4H order block in discount + touch within 20 candles + a 15m CHoCH) almost never occurs.
+  - **Conclusion:** 90 days is too short for any verdict (30 trades are needed), but a longer 5m history alone would not fix it (about 4 trades a year). The entry rules / gates are the bottleneck.
+  - Nothing was changed. Rule changes are new versions, one change each, and need the operator's decision.
+- Tests (test_brain.py):
+  - calendar guard (applied, 13 refusals, fits the newest main, the committed calendar meets the rules);
+  - calendar file (weekdays, 8:30 / 2:00 p.m. New York → UTC incl. the 1 Nov switch, FOMC dates, loader errors, scanner reads it, fact-sheet gaps);
+  - workflows (pinned runner, Node 24 actions, the Save step in a real git repository with and without changes).

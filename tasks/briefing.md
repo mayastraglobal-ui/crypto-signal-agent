@@ -14,7 +14,8 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefin
    - Use only sources you actually opened, and give each item its URL.
    - Rank sources by the weights in section 18. Community posts are ideas only, never evidence.
    - If a high-impact release (CPI, NFP or FOMC) in the next 7 days is **not** in the fact sheet's event list,
-     tell the operator to add it to `config.yaml` → `events`, with the date and time in UTC. You may not edit
+     tell the operator to add it to `events.yaml`, with the date and time in UTC (the weekly research adds checked
+     dates too). You may not edit
      that file yourself.
 4. **Write the briefing** to the path the fact sheet gives, in this order:
    - `# <one-line headline>`

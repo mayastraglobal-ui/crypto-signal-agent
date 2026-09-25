@@ -1319,7 +1319,7 @@ def risk_summary(logdf, now, RK, groups, pct, pct_note, calendar_problem, plans,
     active = rk.blackout(now_ms, RK["events"], RK["blackout_minutes"])
     warn = (f"event calendar has an error: {calendar_problem}" if calendar_problem else
             f"calendar not maintained - no event listed for the next {RK['calendar_horizon_days']} days "
-            "(config.yaml -> events)" if not nxt else None)
+            "(events.yaml)" if not nxt else None)
     prev = {}
     if os.path.exists(state_path):
         try:
@@ -1789,7 +1789,8 @@ def main():
     # ---------- risk engine settings (section 15; engine/risk.py) ----------
     calendar_problem = None
     try:
-        RK = rk.settings(cfg.get("risk"), cfg.get("events"))
+        RK = rk.settings(cfg.get("risk"), (cfg.get("events") or [])
+                         + rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE)))
     except ValueError as e:                  # a broken calendar entry is reported, never silently skipped
         calendar_problem = str(e)
         RK = rk.settings(cfg.get("risk"), [])

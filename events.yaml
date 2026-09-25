@@ -1,0 +1,39 @@
+# HIGH-IMPACT EVENT CALENDAR (AGENT_PROMPT.md section 14 step 11 / section 15)
+#
+# No live entry from 60 minutes before to 60 minutes after each event (config.yaml -> risk.blackout_minutes).
+# The engine reads this file AND config.yaml -> events (both together). Times are UTC.
+#   US data at 8:30 a.m. New York = 12:30 UTC until 1 Nov 2026 (summer time), 13:30 UTC from 1 Nov (winter time).
+#   FOMC statement at 2:00 p.m. New York = 18:00 UTC (summer) / 19:00 UTC (winter).
+#
+# Fields: utc, type (NFP / CPI / PCE / FOMC / GDP / ...), name, source (the official page), check (how the date was
+# checked). `check` values:
+#   official_page    - read on the official calendar page itself
+#   official_search  - read from the official site through a web search restricted to that site; the page itself
+#                      could not be opened from the engine's network - re-check on the page when you can
+#   indirect         - supported by a related official release, not by the main calendar
+#   operator         - given by the operator, not confirmed yet
+# Only ADD entries here. The weekly research task appends new ones (checked by the Brain guard, which refuses any
+# edit or deletion). Corrections and deletions are made by the operator (edit on GitHub).
+# An exchange incident: {from: "2026-10-02 08:00", until: "2026-10-02 11:00", type: exchange_incident, name: "..."}
+
+events:
+  - {utc: "2026-09-30 12:30", type: PCE, name: "US PCE / Personal Income and Outlays (Aug data)",
+     source: "https://www.bea.gov/news/schedule", check: official_search}
+  - {utc: "2026-10-02 12:30", type: NFP, name: "US jobs report / Employment Situation (Sep data)",
+     source: "https://www.bls.gov/schedule/news_release/empsit.htm", check: official_search}
+  - {utc: "2026-10-14 12:30", type: CPI, name: "US CPI (Sep data)",
+     source: "https://www.bls.gov/schedule/news_release/cpi.htm", check: official_search}
+  - {utc: "2026-10-28 18:00", type: FOMC, name: "FOMC decision (Oct 27-28 meeting) + press conference",
+     source: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm", check: official_search}
+  - {utc: "2026-10-29 12:30", type: PCE, name: "US PCE / Personal Income and Outlays (Sep data)",
+     source: "https://www.bea.gov/news/schedule", check: official_search}
+  - {utc: "2026-11-10 13:30", type: CPI, name: "US CPI (Oct data)",
+     source: "https://www.bls.gov/schedule/news_release/cpi.htm", check: indirect}
+  - {utc: "2026-11-25 13:30", type: PCE, name: "US PCE / Personal Income and Outlays (Oct data)",
+     source: "https://www.bea.gov/news/schedule", check: official_search}
+  - {utc: "2026-12-09 19:00", type: FOMC, name: "FOMC decision (Dec 8-9 meeting) + press conference",
+     source: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm", check: official_search}
+  - {utc: "2026-12-10 13:30", type: CPI, name: "US CPI (Nov data)",
+     source: "https://www.bls.gov/schedule/news_release/cpi.htm", check: operator}
+  - {utc: "2026-12-23 13:30", type: PCE, name: "US PCE / Personal Income and Outlays (Nov data)",
+     source: "https://www.bea.gov/news/schedule", check: official_search}

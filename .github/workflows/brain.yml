@@ -20,21 +20,24 @@ concurrency:
 
 jobs:
   brain:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # pinned: ubuntu-latest moves to Ubuntu 26 on 19 Oct 2026
     timeout-minutes: 10
     env:
       GMAIL_USER: ${{ secrets.GMAIL_USER }}
       GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       ALERT_TO: ${{ secrets.ALERT_TO }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 0           # full history: needed to find where each task branch started
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+
+      - name: Install (only what the guard needs)
+        run: pip install pyyaml
 
       - name: Check and apply Claude's work (brain_guard.py)
         run: python brain_guard.py --out "$RUNNER_TEMP/brain_result.json"
@@ -62,7 +65,9 @@ jobs:
         run: |
           git config user.name "signal-bot"
           git config user.email "signal-bot@users.noreply.github.com"
-          git add reports/claude memory reports/brain_sent.json 2>/dev/null || git add reports/claude memory
+          for p in reports/claude memory events.yaml reports/brain_sent.json; do   # only paths that exist yet
+            if [ -e "$p" ]; then git add "$p"; fi
+          done
           if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
           git commit -m "Brain: Claude task work $(date -u +'%Y-%m-%d %H:%M') UTC"
           for i in 1 2 3 4; do

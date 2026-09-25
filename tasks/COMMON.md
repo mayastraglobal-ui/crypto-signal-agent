@@ -53,16 +53,23 @@ the end of the fact sheet.
    - `review` is a date: today + the review days in `config.yaml` → `memory.review_days`.
    - A **lesson** needs `FACT`, `RESEARCH_FINDING` or `BACKTEST_EVIDENCE` **with counts** (how many tests,
      trades or samples). It needs to be systematic in 2 or more tests; single stories are not lessons.
-3. **Nothing else.**
-   - A new strategy idea or a new version: open a **pull request** that changes only `strategies.yaml`, from
-     a branch named `claude/strategy-<id>-v<version>`. Follow the ID-card rules at the top of the file: a
-     new version, a changelog line, and exactly ONE change per version. The operator merges it; it is not
-     tested before that.
-   - If you cannot open a pull request, push the branch and write its name in your output.
+3. **Weekly research only: new entries at the END of `events.yaml`** (the high-impact event calendar).
+   - Only add; never change or delete an entry (the operator corrects them).
+   - Each entry: `{utc: "YYYY-MM-DD HH:MM", type: NFP|CPI|PCE|FOMC|GDP|PPI|..., name: "...", source:
+     "https://<official page>", check: official_page|official_search|indirect}`, written in the same style as
+     the entries above it.
+   - `source` must be an https page on an official site: bls.gov, bea.gov, federalreserve.gov, census.gov,
+     treasury.gov, ecb.europa.eu, boj.or.jp, or binance.com for exchange incidents.
+   - Never add a date you could not see on or through that official site. Say in your output what is missing.
+4. **Nothing else.**
+   - A new strategy idea or a new version: your session can only push to your task branch, so write the exact
+     new `strategies.yaml` card (a new version, a changelog line, exactly ONE change per version) in your output
+     under "Candidates", marked **PROPOSED - not opened**. The operator (or the build session) opens the pull
+     request; it is not tested before the operator merges it.
 
 ## End of every run
 ```bash
-git add <your file> memory/
+git add <your file> memory/        # weekly research: also events.yaml when you added entries
 git commit -m "<Briefing|Daily review|Weekly research> <date>"
 git push -f origin <your task branch>
 ```
