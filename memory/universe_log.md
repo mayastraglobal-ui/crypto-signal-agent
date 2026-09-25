@@ -85,3 +85,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** AVAX - order book too thin: $227k within 1% (need $250k)
 - **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** ENA - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-09-25 19:16 UTC
+- **ELIGIBLE** AVAX - passes every rule again
