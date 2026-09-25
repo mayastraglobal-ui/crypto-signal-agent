@@ -80,3 +80,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 01:15,SOL,15m,FVG_FILLED,bear,,117.56,117.91,,Asia,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-25 00:30,ZEC,15m,OB_RETEST,bull,,1543.15,1550.85,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
 2026-09-25 00:30,BNB,30m,FVG_FILLED,bear,,777.32,778.6,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 02:00,BTC,30m,FVG_RETRACE,bull,,84277.32,84380.01,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-25 01:45,BTC,15m,FVG_FILLED,bull,,84445.92,84549.55,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 02:15,BTC,15m,WEAK_BREAK,bull,84796.51,,,0.243,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-25 02:00,XRP,1h,SWEEP,bear,1.5481,,,0.354,Asia,4h,WEAK_BULL,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-09-25 01:30,XRP,30m,FVG_RETRACE,bull,,1.539,1.5434,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-25 02:00,XRP,30m,OB_RETEST,bull,,1.5322,1.539,,Asia,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-25 02:00,XRP,30m,FVG_FILLED,bull,,1.539,1.5434,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-09-25 01:45,XRP,15m,OB_RETEST,bull,,1.5322,1.5364,,Asia,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-25 01:45,XRP,15m,FVG_FILLED,bull,,1.5364,1.5453,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-09-25 02:00,SOL,1h,SWEEP,bear,117.79,,,0.136,Asia,4h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-09-25 01:30,SOL,30m,SWEEP,bear,117.79,,,0.214,Asia,1h,UNCLEAR,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-09-25 01:45,SOL,15m,FVG_FILLED,bull,,117.16,117.31,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 02:15,SOL,15m,BOS,bull,117.94,,,0.557,Asia,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-09-25 02:15,SOL,15m,ORDER_BLOCK,bull,,117.15,117.49,,Asia,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-25 01:30,ZEC,15m,OB_INVALID,bull,,1543.15,1550.85,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-25 01:45,ZEC,15m,BREAKER_RETEST,bear,,1543.15,1550.85,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
