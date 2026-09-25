@@ -15,3 +15,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END PROVE 1d data: DEGRADED: volume 52x normal on candle 09-23 00:00 UTC (possible bad data); DEGRADED: volume 245x normal on candle 09-24 00:00 UTC (possible bad data)
 - timestamp: 2026-09-25 09:18 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: PROVE · timeframe: - · regime: - · review: 2026-10-25
   - problem first seen 2026-09-24 23:16 UTC UTC
+
+### START BABY 1d data: DEGRADED: volume 65x normal on candle 09-23 00:00 UTC (possible bad data)
+- timestamp: 2026-09-25 11:18 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: BABY · timeframe: - · regime: - · review: 2026-10-25
+  - signals from this data are blocked while it lasts

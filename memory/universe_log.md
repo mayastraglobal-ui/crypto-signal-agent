@@ -55,3 +55,9 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 10:18 UTC
 - **EXCLUDED** VTHO - 7-day average volume $4M < $50M; spread 0.133% > 0.1%; order book too thin: $76k within 1% (need $250k)
+
+## 2026-09-25 11:18 UTC
+- **EXCLUDED** BABY - 7-day average volume $16M < $50M; order book too thin: $43k within 1% (need $250k)
+- **FLAG** BABY - price data DEGRADED - stays in the list, but no signals
+- **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** SUI - in the top 7 for 2 runs in a row (now #7)

@@ -3,23 +3,19 @@
   "BTC",
   "ETH",
   "SOL",
-  "ZEC",
   "XRP",
+  "ZEC",
   "LTC",
-  "BNB"
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
- "out_streak": {
-  "BNB": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 17,
+ "runs": 18,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -57,6 +53,10 @@
    "spread",
    "thin_book",
    "volume_7d"
+  ],
+  "BABY": [
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -78,6 +78,9 @@
   "SAGA": [],
   "LINK": [],
   "XPL": [],
-  "VTHO": []
+  "VTHO": [],
+  "BABY": [
+   "data_degraded"
+  ]
  }
 }
