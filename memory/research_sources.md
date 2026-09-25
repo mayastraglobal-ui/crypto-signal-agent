@@ -3,3 +3,183 @@
 Append-only (AGENT_PROMPT.md section 18). Every source behind a strategy idea: title, URL (only if known - **citations are never invented**), date, claim, evidence class (FACT · RESEARCH_FINDING · BACKTEST_EVIDENCE · CLAIM · HYPOTHESIS · MODEL_OUTPUT · UNVERIFIED_OPINION), derived hypothesis and limitations. The engine adds one record when a strategy version is first tested (from its card); the reviews add external sources. Test results live in `memory/strategy_registry.csv`.
 
 Every entry is a record: a `###` title, one line `- timestamp: … · source: … · evidence: … · confidence: … · strategy: … · asset: … · timeframe: … · regime: … · review: YYYY-MM-DD` (section 22), then its details. `-` = not applicable.
+
+### trend_pullback@1.0 - Buy the dip inside an up-trend: price pulls back to the 20 EMA and bounces.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card trend_pullback@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: trend_pullback v1.0 · asset: research coins · timeframe: 4h, 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: In a trend confirmed by the higher timeframe, a pullback to the 20 EMA that closes strong again continues the trend.
+  - derived hypothesis (tested): trend_pullback@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 4h, 1h, 30m, 15m
+  - limitations: Fails in ranges (every touch of the EMA looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card donchian_breakout@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: donchian_breakout v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A close beyond the 20-candle range with 1.5x volume and ADX > 20 starts a move that is worth following.
+  - derived hypothesis (tested): donchian_breakout@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### rsi2_dip_buy@1.0 - Connors RSI(2): in a long-term up-trend, buy a sharp 1-2 candle dip, sell the bounce.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card rsi2_dip_buy@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: rsi2_dip_buy v1.0 · asset: research coins · timeframe: 4h, 1h, 30m, 15m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A sharp 1-2 candle dip (RSI(2) < 10) snaps back towards the short-term average.
+  - derived hypothesis (tested): rsi2_dip_buy@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE on 4h, 1h, 30m, 15m
+  - limitations: Catching a falling knife in a real breakdown; many small wins, rare large losses.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### bb_squeeze_breakout@1.0 - Volatility squeeze: Bollinger Bands get very tight, then price breaks out with volume.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card bb_squeeze_breakout@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: bb_squeeze_breakout v1.0 · asset: research coins · timeframe: 4h, 1h, 30m, 15m · regime: COMPRESSION, EXPANSION, STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: After a volatility squeeze (bandwidth in its lowest 20%), a band break with volume in the higher-timeframe direction runs.
+  - derived hypothesis (tested): bb_squeeze_breakout@1.0 makes money after fees in regimes COMPRESSION, EXPANSION, STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 4h, 1h, 30m, 15m
+  - limitations: Squeezes can break both ways (head fakes); rare signals.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### macd_trend_cross@1.0 - MACD crosses up below zero while price is above the 200 EMA (trend resumes after a pullback).
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card macd_trend_cross@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: macd_trend_cross v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A MACD cross below zero inside a 200-EMA trend marks the end of a pullback and momentum resuming.
+  - derived hypothesis (tested): macd_trend_cross@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 4h, 1h, 30m
+  - limitations: Lagging; in sideways markets the crosses whipsaw.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### supertrend_flip@1.0 - Supertrend(10,3) flips to up-trend while ADX shows a real trend.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card supertrend_flip@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: supertrend_flip v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A Supertrend flip in the higher-timeframe direction with ADX > 20 catches a new leg of the trend.
+  - derived hypothesis (tested): supertrend_flip@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h, 1h, 30m
+  - limitations: Flips late; gives back a lot before the exit flip.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### liquidity_sweep_reversal@1.0 - Stop-hunt reversal: price dips below the 20-candle low, then closes back above it.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card liquidity_sweep_reversal@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: liquidity_sweep_reversal v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A wick through the 20-candle low (high) that closes back inside, with volume, means the stop-hunt failed and price reverses.
+  - derived hypothesis (tested): liquidity_sweep_reversal@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Strong trends keep sweeping lows without reversing; low timeframes are expensive after fees.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### ema_9_21_cross@1.0 - Classic 9/21 EMA crossover, only with the 200 EMA trend and ADX filter.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card ema_9_21_cross@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: ema_9_21_cross v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: Existing library (before v3), re-versioned under spec v3
+  - URL: none recorded
+  - claim: A 9/21 EMA cross with the 200 EMA trend and ADX > 20 catches trend moves.
+  - derived hypothesis (tested): ema_9_21_cross@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m, 5m
+  - limitations: Whipsaws a lot; kept mainly as a simple benchmark.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S5-SWEEP-MSS-FVG@1.0 - Sweep of liquidity -> structure shift (CHoCH with displacement) -> first pullback into the gap.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S5-SWEEP-MSS-FVG@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S5-SWEEP-MSS-FVG v1.0 · asset: research coins · timeframe: 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: ICT material (CLAIM), AGENT_PROMPT.md section 9 S5
+  - URL: none recorded
+  - claim: With the higher timeframes aligned, a sell-side sweep followed by a market-structure shift with displacement, entered on the first retrace into a fair value gap, continues to the opposing liquidity pool.
+  - derived hypothesis (tested): S5-SWEEP-MSS-FVG@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 30m, 15m, and beats its control twin S5-SWEEP-MSS-FVG-noSMC
+  - limitations: Needs a clean sweep and shift; in chop the shift fails. Low timeframes pay a lot of fees per R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S5-SWEEP-MSS-FVG-noSMC@1.0 - S5 without the sweep, structure shift and gap: enter after any strong candle in the trend direction.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S5-SWEEP-MSS-FVG-noSMC@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: S5-SWEEP-MSS-FVG-noSMC v1.0 · asset: research coins · timeframe: 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: Control twin of S5 (AGENT_PROMPT.md section 9 control-twin rule)
+  - URL: none recorded
+  - claim: Control: a plain displacement candle in the aligned direction, same exits. S5 must beat this to keep its SMC filter.
+  - derived hypothesis (tested): S5-SWEEP-MSS-FVG-noSMC@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 30m, 15m
+  - limitations: A benchmark, not an idea to trade.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S6-OB-FVG@1.0 - Price pulls back into a 4H order block in the cheap half of the 4H range, then 15m structure turns up.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S6-OB-FVG@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S6-OB-FVG v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: ICT material (CLAIM), AGENT_PROMPT.md section 9 S6
+  - URL: none recorded
+  - claim: HTF-aligned retracements into a 4H order block inside discount (premium for shorts), triggered by a 15m CHoCH, continue in the HTF direction.
+  - derived hypothesis (tested): S6-OB-FVG@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 15m, and beats its control twin S6-OB-FVG-noSMC
+  - limitations: Fails in ranges; order blocks are easy to over-use.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S6-OB-FVG-noSMC@1.0 - S6 without the 4H order block and discount filter.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S6-OB-FVG-noSMC@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: S6-OB-FVG-noSMC v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: Control twin of S6 (AGENT_PROMPT.md section 9 control-twin rule)
+  - URL: none recorded
+  - claim: Control: the same 15m CHoCH without the 4H order-block / discount filter. S6 must beat this.
+  - derived hypothesis (tested): S6-OB-FVG-noSMC@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 15m
+  - limitations: A benchmark, not an idea to trade.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S7-SILVER-BULLET@1.0 - Killzone only: liquidity sweep -> strong candle -> entry on the first pullback into its gap.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S7-SILVER-BULLET@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S7-SILVER-BULLET v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: ICT Silver Bullet / killzone material (CLAIM), AGENT_PROMPT.md section 9 S7
+  - URL: none recorded
+  - claim: Inside the London / New York killzones, a sweep followed by displacement and a first retrace into the new gap moves on to the next pool at least 2R away.
+  - derived hypothesis (tested): S7-SILVER-BULLET@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 15m, and beats its control twin S7-SILVER-BULLET-noSMC
+  - limitations: Few signals (short windows); 15m fees are large compared with the stop.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S7-SILVER-BULLET-noSMC@1.0 - S7 without the killzone time filter.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S7-SILVER-BULLET-noSMC@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: S7-SILVER-BULLET-noSMC v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: Control twin of S7 (AGENT_PROMPT.md section 9 control-twin rule)
+  - URL: none recorded
+  - claim: Control: the same rules at any hour. S7 must beat this to keep its killzone filter.
+  - derived hypothesis (tested): S7-SILVER-BULLET-noSMC@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 15m
+  - limitations: A benchmark, not an idea to trade.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S8-PDH-PDL-SWEEP@1.0 - Price pokes below yesterday's low, then closes back inside yesterday's range: aim for the middle, then yesterday's high.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S8-PDH-PDL-SWEEP@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S8-PDH-PDL-SWEEP v1.0 · asset: research coins · timeframe: 1h, 30m · regime: RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION · review: 2026-12-24
+  - title / source: ICT material (CLAIM), AGENT_PROMPT.md section 9 S8
+  - URL: none recorded
+  - claim: A sweep of the prior-day low (high) that closes back inside the prior-day range reverses to the daily middle and then the opposite extreme.
+  - derived hypothesis (tested): S8-PDH-PDL-SWEEP@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION on 1h, 30m, and beats its control twin S8-PDH-PDL-SWEEP-noSMC
+  - limitations: Trend days break through yesterday's levels and never come back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S8-PDH-PDL-SWEEP-noSMC@1.0 - S8 with an ordinary 20-candle low/high instead of yesterday's low/high.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S8-PDH-PDL-SWEEP-noSMC@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: S8-PDH-PDL-SWEEP-noSMC v1.0 · asset: research coins · timeframe: 1h, 30m · regime: RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION · review: 2026-12-24
+  - title / source: Control twin of S8 (AGENT_PROMPT.md section 9 control-twin rule)
+  - URL: none recorded
+  - claim: Control: the same reversal from a plain 20-candle low (high) instead of the prior-day level. S8 must beat this.
+  - derived hypothesis (tested): S8-PDH-PDL-SWEEP-noSMC@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION on 1h, 30m
+  - limitations: A benchmark, not an idea to trade.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S5-SWEEP-MSS-FVG-5M@1.0 - S5-SWEEP-MSS-FVG + 5-minute entry confirmation.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S5-SWEEP-MSS-FVG-5M@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S5-SWEEP-MSS-FVG-5M v1.0 · asset: research coins · timeframe: 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S5-SWEEP-MSS-FVG v1.0
+  - URL: none recorded
+  - claim: Waiting for a closed 5m bar that confirms the direction (section 8) improves S5-SWEEP-MSS-FVG: fewer false entries and a better price, enough to beat the same strategy without the 5m check.
+  - derived hypothesis (tested): S5-SWEEP-MSS-FVG-5M@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 30m, 15m, and beats its control twin S5-SWEEP-MSS-FVG
+  - limitations: Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S6-OB-FVG-5M@1.0 - S6-OB-FVG + 5-minute entry confirmation.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S6-OB-FVG-5M@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S6-OB-FVG-5M v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-24
+  - title / source: AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S6-OB-FVG v1.0
+  - URL: none recorded
+  - claim: Waiting for a closed 5m bar that confirms the direction (section 8) improves S6-OB-FVG: fewer false entries and a better price, enough to beat the same strategy without the 5m check.
+  - derived hypothesis (tested): S6-OB-FVG-5M@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 15m, and beats its control twin S6-OB-FVG
+  - limitations: Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S7-SILVER-BULLET-5M@1.0 - S7-SILVER-BULLET + 5-minute entry confirmation.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S7-SILVER-BULLET-5M@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S7-SILVER-BULLET-5M v1.0 · asset: research coins · timeframe: 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-24
+  - title / source: AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S7-SILVER-BULLET v1.0
+  - URL: none recorded
+  - claim: Waiting for a closed 5m bar that confirms the direction (section 8) improves S7-SILVER-BULLET: fewer false entries and a better price, enough to beat the same strategy without the 5m check.
+  - derived hypothesis (tested): S7-SILVER-BULLET-5M@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 15m, and beats its control twin S7-SILVER-BULLET
+  - limitations: Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### S8-PDH-PDL-SWEEP-5M@1.0 - S8-PDH-PDL-SWEEP + 5-minute entry confirmation.
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card S8-PDH-PDL-SWEEP-5M@1.0 · evidence: CLAIM: not tested when recorded · confidence: untested idea · strategy: S8-PDH-PDL-SWEEP-5M v1.0 · asset: research coins · timeframe: 30m · regime: RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION · review: 2026-12-24
+  - title / source: AGENT_PROMPT.md section 8 (5-minute entry confirmation) on top of S8-PDH-PDL-SWEEP v1.0
+  - URL: none recorded
+  - claim: Waiting for a closed 5m bar that confirms the direction (section 8) improves S8-PDH-PDL-SWEEP: fewer false entries and a better price, enough to beat the same strategy without the 5m check.
+  - derived hypothesis (tested): S8-PDH-PDL-SWEEP-5M@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, WEAK_BULL, WEAK_BEAR, STRONG_BULL, STRONG_BEAR, TRANSITION on 30m, and beats its control twin S8-PDH-PDL-SWEEP
+  - limitations: Misses fast moves that never look back; only 90 days of 5m history to test on; 5m fees are the same per trade but the stop is not smaller.
+  - test results: `memory/strategy_registry.csv` / report section 3
