@@ -68,3 +68,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 13:20 UTC
 - **ELIGIBLE** AVAX - passes every rule again
+
+## 2026-09-25 14:20 UTC
+- **EXCLUDED** XLM - 7-day average volume $32M < $50M
+- **LEAVE** LTC - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** BNB - in the top 7 for 2 runs in a row (now #7)

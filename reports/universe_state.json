@@ -6,20 +6,16 @@
   "SOL",
   "ZEC",
   "SUI",
-  "LTC"
+  "BNB"
  ],
- "in_streak": {
-  "BNB": 1
- },
- "out_streak": {
-  "LTC": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "ONDO": "2026-09-25",
   "SAGA": "2026-09-25",
   "XPL": "2026-09-25"
  },
- "runs": 20,
+ "runs": 21,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -61,7 +57,10 @@
    "thin_book",
    "volume_7d"
   ],
-  "ADA": []
+  "ADA": [],
+  "XLM": [
+   "volume_7d"
+  ]
  },
  "last_flags": {
   "BTC": [],
@@ -86,6 +85,7 @@
   "BABY": [
    "data_degraded"
   ],
-  "ADA": []
+  "ADA": [],
+  "XLM": []
  }
 }
