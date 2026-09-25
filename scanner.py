@@ -437,6 +437,19 @@ def make_namespace(df, feats=None):
         pb = b.shift(1) if isinstance(b, pd.Series) else b
         return (a < b) & (a.shift(1) >= pb)
 
+    @cached
+    def _vprofile(n=100):
+        """Phase 18 C: volume profile of the last n candles (this one included): each candle's volume sits at its
+        typical price, in 24 price bins between the n candles' lowest and highest typical price. POC = the middle of
+        the fullest bin; value area = the fewest fullest bins that hold 70% of the volume (VAL / VAH = its edges)."""
+        return fe.volume_profile(((h + l + c) / 3).to_numpy(dtype=float), v.to_numpy(dtype=float), int(n))
+
+    def vp_poc(n=100): return pd.Series(_vprofile(n)[0], index=df.index)
+
+    def vp_vah(n=100): return pd.Series(_vprofile(n)[1], index=df.index)
+
+    def vp_val(n=100): return pd.Series(_vprofile(n)[2], index=df.index)
+
     def within(x, n):
         """x was true on this candle or one of the n-1 candles before."""
         return x.astype(float).rolling(int(n), min_periods=1).max().fillna(0) > 0
@@ -456,7 +469,8 @@ def make_namespace(df, feats=None):
               bb_upper=bb_upper, bb_lower=bb_lower, bb_width=bb_width, highest=highest,
               lowest=lowest, shift=shift, prev=prev, vol_sma=vol_sma, pct_rank=pct_rank,
               supertrend_dir=supertrend_dir, cross_up=cross_up, cross_down=cross_down,
-              within=within, bars_since=bars_since, abs=abs, min=min, max=max, np=np)
+              within=within, bars_since=bars_since, abs=abs, min=min, max=max, np=np,
+              vp_poc=vp_poc, vp_vah=vp_vah, vp_val=vp_val)
     if feats is not None:
         for col in feats.columns:
             if col not in ns:           # never replace an existing building block (e.g. atr())

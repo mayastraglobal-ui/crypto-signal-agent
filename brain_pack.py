@@ -296,6 +296,54 @@ def project_lines():
     return out
 
 
+def queue_lines(now):
+    """Phase 18 C: the idea queue (memory/experiments.md, 'Queue: ...' records) - the next card(s) to copy into the
+    lab this week, ready to paste, within their factory's quota."""
+    import yaml
+    from engine import brain
+    from engine import idea_queue as iq
+    from engine import strategy_spec as sspec
+    queue = iq.parse(read(os.path.join(MEMORY, "experiments.md")))
+    out = ["", "## Idea queue (memory/experiments.md) - copy the next card(s) UNCHANGED into strategies_lab.yaml, "
+           "only with added = today, while the factory quota allows"]
+    if not queue:
+        return out + ["- the queue is empty"]
+    try:
+        cfg = yaml.safe_load(read(os.path.join(ROOT, "config.yaml")) or "") or {}
+        lab = brain._cards(read(os.path.join(ROOT, sspec.LAB_FILE)))
+        lib = brain._cards(read(os.path.join(ROOT, sspec.LIBRARY_FILE)))
+    except (yaml.YAMLError, ValueError) as e:
+        return out + [f"- ! the lab or library file is not readable ({e}) - add no card"]
+    quota = dict(sspec.DEFAULT_QUOTA, **((cfg.get("lab") or {}).get("factory_quota") or {}))
+    today = now.date()
+    days = [brain._day(c.get("added")) for c in lab if isinstance(c, dict)]
+    left_all = max(0, min(brain.LAB_PER_DAY - sum(d == today for d in days),
+                          brain.LAB_PER_WEEK - sum(d is not None and today - dt.timedelta(days=6) <= d <= today
+                                                   for d in days)))
+    todo = iq.pending(queue, lab + lib)
+    out.append(f"- {len(queue) - len(todo)} of {len(queue)} queued cards are in the lab; {len(todo)} waiting")
+    used = {}
+    for c in lab:
+        d = brain._day(c.get("added")) if isinstance(c, dict) else None
+        if d and today - dt.timedelta(days=6) <= d <= today:
+            used[c.get("factory")] = used.get(c.get("factory"), 0) + 1
+    picks = []
+    for q in todo:
+        f = q["card"].get("factory")
+        if len(picks) < left_all and used.get(f, 0) < int(quota.get(f, 0)):
+            picks.append(q)
+            used[f] = used.get(f, 0) + 1
+    if not picks and todo:
+        out.append(f"- nothing to add now: the {todo[0]['card'].get('factory')} quota (or the lab limit) is used up "
+                   "this week - the queue waits")
+    for q in picks:
+        out += [f"- NEXT: {q['key']} ({q['card'].get('factory')}) - paste this at the end of strategies_lab.yaml:",
+                "```yaml", yaml.dump([iq.ready(q, today)], Dumper=iq._NoAlias, sort_keys=False, allow_unicode=True,
+                                     width=110).rstrip(), "```"]
+    out.append("- then waiting: " + (", ".join(q["key"] for q in todo[len(picks):]) or "nothing"))
+    return out
+
+
 def market_data_lines(rep):
     """Phase 17 C: the futures data the engine recorded this hour (funding, open interest, long/short, taker)."""
     d = (rep or {}).get("derivs")
@@ -513,6 +561,7 @@ def pack(kind, now, live=None):
         out += curriculum_lines()
         out += cleanup_lines(now)
     if kind == "weekly":
+        out += queue_lines(now)
         out += project_lines()
         out += calendar_lines(now)
         from engine import report_card as rcard

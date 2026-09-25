@@ -88,6 +88,8 @@ the end of the fact sheet.
      of edge it is, the regimes it should work in (from the card's regimes), who is on the other side of the trade
      and why they lose, what market behaviour drives it, when it should stop working, and the result that would
      prove it wrong. A card without it is refused. Use `memory/market_mechanics.md` for the mechanism.
+   - A card from the **idea queue** (`Queue: ...` records in `memory/experiments.md`, Phase 18 C) is copied
+     unchanged - only `added` is set to today.
    - Its **parent** (Phase 18, the research loop): `parent: "<kind>: <reference>"` = what led to this card.
      Kinds: `result: <id>@<version> <tf>` (a tested cell), `card: <id>@<version>`, `lesson: <title>`,
      `failure: <failure_journal title>` (or a loss tag with `n=`), `missed_move: <coin, date YYYY-MM-DD>`,

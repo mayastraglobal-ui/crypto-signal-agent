@@ -64,7 +64,8 @@ EDGE_TYPES = {"behavioural": "a bias of other traders (fear, chasing, anchoring,
 FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "macd_hist", "bb_mid", "bb_upper",
              "bb_lower", "bb_width", "highest", "lowest", "shift", "prev", "vol_sma", "pct_rank", "supertrend_dir",
              "cross_up", "cross_down", "within", "bars_since", "abs", "min", "max",
-             "funding_z", "oi_chg", "btc_ret"}                  # Phase 17 C
+             "funding_z", "oi_chg", "btc_ret",                  # Phase 17 C
+             "vp_poc", "vp_vah", "vp_val"}                      # Phase 18 C: volume profile of the last n candles
 MARKET_BLOCKS = {"funding_rate", "oi", "ls_ratio", "taker_ratio", "funding_z", "oi_chg"}   # futures data
 LEAD_BLOCKS = {"btc_ret"}
 COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
@@ -80,6 +81,9 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
            "structure_up", "support", "support_dist_atr", "support_touches", "swing_high", "swing_high_label",
            "swing_high_price", "swing_low", "swing_low_label", "swing_low_price", "upper_wick_pct", "vol_accel",
            "vwap",
+           # Phase 18 C: Fibonacci of the last swing, anchored VWAP, Ichimoku
+           "fib_dir", "fib_382", "fib_500", "fib_618", "fib_786", "avwap_day", "avwap_swing_high", "avwap_swing_low",
+           "ichi_tenkan", "ichi_kijun", "ichi_span_a", "ichi_span_b", "ichi_cloud_top", "ichi_cloud_bottom",
            # engine/smc.py (this timeframe)
            "smc_bear_ob_high", "smc_bear_ob_low", "smc_bos_down", "smc_bos_up", "smc_bull_ob_high",
            "smc_bull_ob_low", "smc_choch_down", "smc_choch_up", "smc_fvg_retrace_bear", "smc_fvg_retrace_bull",
