@@ -12,9 +12,10 @@
  "out_streak": {},
  "suspended": {
   "ONDO": "2026-09-25",
-  "SAGA": "2026-09-25"
+  "SAGA": "2026-09-25",
+  "XPL": "2026-09-25"
  },
- "runs": 14,
+ "runs": 15,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -42,6 +43,10 @@
   ],
   "LINK": [
    "volume_7d"
+  ],
+  "XPL": [
+   "big_move",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -61,6 +66,7 @@
   "AVAX": [],
   "ENA": [],
   "SAGA": [],
-  "LINK": []
+  "LINK": [],
+  "XPL": []
  }
 }
