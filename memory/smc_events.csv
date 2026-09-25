@@ -183,3 +183,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 04:45,XRP,15m,FVG_FILLED,bear,,1.533,1.541,,,1h,TRANSITION,,smc-1.0,Binance
 2026-09-25 04:30,LTC,15m,SWEEP,bull,70.21,,,0.403,,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-09-25 04:30,LTC,15m,FVG_FILLED,bull,,70.0,70.53,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-25 05:45,BTC,15m,SWEEP,bear,84298.01,,,0.273,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-25 06:15,BTC,15m,SWEEP,bull,84061.22,,,0.554,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-25 05:30,ETH,15m,FVG_FILLED,bull,,2676.99,2678.8,,,1h,RANGE,,smc-1.0,Binance
+2026-09-25 06:15,ETH,15m,SWEEP,bull,2671.94,,,0.132,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-25 06:15,XRP,15m,SWEEP,bull,1.5229,,,0.23,London,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-25 06:15,ZEC,15m,WEAK_BREAK,bear,1542.32,,,0.196,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-25 06:15,LTC,15m,SWEEP,bear,71.39,,,0.203,London,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-25 06:00,BNB,1h,FVG_RETRACE,bear,,774.8,776.03,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-25 06:00,BNB,30m,FVG_RETRACE,bear,,774.8,777.26,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 06:00,BNB,15m,FVG,bull,,773.88,774.54,0.371,,1h,RANGE,,smc-1.0,Binance
+2026-09-25 06:15,BNB,15m,FVG_RETRACE,bull,,773.88,774.54,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
