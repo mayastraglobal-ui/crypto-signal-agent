@@ -147,7 +147,7 @@ class Card(unittest.TestCase):
         text = "\n".join(w["lines"])
         self.assertLess(text.index("AGENT REPORT CARD"), text.index("8. CLAUDE'S WEEKLY RESEARCH"))
         with mock.patch.object(scanner.rcard, "collect", side_effect=RuntimeError("boom")):
-            self.assertIn("could not be built", scanner.report_card_lines(NOW, {}, None)[0])   # never stops the email
+            self.assertIn("could not be built", scanner.report_card(NOW, {}, None)[0][0])   # never stops the email
         common = read(os.path.join(ROOT, "tasks", "COMMON.md"))
         self.assertIn("## Run log", common)
         self.assertIn("## Pages that failed to open", common)

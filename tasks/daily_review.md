@@ -1,7 +1,8 @@
 # Task: daily review (every day at 23:30 Beijing = 15:30 UTC; AGENT_PROMPT.md sections 17, 19, 22)
 
 Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-daily`. Your fact sheet is
-`python brain_pack.py daily`. The `## Summary` of your file goes into the next morning's [DAILY] email.
+`python brain_pack.py daily`. Your `## Email summary` block (`lesson`, `tomorrow`) goes into the DAILY REVIEW
+email; the whole file becomes the "Full review" page on the dashboard.
 You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
 
 ## Steps
@@ -69,6 +70,7 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
 10. **Write the review** to the path the fact sheet gives. Use these headings:
    - `# Daily review <date>`
    - `## Summary`: 3-8 lines, the most important first.
+   - `## Email summary`: `lesson`, `tomorrow` (and optional `sub`) - COMMON.md rule 1.
    - `## Results (LIVE / PAPER / VALIDATION)`
    - `## Losses and why`
    - `## Missed moves`

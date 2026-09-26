@@ -12,6 +12,7 @@ on:
   workflow_dispatch:         # lets you press "Run workflow" by hand
 
 permissions:
+  actions: read              # notify.py reads the previous runs: one failure = silent retry, 2 in a row = one email
   contents: write            # needed to save Claude's checked work onto main
 
 concurrency:
@@ -49,11 +50,7 @@ jobs:
       - name: Restore the latest report (for the position book in emails)
         run: python publish_live.py --restore
 
-      - name: Email new briefings ([BRIEFING]) and refused pushes ([SYSTEM])
-        continue-on-error: true
-        run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
-
-      - name: Dashboard (GitHub Pages - shows the new briefing; never stops the run)
+      - name: Dashboard (GitHub Pages - the new report's page, which the email links to; never stops the run)
         continue-on-error: true
         run: |
           if python -c "import json,sys; sys.exit(0 if any(r['status'] == 'applied' for r in json.load(open(sys.argv[1]))) else 1)" "$RUNNER_TEMP/brain_result.json"; then
@@ -62,11 +59,20 @@ jobs:
             echo "No new Claude work - dashboard unchanged"
           fi
 
+      - name: Email new briefings / daily reviews (BRIEFING, DAILY REVIEW) and refused pushes (ACTION NEEDED)
+        continue-on-error: true
+        run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
+
+      - name: Beginner lesson page on the dashboard, when the daily review email wrote one (never stops the run)
+        continue-on-error: true
+        run: |
+          if [ -n "$(git status --porcelain reports/claude/lessons)" ]; then python build_dashboard.py --publish; fi
+
       - name: Save
         run: |
           git config user.name "signal-bot"
           git config user.email "signal-bot@users.noreply.github.com"
-          for p in reports/claude memory events.yaml strategies_lab.yaml reports/brain_sent.json; do   # only paths that exist yet
+          for p in reports/claude memory events.yaml strategies_lab.yaml reports/brain_sent.json reports/curriculum_sent.json; do   # only paths that exist yet
             if [ -e "$p" ]; then git add "$p"; fi
           done
           if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
@@ -77,6 +83,14 @@ jobs:
           done
           exit 1
 
-      - name: Email if the Brain workflow failed
+      - name: Email "fixed" once after 2+ failed Brain runs in a row
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python notify.py recovered brain
+
+      - name: Email if the Brain workflow failed twice in a row
         if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: python3 notify.py brain_failed

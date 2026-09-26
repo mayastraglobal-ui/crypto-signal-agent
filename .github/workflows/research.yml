@@ -11,6 +11,7 @@ on:
   workflow_dispatch:         # lets you press "Run workflow" by hand
 
 permissions:
+  actions: read              # notify.py reads the previous runs: one failure = silent retry, 2 in a row = one email
   contents: write            # needed to save the results back into the repo
 
 concurrency:
@@ -67,6 +68,14 @@ jobs:
           python publish_live.py --restore
           python build_dashboard.py --publish
 
-      - name: Email if the research run failed
+      - name: Email "fixed" once after 2+ failed research runs in a row
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python notify.py recovered research
+
+      - name: Email if the research run failed twice in a row
         if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: python3 notify.py research_failed

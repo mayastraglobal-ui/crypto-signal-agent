@@ -33,6 +33,7 @@ from engine import regime as rg
 from engine import idea_queue as iq
 from engine import research_loop as rloop
 from engine import strategy_spec as sspec
+from engine import summary as esum
 from engine import timeframes as tfm
 
 BRANCHES = ["claude/brain-briefing", "claude/brain-daily", "claude/brain-weekly"]
@@ -314,6 +315,7 @@ def review(changes, main_files, now=None, branch=None, quota=None):
             probs += [f"{p}: {x}" for x in lint(new)]
             if p.startswith("reports/claude/briefings/"):
                 probs += [f"{p}: {x}" for x in check_briefing(new)]
+            probs += [f"{p}: {x}" for x in esum.problems(new, esum.kind_of(p))]      # the email's summary block
             applies.append(dict(path=p, kind="new", text=new))
         elif st == "M" and p in KNOWLEDGE:
             why = mem.append_only_problems(c.get("base") or "", new)

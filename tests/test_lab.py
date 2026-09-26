@@ -342,7 +342,8 @@ class GuardOnGit(unittest.TestCase):
         test_brain.git(self.main, "push", "-q", "origin", "main")
         today = dt.datetime.now(UTC).date()
         good = v11(added=str(today))
-        self.push_task("claude/brain-daily", {"reports/claude/daily/2026-09-25.md": "# D\n## Summary\nok\n"},
+        self.push_task("claude/brain-daily", {"reports/claude/daily/2026-09-25.md": "# D\n## Summary\nok\n"
+                                                                                    + test_brain.EMAIL["daily"]},
                        {"strategies_lab.yaml": dump([good])})
         res = self.guard()
         self.assertEqual(res[0]["status"], "applied", res[0]["problems"])

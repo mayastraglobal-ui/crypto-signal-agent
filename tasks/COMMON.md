@@ -45,7 +45,23 @@ the end of the fact sheet.
 ## What you may write (the Brain guard refuses everything else, and then NOTHING of your run is saved)
 1. **One new file** at the exact path the fact sheet gives ("WRITE YOUR OUTPUT TO").
    - Start it with a `# ` title.
-   - Put a `## Summary` section near the top: 3-8 short lines. The daily summary goes into the morning email.
+   - Put a `## Summary` section near the top: 3-8 short lines.
+   - Put a `## Email summary` section right after it (the email redesign). The email is built from the engine's
+     numbers plus these lines; your whole file becomes a page on the dashboard that the email links to. Each line is
+     `- key: text` - plain text only (no `*`, backticks, `#`, links or URLs), one sentence, numbers only from the
+     fact sheet. The Brain guard refuses the push when the block is missing or breaks a rule.
+     - briefing: `headline` (at most 8 words), `sub` (at most 20 words), `do`, `dont` (one sentence each),
+       optional `mood` (Calm, Busy, Volatile or Risk-off - the email itself uses the engine's mood word);
+     - daily review: `lesson` (the lesson of the day), `tomorrow` (what to watch or not do), optional `sub`;
+     - weekly research: `headline` (at most 8 words), `sub` (at most 20 words), `next` (next week, one sentence),
+       `improvement` (your one process improvement, one sentence).
+     ```
+     ## Email summary
+     - headline: Nothing to trade. Wait.
+     - sub: BTC is flat near 84,000 while altcoins jumped; the jobs report is on Friday.
+     - do: Wait for a LIVE entry email before any trade.
+     - dont: Don't chase the SUI +13% candle.
+     ```
 2. **New records at the END** of these knowledge files, never anywhere else:
    - `memory/lessons.md`, `failure_journal.md`, `missed_trades.md`, `research_sources.md`, `coin_notes.md`,
      `feature_notes.md`, `smc_research.md`, `experiments.md`, `market_mechanics.md` (how markets move: funding,

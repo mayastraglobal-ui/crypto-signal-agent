@@ -1,0 +1,284 @@
+"""
+The email layout (email redesign): every email is a short list of BLOCKS, rendered twice - as a Gmail / phone safe
+HTML card (600 px, tables, inline CSS only, no external fonts, no JavaScript) and as the plain-text part of the same
+email. Both come from the same blocks, so they always say the same thing.
+
+A block is a tuple (kind, data):
+  ("header", (label, when))                  small caps label left, date + time right
+  ("banner", dict(title, sub, right, big, tone))  the big coloured headline (tone: long/short/win/loss/amber/teal)
+  ("headline", (text, sub))                  a big sentence and one sub-sentence (briefing, reviews)
+  ("section", title)                         a small caps section title
+  ("tiles", (tone, [(label, value, note)]))  3-4 number tiles (tone: grey/teal)
+  ("table", dict(cols, rows, tones))          a short table; tones[i][j] = None/"up"/"down" colours one cell
+  ("list", [text, ...])                      numbered one-line items (reasons, actions)
+  ("chips", [(text, ok), ...])               check chips: ok True = green tick, False = amber warning
+  ("box", dict(title, lines, tone, strong))  a framed box (DO NOW, YOUR DECISION, DO / DON'T, lesson)
+  ("line", text)                             one muted line
+  ("grid", (cells, per_row, legend))         small cells, per_row a row (backtests per coin)
+  ("bars", [(label, value_text, fraction, note)])  progress bars (closest to passing)
+  ("ideas", [dict(name, what, source, status)])     new lab cards with a SOURCE and a STATUS chip
+  ("image", cid)                             the chart image (signal emails only), shown from the attachment
+  ("buttons", [(label, url), ...])            1-2 buttons (a missing url is left out)
+  ("footer", text)                           the grey footer line
+
+Missing numbers are shown as "–" (never guessed): see val(). Pure functions.
+"""
+import html
+import math
+import re
+
+PAGE, CARD, BORDER, TEXT, MUTED, TEAL = "#F4F1EA", "#FFFFFF", "#E3DED3", "#1B1F24", "#5B6470", "#0F5E63"
+GREEN, GREEN_BG, RED, RED_BG = "#146C43", "#E3F1E8", "#A61B1B", "#F8E4E4"
+AMBER, AMBER_BG, TILE, TEAL_BG = "#7A4F00", "#FFF1D6", "#F6F4EF", "#E1EEEE"
+FONT = "-apple-system,'Segoe UI',Helvetica,Arial,sans-serif"
+MONO = "'SFMono-Regular',Menlo,Consolas,monospace"
+DASH = "–"
+TONES = {"long": (GREEN, "#FFFFFF"), "short": (RED, "#FFFFFF"), "win": (GREEN_BG, GREEN), "loss": (RED_BG, RED),
+         "amber": (AMBER_BG, AMBER), "teal": (TEAL_BG, TEAL), "plain": (TILE, TEXT)}
+CHIP = {"TESTING": (AMBER_BG, AMBER), "FAILED": (RED_BG, RED), "PASSED": (GREEN_BG, GREEN)}
+MAX_SUBJECT = 70
+_MD = re.compile(r"(\*\*|__|```|`|^#+\s*|^\s*[-*]\s+\[.\]\s*)", re.M)
+
+
+def missing(x):
+    return x is None or x == "" or (isinstance(x, float) and not math.isfinite(x))
+
+
+def val(x, fmt="{}"):
+    """A value for the email, or '–' when it is missing (never a guess)."""
+    return DASH if missing(x) else fmt.format(x)
+
+
+def plain(text):
+    """Text for an email with no markdown symbols (**bold**, `code`, # headings): the symbols are removed."""
+    s = _MD.sub("", str(text or "")).replace("*", "").strip()
+    return re.sub(r"\s+", " ", s)
+
+
+def subject(parts, limit=MAX_SUBJECT):
+    """Parts joined with ' · ', under the limit: the last parts are dropped first, then the text is cut."""
+    parts = [plain(p) for p in parts if p not in (None, "")]
+    while len(parts) > 1 and len(" · ".join(parts)) > limit:
+        parts.pop()
+    s = " · ".join(parts)
+    return s if len(s) <= limit else s[:limit - 1].rstrip() + "…"
+
+
+def price(x):
+    """Prices as traders read them: 84,050 · 2,717.7 · 120.74 · 1.6009 · 0.061234."""
+    if missing(x):
+        return DASH
+    x = float(x)
+    a = abs(x)
+    return (f"{x:,.0f}" if a >= 10_000 else f"{x:,.1f}" if a >= 1_000 else f"{x:,.2f}" if a >= 10 else
+            f"{x:,.4f}" if a >= 1 else f"{x:.6g}")
+
+
+def signed(x, unit="R", digits=1):
+    if missing(x):
+        return DASH
+    x = float(x)
+    s = f"{abs(x):,.{digits}f}{unit}"
+    return ("+" if x > 0 else "−" if x < 0 else "") + s          # a real minus sign
+
+
+def pct(x, digits=2):
+    return signed(x, "%", digits)
+
+
+# ---------------------------------------------------------------- plain text ----------------------------------------
+def text(blocks):
+    L = []
+    for kind, d in blocks:
+        if kind == "header":
+            L += [f"{d[0]}  |  {d[1]}", ""]
+        elif kind == "banner":
+            L += [d["title"] + (f"   {d['big']}" if d.get("big") else "")]
+            L += [x for x in (d.get("sub"), d.get("right")) if x]
+            L.append("")
+        elif kind == "headline":
+            L += [d[0]] + ([d[1]] if d[1] else []) + [""]
+        elif kind == "section":
+            L.append(d.upper())
+        elif kind == "tiles":
+            L += [f"  {lab}: {v}" + (f" ({n})" if n else "") for lab, v, n in d[1]] + [""]
+        elif kind == "table":
+            rows = [d["cols"]] + d["rows"] if d.get("cols") else d["rows"]
+            w = [max(len(str(r[j])) for r in rows) for j in range(len(rows[0]))]
+            L += ["  " + " | ".join(str(c).ljust(w[j]) for j, c in enumerate(r)).rstrip() for r in rows] + [""]
+        elif kind == "list":
+            L += [f"  {i}. {x}" for i, x in enumerate(d, 1)] + [""]
+        elif kind == "chips":
+            L += ["  " + " · ".join(("✓ " if ok else "! ") + t for t, ok in d), ""]
+        elif kind == "box":
+            L += ([d["title"].upper()] if d.get("title") else []) + [f"  {x}" for x in d["lines"]] + [""]
+        elif kind == "line":
+            L += [d, ""]
+        elif kind == "grid":
+            cells, per = d[0], d[1]
+            L += ["  " + "   ".join(cells[i:i + per]) for i in range(0, len(cells), per)]
+            L += ([f"  {d[2]}"] if d[2] else []) + [""]
+        elif kind == "bars":
+            L += [f"  {lab}: {v}" + (f" - {n}" if n else "") for lab, v, _, n in d] + [""]
+        elif kind == "ideas":
+            L += [f"  {x['name']} [{x['source']} · {x['status']}]" + (f" - {x['what']}" if x.get("what") else "")
+                  for x in d] + [""]
+        elif kind == "image":
+            L += ["(chart image attached)", ""]
+        elif kind == "buttons":
+            L += [f"{lab}: {url}" for lab, url in d if url] + [""]
+        elif kind == "footer":
+            L += ["--", d]
+    while L and not L[-1]:
+        L.pop()
+    return "\n".join(L) + "\n"
+
+
+# ---------------------------------------------------------------- HTML ----------------------------------------------
+def e(x):
+    return html.escape(str(x), quote=True)
+
+
+def _row(inner, pad="0 24px 16px"):
+    return f'<tr><td style="padding:{pad};">{inner}</td></tr>'
+
+
+def _label(t, color=MUTED):
+    return (f'<div style="font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:{color};'
+            f'font-weight:700;">{e(t)}</div>')
+
+
+def _tone_cell(x, tone):
+    c = GREEN if tone == "up" else RED if tone == "down" else TEXT
+    return f'<span style="color:{c};font-family:{MONO};">{e(x)}</span>' if tone else e(x)
+
+
+def _html_block(kind, d):
+    if kind == "header":
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+                    f'<td>{_label(d[0], TEAL)}</td><td align="right" style="font-size:12px;color:{MUTED};">{e(d[1])}</td>'
+                    f'</tr></table>', "20px 24px 14px")
+    if kind == "banner":
+        bg, fg = TONES.get(d.get("tone"), TONES["plain"])
+        big = (f'<td align="right" valign="top" style="font-size:30px;font-weight:800;color:{fg};font-family:{MONO};">'
+               f'{e(d["big"])}</td>') if d.get("big") else ""
+        right = (f'<div style="font-size:12px;color:{fg};opacity:.9;margin-top:6px;">{e(d["right"])}</div>'
+                 if d.get("right") else "")
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{bg};'
+                    f'border-radius:10px;"><tr><td style="padding:16px 18px;">'
+                    f'<div style="font-size:26px;font-weight:800;color:{fg};">{e(d["title"])}</div>'
+                    + (f'<div style="font-size:13px;color:{fg};margin-top:4px;">{e(d["sub"])}</div>' if d.get("sub") else "")
+                    + f'{right}</td>{big}</tr></table>')
+    if kind == "headline":
+        return _row(f'<div style="font-size:22px;font-weight:800;color:{TEXT};line-height:1.25;">{e(d[0])}</div>'
+                    + (f'<div style="font-size:14px;color:{MUTED};margin-top:6px;line-height:1.45;">{e(d[1])}</div>'
+                       if d[1] else ""))
+    if kind == "section":
+        return _row(_label(d), "6px 24px 8px")
+    if kind == "tiles":
+        bg = TEAL_BG if d[0] == "teal" else TILE
+        fg = TEAL if d[0] == "teal" else TEXT
+        w = int(100 / max(1, len(d[1])))
+        tds = "".join(f'<td width="{w}%" valign="top" style="padding:4px;"><div style="background:{bg};border-radius:8px;'
+                      f'padding:10px 10px;"><div style="font-size:11px;color:{MUTED};">{e(lab)}</div>'
+                      f'<div style="font-size:18px;font-weight:800;color:{fg};font-family:{MONO};margin-top:2px;">{e(v)}</div>'
+                      + (f'<div style="font-size:11px;color:{MUTED};margin-top:2px;">{e(n)}</div>' if n else "")
+                      + '</div></td>' for lab, v, n in d[1])
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>{tds}</tr></table>',
+                    "0 20px 14px")
+    if kind == "table":
+        tones = d.get("tones") or []
+        head = ("<tr>" + "".join(f'<td style="padding:6px 6px;border-bottom:1px solid {BORDER};">{_label(c)}</td>'
+                                 for c in d["cols"]) + "</tr>") if d.get("cols") else ""
+        body = "".join("<tr>" + "".join(
+            f'<td style="padding:7px 6px;border-bottom:1px solid {BORDER};font-size:13px;color:{TEXT};'
+            + (f'font-family:{MONO};' if j in (d.get("mono") or []) else "") + '">'
+            + _tone_cell(c, (tones[i][j] if i < len(tones) and j < len(tones[i]) else None)) + "</td>"
+            for j, c in enumerate(r)) + "</tr>" for i, r in enumerate(d["rows"]))
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+                    f'style="border-collapse:collapse;">{head}{body}</table>')
+    if kind == "list":
+        items = "".join(f'<tr><td valign="top" style="width:22px;font-weight:800;color:{TEAL};font-size:14px;'
+                        f'padding:3px 0;">{i}.</td><td style="font-size:14px;color:{TEXT};padding:3px 0;line-height:1.4;">'
+                        f'{e(x)}</td></tr>' for i, x in enumerate(d, 1))
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">{items}</table>')
+    if kind == "chips":
+        chips = "".join(f'<span style="display:inline-block;margin:0 6px 6px 0;padding:5px 10px;border-radius:14px;'
+                        f'font-size:12px;background:{GREEN_BG if ok else AMBER_BG};color:{GREEN if ok else AMBER};">'
+                        f'{"✓" if ok else "!"} {e(t)}</span>' for t, ok in d)
+        return _row(chips)
+    if kind == "box":
+        bg, fg = TONES.get(d.get("tone"), (CARD, TEXT))
+        border = f"2px solid {TEAL if d.get('tone') in (None, 'teal', 'plain') else fg}" if d.get("strong") \
+            else f"1px solid {BORDER if d.get('tone') is None else bg}"
+        lines = "".join(f'<div style="font-size:14px;color:{TEXT};line-height:1.45;margin-top:4px;">{e(x)}</div>'
+                        for x in d["lines"])
+        return _row(f'<div style="border:{border};background:{bg if d.get("tone") else CARD};border-radius:10px;'
+                    f'padding:12px 14px;">' + (_label(d["title"], fg if d.get("tone") else TEAL) if d.get("title") else "")
+                    + f'{lines}</div>')
+    if kind == "line":
+        return _row(f'<div style="font-size:13px;color:{MUTED};line-height:1.45;">{e(d)}</div>')
+    if kind == "grid":
+        cells, per = d[0], d[1]
+        rows = "".join("<tr>" + "".join(f'<td width="{int(100 / per)}%" style="padding:3px;"><div style="background:{TILE};'
+                                        f'border-radius:6px;padding:6px 6px;font-size:12px;font-family:{MONO};color:{TEXT};">'
+                                        f'{e(c)}</div></td>' for c in cells[i:i + per]) + "</tr>"
+                       for i in range(0, len(cells), per))
+        return _row(f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">{rows}</table>'
+                    + (f'<div style="font-size:11px;color:{MUTED};margin-top:4px;">{e(d[2])}</div>' if d[2] else ""))
+    if kind == "bars":
+        out = ""
+        for lab, v, frac, note in d:
+            w = max(0, min(100, int(round((frac or 0) * 100))))
+            out += (f'<div style="margin-bottom:10px;"><table role="presentation" width="100%" cellpadding="0" '
+                    f'cellspacing="0"><tr><td style="font-size:13px;color:{TEXT};">{e(lab)}</td>'
+                    f'<td align="right" style="font-size:12px;color:{MUTED};font-family:{MONO};">{e(v)}</td></tr></table>'
+                    f'<div style="background:{TILE};border-radius:4px;height:8px;margin-top:4px;">'
+                    f'<div style="background:{TEAL};width:{w}%;height:8px;border-radius:4px;"></div></div>'
+                    + (f'<div style="font-size:11px;color:{MUTED};margin-top:3px;">{e(note)}</div>' if note else "")
+                    + "</div>")
+        return _row(out)
+    if kind == "ideas":
+        out = ""
+        for x in d:
+            bg, fg = CHIP.get(x["status"], (TILE, MUTED))
+            out += (f'<div style="border-bottom:1px solid {BORDER};padding:8px 0;"><div style="font-size:14px;'
+                    f'font-weight:700;color:{TEXT};">{e(x["name"])}</div>'
+                    + (f'<div style="font-size:13px;color:{MUTED};margin-top:2px;">{e(x["what"])}</div>' if x.get("what")
+                       else "")
+                    + f'<div style="margin-top:5px;"><span style="font-size:10px;letter-spacing:1px;padding:3px 7px;'
+                    f'border-radius:10px;background:{TEAL_BG};color:{TEAL};margin-right:6px;">{e(x["source"])}</span>'
+                    f'<span style="font-size:10px;letter-spacing:1px;padding:3px 7px;border-radius:10px;background:{bg};'
+                    f'color:{fg};">{e(x["status"])}</span></div></div>')
+        return _row(out)
+    if kind == "image":
+        return _row(f'<img src="cid:{e(d)}" width="552" alt="Chart" style="width:100%;max-width:552px;border-radius:8px;'
+                    f'display:block;">')
+    if kind == "buttons":
+        b = "".join(f'<a href="{e(url)}" style="display:inline-block;margin:0 8px 8px 0;padding:11px 18px;'
+                    f'border-radius:8px;background:{TEAL if i == 0 else CARD};color:{"#FFFFFF" if i == 0 else TEAL};'
+                    f'border:1px solid {TEAL};font-size:14px;font-weight:700;text-decoration:none;">{e(lab)}</a>'
+                    for i, (lab, url) in enumerate([x for x in d if x[1]]))
+        return _row(b, "4px 24px 16px") if b else ""
+    if kind == "footer":
+        return (f'<tr><td style="padding:14px 24px;background:{TILE};border-top:1px solid {BORDER};font-size:12px;'
+                f'color:{MUTED};line-height:1.45;border-radius:0 0 14px 14px;">{e(d)}</td></tr>')
+    raise ValueError(f"unknown block {kind}")
+
+
+def to_html(blocks, title=""):
+    rows = "".join(_html_block(k, d) for k, d in blocks)
+    return (f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" '
+            f'content="width=device-width,initial-scale=1"><title>{e(title)}</title></head>'
+            f'<body style="margin:0;padding:0;background:{PAGE};">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{PAGE};">'
+            f'<tr><td align="center" style="padding:16px 8px;">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;'
+            f'background:{CARD};border:1px solid {BORDER};border-radius:14px;font-family:{FONT};color:{TEXT};">'
+            f'{rows}</table></td></tr></table></body></html>')
+
+
+def render(subject_text, blocks, attachments=(), kind=""):
+    """The email as a dict: subject, text, html (+ the chart attachment paths and the kind, for notify.py)."""
+    return dict(subject=subject_text, text=text(blocks), html=to_html(blocks, subject_text),
+                attachments=[a for a in attachments if a], kind=kind)

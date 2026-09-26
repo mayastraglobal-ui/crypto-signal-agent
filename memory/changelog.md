@@ -458,3 +458,11 @@ Newest entries at the bottom. Format: date · who · what · why.
 - New `config.yaml` key `dashboard.url` (null = GitHub Pages of the repository).
 - Tests: new `tests/test_charts.py` (13 tests, including the page drawn in headless Chromium when available - skipped on CI - and an offline research run); `test_dashboard` / `test_learn` updated. Mutation check: 15 of 15 planted bugs caught.
 - No fee, risk or gate was changed; APPROVED stays operator-only.
+
+## 2026-09-25 · Claude (BUILD mode) · Email redesign - short, clean, readable in 30 seconds on a phone
+- Every email is an HTML card (600 px, table layout, inline CSS, no external fonts / scripts; the chart image only on signal emails) plus a plain-text copy built from the same blocks (`engine/mailkit.py`). No markdown symbols. Subjects under 70 characters. Missing numbers show "–".
+- Six templates (`engine/emails.py`): ENTRY SIGNAL, TRADE UPDATE (TP1 / target / stop / time exit / exit rule / cancelled - cancelled is new), ACTION NEEDED + FIXED, BRIEFING, DAILY REVIEW, WEEKLY REPORT (+ RISK NOTICE / reminders / WATCH in the same frame). The numbers come from the engine files (`engine/mailfacts.py`).
+- Workflow failures: one failure is retried silently; the 2nd in a row sends one ACTION NEEDED email (notify.py reads the earlier runs via the GitHub API, `actions: read`); the first success after 2+ failures sends one FIXED email.
+- Research run: `counts` in research.json and one line per day in `reports/research_counts.json` (backtests per coin, strategies, tests, coins, new lab cards) for the daily and weekly emails.
+- Claude's reports get a `## Email summary` block (headline, sub, do, dont / lesson, tomorrow / next, improvement) that the Brain guard checks (`engine/summary.py`); every report becomes a page on the dashboard (`engine/mdpage.py`), linked from the email. The morning [DAILY] email is replaced by the 08:20 BRIEFING and the 23:30 DAILY REVIEW, each with an engine-only fallback if Claude's report does not arrive. The beginner lesson becomes a page linked from the DAILY REVIEW.
+- Unchanged: signals, fees, risk limits, gates, approvals and the send-once rules.

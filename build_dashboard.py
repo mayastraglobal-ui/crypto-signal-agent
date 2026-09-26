@@ -19,6 +19,7 @@ import sys
 import publish_live
 from engine import btcharts
 from engine import dashboard
+from engine import mdpage
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
@@ -88,6 +89,24 @@ def chart_data(offline_prev=None):
     return man, [f"site/charts/{x}" for x in manifest_files(man)] if man else []
 
 
+def claude_pages():
+    """Every Claude report (reports/claude/briefings|daily|weekly/*.md, + the engine's beginner lesson pages) as a clean HTML page (email redesign: the
+    emails link to these). Returns the site paths."""
+    out = []
+    for folder in ("briefings", "daily", "weekly", "lessons"):
+        d = os.path.join(REPORTS, "claude", folder)
+        for name in sorted(x for x in os.listdir(d) if x.endswith(".md")) if os.path.isdir(d) else []:
+            rel = f"reports/claude/{folder}/{name}"
+            with open(os.path.join(d, name), encoding="utf-8", errors="replace") as f:
+                html = mdpage.page(f.read(), rel)
+            dest = os.path.join(SITE, mdpage.page_path(rel))
+            os.makedirs(os.path.dirname(dest), exist_ok=True)
+            with open(dest, "w", encoding="utf-8") as f:
+                f.write(html)
+            out.append("site/" + mdpage.page_path(rel))
+    return out
+
+
 def inputs(now):
     pine_dir = os.path.join(REPORTS, "pine")
     return dict(latest=load("latest.json"), research=load("research.json"), candles=load("dashboard_data.json"),
@@ -115,9 +134,11 @@ def build(now=None, prev=None):
         shutil.copy(os.path.join(ROOT, v), os.path.join(SITE, v))
     with open(os.path.join(SITE, ".nojekyll"), "w") as f:
         f.write("")
+    pages = claude_pages()
     print(f"dashboard: site/index.html ({len(page.encode()) // 1024} KB), chart.html, "
-          f"{len(chart_paths)} chart data file(s)")
-    return ["site/index.html", "site/.nojekyll", "site/chart.html"] + [f"site/{v}" for v in VENDOR] + chart_paths
+          f"{len(chart_paths)} chart data file(s), {len(pages)} Claude report page(s)")
+    return (["site/index.html", "site/.nojekyll", "site/chart.html"] + [f"site/{v}" for v in VENDOR] + chart_paths
+            + pages)
 
 
 def main():

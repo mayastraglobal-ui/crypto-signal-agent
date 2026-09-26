@@ -368,7 +368,7 @@ class BriefingGuard(unittest.TestCase):
         return B.review([test_brain.change(self.P, "A", None, text)], {self.P: None})
 
     def test_briefing_needs_the_three_lines(self):
-        head = "# BTC holds\n## Summary\nquiet\n"
+        head = "# BTC holds\n## Summary\nquiet\n" + test_brain.EMAIL["briefings"]
         self.assertEqual(self.review(head + test_brain.DEBATE)[1], [])
         self.assertIn("no '## Bull vs bear' section", "\n".join(self.review(head)[1]))
         probs = "\n".join(self.review(head + "## Bull vs bear\n- Bull case: x 1\n- Bear case: y 2\n")[1])
@@ -381,7 +381,8 @@ class BriefingGuard(unittest.TestCase):
         self.assertEqual(self.review(ok)[1], [], "bold labels are fine")
         # the daily review and the weekly research are not briefings
         p = "reports/claude/daily/2026-09-26.md"
-        self.assertEqual(B.review([test_brain.change(p, "A", None, head)], {p: None})[1], [])
+        self.assertEqual(B.review([test_brain.change(p, "A", None, "# D\n" + test_brain.EMAIL["daily"])], {p: None})[1],
+                         [])
 
 
 class ReferenceProjects(unittest.TestCase):

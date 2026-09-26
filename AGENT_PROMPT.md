@@ -593,35 +593,15 @@ Record every source in `memory/research_sources.md` with: URL, title, date, clai
 
 ## 20. EMAILS
 
-Every email starts with the **position book** and ends with *"Research signal. Not financial advice."* Idempotent signal IDs and cooldowns prevent duplicates. Do not send noisy alerts for weak or incomplete setups.
+**Email redesign (operator-approved design).** Every email is short and readable in about 30 seconds on a phone: an HTML card (600 px, table layout, inline CSS, no external fonts, no JavaScript, no images except the chart image on signal emails) plus a plain-text copy. Never raw markdown symbols. Same frame: header (label + Beijing time) → one headline / banner → 3-4 number tiles or a short table → at most 3 reasons or 1 lesson → 1-2 buttons → grey footer. Subjects: symbol + what happened + the key number, under 70 characters. All numbers come from the engine's files; a missing value is shown as "–", never guessed. Colour only helps: the words always say LONG / SHORT / WIN / LOSS. Idempotent IDs prevent duplicates; no noisy alerts for weak or incomplete setups.
 
-- **`[ENTRY] LONG ETH/USDT | 15m | S6-OB-FVG v1.2 | R:R 2.4`** contains:
-  - UTC and Beijing time, data state
-  - asset and direction (spot / futures only)
-  - regime by timeframe (1W → 5m)
-  - entry zone, stop, TP1, TP2, R:R, and the 5m confirmation bar
-  - position size at the configured risk
-  - signal expiry
-  - **why the signal exists** (3–5 points: trend, structure, momentum, volume, SMC context such as liquidity taken, MSS, FVG/OB, premium/discount, session)
-  - invalidation conditions
-  - evidence: backtest A/B/C with sample sizes, plus the paper/live record
-  - a chart image
-- **`[EXIT] ETH/USDT LONG | TP1 / TP2 / SL / TIME / INVALIDATED`** contains the realised R, the reason and the next action (e.g. "move stop to breakeven").
-- **`[SYSTEM]`**: data degradation, scan failure, strategy suspension, or a risk-limit breach.
-- **DAILY** (08:00):
-  - market regime and BTC context
-  - **top-7 matrix:** price, 24h volume, regime 1W/1D/4H/1H, 30m momentum, 15m setup state, 5m trigger state
-  - position book
-  - strategy health changes
-  - event calendar
-- **WEEKLY:**
-  - strategy scoreboard
-  - lifecycle changes
-  - failure-attribution summary
-  - SMC/ICT findings
-  - research log with sources
-  - approval packs
-  - next week's experiment queue
+- **ENTRY SIGNAL · LIVE** (APPROVED only): `▲ LONG BTC · 1H · Enter 83,850–84,050 · Stop 83,300`. Banner (pair, timeframe, spot / futures only, strategy, valid until), plan table (entry zone, stop, targets with distance in % and R and what to do), the size box, max 3 reasons (setup, trend agreement, backtest: trades, average R after fees, 95% worst losing streak), 4 check chips (news ±60 min, data, open trades, risk manager), the chart image, buttons: live chart, backtest chart.
+- **TRADE UPDATE · LIVE**: TP1 hit, target hit, stop hit, time exit, exit rule, cancelled before entry. Result banner, a "Do now" box (max 2 actions), tiles (entry, price now, new stop, next target), one line with open trades and today's / this week's R.
+- **ACTION NEEDED**: a workflow failed twice in a row (one failure = silent retry), data unsafe, Claude's push refused - what it means, what to do in 2 minutes, one button. One email per problem, plus one **FIXED** email when it recovers. Risk halts / suspensions: a RISK NOTICE.
+- **BRIEFING** (08:20 / 14:20 / 21:20): the engine's mood word (Calm / Busy / Volatile / Risk-off), signal count and next event in the subject; Claude's headline and sub-sentence; tiles (signals, open trades, market bias, data); the 7 signal coins (price, daily trend, 30-minute move); next events; one DO and one DON'T; link to Claude's full analysis.
+- **DAILY REVIEW** (23:30): trading today, testing today (backtests, strategies, coins, new ideas - from the research run's counts), backtests per coin, new ideas built today (SOURCE and STATUS chips), closest to passing, lesson of the day, tomorrow, link to the full review and the beginner lesson.
+- **WEEKLY REPORT** (Sunday): testing this week, the operator's decision (approval yes / no, with the pack and backtest chart), the agent report card, next week, link to the full weekly research.
+- Claude's reports carry a `## Email summary` block the Brain guard checks; the full reports are pages on the dashboard.
 - **WATCHING** setups appear in reports and briefings. They are emailed only if the operator enables `email_watching: true`.
 
 ---

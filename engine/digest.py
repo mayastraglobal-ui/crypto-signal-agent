@@ -216,4 +216,4 @@ def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path
     else:
         L.append("  Claude's weekly research is not available this week (the task did not run or was refused by "
                  "the guard). Everything above is from the engine and complete without it.")
-    return dict(week=wk, subject=subject, lines=L)
+    return dict(week=wk, subject=subject, lines=L, lifecycle=life)

@@ -27,6 +27,7 @@ Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefin
 4. **Write the briefing** to the path the fact sheet gives, in this order:
    - `# <one-line headline>`
    - `## Summary`: 3-6 lines. This is the most important part.
+   - `## Email summary`: `headline`, `sub`, `do`, `dont` (COMMON.md rule 1 - the BRIEFING email is built from it).
    - `## Position book`: copy the engine's book exactly as it is.
    - `## Market regime`: BTC and the top coins, taken from the engine's matrix, plus the fact sheet's "Playbook for
      the regimes right now" (what made and lost money in each regime in the backtests - if NOTHING made money, say
