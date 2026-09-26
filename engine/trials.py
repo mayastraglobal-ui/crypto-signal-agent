@@ -47,8 +47,16 @@ def parse(text):
     return [dict(r) for r in csv.DictReader(io.StringIO(text))]
 
 
+REEVAL = "re-evaluation"
+
+
 def key(row):
-    return f"{row['strategy']}@{row['version']}|{row['tf']}"
+    """One trial per strategy version x timeframe - and one more per re-evaluation under a new rule set (Phase 19 A:
+    origin "re-evaluation: family gates v1"), because judging the same trades by a second rule set is one more chance
+    for luck to look like a winner."""
+    k = f"{row['strategy']}@{row['version']}|{row['tf']}"
+    o = str(row.get("origin") or "")
+    return f"{k}|{o}" if o.startswith(REEVAL) else k
 
 
 def backfill(registry):

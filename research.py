@@ -11,6 +11,8 @@ For every strategy version x timeframe, on the research coins of the last hourly
   5m check  - strategies with confirm_5m (section 8) are backtested through the 5-minute protocol; their
               control twin is the SAME strategy without the check, run over the same period on the same
               5m bars (a fair comparison - Phase 10)
+  family    Phase 19 A: every cell is also judged by the family table (engine/family_gates.py) - shadow mode shows old
+            and new verdict side by side (memory/family_gates_shadow.csv); costs +100% is shown, never a gate
 Then every version x timeframe moves along its lifecycle (BACKTESTING / VALIDATION / FAILED /
 PAPER_TRADING / RETIRED). APPROVED is never set by the engine - it needs the operator's yes.
 
@@ -42,6 +44,7 @@ from engine import data_quality as dq
 from engine import bias
 from engine import btcharts as btc_mod
 from engine import debate
+from engine import family_gates as fgt
 from engine import history
 from engine import ideas
 from engine import lifecycle as lc
@@ -54,6 +57,7 @@ from engine import trials as trl
 
 CACHE = os.path.join(sc.ROOT, "data", "history")
 TRIALS = os.path.join(sc.MEMORY, "trials.csv")
+SHADOW = os.path.join(sc.MEMORY, "family_gates_shadow.csv")
 log = sc.log
 
 
@@ -113,6 +117,32 @@ def update_trials(registry, tested, now_txt, offline):
             with open(path, "a") as f:
                 f.write(("" if text.endswith("\n") else "\n") + trl.to_csv(new, False))
     return rows + new, new
+
+
+SHADOW_COLS = ["run_utc", "strategy", "version", "tf", "family", "group", "old_verdict", "new_verdict", "changed",
+               "trades", "recovery", "mc_dd95_per_100_r", "dd_days", "dd_share", "streak", "streak95", "new_reasons"]
+
+
+def write_shadow(cells, now_txt, offline):
+    """Phase 19 A: one line per strategy version x timeframe per research run - old verdict vs family-table verdict
+    (memory/family_gates_shadow.csv, append-only; the record the operator reads at the end of the shadow period)."""
+    path = os.path.join(sc.REPORTS, "family_gates_shadow_offline.csv") if offline else SHADOW
+    rows = []
+    for ck, c in sorted(cells.items()):
+        f = c.get("family_gate")
+        if not f:
+            continue
+        m = f["metrics"]
+        w, d, cl = m.get("window") or {}, m.get("duration") or {}, m.get("clustering") or {}
+        rows.append(dict(run_utc=now_txt, strategy=c["strategy"], version=c["version"], tf=c["tf"], family=f["family"],
+                         group=f["group"], old_verdict=f["old"], new_verdict=f["new"], changed=f["changed"],
+                         trades=m["n"], recovery=m.get("recovery"), mc_dd95_per_100_r=w.get("dd95_r"),
+                         dd_days=d.get("days"), dd_share=d.get("share"), streak=cl.get("streak"),
+                         streak95=cl.get("streak95"), new_reasons="; ".join(f["new_reasons"])))
+    if rows:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        pd.DataFrame(rows, columns=SHADOW_COLS).to_csv(path, mode="a", header=not os.path.exists(path), index=False)
+    return len(rows)
 
 
 class _NoAliases(yaml.SafeDumper):
@@ -369,6 +399,8 @@ def main():
     variants = {k: sspec.variants(x, R["perturb_pct"]) for k, x in by_key.items()}
     drops = {k: sspec.rule_drops(x) for k, x in by_key.items()}      # Phase 18 B: one entry rule removed at a time
     BS = bias.settings(R.get("bias_check"))
+    FG = fgt.settings(cfg.get("family_gates"))                 # Phase 19 A: family table (shadow until operator yes)
+    fg_mode, fg_why = fgt.mode(FG, started.date())
     budget_s = float(R.get("time_budget_min", 90)) * 60
     bias_out, rules_skipped = None, []
     try:                                              # Phase 18 D: the backtest chart page's data (never fatal)
@@ -382,6 +414,7 @@ def main():
     bars = {tf: (min(int(R["history_bars"][tf]), int(R["offline_history_bars"])) if args.offline
                  else int(R["history_bars"][tf])) for tf in ["1w", "1d"] + tfs}
     cfg_stress = stressed(cfg, R["cost_stress_x"])
+    cfg_stress2 = stressed(cfg, float(FG["cost_report_x"]))   # Phase 19 A: costs +100%, report only
     coins = research_coins(args.offline, args.coins)
     coins = sorted(coins, key=lambda c: c != "BTC")          # BTC first: the others read its closes (btc_ret)
     derivs_by_coin = sc.load_derivs(args.offline, coins, now_ms)
@@ -390,6 +423,7 @@ def main():
         f"{sum(len(v) for v in variants.values())} ±{R['perturb_pct']}% variants")
 
     per, stress, var = {}, {}, {}            # (id, version, tf) -> {coin: trades} (var: -> {label: {coin: ...}})
+    stress2 = {}                              # costs +100% (report only)
     dropped = {}                              # (id, version, tf) -> {label: (rule, {coin: (trades, total R)})}
     plain5 = {}                               # 5m-confirmed cells: the same signals WITHOUT the 5m check
     S5 = c5m.settings(cfg.get("confirm_5m"))
@@ -461,7 +495,7 @@ def main():
                     rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
                     continue
                 runs_per_coin[base] = runs_per_coin.get(base, 0) + 1
-                for cf, store in ((cfg, per), (cfg_stress, stress)):
+                for cf, store in ((cfg, per), (cfg_stress, stress), (cfg_stress2, stress2)):
                     tr = sc.run_backtest(df, L, S, XL, XS, s, cf, tf, cols, None, m5, S5)
                     sc.mark_oos_for(s, tr, n, cfg, m5)
                     store.setdefault(k3, {})[base] = tr
@@ -521,6 +555,7 @@ def main():
     for k3, ev in evals.items():                     # Phase 18 B: trade-order shuffling + rule significance
         ev["monte_carlo"] = rs.monte_carlo([t["r"] for tr in per[k3].values() for t in tr], mc_runs)
         ev["rules"] = rs.rule_significance(ev["all"], dropped.get(k3, {}), V["min_trades"])
+        ev["stress_2x"] = rs.short(rs.stats([t for tr in stress2.get(k3, {}).values() for t in tr]))
     bias_found = {k: v for k, v in (bias_out or {}).get("findings", {}).items()}
     logdf = sc.load_log()
     fwd = sc.forward_stats(logdf)
@@ -528,8 +563,10 @@ def main():
     AP = ap.settings(cfg.get("approval"))
     approvals, approval_problems = ap.parse_approvals(cfg.get("approvals"))
     approval_warnings, eligible_cells = [], []
-    trial_rows, trial_new = update_trials(registry, [(k[0], k[1], k[2], "lab" if by_key[f"{k[0]}@{k[1]}"].get("lab")
-                                                      else "library") for k in sorted(per)], now_txt, args.offline)
+    reeval = fgt.REEVAL_ORIGIN.format(v=FG["rules_version"])   # Phase 19 A: every cell judged again by the family
+    tested_now = [(k[0], k[1], k[2], "lab" if by_key[f"{k[0]}@{k[1]}"].get("lab") else "library") for k in sorted(per)]
+    trial_rows, trial_new = update_trials(registry, tested_now + [(k[0], k[1], k[2], reeval) for k in sorted(per)],
+                                          now_txt, args.offline)
     alpha = float(R.get("trials_alpha", 0.05))
     trial_bar = (trl.need_t(len(trial_rows), alpha), len(trial_rows))
     log(f"Trials counter: {len(trial_rows)} strategy / version / timeframe tests ({len(trial_new)} new) - "
@@ -551,15 +588,33 @@ def main():
                 twin.pop("_raw")
         elif s.get("control_twin"):
             twin = next((e for k, e in evals.items() if k[0] == s["control_twin"] and k[2] == tf), None)
-        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R, trial_bar, mc_limit,
-                                                bias_checked=f"{sid}@{ver}" in (bias_out or {}).get("checked", {}))
+        checked = f"{sid}@{ver}" in (bias_out or {}).get("checked", {})
+        paper_ok, paper_reasons = lc.paper_gate(base_status, ev, twin, R, trial_bar, mc_limit, bias_checked=checked)
         if s.get("control_twin") and twin is None:
             paper_ok, paper_reasons = False, paper_reasons + ["control twin was not tested"]
+        # Phase 19 A: the same cell judged by the family table - shown side by side; it decides only when active
+        group = fgt.group_of(s["family"], FG)
+        fm = fgt.measure([t for tr in per[k3].values() for t in tr], FG)
+        new_base, new_reasons, _ = lc.judge(raw["st"], raw["dev"], raw["val"], fwd.get(k3), V,
+                                            lc.retune_penalty(registry, s, V["retune_penalty_r"]), ev["median_cost_r"],
+                                            dd_checks=fgt.dd_reasons(fm, group, FG, V))
+        new_ok, new_paper = lc.paper_gate(new_base, ev, twin, R, trial_bar,
+                                          mc_limit if fgt.uses_whole_history_mc(group, FG) else None, bias_checked=checked)
+        if s.get("control_twin") and twin is None:
+            new_ok, new_paper = False, new_paper + ["control twin was not tested"]
+        limits = fgt.live_limit(fm, group, FG, cfg["risk"]["strategy_max_dd_r"], R["paper_max_dd_r"])
+        fam_gate = dict(group=group, family=s["family"], old=fgt.verdict(base_status, paper_ok),
+                        new=fgt.verdict(new_base, new_ok), metrics=fm, limits=limits, mode=fg_mode,
+                        new_reasons=new_reasons + (new_paper if new_base == "VALIDATION" else []))
+        R_cell = R
+        if fg_mode == "active":
+            base_status, reasons, paper_ok, paper_reasons = new_base, new_reasons, new_ok, new_paper
+            R_cell = dict(R, paper_max_dd_r=limits["paper_r"])
         ck = f"{sid}@{ver}|{tf}"
         prev = registry["cells"].get(ck, {})
         rec = lc.paper_record(paper.get(k3, []))
         status, note, failed = lc.next_status(prev.get("status"), base_status, paper_ok, rec,
-                                              int(prev.get("failed_runs") or 0), R)
+                                              int(prev.get("failed_runs") or 0), R_cell)
         status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells,
                                      bool(s.get("lab")))
         bias_txt = bias.tag("; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3])) or next(
@@ -570,6 +625,8 @@ def main():
             if ck in eligible_cells:
                 eligible_cells.remove(ck)
             reasons = [note] + reasons
+            fam_gate.update(old="FAILED", new="FAILED")
+        fam_gate["changed"] = fam_gate["old"] != fam_gate["new"]
         results[k3] = status
         cells[ck] = dict(strategy=sid, version=ver, tf=tf, status=status, base_status=base_status, lab=bool(s.get("lab")),
                          t_stat=ev["t_stat"], need_t=round(trial_bar[0], 3),
@@ -581,7 +638,8 @@ def main():
                          history_from=fmt_day(min(t["entry_time"] for tr in per[k3].values() for t in tr))
                          if any(per[k3].values()) else None,
                          paper=rec, evidence=ev, bias=bias_txt or None,
-                         rules_adding_nothing=[r for r in ev["rules"] if r["adds"] is False])
+                         rules_adding_nothing=[r for r in ev["rules"] if r["adds"] is False],
+                         family_gate=fam_gate)
 
     # ---------- failure attribution per strategy version x timeframe (section 17) ----------
     for ck, cell in cells.items():
@@ -633,7 +691,10 @@ def main():
             overfit="; ".join(ev["overfit"]) or None, paper_gate_failed="; ".join(c["paper_gate_failed"]) or None,
             paper_signals=c["paper"]["n"], failed_runs=c["failed_runs"], bias=c["bias"],
             mc_dd95_r=(ev.get("monte_carlo") or {}).get("dd95_r"), mc_streak95=(ev.get("monte_carlo") or {}).get("streak95"),
-            rules_adding_nothing="; ".join(f"{r['label']} ({r['rule']})" for r in c["rules_adding_nothing"]) or None)
+            rules_adding_nothing="; ".join(f"{r['label']} ({r['rule']})" for r in c["rules_adding_nothing"]) or None,
+            stress2_avg_r=(ev.get("stress_2x") or {}).get("avg_r"), family_group=c["family_gate"]["group"],
+            family_verdict=c["family_gate"]["new"],
+            mc_dd95_per_100_r=(c["family_gate"]["metrics"].get("window") or {}).get("dd95_r"))
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
     if charts_w is not None:
@@ -663,6 +724,11 @@ def main():
     pine_out = export_approved(cells, per, by_key, cfg, now_txt,
                                os.path.join(sc.REPORTS, "pine_offline" if args.offline else "pine"))
     approval_out["pine"] = pine_out
+    try:
+        shadow_rows = write_shadow(cells, now_txt, args.offline)
+    except OSError as e:
+        log(f"family gates shadow log not written: {e}")
+        shadow_rows = 0
     if not args.offline:
         sc.write_experiments(new_exp, registry)
         sc.write_lifecycle_log(changes, started)
@@ -761,6 +827,11 @@ def main():
                                         for c in new_variants]),
                trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
                            file=os.path.relpath(TRIALS, sc.ROOT)),
+               family_gates=dict(rules_version=FG["rules_version"], mode=fg_mode, mode_text=fg_why,
+                                 settings={k: (str(v) if isinstance(v, dt.date) else v) for k, v in FG.items()}, shadow_rows=shadow_rows,
+                                 shadow_file=os.path.relpath(SHADOW, sc.ROOT),
+                                 changed=sorted(ck for ck, c in cells.items() if c["family_gate"]["changed"]),
+                                 live_limits={ck: c["family_gate"]["limits"] for ck, c in cells.items()}),
                lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),
                         moved_to_library=moved))
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")

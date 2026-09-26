@@ -203,6 +203,8 @@ def pack(cell, spec, lineage, board_row, S, now_txt, risk=None, links=None):
              None: "too few trades to judge"}[r["adds"]] for r in rules] or ["- nothing to remove (one rule per side)"]
     L += ["", "## 7. Cost stress test",
           f"- fees, slippage and funding +50%: {_stat(ev['stress'])}",
+          *([f"- fees, slippage and funding +100% (shown only, not a gate): {_stat(ev['stress_2x'])}"]
+            if ev.get("stress_2x") else []),
           f"- median cost per trade: {_f(ev['median_cost_r'], '.3f')}"]
     L += ["", "## 8. Risk metrics",
           f"- max drawdown (backtest): {ev['all']['max_dd_r']:.1f}R · average hold {ev['all']['avg_bars']:.0f} candles",
@@ -214,6 +216,7 @@ def pack(cell, spec, lineage, board_row, S, now_txt, risk=None, links=None):
               f"- **expected worst losing streak: {mc['streak95']} losses in a row** (95% of the random orders stay at "
               f"or below it; median {mc['streak_median']}, as it happened {mc['streak']}) - expect it before you judge "
               "the strategy broken"]
+    L += _family_lines(cell.get("family_gate"))
     L.append(f"- lookahead / recursive check: {('BIASED - ' + cell['bias']) if cell.get('bias') else 'passed'}"
              if "bias" in cell else "- lookahead / recursive check: not run")
     tags = sorted(((t, v) for t, v in (att.get("tags") or {}).items() if v.get("losers")),
@@ -234,6 +237,24 @@ def pack(cell, spec, lineage, board_row, S, now_txt, risk=None, links=None):
                                                                      "check it covers a bull and a bear market"))
     L += ["", "Research signal. Not financial advice."]
     return L
+
+
+def _family_lines(f):
+    """Phase 19 A: the family table's numbers and the drawdown limits this card would live under."""
+    if not f:
+        return []
+    m = f["metrics"]
+    w, d, lim = m.get("window") or {}, m.get("duration") or {}, f.get("limits") or {}
+    return [f"- family table ({f['group']} group, {f['mode']} mode): verdict {f['new']} (old rule: {f['old']})",
+            f"  - recovery factor {'-' if m.get('recovery') is None else m['recovery']} (net {m['net_r']:+.1f}R / "
+            f"max drawdown {m['max_dd_r']:.1f}R) · Monte Carlo 95% worst drawdown per {w.get('window', 100)} trades "
+            f"{w.get('dd95_r', '-')}R · longest drawdown {d.get('days', 0):.0f} days "
+            f"({d.get('share', 0) * 100:.0f}% of the tested period)",
+            (f"  - **if approved, suspended at a live drawdown of {lim.get('live_r', 0):g}R; paper retired at "
+             f"{lim.get('paper_r', 0):g}R** ({lim.get('rule', '-')})" if f["mode"] == "active" else
+             f"  - under the family table it would be suspended at a live drawdown of {lim.get('live_r', 0):g}R and "
+             f"retired from paper at {lim.get('paper_r', 0):g}R ({lim.get('rule', '-')}); in shadow mode the old "
+             "limits (config.yaml risk.strategy_max_dd_r / research.paper_max_dd_r) still apply")]
 
 
 def filename(strategy, version, tf):

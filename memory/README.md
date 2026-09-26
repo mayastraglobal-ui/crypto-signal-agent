@@ -8,7 +8,9 @@ stops the run if an earlier line was changed or removed (section 17).
 |---|---|---|---|---|
 | `strategy_registry.csv` | Per strategy version × timeframe: status, metrics, gates, dates | engine (research run) | daily | no - statuses update |
 | `experiments.md` | Every strategy version ever tested (EXP-ID, hypothesis) + the research loop's `Feedback: <id>@<version>` records and queued hypotheses (Phase 18) | engine (research run) + reviews | first test of a version | yes |
-| `trials.csv` | Every strategy version × timeframe ever tested (one row each) - the trials counter that raises the PAPER_TRADING bar | engine (research run) | first test of a cell | yes |
+| `trials.csv` | Every strategy version × timeframe ever tested (one row each) - the trials counter that raises the PAPER_TRADING bar; plus one row per cell each time a new rule set re-judges it (origin `re-evaluation: family gates vN`, Phase 19 A) | engine (research run) | first test of a cell / first re-evaluation | yes |
+| `family_gates_shadow.csv` | Phase 19 A shadow record: per research run and strategy version × timeframe, the OLD verdict next to the family-table verdict and its numbers | engine (research run) | daily | yes |
+| `family_gates_calibration.md` | How every number of `config.yaml` → `family_gates` was chosen (95th percentile of the family's own history at the pass bar), and old vs new verdict per cell | `family_calibrate.py` (build / operator PR) | when the family table changes (new rules_version) | no - one record per rules version |
 | `strategy_lifecycle.md` | Every status change and why | engine (research run) | on change | yes |
 | `failure_journal.md` | Every logged signal that lost: conditions, tags, MAE / MFE | engine (hourly scan) + reviews | on a loss | yes |
 | `missed_trades.md` | Strong moves and whether they were identifiable before | engine (research run) | daily, if any | yes |

@@ -165,7 +165,9 @@ validation:                  # the "-> VALIDATION" gate (AGENT_PROMPT.md section
   min_oos_trades: 10         # at least 10 trades in the unseen test period
   min_expectancy_r: 0.10     # must make on average +0.10R per trade AFTER fees (was 0.05 before spec v3)
   min_profit_factor: 1.2     # gross wins / gross losses (was 1.15 before spec v3)
-  max_drawdown_r: 10         # worst peak-to-valley loss of the backtest, in R
+  max_drawdown_r: 10         # worst peak-to-valley loss of the backtest, in R. Phase 19 A: kept for the TIGHT family group;
+                             # the TREND group moves to recovery factor + DD per 100 trades + duration (family_gates -
+                             # in shadow mode until the operator's yes, so today this 10R still decides for every card)
   retune_penalty_r: 0.02     # +0.02R on min_expectancy_r for every earlier version of the same idea (section 11)
   max_cost_to_r: 0.25        # cost viability: fees + slippage per trade <= 0.25R, i.e. stop >= 4x the round-trip cost
   min_coin_trades: 5         # a coin needs 5+ trades with this strategy to be "proven" on it
@@ -211,6 +213,39 @@ research:                    # daily research run (research.py, workflow "Resear
     recursive_tolerance_pct: 0.1 # ... at most 0.1% of the candles may flip (rounding)
   time_budget_min: 90            # the research run must finish within 90 minutes: after 60% of it, the rule
                                  # significance test (one entry rule removed at a time) is skipped for the other coins
+
+family_gates:                # Phase 19 A - operator-owned. Strategy-family drawdown gates (engine/family_gates.py).
+                             # Replaces the single validation.max_drawdown_r for the TREND group; the TIGHT group keeps
+                             # it and adds loss clustering + drawdown duration. Fees, risk per trade and the trials
+                             # bar are NOT changed. How each number was chosen: memory/family_gates_calibration.md
+                             # (95th percentile of the group's own trade history, average moved to the +0.10R pass bar).
+  rules_version: 1           # raise it if a number below changes: every card is then re-evaluated once more and that
+                             # re-evaluation is counted in memory/trials.csv (origin "re-evaluation: family gates vN")
+  mode: shadow               # shadow = new verdicts are only SHOWN next to the old ones (report 3b, research.json,
+                             # memory/family_gates_shadow.csv); nothing moves on them. active = the new rule decides -
+                             # the engine stays in shadow unless operator_ok is a date >= shadow_start + shadow_days
+  shadow_start: 2026-09-26
+  shadow_days: 14
+  operator_ok: null          # your yes after the shadow period, e.g. 2026-10-10 (together with mode: active)
+  window_trades: 100         # "per 100 trades": Monte Carlo draws 100 trades at random from the card's own trades
+  mc_runs: 1000
+  reference_percentile: 95   # every limit and the clustering test use the 95th percentile (as Phase 18 B does)
+  cost_report_x: 2.0         # extra cost stress, costs +100% - REPORT ONLY (the +50% gate stays research.cost_stress_x)
+  default_group: tight       # a family not listed below gets the tight (old) rules
+  groups:
+    trend:                   # rare, large wins -> deeper, longer drawdowns at the same edge
+      families: [trend_following, momentum, breakout, mtf_pullback]
+      min_recovery_factor: 3       # net R / max drawdown (whole history) - operator's number
+      max_mc_dd95_per_100_r: 17.0  # Monte Carlo 95% worst drawdown of 100 trades (calibration: p95 = 16.96R -> 17R)
+      max_dd_duration_share: 0.55  # longest time under a previous peak <= 55% of the tested period (p95 = 0.544)
+      keep_max_drawdown_r: false   # the 10R whole-history limit no longer applies to this group
+      keep_whole_history_mc: false # ... nor the 8R whole-history Monte Carlo limit (replaced by the per-100 one)
+    tight:                   # frequent small wins -> a deep drawdown means the idea broke
+      families: [mean_reversion, liquidity_reversal, smc, price_action]
+      keep_max_drawdown_r: true    # validation.max_drawdown_r (10R) stays
+      keep_whole_history_mc: true  # research.monte_carlo_max_dd_r (8R) stays
+      loss_clustering: true        # real longest losing streak must not exceed the 95% of random orders
+      max_dd_duration_share: 0.60  # (calibration: p95 = 0.582 -> 0.60)
 
 derivs:                      # Phase 17 C: futures market-structure data (derivs.py, hourly; engine/derivs.py)
                              # ONE series per source, never mixed: OKX = the main series every building block reads

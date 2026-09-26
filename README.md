@@ -204,7 +204,7 @@ tests every strategy version on every timeframe on years of history (AGENT_PROMP
 | Test | What it asks |
 |---|---|
 | **Layer A** (hourly) | How did it do in the last 15 days (days 1-10 vs 11-15)? Shown only - never enough alone |
-| **Layer B** | On all history since the coin was listed (1D/4H/1H; 30m 2 years, 15m 1 year, 5m 90 days): ≥ 30 trades, ≥ +0.10R per trade, PF ≥ 1.2, drawdown ≤ 10R, profitable in the first 70% ("develop") AND the last 30% ("validate") of every coin, and fees ≤ 1/4 of the stop |
+| **Layer B** | On all history since the coin was listed (1D/4H/1H; 30m 2 years, 15m 1 year, 5m 90 days): ≥ 30 trades, ≥ +0.10R per trade, PF ≥ 1.2, drawdown ≤ 10R (family table in shadow mode - see Phase 19 A), profitable in the first 70% ("develop") AND the last 30% ("validate") of every coin, and fees ≤ 1/4 of the stop |
 | **Layer C** (walk-forward) | History cut into 6 time windows (the first only warms up): at least 3 of the other 5 profitable, and all 5 together |
 | **Costs +50%** | Still profitable when fees, slippage and funding are 50% higher? |
 | **±20% test** | Still profitable when each number in the rules (and the stop and hold time) is moved 20% down or up, one at a time? |
@@ -414,6 +414,34 @@ and the bar.
   (`factory: variant_search`, `parent: result: ...`), within that factory's weekly quota.
 - The research run reports its duration (budget `research.time_budget_min`, 90 min); after 60% of the budget the rule
   test is skipped for the remaining coins.
+
+## Strategy-family gates (Phase 19 A) - in shadow mode
+The single "max drawdown ≤ 10R" gate is measured on the trades of ALL coins over up to 9 years, so a strategy with
+many trades is punished for its sample size (Donchian 4H: 1105 trades, +0.12R each, max drawdown 22.5R). The family
+table (`config.yaml` → `family_gates`, `engine/family_gates.py`) replaces it per group:
+
+| Group | Families | Drawdown rules |
+|---|---|---|
+| **trend** | trend_following, momentum, breakout, mtf_pullback | recovery factor (net R / max drawdown) ≥ 3 · Monte Carlo 95% worst drawdown of **100 trades** ≤ 17R · longest drawdown ≤ 55% of the tested period |
+| **tight** | mean_reversion, liquidity_reversal, smc, price_action, anything not listed | the 10R max drawdown and 8R Monte Carlo stay · no loss clustering (real longest losing streak ≤ 95% of random orders) · longest drawdown ≤ 60% of the tested period |
+
+Every other gate stays for both (expectancy, profit factor, unseen test, walk-forward, costs +50%, ±20%, coins,
+control twin, trials t-statistic, lookahead check). Fees, risk per trade and the trials bar are unchanged.
+- **How the numbers were chosen** (`memory/family_gates_calibration.md`, `family_calibrate.py`): all historical trades
+  of the group, average moved to the +0.10R pass bar ("this family with exactly the minimum edge"); each limit is its
+  95th percentile, rounded up. Leaving any one card out moves them by at most 0.5R.
+- **Live safety from the same rule:** a trend card's live suspension limit and paper drawdown limit = its own Monte
+  Carlo 95% worst drawdown per 100 trades (never above 17R), so an approved card is not suspended by ordinary bad luck;
+  the tight group keeps 8R. Shown in the approval pack.
+- **Shadow mode (at least 14 days from 2026-09-26):** every research run shows the old and the new verdict side by side
+  (report section 3b, `reports/research.json`, `memory/family_gates_shadow.csv`). Only the OLD verdict moves anything.
+  To switch: `mode: active` AND `operator_ok: <date of your yes>`; before the shadow period ends the engine stays in
+  shadow whatever the file says.
+- **Every re-evaluation counts:** each cell judged by the family table adds one row to `memory/trials.csv`
+  (`re-evaluation: family gates v1`), once per rules version - on the 46 cells of the last run the t-statistic bar rises from
+  3.07 to 3.27 (92 trials); new lab cards add more.
+- **Costs +100%** (fees, slippage and funding doubled) is shown next to +50% in the scoreboard and approval packs -
+  report only, never a gate.
 
 ## More ideas and tools (Phase 18 C)
 - **New building blocks** (engine/features.py, scanner.make_namespace; documented at the top of `strategies.yaml`),
