@@ -765,3 +765,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 03:30,SUI,30m,FVG_FILLED,bull,,1.1656,1.1827,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 04:00,ENA,15m,BOS,bull,0.2703,,,0.32,Asia,1h,STRONG_BULL,no displacement,smc-1.0,Binance
 2026-09-26 04:15,ENA,15m,FVG,bull,,0.2687,0.2704,0.446,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 04:30,BTC,15m,WEAK_BREAK,bear,83909.98,,,0.152,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-26 04:45,ETH,15m,SWEEP,bull,2686.08,,,0.242,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 04:30,XRP,30m,WEAK_BREAK,bear,1.555,,,0.163,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 04:30,XRP,15m,WEAK_BREAK,bear,1.5567,,,0.555,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 05:00,SOL,1h,FVG,bear,,120.97,121.57,0.479,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 04:30,ZEC,15m,SWEEP,bull,1529.99,,,0.123,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 05:00,ENA,1h,BOS,bull,0.2735,,,0.831,,4h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 04:30,ENA,30m,SWEEP,bear,0.2735,,,0.951,,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 04:30,ENA,30m,FVG,bull,,0.2672,0.2694,0.422,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 05:00,ENA,30m,BOS,bull,0.2735,,,1.111,,1h,STRONG_BULL,with displacement,smc-1.0,Binance
+2026-09-26 05:00,ENA,30m,ORDER_BLOCK,bull,,0.2694,0.2782,,,1h,STRONG_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-26 05:00,ENA,30m,FVG_RETRACE,bull,,0.2672,0.2694,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 04:30,ENA,15m,FVG_RETRACE,bull,,0.2687,0.2704,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
