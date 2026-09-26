@@ -1185,3 +1185,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 21:30,ENA,15m,FVG_FILLED,bear,,0.2696,0.2704,,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 21:45,ENA,15m,FVG,bull,,0.2694,0.2705,0.439,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 22:15,ENA,15m,FVG_RETRACE,bull,,0.2694,0.2705,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 23:00,BTC,1h,SWEEP,bear,84336.96,,,0.372,,4h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 23:00,BTC,1h,FVG,bull,,84097.88,84158.74,0.267,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 22:30,BTC,15m,FVG,bull,,84164.0,84256.0,0.981,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 23:00,ZEC,1h,FVG,bull,,1585.0,1654.39,2.677,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 23:15,ZEC,15m,FVG_RETRACE,bull,,1592.53,1652.97,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-26 22:30,SOL,15m,BREAKER_RETEST,bull,,120.91,121.56,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 23:00,SOL,15m,FVG,bear,,121.33,121.45,0.274,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 23:15,SOL,15m,FVG_RETRACE,bear,,121.33,121.45,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-26 23:15,SOL,15m,FVG_FILLED,bear,,121.33,121.45,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 22:30,SUI,15m,FVG,bull,,1.1538,1.1563,0.325,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 22:45,SUI,15m,FVG_RETRACE,bull,,1.1538,1.1563,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 23:15,SUI,15m,SWEEP,bear,1.1616,,,0.111,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 22:45,ENA,15m,FVG_FILLED,bull,,0.2694,0.2705,,,1h,STRONG_BULL,,smc-1.0,Binance
