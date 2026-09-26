@@ -130,9 +130,82 @@ class Setup(unittest.TestCase):
             text = test_brain.read(os.path.join(ROOT, ".github", "workflows", name))
             save = text[text.index("git config user.name"):]
             self.assertIn('git config merge.append.driver "python3 append_merge.py %O %A %B"', save, name)
-            self.assertLess(save.index("merge.append.driver"), save.index("git pull --rebase"), name)
-            self.assertLess(save.index("git pull --rebase"), save.index("memory_guard.py --after-sync"), name)
+            pull = "bash git_sync.sh" if name in ("scan.yml", "research.yml") else "git pull --rebase"
+            self.assertNotIn("git pull --rebase --autostash || true", save, name)           # a failed sync never hides
+            self.assertLess(save.index("merge.append.driver"), save.index(pull), name)
+            self.assertLess(save.index(pull), save.index("memory_guard.py --after-sync"), name)
             self.assertLess(save.index("memory_guard.py --after-sync"), save.index("git push"), name)
+        self.assertIn("git pull --rebase --autostash", test_brain.read(os.path.join(ROOT, "git_sync.sh")))
+
+
+class GitSync(unittest.TestCase):
+    """git_sync.sh: a scan queued behind another scan starts from the older main (26 Sep 2026, 09:16 UTC); their
+    generated reports clash on `git pull --rebase`. This run's reports win; a clash outside reports/ stops it."""
+
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.remote = os.path.join(self.tmp, "remote.git")
+        git(self.tmp, "init", "-q", "--bare", "-b", "main", self.remote)
+        self.a, self.b = os.path.join(self.tmp, "a"), os.path.join(self.tmp, "b")
+        git(self.tmp, "clone", "-q", self.remote, self.a)
+        self.cfg(self.a)
+        self.write(self.a, "reports/latest.md", "base\n")
+        self.write(self.a, "notes.txt", "base\n")
+        git(self.a, "add", "-A")
+        git(self.a, "commit", "-qm", "base")
+        git(self.a, "push", "-q", "origin", "main")
+        git(self.tmp, "clone", "-q", self.remote, self.b)
+        self.cfg(self.b)
+
+    def cfg(self, repo):
+        git(repo, "config", "user.email", "t@t")
+        git(repo, "config", "user.name", "t")
+        git(repo, "config", "pull.rebase", "true")
+
+    def write(self, repo, rel, text):
+        os.makedirs(os.path.dirname(os.path.join(repo, rel)) or repo, exist_ok=True)
+        with open(os.path.join(repo, rel), "w") as f:
+            f.write(text)
+
+    def commit(self, repo, rel, text, push=False):
+        self.write(repo, rel, text)
+        git(repo, "commit", "-qam", f"{repo[-1]} {rel}")
+        if push:
+            git(repo, "push", "-q", "origin", "main")
+
+    def sync(self, repo):
+        return subprocess.run(["bash", os.path.join(ROOT, "git_sync.sh")], cwd=repo, capture_output=True, text=True)
+
+    def test_this_runs_reports_win(self):
+        for repo, text in ((self.a, "first"), (self.b, "second")):              # a new file on both sides (add/add)
+            self.write(repo, "reports/system_alert_state.json", f'{{"run": "{text}"}}')
+            git(repo, "add", "-A")
+        self.commit(self.a, "reports/latest.md", "first run\n", push=True)       # the scan that ran first
+        self.commit(self.b, "reports/latest.md", "second run\n")                 # the queued scan, older main
+        p = self.sync(self.b)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("this run's copies win", p.stdout)
+        self.assertEqual(test_brain.read(os.path.join(self.b, "reports/latest.md")), "second run\n")
+        self.assertEqual(test_brain.read(os.path.join(self.b, "reports/system_alert_state.json")), '{"run": "second"}')
+        self.assertEqual(git(self.b, "push", "-q", "origin", "main").returncode, 0)
+        self.assertEqual(git(self.b, "status", "--porcelain").stdout, "")
+
+    def test_a_clash_outside_reports_stops_the_push(self):
+        self.commit(self.a, "notes.txt", "first\n", push=True)
+        self.commit(self.b, "notes.txt", "second\n")
+        p = self.sync(self.b)
+        self.assertEqual(p.returncode, 1)
+        self.assertIn("a clash outside reports/", p.stdout)
+        self.assertFalse(os.path.isdir(os.path.join(self.b, ".git", "rebase-merge")))   # the rebase was undone
+        self.assertEqual(test_brain.read(os.path.join(self.b, "notes.txt")), "second\n")
+
+    def test_no_clash_is_a_plain_rebase(self):
+        self.commit(self.a, "notes.txt", "first\n", push=True)
+        self.commit(self.b, "reports/latest.md", "second\n")
+        p = self.sync(self.b)
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(test_brain.read(os.path.join(self.b, "notes.txt")), "first\n")
 
 
 class AfterSync(unittest.TestCase):
