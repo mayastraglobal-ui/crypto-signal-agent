@@ -51,3 +51,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
   - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### SOL and ENA 2026-09-25 moves: "identifiable" only through failing cells
+- timestamp: 2026-09-26 06:22 UTC · source: Claude daily review 2026-09-26 · evidence: MODEL_OUTPUT: reading of the engine's two missed-move entries and the failing-cell diagnosis of the same research run · confidence: medium · strategy: liquidity_sweep_reversal v1.0, trend_pullback v1.0 · asset: SOL, ENA · timeframe: 5m, 15m, 1h · regime: WEAK_BULL, TRANSITION · review: 2026-10-03
+  The engine marks SOL (+4.8%, 5.5x ATR, from 2026-09-25 07:00) and ENA (+18.4%, 7.5x ATR, from 2026-09-25 08:00) as identifiable. The signals it names came from:
+  - liquidity_sweep_reversal v1.0 5m (both moves): 424 backtest trades, -1.15R per trade, loses in every regime with 10+ trades (BACKTEST);
+  - trend_pullback v1.0 15m (SOL): 3022 backtest trades, -0.26R per trade (BACKTEST); trend_pullback v1.0 1h (SOL): its numbers are not in today's fact sheet.
+  So "identifiable" here does not mean a tested edge saw the move coming. Nothing to change: a signal from a cell that loses over hundreds of trades is not a missed trade.
