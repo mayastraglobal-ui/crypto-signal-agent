@@ -1,12 +1,37 @@
 {
  "claude/brain-briefing": {
-  "sha": "d316078fa1d018a94f817f20b2e89eaf9ba4cf4a",
-  "subject": "Briefing 2026-09-26 08:20",
-  "when": "2026-09-26 00:30",
+  "sha": "cb67354a616c9079ea24e273f7650f1bff7a897e",
+  "subject": "Briefing 2026-09-26 14:20",
+  "when": "2026-09-26 06:29",
   "status": "applied",
   "problems": [],
   "applied": [
-   "reports/claude/briefings/2026-09-26-0820.md"
+   "reports/claude/briefings/2026-09-26-1420.md"
+  ]
+ },
+ "claude/brain-daily": {
+  "sha": "130ac8760180dfdff2553666d9d0a8ddf07c6223",
+  "subject": "Daily review 2026-09-26",
+  "when": "2026-09-26 06:29",
+  "status": "applied",
+  "problems": [],
+  "applied": [
+   "memory/lessons.md",
+   "memory/missed_trades.md",
+   "reports/claude/daily/2026-09-26.md"
+  ]
+ },
+ "claude/brain-weekly": {
+  "sha": "75c2578585d5c671f3add90d82d37c0478c1c7d3",
+  "subject": "Weekly research 2026-09-26",
+  "when": "2026-09-26 06:29",
+  "status": "applied",
+  "problems": [],
+  "applied": [
+   "memory/experiments.md",
+   "memory/research_sources.md",
+   "reports/claude/weekly/2026-09-26.md",
+   "strategies_lab.yaml"
   ]
  }
 }

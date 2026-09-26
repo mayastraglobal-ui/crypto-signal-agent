@@ -773,3 +773,10 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
     file); mirror-image short; its exit is left to our stop and targets; the file runs on 5m, here 30M / 15M; first
     target 2R'
 ```
+
+### Hypothesis: cost share filter for mean reversion
+- timestamp: 2026-09-26 06:40 UTC · source: Claude weekly research 2026-09-26 (loss case study; https://github.com/freqtrade/freqtrade/blob/develop/docs/backtesting.md) · evidence: HYPOTHESIS: derived from the engine's fees_slippage tag (systematic in 3 tests: rsi2_dip_buy 1h, 30m, 15m) · confidence: low · strategy: rsi2_dip_buy, R4-BBRSI · asset: research coins · timeframe: 15m, 30m, 1h · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-25
+  - hypothesis: mean-reversion trades lose most where the stop is narrow compared with the round-trip cost; keeping only entries where the ATR stop is wide compared with price would lift the average trade.
+  - how to test: a one-change version of a mean-reversion card with an extra entry rule on the stop width (ATR as a share of price above a threshold), compared with its parent on the same period; judge on unseen data and the costs +50% test.
+  - blocked on: check that the building blocks can express ATR as a share of price before writing the card; if not, it waits for the operator.
+  - stop if: the filtered version keeps fewer than 30 unseen-data trades, or it is not better than its parent after costs.
