@@ -106,3 +106,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-26 18:20 UTC
 - **EXCLUDED** BABY - 7-day average volume $25M < $50M; spread 0.144% > 0.1%; order book too thin: $66k within 1% (need $250k)
+
+## 2026-09-26 19:16 UTC
+- **EXCLUDED** BABY - 7-day average volume $25M < $50M; order book too thin: $48k within 1% (need $250k)

@@ -13,7 +13,7 @@
  "suspended": {
   "SAGA": "2026-09-26"
  },
- "runs": 50,
+ "runs": 51,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -52,7 +52,6 @@
    "volume_7d"
   ],
   "BABY": [
-   "spread",
    "thin_book",
    "volume_7d"
   ],
