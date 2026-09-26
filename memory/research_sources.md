@@ -247,3 +247,35 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - licence duties we meet: the Apache-2.0 licence and the NOTICE text are published next to the file; the page shows the attribution notice with a link to https://www.tradingview.com/ and keeps the library's attribution logo on, as its README asks.
   - what we deliberately do NOT take: loading it from a CDN (nothing is loaded from outside), TradingView's other (non-open) charting products.
   - licence: Apache-2.0.
+
+### [R1] Microsoft RD-Agent - re-check at release 1.0.0 (the research loop)
+- timestamp: 2026-09-26 06:40 UTC · source: https://github.com/microsoft/RD-Agent (commit 484776c, 2026-09-23, "release 1.0.0") · evidence: FACT: read in the project's own code at that commit · confidence: high for what the code does; its results were not checked · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-25
+  - opened (weekly research 2026-09-26): the repository page, its commit list (newest commit 484776c, 2026-09-23 = the same commit the build session read on 2026-09-25) and rdagent/core/proposal.py at that commit. NOT opened: the paper arxiv.org/abs/2505.15155 (blocked by this environment's network) - nothing from it is cited. The README's performance claim (about 2x the annual return of benchmark factor libraries with over 70% fewer factors) is the project's own CLAIM, not checked.
+  - what the code does: Hypothesis keeps the idea plus its reason, observation and justification; HypothesisFeedback adds observations, an evaluation of the hypothesis, a new hypothesis, a decision and an 'acceptable' flag; Trace keeps every experiment and its feedback as a tree (each node names its parent; by default the newest node), and a selector returns the best result so far so the next idea builds on it.
+  - what we take: nothing new beyond the build session's record - our lab cards already name a parent and the daily review writes Feedback records. One detail worth copying as a PROCESS idea only: the next card in a chain should start from the best tested result so far, not from the newest one.
+  - what we deliberately do NOT take: language-model-written code run automatically, machine-learning forecast models, automatic choice of the next step, any code (none copied).
+  - licence: MIT.
+
+### BbandRsi (freqtrade-strategies) - a range mean-reversion idea for the RANGE gap
+- timestamp: 2026-09-26 06:40 UTC · source: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/BbandRsi.py · evidence: UNVERIFIED_OPINION: a community strategy file published without any evidence of an edge · confidence: low until tested here · strategy: R4-BBRSI v1.0 · asset: research coins · timeframe: 1h, 30m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-25
+  - opened (weekly research 2026-09-26): the file at commit f3340ce. As written: timeframe 1h, entry RSI < 30 and close below the lower Bollinger band, exit RSI > 70, minimal ROI 10%, stop -25%.
+  - claim: in a range, a close below the lower band with an oversold RSI snaps back.
+  - why now: the engine's playbook says no tested strategy made money in RANGE (mean_reversion -0.17R over 13124 backtest trades; rsi2_dip_buy 15m -0.34R over 2181). BbandRsi is a different entry (band plus RSI(14), 1h) aimed at exactly that gap.
+  - derived hypothesis: R4-BBRSI@1.0 (the queued card, first target 2R, ATR stop) makes money after fees in RANGE / HIGH_VOL_RANGE on 1h and 30m.
+  - limitations: no trend filter (falling knives when a range breaks); the file's -25% stop and 10% ROI are replaced by our ATR stop and 2R target, so this is our version of the idea, not the file's result; community source, zero evidentiary weight.
+
+### smart-money-concepts (joshyattridge) - Fair Value Gap definition, with no evidence claimed
+- timestamp: 2026-09-26 06:40 UTC · source: https://github.com/joshyattridge/smart-money-concepts · evidence: UNVERIFIED_OPINION: an open-source SMC indicator package; its README defines the concepts but claims no edge · confidence: high for the definitions, none for an edge · strategy: S5-SWEEP-MSS-FVG, S7-SILVER-BULLET · asset: - · timeframe: - · regime: - · review: 2026-12-25
+  - opened (weekly research 2026-09-26): the repository README (commit not shown on the page; MIT licence).
+  - claim (definition): a bullish Fair Value Gap is when the previous candle's high is lower than the next candle's low (bearish: the mirror). Liquidity = several highs (or lows) within a small range. The README says the project is for education only and should not be the sole decision maker - it claims no profitability.
+  - fits our rule: engine/smc.py uses the same three-candle gap plus a minimum size of 0.25 ATR.
+  - derived hypothesis: none new - the FVG entry is already under test in S5 and S7 against control twins without it.
+  - limitations: a popular definition is not evidence; the package has no out-of-sample test of any kind.
+
+### freqtrade backtesting docs - what a backtest assumes about fills, fees and slippage
+- timestamp: 2026-09-26 06:40 UTC · source: https://github.com/freqtrade/freqtrade/blob/develop/docs/backtesting.md · evidence: FACT: the documented behaviour of a widely used open-source backtester (what it assumes, not a market result) · confidence: high for what the docs say · strategy: all · asset: - · timeframe: all · regime: - · review: 2026-12-25
+  - opened (weekly research 2026-09-26): docs/backtesting.md on the develop branch (commit not noted).
+  - claim: its backtests include the exchange's default fees, but assume every order fills at the requested price with no slippage as long as that price is inside the candle; the docs warn that a backtest never replaces a dry run.
+  - case study (how traders lose money - fee blindness on low timeframes and backtests that assume perfect fills): a small edge per trade on 5m / 15m disappears once real slippage is paid. Our engine charges fees + slippage + funding, and its own numbers show the cost problem: the fees_slippage loss tag is systematic in 3 tests (rsi2_dip_buy 1h, 30m, 15m); rsi2_dip_buy 15m has 2181 backtest trades at -0.34R.
+  - derived hypothesis (testable filter): mean-reversion entries whose stop is narrow compared with price lose most of their edge to costs; test the same entries only when the stop distance is at least 3x the round-trip cost (see experiments.md 'Hypothesis: cost share filter for mean reversion').
+  - limitations: the docs describe one tool, not our engine; the link is to a moving branch.
