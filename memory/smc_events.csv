@@ -695,3 +695,42 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 23:30,ENA,30m,BOS,bull,0.2669,,,0.169,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
 2026-09-25 23:30,ENA,15m,FVG_RETRACE,bull,,0.265,0.266,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
 2026-09-26 00:15,ENA,15m,BOS,bull,0.2701,,,0.55,Asia,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 01:00,BTC,30m,FVG,bear,,83950.41,84038.11,0.345,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:30,BTC,15m,FVG_FILLED,bull,,83973.99,84041.73,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:45,BTC,15m,FVG,bear,,83950.41,84060.0,0.776,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 01:15,BTC,15m,FVG_RETRACE,bear,,83950.41,84060.0,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,ETH,1h,FVG_RETRACE,bull,,2685.6,2690.7,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,ETH,1h,FVG_FILLED,bull,,2685.6,2690.7,,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 00:30,ETH,30m,FVG_RETRACE,bull,,2683.63,2688.29,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:30,ETH,30m,FVG_FILLED,bull,,2688.81,2691.67,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 01:00,ETH,30m,FVG_FILLED,bull,,2683.63,2688.29,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:30,ETH,15m,FVG_RETRACE,bull,,2685.81,2688.29,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:30,ETH,15m,FVG_FILLED,bull,,2688.81,2691.81,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:45,ETH,15m,FVG_RETRACE,bull,,2683.63,2685.7,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,ETH,15m,FVG_FILLED,bull,,2683.63,2685.7,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:45,ETH,15m,FVG_FILLED,bull,,2685.81,2688.29,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:45,ETH,15m,FVG,bear,,2687.0,2689.46,0.431,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 01:00,ETH,15m,FVG_RETRACE,bear,,2687.0,2689.46,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:15,ETH,15m,FVG_FILLED,bear,,2687.0,2689.46,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 01:00,XRP,30m,FVG_RETRACE,bull,,1.5574,1.563,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,XRP,30m,FVG_FILLED,bull,,1.5574,1.563,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 00:45,XRP,15m,FVG_RETRACE,bull,,1.5568,1.5608,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,XRP,15m,FVG_FILLED,bull,,1.5568,1.5608,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 01:00,SOL,30m,FVG_RETRACE,bull,,121.3,121.78,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,SOL,30m,FVG_FILLED,bull,,121.3,121.78,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 00:45,SOL,15m,FVG_RETRACE,bull,,121.15,121.65,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,ZEC,1h,FVG_RETRACE,bull,,1541.06,1549.73,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,ZEC,1h,FVG_FILLED,bull,,1541.06,1549.73,,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 00:30,ZEC,30m,FVG_RETRACE,bull,,1536.9,1549.73,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 01:00,ZEC,30m,FVG_FILLED,bull,,1536.9,1549.73,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:30,ZEC,15m,FVG_RETRACE,bull,,1536.9,1549.58,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,ZEC,15m,FVG_FILLED,bull,,1536.9,1549.58,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:45,ZEC,15m,FVG,bear,,1549.43,1552.0,0.268,Asia,1h,RANGE,,smc-1.0,Binance
+2026-09-26 01:00,SUI,1h,FVG_RETRACE,bull,,1.174,1.1818,,Asia,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,SUI,15m,FVG_RETRACE,bull,,1.1656,1.1801,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,SUI,15m,FVG_FILLED,bull,,1.1815,1.1873,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 01:00,ENA,30m,SWEEP,bear,0.2701,,,0.449,Asia,1h,STRONG_BULL,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-09-26 00:30,ENA,15m,FVG,bull,,0.269,0.2704,0.391,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 00:45,ENA,15m,FVG_RETRACE,bull,,0.269,0.2704,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:45,ENA,15m,FVG_FILLED,bull,,0.269,0.2704,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 01:15,ENA,15m,FVG_FILLED,bull,,0.265,0.266,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
