@@ -847,3 +847,39 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 09:15,SUI,15m,FVG_RETRACE,bull,,1.1586,1.1636,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
 2026-09-26 09:15,SUI,15m,FVG_FILLED,bull,,1.1586,1.1636,,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 09:15,ENA,15m,SWEEP,bear,0.28,,,0.182,,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 09:30,BTC,30m,FVG_RETRACE,bull,,83968.01,84014.03,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 09:30,BTC,30m,FVG_FILLED,bull,,83968.01,84014.03,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 10:00,BTC,30m,FVG,bear,,84041.0,84100.76,0.37,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 09:30,BTC,15m,FVG,bear,,84038.01,84208.06,1.691,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 09:45,BTC,15m,FVG_RETRACE,bear,,84038.01,84208.06,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 10:15,BTC,15m,BREAKER_RETEST,bear,,84053.71,84119.37,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 09:30,ETH,30m,SWEEP,bull,2681.0,,,0.26,,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-26 09:30,ETH,30m,CHOCH,bear,2683.46,,,0.199,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-09-26 09:30,ETH,30m,ORDER_BLOCK,bear,,2690.13,2697.79,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-26 09:30,ETH,30m,AMD,bear,,,,,,1h,COMPRESSION,consolidation -> sweep (1 candle(s) ago) -> CHoCH,smc-1.0,Binance
+2026-09-26 10:00,ETH,30m,FVG,bear,,2683.49,2690.13,0.997,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 09:30,ETH,15m,FVG,bear,,2684.64,2691.0,1.471,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 10:15,ETH,15m,FVG_RETRACE,bear,,2684.64,2691.0,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 10:00,XRP,1h,OB_RETEST,bull,,1.5268,1.5373,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-26 09:30,XRP,30m,WEAK_BREAK,bear,1.5459,,,0.748,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-26 10:00,XRP,30m,FVG,bear,,1.5421,1.549,0.756,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 09:30,XRP,15m,FVG,bear,,1.5419,1.549,1.224,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-26 09:45,XRP,15m,FVG_RETRACE,bear,,1.5419,1.549,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-26 09:30,SOL,30m,WEAK_BREAK,bear,120.14,,,0.188,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 10:00,SOL,30m,FVG,bear,,120.05,120.57,0.831,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 09:30,SOL,15m,CHOCH,bear,120.14,,,0.3,,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-09-26 09:30,SOL,15m,ORDER_BLOCK,bear,,120.57,121.27,,,1h,WEAK_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-26 09:30,SOL,15m,FVG,bear,,120.17,120.69,1.311,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 10:15,SOL,15m,FVG_RETRACE,bear,,120.17,120.69,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 10:00,ZEC,1h,SWEEP,bull,1524.79,,,0.39,,4h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 09:30,ZEC,30m,BOS,bear,1527.56,,,0.703,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 10:00,ZEC,30m,FVG,bear,,1525.38,1530.16,0.466,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 09:30,ZEC,15m,FVG,bear,,1525.94,1530.16,0.653,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 10:15,ZEC,15m,FVG_RETRACE,bear,,1525.94,1530.16,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 10:15,ZEC,15m,FVG_FILLED,bear,,1525.94,1530.16,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 09:30,SUI,15m,FVG,bear,,1.1612,1.1636,0.311,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 09:45,SUI,15m,FVG_RETRACE,bear,,1.1612,1.1636,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 10:00,SUI,15m,FVG_FILLED,bear,,1.1612,1.1636,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 10:15,SUI,15m,BOS,bull,1.1678,,,0.549,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 09:30,ENA,30m,SWEEP,bear,0.28,,,0.131,,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 10:15,ENA,15m,SWEEP,bear,0.2807,,,0.415,,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
