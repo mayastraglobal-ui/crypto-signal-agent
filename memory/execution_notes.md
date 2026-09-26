@@ -28,3 +28,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)
 - timestamp: 2026-09-26 00:24 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: VTHO · timeframe: - · regime: - · review: 2026-10-26
   - signals from this data are blocked while it lasts
+
+### END VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)
+- timestamp: 2026-09-26 13:17 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: VTHO · timeframe: - · regime: - · review: 2026-10-26
+  - problem first seen 2026-09-26 00:24 UTC UTC
