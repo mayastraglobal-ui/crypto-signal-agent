@@ -795,3 +795,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 06:30,ENA,30m,OB_INVALID,bull,,0.2694,0.2782,,London,1h,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-09-26 06:30,ENA,30m,FVG_FILLED,bull,,0.2672,0.2694,,London,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 06:30,ENA,30m,FVG,bear,,0.2697,0.2723,0.466,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 08:00,BTC,30m,FVG,bull,,83968.01,84014.03,0.283,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 07:30,BTC,15m,FVG,bull,,83930.0,83995.76,0.776,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 07:30,ETH,15m,FVG,bull,,2687.09,2689.89,0.768,London,1h,RANGE,,smc-1.0,Binance
+2026-09-26 07:45,ETH,15m,FVG_RETRACE,bull,,2687.09,2689.89,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 08:00,SUI,4h,FVG_RETRACE,bull,,1.1506,1.1634,,,1d,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 07:30,ENA,30m,BREAKER_RETEST,bear,,0.2694,0.2782,,London,1h,STRONG_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 07:30,ENA,30m,FVG_RETRACE,bear,,0.2697,0.2723,,London,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 08:00,ENA,30m,FVG_FILLED,bear,,0.2697,0.2723,,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 08:00,ENA,30m,FVG,bull,,0.2675,0.2704,0.539,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 07:30,ENA,15m,FVG,bull,,0.2675,0.2689,0.36,London,1h,STRONG_BULL,,smc-1.0,Binance
