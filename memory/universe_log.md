@@ -94,3 +94,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-25 21:18 UTC
 - **EXCLUDED** ONDO - 7-day average volume $43M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $220k within 1% (need $250k)
+
+## 2026-09-26 00:24 UTC
+- **FLAG** VTHO - price data DEGRADED - stays in the list, but no signals
+- **EXCLUDED** ONDO - 7-day average volume $49M < $50M; order book too thin: $174k within 1% (need $250k)
+- **EXCLUDED** XPL - 7-day average volume $25M < $50M; order book too thin: $163k within 1% (need $250k)

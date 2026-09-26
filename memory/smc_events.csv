@@ -677,3 +677,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-25 23:00,ENA,30m,FVG,bull,,0.2624,0.2641,0.32,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-25 22:45,ENA,15m,BOS,bull,0.2669,,,0.103,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
 2026-09-25 23:00,ENA,15m,FVG,bull,,0.265,0.266,0.264,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-25 23:30,BTC,15m,FVG_RETRACE,bull,,83973.99,84041.73,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:00,ETH,1h,FVG,bull,,2685.6,2690.7,0.281,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 23:30,ETH,30m,FVG,bull,,2688.81,2691.67,0.251,,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:00,ETH,30m,FVG_RETRACE,bull,,2688.81,2691.67,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 23:30,ETH,15m,FVG_RETRACE,bull,,2688.81,2691.81,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-25 23:45,XRP,15m,SWEEP,bear,1.5751,,,0.44,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 00:15,XRP,15m,FVG_FILLED,bull,,1.5651,1.5686,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 00:00,ZEC,1h,FVG,bull,,1541.06,1549.73,0.332,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-25 23:30,ZEC,30m,FVG,bull,,1536.9,1549.73,0.729,,1h,RANGE,,smc-1.0,Binance
+2026-09-26 00:00,SUI,1h,FVG,bull,,1.174,1.1818,0.264,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-25 23:30,SUI,30m,FVG_RETRACE,bull,,1.1656,1.1827,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-25 23:30,SUI,15m,FVG,bull,,1.192,1.1983,0.397,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-25 23:45,SUI,15m,FVG_RETRACE,bull,,1.192,1.1983,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:00,SUI,15m,FVG_FILLED,bull,,1.192,1.1983,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 00:00,ENA,4h,FVG,bull,,0.256,0.2592,0.261,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-09-25 23:30,ENA,30m,BOS,bull,0.2669,,,0.169,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-25 23:30,ENA,15m,FVG_RETRACE,bull,,0.265,0.266,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 00:15,ENA,15m,BOS,bull,0.2701,,,0.55,Asia,1h,STRONG_BULL,no displacement,smc-1.0,Binance

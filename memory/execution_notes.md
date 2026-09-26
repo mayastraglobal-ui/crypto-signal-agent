@@ -24,3 +24,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 - timestamp: 2026-09-25 14:20 UTC · source: engine: hourly scan (data check) · evidence: FACT: config.yaml -> costs · confidence: configured, not observed · strategy: - · asset: all · timeframe: - · regime: - · review: 2026-10-25
   - costs: {"long": {"maker_fee_pct": 0.1, "slippage_pct": 0.05, "taker_fee_pct": 0.1}, "short": {"funding_pct_per_8h": 0.01, "funding_real_x": 1.0, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
   - before: {"long": {"maker_fee_pct": 0.1, "slippage_pct": 0.05, "taker_fee_pct": 0.1}, "short": {"funding_pct_per_8h": 0.01, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
+
+### START VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)
+- timestamp: 2026-09-26 00:24 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: VTHO · timeframe: - · regime: - · review: 2026-10-26
+  - signals from this data are blocked while it lasts
