@@ -301,6 +301,50 @@ class BiasCheck(unittest.TestCase):
         self.assertEqual(res["findings"], {})
         self.assertEqual(len(res["checked"]), len(cards))
 
+    def test_higher_timeframe_inputs_settle_first(self):
+        """Real history: the 1h and 4h candles cover the same years, and both are trade timeframes, so the recursive
+        run starts 500 x 4h (not 500 x 1h) later on the 4h input of htf_up. Check v1 compared the 1h candles before
+        that 4h trend had settled and called every htf_up / htf_down card BIASED (research run 2026-09-26)."""
+        tfs = ["4h", "1h"]
+        feed, data, quality = sc.Synthetic(), {}, {}
+        for tf, n in (("1w", 700), ("1d", 3000), ("4h", 3000), ("1h", 12000)):       # 4h and 1h: the same 500 days
+            raw = feed.klines("BTCUSDT", tf, n)
+            df, rep = dq.check_candles(raw, sc.TF_MS[tf], int(raw["close_time"].max()) + 1,
+                                       dq.settings(CFG.get("data_quality")))
+            data[("BTCUSDT", tf)], quality[("BTC", tf)] = df, rep
+        lib = [c for c in sc.load_cards()[0] if any("htf_up" in str(r) for r in c.get("long") or [])]
+        self.assertTrue(lib, "the library has htf_up cards")
+        cards = [dict(c, timeframes=[t for t in tfs if t in c["timeframes"]] or ["1h"]) for c in lib[:2]]
+        btc = sc.btc_frames(data, "USDT", tfs)
+        full = sc.prepare_coin("BTCUSDT", "BTC", data, quality, tfs, CFG, None, btc)
+        res = BI.check_coin("BTCUSDT", "BTC", data, quality, tfs, CFG, None, btc, full, cards, sc.prepare_coin,
+                            sc.eval_rules, sc.level_array, SS.columns_needed, self.S)
+        self.assertEqual(res["findings"], {}, {k: BI.summary(v) for k, v in res["findings"].items()})
+        self.assertTrue(all("1h" in v for v in res["checked"].values()))
+
+    def test_settled_from_waits_for_longer_timeframes(self):
+        h = 3_600_000
+        frames = {"1h": dict(df=pd.DataFrame({"open_time": np.arange(2000) * h})),
+                  "4h": dict(df=pd.DataFrame({"open_time": (np.arange(500) * 4 + 1000) * h})),
+                  "30m": dict(df=pd.DataFrame({"open_time": np.arange(4000) * h // 2 + 900 * h}))}
+        self.assertEqual(BI.settled_from(frames, "1h", 10), (1000 + 40) * h, "the 4h input settles last")
+        self.assertEqual(BI.settled_from(frames, "4h", 10), (1000 + 40) * h)
+        self.assertEqual(BI.settled_from(frames, "30m", 10), (1000 + 40) * h)
+        self.assertEqual(BI.settled_from(dict(frames, **{"4h": dict(df=pd.DataFrame({"open_time": np.arange(500) * 4 * h}))}),
+                                         "1h", 10), 40 * h, "10 candles of 4h still take 40 hours")
+        self.assertIsNone(BI.settled_from(frames, "15m", 10))
+
+    def test_stored_bias_of_an_older_check_is_checked_again(self):
+        t = BI.tag("recursive on 1h: long: htf_up (489 of 78216 candles differ, first 2017-10-18 22:00)")
+        self.assertTrue(t.endswith(f"(check v{BI.CHECK_VERSION})"))
+        self.assertTrue(BI.sticky(t))
+        self.assertFalse(BI.sticky("recursive on 1h: long: htf_up (489 of 78216 candles differ, first 2017-10-18 22:00)"),
+                         "written by check v1, before the higher-timeframe fix")
+        self.assertFalse(BI.sticky("x (check v1)"))
+        self.assertTrue(BI.sticky(f"x (check v{BI.CHECK_VERSION + 1})"))
+        self.assertFalse(BI.sticky(None))
+        self.assertEqual(BI.tag(""), "")
+
     def test_biased_status_is_final(self):
         for st in ("BACKTESTING", "VALIDATION", "PAPER_TRADING", "APPROVED", "FAILED"):
             self.assertEqual(LC.biased_status(st, "lookahead on 1h: x")[0], "FAILED")

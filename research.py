@@ -562,8 +562,9 @@ def main():
                                               int(prev.get("failed_runs") or 0), R)
         status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells,
                                      bool(s.get("lab")))
-        bias_txt = "; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3]) or next(
-            (c["bias"] for k2, c in registry["cells"].items() if k2.split("|")[0] == f"{sid}@{ver}" and c.get("bias")), "")
+        bias_txt = bias.tag("; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3])) or next(
+            (c["bias"] for k2, c in registry["cells"].items() if k2.split("|")[0] == f"{sid}@{ver}"
+             and bias.sticky(c.get("bias"))), "")
         if bias_txt:                                  # sticky: a BIASED version never passes again
             status, note = lc.biased_status(status, bias_txt)
             if ck in eligible_cells:
