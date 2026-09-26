@@ -1088,3 +1088,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 18:45,ZEC,15m,FVG_FILLED,bear,,1574.92,1583.23,,,1h,COMPRESSION,,smc-1.0,Binance
 2026-09-26 19:00,SUI,15m,FVG,bear,,1.1649,1.1717,0.95,,1h,WEAK_BULL,,smc-1.0,Binance
 2026-09-26 19:15,SUI,15m,FVG_RETRACE,bear,,1.1649,1.1717,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 19:45,BTC,15m,FVG_FILLED,bull,,83982.73,84007.36,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 20:15,SOL,15m,SWEEP,bull,120.8,,,0.186,,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-26 20:00,XRP,1h,BREAKER_RETEST,bear,,1.5268,1.5373,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 20:00,XRP,1h,FVG,bear,,1.527,1.5337,0.505,,4h,TRANSITION,,smc-1.0,Binance
+2026-09-26 19:30,XRP,30m,FVG,bear,,1.527,1.5339,0.926,,1h,RANGE,,smc-1.0,Binance
+2026-09-26 20:15,XRP,15m,SWEEP,bull,1.5167,,,0.717,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 20:15,XRP,15m,OB_RETEST,bull,,1.5037,1.5156,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-09-26 20:15,XRP,15m,FVG_FILLED,bull,,1.5156,1.5195,,,1h,RANGE,,smc-1.0,Binance
+2026-09-26 20:00,SUI,1h,FVG,bear,,1.1659,1.1753,0.52,,4h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 19:30,SUI,30m,FVG,bear,,1.1659,1.1717,0.509,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 20:15,SUI,15m,SWEEP,bull,1.155,,,0.137,,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
