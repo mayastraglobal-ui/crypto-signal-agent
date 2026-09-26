@@ -274,7 +274,7 @@ def render(inp):
                       esc(", ".join(price(t["price"]) for t in p.get("targets") or [])), esc(p.get("signal_time_utc"))]
                      for p in live]) if live else '<p>No live signal. <span class="mut">No trade is a valid result.</span></p>')
     vs = rep.get("validation_signals") or []
-    sg.append("<h3>PAPER / VALIDATION (logged, never emailed - not for trading)</h3>")
+    sg.append("<h3>PAPER / VALIDATION (logged; PAPER_TRADING ones get PAPER emails - practice, not for trading)</h3>")
     sg.append(table(["Coin", "Side", "TF", "Strategy", "Stage", "Entry", "Stop", "Signal (UTC)"],
                     [[esc(p["coin"]), esc(p["direction"]), esc(p["timeframe"]), esc(p["strategy"]),
                       f'<span class="badge warn">{esc(p.get("stage"))}</span>', price(p.get("entry")),

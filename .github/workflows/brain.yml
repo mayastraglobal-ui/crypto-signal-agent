@@ -14,6 +14,7 @@ on:
 permissions:
   actions: read              # notify.py reads the previous runs: one failure = silent retry, 2 in a row = one email
   contents: write            # needed to save Claude's checked work onto main
+  pull-requests: read        # the daily email lists the merged pull requests (BUILT)
 
 concurrency:
   group: brain               # its own group: it never cancels a waiting hourly scan
@@ -27,6 +28,7 @@ jobs:
       GMAIL_USER: ${{ secrets.GMAIL_USER }}
       GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       ALERT_TO: ${{ secrets.ALERT_TO }}
+      NOTIFY_OWNER: brain    # notify.py keeps the Brain's email state in its own files (never the scan's)
     steps:
       - uses: actions/checkout@v5
         with:
@@ -59,9 +61,15 @@ jobs:
             echo "No new Claude work - dashboard unchanged"
           fi
 
-      - name: Email new briefings / daily reviews (BRIEFING, DAILY REVIEW) and refused pushes (ACTION NEEDED)
+      - name: Email new briefings / daily reviews (BRIEFING, DAILY) and refused pushes (ALERT)
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}   # merged pull requests and the test runs, for the daily email
         run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
+
+      - name: Watchdog - ALERT when no scan ran for 2 hours or a Claude task is 60 minutes late (FIXED when back)
+        continue-on-error: true
+        run: python notify.py watchdog
 
       - name: Beginner lesson page on the dashboard, when the daily review email wrote one (never stops the run)
         continue-on-error: true
@@ -74,7 +82,9 @@ jobs:
           git config user.email "signal-bot@users.noreply.github.com"
           git config merge.append.name "append-only files: keep both additions whole"
           git config merge.append.driver "python3 append_merge.py %O %A %B"   # .gitattributes: merge=append
-          for p in reports/claude memory events.yaml strategies_lab.yaml reports/brain_sent.json reports/curriculum_sent.json; do   # only paths that exist yet
+          for p in reports/claude memory events.yaml strategies_lab.yaml reports/brain_sent.json reports/curriculum_sent.json \
+                   reports/alerts_brain.json reports/briefing_snapshot_brain.json reports/paper_listed.json \
+                   reports/email_failed_brain.json; do   # only paths that exist yet (the Brain's own state files)
             if [ -e "$p" ]; then git add "$p"; fi
           done
           if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi

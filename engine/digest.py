@@ -1,11 +1,9 @@
 """
 The weekly email and the Claude summaries in the engine's emails (AGENT_PROMPT.md sections 19-20) - Phase 14.
 
-  * weekly(): the [WEEKLY] email, built by the hourly scan from measured numbers only (works WITHOUT Claude):
-    results of the week (LIVE / PAPER / VALIDATION kept apart), scoreboard, lifecycle changes, why trades lost,
-    SMC/ICT control-twin findings, missed moves, approval packs with the yes/no question - then Claude's weekly
-    research (sources, experiment queue) if the weekly task wrote it.
-  * claude_summary(): the '## Summary' of a Claude review file, for the [DAILY] email.
+  * weekly(): the numbers of the WEEKLY email (engine/emails.py, format v2), built by the hourly scan from measured
+    numbers only (works WITHOUT Claude): results of the week (LIVE / PAPER / VALIDATION kept apart), lifecycle
+    changes, strong moves, failure tags. The older text email that lived here was removed with format v2.
 
 Pure functions (files are passed in as text); no internet.
 """
@@ -14,36 +12,9 @@ import re
 
 import pandas as pd
 
-from engine import trials as trl
 
 WEEKLY_FROM_HOUR = 4          # Sunday, first scan from 04:00 UTC (12:00 Beijing) - after Claude's weekly research
 STAGES = [("APPROVED", "LIVE (approved strategies)"), ("PAPER_TRADING", "PAPER"), ("VALIDATION", "VALIDATION")]
-
-
-def section(text, heading="Summary", max_lines=12):
-    """The lines under '## <heading>' (until the next '## '), without empty lines at the ends."""
-    out, on = [], False
-    for line in (text or "").splitlines():
-        if line.startswith("## "):
-            if on:
-                break
-            on = line[3:].strip().lower().startswith(heading.lower())
-            continue
-        if on:
-            out.append(line.rstrip())
-    while out and not out[0].strip():
-        out.pop(0)
-    while out and not out[-1].strip():
-        out.pop()
-    return out[:max_lines] + (["  (…more in the file)"] if len(out) > max_lines else [])
-
-
-def claude_summary(text, path, when):
-    """The daily review's summary for the [DAILY] email, clearly marked as Claude-written."""
-    if text is None:
-        return None
-    lines = section(text, "Summary")
-    return dict(file=path, date=when, lines=lines or ["(the review has no '## Summary' section - see the file)"])
 
 
 def is_weekly_time(now):
@@ -100,120 +71,11 @@ def lifecycle_between(text, a, b):
     return out
 
 
-def trials_lines(trials_text, alpha, since, board):
-    """The trials counter (Phase 17) and the strategy lab, for the weekly email."""
-    rows = trl.parse(trials_text)
-    if not rows:
-        return ["  Trials counter: starts with the next daily research run (memory/trials.csv)."]
-    t = trl.summary(rows, alpha, since)
-    L = [f"  Trials counter: {t['total']} strategy / version / timeframe tests so far ({t['new']} new this week, "
-         f"{t['lab']} of them from the lab). Testing more ideas raises the bar: PAPER_TRADING now needs a "
-         f"t-statistic of the average trade >= {t['need_t']:.2f} (with 1 trial it would be {t['need_t_one']:.2f})."]
-    lab = [x for x in board if x.get("lab")]
-    if lab:
-        cnt = {}
-        for x in lab:
-            cnt[x["status"]] = cnt.get(x["status"], 0) + 1
-        L.append(f"  Strategy lab (strategies_lab.yaml, tested like the library, never emailed): {len(lab)} "
-                 "version/timeframe cells - " + " · ".join(f"{k} {v}" for k, v in sorted(cnt.items())))
-    return L
-
-
-def factory_lines(research):
-    """Phase 17 C: pass rate per idea factory (lab cards -> cells that reached VALIDATION or better)."""
-    st = (research or {}).get("factories") or {}
-    if not st:
-        return []
-    parts = [f"{f} {x['passed']}/{x['cells']}" + (f" ({x['pass_rate'] * 100:.0f}%)" if x.get("pass_rate") is not None
-                                                  else "") for f, x in st.items() if x.get("cards")]
-    return ["  Idea factories (lab cards -> strategy/timeframe cells that reached VALIDATION or better): "
-            + ("; ".join(parts) if parts else "no lab card from any factory yet")]
-
-
-def weekly(now, logdf, board, research, lifecycle_text, claude_text, claude_path, trials_text=None, alpha=0.05,
-           card_lines=None, chain_lines=None):
-    """The [WEEKLY] email of the week ending now (dict: week, subject, lines)."""
+def weekly(now, logdf, research, lifecycle_text):
+    """The numbers of the week ending now for the WEEKLY email (engine/emails.py weekly, format v2): results by
+    stage (LIVE, PAPER and VALIDATION kept apart - never added up), lifecycle changes, strong moves, failure tags."""
     a, b = pd.Timestamp(now - dt.timedelta(days=7)), pd.Timestamp(now)
     rows = closed_between(logdf, a, b)
-    res = results_by_stage(rows)
-    research = research or {}
-    wk = week_label(now)
-    live = res[0]
-    subject = (f"[WEEKLY] {wk} - live {live['n']} closed ({live['total_r']:+.1f}R), "
-               f"paper {res[1]['n']} closed ({res[1]['total_r']:+.1f}R)")
-    L = [f"Weekly report {wk} - {a:%Y-%m-%d} to {b:%Y-%m-%d %H:%M} UTC", "",
-         "1. RESULTS THIS WEEK (closed signals; LIVE, PAPER and VALIDATION are kept apart - never add them up)"]
-    L += [f"  {r['label']}: {r['n']} closed, {r['wins']} won, total {r['total_r']:+.2f}R"
-          + (f", average {r['avg_r']:+.2f}R" if r["avg_r"] is not None else "") for r in res]
-    if sum(r["n"] for r in res) < 20:
-        L.append("  Small sample - a week says little about any strategy.")
-    counts = {}
-    for x in board:
-        counts[x["status"]] = counts.get(x["status"], 0) + 1
-    L += ["", "2. STRATEGY SCOREBOARD (backtest, Layer B)",
-          "  " + " · ".join(f"{k} {v}" for k, v in sorted(counts.items()))]
-    top = [x for x in board if x["status"] in ("APPROVED", "PAPER_TRADING", "VALIDATION")]
-    for x in sorted(top, key=lambda x: ["APPROVED", "PAPER_TRADING", "VALIDATION"].index(x["status"])):
-        avg = x.get("avg_r")
-        L.append(f"  - {x['strategy']} v{x['version']} {x['tf']}: {x['status']} · backtest "
-                 + (f"{avg:+.2f}R over {x.get('trades')} trades" if isinstance(avg, (int, float)) and avg == avg
-                    else "not researched yet")
-                 + (f" · live signals {x['live_signals']}" if x.get("live_signals") else ""))
-    if not top:
-        L.append("  No strategy has passed the backtest bar yet - no paper or live signals. That is a result too.")
-    L += trials_lines(trials_text, alpha, f"{a:%Y-%m-%d %H:%M}", board)
-    L += factory_lines(research)
-    if chain_lines:                                           # Phase 18 A: the research loop's idea chains
-        L += ["", "IDEA CHAINS (the research loop: what led to each lab card -> its results -> the next hypothesis)"]
-        L += list(chain_lines)
-    life = lifecycle_between(lifecycle_text, a, b)
-    L += ["", "3. LIFECYCLE CHANGES THIS WEEK"] + ([f"  - {x}" for x in life[:25]] or ["  none"])
-    if len(life) > 25:
-        L.append(f"  (+{len(life) - 25} more in memory/strategy_lifecycle.md)")
-    tags = loss_tags(rows)
-    L += ["", "4. WHY TRADES LOST (failure tags on this week's losing signals)"]
-    L += [f"  - {t}: {n}" for t, n in tags[:10]] or ["  no losing signals this week"]
-    cand = research.get("candidate_lessons") or []
-    if cand:
-        L.append("  Candidate lessons (systematic in 2+ backtests - a review decides):")
-        L += [f"  - {c['tag']}: {c['evidence']}" for c in cand[:6]]
-    smc = [x for x in board if x.get("family") == "smc" and x.get("control_twin")]
-    L += ["", "5. SMC / ICT FINDINGS (does the SMC ingredient beat the same idea without it?)"]
-    verdict = {True: "beats its twin", False: "does NOT beat its twin"}
-    L += [f"  - {x['strategy']} v{x['version']} {x['tf']}: "
-          + verdict.get(x.get("beats_twin") if isinstance(x.get("beats_twin"), bool) else
-                        {"True": True, "False": False}.get(str(x.get("beats_twin"))), "too few trades to compare")
-          for x in smc[:12]] or ["  no SMC strategy researched yet"]
-    moves = [m for m in research.get("missed_moves") or [] if pd.Timestamp(m["start_utc"], tz="UTC") >= a]
-    L += ["", "6. MISSED STRONG MOVES (5x the 1H ATR within 12 hours)"]
-    if moves:
-        v = {}
-        for m in moves:
-            v[m["verdict"]] = v.get(m["verdict"], 0) + 1
-        L.append(f"  {len(moves)} moves: " + "; ".join(f"{k}: {n}" for k, n in sorted(v.items(), key=lambda x: -x[1])))
-    else:
-        L.append("  none recorded this week")
-    appr = research.get("approval") or {}
-    L += ["", "7. APPROVAL PACKS (section 21)"]
-    for p in appr.get("eligible") or []:
-        L += [f"  - Approve {p['strategy']} v{p['version']} {p['tf']} for live emails? (yes/no)",
-              f"    paper {p['paper_signals']} signals, average {p['paper_avg_r']:+.2f}R; backtest unseen "
-              f"{p['backtest_validate_avg_r']:+.2f}R. Pack: {p['pack']}",
-              "    To say yes: copy the line from the pack into `approvals:` in config.yaml. No reply = no."]
-        L += [f"    {p['risk']}"] if p.get("risk") else []          # Phase 18 A: the risk manager's veto, if any
-    if not appr.get("eligible"):
-        L.append("  none - no strategy has 20+ paper signals that meet the section 12 numbers yet")
-    L += [f"  ! {w}" for w in (appr.get("warnings") or [])[:6]]
-    if card_lines:
-        L += [""] + list(card_lines)                          # Phase 17 D: the agent's report card
-    L += ["", "8. CLAUDE'S WEEKLY RESEARCH (written by the AI - sources, ideas and the experiment queue; ideas are "
-          "not evidence until backtested)"]
-    if claude_text:
-        body = [ln.rstrip() for ln in claude_text.splitlines()]
-        L += [f"  {ln}" if ln else "" for ln in body[:150]]
-        if len(body) > 150:
-            L.append(f"  (…the rest is in {claude_path})")
-    else:
-        L.append("  Claude's weekly research is not available this week (the task did not run or was refused by "
-                 "the guard). Everything above is from the engine and complete without it.")
-    return dict(week=wk, subject=subject, lines=L, lifecycle=life)
+    moves = [m for m in (research or {}).get("missed_moves") or [] if pd.Timestamp(m["start_utc"], tz="UTC") >= a]
+    return dict(week=week_label(now), results=results_by_stage(rows), lifecycle=lifecycle_between(lifecycle_text, a, b),
+                missed_moves=moves, loss_tags=loss_tags(rows))

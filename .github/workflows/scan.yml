@@ -16,6 +16,7 @@ on:
 
 permissions:
   actions: read              # notify.py reads the previous runs: one failure = silent retry, 2 in a row = one email
+  pull-requests: read        # the daily / weekly emails list the merged pull requests (BUILT, progress history)
   contents: write            # needed to save the reports back into the repo
 
 concurrency:
@@ -57,19 +58,23 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}   # only to read the repository size for the report
         run: python scanner.py
 
-      - name: Email new signals and position updates ([ENTRY] / [EXIT])
+      - name: Email LIVE and PAPER signals and trade updates (each trade one email thread; max 3 PAPER emails an hour)
         continue-on-error: true
         run: python notify.py
 
       - name: Briefing / daily review from engine numbers only, when Claude's report did not arrive (once a day)
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}   # merged pull requests and the test runs, for the daily email
         run: python notify.py daily
 
       - name: Weekly report email (Sunday, first scan from 04:00 UTC = 12:00 Beijing)
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}   # merged pull requests and the test runs, for the weekly email
         run: python notify.py weekly
 
-      - name: Email data-quality alerts
+      - name: ALERT / FIXED emails (market data unsafe, risk halt) and reminders
         continue-on-error: true
         run: python notify.py system
 
@@ -102,6 +107,8 @@ jobs:
       - name: Test emails (one of each type, marked TEST)
         if: ${{ inputs.sample_emails }}
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: python notify.py samples
 
       - name: Email "fixed" once after 2+ failed scans in a row

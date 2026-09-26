@@ -27,7 +27,6 @@ import research  # noqa: E402
 import scanner  # noqa: E402
 from engine import approval as AP  # noqa: E402
 from engine import brain as B  # noqa: E402
-from engine import briefs  # noqa: E402
 from engine import digest as D  # noqa: E402
 from engine import research as RS  # noqa: E402
 
@@ -469,58 +468,21 @@ class Weekly(unittest.TestCase):
                 dict(strategy="S6-OB-FVG-noSMC", version="1.0", tf="15m", status="FAILED", avg_r=-0.1, trades=300,
                      family="price_action", control_twin=None, beats_twin=None, live_signals=0)]
 
-    def test_weekly_email_sections_and_claude_part(self):
-        research_ = dict(candidate_lessons=[dict(tag="range_market", cells=["a", "b"], evidence="systematic in 2")],
-                         missed_moves=[dict(start_utc="2026-09-25 10:00", verdict="no strategy had a setup")],
-                         approval=dict(eligible=[dict(strategy="S6-OB-FVG", version="1.0", tf="15m", paper_signals=22,
-                                                      paper_avg_r=0.2, backtest_validate_avg_r=0.3,
-                                                      pack="reports/approval/S6-OB-FVG_v1.0_15m.md")], warnings=[]))
-        w = D.weekly(NOW, log_rows([]), self.board(), research_, "", "# Weekly\n## Summary\nidea\n",
-                     "reports/claude/weekly/2026-09-27.md")
-        text = "\n".join(w["lines"])
-        for i in range(1, 9):
-            self.assertIn(f"\n{i}. " if i > 1 else "1. ", text)
-        self.assertIn("Approve S6-OB-FVG v1.0 15m for live emails? (yes/no)", text)
-        self.assertIn("beats its twin", text)
-        self.assertIn("range_market: systematic in 2", text)
-        self.assertIn("1 moves", text)
-        self.assertIn("  idea", text)
-        self.assertTrue(w["subject"].startswith("[WEEKLY] 2026-W39"))
-        w2 = D.weekly(NOW, log_rows([]), [], {}, None, None, "x")
-        t2 = "\n".join(w2["lines"])
-        self.assertIn("not available this week", t2)
-        self.assertIn("No strategy has passed", t2)
-
-    def test_section_and_summary(self):
-        text = "# T\n\n## Summary\n\nline 1\nline 2\n\n## Other\nno\n"
-        self.assertEqual(D.section(text), ["line 1", "line 2"])
-        self.assertEqual(D.section(text, "other"), ["no"])
-        self.assertEqual(len(D.section("## Summary\n" + "x\n" * 20, max_lines=5)), 6)
-        self.assertIsNone(D.claude_summary(None, "p", "d"))
-        self.assertIn("no '## Summary'", D.claude_summary("# only a title\n", "p", "d")["lines"][0])
-
-
-class ClaudeInEngineEmails(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.mkdtemp()
-        self.addCleanup(shutil.rmtree, self.tmp, True)
-
-    def test_daily_email_shows_yesterdays_review_marked_as_ai(self):
-        os.makedirs(os.path.join(self.tmp, "reports/claude/daily"))
-        with open(os.path.join(self.tmp, "reports/claude/daily/2026-09-25.md"), "w") as f:
-            f.write("# Daily review\n## Summary\nTwo paper losses in a range.\n## Losses\nx\n")
-        with mock.patch.object(scanner, "ROOT", self.tmp):
-            cr = scanner.claude_review(dt.datetime(2026, 9, 26, 0, 7, tzinfo=UTC))
-            self.assertIsNone(scanner.claude_review(dt.datetime(2026, 9, 27, 0, 7, tzinfo=UTC)))
-            self.assertEqual(scanner.claude_weekly(NOW), (None, "reports/claude/weekly/2026-09-27.md"))
-        self.assertEqual(cr["lines"], ["Two paper losses in a range."])
-        dly = dict(date="2026-09-26", utc="u", beijing="b", btc={}, fear_greed=None, data_state="GOOD", matrix=[],
-                   health=[], events=[], signals=0, claude_review=cr)
-        text = "\n".join(briefs.daily_email(dly)["lines"])
-        self.assertIn("CLAUDE DAILY REVIEW (written by the AI", text)
-        self.assertIn("Two paper losses in a range.", text)
-        text = "\n".join(briefs.daily_email(dict(dly, claude_review=None))["lines"])
-        self.assertIn("no review for yesterday", text)
+    def test_weekly_numbers(self):
+        rows = log_rows([("APPROVED", "TP2", "CLOSED", 1.5, "2026-09-26 10:00", "", "BTC", "1h", "S"),
+                         ("PAPER_TRADING", "SL", "CLOSED", -1.0, "2026-09-26 11:00", "trend_reversal", "BTC", "1h", "S"),
+                         ("VALIDATION", "TP2", "CLOSED", 2.0, "2026-09-26 12:00", "", "BTC", "1h", "S")])
+        research_ = dict(missed_moves=[dict(start_utc="2026-09-25 10:00", verdict="not identifiable: x"),
+                                       dict(start_utc="2026-09-01 10:00", verdict="old")])
+        w = D.weekly(NOW, rows, research_, "## 2026-09-26 00:50 UTC\n- **b@1.0 1h**: FORMALIZED → **VALIDATION**\n")
+        self.assertEqual(w["week"], "2026-W39")
+        self.assertEqual([r["stage"] for r in w["results"]], ["APPROVED", "PAPER_TRADING", "VALIDATION"])
+        self.assertEqual([(r["n"], r["total_r"]) for r in w["results"]], [(1, 1.5), (1, -1.0), (1, 2.0)])
+        self.assertEqual(w["loss_tags"], [("trend_reversal", 1)])
+        self.assertEqual(len(w["missed_moves"]), 1)                                  # this week's only
+        self.assertEqual(w["lifecycle"], ["b@1.0 1h: FORMALIZED → VALIDATION"])
+        self.assertNotIn("lines", w)                                                 # the old text email is gone
+        self.assertEqual(D.weekly(NOW, log_rows([]), {}, None)["results"][0]["n"], 0)
 
 
 class NotifyModes(unittest.TestCase):
@@ -552,12 +514,12 @@ class NotifyModes(unittest.TestCase):
              os.path.join(self.tmp, "reports/latest.json"))
 
     def test_weekly_once_per_week(self):
-        self.latest(weekly=dict(week="2026-W39", subject="[WEEKLY] 2026-W39", lines=["x"]))
+        self.latest(weekly=dict(week="2026-W39", results=[], lifecycle=[], missed_moves=[]))
         notify.weekly_email()
         notify.weekly_email()
         self.assertEqual(len(self.sent), 1)
         self.assertTrue(self.sent[0][0].startswith("Week 39 · "))
-        self.assertTrue(self.sent[0][1].startswith("WEEKLY REPORT · WEEK 39"))
+        self.assertTrue(self.sent[0][1].startswith("[WEEKLY] Week 39"))
         self.assertIn("Not financial advice.", self.sent[0][1])
         self.latest(weekly=None)
         notify.weekly_email()
@@ -577,8 +539,8 @@ class NotifyModes(unittest.TestCase):
         dump(res, path)
         notify.brain_email(path)
         notify.brain_email(path)
-        self.assertEqual([s for s, _ in self.sent], ["08:20 · Calm · – signals",
-                                                     "! Action needed · Claude task refused (brain-daily)"])
+        self.assertEqual([s for s, _ in self.sent], ["08:20 · No trade · BTC mixed",
+                                                     "! Claude daily review refused · nothing reached main"])
         body = self.sent[0][1]
         self.assertIn("Quiet.", body)
         self.assertIn("https://o.github.io/r/claude/briefings/2026-09-25-0820.html", body)
@@ -596,8 +558,8 @@ class FactSheet(unittest.TestCase):
                          "reports/claude/briefings/2026-09-26-0820.md")               # Beijing date
         self.assertTrue(B.allowed_new(brain_pack.target("daily", NOW)))
         self.assertEqual(brain_pack.target("weekly", NOW.replace(hour=2)), "reports/claude/weekly/2026-09-27.md")
-        self.assertEqual(scanner.claude_weekly(NOW)[1], brain_pack.target("weekly", NOW.replace(hour=2)),
-                         "the weekly email reads the file the weekly task writes")
+        self.assertEqual(f"reports/claude/weekly/{NOW:%Y-%m-%d}.md", brain_pack.target("weekly", NOW.replace(hour=2)),
+                         "the weekly email (notify.weekly_mail) reads the file the weekly task writes")
         day = dt.datetime(2026, 9, 25, 15, 30, tzinfo=UTC)
         self.assertEqual(brain_pack.target("daily", day), "reports/claude/daily/2026-09-25.md")
 

@@ -31,7 +31,6 @@ import test_brain  # noqa: E402
 import test_lab  # noqa: E402
 from engine import brain as B  # noqa: E402
 from engine import derivs as D  # noqa: E402
-from engine import digest as DG  # noqa: E402
 from engine import ideas as I  # noqa: E402
 from engine import regime as rg  # noqa: E402
 from engine import strategy_spec as SS  # noqa: E402
@@ -359,10 +358,7 @@ class LeadLagAndStats(unittest.TestCase):
         st = I.factory_stats(cells, cards)
         self.assertEqual((st["failure"]["cards"], st["failure"]["cells"], st["failure"]["passed"]), (2, 2, 1))
         self.assertEqual(st["failure"]["pass_rate"], 0.5)
-        self.assertIsNone(st["literature"]["pass_rate"])
-        line = " ".join(DG.factory_lines(dict(factories=st)))
-        self.assertIn("failure 1/2 (50%)", line)
-        self.assertNotIn("literature", line)
+        self.assertIsNone(st["literature"]["pass_rate"])        # (shown in the weekly fact sheet, not the email)
 
 
 class Recorder(unittest.TestCase):

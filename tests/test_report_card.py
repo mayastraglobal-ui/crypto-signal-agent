@@ -23,7 +23,6 @@ import scanner  # noqa: E402
 import test_brain  # noqa: E402
 import test_lab  # noqa: E402
 from engine import cleanup as CL  # noqa: E402
-from engine import digest as DG  # noqa: E402
 from engine import lifecycle as LC  # noqa: E402
 from engine import memory as mem  # noqa: E402
 from engine import report_card as RC  # noqa: E402
@@ -141,11 +140,7 @@ class Card(unittest.TestCase):
         self.assertEqual(rc["ideas"]["cards"], 1)
         self.assertTrue(rc["proposal"])
 
-    def test_weekly_email_and_fact_sheet(self):
-        w = DG.weekly(NOW, test_brain.log_rows([]), [], {}, "", WEEKLY, "x", card_lines=["AGENT REPORT CARD (x)",
-                                                                                         "  1. y"])
-        text = "\n".join(w["lines"])
-        self.assertLess(text.index("AGENT REPORT CARD"), text.index("8. CLAUDE'S WEEKLY RESEARCH"))
+    def test_report_card_and_fact_sheet(self):
         with mock.patch.object(scanner.rcard, "collect", side_effect=RuntimeError("boom")):
             self.assertIn("could not be built", scanner.report_card(NOW, {}, None)[0][0])   # never stops the email
         common = read(os.path.join(ROOT, "tasks", "COMMON.md"))

@@ -27,7 +27,6 @@ from engine import approval as AP  # noqa: E402
 from engine import brain as B  # noqa: E402
 from engine import curriculum as CU  # noqa: E402
 from engine import debate as DB  # noqa: E402
-from engine import digest as DG  # noqa: E402
 from engine import ideas as I  # noqa: E402
 from engine import research_loop as RL  # noqa: E402
 from engine import strategy_spec as SS  # noqa: E402
@@ -183,13 +182,9 @@ class Feedback(unittest.TestCase):
         self.assertIn("feedback not written yet", text)
         self.assertIn("no lab card with a parent yet", RL.chain_lines({}, [], {})[0])
 
-    def test_weekly_email_and_daily_fact_sheet_show_the_loop(self):
-        w = DG.weekly(NOW, test_brain.log_rows([]), [], {}, "", "", "x", chain_lines=["  - lesson: A -> B [..]"])
-        text = "\n".join(w["lines"])
-        self.assertIn("IDEA CHAINS", text)
-        self.assertIn("  - lesson: A -> B [..]", text)
-        with mock.patch.object(RL, "load", side_effect=OSError("disk")):
-            self.assertIn("could not be built", scanner.idea_chain_lines()[0], "never stops the weekly email")
+    def test_fact_sheets_show_the_loop(self):
+        # the idea chains are in the weekly research's fact sheet (and so in Claude's full weekly page); the weekly
+        # email (format v2) links to that page instead of repeating them
         card = dict(test_lab.plain(1), lab=True, parent="result: trend_pullback@1.0 1h")
         with mock.patch.object(RL, "load", return_value=({"LAB-PLAIN-1@1.0": card},
                                                          [row("LAB-PLAIN-1@1.0", "1h", "FAILED", "2026-09-26 00:49")],
