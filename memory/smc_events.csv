@@ -997,3 +997,30 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 14:45,BTC,15m,FVG_RETRACE,bear,,84024.02,84050.0,,Silver Bullet,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-09-26 15:00,BTC,15m,FVG,bull,,83982.73,84007.36,0.345,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
 2026-09-26 15:15,ZEC,15m,FVG,bull,,1542.93,1545.92,0.43,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 15:30,BTC,30m,FVG_FILLED,bear,,83975.82,84050.0,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 16:00,BTC,30m,FVG_RETRACE,bear,,84125.97,84163.34,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 16:00,BTC,30m,FVG_FILLED,bear,,84125.97,84163.34,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 15:30,BTC,15m,FVG_FILLED,bear,,84024.02,84050.0,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 15:45,BTC,15m,FVG,bull,,84036.0,84058.49,0.319,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 16:00,BTC,15m,FVG,bull,,84058.5,84082.45,0.338,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 16:00,ETH,30m,WEAK_BREAK,bull,2692.38,,,0.11,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 15:45,ETH,15m,WEAK_BREAK,bull,2692.38,,,0.331,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 15:45,ETH,15m,FVG,bull,,2690.05,2690.99,0.297,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 16:00,ETH,15m,FVG_RETRACE,bull,,2690.05,2690.99,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 16:00,ETH,15m,FVG_FILLED,bull,,2690.05,2690.99,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 16:00,SOL,30m,BOS,bull,121.58,,,0.498,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-26 16:00,SOL,30m,FVG,bull,,121.1,121.47,0.612,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-26 15:30,SOL,15m,BOS,bull,121.2,,,0.921,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-26 15:45,SOL,15m,FVG,bull,,121.08,121.47,1.0,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-26 16:00,SOL,15m,OB_INVALID,bear,,121.57,121.85,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-26 16:15,SOL,15m,BREAKER_RETEST,bull,,121.57,121.85,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 16:00,XRP,30m,BOS,bull,1.5524,,,0.013,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 16:00,XRP,30m,FVG,bull,,1.5468,1.5489,0.289,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 15:45,XRP,15m,SWEEP,bear,1.5524,,,0.402,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 16:00,XRP,15m,BOS,bull,1.5524,,,0.024,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 16:00,ZEC,30m,SWEEP,bear,1552.31,,,0.258,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 15:45,ZEC,15m,SWEEP,bear,1552.31,,,0.381,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 16:15,ZEC,15m,WEAK_BREAK,bull,1552.31,,,0.566,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 15:30,SUI,15m,SWEEP,bear,1.1805,,,0.281,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 16:00,SUI,15m,BOS,bull,1.1805,,,0.423,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 15:45,ENA,15m,WEAK_BREAK,bear,0.2739,,,0.03,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
