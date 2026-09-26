@@ -237,12 +237,15 @@ class BiasCheck(unittest.TestCase):
                         short=list(base["short"]) + ["close > peek"])
         cls.count = dict(base, id="counter", long=list(base["long"]) + ["count > 1800"],
                          short=list(base["short"]) + ["count > 1800"])
+        cls.boot = dict(base, id="booter", long=list(base["long"]) + ["count < 1100"],
+                        short=list(base["short"]) + ["count < 1100"])       # differs only early, then never again
         cls.S = BI.settings(dict(lookahead_cuts=3))
         with mock.patch.object(sc, "make_namespace", planted_ns):
             btc = sc.btc_frames(cls.data, "USDT", TFS)
             full = sc.prepare_coin("BTCUSDT", "BTC", cls.data, cls.quality, TFS, CFG, None, btc)
             cls.res = BI.check_coin("BTCUSDT", "BTC", cls.data, cls.quality, TFS, CFG, None, btc, full,
-                                    [cls.clean, cls.peek, cls.count], sc.prepare_coin, sc.eval_rules, sc.level_array,
+                                    [cls.clean, cls.peek, cls.count, cls.boot], sc.prepare_coin, sc.eval_rules,
+                                    sc.level_array,
                                     SS.columns_needed, cls.S)
 
     def test_finds_the_planted_lookahead(self):
@@ -259,8 +262,19 @@ class BiasCheck(unittest.TestCase):
                                                                 "where history starts")
         self.assertEqual({x["what"] for x in f}, {"long: count > 1800", "short: count > 1800"})
         self.assertEqual(len(self.res["cuts"]), 3)
-        self.assertEqual(sorted(self.res["checked"]), ["clean@1.0", "counter@1.0", "peeker@1.0"])
+        self.assertEqual(sorted(self.res["checked"]), ["booter@1.0", "clean@1.0", "counter@1.0", "peeker@1.0"])
         self.assertEqual(self.res["recursive"], dict(drop=500, settle=1000, tolerance_pct=0.1))
+
+    def test_warm_up_only_is_a_warning_not_biased(self):
+        """A difference that dies out early (a slow warm-up) is a warning; one that persists stays BIASED."""
+        self.assertNotIn("booter@1.0", self.res["findings"], BI.summary(self.res["findings"].get("booter@1.0", [])))
+        w = self.res["warnings"]["booter@1.0"]
+        self.assertEqual({x["what"] for x in w}, {"long: count < 1100", "short: count < 1100"})
+        self.assertIn("counter@1.0", self.res["findings"], "a running count still differs late - BIASED")
+        self.assertNotIn("counter@1.0", self.res["warnings"])
+        lines = "\n".join(BI.report_lines(dict(duration_s=60, robustness=dict(bias=self.res))))
+        self.assertIn("booter@1.0: warm-up only", lines)
+        self.assertIn("counter@1.0 BIASED", lines)
 
     def test_differences_rules(self):
         full = pd.DataFrame({"open_time": np.arange(10) * 10})
@@ -271,7 +285,8 @@ class BiasCheck(unittest.TestCase):
         c["b"][5] = ~c["b"][5]
         c["x"][0] = np.nan
         d = {x["what"]: x for x in BI.differences(full, a, cut, c)}
-        self.assertEqual((d["b"]["bars"], d["b"]["of"], d["b"]["first_ms"]), (1, 6, 70))
+        self.assertEqual((d["b"]["bars"], d["b"]["of"], d["b"]["first_ms"], d["b"]["late"]), (1, 6, 70, 1))
+        self.assertEqual((d["x"]["last_ms"], d["x"]["late"]), (20, 0), "only the first candle differs")
         self.assertEqual(d["x"]["first_ms"], 20, "a value that becomes unknown counts")
         self.assertEqual([x["what"] for x in BI.differences(full, a, cut, c, from_ms=30)], ["b"])
         self.assertEqual(BI.differences(full, a, cut, c, from_ms=30, tol_share=0.2), [], "1 of 5 flips is tolerated")
@@ -300,6 +315,54 @@ class BiasCheck(unittest.TestCase):
                             sc.prepare_coin, sc.eval_rules, sc.level_array, SS.columns_needed, self.S)
         self.assertEqual(res["findings"], {})
         self.assertEqual(len(res["checked"]), len(cards))
+
+    def test_higher_timeframe_inputs_settle_first(self):
+        """Real history: the 1h and 4h candles cover the same years, and both are trade timeframes, so the recursive
+        run starts 500 x 4h (not 500 x 1h) later on the 4h input of htf_up. Check v1 compared the 1h candles before
+        that 4h trend had settled and called every htf_up / htf_down card BIASED (research run 2026-09-26)."""
+        tfs = ["4h", "1h"]
+        feed, data, quality = sc.Synthetic(), {}, {}
+        for tf, n in (("1w", 700), ("1d", 3000), ("4h", 3000), ("1h", 12000)):       # 4h and 1h: the same 500 days
+            raw = feed.klines("BTCUSDT", tf, n)
+            df, rep = dq.check_candles(raw, sc.TF_MS[tf], int(raw["close_time"].max()) + 1,
+                                       dq.settings(CFG.get("data_quality")))
+            data[("BTCUSDT", tf)], quality[("BTC", tf)] = df, rep
+        lib = [c for c in sc.load_cards()[0] if any("htf_up" in str(r) for r in c.get("long") or [])]
+        self.assertTrue(lib, "the library has htf_up cards")
+        cards = [dict(c, timeframes=[t for t in tfs if t in c["timeframes"]] or ["1h"]) for c in lib[:2]]
+        base = lib[0]                                       # a plain EMA-based higher-timeframe filter must pass too
+        cards.append(dict(base, id="ema_htf", timeframes=["1h"], long=["htf_up", "close > ema(close,50)"],
+                          short=["htf_down", "close < ema(close,50)"], exit_long=[], exit_short=[]))
+        btc = sc.btc_frames(data, "USDT", tfs)
+        full = sc.prepare_coin("BTCUSDT", "BTC", data, quality, tfs, CFG, None, btc)
+        res = BI.check_coin("BTCUSDT", "BTC", data, quality, tfs, CFG, None, btc, full, cards, sc.prepare_coin,
+                            sc.eval_rules, sc.level_array, SS.columns_needed, self.S)
+        self.assertEqual(res["findings"], {}, {k: BI.summary(v) for k, v in res["findings"].items()})
+        self.assertTrue(all("1h" in v for v in res["checked"].values()))
+        self.assertIn("ema_htf@1.0", res["checked"])
+
+    def test_settled_from_waits_for_longer_timeframes(self):
+        h = 3_600_000
+        frames = {"1h": dict(df=pd.DataFrame({"open_time": np.arange(2000) * h})),
+                  "4h": dict(df=pd.DataFrame({"open_time": (np.arange(500) * 4 + 1000) * h})),
+                  "30m": dict(df=pd.DataFrame({"open_time": np.arange(4000) * h // 2 + 900 * h}))}
+        self.assertEqual(BI.settled_from(frames, "1h", 10), (1000 + 40) * h, "the 4h input settles last")
+        self.assertEqual(BI.settled_from(frames, "4h", 10), (1000 + 40) * h)
+        self.assertEqual(BI.settled_from(frames, "30m", 10), (1000 + 40) * h)
+        self.assertEqual(BI.settled_from(dict(frames, **{"4h": dict(df=pd.DataFrame({"open_time": np.arange(500) * 4 * h}))}),
+                                         "1h", 10), 40 * h, "10 candles of 4h still take 40 hours")
+        self.assertIsNone(BI.settled_from(frames, "15m", 10))
+
+    def test_stored_bias_of_an_older_check_is_checked_again(self):
+        t = BI.tag("recursive on 1h: long: htf_up (489 of 78216 candles differ, first 2017-10-18 22:00)")
+        self.assertTrue(t.endswith(f"(check v{BI.CHECK_VERSION})"))
+        self.assertTrue(BI.sticky(t))
+        self.assertFalse(BI.sticky("recursive on 1h: long: htf_up (489 of 78216 candles differ, first 2017-10-18 22:00)"),
+                         "written by check v1, before the higher-timeframe fix")
+        self.assertFalse(BI.sticky("x (check v1)"))
+        self.assertTrue(BI.sticky(f"x (check v{BI.CHECK_VERSION + 1})"))
+        self.assertFalse(BI.sticky(None))
+        self.assertEqual(BI.tag(""), "")
 
     def test_biased_status_is_final(self):
         for st in ("BACKTESTING", "VALIDATION", "PAPER_TRADING", "APPROVED", "FAILED"):

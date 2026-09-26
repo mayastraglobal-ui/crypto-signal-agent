@@ -272,6 +272,25 @@ class BullBear(unittest.TestCase):
         lines = DB.case_lines([], [], dict(veto=False, reasons=[], checks=[("heat", False, "heat 0 of 3")]))
         self.assertEqual(lines[0], "Bull case: nothing in the engine's numbers", "an empty side says so")
 
+    def test_data_check_uses_only_the_signal_coins(self):
+        """A candidate coin (e.g. a new listing such as BABY or VTHO) with bad data never vetoes the whole market or
+        an approval pack; a signal coin with bad data and a bad system state still do."""
+        now = NOW.replace(hour=15, minute=30)
+        coins = {"BTC": dict(state="GOOD"), "ETH": dict(state="GOOD"), "BABY": dict(state="UNSAFE"),
+                 "VTHO": dict(state="DEGRADED")}
+        rep = report(data_quality=dict(system_state="GOOD", coins=coins))
+        rm = DB.risk_manager(rep, now)
+        self.assertFalse(rm["veto"], rm)
+        self.assertNotIn("BABY", DB.risk_line(rm))
+        pack = DB.risk_manager(rep, now, regimes=["WEAK_BULL", "STRONG_BULL"], tf="4h")          # an approval pack
+        self.assertFalse(dict((n, v) for n, v, _ in pack["checks"])["data"], pack)
+        bad_eth = report(data_quality=dict(system_state="GOOD", coins=dict(coins, ETH=dict(state="UNSAFE"))))
+        rm = DB.risk_manager(bad_eth, now)
+        self.assertTrue(rm["veto"])
+        self.assertIn("not GOOD: ETH", DB.risk_line(rm))
+        self.assertTrue(DB.risk_manager(report(data_quality=dict(system_state="UNSAFE", coins=coins)), now)["veto"])
+        self.assertTrue(DB.risk_manager(rep, now, coin="BABY", direction="LONG")["veto"], "one coin: its own data")
+
     def test_regime_cases(self):
         bull, bear = DB.regime_cases(report()["regime"]["coins"]["BTC"])
         self.assertEqual(bull, ["1D WEAK_BULL (ADX 44 = strong trend)", "4H STRONG_BULL"])
