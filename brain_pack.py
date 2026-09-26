@@ -462,6 +462,33 @@ def research_loop_lines(kind):
     return out
 
 
+def _price(x):
+    x = float(x)
+    return f"{x:,.2f}" if x >= 1000 else f"{x:,.4f}" if x >= 1 else f"{x:.6g}"
+
+
+def daily_block(dly):
+    """The engine's daily block (latest.json `daily`) as text for the fact sheet: market, the signal coins' matrix,
+    strategy health, the event calendar."""
+    if not dly:
+        return ["(the engine's daily block is missing)"]
+    btc = dly.get("btc") or {}
+    fg = dly.get("fear_greed")
+    L = ["MARKET", f"  BTC trend: daily {btc.get('1d', '?')}, 4H {btc.get('4h', '?')}"
+         + (f" · Fear & Greed {fg['value']} ({fg['label']})" if fg else ""),
+         f"  Data: {dly.get('data_state', '?')}", "",
+         "TOP COINS (signal list)",
+         "  Coin  | Price       | 24h vol (M) | 1W / 1D / 4H / 1H regime                        | 30m momentum | 15m setup | 5m trigger"]
+    for r in dly.get("matrix") or []:
+        L.append(f"  {r['coin']:<5} | {_price(r['price']):>11} | {r['vol_24h_m']:>11.0f} | "
+                 f"{' / '.join(r['regimes']):<48} | {r['mom_30m']:<12} | {r['setup_15m']:<9} | {r['trigger_5m']}")
+    L += ["", "STRATEGY HEALTH (last 24 hours)"] + ([f"  - {c}" for c in dly.get("health") or []] or ["  no status changes"])
+    L += ["", "EVENT CALENDAR (next 7 days)"] + ([f"  - {e}" for e in dly.get("events") or []] or ["  none listed"])
+    if dly.get("calendar_warning"):
+        L.append(f"  ! {dly['calendar_warning']}")
+    return L
+
+
 def pack(kind, now, live=None):
     """live: live_status() (main() checks it; None = not checked)."""
     rep, research = load_json("latest.json"), load_json("research.json")
@@ -482,14 +509,14 @@ def pack(kind, now, live=None):
             f"Data state: {rep['daily'].get('data_state', '?')}", "", "## Position book (copy as is)"]
     out += rep.get("position_book_text") or ["(none)"]
     out += ["", "## Market, top coins, strategy health, event calendar (the engine's daily block)"]
-    out += (rep.get("daily_lines") or [])[1:]
+    out += daily_block(rep.get("daily") or {})
     out += ["", "## Signals this run"]
     sig = rep.get("signals") or []
     out += [f"- LIVE {(p.get('email') or {}).get('subject') or p['coin'] + ' ' + p['direction']}: entry {p.get('entry')}, "
             f"stop {p.get('stop')}, targets {', '.join(str(t['price']) for t in p.get('targets') or [])}"
             for p in sig] or ["- no live signal"]
     vs = rep.get("validation_signals") or []
-    out += [f"- {len(vs)} paper / validation signal(s) (logged, not emailed): "
+    out += [f"- {len(vs)} paper / validation signal(s) (logged; PAPER_TRADING ones get a PAPER email): "
             + "; ".join(f"{p['coin']} {p['direction']} {p['timeframe']} {p['strategy']} ({p.get('stage')})" for p in vs[:10])]
     out += [f"- watching (not signals): " + ("; ".join(f"{w['coin']} {w['direction']} {w['tf']} {w['strategy']} "
                                                        f"{w['state']} ({w['stage']})" for w in (rep.get('watching') or [])[:10])

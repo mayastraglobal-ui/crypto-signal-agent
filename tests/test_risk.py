@@ -276,7 +276,7 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             out = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env, capture_output=True,
                                  text=True).stdout
-            self.assertIn("Subject: ! Risk halt · day_halt", out)
+            self.assertIn("Subject: ! Risk halt: day_halt · no new live entries", out)
             self.assertIn("15 daily loss limit reached", out)
             out = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env, capture_output=True,
                                  text=True).stdout

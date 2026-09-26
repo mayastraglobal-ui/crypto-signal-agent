@@ -51,10 +51,15 @@ the end of the fact sheet.
      `- key: text` - plain text only (no `*`, backticks, `#`, links or URLs), one sentence, numbers only from the
      fact sheet. The Brain guard refuses the push when the block is missing or breaks a rule.
      - briefing: `headline` (at most 8 words), `sub` (at most 20 words), `do`, `dont` (one sentence each),
-       optional `mood` (Calm, Busy, Volatile or Risk-off - the email itself uses the engine's mood word);
-     - daily review: `lesson` (the lesson of the day), `tomorrow` (what to watch or not do), optional `sub`;
+       optional `mood` (Calm, Busy, Volatile or Risk-off - kept in the page; the email does not show it). The 14:20
+       and 21:20 emails show only what the engine saw change since the previous briefing (none = no email);
+     - daily review: `lesson` (the lesson of the day), `tomorrow` (what to watch or not do), optional `sub`,
+       optional `watch` and `avoid` (the email's TOMORROW rows WATCH / AVOID; without them WATCH shows the next
+       event and AVOID shows `tomorrow`);
      - weekly research: `headline` (at most 8 words), `sub` (at most 20 words), `next` (next week, one sentence),
-       `improvement` (your one process improvement, one sentence).
+       `improvement` (your one process improvement, one sentence), optional `test`, `fix`, `study` (the email's
+       NEXT WEEK rows; without them the engine fills TEST from the idea queue, FIX from the closest candidate and
+       STUDY from the reading plan).
      ```
      ## Email summary
      - headline: Nothing to trade. Wait.

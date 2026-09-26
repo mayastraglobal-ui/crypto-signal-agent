@@ -92,7 +92,7 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
 9. **Write the weekly research** to the path the fact sheet gives. Use these headings:
    - `# Weekly research <date>`
    - `## Summary`
-   - `## Email summary`: `headline`, `sub`, `next`, `improvement` (COMMON.md rule 1)
+   - `## Email summary`: `headline`, `sub`, `next`, `improvement`, optional `test`, `fix`, `study` (COMMON.md rule 1)
    - `## Research log (sources)`
    - `## Strategy idea`
    - `## SMC/ICT concept`

@@ -17,8 +17,8 @@ import re
 MOODS = ("Calm", "Busy", "Volatile", "Risk-off")
 KEYS = {                                      # report kind -> (required keys, optional keys)
     "briefing": (("headline", "sub", "do", "dont"), ("mood",)),   # the email's mood word is the engine's
-    "daily": (("lesson", "tomorrow"), ("sub",)),
-    "weekly": (("headline", "sub", "next", "improvement"), ()),
+    "daily": (("lesson", "tomorrow"), ("sub", "watch", "avoid")),                 # format v2: TOMORROW rows
+    "weekly": (("headline", "sub", "next", "improvement"), ("test", "fix", "study")),   # format v2: NEXT WEEK rows
 }
 MAX_WORDS = {"headline": 8, "sub": 20}
 MAX_WORDS_OTHER = 30

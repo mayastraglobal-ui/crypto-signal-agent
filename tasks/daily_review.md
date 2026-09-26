@@ -70,7 +70,7 @@ You may add strategy cards to `strategies_lab.yaml` (step 5; COMMON.md rule 4).
 10. **Write the review** to the path the fact sheet gives. Use these headings:
    - `# Daily review <date>`
    - `## Summary`: 3-8 lines, the most important first.
-   - `## Email summary`: `lesson`, `tomorrow` (and optional `sub`) - COMMON.md rule 1.
+   - `## Email summary`: `lesson`, `tomorrow` (and optional `sub`, `watch`, `avoid`) - COMMON.md rule 1.
    - `## Results (LIVE / PAPER / VALIDATION)`
    - `## Losses and why`
    - `## Missed moves`

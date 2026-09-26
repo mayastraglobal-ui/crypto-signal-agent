@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read              # notify.py reads the previous test runs (ALERT at the first red run on main, FIXED after)
   contents: read
 
 jobs:
@@ -30,3 +31,22 @@ jobs:
 
       - name: Run tests (offline, synthetic data - no internet or secrets needed; test files in parallel)
         run: python tests/run_all.py
+
+      - name: Email "fixed" once when the tests on main are green again
+        if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: python notify.py recovered tests
+
+      - name: Email an ALERT when the tests on main turn red (once, at the first red run)
+        if: ${{ failure() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_TO: ${{ secrets.ALERT_TO }}
+        run: python notify.py tests_failed

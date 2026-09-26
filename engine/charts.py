@@ -1,7 +1,7 @@
 """
 Chart images for emails (AGENT_PROMPT.md section 20) - Phase 12.
 
-One PNG per [ENTRY] / [EXIT] email: the last candles of the signal's timeframe with the entry, stop and
+One PNG per trade email (entry / update): the last candles of the signal's timeframe with the entry, stop and
 target lines, the entry candle marked and (for an exit) the exit candle. Files go to reports/charts/, which
 is NOT committed to main (they are email attachments only).
 

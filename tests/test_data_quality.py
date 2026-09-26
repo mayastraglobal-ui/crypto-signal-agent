@@ -267,14 +267,14 @@ class EndToEnd(unittest.TestCase):
             env = dict(os.environ, DRY_RUN="1")
             first = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env,
                                    capture_output=True, text=True)
-            self.assertIn("Subject: ! Action needed · market data unsafe - signals paused", first.stdout)
+            self.assertIn("Subject: ! Market data unsafe · signals paused", first.stdout)
             again = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env,
                                    capture_output=True, text=True)
-            self.assertIn("no system email", again.stdout)          # no repeat every hour
+            self.assertNotIn("Subject:", again.stdout)                # no repeat every hour
             self.scan(tmp)                                           # data healthy again
             back = subprocess.run([sys.executable, "notify.py", "system"], cwd=tmp, env=env,
                                   capture_output=True, text=True)
-            self.assertIn("Subject: ✓ Fixed · market data works again", back.stdout)
+            self.assertIn("Subject: ✓ Fixed · market data OK", back.stdout)
 
     def test_bad_prices_on_one_coin_block_only_that_coin(self):
         with tempfile.TemporaryDirectory() as tmp:

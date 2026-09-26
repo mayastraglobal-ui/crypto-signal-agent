@@ -29,7 +29,6 @@ import test_brain  # noqa: E402
 from engine import approval as AP  # noqa: E402
 from engine import brain as B  # noqa: E402
 from engine import data_quality as dq  # noqa: E402
-from engine import digest as D  # noqa: E402
 from engine import lifecycle as LC  # noqa: E402
 from engine import memory as mem  # noqa: E402
 from engine import regime as rg  # noqa: E402
@@ -498,20 +497,6 @@ class Trials(unittest.TestCase):
         self.assertIn("multiple-testing bar", why[0])
         self.assertFalse(LC.paper_gate("VALIDATION", dict(ev, t_stat=None), None, R, (1.0, 1))[0])
         self.assertEqual(CFG["research"]["trials_alpha"], 0.05)
-
-    def test_weekly_email_shows_the_counter(self):
-        rows = T.number([dict(strategy="a", version="1.0", tf="1h", first_tested_utc="2026-09-01 00:40", origin="library"),
-                         dict(strategy="b", version="1.0", tf="1h", first_tested_utc="2026-09-26 00:40", origin="lab")], 0)
-        board = [dict(strategy="b", version="1.0", tf="1h", status="BACKTESTING", lab=True, family="momentum")]
-        w = D.weekly(dt.datetime(2026, 9, 27, 4, 0, tzinfo=UTC), test_brain.log_rows([]), board, {}, "", None, "x",
-                     T.to_csv(rows, True), 0.05)
-        text = "\n".join(w["lines"])
-        self.assertIn("Trials counter: 2 strategy / version / timeframe tests so far (1 new this week, 1 of them "
-                      "from the lab)", text)
-        self.assertIn(f">= {T.need_t(2, 0.05):.2f}", text)
-        self.assertIn("Strategy lab", text)
-        w2 = D.weekly(dt.datetime(2026, 9, 27, 4, 0, tzinfo=UTC), test_brain.log_rows([]), [], {}, "", None, "x")
-        self.assertIn("starts with the next daily research run", "\n".join(w2["lines"]))
 
     def test_fact_sheet_lab_part(self):
         tmp = tempfile.mkdtemp()

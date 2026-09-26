@@ -189,7 +189,7 @@ def next_status(prev, base, paper_ok, paper, failed_runs, R):
             return prev, f"failed the long-history test ({failed_runs} of {R['demote_after_failed_runs']} runs)", failed_runs
         return prev, "", 0
     if base == "VALIDATION" and paper_ok:
-        return "PAPER_TRADING", "passed every Phase 8 test - paper signals start (logged, never emailed)", 0
+        return "PAPER_TRADING", "passed every Phase 8 test - paper signals start (logged, PAPER emails)", 0
     return base, "", 0
 
 

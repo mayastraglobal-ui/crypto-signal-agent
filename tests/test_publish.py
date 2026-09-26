@@ -117,7 +117,7 @@ class TaskSessionSecondRun(LiveBranch):
 
     def rep(self, when):
         return json.dumps(dict(generated_utc=when, daily=dict(data_state="GOOD"), position_book_text=["book"],
-                               daily_lines=["x"], signals=[], validation_signals=[], watching=[], risk={}))
+                               signals=[], validation_signals=[], watching=[], risk={}))
 
     def md(self, repo, when):
         with open(os.path.join(repo, "reports", "latest.md"), "w") as f:

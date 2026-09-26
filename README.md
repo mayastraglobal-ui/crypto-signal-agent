@@ -184,7 +184,7 @@ changelog. The comments at the top of the file explain every field.
 - **Lifecycle:** IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING → APPROVED. You set IDEA,
   FORMALIZED or RETIRED; the engine sets the rest per version and timeframe, once a day
   (`memory/strategy_registry.csv`, changes in `memory/strategy_lifecycle.md`). **APPROVED always needs your
-  yes**. Only APPROVED strategies send `[ENTRY]` emails.
+  yes**. Only APPROVED strategies send LIVE emails (PAPER_TRADING ones send PAPER practice emails).
 - **Market gates:** a strategy only trades in the regimes it lists. Trend, breakout and SMC strategies
   need 2 of 1D/4H/1H in their direction and never trade against a STRONG weekly trend; reversal types
   skip the weekly veto; mean-reversion strategies trade only in ranges and never against a STRONG
@@ -255,28 +255,35 @@ report section 3e lists the files and the reviews that are due. **Append-only fi
 
 ## Emails
 
-Email redesign: every email is short and readable in about 30 seconds on a phone - a 600 px HTML card (inline
-styles, no external fonts or scripts) with a plain-text copy, and never markdown symbols. Same frame everywhere:
-header (label + Beijing time) → one headline or banner → 3-4 number tiles or a short table → at most 3 reasons or 1
-lesson → 1-2 buttons → grey footer. The long text (news, regimes, bull vs bear, idea chains, research details) is in
-Claude's full report, published as a page on the dashboard and linked with a button. Numbers come only from the
-engine's files; a missing value shows "–". Layout: `engine/mailkit.py`; templates: `engine/emails.py`; numbers:
-`engine/mailfacts.py`; sending: `notify.py`. Setup: the `GMAIL_USER` / `GMAIL_APP_PASSWORD` secrets (see One-time
-setup). Without them nothing is sent and nothing breaks.
+Email format v2: every email is short and readable in about 30 seconds on a phone - a 600 px HTML card (inline
+styles, no external fonts or scripts) with a plain-text copy, and never markdown symbols. The **type pill comes
+first** (LIVE solid green · PAPER blue on light blue, in a dashed blue card, never green · ALERT solid red · FIXED
+green on light green · BRIEFING / DAILY teal on light teal · WEEKLY solid teal), and the subject starts with the type
+too. Same order everywhere: header (pill + label + Beijing time) → banner or headline → **ACTION box (always; "None."
+is an action)** → numbers (plan table or tiles) → at most 3 reasons or 1 lesson → score line → 1-2 buttons → footer.
+The long text (news, regimes, bull vs bear, idea chains, research details) is in Claude's full report, published as a
+page on the dashboard and linked with a button. Numbers come only from the engine's files; a missing value shows "–".
+Layout: `engine/mailkit.py`; templates: `engine/emails.py`; numbers: `engine/mailfacts.py`; sending: `notify.py`.
+Setup: the `GMAIL_USER` / `GMAIL_APP_PASSWORD` secrets (see One-time setup). Without them nothing is sent and nothing
+breaks.
 
 | Email | Subject example | When |
 |---|---|---|
-| ENTRY SIGNAL · LIVE | `▲ LONG BTC · 1H · Enter 83,850–84,050 · Stop 83,300` | a new signal of an **APPROVED** strategy passes the risk engine (-5M strategies: when the 5m bar confirms). Plan table, your size, 3 reasons, 4 checks, chart image, live chart + backtest chart buttons |
-| TRADE UPDATE · LIVE | `✓ TP1 hit · BTC LONG +2.0R · move stop to entry` · `✕ Stop hit · SOL SHORT −1.0R · trade closed` · `⏱ Time exit · ETH LONG +0.4R` · `⊘ Cancelled · XRP LONG · no 5m confirmation` | an APPROVED position reaches TP1, closes, or its signal is cancelled before the entry. "Do now" box (max 2 actions) |
-| ACTION NEEDED | `! Action needed · hourly scan failed 2× in a row` | the scan / research / Brain failed **twice in a row** (one failure = silent retry), market data unsafe, or Claude's push refused. Then one FIXED email when it works again |
-| RISK NOTICE | `! Risk halt · day_halt` | a risk halt or strategy suspension starts or ends; reminders |
-| BRIEFING · 08:20 | `08:20 · Calm · 0 signals · Next: US PCE Tue 20:30` | after each Claude briefing (08:20 / 14:20 / 21:20). Mood word from the engine (Calm / Busy / Volatile / Risk-off), 4 tiles, the 7 signal coins, next events, one DO and one DON'T. If Claude's 08:20 briefing did not arrive, the scan sends it from engine numbers only (from 09:00 Beijing) |
-| DAILY REVIEW · 23:30 | `Daily · 0 trades · 516 backtests · 2 new ideas` | after Claude's daily review (engine-only fallback from 02:00 Beijing). Trading today, testing today (from the research run's counts), backtests per coin, new ideas with SOURCE / STATUS chips, closest to passing, lesson of the day, tomorrow, and a link to your beginner lesson page |
-| WEEKLY REPORT · WEEK 39 | `Week 39 · 3,540 backtests · 8 new ideas · 0 passed` | Sunday, first scan from 04:00 UTC. Testing this week, **your decision** (approve yes / no, with the pack and chart), the agent report card, next week |
+| A. LIVE signal | `LIVE ▲ LONG BTC 1H · Enter 83,850–84,050 · Stop 83,300` | a new signal of an **APPROVED** strategy passes the risk engine (-5M strategies: when the 5m bar confirms). DO NOW, plan table, your size and loss if stopped, chart image, 3 reasons, 4 checks, the strategy's live score |
+| B. LIVE update | `LIVE ● Filled · BTC LONG at 83,950 · stop active` · `LIVE ✓ TP1 hit · BTC LONG +2.0R · move stop to entry` · `LIVE ✕ Stop hit · SOL SHORT −1.0R · trade closed` · `LIVE ⏱ Time exit ...` · `LIVE ⊘ Cancelled ...` · `LIVE ! Warning · BTC LONG open · US CPI in 30 min` | FILLED (the first scan after the entry), TP1, TP2, rest stopped at entry, stop hit, time exit, exit rule, cancelled, WARNING (a high-impact event within the hour while the trade is open - the agent never moves your stop). **Each update is a reply in the trade's email thread.** Stop hit: why it lost (the engine's tag) and "is the strategy still OK?" |
+| C. PAPER signal | `PAPER ▲ LONG ETH 4H · #4 of 20 · practice only` | a new signal of a **PAPER_TRADING** strategy (not a lab card). "PRACTICE ONLY – DO NOT USE REAL MONEY", PRACTICE NOW, the plan without money boxes, ROAD TO REAL MONEY (n of 20, paper score vs the backtest). **At most 3 PAPER emails an hour**; the rest are listed in the next briefing |
+| D. PAPER update | `PAPER ✓ TP1 hit · ETH LONG +2.0R · #4 of 20` | the same kinds as B for paper trades, in the paper signal's thread |
+| E. PAPER complete | `PAPER ● 20 of 20 done · donchian_breakout 4H +5.8R · your decision` | once, when a version's 20th paper signal closes: 20 squares, paper vs backtest table, YOUR DECISION (only when the approval rules pass) |
+| F. ALERT | `! Market data unsafe · signals paused` | scan / research / Brain failed twice in a row, no scan for 2 hours, market data unsafe (the system or a signal coin), a risk halt, a Claude task refused or 60 minutes late, tests red on main, emails lost. One per problem |
+| G. FIXED | `✓ Fixed · market data OK · 0 signals missed` | once per ALERT, when it works again: down from–to, duration, signals missed, cause |
+| H. BRIEFING 08:20 | `08:20 · No trade · BTC up · PCE Tue 20:30` | after Claude's 08:20 briefing (engine-only from 09:00 Beijing if it is missing): market now, the 7 signal coins, next events, AGENT PLAN TODAY (test / check / study), STRATEGY PROGRESS, DO / DON'T |
+| I. BRIEFING 14:20 / 21:20 | `14:20 · 2 changes · still no trade` | only when something changed since the previous briefing (signal, a daily trend, a strategy status, a new lab card, an event within 24 h, data or a risk halt) - otherwise **no email** |
+| J. DAILY 23:30 | `Daily · 0 trades · 460 backtests · 1 new lesson` | after Claude's daily review (engine-only from 02:00 Beijing): trading today, what the agent did, closest to passing, learned today, tomorrow (watch / avoid / learn), system health |
+| K. WEEKLY | `Week 39 · 0 approved · closest: donchian_breakout 4H` | Sunday, first scan from 04:00 UTC: YOUR DECISION, results, road to real signals, learned this week, agent progress history (changelog + merged PRs), report card, next week |
 
-Each email is sent once. The research run saves its counts in `reports/research_counts.json` (one line per day;
-the weekly email sums the last 7). Claude's reports carry a `## Email summary` block (headline, sub, do / don't,
-lesson, tomorrow, next, improvement) that the Brain guard checks (`engine/summary.py`). To see every email type,
+Each email is sent once. Not ALERTs (only a line in the daily SYSTEM HEALTH): bad data on candidate coins, Binance
+futures blocked (451) while OKX works. The research run saves its counts in `reports/research_counts.json`. Claude's
+reports carry a `## Email summary` block that the Brain guard checks (`engine/summary.py`). To see every email type,
 run **Actions → Crypto Signal Scan → Run workflow → "Send one TEST email of each type"**.
 
 ## Claude's tasks (the "Brain")
@@ -286,8 +293,8 @@ researches**; every number comes from the engine (`brain_pack.py` prints the fac
 
 | Task | When | Instructions | Output |
 |---|---|---|---|
-| Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + `[BRIEFING]` email |
-| Daily review | 23:30 Beijing | `tasks/daily_review.md` | `reports/claude/daily/` (summary in the next `[DAILY]`), memory records: root causes, reviews due, validated lessons, queued refinements (max one per failing strategy) |
+| Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + BRIEFING email (14:20 / 21:20: only when something changed) |
+| Daily review | 23:30 Beijing | `tasks/daily_review.md` | `reports/claude/daily/` (the DAILY email), memory records: root causes, reviews due, validated lessons, queued refinements (max one per failing strategy) |
 | Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **added to the strategy lab**, event calendar entries |
 
 **How Claude's work reaches main safely:** a task never writes to main. It pushes to its own branch
@@ -434,13 +441,13 @@ and the bar.
 - The daily research run writes the data (`reports/backtest_charts/`, not committed); the dashboard publishes it to
   gh-pages, and the hourly rebuilds keep the published copy.
 - Links: the dashboard's strategy table ("chart"), every approval pack ("Check the trades before you say yes": the
-  chart page and the Pine script, now written for every eligible cell), and every [ENTRY] / [EXIT] email (one line
+  chart page and the Pine script, now written for every eligible cell), and every LIVE / PAPER trade email (one line
   at the end; the chart image stays). Address: `config.yaml` → `dashboard.url` (default: GitHub Pages of the repo).
   GitHub Pages must be switched on once (Settings → Pages → Deploy from a branch → gh-pages / root).
 
 ## Approving a strategy (your yes)
 
-A strategy goes live (its signals get `[ENTRY]` emails) only with your explicit yes (AGENT_PROMPT.md sections 12,
+A strategy goes live (its signals get LIVE emails) only with your explicit yes (AGENT_PROMPT.md sections 12,
 21). The daily research run writes an **approval pack** (`reports/approval/`) for every PAPER_TRADING strategy
 version × timeframe with at least 20 closed paper signals, a paper average of 0R or better, and a paper average
 no more than 0.30R below the backtest on unseen data (`config.yaml` → `approval`). The pack shows the rules and

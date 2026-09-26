@@ -28,7 +28,7 @@ import test_brain  # noqa: E402
 import test_emails  # noqa: E402
 import test_learn  # noqa: E402
 from engine import approval as AP  # noqa: E402
-from engine import briefs as BR  # noqa: E402
+from engine import emails as EM  # noqa: E402
 from engine import btcharts as BC  # noqa: E402
 from engine import dashboard as DB  # noqa: E402
 
@@ -233,13 +233,13 @@ class Links(unittest.TestCase):
 
     def test_emails_keep_the_chart_image_and_add_the_link(self):
         url = "https://o.github.io/r/chart.html#s=S6-OB-FVG&v=1.0&tf=15m&c=ETH"
-        m = BR.entry_email(test_emails.card(backtest_chart=url))
-        self.assertEqual(m["lines"][-1], f"Backtest chart of this strategy: {url}")
-        self.assertEqual(BR.entry_email(test_emails.card())["lines"][-1], "  - e", "no link: the email is as before")
+        m = EM.live_entry(dict(test_emails.card(backtest_chart=url), chart_cid="chart"))
+        self.assertIn(f"Backtest chart: {url}", m["text"])
+        self.assertIn('src="cid:chart"', m["html"])
+        self.assertNotIn("Backtest chart:", EM.live_entry(test_emails.card())["text"], "no link: no button")
         base = dict(coin="ETH", quote="USDT", direction="LONG", tf="15m", strategy="S", version="1.0",
-                    stage="APPROVED", utc="u", beijing="b", entry=100.0, next_action="n", kind="CLOSED",
-                    close_reason="SL", result_r=-1.0)
-        self.assertIn(f"Backtest chart of this strategy: {url}", BR.exit_email(dict(base, backtest_chart=url))["lines"])
+                    entry=100.0, kind="CLOSED", close_reason="SL", result_r=-1.0)
+        self.assertIn(f"Backtest chart: {url}", EM.live_update(dict(base, backtest_chart=url))["text"])
 
     def test_email_context_builds_the_link_and_keeps_the_png(self):
         fe = test_emails.FromEvents()
