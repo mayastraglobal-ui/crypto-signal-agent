@@ -786,3 +786,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 06:00,SUI,15m,OB_INVALID,bull,,1.1569,1.1656,,,1h,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-09-26 06:15,SUI,15m,BREAKER_RETEST,bear,,1.1569,1.1656,,London,1h,STRONG_BULL,failed order block retested from the other side,smc-1.0,Binance
 2026-09-26 06:00,ENA,15m,FVG_FILLED,bull,,0.2687,0.2704,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 06:30,ETH,15m,WEAK_BREAK,bear,2685.0,,,0.096,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-26 07:15,ETH,15m,BOS,bull,2690.55,,,0.113,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-26 07:00,XRP,1h,WEAK_BREAK,bear,1.5492,,,0.033,London,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-26 07:00,SOL,15m,FVG_FILLED,bull,,120.14,120.79,,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 07:00,ZEC,30m,SWEEP,bull,1529.08,,,0.13,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 07:00,ZEC,15m,SWEEP,bull,1529.08,,,0.225,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 06:30,ENA,30m,OB_INVALID,bull,,0.2694,0.2782,,London,1h,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-26 06:30,ENA,30m,FVG_FILLED,bull,,0.2672,0.2694,,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 06:30,ENA,30m,FVG,bear,,0.2697,0.2723,0.466,London,1h,STRONG_BULL,,smc-1.0,Binance
