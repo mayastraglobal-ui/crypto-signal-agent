@@ -128,7 +128,10 @@ def risk_manager(rep, now, coin=None, direction=None, regimes=None, tf=None, coi
                    + (" - FULL" if cap and heat >= cap else "")))
     dq = rep.get("data_quality") or {}
     state = dq.get("system_state") or (rep.get("daily") or {}).get("data_state") or "unknown"
-    bad = [c for c, x in (dq.get("coins") or {}).items() if x.get("state") != "GOOD" and (coin is None or c == coin)]
+    # one signal: that coin; the whole market / an approval pack: only the signal coins (candidates such as a new
+    # listing are watched by the universe check and never traded) - plus the system state above
+    watch = {coin} if coin else set(coins or (rep.get("universe") or {}).get("signal") or (dq.get("coins") or {}))
+    bad = [c for c, x in (dq.get("coins") or {}).items() if x.get("state") != "GOOD" and c in watch]
     data_bad = state != "GOOD" or bool(bad) or age > STALE_H
     checks.append(("data", data_bad, f"data {state}" + (f", not GOOD: {', '.join(bad)}" if bad else "")
                    + (f", report {age:.1f} h old (stale)" if age > STALE_H else f", report {age:.1f} h old")))

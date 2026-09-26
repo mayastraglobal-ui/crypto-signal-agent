@@ -113,7 +113,8 @@ def signal_times(spec, arrays, df):
 
 def differences(full_df, full_arr, cut_df, cut_arr, from_ms=None, tol_share=0.0, rtol=1e-9):
     """Compare the arrays of two runs on the candles both have (matched by open time, from from_ms on).
-    Returns [dict(what, bars, of, first_ms)] for every rule / level that differs on more than tol_share of them."""
+    Returns [dict(what, bars, of, first_ms, last_ms, late)] for every rule / level that differs on more than tol_share
+    of them; late = differing candles in the second half of the compared candles (0 = the difference died out)."""
     tf_, tc = full_df["open_time"].to_numpy(), cut_df["open_time"].to_numpy()
     pos = np.searchsorted(tf_, tc)
     ok = pos < len(tf_)
@@ -137,7 +138,8 @@ def differences(full_df, full_arr, cut_df, cut_arr, from_ms=None, tol_share=0.0,
             bad = ~(both_nan | close)
         nb = int(bad.sum())
         if nb > tol_share * n_ok:
-            out.append(dict(what=k, bars=nb, of=n_ok, first_ms=int(tc[ok][bad][0])))
+            out.append(dict(what=k, bars=nb, of=n_ok, first_ms=int(tc[ok][bad][0]), last_ms=int(tc[ok][bad][-1]),
+                            late=int(bad[n_ok // 2:].sum())))
     return out
 
 
@@ -170,7 +172,7 @@ def check_coin(sym, base, data, quality, tfs, cfg, derivs, btc, full, cards, pre
             arrays[(f"{s['id']}@{s['version']}", tf)] = a
             times += list(signal_times(s, a, fr["df"]))
     cuts = pick_cuts(times, int(S["lookahead_cuts"]))
-    findings, checked = {}, {}
+    findings, checked, warnings = {}, {}, {}
     by_key = {f"{s['id']}@{s['version']}": s for s in cards}
 
     def run(kind, pc, from_ms_fn, tol):
@@ -187,9 +189,13 @@ def check_coin(sym, base, data, quality, tfs, cfg, derivs, btc, full, cards, pre
                 continue
             checked.setdefault(key, set()).add(tf)
             for d in differences(full["frames"][tf]["df"], fa, fr["df"], ca, from_ms, tol):
-                findings.setdefault(key, []).append(dict(
-                    check=kind, tf=tf, what=d["what"], bars=d["bars"], of=d["of"],
-                    first_utc=pd.to_datetime(d["first_ms"], unit="ms").strftime("%Y-%m-%d %H:%M")))
+                f = dict(check=kind, tf=tf, what=d["what"], bars=d["bars"], of=d["of"],
+                         first_utc=pd.to_datetime(d["first_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"),
+                         last_utc=pd.to_datetime(d["last_ms"], unit="ms").strftime("%Y-%m-%d %H:%M"))
+                # recursive differences that die out (none in the later half of the compared history) are a slow
+                # warm-up (e.g. a long EMA on a higher timeframe), not a card whose answers depend on where history
+                # starts: a warning, never BIASED. Lookahead differences are always BIASED.
+                (warnings if kind == "recursive" and d["late"] == 0 else findings).setdefault(key, []).append(f)
 
     for t in cuts:
         pc = prepare(sym, base, cut_data(data, end_ms=t), quality, tfs, cfg, derivs, cut_frames(btc, t))
@@ -199,17 +205,21 @@ def check_coin(sym, base, data, quality, tfs, cfg, derivs, btc, full, cards, pre
 
     run("recursive", pc, lambda tf, pc_: settled_from(pc_["frames"], tf, settle),
         float(S["recursive_tolerance_pct"]) / 100)
-    for key in list(findings):                              # one line per rule / level, the first finding
-        seen, keep = set(), []
-        for f in findings[key]:
-            k = (f["check"], f["what"])
-            if k not in seen:
-                seen.add(k)
-                keep.append(f)
-        findings[key] = keep
+    for store in (findings, warnings):                      # one line per rule / level, the first finding
+        for key in list(store):
+            seen, keep = set(), []
+            for f in store[key]:
+                k = (f["check"], f["what"])
+                if k not in seen:
+                    seen.add(k)
+                    keep.append(f)
+            store[key] = keep
+    for key in list(warnings):                              # a card that is BIASED anyway needs no warm-up warning
+        if key in findings:
+            warnings.pop(key)
     return dict(coin=base, cuts=[pd.to_datetime(t, unit="ms").strftime("%Y-%m-%d %H:%M") for t in cuts],
                 recursive=dict(drop=drop, settle=settle, tolerance_pct=float(S["recursive_tolerance_pct"])),
-                findings=findings, checked={k: sorted(v) for k, v in checked.items()},
+                findings=findings, warnings=warnings, checked={k: sorted(v) for k, v in checked.items()},
                 seconds=round(time.time() - t0, 1))
 
 
@@ -253,7 +263,10 @@ def report_lines(research):
                  f"({b.get('seconds')} s).\n")
         for k, f in sorted((b.get("findings") or {}).items()):
             L.append(f"- ⛔ **{k} BIASED** - FAILED on every timeframe, for good: " + "; ".join(summary(f)[:3]))
-        if b.get("findings"):
+        for k, f in sorted((b.get("warnings") or {}).items()):
+            L.append(f"- ⚠ **{k}: warm-up only** (a warning, not BIASED - the differences die out early): "
+                     + "; ".join(summary(f)[:2]))
+        if b.get("findings") or b.get("warnings"):
             L.append("")
     mc = rb.get("monte_carlo") or {}
     cells = research.get("cells") or {}
