@@ -921,3 +921,31 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 10:30,ENA,30m,BOS,bull,0.28,,,0.724,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
 2026-09-26 11:00,ENA,30m,FVG,bull,,0.2803,0.2819,0.295,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-09-26 10:30,ENA,15m,BOS,bull,0.2807,,,0.815,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 12:15,BTC,15m,FVG_RETRACE,bull,,84027.59,84113.29,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 11:30,ETH,30m,FVG_RETRACE,bull,,2683.49,2685.8,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 11:45,ETH,15m,SWEEP,bear,2690.32,,,0.103,NY AM,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 12:00,XRP,4h,FVG_FILLED,bull,,1.5417,1.5582,,,1d,TRANSITION,,smc-1.0,Binance
+2026-09-26 12:00,XRP,30m,FVG_RETRACE,bull,,1.5421,1.5472,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 12:15,XRP,15m,FVG_RETRACE,bull,,1.5419,1.5459,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-09-26 11:30,SOL,30m,FVG_RETRACE,bull,,120.05,120.39,,NY AM,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 12:00,SOL,30m,BOS,bull,121.27,,,0.017,NY AM,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 11:45,SOL,15m,SWEEP,bear,121.27,,,0.228,NY AM,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 12:00,SOL,15m,CHOCH,bull,121.27,,,0.027,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-09-26 12:00,SOL,15m,ORDER_BLOCK,bull,,120.26,120.63,,NY AM,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-26 12:00,SOL,15m,OB_INVALID,bear,,120.57,121.27,,NY AM,1h,WEAK_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-26 12:00,SOL,15m,FVG,bull,,120.67,121.17,1.348,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 12:15,SOL,15m,BREAKER_RETEST,bull,,120.57,121.27,,NY AM,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 12:15,SOL,15m,FVG_RETRACE,bull,,120.67,121.17,,NY AM,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 12:00,ZEC,1h,WEAK_BREAK,bull,1540.22,,,0.112,NY AM,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 12:00,ZEC,30m,WEAK_BREAK,bull,1540.22,,,0.204,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 11:45,ZEC,15m,WEAK_BREAK,bull,1539.47,,,0.406,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-09-26 11:45,ZEC,15m,OB_INVALID,bear,,1534.21,1539.47,,NY AM,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-26 12:15,ZEC,15m,SWEEP,bear,1550.87,,,0.237,NY AM,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-26 12:15,ZEC,15m,BREAKER_RETEST,bull,,1534.21,1539.47,,NY AM,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-26 12:15,ZEC,15m,FVG_FILLED,bear,,1549.43,1552.0,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-26 12:00,SUI,1h,FVG,bull,,1.1671,1.178,0.507,NY AM,4h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 12:00,SUI,30m,FVG_RETRACE,bull,,1.1664,1.1789,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 12:00,SUI,15m,FVG_RETRACE,bull,,1.1749,1.1789,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 12:15,SUI,15m,FVG_FILLED,bull,,1.1749,1.1789,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 11:30,ENA,30m,FVG_RETRACE,bull,,0.2803,0.2819,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 11:30,ENA,30m,FVG_FILLED,bull,,0.2803,0.2819,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance

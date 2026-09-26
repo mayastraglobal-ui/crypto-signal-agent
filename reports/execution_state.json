@@ -1,11 +1,11 @@
 {
  "issues": {
-  "data|VTHO|1d": "VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)",
-  "data|BABY|1d": "BABY 1d data: DEGRADED: volume 65x normal on candle 09-23 00:00 UTC (possible bad data); DEGRADED: volume 67x normal on candle 09-25 00:00 UTC (possible bad data)"
+  "data|BABY|1d": "BABY 1d data: DEGRADED: volume 65x normal on candle 09-23 00:00 UTC (possible bad data); DEGRADED: volume 67x normal on candle 09-25 00:00 UTC (possible bad data)",
+  "data|VTHO|1d": "VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)"
  },
  "since": {
-  "data|VTHO|1d": "2026-09-26 00:24 UTC",
-  "data|BABY|1d": "2026-09-25 11:18 UTC"
+  "data|BABY|1d": "2026-09-25 11:18 UTC",
+  "data|VTHO|1d": "2026-09-26 00:24 UTC"
  },
  "fees": "{\"long\": {\"maker_fee_pct\": 0.1, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.1}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }
