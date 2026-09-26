@@ -83,6 +83,10 @@ def lint(text):
     return out
 
 
+PROJECT_TITLE = re.compile(r"^\[R\d+\]")                 # Phase 18: a reference project record ([R1] ... [R8])
+FULL_COMMIT = re.compile(r"\bcommit [0-9a-f]{40}\b")
+
+
 def check_records(added, path):
     """An addition to a knowledge file must be section 22 records only: '### title', then the field line."""
     probs = []
@@ -103,6 +107,12 @@ def check_records(added, path):
             probs.append(f"record {r['title']!r}: evidence must start with a class {mem.EVIDENCE_CLASSES}")
         if not re.match(r"^\d{4}-\d{2}-\d{2}$", r["review"]):
             probs.append(f"record {r['title']!r}: review must be a date YYYY-MM-DD")
+        if path.endswith("research_sources.md") and PROJECT_TITLE.match(r["title"]):
+            block = ("\n" + added).split("\n### " + r["title"], 1)[-1].split("\n### ", 1)[0]
+            if not FULL_COMMIT.search(block):
+                probs.append(f"reference project record {r['title'][:40]!r}: name the full 40-character commit hash "
+                             "you studied ('commit 0123abcd...', 40 hex characters) - a short hash can later point to "
+                             "another commit")
         if path.endswith("lessons.md"):
             if cls not in LESSON_CLASSES:
                 probs.append(f"lesson {r['title']!r}: evidence {cls} is not enough - a lesson needs "

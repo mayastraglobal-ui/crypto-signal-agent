@@ -105,7 +105,7 @@ class MarketMechanics(unittest.TestCase):
                 self.assertTrue(r["evidence"].startswith("CLAIM"), r["title"])
         self.assertIn(self.PATH, B.KNOWLEDGE)
         self.assertIn(self.PATH, mem.APPEND_ONLY)
-        self.assertIn(f"{self.PATH} merge=union", read(os.path.join(ROOT, ".gitattributes")))
+        self.assertIn(f"{self.PATH} merge=append", read(os.path.join(ROOT, ".gitattributes")))
         self.assertEqual(B.lint(text), [])
 
     def test_tasks_may_add_a_record(self):

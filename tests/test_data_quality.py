@@ -210,9 +210,18 @@ class CrossVenueAndSystem(unittest.TestCase):
 
 def run_copy(tmp, *args):
     """Run scanner.py in a throw-away copy of the repo, so real reports/ are never touched."""
-    for name in ("scanner.py", "notify.py", "config.yaml", "strategies.yaml", "strategies_lab.yaml", "publish_live.py",
-                 "pine_export.py"):
+    for name in ("scanner.py", "notify.py", "config.yaml", "strategies.yaml", "publish_live.py", "pine_export.py"):
         shutil.copy(os.path.join(ROOT, name), tmp)
+    lab = os.path.join(tmp, "strategies_lab.yaml")
+    if not os.path.exists(lab):                  # an EMPTY lab: engine tests must not depend on today's lab cards
+        head = []
+        with open(os.path.join(ROOT, "strategies_lab.yaml")) as f:
+            for line in f:
+                if line.startswith("- "):
+                    break
+                head.append(line)
+        with open(lab, "w") as f:
+            f.write("".join(head))
     if not os.path.exists(os.path.join(tmp, "engine")):
         shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(tmp, "engine"),
                         ignore=shutil.ignore_patterns("__pycache__"))

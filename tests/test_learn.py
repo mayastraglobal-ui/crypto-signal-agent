@@ -431,11 +431,24 @@ class ReferenceProjects(unittest.TestCase):
         done = CU.studied(src)
         for r in ("R1", "R2", "R8"):                       # opened before integrating (Part A uses R1, R2, R8)
             self.assertIn(r, done)
-        recs = {x["title"][:4]: x for x in B.mem.parse(src) if x["title"].startswith("[R")}
+        recs = {}                        # the build session's record = the FIRST one per project (later re-checks append)
+        for x in B.mem.parse(src):
+            if x["title"].startswith("[R"):
+                recs.setdefault(x["title"][:4], x)
         for r in ("[R1]", "[R2]", "[R8]"):
             self.assertRegex(recs[r]["source"], r"commit [0-9a-f]{40}")
-        self.assertEqual(B.check_records("\n### [R1]" + src.split("\n### [R1]", 1)[1], "memory/research_sources.md"),
-                         [], "the build session's records pass the guard's own record rules")
+        blocks = ["\n### " + blk for blk in ("\n" + src).split("\n### ")[1:]]
+        mine = "".join(next(x for x in blocks if x.startswith("\n### " + r["title"] + "\n")) for r in recs.values())
+        self.assertEqual(B.check_records(mine, "memory/research_sources.md"), [],
+                         "the build session's records pass the guard's own record rules")
+        rec = test_brain.rec("[R1] Microsoft RD-Agent - re-check", ev="RESEARCH_FINDING: release notes, 1 source") \
+            .replace("source: Claude daily review", "source: https://github.com/microsoft/RD-Agent (commit 484776c, 2026-09-23)")
+        probs = B.check_records(rec, "memory/research_sources.md")
+        self.assertTrue(any("full 40-character commit" in x for x in probs), probs)           # a short hash: refused
+        full = rec.replace("commit 484776c", "commit " + "4" * 40)
+        self.assertFalse([x for x in B.check_records(full, "memory/research_sources.md") if "commit" in x])
+        self.assertFalse([x for x in B.check_records(test_brain.rec("[C04] a paper"), "memory/research_sources.md")
+                          if "commit" in x], "only reference projects need a commit")
         text = "\n".join(brain_pack.project_lines())
         nxt = CU.next_item(CU.parse_projects(test_brain.read(os.path.join(ROOT, "memory", "curriculum.md"))), done)
         todo = [x for x in CU.parse_projects(test_brain.read(os.path.join(ROOT, "memory", "curriculum.md")))

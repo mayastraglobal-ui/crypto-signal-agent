@@ -1,22 +1,28 @@
-# Append-only files (AGENT_PROMPT.md section 17; engine/memory.py APPEND_ONLY): when two runs add lines at the
-# same time (hourly scan, daily research, Claude's Brain workflow), git keeps BOTH sides' new lines instead of
-# stopping with a conflict. memory_guard.py still checks that no earlier line was changed or removed.
-memory/changelog.md merge=union
-memory/experiments.md merge=union
-memory/strategy_lifecycle.md merge=union
-memory/universe_log.md merge=union
-memory/market_regime_log.md merge=union
-memory/smc_events.csv merge=union
-memory/failure_journal.md merge=union
-memory/missed_trades.md merge=union
-memory/lessons.md merge=union
-memory/research_sources.md merge=union
-memory/coin_notes.md merge=union
-memory/execution_notes.md merge=union
-reports/position_events.csv merge=union
-memory/trials.csv merge=union
-memory/market_mechanics.md merge=union
-strategies_lab.yaml merge=union
-reports/claude/runs.csv merge=union
-memory/retired_cards.csv merge=union
-memory/cleanup_log.md merge=union
+# Append-only files (AGENT_PROMPT.md section 17; engine/memory.py APPEND_ONLY, + the event calendar): when two
+# runs add to the same file at the same time (hourly scan, daily research, Claude's Brain workflow), the `append`
+# merge driver (append_merge.py) keeps BOTH additions, each one whole, one after the other. It replaced
+# `merge=union`, which merges line by line and wrote the lines two additions share only once - on 26 Sep 2026 that
+# interleaved two strategy cards in strategies_lab.yaml and broke both. The workflows register the driver before
+# `git pull --rebase`; where it is not registered, git stops with a normal conflict (safe) instead.
+# memory_guard.py still checks that no earlier line was changed or removed, and after the pull that each file still
+# starts with the pushed main (memory_guard.py --after-sync).
+memory/changelog.md merge=append
+memory/experiments.md merge=append
+memory/strategy_lifecycle.md merge=append
+memory/universe_log.md merge=append
+memory/market_regime_log.md merge=append
+memory/smc_events.csv merge=append
+memory/failure_journal.md merge=append
+memory/missed_trades.md merge=append
+memory/lessons.md merge=append
+memory/research_sources.md merge=append
+memory/coin_notes.md merge=append
+memory/execution_notes.md merge=append
+reports/position_events.csv merge=append
+memory/trials.csv merge=append
+strategies_lab.yaml merge=append
+memory/market_mechanics.md merge=append
+reports/claude/runs.csv merge=append
+memory/retired_cards.csv merge=append
+memory/cleanup_log.md merge=append
+events.yaml merge=append

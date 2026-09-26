@@ -72,13 +72,15 @@ jobs:
         run: |
           git config user.name "signal-bot"
           git config user.email "signal-bot@users.noreply.github.com"
+          git config merge.append.name "append-only files: keep both additions whole"
+          git config merge.append.driver "python3 append_merge.py %O %A %B"   # .gitattributes: merge=append
           for p in reports/claude memory events.yaml strategies_lab.yaml reports/brain_sent.json reports/curriculum_sent.json; do   # only paths that exist yet
             if [ -e "$p" ]; then git add "$p"; fi
           done
           if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
           git commit -m "Brain: Claude task work $(date -u +'%Y-%m-%d %H:%M') UTC"
           for i in 1 2 3 4; do
-            git pull --rebase && git push && exit 0
+            git pull --rebase && python3 memory_guard.py --after-sync && git push && exit 0
             sleep $((i * 5))
           done
           exit 1
