@@ -62,6 +62,73 @@
   stop:
     method: atr
     atr: 1.5
+- id: donchian_breakout-VEXIT
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  - COMPRESSION
+  source: 'engine variant search: one change to donchian_breakout@1.0'
+  hypothesis: 'One change to donchian_breakout@1.0: targets 2R / 3R (50 / 50) instead of a first target below 2R.
+    It should keep the edge of donchian_breakout@1.0 and remove part of its losses; tested because it was the strongest
+    BACKTESTING cell this week.'
+  timeframes:
+  - 4h
+  - 1h
+  - 30m
+  description: 'Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.'
+  logic: Breakouts of a 20-candle range with 1.5x normal volume show new buyers stepping in. ADX > 20 confirms the
+    market is trending, not chopping. This is the family of rules with the best published long-term evidence in
+    crypto (trend following).
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - htf_up
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  short:
+  - htf_down
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - COMPRESSION
+    who_pays: traders fading the breakout (short at the range top) whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend-following has the
+      longest published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside'
+    kill_rule: retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED
+      when the unseen-data part of the backtest turns negative
+  changelog:
+  - '1.0 (2026-09-26): engine variant of donchian_breakout@1.0 - targets 2R / 3R (50 / 50) instead of a first target
+    below 2R'
   targets:
     long:
     - 2R
@@ -89,3 +156,10 @@
     band), plus the mirror-image short; exits kept (RSI > 70 / < 30); first target 2R instead of the file''s 10%
     ROI'
   added: '2026-09-26'
+  added: '2026-09-26'
+  factory: variant_search
+  variant_of: donchian_breakout@1.0
+  parent: 'result: donchian_breakout@1.0 4h'
+  evidence_class: BACKTEST_EVIDENCE
+  factory_evidence: 'donchian_breakout@1.0 4h: 1105 trades, avg +0.123R, unseen part +0.149R (361 trades); change:
+    targets 2R / 3R (50 / 50) instead of a first target below 2R'

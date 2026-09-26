@@ -1,0 +1,24 @@
+[
+ {
+  "date": "2026-09-26",
+  "run_utc": "2026-09-26 06:28",
+  "backtests": 460,
+  "per_coin": {
+   "ADA": 46,
+   "BNB": 46,
+   "BTC": 46,
+   "ENA": 46,
+   "ETH": 46,
+   "SOL": 46,
+   "SUI": 46,
+   "UNI": 46,
+   "XRP": 46,
+   "ZEC": 46
+  },
+  "strategies": 20,
+  "tests": 46,
+  "tests_per_coin": 46,
+  "coins": 10,
+  "new_cards": 1
+ }
+]
