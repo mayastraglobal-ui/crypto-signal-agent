@@ -753,3 +753,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 03:15,ZEC,15m,BOS,bear,1535.11,,,0.009,Asia,1h,RANGE,no displacement,smc-1.0,Binance
 2026-09-26 03:15,SUI,15m,OB_RETEST,bull,,1.1569,1.1656,,Asia,1h,STRONG_BULL,first return into the order block,smc-1.0,Binance
 2026-09-26 03:15,SUI,15m,FVG_FILLED,bull,,1.1656,1.1801,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 03:30,XRP,30m,FVG,bear,,1.5651,1.5697,0.38,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-26 04:00,SOL,1h,WEAK_BREAK,bear,120.82,,,0.137,Asia,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-26 03:30,SOL,30m,SWEEP,bull,120.82,,,0.307,Asia,1h,STRONG_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 03:30,SOL,30m,WEAK_BREAK,bear,121.22,,,0.307,Asia,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 04:00,SOL,30m,FVG,bear,,121.0,121.57,0.708,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 03:30,SOL,15m,FVG,bear,,121.02,121.57,1.044,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 03:30,ZEC,30m,SWEEP,bull,1535.11,,,0.364,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 04:00,ZEC,30m,BOS,bear,1535.11,,,0.083,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-26 04:00,SUI,4h,FVG,bull,,1.1506,1.1634,0.265,,1d,EXPANSION,,smc-1.0,Binance
+2026-09-26 03:30,SUI,30m,FVG_FILLED,bull,,1.1656,1.1827,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-26 04:00,ENA,15m,BOS,bull,0.2703,,,0.32,Asia,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-09-26 04:15,ENA,15m,FVG,bull,,0.2687,0.2704,0.446,,1h,STRONG_BULL,,smc-1.0,Binance
