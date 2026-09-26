@@ -778,3 +778,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-26 05:00,ENA,30m,ORDER_BLOCK,bull,,0.2694,0.2782,,,1h,STRONG_BULL,last bearish candle before the displacement,smc-1.0,Binance
 2026-09-26 05:00,ENA,30m,FVG_RETRACE,bull,,0.2672,0.2694,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
 2026-09-26 04:30,ENA,15m,FVG_RETRACE,bull,,0.2687,0.2704,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-26 05:30,SOL,15m,SWEEP,bull,120.26,,,0.113,,1h,STRONG_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-26 05:30,ENA,30m,OB_RETEST,bull,,0.2694,0.2782,,,1h,STRONG_BULL,first return into the order block,smc-1.0,Binance
