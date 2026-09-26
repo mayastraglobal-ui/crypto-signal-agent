@@ -37,3 +37,7 @@ events:
      source: "https://www.bls.gov/schedule/news_release/cpi.htm", check: operator}
   - {utc: "2026-12-23 13:30", type: PCE, name: "US PCE / Personal Income and Outlays (Nov data)",
      source: "https://www.bea.gov/news/schedule", check: official_search}
+  - {utc: "2026-11-06 13:30", type: NFP, name: "US jobs report / Employment Situation (Oct data)",
+     source: "https://blsmon1.bls.gov/schedule/2026/11_sched.htm", check: official_page}
+  - {utc: "2026-12-04 13:30", type: NFP, name: "US jobs report / Employment Situation (Nov data)",
+     source: "https://blsmon1.bls.gov/schedule/2026/12_sched.htm", check: official_page}
