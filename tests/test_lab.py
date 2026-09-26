@@ -42,7 +42,8 @@ read = test_brain.read
 NOW = dt.datetime(2026, 9, 25, 16, 0, tzinfo=UTC)
 LIB = yaml.safe_load(read(os.path.join(ROOT, "strategies.yaml")))
 LIB_TEXT = read(os.path.join(ROOT, "strategies.yaml"))
-LAB_HEAD = read(os.path.join(ROOT, "strategies_lab.yaml"))
+LAB_TEXT = read(os.path.join(ROOT, "strategies_lab.yaml"))
+LAB_HEAD = test_brain.lab_header(LAB_TEXT)      # the header only: the real file grows with every task push
 CFG = yaml.safe_load(read(os.path.join(ROOT, "config.yaml")))
 
 
@@ -335,8 +336,9 @@ class GuardOnGit(unittest.TestCase):
     guard = test_brain.GuardOnGit.guard
 
     def test_lab_push_applied_then_a_bad_one_refused(self):
-        for f in ("strategies.yaml", "strategies_lab.yaml"):
-            shutil.copy(os.path.join(ROOT, f), os.path.join(self.main, f))
+        shutil.copy(os.path.join(ROOT, "strategies.yaml"), os.path.join(self.main, "strategies.yaml"))
+        with open(os.path.join(self.main, "strategies_lab.yaml"), "w") as f:
+            f.write(LAB_HEAD)
         test_brain.git(self.main, "add", "-A")
         test_brain.git(self.main, "commit", "-qm", "library")
         test_brain.git(self.main, "push", "-q", "origin", "main")
@@ -482,7 +484,7 @@ class Trials(unittest.TestCase):
         self.assertIn("memory/trials.csv", mem.APPEND_ONLY)
         self.assertIn("strategies_lab.yaml", mem.APPEND_ONLY)
         with open(os.path.join(ROOT, ".gitattributes")) as f:
-            self.assertIn("memory/trials.csv merge=union", f.read())
+            self.assertIn("memory/trials.csv merge=append", f.read())
 
     def test_paper_gate_needs_the_bar(self):
         ev = dict(walk_forward=dict(passed=True, positive=4, judged=5, pooled_avg_r=0.2), positive_coins=["a", "b", "c"],
@@ -542,10 +544,17 @@ class Tasks(unittest.TestCase):
         self.assertIn(f"{B.LAB_PER_DAY} new cards per UTC day and {B.LAB_PER_WEEK} per 7 days", common)
         self.assertEqual(B.LAB_BRANCHES, ["claude/brain-daily", "claude/brain-weekly"])
 
-    def test_lab_file_is_a_valid_empty_card_list(self):
+    def test_lab_file_loads_every_card(self):
+        """The real strategies_lab.yaml (it grows with every task push): its header is an empty card list, and EVERY
+        card in it loads in the engine - a card the engine cannot load would never be tested (26 Sep 2026: two
+        concurrent appends were interleaved by git and both cards broke)."""
         self.assertEqual(B._cards(LAB_HEAD), [])
         ok, problems, _, _ = scanner.load_cards()
         self.assertFalse([k for k in problems if k.startswith("lab") or k == SS.LAB_FILE], problems)
+        cards = B._cards(LAB_TEXT)
+        self.assertEqual(len({f"{c['id']}@{c['version']}" for c in cards}), len(cards), "no card twice")
+        self.assertEqual(sorted(f"{c['id']}@{c['version']}" for c in cards),
+                         sorted(SS.key(c) for c in ok if c.get("lab")), "every lab card is loaded")
 
 
 class EndToEnd(unittest.TestCase):

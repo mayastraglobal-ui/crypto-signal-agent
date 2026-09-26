@@ -45,6 +45,16 @@ EMAIL = {"briefings": "## Email summary\n- headline: Quiet.\n- sub: Nothing move
                    "- improvement: Fewer cards.\n"}      # the email redesign: every Claude report has its block
 
 
+def lab_header(text):
+    """The comment header of strategies_lab.yaml without its cards (tests must not depend on today's cards)."""
+    out = []
+    for line in text.splitlines(keepends=True):
+        if line.startswith("- "):
+            break
+        out.append(line)
+    return "".join(out)
+
+
 def email_block(path):
     return next(v for k, v in EMAIL.items() if f"/{k}/" in path)
 
@@ -195,7 +205,7 @@ class GuardOnGit(unittest.TestCase):
         shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(self.main, "engine"),
                         ignore=shutil.ignore_patterns("__pycache__"))
         os.makedirs(os.path.join(self.main, "memory"))
-        for f in ["brain_guard.py", "memory_guard.py", ".gitattributes"]:
+        for f in ["brain_guard.py", "memory_guard.py", "append_merge.py", ".gitattributes"]:
             shutil.copy(os.path.join(ROOT, f), os.path.join(self.main, f))
         self.write(self.main, "memory/lessons.md", BASE)
         self.write(self.main, "memory/failure_journal.md", BASE)
@@ -260,8 +270,10 @@ class GuardOnGit(unittest.TestCase):
         state = json.loads(read(os.path.join(self.main, "reports/claude/state.json")))
         self.assertEqual(state["claude/brain-weekly"]["status"], "rejected")
 
-    def test_union_merge_keeps_both_sides_of_append_only_files(self):
-        """.gitattributes: the hourly scan and the Brain workflow can both append; a rebase keeps both."""
+    def test_append_merge_keeps_both_sides_of_append_only_files(self):
+        """.gitattributes + the `append` driver the workflows register: the hourly scan and the Brain workflow can
+        both append; a rebase keeps both additions whole."""
+        git(self.main, "config", "merge.append.driver", "python3 append_merge.py %O %A %B")
         self.write(self.task, "memory/lessons.md", rec("from the task"), "a")
         git(self.task, "commit", "-qam", "task")
         git(self.task, "push", "-q", "origin", "HEAD:main")
@@ -750,6 +762,10 @@ class Workflows(unittest.TestCase):
         os.makedirs(os.path.join(work, "memory"))
         with open(os.path.join(work, "memory", "lessons.md"), "w") as f:
             f.write("x\n")
+        for f in ("memory_guard.py", "append_merge.py", ".gitattributes"):         # what the Save step runs
+            shutil.copy(os.path.join(ROOT, f), os.path.join(work, f))
+        shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(work, "engine"),
+                        ignore=shutil.ignore_patterns("__pycache__"))
         git(work, "add", "-A")
         git(work, "commit", "-qm", "start")
         git(work, "push", "-q", "-u", "origin", "main")

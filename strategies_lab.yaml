@@ -62,6 +62,33 @@
   stop:
     method: atr
     atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Catches falling knives when a range breaks into a trend; the original has no trend filter.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
+    mechanism: in a range, extremes beyond the Bollinger band with an extreme RSI tend to revert to the mean
+    fails_when: 'a range breaks into a trend: the band keeps being walked and every entry is early'
+    kill_rule: unseen-data average below 0R, or it fails the costs +50% test
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies BbandRsi.py (R4) - long entry as in the file (RSI < 30, close < lower
+    band), plus the mirror-image short; exits kept (RSI > 70 / < 30); first target 2R instead of the file''s 10%
+    ROI'
+  added: '2026-09-26'
 - id: donchian_breakout-VEXIT
   version: '1.0'
   status: FORMALIZED
@@ -139,23 +166,6 @@
     split:
     - 0.5
     - 0.5
-  time_stop_bars: 24
-  cooldown_bars: 0
-  known_weaknesses: Catches falling knives when a range breaks into a trend; the original has no trend filter.
-  edge:
-    type: behavioural
-    works_in:
-    - RANGE
-    - HIGH_VOL_RANGE
-    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
-    mechanism: in a range, extremes beyond the Bollinger band with an extreme RSI tend to revert to the mean
-    fails_when: 'a range breaks into a trend: the band keeps being walked and every entry is early'
-    kill_rule: unseen-data average below 0R, or it fails the costs +50% test
-  changelog:
-  - '1.0: rewritten from freqtrade-strategies BbandRsi.py (R4) - long entry as in the file (RSI < 30, close < lower
-    band), plus the mirror-image short; exits kept (RSI > 70 / < 30); first target 2R instead of the file''s 10%
-    ROI'
-  added: '2026-09-26'
   added: '2026-09-26'
   factory: variant_search
   variant_of: donchian_breakout@1.0
