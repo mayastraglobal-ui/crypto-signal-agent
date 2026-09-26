@@ -46,6 +46,7 @@ from engine import derivs as dv
 from engine import digest
 from engine import emails as emx
 from engine import evidence as evid
+from engine import family_gates as fgt
 from engine import features as fe
 from engine import lifecycle as lc
 from engine import memory as mem
@@ -775,6 +776,7 @@ def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
                 long_avg_r=ev.get("long", {}).get("avg_r"), short_avg_r=ev.get("short", {}).get("avg_r"),
                 walk_forward=f"{wf['positive']}/{wf['judged']}" if wf else None, walk_forward_passed=wf.get("passed"),
                 stress_avg_r=ev.get("stress", {}).get("avg_r"), perturb_stable=pert.get("stable"),
+                stress2_avg_r=ev.get("stress_2x", {}).get("avg_r"),
                 perturb_worst=(f"{pert['worst']['change']}: {pert['worst']['avg_r']:+.2f}R"
                                if pert.get("worst") else None),
                 positive_coins=len(ev.get("positive_coins", [])) if ev else None,
@@ -1728,7 +1730,7 @@ def risk_summary(logdf, now, RK, groups, pct, pct_note, calendar_problem, plans,
     for k in suspended:
         if k not in prev.get("suspended", []):
             transitions.append(dict(kind="start", what=k, text=f"{k} SUSPENDED: live drawdown {b.dd[k]:.1f}R "
-                                    f"> {RK['strategy_max_dd_r']:g}R. Resume only by adding it to config.yaml -> "
+                                    f"> {b.dd_limit(k):g}R. Resume only by adding it to config.yaml -> "
                                     "risk -> resume with today's date"))
     for k in prev.get("suspended", []):
         if k not in suspended:
@@ -2190,6 +2192,7 @@ def main():
     closes_1h = {b: data[(b + quote, "1h")].set_index("close_time")["close"]
                  for b in view["signal"] if data.get((b + quote, "1h")) is not None}
     groups = rk.corr_groups(closes_1h, RK["corr_threshold"], RK["corr_bars"])
+    RK["strategy_dd_limits"] = fgt.active_live_limits(research)   # Phase 19 A: {} until the family table is active
     risk_pct, risk_note = rk.risk_pct(cfg["account"]["risk_per_trade_pct"], logdf, started, RK)
 
     # ---------- build trade plans ----------
@@ -2508,7 +2511,7 @@ def main():
                               changes=(research or {}).get("changes", []),
                               approval=(research or {}).get("approval") or {},
                               trials=(research or {}).get("trials"),
-                              robustness=bias.report_lines(research),
+                              robustness=bias.report_lines(research) + fgt.report_lines(research),
                               lab_cards=sum(bool(x.get("lab")) for x in strategies),
                               research_run=(research or {}).get("run_utc"),
                               candidate_lessons=(research or {}).get("candidate_lessons", []),
@@ -3182,9 +3185,9 @@ def render_scoreboard(o, w):
     w("- **BACKTESTING** = not good enough (yet) · **FAILED** = enough trades and losing · **RETIRED** = paper "
       "results broke the limits; only a new version can be tested again.\n")
     w("| Strategy | Ver | TF | Status | Trades | Win % | Avg R | PF | Max DD | Develop / validate R | Long / short R "
-      "| Walk-fwd | Costs +50% | ±20% worst | Coins + | Cost/trade | Layer A: trades, R (days 1-10 / 11-15) "
-      "| Stood down (regime / permission) | Paper+live signals | Why not |")
-    w("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+      "| Walk-fwd | Costs +50% | Costs +100% (shown only) | ±20% worst | Coins + | Cost/trade "
+      "| Layer A: trades, R (days 1-10 / 11-15) | Stood down (regime / permission) | Paper+live signals | Why not |")
+    w("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for b in o["strategy_scoreboard"]:
         live = f"{b['live_signals']} ({b['live_avg_r']:+.2f})" if b["live_signals"] else "0"
         stable = "-" if b["perturb_stable"] is None else ("stable" if b["perturb_stable"] else "✗ ") + \
@@ -3194,7 +3197,8 @@ def render_scoreboard(o, w):
           f"{num(b['trades'], '{}')} | "
           f"{num(b['win_rate'], '{}')} | {num(b['avg_r'], '{:+.3f}')} | {num(b['profit_factor'], '{}')} | "
           f"{num(b['max_dd_r'], '{}R')} | {num(b['develop_avg_r'])} / {num(b['validate_avg_r'])} | "
-          f"{num(b['long_avg_r'])} / {num(b['short_avg_r'])} | {wf} | {num(b['stress_avg_r'])} | {stable} | "
+          f"{num(b['long_avg_r'])} / {num(b['short_avg_r'])} | {wf} | {num(b['stress_avg_r'])} | "
+          f"{num(b.get('stress2_avg_r'))} | {stable} | "
           f"{num(b['positive_coins'], '{}')} | {num(b['median_cost_r'], '{:.2f}R')} | "
           f"{b['layer_a_trades']}, {b['layer_a_avg_r']:+.2f} ({b['layer_a_first_avg_r']:+.2f} / "
           f"{b['layer_a_last_avg_r']:+.2f}) | {b['blocked_by_regime']} / {b['blocked_by_permission']} of "

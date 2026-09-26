@@ -28,6 +28,7 @@ DEFAULTS = dict(
     day_limit_r=-3.0,             # section 15 drawdown controls
     week_limit_r=-6.0,
     strategy_max_dd_r=8.0,
+    strategy_dd_limits={},        # Phase 19 A: "id@version|tf": limit in R from the family table (only when it is active)
     max_positions=3,              # portfolio heat
     max_per_coin=1,
     corr_threshold=0.7,           # 1h returns over corr_bars: >= 0.7 -> one exposure
@@ -60,6 +61,7 @@ def settings(risk_section, events=None):
     s = dict(DEFAULTS)
     s.update(risk_section or {})
     s["resume"] = dict(s.get("resume") or {})
+    s["strategy_dd_limits"] = dict(s.get("strategy_dd_limits") or {})
     s["events"] = parse_events(events)
     return s
 
@@ -232,8 +234,13 @@ class Book:
         self.open = [dict(coin=r["coin"], direction=r["direction"]) for _, r in live[is_open].iterrows()]
         self.logdf = logdf
 
+    def dd_limit(self, key):
+        """The live drawdown limit of one strategy version x timeframe: its family-table limit when the family table
+        is active (Phase 19 A: the card's own Monte Carlo 95% drawdown per 100 trades), else strategy_max_dd_r."""
+        return float(self.S.get("strategy_dd_limits", {}).get(key, self.S["strategy_max_dd_r"]))
+
     def suspended(self):
-        return sorted(k for k, v in self.dd.items() if v > self.S["strategy_max_dd_r"])
+        return sorted(k for k, v in self.dd.items() if v > self.dd_limit(k))
 
     def halts(self):
         out = []

@@ -25,4 +25,5 @@ memory/market_mechanics.md merge=append
 reports/claude/runs.csv merge=append
 memory/retired_cards.csv merge=append
 memory/cleanup_log.md merge=append
+memory/family_gates_shadow.csv merge=append
 events.yaml merge=append

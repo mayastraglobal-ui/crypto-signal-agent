@@ -68,11 +68,13 @@ def gate_arrays(spec, tf, reg, n):
     return regime_ok & perm_long, regime_ok & perm_short, regime_ok, perm_long, perm_short
 
 
-def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None):
+def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None, dd_checks=None):
     """Section 12 '-> VALIDATION' gate on one strategy version x timeframe (all coins pooled).
     st / ins / oos: stats of all / develop (first 70%) / unseen test (last 30%) trades.
     live: forward-test stats or None. median_cost_r: typical round-trip cost in R (section 11 cost
     viability: the stop must be >= 4x the round-trip cost, i.e. cost <= 0.25R). None = not checked.
+    dd_checks: Phase 19 A - the failed checks of the family table (engine/family_gates.dd_reasons), which then
+    REPLACE the single max_drawdown_r check; None = the old rule (max drawdown <= V['max_drawdown_r']).
     Returns (status, reasons, required expectancy)."""
     need = V["min_expectancy_r"] + penalty_r
     reasons = []
@@ -85,8 +87,11 @@ def judge(st, ins, oos, live, V, penalty_r=0.0, median_cost_r=None):
         reasons.append(f"avg {st['exp_r']:+.2f}R/trade (needs {need:+.2f}R)")
     if st["pf"] < V["min_profit_factor"]:
         reasons.append(f"profit factor {st['pf']:.2f}")
-    if st["max_dd_r"] > V["max_drawdown_r"]:
-        reasons.append(f"max drawdown {st['max_dd_r']:.1f}R")
+    if dd_checks is None:
+        if st["max_dd_r"] > V["max_drawdown_r"]:
+            reasons.append(f"max drawdown {st['max_dd_r']:.1f}R")
+    else:
+        reasons += list(dd_checks)
     if oos["n"] < V["min_oos_trades"]:
         reasons.append(f"only {oos['n']} unseen-test trades")
     if ins["exp_r"] <= 0 or oos["exp_r"] <= 0:
@@ -202,7 +207,8 @@ CELL_COLS = ["tf", "status", "since_utc", "last_checked_utc", "trades", "avg_r",
              "train_avg_r", "test_avg_r", "required_avg_r", "beats_twin", "gates_failed",
              "history_from", "walk_forward", "stress_avg_r", "perturb_worst", "positive_coins",
              "median_cost_r", "overfit", "paper_gate_failed", "paper_signals", "failed_runs",
-             "bias", "mc_dd95_r", "mc_streak95", "rules_adding_nothing"]
+             "bias", "mc_dd95_r", "mc_streak95", "rules_adding_nothing",
+             "stress2_avg_r", "family_group", "family_verdict", "mc_dd95_per_100_r"]      # Phase 19 A
 
 
 def registry_to_frame(reg):

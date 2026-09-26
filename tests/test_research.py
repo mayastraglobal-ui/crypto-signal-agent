@@ -4,6 +4,7 @@ overfitting flag, control twin, the PAPER_TRADING gate and the freeze rules, and
 Run:  python -m unittest discover -s tests -v
 """
 import copy
+import csv
 import json
 import os
 import subprocess
@@ -328,6 +329,22 @@ class EndToEnd(unittest.TestCase):
             self.assertGreaterEqual(len(a["diagnosis"]), 6)
             for k in ("tags", "systematic", "mae_mfe", "by_regime", "by_session", "by_direction", "not_measurable"):
                 self.assertIn(k, a)
+            fg = cell["family_gate"]                                  # Phase 19 A: shadow verdicts side by side
+            self.assertEqual((fg["group"], fg["mode"]), ("trend", "shadow"))
+            self.assertIn(fg["new"], LC.ENGINE_STATUSES)
+            for k in ("window", "duration", "clustering", "recovery"):
+                self.assertIn(k, fg["metrics"])
+            self.assertEqual(res["family_gates"]["mode"], "shadow")
+            for c in res["cells"].values():                          # nothing moves on the new rule in shadow mode
+                if c["family_gate"]["old"] != "PAPER_TRADING":
+                    self.assertNotEqual(c["status"], "PAPER_TRADING")
+            self.assertEqual(cell["evidence"]["stress_2x"]["n"] > 0, cell["evidence"]["all"]["n"] > 0)   # +100% shown
+            self.assertLessEqual(cell["evidence"]["stress_2x"]["avg_r"], cell["evidence"]["stress"]["avg_r"] + 1e-9)
+            with open(os.path.join(tmp, "reports", "trials_offline.csv")) as f:
+                origins = [r["origin"] for r in csv.DictReader(f)]
+            self.assertEqual(origins.count("re-evaluation: family gates v1"), len(res["cells"]))
+            with open(os.path.join(tmp, "reports", "family_gates_shadow_offline.csv")) as f:
+                self.assertEqual(len(list(csv.DictReader(f))), len(res["cells"]))
             self.assertIn("missed_moves", res)
             self.assertIn("candidate_lessons", res)
             self.assertFalse(any(c["status"] == "APPROVED" for c in res["cells"].values()))
@@ -349,6 +366,8 @@ class EndToEnd(unittest.TestCase):
                 md = f.read()
             self.assertIn("### 3c. Research layers (daily run)", md)
             self.assertIn("### 3d. Why trades lose", md)
+            self.assertIn("Costs +100% (shown only)", md)
+            self.assertIn("**Family gates (Phase 19 A, rules v1) - shadow mode", md)
             self.assertIn("Layer A", md)
 
             # a tested version edited in place is refused by BOTH runs
