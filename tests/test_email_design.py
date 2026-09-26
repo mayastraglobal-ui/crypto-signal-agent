@@ -714,6 +714,18 @@ class Alerts(unittest.TestCase):
             notify.watchdog(dt.datetime(2026, 9, 26, 3, 55, tzinfo=dt.timezone.utc))
             self.assertEqual(self.subjects(), [])                                     # nothing twice
 
+    def test_watchdog_no_alert_when_a_newer_report_arrived(self):
+        self.write("latest.json", dict(rep_file(), generated_utc="2026-09-26 09:07"))
+        os.makedirs(os.path.join(self.rep, "claude", "daily"))
+        for rel in ("briefings/2026-09-25-1420.md", "briefings/2026-09-25-2120.md", "briefings/2026-09-26-0820.md",
+                    "briefings/2026-09-26-1420.md",
+                    "daily/2026-09-26.md"):                                   # 25 Sep's daily is missing, 26 Sep's is there
+            with open(os.path.join(self.rep, "claude", rel), "w") as f:
+                f.write("# x\n")
+        with mock.patch.object(notify, "ROOT", self.tmp):
+            notify.watchdog(dt.datetime(2026, 9, 26, 9, 24, tzinfo=dt.timezone.utc))   # the 26 Sep 09:24 UTC case
+        self.assertEqual(self.subjects(), [])                                     # no ALERT + FIXED pair
+
     def test_brain_refusal_alert_and_fixed(self):
         self.write("latest.json", rep_file())
         res = os.path.join(self.tmp, "res.json")

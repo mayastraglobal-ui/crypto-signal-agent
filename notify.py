@@ -611,6 +611,13 @@ def due_times(now):
             and now >= t + dt.timedelta(minutes=TASK_LATE_MIN)]
 
 
+def newer_report(rel):
+    """True when a later report of the same task exists (e.g. yesterday's daily review is missing but today's
+    arrived): the task works again, so a late ALERT would only be followed by its FIXED email."""
+    folder, name = os.path.split(os.path.join(ROOT, rel))
+    return any(n.endswith(".md") and n > name for n in (os.listdir(folder) if os.path.isdir(folder) else []))
+
+
 def watchdog(now=None):
     """ALERT when no scan ran for 2 hours, or a Claude task (briefing, daily review, weekly research) was not delivered
     60 minutes after its time; FIXED when it is back. One ALERT per problem."""
@@ -634,8 +641,8 @@ def watchdog(now=None):
     reg = load(rp("alerts_brain.json"), {})
     for task, slot, t, rel in due_times(now):
         key = f"missing|{task}"
-        if os.path.exists(os.path.join(ROOT, rel)) or key in reg:
-            continue
+        if os.path.exists(os.path.join(ROOT, rel)) or key in reg or newer_report(rel):
+            continue                           # delivered, already reported, or the task works again since
         name = {"briefing": f"{slot} briefing", "daily": "daily review", "weekly": "weekly research"}[task]
         alert_open("brain", key, dict(
             title=f"Claude {name} missing", impact="the engine sends its numbers", utc=utc, since_utc=utc_text(t),

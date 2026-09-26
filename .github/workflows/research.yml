@@ -58,7 +58,7 @@ jobs:
           git config merge.append.driver "python3 append_merge.py %O %A %B"   # .gitattributes: merge=append
           git add reports memory strategies_lab.yaml   # + the engine's variant-search cards (Phase 17 C)
           git commit -m "Research $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
-          git pull --rebase --autostash || true
+          bash git_sync.sh                         # newest main; clashing generated reports: this run's copies win
           python memory_guard.py --after-sync      # the merge broke no append-only file and no lab card
           git push
 
