@@ -686,11 +686,19 @@ class CalendarFile(unittest.TestCase):
     def test_scan_reads_the_calendar_file(self):
         src = read(os.path.join(ROOT, "scanner.py"))
         self.assertIn('rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE))', src)
-        lines = brain_pack.calendar_lines(dt.datetime(2026, 9, 27, tzinfo=UTC))
+        tmp = tempfile.mkdtemp()                              # a calendar of its own: the real file keeps growing
+        self.addCleanup(shutil.rmtree, tmp, True)
+        with open(os.path.join(tmp, "events.yaml"), "w") as f:
+            f.write('events:\n  - {utc: "2026-10-02 12:30", type: NFP, name: "US jobs report (Sep data)", '
+                    'source: "https://x", check: official_page}\n')
+        with mock.patch.object(brain_pack, "ROOT", tmp):
+            lines = brain_pack.calendar_lines(dt.datetime(2026, 9, 27, tzinfo=UTC))
         self.assertIn("events.yaml", lines[1])
         self.assertTrue(any("2026-10-02 12:30 UTC NFP" in ln for ln in lines))
         self.assertTrue(any(ln.startswith("- 2026-11: no NFP") for ln in lines))      # the gap is shown
         self.assertFalse(any(ln.startswith("- 2026-09:") for ln in lines))            # not the current month
+        lines = brain_pack.calendar_lines(dt.datetime(2026, 9, 27, tzinfo=UTC))      # the real file: no NFP gap
+        self.assertFalse([ln for ln in lines if ln.startswith(("- 2026-11: no NFP", "- 2026-12: no NFP"))], lines)
 
 
 class Workflows(unittest.TestCase):
