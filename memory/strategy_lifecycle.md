@@ -73,3 +73,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **supertrend_flip@1.0 30m**: BACKTESTING → **FAILED** (avg -0.14R/trade (needs +0.10R); profit factor 0.75; max drawdown 24.9R; not profitable in BOTH train and unseen test)
 - **supertrend_flip@1.0 4h**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.95; max drawdown 18.2R; not profitable in BOTH train and unseen test)
 - **trend_pullback@1.0 30m**: BACKTESTING → **FAILED** (avg -0.20R/trade (needs +0.10R); profit factor 0.68; max drawdown 711.9R; not profitable in BOTH train and unseen test)
+
+## 2026-09-26 00:50 UTC
+- **donchian_breakout@1.0 4h**: BACKTESTING → **FAILED** (BIASED - recursive on 1h: long: htf_up (489 of 78216 candles differ, first 2017-10-18 22:00); recursive on 1h: short: htf_down (108 of 78216 candles differ, first 2017-10-25 15:00))
