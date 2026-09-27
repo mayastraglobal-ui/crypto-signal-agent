@@ -10,8 +10,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 58,
+ "suspended": {
+  "QNT": "2026-09-27"
+ },
+ "runs": 59,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -56,6 +58,11 @@
   "ADA": [],
   "XLM": [
    "volume_7d"
+  ],
+  "QNT": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -84,6 +91,7 @@
    "data_degraded"
   ],
   "ADA": [],
-  "XLM": []
+  "XLM": [],
+  "QNT": []
  }
 }
