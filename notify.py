@@ -12,7 +12,7 @@ dashboard.
   python notify.py weekly   -> the WEEKLY report, once per week (Sunday, first scan from 04:00 UTC)
   python notify.py system   -> ALERT once when market data turns unsafe (the system, or a SIGNAL coin), FIXED once when
                                it recovers; ALERT / FIXED when a risk halt starts / ends; reminders
-  python notify.py brain result.json -> the BRIEFING (08:20; 14:20 / 21:20 only when something changed) and DAILY
+  python notify.py brain result.json -> the BRIEFING (08:20; 14:20 / 21:20: the changes, or a short "No change") and DAILY
                                emails for Claude's reports the Brain guard applied, and an ALERT when the guard refused
                                a Claude task's push (FIXED when that task's next push is applied)
   python notify.py watchdog -> (the Brain workflow, every 15 minutes) ALERT when no scan ran for 2 hours or a Claude
@@ -25,8 +25,8 @@ dashboard.
                             -> FIXED, once, when a run works after the failures that sent the ALERT
   python notify.py test     -> one short email to check the setup
   python notify.py samples  -> one TEST email of each type (A LIVE signal, B TP1, B stop, C PAPER signal, D PAPER
-                               update, E PAPER complete, F ALERT, G FIXED, H briefing, I changes briefing, J daily,
-                               K weekly) from today's engine files; trade numbers are EXAMPLES
+                               update, E PAPER complete, F ALERT, G FIXED, H briefing, I changes briefing and I
+                               "No change" briefing, J daily, K weekly) from today's engine files; trade numbers are EXAMPLES
 
 Needs 2 GitHub secrets: GMAIL_USER and GMAIL_APP_PASSWORD (optional 3rd: ALERT_TO = another address).
 If the secrets are missing, it does nothing and never breaks the scan. DRY_RUN=1 prints instead of sending
@@ -384,19 +384,22 @@ def save_snapshot(owner, rep, slot):
     save(rp(f"briefing_snapshot_{owner}.json"), s)
 
 
+PREV_SLOT = {"14:20": "08:20", "21:20": "14:20"}
+
+
 def briefing_mail(rel, rep, slot, utc, owner="scan", held=None):
     """The BRIEFING email of one briefing file (rel = None: engine numbers only). 08:20 = the full briefing; 14:20
-    / 21:20 = what changed since the previous briefing, or None when nothing changed (then nothing is sent)."""
+    / 21:20 = what changed since the previous briefing, or a 3-line "No change" email when nothing changed (never
+    skipped)."""
     from engine import mailfacts as mf
     held = held_paper(owner) if held is None else held
     if slot != "08:20":
         prev = last_snapshot()
         ch = mf.diff(prev, snapshot_now(rep)) + [("◆", f"PAPER signal not emailed (max {PAPER_PER_HOUR} an hour): {s}")
                                                   for s in held[:5]]
-        if not ch:
-            return None
-        return em.changes(mf.changes(rep, slot, (prev or {}).get("slot") or "08:20", utc, ch,
-                                     page_url(rel) if rel else None, research()))
+        b = mf.changes(rep, slot, (prev or {}).get("slot") or PREV_SLOT.get(slot, "08:20"), utc, ch,
+                       page_url(rel) if rel else None, research())
+        return em.changes(b) if ch else em.no_change(b)
     b = mf.briefing(rep, slot, utc, summary_of(rel), page_url(rel) if rel else None, pages_base(), research(),
                     mem("strategy_registry.csv"), load(os.path.join(REPORTS, "research_counts.json"), []), lab_cards(),
                     study())
@@ -577,10 +580,7 @@ def brain_email(result_path):
             ok = None
             if m:
                 slot = f"{m.group(2)}:{m.group(3)}"
-                mail = briefing_mail(path, rep, slot, rep.get("generated_utc"), "brain")
-                ok = True if mail is None else send_mail(mail)
-                if mail is None:
-                    print(f"{slot} briefing: nothing changed since the last briefing - no email.")
+                ok = send_mail(briefing_mail(path, rep, slot, rep.get("generated_utc"), "brain"))
                 if ok:
                     save_snapshot("brain", rep, slot)
             m2 = re.match(r"^reports/claude/daily/(\d{4}-\d{2}-\d{2})\.md$", path)
@@ -931,15 +931,16 @@ def samples():
                       cause="EXAMPLE: feed stale; fixed itself", buttons=[("Dashboard", base)]))
     brief_rel = newest_report("briefings", "0820")
     h = briefing_mail(brief_rel, rep, "08:20", utc, "scan", held=[])
-    i = briefing_mail(newest_report("briefings"), rep, "14:20", utc, "scan", held=[]) or em.changes(
-        mf.changes(rep, "14:20", "08:20", utc, [("◆", "No change since the last briefing - a real 14:20 email would "
-                                                      "be skipped.")], None, research()))
+    i_rel = newest_report("briefings")
+    i = em.changes(mf.changes(rep, "14:20", "08:20", utc, [("◆", "EXAMPLE: a change since the 08:20 briefing")],
+                              page_url(i_rel) if i_rel else None, research()))
+    i2 = em.no_change(mf.changes(rep, "21:20", "14:20", utc, [], page_url(i_rel) if i_rel else None, research()))
     day = (now - dt.timedelta(hours=16)).strftime("%Y-%m-%d") if now.hour < 16 else now.strftime("%Y-%m-%d")
     drel = f"reports/claude/daily/{day}.md"
     j = daily_mail(drel if os.path.exists(os.path.join(ROOT, drel)) else None, rep, day, utc)
     wrep = dict(rep, weekly=rep.get("weekly") or dict(week="test", results=[], lifecycle=[], missed_moves=[], card=None))
     k = weekly_mail(wrep, now)
-    for m in (a, b1, b2, c, d, e, f, g, h, i, j, k):
+    for m in (a, b1, b2, c, d, e, f, g, h, i, i2, j, k):
         send_mail(mark_test(m))
 
 

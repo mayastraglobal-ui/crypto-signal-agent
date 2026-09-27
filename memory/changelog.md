@@ -511,3 +511,8 @@ Newest entries at the bottom. Format: date · who · what · why.
 - Costs +100% stress (report only, `family_gates.cost_report_x: 2.0`) next to +50% in the scoreboard and approval packs.
 - Result on the last research run: only **donchian_breakout 1.0 4H** changes verdict (BACKTESTING → would be PAPER_TRADING: RF 6.0, 95% DD per 100 trades 15.7R, longest DD 592 days = 18%, t 3.66 ≥ 3.27, walk-forward 5/5, 8 coins, costs +50% +0.09R, ±20% stable). Every other card still fails on expectancy / profit factor / trades - unchanged. Nothing moves until the operator's yes after the shadow period.
 - Unchanged: fees, risk per trade, the +50% cost gate, the trials alpha, every other gate. Tests: tests/test_family_gates.py (+ end-to-end checks in test_research, test_lab trial count).
+
+## 2026-09-27 · Claude (BUILD mode, operator request) · 14:20 / 21:20 briefing: never skipped, a short "No change" email instead
+- When nothing changed since the previous briefing, the 14:20 / 21:20 slot now sends a 3-line "No change" email (BRIEFING pill, same frame) instead of nothing: `21:20 · No change since 14:20 · still no trade` (or `· 1 trade open` when a LIVE or PAPER trade is open), ACTION None, one status line (signals, open trades, BTC, data, last scan), what comes next, Full analysis. The snapshot is still saved, so the next briefing compares with it. The engine-only fallback follows the same rule.
+- When something changed, the changes email is the same as before (only its footer now names the "No change" email).
+- `python notify.py samples` sends 13 TEST emails (I = the changes and the "No change" version). Tests: tests/test_email_design.py.
