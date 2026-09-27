@@ -79,3 +79,16 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - Exchange listings, delistings and maintenance: mechanism = liquidity arriving or leaving a coin; strategies = none yet (context in the briefing)
   - Fees and slippage measured in R: mechanism = cost as a share of the risk; strategies = all cards (cost viability and the costs +50% test)
   - Spot ETF and stablecoin flows: mechanism = new money entering or leaving; strategies = none (no data source)
+
+### Review: Perpetual futures funding
+- timestamp: 2026-09-27 02:00 UTC · source: https://www.binance.com/en/support/faq/introduction-to-binance-futures-funding-rates-360033525031 · evidence: FACT: the exchange's own documentation, opened in the weekly research 2026-09-27 · confidence: high · strategy: all · asset: all · timeframe: all · regime: - · review: 2026-10-27
+  - mechanism: funding payments between longs and shorts keep the perpetual price near the spot index
+  - strategies: none yet (funding_rate / funding_z building blocks exist, no card uses them); every backtest charges funding as a cost
+  - verdict: CONFIRMED. The page says funding is paid every 8 hours at 00:00, 08:00 and 16:00 UTC by default, and can switch to hourly in extreme volatility (new detail). Positive funding = longs pay shorts.
+  - not checked by this source: the claim that very positive funding is fuel for a long squeeze stays a CLAIM.
+
+### Funding of exactly +0.0100% per 8 hours = the default interest part, not crowding
+- timestamp: 2026-09-27 02:00 UTC · source: https://www.binance.com/en/support/faq/introduction-to-binance-futures-funding-rates-360033525031 · evidence: FACT: the exchange's funding formula (interest 0.03% a day = 0.01% per interval, clamp of +-0.05% around the premium) · confidence: high · strategy: all · asset: all · timeframe: - · regime: - · review: 2026-10-27
+  - mechanism: funding = average premium index + clamp(interest rate - premium index, 0.05%, -0.05%); when the premium is small, the clamp returns the interest part, so funding reads exactly +0.0100%
+  - strategies: none yet (relevant to any future market_structure card with funding_rate or funding_z)
+  - what it means: a reading of exactly +0.0100% (this week SUI and UNI in the fact sheet) is the neutral baseline, not a sign of crowded longs. Only readings clearly above it (or a high funding_z) suggest crowding. The engine's cautious cost of 0.01% per 8 hours equals this baseline.

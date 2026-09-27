@@ -340,3 +340,73 @@
   evidence_class: BACKTEST_EVIDENCE
   factory_evidence: 'donchian_breakout-VEXIT@1.0 4h: 803 trades, avg +0.222R, unseen part +0.275R (266 trades);
     change: only when volume is at least 1.2x normal (rel_vol filter)'
+- id: R4-CLUC
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: mean_reversion
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/ClucMay72018.py (commit f3340ce) - the
+    idea rewritten in our building blocks; no code copied (GPL-3.0)
+  source_url: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/ClucMay72018.py
+  evidence_class: 'UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any
+    idea'
+  factory: literature
+  factory_evidence: 'freqtrade-strategies berlinguyinca/ClucMay72018.py: long entry as in the file (its ''ema100''
+    column is really an EMA 50); mirror-image short; exit at the band''s middle kept; first target 2R'
+  parent: 'source: [R4] freqtrade-strategies'
+  hypothesis: A close 1.5% below the lower Bollinger band, under the 50 EMA and without a 20x volume spike, is a
+    temporary over-extension that returns to the band's middle.
+  timeframes:
+  - 30m
+  - 15m
+  description: 'Buy a deep dip: close 1.5% below the lower Bollinger band while under the 50 EMA, volume not a blow-off.'
+  params:
+    ema_n: 50
+    bb_n: 20
+    bb_k: 2
+    depth: 0.985
+    vol_x: 20
+  long:
+  - close < ema(close,{ema_n})
+  - close < bb_lower(close,{bb_n},{bb_k}) * {depth}
+  - volume < prev(vol_sma(30)) * {vol_x}
+  short:
+  - close > ema(close,{ema_n})
+  - close > bb_upper(close,{bb_n},{bb_k}) * (2 - {depth})
+  - volume < prev(vol_sma(30)) * {vol_x}
+  exit_long:
+  - close > bb_mid(close,{bb_n})
+  exit_short:
+  - close < bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Built for 5m altcoin dips; a strong trend can keep closing below the band.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: sellers who dump into an already stretched move without a real news shock (no volume blow-off)
+    mechanism: an over-extension far outside the Bollinger band tends to return to the band's middle
+    fails_when: news-driven trends and liquidation cascades, where the stretch keeps growing
+    kill_rule: unseen-data average below 0R, or it fails the costs +50% test
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies ClucMay72018.py (R4) - long entry as in the file (its ''ema100'' column
+    is really an EMA 50); mirror-image short; exit at the band''s middle kept; first target 2R'
+  added: '2026-09-27'

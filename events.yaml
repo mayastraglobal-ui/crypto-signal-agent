@@ -41,3 +41,11 @@ events:
      source: "https://blsmon1.bls.gov/schedule/2026/11_sched.htm", check: official_page}
   - {utc: "2026-12-04 13:30", type: NFP, name: "US jobs report / Employment Situation (Nov data)",
      source: "https://blsmon1.bls.gov/schedule/2026/12_sched.htm", check: official_page}
+  - {utc: "2026-09-30 12:30", type: GDP, name: "US GDP (Third Estimate), 2nd Quarter 2026",
+     source: "https://www.bea.gov/news/schedule", check: official_page}
+  - {utc: "2026-10-29 12:30", type: GDP, name: "US GDP (Advance Estimate), 3rd Quarter 2026",
+     source: "https://www.bea.gov/news/schedule", check: official_page}
+  - {utc: "2026-11-25 13:30", type: GDP, name: "US GDP (Second Estimate), 3rd Quarter 2026",
+     source: "https://www.bea.gov/news/schedule", check: official_page}
+  - {utc: "2026-12-23 13:30", type: GDP, name: "US GDP (Third Estimate), 3rd Quarter 2026",
+     source: "https://www.bea.gov/news/schedule", check: official_page}

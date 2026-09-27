@@ -785,3 +785,10 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 |---|---|---|---|---|---|
 | EXP-0021 | 2026-09-27 00:50 | R4-BBRSI@1.0 | mean_reversion | 1h, 30m | In a range, a close below the lower Bollinger band with RSI(14) under 30 is an over-reaction that snaps back. |
 | EXP-0022 | 2026-09-27 00:50 | donchian_breakout-VEXIT@1.0 | breakout | 4h, 1h, 30m | One change to donchian_breakout@1.0: targets 2R / 3R (50 / 50) instead of a first target below 2R. It should keep the edge of donchian_breakout@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week. |
+
+### Hypothesis: taker-flow filter for mean reversion
+- timestamp: 2026-09-27 02:00 UTC · source: Claude weekly research 2026-09-27 (loss case study; https://arxiv.org/abs/2608.21888) · evidence: HYPOTHESIS: derived from a preprint finding (reversal concentrates after aggressive taker flow) and our failed oscillator cards (R4-BBRSI 1h 948 trades -0.29R, 30m 1206 trades -0.32R; rsi2_dip_buy 15m 1736 trades -0.30R) · confidence: low · strategy: R4-BBRSI, R4-CLUC · asset: research coins · timeframe: 1h · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-26
+  - hypothesis: a mean-reversion entry only pays for its costs when the move it fades was driven by unusually one-sided aggressive (taker) flow; entries after quiet drifts are the ones that lose.
+  - how to test: a market_structure card, one change to a mean-reversion parent on 1h: add 'taker_ratio < X' to the long entry (aggressive selling) and 'taker_ratio > 1/X' to the short entry; compare with the parent on the same period; judge on unseen data and the costs +50% test.
+  - blocked on: the futures data has only about 755 hours of history (fact sheet), so a 1h test would have few trades; wait until the history is long enough for 30+ unseen-data trades, or the operator backfills it.
+  - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs.
