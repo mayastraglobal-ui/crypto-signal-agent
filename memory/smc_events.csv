@@ -1943,3 +1943,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-27 16:30,XRP,15m,FVG_RETRACE,bear,,1.5246,1.5272,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-09-27 16:30,SUI,15m,OB_RETEST,bear,,1.2464,1.2545,,,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
 2026-09-27 16:45,SUI,15m,FVG_FILLED,bear,,1.2448,1.248,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 17:30,BTC,30m,SWEEP,bull,84364.0,,,0.105,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-27 17:45,BTC,15m,FVG_FILLED,bear,,84449.95,84506.63,,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 18:15,BTC,15m,FVG,bull,,84520.01,84565.9,0.335,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 18:00,ETH,15m,FVG_FILLED,bear,,2688.0,2690.69,,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 18:15,SOL,15m,WEAK_BREAK,bull,122.35,,,0.067,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-27 18:00,XRP,15m,SWEEP,bear,1.5247,,,0.157,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 18:15,XRP,15m,WEAK_BREAK,bull,1.5247,,,0.517,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-27 18:15,XRP,15m,FVG_FILLED,bear,,1.5246,1.5272,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-27 18:00,SUI,15m,WEAK_BREAK,bull,1.2501,,,0.14,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-27 18:15,SUI,15m,OB_INVALID,bear,,1.2464,1.2545,,,1h,WEAK_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-27 18:15,SUI,15m,FVG,bull,,1.2447,1.2498,0.428,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 17:30,UNI,30m,FVG_RETRACE,bear,,9.707,9.745,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
