@@ -49,3 +49,11 @@ Gate types: S5-S7 = trend (2 of 1D/4H/1H + weekly veto); S8 = reversal (2 of 1D/
 ## Log
 - 2026-09-24 · Phase 6 · definitions smc-1.0 built; sweeps, BOS, CHoCH and first FVG retrace added to the candle-evidence table (vs random entries, after costs). Live event log starts with the first live run (no backfill).
 - 2026-09-24 · Phase 7 · S5-S8 v1.0 and their control twins written as spec v3 cards; new per-candle SMC context (dealing range position, active order blocks, prior-day sweeps, sweep extremes, nearest pools, killzones) and 4H context on lower timeframes, all known at candle close. Twin comparison shown in report section 3b.
+
+### Liquidity sweeps vs stop-loss cascades - the evidence points both ways
+- timestamp: 2026-09-27 02:00 UTC · source: Claude weekly research 2026-09-27; https://www.newyorkfed.org/research/staff_reports/sr150.html · evidence: RESEARCH_FINDING: Osler (NY Fed Staff Report 150) on currency stop-loss orders, plus the engine's BACKTEST numbers quoted from the fact sheet · confidence: medium · strategy: S8-PDH-PDL-SWEEP, liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET · asset: all · timeframe: intraday · regime: - · review: 2026-12-26
+  - ICT / SMC claim: price runs the stops resting beyond an obvious high / low (a 'liquidity sweep'), then reverses.
+  - what the source shows: stop-loss orders do cluster and do move price - but the move ACCELERATES through the cluster (positive feedback, stronger and longer-lasting than take-profit orders). That supports 'stops matter', not 'sweeps reverse'.
+  - our BACKTEST numbers: S8-PDH-PDL-SWEEP 30m -0.53R over 98 trades and does not beat its control twin; S8-PDH-PDL-SWEEP-noSMC 30m -0.45R over 518 trades; liquidity_sweep_reversal loses on 5m (374 trades, -1.14R), 15m (471, -0.44R), 30m (272, -0.51R) and 1h (241, -0.24R); the 'sweep_continued' loss tag is systematic in 2 tests.
+  - why retail traders fail with it: every swing high looks like 'liquidity' after the fact; they fade the sweep at the moment stop orders are still pushing price; they put their own stop just beyond the sweep, where the next cluster sits.
+  - status: unproven; no SMC card has beaten its control twin so far.

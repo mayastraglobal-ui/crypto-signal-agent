@@ -297,3 +297,50 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): donchian_breakout-VEXIT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### Short-horizon mean reversion in cryptocurrency markets (Kitron & Wengrowicz, arXiv 2608.21888)
+- timestamp: 2026-09-27 02:00 UTC · source: https://arxiv.org/abs/2608.21888 · evidence: RESEARCH_FINDING: preprint (submitted 2026-08-22, not peer-reviewed), strictly out-of-sample protocol on 183 Binance pairs and 187 US stocks / ETFs, 2021 onward · confidence: medium · strategy: R4-CLUC, R4-BBRSI, rsi2_dip_buy · asset: research coins · timeframe: 15m · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the arXiv abstract page (version 1).
+  - claim (from the abstract): at 15-minute horizons 90% of 183 Binance pairs show significant directional reversal (2.7% of 187 US stocks / ETFs); betting against the previous candle captures most of it; the reversal is concentrated after moves driven by aggressive taker flow and grows with flow intensity; the gross edge peaks near 1.3 bp per trade against a 5 bp round-trip cost - "too small to clear" spot costs.
+  - why it matters here: it explains our own numbers. Short-term reversal in crypto is real but smaller than its cost. rsi2_dip_buy 15m lost -0.30R over 1736 BACKTEST trades (fees_slippage tag), and R4-BBRSI failed on 1h (948 trades, -0.29R) and 30m (1206 trades, -0.32R).
+  - derived hypothesis: a mean-reversion entry may only clear costs when it follows unusually aggressive one-sided taker flow (see experiments.md 'Hypothesis: taker-flow filter for mean reversion').
+  - limitations: preprint; spot, 15m only; gross edge in basis points, not our R-based trades with ATR stops; only the abstract was read, not the full tables.
+
+### Retail Trader's Ruin: An Anatomy of Popular Signal Failure (Darmanin, arXiv 2607.20093)
+- timestamp: 2026-09-27 02:00 UTC · source: https://arxiv.org/html/2607.20093 · evidence: RESEARCH_FINDING: preprint (July 2026, not peer-reviewed), US equities and ETFs (NASDAQ-100 10,331 days; Russell 3000; SPY 8,358 days) · confidence: medium · strategy: R4-BBRSI, R4-CLUC, rsi2_dip_buy, macd_trend_cross · asset: - · timeframe: daily · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the HTML version of the paper.
+  - claim: five retail signal families were tested with a three-gate test (statistics, net-of-cost return, survival). Oscillator rules (RSI, MACD, Bollinger Bands), volume, calendar and candlestick rules are REFUTED; trend (50/200 cross) and a 12-1 momentum benchmark are INCONCLUSIVE. The oscillator Sharpe gap interval was [-0.608, -0.175] and its net-of-cost CAGR gap [-0.149, -0.044] after 10 bp costs.
+  - why it matters here: our BACKTEST numbers agree for crypto: the oscillator-style mean-reversion cards all failed (R4-BBRSI 1h and 30m, rsi2_dip_buy on all four timeframes). Trend / breakout on 4h is the only family with positive cells so far.
+  - derived hypothesis: none new - it supports spending lab slots on trend / breakout lines rather than more oscillator entries.
+  - limitations: equities, daily data, not crypto; the author suggests no filter; the page was read through a summary tool, so the numbers were checked once, not line by line.
+
+### Stop-Loss Orders and Price Cascades in Currency Markets (Osler, New York Fed Staff Report 150)
+- timestamp: 2026-09-27 02:00 UTC · source: https://www.newyorkfed.org/research/staff_reports/sr150.html · evidence: RESEARCH_FINDING: central-bank staff research on dealer order data in currency markets (July 2002) · confidence: medium · strategy: S8-PDH-PDL-SWEEP, liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET · asset: - · timeframe: intraday · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the abstract page.
+  - claim: stop-loss orders generate positive-feedback trading; exchange-rate trends accelerate when rates reach levels where stop-loss orders cluster; stop-loss orders produce stronger and longer-lasting responses than take-profit orders ('price cascades').
+  - why it matters here: it supports the first half of the SMC 'liquidity sweep' story (stops do cluster and do move price), but it points the other way on the second half: hitting a stop cluster tends to ACCELERATE the move, not reverse it. Our engine's 'sweep_continued' loss tag is systematic in 2 tests (S8-PDH-PDL-SWEEP 1h and 30m).
+  - derived hypothesis: none written as a card this week (lab quota); noted in smc_research.md.
+  - limitations: foreign exchange, 2002, dealer order book of one bank; crypto has no such order data here.
+
+### Liquidation, Leverage and Optimal Margin in Bitcoin Futures Markets (Cheng, Deng, Wang, Yu, arXiv 2102.04591)
+- timestamp: 2026-09-27 02:00 UTC · source: https://arxiv.org/abs/2102.04591 · evidence: RESEARCH_FINDING: preprint (2021-02-09), extreme value analysis of BitMEX perpetual bitcoin futures · confidence: medium · strategy: all · asset: BTC · timeframe: daily · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the arXiv abstract page.
+  - claim: daily forced liquidations were 3.51% (long) and 1.89% (short) of outstanding futures; traders who got liquidated used about 60x leverage on average; margin of 33% (3x) for longs and 20% (5x) for shorts would bring the daily margin-call probability to 1%; normal-distribution assumptions badly underestimate the margin needed.
+  - case study (how traders lose money): over-leverage. At leverage like that, a small ordinary move against the trade uses up the margin. The loss is forced by the exchange before any stop or thesis can play out.
+  - derived rule (already in our engine, not new): risk per trade is fixed at 0.5% of the account with an ATR stop, so leverage follows from the stop and is never chosen for itself. For the operator: never size a position by leverage.
+  - limitations: BitMEX 2017-2020 data; today's exchanges have different margin systems.
+
+### Binance Futures funding rates FAQ - when funding is paid and how it is built
+- timestamp: 2026-09-27 02:00 UTC · source: https://www.binance.com/en/support/faq/introduction-to-binance-futures-funding-rates-360033525031 · evidence: FACT: the exchange's own documentation of its rule · confidence: high · strategy: all · asset: all · timeframe: - · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the FAQ page.
+  - what it says: funding is paid every 8 hours at 00:00, 08:00 and 16:00 UTC by default (can switch to hourly in extreme volatility); positive funding = longs pay shorts; funding = average premium index + clamp(interest rate - premium index, 0.05%, -0.05%); the default interest part is 0.03% a day = 0.01% per interval; most major pairs are capped at +-0.75 x maintenance margin ratio.
+  - used for: the market_mechanics.md review of 'Perpetual futures funding' (CONFIRMED) and the new record on the +0.0100% reading.
+  - limitations: the page describes Binance only; the rule can change without notice.
+
+### [R2] TradingAgents - bull vs bear debate and a risk team (studied at release v0.5.1)
+- timestamp: 2026-09-27 02:00 UTC · source: https://github.com/TauricResearch/TradingAgents (release v0.5.1 = main, commit 35543d0248bf89fcb92b17a15858ad0c0e940687; paper https://arxiv.org/abs/2412.20138 v7, 2025-06-03) · evidence: FACT: read in the project's own code at that commit; the paper's performance claims are the authors' CLAIM, not checked · confidence: high for what the code does · strategy: - · asset: - · timeframe: - · regime: - · review: 2026-12-26
+  - opened (weekly research 2026-09-27): the repository at commit 35543d0248bf89fcb92b17a15858ad0c0e940687 (tag v0.5.1), files tradingagents/agents/researchers/bull_researcher.py and bear_researcher.py, managers/research_manager.py, managers/portfolio_manager.py, risk_mgmt/ (aggressive, conservative, neutral debators), graph/conditional_logic.py, default_config.py; and the arXiv abstract of the paper.
+  - what the code does: a bull and a bear researcher (language models) argue in turns (default 1 round each); a research manager judges the debate into Buy / Overweight / Hold / Underweight / Sell; a trader writes a plan; three risk debators (aggressive, conservative, neutral) argue (default 1 round each); a portfolio manager makes the final call. The judges are told: conflict alone is not a reason to Hold, weigh arguments on their merits 'independent of which side spoke first or last', and choose Hold only when the evidence is balanced or too thin.
+  - what we take (ideas only): (1) the judge instruction against speaking-order bias - our Bull case / Bear case / Risk manager lines should be read as equals, and 'no trade' must be earned by balanced or thin evidence, not chosen because the two sides disagree; (2) 'too thin to support a call' as an explicit reason - it matches our rule that few trades = no verdict.
+  - what we deliberately do NOT take: language models making the trade decision or sizing positions; the Buy/Overweight/... rating scale; a risk team that only argues - our risk manager keeps a hard VETO computed by the engine; lessons fed back from past outcomes into prompts; any code (none copied).
+  - licence: Apache-2.0.

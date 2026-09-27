@@ -22,15 +22,18 @@
   ]
  },
  "claude/brain-weekly": {
-  "sha": "75c2578585d5c671f3add90d82d37c0478c1c7d3",
-  "subject": "Weekly research 2026-09-26",
-  "when": "2026-09-26 06:29",
+  "sha": "47deff04bf151aa8dfa325148503eac4fcf06add",
+  "subject": "Weekly research 2026-09-27",
+  "when": "2026-09-27 02:05",
   "status": "applied",
   "problems": [],
   "applied": [
+   "events.yaml",
    "memory/experiments.md",
+   "memory/market_mechanics.md",
    "memory/research_sources.md",
-   "reports/claude/weekly/2026-09-26.md",
+   "memory/smc_research.md",
+   "reports/claude/weekly/2026-09-27.md",
    "strategies_lab.yaml"
   ]
  }
