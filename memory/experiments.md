@@ -792,3 +792,27 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: a market_structure card, one change to a mean-reversion parent on 1h: add 'taker_ratio < X' to the long entry (aggressive selling) and 'taker_ratio > 1/X' to the short entry; compare with the parent on the same period; judge on unseen data and the costs +50% test.
   - blocked on: the futures data has only about 755 hours of history (fact sheet), so a 1h test would have few trades; wait until the history is long enough for 30+ unseen-data trades, or the operator backfills it.
   - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs.
+
+### Feedback: R4-BBRSI@1.0
+- timestamp: 2026-09-27 15:40 UTC · source: Claude daily review 2026-09-27 · evidence: BACKTEST_EVIDENCE: 2 cells, 2154 trades (948 + 1206) · confidence: high · strategy: R4-BBRSI@1.0 · asset: research coins · timeframe: 1h, 30m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-26
+- parent: source: [R4] freqtrade-strategies
+- hypothesis: In a range, a close below the lower Bollinger band with RSI(14) under 30 is an over-reaction that snaps back.
+- result: BACKTEST 1h FAILED 948 trades -0.287R (unseen -0.265R), profit factor 0.63, max drawdown 273.5R; 30m FAILED 1206 trades -0.320R (unseen -0.294R), profit factor 0.60, max drawdown 390.4R; the diagnosis finds no systematic loss tag in either cell
+- teaches: the hypothesis did not hold. Both cells lose about the same in the train part and the unseen part, and no single failure tag explains the losses, so there is no one change that fixes it; a band-plus-RSI entry in a range has no edge after our costs.
+- next: stop this line
+
+### Feedback: donchian_breakout-VEXIT@1.0
+- timestamp: 2026-09-27 15:40 UTC · source: Claude daily review 2026-09-27 · evidence: BACKTEST_EVIDENCE: 3 cells, 4076 trades (803 + 2223 + 1050) · confidence: medium · strategy: donchian_breakout-VEXIT@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL · review: 2026-12-26
+- parent: result: donchian_breakout@1.0 4h
+- hypothesis: One change to donchian_breakout@1.0: targets 2R / 3R (50 / 50) instead of a first target below 2R. It should keep the edge of donchian_breakout@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week.
+- result: BACKTEST 4h BACKTESTING 803 trades +0.222R (unseen +0.275R), t 4.303, held back only by max drawdown 23.7R; 1h FAILED 2223 trades -0.037R (unseen +0.051R), profit factor 0.94; 30m FAILED 1050 trades -0.006R (unseen +0.057R), profit factor 0.99; playbook: 4h +0.38R over 166 trades in WEAK_BULL and +0.25R over 50 trades in STRONG_BULL
+- teaches: the wider 2R / 3R targets kept the 4h result positive in both the train and the unseen part, but they did not rescue 1h or 30m. The edge of this breakout idea lives on the slow 4h timeframe only; the remaining blocker on 4h is the drawdown, not the average trade.
+- next: stop the 1h and 30m cells of this line. On 4h the engine's two one-change children (donchian_breakout-VEXIT-S4@1.0 and donchian_breakout-VEXIT-VRVOL@1.0) are already queued and untested; wait for their results before any new 4h card. Also check that the 4h cell does not carry the higher-timeframe history bias that failed donchian_breakout@1.0 4h on 2026-09-26.
+
+### Hypothesis: slow own-trend filter for the 4h breakout (from C01, time series momentum)
+- timestamp: 2026-09-27 15:40 UTC · source: Claude daily review 2026-09-27 ([C01] https://pages.stern.nyu.edu/~lpederse/papers/TimeSeriesMomentum.pdf) · evidence: HYPOTHESIS: derived from a published finding in futures markets (58 instruments, 1985-2009) and our 4h breakout cell (donchian_breakout-VEXIT@1.0 4h, 803 trades, +0.222R) · confidence: low · strategy: donchian_breakout-VEXIT · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2026-12-26
+  - hypothesis: a 4h breakout pays more when it agrees with the coin's own slow trend. Longs only when close > shift(close,180) (the close about 30 days ago on 4h candles), shorts only when close < shift(close,180).
+  - why: the paper finds that an instrument's own past return (1 to 12 months) predicts its next month in every one of 58 futures; our breakout edge exists only on the slowest timeframe we test (4h), which fits "slow trends persist".
+  - how to test: a one-change version of the best 4h breakout card (a new entry rule, nothing else), compared with its parent on the same period; judge on the unseen part, the costs +50% test and the drawdown gate.
+  - blocked on: the lab quota (0 cards left today) and the two untested VEXIT children; a card waits for the weekly research or a later daily review, with parent "source: [C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012)".
+  - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs. The paper's horizon is months and its markets are futures from 1985-2009, so a null result on 4h crypto is a real possibility.
