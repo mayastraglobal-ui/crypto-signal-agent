@@ -5,16 +5,15 @@
   "ZEC",
   "SOL",
   "XRP",
-  "SUI"
+  "SUI",
+  "UNI"
  ],
- "in_streak": {
-  "UNI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {
   "QNT": "2026-09-27"
  },
- "runs": 64,
+ "runs": 65,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,7 +31,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",
