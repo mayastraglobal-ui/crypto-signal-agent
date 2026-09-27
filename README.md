@@ -277,7 +277,7 @@ breaks.
 | F. ALERT | `! Market data unsafe · signals paused` | scan / research / Brain failed twice in a row, no scan for 2 hours, market data unsafe (the system or a signal coin), a risk halt, a Claude task refused or 60 minutes late, tests red on main, emails lost. One per problem |
 | G. FIXED | `✓ Fixed · market data OK · 0 signals missed` | once per ALERT, when it works again: down from–to, duration, signals missed, cause |
 | H. BRIEFING 08:20 | `08:20 · No trade · BTC up · PCE Tue 20:30` | after Claude's 08:20 briefing (engine-only from 09:00 Beijing if it is missing): market now, the 7 signal coins, next events, AGENT PLAN TODAY (test / check / study), STRATEGY PROGRESS, DO / DON'T |
-| I. BRIEFING 14:20 / 21:20 | `14:20 · 2 changes · still no trade` | only when something changed since the previous briefing (signal, a daily trend, a strategy status, a new lab card, an event within 24 h, data or a risk halt) - otherwise **no email** |
+| I. BRIEFING 14:20 / 21:20 | `14:20 · 2 changes · still no trade` | what changed since the previous briefing (signal, a daily trend, a strategy status, a new lab card, an event within 24 h, data or a risk halt); nothing changed = a 3-line **No change** email (`21:20 · No change since 14:20 · still no trade`: ACTION None, one status line, what comes next) - never skipped |
 | J. DAILY 23:30 | `Daily · 0 trades · 460 backtests · 1 new lesson` | after Claude's daily review (engine-only from 02:00 Beijing): trading today, what the agent did, closest to passing, learned today, tomorrow (watch / avoid / learn), system health |
 | K. WEEKLY | `Week 39 · 0 approved · closest: donchian_breakout 4H` | Sunday, first scan from 04:00 UTC: YOUR DECISION, results, road to real signals, learned this week, agent progress history (changelog + merged PRs), report card, next week |
 
@@ -293,7 +293,7 @@ researches**; every number comes from the engine (`brain_pack.py` prints the fac
 
 | Task | When | Instructions | Output |
 |---|---|---|---|
-| Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + BRIEFING email (14:20 / 21:20: only when something changed) |
+| Briefing | 08:20 / 14:20 / 21:20 Beijing | `tasks/briefing.md` | `reports/claude/briefings/` + BRIEFING email (14:20 / 21:20: the changes, or a short "No change") |
 | Daily review | 23:30 Beijing | `tasks/daily_review.md` | `reports/claude/daily/` (the DAILY email), memory records: root causes, reviews due, validated lessons, queued refinements (max one per failing strategy) |
 | Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **added to the strategy lab**, event calendar entries |
 

@@ -295,9 +295,11 @@ def changes(rep, slot, prev_slot, utc, change_list, page_url, research=None):
     rep = rep or {}
     st = status(rep)
     now = em.to_dt(utc)
+    paper = ((rep.get("position_book") or {}).get("paper")) or []
     return dict(slot=slot, prev_slot=prev_slot, utc=utc, changes=change_list,
                 signals=len(rep["signals"]) if isinstance(rep.get("signals"), list) else None, open=st["open"],
-                max_open=st["max_open"], btc_trend=(rep.get("market") or {}).get("btc_trend") or {},
+                max_open=st["max_open"], paper_open=len(paper) if isinstance(paper, list) else 0,
+                scan_utc=rep.get("generated_utc"), btc_trend=(rep.get("market") or {}).get("btc_trend") or {},
                 next_event=(next_events(rep, now) or [None])[0],
                 data_state=(rep.get("data_quality") or {}).get("system_state"), decisions=decisions(research),
                 page_url=page_url)

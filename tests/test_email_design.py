@@ -114,6 +114,7 @@ def all_mails(empty=False):
                 ("E", em.paper_complete(dict(strategy="S", version="1.0", tf="4h"))),
                 ("F", em.alert(dict(title="x"))), ("G", em.fixed(dict())),
                 ("H", em.briefing(dict(slot="08:20"))), ("I", em.changes(dict(slot="14:20"))),
+                ("I", em.no_change(dict(slot="14:20"))),
                 ("J", em.daily(dict())), ("K", em.weekly(dict(week_no=39)))]
     rep = rep_file()
     brief = mf.briefing(rep, "08:20", "2026-09-26 00:40", dict(headline="Nothing to trade. Wait.", sub="BTC is flat.",
@@ -149,6 +150,7 @@ def all_mails(empty=False):
             ("I", em.changes(mf.changes(rep, "14:20", "08:20", "2026-09-26 06:20",
                                         [("✓", "donchian_breakout v1.0 4h: FAILED → BACKTESTING"),
                                          ("◆", "New idea in the lab: R4-BBRSI.")], "https://p/"))),
+            ("I", em.no_change(mf.changes(rep, "14:20", "08:20", "2026-09-26 06:20", [], "https://p/"))),
             ("J", em.daily(dict(date="2026-09-26", counts=dict(backtests=460, strategies=20, coins=10),
                                 live_trades=[], paper_trades=[], day_r=0.0, week_r=0.0,
                                 ideas=[dict(name="R4-BBRSI v1.0 · 1h", what="Buy oversold closes.", source="FREQTRADE",
@@ -235,13 +237,14 @@ class Design(unittest.TestCase):
         self.assertEqual(s[14], "✓ Fixed · market data OK · 0 signals missed")
         self.assertEqual(s[15], "08:20 · No trade · BTC up · PCE Wed 20:30")
         self.assertEqual(s[16], "14:20 · 2 changes · still no trade")
-        self.assertEqual(s[17], "Daily · 0 trades · 460 backtests · 1 new lesson")
-        self.assertEqual(s[18], "Week 39 · 0 approved · closest: donchian_breakout 4H")
+        self.assertEqual(s[17], "14:20 · No change since 08:20 · 1 trade open")
+        self.assertEqual(s[18], "Daily · 0 trades · 460 backtests · 1 new lesson")
+        self.assertEqual(s[19], "Week 39 · 0 approved · closest: donchian_breakout 4H")
 
     def test_missing_values_show_a_dash_never_a_guess(self):
         for _, m in all_mails(True):
             self.assertIn("<!DOCTYPE html>", m["html"])
-            self.assertIsNone(re.search(r"\bNone\b(?![.] | –| this week| today|\.$)", m["text"]), m["subject"])
+            self.assertIsNone(re.search(r"\bNone\b(?![.] | –| this week| today|\.$)", m["text"], re.M), m["subject"])
             self.assertNotIn("nan", m["text"].lower().replace("financial", ""))
         self.assertIn("–", em.daily(dict())["text"])
         self.assertIn("Backtest: – trades", em.live_entry(entry_card(backtest={}))["text"])
@@ -415,6 +418,41 @@ class Numbers(unittest.TestCase):
         for part in ("[BRIEFING] 21:20 update", "4 changes since 14:20. Still no trade.", "WHAT CHANGED",
                      "◆ BTC daily trend", "UNCHANGED", "Signals 0 · Open trades 1 / 3 · BTC up · Next event: PCE"):
             self.assertIn(part, t)
+
+    def test_no_change_briefing_is_sent_not_skipped(self):
+        rep = rep_file()                                                         # 1 live trade open
+        snap = mf.snapshot(rep, {}, REGISTRY, [])
+        with mock.patch.object(notify, "last_snapshot", return_value=dict(snap, slot="08:20")), \
+                mock.patch.object(notify, "snapshot_now", return_value=snap), \
+                mock.patch.object(notify, "research", return_value={}):
+            m14 = notify.briefing_mail(None, dict(rep, position_book=dict(rep["position_book"], heat=0, paper=[])),
+                                       "14:20", "2026-09-26 06:20", "scan", held=[])
+        with mock.patch.object(notify, "last_snapshot", return_value=dict(snap, slot="14:20")), \
+                mock.patch.object(notify, "snapshot_now", return_value=snap), \
+                mock.patch.object(notify, "research", return_value={}):
+            m = notify.briefing_mail(None, rep, "21:20", "2026-09-26 13:20", "scan", held=[])  # engine-only fallback
+            ch = notify.briefing_mail(None, rep, "21:20", "2026-09-26 13:20", "scan", held=["BTC ▲ 1h"])
+        self.assertIsNotNone(m)
+        self.assertEqual(m["subject"], "21:20 · No change since 14:20 · 1 trade open")
+        self.assertEqual(m14["subject"], "14:20 · No change since 08:20 · still no trade")
+        for x in (m, m14):
+            self.assertLessEqual(len(x["subject"]), 70)
+            self.assertEqual(x["pill"], "BRIEFING")
+            self.assertTrue(x["has_action"])
+        t = m["text"]
+        for part in ("No change since 14:20.", "None.", "Signals 0 · Open trades 1 / 3 · BTC up · Data GOOD · last scan ",
+                     "Next: daily review 23:30"):
+            self.assertIn(part, t)
+        self.assertNotIn("WHAT CHANGED", t)
+        self.assertIn("Next: briefing 21:20", m14["text"])
+        self.assertEqual(ch["subject"], "21:20 · 1 change · still no trade")          # a change: the changes email
+        self.assertIn("WHAT CHANGED", ch["text"])
+        with mock.patch.object(notify, "last_snapshot", return_value=dict(snap, slot="14:20")), \
+                mock.patch.object(notify, "snapshot_now", return_value=snap), \
+                mock.patch.object(notify, "research", return_value={}):
+            p = notify.briefing_mail(None, dict(rep, position_book=dict(rep["position_book"], heat=0, paper=[{}, {}])), "21:20",
+                      "2026-09-26 13:20", "scan", held=[])
+        self.assertEqual(p["subject"], "21:20 · No change since 14:20 · 2 trades open")    # PAPER trades count too
 
     def test_daily_from_the_files(self):
         rep = rep_file()
@@ -805,8 +843,11 @@ class NotifyRun(unittest.TestCase):
             json.dump([dict(status="applied", branch="claude/brain-briefing", sha="c" * 40, when="2026-09-26 06:40",
                             applied=[rel2], problems=[])], f)
         out = self.run_notify("brain", res)
-        self.assertEqual(self.subjects(out), [])
-        self.assertIn("14:20 briefing: nothing changed since the last briefing - no email.", out)
+        self.assertEqual(self.subjects(out), ["14:20 · No change since 08:20 · 1 trade open"])  # never skipped
+        self.assertIn("Next: briefing 21:20", out)
+        self.assertIn("Full analysis: https://o.github.io/r/claude/briefings/2026-09-26-1420.html", out)
+        with open(os.path.join(self.tmp, "reports", "briefing_snapshot_brain.json")) as f:
+            self.assertEqual(json.load(f)["slot"], "14:20")                             # the next one compares with it
         rel3 = "reports/claude/briefings/2026-09-26-2120.md"                          # 21:20: a new lab card
         with open(os.path.join(self.tmp, rel3), "w") as f:
             f.write(SummaryBlock.GOOD)
@@ -850,12 +891,13 @@ class NotifyRun(unittest.TestCase):
         self.write("latest.json", rep_file())
         out = self.run_notify("samples")
         s = self.subjects(out)
-        self.assertEqual(len(s), 12)                                                  # A, B x2, C, D, E, F, G, H, I, J, K
+        self.assertEqual(len(s), 13)                                            # A, B x2, C, D, E, F, G, H, I x2, J, K
         self.assertTrue(all(x.startswith("TEST · ") for x in s))
         for x, word in zip(s, ["LIVE ▲", "LIVE ✓ TP1", "LIVE ✕ Stop", "PAPER ▲", "PAPER ✓ TP1", "PAPER ● 20 of 20", "! ",
-                               "✓ Fixed", "08:20 · ", "14:20 · ", "Daily · ", "Week "]):
+                               "✓ Fixed", "08:20 · ", "14:20 · ", "21:20 · No change since 14:20", "Daily · ",
+                               "Week "]):
             self.assertTrue(x.startswith("TEST · " + word), (x, word))
-        self.assertEqual(out.count("the trade numbers are EXAMPLES"), 12)
+        self.assertEqual(out.count("the trade numbers are EXAMPLES"), 13)
         self.assertIn("EXAMPLE v1.0", out)
         for f in ("alerts_scan.json", "briefing_snapshot_scan.json", "paper_sent.json"):
             self.assertFalse(os.path.exists(os.path.join(self.tmp, "reports", f)))   # a sample stores nothing

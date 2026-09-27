@@ -645,8 +645,8 @@ def briefing(b):
 # ---------------------------------------------------------------- I. BRIEFING 14:20 / 21:20 ---------------------------
 def changes(b):
     """I. BRIEFING 14:20 / 21:20 - changes only: b = dict(slot, prev_slot, utc, changes [(icon, text)], signals, open,
-    max_open, btc_trend, next_event, data_state, decisions, approved, page_url). The caller does not send it when
-    `changes` is empty."""
+    max_open, btc_trend, next_event, data_state, decisions, approved, page_url). With `changes` empty the caller
+    sends no_change() instead."""
     ch = b.get("changes") or []
     n_sig = b.get("signals")
     still = "still no trade" if not n_sig else plural(n_sig, "signal")
@@ -665,7 +665,30 @@ def changes(b):
               ("section", "What changed"), ("bullets", [f"{i} {mk.plain(t)}" for i, t in ch]),
               ("section", "Unchanged"), ("line", unchanged),
               ("buttons", [("Full analysis", b.get("page_url"))]),
-              ("footer", "No changes at all? This email is skipped. Not financial advice.")]
+              ("footer", "No changes at all? You get a 3-line \"No change\" email. Not financial advice.")]
+    return mk.render(subj, blocks, (), "briefing")
+
+
+NEXT_AFTER = {"14:20": "briefing 21:20", "21:20": "daily review 23:30"}
+
+
+def no_change(b):
+    """I. BRIEFING 14:20 / 21:20 when nothing changed since the previous briefing: 3 short lines, never skipped.
+    b = the same dict as changes() (+ paper_open, scan_utc)."""
+    slot, prev = b.get("slot") or "14:20", b.get("prev_slot") or "08:20"
+    n_open = (b.get("open") or 0) + (b.get("paper_open") or 0)
+    state = plural(n_open, "trade") + " open" if n_open else "still no trade"
+    subj = mk.subject([slot, f"No change since {prev}", state])
+    line = (f"Signals {val(b.get('signals'))} · Open trades {val(b.get('open'))} / {val(b.get('max_open'))} · "
+            f"BTC {market_word(b.get('btc_trend'))} · Data {b.get('data_state') or DASH} · "
+            f"last scan {bj(b.get('scan_utc'), '%H:%M')}")
+    blocks = [("header", ("BRIEFING", f"{slot} update", bj(b.get("utc"), "%a %d %b") + " · Beijing")),
+              ("headline", (f"No change since {prev}.", f"The {prev} briefing still holds.")),
+              action_box("Action", ["None."], mk.GREY_LINE),
+              ("line", line),
+              ("line", f"Next: {NEXT_AFTER.get(slot, 'briefing 08:20')}"),
+              ("buttons", [("Full analysis", b.get("page_url"))]),
+              ("footer", "Not financial advice.")]
     return mk.render(subj, blocks, (), "briefing")
 
 
