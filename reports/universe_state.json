@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "ZEC",
   "SOL",
+  "ZEC",
   "XRP",
   "SUI",
   "UNI"
@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-27"
  },
- "runs": 78,
+ "runs": 79,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -61,6 +61,7 @@
   ],
   "QNT": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
