@@ -1887,3 +1887,38 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-27 15:15,SUI,15m,FVG_RETRACE,bull,,1.2013,1.2278,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
 2026-09-27 14:45,UNI,15m,SWEEP,bull,9.731,,,0.209,Silver Bullet,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-09-27 15:00,UNI,15m,WEAK_BREAK,bear,9.731,,,0.496,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-27 15:30,BTC,30m,FVG_FILLED,bull,,84398.87,84478.06,,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 15:30,BTC,30m,FVG,bear,,84624.01,84700.0,0.364,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 16:00,BTC,30m,OB_INVALID,bull,,84482.98,84605.82,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-27 16:00,BTC,30m,FVG_RETRACE,bear,,84624.01,84700.0,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-27 15:30,BTC,15m,FVG_RETRACE,bear,,84592.24,84673.02,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-27 15:45,BTC,15m,OB_INVALID,bull,,84500.0,84550.06,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-27 16:00,BTC,15m,BREAKER_RETEST,bear,,84500.0,84550.06,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-09-27 16:00,ETH,1h,FVG,bear,,2694.02,2698.21,0.352,,4h,COMPRESSION,,smc-1.0,Binance
+2026-09-27 16:00,ZEC,4h,FVG_FILLED,bull,,1583.45,1636.42,,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 16:00,ZEC,1h,FVG_RETRACE,bull,,1570.45,1577.65,,,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-27 16:00,ZEC,1h,FVG_FILLED,bull,,1585.0,1654.39,,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 16:00,ZEC,1h,FVG,bear,,1608.3,1642.43,1.513,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 15:30,ZEC,30m,FVG_FILLED,bull,,1585.0,1652.97,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 15:30,ZEC,30m,FVG,bear,,1608.3,1623.62,0.919,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 16:00,ZEC,30m,FVG,bear,,1585.88,1604.15,1.125,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 15:30,ZEC,15m,FVG,bear,,1592.31,1604.15,0.893,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 16:00,SOL,4h,FVG_RETRACE,bull,,121.69,123.37,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-27 16:00,SOL,4h,FVG_FILLED,bull,,121.69,123.37,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 16:00,SOL,1h,FVG,bear,,121.9,122.34,0.412,,4h,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 16:15,SOL,15m,FVG_RETRACE,bear,,122.19,122.86,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-27 15:30,XRP,30m,BREAKER_RETEST,bear,,1.5191,1.5233,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-27 16:00,SUI,4h,FVG_RETRACE,bull,,1.1907,1.238,,,1d,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-27 15:30,SUI,30m,FVG_RETRACE,bull,,1.2059,1.2278,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-27 16:00,UNI,1h,WEAK_BREAK,bear,9.666,,,0.225,,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-27 16:00,UNI,1h,OB_RETEST,bull,,9.4,9.561,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-27 16:00,UNI,1h,FVG_FILLED,bull,,9.561,9.649,,,4h,TRANSITION,,smc-1.0,Binance
+2026-09-27 15:30,UNI,30m,OB_INVALID,bull,,9.638,9.71,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-27 15:30,UNI,30m,FVG,bear,,9.707,9.745,0.338,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-27 16:00,UNI,30m,OB_RETEST,bull,,9.4,9.538,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-27 16:00,UNI,30m,BREAKER_RETEST,bear,,9.638,9.71,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-27 16:00,UNI,30m,FVG_FILLED,bull,,9.538,9.717,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-27 15:45,UNI,15m,BREAKER_RETEST,bull,,9.51,9.552,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-27 15:45,UNI,15m,OB_RETEST,bull,,9.411,9.538,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-27 15:45,UNI,15m,FVG_RETRACE,bull,,9.476,9.514,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-27 15:45,UNI,15m,FVG_FILLED,bull,,9.533,9.717,,,1h,UNCLEAR,,smc-1.0,Binance
