@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-27 01:17",
+ "generated_utc": "2026-09-27 02:18",
  "book": {
-  "utc": "2026-09-27 01:17",
-  "beijing": "2026-09-27 09:17",
+  "utc": "2026-09-27 02:18",
+  "beijing": "2026-09-27 10:18",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,10 +19,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-09-27 01:17 UTC / 2026-09-27 09:17 Beijing",
+  "POSITION BOOK \u2014 2026-09-27 02:18 UTC / 2026-09-27 10:18 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Third Estimate), 2nd Quarter 2026 2026-09-30 12:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -34,10 +34,16 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+XRP"
+   "BTC+ETH+SOL+SUI+XRP"
   ],
   "blackout_now": [],
   "upcoming_events": [
+   {
+    "start_utc": "2026-09-30 12:30",
+    "end_utc": "2026-09-30 12:30",
+    "type": "GDP",
+    "name": "US GDP (Third Estimate), 2nd Quarter 2026"
+   },
    {
     "start_utc": "2026-09-30 12:30",
     "end_utc": "2026-09-30 12:30",
@@ -51,7 +57,7 @@
     "name": "US jobs report / Employment Situation (Sep data)"
    }
   ],
-  "next_event": "US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC",
+  "next_event": "US GDP (Third Estimate), 2nd Quarter 2026 2026-09-30 12:30 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
