@@ -780,3 +780,8 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: a one-change version of a mean-reversion card with an extra entry rule on the stop width (ATR as a share of price above a threshold), compared with its parent on the same period; judge on unseen data and the costs +50% test.
   - blocked on: check that the building blocks can express ATR as a share of price before writing the card; if not, it waits for the operator.
   - stop if: the filtered version keeps fewer than 30 unseen-data trades, or it is not better than its parent after costs.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0021 | 2026-09-27 00:50 | R4-BBRSI@1.0 | mean_reversion | 1h, 30m | In a range, a close below the lower Bollinger band with RSI(14) under 30 is an over-reaction that snaps back. |
+| EXP-0022 | 2026-09-27 00:50 | donchian_breakout-VEXIT@1.0 | breakout | 4h, 1h, 30m | One change to donchian_breakout@1.0: targets 2R / 3R (50 / 50) instead of a first target below 2R. It should keep the edge of donchian_breakout@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week. |

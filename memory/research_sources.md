@@ -279,3 +279,21 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - case study (how traders lose money - fee blindness on low timeframes and backtests that assume perfect fills): a small edge per trade on 5m / 15m disappears once real slippage is paid. Our engine charges fees + slippage + funding, and its own numbers show the cost problem: the fees_slippage loss tag is systematic in 3 tests (rsi2_dip_buy 1h, 30m, 15m); rsi2_dip_buy 15m has 2181 backtest trades at -0.34R.
   - derived hypothesis (testable filter): mean-reversion entries whose stop is narrow compared with price lose most of their edge to costs; test the same entries only when the stop distance is at least 3x the round-trip cost (see experiments.md 'Hypothesis: cost share filter for mean reversion').
   - limitations: the docs describe one tool, not our engine; the link is to a moving branch.
+
+### R4-BBRSI@1.0 - Buy when RSI is oversold AND price closes below the lower Bollinger band; sell the mirror image.
+- timestamp: 2026-09-27 00:50 UTC · source: strategies_lab.yaml card R4-BBRSI@1.0 · evidence: UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any idea: not tested when recorded · confidence: untested idea · strategy: R4-BBRSI v1.0 · asset: research coins · timeframe: 1h, 30m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-26
+  - title / source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/BbandRsi.py (commit f3340ce) - the idea rewritten in our building blocks; no code copied (GPL-3.0)
+  - URL: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/BbandRsi.py
+  - claim: In a range, a close below the lower Bollinger band with RSI(14) under 30 is an over-reaction that snaps back.
+  - derived hypothesis (tested): R4-BBRSI@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE on 1h, 30m
+  - limitations: Catches falling knives when a range breaks into a trend; the original has no trend filter.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-09-27 00:50 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2026-12-26
+  - title / source: engine variant search: one change to donchian_breakout@1.0
+  - URL: none recorded
+  - claim: One change to donchian_breakout@1.0: targets 2R / 3R (50 / 50) instead of a first target below 2R. It should keep the edge of donchian_breakout@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week.
+  - derived hypothesis (tested): donchian_breakout-VEXIT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3

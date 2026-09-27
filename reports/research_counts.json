@@ -20,5 +20,25 @@
   "tests_per_coin": 46,
   "coins": 10,
   "new_cards": 1
+ },
+ {
+  "date": "2026-09-27",
+  "run_utc": "2026-09-27 00:50",
+  "backtests": 408,
+  "per_coin": {
+   "BTC": 51,
+   "ENA": 51,
+   "ETH": 51,
+   "SOL": 51,
+   "SUI": 51,
+   "UNI": 51,
+   "XRP": 51,
+   "ZEC": 51
+  },
+  "strategies": 22,
+  "tests": 51,
+  "tests_per_coin": 51,
+  "coins": 8,
+  "new_cards": 2
  }
 ]
