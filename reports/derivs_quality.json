@@ -1,28 +1,28 @@
 {
- "checked_utc": "2026-09-27 07:17",
+ "checked_utc": "2026-09-27 08:18",
  "coins": {
   "BTC": {
    "state": "GOOD",
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 3146993624.3083,
-    "ls_ratio": 1.34,
-    "taker_ratio": 1.0159902544159012,
-    "funding_pct": -0.0008751028665399999
+    "oi_usd": 3151259739.8881,
+    "ls_ratio": 1.36,
+    "taker_ratio": 1.434130995869511,
+    "funding_pct": -0.00181443987004
    },
    "problems": [],
    "fetch": {
@@ -43,23 +43,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 1861910482.9331,
-    "ls_ratio": 1.31,
-    "taker_ratio": 0.780418243401472,
-    "funding_pct": 0.00290877572136
+    "oi_usd": 1874772337.4586,
+    "ls_ratio": 1.32,
+    "taker_ratio": 1.6885025184314228,
+    "funding_pct": 0.00423029555095
    },
    "problems": [],
    "fetch": {
@@ -80,23 +80,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 207143060.4058,
+    "oi_usd": 211522736.6279,
     "ls_ratio": 0.38,
-    "taker_ratio": 1.00785288628945,
-    "funding_pct": 0.0021716414329799997
+    "taker_ratio": 1.3537760834883619,
+    "funding_pct": -0.01253917294011
    },
    "problems": [],
    "fetch": {
@@ -117,23 +117,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 423638560.8744,
-    "ls_ratio": 1.47,
-    "taker_ratio": 0.7167136964779893,
-    "funding_pct": 0.00162978367329
+    "oi_usd": 429794007.1644,
+    "ls_ratio": 1.48,
+    "taker_ratio": 1.532454949942643,
+    "funding_pct": 0.00792345239341
    },
    "problems": [],
    "fetch": {
@@ -154,23 +154,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 131449994.055,
-    "ls_ratio": 2.65,
-    "taker_ratio": 1.04965978062467,
-    "funding_pct": 0.00496793801414
+    "oi_usd": 135925890.1135,
+    "ls_ratio": 2.82,
+    "taker_ratio": 2.045422264675965,
+    "funding_pct": 0.00664812841491
    },
    "problems": [],
    "fetch": {
@@ -191,23 +191,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 105,
-   "funding_age_h": 7.3,
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 50480805.8959,
-    "ls_ratio": 1.85,
-    "taker_ratio": 1.3524790387389753,
-    "funding_pct": 0.01
+    "oi_usd": 54872475.4111,
+    "ls_ratio": 1.84,
+    "taker_ratio": 1.3250112125248728,
+    "funding_pct": 0.00762099303944
    },
    "problems": [],
    "fetch": {
@@ -228,22 +228,22 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 4128
+    "binance_files": 4224
    },
    "age_h": -0.7,
-   "hours": 761,
+   "hours": 762,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 110,
-   "funding_age_h": 3.3,
+   "funding_rows": 111,
+   "funding_age_h": 0.3,
    "last": {
-    "oi_usd": 25968501.6075,
-    "ls_ratio": 1.11,
-    "taker_ratio": 1.371006418037682,
+    "oi_usd": 25915286.2826,
+    "ls_ratio": 1.14,
+    "taker_ratio": 1.2233930254953114,
     "funding_pct": 0.005
    },
    "problems": [],
@@ -257,6 +257,43 @@
     "backfilled_hours": 96,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ENAUSDT&period=1h&limit=500"
+    ]
+   }
+  },
+  "UNI": {
+   "state": "GOOD",
+   "main_source": "okx",
+   "research_rows": {
+    "binance": 501,
+    "binance_files": 4128
+   },
+   "age_h": -0.7,
+   "hours": 762,
+   "first_utc": "2026-08-26",
+   "gaps_7d": 0,
+   "invalid": 0,
+   "sources": [
+    "okx"
+   ],
+   "funding_rows": 106,
+   "funding_age_h": 0.3,
+   "last": {
+    "oi_usd": 66082385.068,
+    "ls_ratio": 1.81,
+    "taker_ratio": 1.155638279228496,
+    "funding_pct": 0.01
+   },
+   "problems": [],
+   "fetch": {
+    "source": "okx",
+    "sources": {
+     "okx": true,
+     "binance": false
+    },
+    "new_hourly": 720,
+    "backfilled_hours": 96,
+    "errors": [
+     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=UNIUSDT&period=1h&limit=500"
     ]
    }
   }

@@ -112,3 +112,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-27 03:19 UTC
 - **EXCLUDED** QNT - 7-day average volume $8M < $50M; 24h move +73.1% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $42k within 1% (need $250k)
+
+## 2026-09-27 08:18 UTC
+- **ELIGIBLE** AVAX - passes every rule again
+- **LEAVE** ENA - not eligible: 24h volume below $50M or no longer listed
