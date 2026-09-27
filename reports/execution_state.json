@@ -1,9 +1,5 @@
 {
- "issues": {
-  "data|BABY|1d": "BABY 1d data: DEGRADED: volume 67x normal on candle 09-25 00:00 UTC (possible bad data); DEGRADED: volume 51x normal on candle 09-26 00:00 UTC (possible bad data)"
- },
- "since": {
-  "data|BABY|1d": "2026-09-25 11:18 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"maker_fee_pct\": 0.1, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.1}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }

@@ -1336,3 +1336,41 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-27 05:15,SUI,15m,BREAKER_RETEST,bear,,1.1613,1.1691,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
 2026-09-27 05:00,ENA,30m,SWEEP,bull,0.2662,,,0.178,,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-09-27 05:00,ENA,15m,SWEEP,bull,0.2662,,,0.284,,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-27 06:00,BTC,1h,SWEEP,bear,84571.13,,,0.391,,4h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 06:00,BTC,30m,SWEEP,bear,84571.13,,,0.669,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 05:30,BTC,15m,FVG,bull,,84362.0,84391.54,0.382,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 05:45,BTC,15m,SWEEP,bear,84600.01,,,0.699,,1h,RANGE,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-09-27 05:45,BTC,15m,BOS,bull,84510.0,,,0.492,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-27 05:45,BTC,15m,FVG_FILLED,bear,,84362.0,84426.0,,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 06:00,BTC,15m,FVG,bull,,84398.87,84468.98,0.771,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 06:00,ETH,30m,SWEEP,bear,2706.09,,,0.995,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 05:30,ETH,15m,FVG,bull,,2693.64,2694.9,0.32,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 05:45,ETH,15m,SWEEP,bear,2706.09,,,1.533,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 06:00,ETH,15m,FVG,bull,,2697.89,2704.48,1.41,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 06:15,ETH,15m,BOS,bull,2706.09,,,0.774,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-27 06:00,ZEC,30m,SWEEP,bear,1656.59,,,0.137,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 05:30,ZEC,15m,FVG,bull,,1637.34,1644.71,0.751,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-27 06:15,ZEC,15m,WEAK_BREAK,bull,1656.59,,,0.235,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-27 06:00,SOL,1h,FVG_RETRACE,bear,,120.86,121.09,,,4h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-27 06:00,SOL,1h,FVG_FILLED,bear,,120.86,121.09,,,4h,STRONG_BULL,,smc-1.0,Binance
+2026-09-27 06:00,SOL,30m,FVG_FILLED,bear,,120.8,121.09,,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 06:00,SOL,30m,FVG,bull,,120.44,120.64,0.341,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 05:30,SOL,15m,FVG,bull,,120.37,120.53,0.456,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-27 05:45,SOL,15m,OB_RETEST,bear,,121.44,121.68,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-09-27 05:45,SOL,15m,FVG_FILLED,bear,,120.8,121.04,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-09-27 06:00,SOL,15m,FVG,bull,,120.72,121.08,0.957,,1h,RANGE,,smc-1.0,Binance
+2026-09-27 05:30,XRP,30m,FVG_RETRACE,bear,,1.5114,1.515,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-27 05:30,XRP,30m,FVG_FILLED,bear,,1.5114,1.515,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 05:30,XRP,15m,FVG,bull,,1.509,1.5127,0.768,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 05:45,XRP,15m,FVG_RETRACE,bear,,1.5238,1.5253,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-27 06:00,XRP,15m,FVG,bull,,1.5154,1.5187,0.642,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 06:15,XRP,15m,FVG_RETRACE,bull,,1.5154,1.5187,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-27 05:30,SUI,30m,FVG_RETRACE,bear,,1.1641,1.1682,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-27 05:30,SUI,30m,FVG_FILLED,bear,,1.1641,1.1682,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 06:00,SUI,30m,FVG,bull,,1.1641,1.1688,0.418,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 05:30,SUI,15m,FVG,bull,,1.1607,1.1658,0.664,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 06:00,SUI,15m,FVG,bull,,1.1748,1.1769,0.257,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-27 06:00,ENA,30m,SWEEP,bear,0.2719,,,0.361,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 06:00,ENA,15m,SWEEP,bear,0.2719,,,0.522,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 06:15,ENA,15m,SWEEP,bear,0.2728,,,0.333,London,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-27 06:15,ENA,15m,BOS,bull,0.2719,,,0.238,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
