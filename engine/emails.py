@@ -645,8 +645,8 @@ def briefing(b):
 # ---------------------------------------------------------------- I. BRIEFING 14:20 / 21:20 ---------------------------
 def changes(b):
     """I. BRIEFING 14:20 / 21:20 - changes only: b = dict(slot, prev_slot, utc, changes [(icon, text)], signals, open,
-    max_open, btc_trend, next_event, data_state, decisions, approved, page_url). With `changes` empty the caller
-    sends no_change() instead."""
+    max_open, btc_trend, next_event, data_state, decisions, approved, page_url, note = an optional line under the
+    headline). With `changes` empty the caller sends no_change() instead."""
     ch = b.get("changes") or []
     n_sig = b.get("signals")
     still = "still no trade" if not n_sig else plural(n_sig, "signal")
@@ -661,6 +661,7 @@ def changes(b):
               ("headline", (f"{plural(len(ch), 'change')} since {b.get('prev_slot') or '08:20'}. "
                             + ("Still no trade." if not n_sig else f"{plural(n_sig, 'signal')}."),
                             f"Only what changed. The {b.get('prev_slot') or '08:20'} briefing still holds for the rest.")),
+              *([("line", b["note"])] if b.get("note") else []),
               action_box("Action", engine_action(b), mk.GREY_LINE if not (n_sig or b.get("open")) else mk.TEAL),
               ("section", "What changed"), ("bullets", [f"{i} {mk.plain(t)}" for i, t in ch]),
               ("section", "Unchanged"), ("line", unchanged),
@@ -684,6 +685,7 @@ def no_change(b):
             f"last scan {bj(b.get('scan_utc'), '%H:%M')}")
     blocks = [("header", ("BRIEFING", f"{slot} update", bj(b.get("utc"), "%a %d %b") + " · Beijing")),
               ("headline", (f"No change since {prev}.", f"The {prev} briefing still holds.")),
+              *([("line", b["note"])] if b.get("note") else []),
               action_box("Action", ["None."], mk.GREY_LINE),
               ("line", line),
               ("line", f"Next: {NEXT_AFTER.get(slot, 'briefing 08:20')}"),

@@ -15,8 +15,10 @@ dashboard.
   python notify.py brain result.json -> the BRIEFING (08:20; 14:20 / 21:20: the changes, or a short "No change") and DAILY
                                emails for Claude's reports the Brain guard applied, and an ALERT when the guard refused
                                a Claude task's push (FIXED when that task's next push is applied)
-  python notify.py watchdog -> (the Brain workflow, every 15 minutes) ALERT when no scan ran for 2 hours or a Claude
-                               task (briefing, daily review, weekly research) is 60 minutes late; FIXED when it is back
+  python notify.py watchdog -> (the Brain workflow, every 15 minutes) the 14:20 / 21:20 BRIEFING from engine numbers
+                               only when Claude's file is 40 minutes late (once per slot: a later Claude file sends
+                               no second email); ALERT when no scan ran for 2 hours or a Claude task (briefing, daily
+                               review, weekly research) is 60 minutes late; FIXED when it is back
   python notify.py failed | research_failed | brain_failed
                             -> ALERT, but only when the previous run of the same workflow failed too
                                (one failure = the agent retries silently)
@@ -70,6 +72,9 @@ REVIEW_FALLBACK_HOURS = range(18, 24)        # UTC: 02:00-07:59 Beijing, when th
 PAPER_PER_HOUR = 3                           # flood guard: at most 3 PAPER emails an hour; the rest in the next briefing
 SCAN_STALE_H = 2                             # ALERT: no scan for 2 hours
 TASK_LATE_MIN = 60                           # ALERT: a Claude task not delivered 60 minutes after its time
+LATE_BRIEF_MIN = 40                          # 14:20 / 21:20: no Claude briefing 40 minutes after -> the engine's email
+LATE_BRIEF_MAX_H = 3                         # ... but not a stale one: only up to 3 hours after the slot
+LATE_NOTE = "(engine only - Claude's briefing was late)"
 TASKS_DUE = [("briefing", "08:20", (0, 20)), ("briefing", "14:20", (6, 20)), ("briefing", "21:20", (13, 20)),
              ("daily", "23:30", (15, 30))]   # (task, Beijing slot, UTC hour / minute); the weekly: Sunday 02:00 UTC
 WEEKLY_DUE = (2, 0)
@@ -387,7 +392,7 @@ def save_snapshot(owner, rep, slot):
 PREV_SLOT = {"14:20": "08:20", "21:20": "14:20"}
 
 
-def briefing_mail(rel, rep, slot, utc, owner="scan", held=None):
+def briefing_mail(rel, rep, slot, utc, owner="scan", held=None, note=None):
     """The BRIEFING email of one briefing file (rel = None: engine numbers only). 08:20 = the full briefing; 14:20
     / 21:20 = what changed since the previous briefing, or a 3-line "No change" email when nothing changed (never
     skipped)."""
@@ -399,6 +404,7 @@ def briefing_mail(rel, rep, slot, utc, owner="scan", held=None):
                                                   for s in held[:5]]
         b = mf.changes(rep, slot, (prev or {}).get("slot") or PREV_SLOT.get(slot, "08:20"), utc, ch,
                        page_url(rel) if rel else None, research())
+        b["note"] = note
         return em.changes(b) if ch else em.no_change(b)
     b = mf.briefing(rep, slot, utc, summary_of(rel), page_url(rel) if rel else None, pages_base(), research(),
                     mem("strategy_registry.csv"), load(os.path.join(REPORTS, "research_counts.json"), []), lab_cards(),
@@ -593,6 +599,33 @@ def brain_email(result_path):
 
 
 # ---------------------------------------------------------------- watchdog (the Brain workflow) ---------------------
+def late_briefings(now=None):
+    """14:20 / 21:20: Claude's briefing file is not on main 40 minutes after the slot -> the engine's own email (the
+    changes or the short "No change" one, from engine numbers only, marked LATE_NOTE), once. The slot's file goes
+    into brain_sent.json, so a Claude file that arrives later sends no second email."""
+    now = now or now_utc()
+    rep = latest()
+    if not rep:
+        return
+    sent = load(BRAIN_SENT, [])
+    for task, slot, (h, mi) in TASKS_DUE:
+        if task != "briefing" or slot == "08:20":
+            continue
+        for back in (1, 0):
+            d = (now - dt.timedelta(days=back)).date()
+            t = dt.datetime(d.year, d.month, d.day, h, mi, tzinfo=dt.timezone.utc)
+            if not t + dt.timedelta(minutes=LATE_BRIEF_MIN) <= now < t + dt.timedelta(hours=LATE_BRIEF_MAX_H):
+                continue
+            rel = f"reports/claude/briefings/{t.astimezone(em.BJ):%Y-%m-%d}-{slot.replace(':', '')}.md"
+            if rel in sent or os.path.exists(os.path.join(ROOT, rel)):
+                continue                       # Claude's briefing arrived (the Brain run emails it) or already sent
+            if send_mail(briefing_mail(None, rep, slot, rep.get("generated_utc"), "brain", note=LATE_NOTE)):
+                save_snapshot("brain", rep, slot)
+                sent.append(rel)
+                save(BRAIN_SENT, sent[-500:])
+                print(f"{slot} briefing: Claude's file is late - the engine's email went out.")
+
+
 def due_times(now):
     """[(key, task, due UTC)] of the Claude tasks due in the last 24 hours (their time + 60 minutes has passed)."""
     out = []
@@ -982,6 +1015,7 @@ def main():
         elif mode == "brain":
             brain_email(sys.argv[2] if len(sys.argv) > 2 else "brain_result.json")
         elif mode == "watchdog":
+            late_briefings()
             watchdog()
         elif mode == "samples":
             samples()
