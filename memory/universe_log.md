@@ -160,3 +160,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-28 15:22 UTC
 - **ELIGIBLE** LINK - passes every rule again
 - **EXCLUDED** MARSCOIN - only 24 days of history (need 180); 7-day average volume $23M < $50M; order book too thin: $56k within 1% (need $250k)
+
+## 2026-09-28 16:23 UTC
+- **EXCLUDED** AVAX - order book too thin: $228k within 1% (need $250k)

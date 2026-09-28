@@ -14,7 +14,7 @@
   "QNT": "2026-09-28",
   "HBAR": "2026-09-28"
  },
- "runs": 95,
+ "runs": 96,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,7 +32,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",

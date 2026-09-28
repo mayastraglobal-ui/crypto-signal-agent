@@ -2562,3 +2562,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 14:45,UNI,15m,BOS,bear,8.768,,,0.044,Silver Bullet,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-09-28 14:45,UNI,15m,FVG,bear,,8.864,8.896,0.341,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-09-28 15:00,UNI,15m,SWEEP,bull,8.673,,,0.447,Silver Bullet,1h,EXPANSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-28 16:00,BTC,4h,FVG_RETRACE,bear,,83534.01,84132.0,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 16:00,BTC,15m,FVG,bull,,83126.01,83211.32,0.285,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 16:00,ETH,4h,FVG_FILLED,bear,,2661.02,2669.78,,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-09-28 16:00,SOL,4h,FVG_RETRACE,bear,,120.23,120.96,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 16:00,SOL,4h,FVG_RETRACE,bear,,118.84,119.45,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 16:00,SOL,4h,FVG_FILLED,bear,,118.84,119.45,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 16:00,SOL,1h,FVG,bear,,118.84,119.4,0.449,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 16:00,XRP,1h,FVG,bear,,1.4979,1.515,0.863,,4h,RANGE,,smc-1.0,Binance
+2026-09-28 15:30,XRP,15m,BREAKER_RETEST,bear,,1.4852,1.493,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 16:00,ZEC,1h,FVG,bear,,1548.78,1579.44,1.292,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 15:30,ZEC,30m,FVG,bear,,1548.78,1559.41,0.568,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 16:15,ZEC,15m,SWEEP,bull,1515.0,,,0.524,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 16:00,SUI,4h,FVG_RETRACE,bear,,1.1995,1.2311,,,1d,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 16:00,SUI,1h,FVG,bear,,1.1602,1.1776,0.659,,4h,STRONG_BULL,,smc-1.0,Binance
+2026-09-28 15:30,SUI,30m,BREAKER_RETEST,bear,,1.1543,1.1641,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 16:00,UNI,4h,SWEEP,bull,8.678,,,0.128,,1d,STRONG_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 16:00,UNI,1h,FVG,bear,,8.86,8.96,0.578,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 16:15,UNI,15m,FVG_RETRACE,bear,,8.864,8.896,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
