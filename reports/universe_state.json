@@ -3,8 +3,8 @@
   "BTC",
   "ETH",
   "SOL",
-  "ZEC",
   "XRP",
+  "ZEC",
   "SUI",
   "UNI"
  ],
@@ -14,7 +14,7 @@
   "QNT": "2026-09-28",
   "HBAR": "2026-09-28"
  },
- "runs": 94,
+ "runs": 95,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -39,9 +39,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "LINK": [
-   "thin_book"
-  ],
+  "LINK": [],
   "XPL": [
    "volume_7d"
   ],
@@ -74,7 +72,6 @@
   ],
   "MARSCOIN": [
    "history",
-   "spread",
    "thin_book",
    "volume_7d"
   ]

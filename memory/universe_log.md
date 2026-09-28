@@ -156,3 +156,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-28 14:22 UTC
 - **EXCLUDED** LINK - order book too thin: $239k within 1% (need $250k)
 - **EXCLUDED** MARSCOIN - only 24 days of history (need 180); 7-day average volume $23M < $50M; spread 0.134% > 0.1%; order book too thin: $69k within 1% (need $250k)
+
+## 2026-09-28 15:22 UTC
+- **ELIGIBLE** LINK - passes every rule again
+- **EXCLUDED** MARSCOIN - only 24 days of history (need 180); 7-day average volume $23M < $50M; order book too thin: $56k within 1% (need $250k)
