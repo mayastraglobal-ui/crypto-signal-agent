@@ -2,24 +2,20 @@
  "members": [
   "BTC",
   "ETH",
-  "SOL",
   "ZEC",
+  "SOL",
   "XRP",
   "SUI",
-  "UNI"
+  "LINK"
  ],
- "in_streak": {
-  "LINK": 1
- },
- "out_streak": {
-  "UNI": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "QNT": "2026-09-28",
   "HBAR": "2026-09-28",
   "MARSCOIN": "2026-09-28"
  },
- "runs": 100,
+ "runs": 101,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
