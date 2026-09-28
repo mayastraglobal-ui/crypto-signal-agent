@@ -2706,3 +2706,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 20:30,XRP,30m,FVG_RETRACE,bear,,1.4948,1.5048,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-09-28 21:15,XRP,15m,FVG_RETRACE,bear,,1.4987,1.507,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-09-28 20:45,LINK,15m,SWEEP,bear,15.343,,,0.147,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 22:00,BTC,1h,FVG_RETRACE,bear,,83613.8,83800.0,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-28 21:30,BTC,30m,FVG_RETRACE,bear,,83652.84,83800.0,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-28 21:45,BTC,15m,FVG,bear,,83475.48,83548.0,0.318,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 22:15,BTC,15m,FVG,bear,,83236.01,83400.0,0.74,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 21:30,ETH,30m,FVG_FILLED,bear,,2682.23,2687.54,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 22:15,ETH,15m,FVG,bear,,2675.27,2678.56,0.335,,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-09-28 21:30,ZEC,15m,SWEEP,bull,1447.47,,,0.106,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 22:00,SOL,30m,BOS,bear,118.01,,,0.29,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 21:45,SOL,15m,FVG,bear,,118.36,118.74,0.631,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 22:00,SOL,15m,WEAK_BREAK,bear,118.01,,,0.465,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 22:15,SOL,15m,SWEEP,bull,117.36,,,0.168,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 22:15,SOL,15m,FVG,bear,,117.82,118.05,0.387,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 22:00,XRP,1h,FVG_RETRACE,bear,,1.496,1.504,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-28 22:00,SUI,15m,FVG,bear,,1.1507,1.1542,0.317,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 22:15,SUI,15m,FVG_RETRACE,bear,,1.1507,1.1542,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
