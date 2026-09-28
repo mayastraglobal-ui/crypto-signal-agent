@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-28"
  },
- "runs": 81,
+ "runs": 82,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -63,6 +63,10 @@
    "big_move",
    "thin_book",
    "volume_7d"
+  ],
+  "PUMP": [
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -94,6 +98,7 @@
   "XLM": [],
   "QNT": [
    "data_degraded"
-  ]
+  ],
+  "PUMP": []
  }
 }
