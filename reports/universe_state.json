@@ -3,18 +3,23 @@
   "BTC",
   "ETH",
   "SOL",
-  "XRP",
   "ZEC",
+  "XRP",
   "SUI",
   "UNI"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "LINK": 1
+ },
+ "out_streak": {
+  "UNI": 1
+ },
  "suspended": {
   "QNT": "2026-09-28",
-  "HBAR": "2026-09-28"
+  "HBAR": "2026-09-28",
+  "MARSCOIN": "2026-09-28"
  },
- "runs": 99,
+ "runs": 100,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -71,6 +76,7 @@
    "volume_7d"
   ],
   "MARSCOIN": [
+   "big_move",
    "history",
    "thin_book",
    "volume_7d"
