@@ -152,3 +152,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-28 12:25 UTC
 - **EXCLUDED** HBAR - 7-day average volume $19M < $50M; 24h move +30.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $81k within 1% (need $250k)
 - **ELIGIBLE** LINK - passes every rule again
+
+## 2026-09-28 14:22 UTC
+- **EXCLUDED** LINK - order book too thin: $239k within 1% (need $250k)
+- **EXCLUDED** MARSCOIN - only 24 days of history (need 180); 7-day average volume $23M < $50M; spread 0.134% > 0.1%; order book too thin: $69k within 1% (need $250k)

@@ -14,7 +14,7 @@
   "QNT": "2026-09-28",
   "HBAR": "2026-09-28"
  },
- "runs": 93,
+ "runs": 94,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -39,7 +39,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "LINK": [],
+  "LINK": [
+   "thin_book"
+  ],
   "XPL": [
    "volume_7d"
   ],
@@ -67,6 +69,12 @@
   ],
   "HBAR": [
    "big_move",
+   "thin_book",
+   "volume_7d"
+  ],
+  "MARSCOIN": [
+   "history",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
@@ -102,6 +110,7 @@
    "data_degraded"
   ],
   "PUMP": [],
-  "HBAR": []
+  "HBAR": [],
+  "MARSCOIN": []
  }
 }
