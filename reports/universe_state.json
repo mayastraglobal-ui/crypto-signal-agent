@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-28"
  },
- "runs": 84,
+ "runs": 85,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -31,7 +31,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",

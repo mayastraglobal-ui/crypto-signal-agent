@@ -2245,3 +2245,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 04:00,UNI,30m,BREAKER_RETEST,bear,,9.4,9.538,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-09-28 03:30,UNI,15m,BREAKER_RETEST,bear,,9.411,9.538,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-09-28 03:30,UNI,15m,FVG_RETRACE,bull,,9.229,9.253,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-28 04:30,ETH,15m,WEAK_BREAK,bull,2658.02,,,0.036,,1h,EXPANSION,no displacement,smc-1.0,Binance
+2026-09-28 05:00,SUI,1h,SWEEP,bull,1.2247,,,0.255,,4h,STRONG_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 04:30,SUI,30m,SWEEP,bull,1.2247,,,0.322,,1h,STRONG_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 05:15,SUI,15m,BOS,bear,1.2182,,,0.52,,1h,WEAK_BULL,no displacement,smc-1.0,Binance

@@ -139,3 +139,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-28 03:20 UTC
 - **ELIGIBLE** AVAX - passes every rule again
+
+## 2026-09-28 05:20 UTC
+- **EXCLUDED** AVAX - order book too thin: $237k within 1% (need $250k)
