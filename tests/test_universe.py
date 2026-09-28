@@ -10,7 +10,6 @@ import unittest
 
 import numpy as np
 import pandas as pd
-import yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -156,17 +155,6 @@ class Membership(unittest.TestCase):
         self.assertEqual(len(view["research"]), 10)
         self.assertTrue(all(e["action"] == "JOIN" for e in ev))
 
-    def test_research_coins_20_signal_coins_stay_7(self):
-        u20 = dict(U, research_coins=20)
-        _, _, view = uni.update_membership(uni.empty_state(), uni.rank(["BTC", "ETH"] + names(25), ALWAYS), u20, ALWAYS)
-        self.assertEqual(len(view["signal"]), 7)                                    # signals: still only 7 coins
-        self.assertEqual(view["research_only"], [f"C{i}" for i in range(6, 19)])   # the next 13 by volume
-        _, _, view = uni.update_membership(uni.empty_state(), uni.rank(["BTC", "ETH"] + names(10), ALWAYS), u20, ALWAYS)
-        self.assertEqual(len(view["research"]), 12)                                 # fewer eligible = fewer coins
-        cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))["universe"]
-        self.assertEqual((cfg["signal_coins"], cfg["research_coins"]), (7, 20))
-        self.assertGreaterEqual(cfg["candidate_pool"], cfg["research_coins"])
-
     def test_newcomer_needs_2_runs_and_swaps_with_the_one_pushed_out(self):
         base = ["BTC", "ETH"] + names(8)
         new = ["BTC", "ETH", "NEW"] + names(8)                 # NEW pushes C5 to rank 8
@@ -276,12 +264,10 @@ class EndToEnd(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             u1, rep1 = self.scan(tmp)
             self.assertEqual(len(u1["signal"]), 7)
-            eligible = sum(bool(c["eligible"]) for c in u1["candidates"])
-            self.assertEqual(len(u1["research_only"]), min(20, eligible) - 7)   # research_coins 20: every eligible coin
-            self.assertEqual(u1["rules"]["research_coins"], 20)                 # up to 20 (fewer when fewer qualify)
+            self.assertEqual(len(u1["research_only"]), 3)
             self.assertEqual(set(rep1["coins_scanned"]), set(u1["signal"]) | set(u1["research_only"]))
             self.assertTrue({"BTC", "ETH"} <= set(u1["signal"]))
-            outsider = u1["research_only"][-1]                  # the last research coin: jumps to the top
+            outsider = u1["research_only"][-1]                  # rank 10: jumps to the top
             last_member = u1["signal"][-1]
             boost = {"quote_volume": {outsider: 5e9}}
             u2, _ = self.scan(tmp, boost)

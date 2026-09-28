@@ -1,8 +1,10 @@
 """Learning-loop upgrades: near-duplicate strategies (one idea, not two), the "vs yesterday / vs last week" lines of
-the daily and weekly emails, and the dashboard's progress charts. Report only - no rule changes.
+the daily and weekly emails, the dashboard's progress charts, and the weekly fixes (sources read, no word cut in
+half, one sentence per day). Report only - no rule changes.
 
 Run:  python -m unittest tests.test_learning_loop -v
 """
+import datetime as dt
 import os
 import sys
 import unittest
@@ -13,6 +15,7 @@ from engine import dashboard  # noqa: E402
 from engine import dupes  # noqa: E402
 from engine import emails as em  # noqa: E402
 from engine import mailfacts as mf  # noqa: E402
+from engine import mailkit as mk  # noqa: E402
 
 H = 3_600_000
 
@@ -99,6 +102,70 @@ HIST = [dict(date="2026-09-20", new_cards=1, best_avg_r=0.15, cells_testing=10, 
              lab_cards=7, ideas=24)]
 
 
+SOURCES = """# Research sources
+
+### trend_pullback@1.0 - Buy the dip inside an up-trend
+- timestamp: 2026-09-25 00:49 UTC · source: strategies.yaml card trend_pullback@1.0 · evidence: HYPOTHESIS
+### [R2] TradingAgents - bull vs bear debate
+- timestamp: 2026-09-22 16:00 UTC · source: https://github.com/TauricResearch/TradingAgents · evidence: FACT
+### [C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012)
+- timestamp: 2026-09-26 06:40 UTC · source: https://doi.org/10.1016/j.jfineco.2011.11.003 · evidence: RESEARCH_FINDING
+### R4-BBRSI@1.0 - Bollinger + RSI dip
+- timestamp: 2026-09-27 00:50 UTC · source: strategies_lab.yaml card R4-BBRSI@1.0 · evidence: UNVERIFIED_OPINION
+### Binance Futures funding rates FAQ - when funding is paid and how it is built
+- timestamp: 2026-09-27 01:10 UTC · source: https://www.binance.com/en/support/faq · evidence: FACT
+"""
+
+
+class WeeklyFixes(unittest.TestCase):
+    def test_learned_from_online_is_sources_read_not_strategy_cards(self):
+        self.assertEqual(mf.sources_read(SOURCES, "2026-09-22"),
+                         ["Binance Futures funding rates FAQ - when funding is paid and how it is built",   # newest first
+                          "[C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012)",
+                          "[R2] TradingAgents - bull vs bear debate"])
+        self.assertEqual(mf.sources_read(SOURCES, "2026-09-26", n=5),
+                         ["Binance Futures funding rates FAQ - when funding is paid and how it is built",
+                          "[C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012)"])      # only this week's
+
+    def test_nothing_is_cut_mid_word(self):
+        s = "not cost-viable: fees + slippage 0.25R per trade (stop must be ≥ 4x the round-trip cost)"
+        for n in range(10, len(s)):
+            c = mk.clip(s, n)
+            self.assertLessEqual(len(c), n)
+            self.assertTrue(c.endswith("…"))
+            self.assertTrue(s.startswith(c[:-1]))
+            self.assertIn(s[len(c) - 1:len(c)], (" ", ",", ";", ":", "(", ""), c)   # the cut is at a word end
+        self.assertEqual(mk.clip("short", 10), "short")
+        self.assertEqual(mk.clip("unbreakablewordthatislong", 10), "unbreakab…")     # one long word: no choice
+        cells = {"A@1.0|4h": dict(strategy="A", version="1.0", tf="4h", status="FAILED", required_avg_r=0.1,
+                                  evidence=dict(all=dict(n=500, avg_r=0.2)), reasons=[s])}
+        note = em.closest(cells)[0][3]
+        self.assertEqual(note, "average met – still fails: not cost-viable: fees + slippage 0.25R per trade")
+        subj = mk.subject(["Week 39", "0 approved", "closest: a_very_long_strategy_name_with_words and more words here"])
+        self.assertLessEqual(len(subj), 70)
+        self.assertNotIn("closest: a_very", subj.replace("…", ""))                 # the last part dropped whole
+
+    def test_progress_history_one_plain_sentence_per_day(self):
+        self.assertEqual(mf.day_sentence(["Phase 0 — operator settings", "Phase 1 — data quality",
+                                          "Phase 2 — tradable universe"]),
+                         "Built Phase 0 — operator settings and 2 more.")
+        self.assertEqual(mf.day_sentence(["Email format v2 - type pill first, an ACTION box in every email",
+                                          "Fix: false BIASED alarm on every htf_up / htf_down card (bias check v2)",
+                                          "Fix: the risk manager's data check uses only the signal coins"]),
+                         "Built Email format v2; fixed false BIASED alarm on every htf_up / htf_down card and 1 more.")
+        self.assertEqual(mf.day_sentence(["Fix: two concurrent appends broke both lab cards; tests independent"]),
+                         "Fixed two concurrent appends broke both lab cards.")
+        self.assertIsNone(mf.day_sentence([]))
+        long = mf.day_sentence(["x " * 60])
+        self.assertTrue(long.endswith("…") and "x x" in long and len(long) < 90)
+        w = mf.weekly({}, {}, [], "", dt.datetime(2026, 9, 28, 4, tzinfo=dt.timezone.utc), None, None, None,
+                      changelog_text="## 2026-09-26 · Claude · Fix: a thing (detail)\n## 2026-09-26 · Claude · New X\n",
+                      sources_text=SOURCES)
+        self.assertEqual(w["history"], [("Sat 26", "Built New X; fixed a thing.")])
+        self.assertEqual(w["learned"]["online"][0], "Binance Futures funding rates FAQ - when funding is paid and how "
+                                                    "it is built")
+
+
 class Versus(unittest.TestCase):
     def test_vs_yesterday(self):
         self.assertEqual(mf.versus(HIST, "2026-09-28", 1),
@@ -121,7 +188,7 @@ class Versus(unittest.TestCase):
         self.assertIn("best avg R –", mf.versus([dict(date="2026-09-27"), dict(date="2026-09-28")], "2026-09-28", 1))
 
     def test_source_count(self):
-        self.assertEqual(mf.source_count("# Research sources\n\n### a@1.0 - x\n- y\n### b@1.0 - z\n"), 2)
+        self.assertEqual(mf.source_count(SOURCES), 3)                          # strategy-card records not counted
         self.assertEqual(mf.source_count(None), 0)
 
     def test_in_the_daily_and_weekly_emails(self):

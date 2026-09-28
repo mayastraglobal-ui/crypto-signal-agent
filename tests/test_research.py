@@ -352,7 +352,6 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(len(reg), len(res["cells"]))
             self.assertFalse(os.path.exists(os.path.join(tmp, "memory")))       # offline never writes memory/
             self.assertIsInstance(res["near_duplicates"], dict)                 # learning loop: near-duplicates ...
-            self.assertEqual(res["robustness"]["short_tf_coins"], [])           # ... and every coin on every timeframe
             with open(os.path.join(tmp, "reports", "research_counts_offline.json")) as f:
                 day = json.load(f)[-1]                                          # ... and the numbers kept per day
             for k in ("best_avg_r", "best_cell", "cells_testing", "cells_failed", "lab_cards", "sources", "ideas",
@@ -386,23 +385,11 @@ class EndToEnd(unittest.TestCase):
             edited[0]["params"]["fast"] = 21
             with open(os.path.join(tmp, "strategies.yaml"), "w") as f:
                 yaml.safe_dump(edited, f, sort_keys=False)
-            with open(os.path.join(tmp, "config.yaml")) as f:                  # time short: research coins #2+ get
-                cfg_text = f.read()                                            # 1h / 4h only (the 20-coin guard)
-            with open(os.path.join(tmp, "config.yaml"), "w") as f:
-                f.write(cfg_text.replace("full_research_coins: 10", "full_research_coins: 1")
-                        .replace("extra_coins_short_after_pct: 50", "extra_coins_short_after_pct: 0"))
             for script in ("research.py", "scanner.py"):
                 p = run(tmp, script, "--coins", "3")
                 self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
             with open(os.path.join(tmp, "reports", "research_offline.json")) as f:
-                res2 = json.load(f)
-            self.assertIn("trend_pullback", res2["not_run"])
-            self.assertEqual(res2["robustness"]["short_tf_coins"], res2["coins"][1:])
-            for c in res2["cells"].values():
-                if c["tf"] not in ("1h", "4h"):
-                    self.assertLessEqual(set(c["evidence"]["by_coin"]), {res2["coins"][0]})
-            with open(os.path.join(tmp, "reports", "latest.md")) as f:
-                self.assertIn("tested on 1h / 4h only (research coins #2+, time short)", f.read())
+                self.assertIn("trend_pullback", json.load(f)["not_run"])
             with open(os.path.join(tmp, "reports", "latest.json")) as f:
                 self.assertIn("trend_pullback", json.load(f)["lifecycle"]["not_run"])
 

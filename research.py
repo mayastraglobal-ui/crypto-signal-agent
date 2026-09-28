@@ -418,10 +418,6 @@ def main():
     fg_mode, fg_why = fgt.mode(FG, started.date())
     budget_s = float(R.get("time_budget_min", 90)) * 60
     bias_out, rules_skipped = None, []
-    full_n = int(R.get("full_research_coins", 10))            # research coins #11+ get fewer timeframes when time is short
-    short_at = float(R.get("extra_coins_short_after_pct", 50)) / 100 * budget_s
-    short_tfs = [tf for tf in tfs if tf in (R.get("extra_coins_short_tfs") or ["1h", "4h"])]
-    short_coins = []
     try:                                              # Phase 18 D: the backtest chart page's data (never fatal)
         charts_w = btc_mod.Writer(os.path.join(sc.REPORTS, "backtest_charts_offline" if args.offline else "backtest_charts"))
     except OSError as e:
@@ -451,17 +447,11 @@ def main():
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
         if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
-    for i, base in enumerate(coins):
+    for base in coins:
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
-        coin_tfs = tfs
-        if i >= full_n and time.time() - t_start >= short_at:   # time is short: an extra coin on 1h / 4h only
-            coin_tfs = short_tfs
-            short_coins.append(base)
-            log(f"{base}: research coin #{i + 1}, {round((time.time() - t_start) / 60)} of {round(budget_s / 60)} "
-                f"minutes used - tested on {', '.join(short_tfs)} only")
         try:
-            for tf in ["1w", "1d"] + coin_tfs:
+            for tf in ["1w", "1d"] + tfs:
                 raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
                 df, rep = dq.check_candles(raw, sc.TF_MS[tf], now_ms, dq_cfg)
                 data[(sym, tf)], quality[(base, tf)] = df, rep
@@ -473,7 +463,7 @@ def main():
             continue
         if base == "BTC":
             btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
-        pc = sc.prepare_coin(sym, base, data, quality, coin_tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
         if bias_out is None:                        # Phase 18 B: lookahead + recursive check on the first coin (BTC)
             try:
                 bias_out = bias.check_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, pc,
@@ -499,7 +489,7 @@ def main():
                 m.update(coin=base, signal_coin=base in signal_coins, key=f"{base}|{m['start_ms']}|{m['dir']}",
                          regime=sc.regime_at(f1["reg"], "1h", i0) if i0 >= 0 else None)   # known before the move
             moves_all += moves
-        for tf in coin_tfs:
+        for tf in tfs:
             if tf not in pc["frames"]:
                 skipped.setdefault(base, "")
                 skipped[base] += f"{tf} not researched (data {quality[(base, tf)]['state']}); "
@@ -860,8 +850,7 @@ def main():
                factories=factories, lead_lag=lead_lag, cleanup=cleanup_out, counts=counts,
                near_duplicates=near_dupes, near_duplicate_settings=ND,
                robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
-                               rules_skipped_coins=rules_skipped, short_tf_coins=short_coins, full_research_coins=full_n,
-                               time_budget_min=round(budget_s / 60),
+                               rules_skipped_coins=rules_skipped, time_budget_min=round(budget_s / 60),
                                simpler_queued=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
                                                for c in simpler], simpler_not_queued=not_queued,
                                rules_adding_nothing={ck: c["rules_adding_nothing"] for ck, c in cells.items()

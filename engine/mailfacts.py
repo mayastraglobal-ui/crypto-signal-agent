@@ -16,6 +16,7 @@ import re
 from engine import btcharts
 from engine import emails as em
 from engine import idea_queue as iq
+from engine import mailkit as mk
 
 PASSED = ("VALIDATION", "PAPER_TRADING", "APPROVED")
 NOT_PASSED = ("FORMALIZED", "BACKTESTING", "FAILED", "NEW")
@@ -137,7 +138,8 @@ def lab_ideas(lab_cards, research, day, queue_text=None):
               and str(x.get("version")) == str(c.get("version"))]
         tfs = ", ".join(c.get("timeframes") or [])
         out.append(dict(name=f"{c.get('id')} v{c.get('version')}" + (f" · {tfs}" if tfs else ""),
-                        what=re.sub(r"\s+", " ", str(c.get("description") or c.get("hypothesis") or "")).strip()[:140],
+                        what=mk.clip(re.sub(r"\s+", " ", str(c.get("description") or c.get("hypothesis") or "")).strip(),
+                                        140),
                         source=em.source_chip(c, queued), status=em.status_chip(st)))
     return out
 
@@ -159,9 +161,53 @@ def counts_for(hist, day):
     return next((x for x in reversed(hist or []) if x.get("date") == day), None)
 
 
+CARD_SOURCE = re.compile(r"· source: \S*strateg\w*\.yaml card ")   # the engine's own record of a strategy card
+
+
+def _source_records(text):
+    """memory/research_sources.md -> [(date, title)] of the sources READ (papers, repositories, articles) - not the
+    records the engine writes itself for each strategy card it tests."""
+    out, title = [], None
+    for line in (text or "").splitlines():
+        m = re.match(r"^### (.+)$", line)
+        if m:
+            title = m.group(1).strip()
+            continue
+        t = re.match(r"^- timestamp: (\d{4}-\d{2}-\d{2})", line)
+        if t and title:
+            if not CARD_SOURCE.search(line):
+                out.append((t.group(1), title))
+            title = None
+    return out
+
+
 def source_count(text):
-    """Research sources recorded so far (the ### records of memory/research_sources.md)."""
-    return len(re.findall(r"^### ", text or "", re.M))
+    """Research sources read so far (strategy-card records not counted)."""
+    return len(_source_records(text))
+
+
+def sources_read(text, since, n=3):
+    """The newest sources read since `since` (YYYY-MM-DD), newest first: the weekly's "Learned from online"."""
+    return [mk.clip(t, 110) for d, t in reversed(_source_records(text)) if d >= since][:n]
+
+
+def day_sentence(items):
+    """One plain sentence for a day of the progress history: 'Built X and 2 more; fixed Y.' items = changelog / PR
+    titles of that day; titles starting 'Fix' are fixes."""
+    def first(t):                                  # the title's first clause, cut only between words
+        return mk.clip(re.split(r"; | \(| - ", re.sub(r"^Fix:\s*", "", t))[0].strip().rstrip("."), 80)
+    fixes = [t for t in items if re.match(r"^Fix\b", t)]
+    built = [t for t in items if t not in fixes]
+    parts = []
+    if built:
+        parts.append(f"Built {first(built[0])}" + (f" and {len(built) - 1} more" if len(built) > 1 else ""))
+    if fixes:
+        parts.append(("fixed " if parts else "Fixed ") + first(fixes[0])
+                     + (f" and {len(fixes) - 1} more" if len(fixes) > 1 else ""))
+    if not parts:
+        return None
+    s = "; ".join(parts)
+    return s if s.endswith("…") else s + "."
 
 
 def _delta(now, then, unit="", digits=0):
@@ -437,8 +483,7 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
     for d in days:
         items = [t for x, t in log if x == d] + [t for x, t in prs if x == d]
         if items:
-            history.append((em.bj(d + " 12:00", "%a %d"), "; ".join(items[:3]) + (f" (+{len(items) - 3} more)"
-                                                                                    if len(items) > 3 else "")))
+            history.append((em.bj(d + " 12:00", "%a %d"), day_sentence(items)))
     mistakes = [re.sub(r"^Fix:\s*", "", t) for x, t in log + prs if x >= since and re.match(r"^Fix\b", t)]
     bad_feeds = sorted(k for k, v in ((feeds or {}).get("sources") or {}).items()
                        if isinstance(v, dict) and v.get("status") not in (None, "ok"))
@@ -457,7 +502,7 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
                 closest=close,
                 passed=passed_between(wk.get("lifecycle")), decision=dec,
                 learned=dict(mistakes=mistakes[:3], testing=headings(lessons_text, since)[:3],
-                             online=headings(sources_text, since)[:3],
+                             online=sources_read(sources_text, since),
                              blocked=f"Feeds failing: {', '.join(bad_feeds)}" if bad_feeds else None),
                 history=history, tests=tests, card=wk.get("card"),
                 next=dict(test=", ".join([q for q in queued if q not in in_lab][:2]) or None,

@@ -31,11 +31,11 @@ market:
 
 universe:                    # which coins the agent watches (AGENT_PROMPT.md section 4)
   signal_coins: 7            # top 7 eligible coins by 24h volume: the ONLY coins that can give signals
-  research_coins: 20         # the 7 + the next 13 eligible by volume: those 13 are backtested only, never a signal
+  research_coins: 10         # the 7 + the next 3: those 3 are backtested only, never a signal
   hysteresis_runs: 2         # a new coin must be in the top 7 for 2 runs in a row to join,
                              # and a member outside the top 7 for 2 runs in a row leaves.
                              # A member that breaks a rule below leaves IMMEDIATELY.
-  candidate_pool: 30         # how many high-volume coins get the detailed checks each run (room for 20 eligible)
+  candidate_pool: 20         # how many high-volume coins get the detailed checks each run
   # --- eligibility rules: ALL must pass ---
   min_24h_volume_usdt: 50000000     # $50M+ traded in the last 24h
   min_7d_avg_volume_usdt: 50000000  # ... and $50M+ per day on average over 7 days
@@ -213,9 +213,6 @@ research:                    # daily research run (research.py, workflow "Resear
     recursive_tolerance_pct: 0.1 # ... at most 0.1% of the candles may flip (rounding)
   time_budget_min: 90            # the research run must finish within 90 minutes: after 60% of it, the rule
                                  # significance test (one entry rule removed at a time) is skipped for the other coins
-  full_research_coins: 10        # the first 10 research coins are always tested on every timeframe ...
-  extra_coins_short_after_pct: 50  # ... the others (#11-20) only on the timeframes below once half the time is used
-  extra_coins_short_tfs: [1h, 4h]
   near_duplicates:               # Phase 20 lite 4 - report only: two cells on the same timeframe sharing >= 70% of
     min_overlap: 0.70            # their trades (of the bigger one) = one idea: the newer is "near-duplicate of" the
     min_trades: 20               # older; cells with fewer trades are not compared

@@ -27,6 +27,7 @@ which the Brain guard checked. Nothing here changes a signal, a fee, a risk limi
 Pure functions: no internet, no files.
 """
 import datetime as dt
+import re
 
 from engine import mailkit as mk
 from engine.mailkit import DASH, pct, price, signed, val
@@ -731,7 +732,8 @@ def closest(cells, n=3):
     rows = []
     for gap, _, c, avg, need in out[:n]:
         note = (f"needs {signed(gap, 'R', 2)} per trade" if gap > 0 else
-                "average met – still fails: " + mk.plain((c.get("reasons") or c.get("paper_gate_failed") or [DASH])[0])[:70])
+                "average met – still fails: " + mk.clip(re.split(r" \(|; ", mk.plain(
+                    (c.get("reasons") or c.get("paper_gate_failed") or [DASH])[0]))[0], 80))
         rows.append((f"{c['strategy']} v{c['version']} {c['tf']}", f"{signed(avg, 'R', 2)} of {signed(need, 'R', 2)}",
                      max(0.0, avg) / need if need > 0 else 0.0, note))
     return rows

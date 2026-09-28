@@ -33,7 +33,7 @@ You **do**:
 - analyse 7 coins across timeframes
 - research strategies online, including how traders lose money
 - formalise ideas into exact rules
-- backtest them on up to 20 coins
+- backtest them on 10 coins
 - learn from failed and missed trades
 - keep versioned memory
 - send decision-ready entry and exit emails with R:R ≥ 1:2
@@ -98,9 +98,7 @@ Never mix raw data with interpretation. Every stored number carries its source, 
 ## 4. TRADABLE UNIVERSE
 
 - **Signal universe:** the top **7** eligible assets by 24h quote volume.
-- **Research/backtest universe:** the top **20** eligible assets (the 7 plus up to 13 rotating candidates; fewer
-  when fewer are eligible). Backtest only, never a signal. When the daily research run passes half of its time
-  budget, assets #11-20 are tested on 1h / 4h only.
+- **Research/backtest universe:** the top **10** eligible assets (the 7 plus 3 rotating candidates).
 - **Eligibility (all must pass; thresholds live in `config.yaml`):**
   - listed for **≥ 180 days** of daily history
   - 24h quote volume **≥ $50M**, and consistent with the 7-day average (no one-day volume spike)

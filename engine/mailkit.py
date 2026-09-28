@@ -79,8 +79,18 @@ def subject(parts, limit=MAX_SUBJECT):
     parts = [plain(p) for p in parts if p not in (None, "")]
     while len(parts) > 1 and len(" · ".join(parts)) > limit:
         parts.pop()
-    s = " · ".join(parts)
-    return s if len(s) <= limit else s[:limit - 1].rstrip() + "…"
+    return clip(" · ".join(parts), limit)
+
+
+def clip(text, limit):
+    """Text of at most `limit` characters, cut only between words (never mid-word), with '…' when cut."""
+    s = str(text or "")
+    if len(s) <= limit:
+        return s
+    cut = s[:limit - 1]
+    if " " in cut and not s[limit - 1].isspace():
+        cut = cut[:cut.rindex(" ")]
+    return cut.rstrip(" ,;:·–-") + "…"
 
 
 def price(x):
