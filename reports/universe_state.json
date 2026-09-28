@@ -11,9 +11,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "QNT": "2026-09-27"
+  "QNT": "2026-09-28"
  },
- "runs": 79,
+ "runs": 80,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -61,7 +61,6 @@
   ],
   "QNT": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]
@@ -93,6 +92,8 @@
   ],
   "ADA": [],
   "XLM": [],
-  "QNT": []
+  "QNT": [
+   "data_degraded"
+  ]
  }
 }

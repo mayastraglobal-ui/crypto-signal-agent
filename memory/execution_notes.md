@@ -40,3 +40,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START VTHO 1d data: DEGRADED: volume 269x normal on candle 09-25 00:00 UTC (possible bad data)
 - timestamp: 2026-09-27 11:17 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: VTHO · timeframe: - · regime: - · review: 2026-10-27
   - signals from this data are blocked while it lasts
+
+### START QNT 1d data: DEGRADED: volume 91x normal on candle 09-27 00:00 UTC (possible bad data)
+- timestamp: 2026-09-28 00:28 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: QNT · timeframe: - · regime: - · review: 2026-10-28
+  - signals from this data are blocked while it lasts
