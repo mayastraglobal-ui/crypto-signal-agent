@@ -166,3 +166,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-28 17:19 UTC
 - **ELIGIBLE** AVAX - passes every rule again
+
+## 2026-09-28 18:22 UTC
+- **EXCLUDED** ONDO - 7-day average volume $49M < $50M

@@ -2620,3 +2620,24 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 16:45,UNI,15m,FVG,bull,,8.867,8.924,0.565,,1h,EXPANSION,,smc-1.0,Binance
 2026-09-28 17:00,UNI,15m,FVG_RETRACE,bull,,8.867,8.924,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
 2026-09-28 17:15,UNI,15m,FVG_FILLED,bull,,8.867,8.924,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-28 18:00,BTC,1h,FVG,bull,,83397.18,83563.11,0.325,,4h,RANGE,,smc-1.0,Binance
+2026-09-28 17:30,BTC,30m,OB_RETEST,bear,,84378.0,84999.0,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-28 17:30,BTC,30m,FVG_RETRACE,bear,,84238.87,84378.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 17:30,BTC,30m,FVG_FILLED,bear,,84238.87,84378.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 17:30,BTC,30m,FVG_RETRACE,bull,,83397.18,83580.28,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 17:30,BTC,15m,FVG,bull,,83776.01,83880.0,0.285,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 17:45,BTC,15m,FVG_RETRACE,bull,,83776.01,83880.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 18:00,ETH,1h,SWEEP,bear,2703.51,,,0.933,,4h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 17:30,ETH,30m,SWEEP,bear,2717.6,,,0.228,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 17:30,ETH,30m,WEAK_BREAK,bull,2698.68,,,0.036,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-28 17:30,ETH,30m,BREAKER_RETEST,bear,,2706.0,2709.78,,,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 17:30,ETH,15m,BREAKER_RETEST,bull,,2712.98,2715.82,,,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 17:30,ETH,15m,BREAKER_RETEST,bull,,2701.85,2709.68,,,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 17:30,ETH,15m,BREAKER_RETEST,bull,,2686.35,2703.51,,,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 17:30,ETH,15m,FVG,bull,,2688.12,2698.95,0.689,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 17:45,ETH,15m,OB_RETEST,bull,,2682.07,2697.87,,,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-28 17:45,ETH,15m,FVG_RETRACE,bull,,2688.12,2698.95,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 18:00,SOL,1h,SWEEP,bear,120.39,,,0.26,,4h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 17:30,SOL,30m,SWEEP,bear,120.39,,,0.325,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 17:30,SOL,15m,OB_RETEST,bull,,119.07,120.26,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-28 17:30,SOL,15m,FVG_FILLED,bear,,120.37,120.61,,,1h,UNCLEAR,,smc-1.0,Binance
