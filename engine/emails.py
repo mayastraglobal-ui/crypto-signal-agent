@@ -719,8 +719,8 @@ def closest(cells, n=3):
     """The cells nearest to the average-R bar that have not passed: [(label, value text, fraction, note)]."""
     out = []
     for c in (cells or {}).values():
-        if c.get("status") not in ("BACKTESTING", "FAILED") or c.get("bias"):
-            continue
+        if c.get("status") not in ("BACKTESTING", "FAILED") or c.get("bias") or c.get("near_duplicate"):
+            continue                           # a near-duplicate is the same idea as a cell already listed
         ev = (c.get("evidence") or {}).get("all") or {}
         avg, need = ev.get("avg_r"), c.get("required_avg_r")
         if avg is None or need is None or ev.get("n", 0) < 1:
@@ -774,8 +774,11 @@ def daily(d):
               ("line", "Missed moves: " + (d.get("missed") or "none recorded today.")),
               ("section", "2 · What the agent did"),
               ("tiles", ("teal", [("Backtests", val(c.get("backtests"), "{:,}"), "runs"),
-                                  ("Strategies", val(c.get("strategies")), "applied"),
+                                  ("Strategies", val(c.get("ideas") if c.get("ideas") is not None else c.get("strategies")),
+                                   f"{plural(c['near_duplicates'], 'near-duplicate')} = 1 idea" if c.get("near_duplicates")
+                                   else "applied"),
                                   ("Coins", val(c.get("coins")), "tested"), ("New ideas", str(len(ideas)), "built")])),
+              *([("line", d["versus"])] if d.get("versus") else []),
               ("kv", [("Status", "; ".join(d.get("status_lines") or []) or "no status change today"),
                       ("Built", "; ".join(d.get("built_lines") or []) or "nothing new today")])]
     if ideas:
@@ -829,9 +832,13 @@ def weekly(w):
                                    ("Week", signed(w.get("week_r")), "live R"),
                                    ("Missed", val(missed.get("n")), missed.get("text") or "")])),
                ("section", "2 · Road to real signals"),
-               ("tiles", ("teal", [("Tested", val(f.get("TESTED")), "cells"), ("Testing", val(f.get("TESTING")), ""),
+               ("tiles", ("teal", [("Tested", val(f["TESTED"] - (f.get("NEAR_DUP") or 0) if f.get("TESTED") is not None
+                                                  else None), "cells"),
+                                   ("Testing", val(f.get("TESTING")), ""),
                                    ("Paper", val(f.get("PAPER")), ""), ("Approved", val(f.get("APPROVED")), "")])),
-               ("line", f"Strategy × timeframe cells. {val(f.get('FAILED'))} failed for real reasons.")]
+               ("line", f"Strategy × timeframe cells. {val(f.get('FAILED'))} failed for real reasons."
+                        + (f" {plural(f['NEAR_DUP'], 'near-duplicate')} counted as one idea." if f.get("NEAR_DUP") else "")),
+               *([("line", w["versus"])] if w.get("versus") else [])]
     if close:
         blocks.append(("bars", close[:3]))
     blocks += [("section", "3 · Learned this week"),

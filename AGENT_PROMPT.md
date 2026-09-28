@@ -33,7 +33,7 @@ You **do**:
 - analyse 7 coins across timeframes
 - research strategies online, including how traders lose money
 - formalise ideas into exact rules
-- backtest them on 10 coins
+- backtest them on up to 20 coins
 - learn from failed and missed trades
 - keep versioned memory
 - send decision-ready entry and exit emails with R:R ≥ 1:2
@@ -98,7 +98,9 @@ Never mix raw data with interpretation. Every stored number carries its source, 
 ## 4. TRADABLE UNIVERSE
 
 - **Signal universe:** the top **7** eligible assets by 24h quote volume.
-- **Research/backtest universe:** the top **10** eligible assets (the 7 plus 3 rotating candidates).
+- **Research/backtest universe:** the top **20** eligible assets (the 7 plus up to 13 rotating candidates; fewer
+  when fewer are eligible). Backtest only, never a signal. When the daily research run passes half of its time
+  budget, assets #11-20 are tested on 1h / 4h only.
 - **Eligibility (all must pass; thresholds live in `config.yaml`):**
   - listed for **≥ 180 days** of daily history
   - 24h quote volume **≥ $50M**, and consistent with the 7-day average (no one-day volume spike)
@@ -601,7 +603,7 @@ Record every source in `memory/research_sources.md` with: URL, title, date, clai
 - **E. PAPER complete**: once, at a version's 20th closed paper signal - paper vs backtest, YOUR DECISION only when the approval rules pass. Approval stays the operator's line in config.yaml.
 - **F. ALERT / G. FIXED**: one layout for every system problem (a workflow failed twice in a row, no scan for 2 hours, market data unsafe for the system or a signal coin, a risk halt, a Claude task refused or 60 minutes late, tests red on main, emails lost), one ALERT per problem and one FIXED when it recovers. Bad data on candidate coins and blocked exchange endpoints are only a SYSTEM HEALTH line.
 - **H. BRIEFING 08:20**: market now, the 7 signal coins, next events, agent plan today, strategy progress, do / don't. **I. 14:20 / 21:20**: only what changed since the previous briefing; nothing changed = a 3-line "No change" email (never skipped): `21:20 · No change since 14:20 · still no trade`, ACTION None, one status line, the next task, Full analysis. Claude's file not on main 40 minutes after the slot (15:00 / 22:00 Beijing): the engine sends that email itself from its numbers, marked "(engine only - Claude's briefing was late)", once; a later Claude file sends no second email (the 60-minute ALERT is unchanged). The same holds for the 08:20 briefing (09:00 Beijing) and the 23:30 daily review (00:10 Beijing, marked "(engine only - Claude's daily review was late)"), also when the task could not run and wrote nothing; the scan re-checks later as a backstop (08:20 from 12:00, the review from 03:00 Beijing).
-- **J. DAILY 23:30**: trading today, what the agent did, closest to passing, learned today, tomorrow, system health. **K. WEEKLY** (Sunday): your decision, results, road to real signals, learned this week, progress history (changelog + merged PRs), report card, next week.
+- **J. DAILY 23:30**: trading today, what the agent did (+ a "vs yesterday" line: best avg R, cells testing / failed, new lab cards, sources read), closest to passing, learned today, tomorrow, system health. **K. WEEKLY** (Sunday): your decision, results, road to real signals (+ the same line "vs last week"), learned this week, progress history (changelog + merged PRs), report card, next week. Near-duplicate cells (Phase 20 lite 4: >= 70% of trades shared on the same timeframe) count as one idea in both; the dashboard shows these numbers per research day as progress charts.
 - Claude's reports carry a `## Email summary` block the Brain guard checks; the full reports are pages on the dashboard.
 - **WATCHING** setups appear in reports and briefings only (never emailed).
 

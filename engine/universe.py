@@ -2,7 +2,8 @@
 Tradable universe (AGENT_PROMPT.md section 4).
 
   - SIGNAL coins   : the top 7 eligible coins by 24h quote volume. Only these may give signals.
-  - RESEARCH coins : the signal coins + the next 3 eligible coins. The extra 3 are backtested only.
+  - RESEARCH coins : the signal coins + the next eligible coins by volume, up to research_coins (config: 20). The
+                     extra ones are backtested only, never a signal.
   - Hysteresis     : a new coin must rank in the top 7 for 2 runs in a row before it joins, and a
                      member must rank outside the top 7 for 2 runs in a row before it leaves.
                      A member that stops being ELIGIBLE (safety rules) is removed at once.

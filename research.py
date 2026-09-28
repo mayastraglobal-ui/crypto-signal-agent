@@ -41,6 +41,7 @@ from engine import attribution as att
 from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import dupes
 from engine import bias
 from engine import btcharts as btc_mod
 from engine import debate
@@ -353,6 +354,20 @@ def run_counts(started, runs_per_coin, tested, per, lab_cards, cells):
                 new_cards=new_cards)
 
 
+def learning_numbers(cells, lab_total, sources_text, min_trades):
+    """The learning-loop numbers of this run, kept per day in research_counts.json for the "vs yesterday / vs last
+    week" lines and the dashboard's progress chart: the best average R of a cell with enough trades (not BIASED),
+    cells testing / failed (the email's buckets), lab cards and research sources recorded so far."""
+    from engine import mailfacts as mf
+    good = [(c["evidence"]["all"]["avg_r"], ck) for ck, c in cells.items()
+            if c["evidence"]["all"]["n"] >= min_trades and not c.get("bias")]
+    best = max(good, default=None)
+    pc = mf.progress_counts(cells)
+    return dict(best_avg_r=round(float(best[0]), 3) if best else None, best_cell=dupes.label(best[1]) if best else None,
+                cells_testing=pc["TESTING"], cells_failed=pc["FAILED"], cells_paper=pc["PAPER"], lab_cards=int(lab_total),
+                sources=mf.source_count(sources_text))
+
+
 def save_counts(counts, offline):
     """reports/research_counts.json: one entry per research day (the newest run of a day wins), last COUNTS_KEEP days."""
     path = os.path.join(sc.REPORTS, "research_counts_offline.json" if offline else "research_counts.json")
@@ -403,6 +418,10 @@ def main():
     fg_mode, fg_why = fgt.mode(FG, started.date())
     budget_s = float(R.get("time_budget_min", 90)) * 60
     bias_out, rules_skipped = None, []
+    full_n = int(R.get("full_research_coins", 10))            # research coins #11+ get fewer timeframes when time is short
+    short_at = float(R.get("extra_coins_short_after_pct", 50)) / 100 * budget_s
+    short_tfs = [tf for tf in tfs if tf in (R.get("extra_coins_short_tfs") or ["1h", "4h"])]
+    short_coins = []
     try:                                              # Phase 18 D: the backtest chart page's data (never fatal)
         charts_w = btc_mod.Writer(os.path.join(sc.REPORTS, "backtest_charts_offline" if args.offline else "backtest_charts"))
     except OSError as e:
@@ -432,11 +451,17 @@ def main():
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
         if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
-    for base in coins:
+    for i, base in enumerate(coins):
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
+        coin_tfs = tfs
+        if i >= full_n and time.time() - t_start >= short_at:   # time is short: an extra coin on 1h / 4h only
+            coin_tfs = short_tfs
+            short_coins.append(base)
+            log(f"{base}: research coin #{i + 1}, {round((time.time() - t_start) / 60)} of {round(budget_s / 60)} "
+                f"minutes used - tested on {', '.join(short_tfs)} only")
         try:
-            for tf in ["1w", "1d"] + tfs:
+            for tf in ["1w", "1d"] + coin_tfs:
                 raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
                 df, rep = dq.check_candles(raw, sc.TF_MS[tf], now_ms, dq_cfg)
                 data[(sym, tf)], quality[(base, tf)] = df, rep
@@ -448,7 +473,7 @@ def main():
             continue
         if base == "BTC":
             btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
-        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        pc = sc.prepare_coin(sym, base, data, quality, coin_tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
         if bias_out is None:                        # Phase 18 B: lookahead + recursive check on the first coin (BTC)
             try:
                 bias_out = bias.check_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, pc,
@@ -474,7 +499,7 @@ def main():
                 m.update(coin=base, signal_coin=base in signal_coins, key=f"{base}|{m['start_ms']}|{m['dir']}",
                          regime=sc.regime_at(f1["reg"], "1h", i0) if i0 >= 0 else None)   # known before the move
             moves_all += moves
-        for tf in tfs:
+        for tf in coin_tfs:
             if tf not in pc["frames"]:
                 skipped.setdefault(base, "")
                 skipped[base] += f"{tf} not researched (data {quality[(base, tf)]['state']}); "
@@ -794,8 +819,25 @@ def main():
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
         + (" - offline: not written" if args.offline and new_variants else ""))
 
+    # ---------- near-duplicates (Phase 20 lite 4): >= 70% of trades shared on a timeframe = one idea ----------
+    ND = dupes.settings(R.get("near_duplicates"))
+    near_dupes = dupes.find(per, dupes.age_order(registry["versions"], by_key), ND,
+                            skip={k for k, x in by_key.items() if x.get("twin_of")})
+    for ck, x in near_dupes.items():
+        if ck in cells:
+            cells[ck]["near_duplicate"] = x
+        log(f"near-duplicate: {dupes.label(ck)} = {dupes.label(x['of'])} ({round(100 * x['overlap'])}% of "
+            f"{x['trades']} trades shared)")
+
     # ---------- counts for the daily and weekly emails (email redesign) ----------
     counts = run_counts(started, runs_per_coin, tested, per, (lab_now or []) + new_variants, cells)
+    src_path = os.path.join(sc.MEMORY, "research_sources.md")
+    counts.update(learning_numbers(cells, len((lab_now or []) + new_variants),
+                                   open(src_path, encoding="utf-8").read() if os.path.exists(src_path) else "",
+                                   V["min_trades"]),
+                  near_duplicates=len(near_dupes),
+                  ideas=dupes.ideas({sspec.key(x): [k[2] for k in per if k[0] == x["id"] and k[1] == x["version"]]
+                                     for x in tested}, near_dupes))
     try:
         save_counts(counts, args.offline)
     except OSError as e:
@@ -816,8 +858,10 @@ def main():
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
                factories=factories, lead_lag=lead_lag, cleanup=cleanup_out, counts=counts,
+               near_duplicates=near_dupes, near_duplicate_settings=ND,
                robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
-                               rules_skipped_coins=rules_skipped, time_budget_min=round(budget_s / 60),
+                               rules_skipped_coins=rules_skipped, short_tf_coins=short_coins, full_research_coins=full_n,
+                               time_budget_min=round(budget_s / 60),
                                simpler_queued=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
                                                for c in simpler], simpler_not_queued=not_queued,
                                rules_adding_nothing={ck: c["rules_adding_nothing"] for ck, c in cells.items()

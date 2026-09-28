@@ -87,7 +87,10 @@ Main keeps the history that matters: `memory/`, `reports/signals_log.csv`, `repo
 
 - **Signal coins (7):** the 7 eligible coins with the most trading in the last 24 hours.
   Only these can give signals. BTC and ETH are always included when eligible.
-- **Research coins (3 more):** the next 3. They are backtested, but never give a signal.
+- **Research coins (up to 13 more):** the next eligible coins by volume, up to 20 coins in all. They are
+  backtested, but never give a signal. Fewer when fewer coins are eligible (the rules below are the same for them).
+  If the daily research run passes half of its 90-minute budget, research coins #11-20 are tested on 1h / 4h only
+  (the report says which).
 - **Eligible** means ALL of: 180+ days of history · $50M+ volume in 24h and on average over 7 days ·
   no one-day volume spike (24h > 3x the 7-day average) · moved less than ±25% in 24h (otherwise
   suspended for the rest of the UTC day) · spread ≤ 0.10% · $250k+ of orders within 1% of the price
@@ -217,6 +220,15 @@ than 8R, and leaves paper if it fails Layer B two days in a row. **APPROVED** on
 Results: report sections 3 / 3b / 3c and `reports/research.json`. Long price history is kept in GitHub's Actions
 cache (not in the repo) and only new candles are downloaded each day. Settings: `config.yaml` → `research`.
 
+**Near-duplicates** (report only, `engine/dupes.py`): two strategy cells on the same timeframe that share at least
+70% of their trades (same coin, same entry candle, same direction - counted against the cell with more trades) are
+one idea. The newer one is marked "near-duplicate of <the older one>" (report 3b, dashboard, `research.json`), and
+the emails, "closest to passing" and the weekly funnel count the pair once. Statuses and gates do not change.
+
+**Learning numbers per day:** each run adds the best average R, cells testing / failed, lab cards, research sources
+recorded and ideas to `reports/research_counts.json`. The daily email compares them with the day before, the weekly
+email with the week before, and the dashboard (section 4) draws them per day.
+
 ## Signal states, 5-minute confirmation and the position book
 
 Every signal of a strategy in VALIDATION or higher is followed through fixed states (AGENT_PROMPT.md
@@ -278,8 +290,8 @@ breaks.
 | G. FIXED | `✓ Fixed · market data OK · 0 signals missed` | once per ALERT, when it works again: down from–to, duration, signals missed, cause |
 | H. BRIEFING 08:20 | `08:20 · No trade · BTC up · PCE Tue 20:30` | after Claude's 08:20 briefing (missing 40 minutes after = engine-only at 09:00 Beijing, marked *(engine only - Claude's briefing was late)*, also when the task wrote nothing at all; the scan's backstop from 12:00): market now, the 7 signal coins, next events, AGENT PLAN TODAY (test / check / study), STRATEGY PROGRESS, DO / DON'T |
 | I. BRIEFING 14:20 / 21:20 | `14:20 · 2 changes · still no trade` | what changed since the previous briefing (signal, a daily trend, a strategy status, a new lab card, an event within 24 h, data or a risk halt); nothing changed = a 3-line **No change** email (`21:20 · No change since 14:20 · still no trade`: ACTION None, one status line, what comes next) - never skipped. Claude's file not on main 40 minutes after the slot (15:00 / 22:00 Beijing): the same email from engine numbers only, marked *(engine only - Claude's briefing was late)*; a Claude file that arrives later sends no second email |
-| J. DAILY 23:30 | `Daily · 0 trades · 460 backtests · 1 new lesson` | after Claude's daily review (missing 40 minutes after = engine-only at 00:10 Beijing, marked *(engine only - Claude's daily review was late)*, also when the task wrote nothing at all; the scan's backstop from 03:00): trading today, what the agent did, closest to passing, learned today, tomorrow (watch / avoid / learn), system health |
-| K. WEEKLY | `Week 39 · 0 approved · closest: donchian_breakout 4H` | Sunday, first scan from 04:00 UTC: YOUR DECISION, results, road to real signals, learned this week, agent progress history (changelog + merged PRs), report card, next week |
+| J. DAILY 23:30 | `Daily · 0 trades · 460 backtests · 1 new lesson` | after Claude's daily review (missing 40 minutes after = engine-only at 00:10 Beijing, marked *(engine only - Claude's daily review was late)*, also when the task wrote nothing at all; the scan's backstop from 03:00): trading today, what the agent did (+ **vs yesterday**: best avg R, cells testing / failed, new lab cards, sources read), closest to passing, learned today, tomorrow (watch / avoid / learn), system health |
+| K. WEEKLY | `Week 39 · 0 approved · closest: donchian_breakout 4H` | Sunday, first scan from 04:00 UTC: YOUR DECISION, results, road to real signals (+ **vs last week**, the same numbers), learned this week, agent progress history (changelog + merged PRs), report card, next week |
 
 Each email is sent once. Not ALERTs (only a line in the daily SYSTEM HEALTH): bad data on candidate coins, Binance
 futures blocked (451) while OKX works. The research run saves its counts in `reports/research_counts.json`. Claude's

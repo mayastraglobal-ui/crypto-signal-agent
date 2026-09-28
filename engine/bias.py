@@ -251,7 +251,10 @@ def report_lines(research):
         L.append(f"**Research run duration:** {dur / 60:.1f} min (budget {budget} min)"
                  + (" - OVER BUDGET: tell the operator" if dur > budget * 60 else "")
                  + (f"; rule test skipped for {', '.join(rb['rules_skipped_coins'])} to stay inside it"
-                    if rb.get("rules_skipped_coins") else "") + ".\n")
+                    if rb.get("rules_skipped_coins") else "")
+                 + (f"; {', '.join(rb['short_tf_coins'])} tested on 1h / 4h only (research coins "
+                    f"#{int(rb.get('full_research_coins', 10)) + 1}+, time short)"
+                    if rb.get("short_tf_coins") else "") + ".\n")
     b = rb.get("bias") or {}
     if b.get("error"):
         L.append(f"**Lookahead / recursive check:** did NOT run ({b['error']}) - no card can reach PAPER_TRADING "
