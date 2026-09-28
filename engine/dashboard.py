@@ -122,6 +122,48 @@ def svg_chart(candles, levels=(), title="", width=460, height=210):
     return "".join(parts)
 
 
+def svg_series(points, title, fmt="{:.0f}", width=300, height=120):
+    """A small line chart of one learning-loop number per research day: points [(YYYY-MM-DD, value or None)]."""
+    pts = [(d, float(v)) for d, v in points if v is not None]
+    if not pts:
+        return f'<div class="nochart">{esc(title)}: no numbers yet</div>'
+    lo, hi = min(v for _, v in pts), max(v for _, v in pts)
+    if hi == lo:
+        lo, hi = lo - 1, hi + 1
+    left, right, top, bottom = 4, 48, 20, 18
+    w, h = width - left - right, height - top - bottom
+    n = len(points)
+    x = lambda i: left + (w * i / (n - 1) if n > 1 else w / 2)
+    y = lambda v: top + (hi - v) / (hi - lo) * h
+    idx = {d: i for i, (d, _) in enumerate(points)}
+    xy = [(x(idx[d]), y(v)) for d, v in pts]
+    parts = [f'<svg class="chart" viewBox="0 0 {width} {height}" role="img" aria-label="{esc(title)}">',
+             f'<text class="ctitle" x="{left}" y="14">{esc(title)}</text>',
+             f'<polyline class="ln" points="{" ".join(f"{a:.1f},{b:.1f}" for a, b in xy)}"/>']
+    parts += [f'<circle class="pt" cx="{a:.1f}" cy="{b:.1f}" r="2.5"/>' for a, b in xy]
+    parts.append(f'<text class="lbl last" x="{left + w + 4}" y="{xy[-1][1] + 4:.1f}">{esc(fmt.format(pts[-1][1]))}</text>')
+    parts.append(f'<text class="axis" x="{left}" y="{height - 4}">{esc(points[0][0][5:])}</text>')
+    parts.append(f'<text class="axis" x="{left + w}" y="{height - 4}" text-anchor="end">{esc(points[-1][0][5:])}</text>')
+    parts.append("</svg>")
+    return "".join(parts)
+
+
+LEARNING = [(1, "Best avg R (a cell with enough trades)", "{:+.3f}R"), (2, "Cells testing", "{:.0f}"),
+            (3, "Cells failed", "{:.0f}"), (4, "Lab cards", "{:.0f}"), (5, "Research sources read", "{:.0f}"),
+            (6, "Ideas (near-duplicates = 1)", "{:.0f}")]
+
+
+def learning_progress(series):
+    """Section 4's progress charts: series = mailfacts.progress_series(research_counts.json)."""
+    if not series:
+        return ""
+    charts = "".join(f'<div class="card">{svg_series([(r[0], r[i]) for r in series], title, fmt)}</div>'
+                     for i, title, fmt in LEARNING)
+    return ("<h3>Learning progress per research day</h3><p class='small mut'>From reports/research_counts.json (one "
+            "entry per daily research run). Days before these numbers were kept have no point.</p>"
+            f'<div class="grid">{charts}</div>')
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # page
 # ---------------------------------------------------------------------------------------------------------------
@@ -150,6 +192,7 @@ svg .wick{stroke-width:1}svg .up{stroke:var(--up);fill:var(--up)}svg .dn{stroke:
 svg .lvl{stroke-width:1.2;stroke-dasharray:5 4}svg .lbl,svg .axis,svg .ctitle{font-size:13px;fill:var(--mut)}
 svg .ctitle{font-weight:600;fill:var(--fg)}svg .entry{stroke:var(--acc);fill:var(--acc)}svg .stop{stroke:var(--dn);
 fill:var(--dn)}svg .tp{stroke:var(--up);fill:var(--up)}svg .last{fill:var(--fg)}.nochart{color:var(--mut);font-size:13px}
+svg .ln{fill:none;stroke:var(--acc);stroke-width:2}svg .pt{fill:var(--acc)}
 .ai-box{border-left:4px solid var(--ai);padding-left:10px}details summary{cursor:pointer;color:var(--acc);margin:6px 0}
 footer{text-align:center;color:var(--mut);font-size:13px;padding:10px}code{font-size:12px}
 """
@@ -323,6 +366,13 @@ def render(inp):
         st.append("<h3>Status changes in the last research run</h3><ul class='small'>" + "".join(
             f'<li>{esc(c["key"])} {esc(c["tf"])}: {esc(c["old"])} → <b>{esc(c["new"])}</b></li>' for c in changes[:20])
             + "</ul>")
+    dup = research.get("near_duplicates") or {}
+    if dup:                                            # Phase 20 lite 4: one idea, not two
+        st.append("<h3>Near-duplicates (counted as one idea)</h3><ul class='small'>" + "".join(
+            f'<li>{esc(k.replace("|", " "))} = near-duplicate of {esc(x["of"].replace("|", " "))} '
+            f'({round(100 * x["overlap"])}% of {x["trades"]:,} trades shared)</li>' for k, x in sorted(dup.items()))
+            + "</ul>")
+    st.append(learning_progress(inp.get("progress") or []))
     S.append("".join(st) + "</section>")
 
     # ---------- 5. approval ----------

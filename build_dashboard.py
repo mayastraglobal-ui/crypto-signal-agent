@@ -108,8 +108,10 @@ def claude_pages():
 
 
 def inputs(now):
+    from engine import mailfacts
     pine_dir = os.path.join(REPORTS, "pine")
     return dict(latest=load("latest.json"), research=load("research.json"), candles=load("dashboard_data.json"),
+                progress=mailfacts.progress_series(load("research_counts.json")),
                 briefing=newest("briefings"), review=newest("daily"),
                 pine_files=[f"reports/pine/{x}" for x in sorted(os.listdir(pine_dir)) if x.endswith(".pine")]
                 if os.path.isdir(pine_dir) else [],

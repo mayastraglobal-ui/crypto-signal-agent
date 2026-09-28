@@ -540,7 +540,7 @@ class Numbers(unittest.TestCase):
                      "Reply YES or NO.", "Live: 2 (+0.5R)", "Paper: 3 (+1.2R)", "Missed: 4 (4 correct skip)",
                      "Tested: 6 (cells)", "FROM MISTAKES\n  - false BIASED alarm", "FROM TESTING\n  - Wider stops",
                      "FROM ONLINE\n  - [R1] RD-Agent", "! Feeds failing: The Block",
-                     "Thu 24 | Phase 0 — settings", "Sat 26 | Fix: false BIASED alarm; Bias check v2 (#31)",
+                     "Thu 24 | Built Phase 0 — settings.", "Sat 26 | Built Bias check v2; fixed false BIASED alarm.",
                      "Tests: 566 · ✓ green on main", "RESEARCH SOURCES READ: 4", "DATA SOURCES: ✓ All OK",
                      "SELF-IMPROVEMENT IDEA: Fewer cards.", "TEST: R4-CLUC", "FIX: A v1.0 4h – needs +0.05R per trade",
                      "STUDY: C01 Time Series Momentum", "EVENTS: PCE Wed 30", "PLAN: Test the queue."):

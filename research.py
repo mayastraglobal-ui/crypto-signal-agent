@@ -41,6 +41,7 @@ from engine import attribution as att
 from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import dupes
 from engine import bias
 from engine import btcharts as btc_mod
 from engine import debate
@@ -351,6 +352,20 @@ def run_counts(started, runs_per_coin, tested, per, lab_cards, cells):
                 per_coin=dict(sorted(runs_per_coin.items())), strategies=len(tested), tests=len(per),
                 tests_per_coin=max(runs_per_coin.values()) if runs_per_coin else 0, coins=len(runs_per_coin),
                 new_cards=new_cards)
+
+
+def learning_numbers(cells, lab_total, sources_text, min_trades):
+    """The learning-loop numbers of this run, kept per day in research_counts.json for the "vs yesterday / vs last
+    week" lines and the dashboard's progress chart: the best average R of a cell with enough trades (not BIASED),
+    cells testing / failed (the email's buckets), lab cards and research sources recorded so far."""
+    from engine import mailfacts as mf
+    good = [(c["evidence"]["all"]["avg_r"], ck) for ck, c in cells.items()
+            if c["evidence"]["all"]["n"] >= min_trades and not c.get("bias")]
+    best = max(good, default=None)
+    pc = mf.progress_counts(cells)
+    return dict(best_avg_r=round(float(best[0]), 3) if best else None, best_cell=dupes.label(best[1]) if best else None,
+                cells_testing=pc["TESTING"], cells_failed=pc["FAILED"], cells_paper=pc["PAPER"], lab_cards=int(lab_total),
+                sources=mf.source_count(sources_text))
 
 
 def save_counts(counts, offline):
@@ -794,8 +809,25 @@ def main():
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
         + (" - offline: not written" if args.offline and new_variants else ""))
 
+    # ---------- near-duplicates (Phase 20 lite 4): >= 70% of trades shared on a timeframe = one idea ----------
+    ND = dupes.settings(R.get("near_duplicates"))
+    near_dupes = dupes.find(per, dupes.age_order(registry["versions"], by_key), ND,
+                            skip={k for k, x in by_key.items() if x.get("twin_of")})
+    for ck, x in near_dupes.items():
+        if ck in cells:
+            cells[ck]["near_duplicate"] = x
+        log(f"near-duplicate: {dupes.label(ck)} = {dupes.label(x['of'])} ({round(100 * x['overlap'])}% of "
+            f"{x['trades']} trades shared)")
+
     # ---------- counts for the daily and weekly emails (email redesign) ----------
     counts = run_counts(started, runs_per_coin, tested, per, (lab_now or []) + new_variants, cells)
+    src_path = os.path.join(sc.MEMORY, "research_sources.md")
+    counts.update(learning_numbers(cells, len((lab_now or []) + new_variants),
+                                   open(src_path, encoding="utf-8").read() if os.path.exists(src_path) else "",
+                                   V["min_trades"]),
+                  near_duplicates=len(near_dupes),
+                  ideas=dupes.ideas({sspec.key(x): [k[2] for k in per if k[0] == x["id"] and k[1] == x["version"]]
+                                     for x in tested}, near_dupes))
     try:
         save_counts(counts, args.offline)
     except OSError as e:
@@ -816,6 +848,7 @@ def main():
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
                approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
                factories=factories, lead_lag=lead_lag, cleanup=cleanup_out, counts=counts,
+               near_duplicates=near_dupes, near_duplicate_settings=ND,
                robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
                                rules_skipped_coins=rules_skipped, time_budget_min=round(budget_s / 60),
                                simpler_queued=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])

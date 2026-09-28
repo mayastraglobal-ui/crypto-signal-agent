@@ -213,6 +213,9 @@ research:                    # daily research run (research.py, workflow "Resear
     recursive_tolerance_pct: 0.1 # ... at most 0.1% of the candles may flip (rounding)
   time_budget_min: 90            # the research run must finish within 90 minutes: after 60% of it, the rule
                                  # significance test (one entry rule removed at a time) is skipped for the other coins
+  near_duplicates:               # Phase 20 lite 4 - report only: two cells on the same timeframe sharing >= 70% of
+    min_overlap: 0.70            # their trades (of the bigger one) = one idea: the newer is "near-duplicate of" the
+    min_trades: 20               # older; cells with fewer trades are not compared
 
 family_gates:                # Phase 19 A - operator-owned. Strategy-family drawdown gates (engine/family_gates.py).
                              # Replaces the single validation.max_drawdown_r for the TREND group; the TIGHT group keeps

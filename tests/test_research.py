@@ -351,6 +351,14 @@ class EndToEnd(unittest.TestCase):
             reg = pd.read_csv(os.path.join(tmp, "reports", "strategy_registry_offline.csv"), dtype={"version": str})
             self.assertEqual(len(reg), len(res["cells"]))
             self.assertFalse(os.path.exists(os.path.join(tmp, "memory")))       # offline never writes memory/
+            self.assertIsInstance(res["near_duplicates"], dict)                 # learning loop: near-duplicates ...
+            with open(os.path.join(tmp, "reports", "research_counts_offline.json")) as f:
+                day = json.load(f)[-1]                                          # ... and the numbers kept per day
+            for k in ("best_avg_r", "best_cell", "cells_testing", "cells_failed", "lab_cards", "sources", "ideas",
+                      "near_duplicates"):
+                self.assertIn(k, day)
+            self.assertEqual(day["cells_testing"] + day["cells_failed"] + day["cells_paper"], len(res["cells"]))
+            self.assertLessEqual(day["ideas"], day["strategies"])
 
             p = run(tmp, "scanner.py", "--coins", "3")                            # hourly scan reads the results
             self.assertEqual(p.returncode, 0, p.stdout + p.stderr)

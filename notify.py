@@ -538,7 +538,8 @@ def weekly_mail(rep, now):
     w = mf.weekly(rep, research(), lab_cards(), mem("experiments.md"), now, summary_of(rel),
                   page_url(rel) if rel else None, pages_base(), pages_base(), repo_link() or None,
                   mem("strategy_registry.csv"), mem("changelog.md"), merged_prs(), mem("lessons.md"),
-                  mem("research_sources.md"), load(os.path.join(REPORTS, "feeds.json"), {}), study(), tests)
+                  mem("research_sources.md"), load(os.path.join(REPORTS, "feeds.json"), {}), study(), tests,
+                  load(os.path.join(REPORTS, "research_counts.json"), []))
     return em.weekly(w)
 
 

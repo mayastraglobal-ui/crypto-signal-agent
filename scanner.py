@@ -53,6 +53,7 @@ from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
 from engine import bias
+from engine import dupes
 from engine import btcharts
 from engine import report_card as rcard
 from engine import risk as rk
@@ -2511,7 +2512,8 @@ def main():
                               changes=(research or {}).get("changes", []),
                               approval=(research or {}).get("approval") or {},
                               trials=(research or {}).get("trials"),
-                              robustness=bias.report_lines(research) + fgt.report_lines(research),
+                              robustness=bias.report_lines(research) + fgt.report_lines(research)
+                              + dupes.report_lines(research),
                               lab_cards=sum(bool(x.get("lab")) for x in strategies),
                               research_run=(research or {}).get("run_utc"),
                               candidate_lessons=(research or {}).get("candidate_lessons", []),

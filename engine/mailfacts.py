@@ -16,6 +16,7 @@ import re
 from engine import btcharts
 from engine import emails as em
 from engine import idea_queue as iq
+from engine import mailkit as mk
 
 PASSED = ("VALIDATION", "PAPER_TRADING", "APPROVED")
 NOT_PASSED = ("FORMALIZED", "BACKTESTING", "FAILED", "NEW")
@@ -137,7 +138,8 @@ def lab_ideas(lab_cards, research, day, queue_text=None):
               and str(x.get("version")) == str(c.get("version"))]
         tfs = ", ".join(c.get("timeframes") or [])
         out.append(dict(name=f"{c.get('id')} v{c.get('version')}" + (f" · {tfs}" if tfs else ""),
-                        what=re.sub(r"\s+", " ", str(c.get("description") or c.get("hypothesis") or "")).strip()[:140],
+                        what=mk.clip(re.sub(r"\s+", " ", str(c.get("description") or c.get("hypothesis") or "")).strip(),
+                                        140),
                         source=em.source_chip(c, queued), status=em.status_chip(st)))
     return out
 
@@ -157,6 +159,113 @@ def lessons_on(text, day):
 
 def counts_for(hist, day):
     return next((x for x in reversed(hist or []) if x.get("date") == day), None)
+
+
+CARD_SOURCE = re.compile(r"· source: \S*strateg\w*\.yaml card ")   # the engine's own record of a strategy card
+
+
+def _source_records(text):
+    """memory/research_sources.md -> [(date, title)] of the sources READ (papers, repositories, articles) - not the
+    records the engine writes itself for each strategy card it tests."""
+    out, title = [], None
+    for line in (text or "").splitlines():
+        m = re.match(r"^### (.+)$", line)
+        if m:
+            title = m.group(1).strip()
+            continue
+        t = re.match(r"^- timestamp: (\d{4}-\d{2}-\d{2})", line)
+        if t and title:
+            if not CARD_SOURCE.search(line):
+                out.append((t.group(1), title))
+            title = None
+    return out
+
+
+def source_count(text):
+    """Research sources read so far (strategy-card records not counted)."""
+    return len(_source_records(text))
+
+
+def sources_read(text, since, n=3):
+    """The newest sources read since `since` (YYYY-MM-DD), newest first: the weekly's "Learned from online"."""
+    return [mk.clip(t, 110) for d, t in reversed(_source_records(text)) if d >= since][:n]
+
+
+def day_sentence(items):
+    """One plain sentence for a day of the progress history: 'Built X and 2 more; fixed Y.' items = changelog / PR
+    titles of that day; titles starting 'Fix' are fixes."""
+    def first(t):                                  # the title's first clause, cut only between words
+        return mk.clip(re.split(r"; | \(| - ", re.sub(r"^Fix:\s*", "", t))[0].strip().rstrip("."), 80)
+    fixes = [t for t in items if re.match(r"^Fix\b", t)]
+    built = [t for t in items if t not in fixes]
+    parts = []
+    if built:
+        parts.append(f"Built {first(built[0])}" + (f" and {len(built) - 1} more" if len(built) > 1 else ""))
+    if fixes:
+        parts.append(("fixed " if parts else "Fixed ") + first(fixes[0])
+                     + (f" and {len(fixes) - 1} more" if len(fixes) > 1 else ""))
+    if not parts:
+        return None
+    s = "; ".join(parts)
+    return s if s.endswith("…") else s + "."
+
+
+def _delta(now, then, unit="", digits=0):
+    if now is None or then is None:
+        return ""
+    d = round(float(now) - float(then), digits)
+    if d == 0:
+        return " (±0)"
+    return (f" ({d:+.{digits}f}{unit})" if digits else f" ({int(d):+d}{unit})").replace("-", "−")  # a real minus
+
+
+def _sum_new(hist, first, last):
+    """New lab cards of the research days first..last (dates, both included); None without any entry."""
+    xs = [x.get("new_cards") for x in hist or [] if first <= str(x.get("date") or "") <= last]
+    xs = [x for x in xs if isinstance(x, int)]
+    return sum(xs) if xs else None
+
+
+def versus(hist, day, back=1):
+    """The learning loop against the day before (back=1) or the week before (back=7), from research_counts.json:
+    'vs yesterday · best avg R +0.226R (+0.020R) · testing 13 (+1) · failed 33 (-1) · new lab cards 2 (yesterday 0)
+    · sources read 27 (+2)'. None when there is nothing to compare with. Older entries lack some numbers: "–"."""
+    hist = sorted((x for x in hist or [] if isinstance(x, dict) and x.get("date")), key=lambda x: x["date"])
+    now = next((x for x in reversed(hist) if x["date"] <= day), None)
+    if not now:
+        return None
+    try:
+        d0 = dt.date.fromisoformat(now["date"])
+    except ValueError:
+        return None
+    then = next((x for x in reversed(hist) if x["date"] <= (d0 - dt.timedelta(days=back)).isoformat()), None)
+    if not then:
+        return None
+    gap = (d0 - dt.date.fromisoformat(then["date"])).days
+    word = ("yesterday" if gap == 1 else "last week" if back == 7 and gap <= 9 else
+            em.bj(then["date"] + " 12:00", "%d %b"))
+    best = now.get("best_avg_r")
+    if back == 1:
+        new_now, new_then = now.get("new_cards"), then.get("new_cards")
+    else:
+        new_now = _sum_new(hist, (d0 - dt.timedelta(days=6)).isoformat(), now["date"])
+        new_then = _sum_new(hist, (d0 - dt.timedelta(days=13)).isoformat(), (d0 - dt.timedelta(days=7)).isoformat())
+    parts = [f"vs {word}",
+             f"best avg R {em.signed(best, 'R', 3) if best is not None else em.DASH}"
+             + _delta(best, then.get("best_avg_r"), "R", 3),
+             f"testing {em.val(now.get('cells_testing'))}" + _delta(now.get("cells_testing"), then.get("cells_testing")),
+             f"failed {em.val(now.get('cells_failed'))}" + _delta(now.get("cells_failed"), then.get("cells_failed")),
+             f"new lab cards {em.val(new_now)} ({word} {em.val(new_then)})",
+             f"sources read {em.val(now.get('sources'))}" + _delta(now.get("sources"), then.get("sources"))]
+    return " · ".join(parts)
+
+
+def progress_series(hist):
+    """[(date, best avg R, testing, failed, lab cards, sources, ideas)] per research day, oldest first (the
+    dashboard's progress chart); numbers an older entry lacks are None."""
+    rows = sorted((x for x in hist or [] if isinstance(x, dict) and x.get("date")), key=lambda x: x["date"])
+    return [(x["date"], x.get("best_avg_r"), x.get("cells_testing"), x.get("cells_failed"), x.get("lab_cards"),
+             x.get("sources"), x.get("ideas")) for x in rows]
 
 
 def closed_today(rep, live):
@@ -327,7 +436,7 @@ def daily(rep, research, counts_hist, lab_cards, lessons_text, queue_text, day, 
                 events=next_events(rep, em.to_dt(utc)), research_time=em.bj("2000-01-01 " + RESEARCH_UTC, "%H:%M"),
                 decisions=decisions(research), approved=progress_counts(cells)["APPROVED"] if cells else None,
                 health=health(rep, derivs, em.to_dt(utc), tests), summary=summary, page_url=page_url,
-                dashboard_url=dashboard_url)
+                dashboard_url=dashboard_url, versus=versus(counts_hist, day, 1))
 
 
 # ---------------------------------------------------------------- K. weekly -------------------------------------------
@@ -348,8 +457,9 @@ def _stage(results, stage):
 
 def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboard_url, pages_base=None, repo_url=None,
            registry_text=None, changelog_text=None, merged=None, lessons_text=None, sources_text=None, feeds=None,
-           study=None, tests=None):
-    """The weekly report of the 7 days ending `now` (UTC datetime). merged = [(date, PR title)]."""
+           study=None, tests=None, counts_hist=None):
+    """The weekly report of the 7 days ending `now` (UTC datetime). merged = [(date, PR title)]; counts_hist =
+    research_counts.json (the "vs last week" line)."""
     rep = rep or {}
     research = research or {}
     wk = rep.get("weekly") or {}
@@ -373,8 +483,7 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
     for d in days:
         items = [t for x, t in log if x == d] + [t for x, t in prs if x == d]
         if items:
-            history.append((em.bj(d + " 12:00", "%a %d"), "; ".join(items[:3]) + (f" (+{len(items) - 3} more)"
-                                                                                    if len(items) > 3 else "")))
+            history.append((em.bj(d + " 12:00", "%a %d"), day_sentence(items)))
     mistakes = [re.sub(r"^Fix:\s*", "", t) for x, t in log + prs if x >= since and re.match(r"^Fix\b", t)]
     bad_feeds = sorted(k for k, v in ((feeds or {}).get("sources") or {}).items()
                        if isinstance(v, dict) and v.get("status") not in (None, "ok"))
@@ -389,14 +498,16 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
                 live=_stage(wk.get("results"), "APPROVED"), paper=_stage(wk.get("results"), "PAPER_TRADING"),
                 week_r=status(rep)["week_r"],
                 missed=dict(n=len(moves) if wk else None, text=", ".join(f"{n} {k}" for k, n in sorted(by.items()))),
-                funnel=progress_counts(cells) if cells else {}, closest=close,
+                funnel=dict(progress_counts(cells), NEAR_DUP=len(research.get("near_duplicates") or {})) if cells else {},
+                closest=close,
                 passed=passed_between(wk.get("lifecycle")), decision=dec,
                 learned=dict(mistakes=mistakes[:3], testing=headings(lessons_text, since)[:3],
-                             online=headings(sources_text, since)[:3],
+                             online=sources_read(sources_text, since),
                              blocked=f"Feeds failing: {', '.join(bad_feeds)}" if bad_feeds else None),
                 history=history, tests=tests, card=wk.get("card"),
                 next=dict(test=", ".join([q for q in queued if q not in in_lab][:2]) or None,
                           fix=f"{close[0][0]} – {close[0][3]}" if close else None, study=study,
                           events=" · ".join(f"{e.get('type') or em.short_event(e.get('name'))} "
                                             f"{em.bj(e.get('start_utc'), '%a %d')}" for e in ev) or None),
-                summary=summary, page_url=page_url, dashboard_url=dashboard_url)
+                summary=summary, page_url=page_url, dashboard_url=dashboard_url,
+                versus=versus(counts_hist, now.date().isoformat(), 7))
