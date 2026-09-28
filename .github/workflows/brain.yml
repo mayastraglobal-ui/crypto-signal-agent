@@ -67,7 +67,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}   # merged pull requests and the test runs, for the daily email
         run: python notify.py brain "$RUNNER_TEMP/brain_result.json"
 
-      - name: Watchdog - ALERT when no scan ran for 2 hours or a Claude task is 60 minutes late (FIXED when back)
+      - name: Watchdog - the engine's 14:20 / 21:20 briefing when Claude's is 40 min late; ALERT when no scan for 2 h or a Claude task is 60 min late (FIXED when back)
         continue-on-error: true
         run: python notify.py watchdog
 

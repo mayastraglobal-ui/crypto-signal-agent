@@ -764,6 +764,54 @@ class Alerts(unittest.TestCase):
             notify.watchdog(dt.datetime(2026, 9, 26, 9, 24, tzinfo=dt.timezone.utc))   # the 26 Sep 09:24 UTC case
         self.assertEqual(self.subjects(), [])                                     # no ALERT + FIXED pair
 
+    def test_late_1420_2120_briefing_engine_email_once(self):
+        self.write("latest.json", dict(rep_file(), generated_utc="2026-09-26 13:07"))
+        os.makedirs(os.path.join(self.rep, "claude", "daily"))
+        for rel in ("briefings/2026-09-25-2120.md", "briefings/2026-09-26-0820.md", "briefings/2026-09-26-1420.md",
+                    "daily/2026-09-25.md"):                                   # everything before 21:20 arrived
+            with open(os.path.join(self.rep, "claude", rel), "w") as f:
+                f.write("# x\n")
+        rel = "reports/claude/briefings/2026-09-26-2120.md"                  # 21:20 Beijing = 13:20 UTC
+        sent_path = os.path.join(self.rep, "brain_sent.json")
+        at = lambda h, m: dt.datetime(2026, 9, 26, h, m, tzinfo=dt.timezone.utc)  # noqa: E731
+        with mock.patch.object(notify, "ROOT", self.tmp), mock.patch.object(notify, "BRAIN_SENT", sent_path):
+            notify.late_briefings(at(13, 55))                                 # 35 minutes: Claude still has time
+            self.assertEqual(self.subjects(), [])
+            notify.late_briefings(at(14, 0))                                  # 40 minutes: the engine's email
+            m = self.sent[0]
+            self.assertEqual(self.subjects(), ["21:20 · No change since 14:20 · 1 trade open"])
+            self.assertIn("(engine only - Claude's briefing was late)", m["text"])
+            self.assertEqual(m["pill"], "BRIEFING")
+            with open(sent_path) as f:
+                self.assertIn(rel, json.load(f))
+            with open(os.path.join(self.rep, "briefing_snapshot_brain.json")) as f:
+                self.assertEqual(json.load(f)["slot"], "21:20")               # the next briefing compares with it
+            notify.late_briefings(at(14, 15))
+            self.assertEqual(self.subjects(), [])                             # once per slot
+            notify.watchdog(at(14, 20))                                       # the same ALERT as before at 60 minutes
+            self.assertEqual(self.subjects(), ["! Claude 21:20 briefing missing · the engine sends its numbers"])
+            with open(os.path.join(self.tmp, rel), "w") as f:                 # Claude's file arrives late
+                f.write(SummaryBlock.GOOD)
+            res = os.path.join(self.tmp, "res.json")
+            with open(res, "w") as f:
+                json.dump([dict(status="applied", branch="claude/brain-briefing", sha="a" * 40,
+                                when="2026-09-26 14:30", applied=[rel], problems=[])], f)
+            notify.brain_email(res)
+            self.assertEqual(self.subjects(), [])                             # no second email for the slot
+            notify.watchdog(at(14, 35))
+            self.assertEqual(self.subjects(), ["✓ Fixed · Claude briefing OK"])
+            os.remove(sent_path)
+            notify.late_briefings(at(16, 25))                                 # over 3 hours: never a stale one
+            notify.late_briefings(at(7, 5))                                   # 14:20 (06:20 UTC): its file is there
+            self.assertEqual(self.subjects(), [])
+
+    def test_late_note_in_the_changes_email(self):
+        b = mf.changes(rep_file(), "14:20", "08:20", "2026-09-26 07:00", [("◆", "Data GOOD → DEGRADED")], None)
+        t = em.changes(dict(b, note=notify.LATE_NOTE))["text"]
+        self.assertIn("1 change since 08:20.", t)
+        self.assertIn("(engine only - Claude's briefing was late)", t)
+        self.assertNotIn("engine only", em.changes(b)["text"])
+
     def test_brain_refusal_alert_and_fixed(self):
         self.write("latest.json", rep_file())
         res = os.path.join(self.tmp, "res.json")

@@ -516,3 +516,8 @@ Newest entries at the bottom. Format: date · who · what · why.
 - When nothing changed since the previous briefing, the 14:20 / 21:20 slot now sends a 3-line "No change" email (BRIEFING pill, same frame) instead of nothing: `21:20 · No change since 14:20 · still no trade` (or `· 1 trade open` when a LIVE or PAPER trade is open), ACTION None, one status line (signals, open trades, BTC, data, last scan), what comes next, Full analysis. The snapshot is still saved, so the next briefing compares with it. The engine-only fallback follows the same rule.
 - When something changed, the changes email is the same as before (only its footer now names the "No change" email).
 - `python notify.py samples` sends 13 TEST emails (I = the changes and the "No change" version). Tests: tests/test_email_design.py.
+
+## 2026-09-28 · Claude (BUILD mode, operator request) · 14:20 / 21:20 briefing: the engine's email when Claude's is 40 minutes late
+- The Brain workflow (every 15 minutes, before the watchdog) checks the 14:20 and 21:20 slots: when Claude's briefing file is not on main 40 minutes after the slot (15:00 / 22:00 Beijing), it sends the changes email or the short "No change" email from engine numbers only, marked "(engine only - Claude's briefing was late)", and saves the snapshot. Not later than 3 hours after the slot (never a stale one).
+- The slot's file name goes into reports/brain_sent.json, so a Claude file that arrives later is put on main but not emailed a second time.
+- Unchanged: the watchdog ALERT at 60 minutes (and its FIXED), the 08:20 fallback, the email layouts. Tests: tests/test_email_design.py.
