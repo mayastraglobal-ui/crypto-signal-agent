@@ -52,7 +52,7 @@ the end of the fact sheet.
      fact sheet. The Brain guard refuses the push when the block is missing or breaks a rule.
      - briefing: `headline` (at most 8 words), `sub` (at most 20 words), `do`, `dont` (one sentence each),
        optional `mood` (Calm, Busy, Volatile or Risk-off - kept in the page; the email does not show it). The 14:20
-       and 21:20 emails show only what the engine saw change since the previous briefing (none = a 3-line "No change" email; no briefing file 40 minutes after the slot = the engine sends it alone, and your late file is then not emailed);
+       and 21:20 emails show only what the engine saw change since the previous briefing (none = a 3-line "No change" email; no briefing or daily review file 40 minutes after its time = the engine sends that email alone, and your late file is then not emailed);
      - daily review: `lesson` (the lesson of the day), `tomorrow` (what to watch or not do), optional `sub`,
        optional `watch` and `avoid` (the email's TOMORROW rows WATCH / AVOID; without them WATCH shows the next
        event and AVOID shows `tomorrow`);

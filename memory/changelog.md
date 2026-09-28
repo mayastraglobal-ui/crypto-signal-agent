@@ -521,3 +521,9 @@ Newest entries at the bottom. Format: date · who · what · why.
 - The Brain workflow (every 15 minutes, before the watchdog) checks the 14:20 and 21:20 slots: when Claude's briefing file is not on main 40 minutes after the slot (15:00 / 22:00 Beijing), it sends the changes email or the short "No change" email from engine numbers only, marked "(engine only - Claude's briefing was late)", and saves the snapshot. Not later than 3 hours after the slot (never a stale one).
 - The slot's file name goes into reports/brain_sent.json, so a Claude file that arrives later is put on main but not emailed a second time.
 - Unchanged: the watchdog ALERT at 60 minutes (and its FIXED), the 08:20 fallback, the email layouts. Tests: tests/test_email_design.py.
+
+## 2026-09-28 · Claude (BUILD mode, operator request) · The late-task email also for the 08:20 briefing and the 23:30 daily review
+- Cause on 2026-09-28: the Claude briefing task could not run a single command (the permission check gave no verdict six times), so it wrote nothing. An email must still go out on time.
+- The Brain workflow's 40-minute check now covers every Claude email task: the 08:20 / 14:20 / 21:20 briefings and the 23:30 daily review. No file on main 40 minutes after its time (09:00, 15:00, 22:00, 00:10 Beijing) = the engine's email from its numbers, marked "(engine only - Claude's briefing was late)" / "(engine only - Claude's daily review was late)", once; a Claude file that arrives later is not emailed again. It does not depend on the Claude task at all.
+- The scan's old fallbacks stay as a later backstop (08:20 briefing from 12:00 Beijing, daily review from 03:00 Beijing) and skip a slot the Brain already sent.
+- Unchanged: the 60-minute watchdog ALERT and its FIXED, the email layouts. Tests: tests/test_email_design.py.

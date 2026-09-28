@@ -613,6 +613,7 @@ def briefing(b):
     data_ok = b.get("data_state") == "GOOD"
     blocks = [("header", ("BRIEFING", b.get("slot") or "08:20", bj(b.get("utc"), "%a %d %b") + " · Beijing")),
               ("headline", (head, sub)),
+              *([("line", b["note"])] if b.get("note") else []),
               action_box("Action", engine_action(b), mk.GREY_LINE if not (n_sig or b.get("open")) else mk.TEAL),
               ("section", "Market now"),
               ("tiles", ("grey", [("BTC", price(btc.get("price")),
@@ -764,6 +765,7 @@ def daily(d):
         else None, d.get("research_time") and f"research run {d['research_time']}"] if x) or DASH)
     blocks = [("header", ("DAILY", "23:30 review", bj(d.get("utc"), "%a %d %b") + " · Beijing")),
               ("headline", (head, s.get("sub") or "")),
+              *([("line", d["note"])] if d.get("note") else []),
               action_box("Action", act, mk.GREY_LINE if act[0].startswith("None.") else mk.TEAL),
               ("section", "1 · Trading today"),
               ("tiles", ("grey", [("Live", str(len(tr)), "closed trades"), ("Paper", str(len(d.get("paper_trades") or [])),
