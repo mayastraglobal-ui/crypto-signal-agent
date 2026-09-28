@@ -2641,3 +2641,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 17:30,SOL,30m,SWEEP,bear,120.39,,,0.325,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-09-28 17:30,SOL,15m,OB_RETEST,bull,,119.07,120.26,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
 2026-09-28 17:30,SOL,15m,FVG_FILLED,bear,,120.37,120.61,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 19:15,BTC,15m,FVG_FILLED,bull,,83776.01,83880.0,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 18:45,ETH,15m,FVG_FILLED,bull,,2688.12,2698.95,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 19:00,ZEC,15m,BOS,bear,1515.0,,,0.133,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-28 19:15,ZEC,15m,OB_INVALID,bull,,1500.79,1517.23,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance

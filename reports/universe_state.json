@@ -14,7 +14,7 @@
   "QNT": "2026-09-28",
   "HBAR": "2026-09-28"
  },
- "runs": 98,
+ "runs": 99,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,6 +26,7 @@
   ],
   "LTC": [],
   "ONDO": [
+   "thin_book",
    "volume_7d"
   ],
   "BNB": [],
