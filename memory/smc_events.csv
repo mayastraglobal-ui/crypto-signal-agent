@@ -2297,3 +2297,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 05:45,UNI,15m,FVG_RETRACE,bull,,9.144,9.18,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-09-28 05:45,UNI,15m,FVG_FILLED,bull,,9.144,9.18,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-28 06:15,UNI,15m,WEAK_BREAK,bear,9.242,,,0.052,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 06:30,BTC,30m,FVG_RETRACE,bear,,83198.01,83435.7,,London,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 06:30,SOL,30m,FVG_RETRACE,bear,,119.3,119.83,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-28 06:30,ZEC,15m,BOS,bear,1551.66,,,0.694,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 06:30,ZEC,15m,FVG_RETRACE,bull,,1542.93,1545.92,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-28 06:30,ZEC,15m,FVG_FILLED,bull,,1542.93,1545.92,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 06:30,XRP,30m,FVG_RETRACE,bear,,1.4865,1.4934,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-28 06:30,SUI,30m,FVG_RETRACE,bear,,1.2152,1.2264,,London,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 07:00,SUI,30m,FVG_RETRACE,bull,,1.1851,1.1932,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 06:45,SUI,15m,FVG,bear,,1.2025,1.2069,0.28,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 07:15,SUI,15m,BOS,bear,1.1942,,,0.165,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-28 07:15,SUI,15m,OB_INVALID,bull,,1.1932,1.2029,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-28 07:15,SUI,15m,FVG_RETRACE,bear,,1.2025,1.2069,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 07:00,UNI,1h,FVG_FILLED,bull,,9.122,9.253,,London,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 07:00,UNI,30m,FVG_FILLED,bull,,9.122,9.18,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 07:00,UNI,15m,WEAK_BREAK,bear,9.135,,,0.128,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
