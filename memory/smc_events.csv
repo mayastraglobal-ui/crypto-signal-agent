@@ -2401,3 +2401,36 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 11:00,UNI,1h,FVG_RETRACE,bear,,8.941,9.027,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-09-28 11:00,UNI,30m,FVG_RETRACE,bear,,8.941,9.057,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
 2026-09-28 11:00,UNI,15m,FVG_FILLED,bear,,8.892,8.987,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-28 11:30,BTC,30m,FVG,bull,,82868.41,82960.0,0.33,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 12:15,BTC,15m,CHOCH,bull,83160.33,,,1.232,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-09-28 12:15,BTC,15m,ORDER_BLOCK,bull,,82597.55,82844.32,,NY AM,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-28 12:15,BTC,15m,OB_RETEST,bear,,83435.7,83526.01,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-09-28 12:15,BTC,15m,FVG_RETRACE,bear,,83354.34,83436.58,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 12:15,BTC,15m,FVG_FILLED,bear,,83354.34,83436.58,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 12:00,ETH,4h,BREAKER_RETEST,bear,,2646.58,2678.7,,,1d,STRONG_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 12:00,ETH,4h,FVG_RETRACE,bear,,2661.02,2669.78,,,1d,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 12:00,ETH,1h,FVG_RETRACE,bear,,2662.5,2672.0,,NY AM,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-28 11:30,ETH,30m,WEAK_BREAK,bull,2661.02,,,0.307,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 11:30,ETH,30m,FVG_RETRACE,bear,,2662.5,2666.3,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-28 11:30,ETH,30m,FVG_FILLED,bear,,2662.5,2666.3,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 11:30,ETH,30m,FVG,bull,,2651.57,2656.6,0.436,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 12:00,ETH,30m,BREAKER_RETEST,bear,,2667.33,2680.8,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 12:00,ETH,30m,FVG,bull,,2659.69,2662.56,0.256,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 12:15,ETH,15m,OB_RETEST,bear,,2686.35,2703.51,,NY AM,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-28 12:00,SOL,4h,FVG,bear,,118.84,119.45,0.273,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 12:00,SOL,15m,WEAK_BREAK,bull,118.71,,,0.039,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-28 12:15,SOL,15m,FVG_RETRACE,bear,,119.63,119.84,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 12:15,SOL,15m,FVG_FILLED,bear,,119.63,119.84,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 11:30,ZEC,30m,WEAK_BREAK,bull,1560.14,,,0.409,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-09-28 11:45,XRP,15m,SWEEP,bear,1.4943,,,0.181,NY AM,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 12:15,XRP,15m,CHOCH,bull,1.4943,,,1.88,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-09-28 12:15,XRP,15m,ORDER_BLOCK,bull,,1.4852,1.493,,NY AM,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-28 12:15,XRP,15m,BREAKER_RETEST,bear,,1.5037,1.5156,,NY AM,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-09-28 12:00,SUI,4h,FVG,bear,,1.1995,1.2311,0.635,,1d,EXPANSION,,smc-1.0,Binance
+2026-09-28 12:15,SUI,15m,SWEEP,bear,1.1995,,,0.166,NY AM,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 12:15,SUI,15m,OB_INVALID,bear,,1.1679,1.186,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-28 12:00,UNI,4h,FVG,bear,,9.15,9.245,0.26,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-09-28 12:15,UNI,15m,WEAK_BREAK,bull,8.988,,,0.319,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-09-28 12:15,UNI,15m,OB_RETEST,bear,,9.057,9.136,,NY AM,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-09-28 12:15,UNI,15m,FVG_RETRACE,bear,,9.005,9.088,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-28 12:15,UNI,15m,FVG_FILLED,bear,,9.005,9.088,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance

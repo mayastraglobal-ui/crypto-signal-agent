@@ -11,9 +11,10 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "QNT": "2026-09-28"
+  "QNT": "2026-09-28",
+  "HBAR": "2026-09-28"
  },
- "runs": 91,
+ "runs": 92,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -38,9 +39,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "LINK": [
-   "volume_7d"
-  ],
+  "LINK": [],
   "XPL": [
    "volume_7d"
   ],
@@ -67,6 +66,7 @@
    "volume_7d"
   ],
   "HBAR": [
+   "big_move",
    "thin_book",
    "volume_7d"
   ]
