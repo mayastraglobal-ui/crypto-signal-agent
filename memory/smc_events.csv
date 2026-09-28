@@ -2341,3 +2341,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 08:00,UNI,4h,FVG,bear,,9.395,9.555,0.439,,1d,STRONG_BULL,,smc-1.0,Binance
 2026-09-28 08:00,UNI,30m,SWEEP,bull,9.042,,,0.124,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-09-28 07:45,UNI,15m,SWEEP,bull,9.042,,,0.164,London,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 09:15,BTC,15m,SWEEP,bull,82705.02,,,0.448,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 08:45,ETH,15m,SWEEP,bull,2642.29,,,0.264,London,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 09:15,SOL,15m,SWEEP,bull,117.9,,,0.395,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 09:15,SOL,15m,FVG_FILLED,bull,,117.8,117.95,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 08:45,ZEC,15m,SWEEP,bear,1558.56,,,0.151,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 08:30,SUI,30m,FVG_RETRACE,bear,,1.186,1.193,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-28 08:30,SUI,30m,FVG_FILLED,bear,,1.186,1.193,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 09:15,SUI,15m,SWEEP,bull,1.1757,,,0.565,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 09:15,SUI,15m,FVG_FILLED,bull,,1.1748,1.1769,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 08:45,UNI,15m,CHOCH,bear,9.027,,,0.334,London,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-09-28 08:45,UNI,15m,ORDER_BLOCK,bear,,9.057,9.136,,London,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-28 09:00,UNI,15m,FVG_FILLED,bull,,8.951,9.001,,London,1h,EXPANSION,,smc-1.0,Binance
+2026-09-28 09:00,UNI,15m,FVG,bear,,9.005,9.088,0.901,London,1h,EXPANSION,,smc-1.0,Binance
+2026-09-28 09:15,UNI,15m,SWEEP,bull,8.787,,,0.206,,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-28 09:15,UNI,15m,FVG_FILLED,bull,,8.786,9.17,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-28 09:15,UNI,15m,FVG,bear,,8.892,8.987,1.007,,1h,EXPANSION,,smc-1.0,Binance
