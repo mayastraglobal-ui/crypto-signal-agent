@@ -822,3 +822,34 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0023 | 2026-09-28 00:52 | donchian_breakout-VEXIT-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0024 | 2026-09-28 00:52 | donchian_breakout-VEXIT-VRVOL@1.0 | breakout | 4h, 1h, 30m | One change to donchian_breakout-VEXIT@1.0: only when volume is at least 1.2x normal (rel_vol filter). It should keep the edge of donchian_breakout-VEXIT@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week. |
 | EXP-0025 | 2026-09-28 00:52 | R4-CLUC@1.0 | mean_reversion | 30m, 15m | A close 1.5% below the lower Bollinger band, under the 50 EMA and without a 20x volume spike, is a temporary over-extension that returns to the band's middle. |
+
+### Feedback: R4-CLUC@1.0
+- timestamp: 2026-09-28 15:40 UTC · source: Claude daily review 2026-09-28 · evidence: BACKTEST_EVIDENCE: 2 cells, 320 trades (85 + 235) · confidence: medium · strategy: R4-CLUC@1.0 · asset: research coins · timeframe: 15m, 30m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-27
+- parent: source: [R4] freqtrade-strategies
+- hypothesis: A close 1.5% below the lower Bollinger band, under the 50 EMA and without a 20x volume spike, is a temporary over-extension that returns to the band's middle.
+- result: BACKTEST 15m FAILED 85 trades -0.147R (unseen +0.317R), profit factor 0.79, max drawdown 22.0R; 30m FAILED 235 trades -0.165R (unseen -0.115R), profit factor 0.75, max drawdown 59.0R; volatility_spike is systematic in R4-CLUC@1.0|30m
+- teaches: the hypothesis did not hold. It is the third range mean-reversion card from this source to fail after costs (with R4-BBRSI 1h and 30m); the positive unseen part on 15m rests on very few trades and the train part is negative, so it is not an edge.
+- next: stop this line
+
+### Feedback: donchian_breakout-VEXIT-S4@1.0
+- timestamp: 2026-09-28 15:40 UTC · source: Claude daily review 2026-09-28 · evidence: BACKTEST_EVIDENCE: 3 cells, 5398 trades (1067 + 2952 + 1379) · confidence: medium · strategy: donchian_breakout-VEXIT-S4@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BULL, EXPANSION, STRONG_BULL · review: 2026-12-27
+- parent: result: donchian_breakout-VEXIT@1.0 4h
+- hypothesis: The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 4h BACKTESTING 1067 trades +0.220R (unseen +0.235R), t 4.856, held back by max drawdown 23.7R; 1h FAILED 2952 trades -0.048R; 30m FAILED 1379 trades -0.040R. Parent 4h today: 939 trades +0.226R (unseen +0.259R), t 4.709
+- teaches: the hypothesis held on 4h: without the ADX rule the card takes 1067 instead of 939 trades at almost the same average (+0.220R vs +0.226R), so the ADX rule does no measurable work. The unseen part is a little lower without it (+0.235R vs +0.259R), so the two are equal within noise, not better. The drawdown gate is still the blocker.
+- next: prefer the simpler 4h card (without ADX) as the base for any later one-change test, because it has more trades for the same result; stop the 1h and 30m cells. The open question on 4h is the drawdown, not the entry filter.
+
+### Feedback: donchian_breakout-VEXIT-VRVOL@1.0
+- timestamp: 2026-09-28 15:40 UTC · source: Claude daily review 2026-09-28 · evidence: BACKTEST_EVIDENCE: 3 cells, 4706 trades (939 + 2599 + 1168) · confidence: high · strategy: donchian_breakout-VEXIT-VRVOL@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BULL, EXPANSION, STRONG_BULL · review: 2026-12-27
+- parent: result: donchian_breakout-VEXIT@1.0 4h
+- hypothesis: One change to donchian_breakout-VEXIT@1.0: only when volume is at least 1.2x normal (rel_vol filter). It should keep the edge of donchian_breakout-VEXIT@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week.
+- result: BACKTEST 4h BACKTESTING 939 trades +0.226R (unseen +0.259R), max drawdown 24.2R; 1h FAILED 2599 trades -0.054R; 30m FAILED 1168 trades -0.019R. The parent's cells today have the same trade counts and averages (4h 939 trades +0.226R, 1h 2599 trades, 30m 1168 trades)
+- teaches: the 1.2x volume filter removed no trades: the parent's edge block already requires a breakout with 1.5x volume, so a weaker volume rule is redundant. The test only added one to the trials counter. Before a one-change variant is queued, check that the new rule is not already implied by an existing rule.
+- next: stop this line
+
+### Hypothesis: 1-week own-trend filter for the 4h breakout (from C02)
+- timestamp: 2026-09-28 15:40 UTC · source: Claude daily review 2026-09-28 ([C02] https://www.nber.org/papers/w24877) · evidence: HYPOTHESIS: derived from a working-paper finding (Bitcoin weekly returns predict 1 to 4 weeks ahead, 2011-2018) and our 4h breakout cell (donchian_breakout-VEXIT-S4@1.0 4h, 1067 trades, +0.220R) · confidence: low · strategy: donchian_breakout-VEXIT-S4 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2026-12-27
+  - hypothesis: a 4h breakout pays more when the coin's own last week agrees with it: longs only when close > shift(close,42) (the close 7 days ago on 4h candles), shorts only when close < shift(close,42).
+  - relation to the C01 hypothesis (30-day filter, queued 2026-09-27): same idea, the horizon the crypto paper found. Test at most ONE of the two first, to keep the trials counter low; this one matches the crypto evidence better.
+  - how to test: a one-change version of donchian_breakout-VEXIT-S4@1.0 (the simpler 4h base, see its Feedback record), same period; judge on the unseen part, the costs +50% test and the drawdown gate.
+  - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs.
