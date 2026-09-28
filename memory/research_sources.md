@@ -354,3 +354,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - what it means for this system: (1) it supports the idea that slow trends persist, which fits our one positive breakout cell living on 4h and not on 1h / 30m; (2) the paper's horizon is months, ours is hours to days, so it is a reason to test a slow own-trend filter, not evidence that our cards work; (3) our trend_reversal tag (systematic in 7 tests) is the same failure the paper shows in 2009.
   - derived hypothesis: 'Hypothesis: slow own-trend filter for the 4h breakout (from C01, time series momentum)' in memory/experiments.md.
   - limitations: 1985-2009 futures, no crypto; volatility-scaled positions, which our fixed 0.5% risk per trade does not copy.
+
+### donchian_breakout-VEXIT-S4@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-09-28 00:52 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-S4@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2026-12-27
+  - title / source: engine rule-significance test: donchian_breakout-VEXIT@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): donchian_breakout-VEXIT-S4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-VRVOL@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-09-28 00:52 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-VRVOL@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-VRVOL v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2026-12-27
+  - title / source: engine variant search: one change to donchian_breakout-VEXIT@1.0
+  - URL: none recorded
+  - claim: One change to donchian_breakout-VEXIT@1.0: only when volume is at least 1.2x normal (rel_vol filter). It should keep the edge of donchian_breakout-VEXIT@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-VRVOL@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### R4-CLUC@1.0 - Buy a deep dip: close 1.5% below the lower Bollinger band while under the 50 EMA, volume not a blow-off.
+- timestamp: 2026-09-28 00:52 UTC · source: strategies_lab.yaml card R4-CLUC@1.0 · evidence: UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any idea: not tested when recorded · confidence: untested idea · strategy: R4-CLUC v1.0 · asset: research coins · timeframe: 30m, 15m · regime: RANGE, HIGH_VOL_RANGE · review: 2026-12-27
+  - title / source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/ClucMay72018.py (commit f3340ce) - the idea rewritten in our building blocks; no code copied (GPL-3.0)
+  - URL: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/ClucMay72018.py
+  - claim: A close 1.5% below the lower Bollinger band, under the 50 EMA and without a 20x volume spike, is a temporary over-extension that returns to the band's middle.
+  - derived hypothesis (tested): R4-CLUC@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE on 30m, 15m
+  - limitations: Built for 5m altcoin dips; a strong trend can keep closing below the band.
+  - test results: `memory/strategy_registry.csv` / report section 3

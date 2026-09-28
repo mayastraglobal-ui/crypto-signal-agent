@@ -104,3 +104,29 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
   - macd_trend_cross v1.0 30m: blocked by the regime gate
   - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+
+### ZEC up +7.1% (6.3x ATR), 2026-09-26 13:00 -> 2026-09-27 02:00
+- timestamp: 2026-09-28 00:52 UTC · source: engine: daily research run · evidence: FACT: move of 6.3x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: COMPRESSION · review: 2026-10-05
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - macd_trend_cross v1.0 1h: blocked by the regime gate
+  - trend_pullback v1.0 4h: signal
+
+### SUI up +10.7% (6.4x ATR), 2026-09-26 20:00 -> 2026-09-27 09:00
+- timestamp: 2026-09-28 00:52 UTC · source: engine: daily research run · evidence: FACT: move of 6.4x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-05
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: no valid stop / target
+  - liquidity_sweep_reversal v1.0 15m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+
+### ENA up +9.0% (5.1x ATR), 2026-09-27 08:00 -> 2026-09-27 19:00
+- timestamp: 2026-09-28 00:52 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ENA · timeframe: 1h · regime: UNCLEAR · review: 2026-10-05
+  - verdict: identifiable: at least one strategy had a valid signal before the move (research-only coin)
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 30m: no valid stop / target
+  - bb_squeeze_breakout v1.0 15m: signal
+  - ema_9_21_cross v1.0 1h: signal
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - macd_trend_cross v1.0 30m: signal
+  - trend_pullback v1.0 1h: signal
+  - trend_pullback v1.0 30m: signal

@@ -88,3 +88,15 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT@1.0 30m**: FORMALIZED → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; max drawdown 69.3R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT@1.0 4h**: FORMALIZED → **BACKTESTING** (max drawdown 23.7R)
 - **macd_trend_cross@1.0 4h**: FAILED → **BACKTESTING** (only 26 trades; avg +0.04R/trade (needs +0.10R); profit factor 1.09; only 9 unseen-test trades; not profitable in BOTH train and unseen test)
+
+## 2026-09-28 00:52 UTC
+- **R4-CLUC@1.0 15m**: FORMALIZED → **FAILED** (avg -0.15R/trade (needs +0.10R); profit factor 0.79; max drawdown 22.0R; not profitable in BOTH train and unseen test)
+- **R4-CLUC@1.0 30m**: FORMALIZED → **FAILED** (avg -0.17R/trade (needs +0.10R); profit factor 0.75; max drawdown 59.0R; not profitable in BOTH train and unseen test)
+- **bb_squeeze_breakout@1.0 1h**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.98; max drawdown 43.2R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4@1.0 1h**: FORMALIZED → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.92; max drawdown 232.5R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4@1.0 30m**: FORMALIZED → **FAILED** (avg -0.04R/trade (needs +0.10R); profit factor 0.94; max drawdown 101.7R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4@1.0 4h**: FORMALIZED → **BACKTESTING** (max drawdown 23.7R)
+- **donchian_breakout-VEXIT-VRVOL@1.0 1h**: FORMALIZED → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.92; max drawdown 215.6R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-VRVOL@1.0 30m**: FORMALIZED → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.97; max drawdown 82.5R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-VRVOL@1.0 4h**: FORMALIZED → **BACKTESTING** (max drawdown 24.2R)
+- **macd_trend_cross@1.0 4h**: BACKTESTING → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.91; only 9 unseen-test trades; not profitable in BOTH train and unseen test)

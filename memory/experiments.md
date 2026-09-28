@@ -816,3 +816,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: a one-change version of the best 4h breakout card (a new entry rule, nothing else), compared with its parent on the same period; judge on the unseen part, the costs +50% test and the drawdown gate.
   - blocked on: the lab quota (0 cards left today) and the two untested VEXIT children; a card waits for the weekly research or a later daily review, with parent "source: [C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012)".
   - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs. The paper's horizon is months and its markets are futures from 1985-2009, so a null result on 4h crypto is a real possibility.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0023 | 2026-09-28 00:52 | donchian_breakout-VEXIT-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0024 | 2026-09-28 00:52 | donchian_breakout-VEXIT-VRVOL@1.0 | breakout | 4h, 1h, 30m | One change to donchian_breakout-VEXIT@1.0: only when volume is at least 1.2x normal (rel_vol filter). It should keep the edge of donchian_breakout-VEXIT@1.0 and remove part of its losses; tested because it was the strongest BACKTESTING cell this week. |
+| EXP-0025 | 2026-09-28 00:52 | R4-CLUC@1.0 | mean_reversion | 30m, 15m | A close 1.5% below the lower Bollinger band, under the 50 EMA and without a 20x volume spike, is a temporary over-extension that returns to the band's middle. |
