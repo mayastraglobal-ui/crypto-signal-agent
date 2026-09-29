@@ -14,7 +14,7 @@
   "HBAR": "2026-09-29",
   "MARSCOIN": "2026-09-29"
  },
- "runs": 119,
+ "runs": 120,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -31,9 +31,7 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [
-   "thin_book"
-  ],
+  "AVAX": [],
   "ENA": [],
   "SAGA": [
    "big_move",
@@ -66,7 +64,6 @@
   ],
   "HBAR": [
    "big_move",
-   "thin_book",
    "volume_7d"
   ],
   "MARSCOIN": [
