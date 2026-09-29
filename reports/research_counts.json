@@ -61,5 +61,36 @@
   "tests_per_coin": 59,
   "coins": 9,
   "new_cards": 0
+ },
+ {
+  "date": "2026-09-29",
+  "run_utc": "2026-09-29 00:53",
+  "backtests": 590,
+  "per_coin": {
+   "BNB": 59,
+   "BTC": 59,
+   "ENA": 59,
+   "ETH": 59,
+   "LINK": 59,
+   "SOL": 59,
+   "SUI": 59,
+   "UNI": 59,
+   "XRP": 59,
+   "ZEC": 59
+  },
+  "strategies": 25,
+  "tests": 59,
+  "tests_per_coin": 59,
+  "coins": 10,
+  "best_avg_r": 0.197,
+  "best_cell": "donchian_breakout-VEXIT v1.0 4h",
+  "cells_testing": 17,
+  "cells_failed": 42,
+  "cells_paper": 0,
+  "lab_cards": 5,
+  "sources": 20,
+  "near_duplicates": 9,
+  "ideas": 22,
+  "new_cards": 0
  }
 ]

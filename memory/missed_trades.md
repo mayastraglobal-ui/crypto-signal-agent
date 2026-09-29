@@ -130,3 +130,44 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - macd_trend_cross v1.0 30m: signal
   - trend_pullback v1.0 1h: signal
   - trend_pullback v1.0 30m: signal
+
+### BTC down -2.4% (7.6x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 7.6x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-06
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ZEC down -8.9% (7.0x ATR), 2026-09-28 12:00 -> 2026-09-28 20:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 7.0x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: TRANSITION · review: 2026-10-06
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+
+### SOL down -4.1% (5.1x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-06
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### LINK up +13.0% (9.3x ATR), 2026-09-28 09:00 -> 2026-09-28 21:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 9.3x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: LINK · timeframe: 1h · regime: UNCLEAR · review: 2026-10-06
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: signal
+  - liquidity_sweep_reversal v1.0 15m: signal
+  - liquidity_sweep_reversal v1.0 1h: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+  - rsi2_dip_buy v1.0 4h: blocked by the regime gate
+
+### UNI down -8.6% (5.9x ATR), 2026-09-27 23:00 -> 2026-09-28 10:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 5.9x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: UNI · timeframe: 1h · regime: RANGE · review: 2026-10-06
+  - verdict: not identifiable: no strategy had a setup before the move (research-only coin)
+
+### BNB down -2.6% (7.2x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 7.2x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-06
+  - verdict: not identifiable: no strategy had a setup before the move (research-only coin)

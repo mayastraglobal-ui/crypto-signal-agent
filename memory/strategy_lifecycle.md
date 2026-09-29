@@ -100,3 +100,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT-VRVOL@1.0 30m**: FORMALIZED → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.97; max drawdown 82.5R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-VRVOL@1.0 4h**: FORMALIZED → **BACKTESTING** (max drawdown 24.2R)
 - **macd_trend_cross@1.0 4h**: BACKTESTING → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.91; only 9 unseen-test trades; not profitable in BOTH train and unseen test)
+
+## 2026-09-29 00:53 UTC
+- **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; max drawdown 24.1R; not profitable in BOTH train and unseen test)
