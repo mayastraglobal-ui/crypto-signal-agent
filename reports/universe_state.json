@@ -8,14 +8,14 @@
   "SUI"
  ],
  "in_streak": {
-  "BNB": 1
+  "LINK": 1
  },
  "out_streak": {},
  "suspended": {
   "HBAR": "2026-09-29",
   "MARSCOIN": "2026-09-29"
  },
- "runs": 113,
+ "runs": 114,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -30,9 +30,7 @@
    "thin_book"
   ],
   "BNB": [],
-  "UNI": [
-   "thin_book"
-  ],
+  "UNI": [],
   "SUI": [],
   "AVAX": [],
   "ENA": [],
@@ -41,9 +39,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "LINK": [
-   "thin_book"
-  ],
+  "LINK": [],
   "XPL": [
    "volume_7d"
   ],

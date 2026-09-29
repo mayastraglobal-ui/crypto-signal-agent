@@ -208,3 +208,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** LINK - order book too thin: $226k within 1% (need $250k)
 - **EXCLUDED** UNI - order book too thin: $201k within 1% (need $250k)
 - **LEAVE** LINK - not eligible: order book too thin: $226k within 1% (need $250k)
+
+## 2026-09-29 10:20 UTC
+- **ELIGIBLE** LINK - passes every rule again
+- **ELIGIBLE** UNI - passes every rule again
