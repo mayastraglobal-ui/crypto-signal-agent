@@ -8,13 +8,17 @@
   "SUI",
   "LINK"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "AVAX": 1
+ },
+ "out_streak": {
+  "LINK": 1
+ },
  "suspended": {
   "HBAR": "2026-09-29",
   "MARSCOIN": "2026-09-29"
  },
- "runs": 120,
+ "runs": 121,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -64,6 +68,7 @@
   ],
   "HBAR": [
    "big_move",
+   "thin_book",
    "volume_7d"
   ],
   "MARSCOIN": [

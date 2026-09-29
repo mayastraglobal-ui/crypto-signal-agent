@@ -228,3 +228,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-29 16:22 UTC
 - **EXCLUDED** HBAR - 7-day average volume $44M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today)
 - **ELIGIBLE** AVAX - passes every rule again
+
+## 2026-09-29 17:19 UTC
+- **EXCLUDED** HBAR - 7-day average volume $44M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $204k within 1% (need $250k)

@@ -3356,3 +3356,28 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-29 15:45,SUI,15m,BREAKER_RETEST,bear,,1.1405,1.1534,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-09-29 16:00,LINK,30m,FVG,bear,,14.876,14.992,0.605,,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-29 15:30,LINK,15m,FVG,bear,,14.996,15.081,0.664,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-29 17:00,BTC,1h,FVG,bear,,83290.0,83688.0,0.816,,4h,RANGE,,smc-1.0,Binance
+2026-09-29 17:00,ETH,1h,FVG,bear,,2684.36,2707.97,1.104,,4h,RANGE,,smc-1.0,Binance
+2026-09-29 17:00,ZEC,1h,FVG,bear,,1399.46,1431.43,1.089,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-29 17:00,SOL,1h,FVG,bear,,118.72,120.16,1.159,,4h,RANGE,,smc-1.0,Binance
+2026-09-29 17:00,SOL,15m,SWEEP,bull,117.95,,,0.624,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-29 17:00,XRP,1h,FVG_FILLED,bull,,1.494,1.5026,,,4h,RANGE,,smc-1.0,Binance
+2026-09-29 17:00,XRP,1h,FVG,bear,,1.5241,1.5417,0.799,,4h,RANGE,,smc-1.0,Binance
+2026-09-29 16:30,XRP,30m,FVG_RETRACE,bear,,1.5236,1.5446,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 17:00,XRP,30m,BOS,bear,1.4977,,,0.815,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-09-29 17:00,XRP,30m,ORDER_BLOCK,bear,,1.511,1.5236,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-29 17:00,XRP,30m,FVG_FILLED,bull,,1.494,1.5,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-29 16:45,XRP,15m,BOS,bear,1.5078,,,1.66,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-09-29 16:45,XRP,15m,ORDER_BLOCK,bear,,1.5171,1.5241,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-29 16:45,XRP,15m,FVG_RETRACE,bull,,1.4901,1.4938,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 16:45,XRP,15m,FVG_FILLED,bull,,1.4901,1.4938,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-29 16:45,XRP,15m,FVG_FILLED,bull,,1.494,1.4987,,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-29 17:00,XRP,15m,FVG,bear,,1.4922,1.515,1.784,,1h,EXPANSION,,smc-1.0,Binance
+2026-09-29 17:00,LINK,1h,SWEEP,bull,14.631,,,0.166,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-29 17:00,LINK,1h,FVG,bear,,14.889,14.992,0.354,,4h,TRANSITION,,smc-1.0,Binance
+2026-09-29 16:30,LINK,30m,FVG_RETRACE,bear,,14.876,14.992,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-29 17:00,LINK,30m,SWEEP,bull,14.631,,,0.257,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-29 17:00,LINK,30m,FVG_RETRACE,bull,,14.469,14.628,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-29 17:00,LINK,15m,SWEEP,bull,14.631,,,0.389,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-29 17:00,LINK,15m,FVG,bear,,14.736,14.787,0.407,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-29 17:15,LINK,15m,FVG_RETRACE,bear,,14.736,14.787,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
