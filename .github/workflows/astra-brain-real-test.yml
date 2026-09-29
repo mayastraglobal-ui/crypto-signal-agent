@@ -1,6 +1,11 @@
 name: GPT-6 Astra Brain Real Test
 
 on:
+  push:
+    branches:
+      - astra-brain-test
+    paths-ignore:
+      - "reports/astra/**"
   workflow_dispatch:
 
 permissions:
