@@ -2758,3 +2758,26 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-28 23:00,LINK,30m,FVG_RETRACE,bear,,15.151,15.232,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-09-28 23:00,LINK,30m,FVG_FILLED,bear,,15.151,15.232,,,1h,TRANSITION,,smc-1.0,Binance
 2026-09-28 23:15,LINK,15m,FVG,bull,,15.142,15.251,0.622,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-28 23:30,BTC,30m,FVG,bull,,83242.4,83455.0,0.638,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 23:30,ETH,30m,WEAK_BREAK,bull,2690.0,,,0.06,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-28 23:30,ETH,30m,FVG,bull,,2675.74,2685.6,0.701,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 23:30,ETH,15m,BOS,bull,2690.0,,,0.096,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-29 00:00,ZEC,4h,FVG,bear,,1489.14,1521.2,0.617,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-09-29 00:00,ZEC,1h,FVG,bull,,1468.3,1475.18,0.26,,4h,RANGE,,smc-1.0,Binance
+2026-09-28 23:30,ZEC,30m,FVG,bull,,1469.01,1475.18,0.305,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-29 00:00,SOL,4h,OB_RETEST,bull,,115.86,117.34,,,1d,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-29 00:00,SOL,4h,FVG_FILLED,bull,,117.34,118.27,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 23:30,SOL,30m,FVG,bull,,117.82,118.55,0.819,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 23:30,XRP,30m,FVG,bull,,1.4867,1.4917,0.358,,1h,RANGE,,smc-1.0,Binance
+2026-09-28 23:30,SUI,30m,BOS,bull,1.1677,,,0.041,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-28 23:30,SUI,30m,FVG,bull,,1.1529,1.1611,0.492,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-28 23:30,SUI,15m,WEAK_BREAK,bull,1.1677,,,0.067,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-29 00:00,LINK,1h,SWEEP,bear,15.489,,,0.133,,4h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 23:30,LINK,30m,SWEEP,bear,15.428,,,0.287,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 23:30,LINK,30m,FVG,bull,,15.151,15.251,0.384,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-29 00:00,LINK,30m,SWEEP,bear,15.489,,,0.173,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-29 00:00,LINK,30m,BOS,bull,15.428,,,0.092,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-29 00:00,LINK,30m,FVG,bull,,15.283,15.384,0.4,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-28 23:30,LINK,15m,SWEEP,bear,15.428,,,0.428,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 23:45,LINK,15m,SWEEP,bear,15.489,,,0.254,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-28 23:45,LINK,15m,BOS,bull,15.428,,,0.113,,1h,TRANSITION,no displacement,smc-1.0,Binance

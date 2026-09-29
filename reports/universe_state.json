@@ -11,11 +11,10 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "QNT": "2026-09-28",
-  "HBAR": "2026-09-28",
-  "MARSCOIN": "2026-09-28"
+  "HBAR": "2026-09-29",
+  "MARSCOIN": "2026-09-29"
  },
- "runs": 103,
+ "runs": 104,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -27,8 +26,7 @@
   ],
   "LTC": [],
   "ONDO": [
-   "thin_book",
-   "volume_7d"
+   "thin_book"
   ],
   "BNB": [],
   "UNI": [],
@@ -58,9 +56,8 @@
    "volume_7d"
   ],
   "QNT": [
-   "big_move",
    "thin_book",
-   "volume_7d"
+   "volume_spike"
   ],
   "PUMP": [
    "thin_book",
