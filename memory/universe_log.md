@@ -190,3 +190,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-29 02:17 UTC
 - **EXCLUDED** QNT - order book too thin: $72k within 1% (need $250k)
 - **EXCLUDED** MARSCOIN - only 25 days of history (need 180); 7-day average volume $29M < $50M; 24h move +31.1% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $53k within 1% (need $250k)
+
+## 2026-09-29 04:20 UTC
+- **EXCLUDED** MARSCOIN - only 25 days of history (need 180); 7-day average volume $29M < $50M; 24h move +29.9% is beyond ±25% - suspended for the rest of the UTC day; spread 0.129% > 0.1%; order book too thin: $52k within 1% (need $250k)

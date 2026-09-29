@@ -14,7 +14,7 @@
   "HBAR": "2026-09-29",
   "MARSCOIN": "2026-09-29"
  },
- "runs": 107,
+ "runs": 108,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -70,6 +70,7 @@
   "MARSCOIN": [
    "big_move",
    "history",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
