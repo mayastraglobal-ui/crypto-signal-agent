@@ -5,17 +5,16 @@
   "ZEC",
   "SOL",
   "XRP",
-  "SUI"
+  "SUI",
+  "LINK"
  ],
- "in_streak": {
-  "LINK": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {
   "HBAR": "2026-09-29",
   "MARSCOIN": "2026-09-29"
  },
- "runs": 114,
+ "runs": 115,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,7 +31,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",
