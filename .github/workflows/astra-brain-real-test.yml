@@ -1,0 +1,37 @@
+name: GPT-6 Astra Brain Real Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  brain-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: astra-brain-test
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install OpenAI SDK
+        run: pip install openai
+
+      - name: Run Astra Brain task
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python tools/astra_brain_real_test.py
+
+      - name: Commit Astra report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/astra/brain-test.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Generate GPT-6 Astra Brain test report"
+          git push origin HEAD:astra-brain-test
