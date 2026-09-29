@@ -3466,3 +3466,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-29 19:45,XRP,15m,FVG_FILLED,bull,,1.494,1.4974,,,1h,EXPANSION,,smc-1.0,Binance
 2026-09-29 20:00,AVAX,1h,FVG,bull,,11.179,11.26,0.331,,4h,WEAK_BULL,,smc-1.0,Binance
 2026-09-29 20:15,AVAX,15m,FVG_RETRACE,bear,,11.396,11.493,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-29 20:30,ZEC,30m,FVG,bear,,1400.7,1419.06,0.92,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-29 21:00,ZEC,30m,FVG_RETRACE,bear,,1400.7,1419.06,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 20:30,ZEC,15m,FVG_RETRACE,bear,,1397.02,1402.77,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 20:45,ZEC,15m,FVG_RETRACE,bear,,1405.4,1419.06,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 20:45,ZEC,15m,FVG_FILLED,bear,,1397.02,1402.77,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-29 20:30,SOL,15m,FVG_FILLED,bear,,118.93,119.19,,,1h,RANGE,,smc-1.0,Binance
+2026-09-29 21:00,SUI,30m,FVG_FILLED,bear,,1.1493,1.1606,,,1h,RANGE,,smc-1.0,Binance
+2026-09-29 20:30,SUI,15m,SWEEP,bear,1.1585,,,0.186,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-29 20:45,SUI,15m,BOS,bull,1.1585,,,0.182,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-09-29 20:45,SUI,15m,FVG,bull,,1.1508,1.1538,0.311,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-29 21:15,SUI,15m,FVG_RETRACE,bull,,1.1508,1.1538,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-29 20:30,AVAX,15m,FVG,bull,,11.374,11.414,0.39,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-29 20:45,AVAX,15m,FVG_RETRACE,bull,,11.374,11.414,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-29 21:15,AVAX,15m,OB_RETEST,bear,,11.51,11.653,,,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-29 21:15,AVAX,15m,FVG_RETRACE,bear,,11.512,11.592,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-29 21:15,AVAX,15m,FVG_FILLED,bear,,11.396,11.493,,,1h,WEAK_BULL,,smc-1.0,Binance
