@@ -246,3 +246,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-30 02:18 UTC
 - **EXCLUDED** QNT - 24h move +37.2% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $79k within 1% (need $250k)
+
+## 2026-09-30 08:22 UTC
+- **EXCLUDED** AAVE - 7-day average volume $31M < $50M
