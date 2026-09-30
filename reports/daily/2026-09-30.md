@@ -1,13 +1,13 @@
 # Crypto Signal Report
 
-**Updated:** 2026-09-30 08:27 Beijing time (2026-09-30 00:27 UTC) · data: Binance · 10 coins scanned
+**Updated:** 2026-09-30 09:20 Beijing time (2026-09-30 01:20 UTC) · data: Binance · 10 coins scanned
 
 > Signals only - not financial advice. Paper-trade first. Never risk money you cannot afford to lose.
 
-**Storage:** repository 8.6 MB (GitHub) · large files of this run 4.1 MB, published to branch `live-reports` (replaced every run, no history)
+**Storage:** repository 8.6 MB (GitHub) · large files of this run 4.2 MB, published to branch `live-reports` (replaced every run, no history)
 
 ```
-POSITION BOOK — 2026-09-30 00:27 UTC / 2026-09-30 08:27 Beijing
+POSITION BOOK — 2026-09-30 01:20 UTC / 2026-09-30 09:20 Beijing
 No open or pending positions.
 Day: +0.00R (limit -3R) · Week: +0.00R (limit -6R) · Heat: 0/3
 Risk:      no halt · risk per trade 0.5% · NEXT EVENT US GDP (Third Estimate), 2nd Quarter 2026 2026-09-30 12:30 UTC
@@ -16,7 +16,7 @@ Paper = signals of PAPER_TRADING / VALIDATION versions (tracked; PAPER_TRADING o
 
 ## 0. Data check
 - **System: GOOD** - all data passed the checks - signals allowed (all checks passed)
-- **Price cross-check** Binance vs OKX: largest difference 0.07% (limit 0.5%)
+- **Price cross-check** Binance vs OKX: largest difference 0.05% (limit 0.5%)
 
 | Coin | Data state | Problem |
 |---|---|---|
@@ -25,36 +25,35 @@ Paper = signals of PAPER_TRADING / VALIDATION versions (tracked; PAPER_TRADING o
 - 75 small note(s) (e.g. unfinished candles ignored) - see `reports/data_quality.json`
 
 ### 0b. Futures market data (funding, open interest, long/short, taker) - Phase 17 C
-Checked 2026-09-30 00:27 UTC. History is saved every hour from now on (exchanges keep only ~30 days).
+Checked 2026-09-30 01:19 UTC. History is saved every hour from now on (exchanges keep only ~30 days).
 
 Every building block reads ONE series, the main source (OKX), in backtests and live; Binance is kept as a separate research series and never mixed in (their levels differ).
 
 | Coin | State | Main source | Main history | Funding now | Long/short | Taker buy/sell | Problems |
 |---|---|---|---|---|---|---|---|
-| BTC | GOOD | okx | 826 h since 2026-08-26 | +0.0100% | 1.39 | 1.01 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BTCUSDT&period=1h&limit=500 |
-| ETH | GOOD | okx | 826 h since 2026-08-26 | +0.0058% | 1.44 | 0.92 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ETHUSDT&period=1h&limit=500 |
-| ZEC | GOOD | okx | 826 h since 2026-08-26 | +0.0100% | 0.79 | 0.95 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=500 |
-| SOL | GOOD | okx | 826 h since 2026-08-26 | -0.0063% | 1.63 | 0.71 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SOLUSDT&period=1h&limit=500 |
-| XRP | GOOD | okx | 826 h since 2026-08-26 | +0.0015% | 2.84 | 0.82 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=XRPUSDT&period=1h&limit=500 |
-| AVAX | GOOD | okx | 818 h since 2026-08-26 | +0.0100% | 1.91 | 1.08 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=AVAXUSDT&period=1h&limit=500 |
-| SUI | GOOD | okx | 826 h since 2026-08-26 | +0.0100% | 2.20 | 1.69 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SUIUSDT&period=1h&limit=500 |
-| BNB | GOOD | okx | 826 h since 2026-08-26 | -0.0004% | 2.20 | 0.72 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BNBUSDT&period=1h&limit=500 |
-| LINK | GOOD | okx | 755 h since 2026-08-29 | +0.0100% | 1.64 | 0.74 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=LINKUSDT&period=1h&limit=500 |
-| UNI | GOOD | okx | 826 h since 2026-08-26 | +0.0100% | 1.77 | 0.86 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=UNIUSDT&period=1h&limit=500 |
+| BTC | GOOD | okx | 827 h since 2026-08-26 | +0.0100% | 1.43 | 0.84 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BTCUSDT&period=1h&limit=500 |
+| ETH | GOOD | okx | 827 h since 2026-08-26 | +0.0058% | 1.47 | 1.18 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ETHUSDT&period=1h&limit=500 |
+| ZEC | GOOD | okx | 827 h since 2026-08-26 | +0.0100% | 0.80 | 1.08 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=500 |
+| XRP | GOOD | okx | 827 h since 2026-08-26 | +0.0015% | 2.84 | 0.90 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=XRPUSDT&period=1h&limit=500 |
+| SOL | GOOD | okx | 827 h since 2026-08-26 | -0.0063% | 1.62 | 0.79 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SOLUSDT&period=1h&limit=500 |
+| AVAX | GOOD | okx | 819 h since 2026-08-26 | +0.0100% | 1.90 | 0.85 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=AVAXUSDT&period=1h&limit=500 |
+| SUI | GOOD | okx | 827 h since 2026-08-26 | +0.0100% | 2.18 | 0.79 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SUIUSDT&period=1h&limit=500 |
+| BNB | GOOD | okx | 827 h since 2026-08-26 | -0.0004% | 2.21 | 1.48 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BNBUSDT&period=1h&limit=500 |
+| HBAR | GOOD | okx | 720 h since 2026-08-31 | +0.0100% | 1.88 | 0.83 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=HBARUSDT&period=1h&limit=500 |
+| UNI | GOOD | okx | 827 h since 2026-08-26 | +0.0100% | 1.78 | 0.75 | binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=UNIUSDT&period=1h&limit=500 |
 
 ## 0b. Coins this run
 - **Signal coins (7/7)** - only these can give signals: **BTC**, **ETH**, **ZEC**, **XRP**, **SOL**, **AVAX**, **SUI**
 - **Research only** - backtested, never a signal: BNB, HBAR, UNI
 - **Changes this run** (also written to `memory/universe_log.md`):
-  - **EXCLUDED** BABY - 7-day average volume $49M < $50M; spread 0.145% > 0.1%; order book too thin: $55k within 1% (need $250k)
-  - **ELIGIBLE** HBAR - passes every rule again
+  - **EXCLUDED** BABY - 7-day average volume $49M < $50M; order book too thin: $52k within 1% (need $250k)
 
 | Not eligible | 24h volume | Why |
 |---|---|---|
-| QNT | $164M | order book too thin: $103k within 1% (need $250k) |
-| BABY | $103M | 7-day average volume $49M < $50M; spread 0.145% > 0.1%; order book too thin: $55k within 1% (need $250k) |
-| PUMP | $79M | 7-day average volume $48M < $50M; order book too thin: $123k within 1% (need $250k) |
-| AAVE | $76M | 7-day average volume $31M < $50M; order book too thin: $149k within 1% (need $250k) |
+| QNT | $166M | order book too thin: $90k within 1% (need $250k) |
+| BABY | $102M | 7-day average volume $49M < $50M; order book too thin: $52k within 1% (need $250k) |
+| PUMP | $81M | 7-day average volume $48M < $50M; order book too thin: $122k within 1% (need $250k) |
+| AAVE | $78M | 7-day average volume $31M < $50M; order book too thin: $188k within 1% (need $250k) |
 
 **Flags (not excluded):** QNT: price data DEGRADED - stays in the list, but no signals; BABY: price data DEGRADED - stays in the list, but no signals
 
@@ -84,13 +83,13 @@ Measurements only - nothing trades on these yet. Structure = the last confirmed 
 
 | Coin | Structure | Last swing high / low | Close location | Volume vs normal | Candle size vs normal | Last 3 candles |
 |---|---|---|---|---|---|---|
-| BTC | up (HH/HL) | 84,564 / 82,900 | 0.22 | 0.51x | 1.08x | bear_reject |
-| ETH | mixed (LH/HL) | 2,700 / 2,668.4 | 0.17 | 0.36x | 1.20x | bear_engulf |
-| ZEC | mixed (LH/HL) | 1,460.16 / 1,381 | 0.34 | 0.96x | 1.26x | - |
-| XRP | up (HH/HL) | 1.5617 / 1.4764 | 0.23 | 0.52x | 1.07x | - |
-| SOL | up (HH/HL) | 121.69 / 117.36 | 0.34 | 0.36x | 0.95x | bull_engulf |
-| AVAX | up (HH/HL) | 12.008 / 11.029 | 0.40 | 0.31x | 1.27x | bear_reject |
-| SUI | mixed (LH/HL) | 1.1622 / 1.127 | 0.48 | 0.50x | 0.85x | bull_engulf |
+| BTC | up (HH/HL) | 84,564 / 82,900 | 0.28 | 0.72x | 1.08x | bear_engulf, bear_reject |
+| ETH | mixed (LH/HL) | 2,700 / 2,668.4 | 0.38 | 0.44x | 1.17x | bear_engulf |
+| ZEC | mixed (LH/HL) | 1,460.16 / 1,381 | 0.52 | 0.40x | 1.23x | bull_engulf |
+| XRP | up (HH/HL) | 1.5617 / 1.4764 | 0.96 | 0.56x | 1.03x | bull_reject |
+| SOL | up (HH/HL) | 121.69 / 117.36 | 0.56 | 0.38x | 0.94x | bull_engulf, bear_engulf |
+| AVAX | mixed (LH/HL) | 11.55 / 11.029 | 0.65 | 0.63x | 1.24x | bear_reject |
+| SUI | mixed (LH/HL) | 1.1622 / 1.127 | 0.40 | 0.49x | 0.83x | bull_engulf, bear_engulf |
 
 ## 0e. Candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL
 Patterns: candle patterns (displacement, engulfing, pin bar) and SMC events (smc_*: sweep of sell-side (bull) / buy-side (bear) liquidity, BOS, CHoCH with displacement, first retrace into a fair value gap).
@@ -114,61 +113,61 @@ If you had entered at the NEXT candle's open after each pattern, with a stop 1 A
 | 4h | smc_fvg_retrace_bull | 661 | 42% | 27% | 20% | 78% | 44% | 30% | can't tell from chance | 0.13R |
 | 4h | smc_fvg_retrace_bear | 685 | 45% | 29% | 19% | 76% | 47% | 32% | can't tell from chance | 0.08R |
 | 1h | displacement_up | 602 | 44% | 33% | 26% | 74% | 43% | 30% | can't tell from chance | 0.28R |
-| 1h | displacement_down | 433 | 36% | 24% | 15% | 83% | 37% | 24% | can't tell from chance | 0.19R |
-| 1h | bull_engulf | 1698 | 40% | 28% | 22% | 75% | 42% | 29% | can't tell from chance | 0.33R |
-| 1h | bear_engulf | 1838 | 37% | 24% | 16% | 80% | 38% | 24% | can't tell from chance | 0.20R |
-| 1h | bull_reject | 1396 | 40% | 29% | 22% | 75% | 42% | 29% | can't tell from chance | 0.32R |
+| 1h | displacement_down | 433 | 36% | 24% | 15% | 83% | 38% | 25% | can't tell from chance | 0.19R |
+| 1h | bull_engulf | 1699 | 40% | 28% | 22% | 76% | 42% | 29% | can't tell from chance | 0.33R |
+| 1h | bear_engulf | 1839 | 37% | 24% | 16% | 80% | 38% | 24% | can't tell from chance | 0.20R |
+| 1h | bull_reject | 1398 | 40% | 29% | 22% | 75% | 42% | 29% | can't tell from chance | 0.32R |
 | 1h | bear_reject | 1379 | 36% | 24% | 17% | 82% | 38% | 25% | can't tell from chance | 0.19R |
-| 1h | smc_sweep_bull | 638 | 41% | 27% | 20% | 77% | 42% | 29% | can't tell from chance | 0.31R |
-| 1h | smc_sweep_bear | 710 | 38% | 24% | 15% | 81% | 38% | 25% | can't tell from chance | 0.19R |
-| 1h | smc_bos_up | 412 | 43% | 30% | 25% | 78% | 42% | 29% | can't tell from chance | 0.27R |
-| 1h | smc_bos_down | 280 | 38% | 28% | 18% | 82% | 37% | 23% | can't tell from chance | 0.22R |
-| 1h | smc_choch_up | 111 | 43% | 34% | 28% | 73% | 40% | 28% | can't tell from chance | 0.33R |
-| 1h | smc_choch_down | 116 | 42% | 29% | 18% | 76% | 37% | 25% | can't tell from chance | 0.18R |
-| 1h | smc_fvg_retrace_bull | 914 | 45% | 32% | 24% | 73% | 43% | 29% | can't tell from chance | 0.31R |
-| 1h | smc_fvg_retrace_bear | 798 | 40% | 27% | 18% | 80% | 38% | 25% | can't tell from chance | 0.21R |
-| 30m | displacement_up | 594 | 39% | 29% | 24% | 79% | 41% | 29% | can't tell from chance | 0.30R |
-| 30m | displacement_down | 432 | 42% | 25% | 15% | 82% | 37% | 22% | beats chance | 0.20R |
-| 30m | bull_engulf | 1714 | 41% | 29% | 22% | 75% | 41% | 29% | can't tell from chance | 0.34R |
+| 1h | smc_sweep_bull | 638 | 41% | 27% | 20% | 77% | 43% | 30% | can't tell from chance | 0.31R |
+| 1h | smc_sweep_bear | 712 | 38% | 24% | 15% | 81% | 39% | 25% | can't tell from chance | 0.19R |
+| 1h | smc_bos_up | 411 | 44% | 30% | 25% | 78% | 42% | 29% | can't tell from chance | 0.27R |
+| 1h | smc_bos_down | 280 | 38% | 28% | 18% | 82% | 38% | 24% | can't tell from chance | 0.22R |
+| 1h | smc_choch_up | 111 | 43% | 34% | 28% | 73% | 42% | 30% | can't tell from chance | 0.33R |
+| 1h | smc_choch_down | 116 | 42% | 29% | 18% | 76% | 36% | 24% | can't tell from chance | 0.18R |
+| 1h | smc_fvg_retrace_bull | 910 | 45% | 32% | 24% | 73% | 42% | 30% | can't tell from chance | 0.31R |
+| 1h | smc_fvg_retrace_bear | 798 | 40% | 27% | 18% | 80% | 39% | 25% | can't tell from chance | 0.21R |
+| 30m | displacement_up | 595 | 40% | 29% | 24% | 79% | 42% | 30% | can't tell from chance | 0.30R |
+| 30m | displacement_down | 433 | 42% | 26% | 15% | 82% | 37% | 22% | beats chance | 0.20R |
+| 30m | bull_engulf | 1718 | 41% | 29% | 22% | 75% | 42% | 29% | can't tell from chance | 0.34R |
 | 30m | bear_engulf | 1791 | 38% | 23% | 16% | 80% | 37% | 22% | can't tell from chance | 0.22R |
-| 30m | bull_reject | 1363 | 45% | 29% | 22% | 74% | 41% | 29% | beats chance | 0.34R |
+| 30m | bull_reject | 1362 | 44% | 29% | 22% | 74% | 41% | 29% | beats chance | 0.34R |
 | 30m | bear_reject | 1446 | 38% | 24% | 16% | 81% | 37% | 22% | can't tell from chance | 0.21R |
 | 30m | smc_sweep_bull | 628 | 39% | 28% | 19% | 76% | 42% | 29% | can't tell from chance | 0.36R |
-| 30m | smc_sweep_bear | 619 | 42% | 26% | 18% | 81% | 38% | 23% | beats chance | 0.20R |
-| 30m | smc_bos_up | 464 | 41% | 32% | 27% | 77% | 42% | 30% | can't tell from chance | 0.31R |
-| 30m | smc_bos_down | 227 | 37% | 24% | 14% | 85% | 37% | 22% | can't tell from chance | 0.24R |
-| 30m | smc_choch_up | 94 | 38% | 26% | 18% | 81% | 43% | 32% | can't tell from chance | 0.39R |
-| 30m | smc_choch_down | 99 | 40% | 25% | 21% | 78% | 38% | 24% | can't tell from chance | 0.21R |
-| 30m | smc_fvg_retrace_bull | 1027 | 42% | 29% | 22% | 76% | 41% | 29% | can't tell from chance | 0.34R |
-| 30m | smc_fvg_retrace_bear | 808 | 37% | 21% | 15% | 80% | 37% | 22% | can't tell from chance | 0.22R |
-| 15m | displacement_up | 474 | 36% | 27% | 20% | 82% | 35% | 25% | can't tell from chance | 0.43R |
-| 15m | displacement_down | 475 | 34% | 23% | 13% | 83% | 37% | 23% | can't tell from chance | 0.31R |
-| 15m | bull_engulf | 1650 | 35% | 25% | 18% | 79% | 34% | 24% | can't tell from chance | 0.51R |
-| 15m | bear_engulf | 1648 | 38% | 25% | 17% | 76% | 37% | 23% | can't tell from chance | 0.30R |
-| 15m | bull_reject | 1260 | 35% | 24% | 16% | 80% | 34% | 24% | can't tell from chance | 0.52R |
-| 15m | bear_reject | 1436 | 36% | 24% | 16% | 80% | 37% | 24% | can't tell from chance | 0.30R |
-| 15m | smc_sweep_bull | 600 | 35% | 24% | 18% | 79% | 34% | 24% | can't tell from chance | 0.47R |
-| 15m | smc_sweep_bear | 609 | 37% | 24% | 14% | 84% | 37% | 23% | can't tell from chance | 0.29R |
-| 15m | smc_bos_up | 348 | 39% | 28% | 22% | 80% | 35% | 25% | can't tell from chance | 0.43R |
-| 15m | smc_bos_down | 372 | 37% | 24% | 17% | 81% | 37% | 23% | can't tell from chance | 0.32R |
-| 15m | smc_choch_up | 84 | 32% | 21% | 13% | 86% | 32% | 20% | can't tell from chance | 0.46R |
-| 15m | smc_choch_down | 87 | 32% | 22% | 15% | 82% | 38% | 25% | can't tell from chance | 0.30R |
-| 15m | smc_fvg_retrace_bull | 1096 | 33% | 23% | 16% | 81% | 34% | 24% | can't tell from chance | 0.49R |
-| 15m | smc_fvg_retrace_bear | 1000 | 35% | 24% | 17% | 80% | 37% | 24% | can't tell from chance | 0.32R |
+| 30m | smc_sweep_bear | 620 | 42% | 26% | 18% | 81% | 37% | 22% | beats chance | 0.20R |
+| 30m | smc_bos_up | 466 | 41% | 32% | 27% | 77% | 42% | 31% | can't tell from chance | 0.31R |
+| 30m | smc_bos_down | 227 | 37% | 24% | 14% | 85% | 36% | 22% | can't tell from chance | 0.24R |
+| 30m | smc_choch_up | 93 | 38% | 25% | 18% | 81% | 44% | 32% | can't tell from chance | 0.39R |
+| 30m | smc_choch_down | 99 | 40% | 25% | 21% | 78% | 37% | 21% | can't tell from chance | 0.21R |
+| 30m | smc_fvg_retrace_bull | 1024 | 42% | 29% | 22% | 76% | 42% | 30% | can't tell from chance | 0.34R |
+| 30m | smc_fvg_retrace_bear | 809 | 37% | 21% | 15% | 80% | 38% | 23% | can't tell from chance | 0.22R |
+| 15m | displacement_up | 474 | 36% | 27% | 20% | 82% | 34% | 24% | can't tell from chance | 0.43R |
+| 15m | displacement_down | 468 | 34% | 23% | 14% | 83% | 37% | 22% | can't tell from chance | 0.31R |
+| 15m | bull_engulf | 1645 | 36% | 25% | 19% | 79% | 34% | 24% | can't tell from chance | 0.51R |
+| 15m | bear_engulf | 1653 | 37% | 25% | 17% | 77% | 37% | 23% | can't tell from chance | 0.30R |
+| 15m | bull_reject | 1267 | 35% | 24% | 16% | 80% | 34% | 24% | can't tell from chance | 0.51R |
+| 15m | bear_reject | 1432 | 36% | 23% | 16% | 80% | 37% | 24% | can't tell from chance | 0.30R |
+| 15m | smc_sweep_bull | 602 | 35% | 24% | 18% | 79% | 35% | 25% | can't tell from chance | 0.47R |
+| 15m | smc_sweep_bear | 606 | 37% | 24% | 14% | 84% | 37% | 22% | can't tell from chance | 0.29R |
+| 15m | smc_bos_up | 345 | 40% | 28% | 22% | 80% | 35% | 24% | can't tell from chance | 0.43R |
+| 15m | smc_bos_down | 365 | 37% | 23% | 17% | 81% | 36% | 23% | can't tell from chance | 0.32R |
+| 15m | smc_choch_up | 84 | 32% | 21% | 13% | 86% | 32% | 21% | can't tell from chance | 0.46R |
+| 15m | smc_choch_down | 87 | 31% | 22% | 15% | 82% | 37% | 24% | can't tell from chance | 0.31R |
+| 15m | smc_fvg_retrace_bull | 1094 | 33% | 23% | 16% | 81% | 34% | 24% | can't tell from chance | 0.49R |
+| 15m | smc_fvg_retrace_bear | 1001 | 35% | 24% | 17% | 80% | 37% | 24% | can't tell from chance | 0.32R |
 | 5m | displacement_up | 1312 | 32% | 22% | 18% | 83% | 29% | 20% | beats chance | 0.82R |
-| 5m | displacement_down | 1203 | 27% | 18% | 12% | 87% | 30% | 20% | worse than chance | 0.51R |
-| 5m | bull_engulf | 4220 | 28% | 20% | 15% | 81% | 29% | 21% | can't tell from chance | 0.88R |
-| 5m | bear_engulf | 4179 | 30% | 20% | 13% | 83% | 30% | 20% | can't tell from chance | 0.53R |
-| 5m | bull_reject | 3277 | 28% | 20% | 14% | 81% | 28% | 20% | can't tell from chance | 0.90R |
-| 5m | bear_reject | 3669 | 31% | 20% | 14% | 82% | 30% | 20% | can't tell from chance | 0.52R |
-| 5m | smc_sweep_bull | 1265 | 29% | 20% | 14% | 80% | 29% | 21% | can't tell from chance | 0.77R |
-| 5m | smc_sweep_bear | 1257 | 33% | 23% | 15% | 82% | 31% | 20% | can't tell from chance | 0.48R |
-| 5m | smc_bos_up | 851 | 31% | 23% | 19% | 83% | 29% | 20% | can't tell from chance | 0.85R |
-| 5m | smc_bos_down | 894 | 27% | 17% | 11% | 87% | 30% | 20% | can't tell from chance | 0.56R |
-| 5m | smc_choch_up | 215 | 33% | 25% | 17% | 85% | 29% | 22% | can't tell from chance | 0.97R |
-| 5m | smc_choch_down | 212 | 28% | 17% | 10% | 87% | 29% | 20% | can't tell from chance | 0.60R |
-| 5m | smc_fvg_retrace_bull | 3467 | 30% | 21% | 16% | 80% | 28% | 20% | can't tell from chance | 0.89R |
-| 5m | smc_fvg_retrace_bear | 3052 | 28% | 18% | 12% | 84% | 30% | 19% | worse than chance | 0.56R |
+| 5m | displacement_down | 1198 | 27% | 18% | 12% | 87% | 30% | 20% | can't tell from chance | 0.51R |
+| 5m | bull_engulf | 4219 | 28% | 20% | 15% | 81% | 29% | 21% | can't tell from chance | 0.88R |
+| 5m | bear_engulf | 4167 | 30% | 20% | 13% | 83% | 30% | 20% | can't tell from chance | 0.53R |
+| 5m | bull_reject | 3282 | 28% | 20% | 14% | 81% | 29% | 20% | can't tell from chance | 0.90R |
+| 5m | bear_reject | 3670 | 31% | 20% | 14% | 82% | 31% | 20% | can't tell from chance | 0.52R |
+| 5m | smc_sweep_bull | 1264 | 29% | 20% | 14% | 80% | 29% | 21% | can't tell from chance | 0.77R |
+| 5m | smc_sweep_bear | 1261 | 33% | 23% | 15% | 82% | 31% | 20% | can't tell from chance | 0.48R |
+| 5m | smc_bos_up | 847 | 31% | 23% | 19% | 83% | 29% | 21% | can't tell from chance | 0.84R |
+| 5m | smc_bos_down | 896 | 27% | 17% | 10% | 88% | 30% | 20% | can't tell from chance | 0.56R |
+| 5m | smc_choch_up | 217 | 33% | 24% | 17% | 85% | 28% | 19% | can't tell from chance | 0.97R |
+| 5m | smc_choch_down | 211 | 28% | 17% | 10% | 87% | 31% | 20% | can't tell from chance | 0.60R |
+| 5m | smc_fvg_retrace_bull | 3470 | 30% | 21% | 16% | 80% | 28% | 20% | can't tell from chance | 0.89R |
+| 5m | smc_fvg_retrace_bear | 3048 | 28% | 18% | 12% | 84% | 30% | 20% | worse than chance | 0.56R |
 
 ## 0f. Market regime
 The market's 'mood' per timeframe, from closed candles. Confidence = how much of the evidence agrees (strong / moderate / weak - never a %). **Permission:** LONG needs at least 2 of 1D/4H/1H bullish and no STRONG_BEAR on 1W (weekly veto); SHORT is the mirror image. *Regimes now gate every strategy: each trades only in its allowed regimes and with timeframe permission (strategy spec v3).*
@@ -177,20 +176,20 @@ The market's 'mood' per timeframe, from closed candles. Confidence = how much of
 |---|---|---|---|---|---|
 | **BTC** | TRANSITION (moderate) | WEAK_BULL (moderate) | RANGE (weak) | RANGE (moderate) | NO TRADE (timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H RANGE)) |
 | **ETH** | WEAK_BULL (weak) | STRONG_BULL (moderate) | RANGE (weak) | RANGE (strong) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H RANGE, 1H RANGE)) |
-| **ZEC** | WEAK_BULL (weak) | STRONG_BULL (moderate) | UNCLEAR (weak) | WEAK_BEAR (weak) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H UNCLEAR, 1H WEAK_BEAR)) |
+| **ZEC** | WEAK_BULL (weak) | STRONG_BULL (moderate) | UNCLEAR (weak) | TRANSITION (weak) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H UNCLEAR, 1H TRANSITION)) |
 | **XRP** | TRANSITION (weak) | TRANSITION (weak) | RANGE (moderate) | RANGE (moderate) | NO TRADE (timeframes disagree (1D TRANSITION, 4H RANGE, 1H RANGE)) |
 | **SOL** | TRANSITION (weak) | WEAK_BULL (moderate) | RANGE (weak) | RANGE (moderate) | NO TRADE (timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H RANGE)) |
-| **AVAX** | TRANSITION (weak) | WEAK_BULL (weak) | WEAK_BULL (moderate) | WEAK_BULL (weak) | LONG allowed (1D/4H/1H bullish, 1W TRANSITION) |
+| **AVAX** | TRANSITION (weak) | WEAK_BULL (weak) | WEAK_BULL (moderate) | TRANSITION (weak) | LONG allowed (1D/4H bullish, 1W TRANSITION) |
 | **SUI** | UNCLEAR (weak) | EXPANSION down (weak) | TRANSITION (weak) | RANGE (strong) | NO TRADE (timeframes disagree (1D EXPANSION, 4H TRANSITION, 1H RANGE)) |
 | **BNB** | WEAK_BULL (weak) | STRONG_BULL (moderate) | RANGE (moderate) | WEAK_BEAR (weak) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H RANGE, 1H WEAK_BEAR)) |
 | **HBAR** | RANGE (weak) | EXPANSION up (weak) | EXPANSION down (weak) | TRANSITION (weak) | NO TRADE (timeframes disagree (1D EXPANSION, 4H EXPANSION, 1H TRANSITION)) |
-| **UNI** | EXPANSION up (moderate) | STRONG_BULL (moderate) | UNCLEAR (weak) | UNCLEAR (weak) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H UNCLEAR, 1H UNCLEAR)) |
+| **UNI** | EXPANSION up (moderate) | STRONG_BULL (moderate) | UNCLEAR (weak) | RANGE (weak) | NO TRADE (timeframes disagree (1D STRONG_BULL, 4H UNCLEAR, 1H RANGE)) |
 
 **BTC evidence** (most coins follow BTC):
 - **1W TRANSITION (moderate)** - for: EMA-fast rising (+1.5 ATR in 10 candles); swing structure down (LH/LL); ADX 27 = strong trend; candle size 0.73x normal, Bollinger width above 56% of the last 100 candles · against: EMAs not lined up
 - **1D WEAK_BULL (moderate)** - for: close above EMA-fast above EMA-slow; EMA-fast rising (+1.5 ATR in 10 candles); ADX 42 = strong trend; candle size 1.03x normal, Bollinger width above 82% of the last 100 candles; volume 0.88x normal · against: swing structure mixed (neutral)
 - **4H RANGE (weak)** - for: EMA-fast flat (+0.0 ATR in 10 candles); ADX 11 = weak trend / ranging; candle size 0.99x normal, Bollinger width above 34% of the last 100 candles · against: close above EMA-fast above EMA-slow; swing structure down (LH/LL)
-- **1H RANGE (moderate)** - for: EMAs not lined up; EMA-fast flat (-0.3 ATR in 10 candles); ADX 15 = weak trend / ranging; candle size 1.08x normal, Bollinger width above 72% of the last 100 candles · against: swing structure up (HH/HL)
+- **1H RANGE (moderate)** - for: EMAs not lined up; EMA-fast flat (-0.3 ATR in 10 candles); ADX 14 = weak trend / ranging; candle size 1.08x normal, Bollinger width above 70% of the last 100 candles · against: swing structure up (HH/HL)
 
 *Full evidence for every coin: `reports/regime.json`. Daily history: `memory/market_regime_log.md`.*
 
@@ -199,13 +198,13 @@ Killzone right now (New York time): **Asia**. Nothing trades on SMC yet; every d
 
 | Coin | 15m trend (last break) | Last 15m sweep | Newest open 15m gap (FVG) | 4H order block | 1H range position | Liquidity above (1H) | Liquidity below (1H) |
 |---|---|---|---|---|---|---|---|
-| **BTC** | down (BOS 40 candles ago) | buy-side (bearish idea) 8 candles ago | bull 83,506.43-83,550.00 (retraced) | bear 84,342.00-84,843.00 | discount (46%) | swing high 84,563.99 (2.24 ATR) | swing low 82,900.00 (1.9 ATR) |
-| **ETH** | down (BOS 0 candles ago) | sell-side (bullish idea) 38 candles ago | bear 2,699.07-2,708.21 (retraced) | bull 2,652.20-2,695.38 | discount (30%) | swing high 2,700.00 (1.22 ATR) | swing low 2,668.40 (0.53 ATR) |
-| **ZEC** | up (BOS 9 candles ago) | buy-side (bearish idea) 63 candles ago | bull 1,403.11-1,409.83 (retraced) | bear 1,540.16-1,569.23 | discount (46%) | swing high 1,460.16 (1.52 ATR) | swing low 1,381.00 (1.29 ATR) |
-| **XRP** | down (BOS 2 candles ago) | buy-side (bearish idea) 39 candles ago | bear 1.4919-1.4938 (retraced) | bull 1.3773-1.3856 | discount (17%) | swing high 1.5617 (3.98 ATR) | swing low 1.4764 (0.8 ATR) |
-| **SOL** | down (BOS 35 candles ago) | buy-side (bearish idea) 8 candles ago | bull 117.93-118.47 | bull 115.86-117.34 | discount (41%) | swing high 121.69 (2.31 ATR) | swing low 117.36 (1.63 ATR) |
-| **AVAX** | down (BOS 27 candles ago) | sell-side (bullish idea) 25 candles ago | bull 11.122-11.191 (retraced) | bull 10.336-10.899 | discount (42%) | swing high 12.008 (2.55 ATR) | swing low 11.029 (1.82 ATR) |
-| **SUI** | up (BOS 14 candles ago) | sell-side (bullish idea) 7 candles ago | bear 1.1570-1.1638 (retraced) | bull 1.0050-1.0598 | premium (72%) | swing high 1.1622 (0.47 ATR) | swing low 1.1270 (1.25 ATR) |
+| **BTC** | down (BOS 44 candles ago) | sell-side (bullish idea) 1 candles ago | bear 83,592.01-83,645.00 (retraced) | bear 84,342.00-84,843.00 | discount (33%) | swing high 84,563.99 (2.77 ATR) | swing low 82,900.00 (1.38 ATR) |
+| **ETH** | down (BOS 4 candles ago) | sell-side (bullish idea) 42 candles ago | bear 2,674.30-2,677.20 (retraced) | bull 2,652.20-2,695.38 | discount (13%) | swing high 2,700.00 (1.55 ATR) | swing low 2,668.40 (0.24 ATR) |
+| **ZEC** | up (BOS 13 candles ago) | buy-side (bearish idea) 2 candles ago | bull 1,403.11-1,409.83 (retraced) | bear 1,540.16-1,569.23 | premium (55%) | swing high 1,460.16 (1.3 ATR) | swing low 1,381.00 (1.57 ATR) |
+| **XRP** | down (BOS 6 candles ago) | buy-side (bearish idea) 43 candles ago | bull 1.4836-1.4890 (retraced) | bull 1.3773-1.3856 | discount (19%) | swing high 1.5617 (4.06 ATR) | swing low 1.4764 (0.94 ATR) |
+| **SOL** | down (BOS 39 candles ago) | buy-side (bearish idea) 12 candles ago | bull 117.93-118.47 | bull 115.86-117.34 | discount (37%) | swing high 121.69 (2.55 ATR) | swing low 117.36 (1.48 ATR) |
+| **AVAX** | down (BOS 31 candles ago) | sell-side (bullish idea) 29 candles ago | bull 11.122-11.191 (retraced) | bull 10.336-10.899 | premium (76%) | swing high 11.550 (0.58 ATR) | swing low 11.029 (1.82 ATR) |
+| **SUI** | up (BOS 0 candles ago) | sell-side (bullish idea) 1 candles ago | bear 1.2025-1.2069 (retraced) | bull 1.0050-1.0598 | premium (56%) | swing high 1.1622 (0.77 ATR) | swing low 1.1270 (0.99 ATR) |
 
 *Full SMC state and the newest events per coin and timeframe: `reports/smc.json`. Definitions: `memory/smc_research.md`.*
 
@@ -230,7 +229,7 @@ No tracked strategy (VALIDATION or higher) has its market filters open right now
 - **Event calendar (next 7 days):** US GDP (Third Estimate), 2nd Quarter 2026 2026-09-30 12:30 UTC, US PCE / Personal Income and Outlays (Aug data) 2026-09-30 12:30 UTC, US jobs report / Employment Situation (Sep data) 2026-10-02 12:30 UTC
 
 ## 3. Strategy scoreboard (after fees)
-**Status and long-history numbers** come from the daily research run (last run 2026-09-29 00:53 UTC); **Layer A** (the last 15 days) is recalculated every hour. Only trades inside each strategy's allowed regimes and with timeframe permission are counted.
+**Status and long-history numbers** come from the daily research run (last run 2026-09-30 00:55 UTC); **Layer A** (the last 15 days) is recalculated every hour. Only trades inside each strategy's allowed regimes and with timeframe permission are counted.
 
 - **VALIDATION** = long history (Layer B): ≥ 30 trades, ≥ +0.10R per trade (+0.02R per re-tuned version), profit factor ≥ 1.2, max drawdown ≤ 10R, profitable in both the develop and the validate part, and cost-viable (fees + slippage ≤ 0.25R, i.e. stop ≥ 4x the round-trip cost).
 - **PAPER_TRADING** (automatic) = VALIDATION + walk-forward (≥ 3 of 5 windows profitable and together profitable) + edge on ≥ 3 coins + still profitable with costs +50% + every ±20% change still profitable + no overfitting flag + beats its control twin. Paper signals are logged and get PAPER emails (practice only, at most 3 an hour).
@@ -238,78 +237,78 @@ No tracked strategy (VALIDATION or higher) has its market filters open right now
 
 | Strategy | Ver | TF | Status | Trades | Win % | Avg R | PF | Max DD | Develop / validate R | Long / short R | Walk-fwd | Costs +50% | Costs +100% (shown only) | ±20% worst | Coins + | Cost/trade | Layer A: trades, R (days 1-10 / 11-15) | Stood down (regime / permission) | Paper+live signals | Why not |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| S7-SILVER-BULLET | 1.0 | 15m | **BACKTESTING** | 5 | 60.0 | +1.221 | 3.69 | 2.3R | +0.97 / +2.21 | +2.21 / +0.97 | 0/5 ✗ | +1.10 | +0.98 | stable | 0 | 0.18R | 1, -2.55 (+0.00 / -2.55) | 19 / 7 of 29 | 0 | only 5 trades; only 1 unseen-test trades |
-| S5-SWEEP-MSS-FVG | 1.0 | 15m | **BACKTESTING** | 6 | 50.0 | +0.206 | 1.21 | 3.3R | +0.51 / -1.32 | -1.32 / +0.51 | 0/5 ✗ | +0.08 | -0.03 | ✗  sweep_bars 20→24: -0.16R | 0 | 0.26R | 1, -1.32 (-1.32 / +0.00) | 44 / 13 of 64 | 0 | not cost-viable: fees + slippage 0.26R per trade (stop must be ≥ 4x the round-trip cost); only 6 trades; only 1 unseen-test trades; not profitable in BOTH train and unseen test |
-| S7-SILVER-BULLET-noSMC | 1.0 | 15m | **BACKTESTING** | 16 | 43.8 | +0.202 | 1.25 | 5.9R | +0.04 / +0.56 | +0.18 / +0.21 | 0/5 ✗ | -0.11 | -0.29 | ✗  sweep_bars 8→10: -0.10R | 0 | 0.34R | 3, -0.65 (+0.31 / -2.55) | 49 / 23 of 80 | 0 | not cost-viable: fees + slippage 0.34R per trade (stop must be ≥ 4x the round-trip cost); only 16 trades; only 5 unseen-test trades |
-| donchian_breakout-VEXIT 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1060 | 39.5 | +0.197 | 1.36 | 26.1R | +0.17 / +0.24 | +0.23 / +0.15 | 5/5 | +0.17 | +0.14 | stable | 9 | 0.04R | 16, +0.51 (+0.73 / -1.03) | 87 / 51 of 257 | 0 | max drawdown 26.1R |
-| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1060 | 39.5 | +0.197 | 1.36 | 26.1R | +0.17 / +0.24 | +0.23 / +0.15 | 5/5 | +0.17 | +0.14 | stable | 9 | 0.04R | 16, +0.51 (+0.73 / -1.03) | 87 / 51 of 257 | 0 | max drawdown 26.1R |
-| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1205 | 39.3 | +0.195 | 1.36 | 28.7R | +0.18 / +0.22 | +0.21 / +0.17 | 5/5 | +0.17 | +0.14 | stable | 10 | 0.04R | 17, +0.59 (+0.94 / -1.03) | 151 / 63 of 349 | 0 | max drawdown 28.7R |
-| donchian_breakout | 1.0 | 4h | **BACKTESTING** | 1092 | 53.7 | +0.099 | 1.22 | 21.6R | +0.09 / +0.12 | +0.10 / +0.10 | 4/5 | +0.07 | +0.05 | stable | 7 | 0.04R | 18, +0.28 (+0.35 / -0.10) | 87 / 51 of 257 | 0 | avg +0.10R/trade (needs +0.10R); max drawdown 21.6R |
-| S5-SWEEP-MSS-FVG-noSMC | 1.0 | 30m | **BACKTESTING** | 14 | 35.7 | +0.088 | 1.2 | 2.5R | +0.07 / +0.14 | -0.76 / +0.23 | 1/5 ✗ | +0.02 | +0.08 | ✗  stop max_width_atr 3.0→3.6: -0.11R | 0 | 0.08R | 0, +0.00 (+0.00 / +0.00) | 561 / 207 of 905 | 0 | only 14 trades; avg +0.09R/trade (needs +0.10R); only 4 unseen-test trades |
+| donchian_breakout-VEXIT 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1104 | 39.5 | +0.169 | 1.31 | 31.9R | +0.16 / +0.19 | +0.21 / +0.12 | 5/5 | +0.14 | +0.11 | stable | 8 | 0.04R | 16, +0.51 (+0.73 / -1.03) | 87 / 51 of 257 | 0 | max drawdown 31.9R |
+| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1254 | 38.9 | +0.169 | 1.3 | 35.1R | +0.17 / +0.17 | +0.19 / +0.15 | 5/5 | +0.14 | +0.12 | stable | 9 | 0.04R | 17, +0.59 (+0.94 / -1.03) | 151 / 63 of 349 | 0 | max drawdown 35.1R |
+| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 4h | **BACKTESTING** | 1104 | 39.5 | +0.169 | 1.31 | 31.9R | +0.16 / +0.19 | +0.21 / +0.12 | 5/5 | +0.14 | +0.11 | stable | 8 | 0.04R | 16, +0.51 (+0.73 / -1.03) | 87 / 51 of 257 | 0 | max drawdown 31.9R |
+| S5-SWEEP-MSS-FVG | 1.0 | 15m | **BACKTESTING** | 7 | 42.9 | +0.153 | 1.16 | 3.3R | +0.40 / -1.32 | -1.32 / +0.40 | 0/5 ✗ | -1.99 | -1.30 | ✗  stop buffer_atr 0.2→0.24: -1.78R | 0 | 0.27R | 1, -1.32 (-1.32 / +0.00) | 44 / 13 of 64 | 0 | not cost-viable: fees + slippage 0.27R per trade (stop must be ≥ 4x the round-trip cost); only 7 trades; profit factor 1.16; only 1 unseen-test trades; not profitable in BOTH train and unseen test |
+| donchian_breakout | 1.0 | 4h | **BACKTESTING** | 1136 | 53.4 | +0.088 | 1.19 | 30.1R | +0.08 / +0.11 | +0.10 / +0.07 | 4/5 | +0.06 | +0.04 | stable | 6 | 0.04R | 18, +0.28 (+0.35 / -0.10) | 87 / 51 of 257 | 0 | avg +0.09R/trade (needs +0.10R); profit factor 1.19; max drawdown 30.1R |
 | S8-PDH-PDL-SWEEP-5M | 1.0 | 30m | **BACKTESTING** | 2 | 50.0 | +0.037 | 1.04 | 1.7R | +0.00 / +0.04 | +0.04 / +0.00 | 0/5 ✗ | -0.27 | -0.78 | ✗  time_stop_bars 30→36: -0.30R | 0 | 0.70R | 1, +1.79 (+0.00 / +1.79) | 36 / 105 of 153 | 0 | not cost-viable: fees + slippage 0.70R per trade (stop must be ≥ 4x the round-trip cost); only 2 trades; avg +0.04R/trade (needs +0.10R); profit factor 1.04; only 2 unseen-test trades; not profitable in BOTH train and unseen test |
-| macd_trend_cross | 1.0 | 1h | **BACKTESTING** | 189 | 51.9 | +0.005 | 1.01 | 24.1R | -0.10 / +0.24 | -0.08 / +0.09 | 2/5 ✗ | -0.05 | -0.12 | ✗  stop atr 1.5→1.2: -0.06R | 4 | 0.13R | 1, -0.02 (-0.02 / +0.00) | 215 / 4 of 221 | 0 | avg +0.01R/trade (needs +0.10R); profit factor 1.01; max drawdown 24.1R; not profitable in BOTH train and unseen test |
 | S6-OB-FVG | 1.0 | 15m | **BACKTESTING** | 0 | 0.0 | +0.000 | 0.0 | 0.0R | +0.00 / +0.00 | +0.00 / +0.00 | 0/5 ✗ | +0.00 | +0.00 | ✗  stop max_width_atr 3.0→3.6: -1.14R | 0 | - | 0, +0.00 (+0.00 / +0.00) | 3 / 4 of 7 | 0 | only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test |
 | S5-SWEEP-MSS-FVG-5M | 1.0 | 30m | **BACKTESTING** | 0 | 0.0 | +0.000 | 0.0 | 0.0R | +0.00 / +0.00 | +0.00 / +0.00 | 0/5 ✗ | +0.00 | +0.00 | ✗  sweep_bars 20→16: +0.00R | 0 | - | 0, +0.00 (+0.00 / +0.00) | 64 / 15 of 82 | 0 | only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test |
 | S5-SWEEP-MSS-FVG-5M | 1.0 | 15m | **BACKTESTING** | 0 | 0.0 | +0.000 | 0.0 | 0.0R | +0.00 / +0.00 | +0.00 / +0.00 | 0/5 ✗ | +0.00 | +0.00 | ✗  sweep_bars 20→16: +0.00R | 0 | - | 0, +0.00 (+0.00 / +0.00) | 44 / 13 of 64 | 0 | only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test |
 | S6-OB-FVG-5M | 1.0 | 15m | **BACKTESTING** | 0 | 0.0 | +0.000 | 0.0 | 0.0R | +0.00 / +0.00 | +0.00 / +0.00 | 0/5 ✗ | +0.00 | +0.00 | ✗  ob_bars 20→16: +0.00R | 0 | - | 0, +0.00 (+0.00 / +0.00) | 3 / 4 of 7 | 0 | only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test |
 | S7-SILVER-BULLET-5M | 1.0 | 15m | **BACKTESTING** | 0 | 0.0 | +0.000 | 0.0 | 0.0R | +0.00 / +0.00 | +0.00 / +0.00 | 0/5 ✗ | +0.00 | +0.00 | ✗  sweep_bars 8→6: +0.00R | 0 | - | 0, +0.00 (+0.00 / +0.00) | 19 / 7 of 29 | 0 | only 0 trades; avg +0.00R/trade (needs +0.10R); profit factor 0.00; only 0 unseen-test trades; not profitable in BOTH train and unseen test |
-| S5-SWEEP-MSS-FVG-noSMC | 1.0 | 15m | **BACKTESTING** | 13 | 46.2 | -0.308 | 0.48 | 5.9R | -0.37 / +0.05 | -0.31 / -0.31 | 0/5 ✗ | -0.30 | -0.54 | ✗  time_stop_bars 30→24: -0.36R | 0 | 0.16R | 0, +0.00 (+0.00 / +0.00) | 482 / 213 of 843 | 0 | only 13 trades; avg -0.31R/trade (needs +0.10R); profit factor 0.48; only 2 unseen-test trades; not profitable in BOTH train and unseen test |
-| S5-SWEEP-MSS-FVG | 1.0 | 30m | **BACKTESTING** | 4 | 0.0 | -1.218 | 0.0 | 4.9R | -1.24 / -1.16 | -1.42 / -1.15 | 0/5 ✗ | -1.22 | -1.29 | ✗  sweep_bars 20→16: -1.22R | 0 | 0.20R | 0, +0.00 (+0.00 / +0.00) | 64 / 15 of 82 | 0 | only 4 trades; avg -1.22R/trade (needs +0.10R); profit factor 0.00; only 1 unseen-test trades; not profitable in BOTH train and unseen test |
-| bb_squeeze_breakout | 1.0 | 4h | **FAILED** | 284 | 50.7 | +0.001 | 1.0 | 24.0R | +0.13 / -0.27 | +0.05 / -0.04 | 2/5 ✗ | -0.05 | -0.09 | ✗  stop atr 1.5→1.8: -0.02R | 6 | 0.07R | 3, +0.49 (+1.27 / +0.10) | 101 / 23 of 142 | 0 | avg +0.00R/trade (needs +0.10R); profit factor 1.00; max drawdown 24.0R; not profitable in BOTH train and unseen test |
-| bb_squeeze_breakout | 1.0 | 1h | **FAILED** | 838 | 53.0 | -0.012 | 0.98 | 37.2R | -0.01 / -0.02 | -0.06 / +0.03 | 2/5 ✗ | -0.09 | -0.17 | ✗  bb_k 2→1: -0.06R | 4 | 0.14R | 7, +0.50 (-0.10 / +1.29) | 145 / 38 of 219 | 0 | avg -0.01R/trade (needs +0.10R); profit factor 0.98; max drawdown 37.2R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT 🧪 lab | 1.0 | 30m | **FAILED** | 1286 | 34.2 | -0.037 | 0.94 | 112.3R | -0.06 / +0.01 | +0.02 / -0.10 | 2/5 ✗ | -0.12 | -0.19 | ✗  stop atr 2.0→1.6: -0.12R | 4 | 0.12R | 53, +0.06 (+0.17 / -0.47) | 149 / 39 of 365 | 0 | avg -0.04R/trade (needs +0.10R); profit factor 0.94; max drawdown 112.3R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 30m | **FAILED** | 1286 | 34.2 | -0.037 | 0.94 | 112.3R | -0.06 / +0.01 | +0.02 / -0.10 | 2/5 ✗ | -0.12 | -0.19 | ✗  stop atr 2.0→1.6: -0.12R | 4 | 0.12R | 53, +0.06 (+0.17 / -0.47) | 149 / 39 of 365 | 0 | avg -0.04R/trade (needs +0.10R); profit factor 0.94; max drawdown 112.3R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 1h | **FAILED** | 3323 | 32.2 | -0.055 | 0.91 | 268.9R | -0.08 / +0.01 | -0.03 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.08R | 2 | 0.09R | 32, +0.66 (+0.71 / +0.38) | 214 / 121 of 550 | 0 | avg -0.05R/trade (needs +0.10R); profit factor 0.91; max drawdown 268.9R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 30m | **FAILED** | 1519 | 33.7 | -0.056 | 0.92 | 132.4R | -0.07 / -0.02 | -0.01 / -0.11 | 1/5 ✗ | -0.14 | -0.22 | ✗  stop atr 2.0→1.6: -0.13R | 3 | 0.13R | 58, +0.10 (+0.11 / +0.05) | 244 / 62 of 508 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.92; max drawdown 132.4R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT 🧪 lab | 1.0 | 1h | **FAILED** | 2925 | 31.8 | -0.061 | 0.9 | 264.4R | -0.10 / +0.02 | -0.04 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.09R | 2 | 0.09R | 30, +0.60 (+0.71 / -0.34) | 127 / 86 of 394 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.90; max drawdown 264.4R; not profitable in BOTH train and unseen test |
-| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 1h | **FAILED** | 2925 | 31.8 | -0.061 | 0.9 | 265.2R | -0.10 / +0.02 | -0.04 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.09R | 2 | 0.09R | 30, +0.60 (+0.71 / -0.34) | 127 / 86 of 394 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.90; max drawdown 265.2R; not profitable in BOTH train and unseen test |
-| donchian_breakout | 1.0 | 30m | **FAILED** | 1320 | 49.2 | -0.066 | 0.88 | 117.2R | -0.07 / -0.04 | -0.04 / -0.09 | 1/5 ✗ | -0.14 | -0.21 | ✗  stop atr 2.0→1.6: -0.14R | 3 | 0.12R | 53, +0.08 (+0.13 / -0.21) | 149 / 39 of 365 | 0 | avg -0.07R/trade (needs +0.10R); profit factor 0.88; max drawdown 117.2R; not profitable in BOTH train and unseen test |
-| donchian_breakout | 1.0 | 1h | **FAILED** | 3011 | 47.7 | -0.069 | 0.87 | 238.5R | -0.09 / -0.03 | -0.07 / -0.06 | 0/5 ✗ | -0.12 | -0.17 | ✗  stop atr 2.0→1.6: -0.09R | 1 | 0.09R | 34, +0.40 (+0.55 / -0.46) | 127 / 86 of 394 | 0 | avg -0.07R/trade (needs +0.10R); profit factor 0.87; max drawdown 238.5R; not profitable in BOTH train and unseen test |
-| trend_pullback | 1.0 | 4h | **FAILED** | 1202 | 47.9 | -0.075 | 0.86 | 141.4R | -0.02 / -0.20 | -0.02 / -0.14 | 2/5 ✗ | -0.12 | -0.15 | ✗  long_rsi_hi 65→52: -0.14R | 3 | 0.06R | 13, +0.39 (+1.05 / -1.10) | 672 / 216 of 1060 | 0 | avg -0.08R/trade (needs +0.10R); profit factor 0.86; max drawdown 141.4R; not profitable in BOTH train and unseen test |
-| macd_trend_cross | 1.0 | 4h | **FAILED** | 34 | 50.0 | -0.094 | 0.82 | 5.6R | +0.03 / -0.40 | +0.23 / -0.45 | 2/5 ✗ | -0.12 | -0.15 | ✗  time_stop_bars 40→32: -0.11R | 1 | 0.06R | 0, +0.00 (+0.00 / +0.00) | 154 / 6 of 162 | 0 | avg -0.09R/trade (needs +0.10R); profit factor 0.82; not profitable in BOTH train and unseen test |
-| rsi2_dip_buy | 1.0 | 4h | **FAILED** | 1836 | 56.2 | -0.103 | 0.64 | 189.0R | -0.09 / -0.13 | -0.12 / -0.09 | 0/5 ✗ | -0.13 | -0.16 | ✗  stop atr 2.0→1.6: -0.13R | 0 | 0.05R | 7, -0.23 (-0.31 / -0.03) | 737 / 3 of 992 | 0 | avg -0.10R/trade (needs +0.10R); profit factor 0.64; max drawdown 189.0R; not profitable in BOTH train and unseen test |
-| supertrend_flip | 1.0 | 4h | **FAILED** | 90 | 46.7 | -0.110 | 0.8 | 18.5R | +0.05 / -0.38 | -0.13 / -0.08 | 3/5 ✗ | -0.14 | -0.16 | ✗  st_n 10→8: -0.12R | 1 | 0.05R | 1, +1.82 (+1.82 / +0.00) | 43 / 7 of 53 | 0 | avg -0.11R/trade (needs +0.10R); profit factor 0.80; max drawdown 18.5R; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 1.0 | 1h | **FAILED** | 344 | 44.5 | -0.127 | 0.77 | 53.2R | -0.13 / -0.12 | -0.19 / -0.06 | 1/5 ✗ | -0.19 | -0.26 | ✗  slow 21→17: -0.19R | 3 | 0.12R | 3, -1.00 (-1.00 / +0.00) | 149 / 7 of 163 | 0 | avg -0.13R/trade (needs +0.10R); profit factor 0.77; max drawdown 53.2R; not profitable in BOTH train and unseen test |
-| rsi2_dip_buy | 1.0 | 1h | **FAILED** | 6905 | 53.7 | -0.131 | 0.54 | 910.8R | -0.11 / -0.17 | -0.14 / -0.12 | 0/5 ✗ | -0.20 | -0.26 | ✗  stop atr 2.0→1.6: -0.16R | 0 | 0.11R | 41, -0.14 (-0.23 / -0.08) | 1050 / 7 of 1422 | 0 | avg -0.13R/trade (needs +0.10R); profit factor 0.54; max drawdown 910.8R; not profitable in BOTH train and unseen test |
-| trend_pullback | 1.0 | 1h | **FAILED** | 6220 | 47.4 | -0.135 | 0.77 | 850.9R | -0.14 / -0.13 | -0.17 / -0.10 | 0/5 ✗ | -0.20 | -0.28 | ✗  stop atr 1.5→1.2: -0.17R | 1 | 0.13R | 50, -0.10 (+0.04 / -0.44) | 1168 / 294 of 1844 | 0 | avg -0.13R/trade (needs +0.10R); profit factor 0.77; max drawdown 850.9R; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 1.0 | 15m | **FAILED** | 447 | 45.0 | -0.162 | 0.72 | 72.3R | -0.15 / -0.20 | -0.22 / -0.13 | 0/5 ✗ | -0.30 | -0.44 | ✗  stop atr 1.5→1.2: -0.29R | 1 | 0.25R | 21, -0.14 (+0.24 / -1.09) | 80 / 14 of 118 | 0 | avg -0.16R/trade (needs +0.10R); profit factor 0.72; max drawdown 72.3R; not profitable in BOTH train and unseen test |
-| R4-CLUC 🧪 lab | 1.0 | 30m | **FAILED** | 259 | 39.0 | -0.167 | 0.74 | 66.8R | -0.18 / -0.12 | +0.14 / -0.36 | 1/5 ✗ | -0.22 | -0.28 | ✗  depth 0.985→1.182: -0.29R | 1 | 0.10R | 3, +0.60 (+0.56 / +0.69) | 80 / 6 of 90 | 0 | avg -0.17R/trade (needs +0.10R); profit factor 0.74; max drawdown 66.8R; not profitable in BOTH train and unseen test |
-| R4-CLUC 🧪 lab | 1.0 | 15m | **FAILED** | 91 | 35.2 | -0.170 | 0.76 | 27.0R | -0.34 / +0.33 | -0.17 / -0.17 | 1/5 ✗ | -0.23 | -0.33 | ✗  depth 0.985→1.182: -0.45R | 2 | 0.15R | 0, +0.00 (+0.00 / +0.00) | 40 / 6 of 46 | 0 | avg -0.17R/trade (needs +0.10R); profit factor 0.76; max drawdown 27.0R; not profitable in BOTH train and unseen test |
-| S6-OB-FVG-noSMC | 1.0 | 15m | **FAILED** | 44 | 36.4 | -0.181 | 0.74 | 12.5R | -0.00 / -0.47 | -0.43 / +0.05 | 1/5 ✗ | -0.38 | -0.47 | ✗  time_stop_bars 30→24: -0.19R | 3 | 0.16R | 6, -0.79 (-0.48 / -1.40) | 102 / 34 of 149 | 0 | avg -0.18R/trade (needs +0.10R); profit factor 0.74; max drawdown 12.5R; not profitable in BOTH train and unseen test |
-| rsi2_dip_buy | 1.0 | 30m | **FAILED** | 2796 | 47.5 | -0.188 | 0.42 | 527.8R | -0.17 / -0.24 | -0.24 / -0.14 | 0/5 ✗ | -0.29 | -0.39 | ✗  stop atr 2.0→1.6: -0.24R | 0 | 0.16R | 38, -0.06 (+0.03 / -0.11) | 1045 / 25 of 1259 | 0 | avg -0.19R/trade (needs +0.10R); profit factor 0.42; max drawdown 527.8R; not profitable in BOTH train and unseen test |
-| S8-PDH-PDL-SWEEP | 1.0 | 1h | **FAILED** | 288 | 31.9 | -0.190 | 0.76 | 74.7R | -0.09 / -0.42 | -0.38 / +0.03 | 1/5 ✗ | -0.29 | -0.40 | ✗  time_stop_bars 30→36: -0.21R | 1 | 0.20R | 4, +0.34 (+2.70 / -0.44) | 87 / 221 of 320 | 0 | avg -0.19R/trade (needs +0.10R); profit factor 0.76; max drawdown 74.7R; not profitable in BOTH train and unseen test |
-| trend_pullback | 1.0 | 30m | **FAILED** | 3534 | 46.3 | -0.191 | 0.69 | 678.6R | -0.18 / -0.22 | -0.21 / -0.17 | 0/5 ✗ | -0.30 | -0.41 | ✗  stop atr 1.5→1.2: -0.26R | 0 | 0.18R | 104, -0.11 (+0.20 / -0.77) | 882 / 260 of 1673 | 0 | avg -0.19R/trade (needs +0.10R); profit factor 0.69; max drawdown 678.6R; not profitable in BOTH train and unseen test |
-| bb_squeeze_breakout | 1.0 | 30m | **FAILED** | 509 | 46.4 | -0.191 | 0.7 | 98.9R | -0.22 / -0.09 | -0.24 / -0.14 | 1/5 ✗ | -0.30 | -0.42 | ✗  stop atr 1.5→1.2: -0.27R | 1 | 0.18R | 20, -0.48 (-0.45 / -0.56) | 111 / 30 of 185 | 0 | avg -0.19R/trade (needs +0.10R); profit factor 0.70; max drawdown 98.9R; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 1.0 | 1h | **FAILED** | 298 | 47.7 | -0.202 | 0.67 | 60.5R | -0.19 / -0.22 | -0.26 / -0.12 | 0/5 ✗ | -0.29 | -0.38 | ✗  vol_x 1.2→1.44: -0.34R | 2 | 0.17R | 5, -0.41 (-0.41 / +0.00) | 101 / 202 of 312 | 0 | avg -0.20R/trade (needs +0.10R); profit factor 0.67; max drawdown 60.5R; not profitable in BOTH train and unseen test |
-| supertrend_flip | 1.0 | 30m | **FAILED** | 165 | 45.5 | -0.206 | 0.64 | 34.0R | -0.22 / -0.17 | -0.21 / -0.20 | 1/5 ✗ | -0.27 | -0.35 | ✗  adx_min 20→24: -0.30R | 1 | 0.13R | 7, -0.39 (-0.25 / -1.26) | 56 / 5 of 71 | 0 | avg -0.21R/trade (needs +0.10R); profit factor 0.64; max drawdown 34.0R; not profitable in BOTH train and unseen test |
-| macd_trend_cross | 1.0 | 30m | **FAILED** | 294 | 46.6 | -0.217 | 0.65 | 70.0R | -0.13 / -0.44 | -0.34 / -0.10 | 0/5 ✗ | -0.34 | -0.43 | ✗  stop atr 1.5→1.2: -0.30R | 1 | 0.19R | 4, -0.16 (+0.23 / -1.33) | 177 / 6 of 194 | 0 | avg -0.22R/trade (needs +0.10R); profit factor 0.65; max drawdown 70.0R; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 1.0 | 30m | **FAILED** | 334 | 40.1 | -0.224 | 0.62 | 78.7R | -0.20 / -0.31 | -0.29 / -0.17 | 0/5 ✗ | -0.32 | -0.42 | ✗  fast 9→11: -0.29R | 0 | 0.16R | 10, +0.06 (+0.20 / -1.18) | 115 / 19 of 150 | 0 | avg -0.22R/trade (needs +0.10R); profit factor 0.62; max drawdown 78.7R; not profitable in BOTH train and unseen test |
-| S8-PDH-PDL-SWEEP-noSMC | 1.0 | 1h | **FAILED** | 808 | 30.3 | -0.241 | 0.71 | 210.4R | -0.24 / -0.24 | -0.33 / -0.16 | 0/5 ✗ | -0.34 | -0.44 | ✗  stop buffer_atr 0.2→0.16: -0.28R | 1 | 0.22R | 17, -0.07 (+0.58 / -1.26) | 482 / 1124 of 1697 | 0 | avg -0.24R/trade (needs +0.10R); profit factor 0.71; max drawdown 210.4R; not profitable in BOTH train and unseen test |
-| supertrend_flip | 1.0 | 1h | **FAILED** | 288 | 43.1 | -0.256 | 0.58 | 77.4R | -0.27 / -0.23 | -0.34 / -0.17 | 0/5 ✗ | -0.31 | -0.36 | ✗  st_n 10→12: -0.28R | 1 | 0.08R | 5, +0.39 (+0.39 / +0.00) | 63 / 2 of 73 | 0 | avg -0.26R/trade (needs +0.10R); profit factor 0.58; max drawdown 77.4R; not profitable in BOTH train and unseen test |
-| trend_pullback | 1.0 | 15m | **FAILED** | 3129 | 44.6 | -0.263 | 0.61 | 830.3R | -0.24 / -0.31 | -0.30 / -0.24 | 0/5 ✗ | -0.42 | -0.57 | ✗  stop atr 1.5→1.2: -0.34R | 0 | 0.26R | 193, -0.16 (+0.04 / -0.83) | 1375 / 210 of 2228 | 0 | not cost-viable: fees + slippage 0.26R per trade (stop must be ≥ 4x the round-trip cost); avg -0.26R/trade (needs +0.10R); profit factor 0.61; max drawdown 830.3R; not profitable in BOTH train and unseen test |
-| R4-BBRSI 🧪 lab | 1.0 | 30m | **FAILED** | 1505 | 32.2 | -0.295 | 0.63 | 445.9R | -0.30 / -0.29 | -0.29 / -0.30 | 0/5 ✗ | -0.42 | -0.55 | ✗  stop atr 1.5→1.2: -0.35R | 0 | 0.21R | 23, -0.21 (-0.52 / +0.07) | 616 / 22 of 729 | 0 | avg -0.30R/trade (needs +0.10R); profit factor 0.63; max drawdown 445.9R; not profitable in BOTH train and unseen test |
-| R4-BBRSI 🧪 lab | 1.0 | 1h | **FAILED** | 1245 | 29.8 | -0.300 | 0.62 | 376.5R | -0.32 / -0.24 | -0.28 / -0.31 | 0/5 ✗ | -0.38 | -0.45 | ✗  rsi_n 14→17: -0.39R | 1 | 0.14R | 4, -0.33 (-1.20 / +0.54) | 755 / 9 of 811 | 0 | avg -0.30R/trade (needs +0.10R); profit factor 0.62; max drawdown 376.5R; not profitable in BOTH train and unseen test |
-| rsi2_dip_buy | 1.0 | 15m | **FAILED** | 2199 | 35.1 | -0.323 | 0.22 | 711.0R | -0.30 / -0.36 | -0.42 / -0.25 | 0/5 ✗ | -0.49 | -0.66 | ✗  hi 90→108: -0.42R | 0 | 0.28R | 58, -0.38 (-0.24 / -0.50) | 1282 / 41 of 1469 | 0 | not cost-viable: fees + slippage 0.28R per trade (stop must be ≥ 4x the round-trip cost); avg -0.32R/trade (needs +0.10R); profit factor 0.22; max drawdown 711.0R; not profitable in BOTH train and unseen test |
-| bb_squeeze_breakout | 1.0 | 15m | **FAILED** | 567 | 40.7 | -0.376 | 0.48 | 219.0R | -0.34 / -0.45 | -0.36 / -0.39 | 0/5 ✗ | -0.52 | -0.66 | ✗  stop atr 1.5→1.2: -0.45R | 0 | 0.29R | 35, -0.73 (-0.76 / -0.53) | 94 / 34 of 182 | 0 | not cost-viable: fees + slippage 0.29R per trade (stop must be ≥ 4x the round-trip cost); avg -0.38R/trade (needs +0.10R); profit factor 0.48; max drawdown 219.0R; not profitable in BOTH train and unseen test |
-| S8-PDH-PDL-SWEEP-noSMC | 1.0 | 30m | **FAILED** | 628 | 24.8 | -0.449 | 0.54 | 286.1R | -0.46 / -0.43 | -0.54 / -0.36 | 0/5 ✗ | -0.62 | -0.75 | ✗  n 20→24: -0.49R | 1 | 0.32R | 26, -0.25 (+0.16 / -1.01) | 493 / 1008 of 1685 | 0 | not cost-viable: fees + slippage 0.32R per trade (stop must be ≥ 4x the round-trip cost); avg -0.45R/trade (needs +0.10R); profit factor 0.54; max drawdown 286.1R; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 1.0 | 30m | **FAILED** | 342 | 37.4 | -0.469 | 0.38 | 160.3R | -0.42 / -0.58 | -0.48 / -0.46 | 0/5 ✗ | -0.62 | -0.78 | ✗  stop atr 1.0→0.8: -0.55R | 0 | 0.27R | 14, -0.85 (-0.80 / -0.96) | 126 / 216 of 366 | 0 | not cost-viable: fees + slippage 0.27R per trade (stop must be ≥ 4x the round-trip cost); avg -0.47R/trade (needs +0.10R); profit factor 0.38; max drawdown 160.3R; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 1.0 | 15m | **FAILED** | 579 | 38.7 | -0.486 | 0.39 | 283.5R | -0.43 / -0.64 | -0.61 / -0.42 | 0/5 ✗ | -0.69 | -0.93 | ✗  stop atr 1.0→0.8: -0.55R | 0 | 0.36R | 40, -0.72 (-0.63 / -0.86) | 111 / 251 of 404 | 0 | not cost-viable: fees + slippage 0.36R per trade (stop must be ≥ 4x the round-trip cost); avg -0.49R/trade (needs +0.10R); profit factor 0.39; max drawdown 283.5R; not profitable in BOTH train and unseen test |
-| S8-PDH-PDL-SWEEP | 1.0 | 30m | **FAILED** | 114 | 20.2 | -0.489 | 0.5 | 59.5R | -0.38 / -0.71 | -0.54 / -0.44 | 0/5 ✗ | -0.63 | -0.76 | ✗  stop max_width_atr 3.0→2.4: -0.49R | 1 | 0.25R | 6, +0.21 (+0.43 / +0.00) | 36 / 105 of 153 | 0 | avg -0.49R/trade (needs +0.10R); profit factor 0.50; max drawdown 59.5R; not profitable in BOTH train and unseen test |
-| ema_9_21_cross | 1.0 | 5m | **FAILED** | 311 | 28.6 | -0.749 | 0.23 | 233.0R | -0.83 / -0.61 | -0.72 / -0.95 | 0/5 ✗ | -1.13 | -1.48 | ✗  stop atr 1.5→1.2: -0.96R | 0 | 0.58R | 83, -0.47 (-0.49 / -0.40) | 203 / 61 of 349 | 0 | not cost-viable: fees + slippage 0.58R per trade (stop must be ≥ 4x the round-trip cost); avg -0.75R/trade (needs +0.10R); profit factor 0.23; max drawdown 233.0R; not profitable in BOTH train and unseen test |
-| liquidity_sweep_reversal | 1.0 | 5m | **FAILED** | 492 | 25.2 | -1.159 | 0.15 | 572.4R | -1.25 / -1.06 | -1.06 / -1.98 | 0/5 ✗ | -1.80 | -2.44 | ✗  stop atr 1.0→0.8: -1.48R | 0 | 1.03R | 146, -1.13 (-1.21 / -0.96) | 232 / 631 of 1013 | 0 | not cost-viable: fees + slippage 1.03R per trade (stop must be ≥ 4x the round-trip cost); avg -1.16R/trade (needs +0.10R); profit factor 0.15; max drawdown 572.4R; not profitable in BOTH train and unseen test |
+| S7-SILVER-BULLET-noSMC | 1.0 | 15m | **BACKTESTING** | 17 | 41.2 | -0.108 | 0.88 | 5.5R | -0.19 / +0.04 | -0.40 / +0.15 | 0/5 ✗ | -0.47 | -0.67 | ✗  sweep_bars 8→10: -0.33R | 0 | 0.39R | 3, -0.65 (+0.31 / -2.55) | 49 / 23 of 80 | 0 | not cost-viable: fees + slippage 0.39R per trade (stop must be ≥ 4x the round-trip cost); only 17 trades; avg -0.11R/trade (needs +0.10R); profit factor 0.88; only 6 unseen-test trades; not profitable in BOTH train and unseen test |
+| S5-SWEEP-MSS-FVG-noSMC | 1.0 | 15m | **BACKTESTING** | 15 | 46.7 | -0.196 | 0.65 | 4.3R | -0.15 / -0.37 | -0.37 / -0.11 | 0/5 ✗ | -0.18 | -0.37 | ✗  stop max_width_atr 3.0→3.6: -0.26R | 0 | 0.16R | 0, +0.00 (+0.00 / +0.00) | 483 / 213 of 844 | 0 | only 15 trades; avg -0.20R/trade (needs +0.10R); profit factor 0.65; only 3 unseen-test trades; not profitable in BOTH train and unseen test |
+| S5-SWEEP-MSS-FVG-noSMC | 1.0 | 30m | **BACKTESTING** | 14 | 35.7 | -0.235 | 0.57 | 3.9R | -0.31 / -0.11 | -0.24 / -0.23 | 0/5 ✗ | -0.33 | -0.22 | ✗  stop max_width_atr 3.0→2.4: -0.30R | 0 | 0.10R | 0, +0.00 (+0.00 / +0.00) | 554 / 207 of 896 | 0 | only 14 trades; avg -0.24R/trade (needs +0.10R); profit factor 0.57; only 5 unseen-test trades; not profitable in BOTH train and unseen test |
+| S7-SILVER-BULLET | 1.0 | 15m | **BACKTESTING** | 5 | 40.0 | -0.396 | 0.59 | 2.6R | -0.55 / -0.17 | -0.17 / -0.55 | 0/5 ✗ | -0.54 | -0.66 | ✗  stop max_width_atr 3.0→2.4: -0.65R | 0 | 0.18R | 1, -2.55 (+0.00 / -2.55) | 19 / 7 of 29 | 0 | only 5 trades; avg -0.40R/trade (needs +0.10R); profit factor 0.59; only 2 unseen-test trades; not profitable in BOTH train and unseen test |
+| S5-SWEEP-MSS-FVG | 1.0 | 30m | **BACKTESTING** | 6 | 0.0 | -1.084 | 0.0 | 6.5R | -1.07 / -1.16 | -0.99 / -1.13 | 0/5 ✗ | -1.08 | -1.14 | ✗  stop max_width_atr 3.0→2.4: -1.22R | 0 | 0.18R | 0, +0.00 (+0.00 / +0.00) | 64 / 15 of 82 | 0 | only 6 trades; avg -1.08R/trade (needs +0.10R); profit factor 0.00; only 1 unseen-test trades; not profitable in BOTH train and unseen test |
+| bb_squeeze_breakout | 1.0 | 4h | **FAILED** | 285 | 51.6 | +0.022 | 1.04 | 30.7R | +0.15 / -0.23 | +0.10 / -0.05 | 2/5 ✗ | -0.02 | -0.06 | ✗  stop atr 1.5→1.8: -0.01R | 6 | 0.07R | 3, +0.49 (+1.27 / +0.10) | 101 / 23 of 142 | 0 | avg +0.02R/trade (needs +0.10R); profit factor 1.04; max drawdown 30.7R; not profitable in BOTH train and unseen test |
+| macd_trend_cross | 1.0 | 1h | **FAILED** | 195 | 51.8 | -0.020 | 0.96 | 31.6R | -0.14 / +0.26 | -0.07 / +0.03 | 2/5 ✗ | -0.08 | -0.14 | ✗  stop atr 1.5→1.2: -0.11R | 4 | 0.13R | 1, -0.02 (-0.02 / +0.00) | 214 / 4 of 220 | 0 | avg -0.02R/trade (needs +0.10R); profit factor 0.96; max drawdown 31.6R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT 🧪 lab | 1.0 | 30m | **FAILED** | 1285 | 34.0 | -0.033 | 0.95 | 85.6R | -0.04 / -0.01 | +0.05 / -0.12 | 1/5 ✗ | -0.11 | -0.18 | ✗  stop atr 2.0→1.6: -0.12R | 3 | 0.13R | 53, +0.06 (+0.17 / -0.47) | 149 / 39 of 365 | 0 | avg -0.03R/trade (needs +0.10R); profit factor 0.95; max drawdown 85.6R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 30m | **FAILED** | 1285 | 34.0 | -0.033 | 0.95 | 85.6R | -0.04 / -0.01 | +0.05 / -0.12 | 1/5 ✗ | -0.11 | -0.18 | ✗  stop atr 2.0→1.6: -0.12R | 3 | 0.13R | 53, +0.06 (+0.17 / -0.47) | 149 / 39 of 365 | 0 | avg -0.03R/trade (needs +0.10R); profit factor 0.95; max drawdown 85.6R; not profitable in BOTH train and unseen test |
+| bb_squeeze_breakout | 1.0 | 1h | **FAILED** | 847 | 51.2 | -0.051 | 0.91 | 67.9R | -0.05 / -0.04 | -0.09 / -0.02 | 0/5 ✗ | -0.14 | -0.21 | ✗  stop atr 1.5→1.2: -0.09R | 3 | 0.14R | 7, +0.50 (-0.10 / +1.29) | 145 / 38 of 219 | 0 | avg -0.05R/trade (needs +0.10R); profit factor 0.91; max drawdown 67.9R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 1h | **FAILED** | 3431 | 32.4 | -0.054 | 0.91 | 258.1R | -0.09 / +0.02 | -0.03 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.08R | 2 | 0.09R | 32, +0.66 (+0.71 / +0.38) | 214 / 121 of 550 | 0 | avg -0.05R/trade (needs +0.10R); profit factor 0.91; max drawdown 258.1R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT 🧪 lab | 1.0 | 1h | **FAILED** | 3009 | 32.2 | -0.057 | 0.91 | 248.7R | -0.10 / +0.04 | -0.04 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.08R | 2 | 0.09R | 30, +0.60 (+0.71 / -0.34) | 127 / 86 of 394 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.91; max drawdown 248.7R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT-S4 🧪 lab | 1.0 | 30m | **FAILED** | 1511 | 33.5 | -0.057 | 0.91 | 124.4R | -0.07 / -0.03 | +0.01 / -0.13 | 1/5 ✗ | -0.14 | -0.21 | ✗  stop atr 2.0→1.6: -0.14R | 2 | 0.13R | 58, +0.10 (+0.11 / +0.05) | 244 / 62 of 508 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.91; max drawdown 124.4R; not profitable in BOTH train and unseen test |
+| donchian_breakout-VEXIT-VRVOL 🧪 lab | 1.0 | 1h | **FAILED** | 3009 | 32.2 | -0.057 | 0.91 | 248.7R | -0.10 / +0.04 | -0.04 / -0.08 | 1/5 ✗ | -0.11 | -0.16 | ✗  stop atr 2.0→1.6: -0.08R | 2 | 0.09R | 30, +0.60 (+0.71 / -0.34) | 127 / 86 of 394 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.91; max drawdown 248.7R; not profitable in BOTH train and unseen test |
+| donchian_breakout | 1.0 | 1h | **FAILED** | 3095 | 48.5 | -0.058 | 0.89 | 209.3R | -0.08 / -0.02 | -0.06 / -0.05 | 0/5 ✗ | -0.11 | -0.15 | ✗  stop atr 2.0→1.6: -0.07R | 1 | 0.08R | 34, +0.40 (+0.55 / -0.46) | 127 / 86 of 394 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.89; max drawdown 209.3R; not profitable in BOTH train and unseen test |
+| supertrend_flip | 1.0 | 4h | **FAILED** | 96 | 46.9 | -0.061 | 0.89 | 16.1R | +0.10 / -0.36 | -0.12 / +0.01 | 3/5 ✗ | -0.09 | -0.11 | ✗  st_n 10→8: -0.07R | 2 | 0.05R | 1, +1.82 (+1.82 / +0.00) | 43 / 7 of 53 | 0 | avg -0.06R/trade (needs +0.10R); profit factor 0.89; max drawdown 16.1R; not profitable in BOTH train and unseen test |
+| donchian_breakout | 1.0 | 30m | **FAILED** | 1321 | 49.2 | -0.068 | 0.87 | 115.9R | -0.07 / -0.08 | -0.04 / -0.10 | 0/5 ✗ | -0.14 | -0.21 | ✗  stop atr 2.0→1.6: -0.14R | 2 | 0.13R | 53, +0.08 (+0.13 / -0.21) | 149 / 39 of 365 | 0 | avg -0.07R/trade (needs +0.10R); profit factor 0.87; max drawdown 115.9R; not profitable in BOTH train and unseen test |
+| trend_pullback | 1.0 | 4h | **FAILED** | 1276 | 48.4 | -0.073 | 0.87 | 136.2R | -0.03 / -0.16 | +0.01 / -0.16 | 1/5 ✗ | -0.11 | -0.15 | ✗  long_rsi_hi 65→52: -0.17R | 3 | 0.06R | 13, +0.39 (+1.05 / -1.10) | 672 / 216 of 1060 | 0 | avg -0.07R/trade (needs +0.10R); profit factor 0.87; max drawdown 136.2R; not profitable in BOTH train and unseen test |
+| macd_trend_cross | 1.0 | 4h | **FAILED** | 38 | 50.0 | -0.082 | 0.85 | 6.0R | +0.07 / -0.46 | +0.31 / -0.43 | 2/5 ✗ | -0.11 | -0.14 | ✗  time_stop_bars 40→32: -0.08R | 1 | 0.06R | 0, +0.00 (+0.00 / +0.00) | 154 / 6 of 162 | 0 | avg -0.08R/trade (needs +0.10R); profit factor 0.85; not profitable in BOTH train and unseen test |
+| R4-CLUC 🧪 lab | 1.0 | 30m | **FAILED** | 214 | 41.1 | -0.102 | 0.84 | 51.0R | -0.14 / +0.08 | +0.12 / -0.26 | 2/5 ✗ | -0.16 | -0.21 | ✗  depth 0.985→1.182: -0.29R | 2 | 0.11R | 3, +0.60 (+0.56 / +0.69) | 80 / 6 of 90 | 0 | avg -0.10R/trade (needs +0.10R); profit factor 0.84; max drawdown 51.0R; not profitable in BOTH train and unseen test |
+| rsi2_dip_buy | 1.0 | 4h | **FAILED** | 1917 | 56.5 | -0.105 | 0.63 | 201.6R | -0.10 / -0.11 | -0.12 / -0.09 | 0/5 ✗ | -0.14 | -0.16 | ✗  stop atr 2.0→1.6: -0.13R | 0 | 0.05R | 7, -0.23 (-0.31 / -0.03) | 737 / 3 of 992 | 0 | avg -0.11R/trade (needs +0.10R); profit factor 0.63; max drawdown 201.6R; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 1.0 | 1h | **FAILED** | 367 | 45.2 | -0.119 | 0.78 | 51.7R | -0.12 / -0.11 | -0.18 / -0.06 | 0/5 ✗ | -0.18 | -0.25 | ✗  slow 21→17: -0.20R | 3 | 0.12R | 3, -1.00 (-1.00 / +0.00) | 149 / 7 of 163 | 0 | avg -0.12R/trade (needs +0.10R); profit factor 0.78; max drawdown 51.7R; not profitable in BOTH train and unseen test |
+| rsi2_dip_buy | 1.0 | 1h | **FAILED** | 7187 | 54.1 | -0.125 | 0.55 | 902.3R | -0.11 / -0.17 | -0.14 / -0.11 | 0/5 ✗ | -0.19 | -0.25 | ✗  stop atr 2.0→1.6: -0.15R | 0 | 0.11R | 41, -0.14 (-0.23 / -0.08) | 1051 / 7 of 1422 | 0 | avg -0.12R/trade (needs +0.10R); profit factor 0.55; max drawdown 902.3R; not profitable in BOTH train and unseen test |
+| supertrend_flip | 1.0 | 30m | **FAILED** | 167 | 48.5 | -0.133 | 0.76 | 23.9R | -0.16 / -0.07 | -0.13 / -0.14 | 2/5 ✗ | -0.20 | -0.28 | ✗  adx_min 20→16: -0.17R | 2 | 0.14R | 7, -0.39 (-0.25 / -1.26) | 56 / 5 of 71 | 0 | avg -0.13R/trade (needs +0.10R); profit factor 0.76; max drawdown 23.9R; not profitable in BOTH train and unseen test |
+| trend_pullback | 1.0 | 1h | **FAILED** | 6496 | 47.2 | -0.136 | 0.76 | 894.0R | -0.14 / -0.13 | -0.18 / -0.10 | 0/5 ✗ | -0.20 | -0.27 | ✗  stop atr 1.5→1.2: -0.17R | 0 | 0.13R | 50, -0.10 (+0.04 / -0.44) | 1167 / 294 of 1843 | 0 | avg -0.14R/trade (needs +0.10R); profit factor 0.76; max drawdown 894.0R; not profitable in BOTH train and unseen test |
+| S8-PDH-PDL-SWEEP | 1.0 | 1h | **FAILED** | 307 | 33.2 | -0.147 | 0.81 | 62.0R | -0.01 / -0.44 | -0.27 / -0.02 | 1/5 ✗ | -0.25 | -0.36 | ✗  time_stop_bars 30→36: -0.17R | 1 | 0.20R | 4, +0.34 (+2.70 / -0.44) | 87 / 221 of 320 | 0 | avg -0.15R/trade (needs +0.10R); profit factor 0.81; max drawdown 62.0R; not profitable in BOTH train and unseen test |
+| R4-CLUC 🧪 lab | 1.0 | 15m | **FAILED** | 81 | 34.6 | -0.168 | 0.77 | 23.2R | -0.31 / +0.40 | -0.17 / -0.17 | 1/5 ✗ | -0.23 | -0.34 | ✗  depth 0.985→1.182: -0.46R | 2 | 0.16R | 0, +0.00 (+0.00 / +0.00) | 40 / 6 of 46 | 0 | avg -0.17R/trade (needs +0.10R); profit factor 0.77; max drawdown 23.2R; not profitable in BOTH train and unseen test |
+| supertrend_flip | 1.0 | 1h | **FAILED** | 274 | 45.6 | -0.184 | 0.68 | 55.3R | -0.18 / -0.18 | -0.29 / -0.10 | 1/5 ✗ | -0.25 | -0.30 | ✗  stop atr 2.0→1.6: -0.21R | 2 | 0.08R | 5, +0.39 (+0.39 / +0.00) | 63 / 2 of 73 | 0 | avg -0.18R/trade (needs +0.10R); profit factor 0.68; max drawdown 55.3R; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 1.0 | 1h | **FAILED** | 309 | 48.2 | -0.192 | 0.68 | 59.5R | -0.17 / -0.24 | -0.20 / -0.19 | 0/5 ✗ | -0.29 | -0.38 | ✗  vol_x 1.2→1.44: -0.32R | 3 | 0.17R | 5, -0.41 (-0.41 / +0.00) | 101 / 202 of 312 | 0 | avg -0.19R/trade (needs +0.10R); profit factor 0.68; max drawdown 59.5R; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 1.0 | 15m | **FAILED** | 469 | 45.0 | -0.192 | 0.68 | 92.2R | -0.19 / -0.19 | -0.26 / -0.16 | 0/5 ✗ | -0.34 | -0.48 | ✗  stop atr 1.5→1.2: -0.29R | 1 | 0.27R | 21, -0.14 (+0.24 / -1.09) | 80 / 14 of 118 | 0 | not cost-viable: fees + slippage 0.27R per trade (stop must be ≥ 4x the round-trip cost); avg -0.19R/trade (needs +0.10R); profit factor 0.68; max drawdown 92.2R; not profitable in BOTH train and unseen test |
+| macd_trend_cross | 1.0 | 30m | **FAILED** | 298 | 48.0 | -0.195 | 0.68 | 67.3R | -0.13 / -0.36 | -0.32 / -0.09 | 0/5 ✗ | -0.32 | -0.42 | ✗  stop atr 1.5→1.2: -0.27R | 1 | 0.20R | 4, -0.16 (+0.23 / -1.33) | 177 / 6 of 194 | 0 | avg -0.20R/trade (needs +0.10R); profit factor 0.68; max drawdown 67.3R; not profitable in BOTH train and unseen test |
+| rsi2_dip_buy | 1.0 | 30m | **FAILED** | 2827 | 46.3 | -0.199 | 0.39 | 565.0R | -0.18 / -0.24 | -0.24 / -0.16 | 0/5 ✗ | -0.30 | -0.41 | ✗  stop atr 2.0→1.6: -0.25R | 0 | 0.17R | 39, -0.06 (+0.03 / -0.10) | 1045 / 25 of 1259 | 0 | avg -0.20R/trade (needs +0.10R); profit factor 0.39; max drawdown 565.0R; not profitable in BOTH train and unseen test |
+| trend_pullback | 1.0 | 30m | **FAILED** | 3505 | 46.1 | -0.201 | 0.68 | 705.2R | -0.17 / -0.27 | -0.21 / -0.19 | 0/5 ✗ | -0.32 | -0.43 | ✗  stop atr 1.5→1.2: -0.25R | 0 | 0.18R | 104, -0.11 (+0.20 / -0.77) | 876 / 260 of 1667 | 0 | avg -0.20R/trade (needs +0.10R); profit factor 0.68; max drawdown 705.2R; not profitable in BOTH train and unseen test |
+| S8-PDH-PDL-SWEEP-noSMC | 1.0 | 1h | **FAILED** | 877 | 30.8 | -0.207 | 0.75 | 199.8R | -0.17 / -0.27 | -0.24 / -0.18 | 1/5 ✗ | -0.31 | -0.42 | ✗  stop buffer_atr 0.2→0.16: -0.26R | 1 | 0.21R | 17, -0.07 (+0.58 / -1.26) | 481 / 1124 of 1696 | 0 | avg -0.21R/trade (needs +0.10R); profit factor 0.75; max drawdown 199.8R; not profitable in BOTH train and unseen test |
+| bb_squeeze_breakout | 1.0 | 30m | **FAILED** | 492 | 45.9 | -0.227 | 0.64 | 113.1R | -0.23 / -0.21 | -0.23 / -0.23 | 0/5 ✗ | -0.34 | -0.46 | ✗  stop atr 1.5→1.2: -0.31R | 1 | 0.20R | 20, -0.48 (-0.45 / -0.56) | 111 / 30 of 185 | 0 | avg -0.23R/trade (needs +0.10R); profit factor 0.64; max drawdown 113.1R; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 1.0 | 30m | **FAILED** | 347 | 39.8 | -0.243 | 0.6 | 86.8R | -0.22 / -0.32 | -0.31 / -0.20 | 0/5 ✗ | -0.34 | -0.43 | ✗  fast 9→11: -0.33R | 1 | 0.17R | 10, +0.06 (+0.20 / -1.18) | 115 / 19 of 150 | 0 | avg -0.24R/trade (needs +0.10R); profit factor 0.60; max drawdown 86.8R; not profitable in BOTH train and unseen test |
+| trend_pullback | 1.0 | 15m | **FAILED** | 3094 | 45.1 | -0.258 | 0.61 | 799.8R | -0.24 / -0.29 | -0.30 / -0.24 | 0/5 ✗ | -0.41 | -0.58 | ✗  stop atr 1.5→1.2: -0.34R | 0 | 0.27R | 193, -0.16 (+0.04 / -0.83) | 1383 / 210 of 2237 | 0 | not cost-viable: fees + slippage 0.27R per trade (stop must be ≥ 4x the round-trip cost); avg -0.26R/trade (needs +0.10R); profit factor 0.61; max drawdown 799.8R; not profitable in BOTH train and unseen test |
+| S6-OB-FVG-noSMC | 1.0 | 15m | **FAILED** | 37 | 35.1 | -0.295 | 0.59 | 12.8R | -0.01 / -0.66 | -0.49 / -0.07 | 1/5 ✗ | -0.46 | -0.59 | ✗  time_stop_bars 30→24: -0.33R | 2 | 0.17R | 6, -0.79 (-0.48 / -1.40) | 102 / 34 of 149 | 0 | avg -0.29R/trade (needs +0.10R); profit factor 0.59; max drawdown 12.8R; not profitable in BOTH train and unseen test |
+| R4-BBRSI 🧪 lab | 1.0 | 1h | **FAILED** | 1298 | 29.3 | -0.312 | 0.6 | 406.8R | -0.33 / -0.26 | -0.28 / -0.34 | 0/5 ✗ | -0.39 | -0.46 | ✗  rsi_n 14→17: -0.38R | 1 | 0.14R | 4, -0.33 (-1.20 / +0.54) | 755 / 9 of 811 | 0 | avg -0.31R/trade (needs +0.10R); profit factor 0.60; max drawdown 406.8R; not profitable in BOTH train and unseen test |
+| R4-BBRSI 🧪 lab | 1.0 | 30m | **FAILED** | 1534 | 31.9 | -0.312 | 0.61 | 486.2R | -0.31 / -0.31 | -0.33 / -0.29 | 0/5 ✗ | -0.44 | -0.56 | ✗  rsi_n 14→17: -0.36R | 0 | 0.22R | 23, -0.21 (-0.52 / +0.07) | 616 / 22 of 729 | 0 | avg -0.31R/trade (needs +0.10R); profit factor 0.61; max drawdown 486.2R; not profitable in BOTH train and unseen test |
+| bb_squeeze_breakout | 1.0 | 15m | **FAILED** | 550 | 42.5 | -0.345 | 0.52 | 194.1R | -0.33 / -0.38 | -0.30 / -0.36 | 0/5 ✗ | -0.51 | -0.66 | ✗  stop atr 1.5→1.2: -0.42R | 0 | 0.31R | 35, -0.73 (-0.76 / -0.53) | 94 / 34 of 182 | 0 | not cost-viable: fees + slippage 0.31R per trade (stop must be ≥ 4x the round-trip cost); avg -0.34R/trade (needs +0.10R); profit factor 0.52; max drawdown 194.1R; not profitable in BOTH train and unseen test |
+| rsi2_dip_buy | 1.0 | 15m | **FAILED** | 2186 | 33.2 | -0.351 | 0.2 | 767.7R | -0.34 / -0.38 | -0.44 / -0.28 | 0/5 ✗ | -0.52 | -0.70 | ✗  hi 90→108: -0.44R | 0 | 0.30R | 58, -0.38 (-0.24 / -0.50) | 1286 / 41 of 1474 | 0 | not cost-viable: fees + slippage 0.30R per trade (stop must be ≥ 4x the round-trip cost); avg -0.35R/trade (needs +0.10R); profit factor 0.20; max drawdown 767.7R; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 1.0 | 30m | **FAILED** | 330 | 37.3 | -0.475 | 0.38 | 156.7R | -0.43 / -0.59 | -0.49 / -0.46 | 0/5 ✗ | -0.62 | -0.77 | ✗  stop atr 1.0→0.8: -0.52R | 0 | 0.28R | 14, -0.85 (-0.80 / -0.96) | 126 / 216 of 366 | 0 | not cost-viable: fees + slippage 0.28R per trade (stop must be ≥ 4x the round-trip cost); avg -0.47R/trade (needs +0.10R); profit factor 0.38; max drawdown 156.7R; not profitable in BOTH train and unseen test |
+| S8-PDH-PDL-SWEEP-noSMC | 1.0 | 30m | **FAILED** | 623 | 24.2 | -0.483 | 0.51 | 300.7R | -0.52 / -0.39 | -0.65 / -0.35 | 0/5 ✗ | -0.65 | -0.78 | ✗  stop buffer_atr 0.2→0.16: -0.51R | 1 | 0.34R | 26, -0.25 (+0.16 / -1.01) | 493 / 1008 of 1685 | 0 | not cost-viable: fees + slippage 0.34R per trade (stop must be ≥ 4x the round-trip cost); avg -0.48R/trade (needs +0.10R); profit factor 0.51; max drawdown 300.7R; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 1.0 | 15m | **FAILED** | 590 | 39.3 | -0.486 | 0.38 | 286.6R | -0.46 / -0.56 | -0.59 / -0.43 | 0/5 ✗ | -0.70 | -0.94 | ✗  stop atr 1.0→0.8: -0.56R | 0 | 0.39R | 40, -0.72 (-0.63 / -0.86) | 111 / 251 of 404 | 0 | not cost-viable: fees + slippage 0.39R per trade (stop must be ≥ 4x the round-trip cost); avg -0.49R/trade (needs +0.10R); profit factor 0.38; max drawdown 286.6R; not profitable in BOTH train and unseen test |
+| S8-PDH-PDL-SWEEP | 1.0 | 30m | **FAILED** | 123 | 19.5 | -0.571 | 0.43 | 74.4R | -0.51 / -0.68 | -0.67 / -0.49 | 0/5 ✗ | -0.70 | -0.83 | ✗  stop max_width_atr 3.0→2.4: -0.57R | 1 | 0.27R | 6, +0.21 (+0.43 / +0.00) | 36 / 105 of 153 | 0 | not cost-viable: fees + slippage 0.27R per trade (stop must be ≥ 4x the round-trip cost); avg -0.57R/trade (needs +0.10R); profit factor 0.43; max drawdown 74.4R; not profitable in BOTH train and unseen test |
+| ema_9_21_cross | 1.0 | 5m | **FAILED** | 284 | 32.7 | -0.640 | 0.3 | 184.1R | -0.73 / -0.51 | -0.57 / -0.92 | 0/5 ✗ | -1.03 | -1.43 | ✗  stop atr 1.5→1.2: -0.86R | 0 | 0.62R | 83, -0.47 (-0.49 / -0.40) | 203 / 58 of 346 | 0 | not cost-viable: fees + slippage 0.62R per trade (stop must be ≥ 4x the round-trip cost); avg -0.64R/trade (needs +0.10R); profit factor 0.30; max drawdown 184.1R; not profitable in BOTH train and unseen test |
+| liquidity_sweep_reversal | 1.0 | 5m | **FAILED** | 478 | 24.7 | -1.175 | 0.14 | 561.7R | -1.25 / -1.09 | -1.05 / -1.77 | 0/5 ✗ | -1.84 | -2.49 | ✗  stop atr 1.0→0.8: -1.50R | 0 | 1.07R | 145, -1.14 (-1.23 / -0.96) | 229 / 634 of 1013 | 0 | not cost-viable: fees + slippage 1.07R per trade (stop must be ≥ 4x the round-trip cost); avg -1.18R/trade (needs +0.10R); profit factor 0.14; max drawdown 561.7R; not profitable in BOTH train and unseen test |
 
 ### 3b. Strategy lifecycle and control twins
 IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING (automatic) → APPROVED (only with your yes). Strategy versions tested so far: **25** (`memory/experiments.md`); full record per version and timeframe in `memory/strategy_registry.csv`.
 
 **Trials counter:** 118 strategy / version / timeframe tests so far (`memory/trials.csv`). The more ideas are tested, the more one looks good by luck, so PAPER_TRADING now also needs a t-statistic of the average trade ≥ **3.34** (Bonferroni: family-wise false-winner rate 0.05 over 118 trials; with 1 trial it would be 1.65).
 
-**Research run duration:** 7.8 min (budget 90 min).
+**Research run duration:** 8.8 min (budget 90 min).
 
-**Lookahead / recursive check** (on BTC): 25 cards checked - history cut after 6 signal candles, and started 500 candles later; 0 BIASED (74.4 s).
+**Lookahead / recursive check** (on BTC): 25 cards checked - history cut after 6 signal candles, and started 500 candles later; 0 BIASED (85.5 s).
 
 **Monte Carlo** (1000 shuffles of each cell's trades): PAPER_TRADING also needs the 95% worst drawdown ≤ 8R.
 
-**Rule significance:** in 35 strategy / timeframe cell(s) an entry rule adds nothing (the card does at least as well without it). Simpler cards queued in the lab: none.
+**Rule significance:** in 34 strategy / timeframe cell(s) an entry rule adds nothing (the card does at least as well without it). Simpler cards queued in the lab: none.
 
 **Family gates (Phase 19 A, rules v1) - shadow mode: new verdicts are shown only.** The single max-drawdown gate is being replaced by a family table (config.yaml → family_gates). Old and new verdicts side by side; until you say yes after the shadow period, only the OLD verdict moves anything.
 
@@ -317,23 +316,23 @@ IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING (automatic)
 
 **Near-duplicates** (same timeframe, >= 70% of trades shared - counted as one idea, nothing else changes):
 
-- donchian_breakout-VEXIT-S4 v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (80% of 3,323 trades shared)
+- donchian_breakout-VEXIT-S4 v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (79% of 3,431 trades shared)
 
-- donchian_breakout-VEXIT-S4 v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (75% of 1,519 trades shared)
+- donchian_breakout-VEXIT-S4 v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (76% of 1,511 trades shared)
 
-- donchian_breakout-VEXIT-S4 v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (80% of 1,205 trades shared)
+- donchian_breakout-VEXIT-S4 v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (81% of 1,254 trades shared)
 
-- donchian_breakout-VEXIT-VRVOL v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (96% of 2,925 trades shared)
+- donchian_breakout-VEXIT-VRVOL v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (96% of 3,009 trades shared)
 
-- donchian_breakout-VEXIT-VRVOL v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (95% of 1,286 trades shared)
+- donchian_breakout-VEXIT-VRVOL v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (95% of 1,285 trades shared)
 
-- donchian_breakout-VEXIT-VRVOL v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (95% of 1,060 trades shared)
+- donchian_breakout-VEXIT-VRVOL v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (96% of 1,104 trades shared)
 
-- donchian_breakout-VEXIT v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (96% of 2,925 trades shared)
+- donchian_breakout-VEXIT v1.0 1h = near-duplicate of donchian_breakout v1.0 1h (96% of 3,009 trades shared)
 
-- donchian_breakout-VEXIT v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (95% of 1,286 trades shared)
+- donchian_breakout-VEXIT v1.0 30m = near-duplicate of donchian_breakout v1.0 30m (95% of 1,285 trades shared)
 
-- donchian_breakout-VEXIT v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (95% of 1,060 trades shared)
+- donchian_breakout-VEXIT v1.0 4h = near-duplicate of donchian_breakout v1.0 4h (96% of 1,104 trades shared)
 
 🧪 **Strategy lab:** 5 card(s) from `strategies_lab.yaml` (written by Claude's reviews). They are tested exactly like the library and can reach PAPER_TRADING, but never send emails (not even PAPER ones) and are never APPROVED - to approve one, move the card into `strategies.yaml` by pull request.
 
@@ -341,30 +340,30 @@ IDEA → FORMALIZED → BACKTESTING → VALIDATION → PAPER_TRADING (automatic)
 
 | Strategy | TF | Trades | Avg R | Validate R | Twin avg R | Twin validate R | Beats twin? |
 |---|---|---|---|---|---|---|---|
-| S7-SILVER-BULLET | 15m | 5 | +1.221 | +2.214 | +0.202 | +0.561 | too few trades to compare |
-| S5-SWEEP-MSS-FVG | 15m | 6 | +0.206 | -1.323 | -0.308 | +0.049 | too few trades to compare |
-| S8-PDH-PDL-SWEEP-5M | 30m | 2 | +0.037 | +0.037 | -0.632 | -0.616 | too few trades to compare |
-| S6-OB-FVG | 15m | 0 | +0.000 | +0.000 | -0.181 | -0.467 | too few trades to compare |
+| S5-SWEEP-MSS-FVG | 15m | 7 | +0.153 | -1.323 | -0.196 | -0.366 | too few trades to compare |
+| S8-PDH-PDL-SWEEP-5M | 30m | 2 | +0.037 | +0.037 | -0.691 | -0.473 | too few trades to compare |
+| S6-OB-FVG | 15m | 0 | +0.000 | +0.000 | -0.295 | -0.662 | too few trades to compare |
 | S5-SWEEP-MSS-FVG-5M | 30m | 0 | +0.000 | +0.000 | +0.000 | +0.000 | too few trades to compare |
 | S5-SWEEP-MSS-FVG-5M | 15m | 0 | +0.000 | +0.000 | -1.323 | -1.323 | too few trades to compare |
 | S6-OB-FVG-5M | 15m | 0 | +0.000 | +0.000 | +0.000 | +0.000 | too few trades to compare |
-| S7-SILVER-BULLET-5M | 15m | 0 | +0.000 | +0.000 | +2.214 | +0.000 | too few trades to compare |
-| S5-SWEEP-MSS-FVG | 30m | 4 | -1.218 | -1.163 | +0.088 | +0.138 | too few trades to compare |
-| S8-PDH-PDL-SWEEP | 1h | 288 | -0.190 | -0.423 | -0.241 | -0.243 | no |
-| S8-PDH-PDL-SWEEP | 30m | 114 | -0.489 | -0.712 | -0.449 | -0.428 | no |
+| S7-SILVER-BULLET-5M | 15m | 0 | +0.000 | +0.000 | -0.169 | -2.552 | too few trades to compare |
+| S7-SILVER-BULLET | 15m | 5 | -0.396 | -0.169 | -0.108 | +0.042 | too few trades to compare |
+| S5-SWEEP-MSS-FVG | 30m | 6 | -1.084 | -1.163 | -0.235 | -0.106 | too few trades to compare |
+| S8-PDH-PDL-SWEEP | 1h | 307 | -0.147 | -0.444 | -0.207 | -0.273 | no |
+| S8-PDH-PDL-SWEEP | 30m | 123 | -0.571 | -0.677 | -0.483 | -0.391 | no |
 
-**Status changes in the last research run** (all of them in `memory/strategy_lifecycle.md`): macd_trend_cross@1.0 1h FAILED → BACKTESTING
+**Status changes in the last research run** (all of them in `memory/strategy_lifecycle.md`): macd_trend_cross@1.0 1h BACKTESTING → FAILED
 
 ### 3c. Research layers (daily run)
-Last run: **2026-09-29 00:53 UTC**. History used per timeframe (all research coins pooled; develop = first 70% of each coin, validate = last 30%; walk-forward = the history cut into equal time windows, the first one only warms up):
+Last run: **2026-09-30 00:55 UTC**. History used per timeframe (all research coins pooled; develop = first 70% of each coin, validate = last 30%; walk-forward = the history cut into equal time windows, the first one only warms up):
 
 | TF | Coins | From | To | Candles (largest coin) | Note |
 |---|---|---|---|---|---|
-| 4h | 10 | 2017-08-17 | 2026-09-28 | 19963 |  |
-| 1h | 10 | 2017-08-17 | 2026-09-28 | 79788 |  |
-| 30m | 10 | 2024-09-29 | 2026-09-29 | 35039 | only 2.0 years - may miss a full bull/bear cycle |
-| 15m | 10 | 2025-09-29 | 2026-09-29 | 35039 | only 1.0 years - may miss a full bull/bear cycle |
-| 5m | 10 | 2026-07-01 | 2026-09-29 | 25919 | only 0.2 years - may miss a full bull/bear cycle |
+| 4h | 10 | 2017-08-17 | 2026-09-29 | 19969 |  |
+| 1h | 10 | 2017-08-17 | 2026-09-29 | 79812 |  |
+| 30m | 10 | 2024-09-30 | 2026-09-30 | 35039 | only 2.0 years - may miss a full bull/bear cycle |
+| 15m | 10 | 2025-09-30 | 2026-09-30 | 35039 | only 1.0 years - may miss a full bull/bear cycle |
+| 5m | 10 | 2026-07-02 | 2026-09-30 | 25919 | only 0.2 years - may miss a full bull/bear cycle |
 
 *Everything per strategy (walk-forward windows, every ±20% variant, results per coin): `reports/research.json`.*
 
@@ -373,63 +372,59 @@ Every backtest trade gets reason tags by fixed rules (section 17; rules and numb
 
 | Strategy | TF | Status | Trades (losers) | Systematic causes ✓ | Common in losers (more than in winners) | Losers' best point | Winners' worst point | R before / after costs |
 |---|---|---|---|---|---|---|---|---|
-| donchian_breakout-VEXIT | 4h | BACKTESTING | 1060 (641) | false_breakout, trend_reversal | false_breakout 62% | +0.47R | -0.38R | +0.26 / +0.20 |
-| donchian_breakout-VEXIT-VRVOL | 4h | BACKTESTING | 1060 (641) | false_breakout, trend_reversal | false_breakout 62% | +0.47R | -0.38R | +0.26 / +0.20 |
-| donchian_breakout-VEXIT-S4 | 4h | BACKTESTING | 1205 (732) | false_breakout, trend_reversal | false_breakout 62% | +0.48R | -0.37R | +0.26 / +0.20 |
-| donchian_breakout | 4h | BACKTESTING | 1092 (506) | false_breakout, trend_reversal, regime_mismatch, stop_too_tight | false_breakout 65%, stop_too_tight 35% | +0.35R | -0.37R | +0.15 / +0.10 |
-| macd_trend_cross | 1h | BACKTESTING | 189 (91) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 91%, indicator_lag 37%, stop_too_tight 31% | +0.32R | -0.35R | +0.16 / +0.01 |
-| bb_squeeze_breakout | 4h | FAILED | 284 (140) | false_breakout, stop_too_tight, structural_change | false_breakout 56%, stop_too_tight 42% | +0.35R | -0.33R | +0.09 / +0.00 |
-| bb_squeeze_breakout | 1h | FAILED | 838 (394) | no_displacement, false_breakout, regime_mismatch, stop_too_tight | false_breakout 64%, no_displacement 53%, stop_too_tight 36%, regime_mismatch 36% | +0.36R | -0.43R | +0.16 / -0.01 |
-| donchian_breakout-VEXIT | 30m | FAILED | 1286 (846) | false_breakout | false_breakout 72% | +0.48R | -0.39R | +0.12 / -0.04 |
-| donchian_breakout-VEXIT-VRVOL | 30m | FAILED | 1286 (846) | false_breakout | false_breakout 72% | +0.48R | -0.39R | +0.12 / -0.04 |
-| donchian_breakout-VEXIT-S4 | 1h | FAILED | 3323 (2254) | htf_conflict, no_displacement, false_breakout, regime_mismatch | false_breakout 64% | +0.51R | -0.38R | +0.05 / -0.06 |
-| donchian_breakout-VEXIT-S4 | 30m | FAILED | 1519 (1007) | false_breakout | false_breakout 72% | +0.47R | -0.40R | +0.11 / -0.06 |
-| donchian_breakout-VEXIT | 1h | FAILED | 2925 (1994) | false_breakout | false_breakout 63% | +0.52R | -0.38R | +0.04 / -0.06 |
-| donchian_breakout-VEXIT-VRVOL | 1h | FAILED | 2925 (1994) | no_displacement, false_breakout | false_breakout 63% | +0.52R | -0.38R | +0.04 / -0.06 |
-| donchian_breakout | 30m | FAILED | 1320 (671) | false_breakout, regime_mismatch, stop_too_tight | false_breakout 75%, stop_too_tight 34% | +0.30R | -0.41R | +0.09 / -0.07 |
-| donchian_breakout | 1h | FAILED | 3011 (1574) | no_displacement, false_breakout, regime_mismatch, stop_too_tight | false_breakout 66%, no_displacement 36%, stop_too_tight 32% | +0.37R | -0.39R | +0.04 / -0.07 |
-| trend_pullback | 4h | FAILED | 1202 (626) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 80%, indicator_lag 38%, stop_too_tight 25% | +0.36R | -0.42R | +0.00 / -0.07 |
-| macd_trend_cross | 4h | FAILED | 34 (17) | structural_change | regime_mismatch 94%, no_displacement 88%, indicator_lag 53%, low_relative_volume 47% | +0.17R | -0.40R | -0.01 / -0.09 |
-| rsi2_dip_buy | 4h | FAILED | 1836 (804) | trend_reversal, regime_mismatch, volatility_spike | regime_mismatch 44% | +0.16R | -0.21R | -0.04 / -0.10 |
-| supertrend_flip | 4h | FAILED | 90 (48) | regime_mismatch, stop_too_tight, indicator_lag, structural_change | regime_mismatch 69%, indicator_lag 40%, stop_too_tight 25% | +0.39R | -0.43R | -0.04 / -0.11 |
-| ema_9_21_cross | 1h | FAILED | 344 (191) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 80%, indicator_lag 46%, stop_too_tight 27% | +0.29R | -0.38R | +0.02 / -0.13 |
-| rsi2_dip_buy | 1h | FAILED | 6905 (3199) | trend_reversal, regime_mismatch, volatility_spike | regime_mismatch 42% | +0.16R | -0.20R | -0.00 / -0.13 |
-| trend_pullback | 1h | FAILED | 6220 (3273) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 76%, indicator_lag 45%, stop_too_tight 28% | +0.29R | -0.42R | +0.02 / -0.14 |
-| ema_9_21_cross | 15m | FAILED | 447 (246) | stop_too_tight, indicator_lag | indicator_lag 47%, stop_too_tight 27% | +0.27R | -0.44R | +0.14 / -0.16 |
-| R4-CLUC | 30m | FAILED | 259 (158) | none | - | +0.35R | -0.49R | -0.06 / -0.17 |
-| R4-CLUC | 15m | FAILED | 91 (59) | none | - | +0.40R | -0.25R | -0.02 / -0.17 |
-| S6-OB-FVG-noSMC | 15m | FAILED | 44 (28) | none | - | +0.24R | -0.50R | +0.01 / -0.18 |
-| rsi2_dip_buy | 30m | FAILED | 2796 (1468) | trend_reversal, volatility_spike, fees_slippage | fees_slippage 34% | +0.16R | -0.19R | +0.02 / -0.19 |
-| S8-PDH-PDL-SWEEP | 1h | FAILED | 288 (196) | stop_too_tight, sweep_continued | sweep_continued 97%, range_market 56%, stop_too_tight 29% | +0.55R | -0.44R | +0.06 / -0.19 |
-| trend_pullback | 30m | FAILED | 3534 (1897) | stop_too_tight, indicator_lag | indicator_lag 47%, stop_too_tight 31% | +0.27R | -0.42R | +0.04 / -0.19 |
-| bb_squeeze_breakout | 30m | FAILED | 509 (273) | false_breakout, stop_too_tight | false_breakout 62%, stop_too_tight 40% | +0.28R | -0.43R | +0.06 / -0.19 |
-| liquidity_sweep_reversal | 1h | FAILED | 298 (156) | stop_too_tight | stop_too_tight 53% | +0.30R | -0.46R | -0.00 / -0.20 |
-| supertrend_flip | 30m | FAILED | 165 (90) | stop_too_tight, indicator_lag | regime_mismatch 43%, indicator_lag 41%, stop_too_tight 34%, late_entry 27% | +0.32R | -0.46R | -0.04 / -0.21 |
-| macd_trend_cross | 30m | FAILED | 294 (157) | overextended_entry, stop_too_tight, indicator_lag | no_displacement 86%, indicator_lag 46%, low_relative_volume 45%, stop_too_tight 29% | +0.30R | -0.44R | +0.02 / -0.22 |
-| ema_9_21_cross | 30m | FAILED | 334 (200) | indicator_lag | indicator_lag 45%, low_relative_volume 38% | +0.27R | -0.42R | -0.01 / -0.22 |
-| S8-PDH-PDL-SWEEP-noSMC | 1h | FAILED | 808 (563) | range_market, stop_too_tight | range_market 47%, stop_too_tight 35% | +0.62R | -0.51R | +0.01 / -0.24 |
-| supertrend_flip | 1h | FAILED | 288 (164) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 69%, stop_too_tight 34%, indicator_lag 34% | +0.38R | -0.37R | -0.15 / -0.26 |
-| trend_pullback | 15m | FAILED | 3129 (1732) | wrong_session, stop_too_tight, indicator_lag | indicator_lag 50%, stop_too_tight 32% | +0.25R | -0.44R | +0.06 / -0.26 |
-| R4-BBRSI | 30m | FAILED | 1505 (1021) | none | - | +0.43R | -0.44R | -0.04 / -0.29 |
-| R4-BBRSI | 1h | FAILED | 1245 (874) | none | - | +0.44R | -0.45R | -0.13 / -0.30 |
-| rsi2_dip_buy | 15m | FAILED | 2199 (1427) | trend_reversal, fees_slippage | fees_slippage 44% | +0.17R | -0.19R | +0.01 / -0.32 |
-| bb_squeeze_breakout | 15m | FAILED | 567 (336) | stop_too_tight | false_breakout 58%, no_displacement 57%, stop_too_tight 40% | +0.29R | -0.48R | -0.03 / -0.38 |
-| S8-PDH-PDL-SWEEP-noSMC | 30m | FAILED | 628 (472) | stop_too_tight | stop_too_tight 33% | +0.60R | -0.54R | -0.05 / -0.45 |
-| liquidity_sweep_reversal | 30m | FAILED | 342 (214) | stop_too_tight | stop_too_tight 40% | +0.40R | -0.45R | -0.15 / -0.47 |
-| liquidity_sweep_reversal | 15m | FAILED | 579 (355) | stop_too_tight | stop_too_tight 38% | +0.37R | -0.45R | -0.02 / -0.49 |
-| S8-PDH-PDL-SWEEP | 30m | FAILED | 114 (91) | stop_too_tight, sweep_continued | sweep_continued 96%, stop_too_tight 26% | +0.50R | -0.65R | -0.15 / -0.49 |
-| ema_9_21_cross | 5m | FAILED | 311 (222) | stop_too_tight, indicator_lag | indicator_lag 50%, stop_too_tight 31% | +0.24R | -0.42R | -0.04 / -0.75 |
-| liquidity_sweep_reversal | 5m | FAILED | 492 (368) | htf_conflict, fees_slippage, stop_too_tight | stop_too_tight 37%, fees_slippage 25% | +0.29R | -0.48R | +0.14 / -1.16 |
+| donchian_breakout-VEXIT | 4h | BACKTESTING | 1104 (668) | no_displacement, false_breakout, trend_reversal | false_breakout 64%, no_displacement 34% | +0.47R | -0.38R | +0.23 / +0.17 |
+| donchian_breakout-VEXIT-S4 | 4h | BACKTESTING | 1254 (766) | no_displacement, false_breakout, trend_reversal | false_breakout 63%, no_displacement 35% | +0.47R | -0.36R | +0.23 / +0.17 |
+| donchian_breakout-VEXIT-VRVOL | 4h | BACKTESTING | 1104 (668) | no_displacement, false_breakout, trend_reversal | false_breakout 64%, no_displacement 34% | +0.47R | -0.38R | +0.23 / +0.17 |
+| donchian_breakout | 4h | BACKTESTING | 1136 (529) | no_displacement, false_breakout, trend_reversal, regime_mismatch, stop_too_tight | false_breakout 67%, stop_too_tight 36%, no_displacement 35% | +0.33R | -0.38R | +0.14 / +0.09 |
+| bb_squeeze_breakout | 4h | FAILED | 285 (138) | false_breakout, stop_too_tight, structural_change | false_breakout 59%, stop_too_tight 43%, regime_mismatch 30% | +0.36R | -0.35R | +0.11 / +0.02 |
+| macd_trend_cross | 1h | FAILED | 195 (94) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 93%, indicator_lag 40%, stop_too_tight 31% | +0.31R | -0.42R | +0.13 / -0.02 |
+| donchian_breakout-VEXIT | 30m | FAILED | 1285 (848) | false_breakout | false_breakout 72% | +0.44R | -0.41R | +0.12 / -0.03 |
+| donchian_breakout-VEXIT-VRVOL | 30m | FAILED | 1285 (848) | false_breakout | false_breakout 72% | +0.44R | -0.41R | +0.12 / -0.03 |
+| bb_squeeze_breakout | 1h | FAILED | 847 (413) | no_displacement, false_breakout, regime_mismatch, stop_too_tight | false_breakout 62%, no_displacement 52%, stop_too_tight 37%, regime_mismatch 35% | +0.35R | -0.44R | +0.12 / -0.05 |
+| donchian_breakout-VEXIT-S4 | 1h | FAILED | 3431 (2319) | htf_conflict, no_displacement, false_breakout, regime_mismatch | false_breakout 64% | +0.49R | -0.40R | +0.05 / -0.05 |
+| donchian_breakout-VEXIT | 1h | FAILED | 3009 (2039) | htf_conflict, no_displacement, false_breakout | false_breakout 63% | +0.51R | -0.40R | +0.05 / -0.06 |
+| donchian_breakout-VEXIT-S4 | 30m | FAILED | 1511 (1005) | false_breakout | false_breakout 72% | +0.44R | -0.42R | +0.11 / -0.06 |
+| donchian_breakout-VEXIT-VRVOL | 1h | FAILED | 3009 (2039) | htf_conflict, no_displacement, false_breakout | false_breakout 63% | +0.51R | -0.40R | +0.05 / -0.06 |
+| donchian_breakout | 1h | FAILED | 3095 (1594) | no_displacement, false_breakout, regime_mismatch, stop_too_tight | false_breakout 66%, no_displacement 36%, stop_too_tight 32% | +0.36R | -0.39R | +0.04 / -0.06 |
+| supertrend_flip | 4h | FAILED | 96 (51) | regime_mismatch, stop_too_tight, indicator_lag, structural_change | regime_mismatch 69%, indicator_lag 35%, stop_too_tight 26% | +0.44R | -0.44R | +0.00 / -0.06 |
+| donchian_breakout | 30m | FAILED | 1321 (671) | false_breakout, regime_mismatch, stop_too_tight | false_breakout 76%, stop_too_tight 34% | +0.28R | -0.41R | +0.09 / -0.07 |
+| trend_pullback | 4h | FAILED | 1276 (658) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 81%, indicator_lag 39%, stop_too_tight 26% | +0.36R | -0.43R | +0.01 / -0.07 |
+| macd_trend_cross | 4h | FAILED | 38 (19) | structural_change | regime_mismatch 95%, no_displacement 90%, low_relative_volume 63%, indicator_lag 58% | +0.17R | -0.45R | -0.00 / -0.08 |
+| R4-CLUC | 30m | FAILED | 214 (126) | none | wrong_session 67% | +0.33R | -0.48R | +0.02 / -0.10 |
+| rsi2_dip_buy | 4h | FAILED | 1917 (834) | trend_reversal, regime_mismatch, volatility_spike | regime_mismatch 45% | +0.16R | -0.21R | -0.04 / -0.10 |
+| ema_9_21_cross | 1h | FAILED | 367 (201) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 80%, wrong_session 68%, indicator_lag 49%, stop_too_tight 27% | +0.26R | -0.38R | +0.03 / -0.12 |
+| rsi2_dip_buy | 1h | FAILED | 7187 (3298) | trend_reversal, regime_mismatch, volatility_spike | regime_mismatch 43% | +0.16R | -0.20R | +0.00 / -0.12 |
+| supertrend_flip | 30m | FAILED | 167 (86) | stop_too_tight, indicator_lag | indicator_lag 45%, regime_mismatch 43%, stop_too_tight 40% | +0.28R | -0.49R | +0.04 / -0.13 |
+| trend_pullback | 1h | FAILED | 6496 (3427) | regime_mismatch, stop_too_tight, indicator_lag | regime_mismatch 76%, indicator_lag 44%, stop_too_tight 28% | +0.30R | -0.43R | +0.02 / -0.14 |
+| S8-PDH-PDL-SWEEP | 1h | FAILED | 307 (205) | stop_too_tight, sweep_continued | sweep_continued 98%, range_market 58%, stop_too_tight 33% | +0.54R | -0.39R | +0.10 / -0.15 |
+| R4-CLUC | 15m | FAILED | 81 (53) | none | wrong_session 62% | +0.40R | -0.25R | -0.01 / -0.17 |
+| supertrend_flip | 1h | FAILED | 274 (149) | regime_mismatch, stop_too_tight, indicator_lag | wrong_session 73%, regime_mismatch 66%, stop_too_tight 40%, indicator_lag 33% | +0.39R | -0.38R | -0.08 / -0.18 |
+| liquidity_sweep_reversal | 1h | FAILED | 309 (160) | stop_too_tight | stop_too_tight 52% | +0.26R | -0.50R | +0.01 / -0.19 |
+| ema_9_21_cross | 15m | FAILED | 469 (258) | stop_too_tight, indicator_lag | indicator_lag 46%, stop_too_tight 30% | +0.28R | -0.42R | +0.13 / -0.19 |
+| macd_trend_cross | 30m | FAILED | 298 (155) | overextended_entry, stop_too_tight, indicator_lag | no_displacement 88%, low_relative_volume 45%, indicator_lag 43%, stop_too_tight 29% | +0.34R | -0.44R | +0.05 / -0.20 |
+| rsi2_dip_buy | 30m | FAILED | 2827 (1517) | trend_reversal, volatility_spike, fees_slippage | fees_slippage 34% | +0.17R | -0.19R | +0.01 / -0.20 |
+| trend_pullback | 30m | FAILED | 3505 (1888) | trend_reversal, stop_too_tight, indicator_lag | indicator_lag 46%, stop_too_tight 29% | +0.28R | -0.43R | +0.03 / -0.20 |
+| S8-PDH-PDL-SWEEP-noSMC | 1h | FAILED | 877 (607) | range_market, trend_reversal, stop_too_tight | range_market 47%, stop_too_tight 36% | +0.61R | -0.51R | +0.04 / -0.21 |
+| bb_squeeze_breakout | 30m | FAILED | 492 (266) | false_breakout, stop_too_tight | false_breakout 63%, stop_too_tight 40% | +0.26R | -0.45R | +0.03 / -0.23 |
+| ema_9_21_cross | 30m | FAILED | 347 (209) | stop_too_tight, indicator_lag | indicator_lag 47%, low_relative_volume 40%, stop_too_tight 26% | +0.27R | -0.37R | -0.03 / -0.24 |
+| trend_pullback | 15m | FAILED | 3094 (1699) | wrong_session, stop_too_tight, indicator_lag | wrong_session 71%, indicator_lag 50%, stop_too_tight 32% | +0.25R | -0.44R | +0.07 / -0.26 |
+| S6-OB-FVG-noSMC | 15m | FAILED | 37 (24) | none | - | +0.24R | -0.59R | -0.08 / -0.29 |
+| R4-BBRSI | 1h | FAILED | 1298 (918) | none | - | +0.45R | -0.43R | -0.14 / -0.31 |
+| R4-BBRSI | 30m | FAILED | 1534 (1044) | none | - | +0.43R | -0.43R | -0.05 / -0.31 |
+| bb_squeeze_breakout | 15m | FAILED | 550 (316) | no_displacement, stop_too_tight | false_breakout 59%, no_displacement 58%, stop_too_tight 44% | +0.31R | -0.45R | +0.02 / -0.34 |
+| rsi2_dip_buy | 15m | FAILED | 2186 (1460) | low_relative_volume, trend_reversal, fees_slippage | low_relative_volume 45%, fees_slippage 44% | +0.16R | -0.19R | +0.00 / -0.35 |
+| liquidity_sweep_reversal | 30m | FAILED | 330 (207) | stop_too_tight | stop_too_tight 40% | +0.36R | -0.49R | -0.15 / -0.47 |
+| S8-PDH-PDL-SWEEP-noSMC | 30m | FAILED | 623 (472) | stop_too_tight | stop_too_tight 31% | +0.59R | -0.49R | -0.07 / -0.48 |
+| liquidity_sweep_reversal | 15m | FAILED | 590 (358) | stop_too_tight | stop_too_tight 37% | +0.39R | -0.47R | +0.00 / -0.49 |
+| S8-PDH-PDL-SWEEP | 30m | FAILED | 123 (99) | stop_too_tight, sweep_continued | sweep_continued 96%, stop_too_tight 26% | +0.53R | -0.64R | -0.22 / -0.57 |
+| ema_9_21_cross | 5m | FAILED | 284 (191) | stop_too_tight, indicator_lag | indicator_lag 53%, stop_too_tight 27% | +0.22R | -0.48R | +0.11 / -0.64 |
+| liquidity_sweep_reversal | 5m | FAILED | 478 (360) | fees_slippage, stop_too_tight | stop_too_tight 37%, fees_slippage 25% | +0.27R | -0.49R | +0.15 / -1.18 |
 
-**Candidate lessons** (systematic in 2+ tests - NOT yet lessons: they need a review before anything changes, and any change is a new version): `stop_too_tight` (systematic in 27 strategy/timeframe tests); `false_breakout` (systematic in 15 strategy/timeframe tests); `regime_mismatch` (systematic in 13 strategy/timeframe tests); `indicator_lag` (systematic in 13 strategy/timeframe tests); `trend_reversal` (systematic in 8 strategy/timeframe tests); `no_displacement` (systematic in 4 strategy/timeframe tests); `volatility_spike` (systematic in 3 strategy/timeframe tests); `fees_slippage` (systematic in 3 strategy/timeframe tests); `sweep_continued` (systematic in 2 strategy/timeframe tests); `htf_conflict` (systematic in 2 strategy/timeframe tests)
+**Candidate lessons** (systematic in 2+ tests - NOT yet lessons: they need a review before anything changes, and any change is a new version): `stop_too_tight` (systematic in 28 strategy/timeframe tests); `false_breakout` (systematic in 15 strategy/timeframe tests); `regime_mismatch` (systematic in 13 strategy/timeframe tests); `indicator_lag` (systematic in 13 strategy/timeframe tests); `no_displacement` (systematic in 10 strategy/timeframe tests); `trend_reversal` (systematic in 10 strategy/timeframe tests); `volatility_spike` (systematic in 3 strategy/timeframe tests); `htf_conflict` (systematic in 3 strategy/timeframe tests); `fees_slippage` (systematic in 3 strategy/timeframe tests); `sweep_continued` (systematic in 2 strategy/timeframe tests)
 
 **Missed moves** (last 24h, ≥ 5x the 1H ATR within 12 hours; also in `memory/missed_trades.md`). Never change a rule just because a missed move became large:
-- BTC down -2.4% (2026-09-27 21:00 → 2026-09-28 10:00 UTC): a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
-- ZEC down -8.9% (2026-09-28 12:00 → 2026-09-28 20:00 UTC): a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
-- SOL down -4.1% (2026-09-27 21:00 → 2026-09-28 10:00 UTC): a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
-- LINK up +13.0% (2026-09-28 09:00 → 2026-09-28 21:00 UTC): identifiable: at least one strategy had a valid signal before the move
-- UNI down -8.6% (2026-09-27 23:00 → 2026-09-28 10:00 UTC): not identifiable: no strategy had a setup before the move
-- BNB down -2.6% (2026-09-27 21:00 → 2026-09-28 10:00 UTC): not identifiable: no strategy had a setup before the move
+- ZEC down -11.5% (2026-09-28 13:00 → 2026-09-29 02:00 UTC): a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+- AVAX up +14.3% (2026-09-29 02:00 → 2026-09-29 12:00 UTC): a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
 
 *The 8 questions of section 17.3 (wrong strategy? wrong regime? timing? stop / target? sample size? costs? other timeframe? systematic or random?) are answered per test in `reports/research.json` → `cells` → `attribution` → `diagnosis`. Losing paper / live signals: `memory/failure_journal.md`.*
 
@@ -445,20 +440,20 @@ Every backtest trade gets reason tags by fixed rules (section 17; rules and numb
 | `memory/experiments.md` | 48.1 KB | 19 | 2026-09-28 15:40 UTC |
 | `memory/failure_journal.md` | 0.6 KB | - | - |
 | `memory/family_gates_calibration.md` | 14.4 KB | - | - |
-| `memory/family_gates_shadow.csv` | 58.5 KB | - | - |
+| `memory/family_gates_shadow.csv` | 79.1 KB | - | - |
 | `memory/feature_notes.md` | 3.6 KB | - | - |
 | `memory/lessons.md` | 2.8 KB | 1 | 2026-09-26 06:22 UTC |
 | `memory/market_mechanics.md` | 11.9 KB | 13 | 2026-09-27 02:00 UTC |
-| `memory/market_regime_log.md` | 7.2 KB | - | - |
-| `memory/missed_trades.md` | 15.1 KB | 20 | 2026-09-29 00:53 UTC |
+| `memory/market_regime_log.md` | 8.4 KB | - | - |
+| `memory/missed_trades.md` | 16.5 KB | 22 | 2026-09-30 00:55 UTC |
 | `memory/playbook.md` | 8.7 KB | - | - |
 | `memory/research_sources.md` | 59.7 KB | 45 | 2026-09-28 15:40 UTC |
-| `memory/smc_events.csv` | 366.8 KB | - | - |
+| `memory/smc_events.csv` | 368.6 KB | - | - |
 | `memory/smc_research.md` | 7.2 KB | 1 | 2026-09-27 02:00 UTC |
-| `memory/strategy_lifecycle.md` | 16.0 KB | - | - |
-| `memory/strategy_registry.csv` | 36.9 KB | - | - |
+| `memory/strategy_lifecycle.md` | 16.2 KB | - | - |
+| `memory/strategy_registry.csv` | 36.6 KB | - | - |
 | `memory/trials.csv` | 9.2 KB | - | - |
-| `memory/universe_log.md` | 12.0 KB | - | - |
+| `memory/universe_log.md` | 12.2 KB | - | - |
 
 **Reviews due** (review date passed; for the reviews): none
 Append-only files may only grow: `memory_guard.py` stops the run before anything else is saved.
