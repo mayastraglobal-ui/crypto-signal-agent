@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "XRP",
   "SOL",
+  "XRP",
   "ZEC",
   "AVAX",
   "SUI"
@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 132,
+ "runs": 133,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
