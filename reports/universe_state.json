@@ -8,12 +8,16 @@
   "SUI",
   "BNB"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "ENA": 1
+ },
+ "out_streak": {
+  "BNB": 1
+ },
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 145,
+ "runs": 146,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
