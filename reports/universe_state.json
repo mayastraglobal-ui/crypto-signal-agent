@@ -2,16 +2,18 @@
  "members": [
   "BTC",
   "ETH",
-  "ZEC",
   "XRP",
   "SOL",
+  "ZEC",
   "AVAX",
   "SUI"
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 129,
+ "suspended": {
+  "QNT": "2026-09-30"
+ },
+ "runs": 130,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -53,6 +55,7 @@
    "volume_7d"
   ],
   "QNT": [
+   "big_move",
    "thin_book"
   ],
   "PUMP": [
