@@ -269,3 +269,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-30 19:20 UTC
 - **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** ENA - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-09-30 22:20 UTC
+- **EXCLUDED** MOVR - 7-day average volume $3M < $50M; 24h move +69.9% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $39k within 1% (need $250k)

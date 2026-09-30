@@ -4928,3 +4928,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 20:45,ETH,15m,FVG,bull,,2674.88,2678.91,0.484,,1h,RANGE,,smc-1.0,Binance
 2026-09-30 20:45,SOL,15m,FVG,bull,,117.67,117.88,0.325,,1h,RANGE,,smc-1.0,Binance
 2026-09-30 21:00,SOL,15m,FVG_RETRACE,bull,,117.67,117.88,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 22:15,ETH,15m,FVG_RETRACE,bull,,2674.88,2678.91,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 22:15,SOL,15m,FVG_FILLED,bull,,117.67,117.88,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 22:15,ZEC,15m,SWEEP,bull,1409.42,,,0.951,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 21:30,ENA,30m,WEAK_BREAK,bear,0.2609,,,0.232,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-09-30 21:30,ENA,15m,WEAK_BREAK,bear,0.2609,,,0.352,,1h,WEAK_BULL,no displacement,smc-1.0,Binance

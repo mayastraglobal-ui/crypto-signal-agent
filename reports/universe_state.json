@@ -11,9 +11,10 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "QNT": "2026-09-30"
+  "QNT": "2026-09-30",
+  "MOVR": "2026-09-30"
  },
- "runs": 149,
+ "runs": 150,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -71,6 +72,11 @@
   ],
   "AAVE": [
    "volume_7d"
+  ],
+  "MOVR": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -106,6 +112,7 @@
   "PUMP": [],
   "HBAR": [],
   "MARSCOIN": [],
-  "AAVE": []
+  "AAVE": [],
+  "MOVR": []
  }
 }
