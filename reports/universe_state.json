@@ -6,18 +6,14 @@
   "ZEC",
   "XRP",
   "SUI",
-  "BNB"
+  "ENA"
  ],
- "in_streak": {
-  "ENA": 1
- },
- "out_streak": {
-  "BNB": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 146,
+ "runs": 147,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],

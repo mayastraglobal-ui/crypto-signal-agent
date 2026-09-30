@@ -265,3 +265,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-09-30 15:23 UTC
 - **ELIGIBLE** HBAR - passes every rule again
+
+## 2026-09-30 19:20 UTC
+- **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** ENA - in the top 7 for 2 runs in a row (now #7)
