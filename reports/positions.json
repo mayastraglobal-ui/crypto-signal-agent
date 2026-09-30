@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-09-30 13:22",
+ "generated_utc": "2026-09-30 14:23",
  "book": {
-  "utc": "2026-09-30 13:22",
-  "beijing": "2026-09-30 21:22",
+  "utc": "2026-09-30 14:23",
+  "beijing": "2026-09-30 22:23",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,7 +19,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-09-30 13:22 UTC / 2026-09-30 21:22 Beijing",
+  "POSITION BOOK \u2014 2026-09-30 14:23 UTC / 2026-09-30 22:23 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Sep data) 2026-10-02 12:30 UTC"
@@ -36,10 +36,7 @@
   "groups": [
    "BNB+BTC+ETH+SOL+SUI+XRP"
   ],
-  "blackout_now": [
-   "US GDP (Third Estimate), 2nd Quarter 2026",
-   "US PCE / Personal Income and Outlays (Aug data)"
-  ],
+  "blackout_now": [],
   "upcoming_events": [
    {
     "start_utc": "2026-10-02 12:30",
