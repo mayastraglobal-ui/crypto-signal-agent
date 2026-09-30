@@ -2,22 +2,18 @@
  "members": [
   "BTC",
   "ETH",
-  "XRP",
   "SOL",
+  "XRP",
   "ZEC",
-  "SUI",
-  "AVAX"
+  "BNB",
+  "SUI"
  ],
- "in_streak": {
-  "BNB": 1
- },
- "out_streak": {
-  "AVAX": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 139,
+ "runs": 140,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
