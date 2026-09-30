@@ -7,48 +7,61 @@
 
 ## CURRENT DESIGN
 
-TradeSentry v3 is designed as a **research and signal system, not an order-execution system**. Its learning loop is: observe → hypothesise → formalise → backtest → validate → paper-test → review → version → monitor.
+TradeSentry v3 is designed as an evidence-driven crypto research and signal system—not an automated trade executor.
 
-- **Engine:** deterministic closed-candle analysis, using REST polling every 15 minutes; selects 7 signal assets and 10 research assets, computes features and regimes, tests strategies, checks risk, and tracks signal outcomes.
-- **Brain:** researches ideas, proposes exact strategy rules, reviews failures and missed opportunities, explains evidence, and maintains research knowledge.
-- **Memory and reporting:** GitHub-based records, reports, and alerts; alerts operate independently of the Brain.
-- **Governance:** immutable tested strategy versions, control-twin comparisons, validation gates, and explicit operator approval before live emails (§§1–2, 10–22).
+- **Engine:** polls closed candles every 15 minutes; selects 7 signal assets and 10 research assets; computes features, regimes and deterministic SMC/ICT events; backtests strategies; enforces risk limits; tracks signal states and outcomes.
+- **Brain:** researches ideas, formalizes hypotheses, interprets failures and missed opportunities, proposes versioned improvements, and explains engine results.
+- **Learning loop:** hypothesis → backtest → out-of-sample validation → stress testing → paper tracking → operator approval → monitoring. Revisions require new versions and preserved evidence.
+- **Delivery:** engine-driven emails, repository reports and versioned memory; alerts must work without the Brain.
 
-**Evidence boundary:** The source describes the intended architecture and labels parts “actually in use,” but no code, run logs, datasets, or results were supplied. Implementation completeness and operational correctness are **not established**.
+The source describes the intended architecture and calls parts “actually in use,” but no code, logs or results were supplied. **Implementation completeness and operational performance are not established.**
 
 ## GAPS
 
-The highest-priority missing or insufficiently specified capabilities are:
+The most important capabilities to verify or specify are:
 
-1. **Verifiable, reproducible experiment execution.** Experiment records are required, but dataset snapshots, code/configuration hashes, reproducible seeds where applicable, and protected holdout enforcement are not specified. The overwritten `live-reports` branch cannot itself preserve historical evidence (§22).
-2. **Stronger statistical learning controls.** Walk-forward tests, trial counts, and perturbation tests are specified. Confidence intervals, dependence-aware uncertainty, multiple-testing correction, and a concrete complexity penalty are not. The +0.02R retuning penalty does not establish statistical protection against repeated selection (§§11–12).
-3. **Operational loss and missed-trade attribution.** Tags and review questions exist, but objective tag criteria, ambiguity handling, a predefined missed-move denominator, and checks against hindsight bias are not fully defined (§17). An explanatory label is not proof of causation.
-4. **Unambiguous execution and governance contracts.** Fifteen-minute polling needs explicit handling of intervening 5-minute confirmations and alert latency; simulated fills must respect when information actually became available. Paper-email instructions conflict between §§12 and 20. The Brain guard is mentioned, but its validation and permission boundaries are not established.
+1. **Reproducible experiment orchestration.** Experiment logs and immutable strategy versions are required, but dataset snapshots, code/configuration hashes, deterministic replay and protected holdout management are not fully specified (§§10–11, 22). These are necessary to distinguish genuine improvements from changed inputs.
+
+2. **Statistically defensible learning.** Trade-count gates, control twins and perturbation tests exist. However, uncertainty estimates, dependence between trades, multiple-testing controls and objective definitions of “stable” or “material divergence” are not specified. The +0.02R retuning penalty does not establish statistical validity.
+
+3. **Auditable failure and missed-trade attribution.** Tags and review questions exist, but reproducible labeling criteria and a systematic missed-move sampling procedure are not established (§17). Hindsight explanations must remain hypotheses unless tested.
+
+4. **Operational and specification consistency.**
+   - Fifteen-minute polling requires explicit handling of intervening 5m bars and alert latency; immediate 5m execution is not established.
+   - §12 both permits and prohibits paper emails; §20 specifies them.
+   - §22 replaces large reports without history; preservation of the exact evidence behind research decisions is not established.
+   - Actual operator fills and reconciliation are not specified, so tracked “live” outcomes should not automatically be treated as realized trading results.
 
 ## DETERMINISTIC CODE VS BRAIN
 
 | Deterministic code | AI Brain |
 |---|---|
-| Fetch and validate data; enforce closed-bar availability and provenance | Assess research sources and distinguish claims from evidence |
-| Calculate features, regimes, SMC detections, fills, costs, metrics, and uncertainty | Propose hypotheses, exact draft rules, and controlled experiments |
-| Execute reproducible backtests, comparisons, state transitions, and outcome logging | Interpret engine results; propose evidence-linked failure classifications |
-| Enforce eligibility, sizing, risk limits, lifecycle gates, and alert permissions | Explain limitations, document lessons, and prepare review packs |
+| Data acquisition, timestamps, quality states and provenance | Source evaluation and research synthesis |
+| Universe selection, features, regimes and SMC detections | Testable hypotheses and proposed formal rules |
+| Backtests, costs, metrics and statistical comparisons | Interpretation of measured results and competing explanations |
+| Risk, sizing, signal eligibility, state transitions and exits | Evidence-linked failure classification and experiment prioritization |
+| Version validation, gate enforcement, audit logs and notifications | Draft documentation, lessons and operator-facing reports |
 
-**Operator-only decisions:** live approval and changes to protected risk settings or gates. Brain proposals must not directly alter active rules or bypass deterministic checks.
+**Operator responsibility:** approve live-email activation and protected changes to risk, fees, gates or scanner/workflow logic. The Brain must not bypass deterministic checks or grant itself approval.
 
 ## NEXT THREE TASKS
 
-1. **Prepare a read-only implementation and specification audit.** Request the relevant code, configuration, tests, and sample reports; map each critical requirement to evidence and flag unresolved contradictions.  
-   **Reason:** establish what actually exists before proposing development or drawing research conclusions.
+1. **Prepare a read-only implementation and specification audit.**  
+   Map requirements to requested code, tests and report artifacts; mark each verified, missing or unknown; list conflicts for operator resolution.  
+   **Reason:** prevents research planning from assuming undocumented capabilities exist.
 
-2. **Draft a preregistered 5-minute-confirmation experiment.** Specify matched with/without-confirmation variants, chronological splits, point-in-time universe selection, polling-aware fills, identical costs, uncertainty estimates, and acceptance criteria—without running or approving it here.  
-   **Reason:** test an explicitly provisional design choice while preventing hindsight and unrealistic timing assumptions.
+2. **Draft one preregistered control-twin experiment: with versus without 5m confirmation.**  
+   Hold other rules constant; specify chronological splits, costs, polling-aware availability, uncertainty analysis and acceptance criteria.  
+   **Reason:** directly tests a mandated architectural assumption without changing several variables at once.
 
-3. **Design the learning-record and attribution contract.** Define experiment identifiers, dataset/code references, objective failure-tag criteria, “unknown” classifications, missed-move selection rules, evidence counts, and one-change version lineage.  
-   **Reason:** make learning reproducible and reversible rather than narrative-driven.
+3. **Design an evidence-linked learning-record schema.**  
+   Specify immutable experiment identifiers, data/code references, observed facts versus proposed causes, reproducible missed-move selection, evidence counts and review dates.  
+   **Reason:** makes lessons traceable and reduces hindsight-driven rule changes.
+
+These are proposals only; no files, signals or approvals are produced here.
 
 ## SAFETY CONTROL
 
-**Risk:** an LLM can turn a persuasive but unsupported explanation—or instructions embedded in external research—into an unsafe rule change or apparent approval.
+**Risk:** an LLM may turn a persuasive but unsupported explanation into an actionable strategy change.
 
-**Control:** enforce a **proposal-only Brain boundary**. Validate proposals against a restricted schema; keep risk settings, active strategy versions, and approval state outside the Brain’s write permissions. Independent deterministic gates must reject invalid or unapproved versions, with authenticated operator approval required for live-email activation. Prompt instructions alone are not sufficient enforcement.
+**Control:** keep Brain outputs in a proposal-only boundary. Deterministic validation must reject unversioned or unauthorized changes, enforce all data/risk/promotion gates, and require explicit operator approval before live-email activation. The prompt requires this separation; its technical enforcement is not established by the supplied source.
