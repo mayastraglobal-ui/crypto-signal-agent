@@ -171,3 +171,18 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### BNB down -2.6% (7.2x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
 - timestamp: 2026-09-29 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 7.2x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-06
   - verdict: not identifiable: no strategy had a setup before the move (research-only coin)
+
+### ZEC down -11.5% (9.0x ATR), 2026-09-28 13:00 -> 2026-09-29 02:00
+- timestamp: 2026-09-30 00:55 UTC · source: engine: daily research run · evidence: FACT: move of 9.0x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: TRANSITION · review: 2026-10-07
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+
+### AVAX up +14.3% (7.0x ATR), 2026-09-29 02:00 -> 2026-09-29 12:00
+- timestamp: 2026-09-30 00:55 UTC · source: engine: daily research run · evidence: FACT: move of 7.0x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: AVAX · timeframe: 1h · regime: UNCLEAR · review: 2026-10-07
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - donchian_breakout-VEXIT-S4 v1.0 30m: blocked by the regime gate

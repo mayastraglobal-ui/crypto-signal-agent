@@ -103,3 +103,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-09-29 00:53 UTC
 - **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; max drawdown 24.1R; not profitable in BOTH train and unseen test)
+
+## 2026-09-30 00:55 UTC
+- **macd_trend_cross@1.0 1h**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.96; max drawdown 31.6R; not profitable in BOTH train and unseen test)
