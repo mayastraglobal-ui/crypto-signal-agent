@@ -3707,3 +3707,45 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 08:45,AVAX,15m,SWEEP,bull,11.025,,,0.43,London,1h,UNCLEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
 2026-09-30 08:45,AVAX,15m,BREAKER_RETEST,bull,,10.928,10.992,,London,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-09-30 08:45,AVAX,15m,FVG_FILLED,bull,,10.998,11.153,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-30 09:30,BTC,30m,FVG_RETRACE,bear,,83172.6,83268.0,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 09:30,BTC,30m,FVG_FILLED,bear,,83172.6,83268.0,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,BTC,30m,BOS,bull,83470.0,,,0.659,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 10:00,BTC,30m,FVG,bull,,83172.6,83426.95,0.994,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,BTC,15m,FVG,bull,,83172.6,83277.25,0.613,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:45,BTC,15m,SWEEP,bear,83620.87,,,1.122,,1h,RANGE,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-09-30 09:45,BTC,15m,WEAK_BREAK,bull,83470.0,,,0.612,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 09:45,BTC,15m,OB_INVALID,bear,,83383.96,83521.98,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 09:45,BTC,15m,FVG_FILLED,bear,,83592.01,83645.0,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:45,BTC,15m,FVG,bull,,83291.95,83426.95,0.726,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,BTC,15m,FVG,bull,,83440.99,83537.21,0.531,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,ETH,1h,BOS,bull,2680.62,,,0.526,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 09:30,ETH,30m,WEAK_BREAK,bull,2680.62,,,0.567,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 10:00,ETH,30m,FVG_FILLED,bear,,2681.69,2689.25,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,ETH,30m,FVG,bull,,2674.0,2684.7,1.025,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,ETH,15m,OB_INVALID,bear,,2674.82,2680.62,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 09:30,ETH,15m,FVG,bull,,2674.0,2677.28,0.48,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:45,ETH,15m,FVG,bull,,2680.0,2684.7,0.633,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,XRP,1h,FVG_FILLED,bear,,1.4903,1.5078,,,4h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,XRP,30m,WEAK_BREAK,bull,1.507,,,0.193,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 10:00,XRP,30m,OB_RETEST,bear,,1.511,1.5236,,,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-30 10:00,XRP,30m,FVG_FILLED,bear,,1.4903,1.515,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-30 10:00,XRP,30m,FVG,bull,,1.5006,1.507,0.704,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-30 09:30,XRP,15m,WEAK_BREAK,bull,1.5042,,,0.715,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 09:45,XRP,15m,FVG_FILLED,bear,,1.4922,1.515,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:45,XRP,15m,FVG,bull,,1.5039,1.507,0.47,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,SOL,30m,FVG_FILLED,bear,,118.63,119.01,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,SOL,30m,FVG,bull,,118.36,118.98,0.866,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,SOL,15m,WEAK_BREAK,bull,118.93,,,0.219,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 09:30,SOL,15m,FVG_FILLED,bear,,118.79,119.01,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:30,SOL,15m,FVG,bull,,118.36,118.59,0.459,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:45,SOL,15m,SWEEP,bear,119.65,,,0.299,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 09:45,SOL,15m,FVG,bull,,118.7,118.98,0.535,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:00,ZEC,30m,SWEEP,bear,1415.51,,,0.252,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 09:45,ZEC,15m,SWEEP,bear,1415.65,,,0.36,,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-09-30 10:00,SUI,30m,SWEEP,bear,1.1738,,,0.222,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 09:45,SUI,15m,SWEEP,bear,1.1738,,,0.293,,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-09-30 09:30,AVAX,15m,FVG,bull,,11.125,11.154,0.374,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-30 09:45,AVAX,15m,SWEEP,bear,11.2,,,0.502,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 09:45,AVAX,15m,OB_RETEST,bear,,11.238,11.322,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-09-30 09:45,AVAX,15m,FVG_RETRACE,bear,,11.223,11.268,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-30 09:45,AVAX,15m,FVG_RETRACE,bull,,11.125,11.154,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
