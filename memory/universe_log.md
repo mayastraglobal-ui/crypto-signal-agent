@@ -256,3 +256,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-09-30 12:28 UTC
 - **LEAVE** AVAX - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** BNB - in the top 7 for 2 runs in a row (now #6)
+
+## 2026-09-30 13:22 UTC
+- **EXCLUDED** AAVE - 7-day average volume $31M < $50M

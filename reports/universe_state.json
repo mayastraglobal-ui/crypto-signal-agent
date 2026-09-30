@@ -5,15 +5,15 @@
   "SOL",
   "XRP",
   "ZEC",
-  "BNB",
-  "SUI"
+  "SUI",
+  "BNB"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 140,
+ "runs": 141,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -70,7 +70,6 @@
    "volume_7d"
   ],
   "AAVE": [
-   "thin_book",
    "volume_7d"
   ]
  },
