@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 142,
+ "runs": 143,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -62,9 +62,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "HBAR": [
-   "thin_book"
-  ],
+  "HBAR": [],
   "MARSCOIN": [
    "big_move",
    "history",
