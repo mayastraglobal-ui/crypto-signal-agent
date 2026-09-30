@@ -3749,3 +3749,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 09:45,AVAX,15m,OB_RETEST,bear,,11.238,11.322,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
 2026-09-30 09:45,AVAX,15m,FVG_RETRACE,bear,,11.223,11.268,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-09-30 09:45,AVAX,15m,FVG_RETRACE,bull,,11.125,11.154,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-30 11:00,BTC,1h,WEAK_BREAK,bull,83849.0,,,0.172,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 11:00,BTC,1h,FVG,bull,,83339.91,83632.01,0.74,,4h,RANGE,,smc-1.0,Binance
+2026-09-30 10:30,BTC,30m,FVG_FILLED,bear,,83756.25,83854.26,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 10:30,BTC,30m,FVG,bull,,83440.99,83632.01,0.751,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 11:00,ETH,1h,FVG,bull,,2674.87,2687.56,0.8,,4h,RANGE,,smc-1.0,Binance
+2026-09-30 10:30,ETH,15m,OB_INVALID,bear,,2686.13,2690.55,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 11:15,ETH,15m,BREAKER_RETEST,bull,,2686.13,2690.55,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 11:00,XRP,1h,FVG,bull,,1.5014,1.5068,0.377,,4h,RANGE,,smc-1.0,Binance
+2026-09-30 10:30,XRP,30m,FVG_RETRACE,bull,,1.5006,1.507,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-30 10:30,XRP,15m,FVG_RETRACE,bull,,1.5039,1.507,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-30 11:00,SOL,1h,FVG,bull,,118.53,119.26,0.703,,4h,RANGE,,smc-1.0,Binance
+2026-09-30 10:30,SOL,30m,FVG,bull,,119.08,119.26,0.256,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 11:00,ZEC,30m,CHOCH,bull,1415.51,,,1.211,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-09-30 11:00,ZEC,30m,ORDER_BLOCK,bull,,1398.79,1414.91,,,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-30 10:45,ZEC,15m,BOS,bull,1419.0,,,0.682,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-09-30 10:45,ZEC,15m,ORDER_BLOCK,bull,,1408.0,1413.36,,,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-30 11:00,ZEC,15m,FVG,bull,,1418.0,1421.41,0.343,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 11:15,SUI,15m,SWEEP,bull,1.15,,,0.34,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 11:15,SUI,15m,WEAK_BREAK,bear,1.152,,,0.066,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 11:15,AVAX,15m,FVG_FILLED,bull,,11.125,11.154,,NY AM,1h,RANGE,,smc-1.0,Binance

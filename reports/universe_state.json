@@ -8,12 +8,16 @@
   "SUI",
   "AVAX"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "BNB": 1
+ },
+ "out_streak": {
+  "AVAX": 1
+ },
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 138,
+ "runs": 139,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
