@@ -3,18 +3,15 @@
   "BTC",
   "ETH",
   "ZEC",
-  "SOL",
   "XRP",
+  "SOL",
   "AVAX",
   "SUI"
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {
-  "HBAR": "2026-09-29",
-  "MARSCOIN": "2026-09-29"
- },
- "runs": 127,
+ "suspended": {},
+ "runs": 128,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -48,6 +45,7 @@
    "volume_7d"
   ],
   "BABY": [
+   "spread",
    "thin_book",
    "volume_7d"
   ],
@@ -62,10 +60,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "HBAR": [
-   "big_move",
-   "volume_7d"
-  ],
+  "HBAR": [],
   "MARSCOIN": [
    "big_move",
    "history",

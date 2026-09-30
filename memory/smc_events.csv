@@ -3521,3 +3521,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-29 23:15,ZEC,15m,FVG,bull,,1416.08,1423.56,0.642,,1h,TRANSITION,,smc-1.0,Binance
 2026-09-29 23:15,SOL,15m,WEAK_BREAK,bull,119.6,,,0.09,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-09-29 22:30,SUI,15m,SWEEP,bull,1.1476,,,0.127,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 00:00,BTC,1h,FVG_RETRACE,bear,,83756.25,84025.26,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-29 23:30,BTC,30m,BOS,bull,83700.0,,,0.228,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-29 23:30,BTC,30m,FVG_RETRACE,bear,,83756.25,83854.26,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-29 23:30,BTC,15m,FVG,bull,,83650.0,83725.0,0.484,,1h,RANGE,,smc-1.0,Binance
+2026-09-29 23:45,BTC,15m,FVG_RETRACE,bull,,83650.0,83725.0,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-29 23:45,BTC,15m,FVG_FILLED,bull,,83650.0,83725.0,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 00:15,ETH,15m,BOS,bear,2675.0,,,0.486,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-29 23:30,ZEC,15m,FVG_RETRACE,bull,,1416.08,1423.56,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-09-29 23:45,ZEC,15m,FVG_FILLED,bull,,1416.08,1423.56,,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-30 00:00,XRP,30m,SWEEP,bull,1.4901,,,0.181,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-29 23:45,XRP,15m,BOS,bear,1.4917,,,0.301,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-29 23:45,XRP,15m,FVG_RETRACE,bull,,1.4836,1.489,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 00:00,XRP,15m,FVG,bear,,1.4919,1.4938,0.303,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 00:15,XRP,15m,FVG_RETRACE,bear,,1.4919,1.4938,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-29 23:30,SOL,30m,SWEEP,bear,119.53,,,0.209,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 00:00,SOL,15m,FVG,bear,,119.17,119.29,0.276,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 00:15,SOL,15m,FVG_RETRACE,bear,,119.17,119.29,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 00:15,SOL,15m,FVG_FILLED,bear,,119.17,119.29,,Asia,1h,RANGE,,smc-1.0,Binance

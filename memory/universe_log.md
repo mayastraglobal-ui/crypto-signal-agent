@@ -236,3 +236,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** HBAR - 7-day average volume $44M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today)
 - **LEAVE** LINK - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** AVAX - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-09-30 00:27 UTC
+- **EXCLUDED** BABY - 7-day average volume $49M < $50M; spread 0.145% > 0.1%; order book too thin: $55k within 1% (need $250k)
+- **ELIGIBLE** HBAR - passes every rule again
