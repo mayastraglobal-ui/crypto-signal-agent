@@ -46,3 +46,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Generate GPT-6 Astra Brain test report"
           git push origin HEAD:astra-brain-test
+
+# Force push-triggered Astra real test retry.
