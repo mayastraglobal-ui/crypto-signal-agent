@@ -3690,3 +3690,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 08:15,ZEC,15m,FVG_RETRACE,bull,,1401.43,1406.53,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-09-30 08:15,ZEC,15m,FVG_FILLED,bull,,1401.43,1406.53,,London,1h,UNCLEAR,,smc-1.0,Binance
 2026-09-30 07:30,AVAX,30m,FVG_RETRACE,bear,,11.182,11.268,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-09-30 08:30,BTC,30m,FVG_RETRACE,bull,,83194.93,83268.0,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 08:30,BTC,30m,FVG_FILLED,bull,,83194.93,83268.0,,London,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:00,BTC,30m,FVG,bear,,83172.6,83268.0,0.405,London,1h,RANGE,,smc-1.0,Binance
+2026-09-30 08:45,BTC,15m,FVG_FILLED,bull,,83112.67,83268.0,,London,1h,RANGE,,smc-1.0,Binance
+2026-09-30 08:30,ETH,15m,FVG,bear,,2672.14,2674.1,0.298,London,1h,RANGE,,smc-1.0,Binance
+2026-09-30 08:45,ETH,15m,FVG_FILLED,bull,,2665.59,2670.21,,London,1h,RANGE,,smc-1.0,Binance
+2026-09-30 09:00,ETH,15m,FVG_RETRACE,bear,,2672.14,2674.1,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 09:15,ETH,15m,WEAK_BREAK,bull,2677.98,,,0.105,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 09:15,ETH,15m,FVG_FILLED,bear,,2672.14,2674.1,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 08:45,SOL,15m,SWEEP,bull,117.91,,,0.192,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 09:00,AVAX,1h,SWEEP,bull,11.029,,,0.203,London,4h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 09:00,AVAX,1h,FVG_FILLED,bull,,10.998,11.228,,London,4h,WEAK_BULL,,smc-1.0,Binance
+2026-09-30 09:00,AVAX,30m,SWEEP,bull,11.029,,,0.333,London,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 09:00,AVAX,30m,FVG_FILLED,bull,,10.998,11.203,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-30 08:45,AVAX,15m,SWEEP,bull,11.025,,,0.43,London,1h,UNCLEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-30 08:45,AVAX,15m,BREAKER_RETEST,bull,,10.928,10.992,,London,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 08:45,AVAX,15m,FVG_FILLED,bull,,10.998,11.153,,London,1h,UNCLEAR,,smc-1.0,Binance
