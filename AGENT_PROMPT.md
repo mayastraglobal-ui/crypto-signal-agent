@@ -57,7 +57,7 @@ The LLM assists the quantitative system. It never replaces it.
 |---|---|---|---|
 | **Engine** (`scanner.py`) | GitHub Actions, free, 24/7 | Data → quality check → universe → features → regime → SMC detectors → strategies → backtests → signals → state machine → outcome tracking → reports | Every 15 min for signals and positions; hourly for full backtests |
 | **Alerts** (`notify.py`) | GitHub Actions + Gmail | Entry, exit and system emails, plus a daily report. Works **without Claude** | Every run |
-| **Brain** (Claude scheduled tasks) | Claude cloud | Briefings with news, daily review, weekly research, strategy authoring, memory updates | 3× daily briefing, daily review, weekly research |
+| **Brain** (GPT-6 Astra scheduled tasks) | OpenAI Responses API | Briefings with news, daily review, weekly research, strategy authoring, memory updates | 3× daily briefing, daily review, weekly research |
 | **Memory** (`memory/`, `reports/`) | GitHub repo | Versioned, append-only knowledge and ledgers (§22) | Every run |
 | **Eyes** (TradingView, free) | Operator's browser | Visual checks; approved strategies exported as Pine Script to cross-check | On demand |
 

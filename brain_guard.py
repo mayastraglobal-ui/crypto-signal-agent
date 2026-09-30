@@ -25,6 +25,7 @@ from engine import brain
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 STATE = os.path.join(ROOT, "reports", "claude", "state.json")
+ASTRA_STATE = os.path.join(ROOT, "reports", "astra", "state.json")
 
 
 def git(*args, check=True):
@@ -87,19 +88,19 @@ def handle(branch, state, now):
                status="rejected" if probs else "applied", problems=probs,
                applied=[a["path"] for a in applies], skipped=skipped)
     state[branch] = {k: res[k] for k in ("sha", "subject", "when", "status", "problems", "applied")}
-    log_run(res)
     return res
 
 
 RUNS = os.path.join(ROOT, "reports", "claude", "runs.csv")
 
 
-def log_run(res):
+def log_run(res, provider):
     """reports/claude/runs.csv (append-only): every task push the guard handled - for the weekly report card."""
     import csv
-    new = not os.path.exists(RUNS)
-    os.makedirs(os.path.dirname(RUNS), exist_ok=True)
-    with open(RUNS, "a", newline="") as f:
+    runs = RUNS if provider == "claude" else os.path.join(ROOT, "reports", "astra", "runs.csv")
+    new = not os.path.exists(runs)
+    os.makedirs(os.path.dirname(runs), exist_ok=True)
+    with open(runs, "a", newline="") as f:
         w = csv.writer(f, lineterminator="\n")
         if new:
             w.writerow(["when", "branch", "sha", "status", "problems", "applied"])
@@ -107,17 +108,29 @@ def log_run(res):
                     len(res["applied"])])
 
 
+def provider_for(branch):
+    return "astra" if branch.startswith("astra/") else "claude"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=None, help="write what happened as JSON (for notify.py brain)")
     args = ap.parse_args()
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M")
-    state = json.load(open(STATE)) if os.path.exists(STATE) else {}
-    results = [r for r in (handle(b, state, now) for b in brain.BRANCHES) if r]
-    if results:
-        os.makedirs(os.path.dirname(STATE), exist_ok=True)
-        with open(STATE, "w") as f:
-            json.dump(state, f, indent=1)
+    states = {"claude": json.load(open(STATE)) if os.path.exists(STATE) else {},
+              "astra": json.load(open(ASTRA_STATE)) if os.path.exists(ASTRA_STATE) else {}}
+    results = []
+    for branch in brain.BRANCHES:
+        provider = provider_for(branch)
+        result = handle(branch, states[provider], now)
+        if result:
+            log_run(result, provider)
+            results.append(result)
+    for provider, path in (("claude", STATE), ("astra", ASTRA_STATE)):
+        if any(provider_for(r["branch"]) == provider for r in results):
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w") as f:
+                json.dump(states[provider], f, indent=1)
     for r in results:
         print(f"{r['branch']} {r['sha'][:8]} ({r['subject']}): {r['status'].upper()}"
               + "".join(f"\n  + {p}" for p in r["applied"]) + "".join(f"\n  = {p} (already on main)" for p in r["skipped"])

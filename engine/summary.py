@@ -29,6 +29,8 @@ _MARKDOWN = re.compile(r"\*|`|^#|\[[^\]]*\]\(|__|https?://")
 
 def kind_of(path):
     """reports/claude/briefings/... -> 'briefing' (daily / weekly), or None."""
+    if str(path).endswith("daily-integration.md"):
+        return "daily"
     for folder, k in (("/briefings/", "briefing"), ("/daily/", "daily"), ("/weekly/", "weekly")):
         if folder in "/" + str(path):
             return k

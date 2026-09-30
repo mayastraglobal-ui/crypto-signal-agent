@@ -1,0 +1,99 @@
+name: Astra Brain (research-only)
+
+# GPT-6 Astra runs on the development branch.  It prepares a task artifact on
+# an isolated task branch; the second job checks it out on astra-brain-test and
+# applies only what brain_guard.py permits.  Neither job checks out or writes
+# main.
+on:
+  schedule:
+    - cron: "20 0,6,13 * * *" # 08:20, 14:20, 21:20 Beijing briefings
+    - cron: "30 15 * * *"     # 23:30 Beijing daily review
+    - cron: "0 2 * * 0"       # Sunday 10:00 Beijing weekly research
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Brain task to run
+        required: true
+        default: daily
+        type: choice
+        options: [briefing, daily, weekly]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astra-brain-test
+  cancel-in-progress: false
+
+env:
+  DEVELOPMENT_BRANCH: astra-brain-test
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: astra-brain-test
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Prepare deterministic fact sheet and execute Astra
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          TASK="${{ inputs.task || 'daily' }}"
+          case "${{ github.event.schedule }}" in
+            "20 0,6,13 * * *") TASK=briefing ;;
+            "0 2 * * 0") TASK=weekly ;;
+            "30 15 * * *") TASK=daily ;;
+          esac
+          git checkout -B "astra/brain-$TASK" "origin/$DEVELOPMENT_BRANCH"
+          python publish_live.py --refresh
+          python brain_pack.py "$TASK" > "$RUNNER_TEMP/fact-sheet.md"
+          python astra_runner.py "$TASK"
+          git add "reports/astra"
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git commit -m "Astra: $TASK task $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push --force origin "astra/brain-$TASK"
+
+  guard:
+    needs: generate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: astra-brain-test
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Validate and apply permitted Astra artifact with Brain Guard
+        run: |
+          python brain_guard.py --out "$RUNNER_TEMP/brain_result.json"
+          python memory_guard.py
+          python - <<'PY' "$RUNNER_TEMP/brain_result.json"
+          import json, sys
+          results = json.load(open(sys.argv[1]))
+          astra = [r for r in results if r["branch"].startswith("astra/")]
+          if not astra or any(r["status"] != "applied" for r in astra):
+              raise SystemExit("Astra artifact was not applied by Brain Guard")
+          PY
+      - name: Save only Brain Guard permitted output
+        run: |
+          git add reports/astra memory events.yaml strategies_lab.yaml
+          if git diff --cached --quiet; then echo "No permitted output"; exit 0; fi
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git commit -m "Brain: Astra task work $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push origin HEAD:"$DEVELOPMENT_BRANCH"

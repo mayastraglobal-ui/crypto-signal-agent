@@ -36,11 +36,20 @@ from engine import strategy_spec as sspec
 from engine import summary as esum
 from engine import timeframes as tfm
 
-BRANCHES = ["claude/brain-briefing", "claude/brain-daily", "claude/brain-weekly"]
+CLAUDE_BRANCHES = ["claude/brain-briefing", "claude/brain-daily", "claude/brain-weekly"]
+ASTRA_BRANCHES = ["astra/brain-briefing", "astra/brain-daily", "astra/brain-weekly"]
+# Keep Claude task branches for auditability while accepting Astra's equivalent
+# append-only task branches through exactly the same review rules.
+BRANCHES = CLAUDE_BRANCHES + ASTRA_BRANCHES
 NEW_FILES = {                                            # folder -> allowed file names
     "reports/claude/briefings/": re.compile(r"^\d{4}-\d{2}-\d{2}-(0820|1420|2120)\.md$"),
     "reports/claude/daily/": re.compile(r"^\d{4}-\d{2}-\d{2}\.md$"),
     "reports/claude/weekly/": re.compile(r"^\d{4}-\d{2}-\d{2}\.md$"),
+    "reports/astra/briefings/": re.compile(r"^\d{4}-\d{2}-\d{2}-(0820|1420|2120)\.md$"),
+    "reports/astra/daily/": re.compile(r"^\d{4}-\d{2}-\d{2}\.md$"),
+    "reports/astra/weekly/": re.compile(r"^\d{4}-\d{2}-\d{2}\.md$"),
+    # One explicitly named, non-alerting real-API daily integration artifact.
+    "reports/astra/": re.compile(r"^daily-integration\.md$"),
 }
 KNOWLEDGE = ["memory/lessons.md", "memory/failure_journal.md", "memory/missed_trades.md",
              "memory/research_sources.md", "memory/coin_notes.md", "memory/feature_notes.md",
@@ -55,7 +64,7 @@ OFFICIAL_DOMAINS = ("bls.gov", "bea.gov", "federalreserve.gov", "census.gov", "t
                     "boj.or.jp", "binance.com")
 CHECKS = {"official_page", "official_search", "indirect"}      # "operator" is the operator's own mark
 LAB = sspec.LAB_FILE                                      # the strategy lab: new cards only (daily + weekly)
-LAB_BRANCHES = ["claude/brain-daily", "claude/brain-weekly"]
+LAB_BRANCHES = ["claude/brain-daily", "claude/brain-weekly", "astra/brain-daily", "astra/brain-weekly"]
 LAB_PER_DAY, LAB_PER_WEEK = 3, 10                         # new cards per UTC day / per 7 days (control twins count)
 _NEG = r"(?<!not )(?<!no )(?<!never )(?<!n't )(?<!without )"
 FORBIDDEN = [                                            # section 25: never promise profits or state a win probability
@@ -70,6 +79,14 @@ FORBIDDEN = [                                            # section 25: never pro
     (re.compile(r"\b(chance|probability|odds|likelihood) (of|to) (winning|win|profit|success|succeed)", re.I),
      "win probability for a trade (section 25)"),
 ]
+ACTION_FORBIDDEN = [
+    (re.compile(_NEG + r"\b(?:place|execute|open|close) (?:a |the )?(?:trade|order|position)\b", re.I),
+     "trading action or executable order"),
+    (re.compile(_NEG + r"\b(?:approve|approved|approving) (?:a |the )?(?:strategy|live trading|live trade)\b", re.I),
+     "strategy or live-trading approval"),
+    (re.compile(r"\b(?:entry|stop[- ]loss|take[- ]profit)\s*[:=]\s*\$?\d", re.I),
+     "executable order level"),
+]
 
 
 def lint(text):
@@ -80,6 +97,13 @@ def lint(text):
             if rx.search(line):
                 out.append(f"line {i}: {why}: {line.strip()[:120]!r}")
                 break
+        for rx, why in ACTION_FORBIDDEN:
+            if rx.search(line):
+                out.append(f"line {i}: prohibited Astra content ({why}): {line.strip()[:120]!r}")
+                break
+        states = {s for s in ("LIVE", "PAPER", "BACKTEST") if re.search(rf"\b{s}\b", line, re.I)}
+        if len(states) > 1:
+            out.append(f"line {i}: mixes result states ({', '.join(sorted(states))}); state results separately")
     return out
 
 
@@ -323,7 +347,7 @@ def review(changes, main_files, now=None, branch=None, quota=None):
                                                                     "overwritten (use a new file name)"))
                 continue
             probs += [f"{p}: {x}" for x in lint(new)]
-            if p.startswith("reports/claude/briefings/"):
+            if p.startswith(("reports/claude/briefings/", "reports/astra/briefings/")):
                 probs += [f"{p}: {x}" for x in check_briefing(new)]
             probs += [f"{p}: {x}" for x in esum.problems(new, esum.kind_of(p))]      # the email's summary block
             applies.append(dict(path=p, kind="new", text=new))
@@ -387,7 +411,7 @@ def review(changes, main_files, now=None, branch=None, quota=None):
             probs.append(f"{p}: new cards go into {LAB} (the operator moves approved ones into strategies.yaml "
                          "by pull request)")
         else:
-            probs.append(f"{p}: not allowed ({st}) - Claude's tasks may only add reports/claude/ files, records at "
+            probs.append(f"{p}: not allowed ({st}) - Brain tasks may only add permitted reports files, records at "
                          "the end of the knowledge files, calendar entries and lab strategy cards; code, config, "
                          "workflows and the engine's files are changed only through a pull request the operator merges")
     return ([] if probs else applies), probs, skipped
