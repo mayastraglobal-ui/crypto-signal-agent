@@ -3,8 +3,8 @@
   "BTC",
   "ETH",
   "SOL",
-  "XRP",
   "ZEC",
+  "XRP",
   "SUI",
   "BNB"
  ],
@@ -13,7 +13,7 @@
  "suspended": {
   "QNT": "2026-09-30"
  },
- "runs": 144,
+ "runs": 145,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
