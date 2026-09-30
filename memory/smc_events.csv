@@ -4905,3 +4905,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 18:30,ENA,15m,FVG,bear,,0.2641,0.2653,0.278,,1h,WEAK_BULL,,smc-1.0,Binance
 2026-09-30 18:45,ENA,15m,FVG_RETRACE,bear,,0.2641,0.2653,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
 2026-09-30 19:00,ENA,15m,FVG_FILLED,bear,,0.2641,0.2653,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-09-30 20:15,BTC,15m,FVG,bear,,83670.0,83749.24,0.313,,1h,UNCLEAR,,smc-1.0,Binance
+2026-09-30 20:00,SOL,1h,WEAK_BREAK,bear,118.02,,,0.557,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 19:30,SOL,30m,SWEEP,bull,117.81,,,0.408,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 19:30,SOL,30m,WEAK_BREAK,bear,118.02,,,0.169,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 19:30,SOL,15m,SWEEP,bull,117.81,,,0.6,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 19:30,SOL,15m,BOS,bear,118.02,,,0.249,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 20:00,ZEC,1h,BREAKER_RETEST,bear,,1420.7,1434.58,,,4h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 20:00,ZEC,1h,FVG,bear,,1430.54,1440.18,0.319,,4h,UNCLEAR,,smc-1.0,Binance
+2026-09-30 19:30,ZEC,30m,FVG,bear,,1422.95,1430.53,0.334,,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-09-30 20:00,ZEC,30m,FVG_RETRACE,bear,,1422.95,1430.53,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 20:00,ZEC,30m,FVG_FILLED,bear,,1422.95,1430.53,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 19:45,ZEC,15m,FVG_FILLED,bear,,1422.71,1430.53,,,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-09-30 20:00,XRP,1h,BOS,bear,1.4897,,,0.029,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 19:30,XRP,30m,SWEEP,bull,1.4897,,,0.324,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-09-30 20:00,XRP,30m,BOS,bear,1.4897,,,0.043,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 20:00,XRP,15m,BOS,bear,1.4897,,,0.063,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 20:00,SUI,30m,SWEEP,bull,1.1468,,,0.196,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 20:00,SUI,15m,SWEEP,bull,1.1468,,,0.295,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
