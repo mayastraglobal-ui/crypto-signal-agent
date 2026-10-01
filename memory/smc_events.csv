@@ -5225,3 +5225,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-01 11:00,ENA,1h,FVG_FILLED,bull,,0.2573,0.2612,,,4h,TRANSITION,,smc-1.0,Binance
 2026-10-01 10:30,ENA,30m,OB_RETEST,bull,,0.2524,0.2574,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-10-01 10:30,ENA,30m,FVG_FILLED,bull,,0.2574,0.2612,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-01 11:30,ETH,30m,FVG,bull,,2692.23,2695.6,0.282,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:00,ETH,30m,FVG_RETRACE,bull,,2692.23,2695.6,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 12:00,ETH,15m,WEAK_BREAK,bull,2706.12,,,0.054,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 12:00,ETH,15m,FVG,bull,,2698.95,2703.35,0.549,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 11:45,SOL,15m,FVG_FILLED,bull,,117.57,117.83,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:00,ZEC,4h,SWEEP,bull,1390.74,,,0.318,,1d,STRONG_BULL,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-10-01 12:00,ZEC,30m,FVG_RETRACE,bear,,1402.45,1408.47,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 11:30,ZEC,15m,FVG,bear,,1386.94,1391.72,0.439,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 11:45,ZEC,15m,FVG_RETRACE,bear,,1386.94,1391.72,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 11:45,ZEC,15m,FVG_FILLED,bear,,1386.94,1391.72,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:00,ZEC,15m,FVG_RETRACE,bear,,1402.45,1406.79,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 12:00,ZEC,15m,FVG,bull,,1386.94,1394.73,0.688,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:15,ZEC,15m,FVG_RETRACE,bear,,1408.33,1410.85,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 12:15,ZEC,15m,FVG_FILLED,bear,,1408.33,1410.85,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:15,ZEC,15m,FVG_FILLED,bear,,1402.45,1406.79,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-01 12:00,SUI,15m,WEAK_BREAK,bull,1.168,,,0.041,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 12:00,SUI,15m,OB_RETEST,bear,,1.1691,1.1808,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-01 12:00,SUI,15m,FVG_FILLED,bear,,1.1595,1.1696,,NY AM,1h,RANGE,,smc-1.0,Binance
