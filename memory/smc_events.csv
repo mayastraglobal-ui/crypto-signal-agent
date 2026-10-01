@@ -4999,3 +4999,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-01 02:30,SOL,15m,SWEEP,bull,117.9,,,0.341,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-01 02:30,ENA,30m,SWEEP,bull,0.2632,,,0.305,Asia,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-01 03:15,ENA,15m,SWEEP,bear,0.2693,,,0.171,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 04:00,BTC,30m,BOS,bull,83692.0,,,0.248,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-01 03:45,BTC,15m,BOS,bull,83692.0,,,0.155,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:00,BTC,15m,FVG,bull,,83537.51,83638.2,0.666,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-01 04:00,ETH,30m,WEAK_BREAK,bull,2694.33,,,0.187,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:00,ETH,15m,WEAK_BREAK,bull,2694.61,,,0.255,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:15,ETH,15m,OB_RETEST,bear,,2699.4,2710.58,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-01 04:15,ETH,15m,FVG,bull,,2693.7,2695.71,0.354,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 04:00,SOL,1h,BOS,bull,118.57,,,0.118,Asia,4h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:00,SOL,30m,BOS,bull,118.49,,,0.327,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:00,SOL,15m,WEAK_BREAK,bull,118.49,,,0.549,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 04:15,SOL,15m,FVG,bull,,118.47,118.58,0.289,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 04:00,XRP,30m,WEAK_BREAK,bull,1.4971,,,0.497,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-01 03:45,XRP,15m,WEAK_BREAK,bull,1.4971,,,0.362,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-01 04:00,XRP,15m,FVG,bull,,1.4952,1.4973,0.411,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-01 03:45,SUI,15m,SWEEP,bull,1.1673,,,0.107,Asia,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 03:30,ENA,30m,SWEEP,bear,0.2693,,,0.11,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 03:45,ENA,15m,BOS,bull,0.2693,,,0.304,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
