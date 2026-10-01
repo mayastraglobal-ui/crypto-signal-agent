@@ -8,12 +8,16 @@
   "SUI",
   "ENA"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "BNB": 1
+ },
+ "out_streak": {
+  "ENA": 1
+ },
  "suspended": {
   "MOVR": "2026-10-01"
  },
- "runs": 166,
+ "runs": 167,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
