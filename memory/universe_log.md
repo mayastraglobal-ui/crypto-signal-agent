@@ -283,3 +283,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-01 02:19 UTC
 - **EXCLUDED** HYPE - only 7 days of history (need 180); 7-day average volume $24M < $50M
+
+## 2026-10-01 08:22 UTC
+- **EXCLUDED** VTHO - 7-day average volume $40M < $50M; spread 0.144% > 0.1%
