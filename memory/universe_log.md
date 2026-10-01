@@ -277,3 +277,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** QNT - order book too thin: $152k within 1% (need $250k)
 - **EXCLUDED** MOVR - 7-day average volume $11M < $50M; 24h move +88.5% is beyond ±25% - suspended for the rest of the UTC day; spread 0.133% > 0.1%; order book too thin: $41k within 1% (need $250k)
 - **EXCLUDED** PUMP - order book too thin: $107k within 1% (need $250k)
+
+## 2026-10-01 01:20 UTC
+- **EXCLUDED** MOVR - 7-day average volume $11M < $50M; 24h move +85.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $44k within 1% (need $250k)
