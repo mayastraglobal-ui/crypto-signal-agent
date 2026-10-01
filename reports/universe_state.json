@@ -11,10 +11,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "QNT": "2026-09-30",
-  "MOVR": "2026-09-30"
+  "MOVR": "2026-10-01"
  },
- "runs": 151,
+ "runs": 152,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -56,12 +55,10 @@
    "volume_7d"
   ],
   "QNT": [
-   "big_move",
    "thin_book"
   ],
   "PUMP": [
-   "thin_book",
-   "volume_7d"
+   "thin_book"
   ],
   "HBAR": [],
   "MARSCOIN": [
@@ -75,6 +72,7 @@
   ],
   "MOVR": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]

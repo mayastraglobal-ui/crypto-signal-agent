@@ -4959,3 +4959,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-09-30 23:00,ENA,15m,BOS,bull,0.2671,,,0.117,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
 2026-09-30 23:00,ENA,15m,FVG,bull,,0.2641,0.2659,0.536,,1h,WEAK_BULL,,smc-1.0,Binance
 2026-09-30 23:15,ENA,15m,FVG_RETRACE,bull,,0.2641,0.2659,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-01 00:15,BTC,15m,SWEEP,bull,83503.18,,,0.271,Asia,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-01 00:15,BTC,15m,WEAK_BREAK,bear,83580.29,,,0.429,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 23:45,ETH,15m,FVG_FILLED,bull,,2684.8,2688.68,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 23:45,SOL,15m,FVG_FILLED,bull,,118.09,118.25,,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 00:00,ZEC,1h,FVG_FILLED,bear,,1430.54,1440.18,,,4h,RANGE,,smc-1.0,Binance
+2026-10-01 00:15,SUI,15m,FVG_FILLED,bull,,1.1594,1.1677,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-01 00:00,ENA,30m,FVG_RETRACE,bull,,0.2603,0.2637,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-30 23:45,ENA,15m,FVG_RETRACE,bull,,0.2604,0.2637,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-30 23:45,ENA,15m,FVG_FILLED,bull,,0.2641,0.2659,,,1h,WEAK_BULL,,smc-1.0,Binance
