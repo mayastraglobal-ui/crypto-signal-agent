@@ -13,7 +13,7 @@
  "suspended": {
   "MOVR": "2026-10-01"
  },
- "runs": 160,
+ "runs": 161,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -71,6 +71,7 @@
   ],
   "MOVR": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ],
