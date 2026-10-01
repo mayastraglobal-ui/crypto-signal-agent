@@ -293,3 +293,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-01 10:21 UTC
 - **EXCLUDED** MOVR - 7-day average volume $11M < $50M; 24h move +57.6% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $26k within 1% (need $250k)
 - **EXCLUDED** VTHO - 7-day average volume $40M < $50M; spread 0.152% > 0.1%; order book too thin: $87k within 1% (need $250k)
+
+## 2026-10-01 14:22 UTC
+- **EXCLUDED** MOVR - 7-day average volume $11M < $50M; 24h move +57.8% is beyond ±25% - suspended for the rest of the UTC day; spread 0.117% > 0.1%; order book too thin: $25k within 1% (need $250k)
