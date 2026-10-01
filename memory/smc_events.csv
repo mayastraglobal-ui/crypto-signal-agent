@@ -5413,3 +5413,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-01 15:00,BNB,15m,SWEEP,bull,766.32,,,0.187,Silver Bullet,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-01 15:15,BNB,15m,SWEEP,bull,765.46,,,0.57,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-01 15:45,BNB,15m,BOS,bear,766.32,,,0.621,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-01 17:15,BTC,15m,OB_INVALID,bear,,84240.35,84419.69,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 17:00,ZEC,1h,CHOCH,bear,1373.52,,,1.196,,4h,RANGE,with displacement,smc-1.0,Binance
+2026-10-01 17:00,ZEC,1h,ORDER_BLOCK,bear,,1380.0,1406.8,,,4h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 17:00,ZEC,1h,OB_INVALID,bull,,1355.53,1377.77,,,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 17:00,ZEC,30m,SWEEP,bull,1343.0,,,0.628,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 17:00,ZEC,30m,CHOCH,bear,1363.21,,,1.085,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-01 17:00,ZEC,30m,ORDER_BLOCK,bear,,1366.1,1384.87,,,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 17:00,ZEC,30m,OB_INVALID,bull,,1355.53,1375.05,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 16:45,ZEC,15m,SWEEP,bull,1343.0,,,0.875,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 16:45,ZEC,15m,BOS,bear,1363.21,,,1.061,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 17:00,ZEC,15m,FVG,bear,,1355.29,1367.83,0.811,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-01 17:00,SUI,30m,FVG_FILLED,bear,,1.159,1.1671,,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 16:45,SUI,15m,SWEEP,bear,1.1657,,,0.288,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 16:45,SUI,15m,FVG_FILLED,bear,,1.1635,1.1673,,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 17:00,SUI,15m,FVG_RETRACE,bull,,1.1423,1.149,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
