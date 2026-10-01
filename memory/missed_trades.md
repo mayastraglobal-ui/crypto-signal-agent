@@ -186,3 +186,21 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
   - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
   - donchian_breakout-VEXIT-S4 v1.0 30m: blocked by the regime gate
+
+### BTC up +2.7% (6.1x ATR), 2026-09-30 06:00 -> 2026-09-30 13:00
+- timestamp: 2026-10-01 00:55 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: RANGE · review: 2026-10-08
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S5-SWEEP-MSS-FVG v1.0 15m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-5M v1.0 15m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S6-OB-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ENA up +12.9% (7.5x ATR), 2026-09-30 06:00 -> 2026-09-30 14:00
+- timestamp: 2026-10-01 00:55 UTC · source: engine: daily research run · evidence: FACT: move of 7.5x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ENA · timeframe: 1h · regime: UNCLEAR · review: 2026-10-08
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+  - rsi2_dip_buy v1.0 4h: blocked by the regime gate
