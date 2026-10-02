@@ -5856,3 +5856,39 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-02 07:15,SOL,15m,FVG_FILLED,bull,,121.47,121.91,,London,1h,EXPANSION,,smc-1.0,Binance
 2026-10-02 07:15,SUI,15m,WEAK_BREAK,bear,1.181,,,0.018,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
 2026-10-02 06:45,BNB,15m,FVG_FILLED,bear,,777.88,778.6,,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 08:00,BTC,4h,WEAK_BREAK,bull,85649.95,,,0.487,,1d,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-02 08:00,BTC,4h,OB_RETEST,bear,,86133.4,86975.51,,,1d,STRONG_BULL,first return into the order block,smc-1.0,Binance
+2026-10-02 08:00,BTC,4h,FVG,bull,,84900.0,85453.36,0.588,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-10-02 08:00,BTC,30m,FVG_RETRACE,bear,,86098.62,86288.59,,London,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-02 07:45,BTC,15m,WEAK_BREAK,bear,85875.32,,,0.442,London,1h,EXPANSION,no displacement,smc-1.0,Binance
+2026-10-02 08:15,BTC,15m,FVG_RETRACE,bear,,86169.78,86288.59,,London,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-02 08:15,BTC,15m,FVG_FILLED,bear,,86169.78,86288.59,,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-02 08:15,BTC,15m,FVG,bull,,85956.01,86062.28,0.424,London,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-02 08:00,ETH,4h,SWEEP,bear,2738.51,,,0.275,,1d,STRONG_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 08:00,ETH,4h,BOS,bull,2722.0,,,0.443,,1d,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-02 08:00,ETH,30m,FVG_FILLED,bear,,2729.17,2735.46,,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 07:45,ETH,15m,FVG_RETRACE,bull,,2721.2,2724.07,,London,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-02 08:00,ETH,15m,BOS,bull,2733.45,,,0.481,London,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-02 08:00,ETH,15m,ORDER_BLOCK,bull,,2723.69,2727.41,,London,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 08:15,ETH,15m,FVG,bull,,2727.41,2737.16,1.173,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 08:00,SOL,4h,SWEEP,bear,122.83,,,0.429,,1d,WEAK_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 08:00,SOL,4h,FVG,bull,,118.58,120.69,0.946,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 08:00,SOL,1h,FVG_FILLED,bull,,121.29,121.68,,London,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 07:30,SOL,30m,FVG_FILLED,bull,,121.29,121.91,,London,1h,EXPANSION,,smc-1.0,Binance
+2026-10-02 07:30,SOL,15m,WEAK_BREAK,bear,121.49,,,0.384,London,1h,EXPANSION,no displacement,smc-1.0,Binance
+2026-10-02 08:15,SOL,15m,FVG,bull,,121.26,121.7,0.754,London,1h,EXPANSION,,smc-1.0,Binance
+2026-10-02 08:00,ZEC,4h,OB_RETEST,bear,,1397.89,1447.6,,,1d,STRONG_BULL,first return into the order block,smc-1.0,Binance
+2026-10-02 08:00,ZEC,4h,FVG_FILLED,bear,,1344.56,1363.21,,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-10-02 08:00,ZEC,1h,FVG_RETRACE,bull,,1346.82,1374.73,,London,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 07:45,ZEC,15m,SWEEP,bull,1374.73,,,0.223,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 08:00,XRP,15m,SWEEP,bear,1.5337,,,0.108,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 08:00,XRP,15m,BOS,bull,1.5279,,,0.616,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-02 08:15,XRP,15m,FVG,bull,,1.5244,1.5311,1.011,London,1h,RANGE,,smc-1.0,Binance
+2026-10-02 08:00,SUI,4h,SWEEP,bear,1.2124,,,0.142,,1d,TRANSITION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 07:30,SUI,30m,OB_INVALID,bull,,1.1767,1.1957,,London,1h,WEAK_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 08:00,SUI,30m,SWEEP,bull,1.1764,,,0.274,London,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 08:00,SUI,30m,BREAKER_RETEST,bear,,1.1767,1.1957,,London,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 08:15,SUI,15m,FVG,bull,,1.178,1.1819,0.389,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 08:00,BNB,4h,SWEEP,bear,779.42,,,0.46,,1d,STRONG_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 08:00,BNB,4h,FVG,bull,,772.0,774.64,0.313,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-10-02 07:45,BNB,15m,WEAK_BREAK,bear,775.8,,,0.47,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
