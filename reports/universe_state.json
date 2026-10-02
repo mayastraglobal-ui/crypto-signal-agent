@@ -5,15 +5,16 @@
   "SOL",
   "ZEC",
   "XRP",
-  "BNB",
-  "SUI"
+  "SUI",
+  "BNB"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "MOVR": "2026-10-02"
+  "MOVR": "2026-10-02",
+  "SAND": "2026-10-02"
  },
- "runs": 191,
+ "runs": 192,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -79,6 +80,12 @@
   "HYPE": [
    "history",
    "volume_7d"
+  ],
+  "SAND": [
+   "big_move",
+   "spread",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -116,6 +123,7 @@
   "MARSCOIN": [],
   "AAVE": [],
   "MOVR": [],
-  "HYPE": []
+  "HYPE": [],
+  "SAND": []
  }
 }
