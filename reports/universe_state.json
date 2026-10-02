@@ -5,15 +5,15 @@
   "SOL",
   "ZEC",
   "XRP",
-  "SUI",
-  "BNB"
+  "BNB",
+  "SUI"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {
   "MOVR": "2026-10-02"
  },
- "runs": 188,
+ "runs": 189,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -73,7 +73,6 @@
   ],
   "MOVR": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ],

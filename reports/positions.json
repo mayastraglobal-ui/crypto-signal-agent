@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-02 12:24",
+ "generated_utc": "2026-10-02 13:21",
  "book": {
-  "utc": "2026-10-02 12:24",
-  "beijing": "2026-10-02 20:24",
+  "utc": "2026-10-02 13:21",
+  "beijing": "2026-10-02 21:21",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -19,10 +19,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-02 12:24 UTC / 2026-10-02 20:24 Beijing",
+  "POSITION BOOK \u2014 2026-10-02 13:21 UTC / 2026-10-02 21:21 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Sep data) 2026-10-02 12:30 UTC"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 \u26a0 calendar not maintained - no event listed for the next 7 days (events.yaml)"
  ],
  "risk": {
   "day_r": 0.0,
@@ -39,16 +39,9 @@
   "blackout_now": [
    "US jobs report / Employment Situation (Sep data)"
   ],
-  "upcoming_events": [
-   {
-    "start_utc": "2026-10-02 12:30",
-    "end_utc": "2026-10-02 12:30",
-    "type": "NFP",
-    "name": "US jobs report / Employment Situation (Sep data)"
-   }
-  ],
-  "next_event": "US jobs report / Employment Situation (Sep data) 2026-10-02 12:30 UTC",
-  "calendar_warning": null,
+  "upcoming_events": [],
+  "next_event": null,
+  "calendar_warning": "calendar not maintained - no event listed for the next 7 days (events.yaml)",
   "transitions": [],
   "no_trade": [],
   "limits": {
