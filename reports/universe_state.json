@@ -11,9 +11,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "MOVR": "2026-10-01"
+  "MOVR": "2026-10-02"
  },
- "runs": 175,
+ "runs": 176,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -99,7 +99,9 @@
   "SAGA": [],
   "LINK": [],
   "XPL": [],
-  "VTHO": [],
+  "VTHO": [
+   "data_degraded"
+  ],
   "BABY": [
    "data_degraded"
   ],

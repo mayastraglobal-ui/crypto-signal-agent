@@ -5611,3 +5611,10 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-01 22:30,XRP,30m,FVG_FILLED,bear,,1.494,1.4966,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-01 22:30,SUI,30m,FVG_RETRACE,bear,,1.1726,1.1779,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-01 22:30,SUI,30m,FVG_FILLED,bear,,1.1726,1.1779,,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 00:00,BTC,4h,OB_INVALID,bear,,84342.0,84843.0,,,1d,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 23:45,BTC,15m,BOS,bull,84788.01,,,0.286,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 00:00,ZEC,4h,FVG,bear,,1344.56,1363.21,0.349,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-10-01 23:30,ZEC,30m,WEAK_BREAK,bull,1338.9,,,0.059,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-01 23:30,ZEC,15m,WEAK_BREAK,bull,1338.9,,,0.091,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-01 23:30,ZEC,15m,BREAKER_RETEST,bear,,1343.0,1374.88,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 00:15,SUI,15m,WEAK_BREAK,bull,1.1802,,,0.268,Asia,1h,RANGE,no displacement,smc-1.0,Binance
