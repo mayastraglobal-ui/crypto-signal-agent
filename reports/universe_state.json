@@ -14,7 +14,7 @@
   "MOVR": "2026-10-02",
   "SAND": "2026-10-02"
  },
- "runs": 198,
+ "runs": 199,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -71,6 +71,7 @@
    "volume_7d"
   ],
   "AAVE": [
+   "thin_book",
    "volume_7d"
   ],
   "MOVR": [
