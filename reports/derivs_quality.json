@@ -1,5 +1,5 @@
 {
- "checked_utc": "2026-10-02 19:19",
+ "checked_utc": "2026-10-02 20:18",
  "coins": {
   "BTC": {
    "state": "GOOD",
@@ -9,7 +9,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -17,11 +17,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.17,
-    "taker_ratio": 0.8192147526750446,
+    "ls_ratio": 1.19,
+    "taker_ratio": 0.8507366025879741,
     "funding_pct": 0.00462739056724
    },
    "problems": [],
@@ -46,7 +46,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -54,11 +54,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.61,
-    "taker_ratio": 0.8185108642114396,
+    "ls_ratio": 1.65,
+    "taker_ratio": 0.8394314811183013,
     "funding_pct": 0.0021334730231899997
    },
    "problems": [],
@@ -83,7 +83,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -91,11 +91,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.76,
-    "taker_ratio": 0.7701307683321286,
+    "ls_ratio": 1.77,
+    "taker_ratio": 0.8628257080690929,
     "funding_pct": 0.01
    },
    "problems": [],
@@ -112,43 +112,6 @@
     ]
    }
   },
-  "ZEC": {
-   "state": "GOOD",
-   "main_source": "okx",
-   "research_rows": {
-    "binance": 577,
-    "binance_files": 8808
-   },
-   "age_h": -0.7,
-   "hours": 893,
-   "first_utc": "2026-08-26",
-   "gaps_7d": 0,
-   "invalid": 0,
-   "sources": [
-    "okx"
-   ],
-   "funding_rows": 122,
-   "funding_age_h": 3.3,
-   "last": {
-    "oi_usd": 0.0,
-    "ls_ratio": 0.91,
-    "taker_ratio": 0.7008087398446295,
-    "funding_pct": 0.01
-   },
-   "problems": [],
-   "fetch": {
-    "source": "okx",
-    "sources": {
-     "okx": true,
-     "binance": false
-    },
-    "new_hourly": 720,
-    "backfilled_hours": 0,
-    "errors": [
-     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=500"
-    ]
-   }
-  },
   "XRP": {
    "state": "GOOD",
    "main_source": "okx",
@@ -157,7 +120,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -165,11 +128,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 3.13,
-    "taker_ratio": 0.9436328590613539,
+    "ls_ratio": 3.09,
+    "taker_ratio": 0.964032498425097,
     "funding_pct": 0.01
    },
    "problems": [],
@@ -186,6 +149,43 @@
     ]
    }
   },
+  "ZEC": {
+   "state": "GOOD",
+   "main_source": "okx",
+   "research_rows": {
+    "binance": 577,
+    "binance_files": 8808
+   },
+   "age_h": -0.7,
+   "hours": 894,
+   "first_utc": "2026-08-26",
+   "gaps_7d": 0,
+   "invalid": 0,
+   "sources": [
+    "okx"
+   ],
+   "funding_rows": 122,
+   "funding_age_h": 4.3,
+   "last": {
+    "oi_usd": 0.0,
+    "ls_ratio": 0.96,
+    "taker_ratio": 0.8187077231764311,
+    "funding_pct": 0.01
+   },
+   "problems": [],
+   "fetch": {
+    "source": "okx",
+    "sources": {
+     "okx": true,
+     "binance": false
+    },
+    "new_hourly": 720,
+    "backfilled_hours": 0,
+    "errors": [
+     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=500"
+    ]
+   }
+  },
   "BNB": {
    "state": "GOOD",
    "main_source": "okx",
@@ -194,7 +194,7 @@
     "binance_files": 8784
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -202,11 +202,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 2.45,
-    "taker_ratio": 1.052520027870798,
+    "ls_ratio": 2.49,
+    "taker_ratio": 1.4042627599980766,
     "funding_pct": 0.0061319798139
    },
    "problems": [],
@@ -231,7 +231,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -239,11 +239,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 3.0,
-    "taker_ratio": 0.751191227173374,
+    "ls_ratio": 2.94,
+    "taker_ratio": 1.16590897511905,
     "funding_pct": 0.00403104435576
    },
    "problems": [],
@@ -260,28 +260,28 @@
     ]
    }
   },
-  "ENA": {
+  "AVAX": {
    "state": "GOOD",
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 8784
+    "binance_files": 6816
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 886,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 143,
-   "funding_age_h": 3.3,
+   "funding_rows": 121,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.99,
-    "taker_ratio": 0.6471216048617148,
-    "funding_pct": 0.005
+    "ls_ratio": 2.93,
+    "taker_ratio": 1.651031719800353,
+    "funding_pct": 0.00579496054933
    },
    "problems": [],
    "fetch": {
@@ -291,9 +291,9 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 96,
     "errors": [
-     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ENAUSDT&period=1h&limit=500"
+     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=AVAXUSDT&period=1h&limit=500"
     ]
    }
   },
@@ -305,7 +305,7 @@
     "binance_files": 8808
    },
    "age_h": -0.7,
-   "hours": 893,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -313,11 +313,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 3.3,
+   "funding_age_h": 4.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.95,
-    "taker_ratio": 0.6045562581500875,
+    "ls_ratio": 1.96,
+    "taker_ratio": 0.5592581889159046,
     "funding_pct": 0.00684212374238
    },
    "problems": [],
@@ -334,28 +334,28 @@
     ]
    }
   },
-  "AVAX": {
+  "ENA": {
    "state": "GOOD",
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 6720
+    "binance_files": 8784
    },
    "age_h": -0.7,
-   "hours": 885,
+   "hours": 894,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 121,
-   "funding_age_h": 3.3,
+   "funding_rows": 144,
+   "funding_age_h": 0.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 2.88,
-    "taker_ratio": 0.8468956995423639,
-    "funding_pct": 0.00579496054933
+    "ls_ratio": 1.95,
+    "taker_ratio": 0.8981076549699663,
+    "funding_pct": 0.005
    },
    "problems": [],
    "fetch": {
@@ -365,9 +365,9 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 96,
+    "backfilled_hours": 0,
     "errors": [
-     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=AVAXUSDT&period=1h&limit=500"
+     "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ENAUSDT&period=1h&limit=500"
     ]
    }
   }
