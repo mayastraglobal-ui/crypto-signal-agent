@@ -14,7 +14,7 @@
   "MOVR": "2026-10-02",
   "SAND": "2026-10-02"
  },
- "runs": 192,
+ "runs": 193,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -83,7 +83,6 @@
   ],
   "SAND": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]
