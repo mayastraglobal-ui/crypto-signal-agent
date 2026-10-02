@@ -5703,3 +5703,28 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-02 02:30,BNB,15m,FVG_RETRACE,bull,,770.59,771.5,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
 2026-10-02 03:00,BNB,15m,BOS,bull,772.82,,,0.991,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
 2026-10-02 03:15,BNB,15m,FVG,bull,,773.03,773.9,0.56,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 04:00,BTC,4h,BREAKER_RETEST,bull,,84342.0,84843.0,,,1d,STRONG_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 04:00,BTC,1h,BOS,bull,85273.65,,,0.553,Asia,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 04:00,BTC,1h,FVG,bull,,84986.39,85187.99,0.47,Asia,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 03:30,BTC,30m,BOS,bull,85273.65,,,0.025,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 03:30,BTC,30m,FVG,bull,,85109.0,85187.99,0.272,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 04:00,BTC,30m,FVG,bull,,85189.97,85280.0,0.31,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 04:00,BTC,15m,FVG,bull,,85335.38,85384.85,0.269,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 04:00,ETH,4h,SWEEP,bear,2722.0,,,0.173,,1d,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 04:00,ETH,1h,SWEEP,bear,2722.0,,,0.362,Asia,4h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 03:30,ETH,30m,SWEEP,bear,2722.0,,,0.533,Asia,1h,WEAK_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 03:30,ETH,15m,FVG_RETRACE,bull,,2712.56,2716.55,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-02 04:00,SOL,15m,BOS,bull,120.4,,,1.836,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-02 04:00,SOL,15m,ORDER_BLOCK,bull,,119.93,120.15,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 04:15,SOL,15m,FVG_RETRACE,bear,,121.35,122.04,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 04:15,SOL,15m,FVG,bull,,120.33,120.69,0.692,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 04:00,ZEC,4h,FVG_RETRACE,bear,,1344.56,1363.21,,,1d,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-02 03:30,ZEC,30m,SWEEP,bear,1345.0,,,0.111,Asia,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 03:30,XRP,15m,FVG_RETRACE,bull,,1.4981,1.5012,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-02 04:00,XRP,15m,OB_INVALID,bear,,1.5041,1.5069,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 04:15,XRP,15m,SWEEP,bear,1.5103,,,0.217,,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-02 04:15,XRP,15m,BREAKER_RETEST,bull,,1.5041,1.5069,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 03:30,SUI,30m,SWEEP,bear,1.1938,,,0.128,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 04:00,BNB,1h,BOS,bull,774.48,,,0.41,Asia,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 03:30,BNB,30m,SWEEP,bear,774.48,,,0.431,Asia,1h,WEAK_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 03:30,BNB,15m,FVG_RETRACE,bull,,773.03,773.9,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
