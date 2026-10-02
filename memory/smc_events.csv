@@ -6295,3 +6295,6 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-02 21:15,BNB,15m,FVG_RETRACE,bear,,764.92,765.68,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-02 21:15,BNB,15m,FVG_FILLED,bear,,764.92,765.68,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-02 21:00,SUI,1h,FVG_RETRACE,bear,,1.1283,1.1514,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 22:15,BTC,15m,WEAK_BREAK,bull,84544.46,,,0.006,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-02 21:30,ETH,30m,OB_INVALID,bull,,2661.65,2669.87,,,1h,EXPANSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 22:00,ETH,30m,BREAKER_RETEST,bear,,2661.65,2669.87,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance

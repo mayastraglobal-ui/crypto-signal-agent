@@ -348,3 +348,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-02 19:19 UTC
 - **EXCLUDED** ADA - 7-day average volume $42M < $50M
+
+## 2026-10-02 22:18 UTC
+- **EXCLUDED** AAVE - 7-day average volume $34M < $50M
