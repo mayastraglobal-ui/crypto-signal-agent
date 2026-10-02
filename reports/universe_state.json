@@ -3,8 +3,8 @@
   "BTC",
   "ETH",
   "SOL",
-  "ZEC",
   "XRP",
+  "ZEC",
   "BNB",
   "SUI"
  ],
@@ -14,7 +14,7 @@
   "MOVR": "2026-10-02",
   "SAND": "2026-10-02"
  },
- "runs": 194,
+ "runs": 195,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -51,7 +51,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "ADA": [],
+  "ADA": [
+   "volume_7d"
+  ],
   "XLM": [
    "volume_7d"
   ],
