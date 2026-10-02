@@ -320,3 +320,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-02 06:25 UTC
 - **EXCLUDED** MOVR - 7-day average volume $25M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.137% > 0.1%; order book too thin: $26k within 1% (need $250k)
 - **EXCLUDED** AAVE - 7-day average volume $34M < $50M; order book too thin: $192k within 1% (need $250k)
+
+## 2026-10-02 07:21 UTC
+- **EXCLUDED** MOVR - 7-day average volume $25M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $25k within 1% (need $250k)
