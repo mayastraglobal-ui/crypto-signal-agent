@@ -6002,3 +6002,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-02 13:00,SUI,15m,BOS,bull,1.1902,,,0.512,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
 2026-10-02 13:00,SUI,15m,ORDER_BLOCK,bull,,1.1745,1.1969,,NY AM,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
 2026-10-02 13:15,SUI,15m,OB_RETEST,bull,,1.1745,1.1969,,NY AM,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-10-02 13:45,ETH,15m,SWEEP,bear,2766.66,,,0.304,NY AM,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 14:15,ETH,15m,WEAK_BREAK,bear,2738.03,,,0.282,Silver Bullet,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 13:45,SOL,15m,SWEEP,bear,123.21,,,0.286,NY AM,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 14:00,ZEC,30m,SWEEP,bear,1404.99,,,0.415,NY AM,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 13:45,ZEC,15m,SWEEP,bear,1404.99,,,0.574,NY AM,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 14:15,XRP,15m,SWEEP,bull,1.5272,,,0.19,Silver Bullet,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 14:00,BNB,1h,SWEEP,bear,783.29,,,0.316,NY AM,4h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 14:00,BNB,1h,FVG,bull,,778.74,779.88,0.303,NY AM,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-02 14:00,BNB,30m,SWEEP,bear,783.29,,,0.465,NY AM,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 13:45,BNB,15m,SWEEP,bear,783.29,,,0.617,NY AM,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 14:00,SUI,1h,FVG,bull,,1.1829,1.1921,0.451,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 13:30,SUI,30m,SWEEP,bear,1.2023,,,0.307,NY AM,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 13:30,SUI,30m,FVG,bull,,1.184,1.1921,0.577,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
