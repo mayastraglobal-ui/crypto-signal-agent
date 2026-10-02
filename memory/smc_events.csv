@@ -6289,3 +6289,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-02 20:00,SUI,1h,FVG,bear,,1.1283,1.1514,0.987,,4h,UNCLEAR,,smc-1.0,Binance
 2026-10-02 19:30,SUI,30m,FVG,bear,,1.128,1.1435,0.91,,1h,RANGE,,smc-1.0,Binance
 2026-10-02 20:00,SUI,30m,FVG_RETRACE,bear,,1.128,1.1435,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 21:00,XRP,1h,FVG_RETRACE,bear,,1.4736,1.4925,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 21:00,BNB,1h,FVG_RETRACE,bear,,766.59,771.2,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 21:00,BNB,15m,FVG,bear,,764.92,765.68,0.317,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 21:15,BNB,15m,FVG_RETRACE,bear,,764.92,765.68,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 21:15,BNB,15m,FVG_FILLED,bear,,764.92,765.68,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 21:00,SUI,1h,FVG_RETRACE,bear,,1.1283,1.1514,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
