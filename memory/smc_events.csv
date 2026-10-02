@@ -5618,3 +5618,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-01 23:30,ZEC,15m,WEAK_BREAK,bull,1338.9,,,0.091,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-10-01 23:30,ZEC,15m,BREAKER_RETEST,bear,,1343.0,1374.88,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-10-02 00:15,SUI,15m,WEAK_BREAK,bull,1.1802,,,0.268,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-02 00:30,ETH,15m,SWEEP,bear,2706.55,,,0.447,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 01:00,ETH,15m,WEAK_BREAK,bull,2706.55,,,0.296,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 00:30,SOL,15m,BOS,bull,118.58,,,0.387,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-02 01:15,ZEC,15m,BOS,bear,1332.46,,,0.258,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-02 00:30,BNB,30m,SWEEP,bear,772.0,,,0.358,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 00:30,BNB,15m,SWEEP,bear,772.0,,,0.607,Asia,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance

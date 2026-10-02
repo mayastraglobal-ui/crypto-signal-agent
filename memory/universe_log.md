@@ -310,3 +310,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-02 00:28 UTC
 - **FLAG** VTHO - price data DEGRADED - stays in the list, but no signals
+
+## 2026-10-02 01:19 UTC
+- **EXCLUDED** MOVR - 7-day average volume $25M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.104% > 0.1%; order book too thin: $40k within 1% (need $250k)
