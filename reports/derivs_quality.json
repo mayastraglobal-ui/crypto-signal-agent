@@ -1,5 +1,5 @@
 {
- "checked_utc": "2026-10-03 00:25",
+ "checked_utc": "2026-10-03 01:18",
  "coins": {
   "BTC": {
    "state": "GOOD",
@@ -8,8 +8,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -17,11 +17,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.31,
-    "taker_ratio": 0.632741544807608,
+    "ls_ratio": 1.34,
+    "taker_ratio": 1.4914935650033643,
     "funding_pct": -9.370733822000001e-05
    },
    "problems": [],
@@ -32,7 +32,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BTCUSDT&period=1h&limit=500"
     ]
@@ -45,8 +45,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -54,11 +54,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.81,
-    "taker_ratio": 0.6849220160730661,
+    "ls_ratio": 1.86,
+    "taker_ratio": 1.349790001224759,
     "funding_pct": 0.0007181938594800001
    },
    "problems": [],
@@ -69,7 +69,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ETHUSDT&period=1h&limit=500"
     ]
@@ -82,8 +82,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -91,11 +91,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.85,
-    "taker_ratio": 1.226870422445826,
+    "ls_ratio": 1.86,
+    "taker_ratio": 1.0363327375298554,
     "funding_pct": -0.00273969849608
    },
    "problems": [],
@@ -106,7 +106,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SOLUSDT&period=1h&limit=500"
     ]
@@ -119,8 +119,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -128,11 +128,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 3.07,
-    "taker_ratio": 1.1334037428181674,
+    "ls_ratio": 3.05,
+    "taker_ratio": 0.8616142686508649,
     "funding_pct": -0.009106052866970001
    },
    "problems": [],
@@ -143,7 +143,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=XRPUSDT&period=1h&limit=500"
     ]
@@ -156,8 +156,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -165,11 +165,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.16,
-    "taker_ratio": 1.4641872283716135,
+    "ls_ratio": 1.14,
+    "taker_ratio": 1.1417112013781416,
     "funding_pct": 0.01
    },
    "problems": [],
@@ -180,7 +180,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=ZECUSDT&period=1h&limit=500"
     ]
@@ -193,8 +193,8 @@
     "binance": 501,
     "binance_files": 8808
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -202,11 +202,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 2.56,
-    "taker_ratio": 2.211620588772052,
+    "ls_ratio": 2.58,
+    "taker_ratio": 1.4985418324876907,
     "funding_pct": -0.00946163262458
    },
    "problems": [],
@@ -217,7 +217,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=BNBUSDT&period=1h&limit=500"
     ]
@@ -230,8 +230,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -239,11 +239,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 2.92,
-    "taker_ratio": 1.1027673223512116,
+    "ls_ratio": 2.71,
+    "taker_ratio": 0.6617303909559299,
     "funding_pct": -0.00885690141427
    },
    "problems": [],
@@ -254,7 +254,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=SUIUSDT&period=1h&limit=500"
     ]
@@ -265,10 +265,10 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 501,
-    "binance_files": 7200
+    "binance_files": 7296
    },
-   "age_h": -0.6,
-   "hours": 890,
+   "age_h": -0.7,
+   "hours": 891,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -276,11 +276,11 @@
     "okx"
    ],
    "funding_rows": 122,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 2.8,
-    "taker_ratio": 0.8496628410335606,
+    "ls_ratio": 2.81,
+    "taker_ratio": 0.8266582571171537,
     "funding_pct": -0.02151092712947
    },
    "problems": [],
@@ -301,10 +301,10 @@
    "state": "GOOD",
    "main_source": "okx",
    "research_rows": {
-    "binance_files": 3648
+    "binance_files": 3744
    },
-   "age_h": -0.6,
-   "hours": 827,
+   "age_h": -0.7,
+   "hours": 828,
    "first_utc": "2026-08-29",
    "gaps_7d": 0,
    "invalid": 0,
@@ -312,11 +312,11 @@
     "okx"
    ],
    "funding_rows": 114,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
     "ls_ratio": 2.28,
-    "taker_ratio": 1.3093992661613112,
+    "taker_ratio": 0.8891878815701543,
     "funding_pct": 0.00133429568074
    },
    "problems": [],
@@ -340,8 +340,8 @@
     "binance": 577,
     "binance_files": 8832
    },
-   "age_h": -0.6,
-   "hours": 898,
+   "age_h": -0.7,
+   "hours": 899,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
@@ -349,11 +349,11 @@
     "okx"
    ],
    "funding_rows": 123,
-   "funding_age_h": 0.4,
+   "funding_age_h": 1.3,
    "last": {
     "oi_usd": 0.0,
-    "ls_ratio": 1.91,
-    "taker_ratio": 1.0159869143449258,
+    "ls_ratio": 1.86,
+    "taker_ratio": 0.9210804417640794,
     "funding_pct": 0.01
    },
    "problems": [],
@@ -364,7 +364,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 24,
+    "backfilled_hours": 0,
     "errors": [
      "binance: HTTPError: 451 Client Error:  for url: https://fapi.binance.com/futures/data/openInterestHist?symbol=UNIUSDT&period=1h&limit=500"
     ]
