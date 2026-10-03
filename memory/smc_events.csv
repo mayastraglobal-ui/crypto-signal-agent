@@ -6408,3 +6408,10 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-03 02:00,SUI,15m,FVG_RETRACE,bull,,1.1613,1.1751,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
 2026-10-03 01:30,BNB,30m,FVG_RETRACE,bear,,769.67,771.2,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-03 01:30,BNB,15m,FVG_RETRACE,bear,,769.67,772.64,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 03:15,BTC,15m,FVG_FILLED,bull,,84571.03,84630.9,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 03:15,BTC,15m,FVG,bear,,84614.01,84641.51,0.264,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 03:00,XRP,15m,FVG_FILLED,bull,,1.4858,1.4888,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 03:00,SUI,1h,FVG_RETRACE,bull,,1.1495,1.1711,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 03:15,SUI,15m,FVG_FILLED,bull,,1.1613,1.1751,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-03 03:15,BNB,15m,SWEEP,bull,767.81,,,0.264,Asia,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-03 03:15,BNB,15m,FVG_RETRACE,bull,,767.07,767.76,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance

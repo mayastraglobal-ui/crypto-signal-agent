@@ -13,7 +13,7 @@
  "suspended": {
   "SAND": "2026-10-03"
  },
- "runs": 202,
+ "runs": 203,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -84,6 +84,7 @@
   ],
   "SAND": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
