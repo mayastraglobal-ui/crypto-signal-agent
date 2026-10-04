@@ -366,3 +366,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-04 10:55 UTC
 - **LEAVE** SUI - not eligible: 24h volume below $50M or no longer listed
+
+## 2026-10-04 21:23 UTC
+- **JOIN** SUI - in the top 7 for 2 runs in a row (now #5)
