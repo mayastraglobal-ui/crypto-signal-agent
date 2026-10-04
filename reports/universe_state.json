@@ -3,17 +3,15 @@
   "BTC",
   "ETH",
   "SOL",
-  "XRP",
   "ZEC",
   "BNB",
+  "XRP",
   "SUI"
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {
-  "SAND": "2026-10-03"
- },
- "runs": 212,
+ "suspended": {},
+ "runs": 213,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -83,7 +81,6 @@
    "volume_7d"
   ],
   "SAND": [
-   "big_move",
    "thin_book",
    "volume_7d"
   ]
@@ -115,9 +112,7 @@
   ],
   "ADA": [],
   "XLM": [],
-  "QNT": [
-   "data_degraded"
-  ],
+  "QNT": [],
   "PUMP": [],
   "HBAR": [],
   "MARSCOIN": [],

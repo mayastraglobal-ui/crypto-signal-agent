@@ -1,9 +1,5 @@
 {
- "issues": {
-  "data|QNT|1d": "QNT 1d data: DEGRADED: volume 60x normal on candle 09-30 00:00 UTC (possible bad data)"
- },
- "since": {
-  "data|QNT|1d": "2026-09-28 00:28 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"maker_fee_pct\": 0.1, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.1}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }

@@ -360,3 +360,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-03 04:20 UTC
 - **EXCLUDED** SAND - 7-day average volume $10M < $50M; 24h move +80.7% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $27k within 1% (need $250k)
+
+## 2026-10-04 02:31 UTC
+- **EXCLUDED** SAND - 7-day average volume $19M < $50M; order book too thin: $52k within 1% (need $250k)

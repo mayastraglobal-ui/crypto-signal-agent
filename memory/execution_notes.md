@@ -64,3 +64,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END VTHO 1d data: DEGRADED: volume 81x normal on candle 10-01 00:00 UTC (possible bad data)
 - timestamp: 2026-10-02 04:20 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: VTHO · timeframe: - · regime: - · review: 2026-11-01
   - problem first seen 2026-10-02 00:28 UTC UTC
+
+### END QNT 1d data: DEGRADED: volume 60x normal on candle 09-30 00:00 UTC (possible bad data)
+- timestamp: 2026-10-04 02:31 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: QNT · timeframe: - · regime: - · review: 2026-11-03
+  - problem first seen 2026-09-28 00:28 UTC UTC
