@@ -363,3 +363,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-04 02:31 UTC
 - **EXCLUDED** SAND - 7-day average volume $19M < $50M; order book too thin: $52k within 1% (need $250k)
+
+## 2026-10-04 10:55 UTC
+- **LEAVE** SUI - not eligible: 24h volume below $50M or no longer listed
