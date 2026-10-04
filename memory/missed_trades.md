@@ -239,3 +239,9 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### LINK down -6.1% (5.4x ATR), 2026-10-02 12:00 -> 2026-10-02 21:00
 - timestamp: 2026-10-03 00:53 UTC · source: engine: daily research run · evidence: FACT: move of 5.4x the 1H ATR within 12 hours; 59 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: LINK · timeframe: 1h · regime: RANGE · review: 2026-10-10
   - verdict: not identifiable: no strategy had a setup before the move (research-only coin)
+
+### BNB up +3.2% (8.0x ATR), 2026-10-03 07:00 -> 2026-10-03 20:00
+- timestamp: 2026-10-04 03:56 UTC · source: engine: daily research run · evidence: FACT: move of 8.0x the 1H ATR within 12 hours; 62 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: UNCLEAR · review: 2026-10-11
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - liquidity_sweep_reversal v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate

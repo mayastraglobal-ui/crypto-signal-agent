@@ -853,3 +853,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - relation to the C01 hypothesis (30-day filter, queued 2026-09-27): same idea, the horizon the crypto paper found. Test at most ONE of the two first, to keep the trials counter low; this one matches the crypto evidence better.
   - how to test: a one-change version of donchian_breakout-VEXIT-S4@1.0 (the simpler 4h base, see its Feedback record), same period; judge on the unseen part, the costs +50% test and the drawdown gate.
   - stop if: fewer than 30 unseen-data trades, or not better than the parent after costs.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0026 | 2026-10-04 03:56 | donchian_breakout-VEXIT-VRVOL-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |

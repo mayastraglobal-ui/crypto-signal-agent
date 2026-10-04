@@ -390,3 +390,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - data: CoinDesk prices, Bitcoin 2011-01-01 to 2018-05-31, Ripple from 2013-08-04, Ethereum from 2015-08-07. Results are before trading costs, on daily and weekly closes.
   - what it means for this system: the horizons where they found crypto momentum (days to about 4 weeks) are longer than 30m and 1h, and closest to our 4h cells held for days. That fits our only positive cells being 4h breakouts, while every 30m and 1h breakout cell failed. It is not evidence that our cards work: it is 2011-2018 data, three coins, and no costs.
   - derived hypothesis: 'Hypothesis: 1-week own-trend filter for the 4h breakout (from C02)' in memory/experiments.md.
+
+### donchian_breakout-VEXIT-VRVOL-S4@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-10-04 03:56 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-VRVOL-S4@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-VRVOL-S4 v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-01-02
+  - title / source: engine rule-significance test: donchian_breakout-VEXIT-VRVOL@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): donchian_breakout-VEXIT-VRVOL-S4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
