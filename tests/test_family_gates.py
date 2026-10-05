@@ -84,7 +84,13 @@ class Table(unittest.TestCase):
         self.assertEqual(R["trials_alpha"], 0.05)
         self.assertEqual(V["max_drawdown_r"], 10)                 # kept for the tight group
         self.assertEqual((R["monte_carlo_max_dd_r"], R["paper_max_dd_r"], CFG["risk"]["strategy_max_dd_r"]), (8, 8, 8))
-        self.assertEqual(CFG["costs"]["long"]["taker_fee_pct"], 0.10)
+        long_ = CFG["costs"]["long"]                              # costs match the market the operator trades
+        if long_.get("market") == "futures":                      # OKX futures (operator, 2026-10-05)
+            self.assertEqual((long_["taker_fee_pct"], long_["maker_fee_pct"]), (0.05, 0.02))
+            self.assertGreaterEqual(long_["funding_pct_per_8h"], 0.01)
+        else:
+            self.assertEqual(long_["taker_fee_pct"], 0.10)
+        self.assertGreaterEqual(CFG["costs"]["short"]["funding_pct_per_8h"], 0.01)
         tight, trend = FG["groups"]["tight"], FG["groups"]["trend"]
         self.assertTrue(tight["keep_max_drawdown_r"] and tight["keep_whole_history_mc"] and tight["loss_clustering"])
         self.assertGreaterEqual(trend["min_recovery_factor"], 3)

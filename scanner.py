@@ -857,14 +857,17 @@ def level_array(expr, ns, n):
 # 3. BACKTEST ENGINE
 # =====================================================================
 def trade_costs(cfg, d):
-    """Costs as fractions for one direction: longs = SPOT costs, shorts = FUTURES costs + funding."""
+    """Costs as fractions for one direction (config.yaml -> costs): shorts = futures costs + funding; longs = the
+    `long` block (futures costs + funding when costs.long.market is "futures", else spot costs, no funding)."""
     c = cfg["costs"]["long" if d == 1 else "short"]
     return dict(taker=c["taker_fee_pct"] / 100, maker=c["maker_fee_pct"] / 100,
                 slip=c["slippage_pct"] / 100, funding_8h=c.get("funding_pct_per_8h", 0.0) / 100)
 
 
-def market_type(d):
-    return "spot" if d == 1 else "futures only"
+def market_type(d, cfg=None):
+    if d == 1:
+        return "futures" if ((cfg or {}).get("costs") or {}).get("long", {}).get("market") == "futures" else "spot"
+    return "futures only"
 
 
 def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None, tps=None, split=None,
@@ -1522,7 +1525,7 @@ class EmailContext:
                     continue                     # plain entries are emailed from the plan (signals)
                 R = abs(entry - stop)
                 z = rk.size(self.acct, self.risk_pct, entry, stop, self.RK["max_leverage"])
-                e = self._card(id=r["id"], coin=r["coin"], direction=r["direction"], market=market_type(d), tf=r["tf"],
+                e = self._card(id=r["id"], coin=r["coin"], direction=r["direction"], market=market_type(d, self.cfg), tf=r["tf"],
                                strategy=r["strategy"], version=str(r["version"]), stage=ev["stage"], entry=entry,
                                entry_zone=[entry - 0.2 * R, entry + 0.2 * R], stop=stop,
                                targets=[dict(price=t, r=abs(t - entry) / R, close_pct=round(x * 100))
@@ -2227,7 +2230,7 @@ def main():
             confirm_5m=sgl["confirm_5m"],
             state=pos.AWAITING if sgl["confirm_5m"] else pos.ACTIVE,
             conditions=sgl["conditions"], session=sgl["session"],
-            direction="LONG" if d == 1 else "SHORT", market=market_type(d),
+            direction="LONG" if d == 1 else "SHORT", market=market_type(d, cfg),
             signal_time_utc=pd.to_datetime(sgl["signal_time"], unit="ms").strftime("%Y-%m-%d %H:%M"),
             signal_age_candles=sgl["age_bars"],
             entry=e, entry_zone=[e - 0.2 * R, e + 0.2 * R], stop=e - d * R,
@@ -3401,8 +3404,10 @@ def render_md(o, cfg):
           f"(at {o['settings']['risk_pct']}% risk, +1R = +{o['settings']['risk_pct']}% of account)")
     else:
         w(f"- {f['signals']} signals logged, none finished yet. Give it a few weeks before trusting anything.")
-    w("\n**Costs used in every backtest:** LONG = spot fees; SHORT = futures fees + funding "
-      "(shorts are **futures only**). Details in `config.yaml` → `costs`.")
+    w("\n**Costs used in every backtest:** " + ("LONG and SHORT = OKX futures fees + funding (always charged, "
+      "never received)" if market_type(1, cfg) == "futures" else
+      "LONG = spot fees; SHORT = futures fees + funding (shorts are **futures only**)")
+      + ". Details in `config.yaml` → `costs`.")
     base = f"https://github.com/{repo_slug()}/blob/{publish_live.BRANCH}/"
     w("\n**Full data** (branch `" + publish_live.BRANCH + "`, newest copy only): " + " · ".join(
         f"[{os.path.basename(p)}]({base}{p})" for p in publish_live.LIVE_FILES))

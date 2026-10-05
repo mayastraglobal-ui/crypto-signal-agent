@@ -24,3 +24,4 @@ site/
 # Phase 18 D: backtest chart data (published with the dashboard on gh-pages, not main)
 reports/backtest_charts/
 reports/backtest_charts_offline/
+reports/live_watcher_state.json
