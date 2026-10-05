@@ -1,9 +1,5 @@
 {
- "issues": {
-  "data|ETH|5m": "ETH 5m data: DEGRADED: volume 98x normal on candle 10-05 16:10 UTC (possible bad data)"
- },
- "since": {
-  "data|ETH|5m": "2026-10-05 16:22 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"maker_fee_pct\": 0.1, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.1}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }
