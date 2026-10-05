@@ -245,3 +245,22 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
   - liquidity_sweep_reversal v1.0 15m: blocked by the regime gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### BTC up +1.6% (7.7x ATR), 2026-10-04 12:00 -> 2026-10-05 00:00
+- timestamp: 2026-10-05 00:57 UTC · source: engine: daily research run · evidence: FACT: move of 7.7x the 1H ATR within 12 hours; 68 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-12
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: no valid stop / target
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 30m: no valid stop / target
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+
+### SUI up +6.8% (7.3x ATR), 2026-10-04 08:00 -> 2026-10-04 16:00
+- timestamp: 2026-10-05 00:57 UTC · source: engine: daily research run · evidence: FACT: move of 7.3x the 1H ATR within 12 hours; 68 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: UNCLEAR · review: 2026-10-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 1h: blocked by the regime gate
+  - trend_pullback v1.0 30m: blocked by the regime gate

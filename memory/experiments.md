@@ -857,3 +857,5 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
 |---|---|---|---|---|---|
 | EXP-0026 | 2026-10-04 03:56 | donchian_breakout-VEXIT-VRVOL-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0027 | 2026-10-05 00:57 | donchian_breakout-VEXIT-VRVOL-S4-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0028 | 2026-10-05 00:57 | donchian_breakout-VEXIT-VRVOL-S5@1.0 | breakout | 4h, 1h, 30m | The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
