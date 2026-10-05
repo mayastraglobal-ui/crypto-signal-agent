@@ -257,6 +257,12 @@ class Alerts(unittest.TestCase):
             r = self.summary(log(), p)
             self.assertIn("calendar not maintained", r["calendar_warning"])
 
+    def test_a_quiet_week_is_not_an_unmaintained_calendar(self):
+        far = S(events=[{"utc": "2026-10-14 12:30", "type": "CPI", "name": "US CPI"}])     # 20 days ahead
+        with tempfile.TemporaryDirectory() as tmp:
+            r = scanner.risk_summary(log(), NOW, far, {}, 0.5, "", None, [], os.path.join(tmp, "s.json"))
+        self.assertIsNone(r["calendar_warning"])
+
     def test_calendar_problem_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             r = scanner.risk_summary(log(), NOW, S(), {}, 0.5, "", "events entry 1: bad", [],

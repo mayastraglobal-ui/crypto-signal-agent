@@ -310,10 +310,9 @@ def health(rep, derivs, now, tests=None):
     bad = sorted(c for c, x in (dq.get("coins") or {}).items() if c not in signal and x.get("state") == "UNSAFE")
     if bad:
         out.append((f"Candidate coins with bad data: {', '.join(bad[:4])}", False))
-    blocked = sorted({c for c, x in ((derivs or {}).get("coins") or {}).items()
-                      if any("451" in str(e) for e in ((x.get("fetch") or {}).get("errors") or []))})
-    if blocked:
-        out.append(("Binance futures data blocked (451) – OKX used", False))
+    fetches = [(x.get("fetch") or {}) for x in ((derivs or {}).get("coins") or {}).values()]
+    if any(f.get("blocked") or any("451" in str(e) for e in f.get("errors") or []) for f in fetches):
+        out.append(("Binance futures API blocked here (451, expected) – OKX used", True))
     return out
 
 

@@ -801,9 +801,10 @@ def main():
     week = [c for c in lab_now or [] if c.get("factory") == "variant_search"
             and str(c.get("added") or "") >= (started - dt.timedelta(days=6)).strftime("%Y-%m-%d")]
     left = 0 if lab_now is None else max(0, int(quota["variant_search"]) - len(week))
-    simpler, not_queued = ideas.simpler_cards(cells, by_key, started.date(), left, rg.LABELS, sc.TF_ORDER)  # 18 B
+    simpler, not_queued = ideas.simpler_cards(cells, by_key, started.date(), left, rg.LABELS, sc.TF_ORDER,  # 18 B
+                                              lab_now or [])
     new_variants = simpler + ideas.variant_cards(cells, by_key, started.date(), left - len(simpler), rg.LABELS,
-                                                 sc.TF_ORDER)
+                                                 sc.TF_ORDER, (lab_now or []) + simpler)
     if new_variants and not args.offline:
         append_lab(lab_path, new_variants)
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"

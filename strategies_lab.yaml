@@ -255,7 +255,7 @@
     > 20 / adx(14) > 20): 904 trades avg +0.224R - the rule does not improve the result'
 - id: donchian_breakout-VEXIT-VRVOL
   version: '1.0'
-  status: FORMALIZED
+  status: RETIRED
   family: breakout
   gate: trend
   regimes:
@@ -323,6 +323,7 @@
   changelog:
   - '1.0 (2026-09-27): engine variant of donchian_breakout-VEXIT@1.0 - only when volume is at least 1.2x normal
     (rel_vol filter)'
+  - '1.0 (2026-10-05): RETIRED by the operator - takes the same trades as donchian_breakout-VEXIT (its volume filter rel_vol > 1.2 never binds: the card already needs volume > 1.5x average)'
   targets:
     long:
     - 2R
@@ -412,7 +413,7 @@
   added: '2026-09-27'
 - id: donchian_breakout-VEXIT-VRVOL-S4
   version: '1.0'
-  status: FORMALIZED
+  status: RETIRED
   family: breakout
   gate: trend
   regimes:
@@ -476,6 +477,7 @@
   changelog:
   - '1.0 (2026-10-03): donchian_breakout-VEXIT-VRVOL@1.0 without entry rule ''adx(14) > 20 / adx(14) > 20'' (rule
     significance test)'
+  - '1.0 (2026-10-05): RETIRED by the operator - takes the same trades as donchian_breakout-VEXIT-S4 (same reason)'
   targets:
     long:
     - 2R
@@ -495,7 +497,7 @@
     (adx(14) > 20 / adx(14) > 20): 1279 trades avg +0.164R - the rule does not improve the result'
 - id: donchian_breakout-VEXIT-VRVOL-S4-S4
   version: '1.0'
-  status: FORMALIZED
+  status: RETIRED
   family: breakout
   gate: trend
   regimes:
@@ -556,6 +558,7 @@
   changelog:
   - '1.0 (2026-10-04): donchian_breakout-VEXIT-VRVOL-S4@1.0 without entry rule ''rel_vol > 1.2 / rel_vol > 1.2''
     (rule significance test)'
+  - '1.0 (2026-10-05): RETIRED by the operator - takes the same trades as donchian_breakout-VEXIT-S4 (identical rules)'
   targets:
     long:
     - 2R
@@ -575,7 +578,7 @@
     4 (rel_vol > 1.2 / rel_vol > 1.2): 926 trades avg +0.235R - the rule does not improve the result'
 - id: donchian_breakout-VEXIT-VRVOL-S5
   version: '1.0'
-  status: FORMALIZED
+  status: RETIRED
   family: breakout
   gate: trend
   regimes:
@@ -639,6 +642,7 @@
   changelog:
   - '1.0 (2026-10-04): donchian_breakout-VEXIT-VRVOL@1.0 without entry rule ''rel_vol > 1.2 / rel_vol > 1.2'' (rule
     significance test)'
+  - '1.0 (2026-10-05): RETIRED by the operator - takes the same trades as donchian_breakout-VEXIT (identical rules)'
   targets:
     long:
     - 2R

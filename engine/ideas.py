@@ -64,6 +64,25 @@ def factory_stats(cells, cards):
     return out
 
 
+def _fp(card):
+    """Fingerprint of what a card trades (rules with the numbers filled in, exits, stop, targets, regimes, ...);
+    None when the card cannot be rendered."""
+    try:
+        if card.get("_raw") is not None:
+            return sspec.fingerprint(card)
+        raw = dict(card, version=str(card.get("version")))
+        return sspec.fingerprint(sspec._finish(sspec.render(raw), raw))
+    except (KeyError, ValueError, TypeError, AttributeError):
+        return None
+
+
+def known(cards, existing=()):
+    """(ids, fingerprints) of every card already written - the loaded cards plus the raw lab file (RETIRED and
+    unloadable cards included), so a variant is never a new name for a card that already exists."""
+    rows = list(cards.values()) + [c for c in existing or () if isinstance(c, dict)]
+    return {c.get("id") for c in rows}, {f for f in map(_fp, rows) if f}
+
+
 def _desc_targets():
     return {"long": ["2R", "3R"], "short": ["2R", "3R"], "split": [0.5, 0.5]}
 
@@ -87,7 +106,8 @@ def _variants(raw, cell, trade_order):
         yield ("ADX", "only when ADX(14) > 20 (trend strength filter)",
                dict(long=list(raw["long"]) + ["adx(14) > {v_adx}"], short=list(raw["short"]) + ["adx(14) > {v_adx}"],
                     params=dict(params, v_adx=20)))
-    if "rel_vol" not in used and "v_rv" not in params:
+    if not used & {"rel_vol", "volume", "vol_sma"} and "v_rv" not in params:    # no volume filter yet (else it is
+                                                                                    # the same filter again)
         yield ("RVOL", "only when volume is at least 1.2x normal (rel_vol filter)",
                dict(long=list(raw["long"]) + ["rel_vol > {v_rv}"], short=list(raw["short"]) + ["rel_vol > {v_rv}"],
                     params=dict(params, v_rv=1.2)))
@@ -100,14 +120,15 @@ def _variants(raw, cell, trade_order):
             break
 
 
-def variant_cards(cells, cards, today, n_max, labels, trade_order):
+def variant_cards(cells, cards, today, n_max, labels, trade_order, existing=()):
     """Factory e: up to n_max new lab cards - one-change variants of the strongest BACKTESTING cells (30+ trades,
     best average R on unseen data first). Parents with a special ingredient (SMC / 5m) or control twins are skipped
-    (a variant would need its own twin). Every card passes the same checks as a Claude card."""
+    (a variant would need its own twin). Every card passes the same checks as a Claude card. A variant that trades
+    exactly like a card already written (existing = the raw lab file) is skipped."""
     if n_max <= 0:
         return []
     by_id = {c["id"]: c for c in cards.values()}
-    ids = set(by_id)
+    ids, fps = known(cards, existing)
     ranked = sorted((c for c in cells.values() if c.get("status") == "BACKTESTING"
                      and c["evidence"]["all"]["n"] >= MIN_TRADES and c["evidence"]["validate"]["n"] > 0),
                     key=lambda c: (-c["evidence"]["validate"]["avg_r"], -c["evidence"]["all"]["avg_r"]))
@@ -144,8 +165,12 @@ def variant_cards(cells, cards, today, n_max, labels, trade_order):
                 continue
             if len(sspec.change_count(raw, card)) != 1:
                 continue
+            fp = _fp(card)
+            if fp is None or fp in fps:                     # the same trades under a new name
+                continue
             out.append(card)
             ids.add(vid)
+            fps.add(fp)
             parents.add(key)
             break
         if len(out) >= n_max:
@@ -153,14 +178,15 @@ def variant_cards(cells, cards, today, n_max, labels, trade_order):
     return out
 
 
-def simpler_cards(cells, cards, today, n_max, labels, trade_order):
+def simpler_cards(cells, cards, today, n_max, labels, trade_order, existing=()):
     """Phase 18 B (rule significance): for a cell where removing ONE entry rule gave at least as good an average per
     trade (with enough trades), queue the simpler card - the same card without that rule - as a lab card (factory
     variant_search, parent = that result). The strongest evidence first; one card per parent; every card passes the
     same checks as a Claude card (a parent whose first target is below 2R cannot be queued - it would need a second
-    change). Returns (new cards (at most n_max), {cell key: why its simpler card was not queued})."""
+    change; a simpler card that trades exactly like a card already written is not queued either).
+    Returns (new cards (at most n_max), {cell key: why its simpler card was not queued})."""
     skipped = {}
-    ids = {c["id"] for c in cards.values()}
+    ids, fps = known(cards, existing)
     rows = [(cell, r) for cell in cells.values() for r in cell.get("rules_adding_nothing") or []
             if cell.get("status") not in ("FAILED", "RETIRED") and not cell.get("bias")]
     rows.sort(key=lambda x: (-(x[1]["avg_r"] - x[0]["evidence"]["all"]["avg_r"]), -x[1]["n"]))
@@ -203,7 +229,12 @@ def simpler_cards(cells, cards, today, n_max, labels, trade_order):
         if probs:
             skipped.setdefault(ck, f"the simpler card would break a lab rule: {probs[0]}")
             continue
+        fp = _fp(card)
+        if fp is None or fp in fps:
+            skipped.setdefault(ck, "the simpler card trades exactly like a card already written")
+            continue
         out.append(card)
         ids.add(vid)
+        fps.add(fp)
         parents.add(key)
     return out, skipped

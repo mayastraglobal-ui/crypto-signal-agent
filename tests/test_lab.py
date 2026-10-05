@@ -534,12 +534,14 @@ class Tasks(unittest.TestCase):
         card in it loads in the engine - a card the engine cannot load would never be tested (26 Sep 2026: two
         concurrent appends were interleaved by git and both cards broke)."""
         self.assertEqual(B._cards(LAB_HEAD), [])
-        ok, problems, _, _ = scanner.load_cards()
+        ok, problems, idle, _ = scanner.load_cards()
         self.assertFalse([k for k in problems if k.startswith("lab") or k == SS.LAB_FILE], problems)
         cards = B._cards(LAB_TEXT)
         self.assertEqual(len({f"{c['id']}@{c['version']}" for c in cards}), len(cards), "no card twice")
-        self.assertEqual(sorted(f"{c['id']}@{c['version']}" for c in cards),
-                         sorted(SS.key(c) for c in ok if c.get("lab")), "every lab card is loaded")
+        self.assertEqual(sorted(f"{c['id']}@{c['version']}" for c in cards),       # RETIRED by the operator = idle
+                         sorted(SS.key(c) for c in ok + idle if c.get("lab")), "every lab card is loaded")
+        self.assertEqual(sorted(SS.key(c) for c in ok if c.get("lab")),
+                         sorted(f"{c['id']}@{c['version']}" for c in cards if c.get("status") == "FORMALIZED"))
 
 
 class EndToEnd(unittest.TestCase):

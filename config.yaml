@@ -320,7 +320,7 @@ risk:                        # the risk engine (AGENT_PROMPT.md section 15) - on
   max_risk_pct: 1.0          # account.risk_per_trade_pct is capped here ...
   first_month_risk_pct: 0.5  # ... and at 0.5% until 30 days after the first live entry
   max_leverage: 3            # never more than 3x: the position is made smaller instead
-  calendar_horizon_days: 7   # the report warns when no event is listed for the next 7 days
+  calendar_horizon_days: 7   # the report lists the events of the next 7 days (it warns only when no future event is listed)
   resume: {}                 # resume a SUSPENDED strategy: "id@version|tf": "YYYY-MM-DD" (its drawdown then
                              # counts only trades closed from that date). Example: {"S6-OB-FVG@1.0|15m": "2026-10-01"}
 
