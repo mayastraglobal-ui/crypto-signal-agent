@@ -859,3 +859,34 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0026 | 2026-10-04 03:56 | donchian_breakout-VEXIT-VRVOL-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0027 | 2026-10-05 00:57 | donchian_breakout-VEXIT-VRVOL-S4-S4@1.0 | breakout | 4h, 1h, 30m | The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0028 | 2026-10-05 00:57 | donchian_breakout-VEXIT-VRVOL-S5@1.0 | breakout | 4h, 1h, 30m | The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+
+### Feedback: donchian_breakout-VEXIT-VRVOL-S4@1.0
+- timestamp: 2026-10-05 17:15 UTC · source: Claude daily review 2026-10-05 · evidence: BACKTEST_EVIDENCE: 3 cells, 4548 trades (926 + 2549 + 1073) · confidence: high · strategy: donchian_breakout-VEXIT-VRVOL-S4@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BULL, WEAK_BEAR · review: 2027-01-03
+- parent: result: donchian_breakout-VEXIT-VRVOL@1.0 4h
+- hypothesis: The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 4h BACKTESTING 926 trades +0.235R (unseen +0.213R), t 4.803, held back by max drawdown 19.0R; 1h FAILED 2549 trades -0.043R (unseen -0.015R), profit factor 0.93; 30m FAILED 1073 trades -0.090R (unseen -0.039R), profit factor 0.87. These are exactly the numbers of donchian_breakout-VEXIT-S4@1.0 in every cell (4h 926 trades +0.23R t 4.803; 1h 2549 trades; 30m 1073 trades)
+- teaches: this card is a duplicate of donchian_breakout-VEXIT-S4@1.0. Its parent VRVOL was already identical to VEXIT (the 1.2x volume rule is implied by the 1.5x volume breakout), so removing ADX from VRVOL gives the same trades as removing ADX from VEXIT. The test taught nothing new and raised the trials counter (now 136 tests).
+- next: stop this line
+
+### Feedback: donchian_breakout-VEXIT-VRVOL-S4-S4@1.0
+- timestamp: 2026-10-05 17:15 UTC · source: Claude daily review 2026-10-05 · evidence: BACKTEST_EVIDENCE: 3 cells, 4548 trades (926 + 2549 + 1073) · confidence: high · strategy: donchian_breakout-VEXIT-VRVOL-S4-S4@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BULL, WEAK_BEAR · review: 2027-01-03
+- parent: result: donchian_breakout-VEXIT-VRVOL-S4@1.0 4h
+- hypothesis: The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 4h BACKTESTING 926 trades +0.235R (unseen +0.213R), t 4.803, held back by max drawdown 19.0R; 1h FAILED 2549 trades -0.043R (unseen -0.015R), profit factor 0.93, max drawdown 175.6R; 30m FAILED 1073 trades -0.090R (unseen -0.039R), profit factor 0.87, max drawdown 116.2R. Identical to its parent and to donchian_breakout-VEXIT-S4@1.0 in every cell
+- teaches: the hypothesis held in the trivial way: removing the 1.2x volume rule changed no trade, because that rule was redundant (already shown in Feedback: donchian_breakout-VEXIT-VRVOL@1.0). The card is the same strategy as donchian_breakout-VEXIT-S4@1.0 under a new name.
+- next: stop this line
+
+### Feedback: donchian_breakout-VEXIT-VRVOL-S5@1.0
+- timestamp: 2026-10-05 17:15 UTC · source: Claude daily review 2026-10-05 · evidence: BACKTEST_EVIDENCE: 3 cells, 3959 trades (814 + 2236 + 909) · confidence: high · strategy: donchian_breakout-VEXIT-VRVOL-S5@1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BULL, WEAK_BEAR · review: 2027-01-03
+- parent: result: donchian_breakout-VEXIT-VRVOL@1.0 4h
+- hypothesis: The rule 'rel_vol > 1.2 / rel_vol > 1.2' adds nothing to donchian_breakout-VEXIT-VRVOL@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 4h BACKTESTING 814 trades +0.247R (unseen +0.242R), t 4.743, held back by max drawdown 20.0R; 1h FAILED 2236 trades -0.043R (unseen -0.000R), profit factor 0.93; 30m FAILED 909 trades -0.058R (unseen -0.024R), profit factor 0.91. Identical to donchian_breakout-VEXIT@1.0 and donchian_breakout-VEXIT-VRVOL@1.0 in every cell
+- teaches: removing a redundant rule gives back the grandparent card, donchian_breakout-VEXIT@1.0. Three of the engine's variant-search cards this week (VRVOL-S4, VRVOL-S4-S4, VRVOL-S5) are copies of two cards that were already tested. The 4h breakout is unchanged: positive in train and unseen parts, blocked only by the drawdown gate.
+- next: stop this line. The useful next test on the 4h breakout is a real change to the base donchian_breakout-VEXIT-S4@1.0 (for example the queued 'Hypothesis: 1-week own-trend filter for the 4h breakout (from C02)'), not more rule removals in the VRVOL branch.
+
+### Hypothesis: break-even stop for the prior-day sweep reversal (S8)
+- timestamp: 2026-10-05 17:15 UTC · source: Claude daily review 2026-10-05 · evidence: HYPOTHESIS: from the engine's diagnosis of S8-PDH-PDL-SWEEP@1.0|30m (77 trades, -0.56R; half the losers were at least +0.50R in profit first) and S8-PDH-PDL-SWEEP-noSMC@1.0|30m (414 trades, -0.46R; half the losers were at least +0.60R in profit first) · confidence: low · strategy: S8-PDH-PDL-SWEEP · asset: research coins · timeframe: 30m · regime: RANGE, TRANSITION · review: 2027-01-03
+  - hypothesis: v1.1: move the stop to the entry price once the trade is +0.5R in profit (one change: the exit, not the entry), because half of the losers were at least +0.50R in profit before they turned into a full loss.
+  - why not a card today: both cells lose in every regime with 10+ trades, and the existing lesson says the fix for these cells is more likely in the entry than in the stop. A break-even stop cuts some losses but also cuts winners that dip back, so it may not lift a -0.46R average to above +0.10R. The 'stop_too_tight' tag is not the reason here; the MFE (best point) is.
+  - how to test: a one-change version of S8-PDH-PDL-SWEEP-noSMC@1.0 (the control with more trades), 30m, same period, first target still at least 2R; judge on the unseen part and the costs +50% test.
+  - stop if: the average stays below 0R, or fewer than 30 unseen-data trades.

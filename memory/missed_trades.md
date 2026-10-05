@@ -264,3 +264,63 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - trend_pullback v1.0 15m: blocked by the regime gate
   - trend_pullback v1.0 1h: blocked by the regime gate
   - trend_pullback v1.0 30m: blocked by the regime gate
+
+### Review: LTC up +14.2% (8.0x ATR), 2026-09-24 01:00 -> 2026-09-24 14:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (8.0x ATR, 46 tests checked) and today's fact sheet · confidence: medium · strategy: trend_pullback v1.0 · asset: LTC · timeframe: 1h · regime: UNCLEAR · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: no new information on this move. LTC is a research-only coin, so no live signal could have been sent. The only 'signal' named was trend_pullback v1.0 4h; the other cells were blocked by the regime gate, which is the gate doing its job.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SOL up +4.8% (5.5x ATR), 2026-09-25 07:00 -> 2026-09-25 19:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record and the failing-cell diagnosis in today's fact sheet · confidence: medium · strategy: liquidity_sweep_reversal v1.0, trend_pullback v1.0 · asset: SOL · timeframe: 5m, 15m, 1h · regime: WEAK_BULL · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: the 'signal' that made this move identifiable came from liquidity_sweep_reversal@1.0|5m is still a failing cell today: 346 backtest trades, -1.31R per trade, losing in every regime with 10+ trades (BACKTEST, fact sheet 2026-10-05). A signal from a cell that loses over hundreds of trades is not a missed trade.
+  - action: none. (The engine wrote this move twice; this review covers both entries with the same title.)
+
+### Review: ENA up +18.4% (7.5x ATR), 2026-09-25 08:00 -> 2026-09-25 21:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record and the failing-cell diagnosis in today's fact sheet · confidence: medium · strategy: liquidity_sweep_reversal v1.0, trend_pullback v1.0 · asset: ENA · timeframe: 5m, 15m, 1h · regime: TRANSITION · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: the 'signal' that made this move identifiable came from liquidity_sweep_reversal@1.0|5m is still a failing cell today: 346 backtest trades, -1.31R per trade, losing in every regime with 10+ trades (BACKTEST, fact sheet 2026-10-05). A signal from a cell that loses over hundreds of trades is not a missed trade.
+  - action: none. (The engine wrote this move twice; this review covers both entries with the same title.)
+
+### Review: SUI up +13.4% (7.3x ATR), 2026-09-25 08:00 -> 2026-09-25 21:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (setups blocked by the permission gate) · confidence: medium · strategy: S5, S7, bb_squeeze_breakout, trend_pullback v1.0 · asset: SUI · timeframe: 15m, 30m, 1h · regime: WEAK_BULL · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: every setup was blocked by the permission gate (no approved strategy). Today no strategy is approved either (no approval pack eligible), so the gate would block the same setups again. That is intended.
+  - action: none. (The engine wrote this move twice; this review covers both entries.)
+
+### Review: UNI up +8.2% (5.3x ATR), 2026-09-25 07:00 -> 2026-09-25 13:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (research-only coin, regime gate) · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC v1.0, liquidity_sweep_reversal v1.0 · asset: UNI · timeframe: 5m, 30m · regime: COMPRESSION · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: both setups came from failing cells: liquidity_sweep_reversal@1.0|5m is still a failing cell today: 346 backtest trades, -1.31R per trade, losing in every regime with 10+ trades (BACKTEST, fact sheet 2026-10-05); S8-PDH-PDL-SWEEP-noSMC@1.0|30m has 414 trades at -0.46R (BACKTEST). The regime gate blocking them cost nothing.
+  - action: none. (The engine wrote this move twice; this review covers both entries.)
+
+### Review: SOL and ENA 2026-09-25 moves: "identifiable" only through failing cells
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: MODEL_OUTPUT: today's failing-cell diagnosis re-read against the 2026-09-26 record · confidence: medium · strategy: liquidity_sweep_reversal v1.0, trend_pullback v1.0 · asset: SOL, ENA · timeframe: 5m, 15m, 1h · regime: WEAK_BULL, TRANSITION · review: 2026-10-12
+  - status: CONFIRMED
+  - today's evidence: liquidity_sweep_reversal@1.0|5m is still a failing cell today: 346 backtest trades, -1.31R per trade, losing in every regime with 10+ trades (BACKTEST, fact sheet 2026-10-05). It is now worse per trade than in the 2026-09-26 record (-1.15R over 424 trades then; the trade count differs because the engine's test window moved). The reading still holds.
+  - action: none.
+
+### Review: ZEC up +10.4% (8.6x ATR), 2026-09-26 09:00 -> 2026-09-26 22:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (all setups blocked by the regime gate) · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal, macd_trend_cross, rsi2_dip_buy v1.0 · asset: ZEC · timeframe: 5m, 15m, 30m, 1h · regime: COMPRESSION · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: the blocked setups came from cells that fail in today's diagnosis (liquidity_sweep_reversal@1.0|15m is still a failing cell today: 398 backtest trades, -0.53R per trade (BACKTEST, fact sheet 2026-10-05); rsi2_dip_buy@1.0|15m 1482 trades -0.39R, BACKTEST). The regime gate did not cost a tested edge.
+  - action: none.
+
+### Review: ZEC up +7.1% (6.3x ATR), 2026-09-26 13:00 -> 2026-09-27 02:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (trend_pullback v1.0 4h signal) · confidence: low · strategy: trend_pullback v1.0 · asset: ZEC · timeframe: 4h · regime: COMPRESSION · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: the only signal was trend_pullback v1.0 4h, which is not approved, and its 4h numbers are not in today's fact sheet (not available). Nothing shows it is an edge.
+  - action: none.
+
+### Review: SUI up +10.7% (6.4x ATR), 2026-09-26 20:00 -> 2026-09-27 09:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (liquidity_sweep_reversal v1.0 15m signal) · confidence: medium · strategy: liquidity_sweep_reversal v1.0 · asset: SUI · timeframe: 15m · regime: WEAK_BULL · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: the signal came from a failing cell: liquidity_sweep_reversal@1.0|15m is still a failing cell today: 398 backtest trades, -0.53R per trade (BACKTEST, fact sheet 2026-10-05); it loses in every regime with 10+ trades.
+  - action: none.
+
+### Review: ENA up +9.0% (5.1x ATR), 2026-09-27 08:00 -> 2026-09-27 19:00
+- timestamp: 2026-10-05 17:10 UTC · source: Claude daily review 2026-10-05 · evidence: FACT: the engine's missed-move record (research-only coin) · confidence: medium · strategy: bb_squeeze_breakout, ema_9_21_cross, macd_trend_cross, trend_pullback v1.0 · asset: ENA · timeframe: 15m, 30m, 1h · regime: UNCLEAR · review: 2026-10-12
+  - status: KEEP
+  - today's evidence: ENA is a research-only coin and its regime was UNCLEAR, where the playbook says no strategy has 30+ backtest trades. Of the cells that signalled, bb_squeeze_breakout@1.0|15m is failing today (384 trades, -0.41R, BACKTEST).
+  - action: none.
