@@ -125,14 +125,17 @@ evidence:                    # candle evidence - RESEARCH EVIDENCE, NOT A SIGNAL
   min_events: 30             # fewer entries than this = "too few to judge"
 
 costs:                       # realistic trading costs - never set these to 0!
-  # Exchange not chosen yet, so we use Binance's standard (VIP 0, no BNB discount) fees.
-  long:                      # LONG trades = buying on the SPOT market
-    taker_fee_pct: 0.10      # market order fee (Binance spot)
-    maker_fee_pct: 0.10      # limit order fee (Binance spot)
+  # Operator trades OKX USDT perpetual futures, both directions (operator decision 2026-10-05).
+  # OKX standard (VIP 0) futures fees. Change these if your OKX fee tier changes.
+  long:                      # LONG trades = OKX USDT perpetual futures
+    market: futures          # "spot" = the old spot-market costs; "futures" = longs pay futures fees + funding
+    taker_fee_pct: 0.05      # market order fee (OKX futures, VIP 0)
+    maker_fee_pct: 0.02      # limit order fee (OKX futures, VIP 0)
     slippage_pct: 0.05       # price moves against you when a market order fills
-  short:                     # SHORT trades = FUTURES ONLY (you cannot short on spot)
-    taker_fee_pct: 0.05      # market order fee (Binance USDT-M futures)
-    maker_fee_pct: 0.02      # limit order fee (Binance USDT-M futures)
+    funding_pct_per_8h: 0.01 # funding: cautiously ALWAYS charged to the long too (money received is never counted)
+  short:                     # SHORT trades = OKX USDT perpetual futures
+    taker_fee_pct: 0.05      # market order fee (OKX futures, VIP 0)
+    maker_fee_pct: 0.02      # limit order fee (OKX futures, VIP 0)
     slippage_pct: 0.05
     funding_pct_per_8h: 0.01 # futures "funding" fee, paid every 8 hours while the trade is open.
                              # Real funding changes sign; we cautiously ALWAYS charge it to the short.
@@ -335,6 +338,16 @@ signals:
                              # (15m: 4 candles, 5m: 12), so no trigger falls between two runs
   max_in_report: 10          # show the best N signals
   allow_shorts: true         # false = long only (spot traders cannot short)
+
+live_watcher:                # instant Telegram alerts at every 5m candle close (live_watcher.py on an always-on server;
+                             # setup: docs/LIVE_WATCHER.md). The hourly scan stays the official record.
+  stages: {APPROVED: LIVE, PAPER_TRADING: PAPER}   # which research status alerts, and its label. Others never alert.
+  entry_zone_r: 0.2          # entry zone shown = planned entry +- 0.2R
+  poll_delay_s: 8            # seconds after each candle close before the check (the exchange finalises the candle)
+  refresh_minutes: 60        # git pull (new statuses, coins, cards) this often
+  cooldown_minutes: 60       # the same coin + direction + strategy + timeframe alerts at most once an hour
+  heartbeat_utc: "00:05"     # one "still running" message a day
+  error_alert_after: 3       # Telegram warning after 3 failed checks in a row
 
 dashboard:                   # Phase 18 D: the web dashboard (build_dashboard.py -> GitHub Pages, branch gh-pages)
   url: null                  # null = https://<owner>.github.io/<repo>/ ; the backtest chart links in approval packs

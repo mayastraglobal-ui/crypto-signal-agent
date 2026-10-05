@@ -166,7 +166,7 @@ class Writers(TmpMemory):
         self.assertEqual(scanner.write_execution_notes(iss, fees, NOW, st), [])   # same state: nothing
         later = NOW + dt.timedelta(hours=3)
         iss2 = {k: v for k, v in iss.items() if k != "data|BTC|1h"}
-        w = scanner.write_execution_notes(iss2, fees.replace("0.1", "0.2"), later, st)
+        w = scanner.write_execution_notes(iss2, fees.replace("0.05", "0.06"), later, st)
         titles = [M.parse(t)[0]["title"] for t in w]
         self.assertEqual(titles, ["END BTC 1h data: 2 gaps", "Fee settings CHANGED"])
         self.assertIn(f"first seen {NOW.strftime('%Y-%m-%d %H:%M')} UTC", w[0])

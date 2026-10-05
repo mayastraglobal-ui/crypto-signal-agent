@@ -22,14 +22,23 @@ def flat(n, px=100.0):
 
 
 class CostTests(unittest.TestCase):
-    def test_long_uses_spot_costs(self):
+    def test_long_uses_futures_costs_plus_funding(self):
+        # Operator trades OKX futures (2026-10-05): longs pay futures fees + funding, like shorts.
         # Price never moves; trade closes on the time stop after 3 candles.
         o, h, l, c = flat(5)
         res = scanner.simulate_trade(o, h, l, c, 0, 1, 100.0, 2.0, CFG, 3, 8.0)
-        # exit 100*(1-0.0005)=99.95 -> pnl -0.05; fees 0.10% in + 0.10% out; no funding
-        expected = (-0.05 - (0.001 * 100 + 0.001 * 99.95)) / 2.0
+        # exit 100*(1-0.0005)=99.95 -> pnl -0.05; fees 0.05% in + 0.05% out; funding 0.01% x 3 periods of 8h
+        expected = (-0.05 - (0.0005 * 100 + 0.0005 * 99.95 + 3 * 0.0001 * 100)) / 2.0
         self.assertEqual(res["reason"], "time")
         self.assertAlmostEqual(res["r"], expected, places=9)
+
+    def test_spot_longs_still_work(self):
+        spot = dict(CFG, costs=dict(CFG["costs"], long=dict(taker_fee_pct=0.10, maker_fee_pct=0.10,
+                                                             slippage_pct=0.05)))
+        o, h, l, c = flat(5)
+        res = scanner.simulate_trade(o, h, l, c, 0, 1, 100.0, 2.0, spot, 3, 8.0)
+        self.assertAlmostEqual(res["r"], (-0.05 - (0.001 * 100 + 0.001 * 99.95)) / 2.0, places=9)
+        self.assertEqual(scanner.market_type(1, spot), "spot")
 
     def test_short_uses_futures_costs_plus_funding(self):
         o, h, l, c = flat(5)
@@ -45,9 +54,9 @@ class CostTests(unittest.TestCase):
         self.assertAlmostEqual(r_1h - r_8h, 3 * 0.0001 * 100 * (1 - 1 / 8) / 2.0, places=9)
         self.assertLess(r_8h, r_1h)   # holding longer costs more funding
 
-    def test_funding_always_charged_to_shorts_never_longs(self):
+    def test_funding_always_charged_to_both_futures_sides(self):
         self.assertGreater(scanner.trade_costs(CFG, -1)["funding_8h"], 0)
-        self.assertEqual(scanner.trade_costs(CFG, 1)["funding_8h"], 0)
+        self.assertGreater(scanner.trade_costs(CFG, 1)["funding_8h"], 0)
 
     def test_stop_fills_first_when_stop_and_target_in_same_candle(self):
         o = np.array([100.0, 100.0])
@@ -59,7 +68,8 @@ class CostTests(unittest.TestCase):
         self.assertLess(res["r"], -1.0)   # a full loss plus costs
 
     def test_market_labels(self):
-        self.assertEqual(scanner.market_type(1), "spot")
+        self.assertEqual(scanner.market_type(1), "spot")                     # no config: the old default
+        self.assertEqual(scanner.market_type(1, CFG), "futures")             # OKX futures trader
         self.assertEqual(scanner.market_type(-1), "futures only")
 
 
@@ -73,6 +83,8 @@ class SafetyGuards(unittest.TestCase):
             self.assertGreater(k["maker_fee_pct"], 0)
             self.assertGreater(k["slippage_pct"], 0)
         self.assertGreater(CFG["costs"]["short"]["funding_pct_per_8h"], 0)
+        if CFG["costs"]["long"].get("market") == "futures":
+            self.assertGreater(CFG["costs"]["long"]["funding_pct_per_8h"], 0)
 
     def test_risk_per_trade_capped_at_one_percent(self):
         self.assertLessEqual(CFG["account"]["risk_per_trade_pct"], 1.0)

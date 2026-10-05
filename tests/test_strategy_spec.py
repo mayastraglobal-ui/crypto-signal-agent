@@ -266,9 +266,11 @@ class Backtest(unittest.TestCase):
         lvl = np.full(40, 99.8)
         L = np.zeros(40, bool)
         L[[10, 12, 20]] = True                          # 12 comes during the cooldown -> ignored
-        tr = scanner.backtest(df, L, np.zeros(40, bool), None, None, s, CFG, "15m", {"lvl": lvl})
+        spot = dict(CFG, costs=dict(CFG["costs"], long=dict(taker_fee_pct=0.10, maker_fee_pct=0.10,
+                                                             slippage_pct=0.05)))     # spot costs: exact numbers
+        tr = scanner.backtest(df, L, np.zeros(40, bool), None, None, s, spot, "15m", {"lvl": lvl})
         self.assertEqual([t["entry_idx"] for t in tr], [11, 21])
-        entry = 101 * (1 + CFG["costs"]["long"]["slippage_pct"] / 100)
+        entry = 101 * (1 + spot["costs"]["long"]["slippage_pct"] / 100)
         R = entry - (99.8 - 0.2)
         self.assertEqual(tr[0]["reason"], "TP1")
         self.assertAlmostEqual(tr[0]["r"] + 0, (2 * R - (entry * 0.001 + (entry + 2 * R) * 0.001)) / R, places=6)

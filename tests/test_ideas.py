@@ -238,7 +238,7 @@ class RealFunding(unittest.TestCase):
         self.assertAlmostEqual(self.trade(-1, np.zeros(30))["funding_r"], flat)   # funding received: not counted
         high = self.trade(-1, np.full(30, 0.001))["funding_r"]                   # shorts pay 0.1% / 8h
         self.assertAlmostEqual(high, flat * 10)
-        self.assertEqual(self.trade(1, np.full(30, 0.001))["funding_r"], 0)      # longs are spot: no funding
+        self.assertAlmostEqual(self.trade(1, np.full(30, 0.001))["funding_r"], flat)  # futures longs: config rate
         stressed = self.trade(-1, np.full(30, 0.001), test_brain.research.stressed(CFG, 1.5))["funding_r"]
         self.assertAlmostEqual(stressed, high * 1.5)
         self.assertEqual(CFG["costs"]["short"]["funding_real_x"], 1.0)
