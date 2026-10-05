@@ -328,8 +328,23 @@ class VariantSearch(unittest.TestCase):
         taken = dict(out[0], lab=True)
         cards2["DB2-VREGIME@1.0"] = taken                                       # already written -> next kind
         nxt = self.run_vs({"a": rcell("DB2", "1h", by_regime=bad)}, cards=cards2)
-        self.assertEqual(nxt[0]["id"], "DB2-VRVOL")                             # DB2 already uses adx
+        self.assertEqual(nxt, [])                   # DB2 already has adx AND a volume filter (rel_vol would be the
+                                                    # same filter again: 28 Sep VEXIT-VRVOL), its next TFs are in
+        no_vol = [r for r in parent["long"] if "volume" not in r], [r for r in parent["short"] if "volume" not in r]
+        p3 = dict(parent, id="DB3", long=no_vol[0], short=no_vol[1],
+                  params={k: v for k, v in parent["params"].items() if k != "vol_x"})
+        cards3 = {"DB3@1.0": SS.load([p3], rg.LABELS, tfm.TRADE_ORDER)[0][0],
+                  "DB3-VREGIME@1.0": dict(taken, id="DB3-VREGIME")}
+        nxt = self.run_vs({"a": rcell("DB3", "1h", by_regime=bad)}, cards=cards3)
+        self.assertEqual(nxt[0]["id"], "DB3-VRVOL")                             # no volume filter yet
         self.assertIn("rel_vol > {v_rv}", nxt[0]["long"])
+
+    def test_a_variant_that_trades_like_an_existing_card_is_skipped(self):
+        cell = {"a": rcell("donchian_breakout", "4h")}
+        first = self.run_vs(cell)[0]
+        lab = [dict(first, id="ALREADY-WRITTEN", status="RETIRED")]            # same rules, other name, retired
+        self.assertEqual(I.variant_cards(cell, self.cards, dt.date(2026, 9, 27), 3, rg.LABELS, tfm.TRADE_ORDER,
+                                         existing=lab), [])
 
     def test_skipped_parents(self):
         cells = {"a": rcell("S5-SWEEP-MSS-FVG", "15m"), "b": rcell("S5-SWEEP-MSS-FVG-noSMC", "15m"),
@@ -413,7 +428,8 @@ class Recorder(unittest.TestCase):
         q = derivs.run(now, fetch, ["BTC"])
         self.assertEqual(q["BTC"]["fetch"]["source"], "okx")
         self.assertEqual(q["BTC"]["fetch"]["sources"], {"okx": True, "binance": False})
-        self.assertIn("451", " ".join(q["BTC"]["fetch"]["errors"]))
+        self.assertEqual(q["BTC"]["fetch"]["blocked"], ["binance"])           # 451 = expected, not a problem
+        self.assertNotIn("451", " ".join(q["BTC"]["fetch"]["errors"]))
         h = D.read(derivs.HOURLY, D.HOURLY_COLS)
         self.assertEqual(set(h["source"]), {"okx", "binance_files"})
         self.assertEqual(q["BTC"]["fetch"]["backfilled_hours"], 4)               # backfill_per_run days
@@ -428,6 +444,18 @@ class Recorder(unittest.TestCase):
         self.assertEqual(set(h2["source"]), {"okx", "binance", "binance_files"})
         self.assertEqual(q2["BTC"]["state"], "GOOD")                             # separate series: not mixed
         self.assertGreater(len(D.read(derivs.HOURLY, D.HOURLY_COLS)), n1)          # history only grows
+
+    def test_a_geo_blocked_api_is_asked_once_per_run(self):
+        fetch, now = self.fake(binance_ok=False)
+        calls = []
+
+        def counting(url, params=None, raw=False):
+            calls.append(url)
+            return fetch(url, params, raw)
+        q = derivs.run(now, counting, ["BTC", "ETH"])
+        self.assertEqual(sum("fapi.binance.com" in u for u in calls), 1)          # ETH: not asked again
+        self.assertEqual([q[c]["fetch"]["blocked"] for c in ("BTC", "ETH")], [["binance"], ["binance"]])
+        self.assertEqual(q["ETH"]["fetch"]["source"], "okx")
 
     def test_unreadable_history_is_never_replaced(self):
         with open(derivs.HOURLY, "wb") as f:

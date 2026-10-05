@@ -86,11 +86,23 @@ def fetch_binance(coin, fetch=get):
     return hourly, funding
 
 
-def fetch_live(coin, fetch=get):
-    """(hourly rows, funding rows, {source: ok?}, errors) - both series, each on its own; one failing never
-    replaces the other (the main series simply has a gap, which the building blocks read as 'unknown')."""
-    rows_h, rows_f, got, errs = [], [], {}, []
+def geo_blocked(e):
+    """HTTP 451 = the exchange refuses this server's country (Binance futures from GitHub's US runners): expected,
+    not a data problem - the research series then comes from the data.binance.vision files only."""
+    code = getattr(getattr(e, "response", None), "status_code", None)
+    return code == 451 or str(e).startswith("451")
+
+
+def fetch_live(coin, fetch=get, skip=()):
+    """(hourly rows, funding rows, {source: ok?}, errors, blocked sources) - both series, each on its own; one failing
+    never replaces the other (the main series simply has a gap, which the building blocks read as 'unknown').
+    skip: sources already known to be geo-blocked this run (not asked again)."""
+    rows_h, rows_f, got, errs, blocked = [], [], {}, [], []
     for name, fn in ((D.MAIN_SOURCE, fetch_okx), ("binance", fetch_binance)):
+        if name in skip:
+            got[name] = False
+            blocked.append(name)
+            continue
         try:
             h, f = fn(coin, fetch)
             rows_h += h
@@ -98,8 +110,11 @@ def fetch_live(coin, fetch=get):
             got[name] = True
         except Exception as e:
             got[name] = False
-            errs.append(f"{name}: {type(e).__name__}: {str(e)[:120]}")
-    return rows_h, rows_f, got, errs
+            if name != D.MAIN_SOURCE and geo_blocked(e):
+                blocked.append(name)
+            else:
+                errs.append(f"{name}: {type(e).__name__}: {str(e)[:120]}")
+    return rows_h, rows_f, got, errs, blocked
 
 
 def backfill(coin, hourly_hist, funding_hist, now, S, fetch=get):
@@ -139,14 +154,15 @@ def run(now, fetch=get, coin_list=None):
         if os.path.exists(path) and os.path.getsize(path) > 200 and not len(df):
             raise RuntimeError(f"{path} exists but cannot be read - nothing written (history is never replaced)")
     n_before = (len(hourly), len(funding))
-    status = {}
+    status, blocked_run = {}, set()
     for c in coin_list or coins():
-        h, f, got, errs = fetch_live(c, fetch)
+        h, f, got, errs, blocked = fetch_live(c, fetch, blocked_run)
+        blocked_run.update(blocked)
         bh, bf, berr = backfill(c, D.series(hourly, "binance_files"), D.series(funding, "binance_files"), now, S, fetch)
         hourly = D.merge(hourly, h + bh, "ts")
         funding = D.merge(funding, f + bf, "time")
         status[c] = dict(source=D.MAIN_SOURCE if got.get(D.MAIN_SOURCE) else None, sources=got,
-                         new_hourly=len(h), backfilled_hours=len(bh), errors=errs + berr)
+                         new_hourly=len(h), backfilled_hours=len(bh), errors=errs + berr, blocked=blocked)
     if len(hourly) < n_before[0] or len(funding) < n_before[1]:
         raise RuntimeError("history would shrink - nothing written")              # never lose history
     os.makedirs(REPORTS, exist_ok=True)
@@ -165,6 +181,7 @@ def main():
     for c, x in q.items():
         print(f"{c}: {x['state']} · main {D.MAIN_SOURCE} {'ok' if x['fetch']['source'] else 'FAILED'} · "
               f"{x.get('hours', 0)} hours of main history · research rows {x.get('research_rows', {})}"
+              + (f" · blocked here (HTTP 451, expected): {', '.join(x['fetch']['blocked'])}" if x["fetch"].get("blocked") else "")
               + "".join(f"\n  ! {p}" for p in x.get("problems", []) + x["fetch"]["errors"]))
     if not any(x["fetch"]["source"] for x in q.values()):
         sys.exit(1)                                   # nothing fetched: a failed (continue-on-error) step

@@ -1711,9 +1711,9 @@ def risk_summary(logdf, now, RK, groups, pct, pct_note, calendar_problem, plans,
     halts, suspended = b.halts(), b.suspended()
     nxt = rk.upcoming(RK["events"], now_ms, RK["calendar_horizon_days"])
     active = rk.blackout(now_ms, RK["events"], RK["blackout_minutes"])
+    ahead = rk.upcoming(RK["events"], now_ms, 3650)          # a quiet week is normal; an empty future is not
     warn = (f"event calendar has an error: {calendar_problem}" if calendar_problem else
-            f"calendar not maintained - no event listed for the next {RK['calendar_horizon_days']} days "
-            "(events.yaml)" if not nxt else None)
+            "calendar not maintained - no future event listed at all (events.yaml)" if not ahead else None)
     prev = {}
     if os.path.exists(state_path):
         try:
@@ -3019,6 +3019,11 @@ def render_derivs(d, w):
           + (f" since {x['first_utc']}" if x.get("first_utc") else "") + f" | {num(last.get('funding_pct'), '{:+.4f}%')} | "
           f"{num(last.get('ls_ratio'), '{:.2f}')} | {num(last.get('taker_ratio'), '{:.2f}')} | "
           f"{'; '.join((x.get('problems') or []) + ((x.get('fetch') or {}).get('errors') or []))[:160] or '-'} |")
+    blocked = sorted({b for x in d["coins"].values() for b in (x.get("fetch") or {}).get("blocked") or []})
+    if blocked:
+        w(f"\n*{', '.join(blocked).capitalize()} futures API: blocked from GitHub's servers (HTTP 451) - expected, not a "
+          "problem. The main series (OKX) is complete; Binance research history comes from the data.binance.vision "
+          "files.*")
     w("")
 
 

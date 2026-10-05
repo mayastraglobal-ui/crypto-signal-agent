@@ -39,7 +39,7 @@ DEFAULTS = dict(
     first_month_risk_pct=0.5,     # 0.5% while validating and in the first live month
     first_month_days=30,
     max_leverage=3.0,
-    calendar_horizon_days=7,      # warn when no event is listed for the coming 7 days
+    calendar_horizon_days=7,      # events of the coming 7 days are listed; warn only when no future event exists
     resume={},                    # "id@version|tf": "YYYY-MM-DD" - operator resumes a suspended strategy
 )
 STEPS = {   # step name -> text (section 14 numbering)
