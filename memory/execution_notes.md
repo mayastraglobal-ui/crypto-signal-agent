@@ -76,3 +76,8 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END ETH 5m data: DEGRADED: volume 98x normal on candle 10-05 16:10 UTC (possible bad data)
 - timestamp: 2026-10-05 17:18 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ETH · timeframe: - · regime: - · review: 2026-11-04
   - problem first seen 2026-10-05 16:22 UTC UTC
+
+### Fee settings CHANGED
+- timestamp: 2026-10-05 21:32 UTC · source: engine: hourly scan (data check) · evidence: FACT: config.yaml -> costs · confidence: configured, not observed · strategy: - · asset: all · timeframe: - · regime: - · review: 2026-11-04
+  - costs: {"long": {"funding_pct_per_8h": 0.01, "maker_fee_pct": 0.02, "market": "futures", "slippage_pct": 0.05, "taker_fee_pct": 0.05}, "short": {"funding_pct_per_8h": 0.01, "funding_real_x": 1.0, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
+  - before: {"long": {"maker_fee_pct": 0.1, "slippage_pct": 0.05, "taker_fee_pct": 0.1}, "short": {"funding_pct_per_8h": 0.01, "funding_real_x": 1.0, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
