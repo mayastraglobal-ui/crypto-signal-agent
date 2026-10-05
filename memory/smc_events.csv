@@ -7696,3 +7696,31 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-05 12:45,BNB,15m,FVG,bear,,788.72,789.66,0.568,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-10-05 13:00,BNB,15m,FVG_RETRACE,bear,,788.72,789.66,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-05 13:15,BNB,15m,FVG_FILLED,bear,,788.72,789.66,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-05 14:00,BTC,30m,BOS,bull,86270.01,,,0.574,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-05 14:00,BTC,15m,BOS,bull,86270.01,,,0.804,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-05 14:00,BTC,15m,ORDER_BLOCK,bull,,85812.0,86152.01,,NY AM,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-05 14:15,BTC,15m,FVG,bull,,86152.01,86259.11,0.433,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-05 13:30,ETH,15m,SWEEP,bear,2723.99,,,0.265,NY AM,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 13:30,ETH,15m,FVG_FILLED,bear,,2722.81,2725.08,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 13:30,ETH,15m,FVG,bull,,2713.26,2718.41,0.786,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 13:45,ETH,15m,FVG_RETRACE,bull,,2713.26,2718.41,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:45,ETH,15m,FVG_FILLED,bull,,2713.26,2718.41,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 14:15,ETH,15m,BOS,bull,2723.99,,,0.632,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-05 13:45,SOL,15m,SWEEP,bull,120.35,,,0.393,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 14:15,SOL,15m,BOS,bull,121.01,,,0.081,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-05 14:15,SOL,15m,FVG_RETRACE,bear,,121.11,121.36,,Silver Bullet,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:30,XRP,30m,FVG_RETRACE,bear,,1.5124,1.5151,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:30,XRP,30m,FVG_FILLED,bear,,1.5124,1.5151,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 14:00,ZEC,1h,WEAK_BREAK,bull,1341.59,,,0.142,NY AM,4h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-05 13:30,ZEC,30m,WEAK_BREAK,bull,1341.59,,,0.103,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-05 13:30,ZEC,15m,BOS,bull,1337.3,,,0.626,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-05 14:15,ZEC,15m,SWEEP,bear,1353.78,,,0.187,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 14:00,SUI,1h,FVG,bear,,1.2259,1.2325,0.365,NY AM,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-05 14:00,BNB,1h,FVG_FILLED,bear,,789.29,791.66,,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-05 13:30,BNB,30m,FVG_RETRACE,bear,,788.78,789.67,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:30,BNB,30m,FVG_FILLED,bear,,788.78,789.67,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-05 14:00,BNB,30m,WEAK_BREAK,bull,791.49,,,0.134,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-05 13:30,BNB,15m,FVG,bull,,788.78,789.48,0.426,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-05 13:45,BNB,15m,FVG_RETRACE,bull,,788.78,789.48,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:45,BNB,15m,FVG_FILLED,bull,,788.78,789.48,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-05 14:00,BNB,15m,WEAK_BREAK,bull,791.49,,,0.216,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
