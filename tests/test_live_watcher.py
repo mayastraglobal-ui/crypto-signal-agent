@@ -126,7 +126,7 @@ class EndToEnd(unittest.TestCase):
         now = int(__import__("time").time() * 1000)
         q = ((now - 30 * 60_000) // (15 * 60_000)) * 15 * 60_000      # a 15m close whose next 5m bar has closed
         self.w.watch = [(self.c5, "15m", "PAPER")]
-        plan = mock.patch.object(sc, "plan_trade", side_effect=lambda s, t, d, e, a, c, cfg, sk=None:
+        plan = mock.patch.object(sc, "plan_trade", side_effect=lambda s, t, d, e, a, c, cfg, sk=None, maker=False:
                                  (2.0, [e + d * 4.0, e + d * 6.0], [0.5, 0.5]))   # SMC stops need SMC levels
         plan.start()
         self.addCleanup(plan.stop)

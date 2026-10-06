@@ -6,8 +6,8 @@ Every definition is the playbook's own, with its numbers. Everything is computed
 at a 5m candle uses only what was known at that candle's close: higher timeframes = their last CLOSED candle,
 swing points only after their confirmation candles, the daily / weekly / Asia levels only once their period ended.
 
-  compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=None, P=None)
-      -> dict of numpy arrays, one value per 5m candle (the column names below)
+  compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=None, P=None, d1d=None, tf_ms=300_000)
+      -> dict of numpy arrays, one value per trigger candle (5m; or 15m) - the column names below
 
 Context    pb_trend / pb_range / pb_transition (1H regime, section 3.2), pb_bias_bull / pb_bias_bear (1H bias, 3.3),
            pb_sess_asia / _london / _ny / _late (UTC sessions, 2.3), pb_vwap_crosses (24 x 15m), pb_funding_ok_long /
@@ -19,6 +19,10 @@ Strategy B pbB_long / pbB_short (5.2, OI confirmation only) and pbB_cvd_long / _
            absorption or the OI drop), pbB_stop_*, pbB_tp2_*, pbB_inval_*, pbB_half (trend regime: half size)
 Strategy C pbC_long / pbC_short (5.3) and pbC_cvd_long / _short (+ CVD not making a new low / high on the retest),
            pbC_stop_*, pbC_tp2_*, pbC_inval_*
+Step 3d    (operator, 2026-10-06: the rules made flexible, the originals untouched) pbA_ldn_* (A in London too),
+           pbCw_* (C with the 2.0 x ATR box), graded setups pbAg_* / pbBg_* / pbCg_* (every must-have + >= grade_min
+           bonus points; pb?g_half_* = below grade_full = half size; pb?g_score_* = the points) and pbAp_* / pbBp_* /
+           pbCp_* (only the full-size setups). compute(..., tf_ms=900_000) = the same rules on 15m trigger candles.
 1 = true, 0 = false, NaN = unknown (a rule reading NaN is false). Pure: no internet, no files.
 """
 import numpy as np
@@ -45,6 +49,9 @@ DEFAULTS = dict(
     # Strategy C (5.3)
     c_comp_atr=0.8, c_comp_bars=8, c_comp_box=1.2, c_under_atr=0.5, c_break_atr=0.2, c_break_body=0.6,
     c_retest_bars=12, c_stop_atr=0.5, c_inval_atr=0.3,
+    # step 3d (operator, 2026-10-06): the looser compression box tested next to the playbook's 1.2, and the grades
+    c_comp_box_wide=2.0,
+    grade_min=2, grade_full=3,        # graded setups: >= grade_min bonus points = a trade, below grade_full = half size
 )
 # sessions (UTC hour ranges) - section 2.3; which strategy may trade in which session
 SESSIONS = dict(asia=(0.0, 7.0), london=(7.0, 10.0), ny=(13.0, 16.0))     # ny = NY open + London/NY overlap
@@ -195,7 +202,7 @@ def vwap_crosses(d15, n):
 
 
 # ---------------------------------------------------------------- levels (section 2.4)
-def day_levels(d5, d15, d1d=None):
+def day_levels(d5, d15, d1d=None, bars_day=288):
     """PDH / PDL, weekly / monthly open, previous week high / low, today's Asia high / low (only after 07:00 UTC),
     the previous UTC day's volume profile (POC / VAH / VAL from its 15m candles). All as known at each 5m close.
     The day / week / month levels come from the daily candles when given (the live watcher keeps 500 of them but
@@ -205,7 +212,7 @@ def day_levels(d5, d15, d1d=None):
     own = pd.DataFrame({"d": day, "o": d5["open"].to_numpy(float), "h": d5["high"].to_numpy(float),
                         "l": d5["low"].to_numpy(float)}).groupby("d").agg(o=("o", "first"), h=("h", "max"),
                                                                            l=("l", "min"), n=("o", "size"))
-    own = own[own["n"] >= 288].drop(columns="n")            # whole days of this market's own 5m candles first ...
+    own = own[own["n"] >= bars_day].drop(columns="n")            # whole days of this market's own 5m candles first ...
     if d1d is not None and len(d1d):                        # ... the daily candles for the days before them
         dd = pd.DataFrame({"d": d1d["open_time"].to_numpy(dtype=np.int64) // DAY_MS, "o": d1d["open"].to_numpy(float),
                            "h": d1d["high"].to_numpy(float), "l": d1d["low"].to_numpy(float)}).set_index("d")
@@ -302,9 +309,12 @@ def candles(df, a, P):
 
 
 # ---------------------------------------------------------------- the whole playbook on 5m
-def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=None, P=None, d1d=None):
+def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=None, P=None, d1d=None, tf_ms=300_000):
+    """d5 = the trigger candles: 5m as the playbook writes it, or 15m (tf_ms = 900_000, step 3d: the same rules on
+    15m triggers - every 'candle' count is then in 15m candles); d15 = the 15m candles (the same frame on 15m)."""
     P = settings(P)
     n = len(d5)
+    per15 = max(1, 900_000 // int(tf_ms))                   # trigger candles per 15m candle
     o, h, l, c, v = (d5[k].to_numpy(dtype=float) for k in ("open", "high", "low", "close", "volume"))
     ot = d5["open_time"].to_numpy(dtype=np.int64)
     a5, e9 = atr(d5), _ema(c, 9)
@@ -320,7 +330,9 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
     nb = int(P["c_comp_bars"])
     box_h = pd.Series(h15).rolling(nb, min_periods=nb).max().to_numpy()
     box_l = pd.Series(l15).rolling(nb, min_periods=nb).min().to_numpy()
-    comp = (a15 < P["c_comp_atr"] * _sma(a15, 50)) & ((box_h - box_l) <= P["c_comp_box"] * a15)
+    calm = a15 < P["c_comp_atr"] * _sma(a15, 50)
+    comp = calm & ((box_h - box_l) <= P["c_comp_box"] * a15)
+    box_w = (box_h - box_l) <= P["c_comp_box_wide"] * a15  # step 3d: the wider box (operator's change to test)
     rb = int(P["b_range_bars"])
     rng_hi = pd.Series(h15).rolling(rb, min_periods=rb).max().to_numpy()
     rng_lo = pd.Series(l15).rolling(rb, min_periods=rb).min().to_numpy()
@@ -337,7 +349,8 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
     ot15 = d15["open_time"].to_numpy(dtype=np.int64)
     sw_l_t = np.where(np.isfinite(il), ot15[np.nan_to_num(il, nan=0).astype(int)], np.nan)
     sw_h_t = np.where(np.isfinite(ih), ot15[np.nan_to_num(ih, nan=0).astype(int)], np.nan)
-    f15 = dict(a15=a15, e21=e21, vw15=vw15, comp=comp.astype(float), box_h=box_h, box_l=box_l, rng_hi=rng_hi,
+    f15 = dict(a15=a15, e21=e21, vw15=vw15, comp=comp.astype(float), comp_w=(calm & box_w).astype(float),
+               box_w=box_w.astype(float), box_h=box_h, box_l=box_l, rng_hi=rng_hi,
                rng_lo=rng_lo, crosses=crosses, eq_l=eq_l, eq_h=eq_h, sw_l=vl, sw_h=vh, sw_l_t=sw_l_t, sw_h_t=sw_h_t,
                **pull)
     if btc15 is not None and len(btc15):
@@ -392,7 +405,7 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
         out["pb_btc_ok_long"], out["pb_btc_ok_short"] = np.ones(n), np.ones(n)
 
     # --- levels (2.4) ---
-    lv = day_levels(d5, d15, d1d)
+    lv = day_levels(d5, d15, d1d, bars_day=DAY_MS // int(tf_ms))
     rd, ru = round_levels(c)
     levels = dict(lv, sw1_up=g(s1, "sw1_up"), sw1_dn=g(s1, "sw1_dn"), sw4_up=g(s4, "sw4_up"),
                   sw4_dn=g(s4, "sw4_dn"), rnd_dn=rd, rnd_up=ru)
@@ -416,9 +429,22 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
         gap = np.where(L > zhi, L - zhi, np.where(L < zlo, zlo - L, 0.0))
         near = np.nanmin(np.where(np.isfinite(L), gap, np.inf), axis=0) <= P["a_level_atr"] * a15_5
         trig_c = (cd["bull_rej"] | cd["bull_eng"]) if d == 1 else (cd["bear_rej"] | cd["bear_eng"])
-        trig = trig_c & ((c > e9) if d == 1 else (c < e9)) & (v >= P["a_trig_vol"] * cd["vavg"])
+        trig_ok = trig_c & ((c > e9) if d == 1 else (c < e9))
+        trig_vol = v >= P["a_trig_vol"] * cd["vavg"]
+        trig = trig_ok & trig_vol
         regime_ok = trend & (bull if d == 1 else bear)
         sig = regime_ok & sess["ny"] & ok_pull & touched & near & trig
+        dl = delta if delta is not None else np.full(n, np.nan)
+        # step 3d (operator, 2026-10-06): A as written but in London too; and the graded A - must-haves: 1H trend +
+        # bias, London / NY, the higher low intact, the pullback in the EMA21 / VWAP zone near a level, the trigger
+        # candle beyond EMA9; bonus points: pullback depth, pullback on lower volume, trigger volume, CVD, NY session
+        ldn_ny = sess["ny"] | sess["london"]
+        out[f"pbA_ldn_{side}"] = (regime_ok & ldn_ny & ok_pull & touched & near & trig).astype(float)
+        core = regime_ok & ldn_ny & (g(s15, f"pull_intact_{sfx}") == 1) & touched & near & trig_ok
+        with np.errstate(invalid="ignore"):
+            cvd_ok = np.isfinite(dl) & (d * dl > 0)
+        _grade(out, "A", side, core, [g(s15, f"pull_deep_{sfx}") == 1, g(s15, f"pull_lowvol_{sfx}") == 1, trig_vol,
+                                      cvd_ok, sess["ny"]], P)
         mid = (h + l) / 2
         entry = np.where(cd["rng"] >= P["a_small_atr"] * a5, mid, np.nan)   # small candle: market (NaN)
         e_est = np.where(np.isfinite(entry), entry, c)
@@ -429,7 +455,6 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
         stop = np.minimum(stop, floor) if d == 1 else np.maximum(stop, floor)  # ... but at least 0.8 x ATR(5m)
         nxt = _next_level(L, e_est, d)
         tp2 = np.where(d * (imp - e_est) > 0, imp, nxt)
-        dl = delta if delta is not None else np.full(n, np.nan)
         out[f"pbA_{side}"] = sig.astype(float)
         out[f"pbA_cvd_{side}"] = np.where(np.isfinite(dl), d * dl > 0, np.nan)
         out[f"pbA_entry_{side}"], out[f"pbA_stop_{side}"], out[f"pbA_tp2_{side}"] = entry, stop, tp2
@@ -437,13 +462,23 @@ def compute(d5, d15, d1h, d4h=None, btc15=None, delta=None, oi=None, funding=Non
 
     # --- Strategy B: liquidity sweep reversal (5.2) and Strategy C: breakout and retest (5.3) ---
     cvd = _cvd(delta, ot) if delta is not None else np.full(n, np.nan)
-    oi_chg = _oi_change(oi, n)
+    oi_chg = _oi_change(oi, n, max(1, H_MS // int(tf_ms)))
     b = _strategy_b(o, h, l, c, ot, a5, cd, cvd, delta, oi_chg, levels, major_lo, major_hi, s15, trend, rangeg,
-                    trans, bull, bear, sess, P)
+                    trans, bull, bear, sess, P, per15)
     cc = _strategy_c(h, l, c, v, a5, cd, cvd, L, s15, trend, rangeg, trans, bull, bear, sess, near_open, P)
     out.update(b)
     out.update(cc)
     return out
+
+
+def _grade(out, key, side, core, bonus, P):
+    """Step 3d graded setups: every must-have true (core) and at least grade_min bonus points = a trade (pb<key>g_*);
+    fewer than grade_full points = half size (pb<key>g_half_*); pb<key>p_* = only the full-size (A+) setups."""
+    score = np.sum([np.asarray(x, dtype=bool) for x in bonus], axis=0)
+    out[f"pb{key}g_score_{side}"] = np.where(core, score, 0).astype(float)
+    out[f"pb{key}g_{side}"] = (core & (score >= P["grade_min"])).astype(float)
+    out[f"pb{key}g_half_{side}"] = (core & (score >= P["grade_min"]) & (score < P["grade_full"])).astype(float)
+    out[f"pb{key}p_{side}"] = (core & (score >= P["grade_full"])).astype(float)
 
 
 def _next_level(L, price, d):
@@ -463,7 +498,8 @@ def _pullbacks(h, l, v, a, ih, vh, il, vl, P):
     OK when the pullback is >= 0.8 x ATR(15m) deep, on lower average volume than the impulse, and has not broken the
     higher low. Short = mirror."""
     m = len(h)
-    out = {k: np.full(m, np.nan) for k in ("pull_ok_l", "pull_px_l", "imp_px_l", "pull_ok_s", "pull_px_s", "imp_px_s")}
+    out = {f"{k}_{x}": np.full(m, np.nan) for k in ("pull_ok", "pull_px", "imp_px", "pull_deep", "pull_lowvol",
+                                                    "pull_intact") for x in "ls"}
     cv = np.r_[0.0, np.cumsum(np.nan_to_num(v))]
     for j in range(m):
         for d, sw_i, sw_v, sfx in ((1, il[j], vl[j], "l"), (-1, ih[j], vh[j], "s")):
@@ -480,7 +516,9 @@ def _pullbacks(h, l, v, a, ih, vh, il, vl, P):
             vol_imp = (cv[k + 1] - cv[s]) / (k + 1 - s)
             vol_pul = (cv[j + 1] - cv[k + 1]) / (j - k)
             intact = (px > sw_v) if d == 1 else (px < sw_v)
-            out[f"pull_ok_{sfx}"][j] = float(depth >= P["a_depth_atr"] * a[j] and vol_pul < vol_imp and intact)
+            deep, low = depth >= P["a_depth_atr"] * a[j], vol_pul < vol_imp
+            out[f"pull_ok_{sfx}"][j] = float(deep and low and intact)
+            out[f"pull_deep_{sfx}"][j], out[f"pull_lowvol_{sfx}"][j], out[f"pull_intact_{sfx}"][j] = deep, low, intact
             out[f"pull_px_{sfx}"][j] = px
             out[f"imp_px_{sfx}"][j] = h[k] if d == 1 else l[k]
     return out
@@ -493,17 +531,17 @@ def _cvd(delta, ot):
     return d.groupby(day).cumsum(skipna=False).to_numpy()
 
 
-def _oi_change(oi, n):
-    """Open-interest change over the last hour, in % (hourly data: the change known at each 5m close)."""
+def _oi_change(oi, n, per_hour=12):
+    """Open-interest change over the last hour, in % (hourly data: the change known at each candle's close)."""
     if oi is None:
         return np.full(n, np.nan)
     x = pd.Series(np.asarray(oi, dtype=float))
     with np.errstate(invalid="ignore", divide="ignore"):
-        return ((x / x.shift(12) - 1) * 100).to_numpy()
+        return ((x / x.shift(per_hour) - 1) * 100).to_numpy()
 
 
 def _strategy_b(o, h, l, c, ot, a5, cd, cvd, delta, oi_chg, levels, major_lo, major_hi, s15, trend, rangeg, trans,
-                bull, bear, sess, P):
+                bull, bear, sess, P, per15=3):
     """Strategy B (5.2). Long: a 5m wick trades below a marked low (Asia low, PDL, VAL, the 24 x 15m range low or an
     equal-lows cluster) by >= 0.1 x ATR(5m), then a 5m candle closes back above it within 3 candles (signal on that
     close). Regime: range (with the 1H bias, or at a major level), transition (major levels only), trend (only
@@ -559,7 +597,7 @@ def _strategy_b(o, h, l, c, ot, a5, cd, cvd, delta, oi_chg, levels, major_lo, ma
                 lower = (ext[i] < prev_sw[i]) if d == 1 else (ext[i] > prev_sw[i])
                 j_ext = k0[i] + int(np.argmin(l[seg]) if d == 1 else np.argmax(h[seg]))
                 a0 = int(np.searchsorted(ot, int(prev_t[i])))
-                at_sw = cvd[a0:a0 + 3]                       # the 5m candles of that 15m swing candle
+                at_sw = cvd[a0:a0 + per15]                   # the trigger candles of that 15m swing candle
                 same_day = a0 < n and ot[a0] // DAY_MS == ot[j_ext] // DAY_MS
                 if lower and same_day and len(at_sw) and np.isfinite(at_sw).all():
                     div[i] = (cvd[j_ext] > at_sw.min()) if d == 1 else (cvd[j_ext] < at_sw.max())
@@ -577,7 +615,10 @@ def _strategy_b(o, h, l, c, ot, a5, cd, cvd, delta, oi_chg, levels, major_lo, ma
                           np.asarray(s15["rng_hi" if d == 1 else "rng_lo"], dtype=float)])
         out[f"pbB_tp2_{side}"] = _next_level(cand, c, d)
         out[f"pbB_inval_{side}"] = lvl_sw
-        out[f"pbB_half_{side}"] = (base & trend).astype(float)
+        out[f"pbB_half_{side}"] = (sig & reg_ok & trend).astype(float)   # counter-trend sweep (any session)
+        # step 3d graded B - must-haves: the sweep and the close back inside, the regime rule; bonus points: OI drop,
+        # CVD divergence, absorption, a playbook session (Asia / London / NY), a major level
+        _grade(out, "B", side, sig & reg_ok, [oi_ok, div, absorb, sess_ok, is_major], P)
     return out
 
 
@@ -592,46 +633,68 @@ def _strategy_c(h, l, c, v, a5, cd, cvd, L, s15, trend, rangeg, trans, bull, bea
     no entry on that candle; within 12 x 5m candles price returns to the level zone and prints a bullish rejection
     candle (signal on that close); a 5m close back inside by more than 0.3 x ATR first cancels it. Regime: trend in
     the breakout's direction, or a range / transition when the breakout comes near a session open. With CVD
-    (pbC_cvd_*): the retest's CVD stays above its low since the breakout."""
+    (pbC_cvd_*): the retest's CVD stays above its low since the breakout.
+    Step 3d: pbCw_* = the same with the wider compression box (2.0 x ATR, the operator's change to test); pbCg_* /
+    pbCp_* = graded C - must-haves: a box within 2.0 x ATR(15m) under the level, the strong breakout candle (no
+    volume rule), not against a 1H trend, the retest rejection; bonus points: the playbook's tight compression,
+    the breakout's volume spike, CVD holding, London / NY session, the playbook's regime rule."""
     n = len(c)
     out = {}
-    comp = np.asarray(s15["comp"], dtype=float) == 1
+    comp, comp_w, box_w = (np.asarray(s15[k], dtype=float) == 1 for k in ("comp", "comp_w", "box_w"))
     bh, bl, a15 = (np.asarray(s15[k], dtype=float) for k in ("box_h", "box_l", "a15"))
     zone = P["zone_atr"] * a15
+    sess_ok = sess["london"] | sess["ny"]
+    prev = lambda x: np.r_[False, x[:-1]]                   # noqa: E731 - true at the candle BEFORE
     for d, side in ((1, "long"), (-1, "short")):
         edge = bh if d == 1 else bl
         lev = _next_level(L, edge - d * 1e-12, d)          # the nearest level at / beyond the box edge
-        under = comp & np.isfinite(lev) & (d * (lev - edge) <= P["c_under_atr"] * a15)
-        brk = (d * (c - lev) >= P["c_break_atr"] * a5) & (cd["body"] >= P["c_break_body"] * cd["rng"]) & \
-              (v >= P["vol_spike"] * cd["vavg"])
-        prev_under = np.r_[False, under[:-1]]
-        start = brk & prev_under                            # the compression was there before the breakout candle
-        reg_at = (trend & (bull if d == 1 else bear)) | ((rangeg | trans) & near_open)
-        sig, sig_cvd = np.zeros(n, bool), np.zeros(n, bool)
-        stop, tp2, inval = np.full(n, np.nan), np.full(n, np.nan), np.full(n, np.nan)
+        with np.errstate(invalid="ignore"):
+            near_lev = np.isfinite(lev) & (d * (lev - edge) <= P["c_under_atr"] * a15)
+            beyond = (d * (c - lev) >= P["c_break_atr"] * a5) & (cd["body"] >= P["c_break_body"] * cd["rng"])
+        spike = v >= P["vol_spike"] * cd["vavg"]
+        with_bias = bull if d == 1 else bear
+        reg_at = (trend & with_bias) | ((rangeg | trans) & near_open)
         rej = cd["bull_rej"] if d == 1 else cd["bear_rej"]
-        for b in np.flatnonzero(start & reg_at):
-            Lb, zb, height = lev[b], zone[b], (bh[b] - bl[b])
-            for i in range(b + 1, min(b + int(P["c_retest_bars"]), n - 1) + 1):
-                if d * (c[i] - (Lb - d * P["c_inval_atr"] * a5[i])) < 0:
-                    break                                   # closed back inside: setup cancelled
-                in_zone = (l[i] <= Lb + zb) if d == 1 else (h[i] >= Lb - zb)
-                if in_zone and rej[i]:
-                    sig[i] = True
-                    seg = cvd[b:i + 1]
-                    sig_cvd[i] = bool(np.isfinite(seg).all() and (d * (cvd[i] - (seg[:-1].min() if d == 1 else
-                                                                                  seg[:-1].max())) > 0))
-                    stop[i] = min(l[i], Lb - P["c_stop_atr"] * a5[i]) if d == 1 else max(h[i], Lb + P["c_stop_atr"] * a5[i])
-                    mm, nx = Lb + d * height, _next_level(L[:, [i]], np.array([Lb]), d)[0]
-                    cand = [x for x in (mm, nx) if np.isfinite(x) and d * (x - c[i]) > 0]
-                    tp2[i] = (min(cand) if d == 1 else max(cand)) if cand else np.nan   # whichever comes first
-                    inval[i] = Lb - d * P["c_inval_atr"] * a5[i]
-                    break
-        sess_ok = sess["london"] | sess["ny"]
-        out[f"pbC_{side}"] = (sig & sess_ok).astype(float)
-        out[f"pbC_cvd_{side}"] = (sig_cvd & sess_ok).astype(float)
-        out[f"pbC_stop_{side}"], out[f"pbC_tp2_{side}"], out[f"pbC_inval_{side}"] = stop, tp2, inval
+        args = (d, lev, h, l, c, a5, rej, zone, bh, bl, L, cvd, P)
+        for key, cm in (("C", comp), ("Cw", comp_w)):       # as written (1.2 x ATR box) and the wider box
+            sig, sig_cvd, stop, tp2, inval, _ = _c_retests(beyond & spike & prev(cm & near_lev) & reg_at, *args)
+            out[f"pb{key}_{side}"] = (sig & sess_ok).astype(float)
+            out[f"pb{key}_cvd_{side}"] = (sig_cvd & sess_ok).astype(float)
+            out[f"pb{key}_stop_{side}"], out[f"pb{key}_tp2_{side}"], out[f"pb{key}_inval_{side}"] = stop, tp2, inval
+        loose = (trend & with_bias) | rangeg | trans
+        sig, sig_cvd, stop, tp2, inval, src = _c_retests(beyond & prev(box_w & near_lev) & loose, *args)
+        b = np.where(src >= 0, src, 0)
+        _grade(out, "C", side, sig, [prev(comp & near_lev)[b], spike[b], sig_cvd, sess_ok, reg_at[b]], P)
+        out[f"pbCg_stop_{side}"], out[f"pbCg_tp2_{side}"], out[f"pbCg_inval_{side}"] = stop, tp2, inval
     return out
+
+
+def _c_retests(starts, d, lev, h, l, c, a5, rej, zone, bh, bl, L, cvd, P):
+    """The retest after each breakout candle b in `starts` (5.3): the first rejection candle in the level zone within
+    c_retest_bars candles, unless a close back inside by > c_inval_atr x ATR comes first. Returns per signal candle:
+    signal, CVD held, stop, TP2, invalidation level, and the breakout candle it came from (-1 = none)."""
+    n = len(c)
+    sig, sig_cvd = np.zeros(n, bool), np.zeros(n, bool)
+    stop, tp2, inval = np.full(n, np.nan), np.full(n, np.nan), np.full(n, np.nan)
+    src = np.full(n, -1)
+    for b in np.flatnonzero(starts):
+        Lb, zb, height = lev[b], zone[b], (bh[b] - bl[b])
+        for i in range(b + 1, min(b + int(P["c_retest_bars"]), n - 1) + 1):
+            if d * (c[i] - (Lb - d * P["c_inval_atr"] * a5[i])) < 0:
+                break                                       # closed back inside: setup cancelled
+            in_zone = (l[i] <= Lb + zb) if d == 1 else (h[i] >= Lb - zb)
+            if in_zone and rej[i]:
+                sig[i], src[i] = True, b
+                seg = cvd[b:i + 1]
+                sig_cvd[i] = bool(np.isfinite(seg).all() and (d * (cvd[i] - (seg[:-1].min() if d == 1 else
+                                                                              seg[:-1].max())) > 0))
+                stop[i] = min(l[i], Lb - P["c_stop_atr"] * a5[i]) if d == 1 else max(h[i], Lb + P["c_stop_atr"] * a5[i])
+                mm, nx = Lb + d * height, _next_level(L[:, [i]], np.array([Lb]), d)[0]
+                cand = [x for x in (mm, nx) if np.isfinite(x) and d * (x - c[i]) > 0]
+                tp2[i] = (min(cand) if d == 1 else max(cand)) if cand else np.nan   # whichever comes first
+                inval[i] = Lb - d * P["c_inval_atr"] * a5[i]
+                break
+    return sig, sig_cvd, stop, tp2, inval, src
 
 
 def coin_list(section, stats):
@@ -666,4 +729,8 @@ COLUMNS = (["pb_trend", "pb_range", "pb_transition", "pb_bias_bull", "pb_bias_be
               for side in ("long", "short")]
            + [f"pb{s}_{k}{side}" for s in "BC" for k in ("", "cvd_", "stop_", "tp2_", "inval_")
               for side in ("long", "short")]
-           + ["pbB_half_long", "pbB_half_short"])
+           + ["pbB_half_long", "pbB_half_short"]
+           # step 3d: A in London too, C with the wider box, the graded setups (g) and their full-size-only part (p)
+           + [f"{k}{side}" for k in ("pbA_ldn_", "pbCw_", "pbCw_cvd_", "pbCw_stop_", "pbCw_tp2_", "pbCw_inval_",
+                                     "pbCg_stop_", "pbCg_tp2_", "pbCg_inval_") for side in ("long", "short")]
+           + [f"pb{s}{k}{side}" for s in "ABC" for k in ("g_", "g_score_", "g_half_", "p_") for side in ("long", "short")])

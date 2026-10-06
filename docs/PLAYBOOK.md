@@ -11,8 +11,8 @@ The operator's decisions (2026-10-06):
   it helps.
 - The playbook strategies must pass the playbook's **stricter bar** as well as the agent's own tests.
 
-Status: **3a** (engine features), **3b** (building blocks and strategies A / B / C) and **3c** (risk rules and the
-pass bar) are built. The strategies start at BACKTESTING like every new card; they alert in Telegram only once the
+Status: **3a** (engine features), **3b** (building blocks and strategies A / B / C), **3c** (risk rules and the
+pass bar) and **step 3d** (flexible versions: graded setups, the operator's three rule changes, the fee fix) are built. The strategies start at BACKTESTING like every new card; they alert in Telegram only once the
 research promotes them to PAPER_TRADING (and LIVE only after the operator's approval).
 
 ## The chain (playbook section 1)
@@ -117,6 +117,59 @@ The rules as written are selective. On BTC, before costs and the other filters:
 The playbook asks for 100 trades before judging (9.2), so A and C may stay in BACKTESTING for lack of trades. That is
 the honest result of the rules as written. Changing a number (for example the compression box) is the operator's
 decision: a new card version, one change at a time (9.1 and 10.2).
+
+## Step 3d: flexible versions (operator, 2026-10-06)
+
+The operator: "the market never follows a rule book perfectly - rules this strict may never give a trade". The first
+measurement agreed (A ~2 trades a year, C none), and showed a second problem: on 5m the stop is so close that fees
+and slippage cost B a median 0.84R a trade. The originals stay exactly as written (the benchmark); next to them:
+
+| Card | What changes | Why |
+|---|---|---|
+| `PB-A-PULLBACK-LDN` | A, London (07:00-10:00 UTC) as well as NY | operator's change 1 (one change only) |
+| `PB-B-SWEEP-15M` | B on 15m trigger candles (outer limit 16 x 15m = 4 hours, as on 5m) | operator's change 2: a wider stop makes the fees smaller in R |
+| `PB-C-BREAKOUT-W20` | C with the compression box 2.0 x ATR (was 1.2) | operator's change 3 |
+| `PB-B-SWEEP-LIMIT` | B + the fee fix: limit entry at the signal close (maker fee, waits 2 candles) and `stop.max_cost_r: 0.25` | fees |
+| `PB-A-GRADED`, `PB-B-GRADED` (5m and 15m), `PB-C-GRADED` | graded setups (below), London / NY for A, the 2.0 box for C, the fee fix | rules that bend without dropping the safety rules |
+| `PB-A-APLUS`, `PB-B-APLUS` (5m and 15m), `PB-C-APLUS` | only the graded setups with 3+ points | measures the grades separately: if GRADED does no better than APLUS, the grade B trades add nothing |
+
+**Graded setups.** Every must-have stays a must-have; the other conditions become bonus points. 2 points = a trade at
+**half size** (grade B, shown in the alert), 3 or more = full size (A+), fewer = no trade.
+
+| | Must-haves (all) | Bonus points (1 each) |
+|---|---|---|
+| A | 1H trend + bias, London / NY, the 15m higher low intact, the pullback in the EMA21 / VWAP zone near a level, a 5m rejection / engulfing candle beyond EMA9 | pullback >= 0.8 ATR deep, pullback on lower volume, trigger volume >= 1.2 x average, CVD on the trigger candle, NY session |
+| B | the sweep (>= 0.1 ATR beyond a marked level), the first close back inside within 3 candles, the playbook's regime rule | OI drop >= 1%, CVD divergence, absorption, Asia / London / NY session, a major level |
+| C | a box within 2.0 x ATR(15m) under a level, a breakout close >= 0.2 ATR beyond with a 60% body, not against a 1H trend, the retest rejection candle before a close back inside | the playbook's tight compression, the breakout's volume spike, CVD holding, London / NY, the playbook's regime rule |
+
+Every playbook A signal is a graded A+ setup (the test checks it). The thresholds 2 and 3 are a choice, not
+measured; they are not tuned to the data (tuning to the data the strategy is judged on is how backtests lie).
+
+**Fee fix.** `stop.max_cost_r: 0.25` = no trade when the round trip (the entry fee - maker for a limit, taker +
+slippage at market - plus a market exit with slippage) costs more than 0.25R. With OKX's fees that means a stop at
+least ~0.5% away for a limit entry, ~0.8% at market: on 5m BTC most stops are closer, so few 5m trades pass; on 15m
+more do. The research counts these as `skipped_fee_cost`.
+
+**First measurement** (2 years, 2024-10 to 2026-10, all costs; a pre-check, the research run decides):
+
+| Card | BTC trades | BTC avg | ETH trades | ETH avg |
+|---|---|---|---|---|
+| PB-B-SWEEP (as written) | 130 | -0.93R | 81 | -0.68R |
+| PB-B-SWEEP-15M | 25 | -0.96R | 16 | -0.53R |
+| PB-B-SWEEP-LIMIT (fee fix) | 11 | -0.25R | 15 | +0.04R |
+| PB-B-GRADED 5m / 15m | 37 / 16 | -0.21R / -0.43R | 76 / 26 | -0.06R / -0.40R |
+| PB-B-APLUS 5m / 15m | 8 / 2 | -0.24R / -0.61R | 13 / 6 | +0.10R / -0.80R |
+| PB-A-PULLBACK / -LDN / -GRADED | 1 / 1 / 3 | all losses | 1 / 2 / 8 | -1.22R / -0.38R / -0.36R |
+| PB-C-* (all versions) | 0 | - | 0-1 | - |
+
+What it says: the fee fix is the biggest single improvement (B from -0.93R / -0.68R to about -0.2R / 0R: the median
+cost falls from 0.84R to 0.20R) - but it removes most trades, and nothing is clearly profitable yet; every sample is far
+below the 100 trades the playbook asks for. 15m triggers did not help B (most 15m sweeps fail the 1.5R-after-fees
+rule to TP2). C stays near zero: strong breakouts straight out of a quiet box with a clean retest are rare whatever
+the box width. The daily research run tests every coin and decides.
+
+Every new card starts at BACKTESTING and needs the same tests and pass bar as the originals; nothing was loosened
+in the gates, the trials bar or the costs. 10 more cards also make the trials bar a little stricter for everyone.
 
 ## Risk rules (3c, for the PB-* strategies only)
 

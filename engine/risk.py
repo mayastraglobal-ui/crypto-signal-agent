@@ -93,15 +93,18 @@ def today_stats(logdf, now):
     return entries, streak, last
 
 
-def pb_size_factor(logdf, now, PB, late=False, half=False, last_week_r=None):
+def pb_size_factor(logdf, now, PB, late=False, half=False, last_week_r=None, grade=None):
     """The playbook's size rules (sections 2.3, 5.2, 6.1, 11): half size in late US hours / at the weekend, for a
     counter-trend sweep (Strategy B in a trend), after a large win (the last closed live trade >= big_win_r), and in
-    the week after a -6R week. Never larger than 1. Returns (factor, reasons)."""
+    the week after a -6R week; step 3d: for a grade B setup (grade = the card's half_size reason). Never larger than
+    1. Returns (factor, reasons)."""
     why = []
     if late:
         why.append("late US / weekend: half size (playbook 2.3)")
     if half:
         why.append("counter-trend sweep: half size (playbook 5.2)")
+    if grade:
+        why.append(f"{grade}: half size")
     d = _closed_r(_live(logdf))
     if len(d) and float(d.sort_values("closed_time_utc")["result_r"].iloc[-1]) >= PB["big_win_r"]:
         why.append(f"after a win of {PB['big_win_r']:g}R or more: half size (playbook 11)")

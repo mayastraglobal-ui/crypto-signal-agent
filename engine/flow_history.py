@@ -161,6 +161,19 @@ def okx_today(base, now_ms, get=None):
     return h.okx_recent(base, now_ms // DAY_MS * DAY_MS - 1, now_ms).sort_values("open_time").reset_index(drop=True)
 
 
+def resample(flow, tf_ms):
+    """The delta per tf_ms candle (step 3d: 15m triggers) = the sum of its 5m deltas; a candle with a 5m delta missing
+    is left out (unknown, never a partial sum)."""
+    if flow is None or not len(flow) or int(tf_ms) == FIVE:
+        return flow
+    per = int(tf_ms) // FIVE
+    f = pd.DataFrame({"t": flow["open_time"].to_numpy(dtype=np.int64) // int(tf_ms) * int(tf_ms),
+                      "delta": flow["delta"].to_numpy(dtype=float)})
+    g = f.groupby("t")["delta"].agg(["sum", "count"])
+    g = g[g["count"] == per]
+    return pd.DataFrame({"open_time": g.index.to_numpy(dtype=np.int64), "delta": g["sum"].to_numpy(), "src": 0})
+
+
 def align(open_time, flow):
     """The delta of each candle (by open time); NaN where unknown."""
     if flow is None or not len(flow):

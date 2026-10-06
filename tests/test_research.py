@@ -48,6 +48,12 @@ FROZEN = {
     "PB-A-PULLBACK@1.0": "cfd99bcc7ae3cc67", "PB-A-PULLBACK-CVD@1.0": "a41e3f79b88ffb12",
     "PB-B-SWEEP@1.0": "0bb3a9255fe4f936", "PB-B-SWEEP-noCVD@1.0": "70f3b212e56424ca",
     "PB-C-BREAKOUT@1.0": "51d544705d5ab1d8", "PB-C-BREAKOUT-noCVD@1.0": "ab5e60af6d592d7c",
+    # step 3d (2026-10-06): the flexible playbook versions
+    "PB-A-PULLBACK-LDN@1.0": "3ba46c2f0247cc3f", "PB-B-SWEEP-15M@1.0": "401ea9369b9651da",
+    "PB-B-SWEEP-LIMIT@1.0": "8b077fee8f9ea740", "PB-C-BREAKOUT-W20@1.0": "175e93c98ffd1449",
+    "PB-A-GRADED@1.0": "8e9ec009e3567e33", "PB-A-APLUS@1.0": "95f56b7ba0c5a583",
+    "PB-B-GRADED@1.0": "1c4b928b5a956d8c", "PB-B-APLUS@1.0": "ded9ecef9cfa7d1c",
+    "PB-C-GRADED@1.0": "e2f43b5ad1ade2ad", "PB-C-APLUS@1.0": "22af889ad45d1143",
 }
 
 

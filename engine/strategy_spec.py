@@ -51,6 +51,9 @@ MANAGE_KEYS = {"be_plus_fees", "trail", "progress", "invalidate"}
 # entry (roadmap step 2B, 2026-10-06): how a signal is entered. market (default) = the next candle's open, taker fee +
 # slippage. limit = a limit order at the signal close -/+ offset_atr x ATR (a small pullback), maker fee, no slippage;
 # filled only when price comes back to it within valid_bars candles - no fill = no trade.
+# step 3d (operator, 2026-10-06): stop.max_cost_r = no trade when the round-trip costs (entry fee - maker for a limit -
+# plus a market exit with slippage) are more than this many R (the stop is too close for the fees);
+# half_size: {long, short, why} = columns that halve the size (graded setups: grade B) - never changes a backtest R.
 ENTRY_TYPES = ("market", "limit")
 LIMIT_MAX_OFFSET_ATR, LIMIT_MAX_BARS = 2.0, 12
 VERSION_RE = re.compile(r"^\d+\.\d+$")
@@ -113,10 +116,11 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
 H4_COLUMNS = {"h4_bear_ob_high", "h4_bear_ob_low", "h4_bull_ob_high", "h4_bull_ob_low", "h4_liq_above",
               "h4_liq_below", "h4_range_high", "h4_range_low", "h4_range_pos"}     # only below 4H
 H4_TFS = ["1h", "30m", "15m", "5m"]
-# step 3: the operator's playbook building blocks (engine/scalp_playbook.py) exist on the 5m candles only
+# step 3: the operator's playbook building blocks (engine/scalp_playbook.py) exist on the 5m candles (step 3d: and on
+# the 15m candles - the same rules on 15m triggers)
 from engine.scalp_playbook import COLUMNS as _PB_COLUMNS  # noqa: E402
 PB_COLUMNS = set(_PB_COLUMNS)
-PB_TFS = ["5m"]
+PB_TFS = ["5m", "15m"]
 SPECIAL_PREFIXES = ("smc_", "h4_")         # the SMC / ICT ingredient: a card using it needs a control twin
 _OPS = (ast.Expression, ast.BoolOp, ast.BinOp, ast.UnaryOp, ast.Compare, ast.Call, ast.Name, ast.Load,
         ast.Constant, ast.keyword, ast.And, ast.Or, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.FloorDiv,
@@ -323,6 +327,14 @@ def check(spec, labels, timeframes):
     if isinstance(st, dict) and "min_width_atr" in st and not (isinstance(st["min_width_atr"], (int, float))
                                                                and 0 <= st["min_width_atr"] < 10):
         errs.append("stop.min_width_atr must be a number from 0 to 10 (ATRs)")
+    if isinstance(st, dict) and "max_cost_r" in st and not (isinstance(st["max_cost_r"], (int, float)) and
+                                                            not isinstance(st["max_cost_r"], bool) and
+                                                            0 < st["max_cost_r"] <= 2):
+        errs.append("stop.max_cost_r must be a number above 0 and at most 2 (round-trip costs in R)")
+    hs = spec.get("half_size")
+    if hs is not None and not (isinstance(hs, dict) and set(hs) == {"long", "short", "why"} and
+                               all(isinstance(hs[k], str) and hs[k] for k in hs)):
+        errs.append("half_size needs long and short (column names: 1 = half size) and why (the reason shown)")
     tg = spec.get("targets")
     if isinstance(tg, dict) and "min_rr_after_fees" in tg and not (
             isinstance(tg["min_rr_after_fees"], (int, float)) and 0 < tg["min_rr_after_fees"] <= 10):
@@ -550,7 +562,7 @@ def expr_problems(expr, tfs):
                     probs.append(f"{expr!r}: {node.id} exists only below 4H (timeframes {H4_TFS})")
             elif node.id in PB_COLUMNS:
                 if not set(tfs) <= set(PB_TFS):
-                    probs.append(f"{expr!r}: {node.id} exists only on 5m (the operator's playbook, timeframes {PB_TFS})")
+                    probs.append(f"{expr!r}: {node.id} exists only on {' / '.join(PB_TFS)} (the operator's playbook)")
             elif node.id not in COLUMNS:
                 probs.append(f"{expr!r}: unknown building block {node.id!r}"
                              + (" (a function - call it, e.g. ema(close,20))" if node.id in FUNCTIONS else ""))
