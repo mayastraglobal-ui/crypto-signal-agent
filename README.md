@@ -213,12 +213,12 @@ tests every strategy version on every timeframe on years of history (AGENT_PROMP
 | Test | What it asks |
 |---|---|
 | **Layer A** (hourly) | How did it do in the last 15 days (days 1-10 vs 11-15)? Shown only - never enough alone |
-| **Layer B** | On all history since the coin was listed (1D/4H/1H; 30m 2 years, 15m 1 year, 5m 90 days): ≥ 30 trades, ≥ +0.10R per trade, PF ≥ 1.2, drawdown ≤ 10R (family table in shadow mode - see Phase 19 A), profitable in the first 70% ("develop") AND the last 30% ("validate") of every coin, and fees ≤ 1/4 of the stop |
+| **Layer B** | On all history since the coin was listed (1D/4H/1H, Binance spot; 30m / 15m / 5m: 2 years of OKX USDT-perpetual candles, the market the operator trades - Binance spot before a coin's OKX listing): ≥ 30 trades, ≥ +0.10R per trade, PF ≥ 1.2, drawdown ≤ 10R (family table in shadow mode - see Phase 19 A), profitable in the first 70% ("develop") AND the last 30% ("validate") of every coin, and fees ≤ 1/4 of the stop |
 | **Layer C** (walk-forward) | History cut into 6 time windows (the first only warms up): at least 3 of the other 5 profitable, and all 5 together |
 | **Costs +50%** | Still profitable when fees, slippage and funding are 50% higher? |
 | **±20% test** | Still profitable when each number in the rules (and the stop and hold time) is moved 20% down or up, one at a time? |
 | **Coins / overfitting** | Profitable on ≥ 3 coins, and no more than half of the profit from one coin or one window |
-| **Control twin** | For SMC strategies: better than the same idea without the SMC part, overall and in the validate part. For `-5M` strategies: better than the same strategy without the 5m check (tested on the 90 days of 5m history, which also sets their develop / validate split and walk-forward windows) |
+| **Control twin** | For SMC strategies: better than the same idea without the SMC part, overall and in the validate part. For `-5M` strategies: better than the same strategy without the 5m check (tested on the 2 years of 5m history, which also sets their develop / validate split and walk-forward windows) |
 
 Passing everything moves a strategy to **PAPER_TRADING** automatically: its signals are logged as paper trades,
 never emailed. A paper strategy is **RETIRED** if its last 20 paper signals average below -0.10R or it loses more
