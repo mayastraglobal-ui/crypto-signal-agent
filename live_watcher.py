@@ -20,12 +20,18 @@ signals, emails them and keeps the risk book. This watcher never places orders a
   python live_watcher.py --find-chat-id     your Telegram chat id (send the bot a message first)
   python live_watcher.py --setup-telegram   step-by-step Telegram setup (writes telegram.env)
 
+While it runs, the bot answers the operator's commands (/status, /trades, /pause, /resume, /help) and the buttons
+under each alert: "✅ Took it" makes the watcher follow that trade and say when TP1 / TP2, the stop or the time stop
+is reached (engine/follow.py: the backtests' rules); every choice and result is written to journal/my_trades.csv.
+Only the chat in TELEGRAM_CHAT_ID is answered.
+
 Telegram settings come from the environment (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) or from the file telegram.env
 next to this script (python live_watcher.py --setup-telegram writes it). Never put them in the repository.
 Without git (a Windows PC with the ZIP download, docs/WINDOWS_WATCHER.md), GitHub's newest decisions are downloaded
 directly every hour (sync_files).
 """
 import argparse
+import csv
 import datetime as dt
 import json
 import os
@@ -44,6 +50,7 @@ import yaml
 import scanner as sc
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import follow as fl
 from engine import lifecycle as lc
 from engine import live as lv
 from engine import risk as rk
@@ -54,6 +61,9 @@ ROOT = sc.ROOT
 STATE = os.path.join(ROOT, "reports", "live_watcher_state.json")     # local only (.gitignore)
 SETTINGS_FILE = os.path.join(ROOT, "telegram.env")                  # local only (.gitignore): bot token + chat id
 LOG_FILE = os.path.join(ROOT, "logs", "live_watcher.log")           # local only (.gitignore)
+JOURNAL = os.path.join(ROOT, "journal", "my_trades.csv")            # local only (.gitignore): took / skipped / results
+JOURNAL_COLS = ["time_utc", "alert_id", "event", "label", "coin", "side", "tf", "strategy", "version", "entry", "stop",
+                "tp1", "tp2", "tp3", "price", "result_r"]
 DATA_TFS = ["1w", "1d", "4h", "1h", "30m", "15m", "5m"]
 REPO = os.environ.get("CRYPTO_AGENT_REPO", "mayastraglobal-ui/crypto-signal-agent")
 RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
@@ -62,7 +72,7 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
-CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py"]      # changed on GitHub -> "run update.bat"
+CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py"]      # changed on GitHub -> "run update.bat"
 
 
 def log(*a):
@@ -224,18 +234,36 @@ class SyntheticSwap:
 
 
 # ---------------------------------------------------------------- Telegram
+def tg_api(method, payload, token=None, timeout=15):
+    """One Telegram Bot API call. Returns (ok, result or error text)."""
+    token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not token:
+        return False, "TELEGRAM_BOT_TOKEN not set"
+    try:
+        r = requests.post(f"https://api.telegram.org/bot{token}/{method}", json=payload, timeout=timeout)
+        j = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+        if r.status_code == 200 and j.get("ok"):
+            return True, j.get("result")
+        return False, f"HTTP {r.status_code}: {(j.get('description') or r.text)[:200]}"
+    except (requests.RequestException, ValueError) as e:
+        return False, e.__class__.__name__
+
+
+def telegram_message(text, token=None, chat=None, timeout=15, buttons=None):
+    """Send one message (with buttons = an inline keyboard). Returns (ok, error text, message id)."""
+    chat = chat or os.environ.get("TELEGRAM_CHAT_ID")
+    if not (token or os.environ.get("TELEGRAM_BOT_TOKEN")) or not chat:
+        return False, "TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set", None
+    p = dict(chat_id=chat, text=text[:4000], parse_mode="HTML", disable_web_page_preview=True)
+    if buttons:
+        p["reply_markup"] = buttons
+    ok, res = tg_api("sendMessage", p, token, timeout)
+    return (True, "", (res or {}).get("message_id")) if ok else (False, res, None)
+
+
 def telegram(text, token=None, chat=None, timeout=15):
     """Send one message. Returns (ok, error text)."""
-    token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
-    chat = chat or os.environ.get("TELEGRAM_CHAT_ID")
-    if not token or not chat:
-        return False, "TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set"
-    try:
-        r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage", timeout=timeout,
-                          json=dict(chat_id=chat, text=text[:4000], parse_mode="HTML", disable_web_page_preview=True))
-        return (True, "") if r.status_code == 200 else (False, f"HTTP {r.status_code}: {r.text[:200]}")
-    except requests.RequestException as e:
-        return False, e.__class__.__name__
+    return telegram_message(text, token, chat, timeout)[:2]
 
 
 def find_chat_ids(token=None):
@@ -263,6 +291,11 @@ class Watcher:
         self.pending = []         # 5m confirmations waiting for their bars
         self.state = self._load_state()
         self.fails = 0
+        self.started_ms = self.now_fn()
+        self.last_tick = None     # (ms, ok, note) of the newest market check, for /status
+        self.last_refresh = None  # (ms, note) of the newest GitHub refresh
+        self.code_old = []        # watcher code files that differ from GitHub main
+        self._poll_err = None
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -309,36 +342,49 @@ class Watcher:
         if not self.git:
             return
         if os.path.isdir(os.path.join(ROOT, ".git")):
+            note = "git pull"
             for cmd in (["git", "pull", "--ff-only", "-q"], [sys.executable, "publish_live.py", "--refresh"]):
                 try:
                     subprocess.run(cmd, cwd=ROOT, timeout=180, capture_output=True, check=False)
                 except (OSError, subprocess.TimeoutExpired) as e:
                     log(f"refresh: {' '.join(cmd[:2])} failed: {e}")
+                    note = f"{' '.join(cmd[:2])} failed"
         else:
             updated, problems = sync_files()
-            log("refresh from GitHub: " + (", ".join(updated) or "nothing new")
-                + ("" if not problems else " · problems: " + "; ".join(problems)))
+            note = (", ".join(updated) or "nothing new") + ("" if not problems else " · problems: " + "; ".join(problems))
+            log("refresh from GitHub: " + note)
             day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
             if self.state.get("update_note") != day:
-                old = code_outdated()
-                if old:
+                self.code_old = code_outdated()
+                if self.code_old:
                     self.state["update_note"] = day
-                    log(f"newer code on GitHub: {', '.join(old)} - run update.bat")
+                    log(f"newer code on GitHub: {', '.join(self.code_old)} - run windows\\4_update.bat")
                     if self.send:
-                        telegram("🔄 A newer version of the live watcher is on GitHub. On the PC: close the watcher "
-                                 "window, double-click <b>windows\\update.bat</b>, then start it again.")
+                        telegram("🔄 A newer version of the live watcher is on GitHub. On the PC, double-click "
+                                 "<b>windows\\4_update.bat</b> (it stops the watcher, updates it and starts it again).")
+        self.last_refresh = (self.now_fn(), note)
         self.reload()
 
     # ---- local state (duplicate guard, heartbeat) ----
     def _load_state(self):
         try:
-            return json.load(open(STATE))
+            st = json.load(open(STATE))
         except (OSError, ValueError):
-            return dict(sent={}, heartbeat=None, alerts_today={})
+            st = {}
+        # alerts: the buttons' memory (3 days) · trades: the ones being followed · paused_until: 0 = alerts on,
+        # -1 = until /resume, else the end (ms) · tg_offset: the next Telegram update to read
+        for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
+                         next_id=0).items():
+            st.setdefault(k, v)
+        return st
 
     def _save_state(self):
-        cut = self.now_fn() - 2 * 86_400_000                         # the duplicate guard needs hours, not weeks
+        now = self.now_fn()
+        cut = now - 2 * 86_400_000                                   # the duplicate guard needs hours, not weeks
         self.state["sent"] = {k: v for k, v in self.state["sent"].items() if int(v) >= cut}
+        self.state["alerts"] = {k: a for k, a in self.state["alerts"].items()
+                                if k in self.state["trades"] or int(a["sent_ms"]) >= now - 3 * 86_400_000}
+        self.state["results"] = self.state["results"][-200:]
         try:
             os.makedirs(os.path.dirname(STATE), exist_ok=True)
             with open(STATE, "w") as f:
@@ -373,14 +419,21 @@ class Watcher:
 
     # ---- one pass, at a 5-minute boundary ----
     def tick(self, now_ms=None):
+        """One pass: new trade alerts, then the trades the operator took. Returns the new alerts."""
         now_ms = now_ms or self.now_fn()
         b = lv.boundary(now_ms)
         closed = lv.closed_at(b)
         need_tfs = sorted({tf for _, tf, _ in self.watch if tf in closed} | ({"5m"} if self.pending else set()),
                           key=sc.TF_ORDER.index)
+        alerts = self.scan(now_ms, b, closed, need_tfs) if need_tfs else []
+        self.pause_check(now_ms)
+        self.deliver(alerts, now_ms)
+        self.follow(now_ms)
+        self._save_state()
+        return alerts
+
+    def scan(self, now_ms, b, closed, need_tfs):
         alerts = []
-        if not need_tfs:
-            return alerts
         hourly = b % sc.TF_MS["1h"] == 0
         for coin in self.coins + self.extra:
             for tf in DATA_TFS:
@@ -405,15 +458,231 @@ class Watcher:
                 continue
             alerts += self.signals(coin, pc, quality, b, closed, now_ms)
             alerts += self.confirmations(coin, pc, now_ms)
-        for a in alerts:
-            text = lv.message(a)
-            if self.send:
-                ok, err = telegram(text)
-                log(f"ALERT {a['label']} {a['coin']} {a['tf']} {a['strategy']}: " + ("sent" if ok else f"NOT sent ({err})"))
-            else:
-                print("\n" + text + "\n", flush=True)
-        self._save_state()
         return alerts
+
+    # ---- Telegram out: alerts with buttons, follow-ups, replies ----
+    def say(self, text, buttons=None):
+        if not self.send:
+            print("\n" + text + "\n", flush=True)
+            return True, "", None
+        return telegram_message(text, buttons=buttons)
+
+    def paused(self, now_ms):
+        p = int(self.state.get("paused_until") or 0)
+        return p < 0 or p > now_ms
+
+    def pause_check(self, now_ms):
+        p = int(self.state.get("paused_until") or 0)
+        if 0 < p <= now_ms:
+            self.state["paused_until"] = 0
+            self.say("▶️ The pause is over: new trade alerts are on again.")
+
+    def deliver(self, alerts, now_ms):
+        for a in alerts:
+            what = f"ALERT {a['label']} {a['coin']} {a['tf']} {a['strategy']}: "
+            if self.send and self.paused(now_ms):
+                log(what + "alerts are paused (/resume) - not sent")
+                continue
+            aid = self._remember(a)
+            ok, err, mid = self.say(lv.message(a), lv.choice_buttons(aid))
+            self.state["alerts"][aid]["msg_id"] = mid
+            if self.send:
+                log(what + ("sent" if ok else f"NOT sent ({err})"))
+
+    def _remember(self, a):
+        """Keep what the buttons and the follow-up need; returns the alert id (in the buttons' data)."""
+        self.state["next_id"] = int(self.state["next_id"]) + 1
+        aid = f"{int(a['sent_ms']) // 1000:x}{self.state['next_id'] % 1000:03d}"
+        self.state["alerts"][aid] = dict({k: a.get(k) for k in ("label", "coin", "inst", "d", "tf", "strategy",
+                                          "version", "entry", "R", "tps", "split", "max_hold", "close_ms", "sent_ms")},
+                                         choice=None, msg_id=None)
+        return aid
+
+    def journal(self, a, event, ms, price=None, result_r=None):
+        """One row in journal/my_trades.csv (the operator's own record: took / skipped / closed / results)."""
+        tps = list(a.get("tps") or []) + [None] * 3
+        row = [dt.datetime.fromtimestamp(ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M"), a.get("id", ""),
+               event, a["label"], a["coin"], "LONG" if a["d"] == 1 else "SHORT", a["tf"], a["strategy"],
+               a.get("version"), a["entry"], a["entry"] - a["d"] * a["R"], *tps[:3], price,
+               None if result_r is None else round(result_r, 3)]
+        try:
+            os.makedirs(os.path.dirname(JOURNAL), exist_ok=True)
+            new = not os.path.exists(JOURNAL)
+            with open(JOURNAL, "a", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                if new:
+                    w.writerow(JOURNAL_COLS)
+                w.writerow(["" if x is None else x for x in row])
+        except OSError as e:
+            log(f"journal not written: {e}")
+
+    # ---- the trades the operator took ----
+    def follow(self, now_ms):
+        for tid, t in list(self.state["trades"].items()):
+            try:
+                raw = self.update(t["coin"], "5m", now_ms)
+            except Exception as e:
+                log(f"follow {t['coin']}: download failed: {e}")
+                continue
+            bars = raw[(raw["open_time"] >= t["checked_ms"]) & (raw["close_time"] < now_ms)].to_dict("records")
+            for ev in fl.step(t, bars):
+                self.say(fl.text(t, ev))
+                name = f"tp{ev['n']}" if ev["kind"] == "tp" else ev["kind"]
+                self.journal(t, name, ev["at_ms"], ev["px"], ev.get("result_r") if ev.get("final") else None)
+                log(f"FOLLOW {t['coin']} {t['tf']} {t['strategy']}: {name}")
+            if t["closed"]:
+                self._end_trade(tid, "done", now_ms, t["realized"], "finished")
+
+    def _end_trade(self, tid, choice, now_ms, r, how):
+        t = self.state["trades"].pop(tid, None)
+        if t:
+            self.state["results"].append(dict(id=tid, coin=t["coin"], d=t["d"], tf=t["tf"], label=t["label"],
+                                              strategy=t["strategy"], r=r, how=how, ended_ms=now_ms))
+        a = self.state["alerts"].get(tid)
+        if a:
+            a["choice"] = choice
+            if a.get("msg_id") and self.send:
+                tg_api("editMessageReplyMarkup", dict(chat_id=os.environ.get("TELEGRAM_CHAT_ID"),
+                                                      message_id=a["msg_id"],
+                                                      reply_markup=lv.choice_buttons(tid, choice)))
+
+    # ---- Telegram in: the operator's commands and button presses ----
+    def commands_on(self):
+        return bool(self.send and os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID"))
+
+    def poll(self, wait_s):
+        """Wait up to wait_s seconds for the operator's messages / button presses and answer them."""
+        p = dict(timeout=int(wait_s), allowed_updates=["message", "callback_query"])
+        if self.state.get("tg_offset") is not None:
+            p["offset"] = int(self.state["tg_offset"])
+        ok, res = tg_api("getUpdates", p, timeout=wait_s + 15)
+        if not ok:
+            if res != self._poll_err:
+                log(f"Telegram commands: {res}")
+            self._poll_err = res
+            time.sleep(min(wait_s, 10))
+            return
+        self._poll_err = None
+        for u in res or []:
+            self.state["tg_offset"] = int(u["update_id"]) + 1
+            try:
+                self.on_update(u, self.now_fn())
+            except Exception as e:
+                log(f"command failed: {e}\n{traceback.format_exc()}")
+        if res:
+            self._save_state()
+
+    def wait_until(self, ms):
+        """Sleep until ms, answering Telegram commands meanwhile."""
+        while True:
+            rem = (ms - self.now_fn()) / 1000
+            if rem <= 0:
+                return
+            if self.commands_on() and rem >= 2:
+                self.poll(min(25, int(rem) - 1))
+            else:
+                time.sleep(rem)
+
+    def on_update(self, u, now_ms):
+        chat = str(os.environ.get("TELEGRAM_CHAT_ID", ""))
+        cq = u.get("callback_query")
+        m = (cq or {}).get("message") or u.get("message") or {}
+        sender = str((m.get("chat") or {}).get("id", ""))
+        if not chat or sender != chat:                               # only the operator's own chat is answered
+            log(f"Telegram: ignored an update from chat {sender or '?'} (not TELEGRAM_CHAT_ID)")
+            return
+        if cq:
+            return self.on_button(cq, now_ms)
+        if int(m.get("date") or 0) * 1000 < now_ms - 10 * 60_000:  # sent while the watcher was off: too old
+            return
+        cmd, arg = lv.parse_command(m.get("text"))
+        self.say(self.command(cmd, arg, now_ms))
+
+    def command(self, cmd, arg, now_ms):
+        if cmd in ("start", "help"):
+            return lv.HELP
+        if cmd == "status":
+            return self.status_text(now_ms)
+        if cmd == "trades":
+            return self.trades_text(now_ms)
+        if cmd == "pause":
+            try:
+                dur = lv.parse_duration(arg)
+            except ValueError:
+                return "Use /pause (until /resume), /pause 2h or /pause 30m (at most 7 days)."
+            self.state["paused_until"] = -1 if dur is None else now_ms + dur
+            self._save_state()
+            return ("⏸ New trade alerts paused " + ("until /resume." if dur is None else f"until {lv.utc(now_ms + dur)}.")
+                    + "\nYou still get the messages about trades you took and the daily 'running' message.")
+        if cmd == "resume":
+            self.state["paused_until"] = 0
+            self._save_state()
+            return "▶️ New trade alerts are on again."
+        if cmd is None:
+            return "I only understand commands. Send /help for the list."
+        return f"I don't know /{cmd}. Send /help for the list."
+
+    def on_button(self, cq, now_ms):
+        action, _, aid = (cq.get("data") or "").partition("|")
+        a = self.state["alerts"].get(aid)
+        toast = ""
+        if a is None:
+            toast = "This alert is too old (buttons work for 3 days)."
+        elif a.get("choice") in ("closed", "done") or action == "noop":
+            toast = "This trade is already finished."
+        elif action == "took" and a.get("choice") != "took":
+            a["choice"] = "took"
+            self.state["trades"][aid] = fl.open_trade(a, aid, now_ms, self.cfg.get("trade_plan"))
+            self.journal(dict(a, id=aid), "took", now_ms)
+            toast = "Recorded: you took it. I'll follow this trade."
+            self.say(f"👀 Following your {'LONG' if a['d'] == 1 else 'SHORT'} {a['coin']} ({a['tf']} {a['strategy']}). "
+                     "Put the stop-loss and the TPs on OKX now if you haven't. I'll message you when a TP, the stop "
+                     "or the time stop is reached. Press 🏁 I closed it under the alert if you close it yourself.")
+        elif action == "skip" and a.get("choice") != "skip":
+            a["choice"] = "skip"
+            self.state["trades"].pop(aid, None)
+            self.journal(dict(a, id=aid), "skipped", now_ms)
+            toast = "Recorded: skipped."
+        elif action == "closed" and a.get("choice") == "took":
+            self.journal(dict(a, id=aid), "closed by you", now_ms)
+            self._end_trade(aid, "closed", now_ms, None, "closed by you")
+            toast = "Recorded: closed. I stopped following it."
+        msg = cq.get("message") or {}
+        if self.send:
+            tg_api("answerCallbackQuery", dict(callback_query_id=cq.get("id"), text=toast))
+        if a is not None and msg.get("message_id") and self.send:
+            tg_api("editMessageReplyMarkup", dict(chat_id=msg["chat"]["id"], message_id=msg["message_id"],
+                                                  reply_markup=lv.choice_buttons(aid, a.get("choice"))))
+        self._save_state()
+        return toast
+
+    def status_text(self, now_ms):
+        day = lv.boundary(now_ms, "1d")
+        return lv.status_text(dict(
+            feed=self.feed.name, started_ms=self.started_ms, now_ms=now_ms, last_tick=self.last_tick,
+            paused_until=self.state.get("paused_until"), watch=[(s["id"], tf, lab) for s, tf, lab in self.watch],
+            coins=self.coins, open_trades=len(self.state["trades"]),
+            alerts_today=sum(1 for a in self.state["alerts"].values() if int(a["sent_ms"]) >= day),
+            refresh=self.last_refresh, code_old=self.code_old))
+
+    def trades_text(self, now_ms):
+        lines = ["📒 <b>Your trades</b>"]
+        if self.state["trades"]:
+            lines.append("Being followed:")
+            lines += [fl.summary(t) for t in self.state["trades"].values()]
+        else:
+            lines.append("No trade is being followed. Press ✅ Took it under an alert and I'll follow it.")
+        res = [r for r in self.state["results"] if int(r["ended_ms"]) >= now_ms - 30 * 86_400_000]
+        if res:
+            known = [r["r"] for r in res if r["r"] is not None]
+            lines.append(f"\nLast 30 days: {len(res)} finished" + (
+                f" · {sum(1 for r in known if r > 0)} won · total about {sum(known):+.1f}R before fees" if known else ""))
+            for r in res[-5:]:
+                when = dt.datetime.fromtimestamp(int(r["ended_ms"]) / 1000, dt.timezone.utc)
+                lines.append(f"• {when:%d %b} {'LONG' if r['d'] == 1 else 'SHORT'} {r['coin']} {r['tf']} ({r['label']}): "
+                             + (f"{r['r']:+.1f}R" if r["r"] is not None else r["how"]))
+        lines.append("\nFull record on the PC: journal\\my_trades.csv")
+        return "\n".join(lines)
 
     def _good(self, coin, tf, quality):
         for t in (tf, sc.HTF.get(tf)):
@@ -511,7 +780,10 @@ class Watcher:
         self.state["heartbeat"] = day.strftime("%Y-%m-%d")
         n = {lab: sum(1 for _, _, l in self.watch if l == lab) for lab in ("LIVE", "PAPER")}
         telegram(f"✅ Live watcher running · {day:%Y-%m-%d}\nWatching {n['LIVE']} LIVE and {n['PAPER']} PAPER "
-                 f"strategy timeframe(s) on {', '.join(self.coins)}.")
+                 f"strategy timeframe(s) on {', '.join(self.coins)}."
+                 + (f"\nFollowing {len(self.state['trades'])} trade(s) you took." if self.state["trades"] else "")
+                 + ("\n⏸ New trade alerts are paused (/resume)." if self.paused(now_ms) else "")
+                 + "\nSend /status any time.")
         self._save_state()
 
     def run(self):
@@ -523,23 +795,25 @@ class Watcher:
             sys.exit(3)
         self.refresh_repo()                          # start from GitHub's newest decisions (a ZIP may be days old)
         ok, err = telegram(f"▶️ Live watcher started on {self.feed.name}. Watching {len(self.watch)} strategy "
-                           f"timeframe(s) on {', '.join(self.coins)}.") if self.send else (True, "")
+                           f"timeframe(s) on {', '.join(self.coins)}. Send /help for the commands.") \
+            if self.send else (True, "")
         if not ok:
             log(f"Telegram not working: {err}")
         while True:
             now = self.now_fn()
-            nxt = lv.boundary(now) + sc.TF_MS["5m"] + int(self.S["poll_delay_s"]) * 1000
-            time.sleep(max(1.0, (nxt - now) / 1000))
+            self.wait_until(lv.boundary(now) + sc.TF_MS["5m"] + int(self.S["poll_delay_s"]) * 1000)
             try:
                 if self.now_fn() - self.reloaded_ms >= int(self.S["refresh_minutes"]) * 60_000:
                     self.refresh_repo()
                 self.tick()
+                self.last_tick = (self.now_fn(), True, "")
                 self.heartbeat(self.now_fn())
                 if self.fails >= int(self.S["error_alert_after"]):
                     telegram("✅ Live watcher recovered.")
                 self.fails = 0
             except Exception as e:
                 self.fails += 1
+                self.last_tick = (self.now_fn(), False, f"{type(e).__name__}: {str(e)[:100]}")
                 log(f"pass failed ({self.fails}): {e}\n{traceback.format_exc()}")
                 if self.fails == int(self.S["error_alert_after"]):
                     telegram(f"⚠️ Live watcher: {self.fails} passes failed in a row - no alerts until it recovers.\n"

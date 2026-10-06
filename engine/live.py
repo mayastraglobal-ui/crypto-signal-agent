@@ -114,3 +114,87 @@ def message(a):
               f"Candle closed {utc(a['close_ms'] + 1)} · sent {utc(a['sent_ms'])}",
               "<i>Signal only - not financial advice. You place the order yourself.</i>"]
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------- Telegram commands and buttons (roadmap step 4)
+CHOICES = {"took": "✅ Took it", "skip": "❌ Skipped"}
+
+
+def choice_buttons(aid, choice=None):
+    """The buttons under an alert. choice: None / 'took' / 'skip' (can still be changed) / 'closed' / 'done'."""
+    if choice in ("closed", "done"):
+        return {"inline_keyboard": [[{"text": "🏁 Trade finished" if choice == "done" else "🏁 You closed it",
+                                      "callback_data": f"noop|{aid}"}]]}
+    row = [{"text": label + (" ✓" if choice == key else ""), "callback_data": f"{key}|{aid}"}
+           for key, label in CHOICES.items()]
+    rows = [row]
+    if choice == "took":
+        rows.append([{"text": "🏁 I closed it", "callback_data": f"closed|{aid}"}])
+    return {"inline_keyboard": rows}
+
+
+def parse_command(text):
+    """'/Pause@my_bot 2h' -> ('pause', '2h'); not a command -> (None, text)."""
+    text = (text or "").strip()
+    if not text.startswith("/"):
+        return None, text
+    head, _, arg = text.partition(" ")
+    return head[1:].split("@")[0].lower(), arg.strip()
+
+
+def parse_duration(arg):
+    """'2' / '2h' / '90m' -> milliseconds; '' -> None (until /resume); unreadable -> ValueError."""
+    arg = (arg or "").strip().lower()
+    if not arg:
+        return None
+    unit = 60_000 if arg.endswith("m") else 3_600_000
+    num = float(arg.rstrip("hm").strip())
+    if not 0 < num * unit <= 7 * 86_400_000:
+        raise ValueError(arg)
+    return int(num * unit)
+
+
+HELP = ("🤖 <b>Crypto watcher commands</b>\n"
+        "/status - is it running, what it watches, the last check\n"
+        "/trades - the trades you took (open ones are followed) and your results\n"
+        "/pause - stop new trade alerts until /resume (/pause 2h = for 2 hours)\n"
+        "/resume - new trade alerts on again\n"
+        "/help - this list\n\n"
+        "Under each alert: <b>✅ Took it</b> = I follow the trade and tell you when TP1 / TP2, the stop or the time "
+        "stop is reached (same rules as the backtests). <b>❌ Skipped</b> = only recorded. "
+        "<b>🏁 I closed it</b> = stop following.\n"
+        "Pausing never stops the messages about trades you already took.")
+
+
+def ago(ms, now_ms):
+    mins = max(0, (now_ms - ms) // 60_000)
+    return f"{mins}m ago" if mins < 60 else f"{mins // 60}h{mins % 60:02d}m ago"
+
+
+def status_text(i):
+    """/status reply. i = dict(feed, started_ms, now_ms, last_tick=(ms, ok, note) or None, paused_until (0 = on,
+    -1 = until /resume, else ms), watch=[(id, tf, label)], coins, open_trades, alerts_today, refresh=(ms, note) or
+    None, code_old=[...])."""
+    now = i["now_ms"]
+    lines = [f"✅ <b>Live watcher running</b> · {i['feed']}", f"Started {ago(i['started_ms'], now)}"]
+    lt = i.get("last_tick")
+    lines.append("Last market check: waiting for the first 5m candle close" if not lt else
+                 f"Last market check: {utc(lt[0])} ({ago(lt[0], now)}) " + ("✓" if lt[1] else f"⚠️ failed: {lt[2]}"))
+    p = i.get("paused_until") or 0
+    lines.append("New trade alerts: ON" if p == 0 or (p > 0 and p <= now) else
+                 "⏸ New trade alerts: PAUSED until /resume" if p < 0 else
+                 f"⏸ New trade alerts: PAUSED until {utc(p)} (/resume to switch on now)")
+    if i["watch"]:
+        lines.append(f"Watching {len(i['watch'])} strategy timeframe(s):")
+        lines += [f"• {sid} {tf} ({lab})" for sid, tf, lab in i["watch"]]
+    else:
+        lines.append("Watching 0 strategies: none is PAPER_TRADING or APPROVED yet. GitHub's daily research "
+                     "promotes them; the watcher picks them up within an hour.")
+    lines.append("Coins: " + ", ".join(i["coins"]))
+    lines.append(f"Trades you took, being followed: {i['open_trades']}" + (" (/trades)" if i["open_trades"] else ""))
+    lines.append(f"Trade alerts sent today (UTC): {i['alerts_today']}")
+    if i.get("refresh"):
+        lines.append(f"GitHub decisions refreshed {ago(i['refresh'][0], now)}: {i['refresh'][1]}")
+    if i.get("code_old"):
+        lines.append("🔄 A newer watcher version is on GitHub: double-click windows\\4_update.bat on the PC.")
+    return "\n".join(lines)
