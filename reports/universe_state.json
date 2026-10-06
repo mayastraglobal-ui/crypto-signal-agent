@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "ZEC",
   "SOL",
+  "ZEC",
   "XRP",
   "SUI",
   "BNB"
@@ -13,7 +13,7 @@
  "suspended": {
   "RLC": "2026-10-06"
  },
- "runs": 258,
+ "runs": 259,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
