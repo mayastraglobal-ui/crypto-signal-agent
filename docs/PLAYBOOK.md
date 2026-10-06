@@ -150,6 +150,24 @@ slippage at market - plus a market exit with slippage) costs more than 0.25R. Wi
 least ~0.5% away for a limit entry, ~0.8% at market: on 5m BTC most stops are closer, so few 5m trades pass; on 15m
 more do. The research counts these as `skipped_fee_cost`.
 
+**First measurement** (2 years, 2024-10 to 2026-10, all costs; a pre-check, the research run decides):
+
+| Card | BTC trades | BTC avg | ETH trades | ETH avg |
+|---|---|---|---|---|
+| PB-B-SWEEP (as written) | 130 | -0.93R | 81 | -0.68R |
+| PB-B-SWEEP-15M | 25 | -0.96R | 16 | -0.53R |
+| PB-B-SWEEP-LIMIT (fee fix) | 11 | -0.25R | 15 | +0.04R |
+| PB-B-GRADED 5m / 15m | 37 / 16 | -0.21R / -0.43R | 76 / 26 | -0.06R / -0.40R |
+| PB-B-APLUS 5m / 15m | 8 / 2 | -0.24R / -0.61R | 13 / 6 | +0.10R / -0.80R |
+| PB-A-PULLBACK / -LDN / -GRADED | 1 / 1 / 3 | all losses | 1 / 2 / 8 | -1.22R / -0.38R / -0.36R |
+| PB-C-* (all versions) | 0 | - | 0-1 | - |
+
+What it says: the fee fix is the biggest single improvement (B from -0.93R / -0.68R to about -0.2R / 0R: the median
+cost falls from 0.84R to 0.20R) - but it removes most trades, and nothing is clearly profitable yet; every sample is far
+below the 100 trades the playbook asks for. 15m triggers did not help B (most 15m sweeps fail the 1.5R-after-fees
+rule to TP2). C stays near zero: strong breakouts straight out of a quiet box with a clean retest are rare whatever
+the box width. The daily research run tests every coin and decides.
+
 Every new card starts at BACKTESTING and needs the same tests and pass bar as the originals; nothing was loosened
 in the gates, the trials bar or the costs. 10 more cards also make the trials bar a little stricter for everyone.
 
