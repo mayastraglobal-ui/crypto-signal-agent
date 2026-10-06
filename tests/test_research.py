@@ -54,6 +54,9 @@ FROZEN = {
     "PB-A-GRADED@1.0": "8e9ec009e3567e33", "PB-A-APLUS@1.0": "95f56b7ba0c5a583",
     "PB-B-GRADED@1.0": "1c4b928b5a956d8c", "PB-B-APLUS@1.0": "ded9ecef9cfa7d1c",
     "PB-C-GRADED@1.0": "e2f43b5ad1ade2ad", "PB-C-APLUS@1.0": "22af889ad45d1143",
+    # roadmap step 5 (2026-10-06): the 4H trend window with faster entries
+    "TRD-H4-PULLBACK@1.0": "4e4303966e864cac", "TRD-H4-PULLBACK-noT4@1.0": "eb192ebf72d26176",
+    "TRD-H4-BREAKOUT@1.0": "e0a51398e9b61a75", "TRD-H4-BREAKOUT-noT4@1.0": "85179c746276e160",
 }
 
 

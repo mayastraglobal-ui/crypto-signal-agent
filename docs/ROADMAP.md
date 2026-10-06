@@ -29,6 +29,7 @@ and targets, instantly.
 | 2026-10-06 | Step 2 part B: limit-order entries (`entry: limit` on a card) in backtests, paper trades, emails, Telegram, Pine |
 | 2026-10-06 | Step 3a-3c: the operator's playbook (strategies A / B / C, its risk rules and pass bar) (`docs/PLAYBOOK.md`) |
 | 2026-10-06 | Step 3d: flexible playbook versions - graded setups, A in London, B on 15m, C's wider box, the fee fix |
+| 2026-10-06 | Step 5: the 4H trend window + faster entries (TRD-H4-*), strategies by market type, scalping variants |
 
 ## Next steps, in order
 
@@ -71,9 +72,19 @@ Status: **built 2026-10-06** (`engine/follow.py`, `engine/live.py`, `live_watche
   and sending the journal to GitHub (it stays on the PC for now).
 
 ### Step 5: the agent improves itself more
-- Choose strategies by market regime (bull / bear / range), from what the research already measures
-- Automatic scalping variants of near-passing 15m cells (5m confirmation, limit entry, session filter)
-- Claude's daily / weekly research focused on scalping ideas from the main loss causes
+Status: **built 2026-10-06** (operator: "start step 5"):
+1. **The proven trend, a faster entry** (`engine/trend4h.py`): `trend4h_long` / `trend4h_short` = the 4H Donchian
+   breakout (the library's measured edge) would hold a trade now - frozen rules, from the newest closed 4H candle,
+   readable on 1H / 30m / 15m / 5m (and by lab cards). Cards `TRD-H4-PULLBACK` (dip to the EMA20 and close back)
+   and `TRD-H4-BREAKOUT` (a new 20-candle high with volume) trade only inside that window, limit entries, 2R / 3R,
+   the fee cap; each has a control twin without the window (`-noT4`).
+2. **Strategies by market type** (`engine/regime_fit.py`): the research run writes `reports/regime_fit.json` (each
+   cell's backtest result per market regime); the hourly scan and the live watcher send no alert in a regime where
+   that cell lost money (30+ trades, -0.10R or worse). It only removes alerts.
+3. **Automatic scalping variants** (`engine/ideas.py`): for a 1H-5m cell whose fees cost a median > 0.15R, the
+   variant search first tries a limit entry (`-VLIMIT`) and the fee cap (`-VFEECAP`), one change each, tested like
+   any card.
+- Still open: Claude's daily / weekly research focused on scalping ideas from the main loss causes.
 
 ### Step 6 (optional): more coins
 Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept.

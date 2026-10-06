@@ -52,6 +52,8 @@ from engine import lifecycle as lc
 from engine import manage as mg
 from engine import flow_history as fh
 from engine import scalp_playbook as spb
+from engine import trend4h as t4
+from engine import regime_fit as rfit
 from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
@@ -658,7 +660,35 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
         ns = make_namespace(df, feats)
         df["_atr"] = ns["atr"](14)
         frames[tf] = dict(df=df, feats=feats, ns=ns, reg=reg, n=len(df))
+    add_trend4h(frames)
     return dict(frames=frames, smc=smc_out, recs=recs, rg_series=rg_ser)
+
+
+def add_trend4h(frames):
+    """Roadmap step 5: the 4H Donchian trend window (engine/trend4h.py) as trend4h_* columns of every timeframe below
+    4H, from the newest CLOSED 4H candle. No 4H frame -> the columns are empty (NaN: rules using them stay false)."""
+    f4 = frames.get("4h")
+    h4 = None
+    if f4 is not None:
+        ns4, n4 = f4["ns"], f4["n"]
+        idx = f4["df"].index
+        gl, gs, _, _, _ = lc.gate_arrays(t4.GATE, "4h", f4["reg"], n4)
+        L, S = eval_rules(t4.RULES["long"], ns4, idx) & gl, eval_rules(t4.RULES["short"], ns4, idx) & gs
+        L[:t4.WARMUP] = False
+        S[:t4.WARMUP] = False
+        d4 = f4["df"]
+        st, age = t4.window(d4["high"].to_numpy(dtype=float), d4["low"].to_numpy(dtype=float),
+                            d4["close"].to_numpy(dtype=float), d4["_atr"].to_numpy(dtype=float), L, S,
+                            eval_rules(t4.RULES["exit_long"], ns4, idx), eval_rules(t4.RULES["exit_short"], ns4, idx))
+        h4 = pd.DataFrame({"close_time": d4["close_time"].to_numpy(), "trend4h_long": (st == 1).astype(float),
+                           "trend4h_short": (st == -1).astype(float), "trend4h_age": age})
+    for tf, fr in frames.items():
+        if tf not in t4.TFS:
+            continue
+        m = tfm.align_higher(fr["df"], h4, t4.COLUMNS)
+        for col in t4.COLUMNS:
+            fr["feats"][col] = m[col].to_numpy(dtype=float)
+            fr["ns"][col] = pd.Series(fr["feats"][col].to_numpy(), index=fr["df"].index)
 
 
 def okx_swap_stats(offline=False):
@@ -2431,6 +2461,7 @@ def main():
     # ---------- build trade plans ----------
     tp = cfg["trade_plan"]
     acct = cfg["account"]["size_usdt"]
+    regime_fit = rfit.table(cells)
     plans, blocked = [], []
     for sgl in live:
         key = (sgl["strategy"], sgl["version"], sgl["tf"])
@@ -2441,6 +2472,10 @@ def main():
             continue
         if not signals_allowed(sgl["coin"], sgl["tf"]):
             blocked.append(f"{sgl['coin']} {sgl['tf']} {sgl['strategy']}")
+            continue
+        why = rfit.blocked(regime_fit, f"{key[0]}@{key[1]}|{key[2]}", sgl.get("regime"))
+        if why:                                # roadmap step 5: not in a market type where it lost money
+            log(f"{sgl['coin']} {sgl['tf']} {sgl['strategy']}: no alert - {why}")
             continue
         pooled, cst = evidence_for(cells.get(f"{key[0]}@{key[1]}|{key[2]}"), per.get(key, {}), sgl["coin"])
         if cst["n"] < V["min_coin_trades"]:

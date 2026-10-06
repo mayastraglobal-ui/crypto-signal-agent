@@ -54,6 +54,7 @@ from engine import flow_history as fh
 from engine import follow as fl
 from engine import lifecycle as lc
 from engine import live as lv
+from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
 from engine import manage as mg
 from engine import risk as rk
@@ -73,10 +74,10 @@ RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
 # Without git (a Windows PC with the ZIP download): the files that carry GitHub's decisions, fetched every hour
 SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strategies.yaml"),
               ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
-              ("main", "reports/universe.json"),
+              ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
-              "engine/manage.py", "engine/flow_history.py"]      # changed on GitHub -> "run update.bat"
+              "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py"]      # changed on GitHub -> "run update.bat"
 
 
 def log(*a):
@@ -335,6 +336,10 @@ class Watcher:
             self.extra = ["BTC"]                                    # btc_ret building block
         else:
             self.extra = []
+        try:                                                        # roadmap step 5: strategies by market type
+            self.regime_fit = json.load(open(os.path.join(ROOT, "reports", "regime_fit.json")))
+        except (OSError, ValueError):
+            self.regime_fit = {}
         self.reloaded_ms = self.now_fn()
         log(f"watching {len(self.watch)} strategy timeframe(s) on {', '.join(self.coins)}: "
             + (", ".join(f"{s['id']} {tf} ({lab})" for s, tf, lab in self.watch) or "none yet (nothing is APPROVED "
@@ -742,6 +747,11 @@ class Watcher:
             if plan is None:
                 continue
             R, tps, split = plan
+            reg_now = (pc["recs"].get(lc.regime_tf(tf)) or {}).get("label")
+            why = rfit.blocked(self.regime_fit, f"{sspec.key(s)}|{tf}", reg_now)
+            if why:                                  # roadmap step 5: not in a market type where it lost money
+                log(f"{coin} {tf} {s['id']}: no alert - {why}")
+                continue
             if s.get("gate") == "playbook":
                 why = self.pb_coin_problem(coin, now_ms)
                 if why:                              # playbook 2.5 / 5.4: skip the pair

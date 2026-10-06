@@ -1588,3 +1588,139 @@
     kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
   changelog:
     - "1.0 (2026-10-06): the A+ part of PB-C-GRADED, to measure the grades separately."
+
+# ---------------------------------------------------------------------
+# Roadmap step 5 part 1 (operator, 2026-10-06): "the proven trend, a faster entry". The 4H Donchian breakout is the
+# one family with a measured edge; trend4h_long / _short (engine/trend4h.py) say when its 4H trade would be open.
+# These cards trade only inside that window, entering on 1H / 30m / 15m / 5m with a limit order at a better price,
+# 2R / 3R targets and the fee cap (no trade when fees + slippage would cost more than 0.25R). Each has a control
+# twin without the window, so the research shows whether the 4H trend is what makes them work.
+# ---------------------------------------------------------------------
+- id: TRD-H4-PULLBACK
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+  source: "Roadmap step 5: the 4H Donchian trend (the library's measured edge) with a faster pullback entry"
+  hypothesis: "While the 4H Donchian breakout trade is open, a pullback to the EMA20 on a faster timeframe that closes back in the trend direction is a better-priced entry into the same trend."
+  timeframes: ["1h", "30m", "15m", "5m"]
+  description: "Inside the 4H Donchian trend window: price dips to the EMA20 and closes back above it with a bullish candle (shorts mirrored); limit entry 0.25 ATR below the close."
+  logic: >-
+    trend4h_long = the 4H Donchian setup would hold a long now (engine/trend4h.py, frozen rules). On the trade
+    timeframe: the candle's low touched the EMA20, it closed above the EMA20 and above its open. Limit 0.25 ATR
+    below the close for 3 candles (maker fee). Stop 2 ATR; targets 2R and 3R; exit when the 4H window closes.
+    No trade when fees + slippage would cost more than 0.25R.
+  long: ["trend4h_long == 1", "low <= ema(close,20)", "close > ema(close,20)", "close > open"]
+  short: ["trend4h_short == 1", "high >= ema(close,20)", "close < ema(close,20)", "close < open"]
+  exit_long: ["trend4h_long != 1"]
+  exit_short: ["trend4h_short != 1"]
+  entry: {type: limit, offset_atr: 0.25, valid_bars: 3}
+  stop: {method: atr, atr: 2.0, max_cost_r: 0.25}
+  targets:
+    long: ["2R", "3R"]
+    short: ["2R", "3R"]
+    split: [0.5, 0.5]
+  time_stop_bars: 48
+  cooldown_bars: 3
+  control_twin: TRD-H4-PULLBACK-noT4
+  known_weaknesses: "Only trades while a 4H breakout is active (a few windows a month per coin); on 5m most stops are too close for the fee cap; the limit misses pullbacks that turn at once."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders who fade a fresh 4H breakout on its first pullback, and late sellers into value"
+    mechanism: "a 4H breakout with volume and ADX starts a trend (the library's measured edge); pullbacks inside it are profit-taking, and a close back above the EMA20 shows the trend side returning, at a better price than the 4H close"
+    fails_when: "false 4H breakouts that fall back inside the range, and choppy pullbacks that keep touching the EMA"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer beats TRD-H4-PULLBACK-noT4"
+  changelog:
+    - "1.0 (2026-10-06): roadmap step 5 - the 4H Donchian trend window with a faster pullback entry."
+
+- id: TRD-H4-PULLBACK-noT4
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+  source: "Control twin of TRD-H4-PULLBACK: the same entry without the 4H trend window"
+  hypothesis: "Control: the pullback entry alone. TRD-H4-PULLBACK must beat it for the 4H window to count."
+  timeframes: ["1h", "30m", "15m", "5m"]
+  twin_of: TRD-H4-PULLBACK
+  description: "TRD-H4-PULLBACK without the 4H Donchian trend window (and without its exit)."
+  logic: "Exactly TRD-H4-PULLBACK without trend4h_long / _short."
+  long: ["low <= ema(close,20)", "close > ema(close,20)", "close > open"]
+  short: ["high >= ema(close,20)", "close < ema(close,20)", "close < open"]
+  entry: {type: limit, offset_atr: 0.25, valid_bars: 3}
+  stop: {method: atr, atr: 2.0, max_cost_r: 0.25}
+  targets:
+    long: ["2R", "3R"]
+    short: ["2R", "3R"]
+    split: [0.5, 0.5]
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "A benchmark."
+  changelog:
+    - "1.0 (2026-10-06): control twin of TRD-H4-PULLBACK."
+
+- id: TRD-H4-BREAKOUT
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+  source: "Roadmap step 5: the 4H Donchian trend (the library's measured edge) with a faster breakout entry"
+  hypothesis: "While the 4H Donchian breakout trade is open, a new 20-candle high on a faster timeframe with volume is the trend's next leg starting."
+  timeframes: ["1h", "30m", "15m", "5m"]
+  description: "Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close."
+  logic: >-
+    trend4h_long, then on the trade timeframe a close above the previous 20-candle high with volume above 1.5 x
+    its 20-candle average. Limit at the close for 2 candles (maker fee). Stop 2 ATR; targets 2R and 3R; exit when
+    the 4H window closes. No trade when fees + slippage would cost more than 0.25R.
+  long: ["trend4h_long == 1", "close > prev(highest(high,20))", "volume > vol_sma(20) * 1.5"]
+  short: ["trend4h_short == 1", "close < prev(lowest(low,20))", "volume > vol_sma(20) * 1.5"]
+  exit_long: ["trend4h_long != 1"]
+  exit_short: ["trend4h_short != 1"]
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: atr, atr: 2.0, max_cost_r: 0.25}
+  targets:
+    long: ["2R", "3R"]
+    short: ["2R", "3R"]
+    split: [0.5, 0.5]
+  time_stop_bars: 48
+  cooldown_bars: 3
+  control_twin: TRD-H4-BREAKOUT-noT4
+  known_weaknesses: "Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back."
+  edge:
+    type: forced_flow
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders short under the faster range top whose stops fuel the next leg of the 4H trend"
+    mechanism: "inside a measured 4H trend, a faster-timeframe breakout with volume is new participation in the trend's direction"
+    fails_when: "late in a 4H trend (exhaustion) and in chop around the 4H breakout level"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer beats TRD-H4-BREAKOUT-noT4"
+  changelog:
+    - "1.0 (2026-10-06): roadmap step 5 - the 4H Donchian trend window with a faster breakout entry."
+
+- id: TRD-H4-BREAKOUT-noT4
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+  source: "Control twin of TRD-H4-BREAKOUT: the same entry without the 4H trend window"
+  hypothesis: "Control: the faster breakout alone. TRD-H4-BREAKOUT must beat it for the 4H window to count."
+  timeframes: ["1h", "30m", "15m", "5m"]
+  twin_of: TRD-H4-BREAKOUT
+  description: "TRD-H4-BREAKOUT without the 4H Donchian trend window (and without its exit)."
+  logic: "Exactly TRD-H4-BREAKOUT without trend4h_long / _short."
+  long: ["close > prev(highest(high,20))", "volume > vol_sma(20) * 1.5"]
+  short: ["close < prev(lowest(low,20))", "volume > vol_sma(20) * 1.5"]
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: atr, atr: 2.0, max_cost_r: 0.25}
+  targets:
+    long: ["2R", "3R"]
+    short: ["2R", "3R"]
+    split: [0.5, 0.5]
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "A benchmark."
+  changelog:
+    - "1.0 (2026-10-06): control twin of TRD-H4-BREAKOUT."
