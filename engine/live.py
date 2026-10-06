@@ -89,8 +89,14 @@ def message(a):
             f"{a['tf']} · {a['strategy']} v{a['version']}"
             + ("" if a["label"] == "LIVE" else "\n<i>PAPER = practice only: this strategy is still being proven</i>"
                if a["label"] == "PAPER" else "\n<i>TEST = code test of the watcher - NOT a trade signal</i>"))
-    lines = [head, "",
-             f"Entry zone: <b>{fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])}</b> (planned {fmt_px(a['entry'])})",
+    lim = a.get("limit_bars")
+    if lim:                                  # roadmap step 2B: a limit-entry strategy
+        until = a["close_ms"] + 1 + int(lim) * tfm.TF_MS[a["tf"]]
+        entry_line = (f"Limit order: <b>{'BUY' if a['d'] == 1 else 'SELL'} LIMIT {fmt_px(a['entry'])}</b> · cancel at "
+                      f"{utc(until)} if not filled ({int(lim)} {a['tf']} candles)")
+    else:
+        entry_line = f"Entry zone: <b>{fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])}</b> (planned {fmt_px(a['entry'])})"
+    lines = [head, "", entry_line,
              f"Stop-loss: <b>{fmt_px(stop, a['entry'])}</b> ({pct:.2f}% away = 1R)"]
     for i, tp in enumerate(a["tps"]):
         share = a["split"][i] if a.get("split") and i < len(a["split"]) else None
@@ -110,6 +116,7 @@ def message(a):
     for w in a.get("warnings") or []:
         lines.append(f"⚠️ {w}")
     lines += ["",
+              "No fill = no trade. Skip it if price reaches TP1 before your order fills." if lim else
               f"Valid for {a.get('valid_bars', 2)} {a['tf']} candles. Skip it if price reaches the stop or TP1 first.",
               f"Candle closed {utc(a['close_ms'] + 1)} · sent {utc(a['sent_ms'])}",
               "<i>Signal only - not financial advice. You place the order yourself.</i>"]

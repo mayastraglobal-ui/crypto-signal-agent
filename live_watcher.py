@@ -494,7 +494,8 @@ class Watcher:
         self.state["next_id"] = int(self.state["next_id"]) + 1
         aid = f"{int(a['sent_ms']) // 1000:x}{self.state['next_id'] % 1000:03d}"
         self.state["alerts"][aid] = dict({k: a.get(k) for k in ("label", "coin", "inst", "d", "tf", "strategy",
-                                          "version", "entry", "R", "tps", "split", "max_hold", "close_ms", "sent_ms")},
+                                          "version", "entry", "R", "tps", "split", "max_hold", "close_ms", "sent_ms",
+                                          "limit_bars")},
                                          choice=None, msg_id=None)
         return aid
 
@@ -531,7 +532,9 @@ class Watcher:
                 self.journal(t, name, ev["at_ms"], ev["px"], ev.get("result_r") if ev.get("final") else None)
                 log(f"FOLLOW {t['coin']} {t['tf']} {t['strategy']}: {name}")
             if t["closed"]:
-                self._end_trade(tid, "done", now_ms, t["realized"], "finished")
+                filled = t.get("filled", True)
+                self._end_trade(tid, "done", now_ms, t["realized"] if filled else None,
+                                "finished" if filled else "limit not filled")
 
     def _end_trade(self, tid, choice, now_ms, r, how):
         t = self.state["trades"].pop(tid, None)
@@ -636,8 +639,10 @@ class Watcher:
             self.journal(dict(a, id=aid), "took", now_ms)
             toast = "Recorded: you took it. I'll follow this trade."
             self.say(f"👀 Following your {'LONG' if a['d'] == 1 else 'SHORT'} {a['coin']} ({a['tf']} {a['strategy']}). "
-                     "Put the stop-loss and the TPs on OKX now if you haven't. I'll message you when a TP, the stop "
-                     "or the time stop is reached. Press 🏁 I closed it under the alert if you close it yourself.")
+                     + ("Your limit order waits for a fill: I'll tell you when it fills or when to cancel it. "
+                        if a.get("limit_bars") else "Put the stop-loss and the TPs on OKX now if you haven't. ")
+                     + "I'll message you when a TP, the stop or the time stop is reached. Press 🏁 I closed it under "
+                     "the alert if you close it yourself.")
         elif action == "skip" and a.get("choice") != "skip":
             a["choice"] = "skip"
             self.state["trades"].pop(aid, None)
@@ -710,6 +715,9 @@ class Watcher:
             if d == 0:
                 continue
             entry, atr = float(df["close"].iloc[t]), float(df["_atr"].iloc[t])
+            lim = sspec.limit_entry(s)
+            if lim:                                  # roadmap step 2B: limit order at the close -/+ offset x ATR
+                entry = entry - d * lim[0] * atr
             plan = sc.plan_trade(s, t, d, entry, atr, cols, self.cfg)
             if plan is None:
                 continue
@@ -720,6 +728,7 @@ class Watcher:
             base = dict(label=label, coin=coin, inst=self.feed.inst(coin), d=d, tf=tf, strategy=s["id"],
                         version=s["version"], entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
+                        limit_bars=lim[1] if lim else None,
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
             if s.get("confirm_5m"):

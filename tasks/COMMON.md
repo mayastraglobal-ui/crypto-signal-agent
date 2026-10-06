@@ -124,6 +124,9 @@ the end of the fact sheet.
      lead_lag = uses `btc_ret(n)`. (`variant_search` is the engine's own factory.)
    - `targets` with the **first target at least 2R** (`"2R"`, `"max(2R, smc_liq_above)"`, or a level with
      `need.min_r: 2.0`) - the config default (TP 1R) is not accepted for lab cards.
+   - Optional for scalping ideas: `entry: {type: limit, offset_atr: <0-2>, valid_bars: <1-12>}` = a limit order at
+     the signal close -/+ offset x ATR, maker fee, no fill within valid_bars candles = no trade (README "Limit
+     entries"). Not together with `confirm_5m`. A limit version of an existing idea changes ONE thing (`entry`).
    - A card whose entry rules use SMC / ICT building blocks (`smc_*`, `h4_*`) or `confirm_5m: true` needs
      `control_twin:` = a card with `twin_of: <this id>` that is the same idea WITHOUT that ingredient (add the twin
      in the same push if it does not exist).

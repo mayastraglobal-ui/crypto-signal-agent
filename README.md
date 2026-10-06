@@ -250,6 +250,12 @@ or `EXPIRED` (no 5m confirmation) / `INVALIDATED` (stop or 5m structure broken b
   (body ≥ 50%, volume ≥ average, price still within entry ± 0.2R); none → EXPIRED, no trade. Each is compared
   with the same strategy without the check, over the same period on the same 5m bars - the check is kept only if
   it helps. Settings: `config.yaml` → `confirm_5m`.
+- **Limit entries** (roadmap step 2B): a card with `entry: {type: limit, offset_atr: 0.25, valid_bars: 2}` does not
+  buy at the next open. It places a limit order at the signal close minus 0.25 ATR (a long; plus for a short),
+  pays the maker fee with no slippage, and trades only if price comes back to that price within 2 candles - no
+  fill = no trade (`AWAITING_FILL` → `ENTRY_TRIGGERED` or `EXPIRED`). In the fill candle only the stop counts
+  (a target touched there may have come before the fill). The ±20% test also moves `offset_atr`. Cards without
+  `entry` are unchanged (market entry, same fingerprint). Not combinable with `confirm_5m`.
 - **Open positions** are managed exactly like the backtest: stop, targets, breakeven after TP1, time stop and the
   strategy's exit rule. An opposite structure break, a strong opposite candle, a regime change or a volatility
   spike only adds a **"watch: ..."** note - they were never tested, so they never close a position.

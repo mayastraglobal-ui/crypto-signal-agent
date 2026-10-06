@@ -133,6 +133,10 @@ def plan_table(e, paper=False):
     z = sorted(e["entry_zone"])
     zone = f"{price(z[0])}–{price(z[1])}"
     rows = [["Entry", zone, ("Buy" if d == 1 else "Sell") + (" inside this zone" if paper else " only inside this zone")]]
+    if e.get("limit_bars"):                                   # roadmap step 2B: a limit-entry strategy
+        rows = [["Entry", f"{price(e['entry'])} limit",
+                 f"Limit {'buy' if d == 1 else 'sell'}; cancel after {e['limit_bars']} {tf_word(e['tf'])} candles "
+                 "if not filled (no fill = no trade)"]]
     tones = [[None, None, None]]
     rows.append(["Stop", f"{price(e['stop'])} −1R", "Exit all if hit" if paper else "Exit everything if hit"])
     tones.append(["down", "down", None])
@@ -175,12 +179,17 @@ def live_entry(e):
     side = "LONG" if d == 1 else "SHORT"
     z = sorted(e["entry_zone"])
     zone = f"{price(z[0])}–{price(z[1])}"
-    subj = mk.subject([f"LIVE {arrow(e['direction'])} {side} {e['coin']} {tf_word(e['tf'])}", f"Enter {zone}",
+    subj = mk.subject([f"LIVE {arrow(e['direction'])} {side} {e['coin']} {tf_word(e['tf'])}",
+                       f"Limit {price(e['entry'])}" if e.get("limit_bars") else f"Enter {zone}",
                        f"Stop {price(e['stop'])}"])
     market = "Futures only" if d == -1 or "futures" in str(e.get("market", "")).lower() else "Spot"
     if e.get("valid_note"):                                  # a 5m-confirmed entry: the bar already closed
         do = [f"{'Buy' if d == 1 else 'Sell (futures)'} now near {price(e.get('entry'))} – the 5m bar confirmed it. "
               f"Set the stop at {price(e['stop'])} right away."]
+    elif e.get("limit_bars"):
+        do = [f"Place a limit {'BUY' if d == 1 else 'SELL (futures)'} at {price(e['entry'])}. Cancel it if it is not "
+              f"filled within {e['limit_bars']} {tf_word(e['tf'])} candles. When it fills, set the stop at "
+              f"{price(e['stop'])} right away."]
     else:
         do = [f"Place a limit {'BUY' if d == 1 else 'SELL (futures)'} between {price(z[0])} and {price(z[1])}. "
               f"Set the stop at {price(e['stop'])} right away."]

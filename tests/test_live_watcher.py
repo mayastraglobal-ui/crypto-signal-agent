@@ -106,6 +106,16 @@ class EndToEnd(unittest.TestCase):
             self.assertEqual(self.w.tick(self.hour + 9000), [])          # duplicate guard
         self.assertIn("LIVE LONG BTC", lv.message(a))
 
+    def test_limit_card_alerts_its_limit_price(self):                 # roadmap step 2B
+        lim = dict(self.plain, entry={"type": "limit", "offset_atr": 0.5, "valid_bars": 2})
+        self.w.watch = [(lim, "1h", "PAPER")]
+        with self.fire(-1):
+            a = self.w.tick(self.hour + 8000)[0]
+        df = self.w.frames[("BTC", "1h")]
+        self.assertEqual(a["limit_bars"], 2)
+        self.assertGreater(a["entry"], float(df["close"].iloc[-1]))           # a short's limit sits above the close
+        self.assertIn("SELL LIMIT", lv.message(a))
+
     def test_nothing_runs_when_no_watched_timeframe_closed(self):
         self.w.watch = [(self.plain, "1h", "LIVE")]
         with self.fire(1):

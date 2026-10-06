@@ -54,7 +54,7 @@ STEPS = {   # step name -> text (section 14 numbering)
     "path": "14.10 opposing level between entry and TP1",
     "duplicate": "14.13 same strategy / coin / timeframe still open or cooling down",
 }
-LIVE_OPEN = ("AWAITING_5M", "ENTRY_TRIGGERED", "POSITION_ACTIVE", "TP1_HIT")
+LIVE_OPEN = ("AWAITING_5M", "AWAITING_FILL", "ENTRY_TRIGGERED", "POSITION_ACTIVE", "TP1_HIT")
 
 
 def settings(risk_section, events=None):
