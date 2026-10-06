@@ -11,8 +11,9 @@ The operator's decisions (2026-10-06):
   it helps.
 - The playbook strategies must pass the playbook's **stricter bar** as well as the agent's own tests.
 
-Status: **3a done** (engine features). 3b (building blocks and strategies A / B / C) and 3c (risk rules and the
-pass bar) follow; this page is updated with each part.
+Status: **3a** (engine features), **3b** (building blocks and strategies A / B / C) and **3c** (risk rules and the
+pass bar) are built. The strategies start at BACKTESTING like every new card; they alert in Telegram only once the
+research promotes them to PAPER_TRADING (and LIVE only after the operator's approval).
 
 ## The chain (playbook section 1)
 
@@ -67,3 +68,72 @@ Every link is a filter; a failed link = no trade.
 Screenshots, emotional state and "no trading when tired" are the operator's part. The agent supports them with the
 Telegram buttons (✅ took it / ❌ skipped, saved in `journal/my_trades.csv`) and, in 3c, the size rules it can check
 (half size after a large win, in late US hours and at weekends).
+
+## Strategies (3b)
+
+`engine/scalp_playbook.py` computes the playbook on closed 5m candles (`pb_*`, `pbA_*`, `pbB_*`, `pbC_*` columns;
+higher timeframes = their last closed candle, swings only after their confirmation candles - a test cuts the future
+off and checks nothing changes). The cards are in `strategies.yaml` (`PB-*`, `gate: playbook`, timeframe 5m):
+
+| Card | Playbook | CVD |
+|---|---|---|
+| `PB-A-PULLBACK` | 5.1 Strategy A, as written | without (the playbook calls CVD optional for A) |
+| `PB-A-PULLBACK-CVD` | 5.1 + the optional CVD confirmation (trigger candle's delta in the trade direction) | with; must beat PB-A-PULLBACK |
+| `PB-B-SWEEP` | 5.2 Strategy B, confirmation = any of CVD divergence, absorption, OI drop >= 1% | with |
+| `PB-B-SWEEP-noCVD` | the same, OI drop only | control twin |
+| `PB-C-BREAKOUT` | 5.3 Strategy C, with "CVD not making a new low" on the retest | with |
+| `PB-C-BREAKOUT-noCVD` | the same without the CVD check | control twin |
+
+Every card also has the section 5.4 filters: funding above +0.05% / below -0.05% per 8h blocks that side; an
+altcoin long is blocked while BTC's 15m structure is breaking down (and vice versa).
+
+### Where the playbook is silent (assumptions, each written in the card's changelog)
+
+| Point | Assumption |
+|---|---|
+| Regime when the trend conditions hold but price crossed VWAP 4+ times | range (the crossings say price is chopping, not trending) |
+| Which session for which strategy | the "Use" column of section 2.3 read literally: A only in NY (13:00-16:00 UTC), B in Asia, London and NY, C in London and NY; 10:00-13:00 and 16:00-24:00 UTC are not listed, so no entries there |
+| A: how long the 50% limit waits | 3 x 5m candles |
+| A: the pullback | the candles after the highest high since the last confirmed 15m swing low (long) |
+| B: range low / high | the 24 x 15m candles' range; equal lows = two confirmed 15m swing lows within 0.1 x ATR(15m) |
+| B: major levels | PDH / PDL, Asia high / low, previous week high / low, weekly open |
+| B: absorption | a delta >= 1.5 x the average absolute delta against the move, closing in the candle's favourable half |
+| B: "OI drops 1% during the sweep" | the hourly OI change known at the sweep candle (OI is recorded hourly; its history starts 2025-09-29) |
+| C: "directly under a level" / "near a session open" | the level within 0.5 x ATR(15m) of the 8-candle box; the first hour of London (07:00) or NY (13:30) |
+| C: time stop | 6 candles (section 7 gives 4-6) |
+| Unbroken 1H / 4H swings | the last 480 candles of each (what the live watcher holds) |
+| "Large win" (11) | +2R or more |
+| Ranges (daily loss -2R to -3R, 6-8 trades a day) | the stricter end: -2R, 6 trades |
+| The engine's outer time limit | 48 x 5m candles (4 hours); the playbook's own time stop is the +0.5R rule |
+
+### What the first measurement shows (BTC, 2024-10 to 2026-10)
+
+The rules as written are selective. On BTC, before costs and the other filters:
+- **A:** about 2 signals a year. The 1H trend, bias, NY session, pullback quality and trigger must all agree.
+- **B:** about 1,100 sweeps back inside a marked level before the confirmation. It is the busiest of the three.
+- **C:** close to none. The playbook's compression ("the last 8 x 15m candles inside 1.2 x ATR") happened on about
+  0.2% of 15m candles.
+
+The playbook asks for 100 trades before judging (9.2), so A and C may stay in BACKTESTING for lack of trades. That is
+the honest result of the rules as written. Changing a number (for example the compression box) is the operator's
+decision: a new card version, one change at a time (9.1 and 10.2).
+
+## Risk rules (3c, for the PB-* strategies only)
+
+`config.yaml` -> `playbook` (the other strategies keep the agent's rules):
+
+| Playbook | In the agent |
+|---|---|
+| 2.1 no entries +-15 min around high-impact news | `risk.blackout_minutes: 15` (the agent's other strategies: 60) |
+| 2.5 coins: BTC, ETH + SOL / BNB / XRP meeting $500M 24h volume and < 0.02% spread, 2-4 pairs | `coins_core`, `coins_extra`, `max_coins: 4`, checked on OKX perpetuals (hourly scan and live watcher) |
+| 5.4 spread above 2x normal → skip the pair | live watcher: no alert when the OKX spread is above 2 x 0.02% |
+| 6.1 max 2 positions, max 1.5% open risk | `max_positions: 2`, `max_open_risk_pct: 1.5` |
+| 6.1 daily loss -2R / weekly -6R | `day_limit_r: -2`, `week_limit_r: -6` (then half size the next week) |
+| 6.1 3 losses in a row = 30-minute break, 4 = stop for the day | `pause_after_losses`, `pause_minutes`, `stop_after_losses` |
+| 6.1 6-8 trades a day | `max_trades_day: 6` |
+| 6.1 isolated margin, liquidation >= 2x the stop distance beyond the stop | the alert gives the highest isolated leverage that keeps it (`liq_x: 2`) |
+| 2.3 / 5.2 / 11 half size: late US and weekends, counter-trend sweeps, after a large win | the size in the alert and the paper record is halved, with the reason |
+| 9.2 / 9.1 pass bar: +0.15R, PF 1.3, 100 trades, 50 paper signals | `playbook.validation` - the stricter of these and the agent's own numbers |
+
+In the Telegram alerts the day limits come from the operator's own trades (the ✅ Took it buttons and their results).
+In the hourly scan and the paper record they come from the APPROVED (live) record, like the agent's other rules.

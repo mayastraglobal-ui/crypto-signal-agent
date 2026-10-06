@@ -48,6 +48,7 @@ from engine import debate
 from engine import family_gates as fgt
 from engine import history
 from engine import okx_history
+from engine import flow_history
 from engine import ideas
 from engine import lifecycle as lc
 from engine import playbook as pbk
@@ -71,6 +72,19 @@ def stressed(cfg, x):
             if k in c["costs"][side]:
                 c["costs"][side][k] *= x
     return c
+
+
+def playbook_bar(V, s, cfg):
+    """The pass bar of one card: the agent's own, and for the operator's playbook strategies (gate: playbook) also the
+    playbook's healthy ranges (section 9.2) - each number the STRICTER of the two (never lower than the agent's)."""
+    if s.get("gate") != "playbook":
+        return V
+    pv = (cfg.get("playbook") or {}).get("validation") or {}
+    out = dict(V)
+    for k in ("min_expectancy_r", "min_profit_factor", "min_trades"):
+        if k in pv:
+            out[k] = max(out[k], pv[k])
+    return out
 
 
 def research_coins(offline, limit):
@@ -396,6 +410,7 @@ def main():
     t_start = time.time()
     cfg = yaml.safe_load(open(os.path.join(sc.ROOT, "config.yaml")))
     R, V = cfg["research"], cfg["validation"]
+    V_all = V
     A = att.settings(cfg.get("attribution"))
     started = dt.datetime.now(dt.timezone.utc)
     now_ms = int(started.timestamp() * 1000)
@@ -430,6 +445,7 @@ def main():
     # roadmap step 2: the scalping timeframes are backtested on OKX USDT-perpetual candles (what the operator trades)
     okx_tfs = [] if args.offline else [tf for tf in (R.get("okx_timeframes") or []) if tf in tfs]
     okx = okx_history.History(cache) if okx_tfs else None
+    flow_h = None if args.offline or "5m" not in tfs else flow_history.History(cache)   # step 3: CVD (playbook)
     bars = {tf: (min(int(R["history_bars"][tf]), int(R["offline_history_bars"])) if args.offline
                  else int(R["history_bars"][tf])) for tf in ["1w", "1d"] + tfs}
     cfg_stress = stressed(cfg, R["cost_stress_x"])
@@ -483,11 +499,19 @@ def main():
             continue
         if base == "BTC":
             btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
-        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        flow = None
+        if flow_h is not None:
+            try:
+                flow = flow_h.coin(base, bars["5m"], now_ms)
+                log(f"{base} order flow (CVD): {len(flow)} 5m candles")
+            except Exception as e:                   # never fatal: the CVD cards just see 'unknown'
+                log(f"{base} order flow failed ({e}) - CVD unknown")
+        pc = sc.prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, flow)
         if bias_out is None:                        # Phase 18 B: lookahead + recursive check on the first coin (BTC)
             try:
                 bias_out = bias.check_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, pc,
-                                           strategies, sc.prepare_coin, sc.eval_rules, sc.level_array,
+                                           strategies, lambda *a: sc.prepare_coin(*a, flow=flow),   # same CVD input
+                                           sc.eval_rules, sc.level_array,
                                            sspec.columns_needed, BS)
                 log(f"Bias check on {base}: {len(bias_out['checked'])} cards checked, "
                     f"{len(bias_out['findings'])} BIASED, {bias_out['seconds']} s")
@@ -613,6 +637,7 @@ def main():
         sid, ver, tf = k3
         s = by_key[f"{sid}@{ver}"]
         raw = ev.pop("_raw")
+        V = playbook_bar(V_all, s, cfg)            # step 3: the playbook's stricter bar for its own strategies
         base_status, reasons, need = lc.judge(raw["st"], raw["dev"], raw["val"], fwd.get(k3), V,
                                               lc.retune_penalty(registry, s, V["retune_penalty_r"]),
                                               ev["median_cost_r"])
@@ -650,7 +675,9 @@ def main():
         rec = lc.paper_record(paper.get(k3, []))
         status, note, failed = lc.next_status(prev.get("status"), base_status, paper_ok, rec,
                                               int(prev.get("failed_runs") or 0), R_cell)
-        status, note = approval_step(ck, status, note, rec, ev, approvals, AP, approval_warnings, eligible_cells,
+        AP_c = dict(AP, min_paper_signals=max(AP["min_paper_signals"], int(((cfg.get("playbook") or {}).get(
+            "validation") or {}).get("min_paper_signals", 0)))) if s.get("gate") == "playbook" else AP
+        status, note = approval_step(ck, status, note, rec, ev, approvals, AP_c, approval_warnings, eligible_cells,
                                      bool(s.get("lab")))
         bias_txt = bias.tag("; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3])) or next(
             (c["bias"] for k2, c in registry["cells"].items() if k2.split("|")[0] == f"{sid}@{ver}"

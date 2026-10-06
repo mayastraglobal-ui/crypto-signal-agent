@@ -128,7 +128,8 @@ class BuildingBlocks(unittest.TestCase):
     def test_lists_match_the_engines_real_namespace(self):
         for tf, fr in self.pc["frames"].items():
             names = set(fr["ns"]) - {"np"}                   # numpy stays out of reach of lab rules
-            want = SS.FUNCTIONS | SS.COLUMNS | (SS.H4_COLUMNS if tf in SS.H4_TFS else set())
+            want = SS.FUNCTIONS | SS.COLUMNS | (SS.H4_COLUMNS if tf in SS.H4_TFS else set()) | \
+                (SS.PB_COLUMNS if tf in SS.PB_TFS else set())
             self.assertEqual(names, want, tf)
 
     def test_every_library_rule_passes_and_a_passing_rule_really_runs(self):

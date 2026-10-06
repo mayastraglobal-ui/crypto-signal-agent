@@ -46,7 +46,7 @@ class Library(unittest.TestCase):
     def test_every_card_is_valid(self):
         ok, problems, idle = SP.load(RAW, RG.LABELS, scanner.TF_ORDER)
         self.assertEqual(problems, {})
-        self.assertEqual(len(ok), 20)
+        self.assertEqual(len(ok), 26)                      # 20 + the operator's 6 playbook cards (step 3)
         ids = {s["id"] for s in ok}
         for sid in ("S5-SWEEP-MSS-FVG", "S6-OB-FVG", "S7-SILVER-BULLET", "S8-PDH-PDL-SWEEP"):
             self.assertIn(sid, ids)
