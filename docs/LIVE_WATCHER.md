@@ -93,6 +93,8 @@ The bot answers `/status`, `/trades`, `/pause` (`/pause 2h`), `/resume` and `/he
 each alert, **✅ Took it** makes the watcher follow the trade (TP1 → stop to entry, TP2 → stop to TP1, last TP, stop,
 time stop: the backtests' rules) and message you at each step; **❌ Skipped** is only recorded. Everything is saved
 in `journal/my_trades.csv` on the server. Details: `docs/WINDOWS_WATCHER.md`, "Using the bot from your phone".
+Optional **journal sync** (the agent learns from your own trades): `python live_watcher.py --setup-github` (a
+fine-grained token, Contents: read and write on this repository) - see `docs/WINDOWS_WATCHER.md`, "Journal sync".
 
 ## Every day: nothing to do
 

@@ -456,9 +456,9 @@ def _stage(results, stage):
 
 def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboard_url, pages_base=None, repo_url=None,
            registry_text=None, changelog_text=None, merged=None, lessons_text=None, sources_text=None, feeds=None,
-           study=None, tests=None, counts_hist=None):
+           study=None, tests=None, counts_hist=None, journal=None):
     """The weekly report of the 7 days ending `now` (UTC datetime). merged = [(date, PR title)]; counts_hist =
-    research_counts.json (the "vs last week" line)."""
+    research_counts.json (the "vs last week" line); journal = reports/journal_review.json (journal sync) or None."""
     rep = rep or {}
     research = research or {}
     wk = rep.get("weekly") or {}
@@ -509,4 +509,15 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
                           events=" · ".join(f"{e.get('type') or em.short_event(e.get('name'))} "
                                             f"{em.bj(e.get('start_utc'), '%a %d')}" for e in ev) or None),
                 summary=summary, page_url=page_url, dashboard_url=dashboard_url,
-                versus=versus(counts_hist, now.date().isoformat(), 7))
+                versus=versus(counts_hist, now.date().isoformat(), 7), journal=journal_facts(journal))
+
+
+def journal_facts(rv):
+    """The weekly email's "Your own trades" part from reports/journal_review.json (None = not set up / no alert)."""
+    g = (rv or {}).get("recent") or {}
+    if not g.get("alerts"):
+        return None
+    return dict(days=rv.get("days"), alerts=g["alerts"], took=g["took"], skipped=g["skipped"],
+                no_answer=g["no_answer"], plan_took=g["plan_took"]["avg_r"], plan_skipped=g["plan_skipped"]["avg_r"],
+                yours=g["yours"]["avg_r"], yours_n=g["yours"]["n"], gap=g["gap"]["avg_r"],
+                findings=list(rv.get("findings") or [])[:3])

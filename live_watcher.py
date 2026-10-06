@@ -31,6 +31,7 @@ Without git (a Windows PC with the ZIP download, docs/WINDOWS_WATCHER.md), GitHu
 directly every hour (sync_files).
 """
 import argparse
+import base64
 import csv
 import datetime as dt
 import json
@@ -52,6 +53,7 @@ from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import flow_history as fh
 from engine import follow as fl
+from engine import journal as jr
 from engine import lifecycle as lc
 from engine import live as lv
 from engine import regime_fit as rfit
@@ -68,6 +70,10 @@ LOG_FILE = os.path.join(ROOT, "logs", "live_watcher.log")           # local only
 JOURNAL = os.path.join(ROOT, "journal", "my_trades.csv")            # local only (.gitignore): took / skipped / results
 JOURNAL_COLS = ["time_utc", "alert_id", "event", "label", "coin", "side", "tf", "strategy", "version", "entry", "stop",
                 "tp1", "tp2", "tp3", "price", "result_r"]
+JOURNAL_BRANCH = "journal"           # journal sync: the GitHub branch that holds a copy of journal/my_trades.csv
+SHADOW_DAYS = 14                     # a silent plan follow-up still open after 14 days is dropped
+RESULT_HINT = ("\n📒 Send your real result: <b>/result 1.2</b> (in R after fees: -1 = full stop lost, 2 = twice your "
+               "risk). It teaches the agent how the plan works for you.")
 DATA_TFS = ["1w", "1d", "4h", "1h", "30m", "15m", "5m"]
 REPO = os.environ.get("CRYPTO_AGENT_REPO", "mayastraglobal-ui/crypto-signal-agent")
 RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
@@ -77,7 +83,8 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
-              "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py"]      # changed on GitHub -> "run update.bat"
+              "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
+              "engine/journal.py"]      # changed on GitHub -> "run update.bat"
 
 
 def log(*a):
@@ -288,6 +295,102 @@ def find_chat_ids(token=None):
 
 
 # ---------------------------------------------------------------- the watcher
+class JournalSync:
+    """Journal sync (operator request 2026-10-06): a copy of journal/my_trades.csv on the GitHub branch `journal`, so the
+    hourly scan can learn from the operator's own trades (journal_review.py). Needs JOURNAL_GITHUB_TOKEN in
+    telegram.env: a fine-grained token for this repository only, permission Contents: read and write
+    (python live_watcher.py --setup-github). Without it nothing is uploaded and the watcher works as before.
+    Only this one file is ever written, on its own branch; main is never touched."""
+    API = "https://api.github.com"
+
+    def __init__(self, path=None, repo=REPO, http=None):
+        self.path, self.repo = path, repo
+        self.http = http or (lambda method, url, **kw: requests.request(method, url, timeout=30, **kw))
+        self.sent = None          # the bytes last uploaded
+        self.sha = None           # the file's blob sha on the branch (needed to replace it)
+        self.last = None          # (ms, ok, note)
+
+    @staticmethod
+    def token():
+        return os.environ.get("JOURNAL_GITHUB_TOKEN", "").strip()
+
+    def _call(self, method, path, **kw):
+        h = {"Authorization": f"Bearer {self.token()}", "Accept": "application/vnd.github+json",
+             "X-GitHub-Api-Version": "2022-11-28"}
+        r = self.http(method, f"{self.API}/repos/{self.repo}{path}", headers=h, **kw)
+        try:
+            body = r.json()
+        except ValueError:
+            body = {}
+        return r.status_code, body
+
+    def _branch(self):
+        """Make sure the branch exists: a branch of its own (no history from main) with a README."""
+        code, _ = self._call("GET", f"/git/ref/heads/{JOURNAL_BRANCH}")
+        if code == 200:
+            return
+        if code != 404:
+            raise RuntimeError(f"GitHub answered HTTP {code} (check the token)")
+        readme = ("# journal\n\nThe operator's own trade journal (journal/my_trades.csv), uploaded by the live "
+                  "watcher's journal sync.\nThe hourly scan reads it (journal_review.py). Nothing else is kept here.\n")
+        code, tree = self._call("POST", "/git/trees", json=dict(tree=[dict(path="README.md", mode="100644",
+                                                                             type="blob", content=readme)]))
+        if code != 201:
+            raise RuntimeError(f"branch not created: HTTP {code} {tree.get('message', '')}")
+        code, commit = self._call("POST", "/git/commits", json=dict(message="Journal branch", tree=tree["sha"],
+                                                                     parents=[]))
+        if code != 201:
+            raise RuntimeError(f"branch not created: HTTP {code} {commit.get('message', '')}")
+        code, ref = self._call("POST", "/git/refs", json=dict(ref=f"refs/heads/{JOURNAL_BRANCH}", sha=commit["sha"]))
+        if code not in (201, 422):                       # 422: created meanwhile by another copy
+            raise RuntimeError(f"branch not created: HTTP {code} {ref.get('message', '')}")
+
+    def push(self, now_ms, force=False):
+        """Upload the journal when it changed since the last upload. Returns (ok, note); never raises."""
+        if not self.token():
+            return False, "off"
+        try:
+            with open(self.path, "rb") as f:
+                data = f.read()
+        except OSError:
+            data = ",".join(jr.COLS).encode() + b"\n" if force else None
+        if data is None or (data == self.sent and not force):
+            return True, "unchanged"
+        try:
+            self._branch()
+            for attempt in range(2):
+                if self.sha is None:
+                    code, cur = self._call("GET", f"/contents/journal/my_trades.csv?ref={JOURNAL_BRANCH}")
+                    self.sha = cur.get("sha") if code == 200 else None
+                body = dict(message=f"Journal {dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc):%Y-%m-%d %H:%M} UTC",
+                            content=base64.b64encode(data).decode(), branch=JOURNAL_BRANCH)
+                if self.sha:
+                    body["sha"] = self.sha
+                code, res = self._call("PUT", "/contents/journal/my_trades.csv", json=body)
+                if code in (200, 201):
+                    self.sha, self.sent = (res.get("content") or {}).get("sha"), data
+                    rows = max(0, data.count(b"\n") - 1)
+                    self.last = (now_ms, True, f"{rows} rows")
+                    return True, self.last[2]
+                if code in (409, 422) and attempt == 0:   # the copy on GitHub changed: read its sha again
+                    self.sha = None
+                    continue
+                raise RuntimeError(f"HTTP {code} {res.get('message', '')}".strip())
+        except Exception as e:
+            self.last = (now_ms, False, str(e)[:120])
+            return False, self.last[2]
+        return False, "not uploaded"
+
+    def status(self, now_ms):
+        """The /status line."""
+        if not self.token():
+            return "off (no JOURNAL_GITHUB_TOKEN - see docs/WINDOWS_WATCHER.md, Journal sync)"
+        if not self.last:
+            return "on, nothing uploaded yet"
+        ms, ok, note = self.last
+        return f"uploaded {lv.ago(ms, now_ms)} ({note})" if ok else f"⚠️ failing: {note}"
+
+
 class Watcher:
     def __init__(self, feed, send=True, git=True, now_fn=None, also=()):
         self.feed, self.send, self.git, self.also = feed, send, git, list(also or ())
@@ -301,6 +404,7 @@ class Watcher:
         self.last_refresh = None  # (ms, note) of the newest GitHub refresh
         self.code_old = []        # watcher code files that differ from GitHub main
         self._poll_err = None
+        self.jsync = JournalSync(JOURNAL)
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -382,8 +486,9 @@ class Watcher:
             st = {}
         # alerts: the buttons' memory (3 days) · trades: the ones being followed · paused_until: 0 = alerts on,
         # -1 = until /resume, else the end (ms) · tg_offset: the next Telegram update to read
+        # shadow: every alert followed silently by the plan's rules (its "plan" result goes to the journal)
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
-                         next_id=0).items():
+                         next_id=0, shadow={}).items():
             st.setdefault(k, v)
         return st
 
@@ -503,6 +608,9 @@ class Watcher:
             self.state["alerts"][aid]["msg_id"] = mid
             if self.send:
                 log(what + ("sent" if ok else f"NOT sent ({err})"))
+                st = self.state["alerts"][aid]                  # journal sync: the alert and its silent plan follow-up
+                self.journal(dict(st, id=aid), "alert", int(st["sent_ms"]))
+                self.state["shadow"][aid] = fl.open_trade(st, aid, int(st["sent_ms"]), self.cfg.get("trade_plan"))
 
     def _remember(self, a):
         """Keep what the buttons and the follow-up need; returns the alert id (in the buttons' data)."""
@@ -533,22 +641,31 @@ class Watcher:
             log(f"journal not written: {e}")
 
     # ---- the trades the operator took ----
-    def follow(self, now_ms):
-        for tid, t in list(self.state["trades"].items()):
+    def _advance(self, t, now_ms, cache):
+        """Walk one trade through the 5m candles closed since its last check; None when the download failed."""
+        if t["coin"] not in cache:
             try:
                 raw = self.update(t["coin"], "5m", now_ms)
+                cache[t["coin"]] = raw[raw["close_time"] < now_ms]
             except Exception as e:
                 log(f"follow {t['coin']}: download failed: {e}")
-                continue
-            closed = raw[raw["close_time"] < now_ms]
-            if t.get("trailing") and len(closed):    # step 3: the playbook's trail (last 5m swing / EMA9)
-                tc = t.get("trail_cfg") or {}
-                tl, ts = mg.trail_levels(closed["high"].to_numpy(), closed["low"].to_numpy(), closed["close"].to_numpy(),
-                                         int(tc.get("swing_n", 3)), int(tc.get("ema", 9)))
-                closed = closed.assign(trail_long=tl, trail_short=ts)
-            bars = closed[closed["open_time"] >= t["checked_ms"]].to_dict("records")
-            for ev in fl.step(t, bars):
-                self.say(fl.text(t, ev))
+                cache[t["coin"]] = None
+        closed = cache[t["coin"]]
+        if closed is None:
+            return None
+        if t.get("trailing") and len(closed):        # step 3: the playbook's trail (last 5m swing / EMA9)
+            tc = t.get("trail_cfg") or {}
+            tl, ts = mg.trail_levels(closed["high"].to_numpy(), closed["low"].to_numpy(), closed["close"].to_numpy(),
+                                     int(tc.get("swing_n", 3)), int(tc.get("ema", 9)))
+            closed = closed.assign(trail_long=tl, trail_short=ts)
+        return fl.step(t, closed[closed["open_time"] >= t["checked_ms"]].to_dict("records"))
+
+    def follow(self, now_ms):
+        cache = {}
+        for tid, t in list(self.state["trades"].items()):
+            evs = self._advance(t, now_ms, cache)
+            for ev in evs or []:
+                self.say(fl.text(t, ev) + (RESULT_HINT if ev.get("final") and ev["kind"] != "expired" else ""))
                 name = f"tp{ev['n']}" if ev["kind"] == "tp" else ev["kind"]
                 self.journal(t, name, ev["at_ms"], ev["px"], ev.get("result_r") if ev.get("final") else None)
                 log(f"FOLLOW {t['coin']} {t['tf']} {t['strategy']}: {name}")
@@ -556,6 +673,15 @@ class Watcher:
                 filled = t.get("filled", True)
                 self._end_trade(tid, "done", now_ms, t["realized"] if filled else None,
                                 "finished" if filled else "limit not filled")
+        for sid, t in list(self.state["shadow"].items()):     # every alert, silently: the plan's result
+            evs = self._advance(t, now_ms, cache)
+            fin = next((e for e in evs or [] if e.get("final")), None)
+            if fin:
+                self.journal(t, "plan" if t.get("filled", True) else "plan not filled", fin["at_ms"], fin["px"],
+                             fin.get("result_r"))
+                self.state["shadow"].pop(sid)
+            elif now_ms - int(t["taken_ms"]) > SHADOW_DAYS * 86_400_000:
+                self.state["shadow"].pop(sid)                  # no stop, target or time stop in 14 days: dropped
 
     def _end_trade(self, tid, choice, now_ms, r, how):
         t = self.state["trades"].pop(tid, None)
@@ -642,6 +768,8 @@ class Watcher:
             self.state["paused_until"] = 0
             self._save_state()
             return "▶️ New trade alerts are on again."
+        if cmd == "result":
+            return self.result(arg, now_ms)
         if cmd is None:
             return "I only understand commands. Send /help for the list."
         return f"I don't know /{cmd}. Send /help for the list."
@@ -673,6 +801,7 @@ class Watcher:
             self.journal(dict(a, id=aid), "closed by you", now_ms)
             self._end_trade(aid, "closed", now_ms, None, "closed by you")
             toast = "Recorded: closed. I stopped following it."
+            self.say(f"🏁 Closed by you · {a['coin']} {a['tf']} {a['strategy']}." + RESULT_HINT)
         msg = cq.get("message") or {}
         if self.send:
             tg_api("answerCallbackQuery", dict(callback_query_id=cq.get("id"), text=toast))
@@ -682,6 +811,33 @@ class Watcher:
         self._save_state()
         return toast
 
+    def result(self, arg, now_ms):
+        """/result 1.2 - the operator's real result (R, after fees) of their newest finished trade without one;
+        /result <id> 1.2 for another (the id is in /trades). Written to the journal as 'your result'."""
+        try:
+            aid, r = jr.parse_result(arg)
+        except ValueError:
+            return ("Send your real result in R after fees, e.g. /result 1.2 or /result -1 (-1 = the full stop lost, "
+                    "2 = twice what you risked). For an older trade: /result &lt;id&gt; 1.2 (ids in /trades).")
+        done = [x for x in self.state["results"] if x.get("how") != "limit not filled"
+                and (x.get("id") == aid if aid else x.get("your_r") is None)]
+        if aid is None and not done and self.state["trades"]:
+            return "Your trades are still open. Send /result when one is finished."
+        if not done:
+            return "No finished trade " + (f"with id {aid}" if aid else "is waiting for a result") + ". See /trades."
+        x = done[-1]
+        x["your_r"] = r
+        a = dict(self.state["alerts"].get(x["id"]) or {}, id=x["id"])
+        if a.get("entry") is not None:
+            self.journal(a, "your result", now_ms, None, r)
+        else:                                                  # the alert is older than 3 days: the short record
+            self.journal(dict(a, label=x["label"], coin=x["coin"], d=x["d"], tf=x["tf"], strategy=x["strategy"],
+                              entry=0.0, R=0.0, tps=[]), "your result", now_ms, None, r)
+        self._save_state()
+        plan = f" (plan: {x['r']:+.1f}R)" if x.get("r") is not None else ""
+        return (f"📒 Recorded: your result {r:+.2f}R · {'LONG' if x['d'] == 1 else 'SHORT'} {x['coin']} {x['tf']} "
+                f"{x['strategy']}{plan}. It goes into the weekly review of your trades.")
+
     def status_text(self, now_ms):
         day = lv.boundary(now_ms, "1d")
         return lv.status_text(dict(
@@ -689,7 +845,7 @@ class Watcher:
             paused_until=self.state.get("paused_until"), watch=[(s["id"], tf, lab) for s, tf, lab in self.watch],
             coins=self.coins, open_trades=len(self.state["trades"]),
             alerts_today=sum(1 for a in self.state["alerts"].values() if int(a["sent_ms"]) >= day),
-            refresh=self.last_refresh, code_old=self.code_old))
+            refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms)))
 
     def trades_text(self, now_ms):
         lines = ["📒 <b>Your trades</b>"]
@@ -706,7 +862,9 @@ class Watcher:
             for r in res[-5:]:
                 when = dt.datetime.fromtimestamp(int(r["ended_ms"]) / 1000, dt.timezone.utc)
                 lines.append(f"• {when:%d %b} {'LONG' if r['d'] == 1 else 'SHORT'} {r['coin']} {r['tf']} ({r['label']}): "
-                             + (f"{r['r']:+.1f}R" if r["r"] is not None else r["how"]))
+                             + (f"{r['r']:+.1f}R" if r["r"] is not None else r["how"])
+                             + (f" · yours {r['your_r']:+.1f}R" if r.get("your_r") is not None else
+                                f" · /result {r['id']} …" if r.get("id") else ""))
         lines.append("\nFull record on the PC: journal\\my_trades.csv")
         return "\n".join(lines)
 
@@ -905,6 +1063,18 @@ class Watcher:
         return (0.5 if why else 1.0), why
 
     # ---- forever ----
+    def sync_journal(self, now_ms, force=False):
+        """Journal sync: upload journal/my_trades.csv to the GitHub branch `journal` when it changed (token needed)."""
+        ok, note = self.jsync.push(now_ms, force)
+        if note in ("off", "unchanged"):
+            return ok, note
+        if ok:
+            log(f"journal uploaded to GitHub ({note})")
+        elif note != getattr(self, "_jsync_err", None):
+            log(f"journal sync failed: {note}")
+        self._jsync_err = None if ok else note
+        return ok, note
+
     def heartbeat(self, now_ms):
         day = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)
         if day.strftime("%H:%M") < self.S["heartbeat_utc"] or self.state.get("heartbeat") == day.strftime("%Y-%m-%d"):
@@ -928,6 +1098,7 @@ class Watcher:
         for note in windows_guard():
             log(note)
         self.refresh_repo()                          # start from GitHub's newest decisions (a ZIP may be days old)
+        self.sync_journal(self.now_fn())
         ok, err = telegram(f"▶️ Live watcher started on {self.feed.name}. Watching {len(self.watch)} strategy "
                            f"timeframe(s) on {', '.join(self.coins)}. Send /help for the commands.") \
             if self.send else (True, "")
@@ -940,6 +1111,7 @@ class Watcher:
                 if self.now_fn() - self.reloaded_ms >= int(self.S["refresh_minutes"]) * 60_000:
                     self.refresh_repo()
                 self.tick()
+                self.sync_journal(self.now_fn())
                 self.last_tick = (self.now_fn(), True, "")
                 self.heartbeat(self.now_fn())
                 if self.fails >= int(self.S["error_alert_after"]):
@@ -1011,6 +1183,41 @@ def setup_telegram(path=SETTINGS_FILE, ask=input, wait_s=180):
     return ok
 
 
+def setup_github(path=SETTINGS_FILE, ask=input, sync=None):
+    """Interactive: a fine-grained GitHub token for the journal sync -> checked by a real upload -> telegram.env."""
+    print("\nJOURNAL SYNC SETUP (optional) - your Telegram button choices and results go to GitHub, so the agent can\n"
+          "learn from your own trades. Guide: docs/WINDOWS_WATCHER.md, 'Journal sync'.\n"
+          "1. Open https://github.com/settings/personal-access-tokens/new (signed in to GitHub).\n"
+          "2. Name: crypto journal · Expiration: 1 year · Repository access: Only select repositories -> "
+          f"{REPO}\n3. Permissions -> Repository permissions -> Contents: Read and write. Nothing else.\n"
+          "4. Generate token, copy it (it starts with github_pat_).\n")
+    token = ask("Paste the token here and press Enter: ").strip()
+    if not token:
+        print("No token - nothing changed.")
+        return False
+    old = os.environ.get("JOURNAL_GITHUB_TOKEN")
+    os.environ["JOURNAL_GITHUB_TOKEN"] = token
+    ok, note = (sync or JournalSync(JOURNAL)).push(int(time.time() * 1000), force=True)
+    if not ok:
+        if old is None:
+            os.environ.pop("JOURNAL_GITHUB_TOKEN", None)
+        else:
+            os.environ["JOURNAL_GITHUB_TOKEN"] = old
+        print(f"\nThe upload did not work: {note}\nCheck the repository and the Contents: Read and write permission, "
+              "then run this again. Nothing was saved.")
+        return False
+    try:
+        with open(path, encoding="utf-8") as f:
+            keep = [x for x in f.read().splitlines() if not x.strip().startswith("JOURNAL_GITHUB_TOKEN=")]
+    except OSError:
+        keep = []
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(keep + [f"JOURNAL_GITHUB_TOKEN={token}"]) + "\n")
+    print(f"\nWorks: your journal is on GitHub (branch '{JOURNAL_BRANCH}', {note}). Token saved in telegram.env "
+          "(private, never uploaded).\nRestart the watcher (2_start_watcher.bat) so it uses it.")
+    return True
+
+
 def main():
     for stream in (sys.stdout, sys.stderr):           # Windows consoles: never crash on an emoji or a coin name
         try:
@@ -1024,6 +1231,8 @@ def main():
     ap.add_argument("--test-telegram", action="store_true", help="send one test message")
     ap.add_argument("--find-chat-id", action="store_true", help="show your Telegram chat id (message the bot first)")
     ap.add_argument("--setup-telegram", action="store_true", help="interactive Telegram setup (writes telegram.env)")
+    ap.add_argument("--setup-github", action="store_true",
+                    help="journal sync: save a GitHub token so your trades reach the research (optional)")
     ap.add_argument("--sync", action="store_true", help="download GitHub's newest decision files now (no git)")
     ap.add_argument("--status", action="store_true", help="show which strategies may alert, then stop")
     ap.add_argument("--offline", action="store_true", help="synthetic prices (code test, no internet)")
@@ -1033,6 +1242,8 @@ def main():
     args = ap.parse_args()
     if args.setup_telegram:
         sys.exit(0 if setup_telegram() else 1)
+    if args.setup_github:
+        sys.exit(0 if setup_github() else 1)
     if args.sync:
         updated, problems = sync_files()
         print("updated: " + (", ".join(updated) or "nothing new") + ("" if not problems else "\nproblems: " + "; ".join(problems)))

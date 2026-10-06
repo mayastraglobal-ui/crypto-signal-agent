@@ -4,6 +4,8 @@ name: Tests
 # Green tick = all tests passed. Red cross = something is broken; open the run to see which test.
 on:
   push:
+    branches-ignore:
+      - journal               # the operator's trade journal (live watcher uploads): no code there
     paths-ignore:
       - "reports/**"          # the hourly / daily report commits don't need testing
       - "memory/**"           # ... nor the engine's memory logs (a pull request still runs every test)

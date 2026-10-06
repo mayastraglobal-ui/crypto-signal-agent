@@ -208,7 +208,9 @@ class Bot(unittest.TestCase):
         with open(LW.JOURNAL) as f:
             rows = f.read().splitlines()
         self.assertEqual(rows[0].split(",")[:3], ["time_utc", "alert_id", "event"])
-        self.assertEqual([r.split(",")[2] for r in rows[1:]], ["took", "tp1", "tp2"])
+        self.assertEqual([r.split(",")[2] for r in rows[1:]], ["alert", "took", "tp1", "tp2", "plan"])
+        self.assertEqual(rows[-1].split(",")[-1], "2.5")                         # the silent plan follow-up agrees
+        self.assertEqual(self.w.state["shadow"], {})
         self.w.on_update(self.press(f"skip|{aid}"), self.now)                  # finished: the choice is final
         self.assertEqual(self.w.state["alerts"][aid]["choice"], "done")
 

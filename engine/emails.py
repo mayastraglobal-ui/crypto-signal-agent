@@ -854,6 +854,16 @@ def weekly(w):
                ("line", f"Strategy × timeframe cells. {val(f.get('FAILED'))} failed for real reasons."
                         + (f" {plural(f['NEAR_DUP'], 'near-duplicate')} counted as one idea." if f.get("NEAR_DUP") else "")),
                *([("line", w["versus"])] if w.get("versus") else [])]
+    j = w.get("journal")
+    if j:                                            # journal sync: the operator's own trades (Telegram buttons)
+        blocks[blocks.index(("section", "2 · Road to real signals")):0] = [
+            ("label", f"Your own trades · last {j.get('days') or 30} days (Telegram buttons)"),
+            ("tiles", ("grey", [("Alerts", val(j["alerts"]), f"{val(j['no_answer'])} no answer"),
+                                ("Took", val(j["took"]), f"plan {signed(j['plan_took'], digits=2)}"),
+                                ("Skipped", val(j["skipped"]), f"plan {signed(j['plan_skipped'], digits=2)}"),
+                                ("Yours", signed(j["yours"], digits=2), f"{val(j['yours_n'])} results"
+                                 + (f" · gap {signed(j['gap'], digits=2)}" if j.get("gap") is not None else ""))])),
+            ("bullets", j.get("findings") or ["No finding yet: each needs 5+ trades."])]
     if close:
         blocks.append(("bars", close[:3]))
     blocks += [("section", "3 · Learned this week"),

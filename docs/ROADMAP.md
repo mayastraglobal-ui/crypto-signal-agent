@@ -30,6 +30,7 @@ and targets, instantly.
 | 2026-10-06 | Step 3a-3c: the operator's playbook (strategies A / B / C, its risk rules and pass bar) (`docs/PLAYBOOK.md`) |
 | 2026-10-06 | Step 3d: flexible playbook versions - graded setups, A in London, B on 15m, C's wider box, the fee fix |
 | 2026-10-06 | Step 5: the 4H trend window + faster entries (TRD-H4-*), strategies by market type, scalping variants |
+| 2026-10-06 | Journal sync: the operator's trades reach GitHub (branch `journal`), plan result of every alert, `/result`, "Your own trades" in the weekly email |
 
 ## Next steps, in order
 
@@ -68,8 +69,12 @@ Status: **built 2026-10-06** (`engine/follow.py`, `engine/live.py`, `live_watche
 - Buttons "✅ Took it / ❌ Skipped / 🏁 I closed it" under each alert; recorded in `journal/my_trades.csv` on the PC.
 - Follow-up of taken trades on 5m candles with the backtests' rules (a test checks they match
   `scanner.simulate_trade`): TP1 → stop to entry, TP2 → stop to TP1, last TP, stop, time stop, result in R.
-- Not yet: "trend turned" warnings and the strategy's own early-exit rule (not in the follow-up; the time stop is),
-  and sending the journal to GitHub (it stays on the PC for now).
+- Not yet: "trend turned" warnings and the strategy's own early-exit rule (not in the follow-up; the time stop is).
+- **Journal sync** (built 2026-10-06, `engine/journal.py`, `journal_review.py`): with a GitHub token
+  (`windows\6_journal_sync.bat`) the watcher uploads the journal to the branch `journal`; every alert is followed
+  silently for its plan result (skipped ones too); `/result 1.2` records the operator's real result; the hourly scan
+  writes `reports/journal_review.*` (took vs skipped by the plan, real vs plan gap, early closes) for the weekly
+  email and Claude's fact sheets. Report only - nothing changes a gate, cost or approval.
 
 ### Step 5: the agent improves itself more
 Status: **built 2026-10-06** (operator: "start step 5"):
@@ -94,6 +99,7 @@ Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept
 | When | What |
 |---|---|
 | Now | Double-click `windows\4_update.bat` once to get the Telegram commands and buttons |
+| After the update | Optional: double-click `windows\6_journal_sync.bat` (GitHub token) so the agent learns from your trades; send `/result 1.2` after each trade |
 | After the next research email | Compare the playbook versions (originals vs -LDN / -15M / -W20 / -LIMIT / -GRADED / -APLUS) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |
