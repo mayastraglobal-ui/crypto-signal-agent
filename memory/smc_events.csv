@@ -8065,3 +8065,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-05 23:30,SUI,15m,FVG,bear,,1.2145,1.2182,0.539,,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-06 00:00,SUI,15m,FVG_RETRACE,bear,,1.2145,1.2182,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-06 00:30,SUI,15m,FVG_FILLED,bear,,1.2145,1.2182,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-06 01:15,BTC,15m,CHOCH,bull,86062.8,,,0.036,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 01:15,BTC,15m,ORDER_BLOCK,bull,,85777.57,85898.01,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 01:15,ETH,15m,SWEEP,bear,2722.0,,,0.334,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 01:15,ETH,15m,FVG,bull,,2715.81,2717.48,0.35,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-06 01:00,ZEC,30m,SWEEP,bear,1354.7,,,0.434,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 00:45,ZEC,15m,FVG_RETRACE,bear,,1345.25,1347.66,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 00:45,ZEC,15m,FVG_FILLED,bear,,1345.25,1347.66,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-06 00:45,ZEC,15m,FVG,bull,,1338.43,1340.7,0.283,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-06 01:00,ZEC,15m,SWEEP,bear,1354.7,,,0.654,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 01:00,ZEC,15m,FVG,bull,,1344.69,1350.06,0.658,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-06 01:15,ZEC,15m,CHOCH,bull,1354.7,,,0.11,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 01:15,ZEC,15m,ORDER_BLOCK,bull,,1333.93,1338.43,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 01:15,SOL,15m,FVG,bull,,120.93,121.01,0.277,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-06 01:00,BNB,30m,BOS,bear,786.08,,,0.14,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 01:00,BNB,15m,WEAK_BREAK,bear,786.08,,,0.237,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 01:00,BNB,15m,OB_INVALID,bull,,786.1,786.98,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 01:15,BNB,15m,BREAKER_RETEST,bear,,786.1,786.98,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 01:00,SUI,1h,FVG_FILLED,bull,,1.2045,1.2195,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-06 01:00,SUI,30m,FVG_FILLED,bull,,1.2045,1.2133,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-06 00:45,SUI,15m,FVG_FILLED,bull,,1.2045,1.2113,,Asia,1h,UNCLEAR,,smc-1.0,Binance
