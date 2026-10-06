@@ -8477,3 +8477,38 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-06 12:45,BNB,15m,OB_RETEST,bull,,783.26,784.21,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
 2026-10-06 12:45,BNB,15m,FVG_RETRACE,bull,,783.96,784.49,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-06 13:15,BNB,15m,FVG_FILLED,bull,,783.96,784.49,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 13:45,BTC,15m,SWEEP,bear,86408.72,,,0.216,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 14:00,BTC,15m,FVG,bull,,86118.38,86259.96,0.705,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:15,BTC,15m,FVG_RETRACE,bull,,86118.38,86259.96,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 14:15,BTC,15m,FVG_FILLED,bull,,86118.38,86259.96,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:00,ETH,30m,SWEEP,bear,2719.0,,,0.119,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 13:45,ETH,15m,SWEEP,bear,2719.0,,,0.175,NY AM,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-06 13:45,ETH,15m,BOS,bull,2717.88,,,0.137,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 13:45,ETH,15m,ORDER_BLOCK,bull,,2709.54,2713.97,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 14:15,ETH,15m,OB_RETEST,bull,,2709.54,2713.97,,Silver Bullet,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-06 14:00,ZEC,30m,WEAK_BREAK,bull,1377.3,,,0.111,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 13:30,ZEC,15m,BOS,bull,1374.25,,,0.284,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 14:00,SOL,1h,WEAK_BREAK,bull,120.81,,,0.141,NY AM,4h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-06 14:00,SOL,30m,CHOCH,bull,120.81,,,0.192,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 14:00,SOL,30m,ORDER_BLOCK,bull,,120.16,120.42,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 14:00,SOL,30m,OB_INVALID,bear,,120.19,120.81,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 13:45,SOL,15m,CHOCH,bull,120.64,,,0.812,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 13:45,SOL,15m,ORDER_BLOCK,bull,,120.16,120.42,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 13:45,SOL,15m,OB_INVALID,bear,,120.38,120.65,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 13:45,SOL,15m,FVG_FILLED,bear,,120.66,120.87,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:00,SOL,15m,FVG,bull,,120.4,120.79,0.988,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:15,SOL,15m,BREAKER_RETEST,bull,,120.38,120.65,,Silver Bullet,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 14:15,SOL,15m,FVG_RETRACE,bull,,120.4,120.79,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 14:00,XRP,1h,SWEEP,bear,1.515,,,0.291,NY AM,4h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 14:00,XRP,30m,SWEEP,bear,1.515,,,0.406,NY AM,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-06 13:45,XRP,15m,CHOCH,bull,1.5149,,,0.047,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 13:45,XRP,15m,ORDER_BLOCK,bull,,1.5072,1.5119,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 13:45,XRP,15m,OB_INVALID,bear,,1.5096,1.5141,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 14:00,XRP,15m,BREAKER_RETEST,bull,,1.5096,1.5141,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 14:00,XRP,15m,FVG,bull,,1.5094,1.5129,0.759,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:15,XRP,15m,FVG_RETRACE,bull,,1.5094,1.5129,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:30,SUI,30m,FVG,bear,,1.1939,1.197,0.342,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 14:00,SUI,30m,FVG_RETRACE,bear,,1.1939,1.197,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 14:00,SUI,30m,FVG_FILLED,bear,,1.1939,1.197,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 13:45,SUI,15m,FVG_RETRACE,bear,,1.1939,1.1965,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:45,SUI,15m,FVG_FILLED,bear,,1.1939,1.1965,,NY AM,1h,RANGE,,smc-1.0,Binance
