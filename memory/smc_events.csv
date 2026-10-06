@@ -8451,3 +8451,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-06 10:30,SOL,30m,FVG_RETRACE,bear,,119.82,120.38,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-06 10:30,SOL,30m,FVG_FILLED,bear,,119.82,120.38,,,1h,RANGE,,smc-1.0,Binance
 2026-10-06 10:30,XRP,15m,BREAKER_RETEST,bull,,1.5042,1.5069,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 11:45,BTC,15m,BOS,bull,86229.42,,,0.501,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 12:00,ZEC,4h,WEAK_BREAK,bull,1366.04,,,0.181,,1d,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-06 11:30,ZEC,30m,FVG_RETRACE,bull,,1355.47,1362.3,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 12:00,ZEC,15m,SWEEP,bear,1374.25,,,0.14,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 12:00,XRP,1h,WEAK_BREAK,bull,1.5095,,,0.392,NY AM,4h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-06 11:30,XRP,30m,WEAK_BREAK,bull,1.5108,,,0.13,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 11:30,XRP,15m,WEAK_BREAK,bull,1.5108,,,0.187,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 12:00,BNB,4h,FVG_RETRACE,bear,,783.06,786.08,,,1d,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-06 12:15,BNB,15m,CHOCH,bull,785.0,,,0.863,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 12:15,BNB,15m,ORDER_BLOCK,bull,,783.26,784.21,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 12:15,BNB,15m,FVG_FILLED,bear,,784.04,785.35,,NY AM,1h,RANGE,,smc-1.0,Binance
