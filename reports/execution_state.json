@@ -5,5 +5,5 @@
  "since": {
   "data|RLC|1d": "2026-10-06 07:21 UTC"
  },
- "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
+ "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }
