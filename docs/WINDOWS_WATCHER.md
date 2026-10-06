@@ -68,6 +68,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 |---|---|
 | `/status` | Is it running, the last market check, which strategies it watches, paused or not, a newer version waiting |
 | `/trades` | The trades you took that it is following, and your results of the last 30 days |
+| `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
 | `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
 | `/help` | The list |
@@ -88,6 +89,36 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 The follow-up messages come about 10–30 seconds after each 5-minute candle closes. They remind you what to do; they
 don't replace the stop-loss and TP orders on OKX, so always put those on OKX as soon as you enter.
 
+## Journal sync (optional, 5 minutes): let the agent learn from your own trades
+
+Your button presses stay on the PC unless you switch this on. With it, the watcher uploads
+`journal\my_trades.csv` to GitHub (its own branch, `journal`) after every 5-minute check when something changed,
+and the hourly scan turns it into **"Your own trades"** in the Sunday weekly email and in Claude's daily and weekly
+fact sheets (`reports/journal_review.md`):
+
+- **Every alert gets a plan result**, also the ones you skip or don't answer: the watcher follows each alert
+  silently with the backtest's rules. So the agent can tell whether your skips help or hurt.
+- **Your real result** (`/result 1.2` after a trade; the bot asks for it) vs the plan for the same trade: the gap
+  is your fees, slippage, late entries and early exits - the part of the backtest you don't get.
+- **Closing early**: what it cost or saved you, per trade.
+
+It only reports. It never changes a strategy, a gate, a cost or an approval - a finding like "your real costs look
+higher than the backtest's" is for you to decide on.
+
+**Set it up (once):**
+1. On GitHub (signed in), open https://github.com/settings/personal-access-tokens/new
+2. **Token name**: `crypto journal` · **Expiration**: 1 year · **Repository access**: *Only select repositories* →
+   `mayastraglobal-ui/crypto-signal-agent`
+3. **Permissions** → Repository permissions → **Contents: Read and write**. Nothing else.
+4. **Generate token** and copy it (it starts with `github_pat_`).
+5. On the PC, double-click **`windows\6_journal_sync.bat`**, paste the token, press Enter. It uploads your journal
+   once to check the token, saves it in `telegram.env` (private, never uploaded) and restarts the watcher.
+6. `/status` in Telegram now shows **Journal sync to GitHub: uploaded …**.
+
+Good to know: the repository is public, so the `journal` branch is too - it holds your alerts, choices and results
+in R (no account, balance or keys). The token can only write files of this one repository; keep `telegram.env`
+private. When the token expires, `/status` shows "failing": make a new one and run `6_journal_sync.bat` again.
+
 ## The buttons (all in the `windows` folder)
 
 | File | What it does |
@@ -97,6 +128,7 @@ don't replace the stop-loss and TP orders on OKX, so always put those on OKX as 
 | `3_stop_watcher.bat` | Stop the watcher |
 | `4_update.bat` | Download the newest version from GitHub (keeps your Telegram settings). Telegram tells you when an update is available |
 | `5_remove_autostart.bat` | Stop it from starting with Windows |
+| `6_journal_sync.bat` | Optional: send your journal to GitHub so the agent learns from your trades (see Journal sync) |
 | `run_watcher.bat` | The watcher itself (the start button and auto-start use it) |
 
 ## Reading an alert

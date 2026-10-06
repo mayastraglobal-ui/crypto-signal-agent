@@ -183,6 +183,7 @@ def parse_duration(arg):
 HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/status - is it running, what it watches, the last check\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
+        "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
         "/pause - stop new trade alerts until /resume (/pause 2h = for 2 hours)\n"
         "/resume - new trade alerts on again\n"
         "/help - this list\n\n"
@@ -200,7 +201,7 @@ def ago(ms, now_ms):
 def status_text(i):
     """/status reply. i = dict(feed, started_ms, now_ms, last_tick=(ms, ok, note) or None, paused_until (0 = on,
     -1 = until /resume, else ms), watch=[(id, tf, label)], coins, open_trades, alerts_today, refresh=(ms, note) or
-    None, code_old=[...])."""
+    None, code_old=[...], journal_sync=text or None)."""
     now = i["now_ms"]
     lines = [f"✅ <b>Live watcher running</b> · {i['feed']}", f"Started {ago(i['started_ms'], now)}"]
     lt = i.get("last_tick")
@@ -221,6 +222,8 @@ def status_text(i):
     lines.append(f"Trade alerts sent today (UTC): {i['alerts_today']}")
     if i.get("refresh"):
         lines.append(f"GitHub decisions refreshed {ago(i['refresh'][0], now)}: {i['refresh'][1]}")
+    if i.get("journal_sync"):
+        lines.append(f"Journal sync to GitHub: {i['journal_sync']}")
     if i.get("code_old"):
         lines.append("🔄 A newer watcher version is on GitHub: double-click windows\\4_update.bat on the PC.")
     return "\n".join(lines)

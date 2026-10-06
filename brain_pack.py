@@ -580,6 +580,7 @@ def pack(kind, now, live=None):
         out += ["### Control-twin comparisons (does the special ingredient add anything?)"]
         out += [f"- {k}: {'beats' if c.get('beats_twin') else 'does not beat' if c.get('beats_twin') is False else 'too few trades vs'} "
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
+    out += journal_lines()
     out += edge_lines_for(research)
     out += lab_lines(now, research)
     out += factory_lines(now, research)
@@ -605,6 +606,14 @@ def pack(kind, now, live=None):
     out += ["", "## Your earlier outputs (read them first)"] + [f"- {p}" for p in
                                                                  recent_files("daily") + recent_files("weekly", 2)]
     return out
+
+
+def journal_lines():
+    """Journal sync: the operator's own trades (reports/journal_review.json, written by the hourly scan)."""
+    from engine import journal as jr
+    rv = load_json("journal_review.json")
+    return ["", "## The operator's own trades (journal sync - Telegram buttons, plan results, /result replies)"] + (
+        jr.lines(rv) if rv else ["- journal sync is not set up yet (no reports/journal_review.json)"])
 
 
 def main():
