@@ -211,7 +211,7 @@ class WindowsPC(unittest.TestCase):
         wdir = os.path.join(ROOT, "windows")
         names = sorted(os.listdir(wdir))
         self.assertEqual(names, ["1_setup.bat", "2_start_watcher.bat", "3_stop_watcher.bat", "4_update.bat",
-                                 "5_remove_autostart.bat", "run_watcher.bat"])
+                                 "5_remove_autostart.bat", "6_journal_sync.bat", "run_watcher.bat"])
         for n in names:
             with open(os.path.join(wdir, n), "rb") as f:
                 b = f.read()
@@ -228,6 +228,8 @@ class WindowsPC(unittest.TestCase):
         self.assertIn("telegram.env", upd)                                         # settings kept on update
         self.assertIn("--from-temp", upd)                                          # never rewrites itself mid-run
         self.assertIn("/T 20 /D Y", upd)                                           # the watcher restarts after an update
+        self.assertIn("journal", upd)                                              # the PC's journal is kept on update
+        self.assertIn("--setup-github", open(os.path.join(wdir, "6_journal_sync.bat")).read())
         ignored = open(os.path.join(ROOT, ".gitignore")).read().split()
         for p in ("telegram.env", "logs/", ".venv/", "STOP_WATCHER", "reports/live_watcher_state.json"):
             self.assertIn(p, ignored)
