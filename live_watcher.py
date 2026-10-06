@@ -925,6 +925,8 @@ class Watcher:
         except OSError:
             log("another live watcher is already running on this computer - this copy stops")
             sys.exit(3)
+        for note in windows_guard():
+            log(note)
         self.refresh_repo()                          # start from GitHub's newest decisions (a ZIP may be days old)
         ok, err = telegram(f"▶️ Live watcher started on {self.feed.name}. Watching {len(self.watch)} strategy "
                            f"timeframe(s) on {', '.join(self.coins)}. Send /help for the commands.") \
@@ -950,6 +952,27 @@ class Watcher:
                 if self.fails == int(self.S["error_alert_after"]):
                     telegram(f"⚠️ Live watcher: {self.fails} passes failed in a row - no alerts until it recovers.\n"
                              f"{type(e).__name__}: {str(e)[:300]}")
+
+
+def windows_guard():
+    """On Windows: keep the computer awake while the watcher runs (sleep blocked; the screen may still turn off), and
+    switch off QuickEdit in its window (a mouse click there would freeze the watcher until a key is pressed). Returns
+    what it did; does nothing elsewhere and never stops the watcher."""
+    if os.name != "nt":
+        return []
+    done = []
+    try:
+        import ctypes
+        k = ctypes.windll.kernel32
+        if k.SetThreadExecutionState(0x80000000 | 0x00000001):       # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
+            done.append("sleep blocked while the watcher runs")
+        h, mode = k.GetStdHandle(-10), ctypes.c_uint32()               # the window's keyboard / mouse input
+        if k.GetConsoleMode(h, ctypes.byref(mode)):
+            k.SetConsoleMode(h, (mode.value & ~0x0040) | 0x0080)      # QuickEdit off (extended flags on)
+            done.append("QuickEdit off")
+    except Exception as e:
+        done.append(f"Windows guard failed: {e}")
+    return done
 
 
 def setup_telegram(path=SETTINGS_FILE, ask=input, wait_s=180):

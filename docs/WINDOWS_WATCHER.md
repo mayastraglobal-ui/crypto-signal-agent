@@ -127,7 +127,11 @@ Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
   only on a PC nobody else can use.
 - **Internet drops:** the watcher retries by itself. After 3 failed checks in a row you get a ⚠️ on Telegram, and
   a "recovered" message when it works again.
-- **Power:** keep a laptop plugged in. The screen may turn off, which is fine.
+- **Power:** keep a laptop plugged in. The screen may turn off, which is fine. Since 2026-10-06 the watcher also
+  tells Windows not to sleep while it runs. A shared or work PC can still be forced to sleep, restart or sign out
+  by its administrator's rules; signing out stops the watcher (locking the screen does not).
+- **Checking from far away:** with a remote-desktop app (for example Chrome Remote Desktop) on the PC and your
+  phone, you can look at the watcher window and restart it without going there.
 - **Log file:** `logs\live_watcher.log` in the agent folder shows everything it did.
 - **Only one copy runs.** Starting it twice is harmless: the second copy closes itself.
 - **Your Telegram token** is stored only in `telegram.env` in the agent folder. Don't share that file.
@@ -140,7 +144,9 @@ Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
 | winget not found / install failed | Install Python from https://www.python.org/downloads/ and tick **"Add python.exe to PATH"** on the first screen, then run `1_setup.bat` again |
 | "That token does not work" | Copy the token again from BotFather (the whole line with the colon), run `1_setup.bat` again |
 | "No message arrived" | Open your bot in Telegram, press **START**, then run `1_setup.bat` again |
-| The bot doesn't answer `/status` | The watcher isn't running, or it's an old version: double-click `4_update.bat` (it restarts the watcher) |
+| The bot doesn't answer `/status` | Check, in this order: 1) is the **Crypto Watcher** window on the taskbar? If not, double-click `2_start_watcher.bat`. 2) Is its title starting with **"Select"**? A mouse click froze it (QuickEdit): press **Esc** (the watcher turns QuickEdit off itself since 2026-10-06). 3) Did the PC sleep, restart or sign out? Sign in; the watcher starts with Windows. 4) Look at the end of `logs\live_watcher.log`: "Telegram commands: ..." = the network blocks Telegram. |
+| No "✅ Live watcher running" message in the morning | It sends one every day at 00:05 UTC. None = it was not running at that time: check the PC |
+| After `4_update.bat` the bot is silent | Older versions asked "Start the watcher again now?" and waited; answer **Y** (since 2026-10-06 it starts by itself after 20 seconds) |
 | No "started" message | Run `2_start_watcher.bat`; look at `logs\live_watcher.log` |
 | Telegram says a newer version is on GitHub | Double-click `4_update.bat` |
 

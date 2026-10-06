@@ -29,5 +29,5 @@ echo Updating the Python packages...
 ".venv\Scripts\python.exe" -m pip install -q -r requirements.txt
 echo.
 echo Updated. Your Telegram settings were kept.
-choice /C YN /M "Start the watcher again now"
+choice /C YN /T 20 /D Y /M "Start the watcher again now (it starts by itself in 20 seconds)"
 if not errorlevel 2 start "Crypto Watcher" /min "%WDIR%run_watcher.bat"
