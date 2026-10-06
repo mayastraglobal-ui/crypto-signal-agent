@@ -18,7 +18,7 @@ It **never trades for you** and never needs your exchange password or API keys.
 The hourly scan is too slow for scalping. `live_watcher.py` runs all the time on a free Oracle Cloud server and
 checks every 5-minute candle close on OKX perpetuals, with the same engine. It sends a **Telegram** alert within
 seconds: entry zone, stop-loss, targets, size and why. Only APPROVED (LIVE) and PAPER_TRADING (PAPER) strategies
-alert. Setup, step by step: [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md).
+alert. Setup, step by step: [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What comes next: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## One-time setup (about 15 minutes, no coding)
 
