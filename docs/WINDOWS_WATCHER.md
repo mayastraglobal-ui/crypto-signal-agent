@@ -1,0 +1,117 @@
+# Live watcher on your Windows PC (step-by-step)
+
+Your Windows PC runs the live watcher day and night. Every 5 minutes, about 10–30 seconds after a candle closes, it
+checks the market on **OKX perpetuals** and sends a **Telegram** alert when a strategy that passed GitHub's tests
+has a setup: entry zone, stop-loss, TP1/TP2/TP3, position size for your account, max hold time and the trend.
+
+- **GitHub stays the brain.** Research, backtests, coin selection, strategy statuses, emails and the official
+  record don't change. The PC only reads GitHub's decisions (every hour, automatically) and watches the market fast.
+- It never places trades and never needs your OKX password or API keys.
+- Until a strategy reaches PAPER_TRADING or APPROVED, the watcher stays quiet. You'll still get a
+  "still running" message every day.
+
+You need about **20 minutes** once, and a Telegram account on your phone.
+
+---
+
+## Step 1: download the agent (2 minutes)
+
+1. Open https://github.com/mayastraglobal-ui/crypto-signal-agent
+2. Click the green **Code** button → **Download ZIP**.
+3. Open your Downloads folder, right-click the ZIP → **Extract All…**, and extract it to an easy place, for
+   example `C:\CryptoAgent`.
+   You now have a folder like `C:\CryptoAgent\crypto-signal-agent-main` with a `windows` folder inside.
+
+> Keep the folder somewhere simple, without brackets in the path (not inside "Program Files (x86)").
+
+## Step 2: run the setup (10–15 minutes, mostly waiting)
+
+1. Open the `windows` folder and **double-click `1_setup.bat`**.
+   If Windows shows "Windows protected your PC", click **More info** → **Run anyway**. It's your own file from
+   your GitHub.
+2. The setup does 5 things and tells you what it's doing:
+
+| Step | What happens | What you do |
+|---|---|---|
+| 1. Python | Looks for Python. If it's missing, it installs it with Windows' own installer (winget) | Say **Yes** if Windows asks. If it says "close this window", close it and double-click `1_setup.bat` again |
+| 2. Packages | Installs what the agent needs (2–5 minutes) | Wait |
+| 3. Telegram | Sets up your bot, see below | Follow the text in the window |
+| 4. Sleep | Asks to keep the PC awake when plugged in | Press **Y** (needed for alerts at night) |
+| 5. Auto-start | Asks to start the watcher every time you sign in to Windows | Press **Y** |
+
+**Telegram part (step 3 of the setup):**
+1. On your phone, open Telegram and search **@BotFather** (blue tick) → press Start → send `/newbot`.
+2. Choose a name (for example `My Crypto Alerts`), then a username that ends in `bot` (for example
+   `mycryptoalerts123_bot`).
+3. BotFather sends a **token** like `123456789:AAH...`. Copy it.
+   (Easiest: open Telegram on the PC at https://web.telegram.org, or send the token to yourself.)
+4. Paste the token into the setup window and press Enter. *(Right-click pastes in the black window.)*
+5. The window shows a link to your bot: open it in Telegram and press **START**.
+6. Within a few seconds the setup finds your chat and sends **"✅ Telegram works"** to your phone.
+
+At the end, press **Y** to start the watcher now. A minimized window **"Crypto Watcher"** appears on the taskbar,
+and Telegram says **"▶️ Live watcher started"**.
+
+## Step 3: done. What it looks like day to day
+
+- **Keep the "Crypto Watcher" window open** (minimized is fine). Closing it stops the alerts.
+- It starts by itself when you sign in to Windows (if you chose Y in step 5).
+- It restarts by itself if it ever crashes, and warns you on Telegram if checks keep failing.
+- Every hour it downloads GitHub's newest decisions (strategy statuses, coins, settings). Nothing to do.
+- Once a day you get **"✅ Live watcher running"**. If that message stops coming, check the PC.
+
+## The buttons (all in the `windows` folder)
+
+| File | What it does |
+|---|---|
+| `1_setup.bat` | First setup; run it again to change the Telegram bot or repair the install |
+| `2_start_watcher.bat` | Start the watcher (if you closed it) |
+| `3_stop_watcher.bat` | Stop the watcher |
+| `4_update.bat` | Download the newest version from GitHub (keeps your Telegram settings). Telegram tells you when an update is available |
+| `5_remove_autostart.bat` | Stop it from starting with Windows |
+| `run_watcher.bat` | The watcher itself (the start button and auto-start use it) |
+
+## Reading an alert
+
+```
+🟢 LIVE LONG SOL · SOL-USDT-SWAP
+15m · donchian_breakout v1.0
+Entry zone: 120.36 – 120.84 (planned 120.60)
+Stop-loss: 119.40 (1.00% away = 1R)
+TP1: 123.00 (2.0R, close 50%)
+TP2: 124.20 (3.0R, close 50%)
+Size at 0.5% risk ($5.00): 4.17 SOL ≈ $503, 0.50x
+Max hold: 30 candles (~7h30m)
+Trend: 1W WEAK_BULL · 1D STRONG_BULL · 4H WEAK_BULL · 1H STRONG_BULL
+Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
+```
+
+- 🟢/🔴 **LIVE** = an approved strategy. 📝 **PAPER** = practice only (the strategy is still being proven).
+- Enter only inside the **entry zone**; if price already ran past it, skip.
+- Put the **stop-loss and TPs** on OKX as soon as you enter. "Close 50%" = take half of the position there.
+- **⚠️** lines (for example a CPI or FOMC event within 60 minutes) mean the risk rules say: no live entry now.
+
+## Good to know
+
+- **Windows Update restarts:** after a restart the PC waits at the sign-in screen. The watcher starts when you
+  sign in. If the PC must recover with nobody there, you can turn on automatic sign-in (search "netplwiz"), but
+  only on a PC nobody else can use.
+- **Internet drops:** the watcher retries by itself. After 3 failed checks in a row you get a ⚠️ on Telegram, and
+  a "recovered" message when it works again.
+- **Power:** keep a laptop plugged in. The screen may turn off, which is fine.
+- **Log file:** `logs\live_watcher.log` in the agent folder shows everything it did.
+- **Only one copy runs.** Starting it twice is harmless: the second copy closes itself.
+- **Your Telegram token** is stored only in `telegram.env` in the agent folder. Don't share that file.
+
+## Problems
+
+| Problem | Fix |
+|---|---|
+| "Python is not installed" again after installing | Close the window and double-click `1_setup.bat` again (Windows needs a new window to see Python) |
+| winget not found / install failed | Install Python from https://www.python.org/downloads/ and tick **"Add python.exe to PATH"** on the first screen, then run `1_setup.bat` again |
+| "That token does not work" | Copy the token again from BotFather (the whole line with the colon), run `1_setup.bat` again |
+| "No message arrived" | Open your bot in Telegram, press **START**, then run `1_setup.bat` again |
+| No "started" message | Run `2_start_watcher.bat`; look at `logs\live_watcher.log` |
+| Telegram says a newer version is on GitHub | Double-click `4_update.bat` |
+
+Running it on the Mac or a Linux server instead is described in `docs/LIVE_WATCHER.md`.
