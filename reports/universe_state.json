@@ -10,8 +10,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 249,
+ "suspended": {
+  "RLC": "2026-10-06"
+ },
+ "runs": 250,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -83,6 +85,11 @@
   "SAND": [
    "thin_book",
    "volume_7d"
+  ],
+  "RLC": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -119,6 +126,9 @@
   "AAVE": [],
   "MOVR": [],
   "HYPE": [],
-  "SAND": []
+  "SAND": [],
+  "RLC": [
+   "data_degraded"
+  ]
  }
 }

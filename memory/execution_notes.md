@@ -81,3 +81,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 - timestamp: 2026-10-05 21:32 UTC · source: engine: hourly scan (data check) · evidence: FACT: config.yaml -> costs · confidence: configured, not observed · strategy: - · asset: all · timeframe: - · regime: - · review: 2026-11-04
   - costs: {"long": {"funding_pct_per_8h": 0.01, "maker_fee_pct": 0.02, "market": "futures", "slippage_pct": 0.05, "taker_fee_pct": 0.05}, "short": {"funding_pct_per_8h": 0.01, "funding_real_x": 1.0, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
   - before: {"long": {"maker_fee_pct": 0.1, "slippage_pct": 0.05, "taker_fee_pct": 0.1}, "short": {"funding_pct_per_8h": 0.01, "funding_real_x": 1.0, "maker_fee_pct": 0.02, "slippage_pct": 0.05, "taker_fee_pct": 0.05}}
+
+### START RLC 1d data: DEGRADED: volume 85x normal on candle 10-05 00:00 UTC (possible bad data)
+- timestamp: 2026-10-06 07:21 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: RLC · timeframe: - · regime: - · review: 2026-11-05
+  - signals from this data are blocked while it lasts
