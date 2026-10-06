@@ -9,6 +9,9 @@ is not followed here (the alert's max hold is).
 A limit-entry alert (roadmap step 2B) first waits for the fill: price back at the limit within the card's
 valid_bars candles -> filled (only the stop counts in the fill candle, as in the backtest); otherwise -> expired, no
 trade.
+Step 3 (the operator's playbook) adds the card's manage block, with the backtest's rules: after TP1 the stop goes to
+entry + fees (be_plus_fees) and trails the last confirmed 5m swing / EMA9 (a message when it should move by 0.25R
+or more); no +0.5R within N candles -> exit (progress); a close beyond the setup's invalidation level -> exit.
 Pure: no internet, no files. A trade is a plain dict, so it can live in the watcher's JSON state.
 """
 import datetime as dt
@@ -27,7 +30,14 @@ def open_trade(a, aid, taken_ms, tp_cfg=None):
     tps = [float(x) for x in a["tps"]]
     split = list(a.get("split") or [1.0 / len(tps)] * len(tps)) if tps else []
     lim = a.get("limit_bars")
-    return dict(id=aid, label=a["label"], coin=a["coin"], inst=a.get("inst", a["coin"]), d=int(a["d"]), tf=a["tf"],
+    man = a.get("manage") or {}
+    d, entry = int(a["d"]), float(a["entry"])
+    iv_every = (man.get("invalidate") or {}).get("every")
+    extra = dict(be_price=entry * (1 + d * float(a.get("be_frac") or 0)) if man.get("be_plus_fees") else entry,
+                 progress=man.get("progress"), trailing=bool(man.get("trail")), trail_cfg=man.get("trail"),
+                 last_trail=None, told_stop=None,
+                 inval=a.get("inval"), inval_every_ms=tfm.TF_MS[iv_every] if iv_every else None, bars_in=0, mfe=0.0)
+    return dict(extra, id=aid, label=a["label"], coin=a["coin"], inst=a.get("inst", a["coin"]), d=int(a["d"]), tf=a["tf"],
                 filled=not lim, fill_by_ms=start + int(lim) * tfm.TF_MS[a["tf"]] if lim else None,
                 max_hold=int(a["max_hold"]) if a.get("max_hold") else None,
                 strategy=a["strategy"], version=a.get("version"), entry=float(a["entry"]), R=float(a["R"]),
@@ -63,6 +73,20 @@ def step(t, bars):
                 continue
             else:
                 continue
+        tv = t.get("last_trail")                                                   # known at the last close
+        if t.get("trailing") and t["hit"] >= 1 and tv is not None and not fill_bar:
+            new = max(t["stop"], tv) if d == 1 else min(t["stop"], tv)
+            if new != t["stop"]:
+                t["stop"] = new
+                told = t.get("told_stop")
+                if told is None or abs(new - told) >= 0.25 * t["R"]:
+                    t["told_stop"] = new
+                    out.append(dict(kind="trail", px=new, at_ms=ot))
+        t["last_trail"] = (b.get("trail_long") if d == 1 else b.get("trail_short"))
+        if t["last_trail"] is not None and t["last_trail"] != t["last_trail"]:     # NaN
+            t["last_trail"] = None
+        t["bars_in"] = t.get("bars_in", 0) + 1
+        t["mfe"] = max(t.get("mfe", 0.0), d * ((h if d == 1 else l) - t["entry"]))
         if (d == 1 and l <= t["stop"]) or (d == -1 and h >= t["stop"]):             # stop first (worst case)
             px = o if ((d == 1 and o < t["stop"]) or (d == -1 and o > t["stop"])) else t["stop"]
             out.append(_close(t, "stop", px, at))
@@ -77,7 +101,7 @@ def step(t, bars):
             t["remaining"] -= frac
             t["hit"] += 1
             if t["hit"] == 1 and t["be"]:
-                t["stop"] = t["entry"]
+                t["stop"] = t.get("be_price", t["entry"])
             elif t["hit"] >= 2 and t["trail"]:
                 t["stop"] = t["tps"][t["hit"] - 2]
             ev = dict(kind="tp", n=t["hit"], px=t["tps"][i], frac=frac, stop=t["stop"], at_ms=at)
@@ -89,6 +113,14 @@ def step(t, bars):
             continue
         if t["hit"] > 0 and ((d == 1 and c <= t["stop"]) or (d == -1 and c >= t["stop"])):
             out.append(_close(t, "stop", t["stop"], at))                         # back through the moved stop
+            continue
+        iv, every = t.get("inval"), t.get("inval_every_ms")
+        if iv is not None and (not every or at % every == 0) and d * (c - iv) < 0:
+            out.append(_close(t, "invalid", c, at))                              # the setup is invalidated
+            continue
+        pg = t.get("progress")
+        if pg and t["bars_in"] == int(pg["bars"]) and t["mfe"] < float(pg["r"]) * t["R"]:
+            out.append(dict(_close(t, "time", c, at), why=f"+{pg['r']:g}R not reached within {pg['bars']} candles"))
             continue
         if t["end_ms"] and at >= t["end_ms"]:
             out.append(_close(t, "time", c, at))
@@ -113,6 +145,9 @@ def text(t, ev):
     if ev["kind"] == "fill":
         return (f"✅ Limit filled · {_head(t)}\nPrice reached your limit {px(t['entry'])}. Set the stop-loss "
                 f"<b>{px(t['stop'])}</b> and the TPs on OKX now if you haven't. {when}")
+    if ev["kind"] == "trail":
+        return (f"🔁 Trail the stop · {_head(t)}\nMove the stop-loss to <b>{px(ev['px'])}</b> (behind the last 5m swing / "
+                f"EMA9). (5m candle closed {lv.utc(ev['at_ms'])})")
     if ev["kind"] == "expired":
         return (f"⌛ Limit not filled · {_head(t)}\nPrice did not come back to {px(t['entry'])} in time → "
                 f"<b>cancel the limit order</b> on OKX. No trade. {when}")
@@ -120,16 +155,22 @@ def text(t, ev):
     if ev["kind"] == "tp":
         if ev.get("final"):
             return f"🏁 TP{ev['n']} hit · {_head(t)}\nTP{ev['n']} {px(ev['px'])} reached → close the rest. {when}{done}"
-        move = ("Move the stop-loss to <b>entry {}</b> (break-even).".format(px(ev["stop"])) if ev["n"] == 1 else
+        move = ("Move the stop-loss to <b>entry {}</b> (break-even{}).".format(
+                    px(ev["stop"]), " + fees" if abs(ev["stop"] - t["entry"]) > 1e-12 else "") if ev["n"] == 1 else
                 f"Move the stop-loss to <b>TP{ev['n'] - 1} {px(ev['stop'])}</b>.")
         return (f"🎯 TP{ev['n']} hit · {_head(t)}\nTP{ev['n']} {px(ev['px'])} reached → close "
                 f"{ev['frac'] * 100:.0f}% of the position. {move} {when}")
     if ev["kind"] == "stop":
         what = ("Stop-loss hit" if ev["hit"] == 0 else
                 "Stopped at entry (break-even) after TP1" if abs(ev["px"] - t["entry"]) < 1e-12 else
+                "Stopped at break-even + fees after TP1" if abs(ev["px"] - t.get("be_price", t["entry"])) < 1e-12 else
                 f"Moved stop hit after TP{ev['hit']}")
         return f"🛑 {what} · {_head(t)}\nStop {px(ev['px'])}. If OKX hasn't closed it, close it now. {when}{done}"
-    return (f"⏱ Time stop · {_head(t)}\nThe strategy's max hold is over → close the rest at market "
+    if ev["kind"] == "invalid":
+        return (f"❌ Setup invalidated · {_head(t)}\nA close beyond {px(t['inval'])} → <b>exit at market</b> "
+                f"(about {px(ev['px'])}). {when}{done}")
+    why = ev.get("why") or "the strategy's max hold is over"
+    return (f"⏱ Time stop · {_head(t)}\n{why[0].upper() + why[1:]} → close the rest at market "
             f"(about {px(ev['px'])}). {when}{done}")
 
 

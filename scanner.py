@@ -49,6 +49,7 @@ from engine import evidence as evid
 from engine import family_gates as fgt
 from engine import features as fe
 from engine import lifecycle as lc
+from engine import manage as mg
 from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
@@ -872,7 +873,8 @@ def market_type(d, cfg=None):
 
 
 def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None, tps=None, split=None,
-                   info=None, fund_real=None, fund_long=None, entry_fee=None, fill_bar=False):
+                   info=None, fund_real=None, fund_long=None, entry_fee=None, fill_bar=False, manage=None,
+                   trail=None, inval=None):
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open
     (then `info`, if given, receives the targets hit so far and the current stop - the position book).
     tps / split: take-profit prices and the share closed at each (default: config trade plan 1R/2R/3R).
@@ -885,8 +887,15 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     (Phase 9 failure attribution), and the funding paid, in R.
     Limit entries (roadmap step 2B): entry_fee = the maker fee (fraction) instead of the taker fee; fill_bar = j0 is
     the candle in which the limit order filled - only the stop counts there (a target touched in that candle may
-    have come BEFORE the fill), targets from the next candle on."""
+    have come BEFORE the fill), targets from the next candle on.
+    The card's manage block (step 3, the operator's playbook): be_plus_fees = after TP1 the stop goes to entry plus
+    the round-trip fees; trail = the per-candle trail level for THIS direction (engine/manage.trail_levels), used
+    after TP1 from the next candle on, only tightening; progress = exit at the close of candle `bars` when +r R was
+    not reached; inval = (level, mask): exit at a close beyond the level, on candles where mask is True (None = all).
+    The playbook's time and invalidation exits report as 'time' and 'exit-rule'."""
     tp = cfg["trade_plan"]
+    manage = manage or {}
+    prog = manage.get("progress")
     k = trade_costs(cfg, d)
     fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
     fund_bar = k["funding_8h"] * bar_hours / 8
@@ -899,6 +908,9 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     remaining, pnl, fees, funding, hit = 1.0, 0.0, (fee_t if entry_fee is None else entry_fee) * entry, 0.0, 0
     mae = mfe = 0.0
     n = len(c)
+    # breakeven + fees: what the entry fee and a market exit (taker + slippage) cost, per unit
+    be = entry * (1 + d * ((fee_t if entry_fee is None else entry_fee) + fee_t + slip)) \
+        if manage.get("be_plus_fees") else entry
 
     def done(j, reason):
         return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1,
@@ -912,6 +924,8 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
         funding += remaining * fb * entry
         worst, best = (l[j], h[j]) if d == 1 else (h[j], l[j])
         mae, mfe = min(mae, d * (worst - entry)), max(mfe, d * (best - entry))
+        if trail is not None and hit >= 1 and j > j0 and np.isfinite(trail[j - 1]):   # known at the last close
+            stop = max(stop, float(trail[j - 1])) if d == 1 else min(stop, float(trail[j - 1]))
         # --- stop-loss first (worst case) ---
         if (d == 1 and l[j] <= stop) or (d == -1 and h[j] >= stop):
             px = o[j] if ((d == 1 and o[j] < stop) or (d == -1 and o[j] > stop)) else stop
@@ -919,22 +933,16 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
             return done(j, "SL" if hit == 0 else f"TP{hit}+stop")
-        if fill_bar and j == j0:                 # the limit fill candle: targets only from the next candle
-            if (j - j0 + 1) >= max_hold:
-                px = c[j] * (1 - slip * d)
-                pnl += remaining * d * (px - entry)
-                fees += remaining * fee_t * px
-                return done(j, "time")
-            continue
+        targets_ok = not (fill_bar and j == j0)  # the limit fill candle: targets only from the next candle
         # --- take-profits ---
-        while hit < len(tps) and ((d == 1 and h[j] >= tps[hit]) or (d == -1 and l[j] <= tps[hit])):
+        while targets_ok and hit < len(tps) and ((d == 1 and h[j] >= tps[hit]) or (d == -1 and l[j] <= tps[hit])):
             frac = split[hit] if hit < len(tps) - 1 else remaining
             pnl += frac * d * (tps[hit] - entry)
             fees += frac * fee_m * tps[hit]
             remaining -= frac
             hit += 1
             if hit == 1 and tp.get("move_stop_to_breakeven_after_tp1", True):
-                stop = entry
+                stop = be
             elif hit >= 2 and tp.get("move_stop_to_tp1_after_tp2", True):
                 stop = tps[hit - 2]
         if remaining <= 1e-9:
@@ -944,9 +952,13 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
             return done(j, f"TP{hit}+stop")
-        # --- early exit rule / time stop (at candle close) ---
+        # --- early exit rule / invalidation / no-progress / time stop (at candle close) ---
         rule_exit = exit_arr is not None and exit_arr[j]
-        if rule_exit or (j - j0 + 1) >= max_hold:
+        if inval is not None and (inval[1] is None or inval[1][j]) and np.isfinite(inval[0]) and \
+                d * (c[j] - inval[0]) < 0:
+            rule_exit = True
+        no_progress = prog is not None and (j - j0 + 1) == int(prog["bars"]) and mfe < float(prog["r"]) * R
+        if rule_exit or no_progress or (j - j0 + 1) >= max_hold:
             px = c[j] * (1 - slip * d)
             pnl += remaining * d * (px - entry)
             fees += remaining * fee_t * px
@@ -976,8 +988,17 @@ def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
         R = d * (entry - (lev - d * st.get("buffer_atr", 0.2) * atr_t))
         if R <= 0 or R > st.get("max_width_atr", 3.0) * atr_t:   # stop on the wrong side or too wide
             return skip("stop")
+    if R < float(st.get("min_width_atr", 0)) * atr_t:            # step 3: a stop too tight is noise-stopped
+        return skip("stop")
     tg = sspec.targets(strat, d, entry, R, t, cols, cfg["trade_plan"])
-    return skip("target") if tg is None else (R, tg[0], tg[1])
+    if tg is None:
+        return skip("target")
+    need = (strat.get("targets") or {}).get("min_rr_after_fees")
+    if need:                                                     # step 3: the last target, after round-trip costs
+        k = trade_costs(cfg, d)
+        if (d * (tg[0][-1] - entry) - entry * 2 * (k["taker"] + k["slip"])) / R < float(need):
+            return skip("target")
+    return R, tg[0], tg[1]
 
 
 def limit_fill(h, l, t, d, price, valid_bars):
@@ -992,7 +1013,11 @@ def limit_fill(h, l, t, d, price, valid_bars):
 
 def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None):
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
-    lim = sspec.limit_entry(strat)
+    lim, levs = sspec.limit_entry(strat), sspec.limit_levels(strat)
+    man = strat.get("manage") or {}
+    trails = mg.trail_levels(h, l, c, man["trail"]["swing_n"], man["trail"]["ema"]) if man.get("trail") else None
+    iv = man.get("invalidate")
+    iv_mask = mg.closes_of(df["close_time"].to_numpy(), TF_MS[iv["every"]]) if iv and iv.get("every") else None
     fund_real = df["_fund_short"].to_numpy() if "_fund_short" in df else None
     fund_long = df["_fund_long"].to_numpy() if "_fund_long" in df else None
     ot = df["open_time"].to_numpy()
@@ -1005,8 +1030,11 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             t += 1
             continue
         k = trade_costs(cfg, d)
+        limit_px = None
         if lim:                                  # limit order at the close -/+ offset x ATR (roadmap step 2B)
-            entry = float(c[t] - d * lim[0] * atr[t])
+            limit_px = float(cols[levs[0 if d == 1 else 1]][t]) if levs else float(c[t] - d * lim[0] * atr[t])
+        if limit_px is not None and np.isfinite(limit_px):     # (a level that is unknown -> market, below)
+            entry = limit_px
             plan = plan_trade(strat, t, d, entry, atr[t], cols or {}, cfg, skipped) if np.isfinite(entry) else None
             if plan is None:
                 t += 1
@@ -1028,9 +1056,11 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
                 continue
             j0, fee_in, cost_in = t + 1, None, k["taker"] + k["slip"]
         R, tps, split = plan
+        inval = (float(cols[iv["long" if d == 1 else "short"]][t]), iv_mask) if iv else None
         res = simulate_trade(o, h, l, c, j0, d, entry, R, cfg, strat["time_stop_bars"], bar_hours,
                              ex_long if d == 1 else ex_short, tps, split, fund_real=fund_real, fund_long=fund_long,
-                             entry_fee=fee_in, fill_bar=bool(lim))
+                             entry_fee=fee_in, fill_bar=fee_in is not None, manage=man,
+                             trail=None if trails is None else trails[0 if d == 1 else 1], inval=inval)
         if res is None:
             break
         res.update(entry_idx=j0, signal_idx=t, dir=d, entry_time=int(ot[j0]), entry=float(entry), R=float(R),
@@ -1148,7 +1178,8 @@ LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "ent
             "state", "state_note", "planned_entry", "entry_time_utc", "sim_tf", "bars_5m",  # Phase 10 states
             "confirm_5m_utc", "smc_5m", "close_reason", "current_stop", "warnings", "next_action",
             "risk_blocks",                                                                  # Phase 11 risk engine
-            "entry_type", "limit_bars"]                                                     # step 2B limit entries
+            "entry_type", "limit_bars",                                                     # step 2B limit entries
+            "inval_level"]                                                                  # step 3 invalidation
 TEXT_COLS = ["closed_time_utc", "version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags",
              "state", "state_note", "entry_time_utc", "sim_tf", "confirm_5m_utc", "smc_5m", "close_reason",
              "warnings", "next_action", "risk_blocks", "entry_type"]
@@ -1329,12 +1360,25 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
         ex = (exits or {}).get((coin, tf, f"{row['strategy']}@{ver}"))
         exit_arr = c5m.exit_on_5m(ex[0], ex[1 if d == 1 else 2], after["close_time"].to_numpy()) if ex else None
         o, h, l, c = (after[k].to_numpy() for k in ("open", "high", "low", "close"))
+        strat = (cards or {}).get(f"{row['strategy']}@{ver}")
+        man = (strat or {}).get("manage") or {}                  # step 3: the playbook's trade management
+        trail = None
+        if man.get("trail"):                 # computed on the whole history (swings / EMA need the candles before)
+            tl = mg.trail_levels(df["high"].to_numpy(), df["low"].to_numpy(), df["close"].to_numpy(),
+                                 man["trail"]["swing_n"], man["trail"]["ema"])
+            trail = tl[0 if d == 1 else 1][pos0:]
+        inval = None
+        if man.get("invalidate") and pd.notna(row.get("inval_level")) and str(row.get("inval_level")) != "":
+            every = man["invalidate"].get("every")
+            inval = (float(row["inval_level"]),
+                     mg.closes_of(after["close_time"].to_numpy(), TF_MS[every]) if every else None)
         info = {}
         res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]) * (TF_MS[tf] // TF_MS[stf]),
                              TF_MS[stf] / 3_600_000, exit_arr, tps, split, info,
                              fund_real=after["_fund_short"].to_numpy() if "_fund_short" in after else None,
                              fund_long=after["_fund_long"].to_numpy() if "_fund_long" in after else None,
-                             entry_fee=trade_costs(cfg, d)["maker"] if limit else None, fill_bar=limit)
+                             entry_fee=trade_costs(cfg, d)["maker"] if limit else None, fill_bar=limit,
+                             manage=man, trail=trail, inval=inval)
         if not res:
             new = pos.TP1_HIT if info.get("hit", 0) >= 1 else pos.ACTIVE
             m = (mon or {}).get((coin, tf))
@@ -1355,7 +1399,6 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
         logdf.at[i, "warnings"], logdf.at[i, "next_action"] = "", "none - closed"
         _event(events, now_txt, row, pos.TP1_HIT if res["hit"] >= 1 else state, pos.CLOSED, None,
                f"{logdf.at[i, 'close_reason']} {res['r']:+.2f}R")
-        strat = (cards or {}).get(f"{row['strategy']}@{ver}")
         tdf, tpos0, tres = df, pos0, res
         if stf != tf:                         # tags are read on the trigger timeframe
             tdf = data.get((sym, tf))
@@ -2193,9 +2236,14 @@ def main():
                     if d == 0:
                         continue
                     a = df["_atr"].iloc[t_i]
-                    lim = sspec.limit_entry(s)
-                    if lim:                         # step 2B: a limit order at the close -/+ offset x ATR
-                        entry = float(df["close"].iloc[t_i] - d * lim[0] * a)
+                    lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
+                    lpx = None
+                    if lim:                         # step 2B: a limit order at the close -/+ offset x ATR, or at a level
+                        lpx = float(cols[levs[0 if d == 1 else 1]][t_i]) if levs else float(df["close"].iloc[t_i] - d * lim[0] * a)
+                        if not np.isfinite(lpx):    # step 3: level unknown -> market entry (playbook: small candle)
+                            lim = None
+                    if lim:
+                        entry = lpx
                     else:
                         entry = float(df["close"].iloc[-1]) if k == 0 else float(df["open"].iloc[t_i + 1])
                     plan = plan_trade(s, t_i, d, entry, a, cols, cfg) if np.isfinite(entry) else None
@@ -2217,6 +2265,8 @@ def main():
                                      entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                                      atr=float(a), age_bars=k, confirm_5m=bool(s.get("confirm_5m")),
                                      limit_bars=lim[1] if lim else None,
+                                     inval=(float(cols[(s.get("manage") or {})["invalidate"]["long" if d == 1 else "short"]][t_i])
+                                            if (s.get("manage") or {}).get("invalidate") else None),
                                      signal_time=int(df["close_time"].iloc[t_i]),
                                      htf_up=bool(df["htf_up"].iloc[t_i]),
                                      htf_down=bool(df["htf_down"].iloc[t_i]),
@@ -2330,7 +2380,7 @@ def main():
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
             version=sgl["version"], stage=stage, lab=bool(strat.get("lab")), family=strat["family"],
-            confirm_5m=sgl["confirm_5m"], limit_bars=sgl.get("limit_bars"),
+            confirm_5m=sgl["confirm_5m"], limit_bars=sgl.get("limit_bars"), inval=sgl.get("inval"),
             entry_type="limit" if sgl.get("limit_bars") else "market",
             state=pos.AWAITING if sgl["confirm_5m"] else pos.AWAITING_FILL if sgl.get("limit_bars") else pos.ACTIVE,
             conditions=sgl["conditions"], session=sgl["session"],
@@ -2403,7 +2453,8 @@ def main():
                    current_stop=p["stop"],
                    state_note="waiting for a 5m confirmation" if p["confirm_5m"] else "entry at the signal candle close",
                    next_action="wait for the 5m bar" if p["confirm_5m"] else pos.next_action(pos.ACTIVE, []),
-                   entry_type=p["entry_type"], limit_bars=p["limit_bars"] or np.nan)
+                   entry_type=p["entry_type"], limit_bars=p["limit_bars"] or np.nan,
+                   inval_level=p.get("inval") if p.get("inval") is not None else np.nan)
         if p["state"] == pos.AWAITING_FILL:
             row.update(entry_time_utc="", bars_5m=0,
                        state_note=f"limit order at {p['entry']:g}, valid {p['limit_bars']} {p['timeframe']} candles",

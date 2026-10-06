@@ -168,6 +168,10 @@ def check_card(spec):
         need(st["short_level"])
     if sspec.limit_entry(spec):          # roadmap step 2B: replayed with the engine's own limit prices
         bad.append("entry: limit order")
+    if spec.get("manage"):               # step 3: the playbook's trail / progress / invalidation exits
+        bad.append("manage (playbook trade management)")
+    if spec.get("gate") == "playbook":
+        bad.append("gate: playbook (its own regime / bias rules)")
     tg = spec.get("targets")
     if tg:
         if tg.get("need"):

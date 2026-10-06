@@ -1,0 +1,517 @@
+Crypto Futures Scalping Playbook
+Complete rules for discretionary trading and for coding into a signal bot
+Important: This is an educational framework, not financial advice. Scalping leveraged futures is high risk and most scalpers lose money, mainly through fees, overtrading and oversized leverage. Every number in this document is a starting point to be validated by your own backtests and journal, not a guarantee.
+
+
+
+1. Philosophy and Structure
+A professional scalper does not hunt for trades all day. They wait for a small number of pre-defined setups at pre-marked levels, during liquid sessions, with risk fixed before entry. Everything in this playbook follows one chain:
+Context: Is today tradable? (news, session, funding, open interest, BTC direction)
+Regime: Is the market trending or ranging on 1H?
+Bias: Long, short or stand aside?
+Location: Is price at one of my marked levels?
+Setup: Which playbook strategy (A, B or C) matches this regime and location?
+Trigger: Has the exact 5m entry condition closed?
+Risk: Does the trade give at least 1.5R after fees, within my risk limits?
+Management: Partial at 1R, breakeven, trail, time stop.
+Review: Log it, measure expectancy, adjust only with data.
+If any link in the chain fails, there is no trade. For the bot, each link becomes a filter function that returns pass or fail.
+2. Pre-Session Routine
+2.1 Economic calendar
+Check high-impact US events: CPI, FOMC rate decision and press conference, NFP, PCE, GDP, major Fed speeches.
+Rule: no new entries from 15 minutes before to 15 minutes after a high-impact release. Close or protect open scalps before it.
+Bot: maintain a news blackout table in UTC and set news_block = true inside those windows.
+2.2 Crypto derivatives context
+Data
+What it tells you
+How to use it
+Funding rate
+Which side is crowded
+Very positive = crowded longs, favour short sweeps above highs. Very negative = crowded shorts, favour long sweeps below lows.
+Open interest (OI)
+Whether positions are building or closing
+Price up + OI up = genuine trend. Price flat + OI up = trapped positions building. Sharp OI drop + big wick = flush likely finished.
+Liquidation heatmap
+Where stop and liquidation clusters sit
+Use large clusters as targets. Avoid putting your stop inside them.
+BTC direction
+Market-wide driver
+Never long an altcoin while BTC is breaking down on 15m, and vice versa.
+Spread and order book depth
+Execution cost
+If spread is unusually wide or the book is thin, skip the pair.
+
+2.3 Session selection (UTC)
+Session
+Approx. time (UTC)
+Character
+Use
+Asia
+00:00 to 07:00
+Lower volume, often ranges
+Mark Asia high and low; trade only clean range setups (Strategy B).
+London open
+07:00 to 10:00
+Volume returns, frequent sweep of Asia range
+Prime window for Strategy B, then C.
+New York open
+13:30 to 16:00
+Highest volume, US data releases
+Prime window for all strategies. Respect news.
+London/NY overlap
+13:00 to 16:00
+Peak liquidity
+Best overall scalping window.
+Late US / weekend
+20:00 onwards, Sat-Sun
+Thin, fake moves
+Reduce size by half or do not trade.
+
+2.4 Levels to mark every day
+Previous day high (PDH) and previous day low (PDL).
+Weekly open, monthly open, previous week high and low.
+Asia session high and low.
+Previous day volume profile: POC, value area high (VAH), value area low (VAL).
+Major 4H and 1H swing highs and lows (unbroken ones are strongest).
+Round numbers (for BTC: every 1,000; for ETH: every 50 or 100).
+Large liquidation clusters.
+A "level zone" is the level plus or minus 0.25 x ATR(14) on 15m. Levels within one zone of each other merge into one stronger level. Trades are only taken inside or on a reaction from a level zone.
+2.5 Coin selection
+Trade only highly liquid perpetuals: BTC, ETH and a short list (for example SOL, BNB, XRP) that meet the filters below.
+24h volume above a fixed threshold (for example over $500M on your exchange).
+Average spread under 0.02% of price.
+Maximum 2 to 4 pairs actively watched. Focus beats coverage.
+3. Timeframes, Regime and Bias
+3.1 Timeframe stack
+Role
+Timeframe
+Question answered
+Map (morning only)
+1D / 4H
+Where are the major levels and the big trend? Not a filter on each trade.
+Regime and bias
+1H
+Trending or ranging? Long, short or stand aside?
+Setup
+15m
+Is price at a level and is a playbook setup forming?
+Trigger
+5m
+Has the entry condition closed? Where is the stop?
+Precision (optional)
+1m
+Fine-tune limit entry inside the 5m zone. Never generates signals by itself.
+
+Your earlier stack (1W/1D, 4H/1H, 1H/30m/15m, 5m) is kept as context, but for scalping the 1W and 1D act only as the morning map. Rule of thumb: each decision timeframe is 3 to 5 times the one below.
+3.2 Regime filter (1H)
+Regime
+Conditions (all must be true)
+Allowed strategies
+Trend
+ADX(14) >= 25 AND |slope of EMA50 over last 10 bars| >= 0.1 x ATR(14) per bar AND price on the same side of EMA200 as the slope
+A (pullback), C (breakout)
+Range
+ADX(14) <= 20 OR price crossed session VWAP 4+ times in the last 24 x 15m candles
+B (sweep reversal)
+Transition
+Anything in between
+B at major levels only, or half size, or no trade
+
+3.3 Bias (1H)
+Bullish: price above EMA200, EMA50 above EMA200, and the last confirmed market-structure event on 1H is a bullish BOS.
+Bearish: mirror conditions.
+Neutral: anything else. Only Strategy B is allowed, in both directions, at major levels.
+4. Toolset and Exact Definitions
+Every tool has one job. Do not add tools that repeat information you already have (MACD, Stochastic, Bollinger, Ichimoku and Fibonacci are deliberately excluded).
+4.1 Indicators and parameters
+Tool
+Settings
+Timeframe
+Job
+EMA
+9, 21
+5m, 15m
+Short-term momentum and pullback zone
+EMA
+50, 200
+1H
+Trend filter and bias
+VWAP
+Daily anchored at 00:00 UTC (+ optional session anchor)
+5m, 15m
+Fair price; long bias above, short below; frequent reaction point
+Volume
+20-period average
+5m, 15m
+Confirms triggers and breakouts
+ATR
+14
+5m, 15m, 1H
+Stop sizing, level zones, volatility filters
+ADX
+14
+1H
+Regime detection
+RSI
+14
+5m
+Divergence at levels only (optional)
+Volume profile
+Previous day and current session
+15m chart
+POC, VAH, VAL levels
+CVD
+Cumulative volume delta from trade stream, session reset
+5m
+Who is aggressive; divergence and absorption
+
+4.2 Market structure definitions
+Swing high (pivot): a candle whose high is higher than the highs of N candles on each side. Use N = 3 on 5m, N = 3 on 15m, N = 5 on 1H. A pivot is only confirmed N candles after it forms (no lookahead).
+Swing low: mirror of swing high.
+Bullish BOS (break of structure): a candle closes above the most recent confirmed swing high while in an up-sequence (higher highs and higher lows).
+Bearish BOS: mirror.
+CHoCH (change of character): the first close beyond a confirmed swing point against the current sequence. Bullish CHoCH = in a down-sequence, a close above the last lower high. Treated as a warning and as a precondition for reversal setups.
+4.3 Candle and volume definitions
+Term
+Exact definition
+Bullish rejection candle
+Lower wick >= 60% of the candle range (high minus low), close in the top 33% of the range, range >= 0.6 x ATR(14)
+Bearish rejection candle
+Mirror: upper wick >= 60%, close in the bottom 33%
+Bullish engulfing
+Close > previous open, open <= previous close, body >= 1.2 x previous body, previous candle bearish
+Volume spike
+Candle volume >= 1.5 x the 20-period average volume
+Strong breakout candle
+Close beyond the level by >= 0.2 x ATR, body >= 60% of range, volume spike
+Compression
+On 15m: ATR(14) < 0.8 x its own 50-period average AND last 8 candles fit inside 1.2 x ATR(14)
+Liquidity sweep
+Wick trades beyond a level by at least 0.1 x ATR(5m), then a candle closes back inside the level within 3 candles
+CVD divergence
+Price makes a higher high (or lower low) versus the previous swing while CVD makes a lower high (or higher low)
+Absorption
+Strong negative delta candle at support that closes in its upper half (sellers hit the bid but price did not fall), or the mirror at resistance
+
+5. The Playbook: Three Strategies
+Each strategy has a regime it belongs to. Running a strategy outside its regime is the most common reason a good strategy shows bad results.
+5.1 Strategy A: Trend Pullback
+Element
+Long rules (short = mirror)
+Regime
+Trend, bias bullish
+Location
+15m price pulls back into the zone between EMA21 and VWAP, and that zone overlaps or sits within 0.5 x ATR(15m) of a marked level, POC or prior breakout level
+Pullback quality
+Pullback is at least 0.8 x ATR(15m) deep, on lower volume than the impulse that preceded it, and has not broken the last 15m higher low
+Trigger (5m)
+Bullish rejection or bullish engulfing candle closes back above EMA9, with volume >= 1.2 x average. Optional confirmation: CVD rising or bullish CVD divergence on the pullback low
+Entry
+Limit order at the 50% level of the trigger candle, or market on close if the candle is small (< 0.8 x ATR)
+Stop
+Below the pullback swing low minus 0.1 x ATR(5m), or 1.5 x ATR(5m) from entry, whichever is tighter but not less than 0.8 x ATR(5m)
+Targets
+TP1 = 1R (close 50%). TP2 = previous 15m swing high or next level, minimum 2R
+Invalidation
+A 15m close below the pullback low, or 1H bias flips to neutral
+Time stop
+If +0.5R is not reached within 6 x 5m candles, exit at market
+
+5.2 Strategy B: Liquidity Sweep Reversal
+Element
+Long rules (short = mirror)
+Regime
+Range or transition. In a trend, only counter-trend sweeps at major levels (PDL, weekly level, Asia low) with half size
+Location
+Price approaches a marked low: Asia low, PDL, VAL, range low or an equal-lows cluster
+Sweep
+A wick trades below the level by >= 0.1 x ATR(5m), then a 5m candle closes back above the level within 3 candles
+Confirmation (need 1 of 3)
+Bullish CVD divergence at the sweep; absorption candle at the sweep; or OI drops >= 1% during the sweep (longs flushed). Bonus: funding negative or neutral
+Entry
+Market on the close back inside, or limit at the retest of the level from above
+Stop
+Below the sweep wick minus 0.1 x ATR(5m)
+Targets
+TP1 = 1R or VWAP (whichever first, close 50%). TP2 = range midpoint, POC or opposite side of the range
+Invalidation
+Any 5m close back below the swept level after entry
+Time stop
+If +0.5R is not reached within 4 x 5m candles, exit. Good sweeps react fast
+
+5.3 Strategy C: Breakout and Retest
+Element
+Long rules (short = mirror)
+Regime
+Trend in the direction of the breakout, or compression at the edge of a range near a session open
+Pre-condition
+15m compression (see definitions) directly under a marked level
+Breakout
+5m strong breakout candle closes above the level with a volume spike. Do not enter on the breakout candle
+Retest
+Within 12 x 5m candles, price returns to the level zone (level plus or minus 0.25 x ATR) and prints a bullish rejection candle, with CVD not making a new low
+Entry
+Limit at the level zone or market on the rejection close
+Stop
+Back inside the range: below the retest low and at least 0.5 x ATR(5m) below the level
+Targets
+TP1 = 1R (close 50%). TP2 = measured move (range height added to breakout level) or next marked level
+Invalidation
+A 5m close back inside the range by more than 0.3 x ATR
+Cancel
+If no retest within 12 candles, cancel the setup. Do not chase
+
+5.4 No-trade conditions (override everything)
+Inside a news blackout window.
+Price crossing VWAP repeatedly with no structure (more than 4 crosses in the last 24 x 15m candles) and no clean range edges.
+Spread above 2x normal, or order book depth sharply reduced.
+Trade does not give >= 1.5R to TP2 after estimated fees and slippage.
+Stop distance would be below 0.5 x ATR(5m) (too tight, will be noise-stopped) or above 3 x ATR(5m) (not a scalp).
+Daily loss limit, consecutive-loss limit or max-trade limit has been hit.
+Altcoin setup that conflicts with the BTC 15m structure.
+Funding extremely against your side (for example above +0.05% per 8h when you want to long a breakout).
+6. Risk Management
+6.1 Core limits
+Rule
+Value
+Reason
+Risk per trade
+0.25% to 0.5% of equity (max 1%)
+Losing streaks of 6 to 8 are normal for scalpers
+Max total open risk
+1% to 1.5% across all positions
+BTC, ETH and alts are correlated; three longs can be one big bet
+Max positions open
+2
+Focus and correlation control
+Daily loss limit
+-2R to -3R, then stop for the day
+Prevents tilt and revenge trading
+Consecutive losses
+3 in a row = 30-minute break; 4 = stop for the day
+Breaks emotional loops
+Max trades per day
+6 to 8
+Prevents overtrading and fee drag
+Weekly loss limit
+-6R, then reduce size by half next week
+Protects against regime changes
+Minimum reward-to-risk
+1.5R to TP2 after fees
+Fees make low-R scalps negative expectancy
+Margin mode
+Isolated
+One bad trade cannot drain the account
+Liquidation distance
+Liquidation price at least 2x the stop distance beyond the stop
+Your stop, not the exchange, must close the trade
+
+6.2 Position sizing
+Size comes from the stop distance, never from leverage. Leverage is only what the exchange requires to open the calculated size.
+risk_amount   = equity * risk_pct                 # e.g. 1000 * 0.005 = 5 USDT
+stop_distance = abs(entry - stop)                 # e.g. 60000 - 59850 = 150
+fee_buffer    = entry * (fee_entry + fee_exit)    # cost per unit of the round trip
+qty           = risk_amount / (stop_distance + fee_buffer)
+notional      = qty * entry
+leverage_used = ceil(notional / margin_allocated)  # informational only
+Worked example: $1,000 equity, 0.5% risk = $5. Entry 60,000, stop 59,850 (150). Taker fee 0.05% each side = 60 per BTC round trip. qty = 5 / (150 + 60) = 0.0238 BTC, notional about $1,430. Notice how much the fee reduces your size: on tight scalps, fees are a large share of risk.
+6.3 Fee and slippage control
+Use limit (maker) orders for entries and TP1 whenever possible. Use market orders only for stops, invalidations and time stops.
+Include fees and an estimated slippage (for example 0.01% to 0.02% per side on majors) in every R:R calculation and every backtest.
+Use your exchange fee tier and any fee-token discounts; small fee differences change scalping profitability materially.
+7. Trade Management
+At entry: stop-loss order placed immediately on the exchange (never a mental stop). TP1 limit order placed.
+At +1R (TP1): close 50%, move stop to breakeven plus fees.
+Trailing the remainder: trail behind the most recent confirmed 5m swing low (long) or below EMA9 on 5m closes, whichever is further. In strong trend days, trail on 15m swings instead.
+TP2: fixed at the next level or measured move. Close everything there.
+Time stop: per strategy (4 to 6 x 5m candles to reach +0.5R).
+Invalidation exit: exit immediately on the strategy invalidation condition, even if the stop is not hit.
+Never: widen a stop, add to a losing position, or remove a stop before news.
+8. Building It Into Your Bot
+8.1 Data required
+Feed
+Source (exchange API)
+Used for
+OHLCV candles 1m, 5m, 15m, 1H, 4H, 1D
+REST for history, WebSocket kline stream live
+Indicators, structure, triggers
+Aggregated trades
+WebSocket trade stream
+CVD, delta, absorption
+Open interest
+REST, poll every 1 to 5 minutes
+OI change filters
+Funding rate
+REST / mark price stream
+Crowding filter
+Order book top levels
+WebSocket depth stream
+Spread and depth filter
+Economic calendar
+Manual table or calendar API, stored in UTC
+News blackout
+Liquidation data (optional)
+Exchange liquidation stream or third-party API
+Targets and flush confirmation
+
+8.2 Engineering rules (avoid fake backtest results)
+Closed candles only. Evaluate signals only when a candle closes. Never use the forming candle for decisions.
+No lookahead. Swing pivots are confirmed N bars late; your code must reflect that delay. Higher-timeframe values must use the last closed higher-timeframe candle only.
+All times in UTC for sessions, news windows and daily resets.
+Deduplication and cooldown: one alert per setup; after an alert on a symbol, cooldown of 3 x 5m candles for the same strategy and direction.
+Data health checks: if a WebSocket disconnects or candles have gaps, pause signals until data is consistent.
+State machine per setup: IDLE, then SETUP_FORMING, TRIGGERED, IN_TRADE, MANAGED, CLOSED or CANCELLED. This prevents duplicate and contradictory signals.
+8.3 Signal pipeline
+on_candle_close(symbol, tf="5m"):
+    ctx = build_context(symbol)          # sessions, news, funding, OI, BTC state
+    if not context_ok(ctx):  return     # news_block, spread, limits, session
+    regime = detect_regime(symbol, "1h")  # trend / range / transition
+    bias   = detect_bias(symbol, "1h")    # bull / bear / neutral
+    for strat in allowed_strategies(regime, bias):
+        setup = strat.check_setup(symbol, "15m", levels)
+        if not setup:  continue
+        trig = strat.check_trigger(symbol, "5m", setup)
+        if not trig:  continue
+        plan = strat.build_plan(trig)    # entry zone, stop, tp1, tp2
+        plan.rr = rr_after_fees(plan)
+        if plan.rr < 1.5 or not stop_size_ok(plan):  continue
+        plan.qty = position_size(equity, risk_pct, plan)
+        if risk_limits_ok(plan):
+            send_alert(plan); set_cooldown(symbol, strat)
+8.4 Example: Strategy A trigger logic
+def check_trigger_A_long(c5, c15, setup):
+    last = c5[-1]                                     # last CLOSED 5m candle
+    rng  = last.high - last.low
+    if rng < 0.6 * atr(c5, 14):            return None
+    lower_wick = min(last.open, last.close) - last.low
+    rejection  = lower_wick >= 0.6 * rng and last.close >= last.low + 0.67 * rng
+    engulf     = is_bullish_engulfing(c5[-2], last)
+    if not (rejection or engulf):          return None
+    if last.close <= ema(c5, 9)[-1]:       return None
+    if last.volume < 1.2 * sma(volume(c5), 20)[-1]:  return None
+    if broke_last_higher_low(c15):         return None
+    stop = setup.pullback_low - 0.1 * atr(c5, 14)
+    return Trigger(entry=(last.high + last.low) / 2, stop=stop)
+8.5 Alert format
+{
+  "symbol": "BTCUSDT", "side": "LONG",
+  "strategy": "A_pullback", "regime_1h": "trend", "bias_1h": "bull",
+  "session": "ny_open", "time_utc": "2026-10-05T14:05:00Z",
+  "entry_zone": [60010, 60060], "stop": 59850,
+  "tp1": 60210, "tp2": 60480, "rr_after_fees": 2.1,
+  "risk_pct": 0.5, "qty": 0.0238,
+  "atr_5m": 120, "volume_ratio": 1.6,
+  "funding": 0.006, "oi_change_1h_pct": 1.2, "cvd_confirm": true,
+  "time_stop_candles": 6,
+  "invalidation": "15m close below 59880"
+}
+Human-readable alert line example: LONG BTCUSDT | A Pullback | Entry 60,010 to 60,060 | SL 59,850 | TP1 60,210 | TP2 60,480 | 2.1R | Time stop 30 min.
+9. Testing and Validation
+9.1 Process
+Backtest each strategy separately on at least 6 to 12 months of 5m data per symbol, including fees, slippage and funding for any position held across a funding time.
+Split data: tune on the first 60 to 70%, test untouched on the remaining 30 to 40% (out-of-sample).
+Walk-forward: re-run the tuning on rolling windows (for example 3 months tune, 1 month test) to check stability.
+Parameter robustness: results should stay positive when a parameter moves 10 to 20% (for example ATR multiple 1.3 or 1.7 instead of 1.5). If only one exact value works, it is overfitted.
+Alert-only / paper phase: run live for 2 to 4 weeks or at least 50 signals, compare to backtest.
+Live at minimum size for the next 50 to 100 trades before increasing risk toward normal.
+9.2 Metrics to track (per strategy, per symbol, per session)
+Metric
+Formula / meaning
+Healthy range for scalping
+Expectancy (R)
+(Win% x avg win R) - (Loss% x avg loss R), after fees
+Above +0.15R per trade
+Win rate
+Wins / total trades
+45% to 65% typical with 1.5R+ targets
+Profit factor
+Gross profit / gross loss
+Above 1.3
+Max drawdown
+Largest peak-to-trough equity fall
+Below 10R to 15R
+Longest losing streak
+Consecutive losses
+Know it, so it does not surprise you
+Average slippage
+Fill price vs intended price
+Stable; rising slippage means execution problems
+Sample size
+Number of trades
+Do not judge under 100 trades
+
+9.3 Kill switch
+If the rolling 30-trade expectancy of a strategy turns negative, switch that strategy to alert-only until it recovers in paper trading.
+If live drawdown exceeds 1.5x the backtest maximum drawdown, stop all live trading and review.
+10. Journal and Review
+10.1 Log for every trade
+Date and time (UTC), symbol, direction, strategy, regime, bias, session.
+Entry, stop, TP1, TP2, exit price, result in R, fees paid, slippage.
+Screenshot of 15m and 5m at entry.
+Rule-follow score: did the trade match the playbook exactly (yes / no)? Any rule-break counts as an error even if it won.
+Emotional state (calm, rushed, frustrated, overconfident).
+10.2 Review schedule
+Daily (5 minutes): were all limits respected? Any rule breaks?
+Weekly: expectancy by strategy, session and symbol. Remove or reduce the weakest combination.
+Monthly: compare live to backtest. Change only one parameter at a time, and only with data.
+11. Psychology Rules
+Trade only setups in this playbook. A trade outside the playbook is a mistake, even if it wins.
+No trading when tired, ill, angry or distracted.
+After a large win, the next trade is at half size.
+Never increase size to win back a loss.
+Accept missed trades. Missing a move costs nothing; chasing it often costs a loss.
+Let the bot find and alert; let rules, not feelings, decide whether to take it.
+12. Pre-Trade Checklist
+Every item must be YES before entry:
+#
+Check
+Yes / No
+1
+No high-impact news within 15 minutes
+2
+Liquid session, spread normal, pair on my list
+3
+Daily, consecutive-loss and max-trade limits not hit
+4
+1H regime identified and strategy allowed in this regime
+5
+Trade direction agrees with 1H bias (or Strategy B at a major level)
+6
+BTC 15m structure does not conflict (for alts)
+7
+Price is at a marked level zone
+8
+5m trigger candle has closed and meets the exact definition
+9
+Stop between 0.5 and 3 x ATR(5m), placed beyond structure
+10
+Reward to TP2 is at least 1.5R after fees
+11
+Position size calculated from stop; total open risk within limit
+12
+Liquidation price well beyond the stop (isolated margin)
+13
+TP1, breakeven rule, trail and time stop are set
+
+13. Quick Reference Summary
+Item
+Rule
+Timeframes
+Map 1D/4H, regime and bias 1H, setup 15m, trigger 5m, precision 1m
+Best hours (UTC)
+London open 07:00 to 10:00, NY open and overlap 13:00 to 16:00
+Strategies
+A Pullback (trend), B Sweep reversal (range), C Breakout-retest (compression / trend)
+Core tools
+EMA 9/21 (5m, 15m), EMA 50/200 (1H), VWAP, Volume, ATR, ADX, Volume profile, CVD
+Risk
+0.25 to 0.5% per trade, max 1.5% open, daily stop -2R to -3R
+Minimum R:R
+1.5R after fees
+Management
+50% at 1R, stop to breakeven, trail rest, time stop 4 to 6 candles
+Validation
+Backtest, out-of-sample, walk-forward, paper 50 signals, small live size
+Kill switch
+Rolling 30-trade expectancy below 0 = alert-only
+

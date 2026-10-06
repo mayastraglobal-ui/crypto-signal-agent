@@ -53,6 +53,7 @@ from engine import data_quality as dq
 from engine import follow as fl
 from engine import lifecycle as lc
 from engine import live as lv
+from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
 
@@ -495,7 +496,7 @@ class Watcher:
         aid = f"{int(a['sent_ms']) // 1000:x}{self.state['next_id'] % 1000:03d}"
         self.state["alerts"][aid] = dict({k: a.get(k) for k in ("label", "coin", "inst", "d", "tf", "strategy",
                                           "version", "entry", "R", "tps", "split", "max_hold", "close_ms", "sent_ms",
-                                          "limit_bars")},
+                                          "limit_bars", "manage", "inval", "be_frac")},
                                          choice=None, msg_id=None)
         return aid
 
@@ -525,7 +526,13 @@ class Watcher:
             except Exception as e:
                 log(f"follow {t['coin']}: download failed: {e}")
                 continue
-            bars = raw[(raw["open_time"] >= t["checked_ms"]) & (raw["close_time"] < now_ms)].to_dict("records")
+            closed = raw[raw["close_time"] < now_ms]
+            if t.get("trailing") and len(closed):    # step 3: the playbook's trail (last 5m swing / EMA9)
+                tc = t.get("trail_cfg") or {}
+                tl, ts = mg.trail_levels(closed["high"].to_numpy(), closed["low"].to_numpy(), closed["close"].to_numpy(),
+                                         int(tc.get("swing_n", 3)), int(tc.get("ema", 9)))
+                closed = closed.assign(trail_long=tl, trail_short=ts)
+            bars = closed[closed["open_time"] >= t["checked_ms"]].to_dict("records")
             for ev in fl.step(t, bars):
                 self.say(fl.text(t, ev))
                 name = f"tp{ev['n']}" if ev["kind"] == "tp" else ev["kind"]
@@ -715,9 +722,13 @@ class Watcher:
             if d == 0:
                 continue
             entry, atr = float(df["close"].iloc[t]), float(df["_atr"].iloc[t])
-            lim = sspec.limit_entry(s)
+            lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
             if lim:                                  # roadmap step 2B: limit order at the close -/+ offset x ATR
-                entry = entry - d * lim[0] * atr
+                lpx = float(cols[levs[0 if d == 1 else 1]][t]) if levs else entry - d * lim[0] * atr
+                if np.isfinite(lpx):                 # step 3: an unknown level = market entry (playbook)
+                    entry = lpx
+                else:
+                    lim = None
             plan = sc.plan_trade(s, t, d, entry, atr, cols, self.cfg)
             if plan is None:
                 continue
@@ -728,7 +739,8 @@ class Watcher:
             base = dict(label=label, coin=coin, inst=self.feed.inst(coin), d=d, tf=tf, strategy=s["id"],
                         version=s["version"], entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
-                        limit_bars=lim[1] if lim else None,
+                        limit_bars=lim[1] if lim else None, manage=s.get("manage"),
+                        inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
             if s.get("confirm_5m"):
@@ -737,6 +749,19 @@ class Watcher:
                 continue
             out.append(self._finish(base, now_ms))
         return out
+
+    @staticmethod
+    def _inval(s, d, cols, t):
+        iv = (s.get("manage") or {}).get("invalidate")
+        if not iv:
+            return None
+        v = float(cols[iv["long" if d == 1 else "short"]][t])
+        return v if np.isfinite(v) else None
+
+    def _be_frac(self, d, limit):
+        """Breakeven + fees: the entry fee (maker for a limit) and a market exit, as a fraction of the entry."""
+        k = sc.trade_costs(self.cfg, d)
+        return (k["maker"] if limit else k["taker"]) + k["taker"] + k["slip"]
 
     def confirmations(self, coin, pc, now_ms):
         out, keep = [], []

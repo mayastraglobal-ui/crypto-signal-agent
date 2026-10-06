@@ -50,6 +50,9 @@ def gate_arrays(spec, tf, reg, n):
     def dirs(t):
         return directions(*reg[t]) if t in reg else np.zeros(n, int)
 
+    if spec["gate"] == "playbook":                   # the operator's playbook: the card's rules hold regime + bias
+        ok = np.ones(n, bool)
+        return ok, ok.copy(), ok.copy(), ok.copy(), ok.copy()
     regime_ok = np.isin(lab(regime_tf(tf)), list(spec["regimes"]))
     wk = lab("1w")
     if spec["gate"] == "mean_reversion":
