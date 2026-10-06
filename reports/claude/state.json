@@ -10,15 +10,17 @@
   ]
  },
  "claude/brain-daily": {
-  "sha": "4ede9bcb028c4fe59bb1310f6c367e012a920c19",
-  "subject": "Daily review 2026-10-05",
-  "when": "2026-10-05 17:27",
+  "sha": "e0c0c9683c237fe10d521ee1a7061680b27c2701",
+  "subject": "Daily review 2026-10-06",
+  "when": "2026-10-06 15:29",
   "status": "applied",
   "problems": [],
   "applied": [
    "memory/experiments.md",
    "memory/missed_trades.md",
-   "reports/claude/daily/2026-10-05.md"
+   "memory/research_sources.md",
+   "reports/claude/daily/2026-10-06.md",
+   "strategies_lab.yaml"
   ]
  },
  "claude/brain-weekly": {

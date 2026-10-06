@@ -660,3 +660,88 @@
   evidence_class: BACKTEST_EVIDENCE
   factory_evidence: 'donchian_breakout-VEXIT-VRVOL@1.0 4h: with the rule 814 trades avg +0.247R; without rule 5
     (rel_vol > 1.2 / rel_vol > 1.2): 814 trades avg +0.247R - the rule does not improve the result'
+- id: donchian_breakout-VEXIT-S4
+  version: '1.1'
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  - COMPRESSION
+  source: 'Claude daily review 2026-10-06: [C03] Liu, Tsyvinski, Wu - Common Risk Factors in Cryptocurrency (NBER w25882)'
+  hypothesis: 'One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last
+    126 candles (21 days on 4h), shorts only when it rose less. Coins that beat the market over 1 to 4 weeks kept beating
+    it in the paper, among large coins; the filter should drop breakouts that go against relative strength.'
+  timeframes:
+  - 4h
+  - 1h
+  - 30m
+  description: 'Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.'
+  logic: Breakouts of a 20-candle range with 1.5x normal volume show new buyers stepping in. ADX > 20 confirms the market
+    is trending, not chopping. This is the family of rules with the best published long-term evidence in crypto (trend
+    following).
+  params:
+    n: 20
+    vol_x: 1.5
+    exit_n: 10
+  long:
+  - htf_up
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - (close / shift(close,126) - 1) * 100 > btc_ret(126)
+  short:
+  - htf_down
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - (close / shift(close,126) - 1) * 100 < btc_ret(126)
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - COMPRESSION
+    who_pays: traders fading the breakout (short at the range top) whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend-following has the longest
+      published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside'
+    kill_rule: retired by the engine's paper rules (last 20 paper signals below -0.10R or 8R drawdown), or FAILED when
+      the unseen-data part of the backtest turns negative
+  changelog:
+  - '1.0 (2026-09-27): donchian_breakout-VEXIT@1.0 without entry rule ''adx(14) > 20 / adx(14) > 20'' (rule significance
+    test)'
+  - '1.1 (2026-10-06): add the relative-strength entry rule (coin''s 126-candle % return vs btc_ret(126)); nothing else
+    changed'
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  added: '2026-10-06'
+  parent: 'source: [C03] Common Risk Factors in Cryptocurrency (Liu, Tsyvinski, Wu)'
+  evidence_class: RESEARCH_FINDING
+  source_url: https://www.nber.org/papers/w25882
+  factory: literature
+  factory_evidence: 'Liu, Tsyvinski, Wu (NBER w25882, 2019): 1- to 4-week cross-sectional momentum, 2.7% to 4.1% per
+    week top minus bottom quintile, 4.2% per week above median size, 2014-2018, before costs'

@@ -341,3 +341,39 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 - timestamp: 2026-10-06 00:56 UTC · source: engine: daily research run · evidence: FACT: move of 7.8x the 1H ATR within 12 hours; 56 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ENA · timeframe: 1h · regime: RANGE · review: 2026-10-13
   - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### Review: BTC down -2.4% (7.6x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: ema_9_21_cross v1.0, liquidity_sweep_reversal v1.0 · asset: BTC · timeframe: 5m · regime: WEAK_BULL · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: both blocked setups came from failing cells: ema_9_21_cross@1.0|5m 231 trades -0.59R and liquidity_sweep_reversal@1.0|5m 384 trades -0.82R (BACKTEST, fact sheet 2026-10-06). The gates cost nothing.
+  - action: none.
+
+### Review: ZEC down -8.9% (7.0x ATR), 2026-09-28 12:00 -> 2026-09-28 20:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal, rsi2_dip_buy, trend_pullback v1.0 · asset: ZEC · timeframe: 5m, 15m, 30m · regime: TRANSITION · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: every blocked setup came from a failing cell: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 495 trades -0.40R; liquidity_sweep_reversal@1.0|15m 449 trades -0.42R and |5m 384 trades -0.82R; rsi2_dip_buy@1.0|15m 1706 trades -0.29R; trend_pullback@1.0|15m 2479 trades -0.21R (BACKTEST).
+  - action: none.
+
+### Review: SOL down -4.1% (5.1x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: liquidity_sweep_reversal v1.0 · asset: SOL · timeframe: 5m · regime: WEAK_BULL · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: the only setup was liquidity_sweep_reversal@1.0|5m, 384 trades -0.82R, losing in every regime with 10+ trades (BACKTEST). The permission gate was right to block it.
+  - action: none.
+
+### Review: LINK up +13.0% (9.3x ATR), 2026-09-28 09:00 -> 2026-09-28 21:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal v1.0 · asset: LINK · timeframe: 15m, 30m · regime: UNCLEAR · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: 'identifiable' rests on two signals from failing cells: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 495 trades -0.40R and liquidity_sweep_reversal@1.0|15m 449 trades -0.42R (BACKTEST). LINK's regime was UNCLEAR, where no strategy has 30+ backtest trades. Not a missed trade.
+  - action: none.
+
+### Review: UNI down -8.6% (5.9x ATR), 2026-09-27 23:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record (no setup before the move) · confidence: high · strategy: all · asset: UNI · timeframe: 1h · regime: RANGE · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: no strategy had a setup before the move, UNI is research-only, and in RANGE no tested strategy made money (playbook today). Nothing to learn for a rule.
+  - action: none.
+
+### Review: BNB down -2.6% (7.2x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-06 15:30 UTC · source: Claude daily review 2026-10-06 · evidence: FACT: the engine's missed-move record (no setup before the move) · confidence: high · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-13
+  - status: KEEP
+  - today's evidence: no strategy had a setup before the move. BTC, SOL and BNB all fell in the same hours (2026-09-27 21:00 to 2026-09-28 10:00), so this looks like one market-wide move, not a BNB setup that was missed. That is a reading of the three records, not a measurement.
+  - action: none.
