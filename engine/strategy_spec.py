@@ -29,14 +29,25 @@ GATES = {
     "trend": "needs 2 of 1D/4H/1H in its direction; no trade against a STRONG weekly trend",
     "reversal": "needs 2 of 1D/4H/1H in its direction; declared reversal type, so no weekly veto",
     "mean_reversion": "trades only in its (range) regimes; never against a STRONG 1W/1D/4H trend",
+    # the operator's own scalping playbook (docs/PLAYBOOK.md, operator decision 2026-10-06): the card's rules hold
+    # the playbook's 1H regime and bias themselves, so the engine's regime / permission gate is not applied
+    "playbook": "the operator's playbook: the card's own rules decide regime and bias (docs/PLAYBOOK.md)",
 }
 REQUIRED = ["id", "version", "status", "family", "gate", "hypothesis", "source", "regimes", "timeframes",
             "long", "short", "stop", "time_stop_bars", "known_weaknesses"]
 # the parts that decide trades: changing any of them needs a new version number
 LOGIC_KEYS = ["family", "gate", "regimes", "timeframes", "long", "short", "exit_long", "exit_short", "stop",
-              "targets", "time_stop_bars", "cooldown_bars", "confirm_5m", "entry"]
+              "targets", "time_stop_bars", "cooldown_bars", "confirm_5m", "entry", "manage"]
 # logic keys added later: a card that does not write them keeps the fingerprint it always had (no reset)
-OPTIONAL_LOGIC = {"entry"}
+OPTIONAL_LOGIC = {"entry", "manage"}
+# manage (step 3, the operator's playbook section 7): how an open trade is managed beyond the trade plan.
+#   be_plus_fees: true   -> after TP1 the stop goes to entry PLUS the round-trip fees (not just entry)
+#   trail: {swing_n, ema} -> after TP1 the stop trails the newest confirmed swing low / high (n candles each side)
+#                           or the EMA, whichever is further from price (engine/manage.py); it only tightens
+#   progress: {r, bars}  -> exit at market at the close of candle `bars` if +r R was not reached by then
+#   invalidate: {long, short, every} -> exit at a candle close beyond the level the column held at the signal
+#                           (checked only at closes of `every`, e.g. 15m; default every candle)
+MANAGE_KEYS = {"be_plus_fees", "trail", "progress", "invalidate"}
 # entry (roadmap step 2B, 2026-10-06): how a signal is entered. market (default) = the next candle's open, taker fee +
 # slippage. limit = a limit order at the signal close -/+ offset_atr x ATR (a small pullback), maker fee, no slippage;
 # filled only when price comes back to it within valid_bars candles - no fill = no trade.
@@ -45,6 +56,7 @@ LIMIT_MAX_OFFSET_ATR, LIMIT_MAX_BARS = 2.0, 12
 VERSION_RE = re.compile(r"^\d+\.\d+$")
 R_RE = re.compile(r"^(\d+(?:\.\d+)?)R$")
 MAX_RE = re.compile(r"^max\((.+),(.+)\)$")
+MIN_RE = re.compile(r"^min\((.+),(.+)\)$")          # 'min' = whichever is CLOSER (step 3: "1R or VWAP, first")
 NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 PARAM_RE = re.compile(r"\{(\w+)\}")
 TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets"]
@@ -243,6 +255,9 @@ def parse_target(item):
     m = MAX_RE.match(x)
     if m:
         return ("max", [parse_target(m.group(1)), parse_target(m.group(2))])
+    m = MIN_RE.match(x)
+    if m:
+        return ("min", [parse_target(m.group(1)), parse_target(m.group(2))])
     if NAME_RE.match(x):
         return ("col", x)
     raise ValueError(f"target '{item}' not understood (use e.g. 2R, a column name, or max(3R, column))")
@@ -259,7 +274,7 @@ def columns_needed(spec):
     def walk(p):
         if p[0] == "col":
             out.add(p[1])
-        elif p[0] == "max":
+        elif p[0] in ("max", "min"):
             for q in p[1]:
                 walk(q)
     for side in ("long", "short"):
@@ -267,6 +282,10 @@ def columns_needed(spec):
             walk(parse_target(item))
     need = tg.get("need") or {}
     out |= {need.get("long"), need.get("short")}
+    ent = spec.get("entry") or {}
+    out |= {ent.get("long_level"), ent.get("short_level")}
+    iv = (spec.get("manage") or {}).get("invalidate") or {}
+    out |= {iv.get("long"), iv.get("short")}
     return {c for c in out if c}
 
 
@@ -297,7 +316,13 @@ def check(spec, labels, timeframes):
         errs.append("stop.atr must be a positive number")
     elif st["method"] == "structure" and not (st.get("long_level") and st.get("short_level")):
         errs.append("a structure stop needs long_level and short_level")
+    if isinstance(st, dict) and "min_width_atr" in st and not (isinstance(st["min_width_atr"], (int, float))
+                                                               and 0 <= st["min_width_atr"] < 10):
+        errs.append("stop.min_width_atr must be a number from 0 to 10 (ATRs)")
     tg = spec.get("targets")
+    if isinstance(tg, dict) and "min_rr_after_fees" in tg and not (
+            isinstance(tg["min_rr_after_fees"], (int, float)) and 0 < tg["min_rr_after_fees"] <= 10):
+        errs.append("targets.min_rr_after_fees must be a number from 0 to 10 (R to the last target, after fees)")
     if tg is not None:
         try:
             lg, sh = tg.get("long") or [], tg.get("short") or []
@@ -313,6 +338,7 @@ def check(spec, labels, timeframes):
     if not (isinstance(spec["time_stop_bars"], int) and spec["time_stop_bars"] > 0):
         errs.append("time_stop_bars must be a positive whole number")
     errs += entry_problems(spec)
+    errs += manage_problems(spec)
     c5 = spec.get("confirm_5m", False)
     if not isinstance(c5, bool):
         errs.append("confirm_5m must be true or false")
@@ -343,10 +369,16 @@ def entry_problems(spec):
         return []
     if not isinstance(ent, dict) or ent.get("type") not in ENTRY_TYPES:
         return [f"entry.type must be one of {list(ENTRY_TYPES)}"]
-    extra = set(ent) - ({"type"} if ent["type"] == "market" else {"type", "offset_atr", "valid_bars"})
+    extra = set(ent) - ({"type"} if ent["type"] == "market" else
+                        {"type", "offset_atr", "valid_bars", "long_level", "short_level"})
     errs = [f"entry: unknown setting(s) {sorted(extra)}"] if extra else []
     if ent["type"] == "limit":
         off, vb = ent.get("offset_atr", 0), ent.get("valid_bars")
+        lv = (ent.get("long_level"), ent.get("short_level"))
+        if any(lv) and not all(isinstance(x, str) and x for x in lv):
+            errs.append("entry: a limit at a level needs both long_level and short_level (column names)")
+        if any(lv) and "offset_atr" in ent:
+            errs.append("entry: use offset_atr OR long_level / short_level, not both")
         if isinstance(off, bool) or not isinstance(off, (int, float)) or not 0 <= off <= LIMIT_MAX_OFFSET_ATR:
             errs.append(f"entry.offset_atr must be a number from 0 to {LIMIT_MAX_OFFSET_ATR:g} (ATRs behind the signal close)")
         if isinstance(vb, bool) or not isinstance(vb, int) or not 1 <= vb <= LIMIT_MAX_BARS:
@@ -362,6 +394,42 @@ def limit_entry(spec):
     if ent.get("type") != "limit":
         return None
     return float(ent.get("offset_atr", 0) or 0), int(ent["valid_bars"])
+
+
+def limit_levels(spec):
+    """(long column, short column) of a limit entry at a level (e.g. the trigger candle's 50%), else None. A level
+    that is unknown (NaN) at the signal means: enter at market (the playbook's 'market on close if the candle is
+    small')."""
+    ent = spec.get("entry") or {}
+    if ent.get("type") == "limit" and ent.get("long_level"):
+        return ent["long_level"], ent["short_level"]
+    return None
+
+
+def manage_problems(spec):
+    m = spec.get("manage")
+    if m is None:
+        return []
+    if not isinstance(m, dict) or not m:
+        return ["manage must be a block of settings (be_plus_fees, trail, progress, invalidate)"]
+    errs = [f"manage: unknown setting(s) {sorted(set(m) - MANAGE_KEYS)}"] if set(m) - MANAGE_KEYS else []
+    if "be_plus_fees" in m and not isinstance(m["be_plus_fees"], bool):
+        errs.append("manage.be_plus_fees must be true or false")
+    tr = m.get("trail")
+    if tr is not None and not (isinstance(tr, dict) and set(tr) <= {"swing_n", "ema"} and
+                               all(isinstance(tr.get(k), int) and not isinstance(tr.get(k), bool) and tr[k] >= 1
+                                   for k in ("swing_n", "ema"))):
+        errs.append("manage.trail needs swing_n and ema (whole numbers >= 1)")
+    pg = m.get("progress")
+    if pg is not None and not (isinstance(pg, dict) and set(pg) == {"r", "bars"} and
+                               isinstance(pg["r"], (int, float)) and 0 < pg["r"] <= 3 and
+                               isinstance(pg["bars"], int) and pg["bars"] >= 1):
+        errs.append("manage.progress needs r (0-3) and bars (whole number >= 1)")
+    iv = m.get("invalidate")
+    if iv is not None and not (isinstance(iv, dict) and isinstance(iv.get("long"), str) and
+                               isinstance(iv.get("short"), str) and set(iv) <= {"long", "short", "every"}):
+        errs.append("manage.invalidate needs long and short (column names) and optionally every (a timeframe)")
+    return errs
 
 
 def load(items, labels, timeframes):
@@ -414,6 +482,9 @@ def _level(p, d, entry, R, t, cols):
     a, b = (_level(q, d, entry, R, t, cols) for q in p[1])     # 'max' = whichever is FARTHER away
     if not (math.isfinite(a) and math.isfinite(b)):
         return a if math.isfinite(a) else b
+    if p[0] == "min":                                           # 'min' = whichever is CLOSER (beyond the entry)
+        ahead = [x for x in (a, b) if d * (x - entry) > 0]
+        return (min(ahead) if d == 1 else max(ahead)) if ahead else float("nan")
     return max(a, b) if d == 1 else min(a, b)
 
 
@@ -703,8 +774,9 @@ def change_count(old, new):
     family and the 5m check each count once; each parameter whose value changed counts once (a parameter that
     comes or goes with a rule change belongs to that change)."""
     groups = [("long", "short"), ("exit_long", "exit_short"), ("stop",), ("targets",), ("time_stop_bars",),
-              ("cooldown_bars",), ("regimes",), ("timeframes",), ("gate",), ("family",), ("confirm_5m",), ("entry",)]
-    norm = {"cooldown_bars": 0, "confirm_5m": False, "entry": None}
+              ("cooldown_bars",), ("regimes",), ("timeframes",), ("gate",), ("family",), ("confirm_5m",), ("entry",),
+              ("manage",)]
+    norm = {"cooldown_bars": 0, "confirm_5m": False, "entry": None, "manage": None}
     diff = [g for g in groups if any(old.get(k, norm.get(k)) != new.get(k, norm.get(k)) for k in g)]
     po, pn = old.get("params") or {}, new.get("params") or {}
     diff += [(f"params.{k}",) for k in sorted(set(po) & set(pn)) if po[k] != pn[k]]

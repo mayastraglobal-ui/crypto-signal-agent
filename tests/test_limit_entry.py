@@ -68,7 +68,7 @@ class Card(unittest.TestCase):
 
     def test_cards_without_it_keep_their_fingerprint(self):
         plain = card()
-        old = dict((k, plain.get(k)) for k in SP.LOGIC_KEYS if k != "entry")   # the fingerprint before step 2B
+        old = dict((k, plain.get(k)) for k in SP.LOGIC_KEYS if k not in SP.OPTIONAL_LOGIC)   # before step 2B
         import hashlib
         import json
         before = hashlib.sha256(json.dumps(old, sort_keys=True, default=str).encode()).hexdigest()[:16]

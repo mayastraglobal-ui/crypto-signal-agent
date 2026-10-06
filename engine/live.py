@@ -107,6 +107,20 @@ def message(a):
         lines.append(f"Size at {a['risk_pct']:g}% risk (${z['risk_usdt']:,.2f}): {z['qty']:.6g} {a['coin']} ≈ "
                      f"${z['notional']:,.0f}, {z['leverage']:.2f}x" + (" (capped by max leverage)" if z.get("capped") else ""))
     lines.append(f"Max hold: {hold_text(a['tf'], a.get('max_hold'))}")
+    man = a.get("manage") or {}
+    if man:                                  # step 3: the operator's playbook trade management
+        after = "stop to entry + fees" if man.get("be_plus_fees") else "stop to entry"
+        if man.get("trail"):
+            after += f", trail the rest behind the last {a['tf']} swing / EMA{man['trail']['ema']}"
+        lines.append(f"After TP1: {after}")
+        if man.get("progress"):
+            pg = man["progress"]
+            lines.append(f"Time stop: exit at market if +{pg['r']:g}R is not reached within {pg['bars']} {a['tf']} "
+                         f"candles ({hold_text(a['tf'], pg['bars']).split('(~')[-1].rstrip(')')})")
+        iv = man.get("invalidate")
+        if iv and a.get("inval") is not None:
+            lines.append(f"Invalidation: exit on a {iv.get('every') or a['tf']} close "
+                         f"{'below' if a['d'] == 1 else 'above'} {fmt_px(a['inval'], a['entry'])}")
     if a.get("confirm"):
         lines.append(f"5m check: {a['confirm']}")
     if a.get("regimes"):
