@@ -18,9 +18,12 @@ signals, emails them and keeps the risk book. This watcher never places orders a
   python live_watcher.py --test-telegram    send one test message (checks the bot token and chat id)
   python live_watcher.py --status           which strategy versions x timeframes may alert right now
   python live_watcher.py --find-chat-id     your Telegram chat id (send the bot a message first)
+  python live_watcher.py --setup-telegram   step-by-step Telegram setup (writes telegram.env)
 
-Telegram settings come from the environment: TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID (never put them in the
-repository - the server keeps them in ~/.crypto-agent.env).
+Telegram settings come from the environment (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID) or from the file telegram.env
+next to this script (python live_watcher.py --setup-telegram writes it). Never put them in the repository.
+Without git (a Windows PC with the ZIP download, docs/WINDOWS_WATCHER.md), GitHub's newest decisions are downloaded
+directly every hour (sync_files).
 """
 import argparse
 import datetime as dt
@@ -35,6 +38,7 @@ import warnings
 import numpy as np
 import pandas as pd
 import requests
+import socket
 import yaml
 
 import scanner as sc
@@ -48,11 +52,106 @@ from engine import strategy_spec as sspec
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)     # the scanner's feature tables
 ROOT = sc.ROOT
 STATE = os.path.join(ROOT, "reports", "live_watcher_state.json")     # local only (.gitignore)
+SETTINGS_FILE = os.path.join(ROOT, "telegram.env")                  # local only (.gitignore): bot token + chat id
+LOG_FILE = os.path.join(ROOT, "logs", "live_watcher.log")           # local only (.gitignore)
 DATA_TFS = ["1w", "1d", "4h", "1h", "30m", "15m", "5m"]
+REPO = os.environ.get("CRYPTO_AGENT_REPO", "mayastraglobal-ui/crypto-signal-agent")
+RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
+# Without git (a Windows PC with the ZIP download): the files that carry GitHub's decisions, fetched every hour
+SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strategies.yaml"),
+              ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
+              ("main", "reports/universe.json"),
+              ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
+CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py"]      # changed on GitHub -> "run update.bat"
 
 
 def log(*a):
-    print(dt.datetime.now(dt.timezone.utc).strftime("%H:%M:%S"), *a, flush=True)
+    line = " ".join([dt.datetime.now(dt.timezone.utc).strftime("%H:%M:%S")] + [str(x) for x in a])
+    print(line, flush=True)
+    try:
+        os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+        if os.path.exists(LOG_FILE) and os.path.getsize(LOG_FILE) > 5_000_000:      # keep the log small
+            os.replace(LOG_FILE, LOG_FILE + ".1")
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d ") + line + "\n")
+    except OSError:
+        pass
+
+
+def load_settings(path=SETTINGS_FILE):
+    """KEY=VALUE lines (telegram.env) into the environment; a value already set in the environment wins."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            for raw in f:
+                k, sep, v = raw.strip().partition("=")
+                if sep and k and not k.startswith("#") and v.strip() and not os.environ.get(k.strip()):
+                    os.environ[k.strip()] = v.strip().strip('"').strip("'")
+    except OSError:
+        pass
+
+
+def _valid(path, data):
+    """A downloaded file is only used when it looks right (never replace a good file with an error page)."""
+    if not data:
+        return False
+    if path.endswith((".yaml", ".json")):
+        try:
+            (yaml.safe_load if path.endswith(".yaml") else json.loads)(data.decode("utf-8"))
+        except (ValueError, yaml.YAMLError, UnicodeDecodeError):
+            return False
+    if path.endswith(".csv") and b"," not in data[:500]:
+        return False
+    if path.endswith(".gz") and data[:2] != b"\x1f\x8b":
+        return False
+    return True
+
+
+def sync_files(root=ROOT, repo=REPO, get=None):
+    """No git: download GitHub's newest decision files (statuses, coins, cards, settings, futures data).
+    Returns (updated paths, problems). Each file is written only when it downloaded completely and looks valid."""
+    get = get or (lambda url: requests.get(url, timeout=60))
+    updated, problems = [], []
+    for branch, path in SYNC_FILES:
+        try:
+            r = get(RAW.format(repo=repo, branch=branch, path=path))
+            data = r.content if r.status_code == 200 else None
+        except requests.RequestException as e:
+            problems.append(f"{path}: {e.__class__.__name__}")
+            continue
+        if not _valid(path, data):
+            problems.append(f"{path}: not downloaded (HTTP {getattr(r, 'status_code', '?')})")
+            continue
+        full = os.path.join(root, *path.split("/"))
+        try:
+            with open(full, "rb") as f:
+                if f.read() == data:
+                    continue
+        except OSError:
+            pass
+        os.makedirs(os.path.dirname(full) or root, exist_ok=True)
+        tmp = full + ".download"
+        with open(tmp, "wb") as f:
+            f.write(data)
+        os.replace(tmp, full)
+        updated.append(path)
+    return updated, problems
+
+
+def code_outdated(root=ROOT, repo=REPO, get=None):
+    """The watcher's own code files that differ from GitHub main ([] = up to date or unknown)."""
+    get = get or (lambda url: requests.get(url, timeout=60))
+    out = []
+    for path in CODE_FILES:
+        try:
+            r = get(RAW.format(repo=repo, branch="main", path=path))
+            if r.status_code != 200 or not r.content:
+                continue
+            with open(os.path.join(root, *path.split("/")), "rb") as f:
+                if f.read().replace(b"\r\n", b"\n") != r.content.replace(b"\r\n", b"\n"):
+                    out.append(path)
+        except (requests.RequestException, OSError):
+            continue
+    return out
 
 
 # ---------------------------------------------------------------- market data: OKX USDT perpetuals
@@ -205,14 +304,29 @@ class Watcher:
                "or PAPER_TRADING - the watcher stays quiet until the daily research run promotes a strategy)"))
 
     def refresh_repo(self):
-        """git pull (new statuses, new cards, newest universe) + the newest futures-data files."""
+        """GitHub's newest decisions (statuses, cards, coins, settings) + the newest futures-data files:
+        git pull in a git checkout (a server), else a direct download of those files (a PC with the ZIP)."""
         if not self.git:
             return
-        for cmd in (["git", "pull", "--ff-only", "-q"], [sys.executable, "publish_live.py", "--refresh"]):
-            try:
-                subprocess.run(cmd, cwd=ROOT, timeout=180, capture_output=True, check=False)
-            except (OSError, subprocess.TimeoutExpired) as e:
-                log(f"refresh: {' '.join(cmd[:2])} failed: {e}")
+        if os.path.isdir(os.path.join(ROOT, ".git")):
+            for cmd in (["git", "pull", "--ff-only", "-q"], [sys.executable, "publish_live.py", "--refresh"]):
+                try:
+                    subprocess.run(cmd, cwd=ROOT, timeout=180, capture_output=True, check=False)
+                except (OSError, subprocess.TimeoutExpired) as e:
+                    log(f"refresh: {' '.join(cmd[:2])} failed: {e}")
+        else:
+            updated, problems = sync_files()
+            log("refresh from GitHub: " + (", ".join(updated) or "nothing new")
+                + ("" if not problems else " · problems: " + "; ".join(problems)))
+            day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
+            if self.state.get("update_note") != day:
+                old = code_outdated()
+                if old:
+                    self.state["update_note"] = day
+                    log(f"newer code on GitHub: {', '.join(old)} - run update.bat")
+                    if self.send:
+                        telegram("🔄 A newer version of the live watcher is on GitHub. On the PC: close the watcher "
+                                 "window, double-click <b>windows\\update.bat</b>, then start it again.")
         self.reload()
 
     # ---- local state (duplicate guard, heartbeat) ----
@@ -401,6 +515,13 @@ class Watcher:
         self._save_state()
 
     def run(self):
+        try:                                         # one watcher per computer: a second copy would double alerts
+            self._lock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self._lock.bind(("127.0.0.1", 47613))
+        except OSError:
+            log("another live watcher is already running on this computer - this copy stops")
+            sys.exit(3)
+        self.refresh_repo()                          # start from GitHub's newest decisions (a ZIP may be days old)
         ok, err = telegram(f"▶️ Live watcher started on {self.feed.name}. Watching {len(self.watch)} strategy "
                            f"timeframe(s) on {', '.join(self.coins)}.") if self.send else (True, "")
         if not ok:
@@ -425,18 +546,68 @@ class Watcher:
                              f"{type(e).__name__}: {str(e)[:300]}")
 
 
+def setup_telegram(path=SETTINGS_FILE, ask=input, wait_s=180):
+    """Interactive: bot token -> check it -> the operator presses Start in the bot -> chat id found -> telegram.env
+    written -> a test message. Used by windows\\1_setup.bat; works on any computer."""
+    print("\nTELEGRAM SETUP\n1. In Telegram, open @BotFather, send /newbot, choose a name and a username ending in 'bot'.\n"
+          "2. BotFather answers with a token like 123456789:AAH... - copy it.\n")
+    token = ask("Paste the bot token here and press Enter: ").strip()
+    try:
+        me = requests.get(f"https://api.telegram.org/bot{token}/getMe", timeout=15).json()
+    except (requests.RequestException, ValueError):
+        me = {}
+    if not me.get("ok"):
+        print("\nThat token does not work (Telegram refused it). Copy it again from BotFather and run setup again.")
+        return False
+    user = me["result"].get("username")
+    print(f"\nToken OK - your bot is @{user}.\n3. Now open https://t.me/{user} in Telegram and press START "
+          "(or send it 'hi').\nWaiting for your message (up to 3 minutes)...")
+    chat, end = None, time.time() + wait_s
+    while chat is None and time.time() < end:
+        try:
+            ids = find_chat_ids(token)
+        except SystemExit:
+            ids = []
+        chat = ids[-1][0] if ids else None
+        if chat is None:
+            time.sleep(3)
+    if chat is None:
+        print("\nNo message arrived. Press START in your bot, then run the setup again.")
+        return False
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("# Telegram settings for the live watcher. Keep this file private.\n"
+                f"TELEGRAM_BOT_TOKEN={token}\nTELEGRAM_CHAT_ID={chat}\n")
+    ok, err = telegram("✅ Crypto Signal Agent: Telegram works. Live alerts will arrive here.", token, chat)
+    print(f"\nSaved. Chat id {chat}. " + ("Test message sent - check Telegram." if ok else f"Test message NOT sent: {err}"))
+    return ok
+
+
 def main():
+    for stream in (sys.stdout, sys.stderr):           # Windows consoles: never crash on an emoji or a coin name
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+    load_settings()
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--once", action="store_true", help="one pass at the newest candle close, then stop")
     ap.add_argument("--send", action="store_true", help="with --once: send the alerts to Telegram")
     ap.add_argument("--test-telegram", action="store_true", help="send one test message")
     ap.add_argument("--find-chat-id", action="store_true", help="show your Telegram chat id (message the bot first)")
+    ap.add_argument("--setup-telegram", action="store_true", help="interactive Telegram setup (writes telegram.env)")
+    ap.add_argument("--sync", action="store_true", help="download GitHub's newest decision files now (no git)")
     ap.add_argument("--status", action="store_true", help="show which strategies may alert, then stop")
     ap.add_argument("--offline", action="store_true", help="synthetic prices (code test, no internet)")
     ap.add_argument("--no-git", action="store_true", help="do not git pull every hour")
     ap.add_argument("--also", action="append", default=[], metavar="STATUS",
                     help="code test only: also watch strategies with this status (e.g. BACKTESTING), labelled TEST")
     args = ap.parse_args()
+    if args.setup_telegram:
+        sys.exit(0 if setup_telegram() else 1)
+    if args.sync:
+        updated, problems = sync_files()
+        print("updated: " + (", ".join(updated) or "nothing new") + ("" if not problems else "\nproblems: " + "; ".join(problems)))
+        return
     if args.find_chat_id:
         ids = find_chat_ids()
         print("\n".join(f"chat id {i}  ({name})" for i, name in ids) if ids else

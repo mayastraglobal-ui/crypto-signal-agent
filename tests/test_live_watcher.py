@@ -113,7 +113,8 @@ class EndToEnd(unittest.TestCase):
         self.assertEqual(self.w.frames, {})                                 # and nothing was downloaded
 
     def test_5m_cards_wait_for_the_confirmation(self):
-        q = (self.hour // (15 * 60_000)) * 15 * 60_000
+        now = int(__import__("time").time() * 1000)
+        q = ((now - 30 * 60_000) // (15 * 60_000)) * 15 * 60_000      # a 15m close whose next 5m bar has closed
         self.w.watch = [(self.c5, "15m", "PAPER")]
         plan = mock.patch.object(sc, "plan_trade", side_effect=lambda s, t, d, e, a, c, cfg, sk=None:
                                  (2.0, [e + d * 4.0, e + d * 6.0], [0.5, 0.5]))   # SMC stops need SMC levels
@@ -140,6 +141,85 @@ class EndToEnd(unittest.TestCase):
         self.w.watch = [(self.plain, "1h", "LIVE")]
         with self.fire(1), mock.patch.object(LW.Watcher, "_good", return_value=False):
             self.assertEqual(self.w.tick(self.hour + 8000), [])
+
+
+class WindowsPC(unittest.TestCase):
+    """The Windows setup (docs/WINDOWS_WATCHER.md): settings file, no-git sync from GitHub, the batch files."""
+
+    def test_settings_file_fills_the_environment_but_never_overrides_it(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "telegram.env")
+            with open(p, "w") as f:
+                f.write("# comment\nTELEGRAM_BOT_TOKEN=123:abc\nTELEGRAM_CHAT_ID= 42 \nEMPTY=\n")
+            with mock.patch.dict(os.environ, {"TELEGRAM_CHAT_ID": "7"}, clear=True):
+                LW.load_settings(p)
+                self.assertEqual(os.environ["TELEGRAM_BOT_TOKEN"], "123:abc")
+                self.assertEqual(os.environ["TELEGRAM_CHAT_ID"], "7")            # the environment wins
+                self.assertNotIn("EMPTY", os.environ)
+            LW.load_settings(os.path.join(d, "missing.env"))                     # no file: no error
+
+    def test_sync_writes_only_complete_valid_files(self):
+        class R:
+            def __init__(self, code, content):
+                self.status_code, self.content = code, content
+        good = {"config.yaml": b"a: 1\n", "memory/strategy_registry.csv": b"id,version\nx,1.0\n",
+                "reports/universe.json": b'{"signal": ["BTC"]}', "reports/funding.csv.gz": b"\x1f\x8b..."}
+
+        def get(url):
+            path = url.split("/", 6)[6]
+            if path in good:
+                return R(200, good[path])
+            if path == "strategies.yaml":
+                return R(200, b"<html>rate limited: [")                            # an error page, not YAML
+            return R(404, b"Not Found")
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "strategies.yaml"), "w") as f:
+                f.write("- id: keep_me\n")
+            up, problems = LW.sync_files(d, "o/r", get)
+            self.assertEqual(sorted(up), sorted(good))
+            with open(os.path.join(d, "strategies.yaml")) as f:
+                self.assertIn("keep_me", f.read())                                 # a bad download never replaces
+            self.assertTrue(any("strategies.yaml" in p for p in problems))
+            self.assertEqual(LW.sync_files(d, "o/r", get)[0], [])                  # unchanged: nothing rewritten
+            with open(os.path.join(d, "reports", "universe.json")) as f:
+                self.assertEqual(f.read(), '{"signal": ["BTC"]}')
+
+    def test_code_outdated_ignores_line_endings(self):
+        class R:
+            status_code, content = 200, b"print(1)\nprint(2)\n"
+        with tempfile.TemporaryDirectory() as d:
+            os.makedirs(os.path.join(d, "engine"))
+            for p in LW.CODE_FILES:
+                with open(os.path.join(d, *p.split("/")), "wb") as f:
+                    f.write(b"print(1)\r\nprint(2)\r\n")                          # a Windows copy
+            self.assertEqual(LW.code_outdated(d, "o/r", lambda url: R()), [])
+            with open(os.path.join(d, "scanner.py"), "wb") as f:
+                f.write(b"print(3)\n")
+            self.assertEqual(LW.code_outdated(d, "o/r", lambda url: R()), ["scanner.py"])
+
+    def test_batch_files_are_windows_files_and_call_real_scripts(self):
+        wdir = os.path.join(ROOT, "windows")
+        names = sorted(os.listdir(wdir))
+        self.assertEqual(names, ["1_setup.bat", "2_start_watcher.bat", "3_stop_watcher.bat", "4_update.bat",
+                                 "5_remove_autostart.bat", "run_watcher.bat"])
+        for n in names:
+            with open(os.path.join(wdir, n), "rb") as f:
+                b = f.read()
+            self.assertNotIn(b"\n", b.replace(b"\r\n", b""), f"{n}: every line must end with CRLF")
+            self.assertTrue(b.startswith(b"@echo off"), n)
+        text = open(os.path.join(wdir, "1_setup.bat")).read()
+        for flag in ("--test-telegram", "--setup-telegram", "--sync"):
+            self.assertIn(flag, text)
+        run = open(os.path.join(wdir, "run_watcher.bat")).read()
+        self.assertIn("live_watcher.py", run)
+        self.assertIn("STOP_WATCHER", run)
+        self.assertIn("STOP_WATCHER", open(os.path.join(wdir, "3_stop_watcher.bat")).read())
+        upd = open(os.path.join(wdir, "4_update.bat")).read()
+        self.assertIn("telegram.env", upd)                                         # settings kept on update
+        self.assertIn("--from-temp", upd)                                          # never rewrites itself mid-run
+        ignored = open(os.path.join(ROOT, ".gitignore")).read().split()
+        for p in ("telegram.env", "logs/", ".venv/", "STOP_WATCHER", "reports/live_watcher_state.json"):
+            self.assertIn(p, ignored)
 
 
 class TelegramSend(unittest.TestCase):

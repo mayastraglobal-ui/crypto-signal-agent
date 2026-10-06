@@ -22,14 +22,16 @@ and targets, instantly.
 | 2026-10-05 | Claude's briefing / daily review / weekly research Routines recreated; cloud network set to Full |
 | 2026-10-05 | Costs = OKX futures fees + funding for longs and shorts (PR #43) |
 | 2026-10-05 | Live watcher with Telegram alerts built (`live_watcher.py`, `docs/LIVE_WATCHER.md`) (PR #43) |
+| 2026-10-06 | Step 1 built: Windows watcher (`windows/*.bat`, `docs/WINDOWS_WATCHER.md`) - the operator still has to run `windows\1_setup.bat` on the Windows PC |
 
 ## Next steps, in order
 
 ### Step 1: Windows watcher (live alerts on the operator's Windows PC, 24/7)
-Oracle Cloud sign-up failed for the operator, and the Windows PC can run 24 hours. Build:
-`setup.bat` (Python packages + Telegram test), `start_watcher.bat`, auto-start with Windows (Task Scheduler),
-restart after a crash, a beginner guide (install Python, download the repo, Telegram bot, sleep = never).
-Status: **waiting for the operator's go-ahead.**
+Oracle Cloud sign-up failed for the operator, and the Windows PC can run 24 hours. `windows\1_setup.bat`
+(Python, packages, Telegram bot, sleep = never, start with Windows via the Startup folder), start / stop / update
+buttons, restart after a crash, guide `docs/WINDOWS_WATCHER.md`.
+Status: **built 2026-10-06** (no git needed: GitHub's decision files are downloaded every hour; `4_update.bat`
+for code). Waiting for the operator to install it on the Windows PC.
 
 ### Step 2: make scalping testable (biggest impact on signals)
 1. More short-timeframe history for research: 5m from 90 days to ~2 years, 15m to ~2 years (bulk files from
@@ -63,7 +65,7 @@ Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept
 
 | When | What |
 |---|---|
-| Now | Say go for Step 1; create the Telegram bot (@BotFather) |
+| Now | Install the Windows watcher: download the ZIP, double-click `windows\1_setup.bat` (`docs/WINDOWS_WATCHER.md`) |
 | Now | Write down the scalping rules (for Step 3) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |

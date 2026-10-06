@@ -18,7 +18,8 @@ It **never trades for you** and never needs your exchange password or API keys.
 The hourly scan is too slow for scalping. `live_watcher.py` runs all the time on a free Oracle Cloud server and
 checks every 5-minute candle close on OKX perpetuals, with the same engine. It sends a **Telegram** alert within
 seconds: entry zone, stop-loss, targets, size and why. Only APPROVED (LIVE) and PAPER_TRADING (PAPER) strategies
-alert. Setup, step by step: [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What comes next: [`docs/ROADMAP.md`](docs/ROADMAP.md).
+alert. Setup, step by step: on a Windows PC [`docs/WINDOWS_WATCHER.md`](docs/WINDOWS_WATCHER.md) (double-click
+`windows\1_setup.bat`), on a Linux server [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What comes next: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 ## One-time setup (about 15 minutes, no coding)
 
@@ -48,7 +49,7 @@ alert. Setup, step by step: [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `strategies_lab.yaml` | The strategy lab: new cards added by Claude's daily review / weekly research, tested like `strategies.yaml` but never emailed or approved | Correct or delete cards here; to approve one, move it into `strategies.yaml` |
 | `scanner.py` | The engine | Not needed |
-| `live_watcher.py`, `engine/live.py`, `deploy/` | The live watcher: instant Telegram alerts at every 5m candle close (`docs/LIVE_WATCHER.md`) | Not needed |
+| `live_watcher.py`, `engine/live.py`, `deploy/`, `windows/` | The live watcher: instant Telegram alerts at every 5m candle close (`docs/WINDOWS_WATCHER.md`, `docs/LIVE_WATCHER.md`) | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |
 | [`reports/latest.json`](https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/live-reports/reports/latest.json) ⓛ | Same report in data form (for Claude) | No |
 | `tasks/` | What Claude's scheduled tasks do (briefing, daily review, weekly research) + their rules | Read it |

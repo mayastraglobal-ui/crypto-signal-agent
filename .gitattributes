@@ -27,3 +27,6 @@ memory/retired_cards.csv merge=append
 memory/cleanup_log.md merge=append
 memory/family_gates_shadow.csv merge=append
 events.yaml merge=append
+
+# Windows batch files are stored with Windows line endings (CRLF) byte for byte - never converted (windows/*.bat)
+*.bat -text
