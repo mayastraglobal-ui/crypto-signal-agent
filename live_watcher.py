@@ -738,7 +738,7 @@ class Watcher:
                     entry = lpx
                 else:
                     lim = None
-            plan = sc.plan_trade(s, t, d, entry, atr, cols, self.cfg)
+            plan = sc.plan_trade(s, t, d, entry, atr, cols, self.cfg, maker=bool(lim))
             if plan is None:
                 continue
             R, tps, split = plan
@@ -755,7 +755,7 @@ class Watcher:
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
                         limit_bars=lim[1] if lim else None, manage=s.get("manage"), gate=s.get("gate"),
                         pb_late=self._col(fr, "pb_late", t), pb_half=self._col(fr, f"pbB_half_{'long' if d == 1 else 'short'}", t)
-                        if s["id"].startswith("PB-B") else False,
+                        if s["id"].startswith("PB-B") else False, pb_grade=sc.half_size_reason(s, fr.get("feats"), d, t),
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
@@ -886,6 +886,8 @@ class Watcher:
             why.append("late US / weekend: half size (playbook 2.3)")
         if a.get("pb_half"):
             why.append("counter-trend sweep: half size (playbook 5.2)")
+        if a.get("pb_grade"):
+            why.append(f"{a['pb_grade']}: half size")
         if last_r is not None and last_r >= PB["big_win_r"]:
             why.append(f"after a win of {PB['big_win_r']:g}R or more: half size (playbook 11)")
         if last_week <= PB["week_limit_r"]:

@@ -140,9 +140,10 @@ class NoLookAhead(unittest.TestCase):
         cards, problems, _, _ = sc.load_cards()
         self.assertEqual(problems, {})
         pbc = [c for c in cards if c["id"].startswith("PB-")]
-        self.assertEqual(len(pbc), 6)
+        self.assertEqual(len(pbc), 16)                                # 6 as written + 10 step-4 versions
         for c in pbc:
-            self.assertEqual((c["gate"], c["timeframes"]), ("playbook", ["5m"]))
+            self.assertEqual(c["gate"], "playbook")
+            self.assertTrue(set(c["timeframes"]) <= set(SP.PB_TFS), c["id"])
             used = SP.columns_needed(c) | {n for r in c["long"] + c["short"] + (c.get("exit_long") or []) +
                                            (c.get("exit_short") or []) for n in SP._names(r)}
             self.assertTrue(used <= set(pb.COLUMNS), used - set(pb.COLUMNS))

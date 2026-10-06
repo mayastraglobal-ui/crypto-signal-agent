@@ -27,6 +27,8 @@ and targets, instantly.
 | 2026-10-06 | Step 4 built: Telegram commands, ✅/❌ buttons, trade follow-up, `journal/my_trades.csv` |
 | 2026-10-06 | Step 2 part A: 2 years of OKX USDT-perpetual 30m / 15m / 5m candles for research; longs pay real funding |
 | 2026-10-06 | Step 2 part B: limit-order entries (`entry: limit` on a card) in backtests, paper trades, emails, Telegram, Pine |
+| 2026-10-06 | Step 3a-3c: the operator's playbook (strategies A / B / C, its risk rules and pass bar) (`docs/PLAYBOOK.md`) |
+| 2026-10-06 | Step 3d: flexible playbook versions - graded setups, A in London, B on 15m, C's wider box, the fee fix |
 
 ## Next steps, in order
 
@@ -56,7 +58,8 @@ for code). Installed and running on the operator's PC.
 - London / New York session open
 - Liquidity sweep in the trend direction
 - Funding / open-interest filter (skip crowded trades)
-- **The operator's own rules** - waiting for the operator to write them down.
+- **The operator's own rules** - done: the operator's scalping playbook, `docs/PLAYBOOK.md` (3a-3c), and its
+  flexible versions (3d: graded setups, the three rule changes the operator asked to test, the fee fix).
 
 ### Step 4: help during a trade (Telegram)
 Status: **built 2026-10-06** (`engine/follow.py`, `engine/live.py`, `live_watcher.py`):
@@ -80,7 +83,7 @@ Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept
 | When | What |
 |---|---|
 | Now | Double-click `windows\4_update.bat` once to get the Telegram commands and buttons |
-| Now | Write down the scalping rules (for Step 3) |
+| After the next research email | Compare the playbook versions (originals vs -LDN / -15M / -W20 / -LIMIT / -GRADED / -APLUS) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |
 | Optional | If the old Claude tasks still exist in the Claude desktop app, delete them (the cloud Routines replace them) |

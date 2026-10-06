@@ -1167,3 +1167,424 @@
   known_weaknesses: "A benchmark."
   changelog:
     - "1.0 (2026-10-06): control twin of PB-C-BREAKOUT."
+
+# ---------------------------------------------------------------------
+# Step 3d (operator, 2026-10-06): "the market never follows the rules perfectly - rules this strict may never give a
+# trade". The originals above stay exactly as written (the benchmark). Next to them, tested the same way:
+#   one-change versions: A in London too (-LDN), B on 15m triggers (-15M), B with the fee fix (-LIMIT), C with the
+#     wider compression box 2.0 x ATR (-W20);
+#   graded versions (-GRADED): the playbook's must-haves stay must-haves; the other conditions become bonus points -
+#     2 points = a trade at half size (grade B), 3+ points = full size (grade A+); -APLUS = only the A+ setups, so
+#     the research shows whether the grade B trades add anything.
+# The fee fix (graded and -LIMIT cards): a limit order (maker fee, no slippage) where the playbook allows one, and
+# stop.max_cost_r 0.25 = no trade when the round-trip costs would be more than 0.25R (the stop is too close for
+# the fees; on BTC 5m the median cost was 0.84R).
+# ---------------------------------------------------------------------
+- id: PB-A-PULLBACK-LDN
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.1 Strategy A, with one change the operator asked to test: the London session too"
+  hypothesis: "Strategy A works in the London session (07:00-10:00 UTC) as well as in New York, so it gives more trades without losing its edge."
+  timeframes: ["5m"]
+  description: "Exactly PB-A-PULLBACK, but entries in London (07:00-10:00 UTC) as well as NY (13:00-16:00 UTC)."
+  logic: "pbA_ldn_long = pbA_long with the session London or NY instead of NY only. Everything else as PB-A-PULLBACK."
+  long: ["pbA_ldn_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbA_ldn_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  exit_long: ["pb_bias_bull != 1"]
+  exit_short: ["pb_bias_bear != 1"]
+  entry: {type: limit, long_level: pbA_entry_long, short_level: pbA_entry_short, valid_bars: 3}
+  stop: {method: structure, long_level: pbA_stop_long, short_level: pbA_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", "max(2R, pbA_tp2_long)"]
+    short: ["1R", "max(2R, pbA_tp2_short)"]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbA_inval_long, short: pbA_inval_short, every: "15m"}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Still few signals (the 1H trend, bias, pullback and trigger must all agree); London opens can be stop hunts before the real move."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+    who_pays: "late counter-trend traders who fade a trending market at its pullback, and traders who sold the dip into value"
+    mechanism: "the same as Strategy A: a shallow, low-volume pullback in a 1H trend is profit-taking; London is the second most liquid session, so the trend side steps back in there too"
+    fails_when: "ranges, trend exhaustion, and London stop hunts that reverse at the NY open"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it does worse than PB-A-PULLBACK"
+  changelog:
+    - "1.0 (2026-10-06): PB-A-PULLBACK + the London session (operator's change to test, one change at a time)."
+
+- id: PB-B-SWEEP-15M
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.2 Strategy B, with one change the operator asked to test: 15m trigger candles"
+  hypothesis: "Strategy B on 15m candles has wider stops, so the fees are a smaller part of each trade, and keeps its edge."
+  timeframes: ["15m"]
+  description: "Exactly PB-B-SWEEP, computed on 15m candles: the sweep, the close back inside within 3 x 15m candles, the confirmation."
+  logic: >-
+    pbB_cvd_long on the 15m candles (engine/scalp_playbook.py with 15m triggers: ATR, the sweep and the 3-candle
+    window are 15m; the CVD is the 15m sum of the 5m deltas). Same entry, stop, targets and management as
+    PB-B-SWEEP; the playbook's +0.5R-within-4-candles rule is 4 x 15m here. The outer time limit stays 4 hours
+    (16 x 15m).
+  long: ["pbB_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbB_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 16
+  cooldown_bars: 3
+  known_weaknesses: "Slower: a 15m candle must close back inside, so the entry is later and further from the wick; fewer sweeps than on 5m."
+  edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, TRANSITION]
+    who_pays: "traders whose stops sit just beyond obvious lows / highs, and breakout traders who chase the poke"
+    mechanism: "the same forced flow as Strategy B; a sweep that a 15m candle closes back inside is a cleaner failure, and the wider stop keeps the fees small in R"
+    fails_when: "trend days: price runs through the level and never comes back"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): PB-B-SWEEP on 15m trigger candles (operator's change to test, one change at a time)."
+
+- id: PB-B-SWEEP-LIMIT
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.2 Strategy B, with the fee fix (step 3d)"
+  hypothesis: "Strategy B loses mostly to fees (median cost 0.84R on BTC 5m); a limit entry and skipping trades whose stop is too close for the fees leave the trades that can pay."
+  timeframes: ["5m"]
+  description: "Exactly PB-B-SWEEP, but the entry is a limit order at the signal close (maker fee, waits 2 candles) and no trade when the round-trip costs exceed 0.25R."
+  logic: "PB-B-SWEEP + entry limit at the close (offset 0, 2 candles) + stop.max_cost_r 0.25. Everything else unchanged."
+  long: ["pbB_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbB_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Misses the sweeps that leave at once (the limit is not filled); on BTC 5m most stops are too close for the 0.25R fee cap, so few trades."
+  edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, TRANSITION]
+    who_pays: "the same stop-loss and breakout-chasing flow as Strategy B"
+    mechanism: "the same as Strategy B; the edge is kept only where the move to the targets is large compared with the fees"
+    fails_when: "trend days, and sweeps so small that the fees eat the move"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): PB-B-SWEEP + the fee fix (limit entry at the close, max_cost_r 0.25)."
+
+- id: PB-C-BREAKOUT-W20
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.3 Strategy C, with one change the operator asked to test: the compression box 2.0 x ATR"
+  hypothesis: "A looser compression (the last 8 x 15m candles inside 2.0 x ATR instead of 1.2) still stores the energy for the breakout and gives Strategy C trades."
+  timeframes: ["5m"]
+  description: "Exactly PB-C-BREAKOUT, but the 15m compression box may be up to 2.0 x ATR(15m) wide."
+  logic: "pbCw_cvd_long = pbC_cvd_long with c_comp_box 2.0 instead of 1.2 (ATR still below 0.8 x its average). Everything else as PB-C-BREAKOUT."
+  long: ["pbCw_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbCw_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbCw_stop_long, short_level: pbCw_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", pbCw_tp2_long]
+    short: ["1R", pbCw_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbCw_inval_long, short: pbCw_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "The box is not the only filter: a strong breakout right out of the box, the volume spike and the retest rejection are all rare (BTC 2026: about 1 setup in 7 months); a wider box is a weaker compression."
+  edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders short under a level during compression, whose stops fuel the breakout, and late sellers on the retest"
+    mechanism: "the same as Strategy C, with a looser definition of the quiet period before the break"
+    fails_when: "false breakouts that close back inside the range"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): PB-C-BREAKOUT with the compression box 2.0 x ATR (operator's change to test, one change at a time)."
+
+- id: PB-A-GRADED
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.1 Strategy A as a graded setup (step 3d, operator 2026-10-06)"
+  hypothesis: "Strategy A's must-haves (1H trend and bias, the pullback into the EMA21 / VWAP zone at a level, the higher low intact, the trigger candle) carry the edge; the other conditions only make it stronger, so a setup with most of them is still worth a (smaller) trade."
+  timeframes: ["5m"]
+  description: "Graded A: must-haves + at least 2 of 5 bonus points (pullback depth, lower pullback volume, trigger volume, CVD, NY session); 2 points = half size, 3+ = full size. London or NY."
+  logic: >-
+    pbAg_long: must-haves = 1H trend + bullish bias, London or NY session, the 15m higher low intact, the
+    pullback reached the EMA21 / VWAP zone within 0.5 x ATR(15m) of a marked level, a 5m rejection / engulfing
+    candle closing above EMA9. Bonus points: pullback >= 0.8 x ATR(15m) deep, pullback volume below the impulse's,
+    trigger volume >= 1.2 x average, trigger candle delta positive (CVD), NY session. >= 2 points = signal,
+    < 3 = half size (pbAg_half_long). Entry, stop, targets and management as PB-A-PULLBACK; fee cap 0.25R.
+  long: ["pbAg_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbAg_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  exit_long: ["pb_bias_bull != 1"]
+  exit_short: ["pb_bias_bear != 1"]
+  half_size: {long: pbAg_half_long, short: pbAg_half_short, why: "grade B setup (2 of 5 bonus points)"}
+  entry: {type: limit, long_level: pbA_entry_long, short_level: pbA_entry_short, valid_bars: 3}
+  stop: {method: structure, long_level: pbA_stop_long, short_level: pbA_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["1R", "max(2R, pbA_tp2_long)"]
+    short: ["1R", "max(2R, pbA_tp2_short)"]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbA_inval_long, short: pbA_inval_short, every: "15m"}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "The grading thresholds (2 and 3 points) are a choice, not measured; the must-haves still need a 1H trend, so no trades in ranges."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+    who_pays: "late counter-trend traders who fade a trending market at its pullback"
+    mechanism: "as Strategy A; the bonus conditions add confidence but the trend, the value zone and the rejection are what make the move"
+    fails_when: "ranges and trend exhaustion; and if the bonus conditions were what carried the edge (then -APLUS beats it)"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it does worse than PB-A-APLUS"
+  changelog:
+    - "1.0 (2026-10-06): graded Strategy A (operator's request: rules that adapt instead of all-or-nothing), with the fee fix."
+
+- id: PB-A-APLUS
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "PB-A-GRADED, only its full-size (A+) setups"
+  hypothesis: "Measures the A+ setups alone: if PB-A-GRADED does no better than this, its grade B trades add nothing."
+  timeframes: ["5m"]
+  description: "Graded A with 3+ of 5 bonus points only (full size)."
+  logic: "pbAp_long = PB-A-GRADED's must-haves + at least 3 bonus points. Everything else as PB-A-GRADED."
+  long: ["pbAp_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbAp_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  exit_long: ["pb_bias_bull != 1"]
+  exit_short: ["pb_bias_bear != 1"]
+  entry: {type: limit, long_level: pbA_entry_long, short_level: pbA_entry_short, valid_bars: 3}
+  stop: {method: structure, long_level: pbA_stop_long, short_level: pbA_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["1R", "max(2R, pbA_tp2_long)"]
+    short: ["1R", "max(2R, pbA_tp2_short)"]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbA_inval_long, short: pbA_inval_short, every: "15m"}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Fewer trades than PB-A-GRADED."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+    who_pays: "late counter-trend traders who fade a trending market at its pullback"
+    mechanism: "as Strategy A, with most of the playbook's confirmations present"
+    fails_when: "ranges and trend exhaustion"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): the A+ part of PB-A-GRADED, to measure the grades separately."
+
+- id: PB-B-GRADED
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.2 Strategy B as a graded setup (step 3d, operator 2026-10-06)"
+  hypothesis: "The sweep of a marked level and the close back inside, in a regime the playbook allows, carry the edge; the confirmations make it stronger, so a sweep with 2 of them is still worth a half-size trade."
+  timeframes: ["5m", "15m"]
+  description: "Graded B on 5m and 15m triggers: must-haves + at least 2 of 5 bonus points (OI drop, CVD divergence, absorption, Asia / London / NY session, a major level); 2 points = half size."
+  logic: >-
+    pbBg_long: must-haves = a wick >= 0.1 x ATR below a marked low, the first close back above it within 3
+    candles, the playbook's regime rule (range with the bias or at a major level, transition at a major level,
+    trend only against it at a major level - half size). Bonus points: OI down >= 1% in the hour, bullish CVD
+    divergence, an absorption candle, the Asia / London / NY session, a major level (PDL, Asia low, previous week
+    low, weekly open). >= 2 points = signal, < 3 = half size. Entry: limit at the signal close (2 candles); stop,
+    targets and management as PB-B-SWEEP; fee cap 0.25R.
+  long: ["pbBg_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbBg_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  half_size: {long: pbBg_half_long, short: pbBg_half_short, why: "grade B setup (2 of 5 bonus points)"}
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Many more sweeps than PB-B-SWEEP, so more noise; the grading thresholds are a choice; the outer time limit is 48 candles on both timeframes (4 hours on 5m, 12 hours on 15m)."
+  edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, TRANSITION]
+    who_pays: "traders whose stops sit just beyond obvious lows / highs, and breakout traders who chase the poke"
+    mechanism: "the sweep fills resting stops; a close back inside shows the forced flow is over; each confirmation makes that more likely"
+    fails_when: "trend days; and if the confirmations were what carried the edge (then -APLUS beats it)"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it does worse than PB-B-APLUS"
+  changelog:
+    - "1.0 (2026-10-06): graded Strategy B on 5m and 15m (operator's request: rules that adapt instead of all-or-nothing), with the fee fix."
+
+- id: PB-B-APLUS
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "PB-B-GRADED, only its full-size (A+) setups"
+  hypothesis: "Measures the A+ sweeps alone: if PB-B-GRADED does no better than this, its grade B trades add nothing."
+  timeframes: ["5m", "15m"]
+  description: "Graded B with 3+ of 5 bonus points only."
+  logic: "pbBp_long = PB-B-GRADED's must-haves + at least 3 bonus points. Everything else as PB-B-GRADED."
+  long: ["pbBp_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbBp_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Fewer trades than PB-B-GRADED."
+  edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, TRANSITION]
+    who_pays: "traders whose stops sit just beyond obvious lows / highs"
+    mechanism: "as Strategy B, with most of the confirmations present"
+    fails_when: "trend days: price runs through the level and never comes back"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): the A+ part of PB-B-GRADED, to measure the grades separately."
+
+- id: PB-C-GRADED
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.3 Strategy C as a graded setup (step 3d, operator 2026-10-06)"
+  hypothesis: "A strong breakout of a level out of a quiet box and a held retest carry the edge; the playbook's tight compression, the volume spike, the CVD, the session and its regime rule make it stronger."
+  timeframes: ["5m"]
+  description: "Graded C: must-haves (box within 2.0 x ATR under a level, strong breakout candle, not against a 1H trend, retest rejection) + at least 2 of 5 bonus points (tight compression, volume spike, CVD holding, London / NY, the playbook's regime rule)."
+  logic: >-
+    pbCg_long: must-haves = the 8 x 15m box within 2.0 x ATR(15m) with a marked level within 0.5 x ATR above it,
+    a 5m close >= 0.2 x ATR beyond the level with a body >= 60%, a 1H trend up or a range / transition, then
+    within 12 candles a bullish rejection candle in the level zone before a close back inside by > 0.3 ATR.
+    Bonus points: the playbook's compression (ATR < 0.8 x average and the box within 1.2 x ATR), the breakout's
+    volume spike, the CVD above its low since the breakout, London / NY session, the playbook's regime rule
+    (trend in the direction, or range / transition near a session open). >= 2 points = signal, < 3 = half size.
+    Entry: limit at the signal close (2 candles); stop / TP2 / invalidation as PB-C-BREAKOUT; fee cap 0.25R.
+  long: ["pbCg_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbCg_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  half_size: {long: pbCg_half_long, short: pbCg_half_short, why: "grade B setup (2 of 5 bonus points)"}
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: structure, long_level: pbCg_stop_long, short_level: pbCg_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["1R", pbCg_tp2_long]
+    short: ["1R", pbCg_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbCg_inval_long, short: pbCg_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Still rare: strong breakouts right out of a quiet box with a clean retest (BTC 2026: about 1 a month); the grading thresholds are a choice."
+  edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders short under a level during compression, whose stops fuel the breakout, and late sellers on the retest"
+    mechanism: "a quiet period, a strong break and a held retest show the other side is gone; each bonus makes it more likely"
+    fails_when: "false breakouts; and if the bonus conditions were what carried the edge (then -APLUS beats it)"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it does worse than PB-C-APLUS"
+  changelog:
+    - "1.0 (2026-10-06): graded Strategy C (operator's request: rules that adapt instead of all-or-nothing), with the fee fix."
+
+- id: PB-C-APLUS
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "PB-C-GRADED, only its full-size (A+) setups"
+  hypothesis: "Measures the A+ breakouts alone: if PB-C-GRADED does no better than this, its grade B trades add nothing."
+  timeframes: ["5m"]
+  description: "Graded C with 3+ of 5 bonus points only."
+  logic: "pbCp_long = PB-C-GRADED's must-haves + at least 3 bonus points. Everything else as PB-C-GRADED."
+  long: ["pbCp_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbCp_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  entry: {type: limit, offset_atr: 0, valid_bars: 2}
+  stop: {method: structure, long_level: pbCg_stop_long, short_level: pbCg_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0, max_cost_r: 0.25}
+  targets:
+    long: ["1R", pbCg_tp2_long]
+    short: ["1R", pbCg_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbCg_inval_long, short: pbCg_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Very few trades."
+  edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders short under a level during compression, whose stops fuel the breakout"
+    mechanism: "as Strategy C, with most of the playbook's conditions present"
+    fails_when: "false breakouts that close back inside the range"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative"
+  changelog:
+    - "1.0 (2026-10-06): the A+ part of PB-C-GRADED, to measure the grades separately."

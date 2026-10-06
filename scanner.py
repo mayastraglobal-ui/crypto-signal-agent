@@ -627,8 +627,8 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
         smc_out[tf] = res
         for col in smc.EVENT_COLUMNS + smc.CONTEXT_COLUMNS:   # SMC joins the features (rules + evidence)
             feats["smc_" + col] = res["series"][col].to_numpy()
-        if tf == "5m":                       # step 3: the operator's playbook building blocks (engine/scalp_playbook.py)
-            add_playbook(df, feats, sym, base, data, cfg, btc, flow)
+        if tf in sspec.PB_TFS:               # step 3: the operator's playbook building blocks (engine/scalp_playbook.py)
+            add_playbook(df, feats, sym, base, data, cfg, btc, flow, tf)
         pairs[tf] = (df, feats)
     add_h4_context(pairs)
 
@@ -682,8 +682,9 @@ def okx_swap_stats(offline=False):
     return out
 
 
-def add_playbook(df, feats, sym, base, data, cfg, btc=None, flow=None):
-    """The playbook columns (pb_*, pbA_* / pbB_* / pbC_*) on the 5m candles: needs the coin's 15m and 1H candles
+def add_playbook(df, feats, sym, base, data, cfg, btc=None, flow=None, tf="5m"):
+    """The playbook columns (pb_*, pbA_* / pbB_* / pbC_*) on the 5m candles (step 3d: also on 15m, the same rules on
+    15m trigger candles): needs the coin's 15m and 1H candles
     (4H optional), BTC's 15m candles for an altcoin, the order-flow delta (flow) and the futures data already
     attached to df. Missing inputs leave the columns empty (NaN) or the CVD part unknown - never a guess."""
     d15, d1h = data.get((sym, "15m")), data.get((sym, "1h"))
@@ -695,12 +696,21 @@ def add_playbook(df, feats, sym, base, data, cfg, btc=None, flow=None):
     if b15 is not None and not {"high", "low"} <= set(b15.columns):
         b15 = None
     out = spb.compute(df, d15, d1h, data.get((sym, "4h")), btc15=b15,
-                      delta=fh.align(df["open_time"].to_numpy(), flow) if flow is not None else None,
+                      delta=fh.align(df["open_time"].to_numpy(), fh.resample(flow, TF_MS[tf])) if flow is not None else None,
                       oi=df["_oi"].to_numpy() if "_oi" in df else None,
                       funding=df["_funding_rate"].to_numpy() if "_funding_rate" in df else None,
-                      P=cfg.get("playbook"), d1d=data.get((sym, "1d")))
+                      P=cfg.get("playbook"), d1d=data.get((sym, "1d")), tf_ms=TF_MS[tf])
     for k in spb.COLUMNS:
         feats[k] = out[k]
+
+
+def half_size_reason(s, feats, d, t):
+    """Step 3d: the card's half_size reason when its column is 1 at candle t (a grade B setup), else None."""
+    hs = s.get("half_size")
+    col = hs and hs["long" if d == 1 else "short"]
+    if not col or feats is None or col not in feats:
+        return None
+    return hs["why"] if feats[col].iloc[t] == 1 else None
 
 
 def strategy_signals(s, tf, fr, cfg, gc=None, detail=None):
@@ -808,7 +818,7 @@ def lab_status(spec, status):
 
 def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
     """One scoreboard line: lifecycle status, Layers B/C from research (rc), Layer A from this run."""
-    gc = gc or dict(raw=0, regime=0, permission=0, stop=0, target=0)
+    gc = gc or dict(raw=0, regime=0, permission=0, stop=0, target=0, cost=0)
     la = rs.layer_a([t for tr in per_coin.values() for t in tr], now_ms, RC["layer_a_days"], RC["layer_a_split_day"])
     ev = (rc or {}).get("evidence", {})
     b_all = ev.get("all", {})
@@ -835,7 +845,7 @@ def board_row(x, tf, status, reg_cell, rc, per_coin, gc, live, now_ms, RC):
                 signal_candles=gc["raw"], blocked_by_regime=gc["regime"], blocked_by_permission=gc["permission"],
                 skipped_stop=gc["stop"], skipped_target=gc["target"], confirm_5m=bool(x.get("confirm_5m")),
                 skipped_5m_expired=gc.get("5m_expired", 0), skipped_5m_invalidated=gc.get("5m_invalidated", 0),
-                skipped_limit_unfilled=gc.get("limit_unfilled", 0),
+                skipped_limit_unfilled=gc.get("limit_unfilled", 0), skipped_fee_cost=gc.get("cost", 0),
                 live_signals=live["n"] if live else 0, live_avg_r=round(live["exp_r"], 3) if live else None,
                 twin_of=x.get("twin_of"), control_twin=x.get("control_twin"),
                 note=(rc or {}).get("note", ""),
@@ -1014,10 +1024,11 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     return None
 
 
-def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
+def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None, maker=False):
     """Stop distance R, take-profit prices and split for a trade planned at the close of candle t,
     using only values known then (cols = level columns the strategy's stop / targets read).
-    None = no valid trade; the reason is counted in `skipped` (stop / target)."""
+    maker = the entry is a limit order (maker fee, no slippage) - only for the fee cap (stop.max_cost_r).
+    None = no valid trade; the reason is counted in `skipped` (stop / cost / target)."""
     def skip(why):
         if skipped is not None:
             skipped[why] = skipped.get(why, 0) + 1
@@ -1036,6 +1047,10 @@ def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
             return skip("stop")
     if R < float(st.get("min_width_atr", 0)) * atr_t:            # step 3: a stop too tight is noise-stopped
         return skip("stop")
+    if st.get("max_cost_r"):            # step 3d: round-trip costs (entry fee + a market exit) at most this many R
+        k = trade_costs(cfg, d)
+        if entry * ((k["maker"] if maker else k["taker"] + k["slip"]) + k["taker"] + k["slip"]) / R > float(st["max_cost_r"]):
+            return skip("cost")
     tg = sspec.targets(strat, d, entry, R, t, cols, cfg["trade_plan"])
     if tg is None:
         return skip("target")
@@ -1081,7 +1096,8 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             limit_px = float(cols[levs[0 if d == 1 else 1]][t]) if levs else float(c[t] - d * lim[0] * atr[t])
         if limit_px is not None and np.isfinite(limit_px):     # (a level that is unknown -> market, below)
             entry = limit_px
-            plan = plan_trade(strat, t, d, entry, atr[t], cols or {}, cfg, skipped) if np.isfinite(entry) else None
+            plan = plan_trade(strat, t, d, entry, atr[t], cols or {}, cfg, skipped, maker=True) \
+                if np.isfinite(entry) else None
             if plan is None:
                 t += 1
                 continue
@@ -2266,7 +2282,7 @@ def main():
                 if tf not in s["timeframes"]:
                     continue
                 k3 = (s["id"], s["version"], tf)
-                gc = gate_counts.setdefault(k3, dict(raw=0, regime=0, permission=0, stop=0, target=0))
+                gc = gate_counts.setdefault(k3, dict(raw=0, regime=0, permission=0, stop=0, target=0, cost=0))
                 try:
                     L, S, XL, XS, cols = strategy_signals(s, tf, fr, cfg, gc)
                 except Exception as e:
@@ -2298,7 +2314,7 @@ def main():
                         entry = lpx
                     else:
                         entry = float(df["close"].iloc[-1]) if k == 0 else float(df["open"].iloc[t_i + 1])
-                    plan = plan_trade(s, t_i, d, entry, a, cols, cfg) if np.isfinite(entry) else None
+                    plan = plan_trade(s, t_i, d, entry, a, cols, cfg, maker=bool(lim)) if np.isfinite(entry) else None
                     if plan is None:
                         continue
                     R, tps, split = plan
@@ -2321,6 +2337,7 @@ def main():
                                      pb_half=bool(feats[f"pbB_half_{'long' if d == 1 else 'short'}"].iloc[t_i] == 1)
                                      if s["id"].startswith("PB-B") and f"pbB_half_{'long' if d == 1 else 'short'}" in feats
                                      else False,
+                                     pb_grade=half_size_reason(s, feats, d, t_i),
                                      inval=(float(cols[(s.get("manage") or {})["invalidate"]["long" if d == 1 else "short"]][t_i])
                                             if (s.get("manage") or {}).get("invalidate") else None),
                                      signal_time=int(df["close_time"].iloc[t_i]),
@@ -2439,7 +2456,7 @@ def main():
         pct_used = risk_pct
         if strat["gate"] == "playbook":       # step 3: the playbook's size rules (half size ...)
             fac, size_note = rk.pb_size_factor(logdf, started, RK["playbook"], sgl.get("pb_late"), sgl.get("pb_half"),
-                                               pb_last_week)
+                                               pb_last_week, grade=sgl.get("pb_grade"))
             pct_used = risk_pct * fac
         sz = rk.size(acct, pct_used, e, e - d * R, RK["max_leverage"])
         plans.append(dict(
