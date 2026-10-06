@@ -248,7 +248,8 @@ def align(close_time, open_time, coin_hourly, coin_funding, source=MAIN_SOURCE):
     funding_rate (% per settlement), oi (USD), ls_ratio, taker_ratio, and _hsrc / _fsrc (the source code of the row each
     candle used; 0 = unknown) so no change is ever computed across two sources.
     _fund_short (backtest COSTS, not a building block): the fraction per 8 hours a SHORT pays at each candle's OPEN -
-    the HIGHEST of every source's -rate (never lower than any exchange's real cost; 0 when funding was positive)."""
+    the HIGHEST of every source's -rate (never lower than any exchange's real cost; 0 when funding was positive).
+    _fund_long: the same for a LONG (the highest +rate; 0 when funding was negative) - roadmap step 2."""
     close_time, open_time = np.asarray(close_time, dtype=np.int64), np.asarray(open_time, dtype=np.int64)
     out = {}
     all_f = coin_funding
@@ -267,12 +268,14 @@ def align(close_time, open_time, coin_hourly, coin_funding, source=MAIN_SOURCE):
     fcodes = f["source"].map(SOURCE_CODE).fillna(9).to_numpy(dtype=float) if len(f) else np.array([])
     out["_fsrc"] = np.nan_to_num(_asof(close_time, ft, fcodes, MAX_AGE_H["funding"] * HOUR_MS), nan=0.0)
     pay = np.zeros(len(open_time))                   # costs: the most any exchange's shorts paid (never less)
+    pay_long = np.zeros(len(open_time))              # ... and longs
     for _, g in (all_f.dropna(subset=["rate"]).groupby("source") if len(all_f) else []):
         g = g.sort_values("time")
         at_open = _asof(open_time, g["time"].to_numpy(dtype=np.int64), g["rate"].to_numpy(dtype=float),
                         MAX_AGE_H["funding"] * HOUR_MS)
         pay = np.maximum(pay, np.where(np.isfinite(at_open), np.maximum(0.0, -at_open), 0.0))
-    out["_fund_short"] = pay
+        pay_long = np.maximum(pay_long, np.where(np.isfinite(at_open), np.maximum(0.0, at_open), 0.0))
+    out["_fund_short"], out["_fund_long"] = pay, pay_long
     return out
 
 

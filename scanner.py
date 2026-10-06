@@ -590,7 +590,7 @@ def attach_market(df, derivs, btc):
     for k in ("funding_rate", "oi", "ls_ratio", "taker_ratio"):
         df["_" + k] = a[k]
     df["_hsrc"], df["_fsrc"] = a["_hsrc"], a["_fsrc"]      # which source each value came from (0 = unknown)
-    df["_fund_short"] = a["_fund_short"]
+    df["_fund_short"], df["_fund_long"] = a["_fund_short"], a["_fund_long"]
     df["_btc_close"] = np.nan
     if btc is not None and len(btc):
         ct = btc["close_time"].to_numpy(dtype=np.int64)
@@ -871,14 +871,15 @@ def market_type(d, cfg=None):
 
 
 def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_arr=None, tps=None, split=None,
-                   info=None, fund_real=None):
+                   info=None, fund_real=None, fund_long=None):
     """Manage one trade from candle j0 (entry candle). Returns dict or None if still open
     (then `info`, if given, receives the targets hit so far and the current stop - the position book).
     tps / split: take-profit prices and the share closed at each (default: config trade plan 1R/2R/3R).
     Conservative: if stop and target are touched in the same candle we assume the STOP hit first.
     Funding (shorts) is charged on the part still open, for every candle held, at entry notional: the config rate,
     or where the real funding history is known (fund_real: the fraction per 8 hours a short paid) the HIGHER of the
-    two - money received from funding is never counted (Phase 17 C).
+    two - money received from funding is never counted (Phase 17 C). Longs on futures (costs.long.market: futures)
+    likewise pay the HIGHER of the config rate and the real rate longs paid (fund_long) - roadmap step 2.
     Also measured: MAE / MFE = the worst / best price reached while the trade was open, in R
     (Phase 9 failure attribution), and the funding paid, in R."""
     tp = cfg["trade_plan"]
@@ -886,6 +887,8 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     fee_t, fee_m, slip = k["taker"], k["maker"], k["slip"]
     fund_bar = k["funding_8h"] * bar_hours / 8
     real_x = float(cfg["costs"]["short"].get("funding_real_x", 1.0))   # Phase 17 C: real funding (shorts), never less
+    real_long = fund_long if (d == 1 and market_type(1, cfg) == "futures") else None
+    real_x_long = float(cfg["costs"]["long"].get("funding_real_x", real_x))
     if tps is None:
         tps, split = [entry + d * r * R for r in tp["tp_r"]], tp["tp_split"]
     stop = entry - d * R
@@ -897,8 +900,10 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
         return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1,
                     mae_r=mae / R, mfe_r=mfe / R, funding_r=funding / R)
     for j in range(j0, n):
-        fb = fund_bar if (fund_real is None or d == 1) else \
-            max(k["funding_8h"], float(fund_real[j]) * real_x) * bar_hours / 8
+        if d == 1:
+            fb = fund_bar if real_long is None else max(k["funding_8h"], float(real_long[j]) * real_x_long) * bar_hours / 8
+        else:
+            fb = fund_bar if fund_real is None else max(k["funding_8h"], float(fund_real[j]) * real_x) * bar_hours / 8
         fees += remaining * fb * entry
         funding += remaining * fb * entry
         worst, best = (l[j], h[j]) if d == 1 else (h[j], l[j])
@@ -967,6 +972,7 @@ def plan_trade(strat, t, d, entry, atr_t, cols, cfg, skipped=None):
 def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None):
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     fund_real = df["_fund_short"].to_numpy() if "_fund_short" in df else None
+    fund_long = df["_fund_long"].to_numpy() if "_fund_long" in df else None
     ot = df["open_time"].to_numpy()
     atr = df["_atr"].to_numpy()
     bar_hours = TF_MS[tf] / 3_600_000
@@ -983,7 +989,7 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             continue
         R, tps, split = plan
         res = simulate_trade(o, h, l, c, t + 1, d, entry, R, cfg, strat["time_stop_bars"], bar_hours,
-                             ex_long if d == 1 else ex_short, tps, split, fund_real=fund_real)
+                             ex_long if d == 1 else ex_short, tps, split, fund_real=fund_real, fund_long=fund_long)
         if res is None:
             break
         k = trade_costs(cfg, d)
@@ -1053,7 +1059,7 @@ def backtest_5m(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols
         if js >= n5:
             break
         res = simulate_trade(o5, h5, l5, cl5, js, d, entry, R, cfg, max_hold, TF_MS["5m"] / 3_600_000,
-                             ex5[d], tps, split, fund_real=m5.get("fund_short"))
+                             ex5[d], tps, split, fund_real=m5.get("fund_short"), fund_long=m5.get("fund_long"))
         if res is None:
             break
         entry_idx = int(np.searchsorted(ot, ot5[js], side="right") - 1)       # trigger candle holding the 5m bar
@@ -1076,6 +1082,8 @@ def m5_arrays(frames):
     arr = c5m.arrays(fr["df"], fr["feats"])
     if arr is not None and "_fund_short" in fr["df"]:
         arr["fund_short"] = fr["df"]["_fund_short"].to_numpy()        # real funding for 5m-simulated shorts
+    if arr is not None and "_fund_long" in fr["df"]:
+        arr["fund_long"] = fr["df"]["_fund_long"].to_numpy()          # ... and longs
     return arr
 
 
@@ -1240,7 +1248,8 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
         info = {}
         res = simulate_trade(o, h, l, c, 0, d, entry, R, cfg, int(row["max_hold_bars"]) * (TF_MS[tf] // TF_MS[stf]),
                              TF_MS[stf] / 3_600_000, exit_arr, tps, split, info,
-                             fund_real=after["_fund_short"].to_numpy() if "_fund_short" in after else None)
+                             fund_real=after["_fund_short"].to_numpy() if "_fund_short" in after else None,
+                             fund_long=after["_fund_long"].to_numpy() if "_fund_long" in after else None)
         if not res:
             new = pos.TP1_HIT if info.get("hit", 0) >= 1 else pos.ACTIVE
             m = (mon or {}).get((coin, tf))

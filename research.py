@@ -47,6 +47,7 @@ from engine import btcharts as btc_mod
 from engine import debate
 from engine import family_gates as fgt
 from engine import history
+from engine import okx_history
 from engine import ideas
 from engine import lifecycle as lc
 from engine import playbook as pbk
@@ -426,6 +427,9 @@ def main():
 
     feed = sc.Synthetic() if args.offline else sc.Binance()     # long history only from the main exchange
     cache = None if args.offline else CACHE
+    # roadmap step 2: the scalping timeframes are backtested on OKX USDT-perpetual candles (what the operator trades)
+    okx_tfs = [] if args.offline else [tf for tf in (R.get("okx_timeframes") or []) if tf in tfs]
+    okx = okx_history.History(cache) if okx_tfs else None
     bars = {tf: (min(int(R["history_bars"][tf]), int(R["offline_history_bars"])) if args.offline
                  else int(R["history_bars"][tf])) for tf in ["1w", "1d"] + tfs}
     cfg_stress = stressed(cfg, R["cost_stress_x"])
@@ -443,6 +447,7 @@ def main():
     plain5 = {}                               # 5m-confirmed cells: the same signals WITHOUT the 5m check
     S5 = c5m.settings(cfg.get("confirm_5m"))
     spans, hist, skipped, rule_errors = {}, {}, {}, {}
+    sources = {}                              # tf -> {coin: where its candles came from} (OKX timeframes only)
     runs_per_coin = {}                        # email redesign: backtests (strategy x timeframe) run per coin today
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
@@ -451,8 +456,23 @@ def main():
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
         try:
+            okx_frames = {}
+            if okx is not None:
+                try:
+                    okx_frames, okx_note = okx.coin(base, {tf: bars[tf] for tf in okx_tfs}, now_ms)
+                    log(f"{base} OKX perpetual candles: {okx_note}")
+                except Exception as e:                   # never fatal: Binance spot as before
+                    log(f"{base} OKX perpetual candles failed ({e}) - Binance spot used")
             for tf in ["1w", "1d"] + tfs:
-                raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
+                ok_df = okx_frames.get(tf)
+                if ok_df is not None and len(ok_df) and int(ok_df["open_time"].min()) <= now_ms - (bars[tf] - 1) * sc.TF_MS[tf]:
+                    raw, how = ok_df, "OKX perpetual"
+                else:                                    # no OKX history (yet) or a younger OKX listing
+                    raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
+                    if ok_df is not None and len(ok_df):
+                        raw, how = okx_history.stitch(ok_df, raw, bars[tf], tf)
+                if tf in okx_tfs:
+                    sources.setdefault(tf, {})[base] = how if how.startswith("OKX") else "Binance spot"
                 df, rep = dq.check_candles(raw, sc.TF_MS[tf], now_ms, dq_cfg)
                 data[(sym, tf)], quality[(base, tf)] = df, rep
                 log(f"{sym} {tf}: {len(df)} candles ({how}), data {rep['state']}"
@@ -841,8 +861,13 @@ def main():
         years = (b - a) / (365 * rs.DAY_MS)
         history_out[tf] = dict(coins=len(h), **{"from": fmt_day(a), "to": fmt_day(b)},
                                bars=max(x[2] for x in h.values()),
-                               note="" if years >= 2 else f"only {years:.1f} years - may miss a full bull/bear cycle")
-    out = dict(run_utc=now_txt, duration_s=round(time.time() - t_start), data_source=feed.name, coins=coins,
+                               note="" if years >= 1.99 else f"only {years:.1f} years - may miss a full bull/bear cycle")
+        if sources.get(tf):
+            history_out[tf]["source"] = "; ".join(f"{c}: {w}" for c, w in sorted(sources[tf].items())
+                                                  if not w.startswith("OKX perpetual") or "Binance" in w) \
+                or "OKX perpetual (all coins)"
+    source = feed.name + (f" + OKX USDT perpetuals ({', '.join(okx_tfs)})" if okx_tfs else "")
+    out = dict(run_utc=now_txt, duration_s=round(time.time() - t_start), data_source=source, coins=coins,
                skipped=skipped, history=history_out, settings=R, changes=changes,
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},

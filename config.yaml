@@ -133,6 +133,8 @@ costs:                       # realistic trading costs - never set these to 0!
     maker_fee_pct: 0.02      # limit order fee (OKX futures, VIP 0)
     slippage_pct: 0.05       # price moves against you when a market order fills
     funding_pct_per_8h: 0.01 # funding: cautiously ALWAYS charged to the long too (money received is never counted)
+    funding_real_x: 1.0      # roadmap step 2: where the real funding history is known, a long pays max(0.01%, the
+                             # real rate longs paid) per 8 hours - never less than above (as shorts, Phase 17 C)
   short:                     # SHORT trades = OKX USDT perpetual futures
     taker_fee_pct: 0.05      # market order fee (OKX futures, VIP 0)
     maker_fee_pct: 0.02      # limit order fee (OKX futures, VIP 0)
@@ -184,8 +186,11 @@ research:                    # daily research run (research.py, workflow "Resear
     4h: 30000                # everything since listing
     1h: 100000               # everything since listing
     30m: 35040               # 2 years
-    15m: 35040               # 1 year
-    5m: 25920                # 90 days
+    15m: 70080               # 2 years (roadmap step 2, 2026-10-06; was 1 year)
+    5m: 210240               # 2 years (roadmap step 2, 2026-10-06; was 90 days)
+  okx_timeframes: [30m, 15m, 5m]   # roadmap step 2: these are backtested on OKX USDT-perpetual candles (the market
+                             # the operator trades; engine/okx_history.py: OKX's monthly / daily files + REST, cached);
+                             # before a coin's OKX listing, Binance spot candles. 1w-1h stay Binance spot (since 2017).
   offline_history_bars: 6000 # --offline tests only (synthetic data)
   layer_a_days: 15           # Layer A = the last 15 days ...
   layer_a_split_day: 10      # ... shown as days 1-10 vs days 11-15

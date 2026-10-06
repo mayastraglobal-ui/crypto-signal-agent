@@ -25,6 +25,7 @@ and targets, instantly.
 | 2026-10-06 | Step 1 built: Windows watcher (`windows/*.bat`, `docs/WINDOWS_WATCHER.md`) |
 | 2026-10-06 | Windows watcher installed and running on the operator's PC |
 | 2026-10-06 | Step 4 built: Telegram commands, ✅/❌ buttons, trade follow-up, `journal/my_trades.csv` |
+| 2026-10-06 | Step 2 part A: 2 years of OKX USDT-perpetual 30m / 15m / 5m candles for research; longs pay real funding |
 
 ## Next steps, in order
 
@@ -36,11 +37,13 @@ Status: **done 2026-10-06** (no git needed: GitHub's decision files are download
 for code). Installed and running on the operator's PC.
 
 ### Step 2: make scalping testable (biggest impact on signals)
-1. More short-timeframe history for research: 5m from 90 days to ~2 years, 15m to ~2 years (bulk files from
-   data.binance.vision), within the research time budget.
-2. Limit-order entries in backtests: maker fee, no slippage, and a trade only counts when price comes back to
-   the limit price (no fill = no trade).
-3. Backtests on OKX perpetual candles with real funding (the market the operator trades).
+1. **Done (part A, 2026-10-06):** more short-timeframe history for research: 30m / 15m / 5m = 2 years (5m was 90
+   days, 15m 1 year), from OKX's own monthly / daily candle files (faster than data.binance.vision and the right
+   market), cached; a later run downloads only new days.
+2. Limit-order entries in backtests (**part B, next**): maker fee, no slippage, and a trade only counts when price
+   comes back to the limit price (no fill = no trade); the same in paper trades and the Telegram alert.
+3. **Done (part A):** backtests on OKX perpetual candles (30m / 15m / 5m; 1W-1H stay Binance spot since 2017) with
+   real funding: longs now pay the higher of 0.01% / 8h and the real rate, like shorts already did.
 
 ### Step 3: focused scalping strategies (5-8 cards, each with a control twin, in the lab first)
 - 4H trend → 15m pullback to EMA20 / VWAP → 5m confirmation
