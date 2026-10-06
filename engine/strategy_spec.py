@@ -34,7 +34,14 @@ REQUIRED = ["id", "version", "status", "family", "gate", "hypothesis", "source",
             "long", "short", "stop", "time_stop_bars", "known_weaknesses"]
 # the parts that decide trades: changing any of them needs a new version number
 LOGIC_KEYS = ["family", "gate", "regimes", "timeframes", "long", "short", "exit_long", "exit_short", "stop",
-              "targets", "time_stop_bars", "cooldown_bars", "confirm_5m"]
+              "targets", "time_stop_bars", "cooldown_bars", "confirm_5m", "entry"]
+# logic keys added later: a card that does not write them keeps the fingerprint it always had (no reset)
+OPTIONAL_LOGIC = {"entry"}
+# entry (roadmap step 2B, 2026-10-06): how a signal is entered. market (default) = the next candle's open, taker fee +
+# slippage. limit = a limit order at the signal close -/+ offset_atr x ATR (a small pullback), maker fee, no slippage;
+# filled only when price comes back to it within valid_bars candles - no fill = no trade.
+ENTRY_TYPES = ("market", "limit")
+LIMIT_MAX_OFFSET_ATR, LIMIT_MAX_BARS = 2.0, 12
 VERSION_RE = re.compile(r"^\d+\.\d+$")
 R_RE = re.compile(r"^(\d+(?:\.\d+)?)R$")
 MAX_RE = re.compile(r"^max\((.+),(.+)\)$")
@@ -178,6 +185,11 @@ def variants(spec, pct):
         tb = int(raw["time_stop_bars"])
         nv = nudge(tb, f)
         out.append((f"time_stop_bars {tb}→{nv}", _finish(render(raw, time_stop_bars=nv), raw), False))
+        lim = limit_entry(raw)
+        if lim and lim[0] > 0:                          # the limit order's distance is a number of the card too
+            nv = nudge(lim[0], f)
+            out.append((f"entry offset_atr {_fmt(lim[0])}→{_fmt(nv)}",
+                        _finish(render(dict(raw, entry=dict(raw["entry"], offset_atr=nv))), raw), False))
     return out
 
 
@@ -216,7 +228,8 @@ def key(spec):
 
 def fingerprint(spec):
     """Short hash of the trade-deciding parts of a card."""
-    core = {k: spec.get(k) for k in LOGIC_KEYS}      # call it on RENDERED cards (see render)
+    core = {k: spec.get(k) for k in LOGIC_KEYS       # call it on RENDERED cards (see render)
+            if k not in OPTIONAL_LOGIC or spec.get(k) is not None}
     return hashlib.sha256(json.dumps(core, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
 
@@ -299,6 +312,7 @@ def check(spec, labels, timeframes):
             errs.append(str(e))
     if not (isinstance(spec["time_stop_bars"], int) and spec["time_stop_bars"] > 0):
         errs.append("time_stop_bars must be a positive whole number")
+    errs += entry_problems(spec)
     c5 = spec.get("confirm_5m", False)
     if not isinstance(c5, bool):
         errs.append("confirm_5m must be true or false")
@@ -321,6 +335,33 @@ def check(spec, labels, timeframes):
     if set(params) - used:
         errs.append(f"params {sorted(set(params) - used)} are not used in any rule")
     return errs
+
+
+def entry_problems(spec):
+    ent = spec.get("entry")
+    if ent is None:
+        return []
+    if not isinstance(ent, dict) or ent.get("type") not in ENTRY_TYPES:
+        return [f"entry.type must be one of {list(ENTRY_TYPES)}"]
+    extra = set(ent) - ({"type"} if ent["type"] == "market" else {"type", "offset_atr", "valid_bars"})
+    errs = [f"entry: unknown setting(s) {sorted(extra)}"] if extra else []
+    if ent["type"] == "limit":
+        off, vb = ent.get("offset_atr", 0), ent.get("valid_bars")
+        if isinstance(off, bool) or not isinstance(off, (int, float)) or not 0 <= off <= LIMIT_MAX_OFFSET_ATR:
+            errs.append(f"entry.offset_atr must be a number from 0 to {LIMIT_MAX_OFFSET_ATR:g} (ATRs behind the signal close)")
+        if isinstance(vb, bool) or not isinstance(vb, int) or not 1 <= vb <= LIMIT_MAX_BARS:
+            errs.append(f"entry.valid_bars must be a whole number from 1 to {LIMIT_MAX_BARS} (candles the order waits)")
+        if spec.get("confirm_5m"):
+            errs.append("a limit entry cannot be combined with confirm_5m (the 5m protocol enters at a 5m close)")
+    return errs
+
+
+def limit_entry(spec):
+    """(offset_atr, valid_bars) of a limit-entry card, else None (market entry)."""
+    ent = spec.get("entry") or {}
+    if ent.get("type") != "limit":
+        return None
+    return float(ent.get("offset_atr", 0) or 0), int(ent["valid_bars"])
 
 
 def load(items, labels, timeframes):
@@ -662,8 +703,8 @@ def change_count(old, new):
     family and the 5m check each count once; each parameter whose value changed counts once (a parameter that
     comes or goes with a rule change belongs to that change)."""
     groups = [("long", "short"), ("exit_long", "exit_short"), ("stop",), ("targets",), ("time_stop_bars",),
-              ("cooldown_bars",), ("regimes",), ("timeframes",), ("gate",), ("family",), ("confirm_5m",)]
-    norm = {"cooldown_bars": 0, "confirm_5m": False}
+              ("cooldown_bars",), ("regimes",), ("timeframes",), ("gate",), ("family",), ("confirm_5m",), ("entry",)]
+    norm = {"cooldown_bars": 0, "confirm_5m": False, "entry": None}
     diff = [g for g in groups if any(old.get(k, norm.get(k)) != new.get(k, norm.get(k)) for k in g)]
     po, pn = old.get("params") or {}, new.get("params") or {}
     diff += [(f"params.{k}",) for k in sorted(set(po) & set(pn)) if po[k] != pn[k]]

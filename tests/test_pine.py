@@ -280,8 +280,9 @@ class Script(unittest.TestCase):
         trades = {"BTC": [dict(entry_time=2, dir=1, entry=100.0, R=5.0, tp1=105.0, tps=[105.0, 110.0]),
                           dict(entry_time=1, dir=-1, entry=50.0, R=2.0, tp1=48.0)], "ETH": []}
         out = P.signals_from_trades(trades, keep=1)
-        self.assertEqual(out, {"BTC": [dict(entry_ms=2, dir=1, stop=95.0, tps=[105.0, 110.0])]})
-        self.assertEqual(P.signals_from_trades(trades)["BTC"][0], dict(entry_ms=1, dir=-1, stop=52.0, tps=[48.0]))
+        self.assertEqual(out, {"BTC": [dict(entry_ms=2, dir=1, stop=95.0, tps=[105.0, 110.0], entry=100.0)]})
+        self.assertEqual(P.signals_from_trades(trades)["BTC"][0], dict(entry_ms=1, dir=-1, stop=52.0, tps=[48.0],
+                                                                        entry=50.0))
 
     def test_backtest_trades_carry_their_targets(self):
         feed = scanner.Synthetic()

@@ -267,6 +267,12 @@ def render(inp):
             ["Coin", "Side", "TF", "Strategy", "Stage", "5m bars", "Trigger"],
             [[esc(p["coin"]), esc(p["direction"]), esc(p["tf"]), esc(p["strategy"]), esc(p["stage"]),
               f'{esc(p.get("bars"))}/6', esc(p.get("trigger"))] for p in book["awaiting"]]))
+    if book.get("limit_orders"):
+        b.append("<h3>Limit orders waiting for a fill</h3>" + table(
+            ["Coin", "Side", "TF", "Strategy", "Stage", "Limit", "Candles waited", "Signal"],
+            [[esc(p["coin"]), esc(p["direction"]), esc(p["tf"]), esc(p["strategy"]), esc(p["stage"]),
+              esc(f'{p["limit"]:g}'), f'{esc(p.get("bars"))}/{esc(p.get("valid_bars"))}', esc(p.get("signal"))]
+             for p in book["limit_orders"]]))
     if book.get("closed_today"):
         b.append("<h3>Closed today</h3>" + table(
             ["Coin", "Side", "TF", "Strategy", "Reason", "Result", "Stage"],

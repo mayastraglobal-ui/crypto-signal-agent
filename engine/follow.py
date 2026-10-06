@@ -6,6 +6,9 @@ management rules as the backtests (scanner.simulate_trade): stop first when the 
 one candle, TP1 -> stop to entry, TP2 -> stop to TP1, the last target closes the rest, and the time stop at the
 strategy's max hold. At each step it tells the operator on Telegram what to do. The strategy's own early-exit rule
 is not followed here (the alert's max hold is).
+A limit-entry alert (roadmap step 2B) first waits for the fill: price back at the limit within the card's
+valid_bars candles -> filled (only the stop counts in the fill candle, as in the backtest); otherwise -> expired, no
+trade.
 Pure: no internet, no files. A trade is a plain dict, so it can live in the watcher's JSON state.
 """
 import datetime as dt
@@ -23,7 +26,10 @@ def open_trade(a, aid, taken_ms, tp_cfg=None):
     start = a["close_ms"] + 1
     tps = [float(x) for x in a["tps"]]
     split = list(a.get("split") or [1.0 / len(tps)] * len(tps)) if tps else []
+    lim = a.get("limit_bars")
     return dict(id=aid, label=a["label"], coin=a["coin"], inst=a.get("inst", a["coin"]), d=int(a["d"]), tf=a["tf"],
+                filled=not lim, fill_by_ms=start + int(lim) * tfm.TF_MS[a["tf"]] if lim else None,
+                max_hold=int(a["max_hold"]) if a.get("max_hold") else None,
                 strategy=a["strategy"], version=a.get("version"), entry=float(a["entry"]), R=float(a["R"]),
                 stop=float(a["entry"]) - int(a["d"]) * float(a["R"]), tps=tps, split=split, hit=0, remaining=1.0,
                 realized=0.0, checked_ms=max(start, taken_ms // FIVE * FIVE),
@@ -43,9 +49,25 @@ def step(t, bars):
         o, h, l, c = (float(b[k]) for k in ("open", "high", "low", "close"))
         at = ot + FIVE
         t["checked_ms"] = at
+        fill_bar = False
+        if not t.get("filled", True):                                              # a limit order still waiting
+            if (d == 1 and l <= t["entry"]) or (d == -1 and h >= t["entry"]):
+                t["filled"], fill_bar = True, True
+                step_ms = tfm.TF_MS[t["tf"]]
+                if t.get("max_hold"):                    # the time stop counts from the fill candle (backtest)
+                    t["end_ms"] = ot // step_ms * step_ms + t["max_hold"] * step_ms
+                out.append(dict(kind="fill", px=t["entry"], at_ms=at))
+            elif at >= t["fill_by_ms"]:
+                t["closed"] = True
+                out.append(dict(kind="expired", px=None, at_ms=at, final=True, result_r=None))
+                continue
+            else:
+                continue
         if (d == 1 and l <= t["stop"]) or (d == -1 and h >= t["stop"]):             # stop first (worst case)
             px = o if ((d == 1 and o < t["stop"]) or (d == -1 and o > t["stop"])) else t["stop"]
             out.append(_close(t, "stop", px, at))
+            continue
+        if fill_bar:                                     # the fill candle: targets only from the next candle
             continue
         while t["hit"] < len(t["tps"]) and ((d == 1 and h >= t["tps"][t["hit"]]) or (d == -1 and l <= t["tps"][t["hit"]])):
             i = t["hit"]
@@ -88,6 +110,12 @@ def text(t, ev):
     """Telegram text (HTML) of one follow-up event: what happened and what to do now."""
     px = lambda x: lv.fmt_px(x, t["entry"])                                          # noqa: E731
     when = f"(5m candle closed {lv.utc(ev['at_ms'])})"
+    if ev["kind"] == "fill":
+        return (f"✅ Limit filled · {_head(t)}\nPrice reached your limit {px(t['entry'])}. Set the stop-loss "
+                f"<b>{px(t['stop'])}</b> and the TPs on OKX now if you haven't. {when}")
+    if ev["kind"] == "expired":
+        return (f"⌛ Limit not filled · {_head(t)}\nPrice did not come back to {px(t['entry'])} in time → "
+                f"<b>cancel the limit order</b> on OKX. No trade. {when}")
     done = (f"\nTrade finished: about <b>{ev['result_r']:+.1f}R</b> before fees." if ev.get("final") else "")
     if ev["kind"] == "tp":
         if ev.get("final"):
@@ -109,7 +137,8 @@ def summary(t):
     """One line for /trades."""
     side = "LONG" if t["d"] == 1 else "SHORT"
     px = lambda x: lv.fmt_px(x, t["entry"])                                          # noqa: E731
-    state = "no target yet" if t["hit"] == 0 else f"TP{t['hit']} hit"
+    state = ("limit waiting for a fill" if not t.get("filled", True) else
+             "no target yet" if t["hit"] == 0 else f"TP{t['hit']} hit")
     end = (f", time stop {dt.datetime.fromtimestamp(t['end_ms'] / 1000, dt.timezone.utc):%d %b %H:%M} UTC"
            if t.get("end_ms") else "")
     return (f"• {side} {t['coin']} {t['tf']} ({t['label']}) · entry {px(t['entry'])} · stop {px(t['stop'])} · "

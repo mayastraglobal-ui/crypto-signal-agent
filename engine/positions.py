@@ -4,6 +4,8 @@ Signal state machine and position book (AGENT_PROMPT.md sections 13 and 16) - Ph
   NO_SETUP -> WATCH -> SETUP_FORMING -> AWAITING_5M -> ENTRY_TRIGGERED -> POSITION_ACTIVE
      -> TP1_HIT (stop -> breakeven) -> CLOSED (TP / BE / SL / TIME / EXIT_RULE)
   side exits: EXPIRED (no 5m confirmation in 6 bars) · INVALIDATED (structure broken before entry)
+  limit entries (roadmap step 2B): AWAITING_FILL (a limit order waits for price to come back to it)
+     -> ENTRY_TRIGGERED -> POSITION_ACTIVE, or EXPIRED (not filled within the card's valid_bars candles)
   NO_TRADE: an APPROVED signal the risk engine did not allow (Phase 11) - logged with the failed step
 
 WATCH and SETUP_FORMING are shown in the report only; every tracked signal (a row of
@@ -19,11 +21,13 @@ import pandas as pd
 
 WATCH, FORMING = "WATCH", "SETUP_FORMING"
 AWAITING, TRIGGERED, ACTIVE, TP1_HIT, CLOSED = "AWAITING_5M", "ENTRY_TRIGGERED", "POSITION_ACTIVE", "TP1_HIT", "CLOSED"
+AWAITING_FILL = "AWAITING_FILL"
 EXPIRED, INVALIDATED, NO_TRADE = "EXPIRED", "INVALIDATED", "NO_TRADE"
-OPEN_STATES = [AWAITING, ACTIVE, TP1_HIT]        # rows the next run still has to look at
+OPEN_STATES = [AWAITING, AWAITING_FILL, ACTIVE, TP1_HIT]   # rows the next run still has to look at
 FINAL_STATES = [CLOSED, EXPIRED, INVALIDATED, NO_TRADE]
 # which state may follow which (anything else is a bug and raises)
-NEXT = {None: {AWAITING, TRIGGERED, NO_TRADE}, AWAITING: {AWAITING, TRIGGERED, EXPIRED, INVALIDATED},
+NEXT = {None: {AWAITING, AWAITING_FILL, TRIGGERED, NO_TRADE}, AWAITING: {AWAITING, TRIGGERED, EXPIRED, INVALIDATED},
+        AWAITING_FILL: {AWAITING_FILL, TRIGGERED, EXPIRED},
         TRIGGERED: {ACTIVE, TP1_HIT, CLOSED}, ACTIVE: {ACTIVE, TP1_HIT, CLOSED}, TP1_HIT: {TP1_HIT, CLOSED}}
 BJ = dt.timezone(dt.timedelta(hours=8))
 LIMITS = dict(day_r=-3.0, week_r=-6.0, heat=3)     # section 15 - enforced by engine/risk.py
@@ -101,7 +105,7 @@ def build(logdf, now, prices=None, limits=None):
     rows = [] if logdf is None or logdf.empty else logdf.to_dict("records")
     today = now.strftime("%Y-%m-%d")
     week0 = (now - dt.timedelta(days=now.weekday())).strftime("%Y-%m-%d")   # Monday of this week (UTC)
-    active, paper, awaiting, closed = [], [], [], []
+    active, paper, awaiting, closed, limit_orders = [], [], [], [], []
     day_r = week_r = paper_day_r = 0.0
     for r in rows:
         st, live = row_state(r), r.get("stage") == "APPROVED"
@@ -111,6 +115,10 @@ def build(logdf, now, prices=None, limits=None):
         if st == AWAITING:
             item.update(bars=int(float(r.get("bars_5m") or 0)), trigger=r["signal_time_utc"])
             awaiting.append(item)
+        elif st == AWAITING_FILL:
+            item.update(limit=float(r["entry"]), stop=float(r["stop"]), signal=r["signal_time_utc"],
+                        valid_bars=int(float(r.get("limit_bars") or 0)), bars=int(float(r.get("bars_5m") or 0)))
+            limit_orders.append(item)
         elif st in (ACTIVE, TP1_HIT, TRIGGERED):
             stf = r.get("sim_tf") if isinstance(r.get("sim_tf"), str) and r.get("sim_tf") else r["tf"]
             px = prices.get((r["coin"], stf), prices.get(r["coin"]))
@@ -137,10 +145,10 @@ def build(logdf, now, prices=None, limits=None):
             if not live and closed_day == today:
                 paper_day_r += res
     return dict(utc=now.strftime("%Y-%m-%d %H:%M"), beijing=now.astimezone(BJ).strftime("%Y-%m-%d %H:%M"),
-                active=active, awaiting=awaiting, paper=paper, closed_today=closed,
+                active=active, awaiting=awaiting, paper=paper, closed_today=closed, limit_orders=limit_orders,
                 day_r=round(day_r, 2), week_r=round(week_r, 2), paper_day_r=round(paper_day_r, 2),
                 heat=len(active), limits=limits or LIMITS,
-                empty=not (active or awaiting or paper or closed))
+                empty=not (active or awaiting or paper or closed or limit_orders))
 
 
 def lines(book, bars_5m=6, risk=None):
@@ -157,6 +165,11 @@ def lines(book, bars_5m=6, risk=None):
         out.append("Awaiting:  " + (" | ".join(f"{p['coin']} · {p['direction']} · {p['tf']} · {p['strategy']} "
                                                f"({p['stage']}) · {p['bars']}/{bars_5m} 5m bars"
                                                for p in book["awaiting"]) or "none"))
+        if book.get("limit_orders"):
+            out.append("Limit:     " + " | ".join(f"{p['coin']} · {p['direction']} · {p['tf']} · {p['strategy']} "
+                                                  f"({p['stage']}) · limit {_fmt(p['limit'])} · "
+                                                  f"{p['bars']}/{p['valid_bars']} candles waited"
+                                                  for p in book["limit_orders"]))
         out.append("Paper:     " + (" | ".join(pos(p) + f" ({p['stage']})" for p in book["paper"]) or "none"))
         out.append("Closed:    " + (" | ".join(f"{p['coin']} {p['direction']} {p['tf']} {p['strategy']} {p['reason']}"
                                                + ("" if p["result_r"] is None else f" {p['result_r']:+.2f}R")

@@ -26,6 +26,7 @@ and targets, instantly.
 | 2026-10-06 | Windows watcher installed and running on the operator's PC |
 | 2026-10-06 | Step 4 built: Telegram commands, ✅/❌ buttons, trade follow-up, `journal/my_trades.csv` |
 | 2026-10-06 | Step 2 part A: 2 years of OKX USDT-perpetual 30m / 15m / 5m candles for research; longs pay real funding |
+| 2026-10-06 | Step 2 part B: limit-order entries (`entry: limit` on a card) in backtests, paper trades, emails, Telegram, Pine |
 
 ## Next steps, in order
 
@@ -40,8 +41,12 @@ for code). Installed and running on the operator's PC.
 1. **Done (part A, 2026-10-06):** more short-timeframe history for research: 30m / 15m / 5m = 2 years (5m was 90
    days, 15m 1 year), from OKX's own monthly / daily candle files (faster than data.binance.vision and the right
    market), cached; a later run downloads only new days.
-2. Limit-order entries in backtests (**part B, next**): maker fee, no slippage, and a trade only counts when price
-   comes back to the limit price (no fill = no trade); the same in paper trades and the Telegram alert.
+2. **Done (part B, 2026-10-06):** limit-order entries - a card option `entry: {type: limit, offset_atr, valid_bars}`:
+   maker fee, no slippage, a trade only counts when price comes back to the limit price within valid_bars candles
+   (no fill = no trade; only the stop counts in the fill candle). The same rules in the hourly paper record
+   (`AWAITING_FILL`), the emails, the Telegram alert ("BUY LIMIT x · cancel at hh:mm") and its follow-up (filled /
+   not filled - cancel), and the Pine export (REPLAY at the engine's limit prices). No card uses it yet: Step 3's
+   scalping cards and Step 5's automatic variants will.
 3. **Done (part A):** backtests on OKX perpetual candles (30m / 15m / 5m; 1W-1H stay Binance spot since 2017) with
    real funding: longs now pay the higher of 0.01% / 8h and the real rate, like shorts already did.
 

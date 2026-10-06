@@ -166,6 +166,8 @@ def check_card(spec):
     if st["method"] == "structure":
         need(st["long_level"])
         need(st["short_level"])
+    if sspec.limit_entry(spec):          # roadmap step 2B: replayed with the engine's own limit prices
+        bad.append("entry: limit order")
     tg = spec.get("targets")
     if tg:
         if tg.get("need"):
@@ -427,9 +429,11 @@ def _arr(vals, kind):
 
 
 def engine_arrays(signals):
-    """signals: {coin: [dict(entry_ms, dir, stop, tps)]} -> Pine lines that fill the arrays for the chart's coin."""
+    """signals: {coin: [dict(entry_ms, dir, stop, tps, entry)]} -> Pine lines that fill the arrays for the chart's
+    coin (eE = the engine's entry price: the limit price of a limit-entry card)."""
     L = ["var array<int> eT = array.new<int>()", "var array<int> eD = array.new<int>()",
-         "var array<float> eS = array.new<float>()", "var array<float> eP1 = array.new<float>()",
+         "var array<float> eS = array.new<float>()", "var array<float> eE = array.new<float>()",
+         "var array<float> eP1 = array.new<float>()",
          "var array<float> eP2 = array.new<float>()", "var array<float> eP3 = array.new<float>()",
          "if barstate.isfirst"]
     coins = sorted(signals)
@@ -442,6 +446,7 @@ def engine_arrays(signals):
               f"        eT := {_arr([x['entry_ms'] for x in s], 'int')}",
               f"        eD := {_arr([x['dir'] for x in s], 'int')}",
               f"        eS := {_arr([x.get('stop') for x in s], 'float')}",
+              f"        eE := {_arr([x.get('entry') for x in s], 'float')}",
               f"        eP1 := {_arr(tp(0), 'float')}", f"        eP2 := {_arr(tp(1), 'float')}",
               f"        eP3 := {_arr(tp(2), 'float')}"]
     return L
@@ -581,14 +586,19 @@ def build(spec, tf, cfg, htf_tf, signals, now_txt, coins_note=""):
               "        placedNow := true"]
     else:
         tfms = {"5m": 300000, "15m": 900000, "30m": 1800000, "1h": 3600000, "4h": 14400000, "1d": 86400000}[tf]
-        S += [f"int TF_MS = {tfms}",
-              "// REPLAY: an engine entry inside the NEXT candle -> place the order now (it fills at the next open)",
+        lim = bool(sspec.limit_entry(spec))
+        S += [f"int TF_MS = {tfms}", f"bool LIMIT_ENTRY = {'true' if lim else 'false'}",
+              "// REPLAY: an engine entry inside the NEXT candle -> place the order now (it fills at the next open;",
+              "// a limit-entry card: a limit order at the engine's limit price, cancelled if that candle does not fill it)",
               "int nxt = f_eng_idx(time_close, time_close + TF_MS)",
               "bool flat = strategy.position_size == 0 and strategy.opentrades == 0",
+              "if flat and LIMIT_ENTRY",
+              "    strategy.cancel(\"L\")",
+              "    strategy.cancel(\"S\")",
               "if flat and nxt >= 0",
               "    int want = array.get(eD, nxt)",
               "    float s = array.get(eS, nxt)",
-              "    float e = close",
+              "    float e = LIMIT_ENTRY ? array.get(eE, nxt) : close",
               "    float r = math.abs(e - s)",
               "    if not na(s) and r > 0",
               "        entryPx := e",
@@ -598,7 +608,8 @@ def build(spec, tf, cfg, htf_tf, signals, now_txt, coins_note=""):
               "        tp2 := array.get(eP2, nxt)",
               "        tp3 := array.get(eP3, nxt)",
               "        qty0 := strategy.equity * 0.01 / r",
-              "        strategy.entry(want == 1 ? \"L\" : \"S\", want == 1 ? strategy.long : strategy.short, qty = qty0)",
+              "        strategy.entry(want == 1 ? \"L\" : \"S\", want == 1 ? strategy.long : strategy.short, qty = qty0, "
+              "limit = LIMIT_ENTRY ? e : na)",
               "        placedNow := true",
               "bool exitL = false", "bool exitS = false"]
     S += ["",
@@ -672,7 +683,7 @@ def signals_from_trades(per_coin, keep=300):
     out = {}
     for coin, trades in per_coin.items():
         rows = [dict(entry_ms=int(t["entry_time"]), dir=int(t["dir"]), stop=float(t["entry"] - t["dir"] * t["R"]),
-                     tps=[float(x) for x in t.get("tps") or [t["tp1"]]]) for t in trades]
+                     tps=[float(x) for x in t.get("tps") or [t["tp1"]]], entry=float(t["entry"])) for t in trades]
         if rows:
             out[coin] = sorted(rows, key=lambda x: x["entry_ms"])[-keep:]
     return out
