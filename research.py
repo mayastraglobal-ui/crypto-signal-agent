@@ -861,7 +861,7 @@ def main():
         years = (b - a) / (365 * rs.DAY_MS)
         history_out[tf] = dict(coins=len(h), **{"from": fmt_day(a), "to": fmt_day(b)},
                                bars=max(x[2] for x in h.values()),
-                               note="" if years >= 2 else f"only {years:.1f} years - may miss a full bull/bear cycle")
+                               note="" if years >= 1.99 else f"only {years:.1f} years - may miss a full bull/bear cycle")
         if sources.get(tf):
             history_out[tf]["source"] = "; ".join(f"{c}: {w}" for c, w in sorted(sources[tf].items())
                                                   if not w.startswith("OKX perpetual") or "Binance" in w) \
