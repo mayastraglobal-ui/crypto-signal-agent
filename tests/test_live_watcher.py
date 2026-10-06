@@ -227,9 +227,16 @@ class WindowsPC(unittest.TestCase):
         upd = open(os.path.join(wdir, "4_update.bat")).read()
         self.assertIn("telegram.env", upd)                                         # settings kept on update
         self.assertIn("--from-temp", upd)                                          # never rewrites itself mid-run
+        self.assertIn("/T 20 /D Y", upd)                                           # the watcher restarts after an update
         ignored = open(os.path.join(ROOT, ".gitignore")).read().split()
         for p in ("telegram.env", "logs/", ".venv/", "STOP_WATCHER", "reports/live_watcher_state.json"):
             self.assertIn(p, ignored)
+
+
+class WindowsGuard(unittest.TestCase):
+    def test_does_nothing_off_windows(self):
+        if os.name != "nt":
+            self.assertEqual(LW.windows_guard(), [])
 
 
 class TelegramSend(unittest.TestCase):
