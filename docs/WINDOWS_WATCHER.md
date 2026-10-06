@@ -60,6 +60,34 @@ and Telegram says **"▶️ Live watcher started"**.
 - Every hour it downloads GitHub's newest decisions (strategy statuses, coins, settings). Nothing to do.
 - Once a day you get **"✅ Live watcher running"**. If that message stops coming, check the PC.
 
+## Using the bot from your phone
+
+Send these to your bot in Telegram (or type `/` and pick one). The bot only answers **your** chat.
+
+| Command | What you get |
+|---|---|
+| `/status` | Is it running, the last market check, which strategies it watches, paused or not, a newer version waiting |
+| `/trades` | The trades you took that it is following, and your results of the last 30 days |
+| `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
+| `/resume` | New trade alerts on again |
+| `/help` | The list |
+
+**Buttons under each alert:**
+- **✅ Took it** → the watcher follows that trade on 5-minute candles, with the same rules as the backtests, and
+  messages you:
+  - 🎯 **TP1 hit** → close the share it says, and move the stop-loss to your entry (break-even).
+  - 🎯 **TP2 hit** → close the share it says, and move the stop-loss to TP1.
+  - 🏁 **last TP hit**, 🛑 **stop hit**, or ⏱ **time stop** (the strategy's max hold is over → close the rest).
+  - Each of these also gives the result in R (1R = what you risked).
+- **❌ Skipped** → only recorded. You can change your mind with the other button.
+- **🏁 I closed it** (appears after ✅) → you closed it yourself; it stops following.
+
+`/pause` never stops the messages about trades you already took. Everything you press is saved on the PC in
+`journal\my_trades.csv` (opens in Excel), so your real results are kept. Updates never touch that file.
+
+The follow-up messages come about 10–30 seconds after each 5-minute candle closes. They remind you what to do; they
+don't replace the stop-loss and TP orders on OKX, so always put those on OKX as soon as you enter.
+
 ## The buttons (all in the `windows` folder)
 
 | File | What it does |
@@ -86,6 +114,7 @@ Trend: 1W WEAK_BULL · 1D STRONG_BULL · 4H WEAK_BULL · 1H STRONG_BULL
 Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
 ```
 
+- Under each alert: **✅ Took it** / **❌ Skipped** (see "Using the bot from your phone" above).
 - 🟢/🔴 **LIVE** = an approved strategy. 📝 **PAPER** = practice only (the strategy is still being proven).
 - Enter only inside the **entry zone**; if price already ran past it, skip.
 - Put the **stop-loss and TPs** on OKX as soon as you enter. "Close 50%" = take half of the position there.
@@ -111,6 +140,7 @@ Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
 | winget not found / install failed | Install Python from https://www.python.org/downloads/ and tick **"Add python.exe to PATH"** on the first screen, then run `1_setup.bat` again |
 | "That token does not work" | Copy the token again from BotFather (the whole line with the colon), run `1_setup.bat` again |
 | "No message arrived" | Open your bot in Telegram, press **START**, then run `1_setup.bat` again |
+| The bot doesn't answer `/status` | The watcher isn't running, or it's an old version: double-click `4_update.bat` (it restarts the watcher) |
 | No "started" message | Run `2_start_watcher.bat`; look at `logs\live_watcher.log` |
 | Telegram says a newer version is on GitHub | Double-click `4_update.bat` |
 

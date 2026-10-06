@@ -19,7 +19,7 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-robocopy "%TEMP%\crypto-agent-update\crypto-signal-agent-main" "%ROOTDIR%" /E /XD .venv logs .git /XF telegram.env STOP_WATCHER live_watcher_state.json /NFL /NDL /NJH /NJS /NP >nul
+robocopy "%TEMP%\crypto-agent-update\crypto-signal-agent-main" "%ROOTDIR%" /E /XD .venv logs journal .git /XF telegram.env STOP_WATCHER live_watcher_state.json /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 (
   echo Copying the new files failed. Nothing important was lost - try again.
   pause

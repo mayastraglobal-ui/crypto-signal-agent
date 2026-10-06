@@ -27,5 +27,6 @@ reports/backtest_charts_offline/
 reports/live_watcher_state.json
 telegram.env
 logs/
+journal/
 .venv/
 STOP_WATCHER

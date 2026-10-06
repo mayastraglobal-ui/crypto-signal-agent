@@ -22,7 +22,9 @@ and targets, instantly.
 | 2026-10-05 | Claude's briefing / daily review / weekly research Routines recreated; cloud network set to Full |
 | 2026-10-05 | Costs = OKX futures fees + funding for longs and shorts (PR #43) |
 | 2026-10-05 | Live watcher with Telegram alerts built (`live_watcher.py`, `docs/LIVE_WATCHER.md`) (PR #43) |
-| 2026-10-06 | Step 1 built: Windows watcher (`windows/*.bat`, `docs/WINDOWS_WATCHER.md`) - the operator still has to run `windows\1_setup.bat` on the Windows PC |
+| 2026-10-06 | Step 1 built: Windows watcher (`windows/*.bat`, `docs/WINDOWS_WATCHER.md`) |
+| 2026-10-06 | Windows watcher installed and running on the operator's PC |
+| 2026-10-06 | Step 4 built: Telegram commands, ✅/❌ buttons, trade follow-up, `journal/my_trades.csv` |
 
 ## Next steps, in order
 
@@ -30,8 +32,8 @@ and targets, instantly.
 Oracle Cloud sign-up failed for the operator, and the Windows PC can run 24 hours. `windows\1_setup.bat`
 (Python, packages, Telegram bot, sleep = never, start with Windows via the Startup folder), start / stop / update
 buttons, restart after a crash, guide `docs/WINDOWS_WATCHER.md`.
-Status: **built 2026-10-06** (no git needed: GitHub's decision files are downloaded every hour; `4_update.bat`
-for code). Waiting for the operator to install it on the Windows PC.
+Status: **done 2026-10-06** (no git needed: GitHub's decision files are downloaded every hour; `4_update.bat`
+for code). Installed and running on the operator's PC.
 
 ### Step 2: make scalping testable (biggest impact on signals)
 1. More short-timeframe history for research: 5m from 90 days to ~2 years, 15m to ~2 years (bulk files from
@@ -49,9 +51,13 @@ for code). Waiting for the operator to install it on the Windows PC.
 - **The operator's own rules** - waiting for the operator to write them down.
 
 ### Step 4: help during a trade (Telegram)
-- Trade-management alerts: TP1 hit → stop to entry, trend turned, time stop reached
-- Buttons "✅ took it / ❌ skipped" → the operator's real results are recorded
-- Commands `/status`, `/pause`
+Status: **built 2026-10-06** (`engine/follow.py`, `engine/live.py`, `live_watcher.py`):
+- Commands `/status`, `/trades`, `/pause` (`/pause 2h`), `/resume`, `/help` - only the operator's chat is answered.
+- Buttons "✅ Took it / ❌ Skipped / 🏁 I closed it" under each alert; recorded in `journal/my_trades.csv` on the PC.
+- Follow-up of taken trades on 5m candles with the backtests' rules (a test checks they match
+  `scanner.simulate_trade`): TP1 → stop to entry, TP2 → stop to TP1, last TP, stop, time stop, result in R.
+- Not yet: "trend turned" warnings and the strategy's own early-exit rule (not in the follow-up; the time stop is),
+  and sending the journal to GitHub (it stays on the PC for now).
 
 ### Step 5: the agent improves itself more
 - Choose strategies by market regime (bull / bear / range), from what the research already measures
@@ -65,7 +71,7 @@ Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept
 
 | When | What |
 |---|---|
-| Now | Install the Windows watcher: download the ZIP, double-click `windows\1_setup.bat` (`docs/WINDOWS_WATCHER.md`) |
+| Now | Double-click `windows\4_update.bat` once to get the Telegram commands and buttons |
 | Now | Write down the scalping rules (for Step 3) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |
