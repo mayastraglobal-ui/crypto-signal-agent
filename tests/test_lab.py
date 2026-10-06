@@ -129,7 +129,7 @@ class BuildingBlocks(unittest.TestCase):
         for tf, fr in self.pc["frames"].items():
             names = set(fr["ns"]) - {"np"}                   # numpy stays out of reach of lab rules
             want = SS.FUNCTIONS | SS.COLUMNS | (SS.H4_COLUMNS if tf in SS.H4_TFS else set()) | \
-                (SS.PB_COLUMNS if tf in SS.PB_TFS else set())
+                (SS.PB_COLUMNS if tf in SS.PB_TFS else set()) | (SS.T4_COLUMNS if tf in SS.T4_TFS else set())
             self.assertEqual(names, want, tf)
 
     def test_every_library_rule_passes_and_a_passing_rule_really_runs(self):

@@ -8,7 +8,8 @@ Idea factories (Phase 17 C, item 9): where new strategy cards come from, and how
   e) variant_search    - THE ENGINE: one-change variants of the best BACKTESTING cells (variant_cards below), at most
                          the factory quota per 7 days; every one is tested and counted in memory/trials.csv like any card.
                          Phase 18 B: the simpler version of a card whose entry rule adds nothing (simpler_cards) comes
-                         first, from the same quota
+                         first, from the same quota; roadmap step 5: for an intraday cell that fees hurt (median cost
+                         > 0.15R), a limit-entry (VLIMIT) and a fee-cap (VFEECAP) variant are tried first
   f) lead_lag          - Claude, from the BTC -> alt lead-lag measurement (lead_lag below)
 
 Every lab card names its factory (strategy_spec.factory_problems); the weekly email shows the pass rate per factory.
@@ -22,6 +23,9 @@ from engine import strategy_spec as sspec
 
 PASSED = ("VALIDATION", "PAPER_TRADING", "APPROVED")
 MIN_TRADES = 30
+INTRADAY = ("1h", "30m", "15m", "5m")     # roadmap step 5: scalping variants only on these timeframes
+COST_HURTS_R = 0.15                       # ... when fees + slippage cost a median of more than 0.15R a trade
+LIMIT_OFFSET_ATR, LIMIT_BARS, FEE_CAP_R = 0.25, 3, 0.25
 
 
 def lead_lag(df, lags=(1, 2, 3)):
@@ -100,6 +104,17 @@ def _variants(raw, cell, trade_order):
         yield ("REGIME", f"no longer trades in {', '.join(bad)} (lost there: "
                + "; ".join(f"{g} {seg[g]['avg_r']:+.2f}R over {seg[g]['n']}" for g in bad) + ")",
                dict(regimes=[g for g in raw["regimes"] if g not in bad]))
+    # roadmap step 5 (2026-10-06): scalping variants of an intraday cell that fees hurt - a limit entry (maker fee,
+    # no slippage, a better price) or the fee cap (skip the trades whose stop is too close for the fees)
+    cost = (cell.get("evidence") or {}).get("median_cost_r")
+    if cell["tf"] in INTRADAY and cost is not None and cost > COST_HURTS_R and not raw.get("confirm_5m"):
+        if not raw.get("entry"):
+            yield ("LIMIT", f"limit entry {LIMIT_OFFSET_ATR:g} ATR behind the signal close, waiting {LIMIT_BARS} candles "
+                            f"(maker fee, no slippage; fees cost a median {cost:.2f}R a trade)",
+                   dict(entry=dict(type="limit", offset_atr=LIMIT_OFFSET_ATR, valid_bars=LIMIT_BARS)))
+        if not (raw.get("stop") or {}).get("max_cost_r"):
+            yield ("FEECAP", f"no trade when fees + slippage would cost more than {FEE_CAP_R:g}R (median {cost:.2f}R now)",
+                   dict(stop=dict(raw["stop"], max_cost_r=FEE_CAP_R)))
     used = sspec.rule_names(raw)
     params = dict(raw.get("params") or {})
     if "adx" not in used and "v_adx" not in params:

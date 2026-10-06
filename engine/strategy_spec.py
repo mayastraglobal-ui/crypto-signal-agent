@@ -120,6 +120,9 @@ H4_TFS = ["1h", "30m", "15m", "5m"]
 # the 15m candles - the same rules on 15m triggers)
 from engine.scalp_playbook import COLUMNS as _PB_COLUMNS  # noqa: E402
 PB_COLUMNS = set(_PB_COLUMNS)
+# roadmap step 5: the 4H Donchian trend window (engine/trend4h.py), readable below 4H
+from engine.trend4h import COLUMNS as _T4_COLUMNS, TFS as T4_TFS  # noqa: E402
+T4_COLUMNS = set(_T4_COLUMNS)
 PB_TFS = ["5m", "15m"]
 SPECIAL_PREFIXES = ("smc_", "h4_")         # the SMC / ICT ingredient: a card using it needs a control twin
 _OPS = (ast.Expression, ast.BoolOp, ast.BinOp, ast.UnaryOp, ast.Compare, ast.Call, ast.Name, ast.Load,
@@ -560,6 +563,9 @@ def expr_problems(expr, tfs):
             if node.id in H4_COLUMNS:
                 if not set(tfs) <= set(H4_TFS):
                     probs.append(f"{expr!r}: {node.id} exists only below 4H (timeframes {H4_TFS})")
+            elif node.id in T4_COLUMNS:
+                if not set(tfs) <= set(T4_TFS):
+                    probs.append(f"{expr!r}: {node.id} exists only below 4H (the 4H trend window, timeframes {T4_TFS})")
             elif node.id in PB_COLUMNS:
                 if not set(tfs) <= set(PB_TFS):
                     probs.append(f"{expr!r}: {node.id} exists only on {' / '.join(PB_TFS)} (the operator's playbook)")

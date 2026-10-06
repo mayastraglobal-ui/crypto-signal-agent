@@ -175,7 +175,8 @@ class Definitions(unittest.TestCase):
 class RuleLanguage(unittest.TestCase):
     def test_existing_strategies_unchanged_and_features_usable(self):
         strategies = [SP.render(s) for s in yaml.safe_load(open(os.path.join(ROOT, "strategies.yaml")))
-                      if s["family"] != "smc" and s["gate"] != "playbook"]   # SMC / playbook cards need their columns
+                      if s["family"] != "smc" and s["gate"] != "playbook"   # SMC / playbook cards need their columns
+                      and not any("trend4h" in str(r) for r in (s.get("long") or []))]    # ... and the 4H window (step 5)
         df = scanner.add_htf(synthetic(n=1500), synthetic(tf="4h", n=600))
         feats = F.compute(df, H1)
         plain, rich = scanner.make_namespace(df), scanner.make_namespace(df, feats)

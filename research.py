@@ -56,6 +56,7 @@ from engine import regime as rg
 from engine import memory as mem
 from engine import research as rs
 from engine import strategy_spec as sspec
+from engine import regime_fit as rfit
 from engine import trials as trl
 
 CACHE = os.path.join(sc.ROOT, "data", "history")
@@ -922,6 +923,9 @@ def main():
                         moved_to_library=moved))
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
+    if not args.offline:                   # roadmap step 5: per cell, the backtest result in each market regime
+        with open(os.path.join(sc.REPORTS, "regime_fit.json"), "w") as f:     # (the live watcher downloads it)
+            json.dump(rfit.table(cells), f, indent=0, sort_keys=True)
     n_status = pd.Series(list(results.values())).value_counts().to_dict() if results else {}
     log(f"Research done in {out['duration_s']} s: {len(cells)} strategy/timeframe cells - {n_status}")
 
