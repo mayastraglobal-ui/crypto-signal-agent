@@ -914,3 +914,256 @@
 # NEW IDEAS go below. Write them as status: IDEA first; switch to FORMALIZED to have them tested
 # under exactly the same standards as everything above.
 # ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+# THE OPERATOR'S SCALPING PLAYBOOK (step 3, operator request 2026-10-06: "follow all rules strictly").
+# Source: docs/playbook/Crypto_Scalping_Playbook.txt; rule-by-rule map: docs/PLAYBOOK.md; the building
+# blocks pb_* / pbA_* / pbB_* / pbC_* are computed on closed 5m candles by engine/scalp_playbook.py with the
+# playbook's own definitions and numbers. gate: playbook = the 1H regime and bias are the playbook's own
+# (in the rules below), not the engine's. Every card is tested twice: with CVD (the operator chose real
+# aggressive volume) and without it (control twin) - CVD is kept only if it helps.
+# time_stop_bars 48 (4 hours) is the engine's required outer limit; the playbook's own time stop is the
+# 'progress' rule (+0.5R within 6 / 4 candles). cooldown 3 x 5m candles (playbook 8.2).
+# ---------------------------------------------------------------------
+- id: PB-A-PULLBACK
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.1 Strategy A: Trend Pullback (docs/playbook/Crypto_Scalping_Playbook.txt)"
+  hypothesis: "In a 1H trend with a matching bias, a 15m pullback into the EMA21 / VWAP zone at a marked level that ends with a 5m rejection or engulfing candle resumes the trend."
+  timeframes: ["5m"]
+  description: "Playbook A: 1H trend + bias, 15m pullback (>= 0.8 ATR, lower volume, higher low intact) into the EMA21/VWAP zone near a level, 5m rejection/engulfing trigger above EMA9 with volume, NY session."
+  logic: >-
+    pbA_long holds the whole of section 5.1: regime trend and bias bullish (1H), the 15m pullback quality,
+    the EMA21/VWAP zone within 0.5 x ATR(15m) of a marked level, the 5m trigger candle (rejection or
+    engulfing, close above EMA9, volume >= 1.2 x average) in the NY session (13:00-16:00 UTC, the only
+    session the playbook lists for A). Funding and BTC filters from section 5.4 / 2.2. Entry: limit at the
+    trigger candle's 50% (market if the candle is smaller than 0.8 x ATR). Stop: the tighter of the
+    pullback low - 0.1 ATR and 1.5 ATR from entry, at least 0.8 ATR. TP1 1R (50%), TP2 the previous 15m
+    swing high or the next level, at least 2R. Exit on a 15m close below the pullback low or when the 1H
+    bias is no longer bullish; +0.5R within 6 candles or exit.
+  long: ["pbA_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbA_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  exit_long: ["pb_bias_bull != 1"]
+  exit_short: ["pb_bias_bear != 1"]
+  entry: {type: limit, long_level: pbA_entry_long, short_level: pbA_entry_short, valid_bars: 3}
+  stop: {method: structure, long_level: pbA_stop_long, short_level: pbA_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", "max(2R, pbA_tp2_long)"]
+    short: ["1R", "max(2R, pbA_tp2_short)"]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbA_inval_long, short: pbA_inval_short, every: "15m"}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "Few signals (1H trend + bias + NY session + pullback + trigger must all agree); a limit at the 50% level misses the fastest moves; the playbook does not say how long the limit waits (3 candles assumed)."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+    who_pays: "late counter-trend traders who fade a trending market at its pullback, and traders who sold the dip into value"
+    mechanism: "in a 1H trend, a shallow, low-volume 15m pullback into EMA21 / VWAP at a marked level is profit-taking, not a reversal; a 5m rejection shows the trend side stepping back in"
+    fails_when: "ranges and trend exhaustion: the pullback becomes a reversal (the 15m higher low breaks)"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or retired by the paper rules (last 20 paper signals below -0.10R)"
+  changelog:
+    - "1.0 (2026-10-06): the operator's playbook section 5.1, exactly as written. Assumptions where the playbook is silent: the limit waits 3 x 5m candles; a pullback = the candles after the highest high since the last confirmed 15m swing low."
+
+- id: PB-A-PULLBACK-CVD
+  version: "1.0"
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.1, with its optional CVD confirmation"
+  hypothesis: "Strategy A is better when the trigger candle's order flow agrees (aggressive buyers on a long trigger)."
+  timeframes: ["5m"]
+  description: "Playbook A + the optional CVD confirmation: the trigger candle's delta is positive (long) / negative (short)."
+  logic: "Exactly PB-A-PULLBACK plus pbA_cvd_long (CVD rising on the trigger candle). Must beat PB-A-PULLBACK."
+  long: ["pbA_long == 1", "pbA_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbA_short == 1", "pbA_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  exit_long: ["pb_bias_bull != 1"]
+  exit_short: ["pb_bias_bear != 1"]
+  entry: {type: limit, long_level: pbA_entry_long, short_level: pbA_entry_short, valid_bars: 3}
+  stop: {method: structure, long_level: pbA_stop_long, short_level: pbA_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", "max(2R, pbA_tp2_long)"]
+    short: ["1R", "max(2R, pbA_tp2_short)"]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbA_inval_long, short: pbA_inval_short, every: "15m"}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  control_twin: PB-A-PULLBACK
+  known_weaknesses: "CVD in backtests is Binance futures order flow, live it is OKX's; even fewer signals than A."
+  edge:
+    type: behavioural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR]
+    who_pays: "the same counter-trend traders; the order flow shows aggressive buyers (sellers) taking the other side on the trigger"
+    mechanism: "a trigger candle carried by aggressive trend-side volume (positive delta on a long) is a real resumption, not a thin bounce"
+    fails_when: "when the CVD source (Binance futures in backtests, OKX live) does not reflect the venue's flow"
+    kill_rule: "kept only while it beats PB-A-PULLBACK out of sample; otherwise the CVD condition is dropped"
+  changelog:
+    - "1.0 (2026-10-06): playbook 5.1 with the optional CVD confirmation."
+
+- id: PB-B-SWEEP
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.2 Strategy B: Liquidity Sweep Reversal"
+  hypothesis: "A sweep of a marked low (high) that closes back inside within 3 candles, confirmed by order flow or an OI flush, reverses toward VWAP and the range middle."
+  timeframes: ["5m"]
+  description: "Playbook B: a wick >= 0.1 ATR beyond a marked level, close back inside within 3 x 5m candles, + 1 of 3 confirmations (CVD divergence, absorption, OI drop >= 1%)."
+  logic: >-
+    pbB_cvd_long holds section 5.2: the level (Asia low, PDL, VAL, the 24 x 15m range low or an equal-lows
+    cluster) swept by >= 0.1 x ATR(5m), the first 5m close back above it within 3 candles; regime range
+    (with the 1H bias, or at a major level), transition (major levels only) or trend (only against the
+    trend at a major level, half size - section 6, applied by the risk rules); sessions Asia, London, NY;
+    confirmation = any of bullish CVD divergence, an absorption candle or OI down >= 1% in the hour.
+    Entry at market on the close back inside. Stop below the sweep wick - 0.1 ATR. TP1 = 1R or VWAP,
+    whichever first (50%); TP2 = range middle, POC or the range's other side. Exit on a 5m close back
+    below the swept level; +0.5R within 4 candles or exit.
+  long: ["pbB_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbB_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  control_twin: PB-B-SWEEP-noCVD
+  known_weaknesses: "OI is hourly (the 'OI drop during the sweep' is the hour's change); CVD divergence compares with the previous 15m swing on the same UTC day only; trend days run through levels."
+  edge:
+    type: forced_flow
+    works_in: [RANGE, HIGH_VOL_RANGE, TRANSITION]
+    who_pays: "traders whose stops sit just beyond obvious lows / highs (Asia range, PDL / PDH, VAL / VAH, equal lows), and breakout traders who chase the poke"
+    mechanism: "the sweep fills resting stops; when price closes back inside within 3 candles with absorption, a CVD divergence or an OI flush, the forced flow is over and price returns toward VWAP and the range middle"
+    fails_when: "trend days: price runs through the level and never comes back"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer beats PB-B-SWEEP-noCVD"
+  changelog:
+    - "1.0 (2026-10-06): the operator's playbook section 5.2. Assumptions where the playbook is silent: range low = the 24 x 15m range; equal lows = two confirmed 15m swing lows within 0.1 x ATR(15m); 'major level' = PDL/PDH, Asia low/high, previous week low/high, weekly open; absorption = a delta >= 1.5 x the average |delta| against the move, closing in the candle's favourable half."
+
+- id: PB-B-SWEEP-noCVD
+  version: "1.0"
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: playbook
+  regimes: [RANGE, HIGH_VOL_RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Control twin of PB-B-SWEEP: the OI-drop confirmation only (no CVD)"
+  hypothesis: "Control: Strategy B confirmed only by the OI drop. PB-B-SWEEP must beat this for CVD to stay."
+  timeframes: ["5m"]
+  twin_of: PB-B-SWEEP
+  description: "Playbook B with only the OI-drop confirmation."
+  logic: "Exactly PB-B-SWEEP without the two CVD confirmations."
+  long: ["pbB_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbB_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbB_stop_long, short_level: pbB_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["min(1R, pb_vwap)", pbB_tp2_long]
+    short: ["min(1R, pb_vwap)", pbB_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 4}
+    invalidate: {long: pbB_inval_long, short: pbB_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "A benchmark; hourly OI history starts 2025-09-29, so it has no trades before that."
+  changelog:
+    - "1.0 (2026-10-06): control twin of PB-B-SWEEP."
+
+- id: PB-C-BREAKOUT
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Operator's playbook section 5.3 Strategy C: Breakout and Retest"
+  hypothesis: "A strong 5m breakout of a level after 15m compression, then a retest of the level zone with a rejection candle, continues by the range height."
+  timeframes: ["5m"]
+  description: "Playbook C: 15m compression under a level, strong 5m breakout (no entry), retest of the level zone within 12 candles with a rejection candle and CVD not making a new low."
+  logic: >-
+    pbC_cvd_long holds section 5.3: 15m compression (ATR < 0.8 x its 50-average and the last 8 candles
+    inside 1.2 x ATR) directly under a marked level; a strong 5m breakout candle (close >= 0.2 ATR beyond,
+    body >= 60%, volume spike) - no entry; within 12 x 5m candles a bullish rejection candle in the level
+    zone (level +- 0.25 x ATR(15m)) with the CVD above its low since the breakout; cancelled by a 5m close
+    back inside by > 0.3 ATR. Regime trend in the breakout direction, or range / transition near a
+    session open; sessions London and NY. Entry at market on the rejection close. Stop below the retest
+    low and at least 0.5 ATR below the level. TP1 1R (50%); TP2 the measured move or the next level,
+    whichever first. Exit on a 5m close back inside by > 0.3 ATR; +0.5R within 6 candles or exit.
+  long: ["pbC_cvd_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbC_cvd_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbC_stop_long, short_level: pbC_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", pbC_tp2_long]
+    short: ["1R", pbC_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbC_inval_long, short: pbC_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  control_twin: PB-C-BREAKOUT-noCVD
+  known_weaknesses: "The compression rule as written (8 x 15m candles inside 1.2 x ATR) is rare: about 0.2% of 15m candles on BTC in 2024-2026, so very few signals; the playbook gives no time stop for C (6 candles assumed, its section 7 range is 4-6)."
+  edge:
+    type: structural
+    works_in: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]
+    who_pays: "traders short under a level during compression, whose stops fuel the breakout, and late sellers on the retest"
+    mechanism: "compression stores energy; a strong-volume breakout and a held retest of the level show the other side is gone, so price moves about the range height"
+    fails_when: "false breakouts that close back inside the range (the 0.3 ATR invalidation)"
+    kill_rule: "FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer beats PB-C-BREAKOUT-noCVD"
+  changelog:
+    - "1.0 (2026-10-06): the operator's playbook section 5.3. Assumptions where the playbook is silent: 'directly under' = the level within 0.5 x ATR(15m) above the 8-candle box; 'near a session open' = the first hour of London (07:00) or NY (13:30); time stop 6 candles."
+
+- id: PB-C-BREAKOUT-noCVD
+  version: "1.0"
+  status: FORMALIZED
+  family: breakout
+  gate: playbook
+  regimes: [STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION]   # informational: gate playbook uses the playbook's own 1H regime
+  source: "Control twin of PB-C-BREAKOUT: without the CVD check on the retest"
+  hypothesis: "Control: Strategy C without the CVD check. PB-C-BREAKOUT must beat this for CVD to stay."
+  timeframes: ["5m"]
+  twin_of: PB-C-BREAKOUT
+  description: "Playbook C without the CVD condition."
+  logic: "Exactly PB-C-BREAKOUT without 'CVD not making a new low'."
+  long: ["pbC_long == 1", "pb_funding_ok_long == 1", "pb_btc_ok_long == 1"]
+  short: ["pbC_short == 1", "pb_funding_ok_short == 1", "pb_btc_ok_short == 1"]
+  stop: {method: structure, long_level: pbC_stop_long, short_level: pbC_stop_short, buffer_atr: 0, min_width_atr: 0.5, max_width_atr: 3.0}
+  targets:
+    long: ["1R", pbC_tp2_long]
+    short: ["1R", pbC_tp2_short]
+    split: [0.5, 0.5]
+    min_rr_after_fees: 1.5
+  manage:
+    be_plus_fees: true
+    trail: {swing_n: 3, ema: 9}
+    progress: {r: 0.5, bars: 6}
+    invalidate: {long: pbC_inval_long, short: pbC_inval_short}
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: "A benchmark."
+  changelog:
+    - "1.0 (2026-10-06): control twin of PB-C-BREAKOUT."

@@ -113,6 +113,10 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
 H4_COLUMNS = {"h4_bear_ob_high", "h4_bear_ob_low", "h4_bull_ob_high", "h4_bull_ob_low", "h4_liq_above",
               "h4_liq_below", "h4_range_high", "h4_range_low", "h4_range_pos"}     # only below 4H
 H4_TFS = ["1h", "30m", "15m", "5m"]
+# step 3: the operator's playbook building blocks (engine/scalp_playbook.py) exist on the 5m candles only
+from engine.scalp_playbook import COLUMNS as _PB_COLUMNS  # noqa: E402
+PB_COLUMNS = set(_PB_COLUMNS)
+PB_TFS = ["5m"]
 SPECIAL_PREFIXES = ("smc_", "h4_")         # the SMC / ICT ingredient: a card using it needs a control twin
 _OPS = (ast.Expression, ast.BoolOp, ast.BinOp, ast.UnaryOp, ast.Compare, ast.Call, ast.Name, ast.Load,
         ast.Constant, ast.keyword, ast.And, ast.Or, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.FloorDiv,
@@ -544,6 +548,9 @@ def expr_problems(expr, tfs):
             if node.id in H4_COLUMNS:
                 if not set(tfs) <= set(H4_TFS):
                     probs.append(f"{expr!r}: {node.id} exists only below 4H (timeframes {H4_TFS})")
+            elif node.id in PB_COLUMNS:
+                if not set(tfs) <= set(PB_TFS):
+                    probs.append(f"{expr!r}: {node.id} exists only on 5m (the operator's playbook, timeframes {PB_TFS})")
             elif node.id not in COLUMNS:
                 probs.append(f"{expr!r}: unknown building block {node.id!r}"
                              + (" (a function - call it, e.g. ema(close,20))" if node.id in FUNCTIONS else ""))
@@ -590,6 +597,8 @@ def lab_card_problems(card, others, labels, timeframes):
     probs = check(card, labels, timeframes)
     if probs:
         return probs
+    if card.get("gate") == "playbook":           # the playbook gate skips the engine's regime gate: operator cards only
+        return ["gate: playbook is for the operator's own playbook cards in strategies.yaml, not for lab cards"]
     try:
         r = render(card)
     except KeyError as e:

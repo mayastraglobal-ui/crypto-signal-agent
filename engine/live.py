@@ -127,6 +127,11 @@ def message(a):
         lines.append("Trend: " + " · ".join(f"{k.upper()} {v}" for k, v in a["regimes"].items()))
     for w in a.get("why") or []:
         lines.append(f"• {w}")
+    if a.get("max_isolated_leverage"):            # step 3: the operator's playbook (6.1)
+        lines.append(f"Isolated margin, leverage at most {a['max_isolated_leverage']}x (liquidation >= 2x the stop "
+                     "distance beyond the stop)")
+    for w in a.get("size_note") or []:
+        lines.append(f"½ {w}")
     for w in a.get("warnings") or []:
         lines.append(f"⚠️ {w}")
     lines += ["",

@@ -50,6 +50,8 @@ from engine import family_gates as fgt
 from engine import features as fe
 from engine import lifecycle as lc
 from engine import manage as mg
+from engine import flow_history as fh
+from engine import scalp_playbook as spb
 from engine import memory as mem
 from engine import positions as pos
 from engine import regime as rg
@@ -578,8 +580,8 @@ def btc_frames(data, quote, tfs):
     out = {}
     for tf in tfs:
         d = data.get(("BTC" + quote, tf))
-        if d is not None and len(d):
-            out[tf] = d[["close_time", "close"]]
+        if d is not None and len(d):              # + high / low: the playbook reads BTC's 15m structure
+            out[tf] = d[[k for k in ("open_time", "close_time", "high", "low", "close") if k in d]]
     return out
 
 
@@ -605,7 +607,7 @@ def attach_market(df, derivs, btc):
     return df
 
 
-def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None):
+def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow=None):
     """Everything the strategies of ONE coin need, per trade timeframe: candles (+ higher-timeframe
     trend), features incl. SMC columns (+ h4_* context), the rule namespace, ATR, and the regime of
     every regime timeframe as it was known at each candle. Used by the hourly scan AND the research run.
@@ -625,6 +627,8 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None):
         smc_out[tf] = res
         for col in smc.EVENT_COLUMNS + smc.CONTEXT_COLUMNS:   # SMC joins the features (rules + evidence)
             feats["smc_" + col] = res["series"][col].to_numpy()
+        if tf == "5m":                       # step 3: the operator's playbook building blocks (engine/scalp_playbook.py)
+            add_playbook(df, feats, sym, base, data, cfg, btc, flow)
         pairs[tf] = (df, feats)
     add_h4_context(pairs)
 
@@ -655,6 +659,48 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None):
         df["_atr"] = ns["atr"](14)
         frames[tf] = dict(df=df, feats=feats, ns=ns, reg=reg, n=len(df))
     return dict(frames=frames, smc=smc_out, recs=recs, rg_series=rg_ser)
+
+
+def okx_swap_stats(offline=False):
+    """{coin: (24h volume in USDT, spread %)} of OKX USDT perpetuals - the playbook's coin filters (2.5)."""
+    if offline:
+        return {}
+    try:
+        j = requests.get(OKX.BASE + "/api/v5/market/tickers", params={"instType": "SWAP"}, timeout=20).json()
+    except (requests.RequestException, ValueError):
+        return {}
+    out = {}
+    for t in j.get("data") or []:
+        if not str(t.get("instId", "")).endswith("-USDT-SWAP"):
+            continue
+        try:
+            last, bid, ask = float(t["last"]), float(t["bidPx"] or 0), float(t["askPx"] or 0)
+            mid = (bid + ask) / 2
+            out[t["instId"].split("-")[0]] = (float(t["volCcy24h"]) * last, (ask - bid) / mid * 100 if mid > 0 else None)
+        except (KeyError, TypeError, ValueError):
+            continue
+    return out
+
+
+def add_playbook(df, feats, sym, base, data, cfg, btc=None, flow=None):
+    """The playbook columns (pb_*, pbA_* / pbB_* / pbC_*) on the 5m candles: needs the coin's 15m and 1H candles
+    (4H optional), BTC's 15m candles for an altcoin, the order-flow delta (flow) and the futures data already
+    attached to df. Missing inputs leave the columns empty (NaN) or the CVD part unknown - never a guess."""
+    d15, d1h = data.get((sym, "15m")), data.get((sym, "1h"))
+    if d15 is None or d1h is None or len(d15) < 300 or len(d1h) < 250:
+        for k in spb.COLUMNS:
+            feats[k] = np.nan
+        return
+    b15 = (btc or {}).get("15m") if base != "BTC" else None
+    if b15 is not None and not {"high", "low"} <= set(b15.columns):
+        b15 = None
+    out = spb.compute(df, d15, d1h, data.get((sym, "4h")), btc15=b15,
+                      delta=fh.align(df["open_time"].to_numpy(), flow) if flow is not None else None,
+                      oi=df["_oi"].to_numpy() if "_oi" in df else None,
+                      funding=df["_funding_rate"].to_numpy() if "_funding_rate" in df else None,
+                      P=cfg.get("playbook"), d1d=data.get((sym, "1d")))
+    for k in spb.COLUMNS:
+        feats[k] = out[k]
 
 
 def strategy_signals(s, tf, fr, cfg, gc=None, detail=None):
@@ -1577,7 +1623,8 @@ class EmailContext:
                        coin=p["coin"], direction=p["direction"], market=p["market"], tf=p["timeframe"],
                        strategy=p["strategy"], version=p["version"], stage=p["stage"], entry=p["entry"],
                        entry_zone=p["entry_zone"], stop=p["stop"], targets=p["targets"], confirm_5m=None,
-                       limit_bars=p.get("limit_bars"),
+                       limit_bars=p.get("limit_bars"), size_note=p.get("size_note") or [],
+                       max_isolated_leverage=p.get("max_isolated_leverage"),
                        size=dict(qty=p["position_qty"], usdt=p["position_usdt"], risk_usdt=p["risk_usdt"],
                                  risk_pct=p["risk_pct"], capped=p["size_capped"]),
                        valid_until_utc=exp,
@@ -2178,7 +2225,12 @@ def main():
     btc_by_tf = btc_frames(data, cfg["market"]["quote"], tfs)
     for u in coins:
         sym, base = u["symbol"], u["base"]
-        pc = prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf)
+        try:                                # step 3: today's order flow (CVD) for the playbook strategies
+            flow = None if args.offline else fh.okx_today(base, int(started.timestamp() * 1000))
+        except Exception as e:
+            log(f"{base}: order flow not loaded ({e}) - CVD unknown this run")
+            flow = None
+        pc = prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, flow)
         m5 = m5_arrays(pc["frames"])
         if m5 is not None:
             m5_by_coin[base] = m5
@@ -2265,6 +2317,10 @@ def main():
                                      entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                                      atr=float(a), age_bars=k, confirm_5m=bool(s.get("confirm_5m")),
                                      limit_bars=lim[1] if lim else None,
+                                     pb_late=bool(feats["pb_late"].iloc[t_i] == 1) if "pb_late" in feats else False,
+                                     pb_half=bool(feats[f"pbB_half_{'long' if d == 1 else 'short'}"].iloc[t_i] == 1)
+                                     if s["id"].startswith("PB-B") and f"pbB_half_{'long' if d == 1 else 'short'}" in feats
+                                     else False,
                                      inval=(float(cols[(s.get("manage") or {})["invalidate"]["long" if d == 1 else "short"]][t_i])
                                             if (s.get("manage") or {}).get("invalidate") else None),
                                      signal_time=int(df["close_time"].iloc[t_i]),
@@ -2350,6 +2406,9 @@ def main():
                  for b in view["signal"] if data.get((b + quote, "1h")) is not None}
     groups = rk.corr_groups(closes_1h, RK["corr_threshold"], RK["corr_bars"])
     RK["strategy_dd_limits"] = fgt.active_live_limits(research)   # Phase 19 A: {} until the family table is active
+    RK["playbook"] = rk.pb_settings(cfg.get("playbook"))           # step 3: the PB-* strategies' own risk rules
+    RK["pb_coins"] = spb.coin_list(cfg.get("playbook"), okx_swap_stats(args.offline))
+    pb_last_week = rk.last_week_r(logdf, started)
     risk_pct, risk_note = rk.risk_pct(cfg["account"]["risk_per_trade_pct"], logdf, started, RK)
 
     # ---------- build trade plans ----------
@@ -2375,11 +2434,20 @@ def main():
         d, e, R = sgl["dir"], sgl["entry"], sgl["R"]
         tps, split = sgl["tps"], sgl["split"]
         against_btc = (d == 1 and btc.get("4h") == "DOWN") or (d == -1 and btc.get("4h") == "UP")
-        sz = rk.size(acct, risk_pct, e, e - d * R, RK["max_leverage"])
         strat = by_key[f"{sgl['strategy']}@{sgl['version']}"]
+        size_note = []
+        pct_used = risk_pct
+        if strat["gate"] == "playbook":       # step 3: the playbook's size rules (half size ...)
+            fac, size_note = rk.pb_size_factor(logdf, started, RK["playbook"], sgl.get("pb_late"), sgl.get("pb_half"),
+                                               pb_last_week)
+            pct_used = risk_pct * fac
+        sz = rk.size(acct, pct_used, e, e - d * R, RK["max_leverage"])
         plans.append(dict(
             coin=sgl["coin"], pair=sgl["symbol"], timeframe=sgl["tf"], strategy=sgl["strategy"],
             version=sgl["version"], stage=stage, lab=bool(strat.get("lab")), family=strat["family"],
+            gate=strat["gate"], size_note=size_note,
+            max_isolated_leverage=spb.max_isolated_leverage(e, R, RK["playbook"]["liq_x"]) if strat["gate"] == "playbook"
+            else None,
             confirm_5m=sgl["confirm_5m"], limit_bars=sgl.get("limit_bars"), inval=sgl.get("inval"),
             entry_type="limit" if sgl.get("limit_bars") else "market",
             state=pos.AWAITING if sgl["confirm_5m"] else pos.AWAITING_FILL if sgl.get("limit_bars") else pos.ACTIVE,
@@ -2394,7 +2462,7 @@ def main():
             expected_hold=tf_to_text(sgl["tf"], cst["avg_bars"] or pooled["avg_bars"]),
             max_hold=tf_to_text(sgl["tf"], strat["time_stop_bars"]), max_hold_bars=strat["time_stop_bars"],
             position_qty=sz["qty"], position_usdt=sz["notional"], leverage_needed=sz["leverage"],
-            risk_usdt=sz["risk_usdt"], size_capped=sz["capped"], risk_pct=risk_pct,
+            risk_usdt=sz["risk_usdt"], size_capped=sz["capped"], risk_pct=pct_used,
             signal_ms=int(sgl["signal_time"]), levels=sgl["levels"], facts=sgl["facts"],
             cooldown_ms=int(strat.get("cooldown_bars", 0)) * TF_MS[sgl["tf"]],
             backtest_coin=dict(trades=cst["n"], win_rate=cst["win_rate"], avg_r=cst["exp_r"]),
@@ -3257,6 +3325,9 @@ def render_plans(plans, settings, w):
             w(f"- **Entry zone:** {fmt_price(min(p['entry_zone']))} - {fmt_price(max(p['entry_zone']))} "
               f"(don't chase if price already left this zone)")
         w(f"- **Stop-loss:** {fmt_price(p['stop'])} ({p['risk_pct_of_price']:.2f}% away)")
+        if p.get("gate") == "playbook":     # step 3: the playbook's margin and size rules
+            w(f"- **Playbook:** isolated margin, leverage at most {p.get('max_isolated_leverage')}x (liquidation >= 2x "
+              "the stop distance beyond the stop)" + "".join(f"; {x}" for x in p.get("size_note") or []))
         for j, t in enumerate(p["targets"], 1):
             last = j == len(p["targets"])
             after = ("close the rest" if last else f"close {t['close_pct']}%, " +

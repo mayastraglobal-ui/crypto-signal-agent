@@ -50,9 +50,11 @@ import yaml
 import scanner as sc
 from engine import confirm5m as c5m
 from engine import data_quality as dq
+from engine import flow_history as fh
 from engine import follow as fl
 from engine import lifecycle as lc
 from engine import live as lv
+from engine import scalp_playbook as spb
 from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
@@ -73,7 +75,8 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
-CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py"]      # changed on GitHub -> "run update.bat"
+CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
+              "engine/manage.py", "engine/flow_history.py"]      # changed on GitHub -> "run update.bat"
 
 
 def log(*a):
@@ -452,8 +455,14 @@ class Watcher:
         for coin in self.coins:
             sym, data, quality = self.coin_data(coin, now_ms)
             try:
+                flow = None                          # step 3: today's order flow (CVD) for playbook strategies
+                if any(s.get("gate") == "playbook" for s, _, _ in self.watch):
+                    try:
+                        flow = fh.okx_today(coin, now_ms)
+                    except Exception as e:
+                        log(f"{coin}: order flow not loaded ({e}) - CVD unknown")
                 pc = sc.prepare_coin(sym, coin, data, quality, [t for t in prep if (sym, t) in data], self.cfg,
-                                     derivs.get(coin), btc)
+                                     derivs.get(coin), btc, flow)
             except Exception as e:
                 log(f"{coin}: prepare failed: {e}")
                 continue
@@ -733,13 +742,20 @@ class Watcher:
             if plan is None:
                 continue
             R, tps, split = plan
+            if s.get("gate") == "playbook":
+                why = self.pb_coin_problem(coin, now_ms)
+                if why:                              # playbook 2.5 / 5.4: skip the pair
+                    log(f"{coin} {tf} {s['id']}: playbook filter - {why}")
+                    continue
             key = lv.dedupe_key(coin, d, s["id"], s["version"], tf)
             if not lv.allowed(self.state["sent"], key, now_ms, self.S) or any(p["key"] == key for p in self.pending):
                 continue
             base = dict(label=label, coin=coin, inst=self.feed.inst(coin), d=d, tf=tf, strategy=s["id"],
                         version=s["version"], entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
-                        limit_bars=lim[1] if lim else None, manage=s.get("manage"),
+                        limit_bars=lim[1] if lim else None, manage=s.get("manage"), gate=s.get("gate"),
+                        pb_late=self._col(fr, "pb_late", t), pb_half=self._col(fr, f"pbB_half_{'long' if d == 1 else 'short'}", t)
+                        if s["id"].startswith("PB-B") else False,
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
@@ -749,6 +765,25 @@ class Watcher:
                 continue
             out.append(self._finish(base, now_ms))
         return out
+
+    def pb_coin_problem(self, coin, now_ms):
+        """Playbook 2.5 / 5.4 on the exchange the operator trades: the coin must be on the playbook's coin list (24h
+        volume, spread) and the spread right now at most 2x the normal maximum. None = fine; unknown data = fine."""
+        if now_ms - getattr(self, "_pb_stats_ms", 0) > 5 * 60_000:
+            self._pb_stats, self._pb_stats_ms = sc.okx_swap_stats(), now_ms
+        sec = self.cfg.get("playbook") or {}
+        coins = spb.coin_list(sec, self._pb_stats)
+        if coins is not None and coin not in coins:
+            return f"not on the playbook's coin list now ({', '.join(coins)})"
+        sp = (self._pb_stats.get(coin) or (None, None))[1]
+        if sp is not None and sp > 2 * float(sec.get("max_spread_pct", 0.02)):
+            return f"spread {sp:.3f}% is above 2x normal"
+        return None
+
+    @staticmethod
+    def _col(fr, name, t):
+        f = fr.get("feats")
+        return bool(f is not None and name in f and f[name].iloc[t] == 1)
 
     @staticmethod
     def _inval(s, d, cols, t):
@@ -793,18 +828,69 @@ class Watcher:
         RK = self.RK
         stop = a["entry"] - a["d"] * a["R"]
         warn = []
-        ev = rk.blackout(now_ms, RK["events"], RK["blackout_minutes"])
+        pbook = a.get("gate") == "playbook"          # step 3: the operator's playbook rules for its PB-* strategies
+        PB = rk.pb_settings(self.cfg.get("playbook"))
+        mins = PB["blackout_minutes"] if pbook else RK["blackout_minutes"]
+        ev = rk.blackout(now_ms, RK["events"], mins)
         if ev:
-            warn.append(f"high-impact event within {RK['blackout_minutes']} min ({ev[0][3]}) - the risk rules say NO "
-                        "live entry now")
+            warn.append(f"high-impact event within {mins} min ({ev[0][3]}) - the risk rules say NO live entry now")
         if self.calendar_problem:
             warn.append(f"event calendar unreadable: {self.calendar_problem}")
-        if a["tps"] and a["d"] * (a["tps"][0] - a["entry"]) / a["R"] < float(RK.get("min_tp1_r", 2.0)) - 1e-9:
+        if not pbook and a["tps"] and a["d"] * (a["tps"][0] - a["entry"]) / a["R"] < float(RK.get("min_tp1_r", 2.0)) - 1e-9:
             warn.append(f"reward to TP1 below {RK.get('min_tp1_r', 2.0):g}R")
         pct = float(self.cfg["account"]["risk_per_trade_pct"])
+        notes = []
+        if pbook:
+            warn += self.pb_limits(now_ms, PB)
+            fac, notes = self.pb_size(PB, a)
+            pct *= fac
+            a = dict(a, max_isolated_leverage=spb.max_isolated_leverage(a["entry"], a["R"], PB["liq_x"]))
         size = rk.size(float(self.cfg["account"]["size_usdt"]), pct, a["entry"], stop, float(RK["max_leverage"]))
         self.state["sent"][a["key"]] = now_ms
-        return dict(a, size=size, risk_pct=pct, warnings=warn, sent_ms=self.now_fn())
+        return dict(a, size=size, risk_pct=pct, warnings=warn, size_note=notes, sent_ms=self.now_fn())
+
+    def pb_journal(self, now_ms):
+        """The operator's own trades (✅ Took it) today, from the buttons' record: (count, R today, losing streak,
+        last loss ms, last result, last week's R)."""
+        day = now_ms // 86_400_000 * 86_400_000
+        res = sorted(self.state.get("results") or [], key=lambda r: int(r["ended_ms"]))
+        took_today = sum(1 for a in self.state["alerts"].values() if a.get("choice") in ("took", "closed", "done")
+                         and int(a["sent_ms"]) >= day)
+        today = [r for r in res if int(r["ended_ms"]) >= day and r.get("r") is not None]
+        streak, last = 0, None
+        for r in today:
+            streak, last = (streak + 1, int(r["ended_ms"])) if r["r"] < 0 else (0, last)
+        wk = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)
+        w1 = int((wk - dt.timedelta(days=wk.weekday())).replace(hour=0, minute=0, second=0, microsecond=0).timestamp() * 1000)
+        last_week = sum(r["r"] for r in res if r.get("r") is not None and w1 - 7 * 86_400_000 <= int(r["ended_ms"]) < w1)
+        known = [r for r in res if r.get("r") is not None]
+        return took_today, sum(r["r"] for r in today), streak, last, (known[-1]["r"] if known else None), last_week
+
+    def pb_limits(self, now_ms, PB):
+        n, day_r, streak, last, _, _ = self.pb_journal(now_ms)
+        out = []
+        if day_r <= PB["day_limit_r"]:
+            out.append(f"playbook: your trades today are {day_r:+.1f}R - daily loss limit, stop for the day")
+        if n >= PB["max_trades_day"]:
+            out.append(f"playbook: {n} trades taken today - the maximum is {PB['max_trades_day']}")
+        if streak >= PB["stop_after_losses"]:
+            out.append(f"playbook: {streak} losses in a row - stop for the day")
+        elif streak >= PB["pause_after_losses"] and last and now_ms - last < PB["pause_minutes"] * 60_000:
+            out.append(f"playbook: {streak} losses in a row - {PB['pause_minutes']}-minute break")
+        return out
+
+    def pb_size(self, PB, a):
+        _, _, _, _, last_r, last_week = self.pb_journal(self.now_fn())
+        why = []
+        if a.get("pb_late"):
+            why.append("late US / weekend: half size (playbook 2.3)")
+        if a.get("pb_half"):
+            why.append("counter-trend sweep: half size (playbook 5.2)")
+        if last_r is not None and last_r >= PB["big_win_r"]:
+            why.append(f"after a win of {PB['big_win_r']:g}R or more: half size (playbook 11)")
+        if last_week <= PB["week_limit_r"]:
+            why.append(f"last week {last_week:+.1f}R: half size this week (playbook 6.1)")
+        return (0.5 if why else 1.0), why
 
     # ---- forever ----
     def heartbeat(self, now_ms):

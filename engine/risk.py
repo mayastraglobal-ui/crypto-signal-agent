@@ -53,7 +53,69 @@ STEPS = {   # step name -> text (section 14 numbering)
     "rr_tp1": "14.9 reward to TP1 below 2R",
     "path": "14.10 opposing level between entry and TP1",
     "duplicate": "14.13 same strategy / coin / timeframe still open or cooling down",
+    # the operator's playbook (step 3, docs/PLAYBOOK.md) - for its PB-* strategies only
+    "pb_blackout": "playbook 2.1: high-impact event within ±15 min",
+    "pb_day_halt": "playbook 6.1: daily loss limit reached (-2R) - stop for the day",
+    "pb_heat": "playbook 6.1: 2 positions already open",
+    "pb_open_risk": "playbook 6.1: total open risk would exceed 1.5%",
+    "pb_trades_day": "playbook 6.1: maximum trades for today reached",
+    "pb_losses_pause": "playbook 6.1: 3 losses in a row - 30-minute break",
+    "pb_losses_stop": "playbook 6.1: 4 losses in a row - stop for the day",
+    "pb_coin": "playbook 2.5: not on the playbook's coin list (liquidity / spread filters)",
 }
+PB_DEFAULTS = dict(blackout_minutes=15, max_positions=2, max_open_risk_pct=1.5, day_limit_r=-2.0, week_limit_r=-6.0,
+                   max_trades_day=6, pause_after_losses=3, pause_minutes=30, stop_after_losses=4, big_win_r=2.0,
+                   liq_x=2.0)
+
+
+def pb_settings(section):
+    """The playbook's risk rules (config.yaml -> playbook -> risk)."""
+    s = dict(PB_DEFAULTS)
+    s.update({k: v for k, v in ((section or {}).get("risk") or {}).items() if k in PB_DEFAULTS})
+    return s
+
+
+def today_stats(logdf, now):
+    """The LIVE (APPROVED) day so far: entries made today, and the losing streak of today's closed trades
+    (count, close time of the last loss in ms)."""
+    live = _live(logdf)
+    today = now.strftime("%Y-%m-%d")
+    et = live["entry_time_utc"].astype(str) if "entry_time_utc" in live else pd.Series(dtype=str)
+    entries = int((et.str[:10] == today).sum())
+    d = _closed_r(live)
+    d = d[d["closed_time_utc"].astype(str).str[:10] == today].sort_values("closed_time_utc")
+    streak, last = 0, None
+    for _, r in d.iterrows():
+        if float(r["result_r"]) < 0:
+            streak, last = streak + 1, _ms(r["closed_time_utc"])
+        else:
+            streak = 0
+    return entries, streak, last
+
+
+def pb_size_factor(logdf, now, PB, late=False, half=False, last_week_r=None):
+    """The playbook's size rules (sections 2.3, 5.2, 6.1, 11): half size in late US hours / at the weekend, for a
+    counter-trend sweep (Strategy B in a trend), after a large win (the last closed live trade >= big_win_r), and in
+    the week after a -6R week. Never larger than 1. Returns (factor, reasons)."""
+    why = []
+    if late:
+        why.append("late US / weekend: half size (playbook 2.3)")
+    if half:
+        why.append("counter-trend sweep: half size (playbook 5.2)")
+    d = _closed_r(_live(logdf))
+    if len(d) and float(d.sort_values("closed_time_utc")["result_r"].iloc[-1]) >= PB["big_win_r"]:
+        why.append(f"after a win of {PB['big_win_r']:g}R or more: half size (playbook 11)")
+    if last_week_r is not None and last_week_r <= PB["week_limit_r"]:
+        why.append(f"last week {last_week_r:+.1f}R: half size this week (playbook 6.1)")
+    return (0.5 if why else 1.0), why
+
+
+def last_week_r(logdf, now):
+    d = _closed_r(_live(logdf))
+    w1 = (now - dt.timedelta(days=now.weekday())).strftime("%Y-%m-%d")
+    w0 = (now - dt.timedelta(days=now.weekday() + 7)).strftime("%Y-%m-%d")
+    t = d["closed_time_utc"].astype(str).str[:10]
+    return round(float(d.loc[(t >= w0) & (t < w1), "result_r"].sum()), 3)
 LIVE_OPEN = ("AWAITING_5M", "AWAITING_FILL", "ENTRY_TRIGGERED", "POSITION_ACTIVE", "TP1_HIT")
 
 
@@ -233,6 +295,7 @@ class Book:
         is_open = live["state"].isin(LIVE_OPEN) if "state" in live else pd.Series(False, index=live.index)
         self.open = [dict(coin=r["coin"], direction=r["direction"]) for _, r in live[is_open].iterrows()]
         self.logdf = logdf
+        self.accepted_today = 0
 
     def dd_limit(self, key):
         """The live drawdown limit of one strategy version x timeframe: its family-table limit when the family table
@@ -252,7 +315,10 @@ class Book:
 
     def check(self, p, cooldown_ms=0):
         """Section 14 steps 9-13 + section 15 for one plan (dict with coin, timeframe, strategy, version,
-        direction, entry, stop, tp1, signal_ms, levels). Returns the failed steps (empty = allowed)."""
+        direction, entry, stop, tp1, signal_ms, levels). Returns the failed steps (empty = allowed).
+        A playbook plan (p['gate'] == 'playbook') is checked by the playbook's own rules instead (check_pb)."""
+        if p.get("gate") == "playbook" and self.S.get("playbook"):
+            return self.check_pb(p, cooldown_ms)
         S, fails = self.S, []
         d = 1 if p["direction"] == "LONG" else -1
         R = abs(p["entry"] - p["stop"])
@@ -278,6 +344,46 @@ class Book:
             fails.append("duplicate")
         return fails
 
+    def check_pb(self, p, cooldown_ms=0):
+        """The playbook's rules (step 3, docs/PLAYBOOK.md) for one PB-* plan: news +-15 min, the -2R day / -6R week,
+        2 open positions and 1.5% open risk, the trades-per-day and losing-streak limits, the coin list; plus the
+        agent's per-coin, correlation, suspension and duplicate checks. The 2R-to-TP1 and path rules are the
+        agent's, not the playbook's (it asks >= 1.5R to TP2 after fees, checked when the trade is planned)."""
+        S, PB, fails = self.S, self.S["playbook"], []
+        now_ms = int(self.now.timestamp() * 1000)
+        if blackout(p["signal_ms"], S["events"], PB["blackout_minutes"]) or \
+                blackout(now_ms, S["events"], PB["blackout_minutes"]):
+            fails.append("pb_blackout")
+        if self.day_r <= PB["day_limit_r"]:
+            fails.append("pb_day_halt")
+        if self.week_r <= PB["week_limit_r"]:
+            fails.append("week_halt")
+        if f"{p['strategy']}@{p['version']}|{p['timeframe']}" in self.suspended():
+            fails.append("suspended")
+        if len(self.open) >= PB["max_positions"]:
+            fails.append("pb_heat")
+        if (len(self.open) + 1) * float(p.get("risk_pct") or 0) > PB["max_open_risk_pct"] + 1e-9:
+            fails.append("pb_open_risk")
+        entries, streak, last = today_stats(self.logdf, self.now)
+        if entries + self.accepted_today >= PB["max_trades_day"]:
+            fails.append("pb_trades_day")
+        if streak >= PB["stop_after_losses"]:
+            fails.append("pb_losses_stop")
+        elif streak >= PB["pause_after_losses"] and last is not None and now_ms - last < PB["pause_minutes"] * 60_000:
+            fails.append("pb_losses_pause")
+        coins = S.get("pb_coins")
+        if coins is not None and p["coin"] not in coins:
+            fails.append("pb_coin")
+        if sum(o["coin"] == p["coin"] for o in self.open) >= S["max_per_coin"]:
+            fails.append("coin")
+        g = self.groups.get(p["coin"], p["coin"])
+        if any(o["coin"] != p["coin"] and self.groups.get(o["coin"], o["coin"]) == g and o["direction"] == p["direction"]
+               for o in self.open):
+            fails.append("correlated")
+        if self.duplicate(p, cooldown_ms):
+            fails.append("duplicate")
+        return fails
+
     def duplicate(self, p, cooldown_ms):
         lg = self.logdf
         if lg is None or lg.empty:
@@ -292,3 +398,4 @@ class Book:
 
     def accept(self, p):
         self.open.append(dict(coin=p["coin"], direction=p["direction"]))
+        self.accepted_today += 1

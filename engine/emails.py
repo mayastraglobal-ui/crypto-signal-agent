@@ -193,6 +193,10 @@ def live_entry(e):
     else:
         do = [f"Place a limit {'BUY' if d == 1 else 'SELL (futures)'} between {price(z[0])} and {price(z[1])}. "
               f"Set the stop at {price(e['stop'])} right away."]
+    if e.get("max_isolated_leverage"):                       # step 3: the operator's playbook (section 6.1)
+        do.append(f"Isolated margin, leverage at most {e['max_isolated_leverage']}x (liquidation at least 2x the stop "
+                  "distance beyond the stop).")
+    do += [f"{x[0].upper()}{x[1:]}." for x in e.get("size_note") or []]
     sz = e.get("size") or {}
     size_tiles = [(f"Your size ({val(e.get('account'), '{:,.0f}')} USDT account)",
                    f"{val(sz.get('qty'), '{:.4g}')} {e['coin']}",

@@ -44,6 +44,10 @@ FROZEN = {
     # Phase 10: the 5-minute confirmation versions
     "S5-SWEEP-MSS-FVG-5M@1.0": "f9d1c2e50f046b7d", "S6-OB-FVG-5M@1.0": "a9e6bcfa6fe62d0c",
     "S7-SILVER-BULLET-5M@1.0": "40a897f8c1b3aed2", "S8-PDH-PDL-SWEEP-5M@1.0": "f0aeec94c99360d9",
+    # step 3 (2026-10-06): the operator's playbook strategies
+    "PB-A-PULLBACK@1.0": "cfd99bcc7ae3cc67", "PB-A-PULLBACK-CVD@1.0": "a41e3f79b88ffb12",
+    "PB-B-SWEEP@1.0": "0bb3a9255fe4f936", "PB-B-SWEEP-noCVD@1.0": "70f3b212e56424ca",
+    "PB-C-BREAKOUT@1.0": "51d544705d5ab1d8", "PB-C-BREAKOUT-noCVD@1.0": "ab5e60af6d592d7c",
 }
 
 
