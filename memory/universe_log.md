@@ -373,3 +373,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-06 07:21 UTC
 - **EXCLUDED** RLC - 7-day average volume $5M < $50M; 24h move +148.2% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $23k within 1% (need $250k)
 - **FLAG** RLC - price data DEGRADED - stays in the list, but no signals
+
+## 2026-10-06 21:18 UTC
+- **EXCLUDED** RLC - 7-day average volume $5M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.114% > 0.1%; order book too thin: $30k within 1% (need $250k)

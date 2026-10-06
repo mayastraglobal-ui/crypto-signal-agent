@@ -5,15 +5,19 @@
   "SOL",
   "ZEC",
   "XRP",
-  "SUI",
-  "BNB"
+  "BNB",
+  "SUI"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "AVAX": 1
+ },
+ "out_streak": {
+  "SUI": 1
+ },
  "suspended": {
   "RLC": "2026-10-06"
  },
- "runs": 263,
+ "runs": 264,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -88,6 +92,7 @@
   ],
   "RLC": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
