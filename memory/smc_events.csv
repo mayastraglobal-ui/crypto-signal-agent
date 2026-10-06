@@ -9291,3 +9291,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-06 21:45,AVAX,15m,FVG,bull,,11.469,11.523,0.742,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-06 22:00,AVAX,15m,FVG_RETRACE,bull,,11.469,11.523,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-06 22:15,AVAX,15m,BOS,bull,11.55,,,0.306,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-06 22:30,BTC,15m,BOS,bear,85495.01,,,0.05,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 22:30,SOL,30m,SWEEP,bear,121.29,,,0.363,,1h,WEAK_BULL,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-06 22:30,SOL,30m,FVG_FILLED,bear,,121.17,121.35,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-06 23:15,SOL,15m,FVG,bear,,120.9,121.03,0.409,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-06 23:00,XRP,15m,BOS,bear,1.498,,,0.138,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 22:30,BNB,30m,FVG_RETRACE,bear,,780.26,780.8,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 23:00,AVAX,1h,FVG,bull,,11.463,11.534,0.536,,4h,RANGE,,smc-1.0,Binance
+2026-10-06 22:30,AVAX,30m,WEAK_BREAK,bull,11.55,,,0.261,,1h,TRANSITION,no displacement,smc-1.0,Binance
