@@ -8462,3 +8462,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-06 12:15,BNB,15m,CHOCH,bull,785.0,,,0.863,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
 2026-10-06 12:15,BNB,15m,ORDER_BLOCK,bull,,783.26,784.21,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
 2026-10-06 12:15,BNB,15m,FVG_FILLED,bear,,784.04,785.35,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 12:30,ETH,15m,WEAK_BREAK,bear,2709.5,,,0.034,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 12:30,ETH,15m,FVG_RETRACE,bull,,2706.43,2708.99,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:00,ZEC,30m,SWEEP,bear,1377.3,,,0.258,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 13:00,ZEC,15m,SWEEP,bear,1377.3,,,0.334,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 13:00,SUI,15m,SWEEP,bull,1.1937,,,0.143,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 13:15,SUI,15m,BOS,bear,1.1937,,,0.331,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 13:15,SUI,15m,FVG,bear,,1.1939,1.1965,0.416,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 13:00,BNB,1h,FVG_FILLED,bear,,783.48,785.68,,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-06 12:30,BNB,30m,SWEEP,bear,785.0,,,0.676,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 12:30,BNB,30m,FVG_FILLED,bear,,784.04,785.68,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 13:00,BNB,30m,WEAK_BREAK,bull,785.0,,,0.424,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-06 12:30,BNB,15m,FVG,bull,,783.96,784.49,0.365,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-06 12:45,BNB,15m,OB_RETEST,bull,,783.26,784.21,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-06 12:45,BNB,15m,FVG_RETRACE,bull,,783.96,784.49,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:15,BNB,15m,FVG_FILLED,bull,,783.96,784.49,,NY AM,1h,RANGE,,smc-1.0,Binance
