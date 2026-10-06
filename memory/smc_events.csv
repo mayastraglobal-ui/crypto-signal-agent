@@ -8703,3 +8703,591 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-06 20:30,XRP,30m,FVG_FILLED,bear,,1.5041,1.506,,,1h,RANGE,,smc-1.0,Binance
 2026-10-06 20:30,XRP,15m,FVG_FILLED,bear,,1.5,1.504,,,1h,RANGE,,smc-1.0,Binance
 2026-10-06 21:00,BNB,1h,FVG,bear,,779.76,780.8,0.372,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-06 22:15,ETH,15m,SWEEP,bear,2698.98,,,0.222,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 22:15,SOL,15m,BOS,bull,121.2,,,0.287,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-06 22:15,SOL,15m,FVG_FILLED,bear,,121.1,121.35,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-06 22:00,ZEC,1h,SWEEP,bull,1339.66,,,0.43,,4h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 21:30,ZEC,30m,SWEEP,bull,1339.66,,,0.604,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 21:30,ZEC,15m,SWEEP,bull,1332.92,,,0.146,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 22:00,BNB,1h,FVG_RETRACE,bear,,779.76,780.8,,,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-09-30 16:00,AVAX,4h,OB_RETEST,bull,,10.336,10.899,,,1d,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-09-30 16:00,AVAX,4h,FVG_FILLED,bull,,10.899,11.228,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-01 20:00,AVAX,4h,SWEEP,bull,10.802,,,0.191,,1d,WEAK_BULL,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-02 12:00,AVAX,4h,SWEEP,bear,11.182,,,0.165,,1d,WEAK_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-02 20:00,AVAX,4h,CHOCH,bear,10.732,,,0.43,,1d,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-02 20:00,AVAX,4h,ORDER_BLOCK,bear,,11.054,11.237,,,1d,WEAK_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-03 00:00,AVAX,4h,FVG,bear,,10.822,10.991,0.49,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-03 04:00,AVAX,4h,FVG_RETRACE,bear,,10.822,10.991,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-03 12:00,AVAX,4h,OB_RETEST,bear,,11.054,11.237,,,1d,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-10-03 12:00,AVAX,4h,FVG_FILLED,bear,,10.822,10.991,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-05 08:00,AVAX,4h,SWEEP,bull,10.948,,,0.547,,1d,STRONG_BULL,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-10-06 00:00,AVAX,4h,SWEEP,bear,11.141,,,0.162,,1d,STRONG_BULL,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-06 04:00,AVAX,4h,SWEEP,bear,11.267,,,0.153,,1d,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 04:00,AVAX,4h,WEAK_BREAK,bull,11.14,,,0.236,,1d,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-06 04:00,AVAX,4h,FVG,bull,,10.918,11.107,0.88,,1d,STRONG_BULL,,smc-1.0,Binance
+2026-10-06 08:00,AVAX,4h,OB_INVALID,bear,,11.054,11.237,,,1d,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 15:00,AVAX,1h,CHOCH,bear,10.991,,,0.55,Silver Bullet,4h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-09-30 15:00,AVAX,1h,ORDER_BLOCK,bear,,11.093,11.365,,Silver Bullet,4h,WEAK_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-30 15:00,AVAX,1h,FVG_RETRACE,bull,,10.653,10.955,,Silver Bullet,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-01 04:00,AVAX,1h,OB_RETEST,bear,,11.093,11.365,,Asia,4h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-10-01 04:00,AVAX,1h,FVG,bull,,10.919,11.024,0.708,Asia,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-01 08:00,AVAX,1h,FVG_RETRACE,bull,,10.919,11.024,,London,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-01 11:00,AVAX,1h,FVG_FILLED,bull,,10.919,11.024,,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-01 17:00,AVAX,1h,BOS,bear,10.802,,,0.17,,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-02 02:00,AVAX,1h,SWEEP,bull,10.87,,,0.13,Asia,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 05:00,AVAX,1h,CHOCH,bull,11.072,,,0.877,,4h,RANGE,with displacement,smc-1.0,Binance
+2026-10-02 05:00,AVAX,1h,ORDER_BLOCK,bull,,10.957,11.073,,,4h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 06:00,AVAX,1h,OB_RETEST,bull,,10.957,11.073,,,4h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-02 12:00,AVAX,1h,SWEEP,bear,11.205,,,0.261,NY AM,4h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 13:00,AVAX,1h,BOS,bull,11.205,,,0.319,NY AM,4h,RANGE,no displacement,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,CHOCH,bear,10.853,,,1.932,,4h,RANGE,with displacement,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,ORDER_BLOCK,bear,,11.021,11.146,,,4h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,BREAKER_RETEST,bull,,10.466,10.726,,,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,OB_RETEST,bull,,10.336,10.589,,,4h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,OB_INVALID,bull,,10.957,11.073,,,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,FVG_RETRACE,bull,,10.507,10.623,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,FVG_FILLED,bull,,10.507,10.623,,,4h,RANGE,,smc-1.0,Binance
+2026-10-02 19:00,AVAX,1h,FVG_FILLED,bull,,10.653,10.955,,,4h,RANGE,,smc-1.0,Binance
+2026-10-02 20:00,AVAX,1h,FVG,bear,,10.689,10.94,1.476,,4h,RANGE,,smc-1.0,Binance
+2026-10-02 22:00,AVAX,1h,FVG_RETRACE,bear,,10.689,10.94,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 02:00,AVAX,1h,BREAKER_RETEST,bear,,10.957,11.073,,Asia,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-03 02:00,AVAX,1h,FVG_FILLED,bear,,10.689,10.94,,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-03 02:00,AVAX,1h,FVG,bull,,10.822,10.877,0.352,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-03 03:00,AVAX,1h,FVG_RETRACE,bull,,10.822,10.877,,Asia,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 10:00,AVAX,1h,SWEEP,bear,10.961,,,0.127,,4h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 11:00,AVAX,1h,WEAK_BREAK,bull,10.961,,,0.363,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-10-03 11:00,AVAX,1h,OB_RETEST,bear,,11.021,11.146,,,4h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-03 14:00,AVAX,1h,OB_INVALID,bear,,11.021,11.146,,NY AM,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-03 15:00,AVAX,1h,BREAKER_RETEST,bull,,11.021,11.146,,Silver Bullet,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-04 03:00,AVAX,1h,SWEEP,bull,11.063,,,0.135,Asia,4h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-04 04:00,AVAX,1h,BOS,bear,11.063,,,0.212,Asia,4h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 12:00,AVAX,1h,SWEEP,bull,10.979,,,0.175,NY AM,4h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-04 14:00,AVAX,1h,BOS,bear,10.979,,,0.015,NY AM,4h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 16:00,AVAX,1h,FVG,bull,,11.006,11.035,0.418,,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 17:00,AVAX,1h,SWEEP,bear,11.113,,,0.317,,4h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 18:00,AVAX,1h,FVG_RETRACE,bull,,11.006,11.035,,,4h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-05 01:00,AVAX,1h,FVG_FILLED,bull,,11.006,11.035,,Asia,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-05 02:00,AVAX,1h,FVG,bear,,11.04,11.085,0.606,Asia,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-05 03:00,AVAX,1h,FVG_RETRACE,bear,,11.04,11.085,,Asia,4h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-05 04:00,AVAX,1h,BOS,bear,10.948,,,0.054,Asia,4h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-05 05:00,AVAX,1h,SWEEP,bull,10.841,,,0.194,,4h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 08:00,AVAX,1h,FVG,bull,,10.929,10.985,0.68,London,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-05 09:00,AVAX,1h,FVG_RETRACE,bull,,10.929,10.985,,London,4h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:00,AVAX,1h,FVG_FILLED,bull,,10.929,10.985,,NY AM,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-05 17:00,AVAX,1h,SWEEP,bull,10.826,,,0.369,,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 17:00,AVAX,1h,FVG_FILLED,bull,,10.822,10.877,,,4h,RANGE,,smc-1.0,Binance
+2026-10-05 22:00,AVAX,1h,FVG,bull,,10.915,10.957,0.487,,4h,RANGE,,smc-1.0,Binance
+2026-10-05 23:00,AVAX,1h,SWEEP,bear,11.052,,,0.232,,4h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 00:00,AVAX,1h,SWEEP,bear,11.141,,,0.404,,4h,RANGE,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-10-06 00:00,AVAX,1h,CHOCH,bull,11.052,,,0.914,,4h,RANGE,with displacement,smc-1.0,Binance
+2026-10-06 00:00,AVAX,1h,ORDER_BLOCK,bull,,10.855,10.915,,,4h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 00:00,AVAX,1h,FVG_FILLED,bear,,11.04,11.085,,,4h,RANGE,,smc-1.0,Binance
+2026-10-06 00:00,AVAX,1h,FVG,bull,,11.016,11.046,0.343,,4h,RANGE,,smc-1.0,Binance
+2026-10-06 01:00,AVAX,1h,FVG,bull,,11.072,11.107,0.4,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-06 02:00,AVAX,1h,SWEEP,bear,11.267,,,0.377,Asia,4h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-06 07:00,AVAX,1h,SWEEP,bear,11.365,,,0.344,London,4h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 12:00,AVAX,1h,OB_INVALID,bear,,11.093,11.365,,NY AM,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 13:00,AVAX,1h,SWEEP,bear,11.55,,,1.166,NY AM,4h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 13:00,AVAX,1h,FVG_FILLED,bear,,11.512,11.615,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-10-06 13:00,AVAX,1h,FVG,bull,,11.387,11.436,0.375,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-10-06 14:00,AVAX,1h,FVG_RETRACE,bull,,11.387,11.436,,NY AM,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-06 14:00,AVAX,1h,FVG_FILLED,bull,,11.387,11.436,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-10-06 20:00,AVAX,1h,BREAKER_RETEST,bull,,11.093,11.365,,,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 13:00,AVAX,30m,BOS,bull,11.239,,,0.902,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-09-30 13:00,AVAX,30m,ORDER_BLOCK,bull,,11.113,11.175,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-30 13:00,AVAX,30m,FVG_FILLED,bear,,11.182,11.268,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 13:30,AVAX,30m,FVG,bull,,11.164,11.251,0.819,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 14:00,AVAX,30m,OB_INVALID,bull,,11.113,11.175,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 14:00,AVAX,30m,FVG_RETRACE,bull,,11.164,11.251,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 14:00,AVAX,30m,FVG_FILLED,bull,,11.164,11.251,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,CHOCH,bear,10.991,,,0.683,Silver Bullet,1h,RANGE,with displacement,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,ORDER_BLOCK,bear,,11.129,11.365,,Silver Bullet,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,BREAKER_RETEST,bear,,11.113,11.175,,Silver Bullet,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,FVG_RETRACE,bull,,10.88,10.955,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,FVG_FILLED,bull,,10.88,10.955,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-09-30 14:30,AVAX,30m,FVG,bear,,11.12,11.251,0.994,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-09-30 15:00,AVAX,30m,FVG,bear,,10.943,10.982,0.296,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-09-30 16:00,AVAX,30m,FVG_RETRACE,bear,,10.943,10.982,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 16:30,AVAX,30m,FVG_FILLED,bear,,10.943,10.982,,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 01:00,AVAX,30m,BOS,bear,10.865,,,0.191,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 01:00,AVAX,30m,FVG,bear,,10.899,10.932,0.389,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 01:30,AVAX,30m,FVG_RETRACE,bear,,10.899,10.932,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 03:00,AVAX,30m,CHOCH,bull,11.008,,,0.669,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-01 03:00,AVAX,30m,ORDER_BLOCK,bull,,10.833,10.895,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-01 03:00,AVAX,30m,FVG_FILLED,bear,,10.899,10.932,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 03:00,AVAX,30m,FVG,bull,,10.895,10.93,0.405,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 03:30,AVAX,30m,FVG,bull,,10.929,11.024,1.098,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 04:00,AVAX,30m,OB_RETEST,bear,,11.129,11.365,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-01 04:00,AVAX,30m,FVG_RETRACE,bear,,11.12,11.251,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 07:30,AVAX,30m,FVG_RETRACE,bull,,10.929,11.024,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 09:30,AVAX,30m,SWEEP,bear,11.157,,,0.266,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 09:30,AVAX,30m,FVG,bull,,11.067,11.093,0.278,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:00,AVAX,30m,FVG_RETRACE,bull,,11.067,11.093,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 10:00,AVAX,30m,FVG_FILLED,bull,,11.067,11.093,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,CHOCH,bear,10.954,,,0.36,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,ORDER_BLOCK,bear,,10.981,11.128,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,OB_RETEST,bull,,10.833,10.895,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,FVG_RETRACE,bull,,10.895,10.93,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,FVG_FILLED,bull,,10.895,10.93,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,FVG_FILLED,bull,,10.929,11.024,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:30,AVAX,30m,FVG,bear,,11.051,11.093,0.423,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 11:00,AVAX,30m,OB_RETEST,bear,,10.981,11.128,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-01 12:00,AVAX,30m,FVG_RETRACE,bear,,11.051,11.093,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 13:30,AVAX,30m,SWEEP,bull,10.887,,,0.138,NY AM,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 15:30,AVAX,30m,SWEEP,bull,10.874,,,0.337,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 17:00,AVAX,30m,BOS,bear,10.874,,,0.988,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-01 17:00,AVAX,30m,ORDER_BLOCK,bear,,10.884,10.934,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 17:00,AVAX,30m,OB_INVALID,bull,,10.833,10.895,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 17:00,AVAX,30m,FVG_RETRACE,bull,,10.653,10.772,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 17:30,AVAX,30m,BREAKER_RETEST,bear,,10.833,10.895,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-01 17:30,AVAX,30m,OB_INVALID,bear,,10.884,10.934,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-01 18:00,AVAX,30m,BREAKER_RETEST,bull,,10.884,10.934,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 01:30,AVAX,30m,SWEEP,bull,10.87,,,0.208,Asia,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 01:30,AVAX,30m,FVG,bear,,10.945,10.972,0.327,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 02:00,AVAX,30m,FVG_RETRACE,bear,,10.945,10.972,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 02:30,AVAX,30m,SWEEP,bear,11.019,,,0.302,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 02:30,AVAX,30m,FVG_FILLED,bear,,10.945,10.972,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 03:00,AVAX,30m,WEAK_BREAK,bull,11.019,,,0.058,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-02 04:30,AVAX,30m,OB_INVALID,bear,,10.981,11.128,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 04:30,AVAX,30m,FVG_FILLED,bear,,11.051,11.093,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 05:00,AVAX,30m,BREAKER_RETEST,bull,,10.981,11.128,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 05:00,AVAX,30m,FVG,bull,,11.021,11.117,1.039,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 05:30,AVAX,30m,FVG_RETRACE,bull,,11.021,11.117,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-02 08:00,AVAX,30m,FVG_FILLED,bull,,11.021,11.117,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 11:30,AVAX,30m,SWEEP,bear,11.205,,,0.385,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 12:30,AVAX,30m,CHOCH,bull,11.205,,,0.012,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-02 12:30,AVAX,30m,ORDER_BLOCK,bull,,11.121,11.202,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 13:00,AVAX,30m,OB_RETEST,bull,,11.121,11.202,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-02 13:00,AVAX,30m,FVG_FILLED,bear,,11.12,11.251,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-02 14:00,AVAX,30m,OB_INVALID,bull,,11.121,11.202,,NY AM,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 14:30,AVAX,30m,BREAKER_RETEST,bear,,11.121,11.202,,Silver Bullet,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 17:30,AVAX,30m,SWEEP,bull,10.991,,,0.193,,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-02 18:30,AVAX,30m,CHOCH,bear,10.991,,,0.894,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-02 18:30,AVAX,30m,ORDER_BLOCK,bear,,10.94,11.055,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-02 19:00,AVAX,30m,BREAKER_RETEST,bull,,10.466,10.726,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 19:00,AVAX,30m,OB_RETEST,bull,,10.406,10.486,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-02 19:00,AVAX,30m,FVG_FILLED,bull,,10.653,10.772,,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 19:00,AVAX,30m,FVG,bear,,10.906,10.94,0.257,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 19:30,AVAX,30m,FVG,bear,,10.689,10.89,1.481,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 22:00,AVAX,30m,FVG_RETRACE,bear,,10.689,10.89,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 01:00,AVAX,30m,FVG_RETRACE,bear,,10.906,10.94,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 01:00,AVAX,30m,FVG_FILLED,bear,,10.689,10.89,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 01:00,AVAX,30m,FVG,bull,,10.822,10.866,0.401,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 01:30,AVAX,30m,OB_RETEST,bear,,10.94,11.055,,Asia,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-03 01:30,AVAX,30m,FVG_FILLED,bear,,10.906,10.94,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 03:00,AVAX,30m,FVG_RETRACE,bull,,10.822,10.866,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 10:00,AVAX,30m,SWEEP,bear,10.961,,,0.215,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 10:30,AVAX,30m,WEAK_BREAK,bull,10.961,,,0.497,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-03 12:00,AVAX,30m,OB_INVALID,bear,,10.94,11.055,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-03 12:30,AVAX,30m,FVG,bull,,11.059,11.089,0.383,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 13:00,AVAX,30m,FVG_RETRACE,bull,,11.059,11.089,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 13:30,AVAX,30m,BREAKER_RETEST,bull,,10.94,11.055,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-03 13:30,AVAX,30m,FVG_FILLED,bull,,11.059,11.089,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 14:30,AVAX,30m,SWEEP,bear,11.187,,,0.143,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 15:00,AVAX,30m,SWEEP,bear,11.2,,,0.228,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 16:00,AVAX,30m,FVG,bear,,11.095,11.144,0.642,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 17:30,AVAX,30m,FVG_RETRACE,bear,,11.095,11.144,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 17:30,AVAX,30m,FVG_FILLED,bear,,11.095,11.144,,,1h,RANGE,,smc-1.0,Binance
+2026-10-04 02:30,AVAX,30m,BOS,bear,11.063,,,0.1,Asia,1h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-10-04 07:00,AVAX,30m,FVG,bear,,11.057,11.07,0.319,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 07:30,AVAX,30m,BOS,bear,11.034,,,0.762,London,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 08:30,AVAX,30m,FVG_RETRACE,bear,,11.057,11.07,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 08:30,AVAX,30m,FVG_FILLED,bear,,11.057,11.07,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 12:00,AVAX,30m,SWEEP,bull,10.979,,,0.31,NY AM,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-04 12:30,AVAX,30m,BOS,bear,10.984,,,0.024,NY AM,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-04 12:30,AVAX,30m,ORDER_BLOCK,bear,,11.006,11.036,,NY AM,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-04 13:00,AVAX,30m,OB_RETEST,bear,,11.006,11.036,,NY AM,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-04 15:00,AVAX,30m,WEAK_BREAK,bull,11.04,,,0.259,Silver Bullet,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 15:00,AVAX,30m,OB_INVALID,bear,,11.006,11.036,,Silver Bullet,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-04 15:30,AVAX,30m,BREAKER_RETEST,bull,,11.006,11.036,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-04 15:30,AVAX,30m,FVG,bull,,11.021,11.035,0.317,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 17:00,AVAX,30m,SWEEP,bear,11.113,,,0.501,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 17:30,AVAX,30m,FVG_RETRACE,bull,,11.021,11.035,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 22:00,AVAX,30m,SWEEP,bull,11.027,,,0.113,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-04 22:30,AVAX,30m,SWEEP,bear,11.115,,,0.135,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 23:00,AVAX,30m,FVG,bull,,11.066,11.079,0.278,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 23:30,AVAX,30m,CHOCH,bull,11.115,,,0.427,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-04 23:30,AVAX,30m,ORDER_BLOCK,bull,,11.022,11.066,,,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,CHOCH,bear,11.022,,,0.382,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,ORDER_BLOCK,bear,,11.085,11.14,,Asia,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,OB_INVALID,bull,,11.022,11.066,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,FVG_FILLED,bull,,11.021,11.035,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,FVG_RETRACE,bull,,11.066,11.079,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 00:30,AVAX,30m,FVG_FILLED,bull,,11.066,11.079,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 01:00,AVAX,30m,BREAKER_RETEST,bear,,11.022,11.066,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-05 01:00,AVAX,30m,FVG,bear,,11.024,11.095,1.349,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 01:30,AVAX,30m,FVG_RETRACE,bear,,11.024,11.095,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 03:30,AVAX,30m,SWEEP,bull,10.948,,,0.573,Asia,1h,RANGE,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-05 05:00,AVAX,30m,SWEEP,bull,10.841,,,0.259,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-05 05:30,AVAX,30m,FVG,bear,,10.907,10.931,0.39,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 06:00,AVAX,30m,FVG_RETRACE,bear,,10.907,10.931,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 06:30,AVAX,30m,FVG_FILLED,bear,,10.907,10.931,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 06:30,AVAX,30m,FVG,bull,,10.907,10.926,0.307,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 07:30,AVAX,30m,WEAK_BREAK,bull,11.044,,,0.27,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 08:00,AVAX,30m,FVG,bull,,11.004,11.041,0.593,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 08:30,AVAX,30m,FVG_RETRACE,bull,,11.004,11.041,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 09:00,AVAX,30m,FVG_FILLED,bull,,11.004,11.041,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 12:30,AVAX,30m,BOS,bear,10.957,,,0.201,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 13:00,AVAX,30m,FVG_RETRACE,bull,,10.907,10.926,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 13:00,AVAX,30m,FVG_FILLED,bull,,10.907,10.926,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-05 13:00,AVAX,30m,FVG,bear,,10.963,10.997,0.561,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-05 13:30,AVAX,30m,FVG_RETRACE,bear,,10.963,10.997,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 14:00,AVAX,30m,FVG_FILLED,bear,,10.963,10.997,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-05 14:30,AVAX,30m,SWEEP,bear,11.042,,,0.159,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 15:00,AVAX,30m,BOS,bear,10.907,,,0.333,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 16:30,AVAX,30m,SWEEP,bull,10.826,,,0.484,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 16:30,AVAX,30m,FVG_FILLED,bull,,10.822,10.866,,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 21:00,AVAX,30m,FVG,bull,,10.914,10.955,0.655,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 22:30,AVAX,30m,WEAK_BREAK,bull,11.052,,,0.304,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 22:30,AVAX,30m,FVG,bull,,10.983,11.013,0.508,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 23:30,AVAX,30m,OB_RETEST,bear,,11.085,11.14,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-05 23:30,AVAX,30m,FVG_FILLED,bear,,11.024,11.095,,,1h,RANGE,,smc-1.0,Binance
+2026-10-06 00:00,AVAX,30m,SWEEP,bear,11.141,,,0.572,,1h,RANGE,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-06 00:30,AVAX,30m,SWEEP,bear,11.172,,,0.383,Asia,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-06 00:30,AVAX,30m,OB_INVALID,bear,,11.085,11.14,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 01:30,AVAX,30m,SWEEP,bear,11.267,,,0.522,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 01:30,AVAX,30m,BREAKER_RETEST,bull,,11.085,11.14,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 05:00,AVAX,30m,SWEEP,bear,11.3,,,0.68,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 05:00,AVAX,30m,FVG,bull,,11.209,11.233,0.291,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-06 05:30,AVAX,30m,WEAK_BREAK,bull,11.3,,,0.219,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-06 06:30,AVAX,30m,FVG_RETRACE,bull,,11.209,11.233,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 06:30,AVAX,30m,FVG_FILLED,bull,,11.209,11.233,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 07:00,AVAX,30m,SWEEP,bear,11.365,,,0.405,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 09:00,AVAX,30m,SWEEP,bear,11.4,,,0.118,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 11:30,AVAX,30m,OB_INVALID,bear,,11.129,11.365,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 12:00,AVAX,30m,WEAK_BREAK,bull,11.411,,,0.252,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-06 12:30,AVAX,30m,SWEEP,bear,11.55,,,1.466,NY AM,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 12:30,AVAX,30m,FVG,bull,,11.401,11.436,0.325,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 13:30,AVAX,30m,FVG_RETRACE,bull,,11.401,11.436,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:30,AVAX,30m,FVG_FILLED,bull,,11.401,11.436,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 19:30,AVAX,30m,SWEEP,bull,11.382,,,0.365,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 19:30,AVAX,30m,BOS,bear,11.396,,,0.125,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-06 19:30,AVAX,30m,BREAKER_RETEST,bull,,11.129,11.365,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 22:00,AVAX,30m,SWEEP,bear,11.55,,,0.311,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 22:00,AVAX,30m,FVG,bull,,11.458,11.51,0.502,,1h,TRANSITION,,smc-1.0,Binance
+2026-09-30 12:45,AVAX,15m,CHOCH,bull,11.22,,,1.057,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-09-30 12:45,AVAX,15m,ORDER_BLOCK,bull,,11.093,11.164,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-09-30 12:45,AVAX,15m,FVG_FILLED,bear,,11.223,11.268,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 13:00,AVAX,15m,SWEEP,bear,11.345,,,0.264,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 13:00,AVAX,15m,OB_INVALID,bear,,11.238,11.322,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 13:00,AVAX,15m,FVG,bull,,11.164,11.253,1.134,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 13:15,AVAX,15m,BREAKER_RETEST,bull,,11.238,11.322,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-09-30 13:15,AVAX,15m,FVG_RETRACE,bull,,11.164,11.253,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 13:45,AVAX,15m,SWEEP,bull,10.991,,,0.116,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 13:45,AVAX,15m,OB_RETEST,bull,,11.093,11.164,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-09-30 13:45,AVAX,15m,FVG_FILLED,bull,,11.164,11.253,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 14:00,AVAX,15m,FVG,bear,,11.132,11.255,1.297,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-09-30 14:15,AVAX,15m,WEAK_BREAK,bear,11.093,,,0.285,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 14:15,AVAX,15m,OB_INVALID,bull,,11.093,11.164,,Silver Bullet,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-09-30 14:45,AVAX,15m,FVG,bear,,10.943,11.021,0.745,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-09-30 15:45,AVAX,15m,FVG_RETRACE,bear,,10.943,11.021,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 16:15,AVAX,15m,FVG_FILLED,bear,,10.943,11.021,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 16:30,AVAX,15m,FVG,bull,,10.978,11.005,0.297,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 16:45,AVAX,15m,FVG_RETRACE,bull,,10.978,11.005,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-09-30 16:45,AVAX,15m,FVG_FILLED,bull,,10.978,11.005,,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 18:00,AVAX,15m,SWEEP,bear,11.05,,,0.188,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-09-30 18:30,AVAX,15m,SWEEP,bull,10.966,,,0.23,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-09-30 18:45,AVAX,15m,WEAK_BREAK,bear,10.966,,,0.323,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-09-30 22:45,AVAX,15m,FVG,bull,,10.923,10.95,0.488,,1h,RANGE,,smc-1.0,Binance
+2026-09-30 23:00,AVAX,15m,FVG_RETRACE,bull,,10.923,10.95,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 00:15,AVAX,15m,FVG_FILLED,bull,,10.923,10.95,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 00:45,AVAX,15m,SWEEP,bull,10.865,,,1.32,Asia,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-01 01:00,AVAX,15m,WEAK_BREAK,bear,10.865,,,0.312,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 01:00,AVAX,15m,FVG,bear,,10.88,10.897,0.338,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 01:15,AVAX,15m,FVG_RETRACE,bear,,10.88,10.897,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 01:30,AVAX,15m,FVG_FILLED,bear,,10.88,10.897,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 02:30,AVAX,15m,BOS,bull,10.919,,,0.194,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 02:45,AVAX,15m,SWEEP,bear,11.008,,,0.417,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 02:45,AVAX,15m,FVG,bull,,10.915,10.93,0.267,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 03:00,AVAX,15m,SWEEP,bear,11.065,,,0.124,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 03:00,AVAX,15m,FVG,bull,,10.929,10.982,0.904,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-01 03:30,AVAX,15m,BREAKER_RETEST,bear,,11.093,11.164,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-01 03:45,AVAX,15m,FVG_RETRACE,bear,,11.132,11.255,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 07:15,AVAX,15m,SWEEP,bear,11.147,,,0.199,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 07:30,AVAX,15m,CHOCH,bear,11.048,,,1.3,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-01 07:30,AVAX,15m,ORDER_BLOCK,bear,,11.085,11.14,,London,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 07:30,AVAX,15m,FVG_RETRACE,bull,,10.929,10.982,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 07:45,AVAX,15m,FVG,bear,,11.058,11.101,0.702,London,1h,RANGE,,smc-1.0,Binance
+2026-10-01 08:30,AVAX,15m,FVG_RETRACE,bear,,11.058,11.101,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 08:45,AVAX,15m,OB_RETEST,bear,,11.085,11.14,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-01 09:00,AVAX,15m,FVG_FILLED,bear,,11.058,11.101,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 09:15,AVAX,15m,SWEEP,bear,11.175,,,0.104,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-01 10:00,AVAX,15m,FVG,bear,,11.065,11.094,0.434,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:15,AVAX,15m,SWEEP,bull,10.954,,,0.255,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 10:30,AVAX,15m,BOS,bear,10.954,,,0.485,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-01 10:30,AVAX,15m,ORDER_BLOCK,bear,,11.093,11.182,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-01 10:30,AVAX,15m,FVG_RETRACE,bull,,10.915,10.93,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 10:30,AVAX,15m,FVG_FILLED,bull,,10.915,10.93,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 10:30,AVAX,15m,FVG_FILLED,bull,,10.929,10.982,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 12:00,AVAX,15m,FVG_RETRACE,bear,,11.065,11.094,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 13:30,AVAX,15m,SWEEP,bull,10.887,,,0.2,NY AM,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 14:00,AVAX,15m,FVG,bull,,10.94,10.961,0.314,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 14:15,AVAX,15m,FVG_RETRACE,bull,,10.94,10.961,,Silver Bullet,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 14:15,AVAX,15m,FVG_FILLED,bull,,10.94,10.961,,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 15:15,AVAX,15m,SWEEP,bull,10.874,,,0.466,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-01 15:45,AVAX,15m,BOS,bear,10.874,,,0.306,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-01 17:00,AVAX,15m,BOS,bear,10.829,,,0.68,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 17:00,AVAX,15m,FVG_RETRACE,bull,,10.653,10.746,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 17:45,AVAX,15m,WEAK_BREAK,bull,10.965,,,0.236,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-01 17:45,AVAX,15m,FVG,bull,,10.865,10.931,0.8,,1h,RANGE,,smc-1.0,Binance
+2026-10-01 18:00,AVAX,15m,FVG_RETRACE,bull,,10.865,10.931,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-01 22:00,AVAX,15m,FVG,bear,,10.929,10.971,0.631,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 22:15,AVAX,15m,FVG_RETRACE,bear,,10.929,10.971,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 22:15,AVAX,15m,FVG_FILLED,bear,,10.929,10.971,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 22:30,AVAX,15m,FVG,bull,,10.929,10.955,0.405,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-01 22:45,AVAX,15m,FVG_RETRACE,bull,,10.929,10.955,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-01 23:00,AVAX,15m,FVG_FILLED,bull,,10.929,10.955,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 01:15,AVAX,15m,FVG,bear,,10.945,10.958,0.254,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 01:30,AVAX,15m,SWEEP,bull,10.87,,,0.332,Asia,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 01:30,AVAX,15m,FVG_FILLED,bull,,10.865,10.931,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 02:00,AVAX,15m,FVG_RETRACE,bear,,10.945,10.958,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 02:15,AVAX,15m,CHOCH,bull,11.019,,,0.199,Asia,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-02 02:15,AVAX,15m,ORDER_BLOCK,bull,,10.874,10.925,,Asia,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 02:15,AVAX,15m,FVG_FILLED,bear,,10.945,10.958,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 02:30,AVAX,15m,FVG,bull,,10.945,10.961,0.258,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 02:45,AVAX,15m,FVG_RETRACE,bull,,10.945,10.961,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 03:15,AVAX,15m,SWEEP,bear,11.044,,,0.482,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 04:30,AVAX,15m,BOS,bull,11.073,,,1.675,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-02 04:30,AVAX,15m,ORDER_BLOCK,bull,,10.991,11.032,,,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 04:30,AVAX,15m,OB_INVALID,bear,,11.085,11.14,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 04:30,AVAX,15m,OB_RETEST,bear,,11.093,11.182,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-02 04:30,AVAX,15m,FVG_FILLED,bear,,11.065,11.094,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 04:45,AVAX,15m,BREAKER_RETEST,bull,,11.085,11.14,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 04:45,AVAX,15m,FVG,bull,,11.032,11.117,1.286,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 05:00,AVAX,15m,OB_INVALID,bear,,11.093,11.182,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 05:15,AVAX,15m,BREAKER_RETEST,bull,,11.093,11.182,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 05:15,AVAX,15m,FVG_RETRACE,bull,,11.032,11.117,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-02 07:30,AVAX,15m,OB_RETEST,bull,,10.991,11.032,,London,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-02 07:30,AVAX,15m,FVG_FILLED,bull,,11.032,11.117,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 07:30,AVAX,15m,FVG,bear,,11.073,11.094,0.378,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 08:00,AVAX,15m,FVG_RETRACE,bear,,11.073,11.094,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-02 08:00,AVAX,15m,FVG_FILLED,bear,,11.073,11.094,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 08:30,AVAX,15m,BOS,bull,11.124,,,0.161,London,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-02 08:30,AVAX,15m,ORDER_BLOCK,bull,,11.061,11.112,,London,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 08:45,AVAX,15m,OB_RETEST,bull,,11.061,11.112,,London,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-02 10:00,AVAX,15m,SWEEP,bear,11.162,,,0.126,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 10:15,AVAX,15m,BOS,bull,11.162,,,0.457,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-02 10:15,AVAX,15m,FVG,bull,,11.131,11.153,0.392,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 10:30,AVAX,15m,FVG_RETRACE,bull,,11.131,11.153,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 12:00,AVAX,15m,FVG_FILLED,bull,,11.131,11.153,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-02 12:45,AVAX,15m,SWEEP,bear,11.237,,,0.503,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-02 12:45,AVAX,15m,FVG_FILLED,bear,,11.132,11.255,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-02 13:00,AVAX,15m,BOS,bull,11.237,,,0.108,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-02 13:00,AVAX,15m,ORDER_BLOCK,bull,,11.121,11.178,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-02 13:15,AVAX,15m,OB_RETEST,bull,,11.121,11.178,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-02 14:00,AVAX,15m,SWEEP,bull,11.088,,,0.16,NY AM,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 14:00,AVAX,15m,OB_INVALID,bull,,11.121,11.178,,NY AM,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 14:15,AVAX,15m,BREAKER_RETEST,bear,,11.121,11.178,,Silver Bullet,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 14:30,AVAX,15m,WEAK_BREAK,bear,11.088,,,0.014,Silver Bullet,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-02 14:45,AVAX,15m,SWEEP,bull,11.054,,,0.27,Silver Bullet,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 17:15,AVAX,15m,OB_INVALID,bull,,11.061,11.112,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 17:30,AVAX,15m,SWEEP,bull,10.991,,,0.243,,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-02 17:45,AVAX,15m,SWEEP,bull,10.957,,,0.217,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-02 17:45,AVAX,15m,WEAK_BREAK,bear,10.991,,,0.294,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-02 17:45,AVAX,15m,OB_INVALID,bull,,10.991,11.032,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 17:45,AVAX,15m,FVG_FILLED,bull,,10.945,10.961,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 18:00,AVAX,15m,BREAKER_RETEST,bear,,10.991,11.032,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 18:15,AVAX,15m,BREAKER_RETEST,bear,,11.061,11.112,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-02 18:30,AVAX,15m,OB_RETEST,bull,,10.874,10.925,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-02 18:45,AVAX,15m,OB_INVALID,bull,,10.874,10.925,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-02 18:45,AVAX,15m,FVG_FILLED,bull,,10.653,10.746,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 18:45,AVAX,15m,FVG,bear,,10.906,11.002,0.915,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-02 19:00,AVAX,15m,FVG,bear,,10.599,10.89,2.692,,1h,RANGE,,smc-1.0,Binance
+2026-10-02 19:15,AVAX,15m,FVG_RETRACE,bear,,10.599,10.89,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-02 22:00,AVAX,15m,BOS,bull,10.646,,,0.383,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-02 23:00,AVAX,15m,FVG,bull,,10.677,10.713,0.456,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-02 23:15,AVAX,15m,FVG_RETRACE,bull,,10.677,10.713,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-02 23:30,AVAX,15m,FVG_FILLED,bull,,10.677,10.713,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 00:00,AVAX,15m,FVG,bull,,10.742,10.774,0.445,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 00:15,AVAX,15m,FVG_RETRACE,bull,,10.742,10.774,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 00:30,AVAX,15m,BREAKER_RETEST,bear,,10.874,10.925,,Asia,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-03 00:45,AVAX,15m,FVG_RETRACE,bear,,10.906,11.002,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 00:45,AVAX,15m,FVG_FILLED,bear,,10.599,10.89,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 00:45,AVAX,15m,FVG,bull,,10.827,10.866,0.553,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-03 03:00,AVAX,15m,FVG_RETRACE,bull,,10.827,10.866,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-03 05:30,AVAX,15m,SWEEP,bear,10.953,,,0.142,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 07:15,AVAX,15m,SWEEP,bull,10.87,,,0.178,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-03 07:30,AVAX,15m,WEAK_BREAK,bear,10.87,,,0.181,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-03 10:00,AVAX,15m,SWEEP,bear,10.961,,,0.356,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 10:15,AVAX,15m,BOS,bull,10.961,,,0.322,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-03 10:15,AVAX,15m,FVG,bull,,10.911,10.942,0.66,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 10:30,AVAX,15m,FVG_FILLED,bear,,10.906,11.002,,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 11:45,AVAX,15m,FVG,bull,,11.014,11.054,0.766,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 12:00,AVAX,15m,FVG,bull,,11.059,11.106,0.879,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 12:15,AVAX,15m,FVG_RETRACE,bull,,11.059,11.106,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 13:15,AVAX,15m,FVG_RETRACE,bull,,11.014,11.054,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 13:15,AVAX,15m,FVG_FILLED,bull,,11.059,11.106,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 14:00,AVAX,15m,FVG,bull,,11.065,11.092,0.52,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-03 14:30,AVAX,15m,SWEEP,bear,11.187,,,0.212,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 14:45,AVAX,15m,SWEEP,bear,11.2,,,0.331,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 15:30,AVAX,15m,FVG_RETRACE,bull,,11.065,11.092,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 15:30,AVAX,15m,FVG,bear,,11.11,11.144,0.626,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 16:15,AVAX,15m,FVG_FILLED,bull,,11.065,11.092,,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 17:15,AVAX,15m,FVG_RETRACE,bear,,11.11,11.144,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 17:30,AVAX,15m,FVG_FILLED,bear,,11.11,11.144,,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 17:30,AVAX,15m,FVG,bull,,11.072,11.108,0.769,,1h,RANGE,,smc-1.0,Binance
+2026-10-03 17:45,AVAX,15m,FVG_RETRACE,bull,,11.072,11.108,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-03 20:00,AVAX,15m,SWEEP,bear,11.145,,,0.113,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-03 22:15,AVAX,15m,SWEEP,bull,11.079,,,0.441,,1h,WEAK_BULL,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-03 22:15,AVAX,15m,FVG_FILLED,bull,,11.072,11.108,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-03 23:45,AVAX,15m,FVG,bull,,11.108,11.123,0.466,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-04 00:00,AVAX,15m,FVG_RETRACE,bull,,11.108,11.123,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-04 00:45,AVAX,15m,FVG_FILLED,bull,,11.108,11.123,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-04 01:30,AVAX,15m,CHOCH,bear,11.075,,,0.064,Asia,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-04 01:30,AVAX,15m,ORDER_BLOCK,bear,,11.104,11.141,,Asia,1h,WEAK_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-04 02:30,AVAX,15m,FVG,bear,,11.062,11.069,0.261,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-04 02:45,AVAX,15m,FVG_RETRACE,bear,,11.062,11.069,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-04 02:45,AVAX,15m,FVG_FILLED,bear,,11.062,11.069,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-04 03:30,AVAX,15m,SWEEP,bull,11.045,,,0.119,Asia,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-04 03:30,AVAX,15m,BOS,bear,11.051,,,0.158,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 05:15,AVAX,15m,SWEEP,bear,11.077,,,0.761,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 05:45,AVAX,15m,CHOCH,bull,11.077,,,1.074,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-04 05:45,AVAX,15m,ORDER_BLOCK,bull,,11.058,11.095,,,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-04 05:45,AVAX,15m,AMD,bull,,,,,,1h,COMPRESSION,consolidation -> sweep (9 candle(s) ago) -> CHoCH,smc-1.0,Binance
+2026-10-04 05:45,AVAX,15m,OB_RETEST,bear,,11.104,11.141,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-04 06:00,AVAX,15m,OB_RETEST,bull,,11.058,11.095,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-04 06:15,AVAX,15m,OB_INVALID,bull,,11.058,11.095,,London,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-04 06:30,AVAX,15m,BREAKER_RETEST,bear,,11.058,11.095,,London,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-04 06:45,AVAX,15m,WEAK_BREAK,bear,11.034,,,0.19,London,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 07:15,AVAX,15m,FVG_FILLED,bull,,11.014,11.054,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 07:45,AVAX,15m,FVG,bear,,11.005,11.014,0.342,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 08:00,AVAX,15m,FVG_RETRACE,bear,,11.005,11.014,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 08:00,AVAX,15m,FVG_FILLED,bear,,11.005,11.014,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 08:15,AVAX,15m,FVG,bull,,11.005,11.025,0.685,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 08:30,AVAX,15m,FVG_RETRACE,bull,,11.005,11.025,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 09:00,AVAX,15m,FVG_FILLED,bull,,11.005,11.025,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 11:45,AVAX,15m,SWEEP,bull,10.979,,,0.495,NY AM,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-04 12:00,AVAX,15m,FVG,bear,,10.999,11.018,0.701,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 12:15,AVAX,15m,WEAK_BREAK,bear,10.984,,,0.074,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 12:15,AVAX,15m,FVG_RETRACE,bear,,10.999,11.018,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 14:30,AVAX,15m,FVG_FILLED,bear,,10.999,11.018,,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 14:45,AVAX,15m,FVG,bull,,10.998,11.01,0.437,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 15:00,AVAX,15m,BOS,bull,11.04,,,0.401,Silver Bullet,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 15:15,AVAX,15m,SWEEP,bear,11.072,,,0.754,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 17:00,AVAX,15m,SWEEP,bear,11.113,,,0.696,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-04 17:15,AVAX,15m,WEAK_BREAK,bear,11.046,,,0.451,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 17:30,AVAX,15m,FVG,bear,,11.061,11.081,0.57,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 17:45,AVAX,15m,FVG_RETRACE,bear,,11.061,11.081,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 18:45,AVAX,15m,FVG_FILLED,bear,,11.061,11.081,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 21:30,AVAX,15m,SWEEP,bull,11.027,,,0.125,,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-04 22:00,AVAX,15m,WEAK_BREAK,bear,11.033,,,0.16,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-04 22:30,AVAX,15m,SWEEP,bear,11.115,,,0.166,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-04 22:30,AVAX,15m,FVG,bull,,11.066,11.081,0.411,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-04 22:45,AVAX,15m,FVG_RETRACE,bull,,11.066,11.081,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-04 23:15,AVAX,15m,BOS,bull,11.115,,,0.283,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-05 00:15,AVAX,15m,FVG_FILLED,bull,,11.066,11.081,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,CHOCH,bear,11.022,,,0.498,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,ORDER_BLOCK,bear,,11.117,11.14,,Asia,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,AMD,bear,,,,,Asia,1h,RANGE,consolidation -> sweep (8 candle(s) ago) -> CHoCH,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,FVG_RETRACE,bull,,10.998,11.01,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,FVG_FILLED,bull,,10.998,11.01,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 00:30,AVAX,15m,FVG,bear,,11.07,11.102,0.817,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 00:45,AVAX,15m,FVG,bear,,11.024,11.04,0.391,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 01:30,AVAX,15m,FVG_RETRACE,bear,,11.024,11.04,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 01:30,AVAX,15m,FVG_FILLED,bear,,11.024,11.04,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 01:45,AVAX,15m,SWEEP,bull,10.96,,,0.332,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 02:00,AVAX,15m,FVG,bear,,10.989,11.009,0.489,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 02:15,AVAX,15m,FVG_RETRACE,bear,,10.989,11.009,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 02:15,AVAX,15m,FVG_FILLED,bear,,10.989,11.009,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 03:30,AVAX,15m,SWEEP,bull,10.947,,,0.77,Asia,1h,RANGE,"sell-side liquidity swept (PDL, equal lows)",smc-1.0,Binance
+2026-10-05 03:30,AVAX,15m,FVG_RETRACE,bull,,10.911,10.942,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 03:45,AVAX,15m,FVG,bear,,10.981,10.995,0.322,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-05 04:00,AVAX,15m,BOS,bear,10.947,,,0.069,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 04:45,AVAX,15m,SWEEP,bull,10.841,,,0.347,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 04:45,AVAX,15m,BOS,bear,10.916,,,1.181,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-05 04:45,AVAX,15m,ORDER_BLOCK,bear,,10.931,10.966,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-05 04:45,AVAX,15m,FVG_FILLED,bull,,10.827,10.866,,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 04:45,AVAX,15m,FVG_FILLED,bull,,10.911,10.942,,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 05:00,AVAX,15m,FVG,bear,,10.903,10.932,0.601,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 05:15,AVAX,15m,FVG_RETRACE,bear,,10.903,10.932,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 06:15,AVAX,15m,OB_RETEST,bear,,10.931,10.966,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-05 06:15,AVAX,15m,FVG_RETRACE,bear,,10.981,10.995,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 06:15,AVAX,15m,FVG_FILLED,bear,,10.903,10.932,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 06:30,AVAX,15m,FVG,bull,,10.929,10.942,0.279,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 06:45,AVAX,15m,FVG_RETRACE,bull,,10.929,10.942,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 06:45,AVAX,15m,FVG_FILLED,bull,,10.929,10.942,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 07:00,AVAX,15m,OB_INVALID,bear,,10.931,10.966,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-05 07:00,AVAX,15m,FVG_FILLED,bear,,10.981,10.995,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 07:15,AVAX,15m,SWEEP,bear,11.044,,,0.209,London,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-05 07:15,AVAX,15m,FVG,bull,,10.963,10.985,0.446,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 07:30,AVAX,15m,WEAK_BREAK,bull,11.044,,,0.344,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 07:45,AVAX,15m,FVG_RETRACE,bear,,11.07,11.102,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 09:00,AVAX,15m,BREAKER_RETEST,bull,,10.931,10.966,,London,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-05 09:00,AVAX,15m,FVG_RETRACE,bull,,10.963,10.985,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 09:00,AVAX,15m,FVG_FILLED,bull,,10.963,10.985,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-05 10:30,AVAX,15m,FVG,bull,,10.981,10.993,0.281,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 10:45,AVAX,15m,FVG_RETRACE,bull,,10.981,10.993,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 10:45,AVAX,15m,FVG_FILLED,bull,,10.981,10.993,,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 12:30,AVAX,15m,BOS,bear,10.957,,,0.286,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 12:30,AVAX,15m,FVG,bear,,10.981,10.997,0.381,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-05 13:15,AVAX,15m,FVG_RETRACE,bear,,10.981,10.997,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 14:00,AVAX,15m,FVG_FILLED,bear,,10.981,10.997,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-05 14:15,AVAX,15m,SWEEP,bear,11.042,,,0.213,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 14:45,AVAX,15m,BOS,bear,10.907,,,0.281,Silver Bullet,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-05 14:45,AVAX,15m,ORDER_BLOCK,bear,,10.968,11.052,,Silver Bullet,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-05 14:45,AVAX,15m,FVG,bear,,10.945,10.968,0.408,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-05 15:00,AVAX,15m,FVG,bear,,10.895,10.943,0.871,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-05 15:15,AVAX,15m,FVG_RETRACE,bear,,10.895,10.943,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 15:30,AVAX,15m,FVG_RETRACE,bear,,10.945,10.968,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 15:30,AVAX,15m,FVG_FILLED,bear,,10.895,10.943,,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 16:15,AVAX,15m,SWEEP,bull,10.826,,,0.599,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-05 20:15,AVAX,15m,WEAK_BREAK,bull,10.918,,,0.308,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-05 20:30,AVAX,15m,OB_RETEST,bear,,10.968,11.052,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-05 20:30,AVAX,15m,FVG_FILLED,bear,,10.945,10.968,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 20:30,AVAX,15m,FVG,bull,,10.884,10.931,1.098,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 20:45,AVAX,15m,FVG,bull,,10.933,10.955,0.517,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-05 22:00,AVAX,15m,WEAK_BREAK,bull,10.994,,,0.536,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-05 22:15,AVAX,15m,SWEEP,bear,11.052,,,0.478,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 22:15,AVAX,15m,FVG,bull,,10.989,11.013,0.615,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 22:30,AVAX,15m,OB_INVALID,bear,,10.968,11.052,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-05 22:30,AVAX,15m,FVG,bull,,11.016,11.031,0.384,,1h,RANGE,,smc-1.0,Binance
+2026-10-05 22:45,AVAX,15m,BREAKER_RETEST,bull,,10.968,11.052,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-05 22:45,AVAX,15m,FVG_RETRACE,bull,,11.016,11.031,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-05 23:15,AVAX,15m,SWEEP,bear,11.08,,,0.256,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-05 23:30,AVAX,15m,OB_RETEST,bear,,11.117,11.14,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-05 23:30,AVAX,15m,FVG_FILLED,bear,,11.07,11.102,,,1h,RANGE,,smc-1.0,Binance
+2026-10-06 00:00,AVAX,15m,SWEEP,bear,11.141,,,0.836,,1h,RANGE,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-06 00:15,AVAX,15m,SWEEP,bear,11.172,,,0.335,Asia,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-06 00:15,AVAX,15m,OB_INVALID,bear,,11.104,11.141,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 00:15,AVAX,15m,OB_INVALID,bear,,11.117,11.14,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 00:30,AVAX,15m,SWEEP,bear,11.175,,,0.444,Asia,1h,RANGE,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-10-06 01:15,AVAX,15m,SWEEP,bear,11.267,,,0.703,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 01:30,AVAX,15m,BREAKER_RETEST,bull,,11.104,11.141,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 01:30,AVAX,15m,BREAKER_RETEST,bull,,11.117,11.14,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 04:15,AVAX,15m,WEAK_BREAK,bull,11.219,,,0.354,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-06 04:30,AVAX,15m,FVG,bull,,11.209,11.231,0.367,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-06 06:15,AVAX,15m,FVG_RETRACE,bull,,11.209,11.231,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 06:15,AVAX,15m,FVG_FILLED,bull,,11.209,11.231,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 06:45,AVAX,15m,CHOCH,bull,11.354,,,0.457,London,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-06 06:45,AVAX,15m,ORDER_BLOCK,bull,,11.197,11.295,,London,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 07:00,AVAX,15m,OB_RETEST,bull,,11.197,11.295,,London,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-06 08:00,AVAX,15m,FVG,bull,,11.276,11.305,0.369,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 08:30,AVAX,15m,FVG_RETRACE,bull,,11.276,11.305,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 08:30,AVAX,15m,FVG_FILLED,bull,,11.276,11.305,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 08:45,AVAX,15m,SWEEP,bear,11.4,,,0.148,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 11:30,AVAX,15m,FVG,bull,,11.332,11.355,0.334,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 11:45,AVAX,15m,BOS,bull,11.411,,,0.887,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-06 11:45,AVAX,15m,ORDER_BLOCK,bull,,11.32,11.387,,NY AM,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-06 12:00,AVAX,15m,FVG,bull,,11.401,11.424,0.324,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 12:15,AVAX,15m,OB_INVALID,bear,,11.51,11.653,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-06 12:15,AVAX,15m,FVG_FILLED,bear,,11.512,11.592,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 12:30,AVAX,15m,BREAKER_RETEST,bull,,11.51,11.653,,NY AM,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-06 12:30,AVAX,15m,FVG,bull,,11.49,11.519,0.324,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 12:45,AVAX,15m,FVG_RETRACE,bull,,11.49,11.519,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 12:45,AVAX,15m,FVG_FILLED,bull,,11.49,11.519,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 13:15,AVAX,15m,FVG_RETRACE,bull,,11.401,11.424,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 13:30,AVAX,15m,FVG_FILLED,bull,,11.401,11.424,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 13:30,AVAX,15m,FVG,bear,,11.442,11.468,0.303,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 13:45,AVAX,15m,OB_RETEST,bull,,11.32,11.387,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-06 13:45,AVAX,15m,FVG_RETRACE,bear,,11.442,11.468,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 14:15,AVAX,15m,FVG_FILLED,bear,,11.442,11.468,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 18:30,AVAX,15m,FVG,bear,,11.475,11.497,0.292,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 18:45,AVAX,15m,FVG_RETRACE,bear,,11.475,11.497,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 18:45,AVAX,15m,FVG_FILLED,bear,,11.475,11.497,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 19:30,AVAX,15m,SWEEP,bull,11.382,,,0.55,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-06 19:30,AVAX,15m,WEAK_BREAK,bear,11.428,,,0.651,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-06 19:30,AVAX,15m,FVG_RETRACE,bull,,11.332,11.355,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 21:45,AVAX,15m,SWEEP,bear,11.55,,,0.447,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-06 21:45,AVAX,15m,FVG,bull,,11.469,11.523,0.742,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-06 22:00,AVAX,15m,FVG_RETRACE,bull,,11.469,11.523,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-06 22:15,AVAX,15m,BOS,bull,11.55,,,0.306,,1h,TRANSITION,no displacement,smc-1.0,Binance
