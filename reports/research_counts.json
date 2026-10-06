@@ -271,5 +271,34 @@
   "near_duplicates": 18,
   "ideas": 22,
   "new_cards": 0
+ },
+ {
+  "date": "2026-10-06",
+  "run_utc": "2026-10-06 00:56",
+  "backtests": 448,
+  "per_coin": {
+   "BNB": 56,
+   "BTC": 56,
+   "ENA": 56,
+   "ETH": 56,
+   "SOL": 56,
+   "SUI": 56,
+   "XRP": 56,
+   "ZEC": 56
+  },
+  "strategies": 24,
+  "tests": 56,
+  "tests_per_coin": 56,
+  "coins": 8,
+  "best_avg_r": 0.251,
+  "best_cell": "donchian_breakout-VEXIT v1.0 4h",
+  "cells_testing": 17,
+  "cells_failed": 39,
+  "cells_paper": 0,
+  "lab_cards": 8,
+  "sources": 20,
+  "near_duplicates": 6,
+  "ideas": 22,
+  "new_cards": 0
  }
 ]

@@ -324,3 +324,20 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - status: KEEP
   - today's evidence: ENA is a research-only coin and its regime was UNCLEAR, where the playbook says no strategy has 30+ backtest trades. Of the cells that signalled, bb_squeeze_breakout@1.0|15m is failing today (384 trades, -0.41R, BACKTEST).
   - action: none.
+
+### BTC up +1.6% (7.5x ATR), 2026-10-04 13:00 -> 2026-10-05 02:00
+- timestamp: 2026-10-06 00:56 UTC · source: engine: daily research run · evidence: FACT: move of 7.5x the 1H ATR within 12 hours; 56 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-13
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: no valid stop / target
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 30m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 1h: signal
+  - trend_pullback v1.0 30m: signal
+
+### ENA up +9.5% (7.8x ATR), 2026-10-05 05:00 -> 2026-10-05 12:00
+- timestamp: 2026-10-06 00:56 UTC · source: engine: daily research run · evidence: FACT: move of 7.8x the 1H ATR within 12 hours; 56 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ENA · timeframe: 1h · regime: RANGE · review: 2026-10-13
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate

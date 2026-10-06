@@ -124,3 +124,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT-VRVOL-S5@1.0 1h**: FORMALIZED → **FAILED** (avg -0.04R/trade (needs +0.10R); profit factor 0.93; max drawdown 152.0R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-VRVOL-S5@1.0 30m**: FORMALIZED → **FAILED** (avg -0.06R/trade (needs +0.10R); profit factor 0.91; max drawdown 83.7R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-VRVOL-S5@1.0 4h**: FORMALIZED → **BACKTESTING** (max drawdown 20.0R)
+
+## 2026-10-06 00:56 UTC
+- **bb_squeeze_breakout@1.0 1h**: FAILED → **BACKTESTING** (avg +0.02R/trade (needs +0.10R); profit factor 1.05; max drawdown 28.5R)
