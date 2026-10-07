@@ -8,10 +8,14 @@
   "BNB",
   "UNI"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
+ "out_streak": {
+  "UNI": 1
+ },
  "suspended": {},
- "runs": 283,
+ "runs": 284,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
