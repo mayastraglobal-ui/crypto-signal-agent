@@ -135,3 +135,77 @@ trial,first_tested_utc,strategy,version,tf,origin
 134,2026-10-05 00:57,donchian_breakout-VEXIT-VRVOL-S5,1.0,1h,re-evaluation: family gates v1
 135,2026-10-05 00:57,donchian_breakout-VEXIT-VRVOL-S5,1.0,30m,re-evaluation: family gates v1
 136,2026-10-05 00:57,donchian_breakout-VEXIT-VRVOL-S5,1.0,4h,re-evaluation: family gates v1
+137,2026-10-07 00:58,PB-A-APLUS,1.0,5m,library
+138,2026-10-07 00:58,PB-A-GRADED,1.0,5m,library
+139,2026-10-07 00:58,PB-A-PULLBACK,1.0,5m,library
+140,2026-10-07 00:58,PB-A-PULLBACK-CVD,1.0,5m,library
+141,2026-10-07 00:58,PB-A-PULLBACK-LDN,1.0,5m,library
+142,2026-10-07 00:58,PB-B-APLUS,1.0,15m,library
+143,2026-10-07 00:58,PB-B-APLUS,1.0,5m,library
+144,2026-10-07 00:58,PB-B-GRADED,1.0,15m,library
+145,2026-10-07 00:58,PB-B-GRADED,1.0,5m,library
+146,2026-10-07 00:58,PB-B-SWEEP,1.0,5m,library
+147,2026-10-07 00:58,PB-B-SWEEP-15M,1.0,15m,library
+148,2026-10-07 00:58,PB-B-SWEEP-LIMIT,1.0,5m,library
+149,2026-10-07 00:58,PB-B-SWEEP-noCVD,1.0,5m,library
+150,2026-10-07 00:58,PB-C-APLUS,1.0,5m,library
+151,2026-10-07 00:58,PB-C-BREAKOUT,1.0,5m,library
+152,2026-10-07 00:58,PB-C-BREAKOUT-W20,1.0,5m,library
+153,2026-10-07 00:58,PB-C-BREAKOUT-noCVD,1.0,5m,library
+154,2026-10-07 00:58,PB-C-GRADED,1.0,5m,library
+155,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,15m,library
+156,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,1h,library
+157,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,30m,library
+158,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,5m,library
+159,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,15m,library
+160,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,1h,library
+161,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,30m,library
+162,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,5m,library
+163,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,15m,library
+164,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,1h,library
+165,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,30m,library
+166,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,5m,library
+167,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,15m,library
+168,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,1h,library
+169,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,30m,library
+170,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,5m,library
+171,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,1h,lab
+172,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,30m,lab
+173,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,4h,lab
+174,2026-10-07 00:58,PB-A-APLUS,1.0,5m,re-evaluation: family gates v1
+175,2026-10-07 00:58,PB-A-GRADED,1.0,5m,re-evaluation: family gates v1
+176,2026-10-07 00:58,PB-A-PULLBACK,1.0,5m,re-evaluation: family gates v1
+177,2026-10-07 00:58,PB-A-PULLBACK-CVD,1.0,5m,re-evaluation: family gates v1
+178,2026-10-07 00:58,PB-A-PULLBACK-LDN,1.0,5m,re-evaluation: family gates v1
+179,2026-10-07 00:58,PB-B-APLUS,1.0,15m,re-evaluation: family gates v1
+180,2026-10-07 00:58,PB-B-APLUS,1.0,5m,re-evaluation: family gates v1
+181,2026-10-07 00:58,PB-B-GRADED,1.0,15m,re-evaluation: family gates v1
+182,2026-10-07 00:58,PB-B-GRADED,1.0,5m,re-evaluation: family gates v1
+183,2026-10-07 00:58,PB-B-SWEEP,1.0,5m,re-evaluation: family gates v1
+184,2026-10-07 00:58,PB-B-SWEEP-15M,1.0,15m,re-evaluation: family gates v1
+185,2026-10-07 00:58,PB-B-SWEEP-LIMIT,1.0,5m,re-evaluation: family gates v1
+186,2026-10-07 00:58,PB-B-SWEEP-noCVD,1.0,5m,re-evaluation: family gates v1
+187,2026-10-07 00:58,PB-C-APLUS,1.0,5m,re-evaluation: family gates v1
+188,2026-10-07 00:58,PB-C-BREAKOUT,1.0,5m,re-evaluation: family gates v1
+189,2026-10-07 00:58,PB-C-BREAKOUT-W20,1.0,5m,re-evaluation: family gates v1
+190,2026-10-07 00:58,PB-C-BREAKOUT-noCVD,1.0,5m,re-evaluation: family gates v1
+191,2026-10-07 00:58,PB-C-GRADED,1.0,5m,re-evaluation: family gates v1
+192,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,15m,re-evaluation: family gates v1
+193,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,1h,re-evaluation: family gates v1
+194,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,30m,re-evaluation: family gates v1
+195,2026-10-07 00:58,TRD-H4-BREAKOUT,1.0,5m,re-evaluation: family gates v1
+196,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,15m,re-evaluation: family gates v1
+197,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,1h,re-evaluation: family gates v1
+198,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,30m,re-evaluation: family gates v1
+199,2026-10-07 00:58,TRD-H4-BREAKOUT-noT4,1.0,5m,re-evaluation: family gates v1
+200,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,15m,re-evaluation: family gates v1
+201,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,1h,re-evaluation: family gates v1
+202,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,30m,re-evaluation: family gates v1
+203,2026-10-07 00:58,TRD-H4-PULLBACK,1.0,5m,re-evaluation: family gates v1
+204,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,15m,re-evaluation: family gates v1
+205,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,1h,re-evaluation: family gates v1
+206,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,30m,re-evaluation: family gates v1
+207,2026-10-07 00:58,TRD-H4-PULLBACK-noT4,1.0,5m,re-evaluation: family gates v1
+208,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,1h,re-evaluation: family gates v1
+209,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,30m,re-evaluation: family gates v1
+210,2026-10-07 00:58,donchian_breakout-VEXIT-S4,1.1,4h,re-evaluation: family gates v1

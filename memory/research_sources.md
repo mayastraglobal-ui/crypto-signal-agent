@@ -426,3 +426,192 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - data: Coinmarketcap daily closes turned into weekly returns, 2014 to 2018, coins above $1 million market cap (109 coins in 2014, 1,583 in 2018; 1,707 in total). Before trading costs: the paper itself says its size strategy does not account for trading costs.
   - what it means for this system: our signal coins are all large coins, the group where the paper finds momentum. The horizon is 1 to 4 weeks with weekly rebalancing, far slower than our 30m and 1h cells and closest to 4h trades held for days. It is a cross-coin (relative) finding: coins that rose MORE than the others kept doing better. Our cards only look at one coin at a time, except through btc_ret(n). It is not evidence that any of our cards works: 2014-2018 data, thousands of small coins, no costs.
   - derived hypothesis: 'Hypothesis: relative-strength filter for the 4h breakout (from C03)' in memory/experiments.md.
+
+### PB-A-PULLBACK@1.0 - Playbook A: 1H trend + bias, 15m pullback (>= 0.8 ATR, lower volume, higher low intact) into the EMA21/VWAP zone near a level, 5m rejection/engulfing trigger above EMA9 with volume, NY session.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-A-PULLBACK@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-A-PULLBACK v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-05
+  - title / source: Operator's playbook section 5.1 Strategy A: Trend Pullback (docs/playbook/Crypto_Scalping_Playbook.txt)
+  - URL: none recorded
+  - claim: In a 1H trend with a matching bias, a 15m pullback into the EMA21 / VWAP zone at a marked level that ends with a 5m rejection or engulfing candle resumes the trend.
+  - derived hypothesis (tested): PB-A-PULLBACK@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 5m
+  - limitations: Few signals (1H trend + bias + NY session + pullback + trigger must all agree); a limit at the 50% level misses the fastest moves; the playbook does not say how long the limit waits (3 candles assumed).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-A-PULLBACK-CVD@1.0 - Playbook A + the optional CVD confirmation: the trigger candle's delta is positive (long) / negative (short).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-A-PULLBACK-CVD@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-A-PULLBACK-CVD v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-05
+  - title / source: Operator's playbook section 5.1, with its optional CVD confirmation
+  - URL: none recorded
+  - claim: Strategy A is better when the trigger candle's order flow agrees (aggressive buyers on a long trigger).
+  - derived hypothesis (tested): PB-A-PULLBACK-CVD@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 5m, and beats its control twin PB-A-PULLBACK
+  - limitations: CVD in backtests is Binance futures order flow, live it is OKX's; even fewer signals than A.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-SWEEP@1.0 - Playbook B: a wick >= 0.1 ATR beyond a marked level, close back inside within 3 x 5m candles, + 1 of 3 confirmations (CVD divergence, absorption, OI drop >= 1%).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-SWEEP@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-B-SWEEP v1.0 · asset: research coins · timeframe: 5m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.2 Strategy B: Liquidity Sweep Reversal
+  - URL: none recorded
+  - claim: A sweep of a marked low (high) that closes back inside within 3 candles, confirmed by order flow or an OI flush, reverses toward VWAP and the range middle.
+  - derived hypothesis (tested): PB-B-SWEEP@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 5m, and beats its control twin PB-B-SWEEP-noCVD
+  - limitations: OI is hourly (the 'OI drop during the sweep' is the hour's change); CVD divergence compares with the previous 15m swing on the same UTC day only; trend days run through levels.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-SWEEP-noCVD@1.0 - Playbook B with only the OI-drop confirmation.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-SWEEP-noCVD@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: PB-B-SWEEP-noCVD v1.0 · asset: research coins · timeframe: 5m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Control twin of PB-B-SWEEP: the OI-drop confirmation only (no CVD)
+  - URL: none recorded
+  - claim: Control: Strategy B confirmed only by the OI drop. PB-B-SWEEP must beat this for CVD to stay.
+  - derived hypothesis (tested): PB-B-SWEEP-noCVD@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 5m
+  - limitations: A benchmark; hourly OI history starts 2025-09-29, so it has no trades before that.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-C-BREAKOUT@1.0 - Playbook C: 15m compression under a level, strong 5m breakout (no entry), retest of the level zone within 12 candles with a rejection candle and CVD not making a new low.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-C-BREAKOUT@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-C-BREAKOUT v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.3 Strategy C: Breakout and Retest
+  - URL: none recorded
+  - claim: A strong 5m breakout of a level after 15m compression, then a retest of the level zone with a rejection candle, continues by the range height.
+  - derived hypothesis (tested): PB-C-BREAKOUT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 5m, and beats its control twin PB-C-BREAKOUT-noCVD
+  - limitations: The compression rule as written (8 x 15m candles inside 1.2 x ATR) is rare: about 0.2% of 15m candles on BTC in 2024-2026, so very few signals; the playbook gives no time stop for C (6 candles assumed, its section 7 range is 4-6).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-C-BREAKOUT-noCVD@1.0 - Playbook C without the CVD condition.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-C-BREAKOUT-noCVD@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: PB-C-BREAKOUT-noCVD v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Control twin of PB-C-BREAKOUT: without the CVD check on the retest
+  - URL: none recorded
+  - claim: Control: Strategy C without the CVD check. PB-C-BREAKOUT must beat this for CVD to stay.
+  - derived hypothesis (tested): PB-C-BREAKOUT-noCVD@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 5m
+  - limitations: A benchmark.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-A-PULLBACK-LDN@1.0 - Exactly PB-A-PULLBACK, but entries in London (07:00-10:00 UTC) as well as NY (13:00-16:00 UTC).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-A-PULLBACK-LDN@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-A-PULLBACK-LDN v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-05
+  - title / source: Operator's playbook section 5.1 Strategy A, with one change the operator asked to test: the London session too
+  - URL: none recorded
+  - claim: Strategy A works in the London session (07:00-10:00 UTC) as well as in New York, so it gives more trades without losing its edge.
+  - derived hypothesis (tested): PB-A-PULLBACK-LDN@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 5m
+  - limitations: Still few signals (the 1H trend, bias, pullback and trigger must all agree); London opens can be stop hunts before the real move.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-SWEEP-15M@1.0 - Exactly PB-B-SWEEP, computed on 15m candles: the sweep, the close back inside within 3 x 15m candles, the confirmation.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-SWEEP-15M@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-B-SWEEP-15M v1.0 · asset: research coins · timeframe: 15m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.2 Strategy B, with one change the operator asked to test: 15m trigger candles
+  - URL: none recorded
+  - claim: Strategy B on 15m candles has wider stops, so the fees are a smaller part of each trade, and keeps its edge.
+  - derived hypothesis (tested): PB-B-SWEEP-15M@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 15m
+  - limitations: Slower: a 15m candle must close back inside, so the entry is later and further from the wick; fewer sweeps than on 5m.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-SWEEP-LIMIT@1.0 - Exactly PB-B-SWEEP, but the entry is a limit order at the signal close (maker fee, waits 2 candles) and no trade when the round-trip costs exceed 0.25R.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-SWEEP-LIMIT@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-B-SWEEP-LIMIT v1.0 · asset: research coins · timeframe: 5m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.2 Strategy B, with the fee fix (step 3d)
+  - URL: none recorded
+  - claim: Strategy B loses mostly to fees (median cost 0.84R on BTC 5m); a limit entry and skipping trades whose stop is too close for the fees leave the trades that can pay.
+  - derived hypothesis (tested): PB-B-SWEEP-LIMIT@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 5m
+  - limitations: Misses the sweeps that leave at once (the limit is not filled); on BTC 5m most stops are too close for the 0.25R fee cap, so few trades.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-C-BREAKOUT-W20@1.0 - Exactly PB-C-BREAKOUT, but the 15m compression box may be up to 2.0 x ATR(15m) wide.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-C-BREAKOUT-W20@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-C-BREAKOUT-W20 v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.3 Strategy C, with one change the operator asked to test: the compression box 2.0 x ATR
+  - URL: none recorded
+  - claim: A looser compression (the last 8 x 15m candles inside 2.0 x ATR instead of 1.2) still stores the energy for the breakout and gives Strategy C trades.
+  - derived hypothesis (tested): PB-C-BREAKOUT-W20@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 5m
+  - limitations: The box is not the only filter: a strong breakout right out of the box, the volume spike and the retest rejection are all rare (BTC 2026: about 1 setup in 7 months); a wider box is a weaker compression.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-A-GRADED@1.0 - Graded A: must-haves + at least 2 of 5 bonus points (pullback depth, lower pullback volume, trigger volume, CVD, NY session); 2 points = half size, 3+ = full size. London or NY.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-A-GRADED@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-A-GRADED v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-05
+  - title / source: Operator's playbook section 5.1 Strategy A as a graded setup (step 3d, operator 2026-10-06)
+  - URL: none recorded
+  - claim: Strategy A's must-haves (1H trend and bias, the pullback into the EMA21 / VWAP zone at a level, the higher low intact, the trigger candle) carry the edge; the other conditions only make it stronger, so a setup with most of them is still worth a (smaller) trade.
+  - derived hypothesis (tested): PB-A-GRADED@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 5m
+  - limitations: The grading thresholds (2 and 3 points) are a choice, not measured; the must-haves still need a 1H trend, so no trades in ranges.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-A-APLUS@1.0 - Graded A with 3+ of 5 bonus points only (full size).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-A-APLUS@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-A-APLUS v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-05
+  - title / source: PB-A-GRADED, only its full-size (A+) setups
+  - URL: none recorded
+  - claim: Measures the A+ setups alone: if PB-A-GRADED does no better than this, its grade B trades add nothing.
+  - derived hypothesis (tested): PB-A-APLUS@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 5m
+  - limitations: Fewer trades than PB-A-GRADED.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-GRADED@1.0 - Graded B on 5m and 15m triggers: must-haves + at least 2 of 5 bonus points (OI drop, CVD divergence, absorption, Asia / London / NY session, a major level); 2 points = half size.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-GRADED@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-B-GRADED v1.0 · asset: research coins · timeframe: 5m, 15m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.2 Strategy B as a graded setup (step 3d, operator 2026-10-06)
+  - URL: none recorded
+  - claim: The sweep of a marked level and the close back inside, in a regime the playbook allows, carry the edge; the confirmations make it stronger, so a sweep with 2 of them is still worth a half-size trade.
+  - derived hypothesis (tested): PB-B-GRADED@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 5m, 15m
+  - limitations: Many more sweeps than PB-B-SWEEP, so more noise; the grading thresholds are a choice; the outer time limit is 48 candles on both timeframes (4 hours on 5m, 12 hours on 15m).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-B-APLUS@1.0 - Graded B with 3+ of 5 bonus points only.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-B-APLUS@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-B-APLUS v1.0 · asset: research coins · timeframe: 5m, 15m · regime: RANGE, HIGH_VOL_RANGE, TRANSITION · review: 2027-01-05
+  - title / source: PB-B-GRADED, only its full-size (A+) setups
+  - URL: none recorded
+  - claim: Measures the A+ sweeps alone: if PB-B-GRADED does no better than this, its grade B trades add nothing.
+  - derived hypothesis (tested): PB-B-APLUS@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, TRANSITION on 5m, 15m
+  - limitations: Fewer trades than PB-B-GRADED.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-C-GRADED@1.0 - Graded C: must-haves (box within 2.0 x ATR under a level, strong breakout candle, not against a 1H trend, retest rejection) + at least 2 of 5 bonus points (tight compression, volume spike, CVD holding, London / NY, the playbook's regime rule).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-C-GRADED@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-C-GRADED v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Operator's playbook section 5.3 Strategy C as a graded setup (step 3d, operator 2026-10-06)
+  - URL: none recorded
+  - claim: A strong breakout of a level out of a quiet box and a held retest carry the edge; the playbook's tight compression, the volume spike, the CVD, the session and its regime rule make it stronger.
+  - derived hypothesis (tested): PB-C-GRADED@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 5m
+  - limitations: Still rare: strong breakouts right out of a quiet box with a clean retest (BTC 2026: about 1 a month); the grading thresholds are a choice.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### PB-C-APLUS@1.0 - Graded C with 3+ of 5 bonus points only.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card PB-C-APLUS@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: PB-C-APLUS v1.0 · asset: research coins · timeframe: 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: PB-C-GRADED, only its full-size (A+) setups
+  - URL: none recorded
+  - claim: Measures the A+ breakouts alone: if PB-C-GRADED does no better than this, its grade B trades add nothing.
+  - derived hypothesis (tested): PB-C-APLUS@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 5m
+  - limitations: Very few trades.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-PULLBACK@1.0 - Inside the 4H Donchian trend window: price dips to the EMA20 and closes back above it with a bullish candle (shorts mirrored); limit entry 0.25 ATR below the close.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card TRD-H4-PULLBACK@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: TRD-H4-PULLBACK v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Roadmap step 5: the 4H Donchian trend (the library's measured edge) with a faster pullback entry
+  - URL: none recorded
+  - claim: While the 4H Donchian breakout trade is open, a pullback to the EMA20 on a faster timeframe that closes back in the trend direction is a better-priced entry into the same trend.
+  - derived hypothesis (tested): TRD-H4-PULLBACK@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m, and beats its control twin TRD-H4-PULLBACK-noT4
+  - limitations: Only trades while a 4H breakout is active (a few windows a month per coin); on 5m most stops are too close for the fee cap; the limit misses pullbacks that turn at once.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-PULLBACK-noT4@1.0 - TRD-H4-PULLBACK without the 4H Donchian trend window (and without its exit).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card TRD-H4-PULLBACK-noT4@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: TRD-H4-PULLBACK-noT4 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Control twin of TRD-H4-PULLBACK: the same entry without the 4H trend window
+  - URL: none recorded
+  - claim: Control: the pullback entry alone. TRD-H4-PULLBACK must beat it for the 4H window to count.
+  - derived hypothesis (tested): TRD-H4-PULLBACK-noT4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: A benchmark.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-BREAKOUT@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card TRD-H4-BREAKOUT@1.0 · evidence: HYPOTHESIS: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Roadmap step 5: the 4H Donchian trend (the library's measured edge) with a faster breakout entry
+  - URL: none recorded
+  - claim: While the 4H Donchian breakout trade is open, a new 20-candle high on a faster timeframe with volume is the trend's next leg starting.
+  - derived hypothesis (tested): TRD-H4-BREAKOUT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m, and beats its control twin TRD-H4-BREAKOUT-noT4
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-BREAKOUT-noT4@1.0 - TRD-H4-BREAKOUT without the 4H Donchian trend window (and without its exit).
+- timestamp: 2026-10-07 00:58 UTC · source: strategies.yaml card TRD-H4-BREAKOUT-noT4@1.0 · evidence: HYPOTHESIS: control twin - a benchmark, not an idea · confidence: untested idea · strategy: TRD-H4-BREAKOUT-noT4 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-05
+  - title / source: Control twin of TRD-H4-BREAKOUT: the same entry without the 4H trend window
+  - URL: none recorded
+  - claim: Control: the faster breakout alone. TRD-H4-BREAKOUT must beat it for the 4H window to count.
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-noT4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: A benchmark.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-S4@1.1 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-10-07 00:58 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-S4@1.1 · evidence: RESEARCH_FINDING: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-S4 v1.1 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-01-05
+  - title / source: Claude daily review 2026-10-06: [C03] Liu, Tsyvinski, Wu - Common Risk Factors in Cryptocurrency (NBER w25882)
+  - URL: https://www.nber.org/papers/w25882
+  - claim: One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last 126 candles (21 days on 4h), shorts only when it rose less. Coins that beat the market over 1 to 4 weeks kept beating it in the paper, among large coins; the filter should drop breakouts that go against relative strength.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-S4@1.1 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3

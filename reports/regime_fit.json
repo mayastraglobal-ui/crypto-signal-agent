@@ -1,276 +1,502 @@
 {
 "PB-A-APLUS@1.0|5m": {
+"EXPANSION": [
+7,
+-0.056
+],
 "STRONG_BEAR": [
-2,
--1.175
+31,
+-0.363
+],
+"STRONG_BULL": [
+16,
+0.09
+],
+"TRANSITION": [
+1,
+-1.227
 ],
 "WEAK_BEAR": [
-1,
--1.174
+6,
+-0.459
+],
+"WEAK_BULL": [
+2,
+-0.343
 ]
 },
 "PB-A-GRADED@1.0|5m": {
+"EXPANSION": [
+9,
+-0.119
+],
 "STRONG_BEAR": [
-2,
--1.175
+38,
+-0.279
+],
+"STRONG_BULL": [
+18,
+-0.042
+],
+"TRANSITION": [
+1,
+-1.227
 ],
 "WEAK_BEAR": [
-1,
--1.174
+7,
+-0.327
+],
+"WEAK_BULL": [
+4,
+-0.339
 ]
 },
 "PB-A-PULLBACK-CVD@1.0|5m": {
-"STRONG_BEAR": [
+"EXPANSION": [
 1,
--1.167
+1.456
+],
+"STRONG_BEAR": [
+7,
+-0.475
+],
+"STRONG_BULL": [
+2,
+1.244
+],
+"TRANSITION": [
+1,
+-1.227
+],
+"WEAK_BEAR": [
+1,
+0.458
 ]
 },
 "PB-A-PULLBACK-LDN@1.0|5m": {
+"EXPANSION": [
+3,
+0.211
+],
 "STRONG_BEAR": [
+15,
+-0.641
+],
+"STRONG_BULL": [
+5,
+0.428
+],
+"TRANSITION": [
 1,
--1.167
+-1.227
+],
+"WEAK_BEAR": [
+2,
+-0.38
 ]
 },
 "PB-A-PULLBACK@1.0|5m": {
-"STRONG_BEAR": [
+"EXPANSION": [
 1,
--1.167
+1.456
+],
+"STRONG_BEAR": [
+8,
+-0.559
+],
+"STRONG_BULL": [
+3,
+0.98
+],
+"TRANSITION": [
+1,
+-1.227
+],
+"WEAK_BEAR": [
+2,
+-0.38
 ]
 },
 "PB-B-APLUS@1.0|15m": {
+"EXPANSION": [
+3,
+-1.102
+],
+"HIGH_VOL_RANGE": [
+2,
+0.578
+],
+"RANGE": [
+26,
+0.077
+],
+"STRONG_BEAR": [
+3,
+0.312
+],
+"STRONG_BULL": [
+2,
+0.199
+],
+"TRANSITION": [
+21,
+-0.111
+],
 "UNCLEAR": [
-1,
-0.018
+13,
+-0.224
+],
+"WEAK_BEAR": [
+15,
+-0.737
 ],
 "WEAK_BULL": [
-1,
--1.232
+11,
+-0.443
 ]
 },
 "PB-B-APLUS@1.0|5m": {
+"COMPRESSION": [
+8,
+-0.038
+],
 "EXPANSION": [
-1,
-1.456
+10,
+0.018
+],
+"HIGH_VOL_RANGE": [
+3,
+-0.539
 ],
 "RANGE": [
-2,
--0.241
+53,
+-0.262
 ],
 "STRONG_BEAR": [
-1,
--1.249
+13,
+0.059
+],
+"STRONG_BULL": [
+13,
+-0.233
 ],
 "TRANSITION": [
-1,
--0.513
+53,
+-0.126
 ],
 "UNCLEAR": [
-1,
-0.47
+45,
+-0.033
 ],
 "WEAK_BEAR": [
-2,
--0.818
+26,
+-0.517
+],
+"WEAK_BULL": [
+22,
+-0.244
 ]
 },
 "PB-B-GRADED@1.0|15m": {
+"COMPRESSION": [
+13,
+-0.499
+],
+"EXPANSION": [
+21,
+-0.367
+],
+"HIGH_VOL_RANGE": [
+6,
+-0.056
+],
 "RANGE": [
-1,
-0.477
+100,
+-0.058
 ],
 "STRONG_BEAR": [
-1,
--0.304
+18,
+-0.196
+],
+"STRONG_BULL": [
+22,
+0.077
 ],
 "TRANSITION": [
-8,
--0.361
+107,
+-0.328
 ],
 "UNCLEAR": [
-2,
--0.287
+70,
+-0.081
 ],
 "WEAK_BEAR": [
-2,
--0.88
+51,
+-0.497
 ],
 "WEAK_BULL": [
-2,
--0.872
+38,
+-0.205
 ]
 },
 "PB-B-GRADED@1.0|5m": {
+"COMPRESSION": [
+34,
+-0.079
+],
 "EXPANSION": [
-3,
-0.363
+56,
+-0.109
+],
+"HIGH_VOL_RANGE": [
+19,
+0.205
 ],
 "RANGE": [
-3,
--0.576
+244,
+-0.119
 ],
 "STRONG_BEAR": [
-5,
--0.68
+59,
+-0.248
 ],
 "STRONG_BULL": [
-1,
-0.021
+53,
+-0.181
 ],
 "TRANSITION": [
-12,
-0.198
+255,
+-0.114
 ],
 "UNCLEAR": [
-3,
--0.287
+180,
+-0.197
 ],
 "WEAK_BEAR": [
-9,
--0.534
+126,
+-0.309
 ],
 "WEAK_BULL": [
-1,
--0.534
+105,
+-0.165
 ]
 },
 "PB-B-SWEEP-15M@1.0|15m": {
+"COMPRESSION": [
+11,
+-0.122
+],
+"EXPANSION": [
+3,
+-1.129
+],
+"HIGH_VOL_RANGE": [
+6,
+-0.573
+],
 "RANGE": [
-7,
--1.113
+68,
+-0.361
 ],
 "STRONG_BEAR": [
-1,
--0.702
+9,
+-0.493
 ],
 "STRONG_BULL": [
-3,
--0.933
+10,
+-0.352
 ],
 "TRANSITION": [
-2,
--0.713
+43,
+-0.467
 ],
 "UNCLEAR": [
-4,
--1.575
+32,
+-0.616
 ],
 "WEAK_BEAR": [
-3,
--0.775
+43,
+-0.653
 ],
 "WEAK_BULL": [
-5,
--0.506
+18,
+-0.484
 ]
 },
 "PB-B-SWEEP-LIMIT@1.0|5m": {
+"COMPRESSION": [
+8,
+0.017
+],
 "EXPANSION": [
-1,
-1.456
+11,
+-0.065
+],
+"HIGH_VOL_RANGE": [
+4,
+-0.692
 ],
 "RANGE": [
-2,
--0.241
+66,
+-0.121
 ],
 "STRONG_BEAR": [
-3,
--0.557
+21,
+-0.121
+],
+"STRONG_BULL": [
+15,
+-0.193
 ],
 "TRANSITION": [
-1,
--0.513
+58,
+-0.188
 ],
 "UNCLEAR": [
-1,
-0.47
+43,
+0.004
 ],
 "WEAK_BEAR": [
-3,
--0.675
+36,
+-0.462
+],
+"WEAK_BULL": [
+28,
+-0.193
 ]
 },
 "PB-B-SWEEP@1.0|5m": {
 "COMPRESSION": [
-1,
--2.835
+45,
+-0.801
 ],
 "EXPANSION": [
-3,
--0.144
+18,
+-0.346
 ],
 "HIGH_VOL_RANGE": [
-2,
--0.587
+14,
+-0.779
 ],
 "RANGE": [
-31,
--0.744
+276,
+-0.57
 ],
 "STRONG_BEAR": [
-8,
--0.554
+46,
+-0.655
 ],
 "STRONG_BULL": [
-10,
--0.792
+52,
+-0.586
 ],
 "TRANSITION": [
-27,
--0.974
+193,
+-0.58
 ],
 "UNCLEAR": [
-12,
--1.158
+147,
+-0.551
 ],
 "WEAK_BEAR": [
-23,
--1.22
+145,
+-0.809
 ],
 "WEAK_BULL": [
-13,
--0.929
+106,
+-0.652
+]
+},
+"PB-C-APLUS@1.0|5m": {
+"STRONG_BULL": [
+1,
+-0.641
+]
+},
+"PB-C-BREAKOUT-W20@1.0|5m": {
+"TRANSITION": [
+1,
+0.351
+]
+},
+"PB-C-GRADED@1.0|5m": {
+"HIGH_VOL_RANGE": [
+2,
+-1.203
+],
+"RANGE": [
+1,
+1.69
+],
+"STRONG_BEAR": [
+1,
+0.46
+],
+"STRONG_BULL": [
+1,
+-0.641
+],
+"UNCLEAR": [
+2,
+-0.35
+],
+"WEAK_BEAR": [
+1,
+-1.115
+],
+"WEAK_BULL": [
+2,
+-1.158
 ]
 },
 "R4-BBRSI@1.0|1h": {
 "HIGH_VOL_RANGE": [
-12,
--0.557
+86,
+0.075
 ],
 "RANGE": [
-197,
--0.513
+1005,
+-0.318
 ]
 },
 "R4-BBRSI@1.0|30m": {
 "HIGH_VOL_RANGE": [
-14,
--0.163
+80,
+0.03
 ],
 "RANGE": [
-132,
--0.304
+1148,
+-0.318
 ]
 },
 "R4-CLUC@1.0|15m": {
+"HIGH_VOL_RANGE": [
+27,
+0.043
+],
 "RANGE": [
-1,
--1.105
+118,
+-0.309
 ]
 },
 "R4-CLUC@1.0|30m": {
 "HIGH_VOL_RANGE": [
-2,
--0.011
+33,
+0.183
 ],
 "RANGE": [
-2,
--1.103
+139,
+-0.221
 ]
 },
 "S5-SWEEP-MSS-FVG-5M@1.0|15m": {
 "STRONG_BULL": [
 1,
 -1.215
+],
+"WEAK_BEAR": [
+1,
+1.474
 ]
 },
 "S5-SWEEP-MSS-FVG-5M@1.0|30m": {
@@ -280,809 +506,1607 @@
 ]
 },
 "S5-SWEEP-MSS-FVG-noSMC@1.0|15m": {
+"EXPANSION": [
+3,
+0.588
+],
+"STRONG_BEAR": [
+3,
+-0.509
+],
+"STRONG_BULL": [
+7,
+0.475
+],
+"WEAK_BEAR": [
+7,
+-0.72
+],
+"WEAK_BULL": [
+9,
+1.079
+]
+},
+"S5-SWEEP-MSS-FVG-noSMC@1.0|30m": {
+"EXPANSION": [
+2,
+-0.613
+],
+"STRONG_BEAR": [
+2,
+-0.693
+],
 "STRONG_BULL": [
 2,
--0.412
+-0.273
+],
+"WEAK_BEAR": [
+3,
+0.47
 ],
 "WEAK_BULL": [
 1,
--1.252
+0.085
 ]
 },
 "S5-SWEEP-MSS-FVG@1.0|15m": {
+"EXPANSION": [
+1,
+-4.325
+],
+"STRONG_BEAR": [
+1,
+-2.296
+],
 "STRONG_BULL": [
 1,
 -1.276
+],
+"WEAK_BEAR": [
+5,
+0.698
+],
+"WEAK_BULL": [
+2,
+1.621
 ]
 },
 "S5-SWEEP-MSS-FVG@1.0|30m": {
+"STRONG_BEAR": [
+1,
+-1.128
+],
 "STRONG_BULL": [
 1,
 -1.265
+],
+"WEAK_BEAR": [
+5,
+-0.198
+],
+"WEAK_BULL": [
+1,
+-1.179
 ]
 },
 "S6-OB-FVG-noSMC@1.0|15m": {
+"STRONG_BEAR": [
+4,
+-1.079
+],
+"STRONG_BULL": [
+12,
+-0.284
+],
 "WEAK_BEAR": [
-1,
-2.416
+16,
+0.055
 ],
 "WEAK_BULL": [
-5,
-0.747
+32,
+0.206
+]
+},
+"S7-SILVER-BULLET-noSMC@1.0|15m": {
+"STRONG_BEAR": [
+1,
+-1.117
+],
+"STRONG_BULL": [
+4,
+1.488
+],
+"WEAK_BEAR": [
+12,
+-0.242
+],
+"WEAK_BULL": [
+2,
+0.63
+]
+},
+"S7-SILVER-BULLET@1.0|15m": {
+"STRONG_BEAR": [
+1,
+-1.117
+],
+"STRONG_BULL": [
+3,
+1.213
+],
+"WEAK_BEAR": [
+1,
+-1.151
+]
+},
+"S8-PDH-PDL-SWEEP-5M@1.0|30m": {
+"RANGE": [
+4,
+-0.438
+],
+"TRANSITION": [
+1,
+1.211
 ]
 },
 "S8-PDH-PDL-SWEEP-noSMC@1.0|1h": {
+"HIGH_VOL_RANGE": [
+5,
+0.527
+],
 "RANGE": [
-34,
--0.146
+274,
+-0.351
+],
+"STRONG_BEAR": [
+2,
+-1.126
 ],
 "STRONG_BULL": [
-1,
-2.512
+2,
+1.642
 ],
 "TRANSITION": [
-53,
-0.003
+318,
+0.016
 ],
 "WEAK_BEAR": [
-6,
--1.232
+51,
+-0.155
 ],
 "WEAK_BULL": [
-4,
-0.296
+29,
+-0.422
 ]
 },
 "S8-PDH-PDL-SWEEP-noSMC@1.0|30m": {
 "HIGH_VOL_RANGE": [
-1,
-3.694
+5,
+0.461
 ],
 "RANGE": [
-17,
--0.472
+173,
+-0.579
+],
+"STRONG_BEAR": [
+13,
+-0.177
 ],
 "STRONG_BULL": [
-1,
--0.098
+6,
+-0.849
 ],
 "TRANSITION": [
-21,
--0.762
+152,
+-0.285
 ],
 "WEAK_BEAR": [
-7,
--0.951
+61,
+-0.681
 ],
 "WEAK_BULL": [
-6,
--1.0
+63,
+-0.607
 ]
 },
 "S8-PDH-PDL-SWEEP@1.0|1h": {
+"HIGH_VOL_RANGE": [
+3,
+-0.467
+],
 "RANGE": [
-18,
--0.526
+128,
+-0.261
+],
+"STRONG_BULL": [
+1,
+-1.116
 ],
 "TRANSITION": [
-16,
-0.076
+107,
+0.11
 ],
 "WEAK_BEAR": [
-1,
--1.179
+5,
+0.588
 ],
 "WEAK_BULL": [
-1,
-1.381
+5,
+0.248
 ]
 },
 "S8-PDH-PDL-SWEEP@1.0|30m": {
+"HIGH_VOL_RANGE": [
+4,
+-1.109
+],
 "RANGE": [
-5,
--0.482
+54,
+-0.062
+],
+"STRONG_BEAR": [
+1,
+-1.065
 ],
 "TRANSITION": [
-3,
--0.686
+33,
+-0.541
+],
+"WEAK_BEAR": [
+5,
+-1.15
 ],
 "WEAK_BULL": [
-2,
--1.628
+9,
+-1.076
+]
+},
+"TRD-H4-BREAKOUT-noT4@1.0|15m": {
+"COMPRESSION": [
+61,
+-0.358
+],
+"EXPANSION": [
+209,
+-0.012
+],
+"RANGE": [
+238,
+-0.061
+],
+"STRONG_BEAR": [
+223,
+-0.12
+],
+"STRONG_BULL": [
+264,
+0.073
+],
+"TRANSITION": [
+234,
+-0.31
+],
+"WEAK_BEAR": [
+527,
+-0.096
+],
+"WEAK_BULL": [
+526,
+-0.077
+]
+},
+"TRD-H4-BREAKOUT-noT4@1.0|1h": {
+"COMPRESSION": [
+25,
+0.203
+],
+"EXPANSION": [
+922,
+0.107
+],
+"RANGE": [
+220,
+0.056
+],
+"STRONG_BEAR": [
+133,
+-0.242
+],
+"STRONG_BULL": [
+200,
+-0.02
+],
+"TRANSITION": [
+167,
+0.209
+],
+"WEAK_BEAR": [
+602,
+-0.1
+],
+"WEAK_BULL": [
+653,
+0.017
+]
+},
+"TRD-H4-BREAKOUT-noT4@1.0|30m": {
+"COMPRESSION": [
+30,
+-0.018
+],
+"EXPANSION": [
+217,
+-0.027
+],
+"RANGE": [
+141,
+-0.056
+],
+"STRONG_BEAR": [
+84,
+-0.049
+],
+"STRONG_BULL": [
+109,
+0.257
+],
+"TRANSITION": [
+123,
+-0.063
+],
+"WEAK_BEAR": [
+299,
+0.012
+],
+"WEAK_BULL": [
+304,
+-0.051
+]
+},
+"TRD-H4-BREAKOUT-noT4@1.0|5m": {
+"COMPRESSION": [
+92,
+-0.17
+],
+"EXPANSION": [
+330,
+-0.011
+],
+"RANGE": [
+425,
+-0.116
+],
+"STRONG_BEAR": [
+545,
+-0.123
+],
+"STRONG_BULL": [
+589,
+0.068
+],
+"TRANSITION": [
+506,
+-0.289
+],
+"WEAK_BEAR": [
+1005,
+-0.176
+],
+"WEAK_BULL": [
+1011,
+-0.143
+]
+},
+"TRD-H4-BREAKOUT@1.0|15m": {
+"COMPRESSION": [
+15,
+-0.247
+],
+"EXPANSION": [
+72,
+0.199
+],
+"RANGE": [
+79,
+-0.106
+],
+"STRONG_BEAR": [
+109,
+-0.103
+],
+"STRONG_BULL": [
+123,
+0.019
+],
+"TRANSITION": [
+82,
+-0.088
+],
+"WEAK_BEAR": [
+121,
+0.019
+],
+"WEAK_BULL": [
+122,
+-0.222
+]
+},
+"TRD-H4-BREAKOUT@1.0|1h": {
+"COMPRESSION": [
+7,
+0.22
+],
+"EXPANSION": [
+348,
+0.179
+],
+"RANGE": [
+63,
+0.131
+],
+"STRONG_BEAR": [
+69,
+-0.162
+],
+"STRONG_BULL": [
+82,
+0.247
+],
+"TRANSITION": [
+57,
+0.266
+],
+"WEAK_BEAR": [
+135,
+-0.075
+],
+"WEAK_BULL": [
+138,
+-0.015
+]
+},
+"TRD-H4-BREAKOUT@1.0|30m": {
+"COMPRESSION": [
+6,
+0.43
+],
+"EXPANSION": [
+83,
+0.016
+],
+"RANGE": [
+41,
+0.16
+],
+"STRONG_BEAR": [
+40,
+0.171
+],
+"STRONG_BULL": [
+55,
+0.15
+],
+"TRANSITION": [
+44,
+0.366
+],
+"WEAK_BEAR": [
+72,
+0.11
+],
+"WEAK_BULL": [
+64,
+0.102
+]
+},
+"TRD-H4-BREAKOUT@1.0|5m": {
+"COMPRESSION": [
+29,
+-0.115
+],
+"EXPANSION": [
+124,
+0.15
+],
+"RANGE": [
+137,
+-0.174
+],
+"STRONG_BEAR": [
+309,
+-0.081
+],
+"STRONG_BULL": [
+287,
+0.047
+],
+"TRANSITION": [
+179,
+-0.236
+],
+"WEAK_BEAR": [
+284,
+-0.22
+],
+"WEAK_BULL": [
+259,
+-0.126
+]
+},
+"TRD-H4-PULLBACK-noT4@1.0|15m": {
+"COMPRESSION": [
+76,
+0.126
+],
+"EXPANSION": [
+172,
+0.029
+],
+"RANGE": [
+391,
+-0.069
+],
+"STRONG_BEAR": [
+376,
+-0.218
+],
+"STRONG_BULL": [
+431,
+0.022
+],
+"TRANSITION": [
+433,
+-0.041
+],
+"WEAK_BEAR": [
+924,
+-0.048
+],
+"WEAK_BULL": [
+896,
+-0.068
+]
+},
+"TRD-H4-PULLBACK-noT4@1.0|1h": {
+"COMPRESSION": [
+90,
+0.156
+],
+"EXPANSION": [
+133,
+0.089
+],
+"RANGE": [
+425,
+-0.062
+],
+"STRONG_BEAR": [
+322,
+-0.027
+],
+"STRONG_BULL": [
+394,
+-0.142
+],
+"TRANSITION": [
+431,
+0.106
+],
+"WEAK_BEAR": [
+1121,
+0.029
+],
+"WEAK_BULL": [
+1206,
+-0.066
+]
+},
+"TRD-H4-PULLBACK-noT4@1.0|30m": {
+"COMPRESSION": [
+45,
+-0.016
+],
+"EXPANSION": [
+65,
+0.1
+],
+"RANGE": [
+227,
+-0.006
+],
+"STRONG_BEAR": [
+204,
+-0.21
+],
+"STRONG_BULL": [
+271,
+-0.015
+],
+"TRANSITION": [
+213,
+-0.121
+],
+"WEAK_BEAR": [
+541,
+-0.05
+],
+"WEAK_BULL": [
+531,
+-0.096
+]
+},
+"TRD-H4-PULLBACK-noT4@1.0|5m": {
+"COMPRESSION": [
+148,
+-0.209
+],
+"EXPANSION": [
+652,
+-0.007
+],
+"RANGE": [
+792,
+-0.103
+],
+"STRONG_BEAR": [
+838,
+-0.12
+],
+"STRONG_BULL": [
+947,
+-0.027
+],
+"TRANSITION": [
+924,
+-0.068
+],
+"WEAK_BEAR": [
+1596,
+-0.147
+],
+"WEAK_BULL": [
+1743,
+-0.181
+]
+},
+"TRD-H4-PULLBACK@1.0|15m": {
+"COMPRESSION": [
+23,
+-0.248
+],
+"EXPANSION": [
+75,
+0.013
+],
+"RANGE": [
+95,
+0.139
+],
+"STRONG_BEAR": [
+170,
+-0.013
+],
+"STRONG_BULL": [
+183,
+0.048
+],
+"TRANSITION": [
+116,
+0.142
+],
+"WEAK_BEAR": [
+171,
+0.146
+],
+"WEAK_BULL": [
+228,
+0.035
+]
+},
+"TRD-H4-PULLBACK@1.0|1h": {
+"COMPRESSION": [
+13,
+0.513
+],
+"EXPANSION": [
+22,
+0.009
+],
+"RANGE": [
+87,
+0.104
+],
+"STRONG_BEAR": [
+145,
+-0.047
+],
+"STRONG_BULL": [
+144,
+-0.176
+],
+"TRANSITION": [
+91,
+0.416
+],
+"WEAK_BEAR": [
+176,
+0.189
+],
+"WEAK_BULL": [
+214,
+-0.141
+]
+},
+"TRD-H4-PULLBACK@1.0|30m": {
+"COMPRESSION": [
+12,
+-0.211
+],
+"EXPANSION": [
+21,
+0.169
+],
+"RANGE": [
+54,
+0.343
+],
+"STRONG_BEAR": [
+94,
+-0.071
+],
+"STRONG_BULL": [
+113,
+-0.093
+],
+"TRANSITION": [
+50,
+0.324
+],
+"WEAK_BEAR": [
+88,
+0.041
+],
+"WEAK_BULL": [
+128,
+-0.136
+]
+},
+"TRD-H4-PULLBACK@1.0|5m": {
+"COMPRESSION": [
+52,
+-0.182
+],
+"EXPANSION": [
+282,
+0.01
+],
+"RANGE": [
+219,
+-0.014
+],
+"STRONG_BEAR": [
+420,
+-0.055
+],
+"STRONG_BULL": [
+445,
+-0.03
+],
+"TRANSITION": [
+309,
+0.088
+],
+"WEAK_BEAR": [
+412,
+-0.065
+],
+"WEAK_BULL": [
+471,
+-0.148
 ]
 },
 "bb_squeeze_breakout@1.0|15m": {
 "COMPRESSION": [
-6,
--1.531
+40,
+-0.699
 ],
 "EXPANSION": [
-3,
-0.195
+14,
+0.042
 ],
 "STRONG_BEAR": [
-20,
--0.387
+134,
+-0.282
 ],
 "STRONG_BULL": [
-33,
--0.536
-],
-"WEAK_BEAR": [
-27,
+186,
 -0.221
 ],
+"WEAK_BEAR": [
+300,
+-0.335
+],
 "WEAK_BULL": [
-47,
--0.501
+312,
+-0.261
 ]
 },
 "bb_squeeze_breakout@1.0|1h": {
 "COMPRESSION": [
-7,
-0.631
+62,
+0.04
 ],
 "EXPANSION": [
-3,
--0.203
+9,
+-0.237
+],
+"STRONG_BEAR": [
+23,
+0.752
 ],
 "STRONG_BULL": [
-10,
-0.332
+34,
+0.107
 ],
 "WEAK_BEAR": [
-32,
--0.212
+289,
+0.011
 ],
 "WEAK_BULL": [
-64,
--0.114
+296,
+-0.053
 ]
 },
 "bb_squeeze_breakout@1.0|30m": {
 "COMPRESSION": [
-10,
--0.911
+39,
+-0.494
 ],
 "EXPANSION": [
-3,
--1.317
+12,
+-0.633
 ],
 "STRONG_BEAR": [
-2,
--1.17
+34,
+-0.189
 ],
 "STRONG_BULL": [
-11,
--0.782
+62,
+-0.161
 ],
 "WEAK_BEAR": [
-8,
-0.067
+144,
+-0.029
 ],
 "WEAK_BULL": [
-21,
--0.102
+140,
+-0.054
 ]
 },
 "bb_squeeze_breakout@1.0|4h": {
 "COMPRESSION": [
-4,
--0.014
+21,
+-0.065
+],
+"EXPANSION": [
+3,
+0.847
+],
+"STRONG_BEAR": [
+7,
+-0.721
+],
+"STRONG_BULL": [
+8,
+-0.004
 ],
 "WEAK_BEAR": [
-13,
-0.209
+96,
+-0.013
 ],
 "WEAK_BULL": [
-25,
-0.497
+102,
+0.166
 ]
 },
 "donchian_breakout-VEXIT-S4@1.0|1h": {
 "COMPRESSION": [
-3,
--1.2
+30,
+-0.015
 ],
 "EXPANSION": [
-159,
-0.114
+1040,
+0.071
 ],
 "STRONG_BEAR": [
-19,
--0.47
+158,
+-0.293
 ],
 "STRONG_BULL": [
-48,
-0.062
+232,
+-0.074
 ],
 "WEAK_BEAR": [
-83,
--0.078
+644,
+-0.109
 ],
 "WEAK_BULL": [
-128,
-0.165
+721,
+-0.023
 ]
 },
 "donchian_breakout-VEXIT-S4@1.0|30m": {
 "COMPRESSION": [
-9,
--0.103
+44,
+-0.084
 ],
 "EXPANSION": [
-27,
--0.338
+229,
+-0.058
 ],
 "STRONG_BEAR": [
-12,
--0.045
+114,
+-0.245
 ],
 "STRONG_BULL": [
-22,
--0.092
+138,
+0.121
 ],
 "WEAK_BEAR": [
-27,
-0.05
+327,
+0.014
 ],
 "WEAK_BULL": [
-54,
-0.033
+348,
+-0.005
 ]
 },
 "donchian_breakout-VEXIT-S4@1.0|4h": {
 "COMPRESSION": [
-1,
--0.797
+12,
+-0.028
 ],
 "EXPANSION": [
-59,
-0.418
+432,
+0.182
 ],
 "STRONG_BEAR": [
-7,
-0.521
+42,
+-0.226
 ],
 "STRONG_BULL": [
-13,
-1.092
+58,
+0.161
 ],
 "WEAK_BEAR": [
-25,
-0.331
+226,
+0.258
 ],
 "WEAK_BULL": [
-54,
-0.398
+259,
+0.346
+]
+},
+"donchian_breakout-VEXIT-S4@1.1|1h": {
+"COMPRESSION": [
+21,
+-0.163
+],
+"EXPANSION": [
+776,
+0.061
+],
+"STRONG_BEAR": [
+131,
+-0.235
+],
+"STRONG_BULL": [
+162,
+-0.1
+],
+"WEAK_BEAR": [
+480,
+-0.044
+],
+"WEAK_BULL": [
+479,
+-0.061
+]
+},
+"donchian_breakout-VEXIT-S4@1.1|30m": {
+"COMPRESSION": [
+32,
+-0.043
+],
+"EXPANSION": [
+188,
+0.025
+],
+"STRONG_BEAR": [
+97,
+-0.247
+],
+"STRONG_BULL": [
+107,
+0.141
+],
+"WEAK_BEAR": [
+261,
+0.029
+],
+"WEAK_BULL": [
+238,
+0.037
+]
+},
+"donchian_breakout-VEXIT-S4@1.1|4h": {
+"COMPRESSION": [
+10,
+0.15
+],
+"EXPANSION": [
+315,
+0.172
+],
+"STRONG_BEAR": [
+34,
+-0.413
+],
+"STRONG_BULL": [
+42,
+-0.205
+],
+"WEAK_BEAR": [
+177,
+0.333
+],
+"WEAK_BULL": [
+144,
+0.43
 ]
 },
 "donchian_breakout-VEXIT@1.0|1h": {
 "EXPANSION": [
-161,
-0.101
+1026,
+0.072
 ],
 "STRONG_BEAR": [
-18,
--0.458
+160,
+-0.261
 ],
 "STRONG_BULL": [
-53,
-0.018
+242,
+-0.053
 ],
 "WEAK_BEAR": [
-67,
--0.088
+516,
+-0.119
 ],
 "WEAK_BULL": [
-94,
--0.013
+537,
+-0.049
 ]
 },
 "donchian_breakout-VEXIT@1.0|30m": {
 "COMPRESSION": [
-2,
-0.35
+9,
+0.051
 ],
 "EXPANSION": [
-26,
--0.391
+227,
+-0.09
 ],
 "STRONG_BEAR": [
-12,
--0.045
+115,
+-0.238
 ],
 "STRONG_BULL": [
-20,
--0.044
+131,
+0.151
 ],
 "WEAK_BEAR": [
-19,
-0.3
+258,
+0.034
 ],
 "WEAK_BULL": [
-38,
-0.19
+279,
+0.045
 ]
 },
 "donchian_breakout-VEXIT@1.0|4h": {
 "EXPANSION": [
-59,
-0.418
+431,
+0.177
 ],
 "STRONG_BEAR": [
-7,
-0.857
+40,
+-0.064
 ],
 "STRONG_BULL": [
-13,
-1.092
+58,
+0.161
 ],
 "WEAK_BEAR": [
-21,
-0.206
+182,
+0.251
 ],
 "WEAK_BULL": [
-41,
-0.594
+192,
+0.413
 ]
 },
 "donchian_breakout@1.0|1h": {
 "EXPANSION": [
-167,
-0.05
+1050,
+0.058
 ],
 "STRONG_BEAR": [
-21,
--0.368
+169,
+-0.161
 ],
 "STRONG_BULL": [
-56,
-0.025
+255,
+-0.089
 ],
 "WEAK_BEAR": [
-68,
--0.159
+526,
+-0.112
 ],
 "WEAK_BULL": [
-96,
--0.131
+549,
+-0.082
 ]
 },
 "donchian_breakout@1.0|30m": {
 "COMPRESSION": [
-2,
--0.777
+9,
+-0.129
 ],
 "EXPANSION": [
-28,
--0.331
+237,
+0.002
 ],
 "STRONG_BEAR": [
-14,
--0.189
+116,
+-0.167
 ],
 "STRONG_BULL": [
-22,
--0.029
+144,
+0.019
 ],
 "WEAK_BEAR": [
-18,
-0.227
+262,
+-0.045
 ],
 "WEAK_BULL": [
-38,
--0.016
+285,
+-0.02
 ]
 },
 "donchian_breakout@1.0|4h": {
 "EXPANSION": [
-62,
-0.175
+437,
+0.089
 ],
 "STRONG_BEAR": [
-8,
-0.424
+45,
+-0.051
 ],
 "STRONG_BULL": [
-14,
-0.66
+60,
+0.16
 ],
 "WEAK_BEAR": [
-23,
--0.012
+189,
+0.166
 ],
 "WEAK_BULL": [
-43,
-0.389
+198,
+0.244
 ]
 },
 "ema_9_21_cross@1.0|15m": {
+"EXPANSION": [
+9,
+-0.339
+],
 "STRONG_BEAR": [
-11,
-0.021
+107,
+-0.112
 ],
 "STRONG_BULL": [
-18,
--0.3
+136,
+-0.318
 ],
 "WEAK_BEAR": [
-22,
--0.205
+236,
+-0.108
 ],
 "WEAK_BULL": [
-27,
--0.408
+229,
+-0.186
 ]
 },
 "ema_9_21_cross@1.0|1h": {
 "EXPANSION": [
-9,
-0.231
+44,
+-0.163
 ],
 "WEAK_BEAR": [
-14,
-0.128
+128,
+-0.052
 ],
 "WEAK_BULL": [
-27,
-0.061
+129,
+-0.135
 ]
 },
 "ema_9_21_cross@1.0|30m": {
 "EXPANSION": [
-3,
--0.676
+8,
+-0.767
 ],
 "STRONG_BEAR": [
-4,
--0.657
+30,
+-0.292
 ],
 "STRONG_BULL": [
-3,
--1.272
+25,
+-0.43
 ],
 "WEAK_BEAR": [
-9,
-0.436
+113,
+-0.089
 ],
 "WEAK_BULL": [
-15,
-0.295
+96,
+-0.113
 ]
 },
 "ema_9_21_cross@1.0|5m": {
 "EXPANSION": [
-14,
--0.707
+155,
+-0.348
 ],
 "STRONG_BEAR": [
-39,
--0.738
+303,
+-0.527
 ],
 "STRONG_BULL": [
-53,
--0.951
+370,
+-0.434
 ],
 "WEAK_BEAR": [
-46,
--0.753
+520,
+-0.425
 ],
 "WEAK_BULL": [
-72,
--0.917
+550,
+-0.578
 ]
 },
 "liquidity_sweep_reversal@1.0|15m": {
 "HIGH_VOL_RANGE": [
-2,
--1.216
-],
-"RANGE": [
-24,
--0.911
-],
-"STRONG_BEAR": [
-15,
--0.774
-],
-"STRONG_BULL": [
-30,
--0.797
-],
-"TRANSITION": [
-25,
+11,
 -0.499
 ],
+"RANGE": [
+198,
+-0.495
+],
+"STRONG_BEAR": [
+100,
+-0.501
+],
+"STRONG_BULL": [
+136,
+-0.409
+],
+"TRANSITION": [
+170,
+-0.313
+],
 "WEAK_BEAR": [
-18,
--1.468
+191,
+-0.587
 ],
 "WEAK_BULL": [
-46,
--0.856
+224,
+-0.549
 ]
 },
 "liquidity_sweep_reversal@1.0|1h": {
+"HIGH_VOL_RANGE": [
+1,
+-1.083
+],
 "RANGE": [
-19,
--0.522
+97,
+-0.208
+],
+"STRONG_BEAR": [
+1,
+-1.098
 ],
 "TRANSITION": [
-30,
-0.039
+138,
+-0.15
 ],
 "WEAK_BEAR": [
-1,
-0.295
+10,
+0.143
 ],
 "WEAK_BULL": [
-7,
-0.014
+12,
+0.332
 ]
 },
 "liquidity_sweep_reversal@1.0|30m": {
 "HIGH_VOL_RANGE": [
-1,
--1.153
+4,
+-0.177
 ],
 "RANGE": [
-12,
--0.699
+79,
+-0.37
 ],
 "STRONG_BEAR": [
-3,
--1.181
+18,
+-0.71
 ],
 "STRONG_BULL": [
-7,
--0.21
+23,
+-0.225
 ],
 "TRANSITION": [
-9,
--0.275
+65,
+-0.292
 ],
 "WEAK_BEAR": [
-4,
--0.524
+44,
+-0.557
 ],
 "WEAK_BULL": [
-12,
--0.674
+53,
+-0.698
 ]
 },
 "liquidity_sweep_reversal@1.0|5m": {
 "HIGH_VOL_RANGE": [
-4,
--0.175
+24,
+-0.381
 ],
 "RANGE": [
-74,
--1.277
+465,
+-0.714
 ],
 "STRONG_BEAR": [
-57,
--1.158
+405,
+-0.621
 ],
 "STRONG_BULL": [
-125,
--1.236
+538,
+-0.732
 ],
 "TRANSITION": [
-68,
--1.046
+450,
+-0.524
 ],
 "WEAK_BEAR": [
-86,
--1.296
+792,
+-0.726
 ],
 "WEAK_BULL": [
-174,
--1.497
+1009,
+-0.735
 ]
 },
 "macd_trend_cross@1.0|1h": {
 "WEAK_BEAR": [
-6,
--0.271
+71,
+-0.076
 ],
 "WEAK_BULL": [
-10,
-0.596
+91,
+0.037
 ]
 },
 "macd_trend_cross@1.0|30m": {
 "STRONG_BEAR": [
-1,
--1.159
+4,
+-0.193
 ],
 "STRONG_BULL": [
 1,
 -1.267
 ],
 "WEAK_BEAR": [
-11,
-0.304
+117,
+-0.068
 ],
 "WEAK_BULL": [
-15,
--0.11
+114,
+-0.235
 ]
 },
 "macd_trend_cross@1.0|4h": {
 "WEAK_BEAR": [
-1,
-0.29
+14,
+-0.369
 ],
 "WEAK_BULL": [
-4,
--0.014
+18,
+0.243
 ]
 },
 "rsi2_dip_buy@1.0|15m": {
 "HIGH_VOL_RANGE": [
-29,
+188,
 -0.215
 ],
 "RANGE": [
-344,
--0.448
+3363,
+-0.252
 ]
 },
 "rsi2_dip_buy@1.0|1h": {
 "HIGH_VOL_RANGE": [
-45,
--0.086
+284,
+-0.045
 ],
 "RANGE": [
-828,
--0.169
+5591,
+-0.112
 ]
 },
 "rsi2_dip_buy@1.0|30m": {
 "HIGH_VOL_RANGE": [
-14,
-0.006
+123,
+-0.085
 ],
 "RANGE": [
-222,
--0.403
+2104,
+-0.167
 ]
 },
 "rsi2_dip_buy@1.0|4h": {
 "HIGH_VOL_RANGE": [
-13,
--0.218
+99,
+-0.122
 ],
 "RANGE": [
-194,
--0.08
+1463,
+-0.1
 ]
 },
 "supertrend_flip@1.0|1h": {
 "EXPANSION": [
-12,
--0.493
+35,
+-0.36
+],
+"STRONG_BEAR": [
+3,
+0.658
 ],
 "STRONG_BULL": [
-1,
--1.039
+3,
+-1.043
 ],
 "WEAK_BEAR": [
-10,
--0.004
+94,
+-0.084
 ],
 "WEAK_BULL": [
-15,
--0.554
+99,
+-0.245
 ]
 },
 "supertrend_flip@1.0|30m": {
 "EXPANSION": [
-2,
--0.389
+9,
+-0.582
 ],
 "STRONG_BEAR": [
-2,
--1.136
+10,
+0.023
 ],
 "STRONG_BULL": [
-1,
--0.979
+6,
+0.046
 ],
 "WEAK_BEAR": [
-5,
-0.047
+51,
+-0.279
 ],
 "WEAK_BULL": [
-7,
-0.037
+51,
+-0.154
 ]
 },
 "supertrend_flip@1.0|4h": {
 "EXPANSION": [
-2,
-0.088
+15,
+0.205
 ],
 "WEAK_BEAR": [
-5,
--0.614
+29,
+-0.192
 ],
 "WEAK_BULL": [
-8,
-0.183
+35,
+-0.101
 ]
 },
 "trend_pullback@1.0|15m": {
 "STRONG_BEAR": [
-79,
--0.236
+728,
+-0.213
 ],
 "STRONG_BULL": [
-141,
--0.53
+910,
+-0.187
 ],
 "WEAK_BEAR": [
-131,
--0.262
+1510,
+-0.216
 ],
 "WEAK_BULL": [
-248,
--0.416
+1652,
+-0.245
 ]
 },
 "trend_pullback@1.0|1h": {
 "STRONG_BEAR": [
-70,
--0.144
+500,
+-0.131
 ],
 "STRONG_BULL": [
-133,
--0.046
+628,
+-0.153
 ],
 "WEAK_BEAR": [
-278,
--0.191
+2013,
+-0.109
 ],
 "WEAK_BULL": [
-415,
--0.111
+2190,
+-0.108
 ]
 },
 "trend_pullback@1.0|30m": {
 "STRONG_BEAR": [
-43,
--0.337
+363,
+-0.177
 ],
 "STRONG_BULL": [
-61,
--0.312
+465,
+-0.135
 ],
 "WEAK_BEAR": [
-92,
--0.198
+963,
+-0.176
 ],
 "WEAK_BULL": [
-151,
--0.079
+1042,
+-0.115
 ]
 },
 "trend_pullback@1.0|4h": {
 "STRONG_BEAR": [
-15,
--0.495
+88,
+-0.2
 ],
 "STRONG_BULL": [
-25,
--0.082
+111,
+-0.039
 ],
 "WEAK_BEAR": [
-41,
--0.241
+382,
+-0.144
 ],
 "WEAK_BULL": [
-91,
-0.091
+448,
+0.025
 ]
 }
 }
