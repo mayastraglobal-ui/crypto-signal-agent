@@ -386,3 +386,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** AVAX - 7-day average volume $49M < $50M
 - **EXCLUDED** RLC - 7-day average volume $13M < $50M; order book too thin: $31k within 1% (need $250k)
 - **LEAVE** AVAX - not eligible: 7-day average volume $49M < $50M
+
+## 2026-10-07 02:19 UTC
+- **EXCLUDED** RLC - 7-day average volume $13M < $50M; spread 0.123% > 0.1%; order book too thin: $26k within 1% (need $250k)
+- **JOIN** UNI - in the top 7 for 2 runs in a row (now #7)
