@@ -10688,3 +10688,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-07 22:15,BNB,15m,FVG_FILLED,bear,,769.51,770.33,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-07 22:00,UNI,30m,FVG,bear,,7.761,7.787,0.37,,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-07 21:30,UNI,15m,FVG_FILLED,bull,,7.764,7.779,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 22:30,SOL,15m,FVG_RETRACE,bear,,115.95,116.05,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 22:30,SOL,15m,FVG_FILLED,bear,,115.59,115.93,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 22:45,SOL,15m,OB_RETEST,bear,,116.01,116.25,,,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-07 22:45,SOL,15m,FVG_FILLED,bear,,115.95,116.05,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 22:30,ZEC,15m,FVG_FILLED,bear,,1315.1,1318.84,,,1h,RANGE,,smc-1.0,Binance
+2026-10-07 22:45,ZEC,15m,FVG_FILLED,bear,,1324.57,1328.69,,,1h,RANGE,,smc-1.0,Binance
+2026-10-07 22:45,ZEC,15m,FVG,bull,,1318.31,1320.91,0.26,,1h,RANGE,,smc-1.0,Binance
+2026-10-07 23:00,ZEC,15m,FVG,bull,,1322.99,1327.88,0.512,,1h,RANGE,,smc-1.0,Binance
+2026-10-07 23:00,BNB,15m,FVG_FILLED,bear,,771.15,771.69,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-07 23:00,BNB,15m,FVG,bull,,770.75,771.16,0.313,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-07 23:15,BNB,15m,FVG,bull,,771.49,771.99,0.391,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-07 22:30,UNI,30m,FVG_RETRACE,bear,,7.761,7.787,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 22:30,UNI,30m,FVG_FILLED,bear,,7.761,7.787,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 23:00,UNI,30m,WEAK_BREAK,bull,7.838,,,0.128,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 23:00,UNI,30m,FVG,bull,,7.761,7.798,0.528,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 22:45,UNI,15m,FVG,bull,,7.777,7.798,0.475,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 23:00,UNI,15m,WEAK_BREAK,bull,7.838,,,0.203,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 23:00,UNI,15m,FVG,bull,,7.812,7.824,0.273,,1h,STRONG_BEAR,,smc-1.0,Binance
