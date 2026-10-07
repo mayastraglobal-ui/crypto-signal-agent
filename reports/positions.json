@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-07 12:27",
+ "generated_utc": "2026-10-07 13:23",
  "book": {
-  "utc": "2026-10-07 12:27",
-  "beijing": "2026-10-07 20:27",
+  "utc": "2026-10-07 13:23",
+  "beijing": "2026-10-07 21:23",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,10 +20,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-07 12:27 UTC / 2026-10-07 20:27 Beijing",
+  "POSITION BOOK \u2014 2026-10-07 13:23 UTC / 2026-10-07 21:23 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5%"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -38,8 +38,15 @@
    "BNB+BTC+ETH+SOL+XRP"
   ],
   "blackout_now": [],
-  "upcoming_events": [],
-  "next_event": null,
+  "upcoming_events": [
+   {
+    "start_utc": "2026-10-14 12:30",
+    "end_utc": "2026-10-14 12:30",
+    "type": "CPI",
+    "name": "US CPI (Sep data)"
+   }
+  ],
+  "next_event": "US CPI (Sep data) 2026-10-14 12:30 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
