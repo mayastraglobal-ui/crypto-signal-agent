@@ -10632,3 +10632,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-07 19:00,UNI,30m,BOS,bear,7.768,,,0.383,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
 2026-10-07 18:45,UNI,15m,SWEEP,bull,7.768,,,0.476,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-07 19:00,UNI,15m,BOS,bear,7.768,,,0.509,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 19:30,ETH,15m,FVG_FILLED,bear,,2562.55,2567.92,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-07 20:00,SOL,30m,BOS,bear,116.01,,,0.247,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 19:45,SOL,15m,BOS,bear,116.01,,,0.094,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 19:30,XRP,30m,FVG_FILLED,bear,,1.4211,1.4273,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-07 19:45,XRP,15m,FVG_RETRACE,bull,,1.4215,1.4235,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:00,XRP,15m,FVG_FILLED,bull,,1.4215,1.4235,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-07 19:30,ZEC,30m,WEAK_BREAK,bull,1342.22,,,0.045,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 19:30,ZEC,15m,BOS,bull,1342.22,,,0.059,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-07 19:30,ZEC,15m,FVG,bull,,1328.53,1333.41,0.427,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-07 20:00,ZEC,15m,FVG_RETRACE,bull,,1328.53,1333.41,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:00,ZEC,15m,FVG_FILLED,bull,,1328.53,1333.41,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-07 19:45,UNI,15m,FVG,bull,,7.764,7.779,0.257,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 20:00,UNI,15m,FVG_RETRACE,bull,,7.764,7.779,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
