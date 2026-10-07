@@ -377,3 +377,15 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - status: KEEP
   - today's evidence: no strategy had a setup before the move. BTC, SOL and BNB all fell in the same hours (2026-09-27 21:00 to 2026-09-28 10:00), so this looks like one market-wide move, not a BNB setup that was missed. That is a reading of the three records, not a measurement.
   - action: none.
+
+### Review: ZEC down -11.5% (9.0x ATR), 2026-09-28 13:00 -> 2026-09-29 02:00
+- timestamp: 2026-10-07 15:30 UTC · source: Claude daily review 2026-10-07 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal, rsi2_dip_buy v1.0 · asset: ZEC · timeframe: 5m, 15m, 30m · regime: TRANSITION · review: 2026-10-14
+  - status: KEEP
+  - today's evidence: every blocked setup came from a failing cell: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 473 trades -0.48R; liquidity_sweep_reversal@1.0|15m 1030 trades -0.48R and |5m 3683 trades -0.69R; rsi2_dip_buy@1.0|15m 3551 trades -0.25R (BACKTEST, fact sheet 2026-10-07). The permission and regime gates cost nothing.
+  - action: none. It overlaps the ZEC -8.9% move of 2026-09-28 (reviewed 2026-10-06): one sell-off, counted twice by the 12-hour window.
+
+### Review: AVAX up +14.3% (7.0x ATR), 2026-09-29 02:00 -> 2026-09-29 12:00
+- timestamp: 2026-10-07 15:30 UTC · source: Claude daily review 2026-10-07 · evidence: FACT: the engine's missed-move record and today's lab results · confidence: medium · strategy: S5-SWEEP-MSS-FVG-noSMC v1.0, donchian_breakout-VEXIT-S4 v1.0 · asset: AVAX · timeframe: 15m, 30m · regime: UNCLEAR · review: 2026-10-14
+  - status: KEEP
+  - today's evidence: donchian_breakout-VEXIT-S4@1.0|30m is FAILED (1200 trades, -0.02R, BACKTEST); only its 4h cell is positive. S5-SWEEP-MSS-FVG-noSMC 15m has no numbers in today's fact sheet (not available). AVAX's regime was UNCLEAR, where no strategy has 30+ backtest trades, so the regime gate blocking it is the intended behaviour.
+  - action: none.
