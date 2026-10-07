@@ -94,7 +94,7 @@ Status: **built 2026-10-06** (operator: "start step 5"):
 ### Step 6 (optional): more coins
 Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept.
 
-### Optional upgrades - the operator picks one later (agreed 2026-10-07; 7 and 8 added the same day)
+### Optional upgrades - the operator picks one later (agreed 2026-10-07; 7-11 added the same day)
 Nothing here is started until the operator names it. Suggested first, once PAPER alerts run (after 10 Oct): 1 or 4.
 1. **Free Oracle cloud server**: run the live watcher there (guide: `docs/LIVE_WATCHER.md`), so alerts no longer
    depend on the lab PC.
@@ -123,6 +123,16 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
    - Telegram controls: `/autopilot on|off`, `/risk 0.5`, `/defensive` - the operator can always override.
 8. **Local runner** (no GitHub Actions needed): research, scan and emails on the operator's own always-on computer -
    see `docs/BACKUP_AND_RESTORE.md`, Way 2.
+9. **Crowding filter (funding + open interest)**: skip longs when the market is crowded long (high positive funding,
+   rising open interest), shorts mirrored; liquidation-cascade setups as a second idea. Data already recorded hourly
+   (`derivs.py`). Tested like any card (twin without the filter).
+10. **"Market weather" dashboard**: one daily view - trend strength, volatility level (ATR percentile), crowding
+    (funding / OI), BTC dominance / BTC direction - with a plain verdict ("trend day / range day / stay out"), in the
+    briefing email and on Telegram (`/weather`). Explains the market; it never creates a signal by itself.
+11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
+    ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
+    every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07
+    discussion: overnight gaps, the US pattern-day-trader rule under $25,000, broker access and data costs.
 
 ## The operator's to-do list
 
