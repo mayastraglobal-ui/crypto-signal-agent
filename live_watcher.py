@@ -128,20 +128,42 @@ def _valid(path, data):
     return True
 
 
-def sync_files(root=ROOT, repo=REPO, get=None):
+def _fetch(get, url, path, deadline, tries=3, wait=(3, 8), sleep=None):
+    """One file from GitHub, retried when the connection breaks or the download is incomplete (a slow VPN cuts
+    downloads half way: ChunkedEncodingError / ConnectionError). Retries stop at the deadline (time.monotonic()), so a
+    bad connection never holds up the 5-minute market check for long. Returns (data or None, problem or None)."""
+    sleep = sleep or time.sleep
+    problem = None
+    for attempt in range(tries):
+        try:
+            r = get(url)
+            data = r.content if r.status_code == 200 else None
+            if r.status_code == 404:
+                return None, f"{path}: not on GitHub (HTTP 404)"
+            problem = None if _valid(path, data) else f"{path}: not downloaded (HTTP {r.status_code})"
+        except requests.RequestException as e:
+            data, problem = None, f"{path}: {e.__class__.__name__}"
+        if problem is None:
+            return data, None
+        if attempt + 1 < tries:
+            pause = wait[min(attempt, len(wait) - 1)]
+            if time.monotonic() + pause >= deadline:
+                break
+            sleep(pause)
+    return None, problem + (f" (after {attempt + 1} tries)" if attempt else "")
+
+
+def sync_files(root=ROOT, repo=REPO, get=None, budget_s=120, sleep=None):
     """No git: download GitHub's newest decision files (statuses, coins, cards, settings, futures data).
-    Returns (updated paths, problems). Each file is written only when it downloaded completely and looks valid."""
-    get = get or (lambda url: requests.get(url, timeout=60))
+    Returns (updated paths, problems). Each file is written only when it downloaded completely and looks valid;
+    a broken download is tried again (up to 3 times, within budget_s seconds for all files together)."""
+    get = get or (lambda url: requests.get(url, timeout=30))
+    deadline = time.monotonic() + budget_s
     updated, problems = [], []
     for branch, path in SYNC_FILES:
-        try:
-            r = get(RAW.format(repo=repo, branch=branch, path=path))
-            data = r.content if r.status_code == 200 else None
-        except requests.RequestException as e:
-            problems.append(f"{path}: {e.__class__.__name__}")
-            continue
-        if not _valid(path, data):
-            problems.append(f"{path}: not downloaded (HTTP {getattr(r, 'status_code', '?')})")
+        data, problem = _fetch(get, RAW.format(repo=repo, branch=branch, path=path), path, deadline, sleep=sleep)
+        if problem:
+            problems.append(problem)
             continue
         full = os.path.join(root, *path.split("/"))
         try:

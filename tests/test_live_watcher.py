@@ -185,14 +185,48 @@ class WindowsPC(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             with open(os.path.join(d, "strategies.yaml"), "w") as f:
                 f.write("- id: keep_me\n")
-            up, problems = LW.sync_files(d, "o/r", get)
+            up, problems = LW.sync_files(d, "o/r", get, sleep=lambda s: None)
             self.assertEqual(sorted(up), sorted(good))
             with open(os.path.join(d, "strategies.yaml")) as f:
                 self.assertIn("keep_me", f.read())                                 # a bad download never replaces
             self.assertTrue(any("strategies.yaml" in p for p in problems))
-            self.assertEqual(LW.sync_files(d, "o/r", get)[0], [])                  # unchanged: nothing rewritten
+            self.assertEqual(LW.sync_files(d, "o/r", get, sleep=lambda s: None)[0], [])   # unchanged: not rewritten
             with open(os.path.join(d, "reports", "universe.json")) as f:
                 self.assertEqual(f.read(), '{"signal": ["BTC"]}')
+
+    def test_a_broken_download_is_tried_again(self):
+        """A slow VPN cuts downloads half way (ChunkedEncodingError): each file gets up to 3 tries, within a budget."""
+        calls, waits = {}, []
+
+        class R:
+            def __init__(self, code, content):
+                self.status_code, self.content = code, content
+
+        def get(url, fails=2):
+            path = url.split("/main/", 1)[-1].split("/live-reports/", 1)[-1]
+            calls[path] = calls.get(path, 0) + 1
+            if path == "config.yaml" and calls[path] <= fails:
+                raise LW.requests.exceptions.ChunkedEncodingError("cut off")
+            if path == "events.yaml" and calls[path] == 1:
+                return R(200, b"events: [unfinished")                              # truncated: not valid YAML
+            if path == "strategies.yaml":
+                raise LW.requests.exceptions.ConnectionError("down")
+            if path in ("config.yaml", "events.yaml"):
+                return R(200, b"ok: 1\n")
+            return R(404, b"Not Found")
+        with tempfile.TemporaryDirectory() as d:
+            up, problems = LW.sync_files(d, "o/r", lambda u: get(u) if "yaml" in u else R(404, b""),
+                                         sleep=waits.append)
+            self.assertEqual(sorted(up), ["config.yaml", "events.yaml"])            # 3rd and 2nd try worked
+            self.assertEqual(calls["config.yaml"], 3)
+            self.assertEqual(calls["strategies.yaml"], 3)
+            self.assertTrue(any("strategies.yaml: ConnectionError (after 3 tries)" in p for p in problems))
+            self.assertFalse(any("events.yaml" in p for p in problems))             # 2nd try was fine
+            self.assertEqual(calls["strategies_lab.yaml"], 1)                       # 404: no retry
+            calls.clear()
+            up, problems = LW.sync_files(d, "o/r", get, budget_s=0, sleep=waits.append)
+            self.assertEqual(calls["config.yaml"], 1)                               # budget used up: one try only
+            self.assertTrue(any("config.yaml: ChunkedEncodingError" in p for p in problems))
 
     def test_code_outdated_ignores_line_endings(self):
         class R:
