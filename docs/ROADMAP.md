@@ -94,6 +94,20 @@ Status: **built 2026-10-06** (operator: "start step 5"):
 ### Step 6 (optional): more coins
 Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept.
 
+### Optional upgrades - the operator picks one later (agreed 2026-10-07: "remember all of this 6, I'll tell you later")
+Nothing here is started until the operator names it. Suggested first, once PAPER alerts run (after 10 Oct): 1 or 4.
+1. **Free Oracle cloud server**: run the live watcher there (guide: `docs/LIVE_WATCHER.md`), so alerts no longer
+   depend on the lab PC.
+2. **Live price stream**: OKX WebSocket for the trades being followed, so TP / stop messages come within a second
+   instead of up to 5 minutes (entry signals stay at the candle close).
+3. **Claude researches from the losses**: each week, new strategy ideas aimed at the main loss causes (the "still
+   open" part of step 5), tested like any card.
+4. **Health check on live strategies**: alerts of a strategy pause by themselves when its recent results drift below
+   its backtest (only ever pauses - never loosens a rule).
+5. **More coins**: step 6 above (~15 coins instead of 7).
+6. **TradingView alerts as a backup**: alert conditions added to the Pine export (`pine_export.py`) for the
+   strategies in paper trading or approved.
+
 ## The operator's to-do list
 
 | When | What |
