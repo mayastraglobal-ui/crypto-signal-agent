@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 285,
+ "runs": 286,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -60,7 +60,8 @@
    "thin_book"
   ],
   "PUMP": [
-   "thin_book"
+   "thin_book",
+   "volume_7d"
   ],
   "HBAR": [],
   "MARSCOIN": [
