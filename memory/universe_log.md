@@ -398,3 +398,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-07 04:20 UTC
 - **LEAVE** UNI - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** SUI - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-10-07 05:20 UTC
+- **EXCLUDED** AVAX - 7-day average volume $49M < $50M
