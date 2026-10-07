@@ -10426,3 +10426,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-07 11:00,BNB,15m,BREAKER_RETEST,bear,,767.67,768.62,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-10-07 10:30,SUI,30m,FVG_RETRACE,bear,,1.1286,1.1323,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-07 11:00,SUI,15m,FVG_RETRACE,bear,,1.1304,1.1323,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 12:00,ETH,4h,FVG_FILLED,bull,,2587.39,2606.69,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-07 12:00,ETH,1h,FVG,bear,,2583.46,2592.98,0.599,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-07 12:00,SOL,4h,SWEEP,bull,117.11,,,0.22,,1d,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-07 11:45,XRP,15m,FVG,bear,,1.4476,1.4497,0.383,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 12:00,XRP,15m,FVG_RETRACE,bear,,1.4476,1.4497,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 12:15,XRP,15m,FVG_FILLED,bear,,1.4476,1.4497,,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 12:00,ZEC,1h,SWEEP,bull,1300.0,,,0.601,NY AM,4h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-07 12:00,ZEC,1h,FVG,bear,,1306.44,1311.53,0.293,NY AM,4h,COMPRESSION,,smc-1.0,Binance
+2026-10-07 12:00,BNB,4h,FVG_RETRACE,bear,,775.52,778.57,,,1d,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-07 12:00,SUI,15m,SWEEP,bull,1.1179,,,0.219,NY AM,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
