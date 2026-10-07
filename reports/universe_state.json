@@ -5,15 +5,14 @@
   "SOL",
   "ZEC",
   "XRP",
-  "BNB",
-  "AVAX"
+  "BNB"
  ],
- "in_streak": {},
- "out_streak": {},
- "suspended": {
-  "RLC": "2026-10-06"
+ "in_streak": {
+  "SUI": 1
  },
- "runs": 266,
+ "out_streak": {},
+ "suspended": {},
+ "runs": 267,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -30,7 +29,9 @@
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "volume_7d"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",
@@ -87,7 +88,6 @@
    "volume_7d"
   ],
   "RLC": [
-   "big_move",
    "thin_book",
    "volume_7d"
   ]

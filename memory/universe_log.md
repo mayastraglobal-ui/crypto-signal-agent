@@ -381,3 +381,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** RLC - 7-day average volume $5M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $34k within 1% (need $250k)
 - **LEAVE** SUI - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** AVAX - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-10-07 00:30 UTC
+- **EXCLUDED** AVAX - 7-day average volume $49M < $50M
+- **EXCLUDED** RLC - 7-day average volume $13M < $50M; order book too thin: $31k within 1% (need $250k)
+- **LEAVE** AVAX - not eligible: 7-day average volume $49M < $50M
