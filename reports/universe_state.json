@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 288,
+ "runs": 289,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,6 +29,7 @@
   "UNI": [],
   "SUI": [],
   "AVAX": [
+   "thin_book",
    "volume_7d"
   ],
   "ENA": [],
@@ -60,7 +61,6 @@
    "thin_book"
   ],
   "PUMP": [
-   "thin_book",
    "volume_7d"
   ],
   "HBAR": [],
