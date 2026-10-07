@@ -3,15 +3,19 @@
   "BTC",
   "ETH",
   "SOL",
-  "ZEC",
   "XRP",
+  "ZEC",
   "BNB",
   "UNI"
  ],
- "in_streak": {},
- "out_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
+ "out_streak": {
+  "UNI": 1
+ },
  "suspended": {},
- "runs": 269,
+ "runs": 270,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,6 +33,7 @@
   "UNI": [],
   "SUI": [],
   "AVAX": [
+   "thin_book",
    "volume_7d"
   ],
   "ENA": [],
@@ -87,7 +92,6 @@
    "volume_7d"
   ],
   "RLC": [
-   "spread",
    "thin_book",
    "volume_7d"
   ]
