@@ -6,16 +6,12 @@
   "XRP",
   "ZEC",
   "BNB",
-  "SUI"
+  "UNI"
  ],
- "in_streak": {
-  "UNI": 1
- },
- "out_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {},
- "runs": 282,
+ "runs": 283,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -33,7 +29,6 @@
   "UNI": [],
   "SUI": [],
   "AVAX": [
-   "thin_book",
    "volume_7d"
   ],
   "ENA": [],
