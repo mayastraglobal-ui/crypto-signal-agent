@@ -94,7 +94,7 @@ Status: **built 2026-10-06** (operator: "start step 5"):
 ### Step 6 (optional): more coins
 Top ~15 liquid OKX perpetuals instead of 7, with the spread and depth rules kept.
 
-### Optional upgrades - the operator picks one later (agreed 2026-10-07: "remember all of this 6, I'll tell you later")
+### Optional upgrades - the operator picks one later (agreed 2026-10-07; 7 and 8 added the same day)
 Nothing here is started until the operator names it. Suggested first, once PAPER alerts run (after 10 Oct): 1 or 4.
 1. **Free Oracle cloud server**: run the live watcher there (guide: `docs/LIVE_WATCHER.md`), so alerts no longer
    depend on the lab PC.
@@ -107,6 +107,22 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
 5. **More coins**: step 6 above (~15 coins instead of 7).
 6. **TradingView alerts as a backup**: alert conditions added to the Pine export (`pine_export.py`) for the
    strategies in paper trading or approved.
+7. **Controlled adaptive agent ("regime autopilot")** - the operator's idea (2026-10-07: track the market, understand
+   the regime, upgrade itself fast, follow risk management) under one rule: *fast to protect, slow to change rules*.
+   Ideas to build in parts, each one switchable by the operator (an `autopilot:` block in config.yaml + Telegram
+   commands), every automatic action logged and announced:
+   - autonomy levels: 0 report only · 1 automatic defence (pause / smaller size) · 2 switch between already-tested
+     strategies by regime · 3 propose new rules (never live without the full tests and the operator's yes);
+   - regime scoreboard: per market type, which tested strategies work; the agent turns them on / off when the regime
+     changes;
+   - drift check (upgrade 4) with a statistical test against the backtest, not "N losses in a row";
+   - size dial between 0.25x and 1x only (never above the normal risk), lower when the regime is unclear, strategies
+     disagree or volatility jumps;
+   - champion / challenger: candidate strategies run in silent paper mode next to the live ones, so evidence for
+     promotion collects from live data faster;
+   - Telegram controls: `/autopilot on|off`, `/risk 0.5`, `/defensive` - the operator can always override.
+8. **Local runner** (no GitHub Actions needed): research, scan and emails on the operator's own always-on computer -
+   see `docs/BACKUP_AND_RESTORE.md`, Way 2.
 
 ## The operator's to-do list
 
