@@ -1,0 +1,124 @@
+{
+ "last_entry_utc": null,
+ "days": 30,
+ "all": {
+  "alerts": 0,
+  "took": 0,
+  "skipped": 0,
+  "no_answer": 0,
+  "plan_took": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_all": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "yours": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "gap": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 0
+ },
+ "recent": {
+  "alerts": 0,
+  "took": 0,
+  "skipped": 0,
+  "no_answer": 0,
+  "plan_took": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_all": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "yours": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "gap": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 0
+ },
+ "per_strategy": [],
+ "findings": [
+  "No alert in your journal yet."
+ ]
+}
