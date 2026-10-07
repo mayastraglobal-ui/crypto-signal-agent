@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "SOL",
   "XRP",
+  "SOL",
   "ZEC",
   "BNB",
   "UNI"
@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 287,
+ "runs": 288,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],

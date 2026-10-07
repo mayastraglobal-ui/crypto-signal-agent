@@ -10645,3 +10645,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-07 20:00,ZEC,15m,FVG_FILLED,bull,,1328.53,1333.41,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-07 19:45,UNI,15m,FVG,bull,,7.764,7.779,0.257,,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-07 20:00,UNI,15m,FVG_RETRACE,bull,,7.764,7.779,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:30,BTC,15m,FVG,bull,,83457.39,83521.47,0.348,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 20:45,BTC,15m,FVG_RETRACE,bull,,83457.39,83521.47,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:45,BTC,15m,FVG_FILLED,bull,,83457.39,83521.47,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 21:00,BTC,15m,FVG,bear,,83446.01,83521.47,0.419,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 21:15,BTC,15m,FVG_RETRACE,bear,,83446.01,83521.47,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:30,ETH,15m,FVG,bull,,2571.38,2575.37,0.496,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 20:45,ETH,15m,FVG_RETRACE,bull,,2571.38,2575.37,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:45,ETH,15m,FVG_FILLED,bull,,2571.38,2575.37,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 20:30,SOL,15m,FVG,bull,,115.97,116.21,0.606,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-07 20:45,SOL,15m,FVG_RETRACE,bull,,115.97,116.21,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:45,ZEC,15m,FVG_RETRACE,bull,,1319.57,1323.68,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-07 20:45,ZEC,15m,FVG_FILLED,bull,,1319.57,1323.68,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-07 21:00,ZEC,15m,FVG,bear,,1324.57,1328.69,0.381,,1h,RANGE,,smc-1.0,Binance
+2026-10-07 21:15,ZEC,15m,FVG_RETRACE,bear,,1324.57,1328.69,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-07 21:00,BNB,15m,FVG,bear,,771.15,771.69,0.343,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-07 21:15,BNB,15m,FVG_RETRACE,bear,,771.15,771.69,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
