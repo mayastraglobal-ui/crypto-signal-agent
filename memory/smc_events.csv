@@ -11492,3 +11492,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-08 22:00,XRP,30m,FVG_RETRACE,bull,,1.369,1.3731,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-08 21:30,XRP,15m,FVG_FILLED,bear,,1.3607,1.38,,,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-08 22:15,BNB,15m,WEAK_BREAK,bull,735.07,,,0.225,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 23:00,BTC,30m,BOS,bull,81891.35,,,0.015,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 22:45,BTC,15m,WEAK_BREAK,bull,81891.35,,,0.148,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 22:30,SOL,15m,FVG_RETRACE,bull,,110.26,110.43,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 22:30,SOL,15m,FVG_FILLED,bull,,110.26,110.43,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-08 23:00,XRP,1h,BREAKER_RETEST,bear,,1.392,1.4063,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-08 22:30,XRP,15m,SWEEP,bear,1.3846,,,1.013,,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-08 22:30,XRP,15m,FVG_RETRACE,bear,,1.385,1.4012,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 22:30,XRP,15m,FVG,bull,,1.3777,1.38,0.279,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-08 22:45,XRP,15m,FVG_RETRACE,bull,,1.3777,1.38,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
