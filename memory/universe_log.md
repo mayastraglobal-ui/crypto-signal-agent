@@ -443,3 +443,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-08 10:22 UTC
 - **LEAVE** BNB - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** UNI - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-10-08 12:27 UTC
+- **LEAVE** UNI - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** BNB - in the top 7 for 2 runs in a row (now #7)
