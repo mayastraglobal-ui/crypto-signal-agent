@@ -469,3 +469,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-08 19:20 UTC
 - **EXCLUDED** AVAX - 7-day average volume $50M < $50M
+
+## 2026-10-08 20:21 UTC
+- **EXCLUDED** OGN - 7-day average volume $3M < $50M; 24h move +120.7% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $28k within 1% (need $250k)

@@ -11436,3 +11436,40 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-08 18:30,SUI,15m,FVG_RETRACE,bear,,1.0275,1.0336,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
 2026-10-08 18:45,SUI,15m,FVG,bull,,1.0117,1.0214,0.656,,1h,EXPANSION,,smc-1.0,Binance
 2026-10-08 19:15,SUI,15m,FVG_FILLED,bear,,1.0275,1.0336,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-08 20:00,BTC,4h,OB_RETEST,bull,,80227.27,80668.15,,,1d,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-10-08 20:00,BTC,4h,FVG,bear,,81839.73,82318.0,0.527,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,BTC,1h,FVG,bull,,81028.74,81425.5,0.671,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-08 20:00,BTC,30m,FVG,bull,,81562.01,81687.97,0.276,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 19:45,BTC,15m,BREAKER_RETEST,bear,,81773.43,82492.56,,,1h,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-08 20:00,ETH,4h,BREAKER_RETEST,bear,,2436.41,2458.99,,,1d,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-08 20:00,ETH,4h,FVG,bear,,2465.96,2527.57,1.594,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,ETH,1h,FVG,bull,,2427.0,2443.52,0.658,,4h,EXPANSION,,smc-1.0,Binance
+2026-10-08 19:30,ETH,30m,FVG_FILLED,bear,,2442.08,2455.58,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 20:00,ETH,30m,FVG,bull,,2449.65,2455.79,0.311,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-08 20:15,ETH,15m,FVG_RETRACE,bear,,2468.88,2509.26,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 20:00,SOL,4h,SWEEP,bull,107.4,,,0.89,,1d,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-08 20:00,SOL,4h,FVG_FILLED,bull,,106.67,111.01,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,SOL,4h,FVG,bear,,109.47,113.14,1.807,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,SOL,1h,FVG_RETRACE,bear,,109.14,112.15,,,4h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-08 20:00,SOL,30m,FVG,bull,,108.27,108.95,0.609,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 19:30,SOL,15m,FVG,bull,,108.27,108.53,0.295,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 20:00,ZEC,4h,FVG,bear,,1170.15,1194.47,0.506,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,ZEC,1h,FVG_RETRACE,bear,,1156.69,1203.41,,,4h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-08 19:45,ZEC,15m,WEAK_BREAK,bull,1153.95,,,0.251,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 19:45,ZEC,15m,FVG_FILLED,bear,,1148.0,1159.87,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-08 20:00,ZEC,15m,FVG,bull,,1148.58,1156.04,0.496,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-08 20:15,ZEC,15m,FVG_RETRACE,bear,,1171.6,1203.41,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 20:00,XRP,4h,BREAKER_RETEST,bear,,1.3773,1.3856,,,1d,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-08 20:00,XRP,4h,FVG,bear,,1.3774,1.3937,0.571,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,XRP,1h,FVG,bull,,1.3463,1.3597,0.693,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-08 19:30,XRP,30m,FVG,bull,,1.3548,1.3597,0.305,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 20:00,XRP,30m,FVG,bull,,1.3637,1.3678,0.262,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 20:00,BNB,4h,FVG_RETRACE,bull,,714.69,718.2,,,1d,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-08 20:00,BNB,4h,FVG,bear,,734.9,761.54,2.653,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-08 20:00,BNB,1h,FVG_FILLED,bear,,725.47,730.92,,,4h,EXPANSION,,smc-1.0,Binance
+2026-10-08 19:30,BNB,15m,FVG_FILLED,bear,,725.47,729.2,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-08 20:00,SUI,4h,FVG,bear,,1.0481,1.1127,1.867,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-08 20:00,SUI,1h,FVG_RETRACE,bear,,1.0466,1.0951,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-08 19:45,SUI,15m,SWEEP,bear,1.0466,,,0.114,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-08 20:00,SUI,15m,FVG,bull,,1.0358,1.0396,0.297,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-08 20:15,SUI,15m,WEAK_BREAK,bull,1.0466,,,0.297,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
