@@ -1,0 +1,307 @@
+{
+ "utc": "2026-10-08 09:21",
+ "verdict": {
+  "code": "CHOPPY",
+  "icon": "\ud83c\udf2b",
+  "title": "Choppy - stay out",
+  "meaning": "The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.",
+  "fits": [
+   "waiting until 1D, 4H and 1H agree - no trade is the right trade"
+  ],
+  "avoid": [
+   "any trade",
+   "trading on feeling or headlines"
+  ]
+ },
+ "breadth": {
+  "UP": 0,
+  "DOWN": 0,
+  "RANGE": 0,
+  "CHOPPY": 7
+ },
+ "coins": [
+  {
+   "coin": "BTC",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
+   "labels": {
+    "1w": "TRANSITION",
+    "1d": "WEAK_BULL",
+    "4h": "TRANSITION",
+    "1h": "STRONG_BEAR"
+   },
+   "adx": {
+    "1d": 42.0,
+    "4h": 28.0,
+    "1h": 50.0
+   },
+   "vol": {
+    "atr_pct": 2.34,
+    "vol_pctile": 7.0,
+    "vol_label": "quiet",
+    "usual_move_pct": 0.97,
+    "move_8of10_pct": 2.12,
+    "days": 250,
+    "basis": "similar days",
+    "price": 83321.81,
+    "band": [
+     81555.412961,
+     85088.207039
+    ]
+   },
+   "crowd": {
+    "funding_pct": -0.0002,
+    "oi_24h_pct": 0.6,
+    "label": "neutral"
+   },
+   "change_24h": -0.95
+  },
+  {
+   "coin": "BNB",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H TRANSITION)",
+   "labels": {
+    "1w": "WEAK_BULL",
+    "1d": "WEAK_BULL",
+    "4h": "TRANSITION",
+    "1h": "TRANSITION"
+   },
+   "adx": {
+    "1d": 29.0,
+    "4h": 25.0,
+    "1h": 29.0
+   },
+   "vol": {
+    "atr_pct": 2.54,
+    "vol_pctile": 16.0,
+    "vol_label": "quiet",
+    "usual_move_pct": 1.0,
+    "move_8of10_pct": 2.06,
+    "days": 233,
+    "basis": "similar days",
+    "price": 772.45,
+    "band": [
+     756.507132,
+     788.392868
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.01,
+    "oi_24h_pct": -5.7,
+    "label": "neutral"
+   },
+   "change_24h": -0.35
+  },
+  {
+   "coin": "ETH",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H WEAK_BEAR, 1H TRANSITION)",
+   "labels": {
+    "1w": "WEAK_BULL",
+    "1d": "WEAK_BULL",
+    "4h": "WEAK_BEAR",
+    "1h": "TRANSITION"
+   },
+   "adx": {
+    "1d": 39.0,
+    "4h": 34.0,
+    "1h": 51.0
+   },
+   "vol": {
+    "atr_pct": 2.9,
+    "vol_pctile": 5.0,
+    "vol_label": "quiet",
+    "usual_move_pct": 1.08,
+    "move_8of10_pct": 3.01,
+    "days": 108,
+    "basis": "similar days",
+    "price": 2574.14,
+    "band": [
+     2496.561801,
+     2651.718199
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.0004,
+    "oi_24h_pct": 0.4,
+    "label": "neutral"
+   },
+   "change_24h": -1.68
+  },
+  {
+   "coin": "SOL",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
+   "labels": {
+    "1w": "WEAK_BULL",
+    "1d": "WEAK_BULL",
+    "4h": "TRANSITION",
+    "1h": "STRONG_BEAR"
+   },
+   "adx": {
+    "1d": 43.0,
+    "4h": 25.0,
+    "1h": 43.0
+   },
+   "vol": {
+    "atr_pct": 3.82,
+    "vol_pctile": 17.0,
+    "vol_label": "quiet",
+    "usual_move_pct": 1.45,
+    "move_8of10_pct": 3.25,
+    "days": 141,
+    "basis": "similar days",
+    "price": 116.3,
+    "band": [
+     112.517029,
+     120.082971
+    ]
+   },
+   "crowd": {
+    "funding_pct": -0.0017,
+    "oi_24h_pct": 1.9,
+    "label": "neutral"
+   },
+   "change_24h": -2.64
+  },
+  {
+   "coin": "SUI",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)",
+   "labels": {
+    "1w": "UNCLEAR",
+    "1d": "TRANSITION",
+    "4h": "UNCLEAR",
+    "1h": "TRANSITION"
+   },
+   "adx": {
+    "1d": 43.0,
+    "4h": 23.0,
+    "1h": 34.0
+   },
+   "vol": {
+    "atr_pct": 8.78,
+    "vol_pctile": 78.0,
+    "vol_label": "normal",
+    "usual_move_pct": 3.0,
+    "move_8of10_pct": 5.62,
+    "days": 525,
+    "basis": "similar days",
+    "price": 1.1283,
+    "band": [
+     1.06484,
+     1.19176
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.0053,
+    "oi_24h_pct": 0.4,
+    "label": "neutral"
+   },
+   "change_24h": -0.23
+  },
+  {
+   "coin": "XRP",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
+   "labels": {
+    "1w": "TRANSITION",
+    "1d": "WEAK_BULL",
+    "4h": "TRANSITION",
+    "1h": "STRONG_BEAR"
+   },
+   "adx": {
+    "1d": 43.0,
+    "4h": 28.0,
+    "1h": 53.0
+   },
+   "vol": {
+    "atr_pct": 4.65,
+    "vol_pctile": 42.0,
+    "vol_label": "normal",
+    "usual_move_pct": 1.48,
+    "move_8of10_pct": 3.41,
+    "days": 389,
+    "basis": "similar days",
+    "price": 1.4215,
+    "band": [
+     1.372968,
+     1.470032
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.0001,
+    "oi_24h_pct": -6.7,
+    "label": "neutral"
+   },
+   "change_24h": -3.29
+  },
+  {
+   "coin": "ZEC",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H WEAK_BEAR)",
+   "labels": {
+    "1w": "WEAK_BULL",
+    "1d": "WEAK_BULL",
+    "4h": "RANGE",
+    "1h": "WEAK_BEAR"
+   },
+   "adx": {
+    "1d": 36.0,
+    "4h": 14.0,
+    "1h": 23.0
+   },
+   "vol": {
+    "atr_pct": 8.31,
+    "vol_pctile": 29.0,
+    "vol_label": "normal",
+    "usual_move_pct": 2.8,
+    "move_8of10_pct": 6.34,
+    "days": 496,
+    "basis": "similar days",
+    "price": 1327.98,
+    "band": [
+     1243.750626,
+     1412.209374
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.01,
+    "oi_24h_pct": -1.7,
+    "label": "neutral"
+   },
+   "change_24h": -6.76
+  }
+ ],
+ "alts_vs_btc_24h": -1.21,
+ "fear_greed": {
+  "value": 64,
+  "label": "Greed",
+  "yesterday": 71
+ },
+ "events": [
+  {
+   "start_utc": "2026-10-14 12:30",
+   "name": "US CPI (Sep data)",
+   "hours": 147.1
+  }
+ ],
+ "blackout_now": [],
+ "warnings": [],
+ "settings": {
+  "funding_long_pct": 0.03,
+  "funding_short_pct": -0.01,
+  "oi_rise_pct": 5.0,
+  "similar_atr": 0.2,
+  "min_similar": 30
+ },
+ "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-08 09:21 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H STRONG_BEAR\nVolatility: quiet (daily range 2.3%, higher than 7% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,555 \u2013 85,088) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0002%/8h, open interest +0.6% in 24h)\nAltcoins vs BTC (24h): -1.2%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+}
