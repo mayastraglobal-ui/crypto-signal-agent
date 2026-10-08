@@ -528,6 +528,7 @@ def pack(kind, now, live=None):
             + (f" (! {risk['calendar_warning']})" if risk.get("calendar_warning") else "")]
     out += feed_lines(now, kind)
     out += market_data_lines(rep)
+    out += weather_lines(rep)
     out += playbook_lines(rep, research)
     if kind == "briefing":
         out += debate_lines(rep, research, now)
@@ -606,6 +607,12 @@ def pack(kind, now, live=None):
     out += ["", "## Your earlier outputs (read them first)"] + [f"- {p}" for p in
                                                                  recent_files("daily") + recent_files("weekly", 2)]
     return out
+
+
+def weather_lines(rep):
+    """Upgrade 10: the market weather (engine/weather.py, in the hourly scan's latest.json)."""
+    from engine import weather as wx
+    return ["", "## Market weather (what kind of day it is - explains, never a signal)"] + wx.md_lines((rep or {}).get("weather"))
 
 
 def journal_lines():

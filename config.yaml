@@ -370,6 +370,14 @@ playbook:                    # step 3: the operator's scalping playbook (docs/PL
     min_trades: 100          # "do not judge under 100 trades"
     min_paper_signals: 50    # 9.1: paper phase of at least 50 signals before live
 
+weather:                     # upgrade 10: the "market weather" (engine/weather.py) - EXPLAINS only, never a signal,
+                             # gate, size or approval. reports/market_weather.json, Telegram /weather, briefing email
+  funding_long_pct: 0.03     # funding per 8h at or above this = longs pay a lot ("leaning / crowded long")
+  funding_short_pct: -0.01   # at or below this = shorts pay ("leaning / crowded short")
+  oi_rise_pct: 5.0           # + open interest up 5% in 24h = "crowded" (rules of thumb; upgrade 9 would test them)
+  similar_atr: 0.2           # usual 24h move: past days whose daily range (ATR %) was within +-20% of today's ...
+  min_similar: 30            # ... at least 30 of them, else all days of the last 3 years
+
 live_watcher:                # instant Telegram alerts at every 5m candle close (live_watcher.py on an always-on server;
                              # setup: docs/LIVE_WATCHER.md). The hourly scan stays the official record.
   stages: {APPROVED: LIVE, PAPER_TRADING: PAPER}   # which research status alerts, and its label. Others never alert.
