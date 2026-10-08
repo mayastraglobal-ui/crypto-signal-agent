@@ -464,3 +464,15 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### Review: BTC up +2.7% (6.1x ATR), 2026-09-30 06:00 -> 2026-09-30 13:00
+- timestamp: 2026-10-08 15:30 UTC · source: Claude daily review 2026-10-08 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S5-SWEEP-MSS-FVG, S6-OB-FVG-noSMC, liquidity_sweep_reversal v1.0 · asset: BTC · timeframe: 5m, 15m · regime: RANGE · review: 2026-10-15
+  - status: KEEP
+  - today's evidence: the permission gate blocked liquidity_sweep_reversal@1.0|15m (1139 trades, -0.47R) and |5m (4042 trades, -0.67R), both failing cells (BACKTEST, fact sheet 2026-10-08). S5-SWEEP-MSS-FVG-noSMC@1.0|15m went BACKTESTING -> FAILED today. The regime gate blocked the S5/S6 cells in a RANGE hour, where the playbook shows the smc family losing (-0.35R over 694 trades). Nothing was missed.
+  - action: none.
+
+### Review: ENA up +12.9% (7.5x ATR), 2026-09-30 06:00 -> 2026-09-30 14:00
+- timestamp: 2026-10-08 15:30 UTC · source: Claude daily review 2026-10-08 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal, rsi2_dip_buy v1.0 · asset: ENA · timeframe: 5m, 30m, 1h, 4h · regime: UNCLEAR · review: 2026-10-15
+  - status: KEEP
+  - today's evidence: every blocked setup came from a failing cell: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 523 trades -0.45R; liquidity_sweep_reversal@1.0|5m 4042 trades -0.67R (BACKTEST). The rsi2_dip_buy 1h and 4h cells have no numbers in today's fact sheet (not available), but rsi2_dip_buy@1.0|15m loses (4043 trades, -0.24R). ENA's regime was UNCLEAR, where no strategy has shown an edge.
+  - action: none.

@@ -938,3 +938,11 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: an engine change, not a lab card - for the operator. Compare, for every past research run, the bar with N = all trials and with N = trials with distinct trade lists; report how many cells would change verdict. Nothing should pass only because of this change without also passing every other gate.
   - stop if: no cell changes verdict, or the count of distinct trials is close to the total (clones are rare).
   - not tested here: the paper's skewness / kurtosis correction. It needs the return distribution per cell, which the fact sheet does not give.
+
+### Feedback: donchian_breakout-VEXIT-S4@1.1
+- timestamp: 2026-10-08 15:30 UTC · source: Claude daily review 2026-10-08 (update: a cell changed status since the 2026-10-07 feedback) · evidence: BACKTEST_EVIDENCE: 3 cells, 4331 trades (861 + 2414 + 1056) · confidence: medium · strategy: donchian_breakout-VEXIT-S4@1.1 · asset: research coins · timeframe: 4h, 1h, 30m · regime: WEAK_BEAR, EXPANSION · review: 2027-01-06
+- parent: source: [C03] Common Risk Factors in Cryptocurrency (Liu, Tsyvinski, Wu)
+- hypothesis: One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last 126 candles (21 days on 4h), shorts only when it rose less. Coins that beat the market over 1 to 4 weeks kept beating it in the paper, among large coins; the filter should drop breakouts that go against relative strength.
+- result: BACKTEST 4h BACKTESTING 861 trades +0.196R (unseen +0.191R), t 3.94, held back by max drawdown 19.5R; 1h FAILED 2414 trades -0.010R (unseen +0.055R); 30m BACKTESTING -> FAILED today, 1056 trades -0.016R (unseen +0.029R), max drawdown 71.7R. Parent today: 4h 1187 trades +0.206R (unseen +0.186R), t 4.799.
+- teaches: with one more day of data the picture is the same: on 4h the filter keeps about 73% of the parent's trades at about the same average (+0.196R vs +0.206R), and its drawdown (19.5R) is no lower than before. The 30m cell, which looked flat yesterday, has now failed. The relative-strength rule adds nothing measurable.
+- next: stop this line
