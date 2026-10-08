@@ -13,7 +13,7 @@
  "suspended": {
   "MET": "2026-10-08"
  },
- "runs": 308,
+ "runs": 309,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -31,6 +31,7 @@
   "UNI": [],
   "SUI": [],
   "AVAX": [
+   "thin_book",
    "volume_7d"
   ],
   "ENA": [
