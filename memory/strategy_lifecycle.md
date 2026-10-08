@@ -167,3 +167,10 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT-S4@1.1 30m**: FORMALIZED → **BACKTESTING** (avg +0.01R/trade (needs +0.12R); profit factor 1.02; max drawdown 55.2R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-S4@1.1 4h**: FORMALIZED → **BACKTESTING** (max drawdown 17.3R)
 - **macd_trend_cross@1.0 4h**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.95; only 9 unseen-test trades; not profitable in BOTH train and unseen test)
+
+## 2026-10-08 00:58 UTC
+- **PB-B-APLUS@1.0 15m**: BACKTESTING → **FAILED** (avg -0.18R/trade (needs +0.15R); profit factor 0.68; max drawdown 20.3R; not profitable in BOTH train and unseen test)
+- **S5-SWEEP-MSS-FVG-noSMC@1.0 15m**: BACKTESTING → **FAILED** (not profitable in BOTH train and unseen test)
+- **TRD-H4-PULLBACK@1.0 1h**: FAILED → **BACKTESTING** (avg +0.04R/trade (needs +0.10R); profit factor 1.07; max drawdown 40.4R)
+- **TRD-H4-PULLBACK@1.0 30m**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; max drawdown 72.4R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4@1.1 30m**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.12R); profit factor 0.98; max drawdown 71.7R; not profitable in BOTH train and unseen test)
