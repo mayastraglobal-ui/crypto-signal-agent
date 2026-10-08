@@ -10,8 +10,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 303,
+ "suspended": {
+  "MET": "2026-10-08"
+ },
+ "runs": 304,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -88,6 +90,11 @@
   "RLC": [
    "thin_book",
    "volume_7d"
+  ],
+  "MET": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -127,6 +134,7 @@
   "SAND": [],
   "RLC": [
    "data_degraded"
-  ]
+  ],
+  "MET": []
  }
 }
