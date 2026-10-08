@@ -436,3 +436,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-08 03:20 UTC
 - **EXCLUDED** AVAX - 7-day average volume $50M < $50M; order book too thin: $213k within 1% (need $250k)
 - **EXCLUDED** PUMP - 7-day average volume $40M < $50M; order book too thin: $239k within 1% (need $250k)
+
+## 2026-10-08 06:27 UTC
+- **EXCLUDED** AVAX - 7-day average volume $50M < $50M
