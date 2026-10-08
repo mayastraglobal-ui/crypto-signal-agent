@@ -601,6 +601,23 @@ def progress_blocks(sp, one=True):
     return out
 
 
+def weather_blocks(w):
+    """Upgrade 10: the market weather (engine/weather.py) in the 08:20 briefing - explains, never a signal."""
+    v = (w or {}).get("verdict")
+    if not v:
+        return []
+    btc = next((c for c in w.get("coins") or [] if c.get("coin") == "BTC"), None) or {}
+    vol = btc.get("vol") or {}
+    kv = [("Verdict", f"{v.get('icon') or ''} {v.get('title')}".strip()), ("What it means", v.get("meaning") or DASH)]
+    if vol.get("move_8of10_pct") is not None:
+        kv.append(("BTC usual 24h move", f"±{vol['usual_move_pct']:.1f}% on a typical day, within "
+                                         f"±{vol['move_8of10_pct']:.1f}% on 8 of 10 {vol.get('basis') or 'days'} "
+                                         f"(volatility {vol.get('vol_label')}) - from the past, not a forecast"))
+    kv += [("Fits", "; ".join(v.get("fits") or []) or DASH), ("Avoid", "; ".join(v.get("avoid") or []) or DASH)]
+    return [("section", "Market weather"), ("kv", kv)] + (
+        [("bullets", [mk.plain(x) for x in w["warnings"][:4]])] if w.get("warnings") else [])
+
+
 def briefing(b):
     """H. BRIEFING 08:20: b = mailfacts.briefing(): slot, utc, signals, open, max_open, data_state, btc (dict(price,
     trend 1d / 4h)), fear_greed, coins [dict(coin, price, regime_1d, change_24h)], events, plan (dict(test, check,
@@ -636,6 +653,7 @@ def briefing(b):
                                   ("Mood (Fear & Greed)", f"{fg.get('label') or ''} {val(fg.get('value'))}".strip(),
                                    f"yesterday {val(fg.get('yesterday'))}")])),
               ("table", dict(cols=["Coin", "Price", "Trend", "24h"], rows=rows, tones=tones, mono=[1, 3]))]
+    blocks += weather_blocks(b.get("weather"))
     if ev:
         blocks += [("section", "Next events · no new trades ±1 hour"), ("table", dict(cols=None, rows=event_rows(ev)))]
     blocks += [("section", "Agent plan today"),

@@ -69,6 +69,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/status` | Is it running, the last market check, which strategies it watches, paused or not, a newer version waiting |
 | `/trades` | The trades you took that it is following, and your results of the last 30 days |
 | `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
+| `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
 | `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
 | `/help` | The list |

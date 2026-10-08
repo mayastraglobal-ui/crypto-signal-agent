@@ -67,6 +67,7 @@ from engine import smc
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
 from engine import universe as uni
+from engine import weather as wx
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
@@ -575,6 +576,25 @@ def load_derivs(offline, bases, now_ms):
     f = dv.read(os.path.join(REPORTS, "funding.csv.gz"), dv.FUNDING_COLS)
     h, f = dv.clean(h, f)
     return {b: (h[h["coin"] == b], f[f["coin"] == b]) for b in bases}
+
+
+def market_weather(now, regimes, daily_hlc, derivs, snap, risk_out, fg, cfg, offline):
+    """Upgrade 10: what kind of day it is (engine/weather.py) -> reports/market_weather.json (the live watcher's
+    /weather, small enough for main) and .md. Explains only: no signal, gate, size or approval reads it."""
+    try:
+        w = wx.build(now, regimes, daily_hlc, derivs, snap, (risk_out or {}).get("upcoming_events"),
+                     (risk_out or {}).get("blackout_now"), fg, wx.settings(cfg.get("weather")))
+    except Exception as e:                  # never let the explanation break the scan
+        log(f"market weather not built ({type(e).__name__}: {e})")
+        return None
+    sfx = "_offline" if offline else ""
+    with open(os.path.join(REPORTS, f"market_weather{sfx}.json"), "w") as f:
+        json.dump(w, f, indent=1, default=float)
+    with open(os.path.join(REPORTS, f"market_weather{sfx}.md"), "w") as f:
+        f.write("# Market weather\n\nWhat kind of day it is, from the hourly scan's own numbers (engine/weather.py). "
+                "Explains the market only: it never creates a signal or changes a rule.\n\n"
+                + "\n".join(wx.md_lines(w)) + "\n")
+    return w
 
 
 def btc_frames(data, quote, tfs):
@@ -2257,6 +2277,7 @@ def main():
     ev_frames = {tf: [] for tf in tfs}      # candle evidence input, per timeframe
     rg_cfg = rg.settings(cfg.get("regime"))
     regimes = {}
+    daily_hlc = {}                          # coin -> closed 1D (high, low, close), for the market weather
     rg_series = {}                          # (coin, tf) -> (close_time array, label array) for stamping
     lb = int(cfg["signals"]["lookback_bars"])
     scan_ms = int(cfg["signals"].get("scan_interval_minutes", 60)) * 60_000
@@ -2283,6 +2304,9 @@ def main():
         rg_series.update(pc["rg_series"])
         verdict_now, reason = rg.permission(pc["recs"])
         regimes[base] = dict(timeframes=pc["recs"], permission=verdict_now, permission_reason=reason)
+        d1 = data.get((sym, "1d"))           # upgrade 10: the market weather's volatility and usual 24h move
+        if d1 is not None and len(d1) and (quality.get((base, "1d")) or {}).get("state") != dq.UNSAFE:
+            daily_hlc[base] = (d1["high"].to_numpy(), d1["low"].to_numpy(), d1["close"].to_numpy())
         for tf, fr in pc["frames"].items():
             df, feats, ns, reg, n = fr["df"], fr["feats"], fr["ns"], fr["reg"], fr["n"]
             ctx = None                      # attribution context, built only when a signal needs it
@@ -2820,6 +2844,8 @@ def main():
                derivs=derivs_report(args.offline),
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
                candle_evidence=ev_out, regime=rg_out, smc=smc_out)
+    out["weather"] = market_weather(started, {b: regimes[b] for b in view["signal"] if b in regimes}, daily_hlc,
+                                    derivs_by_coin, snap, risk_out, fg, cfg, args.offline)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     out["storage"] = storage_info(args.offline)          # measured after latest.json exists
     md = render_md(out, cfg)

@@ -20,7 +20,7 @@ signals, emails them and keeps the risk book. This watcher never places orders a
   python live_watcher.py --find-chat-id     your Telegram chat id (send the bot a message first)
   python live_watcher.py --setup-telegram   step-by-step Telegram setup (writes telegram.env)
 
-While it runs, the bot answers the operator's commands (/status, /trades, /pause, /resume, /help) and the buttons
+While it runs, the bot answers the operator's commands (/status, /trades, /weather, /pause, /resume, /help) and the buttons
 under each alert: "✅ Took it" makes the watcher follow that trade and say when TP1 / TP2, the stop or the time stop
 is reached (engine/follow.py: the backtests' rules); every choice and result is written to journal/my_trades.csv.
 Only the chat in TELEGRAM_CHAT_ID is answered.
@@ -81,6 +81,7 @@ RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
 SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strategies.yaml"),
               ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
+              ("main", "reports/market_weather.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
@@ -792,6 +793,13 @@ class Watcher:
             return "▶️ New trade alerts are on again."
         if cmd == "result":
             return self.result(arg, now_ms)
+        if cmd == "weather":
+            try:
+                with open(os.path.join(ROOT, "reports", "market_weather.json"), encoding="utf-8") as f:
+                    w = json.load(f)
+            except (OSError, ValueError):
+                w = None
+            return lv.weather_text(w, now_ms)
         if cmd is None:
             return "I only understand commands. Send /help for the list."
         return f"I don't know /{cmd}. Send /help for the list."

@@ -348,7 +348,7 @@ def briefing(rep, slot, utc, summary, page_url, dashboard_url, research=None, re
                 events=next_events(rep, em.to_dt(utc)), plan=plan_today(research, counts_hist, lab_cards, close, study),
                 progress=dict(counts=counts if cells else {}, closest=close), last_scan_utc=rep.get("generated_utc"),
                 decisions=decisions(research), approved=counts["APPROVED"] if cells else None, summary=summary,
-                page_url=page_url, dashboard_url=dashboard_url)
+                page_url=page_url, dashboard_url=dashboard_url, weather=rep.get("weather") or None)
 
 
 # ---------------------------------------------------------------- I. changes since the last briefing ------------------
@@ -366,7 +366,8 @@ def snapshot(rep, research, registry_text, lab_cards):
                 events=sorted(f"{e.get('start_utc')}|{e.get('type') or em.short_event(e.get('name'))}"
                               for e in next_events(rep, now, 1, 9)),
                 data=(rep.get("data_quality") or {}).get("system_state"),
-                halts=sorted(str(h) for h in ((rep.get("risk") or {}).get("halts_text") or [])))
+                halts=sorted(str(h) for h in ((rep.get("risk") or {}).get("halts_text") or [])),
+                weather=((rep.get("weather") or {}).get("verdict") or {}).get("title"))
 
 
 def diff(prev, now):
@@ -392,6 +393,8 @@ def diff(prev, now):
         out.append(("!", f"Within 24 hours: {name} {em.bj(start, '%a %H:%M')} – no new trades ±1 hour"))
     if now.get("data") != prev.get("data") and now.get("data"):
         out.append(("!" if now["data"] != "GOOD" else "✓", f"Data {prev.get('data') or '–'} → {now['data']}"))
+    if prev.get("weather") and now.get("weather") and prev["weather"] != now["weather"]:
+        out.append(("◆", f"Market weather: {prev['weather']} → {now['weather']}"))
     for h in sorted(set(now["halts"]) - set(prev.get("halts") or [])):
         out.append(("!", f"Risk halt: {h}"))
     for h in sorted(set(prev.get("halts") or []) - set(now["halts"])):

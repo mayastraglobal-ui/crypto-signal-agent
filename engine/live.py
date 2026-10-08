@@ -184,6 +184,7 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/status - is it running, what it watches, the last check\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
         "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
+        "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/pause - stop new trade alerts until /resume (/pause 2h = for 2 hours)\n"
         "/resume - new trade alerts on again\n"
         "/help - this list\n\n"
@@ -191,6 +192,21 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "stop is reached (same rules as the backtests). <b>❌ Skipped</b> = only recorded. "
         "<b>🏁 I closed it</b> = stop following.\n"
         "Pausing never stops the messages about trades you already took.")
+
+
+def weather_text(w, now_ms):
+    """/weather reply from reports/market_weather.json (GitHub's hourly scan, downloaded every hour). Upgrade 10."""
+    if not w or not w.get("telegram"):
+        return ("🌫 No market weather yet. GitHub's hourly scan writes it and the watcher downloads it every hour - "
+                "try again later.")
+    try:
+        made = int(dt.datetime.strptime(w["utc"], "%Y-%m-%d %H:%M").replace(tzinfo=dt.timezone.utc).timestamp() * 1000)
+    except (KeyError, TypeError, ValueError):
+        return w["telegram"]
+    age = f"\nMade by GitHub's hourly scan {ago(made, now_ms)}."
+    if now_ms - made > 3 * 3_600_000:
+        age += " ⚠️ Older than 3 hours - the scan or the download may be late."
+    return w["telegram"] + age
 
 
 def ago(ms, now_ms):
