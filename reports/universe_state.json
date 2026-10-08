@@ -13,7 +13,7 @@
  "suspended": {
   "MET": "2026-10-08"
  },
- "runs": 307,
+ "runs": 308,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -33,7 +33,9 @@
   "AVAX": [
    "volume_7d"
   ],
-  "ENA": [],
+  "ENA": [
+   "volume_7d"
+  ],
   "SAGA": [
    "big_move",
    "thin_book",
