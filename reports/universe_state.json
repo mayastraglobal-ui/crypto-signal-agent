@@ -6,16 +6,12 @@
   "SOL",
   "ZEC",
   "BNB",
-  "UNI"
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
- "out_streak": {
-  "UNI": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {},
- "runs": 291,
+ "runs": 292,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -62,6 +58,7 @@
    "thin_book"
   ],
   "PUMP": [
+   "thin_book",
    "volume_7d"
   ],
   "HBAR": [],
