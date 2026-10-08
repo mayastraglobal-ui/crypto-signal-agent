@@ -13,7 +13,7 @@
  "suspended": {
   "MET": "2026-10-08"
  },
- "runs": 304,
+ "runs": 305,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -60,7 +60,6 @@
    "thin_book"
   ],
   "PUMP": [
-   "thin_book",
    "volume_7d"
   ],
   "HBAR": [],
