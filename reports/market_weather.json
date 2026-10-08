@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-08 20:21",
+ "utc": "2026-10-08 21:20",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -24,17 +24,17 @@
    "coin": "BTC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H EXPANSION)",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
    "labels": {
     "1w": "TRANSITION",
     "1d": "WEAK_BULL",
     "4h": "TRANSITION",
-    "1h": "EXPANSION"
+    "1h": "STRONG_BEAR"
    },
    "adx": {
     "1d": 42.0,
     "4h": 34.0,
-    "1h": 51.0
+    "1h": 49.0
    },
    "vol": {
     "atr_pct": 2.34,
@@ -52,10 +52,10 @@
    },
    "crowd": {
     "funding_pct": 0.0062,
-    "oi_24h_pct": -2.1,
+    "oi_24h_pct": -2.0,
     "label": "neutral"
    },
-   "change_24h": -2.13
+   "change_24h": -1.91
   },
   {
    "coin": "BNB",
@@ -71,7 +71,7 @@
    "adx": {
     "1d": 29.0,
     "4h": 30.0,
-    "1h": 46.0
+    "1h": 47.0
    },
    "vol": {
     "atr_pct": 2.54,
@@ -89,10 +89,10 @@
    },
    "crowd": {
     "funding_pct": -0.0031,
-    "oi_24h_pct": -6.4,
+    "oi_24h_pct": -5.4,
     "label": "neutral"
    },
-   "change_24h": -5.18
+   "change_24h": -4.64
   },
   {
    "coin": "ETH",
@@ -103,12 +103,12 @@
     "1w": "WEAK_BULL",
     "1d": "WEAK_BULL",
     "4h": "EXPANSION",
-    "1h": "WEAK_BEAR"
+    "1h": "STRONG_BEAR"
    },
    "adx": {
     "1d": 39.0,
     "4h": 41.0,
-    "1h": 60.0
+    "1h": 59.0
    },
    "vol": {
     "atr_pct": 2.9,
@@ -126,10 +126,10 @@
    },
    "crowd": {
     "funding_pct": 0.0034,
-    "oi_24h_pct": -7.1,
+    "oi_24h_pct": -6.9,
     "label": "neutral"
    },
-   "change_24h": -4.24
+   "change_24h": -3.72
   },
   {
    "coin": "SOL",
@@ -145,7 +145,7 @@
    "adx": {
     "1d": 43.0,
     "4h": 33.0,
-    "1h": 59.0
+    "1h": 58.0
    },
    "vol": {
     "atr_pct": 3.82,
@@ -163,21 +163,21 @@
    },
    "crowd": {
     "funding_pct": -0.002,
-    "oi_24h_pct": -5.9,
+    "oi_24h_pct": -6.0,
     "label": "neutral"
    },
-   "change_24h": -6.0
+   "change_24h": -5.07
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H WEAK_BEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H STRONG_BEAR)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "WEAK_BEAR"
+    "1h": "STRONG_BEAR"
    },
    "adx": {
     "1d": 43.0,
@@ -200,26 +200,26 @@
    },
    "crowd": {
     "funding_pct": 0.0081,
-    "oi_24h_pct": -12.2,
+    "oi_24h_pct": -12.1,
     "label": "neutral"
    },
-   "change_24h": -6.42
+   "change_24h": -6.0
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H EXPANSION)",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
    "labels": {
     "1w": "TRANSITION",
     "1d": "WEAK_BULL",
     "4h": "TRANSITION",
-    "1h": "EXPANSION"
+    "1h": "STRONG_BEAR"
    },
    "adx": {
     "1d": 43.0,
     "4h": 36.0,
-    "1h": 53.0
+    "1h": 52.0
    },
    "vol": {
     "atr_pct": 4.65,
@@ -237,10 +237,10 @@
    },
    "crowd": {
     "funding_pct": -0.0029,
-    "oi_24h_pct": -9.0,
+    "oi_24h_pct": -9.3,
     "label": "neutral"
    },
-   "change_24h": -3.36
+   "change_24h": -2.52
   },
   {
    "coin": "ZEC",
@@ -274,13 +274,13 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -4.1,
+    "oi_24h_pct": -1.7,
     "label": "neutral"
    },
-   "change_24h": -12.16
+   "change_24h": -10.53
   }
  ],
- "alts_vs_btc_24h": -3.46,
+ "alts_vs_btc_24h": -2.95,
  "fear_greed": {
   "value": 64,
   "label": "Greed",
@@ -290,7 +290,7 @@
   {
    "start_utc": "2026-10-14 12:30",
    "name": "US CPI (Sep data)",
-   "hours": 136.1
+   "hours": 135.2
   }
  ],
  "blackout_now": [],
@@ -303,5 +303,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-08 20:21 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H EXPANSION\nVolatility: quiet (daily range 2.3%, higher than 7% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,555 \u2013 85,088) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0062%/8h, open interest -2.1% in 24h)\nAltcoins vs BTC (24h): -3.5%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\ud83d\udd34 BNB: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udfe2 SOL: trend up\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\ud83d\udd34 ZEC: trend down\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-08 21:20 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H STRONG_BEAR\nVolatility: quiet (daily range 2.3%, higher than 7% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,555 \u2013 85,088) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0062%/8h, open interest -2.0% in 24h)\nAltcoins vs BTC (24h): -3.0%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\ud83d\udd34 BNB: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udfe2 SOL: trend up\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\ud83d\udd34 ZEC: trend down\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
