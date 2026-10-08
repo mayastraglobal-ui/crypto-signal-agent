@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-08 09:21",
+ "utc": "2026-10-08 10:22",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -34,7 +34,7 @@
    "adx": {
     "1d": 42.0,
     "4h": 28.0,
-    "1h": 50.0
+    "1h": 48.0
    },
    "vol": {
     "atr_pct": 2.34,
@@ -52,47 +52,10 @@
    },
    "crowd": {
     "funding_pct": -0.0002,
-    "oi_24h_pct": 0.6,
+    "oi_24h_pct": 0.0,
     "label": "neutral"
    },
-   "change_24h": -0.95
-  },
-  {
-   "coin": "BNB",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
-   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H TRANSITION)",
-   "labels": {
-    "1w": "WEAK_BULL",
-    "1d": "WEAK_BULL",
-    "4h": "TRANSITION",
-    "1h": "TRANSITION"
-   },
-   "adx": {
-    "1d": 29.0,
-    "4h": 25.0,
-    "1h": 29.0
-   },
-   "vol": {
-    "atr_pct": 2.54,
-    "vol_pctile": 16.0,
-    "vol_label": "quiet",
-    "usual_move_pct": 1.0,
-    "move_8of10_pct": 2.06,
-    "days": 233,
-    "basis": "similar days",
-    "price": 772.45,
-    "band": [
-     756.507132,
-     788.392868
-    ]
-   },
-   "crowd": {
-    "funding_pct": 0.01,
-    "oi_24h_pct": -5.7,
-    "label": "neutral"
-   },
-   "change_24h": -0.35
+   "change_24h": -1.13
   },
   {
    "coin": "ETH",
@@ -126,10 +89,10 @@
    },
    "crowd": {
     "funding_pct": 0.0004,
-    "oi_24h_pct": 0.4,
+    "oi_24h_pct": -0.8,
     "label": "neutral"
    },
-   "change_24h": -1.68
+   "change_24h": -1.14
   },
   {
    "coin": "SOL",
@@ -163,10 +126,10 @@
    },
    "crowd": {
     "funding_pct": -0.0017,
-    "oi_24h_pct": 1.9,
+    "oi_24h_pct": 1.8,
     "label": "neutral"
    },
-   "change_24h": -2.64
+   "change_24h": -2.42
   },
   {
    "coin": "SUI",
@@ -182,7 +145,7 @@
    "adx": {
     "1d": 43.0,
     "4h": 23.0,
-    "1h": 34.0
+    "1h": 33.0
    },
    "vol": {
     "atr_pct": 8.78,
@@ -200,10 +163,47 @@
    },
    "crowd": {
     "funding_pct": 0.0053,
-    "oi_24h_pct": 0.4,
+    "oi_24h_pct": 3.5,
     "label": "neutral"
    },
-   "change_24h": -0.23
+   "change_24h": 0.11
+  },
+  {
+   "coin": "UNI",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)",
+   "labels": {
+    "1w": "EXPANSION",
+    "1d": "WEAK_BULL",
+    "4h": "TRANSITION",
+    "1h": "STRONG_BEAR"
+   },
+   "adx": {
+    "1d": 47.0,
+    "4h": 34.0,
+    "1h": 44.0
+   },
+   "vol": {
+    "atr_pct": 8.07,
+    "vol_pctile": 71.0,
+    "vol_label": "normal",
+    "usual_move_pct": 2.69,
+    "move_8of10_pct": 5.8,
+    "days": 490,
+    "basis": "similar days",
+    "price": 7.91,
+    "band": [
+     7.45114,
+     8.36886
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.01,
+    "oi_24h_pct": -2.0,
+    "label": "neutral"
+   },
+   "change_24h": -3.31
   },
   {
    "coin": "XRP",
@@ -219,7 +219,7 @@
    "adx": {
     "1d": 43.0,
     "4h": 28.0,
-    "1h": 53.0
+    "1h": 52.0
    },
    "vol": {
     "atr_pct": 4.65,
@@ -237,26 +237,26 @@
    },
    "crowd": {
     "funding_pct": 0.0001,
-    "oi_24h_pct": -6.7,
+    "oi_24h_pct": -4.3,
     "label": "neutral"
    },
-   "change_24h": -3.29
+   "change_24h": -2.96
   },
   {
    "coin": "ZEC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H WEAK_BEAR)",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H EXPANSION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "WEAK_BULL",
     "4h": "RANGE",
-    "1h": "WEAK_BEAR"
+    "1h": "EXPANSION"
    },
    "adx": {
     "1d": 36.0,
     "4h": 14.0,
-    "1h": 23.0
+    "1h": 25.0
    },
    "vol": {
     "atr_pct": 8.31,
@@ -274,13 +274,13 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -1.7,
+    "oi_24h_pct": -5.8,
     "label": "neutral"
    },
-   "change_24h": -6.76
+   "change_24h": -7.42
   }
  ],
- "alts_vs_btc_24h": -1.21,
+ "alts_vs_btc_24h": -1.56,
  "fear_greed": {
   "value": 64,
   "label": "Greed",
@@ -290,7 +290,7 @@
   {
    "start_utc": "2026-10-14 12:30",
    "name": "US CPI (Sep data)",
-   "hours": 147.1
+   "hours": 146.1
   }
  ],
  "blackout_now": [],
@@ -303,5 +303,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-08 09:21 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H STRONG_BEAR\nVolatility: quiet (daily range 2.3%, higher than 7% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,555 \u2013 85,088) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0002%/8h, open interest +0.6% in 24h)\nAltcoins vs BTC (24h): -1.2%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-08 10:22 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H STRONG_BEAR\nVolatility: quiet (daily range 2.3%, higher than 7% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,555 \u2013 85,088) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0002%/8h, open interest +0.0% in 24h)\nAltcoins vs BTC (24h): -1.6%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa UNI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

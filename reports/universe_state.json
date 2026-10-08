@@ -6,16 +6,12 @@
   "ZEC",
   "XRP",
   "SUI",
-  "BNB"
+  "UNI"
  ],
- "in_streak": {
-  "UNI": 1
- },
- "out_streak": {
-  "BNB": 1
- },
+ "in_streak": {},
+ "out_streak": {},
  "suspended": {},
- "runs": 300,
+ "runs": 301,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
