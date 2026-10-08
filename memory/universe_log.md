@@ -429,3 +429,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** PUMP - 7-day average volume $40M < $50M; order book too thin: $248k within 1% (need $250k)
 - **LEAVE** UNI - outside the top 7 for 2 runs in a row (now #8)
 - **JOIN** SUI - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-10-08 02:19 UTC
+- **EXCLUDED** PUMP - 7-day average volume $40M < $50M

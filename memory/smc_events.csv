@@ -10797,3 +10797,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-08 00:30,SUI,15m,FVG_FILLED,bear,,1.1341,1.1376,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-08 00:30,SUI,15m,FVG,bull,,1.1286,1.1307,0.378,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-08 01:15,SUI,15m,SWEEP,bear,1.1453,,,0.237,Asia,1h,WEAK_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-08 02:00,BTC,1h,BOS,bear,83119.99,,,0.059,Asia,4h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-08 02:00,BTC,30m,WEAK_BREAK,bear,83119.99,,,0.087,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 02:00,BTC,15m,BOS,bear,83125.02,,,0.174,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 02:15,BTC,15m,SWEEP,bull,83062.0,,,1.003,Asia,1h,WEAK_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-08 02:15,BTC,15m,FVG,bear,,83168.01,83250.0,0.522,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-08 02:00,ETH,1h,SWEEP,bear,2579.59,,,0.538,Asia,4h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-08 02:15,ETH,15m,FVG_FILLED,bull,,2573.38,2575.29,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-08 02:00,SOL,15m,BOS,bear,116.11,,,0.031,Asia,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-08 02:00,BNB,1h,SWEEP,bear,775.7,,,0.164,Asia,4h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-08 02:15,BNB,15m,SWEEP,bull,772.23,,,0.32,Asia,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-08 02:15,BNB,15m,FVG_RETRACE,bull,,771.49,771.99,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-08 02:15,BNB,15m,FVG_FILLED,bull,,772.0,772.63,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-08 02:00,SUI,30m,FVG_RETRACE,bull,,1.1291,1.1346,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 02:00,SUI,30m,FVG_FILLED,bull,,1.1291,1.1346,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-08 02:00,SUI,15m,FVG_RETRACE,bull,,1.1286,1.1307,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-08 02:00,SUI,15m,FVG_FILLED,bull,,1.1286,1.1307,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance

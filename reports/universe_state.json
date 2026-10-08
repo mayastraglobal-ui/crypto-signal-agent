@@ -2,8 +2,8 @@
  "members": [
   "BTC",
   "ETH",
-  "XRP",
   "SOL",
+  "XRP",
   "ZEC",
   "BNB",
   "SUI"
@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 292,
+ "runs": 293,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -58,7 +58,6 @@
    "thin_book"
   ],
   "PUMP": [
-   "thin_book",
    "volume_7d"
   ],
   "HBAR": [],
