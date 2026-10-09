@@ -32,6 +32,22 @@ and targets, instantly.
 | 2026-10-06 | Step 5: the 4H trend window + faster entries (TRD-H4-*), strategies by market type, scalping variants |
 | 2026-10-06 | Journal sync: the operator's trades reach GitHub (branch `journal`), plan result of every alert, `/result`, "Your own trades" in the weekly email |
 | 2026-10-08 | Upgrade 10 "Market weather": `engine/weather.py`, `reports/market_weather.json`, Telegram `/weather`, the 08:20 briefing email, Claude's fact sheets |
+| 2026-10-09 | Forward Test Program PR 1 "Strategy lab": 10 strategies × 4 versions (`strategies_program.yaml`), the 4H + 1H gate (1W / 1D context only), 5 years of 30m / 15m history, nightly batches, `reports/program.md` (per coin, after and before fees) - `docs/PROGRAM.md` |
+
+## The Forward Test Program (agreed 2026-10-09, `docs/PROGRAM.md`)
+
+10 different strategies × 4 versions, backtested on 5 years per coin, then watched live; Claude's weekly review
+promotes the best to 🟡 PAPER each week (the operator's one tap), 20 good paper trades + the operator's "yes" = 🟢 LIVE.
+1. **PR 1 - strategy lab**: **built 2026-10-09** (see Done).
+2. **PR 2 - Signal Center**: silent live tracking of every positive strategy / version / coin, 🔵 TEST alerts for the
+   best (max 10 a day, merged duplicates, 5m confirmation, ⭐ timeframe agreement, weather line, ⚠️ against-the-daily
+   mark), the new alert layout (✅ Took it / ❌ Skip / ℹ️ Details, $ size, margin at 3x, stop / TP1 in $, past win
+   chance), `/tests on|off`, demo book (TEST trades never touch the loss limits), market type saved per alert,
+   `/weather` in Beijing time, a 2-week replay check before switching on.
+3. **PR 3 - weekly review**: per strategy / version / coin / market type before and after fees, honest confidence,
+   automatic version ideas, promote (>= 10 live trades, positive after fees, one tap) / demote, max 5 in paper (one
+   per strategy per coin), a system check at the top.
+4. Still needed before the first real-money strategy: the $1000 account replay and the LIVE health check.
 
 ## Next steps, in order
 
@@ -147,5 +163,6 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
 | After the update | Optional: double-click `windows\6_journal_sync.bat` (GitHub token) so the agent learns from your trades; send `/result 1.2` after each trade |
 | After the next research email | Compare the playbook versions (originals vs -LDN / -15M / -W20 / -LIMIT / -GRADED / -APLUS) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
+| After PR 1 is merged | Nothing to do: the research run tests 2 program strategies a night; read `reports/program.md` after ~5 nights |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |
 | Optional | If the old Claude tasks still exist in the Claude desktop app, delete them (the cloud Routines replace them) |

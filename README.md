@@ -48,6 +48,7 @@ alert. Setup, step by step: on a Windows PC [`docs/WINDOWS_WATCHER.md`](docs/WIN
 | `events.yaml` | High-impact event calendar (CPI, NFP, PCE, FOMC) in UTC - no live entry ±60 min around each | Yes - correct or delete entries here; the weekly research only adds |
 | `strategies.yaml` | Every strategy, written as simple rules | Yes, add new ideas here |
 | `strategies_lab.yaml` | The strategy lab: new cards added by Claude's daily review / weekly research, tested like `strategies.yaml` but never emailed or approved | Correct or delete cards here; to approve one, move it into `strategies.yaml` |
+| `strategies_program.yaml` | The Forward Test Program: 10 strategies x 4 versions, tested 2 strategies a night on 5 years per coin; results per coin after and before fees in `reports/program.md` ([`docs/PROGRAM.md`](docs/PROGRAM.md)) | Change only by pull request; to approve a card, move it into `strategies.yaml` |
 | `scanner.py` | The engine | Not needed |
 | `live_watcher.py`, `engine/live.py`, `deploy/`, `windows/` | The live watcher: instant Telegram alerts at every 5m candle close (`docs/WINDOWS_WATCHER.md`, `docs/LIVE_WATCHER.md`) | Not needed |
 | `reports/latest.md` | Newest report (for you) | No, it's generated |

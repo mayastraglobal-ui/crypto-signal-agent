@@ -44,6 +44,10 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt
 
+      - name: Newest large reports (futures data, last research results - carried for untested program cells)
+        continue-on-error: true
+        run: python publish_live.py --restore
+
       - name: Research (Layers B/C, stress, +-20%, lifecycle)
         run: python research.py
 

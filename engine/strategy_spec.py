@@ -32,6 +32,9 @@ GATES = {
     # the operator's own scalping playbook (docs/PLAYBOOK.md, operator decision 2026-10-06): the card's rules hold
     # the playbook's 1H regime and bias themselves, so the engine's regime / permission gate is not applied
     "playbook": "the operator's playbook: the card's own rules decide regime and bias (docs/PLAYBOOK.md)",
+    # the Forward Test Program (operator plan 2026-10-09): 4H and 1H decide; 1W / 1D are context only (never block)
+    "intraday": "needs the 4H AND the 1H regime in its direction; 1W / 1D are context only (no veto)",
+    "intraday_reversal": "trades only in its regimes, never against a STRONG 4H trend; 1W / 1D are context only",
 }
 REQUIRED = ["id", "version", "status", "family", "gate", "hypothesis", "source", "regimes", "timeframes",
             "long", "short", "stop", "time_stop_bars", "known_weaknesses"]
@@ -47,7 +50,10 @@ OPTIONAL_LOGIC = {"entry", "manage"}
 #   progress: {r, bars}  -> exit at market at the close of candle `bars` if +r R was not reached by then
 #   invalidate: {long, short, every} -> exit at a candle close beyond the level the column held at the signal
 #                           (checked only at closes of `every`, e.g. 15m; default every candle)
+#   trail: {atr_n, atr_x} -> (Forward Test Program) after TP1 the stop trails atr_x x ATR(atr_n) behind the highest
+#                           high (long) / lowest low (short) of the last atr_n candles (chandelier exit), tightens only
 MANAGE_KEYS = {"be_plus_fees", "trail", "progress", "invalidate"}
+TRAIL_KINDS = ({"swing_n", "ema"}, {"atr_n", "atr_x"})
 # entry (roadmap step 2B, 2026-10-06): how a signal is entered. market (default) = the next candle's open, taker fee +
 # slippage. limit = a limit order at the signal close -/+ offset_atr x ATR (a small pullback), maker fee, no slippage;
 # filled only when price comes back to it within valid_bars candles - no fill = no trade.
@@ -67,6 +73,13 @@ CONFIRM_TFS = ["30m", "15m"]           # the 5-minute protocol (section 8) runs 
 
 # ---------- the strategy lab (Phase 17) ----------
 LIBRARY_FILE, LAB_FILE = "strategies.yaml", "strategies_lab.yaml"
+# the Forward Test Program (operator plan 2026-10-09): 10 strategies x 4 versions, written by pull request only (the
+# Brain may not edit it). Checked like lab cards (building blocks only, never APPROVED from here) and backtested in
+# nightly batches (research.py, config.yaml -> program).
+PROGRAM_FILE = "strategies_program.yaml"
+PROGRAM_VERSIONS = {"V1": "base: 4H", "V2": "faster: the same rules on 1H / 30m / 15m (4H + 1H decide the direction)",
+                    "V3": "V1 + the daily regime must agree (shows whether the daily filter helps)",
+                    "V4": "V1 with a trailing ATR exit after TP1 (lets winners run)"}
 EVIDENCE_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE", "CLAIM", "HYPOTHESIS", "MODEL_OUTPUT",
                     "UNVERIFIED_OPINION"]           # = engine/memory.py (section 22)
 MIN_TP1_R = 2.0                                     # a lab card's first target is at least 2R away
@@ -106,6 +119,9 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
            # Phase 18 C: Fibonacci of the last swing, anchored VWAP, Ichimoku
            "fib_dir", "fib_382", "fib_500", "fib_618", "fib_786", "avwap_day", "avwap_swing_high", "avwap_swing_low",
            "ichi_tenkan", "ichi_kijun", "ichi_span_a", "ichi_span_b", "ichi_cloud_top", "ichi_cloud_bottom",
+           # Forward Test Program: the regime direction of each regime timeframe as known at the candle (+1 bull,
+           # -1 bear, 0 neither - context for rules such as "the daily agrees"), and the trading sessions (UTC)
+           "dir_1w", "dir_1d", "dir_4h", "dir_1h", "sess_asia", "sess_london", "sess_ny", "asia_high", "asia_low",
            # engine/smc.py (this timeframe)
            "smc_bear_ob_high", "smc_bear_ob_low", "smc_bos_down", "smc_bos_up", "smc_bull_ob_high",
            "smc_bull_ob_low", "smc_choch_down", "smc_choch_up", "smc_fvg_retrace_bear", "smc_fvg_retrace_bull",
@@ -435,10 +451,14 @@ def manage_problems(spec):
     if "be_plus_fees" in m and not isinstance(m["be_plus_fees"], bool):
         errs.append("manage.be_plus_fees must be true or false")
     tr = m.get("trail")
-    if tr is not None and not (isinstance(tr, dict) and set(tr) <= {"swing_n", "ema"} and
+    if tr is not None and not (isinstance(tr, dict) and set(tr) == TRAIL_KINDS[0] and
                                all(isinstance(tr.get(k), int) and not isinstance(tr.get(k), bool) and tr[k] >= 1
-                                   for k in ("swing_n", "ema"))):
-        errs.append("manage.trail needs swing_n and ema (whole numbers >= 1)")
+                                   for k in ("swing_n", "ema"))) and \
+            not (isinstance(tr, dict) and set(tr) == TRAIL_KINDS[1] and isinstance(tr["atr_n"], int) and
+                 not isinstance(tr["atr_n"], bool) and tr["atr_n"] >= 2 and isinstance(tr["atr_x"], (int, float)) and
+                 not isinstance(tr["atr_x"], bool) and 0.5 <= tr["atr_x"] <= 10):
+        errs.append("manage.trail needs swing_n and ema (whole numbers >= 1), or atr_n (whole number >= 2) and atr_x "
+                    "(0.5 to 10 ATRs)")
     pg = m.get("progress")
     if pg is not None and not (isinstance(pg, dict) and set(pg) == {"r", "bars"} and
                                isinstance(pg["r"], (int, float)) and 0 < pg["r"] <= 3 and
@@ -834,25 +854,45 @@ def version_problems(card, earlier):
     return []
 
 
-def load_library(main_items, lab_items, labels, timeframes):
-    """strategies.yaml + strategies_lab.yaml, checked. Lab cards are marked lab=True and must also pass
-    lab_card_problems (building blocks only). A lab card whose id@version is also in strategies.yaml has been moved
-    there by the operator: the strategies.yaml copy is used. Returns (runnable, problems, idle, moved keys)."""
+def program_card_problems(card):
+    """What a Forward Test Program card needs on top of the lab rules: program: {strategy, name, version: V1-V4}."""
+    p = card.get("program") if isinstance(card, dict) else None
+    if not isinstance(p, dict) or set(p) != {"strategy", "name", "version"}:
+        return ["program block missing - program: {strategy: <1-10>, name: <strategy name>, version: <V1-V4>}"]
+    probs = []
+    if isinstance(p["strategy"], bool) or not isinstance(p["strategy"], int) or not 1 <= p["strategy"] <= 99:
+        probs.append("program.strategy must be the strategy number (a whole number)")
+    if not isinstance(p["name"], str) or len(p["name"].strip()) < 3:
+        probs.append("program.name must name the strategy")
+    if p["version"] not in PROGRAM_VERSIONS:
+        probs.append(f"program.version must be one of {sorted(PROGRAM_VERSIONS)}")
+    return probs
+
+
+def load_library(main_items, lab_items, labels, timeframes, program_items=None):
+    """strategies.yaml + strategies_lab.yaml (+ strategies_program.yaml), checked. Lab and program cards are marked
+    lab=True (program cards also _program=True) and must also pass lab_card_problems (building blocks only). A lab or
+    program card whose id@version is also in strategies.yaml has been moved there by the operator: the strategies.yaml
+    copy is used. Returns (runnable, problems, idle, moved keys)."""
     main_items = [x for x in (main_items or [])]
     main_keys = {f"{x.get('id')}@{x.get('version')}" for x in main_items if isinstance(x, dict)}
-    everything = {x.get("id"): x for x in main_items + list(lab_items or []) if isinstance(x, dict)}
+    everything = {x.get("id"): x for x in main_items + list(lab_items or []) + list(program_items or [])
+                  if isinstance(x, dict)}
     items, bad, moved = list(main_items), {}, []
-    for i, c in enumerate(lab_items or [], 1):
-        name = f"lab: {c.get('id') if isinstance(c, dict) and c.get('id') else f'#{i}'}"
-        if isinstance(c, dict) and f"{c.get('id')}@{c.get('version')}" in main_keys:
-            moved.append(f"{c['id']}@{c['version']}")
-            continue
-        others = {k: v for k, v in everything.items() if k != (c.get("id") if isinstance(c, dict) else None)}
-        errs = lab_card_problems(c, others, labels, timeframes)
-        if errs:
-            bad[name] = errs
-            continue
-        items.append(dict(c, lab=True))
+    for kind, cards in (("lab", lab_items), ("program", program_items)):
+        for i, c in enumerate(cards or [], 1):
+            name = f"{kind}: {c.get('id') if isinstance(c, dict) and c.get('id') else f'#{i}'}"
+            if isinstance(c, dict) and f"{c.get('id')}@{c.get('version')}" in main_keys:
+                moved.append(f"{c['id']}@{c['version']}")
+                continue
+            others = {k: v for k, v in everything.items() if k != (c.get("id") if isinstance(c, dict) else None)}
+            errs = lab_card_problems(c, others, labels, timeframes)
+            if kind == "program" and not errs:
+                errs = program_card_problems(c)
+            if errs:
+                bad[name] = errs
+                continue
+            items.append(dict(c, lab=True, _program=True) if kind == "program" else dict(c, lab=True))
     ok, problems, idle = load(items, labels, timeframes)
     problems.update(bad)
     return ok, problems, idle, moved

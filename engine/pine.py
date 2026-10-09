@@ -483,7 +483,8 @@ def build(spec, tf, cfg, htf_tf, signals, now_txt, coins_note=""):
          "//"]
     if mode == "RULES":
         H += ["// RULES mode: Pine computes the entry / exit rules itself with the engine's exact formulas.",
-              "// Pine cannot apply the engine's regime gate (2 of 1D/4H/1H + weekly veto), data checks or risk engine,",
+              f"// Pine cannot apply the engine's regime gate ({sspec.GATES.get(spec.get('gate'), '-')}), data checks"
+              " or risk engine,",
               "// so it shows MORE entries than the engine: the table counts matched / only engine / only Pine."]
     else:
         H += ["// REPLAY mode: these parts have no exact Pine translation, so Pine does NOT recompute the rules:",

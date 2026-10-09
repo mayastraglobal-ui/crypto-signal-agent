@@ -52,6 +52,39 @@ def trail_levels(h, l, c, swing_n=3, ema_n=9):
     return long_t, short_t
 
 
+def chandelier_levels(h, l, c, n=22, x=3.0):
+    """(long trail, short trail) per candle close for the trailing ATR exit (Forward Test Program V4): x times
+    ATR(n) behind the highest high / lowest low of the last n candles (this one included). ATR = Wilder's, as the
+    rule building block atr(n)."""
+    h, l, c = (np.asarray(v, dtype=float) for v in (h, l, c))
+    m = len(c)
+    if m == 0:
+        return np.array([]), np.array([])
+    pc = np.concatenate([[np.nan], c[:-1]])
+    tr = np.nanmax(np.vstack([h - l, np.abs(h - pc), np.abs(l - pc)]), axis=0)
+    a = np.full(m, np.nan)
+    v, cnt = np.nan, 0
+    for i in range(m):                              # = pandas ewm(alpha=1/n, adjust=False, min_periods=n)
+        if np.isfinite(tr[i]):
+            v = tr[i] if not np.isfinite(v) else v + (tr[i] - v) / n
+            cnt += 1
+        if cnt >= n:
+            a[i] = v
+    hh = np.full(m, np.nan)
+    ll = np.full(m, np.nan)
+    for i in range(n - 1, m):
+        hh[i], ll[i] = h[i - n + 1:i + 1].max(), l[i - n + 1:i + 1].min()
+    return hh - x * a, ll + x * a
+
+
+def trail_for(trail, h, l, c):
+    """(long trail, short trail) of a card's manage.trail: the swing / EMA trail ({swing_n, ema}) or the trailing ATR
+    exit ({atr_n, atr_x})."""
+    if "atr_n" in trail:
+        return chandelier_levels(h, l, c, int(trail["atr_n"]), float(trail["atr_x"]))
+    return trail_levels(h, l, c, int(trail.get("swing_n", 3)), int(trail.get("ema", 9)))
+
+
 def closes_of(close_time, tf_ms):
     """True for candles whose close is also the close of a `tf_ms` candle (e.g. the 5m candles closing a 15m one)."""
     return (np.asarray(close_time, dtype=np.int64) + 1) % int(tf_ms) == 0

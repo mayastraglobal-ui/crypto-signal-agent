@@ -12,7 +12,7 @@ Strategy lifecycle, promotion gates and market gates (AGENT_PROMPT.md sections 5
 
 Market gates (applied to every candle, in backtests AND live, using closed candles only):
 - regime gate: the strategy trades only in the regimes it lists (on its regime timeframe);
-- permission gate: see strategy_spec.GATES.
+- permission gate: see strategy_spec.GATES (the Forward Test Program's "intraday" gates read only 4H and 1H).
 
 Pure functions only: no internet, no files.
 """
@@ -55,7 +55,12 @@ def gate_arrays(spec, tf, reg, n):
         return ok, ok.copy(), ok.copy(), ok.copy(), ok.copy()
     regime_ok = np.isin(lab(regime_tf(tf)), list(spec["regimes"]))
     wk = lab("1w")
-    if spec["gate"] == "mean_reversion":
+    if spec["gate"] == "intraday":                   # Forward Test Program: 4H AND 1H agree; 1W / 1D never block
+        d4, d1 = dirs("4h"), dirs("1h")
+        perm_long, perm_short = (d4 == 1) & (d1 == 1), (d4 == -1) & (d1 == -1)
+    elif spec["gate"] == "intraday_reversal":        # ... never against a STRONG 4H trend; 1W / 1D never block
+        perm_long, perm_short = lab("4h") != "STRONG_BEAR", lab("4h") != "STRONG_BULL"
+    elif spec["gate"] == "mean_reversion":
         strong_bear = np.zeros(n, bool)
         strong_bull = np.zeros(n, bool)
         for t in ["1w", "1d", "4h"]:

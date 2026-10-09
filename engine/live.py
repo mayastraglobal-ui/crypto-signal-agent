@@ -110,7 +110,11 @@ def message(a):
     man = a.get("manage") or {}
     if man:                                  # step 3: the operator's playbook trade management
         after = "stop to entry + fees" if man.get("be_plus_fees") else "stop to entry"
-        if man.get("trail"):
+        if (man.get("trail") or {}).get("atr_n"):
+            tr = man["trail"]
+            after += (f", trail the rest {tr['atr_x']:g} ATR behind the highest high / lowest low of the last "
+                      f"{tr['atr_n']} {a['tf']} candles")
+        elif man.get("trail"):
             after += f", trail the rest behind the last {a['tf']} swing / EMA{man['trail']['ema']}"
         lines.append(f"After TP1: {after}")
         if man.get("progress"):

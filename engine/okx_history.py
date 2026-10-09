@@ -84,16 +84,18 @@ def days(start_ms, end_ms):
 
 
 def parse_zip(content):
-    """1-minute candles of one OKX file (only confirmed candles)."""
+    """1-minute candles of one OKX file. The files only cover FINISHED months / days (months() and days() never
+    ask for one still running), so every candle in them is closed: their `confirm` column is ignored - OKX's older
+    archive files (e.g. 2023-09 to 2023-11 and 2024-02 to 2024-07) say confirm = 0 on every row, and dropping those
+    rows left months-long holes that made the 5-year 30m / 15m history UNSAFE (found 2026-10-09)."""
     with zipfile.ZipFile(io.BytesIO(content)) as z:
         name = next(n for n in z.namelist() if n.endswith(".csv"))
         df = pd.read_csv(z.open(name))
-    if "confirm" in df:
-        df = df[df["confirm"].astype(str).isin(["1", "1.0"])]
     out = pd.DataFrame({"open_time": df["open_time"].astype("int64"), "open": df["open"], "high": df["high"],
                         "low": df["low"], "close": df["close"], "volume": df["vol_ccy"],
                         "quote_volume": df["vol_quote"]})
-    return out.astype({c: float for c in COLS[1:]}).sort_values("open_time").reset_index(drop=True)
+    out = out.astype({c: float for c in COLS[1:]}).drop_duplicates("open_time", keep="last")   # a minute repeated
+    return out.sort_values("open_time").reset_index(drop=True)
 
 
 def resample(m1, tf, until_ms=None):

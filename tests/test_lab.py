@@ -540,8 +540,9 @@ class Tasks(unittest.TestCase):
         cards = B._cards(LAB_TEXT)
         self.assertEqual(len({f"{c['id']}@{c['version']}" for c in cards}), len(cards), "no card twice")
         self.assertEqual(sorted(f"{c['id']}@{c['version']}" for c in cards),       # RETIRED by the operator = idle
-                         sorted(SS.key(c) for c in ok + idle if c.get("lab")), "every lab card is loaded")
-        self.assertEqual(sorted(SS.key(c) for c in ok if c.get("lab")),
+                         sorted(SS.key(c) for c in ok + idle if c.get("lab") and not c.get("_program")),
+                         "every lab card is loaded")                         # (program cards: tests/test_program.py)
+        self.assertEqual(sorted(SS.key(c) for c in ok if c.get("lab") and not c.get("_program")),
                          sorted(f"{c['id']}@{c['version']}" for c in cards if c.get("status") == "FORMALIZED"))
 
 

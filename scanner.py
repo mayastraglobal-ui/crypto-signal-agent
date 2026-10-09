@@ -52,6 +52,7 @@ from engine import lifecycle as lc
 from engine import manage as mg
 from engine import flow_history as fh
 from engine import scalp_playbook as spb
+from engine import sessions as sess
 from engine import trend4h as t4
 from engine import regime_fit as rfit
 from engine import memory as mem
@@ -677,11 +678,29 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
         for rtf, hist in reg_hist.items():
             m = tfm.align_higher(df, hist, ["label", "exp_dir"])
             reg[rtf] = (m["label"].to_numpy(dtype=object), m["exp_dir"].to_numpy(dtype=object))
+        feats = add_context(df, feats, reg, tf)
         ns = make_namespace(df, feats)
         df["_atr"] = ns["atr"](14)
         frames[tf] = dict(df=df, feats=feats, ns=ns, reg=reg, n=len(df))
     add_trend4h(frames)
     return dict(frames=frames, smc=smc_out, recs=recs, rg_series=rg_ser)
+
+
+def add_context(df, feats, reg, tf):
+    """Forward Test Program building blocks: dir_1w / dir_1d / dir_4h / dir_1h = the regime direction of that
+    timeframe as known at each candle (+1 bull, -1 bear, 0 neither; unknown = NaN, so a rule using it is false), and
+    the trading sessions (engine/sessions.py: sess_asia / sess_london / sess_ny, asia_high / asia_low).
+    Returns the feature table with these columns added (one concat - no fragmented table)."""
+    new = {}
+    for rtf in ("1w", "1d", "4h", "1h"):
+        if rtf in reg:
+            known = pd.notna(pd.Series(reg[rtf][0])).to_numpy()
+            new[f"dir_{rtf}"] = np.where(known, lc.directions(*reg[rtf]), np.nan).astype(float)
+        else:
+            new[f"dir_{rtf}"] = np.full(len(df), np.nan)
+    new.update(sess.columns(df["open_time"].to_numpy(), df["high"].to_numpy(), df["low"].to_numpy(), TF_MS[tf]))
+    return pd.concat([feats.drop(columns=[k for k in new if k in feats]), pd.DataFrame(new, index=feats.index)],
+                     axis=1)
 
 
 def add_trend4h(frames):
@@ -828,21 +847,25 @@ def load_research(offline=False):
 
 
 def load_cards():
-    """strategies.yaml + strategies_lab.yaml (Phase 17), checked. A broken lab file is reported and skipped - the
-    library still runs. Returns (runnable cards, problems, idle cards, lab cards moved into strategies.yaml)."""
+    """strategies.yaml + strategies_lab.yaml (Phase 17) + strategies_program.yaml (the Forward Test Program), checked.
+    A broken lab or program file is reported and skipped - the library still runs.
+    Returns (runnable cards, problems, idle cards, lab cards moved into strategies.yaml)."""
     with open(os.path.join(ROOT, sspec.LIBRARY_FILE)) as f:
         main = yaml.safe_load(f)
-    lab, lab_problem = [], None
-    path = os.path.join(ROOT, sspec.LAB_FILE)
-    if os.path.exists(path):
+
+    def extra(name):
+        path = os.path.join(ROOT, name)
+        if not os.path.exists(path):
+            return [], None
         try:
             with open(path) as f:
-                lab = yaml.safe_load(f) or []
-            if not isinstance(lab, list):
-                lab, lab_problem = [], "the file must be a list of cards"
+                cards = yaml.safe_load(f) or []
         except yaml.YAMLError as e:
-            lab_problem = f"not readable ({str(e).splitlines()[0]})"
-    ok, problems, idle, moved = sspec.load_library(main, lab, rg.LABELS, TF_ORDER)
+            return [], f"not readable ({str(e).splitlines()[0]})"
+        return (cards, None) if isinstance(cards, list) else ([], "the file must be a list of cards")
+    lab, lab_problem = extra(sspec.LAB_FILE)
+    program, program_problem = extra(sspec.PROGRAM_FILE)
+    ok, problems, idle, moved = sspec.load_library(main, lab, rg.LABELS, TF_ORDER, program)
     ret_path = os.path.join(MEMORY, "retired_cards.csv")        # Phase 17 D: retired by the monthly clean-up
     if os.path.exists(ret_path):
         with open(ret_path) as f:
@@ -851,6 +874,8 @@ def load_cards():
         ok = [x for x in ok if sspec.key(x) not in gone]
     if lab_problem:
         problems[sspec.LAB_FILE] = [lab_problem + " - no lab card was run"]
+    if program_problem:
+        problems[sspec.PROGRAM_FILE] = [program_problem + " - no program card was run"]
     return ok, problems, idle, moved
 
 
@@ -990,7 +1015,8 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
     two - money received from funding is never counted (Phase 17 C). Longs on futures (costs.long.market: futures)
     likewise pay the HIGHER of the config rate and the real rate longs paid (fund_long) - roadmap step 2.
     Also measured: MAE / MFE = the worst / best price reached while the trade was open, in R
-    (Phase 9 failure attribution), and the funding paid, in R.
+    (Phase 9 failure attribution), the funding paid, in R, and fees_r = exchange fees + funding in R (slippage is in
+    the fill prices): the result before fees is r + fees_r.
     Limit entries (roadmap step 2B): entry_fee = the maker fee (fraction) instead of the taker fee; fill_bar = j0 is
     the candle in which the limit order filled - only the stop counts there (a target touched in that candle may
     have come BEFORE the fill), targets from the next candle on.
@@ -1020,7 +1046,7 @@ def simulate_trade(o, h, l, c, j0, d, entry, R, cfg, max_hold, bar_hours, exit_a
 
     def done(j, reason):
         return dict(exit_idx=j, r=(pnl - fees) / R, reason=reason, hit=hit, bars=j - j0 + 1,
-                    mae_r=mae / R, mfe_r=mfe / R, funding_r=funding / R)
+                    mae_r=mae / R, mfe_r=mfe / R, funding_r=funding / R, fees_r=fees / R)
     for j in range(j0, n):
         if d == 1:
             fb = fund_bar if real_long is None else max(k["funding_8h"], float(real_long[j]) * real_x_long) * bar_hours / 8
@@ -1126,7 +1152,7 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     lim, levs = sspec.limit_entry(strat), sspec.limit_levels(strat)
     man = strat.get("manage") or {}
-    trails = mg.trail_levels(h, l, c, man["trail"]["swing_n"], man["trail"]["ema"]) if man.get("trail") else None
+    trails = mg.trail_for(man["trail"], h, l, c) if man.get("trail") else None
     iv = man.get("invalidate")
     iv_mask = mg.closes_of(df["close_time"].to_numpy(), TF_MS[iv["every"]]) if iv and iv.get("every") else None
     fund_real = df["_fund_short"].to_numpy() if "_fund_short" in df else None
@@ -1476,8 +1502,7 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
         man = (strat or {}).get("manage") or {}                  # step 3: the playbook's trade management
         trail = None
         if man.get("trail"):                 # computed on the whole history (swings / EMA need the candles before)
-            tl = mg.trail_levels(df["high"].to_numpy(), df["low"].to_numpy(), df["close"].to_numpy(),
-                                 man["trail"]["swing_n"], man["trail"]["ema"])
+            tl = mg.trail_for(man["trail"], df["high"].to_numpy(), df["low"].to_numpy(), df["close"].to_numpy())
             trail = tl[0 if d == 1 else 1][pos0:]
         inval = None
         if man.get("invalidate") and pd.notna(row.get("inval_level")) and str(row.get("inval_level")) != "":

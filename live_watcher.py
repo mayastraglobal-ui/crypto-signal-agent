@@ -61,6 +61,7 @@ from engine import scalp_playbook as spb
 from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
+from engine import timeframes as tfm
 
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)     # the scanner's feature tables
 ROOT = sc.ROOT
@@ -79,13 +80,26 @@ REPO = os.environ.get("CRYPTO_AGENT_REPO", "mayastraglobal-ui/crypto-signal-agen
 RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
 # Without git (a Windows PC with the ZIP download): the files that carry GitHub's decisions, fetched every hour
 SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strategies.yaml"),
-              ("main", "strategies_lab.yaml"), ("main", "memory/strategy_registry.csv"),
+              ("main", "strategies_lab.yaml"), ("main", "strategies_program.yaml"),
+              ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("main", "reports/market_weather.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
-              "engine/journal.py"]      # changed on GitHub -> "run update.bat"
+              "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
+              "engine/lifecycle.py"]    # changed on GitHub -> "run update.bat"
+
+
+def trail_on_5m(m5, card, trail):
+    """{trail_long, trail_short} for each closed 5m candle: the card timeframe's trailing ATR level of the newest card
+    candle closed by then (no look-ahead). No card candles -> unknown (NaN: the stop just stays where it is)."""
+    if card is None or not len(card):
+        return dict(trail_long=np.full(len(m5), np.nan), trail_short=np.full(len(m5), np.nan))
+    tl, ts = mg.trail_for(trail, card["high"].to_numpy(), card["low"].to_numpy(), card["close"].to_numpy())
+    m = tfm.align_higher(m5, pd.DataFrame({"close_time": card["close_time"].to_numpy(), "tl": tl, "ts": ts}),
+                         ["tl", "ts"])
+    return dict(trail_long=m["tl"].to_numpy(dtype=float), trail_short=m["ts"].to_numpy(dtype=float))
 
 
 def log(*a):
@@ -676,8 +690,18 @@ class Watcher:
         closed = cache[t["coin"]]
         if closed is None:
             return None
-        if t.get("trailing") and len(closed):        # step 3: the playbook's trail (last 5m swing / EMA9)
-            tc = t.get("trail_cfg") or {}
+        tc = t.get("trail_cfg") or {}
+        if t.get("trailing") and len(closed) and "atr_n" in tc:   # the trailing ATR exit: on the card's own candles
+            key = (t["coin"], t["tf"])
+            if key not in cache:
+                try:
+                    raw = self.update(t["coin"], t["tf"], now_ms)
+                    cache[key] = raw[raw["close_time"] < now_ms]
+                except Exception as e:
+                    log(f"follow {t['coin']} {t['tf']}: download failed: {e}")
+                    cache[key] = None
+            closed = closed.assign(**trail_on_5m(closed, cache[key], tc))
+        elif t.get("trailing") and len(closed):      # step 3: the playbook's trail (last 5m swing / EMA9)
             tl, ts = mg.trail_levels(closed["high"].to_numpy(), closed["low"].to_numpy(), closed["close"].to_numpy(),
                                      int(tc.get("swing_n", 3)), int(tc.get("ema", 9)))
             closed = closed.assign(trail_long=tl, trail_short=ts)

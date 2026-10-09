@@ -1,0 +1,3063 @@
+# =====================================================================
+#  FORWARD TEST PROGRAM (operator plan 2026-10-09) - 10 different strategies x 4 versions
+#
+#  Same card format as strategies.yaml (read its header for every field and building block). These cards are
+#  tested EXACTLY like the library: same fees, same walk-forward / costs +50% / +-20% / trials counter, same pass
+#  bar. Like a lab card a program card is never APPROVED from here: to approve one, copy it unchanged into
+#  strategies.yaml by pull request, then add the approvals line.
+#
+#  Written by the operator's pull requests only (the Brain may not edit this file). The engine may ADD new
+#  versions of a program strategy to strategies_lab.yaml (variant search); a running card is never edited.
+#
+#  The four versions of every strategy (each differs from V1 in ONE way):
+#    V1  base: 4H (strategy 8, the session breakout: 1H)
+#    V2  faster: the same rules on 1H / 30m / 15m (4H + 1H still decide the direction)
+#    V3  V1 + the daily regime must agree (dir_1d) - shows whether the daily filter helps or only blocks moves
+#    V4  V1 with a trailing ATR exit after TP1 (targets 2R / 10R, stop trails 3 ATR(22) behind the extreme)
+#
+#  Market gates of the program (engine/lifecycle.py):
+#    intraday           trend strategies: the 4H AND the 1H regime must point the same way; 1W / 1D never block
+#    intraday_reversal  range / fade strategies: only in their regimes, never against a STRONG 4H trend
+#
+#  Research tests the program in nightly batches (config.yaml -> program): the strategies tested longest ago
+#  go first, so the first full pass takes about 5 nights, then it keeps rotating.
+# =====================================================================
+
+- id: P01-BREAKOUT-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 1
+    name: Breakout (Donchian + volume + ADX)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: donchian_breakout@1.0'
+  hypothesis: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX
+    starts a move worth following.
+  timeframes:
+  - 4h
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below
+    the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the longest
+      published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P01-BREAKOUT-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 1
+    name: Breakout (Donchian + volume + ADX)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P01-BREAKOUT-V1@1.0'
+  hypothesis: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX
+    starts a move worth following.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below
+    the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the longest
+      published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P01-BREAKOUT-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 1
+    name: Breakout (Donchian + volume + ADX)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P01-BREAKOUT-V1@1.0'
+  hypothesis: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX
+    starts a move worth following.
+  timeframes:
+  - 4h
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below
+    the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - dir_1d > 0
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - dir_1d < 0
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the longest
+      published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P01-BREAKOUT-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 1
+    name: Breakout (Donchian + volume + ADX)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P01-BREAKOUT-V1@1.0'
+  hypothesis: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX
+    starts a move worth following.
+  timeframes:
+  - 4h
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below
+    the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 120
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the longest
+      published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P02-EMA-PULLBACK-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 2
+    name: EMA trend pullback (EMA20/50 + RSI + VWAP)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version
+    V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: trend_pullback@1.0'
+  hypothesis: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last
+    swing low still in profit, continues the trend.
+  timeframes:
+  - 4h
+  description: In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the
+    VWAP anchored at the last swing low (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+    rsi_n: 14
+    rsi_lo: 40
+    rsi_hi: 65
+  long:
+  - ema(close,{fast}) > ema(close,{slow})
+  - low <= ema(close,{fast})
+  - close > ema(close,{fast})
+  - close > open
+  - rsi(close,{rsi_n}) > {rsi_lo}
+  - rsi(close,{rsi_n}) < {rsi_hi}
+  - close > avwap_swing_low
+  short:
+  - ema(close,{fast}) < ema(close,{slow})
+  - high >= ema(close,{fast})
+  - close < ema(close,{fast})
+  - close < open
+  - rsi(close,{rsi_n}) < 100 - {rsi_lo}
+  - rsi(close,{rsi_n}) > 100 - {rsi_hi}
+  - close < avwap_swing_high
+  exit_long:
+  - close < ema(close,{slow})
+  exit_short:
+  - close > ema(close,{slow})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last
+    one.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who sold the dip into a trend the higher timeframes still support
+    mechanism: trends persist; a pullback to the 20 EMA resets momentum and buyers step in at 'value'
+    fails_when: ranges and the last leg of a mature trend, where the bounce fails
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P02-EMA-PULLBACK-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 2
+    name: EMA trend pullback (EMA20/50 + RSI + VWAP)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version
+    V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P02-EMA-PULLBACK-V1@1.0'
+  hypothesis: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last
+    swing low still in profit, continues the trend.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the
+    VWAP anchored at the last swing low (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+    rsi_n: 14
+    rsi_lo: 40
+    rsi_hi: 65
+  long:
+  - ema(close,{fast}) > ema(close,{slow})
+  - low <= ema(close,{fast})
+  - close > ema(close,{fast})
+  - close > open
+  - rsi(close,{rsi_n}) > {rsi_lo}
+  - rsi(close,{rsi_n}) < {rsi_hi}
+  - close > avwap_swing_low
+  short:
+  - ema(close,{fast}) < ema(close,{slow})
+  - high >= ema(close,{fast})
+  - close < ema(close,{fast})
+  - close < open
+  - rsi(close,{rsi_n}) < 100 - {rsi_lo}
+  - rsi(close,{rsi_n}) > 100 - {rsi_hi}
+  - close < avwap_swing_high
+  exit_long:
+  - close < ema(close,{slow})
+  exit_short:
+  - close > ema(close,{slow})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last
+    one.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who sold the dip into a trend the higher timeframes still support
+    mechanism: trends persist; a pullback to the 20 EMA resets momentum and buyers step in at 'value'
+    fails_when: ranges and the last leg of a mature trend, where the bounce fails
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P02-EMA-PULLBACK-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 2
+    name: EMA trend pullback (EMA20/50 + RSI + VWAP)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version
+    V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P02-EMA-PULLBACK-V1@1.0'
+  hypothesis: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last
+    swing low still in profit, continues the trend.
+  timeframes:
+  - 4h
+  description: In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the
+    VWAP anchored at the last swing low (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+    rsi_n: 14
+    rsi_lo: 40
+    rsi_hi: 65
+  long:
+  - ema(close,{fast}) > ema(close,{slow})
+  - low <= ema(close,{fast})
+  - close > ema(close,{fast})
+  - close > open
+  - rsi(close,{rsi_n}) > {rsi_lo}
+  - rsi(close,{rsi_n}) < {rsi_hi}
+  - close > avwap_swing_low
+  - dir_1d > 0
+  short:
+  - ema(close,{fast}) < ema(close,{slow})
+  - high >= ema(close,{fast})
+  - close < ema(close,{fast})
+  - close < open
+  - rsi(close,{rsi_n}) < 100 - {rsi_lo}
+  - rsi(close,{rsi_n}) > 100 - {rsi_hi}
+  - close < avwap_swing_high
+  - dir_1d < 0
+  exit_long:
+  - close < ema(close,{slow})
+  exit_short:
+  - close > ema(close,{slow})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last
+    one.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who sold the dip into a trend the higher timeframes still support
+    mechanism: trends persist; a pullback to the 20 EMA resets momentum and buyers step in at 'value'
+    fails_when: ranges and the last leg of a mature trend, where the bounce fails
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P02-EMA-PULLBACK-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 2
+    name: EMA trend pullback (EMA20/50 + RSI + VWAP)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version
+    V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P02-EMA-PULLBACK-V1@1.0'
+  hypothesis: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last
+    swing low still in profit, continues the trend.
+  timeframes:
+  - 4h
+  description: In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the
+    VWAP anchored at the last swing low (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+    rsi_n: 14
+    rsi_lo: 40
+    rsi_hi: 65
+  long:
+  - ema(close,{fast}) > ema(close,{slow})
+  - low <= ema(close,{fast})
+  - close > ema(close,{fast})
+  - close > open
+  - rsi(close,{rsi_n}) > {rsi_lo}
+  - rsi(close,{rsi_n}) < {rsi_hi}
+  - close > avwap_swing_low
+  short:
+  - ema(close,{fast}) < ema(close,{slow})
+  - high >= ema(close,{fast})
+  - close < ema(close,{fast})
+  - close < open
+  - rsi(close,{rsi_n}) < 100 - {rsi_lo}
+  - rsi(close,{rsi_n}) > 100 - {rsi_hi}
+  - close < avwap_swing_high
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last
+    one.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who sold the dip into a trend the higher timeframes still support
+    mechanism: trends persist; a pullback to the 20 EMA resets momentum and buyers step in at 'value'
+    fails_when: ranges and the last leg of a mature trend, where the bounce fails
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P03-FIB-PULLBACK-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 3
+    name: Fibonacci pullback (50-61.8% of the last swing)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing)
+    - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC 87,000 -> 81,900 drop 2026-10-02 to 2026-10-09 (Forward Test Program)'
+  hypothesis: 'Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not
+    a reversal: the leg resumes.'
+  timeframes:
+  - 4h
+  description: After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a
+    green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+  long:
+  - fib_dir > 0
+  - low <= fib_500
+  - close > fib_618
+  - close > open
+  - ema(close,{fast}) > ema(close,{slow})
+  short:
+  - fib_dir < 0
+  - high >= fib_500
+  - close < fib_618
+  - close < open
+  - ema(close,{fast}) < ema(close,{slow})
+  stop:
+    method: structure
+    long_level: fib_786
+    short_level: fib_786
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+    min_width_atr: 0.8
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building
+    blocks existed but were never used).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who treat a normal retracement as a reversal and short into support
+    mechanism: many traders watch the same Fibonacci levels, so orders cluster at 50-61.8% and the pullback tends to stop
+      there inside a trend
+    fails_when: 'a trend that is ending: the retracement goes past 78.6% and becomes a reversal'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P03-FIB-PULLBACK-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 3
+    name: Fibonacci pullback (50-61.8% of the last swing)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing)
+    - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P03-FIB-PULLBACK-V1@1.0'
+  hypothesis: 'Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not
+    a reversal: the leg resumes.'
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a
+    green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+  long:
+  - fib_dir > 0
+  - low <= fib_500
+  - close > fib_618
+  - close > open
+  - ema(close,{fast}) > ema(close,{slow})
+  short:
+  - fib_dir < 0
+  - high >= fib_500
+  - close < fib_618
+  - close < open
+  - ema(close,{fast}) < ema(close,{slow})
+  stop:
+    method: structure
+    long_level: fib_786
+    short_level: fib_786
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+    min_width_atr: 0.8
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building
+    blocks existed but were never used).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who treat a normal retracement as a reversal and short into support
+    mechanism: many traders watch the same Fibonacci levels, so orders cluster at 50-61.8% and the pullback tends to stop
+      there inside a trend
+    fails_when: 'a trend that is ending: the retracement goes past 78.6% and becomes a reversal'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P03-FIB-PULLBACK-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 3
+    name: Fibonacci pullback (50-61.8% of the last swing)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing)
+    - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P03-FIB-PULLBACK-V1@1.0'
+  hypothesis: 'Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not
+    a reversal: the leg resumes.'
+  timeframes:
+  - 4h
+  description: After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a
+    green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+  long:
+  - fib_dir > 0
+  - low <= fib_500
+  - close > fib_618
+  - close > open
+  - ema(close,{fast}) > ema(close,{slow})
+  - dir_1d > 0
+  short:
+  - fib_dir < 0
+  - high >= fib_500
+  - close < fib_618
+  - close < open
+  - ema(close,{fast}) < ema(close,{slow})
+  - dir_1d < 0
+  stop:
+    method: structure
+    long_level: fib_786
+    short_level: fib_786
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+    min_width_atr: 0.8
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building
+    blocks existed but were never used).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who treat a normal retracement as a reversal and short into support
+    mechanism: many traders watch the same Fibonacci levels, so orders cluster at 50-61.8% and the pullback tends to stop
+      there inside a trend
+    fails_when: 'a trend that is ending: the retracement goes past 78.6% and becomes a reversal'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P03-FIB-PULLBACK-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 3
+    name: Fibonacci pullback (50-61.8% of the last swing)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing)
+    - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P03-FIB-PULLBACK-V1@1.0'
+  hypothesis: 'Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not
+    a reversal: the leg resumes.'
+  timeframes:
+  - 4h
+  description: After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a
+    green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+  long:
+  - fib_dir > 0
+  - low <= fib_500
+  - close > fib_618
+  - close > open
+  - ema(close,{fast}) > ema(close,{slow})
+  short:
+  - fib_dir < 0
+  - high >= fib_500
+  - close < fib_618
+  - close < open
+  - ema(close,{fast}) < ema(close,{slow})
+  stop:
+    method: structure
+    long_level: fib_786
+    short_level: fib_786
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+    min_width_atr: 0.8
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building
+    blocks existed but were never used).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who treat a normal retracement as a reversal and short into support
+    mechanism: many traders watch the same Fibonacci levels, so orders cluster at 50-61.8% and the pullback tends to stop
+      there inside a trend
+    fails_when: 'a trend that is ending: the retracement goes past 78.6% and becomes a reversal'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P04-MACD-SUPERTREND-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 4
+    name: Trend momentum (MACD + Supertrend)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: supertrend_flip@1.0'
+  hypothesis: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg
+    of the trend.
+  timeframes:
+  - 4h
+  description: Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored);
+    exit when the Supertrend flips.
+  params:
+    st_n: 10
+    st_x: 3.0
+  long:
+  - supertrend_dir({st_n},{st_x}) > 0
+  - cross_up(macd_line(close), macd_signal(close))
+  - macd_line(close) > 0
+  short:
+  - supertrend_dir({st_n},{st_x}) < 0
+  - cross_down(macd_line(close), macd_signal(close))
+  - macd_line(close) < 0
+  exit_long:
+  - supertrend_dir({st_n},{st_x}) < 0
+  exit_short:
+  - supertrend_dir({st_n},{st_x}) > 0
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: 'Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.'
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who fade momentum and anchor to the old price level
+    mechanism: momentum persists over short horizons (time-series momentum); a MACD push with the Supertrend shows the trend
+      accelerating again
+    fails_when: flat or choppy markets where MACD crosses back and forth
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P04-MACD-SUPERTREND-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 4
+    name: Trend momentum (MACD + Supertrend)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P04-MACD-SUPERTREND-V1@1.0'
+  hypothesis: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg
+    of the trend.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored);
+    exit when the Supertrend flips.
+  params:
+    st_n: 10
+    st_x: 3.0
+  long:
+  - supertrend_dir({st_n},{st_x}) > 0
+  - cross_up(macd_line(close), macd_signal(close))
+  - macd_line(close) > 0
+  short:
+  - supertrend_dir({st_n},{st_x}) < 0
+  - cross_down(macd_line(close), macd_signal(close))
+  - macd_line(close) < 0
+  exit_long:
+  - supertrend_dir({st_n},{st_x}) < 0
+  exit_short:
+  - supertrend_dir({st_n},{st_x}) > 0
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: 'Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.'
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who fade momentum and anchor to the old price level
+    mechanism: momentum persists over short horizons (time-series momentum); a MACD push with the Supertrend shows the trend
+      accelerating again
+    fails_when: flat or choppy markets where MACD crosses back and forth
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P04-MACD-SUPERTREND-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 4
+    name: Trend momentum (MACD + Supertrend)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P04-MACD-SUPERTREND-V1@1.0'
+  hypothesis: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg
+    of the trend.
+  timeframes:
+  - 4h
+  description: Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored);
+    exit when the Supertrend flips.
+  params:
+    st_n: 10
+    st_x: 3.0
+  long:
+  - supertrend_dir({st_n},{st_x}) > 0
+  - cross_up(macd_line(close), macd_signal(close))
+  - macd_line(close) > 0
+  - dir_1d > 0
+  short:
+  - supertrend_dir({st_n},{st_x}) < 0
+  - cross_down(macd_line(close), macd_signal(close))
+  - macd_line(close) < 0
+  - dir_1d < 0
+  exit_long:
+  - supertrend_dir({st_n},{st_x}) < 0
+  exit_short:
+  - supertrend_dir({st_n},{st_x}) > 0
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: 'Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.'
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who fade momentum and anchor to the old price level
+    mechanism: momentum persists over short horizons (time-series momentum); a MACD push with the Supertrend shows the trend
+      accelerating again
+    fails_when: flat or choppy markets where MACD crosses back and forth
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P04-MACD-SUPERTREND-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 4
+    name: Trend momentum (MACD + Supertrend)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P04-MACD-SUPERTREND-V1@1.0'
+  hypothesis: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg
+    of the trend.
+  timeframes:
+  - 4h
+  description: Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored);
+    exit when the Supertrend flips.
+  params:
+    st_n: 10
+    st_x: 3.0
+  long:
+  - supertrend_dir({st_n},{st_x}) > 0
+  - cross_up(macd_line(close), macd_signal(close))
+  - macd_line(close) > 0
+  short:
+  - supertrend_dir({st_n},{st_x}) < 0
+  - cross_down(macd_line(close), macd_signal(close))
+  - macd_line(close) < 0
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 120
+  cooldown_bars: 0
+  known_weaknesses: 'Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.'
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who fade momentum and anchor to the old price level
+    mechanism: momentum persists over short horizons (time-series momentum); a MACD push with the Supertrend shows the trend
+      accelerating again
+    fails_when: flat or choppy markets where MACD crosses back and forth
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P05-RANGE-REVERSAL-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 5
+    name: Range reversal (RSI + Bollinger)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'source: [R4] freqtrade-strategies (BbandRsi, the idea of lab card R4-BBRSI)'
+  hypothesis: 'In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price
+    returns to the middle band.'
+  timeframes:
+  - 4h
+  description: In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes
+    back inside; exit at the middle band.
+  params:
+    bb_n: 20
+    bb_k: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - prev(close) < prev(bb_lower(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) < {rsi_lo}
+  - close > bb_lower(close,{bb_n},{bb_k})
+  short:
+  - prev(close) > prev(bb_upper(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) > 100 - {rsi_lo}
+  - close < bb_upper(close,{bb_n},{bb_k})
+  exit_long:
+  - close > bb_mid(close,{bb_n})
+  exit_short:
+  - close < bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before
+    2R.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
+    mechanism: in a range, extremes beyond the band with an extreme RSI revert to the mean
+    fails_when: 'a range that breaks into a trend: the band keeps being walked'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P05-RANGE-REVERSAL-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 5
+    name: Range reversal (RSI + Bollinger)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P05-RANGE-REVERSAL-V1@1.0'
+  hypothesis: 'In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price
+    returns to the middle band.'
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes
+    back inside; exit at the middle band.
+  params:
+    bb_n: 20
+    bb_k: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - prev(close) < prev(bb_lower(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) < {rsi_lo}
+  - close > bb_lower(close,{bb_n},{bb_k})
+  short:
+  - prev(close) > prev(bb_upper(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) > 100 - {rsi_lo}
+  - close < bb_upper(close,{bb_n},{bb_k})
+  exit_long:
+  - close > bb_mid(close,{bb_n})
+  exit_short:
+  - close < bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before
+    2R.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
+    mechanism: in a range, extremes beyond the band with an extreme RSI revert to the mean
+    fails_when: 'a range that breaks into a trend: the band keeps being walked'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P05-RANGE-REVERSAL-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 5
+    name: Range reversal (RSI + Bollinger)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P05-RANGE-REVERSAL-V1@1.0'
+  hypothesis: 'In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price
+    returns to the middle band.'
+  timeframes:
+  - 4h
+  description: In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes
+    back inside; exit at the middle band.
+  params:
+    bb_n: 20
+    bb_k: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - prev(close) < prev(bb_lower(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) < {rsi_lo}
+  - close > bb_lower(close,{bb_n},{bb_k})
+  - dir_1d > 0
+  short:
+  - prev(close) > prev(bb_upper(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) > 100 - {rsi_lo}
+  - close < bb_upper(close,{bb_n},{bb_k})
+  - dir_1d < 0
+  exit_long:
+  - close > bb_mid(close,{bb_n})
+  exit_short:
+  - close < bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before
+    2R.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
+    mechanism: in a range, extremes beyond the band with an extreme RSI revert to the mean
+    fails_when: 'a range that breaks into a trend: the band keeps being walked'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P05-RANGE-REVERSAL-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 5
+    name: Range reversal (RSI + Bollinger)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P05-RANGE-REVERSAL-V1@1.0'
+  hypothesis: 'In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price
+    returns to the middle band.'
+  timeframes:
+  - 4h
+  description: In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes
+    back inside; exit at the middle band.
+  params:
+    bb_n: 20
+    bb_k: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - prev(close) < prev(bb_lower(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) < {rsi_lo}
+  - close > bb_lower(close,{bb_n},{bb_k})
+  short:
+  - prev(close) > prev(bb_upper(close,{bb_n},{bb_k}))
+  - prev(rsi(close,{rsi_n})) > 100 - {rsi_lo}
+  - close < bb_upper(close,{bb_n},{bb_k})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 48
+  cooldown_bars: 0
+  known_weaknesses: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before
+    2R.
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: traders who panic-sell (or chase) a stretched candle at the edge of a range
+    mechanism: in a range, extremes beyond the band with an extreme RSI revert to the mean
+    fails_when: 'a range that breaks into a trend: the band keeps being walked'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P06-VWAP-REVERSION-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 6
+    name: VWAP reversion
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC 87,000 -> 81,900 drop 2026-10-02 to 2026-10-09 (Forward Test Program)'
+  hypothesis: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  timeframes:
+  - 4h
+  description: Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit
+    back at the VWAP (shorts mirrored).
+  params:
+    dev: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - close < vwap - {dev} * atr(14)
+  - rsi(close,{rsi_n}) < {rsi_lo}
+  - close > open
+  short:
+  - close > vwap + {dev} * atr(14)
+  - rsi(close,{rsi_n}) > 100 - {rsi_lo}
+  - close < open
+  exit_long:
+  - close > vwap
+  exit_short:
+  - close < vwap
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: 'The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from
+    it.'
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: late traders who chase a stretched move far away from the day's average price
+    mechanism: the VWAP is the price most of the day's volume traded at; in a range, price is pulled back to it as the stretch
+      is unwound
+    fails_when: 'trend days and news days: price walks away from the VWAP and never comes back'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P06-VWAP-REVERSION-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 6
+    name: VWAP reversion
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P06-VWAP-REVERSION-V1@1.0'
+  hypothesis: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit
+    back at the VWAP (shorts mirrored).
+  params:
+    dev: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - close < vwap - {dev} * atr(14)
+  - rsi(close,{rsi_n}) < {rsi_lo}
+  - close > open
+  short:
+  - close > vwap + {dev} * atr(14)
+  - rsi(close,{rsi_n}) > 100 - {rsi_lo}
+  - close < open
+  exit_long:
+  - close > vwap
+  exit_short:
+  - close < vwap
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: 'The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from
+    it.'
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: late traders who chase a stretched move far away from the day's average price
+    mechanism: the VWAP is the price most of the day's volume traded at; in a range, price is pulled back to it as the stretch
+      is unwound
+    fails_when: 'trend days and news days: price walks away from the VWAP and never comes back'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P06-VWAP-REVERSION-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 6
+    name: VWAP reversion
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P06-VWAP-REVERSION-V1@1.0'
+  hypothesis: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  timeframes:
+  - 4h
+  description: Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit
+    back at the VWAP (shorts mirrored).
+  params:
+    dev: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - close < vwap - {dev} * atr(14)
+  - rsi(close,{rsi_n}) < {rsi_lo}
+  - close > open
+  - dir_1d > 0
+  short:
+  - close > vwap + {dev} * atr(14)
+  - rsi(close,{rsi_n}) > 100 - {rsi_lo}
+  - close < open
+  - dir_1d < 0
+  exit_long:
+  - close > vwap
+  exit_short:
+  - close < vwap
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: 'The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from
+    it.'
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: late traders who chase a stretched move far away from the day's average price
+    mechanism: the VWAP is the price most of the day's volume traded at; in a range, price is pulled back to it as the stretch
+      is unwound
+    fails_when: 'trend days and news days: price walks away from the VWAP and never comes back'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P06-VWAP-REVERSION-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: mean_reversion
+  gate: intraday_reversal
+  regimes:
+  - RANGE
+  - HIGH_VOL_RANGE
+  - COMPRESSION
+  program:
+    strategy: 6
+    name: VWAP reversion
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P06-VWAP-REVERSION-V1@1.0'
+  hypothesis: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  timeframes:
+  - 4h
+  description: Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit
+    back at the VWAP (shorts mirrored).
+  params:
+    dev: 2.0
+    rsi_n: 14
+    rsi_lo: 35
+  long:
+  - close < vwap - {dev} * atr(14)
+  - rsi(close,{rsi_n}) < {rsi_lo}
+  - close > open
+  short:
+  - close > vwap + {dev} * atr(14)
+  - rsi(close,{rsi_n}) > 100 - {rsi_lo}
+  - close < open
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 48
+  cooldown_bars: 0
+  known_weaknesses: 'The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from
+    it.'
+  edge:
+    type: behavioural
+    works_in:
+    - RANGE
+    - HIGH_VOL_RANGE
+    who_pays: late traders who chase a stretched move far away from the day's average price
+    mechanism: the VWAP is the price most of the day's volume traded at; in a range, price is pulled back to it as the stretch
+      is unwound
+    fails_when: 'trend days and news days: price walks away from the VWAP and never comes back'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P07-SQUEEZE-RETEST-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 7
+    name: Squeeze breakout & retest
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: bb_squeeze_breakout@1.0'
+  hypothesis: 'A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.'
+  timeframes:
+  - 4h
+  description: After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the
+    broken level and closes above it again with a green candle (shorts mirrored).
+  params:
+    bb_n: 20
+    rank_n: 100
+    sq: 0.2
+    lb: 30
+  long:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_up
+  - close > open
+  short:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_down
+  - close < open
+  exit_long:
+  - close < bb_mid(close,{bb_n})
+  exit_short:
+  - close > bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 40
+  cooldown_bars: 0
+  known_weaknesses: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who faded the breakout and have to buy back when the retest holds
+    mechanism: low volatility is followed by high volatility; a retest that holds shows the broken level has turned from
+      resistance into support
+    fails_when: 'false breakouts in chop: price falls back into the old range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P07-SQUEEZE-RETEST-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 7
+    name: Squeeze breakout & retest
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P07-SQUEEZE-RETEST-V1@1.0'
+  hypothesis: 'A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.'
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the
+    broken level and closes above it again with a green candle (shorts mirrored).
+  params:
+    bb_n: 20
+    rank_n: 100
+    sq: 0.2
+    lb: 30
+  long:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_up
+  - close > open
+  short:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_down
+  - close < open
+  exit_long:
+  - close < bb_mid(close,{bb_n})
+  exit_short:
+  - close > bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 40
+  cooldown_bars: 0
+  known_weaknesses: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who faded the breakout and have to buy back when the retest holds
+    mechanism: low volatility is followed by high volatility; a retest that holds shows the broken level has turned from
+      resistance into support
+    fails_when: 'false breakouts in chop: price falls back into the old range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P07-SQUEEZE-RETEST-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 7
+    name: Squeeze breakout & retest
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P07-SQUEEZE-RETEST-V1@1.0'
+  hypothesis: 'A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.'
+  timeframes:
+  - 4h
+  description: After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the
+    broken level and closes above it again with a green candle (shorts mirrored).
+  params:
+    bb_n: 20
+    rank_n: 100
+    sq: 0.2
+    lb: 30
+  long:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_up
+  - close > open
+  - dir_1d > 0
+  short:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_down
+  - close < open
+  - dir_1d < 0
+  exit_long:
+  - close < bb_mid(close,{bb_n})
+  exit_short:
+  - close > bb_mid(close,{bb_n})
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 40
+  cooldown_bars: 0
+  known_weaknesses: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who faded the breakout and have to buy back when the retest holds
+    mechanism: low volatility is followed by high volatility; a retest that holds shows the broken level has turned from
+      resistance into support
+    fails_when: 'false breakouts in chop: price falls back into the old range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P07-SQUEEZE-RETEST-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 7
+    name: Squeeze breakout & retest
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P07-SQUEEZE-RETEST-V1@1.0'
+  hypothesis: 'A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.'
+  timeframes:
+  - 4h
+  description: After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the
+    broken level and closes above it again with a green candle (shorts mirrored).
+  params:
+    bb_n: 20
+    rank_n: 100
+    sq: 0.2
+    lb: 30
+  long:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_up
+  - close > open
+  short:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - retest_down
+  - close < open
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 80
+  cooldown_bars: 0
+  known_weaknesses: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who faded the breakout and have to buy back when the retest holds
+    mechanism: low volatility is followed by high volatility; a retest that holds shows the broken level has turned from
+      resistance into support
+    fails_when: 'false breakouts in chop: price falls back into the old range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P08-SESSION-BREAKOUT-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 8
+    name: Session open breakout (Asia range -> London / New York)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New
+    York) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC 87,000 -> 81,900 drop 2026-10-02 to 2026-10-09 (Forward Test Program)'
+  hypothesis: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the
+    4H + 1H trend direction, runs.
+  timeframes:
+  - 1h
+  description: 'During London or New York (08:00-21:00 UTC), price closes for the first time above today''s Asia high (00:00-08:00
+    UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.'
+  params:
+    vol_x: 1.3
+  long:
+  - sess_london + sess_ny > 0
+  - close > asia_high
+  - prev(close) <= prev(asia_high)
+  - volume > vol_sma(20) * {vol_x}
+  short:
+  - sess_london + sess_ny > 0
+  - close < asia_low
+  - prev(close) >= prev(asia_low)
+  - volume > vol_sma(20) * {vol_x}
+  exit_long:
+  - close < (asia_high + asia_low) / 2
+  exit_short:
+  - close > (asia_high + asia_low) / 2
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 16
+  cooldown_bars: 0
+  known_weaknesses: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at
+    the London open are common.
+  edge:
+    type: structural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders with stops just outside the Asia range, whose stops fill the breakout
+    mechanism: volume and volatility rise when Europe and the US open; the Asia range high and low hold resting orders that
+      the new flow runs through
+    fails_when: quiet days without London / New York follow-through, and news-driven whipsaws
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 1H'
+  added: '2026-10-09'
+- id: P08-SESSION-BREAKOUT-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 8
+    name: Session open breakout (Asia range -> London / New York)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New
+    York) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P08-SESSION-BREAKOUT-V1@1.0'
+  hypothesis: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the
+    4H + 1H trend direction, runs.
+  timeframes:
+  - 30m
+  - 15m
+  description: 'During London or New York (08:00-21:00 UTC), price closes for the first time above today''s Asia high (00:00-08:00
+    UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.'
+  params:
+    vol_x: 1.3
+  long:
+  - sess_london + sess_ny > 0
+  - close > asia_high
+  - prev(close) <= prev(asia_high)
+  - volume > vol_sma(20) * {vol_x}
+  short:
+  - sess_london + sess_ny > 0
+  - close < asia_low
+  - prev(close) >= prev(asia_low)
+  - volume > vol_sma(20) * {vol_x}
+  exit_long:
+  - close < (asia_high + asia_low) / 2
+  exit_short:
+  - close > (asia_high + asia_low) / 2
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 16
+  cooldown_bars: 0
+  known_weaknesses: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at
+    the London open are common.
+  edge:
+    type: structural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders with stops just outside the Asia range, whose stops fill the breakout
+    mechanism: volume and volatility rise when Europe and the US open; the Asia range high and low hold resting orders that
+      the new flow runs through
+    fails_when: quiet days without London / New York follow-through, and news-driven whipsaws
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 30M / 15M'
+  added: '2026-10-09'
+- id: P08-SESSION-BREAKOUT-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 8
+    name: Session open breakout (Asia range -> London / New York)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New
+    York) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P08-SESSION-BREAKOUT-V1@1.0'
+  hypothesis: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the
+    4H + 1H trend direction, runs.
+  timeframes:
+  - 1h
+  description: 'During London or New York (08:00-21:00 UTC), price closes for the first time above today''s Asia high (00:00-08:00
+    UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.'
+  params:
+    vol_x: 1.3
+  long:
+  - sess_london + sess_ny > 0
+  - close > asia_high
+  - prev(close) <= prev(asia_high)
+  - volume > vol_sma(20) * {vol_x}
+  - dir_1d > 0
+  short:
+  - sess_london + sess_ny > 0
+  - close < asia_low
+  - prev(close) >= prev(asia_low)
+  - volume > vol_sma(20) * {vol_x}
+  - dir_1d < 0
+  exit_long:
+  - close < (asia_high + asia_low) / 2
+  exit_short:
+  - close > (asia_high + asia_low) / 2
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 16
+  cooldown_bars: 0
+  known_weaknesses: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at
+    the London open are common.
+  edge:
+    type: structural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders with stops just outside the Asia range, whose stops fill the breakout
+    mechanism: volume and volatility rise when Europe and the US open; the Asia range high and low hold resting orders that
+      the new flow runs through
+    fails_when: quiet days without London / New York follow-through, and news-driven whipsaws
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P08-SESSION-BREAKOUT-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 8
+    name: Session open breakout (Asia range -> London / New York)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New
+    York) - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P08-SESSION-BREAKOUT-V1@1.0'
+  hypothesis: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the
+    4H + 1H trend direction, runs.
+  timeframes:
+  - 1h
+  description: 'During London or New York (08:00-21:00 UTC), price closes for the first time above today''s Asia high (00:00-08:00
+    UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.'
+  params:
+    vol_x: 1.3
+  long:
+  - sess_london + sess_ny > 0
+  - close > asia_high
+  - prev(close) <= prev(asia_high)
+  - volume > vol_sma(20) * {vol_x}
+  short:
+  - sess_london + sess_ny > 0
+  - close < asia_low
+  - prev(close) >= prev(asia_low)
+  - volume > vol_sma(20) * {vol_x}
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 32
+  cooldown_bars: 0
+  known_weaknesses: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at
+    the London open are common.
+  edge:
+    type: structural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders with stops just outside the Asia range, whose stops fill the breakout
+    mechanism: volume and volatility rise when Europe and the US open; the Asia range high and low hold resting orders that
+      the new flow runs through
+    fails_when: quiet days without London / New York follow-through, and news-driven whipsaws
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P09-SWEEP-MSS-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 9
+    name: Liquidity sweep + structure shift
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: liquidity_sweep_reversal@1.0'
+  hypothesis: 'A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of
+    the pullback: the trend resumes.'
+  timeframes:
+  - 4h
+  description: Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles
+    a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored).
+    Plain building blocks, no SMC detector.
+  params:
+    n: 20
+    k: 5
+  long:
+  - within(low < prev(lowest(low,{n})), {k})
+  - close > prev(highest(high,{k}))
+  - displacement_up
+  short:
+  - within(high > prev(highest(high,{n})), {k})
+  - close < prev(lowest(low,{k}))
+  - displacement_down
+  stop:
+    method: structure
+    long_level: lowest(low,{k})
+    short_level: highest(high,{k})
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop
+    is wide.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders whose stop-losses sit under the obvious low and are filled at the worst price
+    mechanism: stop orders under a low give large players the liquidity to buy; once filled, a strong close back above the
+      recent highs shows the selling is done
+    fails_when: 'real breakdowns: the low breaks and price keeps going'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P09-SWEEP-MSS-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 9
+    name: Liquidity sweep + structure shift
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P09-SWEEP-MSS-V1@1.0'
+  hypothesis: 'A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of
+    the pullback: the trend resumes.'
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles
+    a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored).
+    Plain building blocks, no SMC detector.
+  params:
+    n: 20
+    k: 5
+  long:
+  - within(low < prev(lowest(low,{n})), {k})
+  - close > prev(highest(high,{k}))
+  - displacement_up
+  short:
+  - within(high > prev(highest(high,{n})), {k})
+  - close < prev(lowest(low,{k}))
+  - displacement_down
+  stop:
+    method: structure
+    long_level: lowest(low,{k})
+    short_level: highest(high,{k})
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop
+    is wide.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders whose stop-losses sit under the obvious low and are filled at the worst price
+    mechanism: stop orders under a low give large players the liquidity to buy; once filled, a strong close back above the
+      recent highs shows the selling is done
+    fails_when: 'real breakdowns: the low breaks and price keeps going'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P09-SWEEP-MSS-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 9
+    name: Liquidity sweep + structure shift
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P09-SWEEP-MSS-V1@1.0'
+  hypothesis: 'A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of
+    the pullback: the trend resumes.'
+  timeframes:
+  - 4h
+  description: Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles
+    a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored).
+    Plain building blocks, no SMC detector.
+  params:
+    n: 20
+    k: 5
+  long:
+  - within(low < prev(lowest(low,{n})), {k})
+  - close > prev(highest(high,{k}))
+  - displacement_up
+  - dir_1d > 0
+  short:
+  - within(high > prev(highest(high,{n})), {k})
+  - close < prev(lowest(low,{k}))
+  - displacement_down
+  - dir_1d < 0
+  stop:
+    method: structure
+    long_level: lowest(low,{k})
+    short_level: highest(high,{k})
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop
+    is wide.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders whose stop-losses sit under the obvious low and are filled at the worst price
+    mechanism: stop orders under a low give large players the liquidity to buy; once filled, a strong close back above the
+      recent highs shows the selling is done
+    fails_when: 'real breakdowns: the low breaks and price keeps going'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P09-SWEEP-MSS-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  program:
+    strategy: 9
+    name: Liquidity sweep + structure shift
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P09-SWEEP-MSS-V1@1.0'
+  hypothesis: 'A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of
+    the pullback: the trend resumes.'
+  timeframes:
+  - 4h
+  description: Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles
+    a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored).
+    Plain building blocks, no SMC detector.
+  params:
+    n: 20
+    k: 5
+  long:
+  - within(low < prev(lowest(low,{n})), {k})
+  - close > prev(highest(high,{k}))
+  - displacement_up
+  short:
+  - within(high > prev(highest(high,{n})), {k})
+  - close < prev(lowest(low,{k}))
+  - displacement_down
+  stop:
+    method: structure
+    long_level: lowest(low,{k})
+    short_level: highest(high,{k})
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop
+    is wide.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders whose stop-losses sit under the obvious low and are filled at the worst price
+    mechanism: stop orders under a low give large players the liquidity to buy; once filled, a strong close back above the
+      recent highs shows the selling is done
+    fails_when: 'real breakdowns: the low breaks and price keeps going'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
+- id: P10-CROWDING-FADE-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  program:
+    strategy: 10
+    name: Crowding fade (funding + open interest)
+    version: V1
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version
+    V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC 87,000 -> 81,900 drop 2026-10-02 to 2026-10-09 (Forward Test Program)'
+  hypothesis: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits
+    push price further the other way.
+  timeframes:
+  - 4h
+  description: 'Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing
+    below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).'
+  params:
+    fund_hi: 0.03
+    fund_lo: 0.01
+    oi_n: 6
+    oi_min: 3.0
+  long:
+  - funding_rate < -{fund_lo}
+  - oi_chg({oi_n}) > {oi_min}
+  - close > open
+  - close > prev(high)
+  short:
+  - funding_rate > {fund_hi}
+  - oi_chg({oi_n}) > {oi_min}
+  - close < open
+  - close < prev(low)
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding
+    can stay extreme for a long time.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - HIGH_VOL_RANGE
+    - WEAK_BEAR
+    - STRONG_BEAR
+    - EXPANSION
+    who_pays: over-leveraged traders on the crowded side who pay high funding and get liquidated
+    mechanism: when price turns against a crowded, leveraged side, stop-losses and liquidations force them out and push
+      price further
+    fails_when: strong trends where the crowd is right and funding stays high for weeks
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V1 - base version on 4H'
+  added: '2026-10-09'
+- id: P10-CROWDING-FADE-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  program:
+    strategy: 10
+    name: Crowding fade (funding + open interest)
+    version: V2
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version
+    V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P10-CROWDING-FADE-V1@1.0'
+  hypothesis: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits
+    push price further the other way.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: 'Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing
+    below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).'
+  params:
+    fund_hi: 0.03
+    fund_lo: 0.01
+    oi_n: 6
+    oi_min: 3.0
+  long:
+  - funding_rate < -{fund_lo}
+  - oi_chg({oi_n}) > {oi_min}
+  - close > open
+  - close > prev(high)
+  short:
+  - funding_rate > {fund_hi}
+  - oi_chg({oi_n}) > {oi_min}
+  - close < open
+  - close < prev(low)
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding
+    can stay extreme for a long time.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - HIGH_VOL_RANGE
+    - WEAK_BEAR
+    - STRONG_BEAR
+    - EXPANSION
+    who_pays: over-leveraged traders on the crowded side who pay high funding and get liquidated
+    mechanism: when price turns against a crowded, leveraged side, stop-losses and liquidations force them out and push
+      price further
+    fails_when: strong trends where the crowd is right and funding stays high for weeks
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V2 - V1''s rules on the faster timeframes 1H / 30M / 15M'
+  added: '2026-10-09'
+- id: P10-CROWDING-FADE-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  program:
+    strategy: 10
+    name: Crowding fade (funding + open interest)
+    version: V3
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version
+    V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P10-CROWDING-FADE-V1@1.0'
+  hypothesis: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits
+    push price further the other way.
+  timeframes:
+  - 4h
+  description: 'Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing
+    below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).'
+  params:
+    fund_hi: 0.03
+    fund_lo: 0.01
+    oi_n: 6
+    oi_min: 3.0
+  long:
+  - funding_rate < -{fund_lo}
+  - oi_chg({oi_n}) > {oi_min}
+  - close > open
+  - close > prev(high)
+  - dir_1d > 0
+  short:
+  - funding_rate > {fund_hi}
+  - oi_chg({oi_n}) > {oi_min}
+  - close < open
+  - close < prev(low)
+  - dir_1d < 0
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding
+    can stay extreme for a long time.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - HIGH_VOL_RANGE
+    - WEAK_BEAR
+    - STRONG_BEAR
+    - EXPANSION
+    who_pays: over-leveraged traders on the crowded side who pay high funding and get liquidated
+    mechanism: when price turns against a crowded, leveraged side, stop-losses and liquidations force them out and push
+      price further
+    fails_when: strong trends where the crowd is right and funding stays high for weeks
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V3 - V1 + one entry rule: the daily regime agrees (dir_1d) - the control that
+    shows whether the daily filter helps'
+  added: '2026-10-09'
+- id: P10-CROWDING-FADE-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: liquidity_reversal
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  program:
+    strategy: 10
+    name: Crowding fade (funding + open interest)
+    version: V4
+  source: 'Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version
+    V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'card: P10-CROWDING-FADE-V1@1.0'
+  hypothesis: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits
+    push price further the other way.
+  timeframes:
+  - 4h
+  description: 'Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing
+    below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).'
+  params:
+    fund_hi: 0.03
+    fund_lo: 0.01
+    oi_n: 6
+    oi_min: 3.0
+  long:
+  - funding_rate < -{fund_lo}
+  - oi_chg({oi_n}) > {oi_min}
+  - close > open
+  - close > prev(high)
+  short:
+  - funding_rate > {fund_hi}
+  - oi_chg({oi_n}) > {oi_min}
+  - close < open
+  - close < prev(low)
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 48
+  cooldown_bars: 0
+  known_weaknesses: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding
+    can stay extreme for a long time.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - HIGH_VOL_RANGE
+    - WEAK_BEAR
+    - STRONG_BEAR
+    - EXPANSION
+    who_pays: over-leveraged traders on the crowded side who pay high funding and get liquidated
+    mechanism: when price turns against a crowded, leveraged side, stop-losses and liquidations force them out and push
+      price further
+    fails_when: strong trends where the crowd is right and funding stays high for weeks
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-09): Forward Test Program V4 - V1 with a trailing ATR exit: targets 2R / 10R (50 / 50), after TP1 the
+    stop trails 3 ATR(22) behind the highest high / lowest low, no early exit rule, twice the time stop'
+  added: '2026-10-09'
