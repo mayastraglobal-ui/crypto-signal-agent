@@ -11902,3 +11902,10 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 14:30,BNB,15m,FVG_RETRACE,bear,,740.03,741.47,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-09 14:30,BNB,15m,FVG_FILLED,bear,,740.03,741.47,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
 2026-10-09 14:45,BNB,15m,OB_RETEST,bear,,742.0,743.38,,Silver Bullet,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-09 16:15,BTC,15m,SWEEP,bull,82822.0,,,0.193,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-09 15:30,BNB,15m,FVG,bear,,739.21,740.48,0.59,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 15:45,BNB,15m,FVG_RETRACE,bear,,739.21,740.48,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 15:45,BNB,15m,FVG_FILLED,bear,,739.21,740.48,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 16:00,BNB,15m,FVG,bull,,739.21,740.04,0.396,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 16:15,BNB,15m,FVG_RETRACE,bull,,739.21,740.04,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 16:15,SUI,15m,WEAK_BREAK,bull,1.064,,,0.135,,1h,TRANSITION,no displacement,smc-1.0,Binance
