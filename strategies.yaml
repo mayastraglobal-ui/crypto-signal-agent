@@ -21,6 +21,7 @@
 #                                       1W / 1D are context only, never block
 #                      intraday_reversal = (Forward Test Program) only in its regimes, never against a STRONG
 #                                       4H trend; 1W / 1D never block
+#                      intraday_fast  = (Forward Test Program V5) like intraday, the 4H part from the fast 4H trend
 #    regimes           allowed market regimes; outside them the strategy stands down.
 #                      Checked on 1D for 1D signals, 4H for 4H signals, 1H for 1H and below.
 #    long / short      conditions - ALL must be true on a CLOSED candle. Entry = next candle's open.
@@ -86,6 +87,7 @@
 #                                          first; unknown values make a rule false)
 #    h4_* (below 4H only)               -> the same SMC context from the newest CLOSED 4H candle,
 #                                          e.g. h4_bull_ob_low, h4_bull_ob_high, h4_range_low, h4_range_high
+#    dir_4h_fast                        -> (V5) +1 / -1 / 0: 4H close and EMA20 above / below the EMA50 (fast trend)
 #    dir_1w dir_1d dir_4h dir_1h        -> (Forward Test Program) that timeframe's regime direction as known at the
 #                                          candle: +1 bull, -1 bear, 0 neither; e.g. dir_1d > 0 = "the daily agrees"
 #    sess_asia sess_london sess_ny      -> 1 when the candle opens in that session (UTC 00-08 / 08-13 / 13-21)

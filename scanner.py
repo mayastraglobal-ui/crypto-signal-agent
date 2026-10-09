@@ -673,6 +673,10 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
         reg_hist[rtf] = pd.DataFrame({"close_time": df_r["close_time"].to_numpy(),
                                       "label": r_r["label"].to_numpy(dtype=object),
                                       "exp_dir": r_r["expansion_dir"].to_numpy(dtype=object)})
+    d4 = data.get((sym, "4h"))               # Forward Test Program V5: the fast 4H trend (EMA20 / EMA50 on 4H closes)
+    if d4 is not None and len(d4) and (quality.get((base, "4h")) or {}).get("state") != dq.UNSAFE:
+        reg_hist["4h_fast"] = pd.DataFrame({"close_time": d4["close_time"].to_numpy(),
+                                            "label": fast_trend(d4["close"]), "exp_dir": None})
     frames = {}
     for tf, (df, feats) in pairs.items():
         reg = {}                            # regime of every regime timeframe, as known at each candle
@@ -687,6 +691,20 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
     return dict(frames=frames, smc=smc_out, recs=recs, rg_series=rg_ser)
 
 
+def fast_trend(close):
+    """The fast trend of a candle series (Forward Test Program V5, operator request 2026-10-09): UP when the close is
+    above the EMA50 and the EMA20 above the EMA50, DOWN mirrored, else FLAT - the same test as htf_up / htf_down. On 4H
+    it calls a trend earlier than the regime label (6-9 Oct 2026: DOWN from 8 Oct 08:00 UTC; the 4H regime never said
+    bear). Returns an object array."""
+    c = pd.Series(np.asarray(close, dtype=float))
+    e20 = c.ewm(span=20, adjust=False, min_periods=20).mean()
+    e50 = c.ewm(span=50, adjust=False, min_periods=50).mean()
+    up, dn = ((c > e50) & (e20 > e50)).to_numpy(), ((c < e50) & (e20 < e50)).to_numpy()
+    out = np.where(up, "UP", np.where(dn, "DOWN", "FLAT")).astype(object)
+    out[e50.isna().to_numpy()] = None
+    return out
+
+
 def add_context(df, feats, reg, tf):
     """Forward Test Program building blocks: dir_1w / dir_1d / dir_4h / dir_1h = the regime direction of that
     timeframe as known at each candle (+1 bull, -1 bear, 0 neither; unknown = NaN, so a rule using it is false), and
@@ -699,6 +717,11 @@ def add_context(df, feats, reg, tf):
             new[f"dir_{rtf}"] = np.where(known, lc.directions(*reg[rtf]), np.nan).astype(float)
         else:
             new[f"dir_{rtf}"] = np.full(len(df), np.nan)
+    if "4h_fast" in reg:                    # +1 / -1 / 0 (unknown = NaN)
+        f = np.asarray(reg["4h_fast"][0], dtype=object)
+        new["dir_4h_fast"] = np.where(f == "UP", 1.0, np.where(f == "DOWN", -1.0, np.where(f == "FLAT", 0.0, np.nan)))
+    else:
+        new["dir_4h_fast"] = np.full(len(df), np.nan)
     new.update(sess.columns(df["open_time"].to_numpy(), df["high"].to_numpy(), df["low"].to_numpy(), TF_MS[tf]))
     return pd.concat([feats.drop(columns=[k for k in new if k in feats]), pd.DataFrame(new, index=feats.index)],
                      axis=1)

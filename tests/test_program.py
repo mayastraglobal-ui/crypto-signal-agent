@@ -43,11 +43,11 @@ class Cards(unittest.TestCase):
     def test_forty_cards_load_and_are_lab_cards(self):
         cards, problems = loaded()
         self.assertFalse({k: v for k, v in problems.items() if str(k).startswith("program")})
-        self.assertEqual(len(cards), 40)
+        self.assertEqual(len(cards), 47)                                    # 10 x V1-V4 + 7 V5 (2026-10-09)
         self.assertTrue(all(c["lab"] for c in cards))                       # never APPROVED from this file
         self.assertEqual(sorted({PG.number(c) for c in cards}), list(range(1, 11)))
-        self.assertEqual(sum(len(c["timeframes"]) for c in cards), 59)
-        self.assertEqual(len({c["id"] for c in cards}), 40)
+        self.assertEqual(sum(len(c["timeframes"]) for c in cards), 79)
+        self.assertEqual(len({c["id"] for c in cards}), 47)
 
     def test_each_version_differs_from_v1_in_one_way(self):
         by = {(c["program"]["strategy"], c["program"]["version"]): c for c in RAW}
@@ -67,6 +67,16 @@ class Cards(unittest.TestCase):
             for k in ("stop", "targets", "time_stop_bars", "timeframes", "gate"):
                 self.assertEqual(v3[k], v1[k], (n, k))
             self.assertNotIn("htf_up", " ".join(v1["long"]))                  # 4H + 1H come from the gate
+
+    def test_v5_is_v2_with_the_fast_4h_gate(self):
+        by = {(c["program"]["strategy"], c["program"]["version"]): c for c in RAW}
+        v5 = sorted(n for n, v in by if v == "V5")
+        self.assertEqual(v5, [n for n in range(1, 11) if by[(n, "V1")]["gate"] == "intraday"])
+        for n in v5:
+            a, b = by[(n, "V2")], by[(n, "V5")]
+            self.assertEqual(b["gate"], "intraday_fast")
+            diff = [k for k in SP.LOGIC_KEYS if a.get(k) != b.get(k)]
+            self.assertEqual(diff, ["gate"], n)
 
     def test_program_block_is_required_and_the_brain_may_not_write_the_file(self):
         c = copy.deepcopy(RAW[0])
@@ -118,7 +128,31 @@ class Gates(unittest.TestCase):
         self.assertEqual(gl.tolist(), [True, False, True])           # 1W / 1D STRONG_BEAR do not block
         self.assertEqual(gs.tolist(), [True, True, False])
 
+    def test_fast_4h_gate_reads_the_ema_trend_not_the_regime_label(self):
+        s = dict(gate="intraday_fast", regimes=list(RG.LABELS))
+        reg = self.reg(**{"4h": ["TRANSITION", "UNCLEAR", "WEAK_BULL"], "1h": ["STRONG_BEAR", "STRONG_BEAR", "WEAK_BULL"],
+                          "4h_fast": ["DOWN", "FLAT", "UP"], "1d": ["STRONG_BULL"] * 3})
+        gl, gs, *_ = LC.gate_arrays(s, "15m", reg, 3)
+        self.assertEqual(gs.tolist(), [True, False, False])          # 4H label TRANSITION, fast trend DOWN: short ok
+        self.assertEqual(gl.tolist(), [False, False, True])
+        self.assertFalse(LC.gate_arrays(dict(s, gate="intraday"), "15m", reg, 3)[1][0])   # the label gate said no
+        self.assertFalse(LC.gate_arrays(s, "15m", {k: v for k, v in reg.items() if k != "4h_fast"}, 3)[1].any())
+
+    def test_fast_trend_is_the_htf_ema_test(self):
+        up = np.linspace(100, 200, 120)
+        f = sc.fast_trend(np.r_[up, up[::-1]])
+        self.assertIsNone(f[10])                                      # EMA50 not ready yet
+        self.assertEqual(f[119], "UP")
+        self.assertEqual(f[-1], "DOWN")
+        n = 3
+        df = pd.DataFrame(dict(open_time=np.arange(n) * H, high=1.0, low=1.0))
+        reg = {"4h_fast": (np.array(["UP", "FLAT", None], dtype=object), np.array([None] * n, dtype=object))}
+        g = sc.add_context(df, pd.DataFrame(index=df.index), reg, "1h")
+        self.assertEqual(g["dir_4h_fast"].tolist()[:2], [1.0, 0.0])
+        self.assertTrue(np.isnan(g["dir_4h_fast"].iloc[2]))
+
     def test_new_gates_are_known(self):
+        self.assertIn("intraday_fast", SP.GATES)
         self.assertIn("intraday", SP.GATES)
         self.assertIn("intraday_reversal", SP.GATES)
 
@@ -261,7 +295,7 @@ class Batches(unittest.TestCase):
         run, skipped = PG.select(cards + [dict(id="X", version="1.0")], [1])
         self.assertEqual({PG.number(c) for c in run if PG.is_program(c)}, {1})
         self.assertIn("X", [c["id"] for c in run])                       # the library always runs
-        self.assertEqual(len(skipped), 36)
+        self.assertEqual(len(skipped), 42)                                 # 47 cards - strategy 1 (V1-V5)
 
     def test_carried_cells_keep_their_results_and_take_the_registry_status(self):
         cards = self.cards()

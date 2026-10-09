@@ -33,6 +33,7 @@ and targets, instantly.
 | 2026-10-06 | Journal sync: the operator's trades reach GitHub (branch `journal`), plan result of every alert, `/result`, "Your own trades" in the weekly email |
 | 2026-10-08 | Upgrade 10 "Market weather": `engine/weather.py`, `reports/market_weather.json`, Telegram `/weather`, the 08:20 briefing email, Claude's fact sheets |
 | 2026-10-09 | Forward Test Program PR 1 "Strategy lab": 10 strategies × 4 versions (`strategies_program.yaml`), the 4H + 1H gate (1W / 1D context only), 5 years of 30m / 15m history, nightly batches, `reports/program.md` (per coin, after and before fees) - `docs/PROGRAM.md` |
+| 2026-10-09 | Forward Test Program V5: the fast 4H trend (4H EMA20 / EMA50) gate on the 7 trend strategies' faster timeframes (`gate: intraday_fast`) |
 | 2026-10-09 | Forward Test Program PR 2 "Signal Center": 🔵 TEST alerts (positive pairs, 5m check, merged, ⭐, ⚠️ vs daily, max 10 a day), new alert layout with $ and ℹ️ Details, `/tests on|off`, demo book, `/weather` in Beijing time, TEST setups recorded on GitHub, `7_replay_test_alerts.bat` |
 
 ## The Forward Test Program (agreed 2026-10-09, `docs/PROGRAM.md`)

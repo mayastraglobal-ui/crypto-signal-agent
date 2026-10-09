@@ -202,9 +202,10 @@ def details_text(a, card):
             out += ["", f"<b>Rules ({side}, all true on a closed candle)</b>"]
             out += [f"• <code>{html.escape(str(r))}</code>" for r in rules]
         gate = card.get("gate")
-        if gate in ("intraday", "intraday_reversal"):
-            out.append("• market gate: " + ("4H and 1H trend the same way" if gate == "intraday" else
-                                            "its range regimes, never against a strong 4H trend")
+        if gate in ("intraday", "intraday_reversal", "intraday_fast"):
+            out.append("• market gate: " + {"intraday": "4H and 1H trend the same way",
+                                            "intraday_fast": "the fast 4H trend (EMA20 / EMA50) and the 1H agree",
+                                            "intraday_reversal": "its range regimes, never against a strong 4H trend"}[gate]
                        + " (1W / 1D are context only)")
         e = card.get("edge") or {}
         if e.get("mechanism"):
