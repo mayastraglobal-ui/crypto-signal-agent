@@ -11530,3 +11530,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 01:00,SUI,15m,FVG_RETRACE,bear,,1.0476,1.0512,,Asia,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-09 01:30,SUI,15m,FVG_FILLED,bear,,1.0476,1.0512,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-09 01:45,SUI,15m,SWEEP,bear,1.0566,,,0.241,Asia,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-09 02:00,BTC,30m,BOS,bull,81948.03,,,0.086,Asia,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-09 02:00,ETH,1h,SWEEP,bear,2484.0,,,0.114,Asia,4h,EXPANSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-09 02:00,ETH,30m,SWEEP,bear,2484.0,,,0.178,Asia,1h,STRONG_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-09 02:15,SOL,15m,FVG_RETRACE,bear,,109.8,110.03,,Asia,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-09 02:15,ZEC,15m,WEAK_BREAK,bull,1195.87,,,0.606,Asia,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-09 02:15,ZEC,15m,OB_RETEST,bear,,1203.41,1210.94,,Asia,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-09 02:15,ZEC,15m,FVG_FILLED,bear,,1171.6,1203.41,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-09 02:00,XRP,30m,SWEEP,bear,1.3926,,,0.245,Asia,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-09 02:00,SUI,30m,SWEEP,bear,1.0566,,,0.137,Asia,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
