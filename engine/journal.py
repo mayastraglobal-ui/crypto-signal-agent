@@ -153,8 +153,26 @@ def review(rows, now_ms, days=30):
                         your_avg_r=s["yours"]["avg_r"], your_n=s["yours"]["n"]))
     a, r = _group(ts), _group(recent)
     last = max((x.get("time_utc") or "" for x in rows), default="") or None
-    return dict(last_entry_utc=last, days=days, all=a, recent=r, per_strategy=per,
+    tests = {}                                      # PR 3: the 🔵 TEST alerts' plan results (5m-confirmed, before fees)
+    for t in ts:
+        if t.get("label") == "TEST" and t.get("plan_r") is not None:
+            x = tests.setdefault(t["strategy"], dict(n=0, sum=0.0))
+            x["n"] += 1
+            x["sum"] += float(t["plan_r"])
+    tests = {k: dict(n=x["n"], avg_r=round(x["sum"] / x["n"], 3)) for k, x in sorted(tests.items())}
+    return dict(last_entry_utc=last, days=days, all=a, recent=r, per_strategy=per, tests=tests,
                 findings=findings(a) or ([] if ts else ["No alert in your journal yet."]))
+
+
+DECISION_COLS = ["time_utc", "week", "action", "key", "coin"]
+
+
+def read_decisions(text):
+    """journal/decisions.csv (the operator's taps under the weekly review: promote / unpromote) -> [dict]."""
+    if not text:
+        return []
+    return [dict(r) for r in csv.DictReader(io.StringIO(text))
+            if r.get("action") in ("promote", "unpromote") and r.get("key") and r.get("coin")]
 
 
 def lines(rv):

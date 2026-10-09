@@ -459,7 +459,7 @@ def _stage(results, stage):
 
 def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboard_url, pages_base=None, repo_url=None,
            registry_text=None, changelog_text=None, merged=None, lessons_text=None, sources_text=None, feeds=None,
-           study=None, tests=None, counts_hist=None, journal=None):
+           study=None, tests=None, counts_hist=None, journal=None, program=None):
     """The weekly report of the 7 days ending `now` (UTC datetime). merged = [(date, PR title)]; counts_hist =
     research_counts.json (the "vs last week" line); journal = reports/journal_review.json (journal sync) or None."""
     rep = rep or {}
@@ -512,7 +512,22 @@ def weekly(rep, research, lab_cards, queue_text, now, summary, page_url, dashboa
                           events=" · ".join(f"{e.get('type') or em.short_event(e.get('name'))} "
                                             f"{em.bj(e.get('start_utc'), '%a %d')}" for e in ev) or None),
                 summary=summary, page_url=page_url, dashboard_url=dashboard_url,
-                versus=versus(counts_hist, now.date().isoformat(), 7), journal=journal_facts(journal))
+                versus=versus(counts_hist, now.date().isoformat(), 7), journal=journal_facts(journal),
+                program=program_facts(program))
+
+
+def program_facts(rv):
+    """PR 3: the weekly email's "Forward Test Program" part from reports/weekly_review.json (None = not built yet)."""
+    if not rv or not rv.get("totals"):
+        return None
+    t = rv["totals"]
+    bad = [s["text"] for s in rv.get("system") or [] if s.get("ok") is False]
+    return dict(test=t["TEST"], paper=t["PAPER"],
+                promote=[f"{p['key'].split('@')[0]} {p['tf']} on {p['coin']}: {p['confidence']}"
+                         for p in rv.get("promote") or []],
+                demoted=[f"{d['key'].split('@')[0]} {d['key'].split('|')[1]} on {d['coin']}"
+                         for d in rv.get("demoted") or []],
+                ideas=list(rv.get("ideas") or [])[:4], system="all parts ran" if not bad else "; ".join(bad))
 
 
 def journal_facts(rv):

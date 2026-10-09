@@ -53,6 +53,7 @@ from engine import ideas
 from engine import lifecycle as lc
 from engine import playbook as pbk
 from engine import program as prog
+from engine import weekly_review as wrv
 from engine import regime as rg
 from engine import memory as mem
 from engine import research as rs
@@ -64,6 +65,15 @@ CACHE = os.path.join(sc.ROOT, "data", "history")
 TRIALS = os.path.join(sc.MEMORY, "trials.csv")
 SHADOW = os.path.join(sc.MEMORY, "family_gates_shadow.csv")
 log = sc.log
+
+
+def load_json(path):
+    """A JSON file, or None when it is missing or unreadable."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
 
 
 def stressed(cfg, x):
@@ -646,6 +656,12 @@ def main():
         ev["stress_2x"] = rs.short(rs.stats([t for tr in stress2.get(k3, {}).values() for t in tr]))
     bias_found = {k: v for k, v in (bias_out or {}).get("findings", {}).items()}
     logdf = sc.load_log()
+    # PR 3: the operator's promotions (taps under the weekly review / config.yaml -> promotions); the cells that were
+    # PAPER only because of a promotion until now (reports/promotions_state.json)
+    WR = wrv.settings(cfg.get("weekly_review"))
+    promo_state_path = os.path.join(sc.REPORTS, "promotions_state_offline.json" if args.offline
+                                    else "promotions_state.json")
+    prev_via = set((load_json(promo_state_path) or {}).get("via_promotion") or [])
     fwd = sc.forward_stats(logdf)
     paper = paper_results(logdf)
     AP = ap.settings(cfg.get("approval"))
@@ -706,8 +722,14 @@ def main():
                                               int(prev.get("failed_runs") or 0), R_cell)
         AP_c = dict(AP, min_paper_signals=max(AP["min_paper_signals"], int(((cfg.get("playbook") or {}).get(
             "validation") or {}).get("min_paper_signals", 0)))) if s.get("gate") == "playbook" else AP
-        status, note = approval_step(ck, status, note, rec, ev, approvals, AP_c, approval_warnings, eligible_cells,
-                                     bool(s.get("lab")))
+        if ck in prev_via and not (base_status == "VALIDATION" and paper_ok):
+            # PAPER by the operator's promotion only: LIVE also needs the full pass bar - never eligible from here
+            if approvals.get(ck):
+                approval_warnings.append(f"{ck}: approval listed, but this cell is PAPER only through a promotion - "
+                                         "LIVE also needs the full backtest pass bar")
+        else:
+            status, note = approval_step(ck, status, note, rec, ev, approvals, AP_c, approval_warnings, eligible_cells,
+                                         bool(s.get("lab")))
         bias_txt = bias.tag("; ".join(bias.summary(bias_found.get(f"{sid}@{ver}", []))[:3])) or next(
             (c["bias"] for k2, c in registry["cells"].items() if k2.split("|")[0] == f"{sid}@{ver}"
              and bias.sticky(c.get("bias"))), "")
@@ -763,11 +785,46 @@ def main():
                            findings={k: v for k, v in sorted(found.items()) if v not in ("no setup", "no candles")},
                            strategies_checked=len(found)))
 
+    # ---------- PR 3: promotions to PAPER (the operator's tap) and demotions (by the paper record) ----------
+    jrv = load_json(os.path.join(sc.REPORTS, "journal_review.json")) or {}
+    number_of = {sspec.key(c): prog.number(c) for c in program_cards}
+    promos = [p for p in wrv.parse_promotions(cfg.get("promotions"), jrv.get("decisions"))
+              if p["key"].split("|")[0] in number_of]               # program cards only
+    promo_active, promo_demoted, promo_refused = wrv.active_promotions(promos, logdf, number_of, WR)
+
+    def status_of(ck):
+        sid, rest = ck.split("@", 1)
+        k3 = (sid, rest.split("|")[0], rest.split("|")[1])
+        return results.get(k3) or (registry["cells"].get(ck) or {}).get("status")
+    biased = {ck for ck, c in registry["cells"].items() if bias.sticky(c.get("bias"))} | \
+        {ck for ck, c in cells.items() if c.get("bias")}
+    to_paper, release, via = wrv.promotion_moves(promo_active, prev_via, status_of, biased)
+    promo_changes = []
+    for ck in to_paper + release:
+        sid, rest = ck.split("@", 1)
+        ver, tf = rest.split("|")
+        new = "PAPER_TRADING" if ck in to_paper else (cells[ck]["base_status"] if ck in cells else "BACKTESTING")
+        why = ("promoted to PAPER by the operator (weekly review): PAPER only on " + ", ".join(promo_active[ck])
+               if ck in to_paper else "promotion ended (demoted by its paper record, or taken back) - back to testing")
+        if (sid, ver, tf) in results:
+            results[(sid, ver, tf)] = new
+            cells[ck].update(status=new, note=why)
+        elif ck in registry["cells"]:
+            old = registry["cells"][ck].get("status")
+            registry["cells"][ck].update(status=new, since_utc=now_txt)
+            promo_changes.append(dict(key=f"{sid}@{ver}", tf=tf, old=old, new=new, why=why))
+    log(f"Promotions: {len(promo_active)} cell(s) in force ({len(to_paper)} new, {len(release)} released), "
+        f"{len(promo_demoted)} demoted, {len(promo_refused)} not applied")
+    with open(promo_state_path, "w") as f:              # read by the hourly scan and the live watcher
+        json.dump(dict(updated_utc=now_txt, active={k: promo_active[k] for k in via}, via_promotion=via,
+                       demoted=promo_demoted, refused=promo_refused), f, indent=1)
+
     tested = [x for x in strategies if any(k[0] == x["id"] and k[1] == x["version"] for k in per)]
     registry, new_exp, changes = lc.update(registry, tested, fps, results, now_txt)
     for c in changes:
         cell = cells[f"{c['key']}|{c['tf']}"]
         c["why"] = cell["note"] or "; ".join(cell["reasons"] + cell["paper_gate_failed"])
+    changes += promo_changes
     for ck, c in cells.items():
         ev, wf = c["evidence"], c["evidence"]["walk_forward"]
         registry["cells"][ck].update(

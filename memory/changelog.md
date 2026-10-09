@@ -640,3 +640,20 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Engine**: `scanner.fast_trend` (UP / DOWN / FLAT from closed 4H candles) as `reg["4h_fast"]` in `prepare_coin` and the building block `dir_4h_fast`; gate `intraday_fast` (`engine/lifecycle.py`) = the 4H + 1H gate with the 4H part from the fast trend. 1W / 1D still never block.
 - **Cards** (appended to `strategies_program.yaml`; the 40 existing cards are byte-for-byte unchanged): P01 / P02 / P03 / P04 / P07 / P08 / P09-V5 = their V2 with ONE change, the gate (the range / fade strategies 5, 6, 10 do not use the 4H + 1H gate). 7 cards, 20 strategy / timeframe tests, backtested with their strategy in the nightly rotation; the trials counter grows by 40 rows (luck bar about 3.64 once all are tested).
 - **Replay** (BTC, 14 days, V5 listed with V2's numbers for the check only): 15 V5 short setups on 8-9 Oct (none before); with the 5m check 4 alerts, all stopped (-5.0R, the 9 Oct bounce); without it -0.66R over 16. No conclusion from one coin and two weeks. Tests: tests/test_program.py.
+
+## 2026-10-09 · Claude (BUILD mode, operator request) · Forward Test Program PR 3: the weekly review and promotions
+- **Why** (operator plan 2026-10-09): every week, see which TEST strategies work live per coin (after and before fees, by market type, with honest confidence) and move the best to PAPER with one tap; weak ones go back by themselves.
+- **Report** (`engine/weekly_review.py`, `config.yaml` -> `weekly_review`): the hourly scan writes `reports/weekly_review.json|md` (final Sunday from 04:00 UTC) from the signals log (TEST / PAPER rows, new column `fees_r`), `reports/program.json`, `reports/journal_review.json` (the watcher's 5m-confirmed TEST plan results, the taps), the research counts; promotion candidates (10+ live setups, > 0R after fees, positive backtest on the coin; max 5 in paper, one per strategy per coin), demotions, ideas for new versions (losing market types, fees, the 5m check), a system check.
+- **Promotions**: `config.yaml -> promotions` and the operator's taps (`journal/decisions.csv` on the branch `journal`, uploaded by the watcher with journal sync; `journal_review.py` reads it). The research run applies them (`reports/promotions_state.json`): PAPER only on the promoted coins (`signal_center.test_list` / `scan_stage`, the watcher), automatic demotion when the last 10 paper signals average below 0R, a BIASED cell never. A cell PAPER only through a promotion is never eligible for approval from that - LIVE still needs the full pass bar.
+- **Telegram**: the watcher sends the final review once a week with a "🟡 Promote" button per candidate (no journal sync: it sends the config line instead); `/review`. Weekly email: a "Forward Test Program" part. Claude: `brain_pack.py` daily / weekly include the review; `tasks/weekly_research.md` step 7b.
+- Unchanged: gates, costs, the trials bar, the pass rules, approvals. Tests: tests/test_weekly_review.py.
+
+## 2026-10-09 · Operator + Claude · Telegram times in Beijing time everywhere
+- Operator: "telegram weather still showing UTC time". `/weather` was already converted in PR 2 (`engine/weather.py`
+  `beijing()`), but its text is written by GitHub's hourly scan, and the last scan before the merge (17:18 UTC) still
+  used the old code - the first scan after the merge writes Beijing time.
+- The other Telegram texts still showed UTC: the alert's "Candle closed / sent" line, the limit "cancel at" time,
+  `/status` (last market check, paused until), `/pause`, the 5m check "CONFIRMED on the ..." line, the follow-up
+  messages ("5m candle closed ...") and the `/trades` time stop. All now in Beijing time (`engine/live.py` `bj()`).
+  `/status` "Trade alerts sent today" now says the day starts 08:00 Beijing (it counts the UTC day, unchanged).
+- Display only: no rule, limit or day boundary changed.

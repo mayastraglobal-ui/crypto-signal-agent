@@ -50,19 +50,25 @@ def qualifies(row, S):
     return not (tn >= S["test_min_trades"] and ta is not None and float(ta) < 0)
 
 
-def test_list(program, reg_cells, S):
+def test_list(program, reg_cells, S, promoted=None):
     """{'id@ver|tf': {coin: stats}} - the program cells x coins that may send TEST alerts.
-    program: reports/program.json (or None); reg_cells: the registry's cells (status, gates_failed)."""
+    program: reports/program.json (or None); reg_cells: the registry's cells (status, gates_failed);
+    promoted: {'id@ver|tf': [coins]} promoted to PAPER by the operator (PR 3) - PAPER only on those coins, so the
+    cell's other positive coins stay TEST."""
     out = {}
     if not S.get("enabled") or not program:
         return out
     for ck, row in (program.get("cells") or {}).items():
         cell = reg_cells.get(ck) or {}
         st = cell.get("status") or row.get("status")
-        if st in OWN_LABEL or st == "RETIRED" or "LIVE results bad" in str(cell.get("gates_failed") or ""):
+        promo = (promoted or {}).get(ck)
+        if (st in OWN_LABEL and promo is None) or st == "RETIRED" or \
+                "LIVE results bad" in str(cell.get("gates_failed") or ""):
             continue
         coins = {}
         for coin, x in (row.get("coins") or {}).items():
+            if promo is not None and coin in promo:
+                continue                                   # 🟡 PAPER on this coin (promoted)
             if qualifies(x, S):
                 coins[coin] = dict(n=int(x["n"]), win_rate=float(x.get("win_rate") or 0), avg_r=float(x["avg_r"]),
                                    test_avg_r=x.get("test_avg_r"), score=score(x["n"], x["avg_r"]),
@@ -72,10 +78,12 @@ def test_list(program, reg_cells, S):
     return out
 
 
-def scan_stage(status, tests, cell_key, coin):
+def scan_stage(status, tests, cell_key, coin, promoted=None):
     """The hourly scan's record stage of one signal: (stage, TEST stats). VALIDATION / PAPER / APPROVED keep their
-    stage; a TEST pair (positive on this coin) is recorded as TEST; anything else is not recorded (None, None)."""
-    if status in ("VALIDATION", "PAPER_TRADING", "APPROVED"):
+    stage - except a cell promoted to PAPER by the operator (PR 3), which is PAPER only on its promoted coins; a TEST
+    pair (positive on this coin) is recorded as TEST; anything else is not recorded (None, None)."""
+    promo = (promoted or {}).get(cell_key)
+    if status in ("VALIDATION", "PAPER_TRADING", "APPROVED") and not (promo is not None and coin not in promo):
         return status, None
     tst = ((tests or {}).get(cell_key) or {}).get(coin)
     return ("TEST", tst) if tst is not None else (None, None)

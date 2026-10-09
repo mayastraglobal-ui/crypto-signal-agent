@@ -882,6 +882,19 @@ def weekly(w):
                                 ("Yours", signed(j["yours"], digits=2), f"{val(j['yours_n'])} results"
                                  + (f" · gap {signed(j['gap'], digits=2)}" if j.get("gap") is not None else ""))])),
             ("bullets", j.get("findings") or ["No finding yet: each needs 5+ trades."])]
+    pg = w.get("program")
+    if pg:                                           # PR 3: the Forward Test Program's weekly review
+        t, p = pg["test"], pg["paper"]
+        blocks += [("label", "Forward Test Program · weekly review (reports/weekly_review.md)"),
+                   ("tiles", ("grey", [("TEST week", val(t["week_n"]), signed(t["week_total_r"])),
+                                       ("TEST total", val(t["n"]), signed(t["avg_r"], digits=2) + " a trade"
+                                        if t["avg_r"] is not None else DASH),
+                                       ("PAPER week", val(p["week_n"]), signed(p["week_total_r"])),
+                                       ("System", "✓" if pg["system"] == "all parts ran" else "!",
+                                        pg["system"][:40])])),
+                   ("bullets", ([f"Promote (tap in Telegram): {x}" for x in pg["promote"]] or
+                                ["Nothing ready for PAPER yet (10+ live TEST setups, positive after fees)."])
+                    + [f"Back to TEST: {x}" for x in pg["demoted"]] + [f"Idea: {x}" for x in pg["ideas"]])]
     if close:
         blocks.append(("bars", close[:3]))
     blocks += [("section", "3 · Learned this week"),

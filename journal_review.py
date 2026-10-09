@@ -25,14 +25,15 @@ OUT_JSON = os.path.join(ROOT, "reports", "journal_review.json")
 OUT_MD = os.path.join(ROOT, "reports", "journal_review.md")
 BRANCH = "journal"
 PATH = "journal/my_trades.csv"
+DECISIONS = "journal/decisions.csv"      # PR 3: the operator's taps under the weekly review (promote / unpromote)
 
 
-def fetch(root=ROOT):
+def fetch(root=ROOT, path=PATH):
     """The journal text from origin/journal, or None when the branch or the file is not there."""
     git = lambda *a: subprocess.run(["git", "-C", root, *a], capture_output=True, text=True)  # noqa: E731
     if git("fetch", "--quiet", "--depth", "1", "origin", BRANCH).returncode != 0:
         return None
-    r = git("show", f"FETCH_HEAD:{PATH}")
+    r = git("show", f"FETCH_HEAD:{path}")
     return r.stdout if r.returncode == 0 else None
 
 
@@ -62,6 +63,7 @@ def main():
         return 0
     rows = jr.read(text)
     rv = jr.review(rows, int(time.time() * 1000))
+    rv["decisions"] = jr.read_decisions(None if args.file else fetch(path=DECISIONS))
     write(rv)
     print("\n".join(jr.lines(rv)))
     return 0

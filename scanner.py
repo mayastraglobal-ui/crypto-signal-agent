@@ -54,6 +54,7 @@ from engine import flow_history as fh
 from engine import scalp_playbook as spb
 from engine import sessions as sess
 from engine import signal_center as scx
+from engine import weekly_review as wrv
 from engine import trend4h as t4
 from engine import regime_fit as rfit
 from engine import memory as mem
@@ -1342,7 +1343,8 @@ LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "ent
             "risk_blocks",                                                                  # Phase 11 risk engine
             "entry_type", "limit_bars",                                                     # step 2B limit entries
             "inval_level",                                                                  # step 3 invalidation
-            "market_type"]                                          # Forward Test Program: the market at the signal
+            "market_type",                                          # Forward Test Program: the market at the signal
+            "fees_r"]                                               # PR 3: fees + funding of a closed signal, in R
 TEXT_COLS = ["closed_time_utc", "version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags",
              "state", "state_note", "entry_time_utc", "sim_tf", "confirm_5m_utc", "smc_5m", "close_reason",
              "warnings", "next_action", "risk_blocks", "entry_type", "market_type"]
@@ -1555,6 +1557,7 @@ def update_forward(logdf, data, quality, feed, cfg, cards=None, rg_series=None, 
             _event(events, now_txt, row, pos.ACTIVE, pos.TP1_HIT, None, "TP1 reached - stop moved to breakeven")
         logdf.at[i, "status"] = res["reason"]
         logdf.at[i, "result_r"] = round(res["r"], 3)
+        logdf.at[i, "fees_r"] = round(float(res.get("fees_r", np.nan)), 3)      # result before fees = r + fees_r
         logdf.at[i, "closed_time_utc"] = fmt_ms(after["close_time"].iloc[res["exit_idx"]])
         logdf.at[i, "mae_r"], logdf.at[i, "mfe_r"] = round(res["mae_r"], 3), round(res["mfe_r"], 3)
         logdf.at[i, "state"], logdf.at[i, "close_reason"] = pos.CLOSED, pos.close_reason(res["reason"])
@@ -2539,19 +2542,15 @@ def main():
     # the Signal Center (Forward Test Program PR 2): program cells positive on a coin in the 5-year backtest are
     # recorded as stage TEST (silent tracking for the weekly review) - never emailed, never in the risk book
     SC = scx.settings(cfg.get("signal_center"))
-    p_path = os.path.join(REPORTS, "program_offline.json")
-    if not (args.offline and os.path.exists(p_path)):
-        p_path = os.path.join(REPORTS, "program.json")
-    try:
-        with open(p_path, encoding="utf-8") as f:
-            tests = scx.test_list(json.load(f), registry["cells"], SC)
-    except (OSError, ValueError):
-        tests = {}
+    program_rep = read_json("program", args.offline)
+    promo_state = read_json("promotions_state", args.offline) or {}
+    promoted = promo_state.get("active") or {}          # PR 3: PAPER by the operator's tap - only on these coins
+    tests = scx.test_list(program_rep, registry["cells"], SC, promoted)
     plans, blocked = [], []
     for sgl in live:
         key = (sgl["strategy"], sgl["version"], sgl["tf"])
         # only versions that passed the backtest gate - or a TEST pair (positive on this coin in the program results)
-        stage, tst = scx.scan_stage(verdict.get(key), tests, f"{key[0]}@{key[1]}|{key[2]}", sgl["coin"])
+        stage, tst = scx.scan_stage(verdict.get(key), tests, f"{key[0]}@{key[1]}|{key[2]}", sgl["coin"], promoted)
         if stage is None:
             continue
         if sgl["coin"] not in signal_set:      # research-only coin: backtest only, never a signal
@@ -2752,6 +2751,7 @@ def main():
     daily = mail.daily(view["signal"], snap, watching, [p for p in plans if p["stage"] != "TEST"], book, btc, fg,
                        sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
+    weekly_review(started, logdf, registry, cfg, args.offline)          # PR 3: the Forward Test Program review
     weekly = None
     if digest.is_weekly_time(started):
         _, card = report_card(started, research, logdf, sys_state)
@@ -3067,6 +3067,40 @@ def read_text(path):
         return None
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
+
+
+def read_json(name, offline=False):
+    """reports/<name>.json (offline runs prefer reports/<name>_offline.json), or None."""
+    for path in ([os.path.join(REPORTS, f"{name}_offline.json")] if offline else []) + [os.path.join(REPORTS,
+                                                                                                    f"{name}.json")]:
+        try:
+            with open(path, encoding="utf-8") as f:
+                return json.load(f)
+        except (OSError, ValueError):
+            continue
+    return None
+
+
+def weekly_review(now, logdf, registry, cfg, offline):
+    """PR 3: reports/weekly_review.json / .md - the program's live results, promotion candidates, demotions, ideas,
+    5m comparison and system check (engine/weekly_review.py). Written every hour (final on Sunday from 04:00 UTC,
+    when the live watcher sends it to Telegram). Never fatal."""
+    try:
+        st = read_json("promotions_state", offline) or {}
+        rv = wrv.build(now, logdf, read_json("program", offline), registry["cells"], st.get("active") or {},
+                       st.get("demoted"), st.get("refused"), read_json("journal_review", False),
+                       read_json("research_counts", offline), now.strftime("%Y-%m-%d %H:%M"),
+                       wrv.settings(cfg.get("weekly_review")))
+    except Exception as e:
+        log(f"weekly review not built ({type(e).__name__}: {e})")
+        return None
+    sfx = "_offline" if offline else ""
+    rv["telegram"] = wrv.telegram(rv)
+    with open(os.path.join(REPORTS, f"weekly_review{sfx}.json"), "w") as f:
+        json.dump(rv, f, indent=1, default=float)
+    with open(os.path.join(REPORTS, f"weekly_review{sfx}.md"), "w") as f:
+        f.write(wrv.render(rv))
+    return rv
 
 
 def report_card(now, research, logdf, data_state=None):

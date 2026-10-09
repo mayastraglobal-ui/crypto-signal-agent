@@ -141,13 +141,13 @@ def _head(t):
 def text(t, ev):
     """Telegram text (HTML) of one follow-up event: what happened and what to do now."""
     px = lambda x: lv.fmt_px(x, t["entry"])                                          # noqa: E731
-    when = f"(5m candle closed {lv.utc(ev['at_ms'])})"
+    when = f"(5m candle closed {lv.bj(ev['at_ms'])})"
     if ev["kind"] == "fill":
         return (f"✅ Limit filled · {_head(t)}\nPrice reached your limit {px(t['entry'])}. Set the stop-loss "
                 f"<b>{px(t['stop'])}</b> and the TPs on OKX now if you haven't. {when}")
     if ev["kind"] == "trail":
         return (f"🔁 Trail the stop · {_head(t)}\nMove the stop-loss to <b>{px(ev['px'])}</b> (behind the last 5m swing / "
-                f"EMA9). (5m candle closed {lv.utc(ev['at_ms'])})")
+                f"EMA9). (5m candle closed {lv.bj(ev['at_ms'])})")
     if ev["kind"] == "expired":
         return (f"⌛ Limit not filled · {_head(t)}\nPrice did not come back to {px(t['entry'])} in time → "
                 f"<b>cancel the limit order</b> on OKX. No trade. {when}")
@@ -180,7 +180,7 @@ def summary(t):
     px = lambda x: lv.fmt_px(x, t["entry"])                                          # noqa: E731
     state = ("limit waiting for a fill" if not t.get("filled", True) else
              "no target yet" if t["hit"] == 0 else f"TP{t['hit']} hit")
-    end = (f", time stop {dt.datetime.fromtimestamp(t['end_ms'] / 1000, dt.timezone.utc):%d %b %H:%M} UTC"
+    end = (f", time stop {dt.datetime.fromtimestamp(t['end_ms'] / 1000, lv.BJ):%d %b %H:%M} Beijing"
            if t.get("end_ms") else "")
     return (f"• {side} {t['coin']} {t['tf']} ({t['label']}) · entry {px(t['entry'])} · stop {px(t['stop'])} · "
             f"{state}{end}")

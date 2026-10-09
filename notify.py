@@ -540,7 +540,8 @@ def weekly_mail(rep, now):
                   mem("strategy_registry.csv"), mem("changelog.md"), merged_prs(), mem("lessons.md"),
                   mem("research_sources.md"), load(os.path.join(REPORTS, "feeds.json"), {}), study(), tests,
                   load(os.path.join(REPORTS, "research_counts.json"), []),
-                  load(os.path.join(REPORTS, "journal_review.json"), None))
+                  load(os.path.join(REPORTS, "journal_review.json"), None),
+                  load(os.path.join(REPORTS, "weekly_review.json"), None))
     return em.weekly(w)
 
 
