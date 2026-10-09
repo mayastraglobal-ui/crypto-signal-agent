@@ -508,3 +508,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-09 16:20 UTC
 - **EXCLUDED** RLC - 7-day average volume $18M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.127% > 0.1%; order book too thin: $4k within 1% (need $250k)
+
+## 2026-10-09 20:19 UTC
+- **LEAVE** SUI - outside the top 7 for 2 runs in a row (now #8)
+- **JOIN** UNI - in the top 7 for 2 runs in a row (now #7)
