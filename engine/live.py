@@ -7,6 +7,7 @@ The hourly GitHub scan stays the official record (signals log, emails, risk book
 closed, which strategy versions may alert, the alert text and the duplicate guard. No internet, no files.
 """
 import datetime as dt
+import html
 
 from engine import timeframes as tfm
 
@@ -77,38 +78,81 @@ def hold_text(tf, bars):
     return f"{int(bars)} candles (~{mins // 60}h{mins % 60:02d}m)" if mins >= 60 else f"{int(bars)} candles (~{mins}m)"
 
 
+LABEL_ICON = {"LIVE": "🟢", "PAPER": "🟡", "TEST": "🔵"}
+LABEL_NOTE = {
+    "PAPER": "🟡 PAPER = practice only: this strategy passed the backtest and is being proven on paper.",
+    "TEST": "🔵 TEST = a setup of a strategy that was positive on this coin in the 5-year backtest. Not proven live "
+            "yet - watch it or take it as a demo trade (✅ Took it): it never counts in your loss limits.",
+    "CHECK": "🧪 CHECK = code test of the watcher - NOT a trade signal.",
+}
+SEP = "━━━━━━━━━━━━━━"
+BJ = dt.timezone(dt.timedelta(hours=8))
+
+
+def bj(ms):
+    return dt.datetime.fromtimestamp(ms / 1000, BJ).strftime("%H:%M Beijing")
+
+
+def _usd(x):
+    return f"${x:,.2f}" if abs(x) < 1000 else f"${x:,.0f}"
+
+
 def message(a):
-    """Telegram text (HTML) of one alert. a = dict(label, coin, inst, d, tf, strategy, version, entry, R, tps, split,
-    zone_r, size, risk_pct, max_hold, regimes, why, close_ms, sent_ms, confirm, valid_bars, warnings)."""
+    """Telegram text (HTML) of one alert (Forward Test Program layout, 2026-10-09). a = dict(label, coin, inst, d, tf,
+    strategy, version, entry, R, tps, split, zone_r, size, risk_pct, max_hold, regimes, close_ms, sent_ms, confirm,
+    valid_bars, warnings; TEST alerts also: test (backtest on this coin), program, also, agree, against, weather,
+    market)."""
     side = "LONG" if a["d"] == 1 else "SHORT"
-    icon = ("🟢" if a["d"] == 1 else "🔴") if a["label"] == "LIVE" else ("📝" if a["label"] == "PAPER" else "🧪")
+    lab = a["label"]
     stop = a["entry"] - a["d"] * a["R"]
-    zlo, zhi = sorted((a["entry"] - a["zone_r"] * a["R"], a["entry"] + a["zone_r"] * a["R"]))
     pct = abs(stop / a["entry"] - 1) * 100
-    head = (f"{icon} <b>{a['label']} {side} {a['coin']}</b> · {a['inst']}\n"
-            f"{a['tf']} · {a['strategy']} v{a['version']}"
-            + ("" if a["label"] == "LIVE" else "\n<i>PAPER = practice only: this strategy is still being proven</i>"
-               if a["label"] == "PAPER" else "\n<i>TEST = code test of the watcher - NOT a trade signal</i>"))
+    z = a.get("size") or {}
+    risk = float(z.get("risk_usdt") or 0)
+    prog = a.get("program") or {}
+    name = (f"{prog['name']} · {prog['version']}" if prog.get("name") else f"{a['strategy']} v{a['version']}")
+    lines = [f"{LABEL_ICON.get(lab, '🧪')} <b>{lab} · {side} {a['coin']}</b> · {a['tf'].upper()}"
+             + (" ⭐" if a.get("agree") else "") + f" · {a.get('inst') or a['coin']}",
+             name + (f" ({a['strategy']})" if prog.get("name") else "")]
+    if a.get("agree"):
+        lines.append("⭐ Same direction on: " + ", ".join(a["agree"]))
+    lines.append(SEP)
     lim = a.get("limit_bars")
     if lim:                                  # roadmap step 2B: a limit-entry strategy
         until = a["close_ms"] + 1 + int(lim) * tfm.TF_MS[a["tf"]]
-        entry_line = (f"Limit order: <b>{'BUY' if a['d'] == 1 else 'SELL'} LIMIT {fmt_px(a['entry'])}</b> · cancel at "
-                      f"{utc(until)} if not filled ({int(lim)} {a['tf']} candles)")
+        lines.append(f"Entry: <b>{'BUY' if a['d'] == 1 else 'SELL'} LIMIT {fmt_px(a['entry'])}</b> · cancel at "
+                     f"{utc(until)} if not filled ({int(lim)} {a['tf']} candles)")
     else:
-        entry_line = f"Entry zone: <b>{fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])}</b> (planned {fmt_px(a['entry'])})"
-    lines = [head, "", entry_line,
-             f"Stop-loss: <b>{fmt_px(stop, a['entry'])}</b> ({pct:.2f}% away = 1R)"]
+        zlo, zhi = sorted((a["entry"] - a["zone_r"] * a["R"], a["entry"] + a["zone_r"] * a["R"]))
+        lines.append(f"Entry: <b>{fmt_px(a['entry'])}</b> (zone {fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])})")
+    lines.append(f"Stop: <b>{fmt_px(stop, a['entry'])}</b> ({pct:.2f}% away)" + (f" · −{_usd(risk)}" if risk else ""))
     for i, tp in enumerate(a["tps"]):
         share = a["split"][i] if a.get("split") and i < len(a["split"]) else None
-        lines.append(f"TP{i + 1}: <b>{fmt_px(tp, a['entry'])}</b> ({a['d'] * (tp - a['entry']) / a['R']:.1f}R"
-                     + (f", close {share * 100:.0f}%" if share is not None else "") + ")")
-    z = a.get("size") or {}
+        r_mult = a["d"] * (tp - a["entry"]) / a["R"]
+        money = f" · +{_usd(r_mult * risk * share)} on the {share * 100:.0f}% closed" if risk and share else \
+            (f" · +{_usd(r_mult * risk)}" if risk else "")
+        lines.append(f"TP{i + 1}: <b>{fmt_px(tp, a['entry'])}</b> ({r_mult:.1f}R){money}")
+    lines.append(SEP)
     if z.get("qty"):
-        lines.append(f"Size at {a['risk_pct']:g}% risk (${z['risk_usdt']:,.2f}): {z['qty']:.6g} {a['coin']} ≈ "
-                     f"${z['notional']:,.0f}, {z['leverage']:.2f}x" + (" (capped by max leverage)" if z.get("capped") else ""))
+        cap_note = " (capped by max leverage)" if z.get("capped") else ""
+        lines.append(f"Size: {z['qty']:.6g} {a['coin']} ≈ <b>{_usd(z['notional'])}</b> · "
+                     f"margin {_usd(z['notional'] / 3)} at 3x{cap_note}")
+        acct = risk / (float(a["risk_pct"]) / 100) if a.get("risk_pct") else None
+        lines.append(f"Risk: <b>{_usd(risk)}</b> ({a['risk_pct']:g}%" + (f" of {_usd(acct)})" if acct else ")"))
+    t = a.get("test") or a.get("past")
+    if t and t.get("n"):
+        lines.append(f"Past: {a['coin']} won {t['win_rate']:.0f}% of {t['n']} backtest trades · "
+                     f"{t['avg_r']:+.2f}R a trade after fees")
+    if a.get("weather"):
+        lines.append(f"Market: {a['weather']}")
+    if a.get("regimes"):
+        lines.append("Trend: " + " · ".join(f"{k.upper()} {v}" for k, v in a["regimes"].items()))
+    if a.get("against"):
+        lines.append(f"⚠️ Against the daily trend ({a['against']}) - context only, it does not block")
+    if a.get("confirm"):
+        lines.append(f"5m check: ✓ {a['confirm']}")
     lines.append(f"Max hold: {hold_text(a['tf'], a.get('max_hold'))}")
     man = a.get("manage") or {}
-    if man:                                  # step 3: the operator's playbook trade management
+    if man:                                  # step 3 / the program's V4: trade management after TP1
         after = "stop to entry + fees" if man.get("be_plus_fees") else "stop to entry"
         if (man.get("trail") or {}).get("atr_n"):
             tr = man["trail"]
@@ -125,10 +169,6 @@ def message(a):
         if iv and a.get("inval") is not None:
             lines.append(f"Invalidation: exit on a {iv.get('every') or a['tf']} close "
                          f"{'below' if a['d'] == 1 else 'above'} {fmt_px(a['inval'], a['entry'])}")
-    if a.get("confirm"):
-        lines.append(f"5m check: {a['confirm']}")
-    if a.get("regimes"):
-        lines.append("Trend: " + " · ".join(f"{k.upper()} {v}" for k, v in a["regimes"].items()))
     for w in a.get("why") or []:
         lines.append(f"• {w}")
     if a.get("max_isolated_leverage"):            # step 3: the operator's playbook (6.1)
@@ -138,28 +178,70 @@ def message(a):
         lines.append(f"½ {w}")
     for w in a.get("warnings") or []:
         lines.append(f"⚠️ {w}")
-    lines += ["",
-              "No fill = no trade. Skip it if price reaches TP1 before your order fills." if lim else
+    lines.append(SEP)
+    if LABEL_NOTE.get(lab):
+        lines.append(f"<i>{LABEL_NOTE[lab]}</i>")
+    lines += ["No fill = no trade. Skip it if price reaches TP1 before your order fills." if lim else
               f"Valid for {a.get('valid_bars', 2)} {a['tf']} candles. Skip it if price reaches the stop or TP1 first.",
-              f"Candle closed {utc(a['close_ms'] + 1)} · sent {utc(a['sent_ms'])}",
+              f"Candle closed {utc(a['close_ms'] + 1)} ({bj(a['close_ms'] + 1)}) · sent {utc(a['sent_ms'])}",
               "<i>Signal only - not financial advice. You place the order yourself.</i>"]
     return "\n".join(lines)
 
 
+def details_text(a, card):
+    """The ℹ️ Details reply: what the strategy looks for, its rules, why it should work, when it fails, and the
+    backtest on this coin. card: the strategy card (or None when it is no longer loaded)."""
+    side = "long" if a["d"] == 1 else "short"
+    prog = (card or {}).get("program") or a.get("program") or {}
+    out = [f"ℹ️ <b>{prog.get('name') or a['strategy']}</b>" + (f" · {prog['version']}" if prog.get("version") else ""),
+           f"{a['strategy']} v{a.get('version')} · {a['tf']} · {a['coin']} {side.upper()}"]
+    if card:
+        out += ["", html.escape(" ".join(str(card.get("description") or card.get("hypothesis") or "").split()))]
+        rules = card.get(side) or []
+        if rules:
+            out += ["", f"<b>Rules ({side}, all true on a closed candle)</b>"]
+            out += [f"• <code>{html.escape(str(r))}</code>" for r in rules]
+        gate = card.get("gate")
+        if gate in ("intraday", "intraday_reversal"):
+            out.append("• market gate: " + ("4H and 1H trend the same way" if gate == "intraday" else
+                                            "its range regimes, never against a strong 4H trend")
+                       + " (1W / 1D are context only)")
+        e = card.get("edge") or {}
+        if e.get("mechanism"):
+            out += ["", f"<b>Why it can work:</b> {html.escape(str(e['mechanism']))}"]
+        if e.get("fails_when"):
+            out.append(f"<b>When it fails:</b> {html.escape(str(e['fails_when']))}")
+    t = a.get("test") or a.get("past")
+    if t and t.get("n"):
+        out += ["", f"<b>Backtest on {a['coin']}</b> (5 years, after fees): {t['n']} trades, {t['win_rate']:.0f}% won, "
+                    f"{t['avg_r']:+.2f}R a trade"
+                + (f", unseen last part {t['test_avg_r']:+.2f}R" if t.get("test_avg_r") is not None else "")]
+    if a.get("market"):
+        out.append(f"Market at the alert: {a['market']}")
+    if a["label"] == "TEST":
+        out += ["", "TEST alerts are tracked on GitHub too. The weekly review promotes a strategy to 🟡 PAPER only "
+                    "after enough live TEST trades stay positive after fees - and only with your tap."]
+    return "\n".join(out)
+
+
 # ---------------------------------------------------------------- Telegram commands and buttons (roadmap step 4)
-CHOICES = {"took": "✅ Took it", "skip": "❌ Skipped"}
+CHOICES = {"took": "✅ Took it", "skip": "❌ Skip"}
+INFO = {"text": "ℹ️ Details", "callback_data": "info|{aid}"}
 
 
 def choice_buttons(aid, choice=None):
-    """The buttons under an alert. choice: None / 'took' / 'skip' (can still be changed) / 'closed' / 'done'."""
+    """The buttons under an alert. choice: None / 'took' / 'skip' (can still be changed) / 'closed' / 'done'.
+    ℹ️ Details is always there."""
+    info = [{"text": INFO["text"], "callback_data": INFO["callback_data"].format(aid=aid)}]
     if choice in ("closed", "done"):
         return {"inline_keyboard": [[{"text": "🏁 Trade finished" if choice == "done" else "🏁 You closed it",
-                                      "callback_data": f"noop|{aid}"}]]}
+                                      "callback_data": f"noop|{aid}"}], info]}
     row = [{"text": label + (" ✓" if choice == key else ""), "callback_data": f"{key}|{aid}"}
            for key, label in CHOICES.items()]
     rows = [row]
     if choice == "took":
         rows.append([{"text": "🏁 I closed it", "callback_data": f"closed|{aid}"}])
+    rows.append(info)
     return {"inline_keyboard": rows}
 
 
@@ -189,11 +271,13 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
         "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
+        "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
         "/pause - stop new trade alerts until /resume (/pause 2h = for 2 hours)\n"
         "/resume - new trade alerts on again\n"
         "/help - this list\n\n"
         "Under each alert: <b>✅ Took it</b> = I follow the trade and tell you when TP1 / TP2, the stop or the time "
-        "stop is reached (same rules as the backtests). <b>❌ Skipped</b> = only recorded. "
+        "stop is reached (same rules as the backtests; a 🔵 TEST trade goes to the demo book, never your loss limits). "
+        "<b>❌ Skip</b> = only recorded. <b>ℹ️ Details</b> = the strategy, its rules and its backtest. "
         "<b>🏁 I closed it</b> = stop following.\n"
         "Pausing never stops the messages about trades you already took.")
 
@@ -231,9 +315,17 @@ def status_text(i):
     lines.append("New trade alerts: ON" if p == 0 or (p > 0 and p <= now) else
                  "⏸ New trade alerts: PAUSED until /resume" if p < 0 else
                  f"⏸ New trade alerts: PAUSED until {utc(p)} (/resume to switch on now)")
-    if i["watch"]:
-        lines.append(f"Watching {len(i['watch'])} strategy timeframe(s):")
-        lines += [f"• {sid} {tf} ({lab})" for sid, tf, lab in i["watch"]]
+    real = [w for w in i["watch"] if w[2] != "TEST"]
+    tests = [w for w in i["watch"] if w[2] == "TEST"]
+    if tests or "tests_on" in i:
+        lines.append(f"🔵 TEST alerts: {'ON' if i.get('tests_on', True) else 'OFF (/tests on)'} · "
+                     f"{len(tests)} backtest-positive strategy timeframe(s) on their positive coins"
+                     + (f" · {i['tests_today']} sent today (max {i['tests_max']})" if "tests_today" in i else ""))
+    if real:
+        lines.append(f"Watching {len(real)} strategy timeframe(s):")
+        lines += [f"• {sid} {tf} ({lab})" for sid, tf, lab in real]
+    elif tests:
+        lines.append("LIVE / PAPER: none yet - the weekly review promotes the best TEST strategies to PAPER.")
     else:
         lines.append("Watching 0 strategies: none is PAPER_TRADING or APPROVED yet. GitHub's daily research "
                      "promotes them; the watcher picks them up within an hour.")

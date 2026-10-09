@@ -69,7 +69,8 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/status` | Is it running, the last market check, which strategies it watches, paused or not, a newer version waiting |
 | `/trades` | The trades you took that it is following, and your results of the last 30 days |
 | `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
-| `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
+| `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
+| `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
 | `/help` | The list |
@@ -81,7 +82,9 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
   - 🎯 **TP2 hit** → close the share it says, and move the stop-loss to TP1.
   - 🏁 **last TP hit**, 🛑 **stop hit**, or ⏱ **time stop** (the strategy's max hold is over → close the rest).
   - Each of these also gives the result in R (1R = what you risked).
-- **❌ Skipped** → only recorded. You can change your mind with the other button.
+- **❌ Skip** → only recorded. You can change your mind with the other button.
+- **ℹ️ Details** → what the strategy looks for, its exact rules, why it should work, when it fails, and its
+  backtest on this coin.
 - **🏁 I closed it** (appears after ✅) → you closed it yourself; it stops following.
 
 `/pause` never stops the messages about trades you already took. Everything you press is saved on the PC in
@@ -130,28 +133,62 @@ private. When the token expires, `/status` shows "failing": make a new one and r
 | `4_update.bat` | Download the newest version from GitHub (keeps your Telegram settings). Telegram tells you when an update is available |
 | `5_remove_autostart.bat` | Stop it from starting with Windows |
 | `6_journal_sync.bat` | Optional: send your journal to GitHub so the agent learns from your trades (see Journal sync) |
+| `7_replay_test_alerts.bat` | Safety check of the 🔵 TEST alerts: the last 14 days replayed with their rules on real candles - every alert it would have sent and how it ended. Sends nothing |
 | `run_watcher.bat` | The watcher itself (the start button and auto-start use it) |
 
 ## Reading an alert
 
 ```
-🟢 LIVE LONG SOL · SOL-USDT-SWAP
-15m · donchian_breakout v1.0
-Entry zone: 120.36 – 120.84 (planned 120.60)
-Stop-loss: 119.40 (1.00% away = 1R)
-TP1: 123.00 (2.0R, close 50%)
-TP2: 124.20 (3.0R, close 50%)
-Size at 0.5% risk ($5.00): 4.17 SOL ≈ $503, 0.50x
-Max hold: 30 candles (~7h30m)
-Trend: 1W WEAK_BULL · 1D STRONG_BULL · 4H WEAK_BULL · 1H STRONG_BULL
-Valid for 2 15m candles. Skip it if price reaches the stop or TP1 first.
+🔵 TEST · SHORT BTC · 1H ⭐ · BTC-USDT-SWAP
+Breakout (Donchian + volume + ADX) · V2 (P01-BREAKOUT-V2)
+⭐ Same direction on: 4h P01
+━━━━━━━━━━━━━━
+Entry: 81,950.00 (zone 81,790.00 – 82,110.00)
+Stop: 82,750.00 (0.98% away) · −$5.00
+TP1: 80,350.00 (2.0R) · +$5.00 on the 50% closed
+TP2: 79,550.00 (3.0R) · +$7.50 on the 50% closed
+━━━━━━━━━━━━━━
+Size: 0.0062 BTC ≈ $510 · margin $170 at 3x
+Risk: $5.00 (0.5% of $1,000)
+Past: BTC won 46% of 128 backtest trades · +0.38R a trade after fees
+Market: 🌧 Trend down day · BTC: down
+Trend: 1W WEAK_BULL · 1D WEAK_BULL · 4H WEAK_BEAR · 1H STRONG_BEAR
+⚠️ Against the daily trend (1D WEAK_BULL) - context only, it does not block
+5m check: ✓ CONFIRMED on the 10:35 UTC 5m bar close
+Max hold: 60 candles (~60h00m)
+━━━━━━━━━━━━━━
+🔵 TEST = a setup of a strategy that was positive on this coin in the 5-year backtest ...
+Valid for 2 1h candles. Skip it if price reaches the stop or TP1 first.
+Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 ```
 
-- Under each alert: **✅ Took it** / **❌ Skipped** (see "Using the bot from your phone" above).
-- 🟢/🔴 **LIVE** = an approved strategy. 📝 **PAPER** = practice only (the strategy is still being proven).
+- Under each alert: **✅ Took it** / **❌ Skip** / **ℹ️ Details** (see "Using the bot from your phone" above).
+- 🟢 **LIVE** = an approved strategy. 🟡 **PAPER** = practice only (the strategy is still being proven).
+  🔵 **TEST** = see below.
+- **Stop / TP in $** = what you lose or make at that price with the size shown (the TP amount is for the share
+  closed there). **Margin at 3x** = what OKX holds if you use 3x leverage.
 - Enter only inside the **entry zone**; if price already ran past it, skip.
 - Put the **stop-loss and TPs** on OKX as soon as you enter. "Close 50%" = take half of the position there.
 - **⚠️** lines (for example a CPI or FOMC event within 60 minutes) mean the risk rules say: no live entry now.
+
+## TEST alerts (the Signal Center, 2026-10-09)
+
+- A 🔵 **TEST** alert comes from a Forward Test Program strategy (`docs/PROGRAM.md`) on a coin where that strategy
+  was **positive after fees in the 5-year backtest** (at least 20 trades, the unseen last part not negative). It is
+  not paper trading and not proven live: it shows the setup as it forms on the real chart, long or short.
+- 1W / 1D never block a TEST alert. When the trade goes against the daily trend you see **⚠️ Against the daily trend**.
+- A **5m candle must confirm** the entry first (body in the trade's direction, normal volume, close near the entry,
+  within 30 minutes) - otherwise no alert.
+- **⭐** = another timeframe or strategy gave the same coin and direction in the last 4 hours. Versions and
+  timeframes of one strategy are merged into one alert.
+- At most **10 TEST alerts a day** (Beijing day), the strongest backtest first; one per coin + direction + strategy
+  in 4 hours.
+- **✅ Took it** on a TEST alert puts the trade in the **demo book**: followed like any trade, shown separately in
+  `/trades`, and it **never counts in your loss limits**.
+- GitHub records every TEST setup too (even when your PC is off). The weekly review uses those results to promote
+  the best to 🟡 PAPER - only with your tap.
+- Safety check before trusting it: double-click `windows\7_replay_test_alerts.bat`. It replays the last 14 days
+  with these rules on real candles and shows every alert it would have sent and how each one ended.
 
 ## Good to know
 

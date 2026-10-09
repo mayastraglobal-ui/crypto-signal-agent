@@ -53,6 +53,7 @@ from engine import manage as mg
 from engine import flow_history as fh
 from engine import scalp_playbook as spb
 from engine import sessions as sess
+from engine import signal_center as scx
 from engine import trend4h as t4
 from engine import regime_fit as rfit
 from engine import memory as mem
@@ -1317,10 +1318,11 @@ LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "ent
             "confirm_5m_utc", "smc_5m", "close_reason", "current_stop", "warnings", "next_action",
             "risk_blocks",                                                                  # Phase 11 risk engine
             "entry_type", "limit_bars",                                                     # step 2B limit entries
-            "inval_level"]                                                                  # step 3 invalidation
+            "inval_level",                                                                  # step 3 invalidation
+            "market_type"]                                          # Forward Test Program: the market at the signal
 TEXT_COLS = ["closed_time_utc", "version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags",
              "state", "state_note", "entry_time_utc", "sim_tf", "confirm_5m_utc", "smc_5m", "close_reason",
-             "warnings", "next_action", "risk_blocks", "entry_type"]
+             "warnings", "next_action", "risk_blocks", "entry_type", "market_type"]
 EVENT_COLS = ["time_utc", "id", "coin", "tf", "strategy", "version", "stage", "from_state", "to_state", "price", "note"]
 
 
@@ -2511,11 +2513,23 @@ def main():
     tp = cfg["trade_plan"]
     acct = cfg["account"]["size_usdt"]
     regime_fit = rfit.table(cells)
+    # the Signal Center (Forward Test Program PR 2): program cells positive on a coin in the 5-year backtest are
+    # recorded as stage TEST (silent tracking for the weekly review) - never emailed, never in the risk book
+    SC = scx.settings(cfg.get("signal_center"))
+    p_path = os.path.join(REPORTS, "program_offline.json")
+    if not (args.offline and os.path.exists(p_path)):
+        p_path = os.path.join(REPORTS, "program.json")
+    try:
+        with open(p_path, encoding="utf-8") as f:
+            tests = scx.test_list(json.load(f), registry["cells"], SC)
+    except (OSError, ValueError):
+        tests = {}
     plans, blocked = [], []
     for sgl in live:
         key = (sgl["strategy"], sgl["version"], sgl["tf"])
-        stage = verdict.get(key)
-        if stage not in ("VALIDATION", "PAPER_TRADING", "APPROVED"):   # only versions that passed the backtest gate
+        # only versions that passed the backtest gate - or a TEST pair (positive on this coin in the program results)
+        stage, tst = scx.scan_stage(verdict.get(key), tests, f"{key[0]}@{key[1]}|{key[2]}", sgl["coin"])
+        if stage is None:
             continue
         if sgl["coin"] not in signal_set:      # research-only coin: backtest only, never a signal
             continue
@@ -2527,11 +2541,9 @@ def main():
             log(f"{sgl['coin']} {sgl['tf']} {sgl['strategy']}: no alert - {why}")
             continue
         pooled, cst = evidence_for(cells.get(f"{key[0]}@{key[1]}|{key[2]}"), per.get(key, {}), sgl["coin"])
-        if cst["n"] < V["min_coin_trades"]:
-            continue
         shrunk = (cst["n"] * cst["exp_r"] + 20 * pooled["exp_r"]) / (cst["n"] + 20)
-        if shrunk <= V["min_expectancy_r"] or cst["exp_r"] <= 0:
-            continue
+        if tst is None and (cst["n"] < V["min_coin_trades"] or shrunk <= V["min_expectancy_r"] or cst["exp_r"] <= 0):
+            continue                           # (a TEST pair was checked on its 5-year coin result instead)
         d, e, R = sgl["dir"], sgl["entry"], sgl["R"]
         tps, split = sgl["tps"], sgl["split"]
         against_btc = (d == 1 and btc.get("4h") == "DOWN") or (d == -1 and btc.get("4h") == "UP")
@@ -2569,7 +2581,9 @@ def main():
             backtest_coin=dict(trades=cst["n"], win_rate=cst["win_rate"], avg_r=cst["exp_r"]),
             backtest_all=dict(trades=pooled["n"], win_rate=pooled["win_rate"], avg_r=pooled["exp_r"],
                               pf=pooled["pf"]),
-            confidence_score=round(shrunk + (0 if not against_btc else -0.05), 3),
+            confidence_score=round(shrunk + (0 if not against_btc else -0.05), 3), test=tst,
+            market_type=scx.market_type(regimes.get(sgl["coin"], {}).get("timeframes"),
+                                        regimes.get(sgl["coin"], {}).get("permission")),
             why=strat.get("logic", "").strip(), rules_met=strat["long" if d == 1 else "short"],
             exit_rule=strat.get("exit_long" if d == 1 else "exit_short"),
             context=dict(htf_trend="UP" if sgl["htf_up"] else "DOWN" if sgl["htf_down"] else "SIDEWAYS",
@@ -2579,7 +2593,8 @@ def main():
     # combine agreement / conflicts per coin (APPROVED and VALIDATION kept apart)
     by = {}
     for p in plans:
-        by.setdefault((p["stage"], p["coin"]), []).append(p)
+        if p["stage"] != "TEST":               # TEST setups are only recorded (signals log), never shown as signals
+            by.setdefault((p["stage"], p["coin"]), []).append(p)
     final = []
     for (_, coin), ps in by.items():
         dirs = {p["direction"] for p in ps}
@@ -2623,7 +2638,8 @@ def main():
                    state_note="waiting for a 5m confirmation" if p["confirm_5m"] else "entry at the signal candle close",
                    next_action="wait for the 5m bar" if p["confirm_5m"] else pos.next_action(pos.ACTIVE, []),
                    entry_type=p["entry_type"], limit_bars=p["limit_bars"] or np.nan,
-                   inval_level=p.get("inval") if p.get("inval") is not None else np.nan)
+                   inval_level=p.get("inval") if p.get("inval") is not None else np.nan,
+                   market_type=p.get("market_type") or "")
         if p["state"] == pos.AWAITING_FILL:
             row.update(entry_time_utc="", bars_5m=0,
                        state_note=f"limit order at {p['entry']:g}, valid {p['limit_bars']} {p['timeframe']} candles",
@@ -2710,7 +2726,8 @@ def main():
                                      **{k: e[k] for k in ("subject", "text", "html", "chart")}))
     email_events += mail.followups(events)
     email_events += mail.paper_complete(closed_now, research)
-    daily = mail.daily(view["signal"], snap, watching, plans, book, btc, fg, sys_state,
+    daily = mail.daily(view["signal"], snap, watching, [p for p in plans if p["stage"] != "TEST"], book, btc, fg,
+                       sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
     weekly = None
     if digest.is_weekly_time(started):

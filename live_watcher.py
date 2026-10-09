@@ -20,8 +20,13 @@ signals, emails them and keeps the risk book. This watcher never places orders a
   python live_watcher.py --find-chat-id     your Telegram chat id (send the bot a message first)
   python live_watcher.py --setup-telegram   step-by-step Telegram setup (writes telegram.env)
 
-While it runs, the bot answers the operator's commands (/status, /trades, /weather, /pause, /resume, /help) and the buttons
-under each alert: "✅ Took it" makes the watcher follow that trade and say when TP1 / TP2, the stop or the time stop
+TEST alerts (the Signal Center, Forward Test Program PR 2): program strategies positive on a coin in the 5-year backtest
+(reports/program.json) also alert, labelled TEST, after a 5m confirmation, at most 10 a day (engine/signal_center.py).
+
+  python live_watcher.py --replay 14        the Signal Center's safety check: the last 14 days with the TEST rules
+
+While it runs, the bot answers the operator's commands (/status, /trades, /weather, /tests, /pause, /resume, /help)
+and the buttons under each alert: "✅ Took it" makes the watcher follow that trade and say when TP1 / TP2, the stop or the time stop
 is reached (engine/follow.py: the backtests' rules); every choice and result is written to journal/my_trades.csv.
 Only the chat in TELEGRAM_CHAT_ID is answered.
 
@@ -58,6 +63,7 @@ from engine import lifecycle as lc
 from engine import live as lv
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
+from engine import signal_center as scx
 from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
@@ -83,12 +89,12 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "strategies_lab.yaml"), ("main", "strategies_program.yaml"),
               ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
-              ("main", "reports/market_weather.json"),
+              ("main", "reports/market_weather.json"), ("main", "reports/program.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
-              "engine/lifecycle.py"]    # changed on GitHub -> "run update.bat"
+              "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -448,8 +454,9 @@ class Watcher:
     def reload(self):
         self.cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml")))
         self.S = lv.settings(self.cfg.get("live_watcher"))
-        for st in self.also:                                        # --also: a code test only, labelled TEST
-            self.S["stages"].setdefault(st, "TEST")
+        for st in self.also:                                        # --also: a code test only, labelled CHECK
+            self.S["stages"].setdefault(st, "CHECK")
+        self.SC = scx.settings(self.cfg.get("signal_center"))
         self.dq_cfg = dq.settings(self.cfg.get("data_quality"))
         self.S5 = c5m.settings(self.cfg.get("confirm_5m"))
         try:
@@ -468,6 +475,17 @@ class Watcher:
                 label = lv.alert_label(st, s.get("lab"), self.S)
                 if label:
                     self.watch.append((s, tf, label))
+        # the Signal Center (Forward Test Program PR 2): 🔵 TEST alerts for program cells positive on a coin in the
+        # 5-year backtest (reports/program.json) - only where the cell does not already alert as PAPER / LIVE
+        self.program = self._json("reports/program.json")
+        self.weather = self._json("reports/market_weather.json")
+        self.tests = scx.test_list(self.program, reg["cells"], self.SC)
+        have = {(sspec.key(s), tf) for s, tf, _ in self.watch}
+        for s in cards:
+            for tf in s["timeframes"]:
+                if f"{sspec.key(s)}|{tf}" in self.tests and (sspec.key(s), tf) not in have:
+                    self.watch.append((s, tf, "TEST"))
+        self.cards = {sspec.key(s): s for s in cards}
         try:
             u = json.load(open(os.path.join(ROOT, "reports", "universe.json")))
             self.coins = list(u.get("signal") or [])
@@ -485,6 +503,14 @@ class Watcher:
         log(f"watching {len(self.watch)} strategy timeframe(s) on {', '.join(self.coins)}: "
             + (", ".join(f"{s['id']} {tf} ({lab})" for s, tf, lab in self.watch) or "none yet (nothing is APPROVED "
                "or PAPER_TRADING - the watcher stays quiet until the daily research run promotes a strategy)"))
+
+    @staticmethod
+    def _json(rel):
+        try:
+            with open(os.path.join(ROOT, rel), encoding="utf-8") as f:
+                return json.load(f)
+        except (OSError, ValueError):
+            return None
 
     def refresh_repo(self):
         """GitHub's newest decisions (statuses, cards, coins, settings) + the newest futures-data files:
@@ -524,8 +550,9 @@ class Watcher:
         # alerts: the buttons' memory (3 days) · trades: the ones being followed · paused_until: 0 = alerts on,
         # -1 = until /resume, else the end (ms) · tg_offset: the next Telegram update to read
         # shadow: every alert followed silently by the plan's rules (its "plan" result goes to the journal)
+        # tests_on: 🔵 TEST alerts on / off (/tests) · test_sent: when each TEST alert went out (the daily cap)
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
-                         next_id=0, shadow={}).items():
+                         next_id=0, shadow={}, tests_on=True, test_sent=[]).items():
             st.setdefault(k, v)
         return st
 
@@ -536,6 +563,7 @@ class Watcher:
         self.state["alerts"] = {k: a for k, a in self.state["alerts"].items()
                                 if k in self.state["trades"] or int(a["sent_ms"]) >= now - 3 * 86_400_000}
         self.state["results"] = self.state["results"][-200:]
+        self.state["test_sent"] = [m for m in self.state["test_sent"] if int(m) >= now - 3 * 86_400_000]
         try:
             os.makedirs(os.path.dirname(STATE), exist_ok=True)
             with open(STATE, "w") as f:
@@ -635,11 +663,24 @@ class Watcher:
             self.say("▶️ The pause is over: new trade alerts are on again.")
 
     def deliver(self, alerts, now_ms):
+        tests = [a for a in alerts if a["label"] == "TEST"]
+        if tests:                                    # the Signal Center: /tests off, then at most N a day
+            if not self.state.get("tests_on", True):
+                keep, drop = [], tests
+            else:
+                keep, drop = scx.cap(tests, scx.sent_today(self.state["test_sent"], now_ms), self.SC)
+            for a in drop:
+                log(f"ALERT TEST {a['coin']} {a['tf']} {a['strategy']}: not sent ("
+                    + ("TEST alerts off" if not self.state.get("tests_on", True) else
+                       f"daily maximum of {self.SC['max_per_day']} reached") + ") - GitHub still records it")
+            alerts = [a for a in alerts if a["label"] != "TEST"] + keep
         for a in alerts:
             what = f"ALERT {a['label']} {a['coin']} {a['tf']} {a['strategy']}: "
             if self.send and self.paused(now_ms):
                 log(what + "alerts are paused (/resume) - not sent")
                 continue
+            if a["label"] == "TEST":
+                self.state["test_sent"].append(now_ms)
             aid = self._remember(a)
             ok, err, mid = self.say(lv.message(a), lv.choice_buttons(aid))
             self.state["alerts"][aid]["msg_id"] = mid
@@ -655,7 +696,8 @@ class Watcher:
         aid = f"{int(a['sent_ms']) // 1000:x}{self.state['next_id'] % 1000:03d}"
         self.state["alerts"][aid] = dict({k: a.get(k) for k in ("label", "coin", "inst", "d", "tf", "strategy",
                                           "version", "entry", "R", "tps", "split", "max_hold", "close_ms", "sent_ms",
-                                          "limit_bars", "manage", "inval", "be_frac")},
+                                          "limit_bars", "manage", "inval", "be_frac", "test", "program", "market",
+                                          "against")},
                                          choice=None, msg_id=None)
         return aid
 
@@ -817,6 +859,18 @@ class Watcher:
             return "▶️ New trade alerts are on again."
         if cmd == "result":
             return self.result(arg, now_ms)
+        if cmd == "tests":
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state["tests_on"] = arg == "on"
+                self._save_state()
+            on = self.state.get("tests_on", True)
+            n = sum(1 for _, _, lab in self.watch if lab == "TEST")
+            return (f"🔵 TEST alerts are <b>{'ON' if on else 'OFF'}</b>. "
+                    + (f"{n} backtest-positive strategy timeframe(s) watched on their positive coins; at most "
+                       f"{self.SC['max_per_day']} a day, each confirmed by a 5m candle. " if on else
+                       "GitHub still records every TEST setup for the weekly review. ")
+                    + ("/tests off to stop them." if on else "/tests on to switch them on."))
         if cmd == "weather":
             try:
                 with open(os.path.join(ROOT, "reports", "market_weather.json"), encoding="utf-8") as f:
@@ -834,14 +888,21 @@ class Watcher:
         toast = ""
         if a is None:
             toast = "This alert is too old (buttons work for 3 days)."
+        elif action == "info":                       # ℹ️ Details: the strategy, its rules, its backtest on this coin
+            self.say(lv.details_text(a, self.cards.get(f"{a['strategy']}@{a['version']}")))
+            toast = "Details sent below."
         elif a.get("choice") in ("closed", "done") or action == "noop":
             toast = "This trade is already finished."
         elif action == "took" and a.get("choice") != "took":
             a["choice"] = "took"
             self.state["trades"][aid] = fl.open_trade(a, aid, now_ms, self.cfg.get("trade_plan"))
             self.journal(dict(a, id=aid), "took", now_ms)
-            toast = "Recorded: you took it. I'll follow this trade."
-            self.say(f"👀 Following your {'LONG' if a['d'] == 1 else 'SHORT'} {a['coin']} ({a['tf']} {a['strategy']}). "
+            demo = a.get("label") == "TEST"
+            toast = "Recorded as a demo trade (TEST)." if demo else "Recorded: you took it. I'll follow this trade."
+            self.say(("🔵 Demo book: " if demo else "")
+                     + f"👀 Following your {'LONG' if a['d'] == 1 else 'SHORT'} {a['coin']} "
+                     + f"({a['tf']} {a['strategy']}). "
+                     + ("It never counts in your loss limits. " if demo else "")
                      + ("Your limit order waits for a fill: I'll tell you when it fills or when to cancel it. "
                         if a.get("limit_bars") else "Put the stop-loss and the TPs on OKX now if you haven't. ")
                      + "I'll message you when a TP, the stop or the time stop is reached. Press 🏁 I closed it under "
@@ -899,19 +960,29 @@ class Watcher:
             paused_until=self.state.get("paused_until"), watch=[(s["id"], tf, lab) for s, tf, lab in self.watch],
             coins=self.coins, open_trades=len(self.state["trades"]),
             alerts_today=sum(1 for a in self.state["alerts"].values() if int(a["sent_ms"]) >= day),
+            tests_on=self.state.get("tests_on", True), tests_today=scx.sent_today(self.state["test_sent"], now_ms),
+            tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms)))
 
     def trades_text(self, now_ms):
         lines = ["📒 <b>Your trades</b>"]
-        if self.state["trades"]:
+        real = [t for t in self.state["trades"].values() if t.get("label") != "TEST"]
+        demo = [t for t in self.state["trades"].values() if t.get("label") == "TEST"]
+        if real:
             lines.append("Being followed:")
-            lines += [fl.summary(t) for t in self.state["trades"].values()]
-        else:
+            lines += [fl.summary(t) for t in real]
+        if demo:
+            lines.append("🔵 Demo book (TEST trades - never in your loss limits):")
+            lines += [fl.summary(t) for t in demo]
+        if not real and not demo:
             lines.append("No trade is being followed. Press ✅ Took it under an alert and I'll follow it.")
-        res = [r for r in self.state["results"] if int(r["ended_ms"]) >= now_ms - 30 * 86_400_000]
-        if res:
+        res_all = [r for r in self.state["results"] if int(r["ended_ms"]) >= now_ms - 30 * 86_400_000]
+        for title, res in (("Last 30 days", [r for r in res_all if r.get("label") != "TEST"]),
+                           ("Demo book, last 30 days", [r for r in res_all if r.get("label") == "TEST"])):
+            if not res:
+                continue
             known = [r["r"] for r in res if r["r"] is not None]
-            lines.append(f"\nLast 30 days: {len(res)} finished" + (
+            lines.append(f"\n{title}: {len(res)} finished" + (
                 f" · {sum(1 for r in known if r > 0)} won · total about {sum(known):+.1f}R before fees" if known else ""))
             for r in res[-5:]:
                 when = dt.datetime.fromtimestamp(int(r["ended_ms"]) / 1000, dt.timezone.utc)
@@ -930,11 +1001,14 @@ class Watcher:
         return True
 
     def signals(self, coin, pc, quality, b, closed, now_ms):
-        out = []
+        out, test_cands = [], []
         for s, tf, label in self.watch:
             fr = pc["frames"].get(tf)
             if tf not in closed or fr is None or not self._good(coin, tf, quality):
                 continue
+            stats = (self.tests.get(f"{sspec.key(s)}|{tf}") or {}).get(coin) if label == "TEST" else None
+            if label == "TEST" and (stats is None or not self.state.get("tests_on", True)):
+                continue                             # TEST: only on the coins where the backtest was positive
             df, t = fr["df"], fr["n"] - 1
             if int(df["close_time"].iloc[t]) != b - 1:              # the candle that just closed must be there
                 log(f"{coin} {tf}: newest candle not in yet - skipped this close")
@@ -969,9 +1043,17 @@ class Watcher:
                 if why:                              # playbook 2.5 / 5.4: skip the pair
                     log(f"{coin} {tf} {s['id']}: playbook filter - {why}")
                     continue
-            key = lv.dedupe_key(coin, d, s["id"], s["version"], tf)
-            if not lv.allowed(self.state["sent"], key, now_ms, self.S) or any(p["key"] == key for p in self.pending):
-                continue
+            if label == "TEST":                      # one per coin + direction + strategy within the TEST cooldown
+                key = scx.group_key(dict(coin=coin, d=d, strategy=s["id"], test=stats))
+                last = self.state["sent"].get(key)
+                if (last is not None and now_ms - int(last) < self.SC["cooldown_minutes"] * 60_000) or \
+                        any(p["key"] == key for p in self.pending):
+                    continue
+            else:
+                key = lv.dedupe_key(coin, d, s["id"], s["version"], tf)
+                if not lv.allowed(self.state["sent"], key, now_ms, self.S) or \
+                        any(p["key"] == key for p in self.pending):
+                    continue
             base = dict(label=label, coin=coin, inst=self.feed.inst(coin), d=d, tf=tf, strategy=s["id"],
                         version=s["version"], entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
@@ -981,11 +1063,28 @@ class Watcher:
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
+            if label == "TEST":
+                prog = s.get("program") or {}
+                base.update(test=stats, program=dict(name=prog.get("name"), version=prog.get("version")),
+                            against=scx.against_daily(d, pc["recs"]), market=scx.market_type(pc["recs"]),
+                            weather=scx.weather_line(self.weather, coin))
+                test_cands.append(base)
+                continue
             if s.get("confirm_5m"):
                 self.pending.append(dict(base, after_ms=b, coin=coin))
                 log(f"{coin} {tf} {s['id']}: trigger - waiting for the 5m confirmation")
                 continue
             out.append(self._finish(base, now_ms))
+        recent = [a for a in self.state["alerts"].values() if a.get("coin") == coin] + \
+            [p for p in self.pending if p.get("coin") == coin]
+        for a in scx.merge(test_cands):             # the Signal Center: merged, then the 5m candle confirms
+            a["agree"] = scx.agreement(a, recent, now_ms, self.SC, others=test_cands + out)
+            if self.SC["confirm_5m"]:
+                self.state["sent"][a["key"]] = now_ms          # reserved: no duplicate while it waits
+                self.pending.append(dict(a, after_ms=b, reserved_ms=now_ms))
+                log(f"{coin} {a['tf']} {a['strategy']}: TEST trigger - waiting for the 5m confirmation")
+            else:
+                out.append(self._finish(a, now_ms))
         return out
 
     def pb_coin_problem(self, coin, now_ms):
@@ -1043,6 +1142,8 @@ class Watcher:
                 out.append(self._finish(a, now_ms))
             else:
                 log(f"{coin} {p['tf']} {p['strategy']}: 5m {res['state']} - {res['why']}")
+                if p.get("reserved_ms") is not None and self.state["sent"].get(p["key"]) == p["reserved_ms"]:
+                    self.state["sent"].pop(p["key"])            # a TEST setup that failed may alert again
         self.pending = keep
         return out
 
@@ -1075,9 +1176,10 @@ class Watcher:
         """The operator's own trades (✅ Took it) today, from the buttons' record: (count, R today, losing streak,
         last loss ms, last result, last week's R)."""
         day = now_ms // 86_400_000 * 86_400_000
-        res = sorted(self.state.get("results") or [], key=lambda r: int(r["ended_ms"]))
+        res = sorted([r for r in self.state.get("results") or [] if r.get("label") != "TEST"],   # demo book: never
+                     key=lambda r: int(r["ended_ms"]))                                          # in the limits
         took_today = sum(1 for a in self.state["alerts"].values() if a.get("choice") in ("took", "closed", "done")
-                         and int(a["sent_ms"]) >= day)
+                         and int(a["sent_ms"]) >= day and a.get("label") != "TEST")
         today = [r for r in res if int(r["ended_ms"]) >= day and r.get("r") is not None]
         streak, last = 0, None
         for r in today:
@@ -1134,9 +1236,10 @@ class Watcher:
         if day.strftime("%H:%M") < self.S["heartbeat_utc"] or self.state.get("heartbeat") == day.strftime("%Y-%m-%d"):
             return
         self.state["heartbeat"] = day.strftime("%Y-%m-%d")
-        n = {lab: sum(1 for _, _, l in self.watch if l == lab) for lab in ("LIVE", "PAPER")}
-        telegram(f"✅ Live watcher running · {day:%Y-%m-%d}\nWatching {n['LIVE']} LIVE and {n['PAPER']} PAPER "
-                 f"strategy timeframe(s) on {', '.join(self.coins)}."
+        n = {lab: sum(1 for _, _, l in self.watch if l == lab) for lab in ("LIVE", "PAPER", "TEST")}
+        telegram(f"✅ Live watcher running · {day:%Y-%m-%d}\nWatching {n['LIVE']} LIVE, {n['PAPER']} PAPER and "
+                 f"{n['TEST']} TEST strategy timeframe(s) on {', '.join(self.coins)}."
+                 + ("" if self.state.get("tests_on", True) else "\n🔵 TEST alerts are off (/tests on).")
                  + (f"\nFollowing {len(self.state['trades'])} trade(s) you took." if self.state["trades"] else "")
                  + ("\n⏸ New trade alerts are paused (/resume)." if self.paused(now_ms) else "")
                  + "\nSend /status any time.")
@@ -1178,6 +1281,137 @@ class Watcher:
                 if self.fails == int(self.S["error_alert_after"]):
                     telegram(f"⚠️ Live watcher: {self.fails} passes failed in a row - no alerts until it recovers.\n"
                              f"{type(e).__name__}: {str(e)[:300]}")
+
+
+# ---------------------------------------------------------------- the Signal Center's safety replay (PR 2, Idea C)
+REPLAY_TFS = ["1w", "1d", "4h", "1h", "30m", "15m", "5m"]
+
+
+def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
+    """Replay the last `days` days on real candles with the live rules of the 🔵 TEST alerts: the TEST list, the
+    strategy rules, plan_trade, the market-type filter, merging per coin + direction + strategy, the TEST cooldown,
+    the 5m confirmation and the daily cap - then follow each alert to its plan result on the 5m candles (stop / TPs /
+    time stop; the V4 trail is not replayed). w: a Watcher (feed, cards, TEST list, settings). Returns dict(alerts,
+    days, dropped, summary)."""
+    now_ms = int(now_ms or w.now_fn())
+    start = now_ms - int(days) * 86_400_000
+    coins = coins or w.coins
+    tests = [(s, tf) for s, tf, lab in w.watch if lab == "TEST"]
+    cands = []
+    for coin in coins:
+        if not any(coin in (w.tests.get(f"{sspec.key(s)}|{tf}") or {}) for s, tf in tests):
+            continue
+        for tf in REPLAY_TFS:                        # enough candles: the replay window + the indicators' warm-up
+            n = int((now_ms - start) // sc.TF_MS[tf]) + 600
+            try:
+                w.frames[(coin, tf)] = w.feed.candles(coin, tf, n if tf not in ("1w", "1d") else 600)
+            except Exception as e:
+                log_fn(f"{coin} {tf}: download failed: {e}")
+        sym, data, quality = w.coin_data(coin, now_ms)
+        try:
+            pc = sc.prepare_coin(sym, coin, data, quality, [t for t in sc.TF_ORDER if (sym, t) in data], w.cfg,
+                                 None, sc.btc_frames(data, w.cfg["market"]["quote"], sc.TF_ORDER) if coin == "BTC"
+                                 else None)
+        except Exception as e:
+            log_fn(f"{coin}: prepare failed: {e}")
+            continue
+        m5 = sc.m5_arrays(pc["frames"])
+        for s, tf in tests:
+            stats = (w.tests.get(f"{sspec.key(s)}|{tf}") or {}).get(coin)
+            fr = pc["frames"].get(tf)
+            if stats is None or fr is None or m5 is None:
+                continue
+            L, S, _, _, cols = sc.strategy_signals(s, tf, fr, w.cfg)
+            df = fr["df"]
+            ct = df["close_time"].to_numpy()
+            for t in np.flatnonzero((L | S) & (ct >= start) & (ct < now_ms)):
+                d = 1 if L[t] else -1
+                entry, atr = float(df["close"].iloc[t]), float(df["_atr"].iloc[t])
+                plan = sc.plan_trade(s, t, d, entry, atr, cols, w.cfg)
+                if plan is None:
+                    continue
+                reg_t = sc.regime_at(fr["reg"], tf, t)
+                if rfit.blocked(w.regime_fit, f"{sspec.key(s)}|{tf}", reg_t):
+                    continue
+                R, tps, split = plan
+                recs = {k: dict(label=v[0][t]) for k, v in fr["reg"].items()}
+                prog = s.get("program") or {}
+                cands.append(dict(label="TEST", coin=coin, d=d, tf=tf, strategy=s["id"], version=s["version"],
+                                  entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
+                                  max_hold=s.get("time_stop_bars"), test=stats, close_ms=int(ct[t]),
+                                  program=dict(name=prog.get("name"), version=prog.get("version")),
+                                  against=scx.against_daily(d, recs), m5=m5, key=None))
+    # in time order, exactly as live: merged per close, cooldown, the 5m candle, the daily cap
+    out, dropped, sent, reserved = [], [], [], {}
+    for close_ms in sorted({c["close_ms"] for c in cands}):
+        now_c = close_ms + 1
+        batch = [c for c in cands if c["close_ms"] == close_ms]
+        for c in batch:
+            c["key"] = scx.group_key(c)
+        batch = [c for c in batch if reserved.get(c["key"]) is None
+                 or now_c - reserved[c["key"]] >= w.SC["cooldown_minutes"] * 60_000]
+        for a in scx.merge(batch):
+            a["agree"] = scx.agreement(a, out[-20:], now_c, w.SC, others=batch)
+            m5 = a.pop("m5")
+            o, h, l, c = (np.asarray(m5[k], dtype=float) for k in ("open", "high", "low", "close"))
+            hold = int(a["max_hold"] or 0) * (sc.TF_MS[a["tf"]] // sc.TF_MS["5m"])
+
+            def plan_result(j0, entry):                # the plan's result from 5m bar j0 on (None = still open)
+                if j0 >= len(c):
+                    return None
+                tps = [x + entry - a["entry"] for x in a["tps"]]
+                r = sc.simulate_trade(o, h, l, c, j0, a["d"], entry, a["R"], w.cfg, max(1, hold), 5 / 60, tps=tps,
+                                      split=a["split"])
+                return None if r is None else dict(r=round(float(r["r"]), 2), reason=r["reason"])
+            res = c5m.check(m5, now_c, a["d"], a["entry"], a["entry"] - a["d"] * a["R"], w.S5) if w.SC["confirm_5m"] \
+                else dict(state=c5m.CONFIRMED, idx=c5m.first_bar(m5, now_c) - 1)
+            if res["state"] != c5m.CONFIRMED:          # what it would have done without the 5m check (next 5m open)
+                j0 = c5m.first_bar(m5, now_c)
+                dropped.append(dict(a, why=f"5m {res['state']}: {res['why']}",
+                                    without_5m=plan_result(j0, float(o[j0])) if j0 < len(o) else None))
+                continue
+            j = res["idx"]
+            shift = float(m5["close"][j]) - a["entry"]
+            a.update(entry=float(m5["close"][j]), tps=[x + shift for x in a["tps"]],
+                     sent_ms=int(m5["close_time"][j]) + 1)
+            if scx.sent_today(sent, a["sent_ms"]) >= w.SC["max_per_day"]:
+                dropped.append(dict(a, why="daily maximum reached"))
+                continue
+            reserved[a["key"]] = now_c
+            sent.append(a["sent_ms"])
+            a["result"] = plan_result(j + 1, a["entry"])
+            out.append(a)
+    for a in dropped:
+        a.pop("m5", None)
+    done = [a["result"]["r"] for a in out if a.get("result")]
+    unc = [a["without_5m"]["r"] for a in dropped if a.get("without_5m")]
+    days_seen = {scx.bj_day(a["sent_ms"]) for a in out}
+    summary = dict(alerts=len(out), finished=len(done), open=len(out) - len(done),
+                   won=sum(1 for r in done if r > 0), total_r=round(sum(done), 2),
+                   max_day=max([scx.sent_today([x["sent_ms"] for x in out], a["sent_ms"]) for a in out] or [0]),
+                   days_with_alerts=len(days_seen), not_confirmed=sum(1 for a in dropped if a["why"].startswith("5m")),
+                   capped=sum(1 for a in dropped if a["why"] == "daily maximum reached"),
+                   unconfirmed_finished=len(unc), unconfirmed_won=sum(1 for r in unc if r > 0),
+                   unconfirmed_total_r=round(sum(unc), 2))
+    return dict(alerts=out, dropped=dropped, days=days, summary=summary)
+
+
+def replay_text(rep):
+    s = rep["summary"]
+    lines = [f"Replay of the last {rep['days']} days with the 🔵 TEST alert rules (real OKX candles):",
+             f"  {s['alerts']} alert(s) on {s['days_with_alerts']} day(s), at most {s['max_day']} in one Beijing day; "
+             f"{s['not_confirmed']} setup(s) not confirmed by a 5m candle, {s['capped']} over the daily maximum",
+             f"  plan results: {s['finished']} finished ({s['won']} won, total {s['total_r']:+.2f}R after fees), "
+             f"{s['open']} still open",
+             f"  the setups the 5m check removed, if entered anyway: {s['unconfirmed_finished']} finished "
+             f"({s['unconfirmed_won']} won, total {s['unconfirmed_total_r']:+.2f}R after fees)", ""]
+    for a in rep["alerts"]:
+        when = dt.datetime.fromtimestamp(a["sent_ms"] / 1000, scx.BJ).strftime("%m-%d %H:%M")
+        res = a.get("result")
+        lines.append(f"  {when} BJ  {'LONG ' if a['d'] == 1 else 'SHORT'} {a['coin']:<5} {a['tf']:<4} "
+                     f"{a['strategy']:<24} " + (f"{res['r']:+.2f}R ({res['reason']})" if res else "open")
+                     + (" ⭐" if a.get("agree") else "") + (" ⚠️ vs 1D" if a.get("against") else ""))
+    return "\n".join(lines)
 
 
 def windows_guard():
@@ -1292,7 +1526,9 @@ def main():
     ap.add_argument("--offline", action="store_true", help="synthetic prices (code test, no internet)")
     ap.add_argument("--no-git", action="store_true", help="do not git pull every hour")
     ap.add_argument("--also", action="append", default=[], metavar="STATUS",
-                    help="code test only: also watch strategies with this status (e.g. BACKTESTING), labelled TEST")
+                    help="code test only: also watch strategies with this status (e.g. BACKTESTING), labelled CHECK")
+    ap.add_argument("--replay", type=int, default=None, metavar="DAYS",
+                    help="the Signal Center's safety check: replay the last DAYS days with the TEST alert rules")
     args = ap.parse_args()
     if args.setup_telegram:
         sys.exit(0 if setup_telegram() else 1)
@@ -1315,6 +1551,9 @@ def main():
     w = Watcher(feed, send=args.send or not args.once, git=not (args.no_git or args.offline or args.once),
                 also=args.also)
     if args.status:
+        return
+    if args.replay:
+        print(replay_text(replay(w, args.replay)))
         return
     if args.once:
         now = w.now_fn()

@@ -89,7 +89,7 @@ crash or a reboot.
 
 ## Commands and buttons in Telegram
 
-The bot answers `/status`, `/trades`, `/weather` (the market weather), `/pause` (`/pause 2h`), `/resume` and `/help`,
+The bot answers `/status`, `/trades`, `/weather` (the market weather), `/tests on|off` (🔵 TEST alerts, `docs/WINDOWS_WATCHER.md`), `/pause` (`/pause 2h`), `/resume` and `/help`,
 only in your own chat. Under
 each alert, **✅ Took it** makes the watcher follow the trade (TP1 → stop to entry, TP2 → stop to TP1, last TP, stop,
 time stop: the backtests' rules) and message you at each step; **❌ Skipped** is only recorded. Everything is saved

@@ -400,6 +400,19 @@ live_watcher:                # instant Telegram alerts at every 5m candle close 
   heartbeat_utc: "00:05"     # one "still running" message a day
   error_alert_after: 3       # Telegram warning after 3 failed checks in a row
 
+signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-09) - engine/signal_center.py.
+                             # 🔵 TEST alerts: a program strategy / version / timeframe on a coin where it was POSITIVE
+                             # in the 5-year backtest after fees (reports/program.json). Not paper, not proven: the
+                             # weekly review promotes the best to PAPER only with the operator's tap.
+  enabled: true
+  min_coin_trades: 20        # at least 20 backtest trades on that coin ...
+  min_avg_r: 0.0             # ... averaging above 0R after fees ...
+  test_min_trades: 5         # ... and its unseen last 30% not negative (when it holds >= 5 trades)
+  max_per_day: 10            # at most 10 TEST alerts a Beijing day (the strongest backtest evidence first)
+  cooldown_minutes: 240      # one TEST alert per coin + direction + strategy in 4 hours (versions / timeframes merged)
+  confirm_5m: true           # a 5m candle must confirm the entry first (confirm_5m: settings above)
+  agree_hours: 4             # ⭐ when another timeframe / strategy gave the same coin and direction within 4 hours
+
 dashboard:                   # Phase 18 D: the web dashboard (build_dashboard.py -> GitHub Pages, branch gh-pages)
   url: null                  # null = https://<owner>.github.io/<repo>/ ; the backtest chart links in approval packs
                              # and [ENTRY] / [EXIT] emails point there (set it if you use another address)

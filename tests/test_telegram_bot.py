@@ -186,7 +186,7 @@ class Bot(unittest.TestCase):
     def test_took_it_follows_the_trade_to_the_end_and_records_it(self):
         self.w.deliver([dict(alert(), size={}, risk_pct=0.5, zone_r=0.2, regimes={}, warnings=[])], self.now)
         text, buttons = self.sent[-1]
-        self.assertIn("PAPER LONG SOL", text)
+        self.assertIn("PAPER · LONG SOL", text)
         aid = buttons["inline_keyboard"][0][0]["callback_data"].split("|")[1]
         self.w.on_update(self.press(f"took|{aid}"), self.now)
         self.assertIn(aid, self.w.state["trades"])

@@ -94,17 +94,19 @@ def carry(prev_cells, skipped, reg_cells, prev_run):
 
 
 def coin_rows(per_coin, min_trades):
-    """{coin: {n, win_rate, avg_r, gross_avg_r, total_r, positive}} from {coin: trades}. gross = before fees and
-    funding (r + fees_r)."""
+    """{coin: {n, win_rate, avg_r, gross_avg_r, total_r, positive, test_n, test_avg_r}} from {coin: trades}. gross =
+    before fees and funding (r + fees_r); test = the coin's unseen last 30% (trades marked oos)."""
     out = {}
     for coin, tr in sorted(per_coin.items()):
         r = np.array([t["r"] for t in tr], dtype=float)
         g = np.array([t["r"] + t.get("fees_r", 0.0) for t in tr], dtype=float)
         n = len(r)
+        o = np.array([t["r"] for t in tr if t.get("oos")], dtype=float)     # the unseen last 30% of this coin
         out[coin] = dict(n=n, win_rate=round(float((r > 0).mean()) * 100, 1) if n else 0.0,
                          avg_r=round(float(r.mean()), 3) if n else 0.0,
                          gross_avg_r=round(float(g.mean()), 3) if n else 0.0,
-                         total_r=round(float(r.sum()), 1), positive=bool(n >= min_trades and r.mean() > 0))
+                         total_r=round(float(r.sum()), 1), positive=bool(n >= min_trades and r.mean() > 0),
+                         test_n=len(o), test_avg_r=round(float(o.mean()), 3) if len(o) else None)
     return out
 
 

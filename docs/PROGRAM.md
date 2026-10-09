@@ -9,8 +9,8 @@ and real money always needs the operator's "yes".
 | PR | What | Status |
 |---|---|---|
 | **1. Strategy lab** | 10 strategies × 4 versions, the 4H + 1H gate, 5 years of 30m / 15m history, nightly batches, results per coin after and before fees | **built 2026-10-09** |
-| 2. Signal Center | silent live tracking of every positive strategy / version / coin, 🔵 TEST alerts for the best (new layout, ✅ Took it / ❌ Skip / ℹ️ Details), `/tests on|off`, demo book, a 2-week replay check before switching on | next |
-| 3. Weekly review | weekly report per strategy / version / coin / market type before and after fees, honest confidence, new version ideas, promote to 🟡 PAPER with one tap (max 5, one per strategy per coin), demote weak ones, system check | after PR 2 |
+| 2. Signal Center | silent live tracking of every positive strategy / version / coin, 🔵 TEST alerts for the best (new layout, ✅ Took it / ❌ Skip / ℹ️ Details), `/tests on|off`, demo book, a 2-week replay check | **built 2026-10-09** |
+| 3. Weekly review | weekly report per strategy / version / coin / market type before and after fees, honest confidence, new version ideas, promote to 🟡 PAPER with one tap (max 5, one per strategy per coin), demote weak ones, system check | next |
 
 ## The 10 strategies
 
@@ -89,3 +89,24 @@ python research.py --program none     # the library only
 - Strategy 10 (crowding fade) has only about 1 year of funding / open-interest history: few backtest trades, it
   mostly has to prove itself live.
 - 15m results carry the most fees (about 0.18R a trade); 4H the least (about 0.04R).
+
+## The Signal Center (PR 2)
+
+- **Which pairs send 🔵 TEST alerts** (`config.yaml` → `signal_center`, `engine/signal_center.py`): a program cell on a
+  coin with at least 20 backtest trades, an average above 0R after fees and an unseen last part that is not negative
+  (`reports/program.json`). A cell already in 🟡 PAPER / 🟢 LIVE alerts with that label instead; a cell whose live
+  record failed it (20 signals averaging below -0.10R) stops.
+- **Live watcher**: on the real chart, long and short; 1W / 1D never block (⚠️ when against the daily); a 5m candle
+  must confirm (operator choice A); one alert per coin + direction + strategy (versions / timeframes merged, ⭐ when
+  another timeframe or strategy agrees within 4 hours); at most 10 a Beijing day; `/tests on|off`; ✅ Took it = demo
+  book (never in the loss limits); ℹ️ Details = the strategy, its rules, why / when it fails, its backtest.
+- **GitHub (silent tracking)**: the hourly scan records every TEST setup in `reports/signals_log.csv` as stage TEST
+  with the market type (`market_type`: the coin's verdict and its 1D / 4H / 1H labels) - without the 5m check, so the
+  weekly review can compare both. Never emailed, never in the position book or the risk limits. Bad live results
+  (20 signals below -0.10R) fail the cell, as for every strategy.
+- **Safety replay**: `windows\7_replay_test_alerts.bat` (`python live_watcher.py --replay 14`).
+- **First replay (2026-10-09, BTC, the BTC-only backtest of the PR 1 measurement)**: 12 BTC cells qualified; in 14
+  days 15 setups, 3 confirmed by the 5m candle (+0.17R together), the 12 the 5m check removed would have made +3.91R -
+  far too few trades to judge either way. No short setup passed the gate during the 6-9 Oct fall: the 1H regime was
+  STRONG_BEAR but the 4H regime only UNCLEAR / TRANSITION (the regime classifier is slow to call a 4H bear).
+
