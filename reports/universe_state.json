@@ -13,7 +13,7 @@
  "suspended": {
   "OGN": "2026-10-09"
  },
- "runs": 315,
+ "runs": 316,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -25,6 +25,7 @@
   ],
   "LTC": [],
   "ONDO": [
+   "thin_book",
    "volume_7d"
   ],
   "BNB": [],
@@ -98,6 +99,7 @@
   ],
   "OGN": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
