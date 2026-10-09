@@ -11682,3 +11682,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 09:00,BNB,15m,FVG_RETRACE,bear,,743.14,744.14,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-09 09:00,BNB,15m,FVG_FILLED,bear,,743.14,744.14,,London,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-09 08:45,SUI,15m,FVG_FILLED,bull,,1.0696,1.0733,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-09 10:15,ETH,15m,FVG_RETRACE,bull,,2500.0,2501.67,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 10:15,ETH,15m,FVG_FILLED,bull,,2500.0,2501.67,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 10:00,ZEC,30m,WEAK_BREAK,bull,1232.51,,,0.078,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-09 10:00,ZEC,15m,CHOCH,bull,1232.51,,,0.137,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-10-09 10:00,ZEC,15m,ORDER_BLOCK,bull,,1223.41,1227.68,,,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance

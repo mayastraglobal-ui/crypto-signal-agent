@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-09 09:22",
+ "utc": "2026-10-09 10:22",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -15,9 +15,9 @@
  },
  "breadth": {
   "UP": 0,
-  "DOWN": 2,
+  "DOWN": 3,
   "RANGE": 0,
-  "CHOPPY": 5
+  "CHOPPY": 4
  },
  "coins": [
   {
@@ -34,7 +34,7 @@
    "adx": {
     "1d": 40.0,
     "4h": 37.0,
-    "1h": 29.0
+    "1h": 27.0
    },
    "vol": {
     "atr_pct": 2.47,
@@ -52,10 +52,10 @@
    },
    "crowd": {
     "funding_pct": 0.0007,
-    "oi_24h_pct": -2.6,
+    "oi_24h_pct": -3.1,
     "label": "neutral"
    },
-   "change_24h": -0.48
+   "change_24h": -0.38
   },
   {
    "coin": "BNB",
@@ -71,7 +71,7 @@
    "adx": {
     "1d": 28.0,
     "4h": 34.0,
-    "1h": 35.0
+    "1h": 34.0
    },
    "vol": {
     "atr_pct": 3.01,
@@ -89,10 +89,10 @@
    },
    "crowd": {
     "funding_pct": -0.0186,
-    "oi_24h_pct": -2.7,
+    "oi_24h_pct": -3.1,
     "label": "leaning short"
    },
-   "change_24h": -3.25
+   "change_24h": -3.42
   },
   {
    "coin": "ETH",
@@ -108,7 +108,7 @@
    "adx": {
     "1d": 37.0,
     "4h": 45.0,
-    "1h": 37.0
+    "1h": 35.0
    },
    "vol": {
     "atr_pct": 3.24,
@@ -126,26 +126,26 @@
    },
    "crowd": {
     "funding_pct": -0.0085,
-    "oi_24h_pct": -8.0,
+    "oi_24h_pct": -8.1,
     "label": "neutral"
    },
-   "change_24h": -2.18
+   "change_24h": -2.42
   },
   {
    "coin": "SOL",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
-   "why": "timeframes disagree (1D WEAK_BULL, 4H WEAK_BEAR, 1H TRANSITION)",
+   "verdict": "DOWN",
+   "permission": "SHORT allowed",
+   "why": "4H/1H bearish, 1W WEAK_BULL",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "WEAK_BULL",
     "4h": "WEAK_BEAR",
-    "1h": "TRANSITION"
+    "1h": "WEAK_BEAR"
    },
    "adx": {
     "1d": 41.0,
     "4h": 37.0,
-    "1h": 43.0
+    "1h": 41.0
    },
    "vol": {
     "atr_pct": 4.43,
@@ -163,26 +163,26 @@
    },
    "crowd": {
     "funding_pct": -0.0052,
-    "oi_24h_pct": -5.0,
+    "oi_24h_pct": -5.8,
     "label": "neutral"
    },
-   "change_24h": -3.79
+   "change_24h": -4.12
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H WEAK_BEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "WEAK_BEAR"
+    "1h": "TRANSITION"
    },
    "adx": {
     "1d": 40.0,
     "4h": 29.0,
-    "1h": 34.0
+    "1h": 32.0
    },
    "vol": {
     "atr_pct": 9.88,
@@ -200,10 +200,10 @@
    },
    "crowd": {
     "funding_pct": -0.0059,
-    "oi_24h_pct": -10.0,
+    "oi_24h_pct": -9.9,
     "label": "neutral"
    },
-   "change_24h": -4.97
+   "change_24h": -5.31
   },
   {
    "coin": "XRP",
@@ -219,7 +219,7 @@
    "adx": {
     "1d": 40.0,
     "4h": 40.0,
-    "1h": 27.0
+    "1h": 25.0
    },
    "vol": {
     "atr_pct": 4.86,
@@ -237,10 +237,10 @@
    },
    "crowd": {
     "funding_pct": -0.0084,
-    "oi_24h_pct": -5.1,
+    "oi_24h_pct": -6.6,
     "label": "neutral"
    },
-   "change_24h": -0.72
+   "change_24h": -0.96
   },
   {
    "coin": "ZEC",
@@ -256,7 +256,7 @@
    "adx": {
     "1d": 35.0,
     "4h": 25.0,
-    "1h": 23.0
+    "1h": 22.0
    },
    "vol": {
     "atr_pct": 9.96,
@@ -274,13 +274,13 @@
    },
    "crowd": {
     "funding_pct": -0.0032,
-    "oi_24h_pct": 2.6,
+    "oi_24h_pct": 6.8,
     "label": "neutral"
    },
-   "change_24h": -0.32
+   "change_24h": 0.48
   }
  ],
- "alts_vs_btc_24h": -2.23,
+ "alts_vs_btc_24h": -2.54,
  "fear_greed": {
   "value": 59,
   "label": "Greed",
@@ -290,7 +290,7 @@
   {
    "start_utc": "2026-10-14 12:30",
    "name": "US CPI (Sep data)",
-   "hours": 123.1
+   "hours": 122.1
   }
  ],
  "blackout_now": [],
@@ -303,5 +303,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-09 09:22 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: quiet (daily range 2.5%, higher than 16% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (80,029 \u2013 83,480) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0007%/8h, open interest -2.6% in 24h)\nAltcoins vs BTC (24h): -2.2%\nMood (Fear & Greed): Greed 59\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy \u00b7 leaning short\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udd34 ZEC: trend down\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 2026-10-09 10:22 UTC</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D WEAK_BULL \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: quiet (daily range 2.5%, higher than 16% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (80,029 \u2013 83,480) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0007%/8h, open interest -3.1% in 24h)\nAltcoins vs BTC (24h): -2.5%\nMood (Fear & Greed): Greed 59\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy \u00b7 leaning short\n\u26aa ETH: choppy\n\ud83d\udd34 SOL: trend down\n\u26aa SUI: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udd34 ZEC: trend down\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 2026-10-14 12:30 UTC\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
