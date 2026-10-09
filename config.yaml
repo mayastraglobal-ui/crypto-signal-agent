@@ -413,6 +413,21 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   confirm_5m: true           # a 5m candle must confirm the entry first (confirm_5m: settings above)
   agree_hours: 4             # ⭐ when another timeframe / strategy gave the same coin and direction within 4 hours
 
+weekly_review:               # Forward Test Program PR 3 - engine/weekly_review.py, reports/weekly_review.md (hourly;
+                             # final on Sunday from 04:00 UTC, then the live watcher sends it to Telegram)
+  promote_min_trades: 10     # a TEST pair (strategy / version / timeframe / coin) is a promotion candidate after 10
+  promote_min_avg_r: 0.0     # closed live setups averaging above 0R AFTER fees, with a positive backtest on that coin
+  paper_max: 5               # at most 5 pairs in PAPER through promotions, one per program strategy per coin
+  demote_min_trades: 10      # a promoted pair goes back to TEST by itself when its last 10 paper signals ...
+  demote_below_r: 0.0        # ... average below 0R after fees
+  idea_min_trades: 10        # ideas for new versions need 10+ live trades in the group they talk about
+
+# PROMOTIONS (PR 3): TEST -> PAPER, the operator's decision. Tap "Promote" under the weekly review in Telegram (with
+# journal sync on, GitHub applies it in the next research run), or add a line here. PAPER = practice alerts on that
+# coin only; LIVE still needs the full pass bar, 20 good paper signals and an approvals line. Example:
+#   - {strategy: P01-BREAKOUT-V2, version: "1.0", tf: 1h, coin: BTC, date: 2026-10-18}
+promotions: []
+
 dashboard:                   # Phase 18 D: the web dashboard (build_dashboard.py -> GitHub Pages, branch gh-pages)
   url: null                  # null = https://<owner>.github.io/<repo>/ ; the backtest chart links in approval packs
                              # and [ENTRY] / [EXIT] emails point there (set it if you use another address)

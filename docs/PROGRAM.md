@@ -10,7 +10,7 @@ and real money always needs the operator's "yes".
 |---|---|---|
 | **1. Strategy lab** | 10 strategies × 4 versions, the 4H + 1H gate, 5 years of 30m / 15m history, nightly batches, results per coin after and before fees | **built 2026-10-09** |
 | 2. Signal Center | silent live tracking of every positive strategy / version / coin, 🔵 TEST alerts for the best (new layout, ✅ Took it / ❌ Skip / ℹ️ Details), `/tests on|off`, demo book, a 2-week replay check | **built 2026-10-09** |
-| 3. Weekly review | weekly report per strategy / version / coin / market type before and after fees, honest confidence, new version ideas, promote to 🟡 PAPER with one tap (max 5, one per strategy per coin), demote weak ones, system check | next |
+| 3. Weekly review | weekly report per strategy / version / coin / market type before and after fees, honest confidence, new version ideas, promote to 🟡 PAPER with one tap (max 5, one per strategy per coin), demote weak ones, system check | **built 2026-10-09** |
 
 ## The 10 strategies
 
@@ -119,3 +119,26 @@ python research.py --program none     # the library only
   V5 gave 15 short setups on 8-9 Oct where the old gate gave none. With the 5m check 4 went out and all 4 were
   stopped (-5.0R, BTC bounced 81,000 -> 83,000 on 9 Oct); without it the 16 V5 setups were about flat (-0.66R).
   One coin, two weeks: no conclusion - the 5-year backtest of V5 (tested with its strategy each rotation) decides.
+
+## The weekly review (PR 3)
+
+- **The report** (`engine/weekly_review.py`, `config.yaml` → `weekly_review`): `reports/weekly_review.md|json`,
+  rewritten by every hourly scan, final on Sunday from 04:00 UTC (12:00 Beijing). It shows, for every program
+  strategy / version / timeframe / coin with live results: TEST and PAPER trades, win %, average R **after fees** and
+  **before fees**, this week, by market type (the coin's verdict at each setup), the 5-year backtest on that coin, and
+  an **honest confidence** line ("+0.30R over 12 trades: still uncertain - could be luck"). Also: with vs without
+  the 5m check, ideas for new versions, and a **system check** (research every night, the hourly scan, the program
+  rotation, the watcher's journal).
+- **Promote to 🟡 PAPER** - candidates: 10+ closed live TEST setups, positive after fees, positive backtest on that
+  coin; the best evidence first; at most 5 pairs in PAPER, one per strategy per coin. **Your tap**: on Sunday the
+  live watcher sends the review to Telegram with a "🟡 Promote" button per candidate. With journal sync on, the tap
+  reaches GitHub (`journal/decisions.csv` on the branch `journal`) and the next nightly research makes that cell PAPER
+  **on that coin only** (its other positive coins stay TEST). Without journal sync the bot sends you the line to add
+  under `promotions:` in `config.yaml`.
+- **Demote** (automatic, the safe direction): a promoted pair whose last 10 paper signals average below 0R goes back
+  to 🔵 TEST by itself.
+- **LIVE is not easier**: a cell that is PAPER only because of a promotion is never eligible for approval from that -
+  LIVE still needs the full backtest pass bar, 20 good paper signals and your approvals line.
+- **Telegram**: `/review` shows the newest review any time. The Sunday weekly email has a "Forward Test Program"
+  part. Claude's weekly research (`tasks/weekly_research.md`, step 7b) explains it in plain words and may turn ONE of
+  the review's ideas into a new lab version (one change, tested like every card).

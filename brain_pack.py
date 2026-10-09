@@ -582,6 +582,8 @@ def pack(kind, now, live=None):
         out += [f"- {k}: {'beats' if c.get('beats_twin') else 'does not beat' if c.get('beats_twin') is False else 'too few trades vs'} "
                 f"its twin" for k, c in sorted(cells.items()) if c.get("beats_twin") is not None or c.get("twin_same_window")][:30]
     out += journal_lines()
+    if kind in ("weekly", "daily"):
+        out += program_review_lines(kind)
     out += edge_lines_for(research)
     out += lab_lines(now, research)
     out += factory_lines(now, research)
@@ -613,6 +615,16 @@ def weather_lines(rep):
     """Upgrade 10: the market weather (engine/weather.py, in the hourly scan's latest.json)."""
     from engine import weather as wx
     return ["", "## Market weather (what kind of day it is - explains, never a signal)"] + wx.md_lines((rep or {}).get("weather"))
+
+
+def program_review_lines(kind):
+    """PR 3: the Forward Test Program's weekly review (reports/weekly_review.md, written by the hourly scan)."""
+    text = read(os.path.join(REPORTS, "weekly_review.md"))
+    if not text:
+        return ["", "## Forward Test Program review", "- not built yet (reports/weekly_review.md)"]
+    body = text.split("\n", 1)[1] if kind == "weekly" else text.split("## Every live")[0].split("\n", 1)[1]
+    return ["", "## Forward Test Program review (reports/weekly_review.md - TEST / PAPER live results, "
+                "promotion candidates, ideas)", body.strip()]
 
 
 def journal_lines():

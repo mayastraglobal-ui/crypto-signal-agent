@@ -83,6 +83,20 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
    any strategy where paper or live is clearly worse than the backtest, and what it may mean.
 7. **Timeframe models.** Say which timeframes work for which strategy families, from the scoreboard numbers,
    and where the sample is still too small.
+7b. **Forward Test Program review** (fact sheet "Forward Test Program review" = `reports/weekly_review.md`). Write
+   `## Forward Test Program` in plain words for the operator (a beginner):
+   - the week in 3 lines: TEST setups and their result after fees, PAPER, and the system check (say clearly if a
+     part did not run);
+   - for each promotion candidate: why it qualifies (live trades, after fees, the backtest on that coin), the honest
+     confidence line as written, and what could still go wrong. **Never tell the operator to promote** - they tap
+     "Promote" in Telegram (or add the `promotions:` line); you only explain;
+   - demotions and what they mean;
+   - with vs without the 5m check, and before vs after fees - what the numbers say, and where the sample is too
+     small;
+   - the review's "Ideas for new versions": pick at most ONE that has the evidence, and if it fits the lab rules add
+     it as a lab card in step 3 (a new version of a program card = a NEW id in `strategies_lab.yaml`, e.g.
+     `P01-BREAKOUT-V2-NOCHOP`, ONE change, `parent: "result: <id>@<version> <tf>"`, factory `failure` or
+     `market_structure` as fits). Never edit `strategies_program.yaml`.
 8. **Approval packs.** For each eligible strategy in the fact sheet:
    - summarise its pack in 5 plain lines: strengths, weaknesses, and what could go wrong - start from the pack's
      `Bull case`, `Bear case` and `Risk manager` lines (a VETO means: not now);
@@ -100,6 +114,7 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
    - `## Candidates (added to the lab)`
    - `## Event calendar`
    - `## Market mechanics and edges`
+   - `## Forward Test Program` (step 7b)
    - `## Backtest vs paper vs live`
    - `## Timeframe models`
    - `## Approval packs`

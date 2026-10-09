@@ -78,6 +78,7 @@ JOURNAL = os.path.join(ROOT, "journal", "my_trades.csv")            # local only
 JOURNAL_COLS = ["time_utc", "alert_id", "event", "label", "coin", "side", "tf", "strategy", "version", "entry", "stop",
                 "tp1", "tp2", "tp3", "price", "result_r"]
 JOURNAL_BRANCH = "journal"           # journal sync: the GitHub branch that holds a copy of journal/my_trades.csv
+DECISIONS = os.path.join(ROOT, "journal", "decisions.csv")   # PR 3: the operator's taps under the weekly review
 SHADOW_DAYS = 14                     # a silent plan follow-up still open after 14 days is dropped
 RESULT_HINT = ("\n📒 Send your real result: <b>/result 1.2</b> (in R after fees: -1 = full stop lost, 2 = twice your "
                "risk). It teaches the agent how the plan works for you.")
@@ -90,11 +91,13 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("main", "reports/market_weather.json"), ("main", "reports/program.json"),
+              ("main", "reports/weekly_review.json"), ("main", "reports/promotions_state.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
-              "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py"]    # changed -> "run update.bat"
+              "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
+              "engine/weekly_review.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -346,8 +349,8 @@ class JournalSync:
     Only this one file is ever written, on its own branch; main is never touched."""
     API = "https://api.github.com"
 
-    def __init__(self, path=None, repo=REPO, http=None):
-        self.path, self.repo = path, repo
+    def __init__(self, path=None, repo=REPO, http=None, remote="journal/my_trades.csv"):
+        self.path, self.repo, self.remote = path, repo, remote
         self.http = http or (lambda method, url, **kw: requests.request(method, url, timeout=30, **kw))
         self.sent = None          # the bytes last uploaded
         self.sha = None           # the file's blob sha on the branch (needed to replace it)
@@ -396,20 +399,21 @@ class JournalSync:
             with open(self.path, "rb") as f:
                 data = f.read()
         except OSError:
-            data = ",".join(jr.COLS).encode() + b"\n" if force else None
+            data = ",".join(jr.COLS if self.remote.endswith("my_trades.csv") else jr.DECISION_COLS).encode() + b"\n" \
+                if force else None
         if data is None or (data == self.sent and not force):
             return True, "unchanged"
         try:
             self._branch()
             for attempt in range(2):
                 if self.sha is None:
-                    code, cur = self._call("GET", f"/contents/journal/my_trades.csv?ref={JOURNAL_BRANCH}")
+                    code, cur = self._call("GET", f"/contents/{self.remote}?ref={JOURNAL_BRANCH}")
                     self.sha = cur.get("sha") if code == 200 else None
                 body = dict(message=f"Journal {dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc):%Y-%m-%d %H:%M} UTC",
                             content=base64.b64encode(data).decode(), branch=JOURNAL_BRANCH)
                 if self.sha:
                     body["sha"] = self.sha
-                code, res = self._call("PUT", "/contents/journal/my_trades.csv", json=body)
+                code, res = self._call("PUT", f"/contents/{self.remote}", json=body)
                 if code in (200, 201):
                     self.sha, self.sent = (res.get("content") or {}).get("sha"), data
                     rows = max(0, data.count(b"\n") - 1)
@@ -448,6 +452,7 @@ class Watcher:
         self.code_old = []        # watcher code files that differ from GitHub main
         self._poll_err = None
         self.jsync = JournalSync(JOURNAL)
+        self.dsync = JournalSync(DECISIONS, remote="journal/decisions.csv")     # PR 3: promote taps
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -479,7 +484,8 @@ class Watcher:
         # 5-year backtest (reports/program.json) - only where the cell does not already alert as PAPER / LIVE
         self.program = self._json("reports/program.json")
         self.weather = self._json("reports/market_weather.json")
-        self.tests = scx.test_list(self.program, reg["cells"], self.SC)
+        self.promoted = (self._json("reports/promotions_state.json") or {}).get("active") or {}   # PR 3
+        self.tests = scx.test_list(self.program, reg["cells"], self.SC, self.promoted)
         have = {(sspec.key(s), tf) for s, tf, _ in self.watch}
         for s in cards:
             for tf in s["timeframes"]:
@@ -540,6 +546,8 @@ class Watcher:
                                  "<b>windows\\4_update.bat</b> (it stops the watcher, updates it and starts it again).")
         self.last_refresh = (self.now_fn(), note)
         self.reload()
+        if self.send:
+            self.weekly_review(self.now_fn())
 
     # ---- local state (duplicate guard, heartbeat) ----
     def _load_state(self):
@@ -552,7 +560,7 @@ class Watcher:
         # shadow: every alert followed silently by the plan's rules (its "plan" result goes to the journal)
         # tests_on: 🔵 TEST alerts on / off (/tests) · test_sent: when each TEST alert went out (the daily cap)
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
-                         next_id=0, shadow={}, tests_on=True, test_sent=[]).items():
+                         next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None).items():
             st.setdefault(k, v)
         return st
 
@@ -859,6 +867,9 @@ class Watcher:
             return "▶️ New trade alerts are on again."
         if cmd == "result":
             return self.result(arg, now_ms)
+        if cmd == "review":
+            rv = self._json("reports/weekly_review.json")
+            return (rv or {}).get("telegram") or "📊 No weekly review yet - GitHub's hourly scan writes it."
         if cmd == "tests":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -884,6 +895,8 @@ class Watcher:
 
     def on_button(self, cq, now_ms):
         action, _, aid = (cq.get("data") or "").partition("|")
+        if action == "promo":                        # PR 3: a tap under the weekly review
+            return self.on_promote(cq, aid, now_ms)
         a = self.state["alerts"].get(aid)
         toast = ""
         if a is None:
@@ -953,6 +966,63 @@ class Watcher:
         return (f"📒 Recorded: your result {r:+.2f}R · {'LONG' if x['d'] == 1 else 'SHORT'} {x['coin']} {x['tf']} "
                 f"{x['strategy']}{plan}. It goes into the weekly review of your trades.")
 
+    # ---- PR 3: the weekly review in Telegram, and the operator's promote taps ----
+    def weekly_review(self, now_ms):
+        """Send the final weekly review once (Sunday, from 04:00 UTC), with one Promote button per candidate."""
+        rv = self._json("reports/weekly_review.json")
+        if not rv or not rv.get("final") or rv.get("week") == self.state.get("review_week"):
+            return False
+        self.state["review_week"] = rv["week"]
+        self.state["review"] = dict(week=rv["week"], promote=[
+            dict(key=p["key"], coin=p["coin"], name=f"{p['key'].split('@')[0]} {p['tf']} {p['coin']}")
+            for p in rv.get("promote") or []])
+        rows = [[{"text": f"🟡 Promote {i + 1}: {p['name']}"[:60], "callback_data": f"promo|{i}"}]
+                for i, p in enumerate(self.state["review"]["promote"])]
+        self.say(rv.get("telegram") or "📊 Weekly review ready.", {"inline_keyboard": rows} if rows else None)
+        self._save_state()
+        return True
+
+    def on_promote(self, cq, idx, now_ms):
+        rv = self.state.get("review") or {}
+        try:
+            p = (rv.get("promote") or [])[int(idx)]
+        except (ValueError, IndexError):
+            p = None
+        if p is None:
+            toast = "This weekly review is no longer current."
+        else:
+            row = [dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M"), rv["week"],
+                   "promote", p["key"], p["coin"]]
+            try:
+                os.makedirs(os.path.dirname(DECISIONS), exist_ok=True)
+                new = not os.path.exists(DECISIONS)
+                with open(DECISIONS, "a", newline="", encoding="utf-8") as f:
+                    w = csv.writer(f)
+                    if new:
+                        w.writerow(jr.DECISION_COLS)
+                    w.writerow(row)
+            except OSError as e:
+                log(f"decision not written: {e}")
+            ok, note = self.dsync.push(now_ms)
+            sid, rest = p["key"].split("@", 1)
+            ver, tf = rest.split("|")
+            if ok and note != "off":
+                toast = "Promoted - GitHub applies it in the next research run."
+                self.say(f"🟡 Promoted: {p['name']}. GitHub's next nightly research run makes it PAPER on {p['coin']} "
+                         "(practice alerts, 🟡). LIVE still needs 20 good paper signals, the full pass bar and your "
+                         "approval line.")
+            else:
+                toast = "Recorded on this PC - add the line to config.yaml (see the message)."
+                self.say(f"🟡 Recorded on this PC, but GitHub cannot see it: journal sync is off "
+                         f"({'no token' if note == 'off' else note}). Either set it up (windows\\6_journal_sync.bat) "
+                         "or add this line under <code>promotions:</code> in config.yaml on GitHub:\n"
+                         f"<code>  - {{strategy: {sid}, version: \"{ver}\", tf: {tf}, coin: {p['coin']}, "
+                         f"date: {row[0][:10]}}}</code>")
+        if self.send:
+            tg_api("answerCallbackQuery", dict(callback_query_id=cq.get("id"), text=toast))
+        self._save_state()
+        return toast
+
     def status_text(self, now_ms):
         day = lv.boundary(now_ms, "1d")
         return lv.status_text(dict(
@@ -1009,6 +1079,9 @@ class Watcher:
             stats = (self.tests.get(f"{sspec.key(s)}|{tf}") or {}).get(coin) if label == "TEST" else None
             if label == "TEST" and (stats is None or not self.state.get("tests_on", True)):
                 continue                             # TEST: only on the coins where the backtest was positive
+            promo = self.promoted.get(f"{sspec.key(s)}|{tf}")
+            if label == "PAPER" and promo is not None and coin not in promo:
+                continue                             # PR 3: PAPER by your tap - only on the promoted coins
             df, t = fr["df"], fr["n"] - 1
             if int(df["close_time"].iloc[t]) != b - 1:              # the candle that just closed must be there
                 log(f"{coin} {tf}: newest candle not in yet - skipped this close")

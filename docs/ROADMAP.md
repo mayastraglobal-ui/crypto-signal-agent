@@ -33,6 +33,7 @@ and targets, instantly.
 | 2026-10-06 | Journal sync: the operator's trades reach GitHub (branch `journal`), plan result of every alert, `/result`, "Your own trades" in the weekly email |
 | 2026-10-08 | Upgrade 10 "Market weather": `engine/weather.py`, `reports/market_weather.json`, Telegram `/weather`, the 08:20 briefing email, Claude's fact sheets |
 | 2026-10-09 | Forward Test Program PR 1 "Strategy lab": 10 strategies × 4 versions (`strategies_program.yaml`), the 4H + 1H gate (1W / 1D context only), 5 years of 30m / 15m history, nightly batches, `reports/program.md` (per coin, after and before fees) - `docs/PROGRAM.md` |
+| 2026-10-09 | Forward Test Program PR 3 "weekly review": `reports/weekly_review.md` (live TEST / PAPER per strategy / version / coin, after and before fees, by market type, honest confidence, 5m comparison, ideas, system check), promote with a Telegram tap (max 5, one per strategy per coin), automatic demotion, `/review`, weekly email part |
 | 2026-10-09 | Forward Test Program V5: the fast 4H trend (4H EMA20 / EMA50) gate on the 7 trend strategies' faster timeframes (`gate: intraday_fast`) |
 | 2026-10-09 | Forward Test Program PR 2 "Signal Center": 🔵 TEST alerts (positive pairs, 5m check, merged, ⭐, ⚠️ vs daily, max 10 a day), new alert layout with $ and ℹ️ Details, `/tests on|off`, demo book, `/weather` in Beijing time, TEST setups recorded on GitHub, `7_replay_test_alerts.bat` |
 
@@ -46,7 +47,7 @@ promotes the best to 🟡 PAPER each week (the operator's one tap), 20 good pape
    mark), the new alert layout (✅ Took it / ❌ Skip / ℹ️ Details, $ size, margin at 3x, stop / TP1 in $, past win
    chance), `/tests on|off`, demo book (TEST trades never touch the loss limits), market type saved per alert,
    `/weather` in Beijing time, a 2-week replay check before switching on.
-3. **PR 3 - weekly review**: per strategy / version / coin / market type before and after fees, honest confidence,
+3. **PR 3 - weekly review** (**built 2026-10-09**): per strategy / version / coin / market type before and after fees, honest confidence,
    automatic version ideas, promote (>= 10 live trades, positive after fees, one tap) / demote, max 5 in paper (one
    per strategy per coin), a system check at the top.
 4. Still needed before the first real-money strategy: the $1000 account replay and the LIVE health check.
@@ -166,6 +167,7 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
 | After the next research email | Compare the playbook versions (originals vs -LDN / -15M / -W20 / -LIMIT / -GRADED / -APLUS) |
 | On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
 | After PR 1 is merged | Nothing to do: the research run tests 2 program strategies a night; read `reports/program.md` after ~5 nights |
+| Sundays from 12:00 Beijing | Read the weekly review in Telegram (`/review` any time); tap "🟡 Promote" for a candidate you want in PAPER (journal sync on), or add its line under `promotions:` in `config.yaml` |
 | After PR 2 is merged | `windows\4_update.bat`; TEST alerts start by themselves as the nightly research finds positive pairs (`/tests off` stops them). Optional: `windows\7_replay_test_alerts.bat` |
 | Later | Approve a strategy when the weekly email shows 20 good paper trades (copy its approval line) |
 | Optional | If the old Claude tasks still exist in the Claude desktop app, delete them (the cloud Routines replace them) |
