@@ -126,3 +126,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START RLC 1d data: DEGRADED: volume 103x normal on candle 10-06 00:00 UTC (possible bad data); DEGRADED: volume 50x normal on candle 10-08 00:00 UTC (possible bad data)
 - timestamp: 2026-10-09 13:23 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: RLC · timeframe: - · regime: - · review: 2026-11-08
   - signals from this data are blocked while it lasts
+
+### END OGN 1d data: DEGRADED: volume 83x normal on candle 10-08 00:00 UTC (possible bad data)
+- timestamp: 2026-10-09 14:23 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: OGN · timeframe: - · regime: - · review: 2026-11-08
+  - problem first seen 2026-10-09 00:32 UTC UTC

@@ -1,10 +1,8 @@
 {
  "issues": {
-  "data|OGN|1d": "OGN 1d data: DEGRADED: volume 83x normal on candle 10-08 00:00 UTC (possible bad data)",
   "data|RLC|1d": "RLC 1d data: DEGRADED: volume 103x normal on candle 10-06 00:00 UTC (possible bad data); DEGRADED: volume 50x normal on candle 10-08 00:00 UTC (possible bad data)"
  },
  "since": {
-  "data|OGN|1d": "2026-10-09 00:32 UTC",
   "data|RLC|1d": "2026-10-09 13:23 UTC"
  },
  "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
