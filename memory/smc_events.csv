@@ -11671,3 +11671,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 07:45,SUI,15m,FVG_RETRACE,bear,,1.0739,1.0951,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-09 08:00,SUI,15m,FVG,bull,,1.0696,1.0733,0.649,London,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-09 08:15,SUI,15m,FVG_RETRACE,bull,,1.0696,1.0733,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-09 09:15,ETH,15m,FVG,bull,,2500.0,2501.67,0.282,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 08:30,SOL,15m,BOS,bear,110.21,,,0.052,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-09 08:45,SOL,15m,FVG_FILLED,bull,,110.13,110.34,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 08:45,SOL,15m,FVG,bear,,110.29,110.44,0.4,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 09:00,SOL,15m,FVG_RETRACE,bear,,110.29,110.44,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 09:00,SOL,15m,FVG_FILLED,bear,,110.29,110.44,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 09:00,ZEC,1h,BREAKER_RETEST,bull,,1199.39,1222.02,,London,4h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-09 08:45,BNB,15m,FVG,bear,,743.14,744.14,0.607,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-09 09:00,BNB,15m,FVG_RETRACE,bear,,743.14,744.14,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-09 09:00,BNB,15m,FVG_FILLED,bear,,743.14,744.14,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-09 08:45,SUI,15m,FVG_FILLED,bull,,1.0696,1.0733,,London,1h,WEAK_BEAR,,smc-1.0,Binance
