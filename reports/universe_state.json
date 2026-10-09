@@ -11,10 +11,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "MET": "2026-10-08",
-  "OGN": "2026-10-08"
+  "OGN": "2026-10-09"
  },
- "runs": 314,
+ "runs": 315,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,14 +25,12 @@
   ],
   "LTC": [],
   "ONDO": [
-   "thin_book"
+   "volume_7d"
   ],
   "BNB": [],
   "UNI": [],
   "SUI": [],
-  "AVAX": [
-   "volume_7d"
-  ],
+  "AVAX": [],
   "ENA": [
    "volume_7d"
   ],
@@ -144,6 +141,8 @@
    "data_degraded"
   ],
   "MET": [],
-  "OGN": []
+  "OGN": [
+   "data_degraded"
+  ]
  }
 }

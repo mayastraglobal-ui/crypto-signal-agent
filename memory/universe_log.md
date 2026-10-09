@@ -472,3 +472,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-08 20:21 UTC
 - **EXCLUDED** OGN - 7-day average volume $3M < $50M; 24h move +120.7% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $28k within 1% (need $250k)
+
+## 2026-10-09 00:32 UTC
+- **ELIGIBLE** AVAX - passes every rule again
+- **FLAG** OGN - price data DEGRADED - stays in the list, but no signals
+- **EXCLUDED** ONDO - 7-day average volume $26M < $50M
