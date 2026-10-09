@@ -55,7 +55,9 @@ Each version differs from V1 in **one** way, so the results show what each chang
 - **Same tests as every strategy**: fees and funding of OKX futures, walk-forward, costs +50%, every number ±20%, at
   least 3 positive coins, the trials counter (luck bar), the bias check. Nothing is lowered.
 - **History**: 4H / 1H since 2017 (Binance spot), 30m / 15m **5 years** (OKX perpetuals, Binance spot before a
-  coin's OKX listing), 5m 2 years (only for entry confirmation).
+  coin's OKX listing; a younger coin has less - SUI since May 2023), 5m 2 years (only for entry confirmation).
+- **5m entry confirmation** (operator decision 2026-10-09, option A): not part of the backtest cards; PR 2 adds it to
+  the live TEST alerts (an alert waits for a confirming 5m candle).
 - **Nightly batches** (`config.yaml` → `program`): 2 strategies (all 4 versions, all timeframes) per night, the ones
   tested longest ago first, so the first full pass takes **5 nights** and then it keeps rotating. A strategy with a
   version in VALIDATION / PAPER_TRADING is tested every night. A strategy not tested tonight keeps its status and
