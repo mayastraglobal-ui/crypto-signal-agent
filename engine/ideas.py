@@ -154,7 +154,7 @@ def variant_cards(cells, cards, today, n_max, labels, trade_order, existing=()):
         if parent is None or key in parents or parent.get("twin_of") or sspec.special(parent):
             continue
         raw = {k: copy.deepcopy(v) for k, v in (parent.get("_raw") or parent).items()
-               if not k.startswith("_") and k not in ("lab", "control_twin", "twin_of")}
+               if not k.startswith("_") and k not in ("lab", "control_twin", "twin_of", "program")}
         for kind, what, change in _variants(raw, cell, trade_order):
             vid = f"{parent['id']}-V{kind}"
             if vid in ids:
@@ -219,7 +219,7 @@ def simpler_cards(cells, cards, today, n_max, labels, trade_order, existing=()):
             skipped.setdefault(ck, "the week's variant_search quota is used up - queued again next run")
             continue
         raw = {k: copy.deepcopy(v) for k, v in (parent.get("_raw") or parent).items()
-               if not k.startswith("_") and k not in ("lab", "control_twin", "twin_of")}
+               if not k.startswith("_") and k not in ("lab", "control_twin", "twin_of", "program")}
         drop = next((d for d in sspec.rule_drops(dict(parent, _raw=raw)) if d[0] == r["label"]), None)
         if drop is None:
             continue

@@ -185,8 +185,8 @@ research:                    # daily research run (research.py, workflow "Resear
     1d: 5000                 # everything since listing (Binance starts in 2017)
     4h: 30000                # everything since listing
     1h: 100000               # everything since listing
-    30m: 35040               # 2 years
-    15m: 70080               # 2 years (roadmap step 2, 2026-10-06; was 1 year)
+    30m: 87600               # 5 years (Forward Test Program, 2026-10-09; was 2 years)
+    15m: 175200              # 5 years (Forward Test Program, 2026-10-09; was 2 years, before that 1 year)
     5m: 210240               # 2 years (roadmap step 2, 2026-10-06; was 90 days)
   okx_timeframes: [30m, 15m, 5m]   # roadmap step 2: these are backtested on OKX USDT-perpetual candles (the market
                              # the operator trades; engine/okx_history.py: OKX's monthly / daily files + REST, cached);
@@ -224,6 +224,18 @@ research:                    # daily research run (research.py, workflow "Resear
   near_duplicates:               # Phase 20 lite 4 - report only: two cells on the same timeframe sharing >= 70% of
     min_overlap: 0.70            # their trades (of the bigger one) = one idea: the newer is "near-duplicate of" the
     min_trades: 20               # older; cells with fewer trades are not compared
+
+program:                     # the Forward Test Program (operator plan 2026-10-09) - strategies_program.yaml,
+                             # engine/program.py. 10 strategies x 4 versions = 59 strategy / timeframe tests: too many
+                             # for one night on 10 coins and 5 years, so research tests them in batches:
+  strategies_per_night: 2    # this many strategies (all 4 versions) per night, the ones tested longest ago first;
+                             # a strategy with a cell in VALIDATION / PAPER_TRADING / APPROVED is tested every night.
+                             # Results per coin, after AND before fees: reports/program.md / program.json
+  skip_after_min: 95         # safety: when the run is already past 95 minutes as a coin starts, tonight's batch is
+                             # dropped whole (never half-tested) and goes first the next night - the run ends in time
+                             # (measured 2026-10-09 on BTC: library 551 s with 2 years, 706 s with 5 years; all 10
+                             # program strategies +163 s - about 16 s per strategy per coin. Nightly estimate on
+                             # 10 coins: ~74 min library + ~5 min per 2 strategies; workflow limit 150 min)
 
 family_gates:                # Phase 19 A - operator-owned. Strategy-family drawdown gates (engine/family_gates.py).
                              # Replaces the single validation.max_drawdown_r for the TREND group; the TIGHT group keeps

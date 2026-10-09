@@ -17,6 +17,10 @@
 #                                       STRONG weekly trend (weekly veto)
 #                      reversal       = needs 2 of 1D/4H/1H in its direction, no weekly veto
 #                      mean_reversion = only in its (range) regimes, never against a STRONG 1W/1D/4H trend
+#                      intraday       = (Forward Test Program) the 4H AND the 1H regime in its direction;
+#                                       1W / 1D are context only, never block
+#                      intraday_reversal = (Forward Test Program) only in its regimes, never against a STRONG
+#                                       4H trend; 1W / 1D never block
 #    regimes           allowed market regimes; outside them the strategy stands down.
 #                      Checked on 1D for 1D signals, 4H for 4H signals, 1H for 1H and below.
 #    long / short      conditions - ALL must be true on a CLOSED candle. Entry = next candle's open.
@@ -82,6 +86,12 @@
 #                                          first; unknown values make a rule false)
 #    h4_* (below 4H only)               -> the same SMC context from the newest CLOSED 4H candle,
 #                                          e.g. h4_bull_ob_low, h4_bull_ob_high, h4_range_low, h4_range_high
+#    dir_1w dir_1d dir_4h dir_1h        -> (Forward Test Program) that timeframe's regime direction as known at the
+#                                          candle: +1 bull, -1 bear, 0 neither; e.g. dir_1d > 0 = "the daily agrees"
+#    sess_asia sess_london sess_ny      -> 1 when the candle opens in that session (UTC 00-08 / 08-13 / 13-21)
+#    asia_high asia_low                 -> today's Asia-session high / low, known from 08:00 UTC (engine/sessions.py)
+#  TRADE MANAGEMENT (manage:) also offers the trailing ATR exit: trail: {atr_n: 22, atr_x: 3.0} = after TP1 the
+#  stop trails 3 x ATR(22) behind the highest high / lowest low of the last 22 candles (docs/PROGRAM.md, version V4).
 # =====================================================================
 
 - id: trend_pullback

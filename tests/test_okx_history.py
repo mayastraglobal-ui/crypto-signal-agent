@@ -35,8 +35,8 @@ def minutes(a, b):
                              vol=1.0, vol_ccy=0.01 * (1 + i % 3), vol_quote=c * 0.01 * (1 + i % 3)))
 
 
-def zipped(df):
-    out = df.assign(instrument_name="BTC-USDT-SWAP", confirm=1)[
+def zipped(df, confirm=1):
+    out = df.assign(instrument_name="BTC-USDT-SWAP", confirm=confirm)[
         ["instrument_name", "open", "high", "low", "close", "vol", "vol_ccy", "vol_quote", "open_time", "confirm"]]
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w") as z:
@@ -111,6 +111,16 @@ class Calendar(unittest.TestCase):
         self.assertEqual(list(df.columns), oh.COLS)
         self.assertEqual(len(df), 5)
         self.assertAlmostEqual(df["volume"].iloc[0], 0.01 * (1 + (a // MIN) % 3))
+
+    def test_archive_rows_count_even_when_marked_unconfirmed(self):
+        """OKX's older month files say confirm = 0 on every row (e.g. 2023-10): the month is over, so they are closed
+        candles - dropping them left months-long holes in the 5-year history (2026-10-09). A repeated minute counts
+        once."""
+        a = cn_ms(2023, 10, 1)
+        m = minutes(a, a + 5 * MIN)
+        df = oh.parse_zip(zipped(pd.concat([m, m.tail(1)]), confirm=0))
+        self.assertEqual(len(df), 5)
+        self.assertTrue(df["open_time"].is_monotonic_increasing)
 
 
 class Download(unittest.TestCase):
@@ -192,7 +202,7 @@ class LongFunding(unittest.TestCase):
 
 
 class Config(unittest.TestCase):
-    def test_scalping_timeframes_have_two_years_on_okx(self):
+    def test_scalping_timeframes_have_two_years_on_okx(self):    # 30m / 15m: 5 years since 2026-10-09
         with open(os.path.join(ROOT, "config.yaml")) as f:
             R = sc.yaml.safe_load(f)["research"]
         self.assertEqual(R["okx_timeframes"], ["30m", "15m", "5m"])

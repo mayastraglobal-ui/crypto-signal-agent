@@ -59,8 +59,18 @@ def lab_problems():
         return [f"{sspec.LAB_FILE}: not readable after the merge ({str(e).splitlines()[0]})"]
     if not isinstance(lab, list):
         return [f"{sspec.LAB_FILE}: not a list of cards after the merge"]
-    _, problems, _, _ = sspec.load_library(lib, lab, rg.LABELS, tfm.TRADE_ORDER)
-    return [f"{sspec.LAB_FILE}: {k}: {'; '.join(v)}" for k, v in problems.items() if str(k).startswith("lab")]
+    prog, ppath = [], os.path.join(ROOT, sspec.PROGRAM_FILE)
+    if os.path.exists(ppath):                      # the Forward Test Program cards must still load too
+        try:
+            with open(ppath) as f:
+                prog = yaml.safe_load(f) or []
+        except yaml.YAMLError as e:
+            return [f"{sspec.PROGRAM_FILE}: not readable after the merge ({str(e).splitlines()[0]})"]
+        if not isinstance(prog, list):
+            return [f"{sspec.PROGRAM_FILE}: not a list of cards after the merge"]
+    _, problems, _, _ = sspec.load_library(lib, lab, rg.LABELS, tfm.TRADE_ORDER, prog)
+    return [f"{sspec.LAB_FILE if str(k).startswith('lab') else sspec.PROGRAM_FILE}: {k}: {'; '.join(v)}"
+            for k, v in problems.items() if str(k).startswith(("lab", "program"))]
 
 
 def main():

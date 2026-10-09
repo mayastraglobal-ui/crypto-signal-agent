@@ -52,6 +52,7 @@ from engine import flow_history
 from engine import ideas
 from engine import lifecycle as lc
 from engine import playbook as pbk
+from engine import program as prog
 from engine import regime as rg
 from engine import memory as mem
 from engine import research as rs
@@ -406,6 +407,8 @@ def main():
     ap_.add_argument("--offline", action="store_true", help="use synthetic data (code test)")
     ap_.add_argument("--coins", type=int, default=None, help="only the first N research coins (test runs)")
     ap_.add_argument("--cleanup", action="store_true", help="run the monthly clean-up now (it runs on the 1st anyway)")
+    ap_.add_argument("--program", default="auto", help="Forward Test Program strategies to test: auto (tonight's "
+                     "batch, the default), all, none, or numbers like 1,4")
     args = ap_.parse_args()
 
     t_start = time.time()
@@ -427,6 +430,16 @@ def main():
         if msg:
             problems.setdefault(x["id"], []).append(msg)
             strategies.remove(x)
+    # the Forward Test Program (strategies_program.yaml): tonight's batch only - the rest keep their status and
+    # their last results are carried into tonight's reports (engine/program.py)
+    PG = prog.settings(cfg.get("program"))
+    program_cards = [x for x in strategies if prog.is_program(x)]
+    program_chosen, program_why = prog.batch(program_cards, registry["cells"], PG["strategies_per_night"],
+                                             args.program)
+    strategies, program_skipped = prog.select(strategies, program_chosen)
+    if program_cards:
+        log(f"Forward Test Program: strategies {program_chosen or 'none'} tonight ("
+            + "; ".join(f"{k}: {v}" for k, v in program_why.items()) + f"), {len(program_skipped)} card(s) carried")
     by_key = {sspec.key(x): x for x in strategies}
     variants = {k: sspec.variants(x, R["perturb_pct"]) for k, x in by_key.items()}
     drops = {k: sspec.rule_drops(x) for k, x in by_key.items()}      # Phase 18 B: one entry rule removed at a time
@@ -469,9 +482,16 @@ def main():
     moves_all, move_found = [], {}           # missed-move learning (section 17.4)
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
         if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
+    program_cut = None                        # the coin at which tonight's program batch was dropped (time)
     for base in coins:
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
+        if program_cut is None and any(prog.is_program(x) for x in strategies) and \
+                time.time() - t_start > float(PG["skip_after_min"]) * 60:
+            program_cut = base                    # never half-tested: the whole batch waits for the next night
+            strategies = [x for x in strategies if not prog.is_program(x)]
+            log(f"Forward Test Program: {round((time.time() - t_start) / 60)} min gone before {base} - tonight's "
+                f"batch is dropped (tested again first next night)")
         try:
             okx_frames = {}
             if okx is not None:
@@ -599,6 +619,14 @@ def main():
                 charts_w = None
         log(f"researched {sym}")
         del pc, data, m5
+    if program_cut is not None:                   # drop every program result of the coins done before the cut
+        cut = {sspec.key(x) for x in program_cards if prog.number(x) in program_chosen}
+        for store in (per, stress, stress2, var, dropped, plain5):
+            for k3 in [k for k in store if f"{k[0]}@{k[1]}" in cut]:
+                del store[k3]
+        program_skipped += [x for x in program_cards if sspec.key(x) in cut]
+        program_why = {k: f"dropped tonight: the run was too long before {program_cut}" for k in program_chosen}
+        program_chosen = []
 
     # ---------- evidence per strategy version x timeframe ----------
     wins = {tf: rs.windows(min(a for a, _ in sp), max(b for _, b in sp), int(R["walk_forward_windows"]))
@@ -760,6 +788,31 @@ def main():
             mc_dd95_per_100_r=(c["family_gate"]["metrics"].get("window") or {}).get("dd95_r"))
     os.makedirs(os.path.dirname(reg_path), exist_ok=True)
     lc.registry_to_frame(registry).to_csv(reg_path, index=False)
+
+    # ---------- Forward Test Program: carried cells + the per-coin results file (engine/program.py) ----------
+    prev_research = sc.load_research(args.offline) or {}
+    carried = prog.carry(prev_research.get("cells"), program_skipped, registry["cells"], prev_research.get("run_utc"))
+    all_cells = dict(carried, **cells)          # tonight's cells + the program cells not tested tonight
+    program_out = None
+    if program_cards:
+        p_next, _ = prog.batch(program_cards, registry["cells"], PG["strategies_per_night"])
+        p_path = os.path.join(sc.REPORTS, "program_offline.json" if args.offline else "program.json")
+        p_prev = None
+        if os.path.exists(p_path):
+            try:
+                with open(p_path) as f:
+                    p_prev = json.load(f)
+            except ValueError:
+                pass
+        program_out = prog.table(p_prev, program_cards, {k: c for k, c in cells.items()
+                                                         if prog.is_program(by_key[f"{c['strategy']}@{c['version']}"])},
+                                 per, V_all["min_coin_trades"], now_txt, program_chosen, program_why, p_next)
+        with open(p_path, "w") as f:
+            json.dump(program_out, f, indent=1, default=float)
+        with open(p_path[:-5] + ".md", "w") as f:
+            f.write(prog.render(program_out))
+        log(f"Forward Test Program: {len(program_out['cells'])} cell(s) in {os.path.relpath(p_path, sc.ROOT)}, "
+            f"{len(carried)} carried from {prev_research.get('run_utc') or '-'}; next night: {p_next}")
     if charts_w is not None:
         try:
             charts_w.finish(cells, now_txt)
@@ -800,7 +853,8 @@ def main():
 
     # ---------- regime playbook (Phase 17 B): measured results per regime -> memory/playbook.md (weekly) ----------
     fam_of = {k: x["family"] for k, x in by_key.items()}
-    playbook, pb_matrix = pbk.build(cells, fam_of, rg.LABELS), pbk.matrix(cells, fam_of)
+    fam_of.update({f"{x['id']}@{x['version']}": x["family"] for x in program_skipped})
+    playbook, pb_matrix = pbk.build(all_cells, fam_of, rg.LABELS), pbk.matrix(all_cells, fam_of)
     pb_path = os.path.join(sc.REPORTS, "playbook_offline.md") if args.offline else os.path.join(sc.MEMORY, "playbook.md")
     if args.offline or started.weekday() == 6 or not os.path.exists(pb_path):       # Sundays (and the first time)
         os.makedirs(os.path.dirname(pb_path), exist_ok=True)
@@ -871,7 +925,7 @@ def main():
     # ---------- counts for the daily and weekly emails (email redesign) ----------
     counts = run_counts(started, runs_per_coin, tested, per, (lab_now or []) + new_variants, cells)
     src_path = os.path.join(sc.MEMORY, "research_sources.md")
-    counts.update(learning_numbers(cells, len((lab_now or []) + new_variants),
+    counts.update(learning_numbers(all_cells, len((lab_now or []) + new_variants),
                                    open(src_path, encoding="utf-8").read() if os.path.exists(src_path) else "",
                                    V["min_trades"]),
                   near_duplicates=len(near_dupes),
@@ -900,7 +954,7 @@ def main():
                not_run={k: v for k, v in problems.items()}, rule_errors={k: sorted(v) for k, v in rule_errors.items()},
                walk_forward_windows={tf: [dict(start=fmt_day(a), end=fmt_day(b)) for a, b in w] for tf, w in wins.items()},
                attribution_settings=A, candidate_lessons=candidate_lessons, missed_moves=missed,
-               approval=approval_out, cells=cells, playbook=playbook, playbook_matrix=pb_matrix,
+               approval=approval_out, cells=all_cells, playbook=playbook, playbook_matrix=pb_matrix,
                factories=factories, lead_lag=lead_lag, cleanup=cleanup_out, counts=counts,
                near_duplicates=near_dupes, near_duplicate_settings=ND,
                robustness=dict(bias=bias_out, monte_carlo=dict(runs=mc_runs, limit_r=mc_limit),
@@ -919,13 +973,18 @@ def main():
                                  shadow_file=os.path.relpath(SHADOW, sc.ROOT),
                                  changed=sorted(ck for ck, c in cells.items() if c["family_gate"]["changed"]),
                                  live_limits={ck: c["family_gate"]["limits"] for ck, c in cells.items()}),
-               lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")),
-                        moved_to_library=moved))
+               lab=dict(file=sspec.LAB_FILE, cards=sorted(k for k, x in by_key.items() if x.get("lab")
+                                                          and not prog.is_program(x)),
+                        moved_to_library=moved),
+               program=dict(file=sspec.PROGRAM_FILE, report="reports/program.md", tested_tonight=program_chosen,
+                            why={str(k): v for k, v in program_why.items()},
+                            next_night=(program_out or {}).get("next_night"), carried=sorted(carried),
+                            cards=len(program_cards), settings=PG))
     path = os.path.join(sc.REPORTS, "research_offline.json" if args.offline else "research.json")
     json.dump(out, open(path, "w"), indent=1, default=float)
     if not args.offline:                   # roadmap step 5: per cell, the backtest result in each market regime
         with open(os.path.join(sc.REPORTS, "regime_fit.json"), "w") as f:     # (the live watcher downloads it)
-            json.dump(rfit.table(cells), f, indent=0, sort_keys=True)
+            json.dump(rfit.table(all_cells), f, indent=0, sort_keys=True)
     n_status = pd.Series(list(results.values())).value_counts().to_dict() if results else {}
     log(f"Research done in {out['duration_s']} s: {len(cells)} strategy/timeframe cells - {n_status}")
 
