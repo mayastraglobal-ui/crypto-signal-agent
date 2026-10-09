@@ -55,8 +55,13 @@ def gate_arrays(spec, tf, reg, n):
         return ok, ok.copy(), ok.copy(), ok.copy(), ok.copy()
     regime_ok = np.isin(lab(regime_tf(tf)), list(spec["regimes"]))
     wk = lab("1w")
-    if spec["gate"] == "intraday":                   # Forward Test Program: 4H AND 1H agree; 1W / 1D never block
-        d4, d1 = dirs("4h"), dirs("1h")
+    if spec["gate"] in ("intraday", "intraday_fast"):   # Forward Test Program: 4H AND 1H agree; 1W / 1D never block
+        if spec["gate"] == "intraday":
+            d4 = dirs("4h")
+        else:                                        # V5: the fast 4H trend (EMA20 / EMA50 on 4H closes)
+            f = lab("4h_fast")
+            d4 = np.where(f == "UP", 1, np.where(f == "DOWN", -1, 0))
+        d1 = dirs("1h")
         perm_long, perm_short = (d4 == 1) & (d1 == 1), (d4 == -1) & (d1 == -1)
     elif spec["gate"] == "intraday_reversal":        # ... never against a STRONG 4H trend; 1W / 1D never block
         perm_long, perm_short = lab("4h") != "STRONG_BEAR", lab("4h") != "STRONG_BULL"

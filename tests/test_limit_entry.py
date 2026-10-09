@@ -201,8 +201,8 @@ class Telegram(unittest.TestCase):
         self.assertIn("BUY LIMIT 99.00", t)
         self.assertIn(f"cancel at {lv.utc(T0 + 3 * H)} if not filled (2 1h candles)", t)
         self.assertIn("No fill = no trade", t)
-        self.assertNotIn("Entry zone", t)
-        self.assertIn("Entry zone", lv.message(self.alert(limit_bars=None)))
+        self.assertNotIn("(zone", t)
+        self.assertIn("(zone 98.6000 – 99.4000)", lv.message(self.alert(limit_bars=None)))
 
     def follow(self, rows):
         t = fl.open_trade(self.alert(tf="5m"), "a", T0 + H, dict(move_stop_to_breakeven_after_tp1=True))

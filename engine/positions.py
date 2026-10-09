@@ -108,6 +108,8 @@ def build(logdf, now, prices=None, limits=None):
     active, paper, awaiting, closed, limit_orders = [], [], [], [], []
     day_r = week_r = paper_day_r = 0.0
     for r in rows:
+        if r.get("stage") == "TEST":            # the Signal Center's silent record: not a position, not paper
+            continue
         st, live = row_state(r), r.get("stage") == "APPROVED"
         d = 1 if r["direction"] == "LONG" else -1
         item = dict(id=r["id"], coin=r["coin"], direction=r["direction"], tf=r["tf"], strategy=r["strategy"],

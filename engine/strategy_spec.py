@@ -35,6 +35,9 @@ GATES = {
     # the Forward Test Program (operator plan 2026-10-09): 4H and 1H decide; 1W / 1D are context only (never block)
     "intraday": "needs the 4H AND the 1H regime in its direction; 1W / 1D are context only (no veto)",
     "intraday_reversal": "trades only in its regimes, never against a STRONG 4H trend; 1W / 1D are context only",
+    # V5 (operator request 2026-10-09): the 4H part read from the 4H EMA20 / EMA50 (faster than the 4H regime label)
+    "intraday_fast": "needs the fast 4H trend (4H close and EMA20 vs EMA50) AND the 1H regime in its direction; 1W / 1D "
+                     "are context only",
 }
 REQUIRED = ["id", "version", "status", "family", "gate", "hypothesis", "source", "regimes", "timeframes",
             "long", "short", "stop", "time_stop_bars", "known_weaknesses"]
@@ -79,7 +82,8 @@ LIBRARY_FILE, LAB_FILE = "strategies.yaml", "strategies_lab.yaml"
 PROGRAM_FILE = "strategies_program.yaml"
 PROGRAM_VERSIONS = {"V1": "base: 4H", "V2": "faster: the same rules on 1H / 30m / 15m (4H + 1H decide the direction)",
                     "V3": "V1 + the daily regime must agree (shows whether the daily filter helps)",
-                    "V4": "V1 with a trailing ATR exit after TP1 (lets winners run)"}
+                    "V4": "V1 with a trailing ATR exit after TP1 (lets winners run)",
+                    "V5": "V2 with the fast 4H trend (EMA20 / EMA50 on 4H) instead of the 4H regime label"}
 EVIDENCE_CLASSES = ["FACT", "RESEARCH_FINDING", "BACKTEST_EVIDENCE", "CLAIM", "HYPOTHESIS", "MODEL_OUTPUT",
                     "UNVERIFIED_OPINION"]           # = engine/memory.py (section 22)
 MIN_TP1_R = 2.0                                     # a lab card's first target is at least 2R away
@@ -121,7 +125,7 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
            "ichi_tenkan", "ichi_kijun", "ichi_span_a", "ichi_span_b", "ichi_cloud_top", "ichi_cloud_bottom",
            # Forward Test Program: the regime direction of each regime timeframe as known at the candle (+1 bull,
            # -1 bear, 0 neither - context for rules such as "the daily agrees"), and the trading sessions (UTC)
-           "dir_1w", "dir_1d", "dir_4h", "dir_1h", "sess_asia", "sess_london", "sess_ny", "asia_high", "asia_low",
+           "dir_1w", "dir_1d", "dir_4h", "dir_1h", "dir_4h_fast", "sess_asia", "sess_london", "sess_ny", "asia_high", "asia_low",
            # engine/smc.py (this timeframe)
            "smc_bear_ob_high", "smc_bear_ob_low", "smc_bos_down", "smc_bos_up", "smc_bull_ob_high",
            "smc_bull_ob_low", "smc_choch_down", "smc_choch_up", "smc_fvg_retrace_bear", "smc_fvg_retrace_bull",

@@ -254,10 +254,20 @@ def _usual(c):
             f"±{v['move_8of10_pct']:.1f}% ({_price(band[0])} – {_price(band[1])})")
 
 
+def beijing(utc_txt):
+    """'2026-10-08 08:00' (UTC) -> '10-08 16:00 Beijing' (the operator's clock; operator choice 2026-10-09)."""
+    try:
+        t = dt.datetime.strptime(str(utc_txt), "%Y-%m-%d %H:%M").replace(tzinfo=dt.timezone.utc)
+    except ValueError:
+        return f"{utc_txt} UTC"
+    return (t + dt.timedelta(hours=8)).strftime("%m-%d %H:%M Beijing")
+
+
 def telegram(w):
-    """The /weather reply (Telegram HTML)."""
+    """The /weather reply (Telegram HTML), times in Beijing time."""
     v = w["verdict"]
-    out = [f"{v['icon']} <b>Market weather · {w['utc']} UTC</b>", f"Verdict: <b>{v['title']}</b>", v["meaning"], ""]
+    out = [f"{v['icon']} <b>Market weather · {beijing(w['utc'])}</b>", f"Verdict: <b>{v['title']}</b>", v["meaning"],
+           ""]
     btc = next((c for c in w["coins"] if c["coin"] == "BTC"), None)
     if btc:
         lb = btc["labels"]
@@ -283,7 +293,8 @@ def telegram(w):
             + (f" · {c['crowd']['label']}" if c["crowd"]["label"] not in ("neutral", "unknown") else "")
             for c in w["coins"]]
     if w.get("events"):
-        out += ["", "<b>Events</b>"] + [f"• {html.escape(str(e['name']))} {e['start_utc']} UTC" for e in w["events"][:4]]
+        out += ["", "<b>Events</b>"] + [f"• {html.escape(str(e['name']))} {beijing(e['start_utc'])}"
+                                        for e in w["events"][:4]]
     if w.get("warnings"):
         out += [""] + [f"⚠️ {html.escape(x)}" for x in w["warnings"]]
     out += ["", "Fits today: " + "; ".join(v["fits"]), "Avoid: " + "; ".join(v["avoid"]), "",

@@ -53,11 +53,15 @@ class Helpers(unittest.TestCase):
                  max_hold=8, regimes={"1w": "WEAK_BEAR", "4h": "STRONG_BEAR"}, close_ms=H - 1, sent_ms=H + 9000,
                  valid_bars=2, warnings=["test warning"])
         t = lv.message(a)
-        for want in ("LIVE SHORT BTC", "BTC-USDT-SWAP", "99.60 – 100.40", "Stop-loss: <b>102.00</b>",
-                     "TP1: <b>96.00</b> (2.0R, close 50%)", "TP2: <b>94.00</b> (3.0R", "$5.00", "~2h00m", "1W WEAK_BEAR", "⚠️ test warning", "01:00 UTC", "not financial advice"):
+        for want in ("LIVE · SHORT BTC", "BTC-USDT-SWAP", "99.60 – 100.40",
+                     "Stop: <b>102.00</b> (2.00% away) · −$5.00", "TP1: <b>96.00</b> (2.0R) · +$5.00 on the 50% closed",
+                     "TP2: <b>94.00</b> (3.0R)", "margin $83.33 at 3x",
+                     "Risk: <b>$5.00</b> (0.5% of $1,000)", "~2h00m", "1W WEAK_BEAR", "⚠️ test warning",
+                     "01:00 UTC (09:00 Beijing)", "not financial advice"):
             self.assertIn(want, t)
         self.assertNotIn("PAPER", t)
         self.assertIn("practice only", lv.message(dict(a, label="PAPER")))
+        self.assertIn("🔵 TEST = a setup of a strategy that was positive", lv.message(dict(a, label="TEST")))
 
 
 class EndToEnd(unittest.TestCase):
@@ -104,7 +108,7 @@ class EndToEnd(unittest.TestCase):
         self.assertAlmostEqual(a["size"]["risk_usdt"], 1000 * 0.5 / 100, places=6)
         with self.fire(1):
             self.assertEqual(self.w.tick(self.hour + 9000), [])          # duplicate guard
-        self.assertIn("LIVE LONG BTC", lv.message(a))
+        self.assertIn("LIVE · LONG BTC", lv.message(a))
 
     def test_limit_card_alerts_its_limit_price(self):                 # roadmap step 2B
         lim = dict(self.plain, entry={"type": "limit", "offset_atr": 0.5, "valid_bars": 2})
@@ -245,7 +249,9 @@ class WindowsPC(unittest.TestCase):
         wdir = os.path.join(ROOT, "windows")
         names = sorted(os.listdir(wdir))
         self.assertEqual(names, ["1_setup.bat", "2_start_watcher.bat", "3_stop_watcher.bat", "4_update.bat",
-                                 "5_remove_autostart.bat", "6_journal_sync.bat", "run_watcher.bat"])
+                                 "5_remove_autostart.bat", "6_journal_sync.bat", "7_replay_test_alerts.bat",
+                                 "run_watcher.bat"])
+        self.assertIn("--replay 14", open(os.path.join(wdir, "7_replay_test_alerts.bat")).read())
         for n in names:
             with open(os.path.join(wdir, n), "rb") as f:
                 b = f.read()

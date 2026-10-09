@@ -455,7 +455,9 @@ class ForwardStates(unittest.TestCase):
     def test_paper_signals_are_logged(self):              # the Phase 8 bug: PAPER_TRADING never reached the log
         with open(os.path.join(ROOT, "scanner.py")) as f:
             src = f.read()
-        self.assertIn('if stage not in ("VALIDATION", "PAPER_TRADING", "APPROVED"):', src)
+        self.assertIn("stage, tst = scx.scan_stage(verdict.get(key)", src)        # PR 2: the stage helper
+        from engine import signal_center as scx
+        self.assertEqual(scx.scan_stage("PAPER_TRADING", {}, "x", "BTC")[0], "PAPER_TRADING")
 
 
 class EndToEnd(unittest.TestCase):
