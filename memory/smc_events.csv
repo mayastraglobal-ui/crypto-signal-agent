@@ -12071,3 +12071,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 19:45,UNI,15m,BOS,bear,7.27,,,0.505,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-09 20:00,UNI,15m,FVG,bear,,7.258,7.284,0.59,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-09 20:15,UNI,15m,FVG_RETRACE,bear,,7.258,7.284,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 20:30,BTC,30m,BREAKER_RETEST,bear,,82400.0,82690.01,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-09 21:15,BTC,15m,FVG,bull,,82426.66,82509.57,0.56,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 21:00,ETH,15m,FVG_FILLED,bear,,2479.07,2482.9,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-09 21:15,ETH,15m,FVG,bull,,2480.55,2482.99,0.414,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-09 20:30,SOL,15m,FVG_RETRACE,bear,,109.18,109.4,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 20:30,SOL,15m,FVG_FILLED,bear,,108.84,109.13,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 20:30,ZEC,15m,FVG,bull,,1204.59,1207.06,0.306,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 20:45,ZEC,15m,FVG_RETRACE,bull,,1204.59,1207.06,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-09 20:45,ZEC,15m,FVG_FILLED,bull,,1204.59,1207.06,,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 20:30,XRP,15m,FVG,bull,,1.3841,1.3877,0.703,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-09 20:45,XRP,15m,FVG_RETRACE,bull,,1.3841,1.3877,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-09 20:30,BNB,15m,FVG_FILLED,bear,,739.01,739.7,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 21:15,BNB,15m,WEAK_BREAK,bull,741.82,,,0.144,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-09 21:15,BNB,15m,FVG,bull,,740.03,740.67,0.372,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 20:30,UNI,15m,FVG_FILLED,bear,,7.258,7.284,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 20:30,UNI,15m,FVG,bull,,7.258,7.269,0.26,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 20:45,UNI,15m,FVG_RETRACE,bull,,7.258,7.269,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 20:45,UNI,15m,FVG_FILLED,bull,,7.258,7.269,,,1h,TRANSITION,,smc-1.0,Binance
