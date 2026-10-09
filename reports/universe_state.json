@@ -12,9 +12,10 @@
  "out_streak": {},
  "suspended": {
   "OGN": "2026-10-09",
-  "STRK": "2026-10-09"
+  "STRK": "2026-10-09",
+  "RLC": "2026-10-09"
  },
- "runs": 327,
+ "runs": 328,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -89,6 +90,7 @@
    "volume_7d"
   ],
   "RLC": [
+   "big_move",
    "thin_book",
    "volume_7d"
   ],
