@@ -496,3 +496,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-09 09:22 UTC
 - **EXCLUDED** PUMP - 7-day average volume $45M < $50M
+
+## 2026-10-09 11:20 UTC
+- **EXCLUDED** OGN - 7-day average volume $11M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.105% > 0.1%; order book too thin: $29k within 1% (need $250k)
