@@ -15,7 +15,7 @@
   "STRK": "2026-10-09",
   "RLC": "2026-10-09"
  },
- "runs": 337,
+ "runs": 338,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -91,7 +91,6 @@
   ],
   "RLC": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ],

@@ -12105,3 +12105,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 21:30,BNB,15m,FVG,bull,,740.84,742.07,0.747,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-09 22:15,BNB,15m,FVG_RETRACE,bull,,740.84,742.07,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-09 22:15,BNB,15m,FVG_FILLED,bull,,740.84,742.07,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 22:45,BTC,15m,BOS,bull,82598.02,,,0.339,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-09 23:00,BTC,15m,FVG,bull,,82535.04,82616.0,0.689,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 23:15,BTC,15m,FVG_FILLED,bear,,82525.85,82658.27,,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 22:45,SOL,15m,BOS,bull,109.23,,,0.395,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-09 22:45,SOL,15m,FVG_FILLED,bear,,109.18,109.4,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 23:00,XRP,30m,WEAK_BREAK,bull,1.3938,,,0.23,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-09 22:45,XRP,15m,WEAK_BREAK,bull,1.3938,,,0.286,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-09 22:45,XRP,15m,FVG_RETRACE,bear,,1.3951,1.3987,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-09 23:00,XRP,15m,FVG,bull,,1.3938,1.395,0.31,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 23:15,XRP,15m,FVG_RETRACE,bull,,1.3938,1.395,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-09 23:15,XRP,15m,FVG_FILLED,bull,,1.3938,1.395,,,1h,RANGE,,smc-1.0,Binance
+2026-10-09 22:30,BNB,30m,FVG_RETRACE,bull,,740.84,742.12,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 22:30,BNB,30m,FVG_FILLED,bull,,740.84,742.12,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 22:30,BNB,15m,FVG_RETRACE,bull,,740.03,740.67,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-09 22:30,BNB,15m,FVG_FILLED,bull,,740.03,740.67,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-09 23:00,UNI,15m,FVG,bull,,7.27,7.28,0.272,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-09 23:15,UNI,15m,FVG_RETRACE,bull,,7.27,7.28,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-09 23:15,UNI,15m,FVG_FILLED,bull,,7.27,7.28,,,1h,STRONG_BEAR,,smc-1.0,Binance
