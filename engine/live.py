@@ -120,7 +120,7 @@ def message(a):
     if lim:                                  # roadmap step 2B: a limit-entry strategy
         until = a["close_ms"] + 1 + int(lim) * tfm.TF_MS[a["tf"]]
         lines.append(f"Entry: <b>{'BUY' if a['d'] == 1 else 'SELL'} LIMIT {fmt_px(a['entry'])}</b> · cancel at "
-                     f"{utc(until)} if not filled ({int(lim)} {a['tf']} candles)")
+                     f"{bj(until)} if not filled ({int(lim)} {a['tf']} candles)")
     else:
         zlo, zhi = sorted((a["entry"] - a["zone_r"] * a["R"], a["entry"] + a["zone_r"] * a["R"]))
         lines.append(f"Entry: <b>{fmt_px(a['entry'])}</b> (zone {fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])})")
@@ -183,7 +183,7 @@ def message(a):
         lines.append(f"<i>{LABEL_NOTE[lab]}</i>")
     lines += ["No fill = no trade. Skip it if price reaches TP1 before your order fills." if lim else
               f"Valid for {a.get('valid_bars', 2)} {a['tf']} candles. Skip it if price reaches the stop or TP1 first.",
-              f"Candle closed {utc(a['close_ms'] + 1)} ({bj(a['close_ms'] + 1)}) · sent {utc(a['sent_ms'])}",
+              f"Candle closed {bj(a['close_ms'] + 1)} · sent {bj(a['sent_ms'])}",
               "<i>Signal only - not financial advice. You place the order yourself.</i>"]
     return "\n".join(lines)
 
@@ -312,11 +312,11 @@ def status_text(i):
     lines = [f"✅ <b>Live watcher running</b> · {i['feed']}", f"Started {ago(i['started_ms'], now)}"]
     lt = i.get("last_tick")
     lines.append("Last market check: waiting for the first 5m candle close" if not lt else
-                 f"Last market check: {utc(lt[0])} ({ago(lt[0], now)}) " + ("✓" if lt[1] else f"⚠️ failed: {lt[2]}"))
+                 f"Last market check: {bj(lt[0])} ({ago(lt[0], now)}) " + ("✓" if lt[1] else f"⚠️ failed: {lt[2]}"))
     p = i.get("paused_until") or 0
     lines.append("New trade alerts: ON" if p == 0 or (p > 0 and p <= now) else
                  "⏸ New trade alerts: PAUSED until /resume" if p < 0 else
-                 f"⏸ New trade alerts: PAUSED until {utc(p)} (/resume to switch on now)")
+                 f"⏸ New trade alerts: PAUSED until {bj(p)} (/resume to switch on now)")
     real = [w for w in i["watch"] if w[2] != "TEST"]
     tests = [w for w in i["watch"] if w[2] == "TEST"]
     if tests or "tests_on" in i:
@@ -333,7 +333,7 @@ def status_text(i):
                      "promotes them; the watcher picks them up within an hour.")
     lines.append("Coins: " + ", ".join(i["coins"]))
     lines.append(f"Trades you took, being followed: {i['open_trades']}" + (" (/trades)" if i["open_trades"] else ""))
-    lines.append(f"Trade alerts sent today (UTC): {i['alerts_today']}")
+    lines.append(f"Trade alerts sent today (the day starts 08:00 Beijing): {i['alerts_today']}")
     if i.get("refresh"):
         lines.append(f"GitHub decisions refreshed {ago(i['refresh'][0], now)}: {i['refresh'][1]}")
     if i.get("journal_sync"):

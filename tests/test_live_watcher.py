@@ -57,7 +57,7 @@ class Helpers(unittest.TestCase):
                      "Stop: <b>102.00</b> (2.00% away) · −$5.00", "TP1: <b>96.00</b> (2.0R) · +$5.00 on the 50% closed",
                      "TP2: <b>94.00</b> (3.0R)", "margin $83.33 at 3x",
                      "Risk: <b>$5.00</b> (0.5% of $1,000)", "~2h00m", "1W WEAK_BEAR", "⚠️ test warning",
-                     "01:00 UTC (09:00 Beijing)", "not financial advice"):
+                     "Candle closed 09:00 Beijing", "not financial advice"):
             self.assertIn(want, t)
         self.assertNotIn("PAPER", t)
         self.assertIn("practice only", lv.message(dict(a, label="PAPER")))

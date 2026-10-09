@@ -859,7 +859,7 @@ class Watcher:
                 return "Use /pause (until /resume), /pause 2h or /pause 30m (at most 7 days)."
             self.state["paused_until"] = -1 if dur is None else now_ms + dur
             self._save_state()
-            return ("⏸ New trade alerts paused " + ("until /resume." if dur is None else f"until {lv.utc(now_ms + dur)}.")
+            return ("⏸ New trade alerts paused " + ("until /resume." if dur is None else f"until {lv.bj(now_ms + dur)}.")
                     + "\nYou still get the messages about trades you took and the daily 'running' message.")
         if cmd == "resume":
             self.state["paused_until"] = 0
@@ -1209,7 +1209,7 @@ class Watcher:
             elif res["state"] == c5m.CONFIRMED:
                 j = res["idx"]
                 a = dict(p, entry=float(m5["close"][j]), close_ms=int(m5["close_time"][j]),
-                         confirm=f"CONFIRMED on the {lv.utc(int(m5['close_time'][j]) + 1)} 5m bar close"
+                         confirm=f"CONFIRMED on the {lv.bj(int(m5['close_time'][j]) + 1)} 5m bar close"
                          + (f" ({', '.join(res['smc'])})" if res["smc"] else ""))
                 a["tps"] = [a["entry"] + (tp - p["entry"]) for tp in p["tps"]]   # same distances from the 5m entry
                 out.append(self._finish(a, now_ms))
@@ -1632,7 +1632,7 @@ def main():
         now = w.now_fn()
         b = lv.boundary(now)
         alerts = w.tick(now)
-        print(f"{len(alerts)} alert(s) at the {lv.utc(b - 1)} close")
+        print(f"{len(alerts)} alert(s) at the {lv.bj(b - 1)} close")
         return
     w.run()
 

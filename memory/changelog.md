@@ -647,3 +647,13 @@ Newest entries at the bottom. Format: date · who · what · why.
 - **Promotions**: `config.yaml -> promotions` and the operator's taps (`journal/decisions.csv` on the branch `journal`, uploaded by the watcher with journal sync; `journal_review.py` reads it). The research run applies them (`reports/promotions_state.json`): PAPER only on the promoted coins (`signal_center.test_list` / `scan_stage`, the watcher), automatic demotion when the last 10 paper signals average below 0R, a BIASED cell never. A cell PAPER only through a promotion is never eligible for approval from that - LIVE still needs the full pass bar.
 - **Telegram**: the watcher sends the final review once a week with a "🟡 Promote" button per candidate (no journal sync: it sends the config line instead); `/review`. Weekly email: a "Forward Test Program" part. Claude: `brain_pack.py` daily / weekly include the review; `tasks/weekly_research.md` step 7b.
 - Unchanged: gates, costs, the trials bar, the pass rules, approvals. Tests: tests/test_weekly_review.py.
+
+## 2026-10-09 · Operator + Claude · Telegram times in Beijing time everywhere
+- Operator: "telegram weather still showing UTC time". `/weather` was already converted in PR 2 (`engine/weather.py`
+  `beijing()`), but its text is written by GitHub's hourly scan, and the last scan before the merge (17:18 UTC) still
+  used the old code - the first scan after the merge writes Beijing time.
+- The other Telegram texts still showed UTC: the alert's "Candle closed / sent" line, the limit "cancel at" time,
+  `/status` (last market check, paused until), `/pause`, the 5m check "CONFIRMED on the ..." line, the follow-up
+  messages ("5m candle closed ...") and the `/trades` time stop. All now in Beijing time (`engine/live.py` `bj()`).
+  `/status` "Trade alerts sent today" now says the day starts 08:00 Beijing (it counts the UTC day, unchanged).
+- Display only: no rule, limit or day boundary changed.

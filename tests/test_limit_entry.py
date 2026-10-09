@@ -199,7 +199,7 @@ class Telegram(unittest.TestCase):
     def test_alert_names_the_limit_and_the_cancel_time(self):
         t = lv.message(self.alert())
         self.assertIn("BUY LIMIT 99.00", t)
-        self.assertIn(f"cancel at {lv.utc(T0 + 3 * H)} if not filled (2 1h candles)", t)
+        self.assertIn(f"cancel at {lv.bj(T0 + 3 * H)} if not filled (2 1h candles)", t)
         self.assertIn("No fill = no trade", t)
         self.assertNotIn("(zone", t)
         self.assertIn("(zone 98.6000 – 99.4000)", lv.message(self.alert(limit_bars=None)))

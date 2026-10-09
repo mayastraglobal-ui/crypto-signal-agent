@@ -107,7 +107,7 @@ def test_alert(**kw):
                                     version="V2"),
              program=dict(name="Breakout (Donchian + volume + ADX)", version="V2"), agree=["4h P01"],
              against="1D WEAK_BULL", weather="🌧 Trend down day · BTC: down", market="DOWN (1D WEAK_BULL, ...)",
-             confirm="CONFIRMED on the 00:05 UTC 5m bar close")
+             confirm="CONFIRMED on the 08:05 Beijing 5m bar close")
     a.update(kw)
     return a
 
@@ -120,7 +120,7 @@ class Layout(unittest.TestCase):
                      "TP1: <b>96.00</b> (2.0R) · +$5.00 on the 50% closed", "margin $83.33 at 3x",
                      "Past: BTC won 46% of 128 backtest trades · +0.38R a trade after fees",
                      "Market: 🌧 Trend down day", "⚠️ Against the daily trend (1D WEAK_BULL) - context only",
-                     "5m check: ✓ CONFIRMED", "🔵 TEST = a setup of a strategy", "(08:00 Beijing)"):
+                     "5m check: ✓ CONFIRMED", "🔵 TEST = a setup of a strategy", "Candle closed 08:00 Beijing"):
             self.assertIn(want, t)
         self.assertNotIn("fee", t.split("Past")[0].lower())                   # no fee line in the alert
         b = lv.choice_buttons("a1")["inline_keyboard"]
