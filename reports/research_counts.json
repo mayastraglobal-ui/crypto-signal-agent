@@ -359,5 +359,36 @@
   "near_duplicates": 8,
   "ideas": 41,
   "new_cards": 0
+ },
+ {
+  "date": "2026-10-09",
+  "run_utc": "2026-10-09 01:00",
+  "backtests": 930,
+  "per_coin": {
+   "ADA": 93,
+   "AVAX": 93,
+   "BNB": 93,
+   "BTC": 93,
+   "ETH": 93,
+   "SOL": 93,
+   "SUI": 93,
+   "UNI": 93,
+   "XRP": 93,
+   "ZEC": 93
+  },
+  "strategies": 45,
+  "tests": 93,
+  "tests_per_coin": 93,
+  "coins": 10,
+  "best_avg_r": 0.455,
+  "best_cell": "S5-SWEEP-MSS-FVG-noSMC v1.0 15m",
+  "cells_testing": 30,
+  "cells_failed": 63,
+  "cells_paper": 0,
+  "lab_cards": 9,
+  "sources": 23,
+  "near_duplicates": 9,
+  "ideas": 41,
+  "new_cards": 0
  }
 ]

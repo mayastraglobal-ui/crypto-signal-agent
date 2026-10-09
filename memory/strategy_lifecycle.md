@@ -174,3 +174,7 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **TRD-H4-PULLBACK@1.0 1h**: FAILED → **BACKTESTING** (avg +0.04R/trade (needs +0.10R); profit factor 1.07; max drawdown 40.4R)
 - **TRD-H4-PULLBACK@1.0 30m**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; max drawdown 72.4R; not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-S4@1.1 30m**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.12R); profit factor 0.98; max drawdown 71.7R; not profitable in BOTH train and unseen test)
+
+## 2026-10-09 01:00 UTC
+- **TRD-H4-PULLBACK@1.0 1h**: BACKTESTING → **FAILED** (avg +0.03R/trade (needs +0.10R); profit factor 1.05; max drawdown 51.1R; not profitable in BOTH train and unseen test)
+- **bb_squeeze_breakout@1.0 1h**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; max drawdown 44.3R; not profitable in BOTH train and unseen test)
