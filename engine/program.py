@@ -18,7 +18,7 @@ Pure functions only: no internet, no files.
 """
 import numpy as np
 
-DEFAULTS = dict(strategies_per_night=2, skip_after_min=65)
+DEFAULTS = dict(strategies_per_night=2, skip_after_min=95)
 ACTIVE = ("VALIDATION", "PAPER_TRADING", "APPROVED")
 
 

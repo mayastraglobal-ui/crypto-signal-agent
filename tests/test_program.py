@@ -2,6 +2,7 @@
 4H + 1H market gates (1W / 1D context only), the session and regime-direction building blocks, the trailing ATR exit,
 the nightly batches with carried results, and the per-coin results file (after and before fees)."""
 import copy
+import re
 import os
 import sys
 import tempfile
@@ -358,7 +359,7 @@ class Wiring(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(tmp, "reports", "program_offline.md")))
         # a night that runs too long drops the whole batch (never half-tested) - it goes first the next night
         with open(os.path.join(tmp, "config.yaml")) as f:
-            cfg = f.read().replace("skip_after_min: 65", "skip_after_min: 0")
+            cfg = re.sub(r"skip_after_min: \d+", "skip_after_min: 0", f.read())
         with open(os.path.join(tmp, "config.yaml"), "w") as f:
             f.write(cfg)
         p = subprocess.run([sys.executable, "research.py", "--offline", "--coins", "1", "--program", "3"], cwd=tmp,

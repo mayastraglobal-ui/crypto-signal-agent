@@ -231,8 +231,11 @@ program:                     # the Forward Test Program (operator plan 2026-10-0
   strategies_per_night: 2    # this many strategies (all 4 versions) per night, the ones tested longest ago first;
                              # a strategy with a cell in VALIDATION / PAPER_TRADING / APPROVED is tested every night.
                              # Results per coin, after AND before fees: reports/program.md / program.json
-  skip_after_min: 65         # safety: when the run is already past 65 minutes as a coin starts, tonight's batch is
+  skip_after_min: 95         # safety: when the run is already past 95 minutes as a coin starts, tonight's batch is
                              # dropped whole (never half-tested) and goes first the next night - the run ends in time
+                             # (measured 2026-10-09 on BTC: library 551 s with 2 years, 706 s with 5 years; all 10
+                             # program strategies +163 s - about 16 s per strategy per coin. Nightly estimate on
+                             # 10 coins: ~74 min library + ~5 min per 2 strategies; workflow limit 150 min)
 
 family_gates:                # Phase 19 A - operator-owned. Strategy-family drawdown gates (engine/family_gates.py).
                              # Replaces the single validation.max_drawdown_r for the TREND group; the TIGHT group keeps

@@ -61,7 +61,7 @@ Each version differs from V1 in **one** way, so the results show what each chang
 - **Nightly batches** (`config.yaml` → `program`): 2 strategies (all 4 versions, all timeframes) per night, the ones
   tested longest ago first, so the first full pass takes **5 nights** and then it keeps rotating. A strategy with a
   version in VALIDATION / PAPER_TRADING is tested every night. A strategy not tested tonight keeps its status and
-  its last results. Safety: if a night is already past 65 minutes when a coin starts (`skip_after_min`), that night's
+  its last results. Safety: if a night is already past 95 minutes when a coin starts (`skip_after_min`), that night's
   batch is dropped whole - never half-tested - and goes first the next night, so the run always ends in time.
 - **Results**: `reports/program.md` (one table per strategy: trades, win %, average R **after fees** and **before
   fees**, the unseen-test part, the coins where it was positive) and `reports/program.json` (the same for the next
