@@ -1,0 +1,69 @@
+{
+ "week": "2026-W41",
+ "utc": "2026-10-09 19:18",
+ "final": false,
+ "rows": [],
+ "promote": [],
+ "paper": [],
+ "demoted": [],
+ "refused": [],
+ "ideas": [],
+ "five_min": {
+  "confirmed_n": 0,
+  "confirmed_r": null,
+  "all_n": 0,
+  "all_gross_r": null,
+  "by_strategy": [],
+  "note": null
+ },
+ "system": [
+  {
+   "ok": true,
+   "text": "nightly research ran on 8 of the last 7 days (last 2026-10-09)"
+  },
+  {
+   "ok": true,
+   "text": "hourly scan: last run 2026-10-09 19:18 UTC"
+  },
+  {
+   "ok": false,
+   "text": "program results: none yet (reports/program.json)"
+  },
+  {
+   "ok": false,
+   "text": "live watcher journal: last entry none UTC"
+  },
+  {
+   "ok": true,
+   "text": "TEST setups closed this week (GitHub record): 0"
+  }
+ ],
+ "totals": {
+  "TEST": {
+   "n": 0,
+   "total_r": 0,
+   "avg_r": null,
+   "week_n": 0,
+   "week_total_r": 0
+  },
+  "PAPER": {
+   "n": 0,
+   "total_r": 0,
+   "avg_r": null,
+   "week_n": 0,
+   "week_total_r": 0
+  }
+ },
+ "settings": {
+  "promote_min_trades": 10,
+  "promote_min_avg_r": 0.0,
+  "paper_max": 5,
+  "demote_min_trades": 10,
+  "demote_below_r": 0.0,
+  "idea_min_trades": 10,
+  "idea_market_below_r": -0.2,
+  "idea_fee_gap_r": 0.15,
+  "idea_5m_gap_r": 0.2
+ },
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W41</b>\n\ud83d\udd35 TEST: 0 setups closed this week (+0.0R) \u00b7 0 since the start (- a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f program results: none yet (reports/program.json); live watcher journal: last entry none UTC\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+}
