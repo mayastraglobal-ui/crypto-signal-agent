@@ -12130,3 +12130,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 23:30,BNB,15m,WEAK_BREAK,bull,742.8,,,0.047,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-10 00:00,BNB,15m,SWEEP,bear,743.28,,,0.16,,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
 2026-10-10 00:30,BNB,15m,OB_INVALID,bear,,742.0,743.38,,Asia,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-10 01:30,BTC,30m,SWEEP,bear,82686.0,,,0.448,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 01:30,BTC,15m,SWEEP,bear,82686.0,,,0.854,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 01:30,BTC,15m,FVG,bull,,82590.0,82621.31,0.315,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-10 01:45,BTC,15m,FVG_RETRACE,bull,,82590.0,82621.31,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-10 01:45,BTC,15m,FVG_FILLED,bull,,82590.0,82621.31,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-10 01:15,ETH,15m,WEAK_BREAK,bull,2490.77,,,0.471,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-10 01:00,SOL,30m,SWEEP,bear,109.43,,,0.22,Asia,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 01:30,SOL,30m,WEAK_BREAK,bull,109.43,,,0.207,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-10 00:45,SOL,15m,SWEEP,bear,109.43,,,0.126,Asia,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 01:15,SOL,15m,BOS,bull,109.43,,,0.79,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-10 01:45,ZEC,15m,WEAK_BREAK,bull,1218.38,,,0.086,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-10 00:45,XRP,15m,FVG_RETRACE,bull,,1.3975,1.3991,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-10 00:45,BNB,15m,BREAKER_RETEST,bull,,742.0,743.38,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-10 01:30,BNB,15m,FVG,bull,,743.4,744.2,0.627,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 01:45,BNB,15m,FVG_RETRACE,bull,,743.4,744.2,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
