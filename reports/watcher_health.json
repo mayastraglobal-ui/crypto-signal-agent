@@ -1,8 +1,33 @@
 {
- "state": "OFF",
- "checked_utc": "2026-10-10 11:18",
- "last_utc": null,
- "age_min": null,
- "heartbeat": null,
- "text": "no heartbeat on GitHub - the watcher needs journal sync (JOURNAL_GITHUB_TOKEN) and the update of 2026-10-10"
+ "state": "OK",
+ "checked_utc": "2026-10-10 12:23",
+ "last_utc": "2026-10-10 11:20",
+ "age_min": 63,
+ "heartbeat": {
+  "utc": "2026-10-10 11:20",
+  "started_utc": "2026-10-10 11:15",
+  "feed": "OKX USDT perpetuals",
+  "coins": [
+   "BTC",
+   "ETH",
+   "SOL",
+   "ZEC",
+   "XRP",
+   "SUI",
+   "BNB"
+  ],
+  "last_check_utc": "2026-10-10 11:20",
+  "last_check_ok": true,
+  "fails": 0,
+  "watching": {
+   "LIVE": 0,
+   "PAPER": 0,
+   "TEST": 8
+  },
+  "open_trades": 0,
+  "paused": false,
+  "tests_on": true,
+  "code_old": false
+ },
+ "text": "live watcher: last heartbeat 2026-10-10 11:20 UTC (63 min ago)"
 }

@@ -12348,3 +12348,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 10:30,SUI,15m,FVG_RETRACE,bull,,1.1049,1.1125,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-10 10:30,BNB,30m,FVG_RETRACE,bull,,748.67,749.28,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-10 10:30,BNB,15m,FVG_RETRACE,bull,,748.46,749.0,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:00,BTC,15m,FVG,bull,,82821.19,82879.71,0.889,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 12:15,BTC,15m,FVG_RETRACE,bull,,82821.19,82879.71,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:00,ETH,15m,FVG,bull,,2495.97,2497.22,0.517,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 12:15,ETH,15m,FVG_RETRACE,bull,,2495.97,2497.22,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:15,ETH,15m,FVG_FILLED,bull,,2495.97,2497.22,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 12:00,SOL,30m,FVG_RETRACE,bear,,109.72,109.92,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:00,SOL,30m,FVG_FILLED,bear,,109.72,109.92,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-10 12:00,SOL,15m,FVG_FILLED,bear,,109.72,109.92,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-10 12:00,SOL,15m,FVG,bull,,109.65,109.8,0.676,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-10 12:15,SOL,15m,FVG_RETRACE,bull,,109.65,109.8,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:15,SOL,15m,FVG_FILLED,bull,,109.65,109.8,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-10 12:00,ZEC,15m,FVG,bull,,1224.56,1227.59,0.639,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-10 12:15,ZEC,15m,FVG_RETRACE,bull,,1224.56,1227.59,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:00,XRP,4h,FVG_RETRACE,bull,,1.3975,1.4036,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 12:00,SUI,4h,OB_RETEST,bear,,1.1264,1.1468,,,1d,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-10 12:00,SUI,4h,FVG,bull,,1.0949,1.1025,0.257,,1d,TRANSITION,,smc-1.0,Binance
