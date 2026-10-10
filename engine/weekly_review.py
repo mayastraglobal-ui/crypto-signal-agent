@@ -320,7 +320,7 @@ def system_check(now, research_runs, scan_utc, program, journal, rows):
     """Idea C part 2: did every part run this week? [(ok, text)]."""
     out = []
     days = sorted({str(x.get("date")) for x in research_runs or [] if x.get("date")})
-    last7 = [d for d in days if d >= (now - dt.timedelta(days=7)).strftime("%Y-%m-%d")]
+    last7 = [d for d in days if d >= (now - dt.timedelta(days=6)).strftime("%Y-%m-%d")]   # today + the 6 before
     out.append((len(last7) >= 6, f"nightly research ran on {len(last7)} of the last 7 days"
                 + (f" (last {days[-1]})" if days else "")))
     out.append((scan_utc is not None, f"hourly scan: last run {scan_utc or 'unknown'} UTC"))
@@ -334,8 +334,11 @@ def system_check(now, research_runs, scan_utc, program, journal, rows):
         out.append((False, "program results: none yet (reports/program.json)"))
     if journal:
         last = journal.get("last_entry_utc")
-        out.append((bool(last) and str(last) >= (now - dt.timedelta(days=2)).strftime("%Y-%m-%d"),
-                    f"live watcher journal: last entry {last or 'none'} UTC"))
+        if not last:                     # journal sync works but nothing to record yet (no alert sent) - not a fault
+            out.append((None, "live watcher journal: synced, no alert recorded yet"))
+        else:
+            out.append((str(last) >= (now - dt.timedelta(days=2)).strftime("%Y-%m-%d"),
+                        f"live watcher journal: last entry {last} UTC"))
     else:
         out.append((None, "live watcher: journal sync off - GitHub cannot see the watcher (optional)"))
     n_week = sum(r["week"]["n"] for r in rows if r["stage"] == "TEST")

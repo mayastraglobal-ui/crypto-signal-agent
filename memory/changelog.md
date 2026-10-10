@@ -714,3 +714,14 @@ Newest entries at the bottom. Format: date · who · what · why.
   variant-search cards); they still count in the shared weekly `failure` quota.
 - Tests: `tests/test_failure_lab.py` (new), `tests/test_research.py` (the offline run writes the Failure Lab file),
   `tests/test_lab.py` (repair cards outside Claude's limits).
+
+## 2026-10-10 · Operator + Claude · Health check of the whole agent: two small weekly-review fixes
+- Checked: every workflow of the last 9 hours (Research, Scan, Brain, Tests, Pages: all green except one Tests run on
+  Claude's briefing branch built from the main before PR #60), Claude's Routines (briefing 3x a day, daily review
+  daily; the weekly research Routine, recreated 2026-10-05, fires for the first time on 2026-10-11 09:52 Beijing),
+  data quality (all 7 signal coins GOOD), the signals log (header only since 2026-10-03: no strategy has been in PAPER
+  yet and no TEST setup has triggered since PR 2 - the market was choppy; not data loss), the scan's TEST stage (23
+  program pairs listed from reports/program.json).
+- Fixed in `engine/weekly_review.py` system check: "nightly research ran on 8 of the last 7 days" (the window had
+  8 dates: today + 7 before - now today + 6), and "live watcher journal: last entry none" shown as a fault when
+  journal sync works but no alert was sent yet - now neutral ("synced, no alert recorded yet").
