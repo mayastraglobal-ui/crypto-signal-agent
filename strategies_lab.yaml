@@ -745,3 +745,83 @@
   factory: literature
   factory_evidence: 'Liu, Tsyvinski, Wu (NBER w25882, 2019): 1- to 4-week cross-sectional momentum, 2.7% to 4.1% per
     week top minus bottom quintile, 4.2% per week above median size, 2014-2018, before costs'
+- id: P02-EMA-PULLBACK-V4-S6
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine rule-significance test: P02-EMA-PULLBACK-V4@1.0 without one entry rule'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P02-EMA-PULLBACK-V4@1.0 4h'
+  hypothesis: 'The rule ''rsi(close,14) < 65 / rsi(close,14) > 100 - 65'' adds nothing to P02-EMA-PULLBACK-V4@1.0:
+    the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).'
+  timeframes:
+  - 4h
+  description: In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65,
+    above the VWAP anchored at the last swing low (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+    rsi_n: 14
+    rsi_lo: 40
+  long:
+  - ema(close,{fast}) > ema(close,{slow})
+  - low <= ema(close,{fast})
+  - close > ema(close,{fast})
+  - close > open
+  - rsi(close,{rsi_n}) > {rsi_lo}
+  - close > avwap_swing_low
+  short:
+  - ema(close,{fast}) < ema(close,{slow})
+  - high >= ema(close,{fast})
+  - close < ema(close,{fast})
+  - close < open
+  - rsi(close,{rsi_n}) < 100 - {rsi_lo}
+  - close < avwap_swing_high
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often
+    the last one.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who sold the dip into a trend the higher timeframes still support
+    mechanism: trends persist; a pullback to the 20 EMA resets momentum and buyers step in at 'value'
+    fails_when: ranges and the last leg of a mature trend, where the bounce fails
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-10-10): P02-EMA-PULLBACK-V4@1.0 without entry rule ''rsi(close,14) < 65 / rsi(close,14) > 100 - 65''
+    (rule significance test)'
+  added: '2026-10-10'
+  factory: variant_search
+  variant_of: P02-EMA-PULLBACK-V4@1.0
+  factory_evidence: 'P02-EMA-PULLBACK-V4@1.0 4h: with the rule 297 trades avg +0.096R; without rule 6 (rsi(close,14)
+    < 65 / rsi(close,14) > 100 - 65): 343 trades avg +0.160R - the rule does not improve the result'

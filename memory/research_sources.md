@@ -639,3 +639,93 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: bitcoin prices on different exchanges can differ a lot, and these gaps last. They are much larger across countries than within one country: from December 2017 to early February 2018 Korean prices averaged more than 15% above US prices (40% on some days, the "Kimchi premium"), Japan about 10%, Europe about 3%; inside one country the gaps typically stay below 1% on average. The gaps open up when bitcoin rises fast, and capital controls stop arbitrage capital from closing them. Signed volume (buys minus sells) split into a common part and an exchange-specific part: the common part explains 80% of bitcoin returns, and the exchange-specific part helps explain the gaps. Data: tick data from 34 exchanges in 19 countries (Kaiko), mainly January 2017 to February 2018.
   - what it means for this system: our candles come from one large exchange at a time (Binance, OKX as a fallback). Two large, liquid exchanges should usually be within about 1% of each other, but the paper shows that gaps grow exactly in fast markets. A switch from Binance to OKX in the middle of a candle series could then put a small artificial jump into the data, or move a stop or breakout level by a fraction of a percent. The paper's signed-volume result is contemporaneous (volume and price move together in the same period); it is not evidence that our taker_ratio block predicts the next move. This is my reading, not a measurement.
   - derived hypothesis: 'Hypothesis: mark candle-source switches in the backtest data (from C06)' in memory/experiments.md.
+
+### P01-BREAKOUT-V1@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V1
+  - URL: none recorded
+  - claim: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following.
+  - derived hypothesis (tested): P01-BREAKOUT-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V2@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V2
+  - URL: none recorded
+  - claim: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following.
+  - derived hypothesis (tested): P01-BREAKOUT-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V3@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V3
+  - URL: none recorded
+  - claim: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following.
+  - derived hypothesis (tested): P01-BREAKOUT-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V4@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V4
+  - URL: none recorded
+  - claim: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following.
+  - derived hypothesis (tested): P01-BREAKOUT-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V1@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version V1
+  - URL: none recorded
+  - claim: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V2@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version V2
+  - URL: none recorded
+  - claim: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V3@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version V3
+  - URL: none recorded
+  - claim: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V4@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version V4
+  - URL: none recorded
+  - claim: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V5@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 1, Breakout (Donchian + volume + ADX) - version V5
+  - URL: none recorded
+  - claim: When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following.
+  - derived hypothesis (tested): P01-BREAKOUT-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V5@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-10 00:59 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-08
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 2, EMA trend pullback (EMA20/50 + RSI + VWAP) - version V5
+  - URL: none recorded
+  - claim: A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3

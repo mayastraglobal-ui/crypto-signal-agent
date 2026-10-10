@@ -1,0 +1,1567 @@
+{
+ "updated_utc": "2026-10-10 00:59",
+ "tested_tonight": [
+  1,
+  2
+ ],
+ "why": {
+  "1": "never tested yet",
+  "2": "never tested yet"
+ },
+ "next_night": [
+  3,
+  4
+ ],
+ "strategies": {
+  "1": "Breakout (Donchian + volume + ADX)",
+  "2": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+  "3": "Fibonacci pullback (50-61.8% of the last swing)",
+  "4": "Trend momentum (MACD + Supertrend)",
+  "5": "Range reversal (RSI + Bollinger)",
+  "6": "VWAP reversion",
+  "7": "Squeeze breakout & retest",
+  "8": "Session open breakout (Asia range -> London / New York)",
+  "9": "Liquidity sweep + structure shift",
+  "10": "Crowding fade (funding + open interest)"
+ },
+ "cells": {
+  "P01-BREAKOUT-V1@1.0|4h": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V1",
+   "id": "P01-BREAKOUT-V1",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 1058,
+   "win_rate": 39.6,
+   "avg_r": 0.186,
+   "gross_avg_r": 0.221,
+   "pf": 1.34,
+   "test_avg_r": 0.13,
+   "test_trades": 347,
+   "long_avg_r": 0.258,
+   "short_avg_r": 0.088,
+   "fees_avg_r": 0.035,
+   "coins": {
+    "BNB": {
+     "n": 171,
+     "win_rate": 38.6,
+     "avg_r": 0.14,
+     "gross_avg_r": 0.178,
+     "total_r": 23.9,
+     "positive": true,
+     "test_n": 56,
+     "test_avg_r": 0.013
+    },
+    "BTC": {
+     "n": 197,
+     "win_rate": 45.2,
+     "avg_r": 0.378,
+     "gross_avg_r": 0.428,
+     "total_r": 74.5,
+     "positive": true,
+     "test_n": 65,
+     "test_avg_r": 0.022
+    },
+    "ETH": {
+     "n": 202,
+     "win_rate": 40.6,
+     "avg_r": 0.252,
+     "gross_avg_r": 0.288,
+     "total_r": 51.0,
+     "positive": true,
+     "test_n": 65,
+     "test_avg_r": 0.175
+    },
+    "SOL": {
+     "n": 127,
+     "win_rate": 45.7,
+     "avg_r": 0.297,
+     "gross_avg_r": 0.325,
+     "total_r": 37.7,
+     "positive": true,
+     "test_n": 38,
+     "test_avg_r": 0.128
+    },
+    "XRP": {
+     "n": 194,
+     "win_rate": 35.6,
+     "avg_r": 0.068,
+     "gross_avg_r": 0.097,
+     "total_r": 13.2,
+     "positive": true,
+     "test_n": 70,
+     "test_avg_r": 0.275
+    },
+    "ZEC": {
+     "n": 167,
+     "win_rate": 32.9,
+     "avg_r": -0.022,
+     "gross_avg_r": 0.003,
+     "total_r": -3.6,
+     "positive": false,
+     "test_n": 53,
+     "test_avg_r": 0.138
+    }
+   },
+   "positive_coins": [
+    "BNB",
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+   ],
+   "why_not": [
+    "max drawdown 24.3R"
+   ]
+  },
+  "P01-BREAKOUT-V2@1.0|1h": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "id": "P01-BREAKOUT-V2",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 1849,
+   "win_rate": 32.3,
+   "avg_r": -0.023,
+   "gross_avg_r": 0.022,
+   "pf": 0.96,
+   "test_avg_r": 0.055,
+   "test_trades": 577,
+   "long_avg_r": 0.023,
+   "short_avg_r": -0.079,
+   "fees_avg_r": 0.045,
+   "coins": {
+    "BNB": {
+     "n": 327,
+     "win_rate": 29.7,
+     "avg_r": -0.108,
+     "gross_avg_r": -0.061,
+     "total_r": -35.4,
+     "positive": false,
+     "test_n": 100,
+     "test_avg_r": -0.052
+    },
+    "BTC": {
+     "n": 353,
+     "win_rate": 36.0,
+     "avg_r": 0.116,
+     "gross_avg_r": 0.178,
+     "total_r": 40.9,
+     "positive": true,
+     "test_n": 111,
+     "test_avg_r": 0.122
+    },
+    "ETH": {
+     "n": 354,
+     "win_rate": 29.9,
+     "avg_r": -0.073,
+     "gross_avg_r": -0.027,
+     "total_r": -25.9,
+     "positive": false,
+     "test_n": 108,
+     "test_avg_r": 0.097
+    },
+    "SOL": {
+     "n": 243,
+     "win_rate": 35.0,
+     "avg_r": 0.039,
+     "gross_avg_r": 0.072,
+     "total_r": 9.4,
+     "positive": true,
+     "test_n": 73,
+     "test_avg_r": 0.132
+    },
+    "XRP": {
+     "n": 311,
+     "win_rate": 32.5,
+     "avg_r": -0.026,
+     "gross_avg_r": 0.015,
+     "total_r": -8.0,
+     "positive": false,
+     "test_n": 102,
+     "test_avg_r": -0.053
+    },
+    "ZEC": {
+     "n": 261,
+     "win_rate": 31.4,
+     "avg_r": -0.09,
+     "gross_avg_r": -0.057,
+     "total_r": -23.5,
+     "positive": false,
+     "test_n": 83,
+     "test_avg_r": 0.105
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "SOL"
+   ],
+   "why_not": [
+    "avg -0.02R/trade (needs +0.10R)",
+    "profit factor 0.96",
+    "max drawdown 100.0R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P01-BREAKOUT-V2@1.0|30m": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "id": "P01-BREAKOUT-V2",
+   "tf": "30m",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 873,
+   "win_rate": 36.2,
+   "avg_r": 0.005,
+   "gross_avg_r": 0.078,
+   "pf": 1.01,
+   "test_avg_r": 0.084,
+   "test_trades": 408,
+   "long_avg_r": 0.038,
+   "short_avg_r": -0.035,
+   "fees_avg_r": 0.073,
+   "coins": {
+    "BNB": {
+     "n": 207,
+     "win_rate": 31.4,
+     "avg_r": -0.163,
+     "gross_avg_r": -0.087,
+     "total_r": -33.7,
+     "positive": false,
+     "test_n": 76,
+     "test_avg_r": -0.089
+    },
+    "BTC": {
+     "n": 164,
+     "win_rate": 37.8,
+     "avg_r": 0.059,
+     "gross_avg_r": 0.161,
+     "total_r": 9.7,
+     "positive": true,
+     "test_n": 73,
+     "test_avg_r": 0.097
+    },
+    "ETH": {
+     "n": 171,
+     "win_rate": 39.8,
+     "avg_r": 0.123,
+     "gross_avg_r": 0.191,
+     "total_r": 21.1,
+     "positive": true,
+     "test_n": 88,
+     "test_avg_r": 0.277
+    },
+    "SOL": {
+     "n": 170,
+     "win_rate": 37.1,
+     "avg_r": 0.07,
+     "gross_avg_r": 0.125,
+     "total_r": 11.9,
+     "positive": true,
+     "test_n": 89,
+     "test_avg_r": 0.156
+    },
+    "XRP": {
+     "n": 161,
+     "win_rate": 36.0,
+     "avg_r": -0.027,
+     "gross_avg_r": 0.035,
+     "total_r": -4.3,
+     "positive": false,
+     "test_n": 82,
+     "test_avg_r": -0.054
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "ETH",
+    "SOL"
+   ],
+   "why_not": [
+    "avg +0.01R/trade (needs +0.10R)",
+    "profit factor 1.01",
+    "max drawdown 56.0R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P01-BREAKOUT-V2@1.0|15m": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "id": "P01-BREAKOUT-V2",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 1330,
+   "win_rate": 34.4,
+   "avg_r": -0.057,
+   "gross_avg_r": 0.043,
+   "pf": 0.91,
+   "test_avg_r": -0.008,
+   "test_trades": 622,
+   "long_avg_r": -0.059,
+   "short_avg_r": -0.053,
+   "fees_avg_r": 0.1,
+   "coins": {
+    "BNB": {
+     "n": 323,
+     "win_rate": 31.6,
+     "avg_r": -0.201,
+     "gross_avg_r": -0.094,
+     "total_r": -64.8,
+     "positive": false,
+     "test_n": 119,
+     "test_avg_r": -0.279
+    },
+    "BTC": {
+     "n": 245,
+     "win_rate": 38.8,
+     "avg_r": 0.072,
+     "gross_avg_r": 0.208,
+     "total_r": 17.6,
+     "positive": true,
+     "test_n": 118,
+     "test_avg_r": 0.055
+    },
+    "ETH": {
+     "n": 279,
+     "win_rate": 33.3,
+     "avg_r": -0.063,
+     "gross_avg_r": 0.033,
+     "total_r": -17.6,
+     "positive": false,
+     "test_n": 146,
+     "test_avg_r": 0.074
+    },
+    "SOL": {
+     "n": 249,
+     "win_rate": 33.7,
+     "avg_r": -0.045,
+     "gross_avg_r": 0.025,
+     "total_r": -11.3,
+     "positive": false,
+     "test_n": 125,
+     "test_avg_r": 0.056
+    },
+    "XRP": {
+     "n": 234,
+     "win_rate": 35.9,
+     "avg_r": 0.004,
+     "gross_avg_r": 0.09,
+     "total_r": 0.9,
+     "positive": true,
+     "test_n": 114,
+     "test_avg_r": 0.032
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "XRP"
+   ],
+   "why_not": [
+    "avg -0.06R/trade (needs +0.10R)",
+    "profit factor 0.91",
+    "max drawdown 116.0R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P01-BREAKOUT-V3@1.0|4h": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V3",
+   "id": "P01-BREAKOUT-V3",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 333,
+   "win_rate": 40.5,
+   "avg_r": 0.209,
+   "gross_avg_r": 0.24,
+   "pf": 1.39,
+   "test_avg_r": 0.208,
+   "test_trades": 111,
+   "long_avg_r": 0.34,
+   "short_avg_r": 0.012,
+   "fees_avg_r": 0.031,
+   "coins": {
+    "BNB": {
+     "n": 56,
+     "win_rate": 41.1,
+     "avg_r": 0.165,
+     "gross_avg_r": 0.201,
+     "total_r": 9.2,
+     "positive": true,
+     "test_n": 21,
+     "test_avg_r": 0.022
+    },
+    "BTC": {
+     "n": 60,
+     "win_rate": 51.7,
+     "avg_r": 0.57,
+     "gross_avg_r": 0.616,
+     "total_r": 34.2,
+     "positive": true,
+     "test_n": 18,
+     "test_avg_r": 0.41
+    },
+    "ETH": {
+     "n": 68,
+     "win_rate": 44.1,
+     "avg_r": 0.22,
+     "gross_avg_r": 0.252,
+     "total_r": 15.0,
+     "positive": true,
+     "test_n": 21,
+     "test_avg_r": 0.165
+    },
+    "SOL": {
+     "n": 38,
+     "win_rate": 36.8,
+     "avg_r": 0.074,
+     "gross_avg_r": 0.095,
+     "total_r": 2.8,
+     "positive": true,
+     "test_n": 11,
+     "test_avg_r": -0.228
+    },
+    "XRP": {
+     "n": 64,
+     "win_rate": 39.1,
+     "avg_r": 0.231,
+     "gross_avg_r": 0.256,
+     "total_r": 14.8,
+     "positive": true,
+     "test_n": 23,
+     "test_avg_r": 0.688
+    },
+    "ZEC": {
+     "n": 47,
+     "win_rate": 25.5,
+     "avg_r": -0.135,
+     "gross_avg_r": -0.115,
+     "total_r": -6.3,
+     "positive": false,
+     "test_n": 17,
+     "test_avg_r": -0.086
+    }
+   },
+   "positive_coins": [
+    "BNB",
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+   ],
+   "why_not": [
+    "max drawdown 12.9R"
+   ]
+  },
+  "P01-BREAKOUT-V4@1.0|4h": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V4",
+   "id": "P01-BREAKOUT-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 900,
+   "win_rate": 39.6,
+   "avg_r": 0.184,
+   "gross_avg_r": 0.226,
+   "pf": 1.29,
+   "test_avg_r": 0.091,
+   "test_trades": 292,
+   "long_avg_r": 0.244,
+   "short_avg_r": 0.106,
+   "fees_avg_r": 0.042,
+   "coins": {
+    "BNB": {
+     "n": 143,
+     "win_rate": 40.6,
+     "avg_r": 0.174,
+     "gross_avg_r": 0.219,
+     "total_r": 24.8,
+     "positive": true,
+     "test_n": 43,
+     "test_avg_r": 0.201
+    },
+    "BTC": {
+     "n": 167,
+     "win_rate": 44.3,
+     "avg_r": 0.396,
+     "gross_avg_r": 0.457,
+     "total_r": 66.1,
+     "positive": true,
+     "test_n": 56,
+     "test_avg_r": -0.049
+    },
+    "ETH": {
+     "n": 168,
+     "win_rate": 38.7,
+     "avg_r": 0.228,
+     "gross_avg_r": 0.27,
+     "total_r": 38.3,
+     "positive": true,
+     "test_n": 51,
+     "test_avg_r": 0.117
+    },
+    "SOL": {
+     "n": 108,
+     "win_rate": 45.4,
+     "avg_r": 0.301,
+     "gross_avg_r": 0.335,
+     "total_r": 32.5,
+     "positive": true,
+     "test_n": 36,
+     "test_avg_r": -0.012
+    },
+    "XRP": {
+     "n": 168,
+     "win_rate": 37.5,
+     "avg_r": 0.043,
+     "gross_avg_r": 0.077,
+     "total_r": 7.2,
+     "positive": true,
+     "test_n": 60,
+     "test_avg_r": 0.147
+    },
+    "ZEC": {
+     "n": 146,
+     "win_rate": 32.2,
+     "avg_r": -0.022,
+     "gross_avg_r": 0.008,
+     "total_r": -3.2,
+     "positive": false,
+     "test_n": 46,
+     "test_avg_r": 0.135
+    }
+   },
+   "positive_coins": [
+    "BNB",
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+   ],
+   "why_not": [
+    "max drawdown 24.7R"
+   ]
+  },
+  "P01-BREAKOUT-V5@1.0|1h": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V5",
+   "id": "P01-BREAKOUT-V5",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 3762,
+   "win_rate": 33.0,
+   "avg_r": -0.023,
+   "gross_avg_r": 0.028,
+   "pf": 0.96,
+   "test_avg_r": 0.024,
+   "test_trades": 1213,
+   "long_avg_r": -0.015,
+   "short_avg_r": -0.032,
+   "fees_avg_r": 0.051,
+   "coins": {
+    "BNB": {
+     "n": 663,
+     "win_rate": 30.9,
+     "avg_r": -0.101,
+     "gross_avg_r": -0.043,
+     "total_r": -66.7,
+     "positive": false,
+     "test_n": 225,
+     "test_avg_r": -0.01
+    },
+    "BTC": {
+     "n": 689,
+     "win_rate": 35.0,
+     "avg_r": 0.024,
+     "gross_avg_r": 0.095,
+     "total_r": 16.8,
+     "positive": true,
+     "test_n": 232,
+     "test_avg_r": 0.005
+    },
+    "ETH": {
+     "n": 717,
+     "win_rate": 33.5,
+     "avg_r": 0.011,
+     "gross_avg_r": 0.062,
+     "total_r": 7.7,
+     "positive": true,
+     "test_n": 221,
+     "test_avg_r": 0.002
+    },
+    "SOL": {
+     "n": 523,
+     "win_rate": 32.7,
+     "avg_r": -0.026,
+     "gross_avg_r": 0.013,
+     "total_r": -13.3,
+     "positive": false,
+     "test_n": 153,
+     "test_avg_r": 0.153
+    },
+    "XRP": {
+     "n": 633,
+     "win_rate": 31.8,
+     "avg_r": -0.042,
+     "gross_avg_r": 0.006,
+     "total_r": -26.5,
+     "positive": false,
+     "test_n": 211,
+     "test_avg_r": -0.069
+    },
+    "ZEC": {
+     "n": 537,
+     "win_rate": 34.1,
+     "avg_r": -0.008,
+     "gross_avg_r": 0.028,
+     "total_r": -4.1,
+     "positive": false,
+     "test_n": 171,
+     "test_avg_r": 0.126
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "ETH"
+   ],
+   "why_not": [
+    "avg -0.02R/trade (needs +0.10R)",
+    "profit factor 0.96",
+    "max drawdown 226.0R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P01-BREAKOUT-V5@1.0|30m": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V5",
+   "id": "P01-BREAKOUT-V5",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 1938,
+   "win_rate": 32.9,
+   "avg_r": -0.095,
+   "gross_avg_r": -0.012,
+   "pf": 0.86,
+   "test_avg_r": -0.075,
+   "test_trades": 910,
+   "long_avg_r": -0.11,
+   "short_avg_r": -0.079,
+   "fees_avg_r": 0.083,
+   "coins": {
+    "BNB": {
+     "n": 471,
+     "win_rate": 30.4,
+     "avg_r": -0.172,
+     "gross_avg_r": -0.081,
+     "total_r": -81.2,
+     "positive": false,
+     "test_n": 174,
+     "test_avg_r": -0.148
+    },
+    "BTC": {
+     "n": 353,
+     "win_rate": 34.6,
+     "avg_r": -0.1,
+     "gross_avg_r": 0.014,
+     "total_r": -35.2,
+     "positive": false,
+     "test_n": 183,
+     "test_avg_r": -0.12
+    },
+    "ETH": {
+     "n": 364,
+     "win_rate": 33.5,
+     "avg_r": -0.072,
+     "gross_avg_r": 0.006,
+     "total_r": -26.4,
+     "positive": false,
+     "test_n": 185,
+     "test_avg_r": -0.006
+    },
+    "SOL": {
+     "n": 380,
+     "win_rate": 32.9,
+     "avg_r": -0.042,
+     "gross_avg_r": 0.019,
+     "total_r": -16.1,
+     "positive": false,
+     "test_n": 187,
+     "test_avg_r": 0.025
+    },
+    "XRP": {
+     "n": 370,
+     "win_rate": 33.8,
+     "avg_r": -0.068,
+     "gross_avg_r": 0.003,
+     "total_r": -25.2,
+     "positive": false,
+     "test_n": 181,
+     "test_avg_r": -0.135
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.09R/trade (needs +0.10R)",
+    "profit factor 0.86",
+    "max drawdown 207.3R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P01-BREAKOUT-V5@1.0|15m": {
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V5",
+   "id": "P01-BREAKOUT-V5",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 2971,
+   "win_rate": 31.6,
+   "avg_r": -0.149,
+   "gross_avg_r": -0.035,
+   "pf": 0.79,
+   "test_avg_r": -0.138,
+   "test_trades": 1399,
+   "long_avg_r": -0.179,
+   "short_avg_r": -0.117,
+   "fees_avg_r": 0.113,
+   "coins": {
+    "BNB": {
+     "n": 717,
+     "win_rate": 31.4,
+     "avg_r": -0.193,
+     "gross_avg_r": -0.068,
+     "total_r": -138.6,
+     "positive": false,
+     "test_n": 270,
+     "test_avg_r": -0.24
+    },
+    "BTC": {
+     "n": 525,
+     "win_rate": 34.3,
+     "avg_r": -0.119,
+     "gross_avg_r": 0.034,
+     "total_r": -62.4,
+     "positive": false,
+     "test_n": 265,
+     "test_avg_r": -0.146
+    },
+    "ETH": {
+     "n": 576,
+     "win_rate": 29.3,
+     "avg_r": -0.192,
+     "gross_avg_r": -0.085,
+     "total_r": -110.7,
+     "positive": false,
+     "test_n": 300,
+     "test_avg_r": -0.134
+    },
+    "SOL": {
+     "n": 592,
+     "win_rate": 32.4,
+     "avg_r": -0.089,
+     "gross_avg_r": -0.008,
+     "total_r": -52.9,
+     "positive": false,
+     "test_n": 283,
+     "test_avg_r": -0.022
+    },
+    "XRP": {
+     "n": 561,
+     "win_rate": 30.8,
+     "avg_r": -0.136,
+     "gross_avg_r": -0.037,
+     "total_r": -76.6,
+     "positive": false,
+     "test_n": 281,
+     "test_avg_r": -0.152
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.15R/trade (needs +0.10R)",
+    "profit factor 0.79",
+    "max drawdown 461.9R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V1@1.0|4h": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V1",
+   "id": "P02-EMA-PULLBACK-V1",
+   "tf": "4h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 299,
+   "win_rate": 31.4,
+   "avg_r": -0.024,
+   "gross_avg_r": 0.022,
+   "pf": 0.96,
+   "test_avg_r": -0.133,
+   "test_trades": 100,
+   "long_avg_r": -0.03,
+   "short_avg_r": -0.018,
+   "fees_avg_r": 0.046,
+   "coins": {
+    "BNB": {
+     "n": 54,
+     "win_rate": 29.6,
+     "avg_r": -0.004,
+     "gross_avg_r": 0.049,
+     "total_r": -0.2,
+     "positive": false,
+     "test_n": 17,
+     "test_avg_r": 0.281
+    },
+    "BTC": {
+     "n": 57,
+     "win_rate": 31.6,
+     "avg_r": -0.091,
+     "gross_avg_r": -0.03,
+     "total_r": -5.2,
+     "positive": false,
+     "test_n": 18,
+     "test_avg_r": -0.068
+    },
+    "ETH": {
+     "n": 47,
+     "win_rate": 27.7,
+     "avg_r": -0.091,
+     "gross_avg_r": -0.046,
+     "total_r": -4.3,
+     "positive": false,
+     "test_n": 19,
+     "test_avg_r": -0.35
+    },
+    "SOL": {
+     "n": 31,
+     "win_rate": 29.0,
+     "avg_r": -0.076,
+     "gross_avg_r": -0.043,
+     "total_r": -2.3,
+     "positive": false,
+     "test_n": 14,
+     "test_avg_r": -0.413
+    },
+    "XRP": {
+     "n": 63,
+     "win_rate": 34.9,
+     "avg_r": 0.009,
+     "gross_avg_r": 0.055,
+     "total_r": 0.5,
+     "positive": true,
+     "test_n": 17,
+     "test_avg_r": -0.22
+    },
+    "ZEC": {
+     "n": 47,
+     "win_rate": 34.0,
+     "avg_r": 0.09,
+     "gross_avg_r": 0.123,
+     "total_r": 4.2,
+     "positive": true,
+     "test_n": 15,
+     "test_avg_r": -0.042
+    }
+   },
+   "positive_coins": [
+    "XRP",
+    "ZEC"
+   ],
+   "why_not": [
+    "avg -0.02R/trade (needs +0.10R)",
+    "profit factor 0.96",
+    "max drawdown 23.4R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V2@1.0|1h": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V2",
+   "id": "P02-EMA-PULLBACK-V2",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 2302,
+   "win_rate": 31.1,
+   "avg_r": -0.09,
+   "gross_avg_r": -0.023,
+   "pf": 0.86,
+   "test_avg_r": -0.097,
+   "test_trades": 680,
+   "long_avg_r": -0.107,
+   "short_avg_r": -0.068,
+   "fees_avg_r": 0.067,
+   "coins": {
+    "BNB": {
+     "n": 422,
+     "win_rate": 29.4,
+     "avg_r": -0.131,
+     "gross_avg_r": -0.06,
+     "total_r": -55.4,
+     "positive": false,
+     "test_n": 112,
+     "test_avg_r": -0.185
+    },
+    "BTC": {
+     "n": 452,
+     "win_rate": 31.9,
+     "avg_r": -0.119,
+     "gross_avg_r": -0.03,
+     "total_r": -53.8,
+     "positive": false,
+     "test_n": 130,
+     "test_avg_r": -0.124
+    },
+    "ETH": {
+     "n": 416,
+     "win_rate": 30.5,
+     "avg_r": -0.122,
+     "gross_avg_r": -0.055,
+     "total_r": -50.9,
+     "positive": false,
+     "test_n": 122,
+     "test_avg_r": -0.116
+    },
+    "SOL": {
+     "n": 279,
+     "win_rate": 30.5,
+     "avg_r": -0.072,
+     "gross_avg_r": -0.022,
+     "total_r": -20.1,
+     "positive": false,
+     "test_n": 91,
+     "test_avg_r": -0.313
+    },
+    "XRP": {
+     "n": 380,
+     "win_rate": 32.9,
+     "avg_r": -0.022,
+     "gross_avg_r": 0.042,
+     "total_r": -8.5,
+     "positive": false,
+     "test_n": 122,
+     "test_avg_r": 0.054
+    },
+    "ZEC": {
+     "n": 353,
+     "win_rate": 31.7,
+     "avg_r": -0.051,
+     "gross_avg_r": -0.003,
+     "total_r": -17.8,
+     "positive": false,
+     "test_n": 103,
+     "test_avg_r": 0.065
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.09R/trade (needs +0.10R)",
+    "profit factor 0.86",
+    "max drawdown 236.6R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V2@1.0|30m": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V2",
+   "id": "P02-EMA-PULLBACK-V2",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 1692,
+   "win_rate": 30.3,
+   "avg_r": -0.136,
+   "gross_avg_r": -0.028,
+   "pf": 0.8,
+   "test_avg_r": -0.129,
+   "test_trades": 761,
+   "long_avg_r": -0.123,
+   "short_avg_r": -0.155,
+   "fees_avg_r": 0.108,
+   "coins": {
+    "BNB": {
+     "n": 430,
+     "win_rate": 28.8,
+     "avg_r": -0.191,
+     "gross_avg_r": -0.071,
+     "total_r": -82.0,
+     "positive": false,
+     "test_n": 148,
+     "test_avg_r": -0.078
+    },
+    "BTC": {
+     "n": 300,
+     "win_rate": 33.3,
+     "avg_r": -0.142,
+     "gross_avg_r": 0.005,
+     "total_r": -42.5,
+     "positive": false,
+     "test_n": 140,
+     "test_avg_r": -0.124
+    },
+    "ETH": {
+     "n": 332,
+     "win_rate": 30.1,
+     "avg_r": -0.132,
+     "gross_avg_r": -0.028,
+     "total_r": -43.9,
+     "positive": false,
+     "test_n": 169,
+     "test_avg_r": -0.052
+    },
+    "SOL": {
+     "n": 332,
+     "win_rate": 28.9,
+     "avg_r": -0.128,
+     "gross_avg_r": -0.051,
+     "total_r": -42.5,
+     "positive": false,
+     "test_n": 158,
+     "test_avg_r": -0.186
+    },
+    "XRP": {
+     "n": 298,
+     "win_rate": 30.9,
+     "avg_r": -0.067,
+     "gross_avg_r": 0.027,
+     "total_r": -20.1,
+     "positive": false,
+     "test_n": 146,
+     "test_avg_r": -0.216
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.14R/trade (needs +0.10R)",
+    "profit factor 0.80",
+    "max drawdown 236.7R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V2@1.0|15m": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V2",
+   "id": "P02-EMA-PULLBACK-V2",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 3121,
+   "win_rate": 28.5,
+   "avg_r": -0.214,
+   "gross_avg_r": -0.061,
+   "pf": 0.7,
+   "test_avg_r": -0.246,
+   "test_trades": 1415,
+   "long_avg_r": -0.235,
+   "short_avg_r": -0.183,
+   "fees_avg_r": 0.153,
+   "coins": {
+    "BNB": {
+     "n": 771,
+     "win_rate": 27.4,
+     "avg_r": -0.263,
+     "gross_avg_r": -0.099,
+     "total_r": -202.6,
+     "positive": false,
+     "test_n": 264,
+     "test_avg_r": -0.289
+    },
+    "BTC": {
+     "n": 598,
+     "win_rate": 26.6,
+     "avg_r": -0.348,
+     "gross_avg_r": -0.135,
+     "total_r": -208.4,
+     "positive": false,
+     "test_n": 267,
+     "test_avg_r": -0.38
+    },
+    "ETH": {
+     "n": 662,
+     "win_rate": 30.4,
+     "avg_r": -0.165,
+     "gross_avg_r": -0.018,
+     "total_r": -109.2,
+     "positive": false,
+     "test_n": 336,
+     "test_avg_r": -0.137
+    },
+    "SOL": {
+     "n": 589,
+     "win_rate": 28.5,
+     "avg_r": -0.174,
+     "gross_avg_r": -0.068,
+     "total_r": -102.7,
+     "positive": false,
+     "test_n": 298,
+     "test_avg_r": -0.273
+    },
+    "XRP": {
+     "n": 501,
+     "win_rate": 30.1,
+     "avg_r": -0.09,
+     "gross_avg_r": 0.038,
+     "total_r": -45.0,
+     "positive": false,
+     "test_n": 250,
+     "test_avg_r": -0.174
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "not cost-viable: fees + slippage 0.28R per trade (stop must be \u2265 4x the round-trip cost)",
+    "avg -0.21R/trade (needs +0.10R)",
+    "profit factor 0.70",
+    "max drawdown 693.9R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V3@1.0|4h": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V3",
+   "id": "P02-EMA-PULLBACK-V3",
+   "tf": "4h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 117,
+   "win_rate": 23.1,
+   "avg_r": -0.261,
+   "gross_avg_r": -0.214,
+   "pf": 0.62,
+   "test_avg_r": -0.297,
+   "test_trades": 45,
+   "long_avg_r": -0.247,
+   "short_avg_r": -0.286,
+   "fees_avg_r": 0.047,
+   "coins": {
+    "BNB": {
+     "n": 19,
+     "win_rate": 36.8,
+     "avg_r": 0.271,
+     "gross_avg_r": 0.319,
+     "total_r": 5.1,
+     "positive": true,
+     "test_n": 5,
+     "test_avg_r": 0.822
+    },
+    "BTC": {
+     "n": 30,
+     "win_rate": 30.0,
+     "avg_r": -0.11,
+     "gross_avg_r": -0.047,
+     "total_r": -3.3,
+     "positive": false,
+     "test_n": 11,
+     "test_avg_r": 0.23
+    },
+    "ETH": {
+     "n": 18,
+     "win_rate": 5.6,
+     "avg_r": -0.839,
+     "gross_avg_r": -0.801,
+     "total_r": -15.1,
+     "positive": false,
+     "test_n": 8,
+     "test_avg_r": -0.964
+    },
+    "SOL": {
+     "n": 11,
+     "win_rate": 27.3,
+     "avg_r": -0.138,
+     "gross_avg_r": -0.106,
+     "total_r": -1.5,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.609
+    },
+    "XRP": {
+     "n": 23,
+     "win_rate": 17.4,
+     "avg_r": -0.519,
+     "gross_avg_r": -0.468,
+     "total_r": -11.9,
+     "positive": false,
+     "test_n": 8,
+     "test_avg_r": -0.66
+    },
+    "ZEC": {
+     "n": 16,
+     "win_rate": 18.8,
+     "avg_r": -0.238,
+     "gross_avg_r": -0.211,
+     "total_r": -3.8,
+     "positive": false,
+     "test_n": 8,
+     "test_avg_r": -0.494
+    }
+   },
+   "positive_coins": [
+    "BNB"
+   ],
+   "why_not": [
+    "avg -0.26R/trade (needs +0.10R)",
+    "profit factor 0.62",
+    "max drawdown 30.9R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V4@1.0|4h": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V4",
+   "id": "P02-EMA-PULLBACK-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 297,
+   "win_rate": 35.0,
+   "avg_r": 0.096,
+   "gross_avg_r": 0.15,
+   "pf": 1.14,
+   "test_avg_r": 0.031,
+   "test_trades": 100,
+   "long_avg_r": 0.093,
+   "short_avg_r": 0.1,
+   "fees_avg_r": 0.054,
+   "coins": {
+    "BNB": {
+     "n": 54,
+     "win_rate": 31.5,
+     "avg_r": -0.039,
+     "gross_avg_r": 0.023,
+     "total_r": -2.1,
+     "positive": false,
+     "test_n": 18,
+     "test_avg_r": 0.253
+    },
+    "BTC": {
+     "n": 57,
+     "win_rate": 35.1,
+     "avg_r": 0.155,
+     "gross_avg_r": 0.224,
+     "total_r": 8.8,
+     "positive": true,
+     "test_n": 18,
+     "test_avg_r": 0.164
+    },
+    "ETH": {
+     "n": 46,
+     "win_rate": 37.0,
+     "avg_r": 0.243,
+     "gross_avg_r": 0.3,
+     "total_r": 11.2,
+     "positive": true,
+     "test_n": 18,
+     "test_avg_r": 0.033
+    },
+    "SOL": {
+     "n": 31,
+     "win_rate": 32.3,
+     "avg_r": 0.007,
+     "gross_avg_r": 0.044,
+     "total_r": 0.2,
+     "positive": true,
+     "test_n": 14,
+     "test_avg_r": -0.059
+    },
+    "XRP": {
+     "n": 62,
+     "win_rate": 38.7,
+     "avg_r": 0.185,
+     "gross_avg_r": 0.237,
+     "total_r": 11.5,
+     "positive": true,
+     "test_n": 17,
+     "test_avg_r": -0.174
+    },
+    "ZEC": {
+     "n": 47,
+     "win_rate": 34.0,
+     "avg_r": -0.023,
+     "gross_avg_r": 0.014,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 15,
+     "test_avg_r": -0.084
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+   ],
+   "why_not": [
+    "avg +0.10R/trade (needs +0.10R)",
+    "profit factor 1.14",
+    "max drawdown 19.3R"
+   ]
+  },
+  "P02-EMA-PULLBACK-V5@1.0|1h": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V5",
+   "id": "P02-EMA-PULLBACK-V5",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 4852,
+   "win_rate": 30.1,
+   "avg_r": -0.11,
+   "gross_avg_r": -0.037,
+   "pf": 0.83,
+   "test_avg_r": -0.109,
+   "test_trades": 1445,
+   "long_avg_r": -0.121,
+   "short_avg_r": -0.098,
+   "fees_avg_r": 0.073,
+   "coins": {
+    "BNB": {
+     "n": 914,
+     "win_rate": 28.0,
+     "avg_r": -0.166,
+     "gross_avg_r": -0.084,
+     "total_r": -151.7,
+     "positive": false,
+     "test_n": 262,
+     "test_avg_r": -0.225
+    },
+    "BTC": {
+     "n": 902,
+     "win_rate": 31.8,
+     "avg_r": -0.116,
+     "gross_avg_r": -0.019,
+     "total_r": -105.1,
+     "positive": false,
+     "test_n": 272,
+     "test_avg_r": -0.027
+    },
+    "ETH": {
+     "n": 841,
+     "win_rate": 29.1,
+     "avg_r": -0.15,
+     "gross_avg_r": -0.077,
+     "total_r": -126.0,
+     "positive": false,
+     "test_n": 254,
+     "test_avg_r": -0.184
+    },
+    "SOL": {
+     "n": 617,
+     "win_rate": 32.4,
+     "avg_r": -0.021,
+     "gross_avg_r": 0.032,
+     "total_r": -13.2,
+     "positive": false,
+     "test_n": 179,
+     "test_avg_r": -0.1
+    },
+    "XRP": {
+     "n": 826,
+     "win_rate": 30.5,
+     "avg_r": -0.072,
+     "gross_avg_r": -0.001,
+     "total_r": -59.2,
+     "positive": false,
+     "test_n": 262,
+     "test_avg_r": -0.018
+    },
+    "ZEC": {
+     "n": 752,
+     "win_rate": 29.4,
+     "avg_r": -0.106,
+     "gross_avg_r": -0.055,
+     "total_r": -79.5,
+     "positive": false,
+     "test_n": 216,
+     "test_avg_r": -0.1
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.11R/trade (needs +0.10R)",
+    "profit factor 0.83",
+    "max drawdown 569.3R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V5@1.0|30m": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V5",
+   "id": "P02-EMA-PULLBACK-V5",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 3703,
+   "win_rate": 30.0,
+   "avg_r": -0.163,
+   "gross_avg_r": -0.043,
+   "pf": 0.77,
+   "test_avg_r": -0.169,
+   "test_trades": 1665,
+   "long_avg_r": -0.19,
+   "short_avg_r": -0.13,
+   "fees_avg_r": 0.12,
+   "coins": {
+    "BNB": {
+     "n": 950,
+     "win_rate": 27.5,
+     "avg_r": -0.25,
+     "gross_avg_r": -0.118,
+     "total_r": -237.9,
+     "positive": false,
+     "test_n": 338,
+     "test_avg_r": -0.247
+    },
+    "BTC": {
+     "n": 671,
+     "win_rate": 31.0,
+     "avg_r": -0.212,
+     "gross_avg_r": -0.053,
+     "total_r": -142.0,
+     "positive": false,
+     "test_n": 323,
+     "test_avg_r": -0.17
+    },
+    "ETH": {
+     "n": 656,
+     "win_rate": 28.5,
+     "avg_r": -0.194,
+     "gross_avg_r": -0.079,
+     "total_r": -127.3,
+     "positive": false,
+     "test_n": 325,
+     "test_avg_r": -0.124
+    },
+    "SOL": {
+     "n": 738,
+     "win_rate": 30.4,
+     "avg_r": -0.113,
+     "gross_avg_r": -0.027,
+     "total_r": -83.2,
+     "positive": false,
+     "test_n": 336,
+     "test_avg_r": -0.152
+    },
+    "XRP": {
+     "n": 688,
+     "win_rate": 33.4,
+     "avg_r": -0.017,
+     "gross_avg_r": 0.088,
+     "total_r": -11.5,
+     "positive": false,
+     "test_n": 343,
+     "test_avg_r": -0.152
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.16R/trade (needs +0.10R)",
+    "profit factor 0.77",
+    "max drawdown 602.5R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P02-EMA-PULLBACK-V5@1.0|15m": {
+   "strategy": 2,
+   "name": "EMA trend pullback (EMA20/50 + RSI + VWAP)",
+   "version": "V5",
+   "id": "P02-EMA-PULLBACK-V5",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-10 00:59",
+   "trades": 6894,
+   "win_rate": 27.9,
+   "avg_r": -0.263,
+   "gross_avg_r": -0.091,
+   "pf": 0.65,
+   "test_avg_r": -0.308,
+   "test_trades": 3153,
+   "long_avg_r": -0.298,
+   "short_avg_r": -0.219,
+   "fees_avg_r": 0.172,
+   "coins": {
+    "BNB": {
+     "n": 1759,
+     "win_rate": 24.6,
+     "avg_r": -0.381,
+     "gross_avg_r": -0.192,
+     "total_r": -669.5,
+     "positive": false,
+     "test_n": 624,
+     "test_avg_r": -0.484
+    },
+    "BTC": {
+     "n": 1292,
+     "win_rate": 26.3,
+     "avg_r": -0.405,
+     "gross_avg_r": -0.17,
+     "total_r": -523.4,
+     "positive": false,
+     "test_n": 631,
+     "test_avg_r": -0.476
+    },
+    "ETH": {
+     "n": 1299,
+     "win_rate": 29.1,
+     "avg_r": -0.235,
+     "gross_avg_r": -0.07,
+     "total_r": -305.2,
+     "positive": false,
+     "test_n": 642,
+     "test_avg_r": -0.208
+    },
+    "SOL": {
+     "n": 1342,
+     "win_rate": 29.9,
+     "avg_r": -0.132,
+     "gross_avg_r": -0.012,
+     "total_r": -177.1,
+     "positive": false,
+     "test_n": 635,
+     "test_avg_r": -0.181
+    },
+    "XRP": {
+     "n": 1202,
+     "win_rate": 30.6,
+     "avg_r": -0.115,
+     "gross_avg_r": 0.032,
+     "total_r": -138.7,
+     "positive": false,
+     "test_n": 621,
+     "test_avg_r": -0.194
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "not cost-viable: fees + slippage 0.31R per trade (stop must be \u2265 4x the round-trip cost)",
+    "avg -0.26R/trade (needs +0.10R)",
+    "profit factor 0.65",
+    "max drawdown 1817.7R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  }
+ },
+ "min_coin_trades": 5
+}

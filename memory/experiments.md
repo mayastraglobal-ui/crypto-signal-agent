@@ -952,3 +952,16 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: where a candle series switches from Binance to OKX (or back), the step between the two sources can create a fake breakout or trigger a stop that never happened on either exchange. Backtest trades that open or close within a few candles of such a switch should be rarer than 1% of trades; if they are more common, they can bias results.
   - how to test: an engine check, not a lab card - for the operator. Count the trades of the main cells (for example donchian_breakout-VEXIT-S4@1.0 4h) that touch a source switch, and compare their average R with the rest. The futures data already keeps its source per row (the engine refuses to compare funding or open interest across exchanges); the candles would need the same mark.
   - stop if: switches are rare and the trades near them look like the rest.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0050 | 2026-10-10 00:59 | P01-BREAKOUT-V1@1.0 | breakout | 4h | When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following. |
+| EXP-0051 | 2026-10-10 00:59 | P01-BREAKOUT-V2@1.0 | breakout | 1h, 30m, 15m | When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following. |
+| EXP-0052 | 2026-10-10 00:59 | P01-BREAKOUT-V3@1.0 | breakout | 4h | When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following. |
+| EXP-0053 | 2026-10-10 00:59 | P01-BREAKOUT-V4@1.0 | breakout | 4h | When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following. |
+| EXP-0054 | 2026-10-10 00:59 | P02-EMA-PULLBACK-V1@1.0 | mtf_pullback | 4h | A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend. |
+| EXP-0055 | 2026-10-10 00:59 | P02-EMA-PULLBACK-V2@1.0 | mtf_pullback | 1h, 30m, 15m | A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend. |
+| EXP-0056 | 2026-10-10 00:59 | P02-EMA-PULLBACK-V3@1.0 | mtf_pullback | 4h | A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend. |
+| EXP-0057 | 2026-10-10 00:59 | P02-EMA-PULLBACK-V4@1.0 | mtf_pullback | 4h | A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend. |
+| EXP-0058 | 2026-10-10 00:59 | P01-BREAKOUT-V5@1.0 | breakout | 1h, 30m, 15m | When 4H and 1H trend the same way, a close outside the 20-candle range with strong volume and a trending ADX starts a move worth following. |
+| EXP-0059 | 2026-10-10 00:59 | P02-EMA-PULLBACK-V5@1.0 | mtf_pullback | 1h, 30m, 15m | A pullback to the 20 EMA inside a 4H + 1H trend, with momentum reset but not broken and buyers since the last swing low still in profit, continues the trend. |
