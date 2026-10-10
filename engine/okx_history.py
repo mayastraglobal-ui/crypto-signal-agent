@@ -114,20 +114,55 @@ def resample(m1, tf, until_ms=None):
     return out[out["open_time"] + step <= end][COLS].reset_index(drop=True)
 
 
+def missing(okx, tf, bars, now_ms):
+    """Candles missing from an OKX frame inside the window it should cover (the newest `bars` closed candles, or
+    since its first candle when that is younger). A coin OKX delisted and listed again has a hole of months: ZEC's
+    perpetual archive stops in 2024-01 and starts again on 2025-11-06 (found 2026-10-10)."""
+    if okx is None or not len(okx):
+        return bars
+    step = TF_MS[tf]
+    start = max(int(okx["open_time"].min()), (now_ms // step - bars) * step)
+    want = (now_ms // step) * step - start
+    have = int(((okx["open_time"] >= start) & (okx["open_time"] + step <= now_ms)).sum())
+    return max(0, want // step - have)
+
+
+def _day(ms):
+    return f"{dt.datetime.fromtimestamp(ms / 1000, dt.timezone.utc):%Y-%m-%d}"
+
+
 def stitch(okx, spot, bars, tf):
-    """OKX perpetual candles, with the Binance spot candles BEFORE the first OKX candle in front (a young OKX listing).
+    """OKX perpetual candles, with Binance spot candles where OKX has none: before the first OKX candle (a young OKX
+    listing) and inside OKX holes (a delisted and relisted perpetual). Never after the newest OKX candle.
     Returns (candles, note)."""
     if okx is None or not len(okx):
         return spot, "Binance spot (no OKX perpetual candles)"
-    first = int(okx["open_time"].min())
-    before = spot[spot["open_time"] < first] if spot is not None and len(spot) else spot
-    if before is None or not len(before):
+    step = TF_MS[tf]
+    first, last = int(okx["open_time"].min()), int(okx["open_time"].max())
+    if spot is None or not len(spot):
         return okx.tail(bars).reset_index(drop=True), "OKX perpetual"
-    df = pd.concat([before[COLS], okx[COLS]], ignore_index=True).sort_values("open_time").tail(bars)
-    df = df.astype({"open_time": "int64"}).reset_index(drop=True)
-    df["close_time"] = df["open_time"] + TF_MS[tf] - 1
-    day = dt.datetime.fromtimestamp(first / 1000, dt.timezone.utc)
-    return df, f"OKX perpetual from {day:%Y-%m-%d}, Binance spot before"
+    t = spot["open_time"].astype("int64")
+    fill = spot[(t <= last) & ~t.isin(okx["open_time"].astype("int64"))]
+    df = pd.concat([fill[COLS], okx[COLS]], ignore_index=True).astype({"open_time": "int64"})
+    df = df.sort_values("open_time").tail(bars).reset_index(drop=True)
+    ft = fill["open_time"].astype("int64")
+    ft = ft[ft >= int(df["open_time"].min())].sort_values().to_numpy()   # Binance candles inside the kept window
+    if not len(ft):
+        return okx.tail(bars).reset_index(drop=True), "OKX perpetual"
+    df["close_time"] = df["open_time"] + step - 1
+    holes = []                                   # runs of 1+ day of Binance candles inside the OKX history
+    inside = ft[ft > first]
+    if len(inside):
+        cuts = np.flatnonzero(np.diff(inside) > step) + 1
+        for run in np.split(inside, cuts):
+            if run[-1] + step - run[0] >= DAY_MS:
+                holes.append(f"{_day(int(run[0]))} to {_day(int(run[-1]) + step)}")
+    note = f"OKX perpetual from {_day(first)}, Binance spot before" if (ft < first).any() else "OKX perpetual"
+    if holes:
+        note += f" and in {len(holes)} gap(s): " + ", ".join(holes)
+    elif len(inside):
+        note += f" ({len(inside)} missing candle(s) from Binance spot)"
+    return df, note
 
 
 class History:

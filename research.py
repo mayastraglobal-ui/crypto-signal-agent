@@ -64,6 +64,7 @@ from engine import trials as trl
 CACHE = os.path.join(sc.ROOT, "data", "history")
 TRIALS = os.path.join(sc.MEMORY, "trials.csv")
 SHADOW = os.path.join(sc.MEMORY, "family_gates_shadow.csv")
+OKX_HOLE_SHARE = 0.005     # OKX frame missing more than 0.5% of its candles = a real hole: Binance spot fills it
 log = sc.log
 
 
@@ -99,8 +100,10 @@ def playbook_bar(V, s, cfg):
     return out
 
 
-def research_coins(offline, limit):
-    """Signal + research-only coins chosen by the newest hourly scan (reports/universe.json)."""
+def research_coins(offline, limit, pinned=()):
+    """Signal + research-only coins chosen by the newest hourly scan (reports/universe.json), then the operator's
+    pinned coins (config.yaml -> universe.research_pinned) that the scan left out - backtested every night even when a
+    quiet weekend pushes them under the volume rules (SUI on 2026-10-10). Pinning never makes a coin a signal coin."""
     path = os.path.join(sc.REPORTS, "universe.json")
     coins = []
     if os.path.exists(path):
@@ -110,6 +113,8 @@ def research_coins(offline, limit):
         coins = ["BTC", "ETH", "SOL", "BNB"]
     if not coins:
         sys.exit("No coins: reports/universe.json is missing - the hourly scan must run first.")
+    if not offline:
+        coins += [c for c in pinned if c not in coins]
     return coins[:limit] if limit else coins
 
 
@@ -474,7 +479,7 @@ def main():
                  else int(R["history_bars"][tf])) for tf in ["1w", "1d"] + tfs}
     cfg_stress = stressed(cfg, R["cost_stress_x"])
     cfg_stress2 = stressed(cfg, float(FG["cost_report_x"]))   # Phase 19 A: costs +100%, report only
-    coins = research_coins(args.offline, args.coins)
+    coins = research_coins(args.offline, args.coins, (cfg.get("universe") or {}).get("research_pinned") or [])
     coins = sorted(coins, key=lambda c: c != "BTC")          # BTC first: the others read its closes (btc_ret)
     derivs_by_coin = sc.load_derivs(args.offline, coins, now_ms)
     btc_by_tf, lead_lag = {}, {}
@@ -512,9 +517,10 @@ def main():
                     log(f"{base} OKX perpetual candles failed ({e}) - Binance spot used")
             for tf in ["1w", "1d"] + tfs:
                 ok_df = okx_frames.get(tf)
-                if ok_df is not None and len(ok_df) and int(ok_df["open_time"].min()) <= now_ms - (bars[tf] - 1) * sc.TF_MS[tf]:
+                if ok_df is not None and len(ok_df) and int(ok_df["open_time"].min()) <= now_ms - (bars[tf] - 1) * sc.TF_MS[tf] \
+                        and okx_history.missing(ok_df, tf, bars[tf], now_ms) <= OKX_HOLE_SHARE * bars[tf]:
                     raw, how = ok_df, "OKX perpetual"
-                else:                                    # no OKX history (yet) or a younger OKX listing
+                else:                                    # no OKX history (yet), a younger listing or a relisting hole
                     raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
                     if ok_df is not None and len(ok_df):
                         raw, how = okx_history.stitch(ok_df, raw, bars[tf], tf)
