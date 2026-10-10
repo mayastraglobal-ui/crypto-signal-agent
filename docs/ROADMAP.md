@@ -165,7 +165,7 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
 | Now | Double-click `windows\4_update.bat` once to get the Telegram commands and buttons |
 | After the update | Optional: double-click `windows\6_journal_sync.bat` (GitHub token) so the agent learns from your trades; send `/result 1.2` after each trade |
 | After the next research email | Compare the playbook versions (originals vs -LDN / -15M / -W20 / -LIMIT / -GRADED / -APLUS) |
-| On or after 2026-10-10 | `config.yaml` → `family_gates`: `mode: active`, `operator_ok: 2026-10-10` (lets the 4H Donchian strategies reach PAPER_TRADING) |
+| ~~On or after 2026-10-10~~ | **Done 2026-10-10:** family gates active (`mode: active`, `operator_ok: 2026-10-10`) - the 4H Donchian strategies can reach PAPER_TRADING from the next research run |
 | After PR 1 is merged | Nothing to do: the research run tests 2 program strategies a night; read `reports/program.md` after ~5 nights |
 | Sundays from 12:00 Beijing | Read the weekly review in Telegram (`/review` any time); tap "🟡 Promote" for a candidate you want in PAPER (journal sync on), or add its line under `promotions:` in `config.yaml` |
 | After PR 2 is merged | `windows\4_update.bat`; TEST alerts start by themselves as the nightly research finds positive pairs (`/tests off` stops them). Optional: `windows\7_replay_test_alerts.bat` |

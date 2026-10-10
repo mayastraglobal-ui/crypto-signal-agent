@@ -244,12 +244,12 @@ family_gates:                # Phase 19 A - operator-owned. Strategy-family draw
                              # (95th percentile of the group's own trade history, average moved to the +0.10R pass bar).
   rules_version: 1           # raise it if a number below changes: every card is then re-evaluated once more and that
                              # re-evaluation is counted in memory/trials.csv (origin "re-evaluation: family gates vN")
-  mode: shadow               # shadow = new verdicts are only SHOWN next to the old ones (report 3b, research.json,
+  mode: active               # shadow = new verdicts are only SHOWN next to the old ones (report 3b, research.json,
                              # memory/family_gates_shadow.csv); nothing moves on them. active = the new rule decides -
                              # the engine stays in shadow unless operator_ok is a date >= shadow_start + shadow_days
   shadow_start: 2026-09-26
   shadow_days: 14
-  operator_ok: null          # your yes after the shadow period, e.g. 2026-10-10 (together with mode: active)
+  operator_ok: 2026-10-10    # your yes after the shadow period (operator: "turn on family gates", 2026-10-10)
   window_trades: 100         # "per 100 trades": Monte Carlo draws 100 trades at random from the card's own trades
   mc_runs: 1000
   reference_percentile: 95   # every limit and the clustering test use the 95th percentile (as Phase 18 B does)

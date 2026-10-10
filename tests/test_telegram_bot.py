@@ -154,7 +154,7 @@ class Bot(unittest.TestCase):
     def test_status_help_and_unknown(self):
         self.w.on_update(self.msg("/status"), self.now)
         self.assertIn("Live watcher running", self.sent[-1][0])
-        self.assertIn("Watching", self.sent[-1][0])
+        self.assertRegex(self.sent[-1][0], r"Watching|LIVE / PAPER: none yet")   # wording depends on reports/program.json
         self.w.on_update(self.msg("/help"), self.now)
         self.assertIn("/pause", self.sent[-1][0])
         self.w.on_update(self.msg("/nonsense"), self.now)

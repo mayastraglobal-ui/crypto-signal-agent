@@ -5,6 +5,7 @@ Run:  python -m unittest discover -s tests -v
 """
 import copy
 import csv
+import datetime as dt
 import json
 import os
 import subprocess
@@ -21,6 +22,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import research  # noqa: E402
 import scanner  # noqa: E402
+from engine import family_gates as FGM  # noqa: E402
 from engine import history as H  # noqa: E402
 from engine import lifecycle as LC  # noqa: E402
 from engine import regime as RG  # noqa: E402
@@ -342,15 +344,17 @@ class EndToEnd(unittest.TestCase):
             self.assertGreaterEqual(len(a["diagnosis"]), 6)
             for k in ("tags", "systematic", "mae_mfe", "by_regime", "by_session", "by_direction", "not_measurable"):
                 self.assertIn(k, a)
-            fg = cell["family_gate"]                                  # Phase 19 A: shadow verdicts side by side
-            self.assertEqual((fg["group"], fg["mode"]), ("trend", "shadow"))
+            fg = cell["family_gate"]                                  # Phase 19 A: old and new verdicts side by side
+            mode = FGM.mode(dict(FGM.DEFAULTS, **CFG["family_gates"]), dt.datetime.now(dt.timezone.utc).date())[0]
+            self.assertEqual((fg["group"], fg["mode"]), ("trend", mode))   # the operator's config decides the mode
             self.assertIn(fg["new"], LC.ENGINE_STATUSES)
             for k in ("window", "duration", "clustering", "recovery"):
                 self.assertIn(k, fg["metrics"])
-            self.assertEqual(res["family_gates"]["mode"], "shadow")
-            for c in res["cells"].values():                          # nothing moves on the new rule in shadow mode
-                if c["family_gate"]["old"] != "PAPER_TRADING":
-                    self.assertNotEqual(c["status"], "PAPER_TRADING")
+            self.assertEqual(res["family_gates"]["mode"], mode)
+            for c in res["cells"].values():   # shadow: nothing moves on the new rule; active: only the new rule's PAPER
+                if c["status"] == "PAPER_TRADING":
+                    self.assertIn("PAPER_TRADING", (c["family_gate"]["old"] if mode == "shadow" else
+                                                    c["family_gate"]["new"], c["base_status"]))
             self.assertEqual(cell["evidence"]["stress_2x"]["n"] > 0, cell["evidence"]["all"]["n"] > 0)   # +100% shown
             self.assertLessEqual(cell["evidence"]["stress_2x"]["avg_r"], cell["evidence"]["stress"]["avg_r"] + 1e-9)
             with open(os.path.join(tmp, "reports", "trials_offline.csv")) as f:
@@ -388,7 +392,7 @@ class EndToEnd(unittest.TestCase):
             self.assertIn("### 3c. Research layers (daily run)", md)
             self.assertIn("### 3d. Why trades lose", md)
             self.assertIn("Costs +100% (shown only)", md)
-            self.assertIn("**Family gates (Phase 19 A, rules v1) - shadow mode", md)
+            self.assertIn(f"**Family gates (Phase 19 A, rules v1) - {res['family_gates']['mode_text']}", md)
             self.assertIn("Layer A", md)
 
             # a tested version edited in place is refused by BOTH runs
