@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-10 15:17",
+ "utc": "2026-10-10 16:18",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -17,7 +17,7 @@
   "UP": 0,
   "DOWN": 0,
   "RANGE": 0,
-  "CHOPPY": 5
+  "CHOPPY": 6
  },
  "coins": [
   {
@@ -33,7 +33,7 @@
    },
    "adx": {
     "1d": 38.0,
-    "4h": 30.0,
+    "4h": 29.0,
     "1h": 11.0
    },
    "vol": {
@@ -51,11 +51,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0004,
-    "oi_24h_pct": 0.1,
+    "funding_pct": 0.0011,
+    "oi_24h_pct": -56.7,
     "label": "neutral"
    },
-   "change_24h": -0.0
+   "change_24h": 0.14
   },
   {
    "coin": "ETH",
@@ -70,8 +70,8 @@
    },
    "adx": {
     "1d": 35.0,
-    "4h": 45.0,
-    "1h": 12.0
+    "4h": 44.0,
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 3.15,
@@ -88,26 +88,26 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0005,
-    "oi_24h_pct": -1.2,
+    "funding_pct": -0.0002,
+    "oi_24h_pct": -69.1,
     "label": "neutral"
    },
-   "change_24h": 0.75
+   "change_24h": 0.51
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "UNCLEAR"
+    "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 38.0,
-    "4h": 39.0,
+    "4h": 38.0,
     "1h": 20.0
    },
    "vol": {
@@ -125,27 +125,64 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0025,
-    "oi_24h_pct": -0.1,
+    "funding_pct": -0.0012,
+    "oi_24h_pct": -59.1,
     "label": "neutral"
    },
-   "change_24h": 0.6
+   "change_24h": 0.4
+  },
+  {
+   "coin": "SUI",
+   "verdict": "CHOPPY",
+   "permission": "NO TRADE",
+   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)",
+   "labels": {
+    "1w": "UNCLEAR",
+    "1d": "TRANSITION",
+    "4h": "UNCLEAR",
+    "1h": "TRANSITION"
+   },
+   "adx": {
+    "1d": 37.0,
+    "4h": 25.0,
+    "1h": 34.0
+   },
+   "vol": {
+    "atr_pct": 8.46,
+    "vol_pctile": 73.0,
+    "vol_label": "normal",
+    "usual_move_pct": 2.94,
+    "move_8of10_pct": 5.6,
+    "days": 541,
+    "basis": "similar days",
+    "price": 1.0698,
+    "band": [
+     1.00987,
+     1.12973
+    ]
+   },
+   "crowd": {
+    "funding_pct": 0.0058,
+    "oi_24h_pct": 9.3,
+    "label": "neutral"
+   },
+   "change_24h": 5.51
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H RANGE)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)",
    "labels": {
     "1w": "TRANSITION",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "RANGE"
+    "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 37.0,
     "4h": 42.0,
-    "1h": 13.0
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 4.41,
@@ -162,11 +199,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0019,
-    "oi_24h_pct": 3.2,
+    "funding_pct": 0.0017,
+    "oi_24h_pct": -72.3,
     "label": "neutral"
    },
-   "change_24h": 1.72
+   "change_24h": 1.47
   },
   {
    "coin": "ZEC",
@@ -182,7 +219,7 @@
    "adx": {
     "1d": 34.0,
     "4h": 24.0,
-    "1h": 18.0
+    "1h": 19.0
    },
    "vol": {
     "atr_pct": 9.54,
@@ -199,14 +236,14 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0025,
-    "oi_24h_pct": -74.6,
+    "funding_pct": -0.0007,
+    "oi_24h_pct": 0.3,
     "label": "neutral"
    },
-   "change_24h": 1.27
+   "change_24h": 0.56
   }
  ],
- "alts_vs_btc_24h": 1.01,
+ "alts_vs_btc_24h": 0.42,
  "fear_greed": {
   "value": 64,
   "label": "Greed",
@@ -216,7 +253,7 @@
   {
    "start_utc": "2026-10-14 12:30",
    "name": "US CPI (Sep data)",
-   "hours": 93.2
+   "hours": 92.2
   }
  ],
  "blackout_now": [],
@@ -229,5 +266,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-10 23:17 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H COMPRESSION\nVolatility: quiet (daily range 2.4%, higher than 14% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (80,900 \u2013 84,371) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0004%/8h, open interest +0.1% in 24h)\nAltcoins vs BTC (24h): +1.0%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 10-14 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-11 00:18 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H COMPRESSION\nVolatility: quiet (daily range 2.4%, higher than 14% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (80,900 \u2013 84,371) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0011%/8h, open interest -56.7% in 24h)\nAltcoins vs BTC (24h): +0.4%\nMood (Fear & Greed): Greed 64\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 10-14 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
