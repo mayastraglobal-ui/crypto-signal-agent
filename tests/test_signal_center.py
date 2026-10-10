@@ -202,6 +202,40 @@ class Watcher(unittest.TestCase):
             self.assertEqual(self.w.tick(self.now), [])
         self.assertEqual(self.w.pending, [])
 
+    def test_watch_note_at_once_while_the_5m_check_waits(self):          # 👀 2026-10-10
+        with self.fire():
+            self.assertEqual(self.w.tick(self.now), [])
+        notes = [(t, b) for t, b in self.sent if "<b>Watch ·" in t]
+        self.assertEqual(len(notes), 1)                                     # merged setup: one note
+        text, buttons = notes[0]
+        self.assertIn("<b>Watch · SHORT BTC</b> · 1H", text)
+        self.assertIn("Waiting up to 30 min for a 5m candle", text)
+        self.assertIn("Information only - not a trade signal", text)
+        self.assertIsNone(buttons)                                          # never buttons: not a signal
+        self.assertEqual(len(self.w.pending), 1)
+        self.assertEqual(self.w.state["watch_sent"], [self.now])
+        self.assertIn("Watch notes: ON · 1 sent today", self.w.status_text(self.now))
+
+    def test_watch_off_cap_and_pause(self):
+        msg = lambda t: dict(update_id=1, message=dict(chat=dict(id=42), date=self.now // 1000, text=t))  # noqa: E731
+        self.w.on_update(msg("/watch off"), self.now)
+        self.assertIn("Watch notes are <b>OFF</b>", self.sent[-1][0])
+        with self.fire():
+            self.w.tick(self.now)
+        self.assertFalse(any("<b>Watch ·" in t for t, _ in self.sent))
+        self.assertEqual(len(self.w.pending), 1)                            # the TEST setup itself still waits
+        self.w.on_update(msg("/watch on"), self.now)
+        self.assertIn("<b>ON</b>", self.sent[-1][0])
+        a = dict(self.w.pending[0])
+        self.w.SC = dict(self.w.SC, watch_max_per_day=1)
+        self.w.state["watch_sent"] = [self.now]
+        self.assertFalse(self.w.watch_note(a, self.now))                   # the daily maximum
+        self.w.state["watch_sent"] = []
+        self.w.state["paused_until"] = -1
+        self.assertFalse(self.w.watch_note(a, self.now))                   # /pause holds them too
+        self.w.state["paused_until"] = 0
+        self.assertTrue(self.w.watch_note(a, self.now))
+
     def test_failed_5m_check_releases_the_setup(self):
         with self.fire():
             self.w.tick(self.now)

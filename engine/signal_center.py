@@ -22,7 +22,7 @@ import datetime as dt
 import math
 
 DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades=5, max_per_day=10,
-                cooldown_minutes=240, confirm_5m=True, agree_hours=4)
+                cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12)
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -30,7 +30,8 @@ OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / �
 def settings(section):
     s = dict(DEFAULTS)
     s.update({k: v for k, v in (section or {}).items() if k in DEFAULTS})
-    for k in ("min_coin_trades", "test_min_trades", "max_per_day", "cooldown_minutes", "agree_hours"):
+    for k in ("min_coin_trades", "test_min_trades", "max_per_day", "cooldown_minutes", "agree_hours",
+              "watch_max_per_day"):
         s[k] = int(s[k])
     s["min_avg_r"] = float(s["min_avg_r"])
     return s

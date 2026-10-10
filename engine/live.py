@@ -97,6 +97,27 @@ def _usd(x):
     return f"${x:,.2f}" if abs(x) < 1000 else f"${x:,.0f}"
 
 
+def watch_text(a, wait_min=30):
+    """👀 Watch note (operator request 2026-10-10): a TEST setup was found and waits for its 5m confirmation. Sent at
+    once so the operator sees the move; information only - no buttons, never a trade signal. If the 5m candle
+    confirms, the normal 🔵 TEST alert follows."""
+    side = "LONG" if a["d"] == 1 else "SHORT"
+    prog = a.get("program") or {}
+    name = f"{prog['name']} · {prog['version']}" if prog.get("name") else f"{a['strategy']} v{a['version']}"
+    stop = a["entry"] - a["d"] * a["R"]
+    lines = [f"👀 <b>Watch · {side} {a['coin']}</b> · {a['tf'].upper()}",
+             f"{name} · setup on the {bj(a['close_ms'] + 1)} close at <b>{fmt_px(a['entry'])}</b>",
+             f"Its stop would be {fmt_px(stop, a['entry'])} ({abs(stop / a['entry'] - 1) * 100:.2f}% away)"]
+    if a.get("regimes"):
+        lines.append("Trend: " + " · ".join(f"{k.upper()} {v}" for k, v in a["regimes"].items()))
+    if a.get("against"):
+        lines.append(f"⚠️ Against the daily trend ({a['against']}) - context only")
+    lines += [f"Waiting up to {wait_min} min for a 5m candle to confirm. If it confirms, the 🔵 TEST alert follows "
+              "with the size and the buttons.",
+              "<i>Information only - not a trade signal. /watch off stops these notes.</i>"]
+    return "\n".join(lines)
+
+
 def message(a):
     """Telegram text (HTML) of one alert (Forward Test Program layout, 2026-10-09). a = dict(label, coin, inst, d, tf,
     strategy, version, entry, R, tps, split, zone_r, size, risk_pct, max_hold, regimes, close_ms, sent_ms, confirm,
@@ -271,6 +292,7 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/status - is it running, what it watches, the last check\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
         "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
+        "/watch on|off - 👀 watch notes: a TEST setup found, waiting for its 5m confirmation (information only)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
         "/review - the latest weekly review: TEST / PAPER results, what is ready for PAPER, the system check\n"
@@ -323,6 +345,9 @@ def status_text(i):
         lines.append(f"🔵 TEST alerts: {'ON' if i.get('tests_on', True) else 'OFF (/tests on)'} · "
                      f"{len(tests)} backtest-positive strategy timeframe(s) on their positive coins"
                      + (f" · {i['tests_today']} sent today (max {i['tests_max']})" if "tests_today" in i else ""))
+    if "watch_on" in i:
+        lines.append(f"👀 Watch notes: {'ON' if i['watch_on'] else 'OFF (/watch on)'}"
+                     + (f" · {i.get('watch_today', 0)} sent today" if i["watch_on"] else ""))
     if real:
         lines.append(f"Watching {len(real)} strategy timeframe(s):")
         lines += [f"• {sid} {tf} ({lab})" for sid, tf, lab in real]

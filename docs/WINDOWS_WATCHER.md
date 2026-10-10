@@ -71,6 +71,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
 | `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
+| `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
 | `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
 | `/help` | The list |
@@ -186,6 +187,11 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 - 1W / 1D never block a TEST alert. When the trade goes against the daily trend you see **⚠️ Against the daily trend**.
 - A **5m candle must confirm** the entry first (body in the trade's direction, normal volume, close near the entry,
   within 30 minutes) - otherwise no alert.
+- **👀 Watch notes** (2026-10-10): as soon as a TEST setup is found you get a short note - coin, side, timeframe,
+  strategy, price, where its stop would be, the trend - while it waits for that 5m candle. **Information only**: no
+  buttons, never a trade signal. If the 5m candle confirms, the normal 🔵 TEST alert follows. At most 12 a day;
+  `/watch off` stops them (and `/tests off` or `/pause` holds them too). Why: in the 14 days before 10 Oct the 5m check
+  held back 15 of 18 setups, among them the two best shorts of the 6-9 Oct fall - you now see every setup.
 - **⭐** = another timeframe or strategy gave the same coin and direction in the last 4 hours. Versions and
   timeframes of one strategy are merged into one alert.
 - At most **10 TEST alerts a day** (Beijing day), the strongest backtest first; one per coin + direction + strategy

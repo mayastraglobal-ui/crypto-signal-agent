@@ -610,8 +610,10 @@ class Watcher:
         # -1 = until /resume, else the end (ms) · tg_offset: the next Telegram update to read
         # shadow: every alert followed silently by the plan's rules (its "plan" result goes to the journal)
         # tests_on: 🔵 TEST alerts on / off (/tests) · test_sent: when each TEST alert went out (the daily cap)
+        # watch_on / watch_sent: 👀 watch notes on / off (/watch) and when each went out (their own daily cap)
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
-                         next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None).items():
+                         next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None,
+                         watch_on=True, watch_sent=[]).items():
             st.setdefault(k, v)
         return st
 
@@ -623,6 +625,7 @@ class Watcher:
                                 if k in self.state["trades"] or int(a["sent_ms"]) >= now - 3 * 86_400_000}
         self.state["results"] = self.state["results"][-200:]
         self.state["test_sent"] = [m for m in self.state["test_sent"] if int(m) >= now - 3 * 86_400_000]
+        self.state["watch_sent"] = [m for m in self.state["watch_sent"] if int(m) >= now - 3 * 86_400_000]
         try:
             os.makedirs(os.path.dirname(STATE), exist_ok=True)
             with open(STATE, "w") as f:
@@ -748,6 +751,24 @@ class Watcher:
                 st = self.state["alerts"][aid]                  # journal sync: the alert and its silent plan follow-up
                 self.journal(dict(st, id=aid), "alert", int(st["sent_ms"]))
                 self.state["shadow"][aid] = fl.open_trade(st, aid, int(st["sent_ms"]), self.cfg.get("trade_plan"))
+
+    def watch_note(self, a, now_ms):
+        """👀 Watch note (2026-10-10): the operator sees a TEST setup at once, while it waits for its 5m confirmation
+        (information only, no buttons). Off with /watch off or /tests off, never while paused, at most
+        watch_max_per_day a Beijing day. Returns True when sent."""
+        if not (self.SC["watch_notes"] and self.state.get("watch_on", True) and self.state.get("tests_on", True)):
+            return False
+        if self.paused(now_ms):
+            return False
+        if scx.sent_today(self.state["watch_sent"], now_ms) >= int(self.SC["watch_max_per_day"]):
+            log(f"WATCH {a['coin']} {a['tf']} {a['strategy']}: daily maximum of {self.SC['watch_max_per_day']} "
+                "watch notes reached - not sent")
+            return False
+        ok, err, _ = self.say(lv.watch_text(a, int(self.S5["bars"]) * 5))
+        self.state["watch_sent"].append(now_ms)
+        if self.send:
+            log(f"WATCH {a['coin']} {a['tf']} {a['strategy']}: " + ("sent" if ok else f"NOT sent ({err})"))
+        return ok
 
     def _remember(self, a):
         """Keep what the buttons and the follow-up need; returns the alert id (in the buttons' data)."""
@@ -921,6 +942,17 @@ class Watcher:
         if cmd == "review":
             rv = self._json("reports/weekly_review.json")
             return (rv or {}).get("telegram") or "📊 No weekly review yet - GitHub's hourly scan writes it."
+        if cmd == "watch":
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state["watch_on"] = arg == "on"
+                self._save_state()
+            on = self.state.get("watch_on", True)
+            return (f"👀 Watch notes are <b>{'ON' if on else 'OFF'}</b>. "
+                    + (f"A note comes as soon as a TEST setup is found, while it waits for its 5m confirmation "
+                       f"(information only, at most {self.SC['watch_max_per_day']} a day). /watch off to stop them."
+                       if on else "/watch on to switch them on.")
+                    + ("" if self.state.get("tests_on", True) else " (TEST alerts are off too: /tests on.)"))
         if cmd == "tests":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1082,6 +1114,8 @@ class Watcher:
             coins=self.coins, open_trades=len(self.state["trades"]),
             alerts_today=sum(1 for a in self.state["alerts"].values() if int(a["sent_ms"]) >= day),
             tests_on=self.state.get("tests_on", True), tests_today=scx.sent_today(self.state["test_sent"], now_ms),
+            watch_on=self.state.get("watch_on", True) and self.SC["watch_notes"],
+            watch_today=scx.sent_today(self.state["watch_sent"], now_ms),
             tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
             heartbeat=self.hb.status(now_ms)))
@@ -1208,6 +1242,7 @@ class Watcher:
                 self.state["sent"][a["key"]] = now_ms          # reserved: no duplicate while it waits
                 self.pending.append(dict(a, after_ms=b, reserved_ms=now_ms))
                 log(f"{coin} {a['tf']} {a['strategy']}: TEST trigger - waiting for the 5m confirmation")
+                self.watch_note(a, now_ms)
             else:
                 out.append(self._finish(a, now_ms))
         return out

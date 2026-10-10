@@ -122,6 +122,7 @@ class Review(unittest.TestCase):
 
     def test_no_branch_writes_nothing(self):
         with mock.patch.object(JRV, "fetch", return_value=None), mock.patch.object(JRV, "write") as w, \
+                mock.patch.object(JRV, "write_health"), \
                 mock.patch.object(sys, "argv", ["journal_review.py"]), mock.patch("builtins.print"):
             JRV.main()
         w.assert_not_called()
