@@ -601,3 +601,39 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
   - rsi2_dip_buy v1.0 15m: blocked by the permission gate
   - trend_pullback v1.0 15m: blocked by the regime gate
+
+### Review: BTC down -2.9% (5.2x ATR), 2026-10-02 12:00 -> 2026-10-02 19:00
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal v1.0 · asset: BTC · timeframe: 15m, 30m, 1h · regime: RANGE · review: 2026-10-17
+  - status: KEEP
+  - today's evidence: the permission gate blocked failing cells only: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 639 trades -0.38R; liquidity_sweep_reversal@1.0|15m 1055 trades -0.53R (BACKTEST, fact sheet 2026-10-10). The S8-noSMC 1h cell has no numbers in today's fact sheet (not available).
+  - action: none.
+
+### Review: SOL up +5.4% (6.0x ATR), 2026-10-01 16:00 -> 2026-10-02 05:00
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: FACT: the engine's missed-move record and today's playbook · confidence: medium · strategy: S8-PDH-PDL-SWEEP, S8-PDH-PDL-SWEEP-noSMC, S5-SWEEP-MSS-FVG-noSMC, liquidity_sweep_reversal v1.0 · asset: SOL · timeframe: 5m, 15m, 30m, 1h · regime: STRONG_BULL · review: 2026-10-17
+  - status: KEEP
+  - today's evidence: 'identifiable' rests on S8-PDH-PDL-SWEEP v1.0 1h and its noSMC twin. Both cells are FAILED in the playbook (for example S8-PDH-PDL-SWEEP v1.0 1h +0.11R over 101 trades in TRANSITION on 2026-10-05, marked FAILED). A signal from a failed cell is not a missed trade.
+  - action: none.
+
+### Review: XRP down -4.8% (5.8x ATR), 2026-10-02 09:00 -> 2026-10-02 19:00
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal v1.0 · asset: XRP · timeframe: 5m, 30m, 1h · regime: RANGE · review: 2026-10-17
+  - status: KEEP
+  - today's evidence: the permission gate blocked failing cells only: S8-PDH-PDL-SWEEP-noSMC@1.0|30m 639 trades -0.38R; liquidity_sweep_reversal@1.0|5m 2376 trades -0.85R (BACKTEST).
+  - action: none.
+
+### Review: AVAX down -6.2% (5.5x ATR), 2026-10-02 12:00 -> 2026-10-02 21:00
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: FACT: the engine's missed-move record and today's failing-cell diagnosis · confidence: medium · strategy: S8-PDH-PDL-SWEEP-noSMC, liquidity_sweep_reversal v1.0 · asset: AVAX · timeframe: 5m, 30m, 1h · regime: RANGE · review: 2026-10-17
+  - status: KEEP
+  - today's evidence: research-only coin; the blocked cells fail (S8-PDH-PDL-SWEEP-noSMC@1.0|30m 639 trades -0.38R; liquidity_sweep_reversal@1.0|5m 2376 trades -0.85R; BACKTEST). The liquidity_sweep_reversal 1h cell has no numbers in today's fact sheet (not available).
+  - action: none.
+
+### Review: LINK down -6.1% (5.4x ATR), 2026-10-02 12:00 -> 2026-10-02 21:00
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: FACT: the engine's missed-move record (no setup before the move) · confidence: high · strategy: all · asset: LINK · timeframe: 1h · regime: RANGE · review: 2026-10-17
+  - status: KEEP
+  - today's evidence: no setup existed, LINK is research-only, and BTC, AVAX and LINK all fell from 2026-10-02 12:00: one market-wide move, not a coin setup (my reading of the three records).
+  - action: none.
+
+### The 2026-10-08 sell-off: ten missed-move records, one event, not shown in the fact sheet
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 · evidence: MODEL_OUTPUT: reading of the ten engine records written at 2026-10-09 01:00 UTC (93 strategy / timeframe tests checked) and the fact sheets of 2026-10-09 and 2026-10-10 · confidence: medium · strategy: all · asset: BTC, ETH, SOL, ZEC, XRP, BNB, SUI, UNI, ADA, AVAX · timeframe: 1h · regime: STRONG_BEAR, TRANSITION, RANGE · review: 2026-10-17
+  The engine wrote ten strong-move records for 2026-10-08 (BTC -2.9%, ETH -5.9%, SOL -7.7%, ZEC -14.0%, XRP -6.3%, BNB -6.1%, SUI -11.6%, UNI -10.1%, ADA -11.4%, AVAX -9.0%). Eight of them run 09:00 -> 17:00 or 18:00 UTC, so this was one market-wide sell-off, not ten separate chances.
+  - what the engine's entries do not say: every setup in them was blocked by the permission gate (no approved strategy) or the regime gate, and the cells involved (trend_pullback, ema_9_21_cross, TRD-H4-*-noT4, liquidity_sweep_reversal) are FAILED or below the bar in the fact sheets of these days. Nothing to change.
+  - process note for the operator: the fact sheets of 2026-10-09 and 2026-10-10 both say 'Missed strong moves: none in this period', although these records exist in memory/missed_trades.md. The daily review of 2026-10-09 therefore did not discuss them. The fact sheet's missed-move list seems to read a different source than the file.
