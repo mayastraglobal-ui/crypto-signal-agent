@@ -20,6 +20,8 @@ checks every 5-minute candle close on OKX perpetuals, with the same engine. It s
 seconds: entry zone, stop-loss, targets, size and why. Only APPROVED (LIVE) and PAPER_TRADING (PAPER) strategies
 alert. Setup, step by step: on a Windows PC [`docs/WINDOWS_WATCHER.md`](docs/WINDOWS_WATCHER.md) (double-click
 `windows\1_setup.bat`), on a Linux server [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What comes next: [`docs/ROADMAP.md`](docs/ROADMAP.md).
+Between candle closes it also checks every minute for sudden moves and sends an information-only ⚡ note (fast move,
+volume spike, yesterday's high / low broken): [`docs/SHOCK_ALARM.md`](docs/SHOCK_ALARM.md).
 
 ## One-time setup (about 15 minutes, no coding)
 

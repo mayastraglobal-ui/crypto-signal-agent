@@ -192,10 +192,11 @@ def live_table(logdf, now, keys=None):
 
 
 def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journal=None, research_runs=None,
-          scan_utc=None, S=None, failure_lab=None, watcher=None):
+          scan_utc=None, S=None, failure_lab=None, watcher=None, shocks=None):
     """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}.
     failure_lab: reports/failure_lab.json (the research run's repairs and their record); watcher: reports/
-    watcher_health.json (the live watcher's hourly heartbeat, journal_review.py)."""
+    watcher_health.json (the live watcher's hourly heartbeat, journal_review.py); shocks: reports/shocks_review.json
+    (the ⚡ shock alarm's week, journal_review.py)."""
     S = S or settings(None)
     cells = (program or {}).get("cells") or {}
     live = live_table(logdf, now, list(cells))
@@ -238,7 +239,7 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                 demoted=demoted or [], refused=refused or [], ideas=ideas(rows, journal, S),
                 five_min=five_min(rows, journal), system=system_check(now, research_runs, scan_utc, program, journal,
                                                                       rows, watcher),
-                totals=totals(rows), failure_lab=failure_part(failure_lab), settings=S)
+                totals=totals(rows), failure_lab=failure_part(failure_lab), shocks=shocks or None, settings=S)
 
 
 def failure_part(fl):
@@ -390,6 +391,10 @@ def render(rv):
     L += ["", "## Failure Lab (repairs for the loss causes)", ""] + (
         [f"- {x}" for x in fl["lines"]] if fl and fl["lines"] else
         ["- no repair yet (the research run writes at most one a night, for a loss cause with 30+ losing trades)"])
+    sv = rv.get("shocks")
+    L += ["", "## ⚡ Shock alarm (sudden moves between candle closes, information only)", ""] + (
+        [f"- {x}" for x in sv["lines"]] if sv and sv.get("lines") else
+        ["- no shock log on GitHub yet (the live watcher writes journal/shocks.csv; it needs journal sync)"])
     L += ["", "## Every live strategy / version / coin", "",
           "| Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |",
           "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
@@ -429,5 +434,10 @@ def telegram(rv):
         L += ["", f"🔧 Failure Lab: {fl['judged']} repair(s) judged - {fl['helped']} beat their parent, "
                   f"{fl['passed']} reached VALIDATION; {fl['pending']} waiting for a test"
               + (f" · stopped: {', '.join(fl['retired'])}" if fl["retired"] else "")]
+    sv = rv.get("shocks")
+    if sv and sv.get("n"):
+        L += ["", f"⚡ Shocks: {sv['n']} this week ({sv['sent']} sent)"
+                  + (f" · 4h later {sv['kept']} kept going, {sv['reversed']} reversed" if sv.get("done") else "")
+                  + f" · a strategy alert followed {sv['caught']}"]
     L.append("\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>")
     return "\n".join(L)

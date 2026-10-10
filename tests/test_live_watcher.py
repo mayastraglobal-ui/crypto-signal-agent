@@ -250,8 +250,9 @@ class WindowsPC(unittest.TestCase):
         names = sorted(os.listdir(wdir))
         self.assertEqual(names, ["1_setup.bat", "2_start_watcher.bat", "3_stop_watcher.bat", "4_update.bat",
                                  "5_remove_autostart.bat", "6_journal_sync.bat", "7_replay_test_alerts.bat",
-                                 "run_watcher.bat"])
+                                 "8_replay_shocks.bat", "run_watcher.bat"])
         self.assertIn("--replay 14", open(os.path.join(wdir, "7_replay_test_alerts.bat")).read())
+        self.assertIn("--shock-replay 14", open(os.path.join(wdir, "8_replay_shocks.bat")).read())
         for n in names:
             with open(os.path.join(wdir, n), "rb") as f:
                 b = f.read()

@@ -759,3 +759,22 @@ Newest entries at the bottom. Format: date · who · what · why.
   turned, and the range strategies never trade against a STRONG 4H trend - so the first leg of a V-bottom is not an
   alert; the continuation after the turn is. Strategies 5, 6, 9 and 10 (the reversal ideas) are first tested on 12-14 Oct (rotation: 3+4, 5+6, 7+8, 9+10).
 - Tests: `tests/test_signal_center.py` (the note at once, no buttons, /watch off, the cap, the pause).
+
+## 2026-10-10 · Operator + Claude · ⚡ Shock alarm (sudden moves between candle closes)
+- Operator: "build the shock alarm" (after an outside analysis: the agent is candle-close based and cannot tell about
+  a sudden fall or rally while it happens).
+- New `engine/shock.py` + `live_watcher.py`: every minute (5 s after it) the watcher reads the closed OKX 1-minute
+  candles of the watched coins (`OKXSwap.minutes`, public data) and checks the last 15 minutes: fast move >= 1.8x the
+  1H ATR(14); volume >= 5x the 4 hours before with a move >= 1.2x ATR; yesterday's (UTC) high / low broken by 0.1x ATR
+  during a move >= 1x ATR, once per side a day. 2+ missing minutes -> skipped. One note per minute for all coins, one
+  per coin in 30 min (unless the move doubles: "getting bigger"), a market-wide wave = 15 min (a new note only when 2+
+  coins new to the wave join), at most 8 a Beijing day, `/shock on|off`, held by `/pause`. INFORMATION ONLY: never a
+  signal, gate, size or approval; the note names an open followed trade on that coin ("check its stop on OKX").
+- Tuned on `live_watcher.py --shock-replay 14` (27 Sep - 10 Oct, real candles): the first settings (1.5x, 3x volume,
+  any sweep) gave 226 shocks and the daily cap every day; the final ones 75 shocks, 44 notes (~3 a day, max 7), one
+  note at the start of the 7 Oct crash (09:58 Beijing), a second when it spread. 4h later 35 of 75 had kept going.
+- Log: 4 hours after each shock a row in `journal/shocks.csv` (1h / 4h outcome, best / worst, strategy alerts on the
+  coin within 4h), synced to the branch `journal` with the journal-sync token; `journal_review.py` ->
+  `reports/shocks_review.json`; the weekly review shows "⚡ Shock alarm" (+ a Telegram line).
+- Needs `windows\4_update.bat` once on the PC. New `windows\8_replay_shocks.bat`. Tests: `tests/test_shock.py`.
+
