@@ -3090,7 +3090,8 @@ def weekly_review(now, logdf, registry, cfg, offline):
         rv = wrv.build(now, logdf, read_json("program", offline), registry["cells"], st.get("active") or {},
                        st.get("demoted"), st.get("refused"), read_json("journal_review", False),
                        read_json("research_counts", offline), now.strftime("%Y-%m-%d %H:%M"),
-                       wrv.settings(cfg.get("weekly_review")), read_json("failure_lab", offline))
+                       wrv.settings(cfg.get("weekly_review")), read_json("failure_lab", offline),
+                       read_json("watcher_health", False))
     except Exception as e:
         log(f"weekly review not built ({type(e).__name__}: {e})")
         return None

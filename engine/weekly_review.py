@@ -192,9 +192,10 @@ def live_table(logdf, now, keys=None):
 
 
 def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journal=None, research_runs=None,
-          scan_utc=None, S=None, failure_lab=None):
+          scan_utc=None, S=None, failure_lab=None, watcher=None):
     """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}.
-    failure_lab: reports/failure_lab.json (the research run's repairs and their record)."""
+    failure_lab: reports/failure_lab.json (the research run's repairs and their record); watcher: reports/
+    watcher_health.json (the live watcher's hourly heartbeat, journal_review.py)."""
     S = S or settings(None)
     cells = (program or {}).get("cells") or {}
     live = live_table(logdf, now, list(cells))
@@ -236,7 +237,7 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                 paper=[dict(key=k, coins=cs) for k, cs in sorted((promos_active or {}).items())],
                 demoted=demoted or [], refused=refused or [], ideas=ideas(rows, journal, S),
                 five_min=five_min(rows, journal), system=system_check(now, research_runs, scan_utc, program, journal,
-                                                                      rows),
+                                                                      rows, watcher),
                 totals=totals(rows), failure_lab=failure_part(failure_lab), settings=S)
 
 
@@ -316,7 +317,7 @@ def five_min(rows, journal):
                                           "(windows\\6_journal_sync.bat)")
 
 
-def system_check(now, research_runs, scan_utc, program, journal, rows):
+def system_check(now, research_runs, scan_utc, program, journal, rows, watcher=None):
     """Idea C part 2: did every part run this week? [(ok, text)]."""
     out = []
     days = sorted({str(x.get("date")) for x in research_runs or [] if x.get("date")})
@@ -332,7 +333,9 @@ def system_check(now, research_runs, scan_utc, program, journal, rows):
                                          "re-tested in the last 7 days"))
     else:
         out.append((False, "program results: none yet (reports/program.json)"))
-    if journal:
+    if (watcher or {}).get("state") in ("OK", "SILENT"):        # the heartbeat says it best (2026-10-10)
+        out.append((watcher["state"] == "OK", watcher.get("text") or f"live watcher: {watcher['state']}"))
+    elif journal:
         last = journal.get("last_entry_utc")
         if not last:                     # journal sync works but nothing to record yet (no alert sent) - not a fault
             out.append((None, "live watcher journal: synced, no alert recorded yet"))

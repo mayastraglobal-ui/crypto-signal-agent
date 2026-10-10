@@ -438,6 +438,56 @@ class JournalSync:
         return f"uploaded {lv.ago(ms, now_ms)} ({note})" if ok else f"⚠️ failing: {note}"
 
 
+class Heartbeat(JournalSync):
+    """"I am running" for GitHub (2026-10-10): every hour the watcher writes heartbeat.json to the branch
+    `watcher-heartbeat` - ONE commit with no parent, replaced each time (no history builds up; main and the journal
+    branch are never touched). The hourly scan reads it (journal_review.py -> reports/watcher_health.json) and emails
+    an ALERT when it goes silent for 2 hours (the PC is off, asleep or offline), FIXED when it is back. Uses the
+    journal-sync token (JOURNAL_GITHUB_TOKEN, Contents: read and write); without it nothing is sent."""
+    BRANCH, FILE = "watcher-heartbeat", "heartbeat.json"
+
+    def __init__(self, http=None, every_min=60):
+        super().__init__(None, http=http)
+        self.every_ms = int(every_min) * 60_000
+
+    def push(self, now_ms, info=None, force=False):
+        """Send the heartbeat when due (every_min after the last good one). Returns (ok, note); never raises."""
+        if not self.token():
+            return False, "off"
+        if not force and self.last and self.last[1] and now_ms - self.last[0] < self.every_ms:
+            return True, "not due"
+        utc = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")
+        body = json.dumps(dict(utc=utc, **(info or {})), indent=1, default=str)
+        try:
+            code, tree = self._call("POST", "/git/trees", json=dict(tree=[dict(path=self.FILE, mode="100644",
+                                                                               type="blob", content=body)]))
+            if code != 201:
+                raise RuntimeError(f"HTTP {code} {tree.get('message', '')}".strip())
+            code, commit = self._call("POST", "/git/commits", json=dict(message=f"Heartbeat {utc} UTC",
+                                                                         tree=tree["sha"], parents=[]))
+            if code != 201:
+                raise RuntimeError(f"HTTP {code} {commit.get('message', '')}".strip())
+            code, res = self._call("PATCH", f"/git/refs/heads/{self.BRANCH}", json=dict(sha=commit["sha"], force=True))
+            if code in (404, 422):                       # no branch yet: create it
+                code, res = self._call("POST", "/git/refs", json=dict(ref=f"refs/heads/{self.BRANCH}",
+                                                                      sha=commit["sha"]))
+            if code not in (200, 201):
+                raise RuntimeError(f"HTTP {code} {res.get('message', '')}".strip())
+            self.last = (now_ms, True, "sent")
+            return True, "sent"
+        except Exception as e:
+            self.last = (now_ms, False, str(e)[:120])
+            return False, self.last[2]
+
+    def status(self, now_ms):
+        if not self.token():
+            return None
+        if not self.last:
+            return "on, first one within 5 minutes"
+        ms, ok, note = self.last
+        return f"sent {lv.ago(ms, now_ms)} - GitHub emails you if it stops" if ok else f"⚠️ failing: {note}"
+
+
 class Watcher:
     def __init__(self, feed, send=True, git=True, now_fn=None, also=()):
         self.feed, self.send, self.git, self.also = feed, send, git, list(also or ())
@@ -453,6 +503,7 @@ class Watcher:
         self._poll_err = None
         self.jsync = JournalSync(JOURNAL)
         self.dsync = JournalSync(DECISIONS, remote="journal/decisions.csv")     # PR 3: promote taps
+        self.hb = Heartbeat()                                                 # "I am running" for GitHub
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -1032,7 +1083,8 @@ class Watcher:
             alerts_today=sum(1 for a in self.state["alerts"].values() if int(a["sent_ms"]) >= day),
             tests_on=self.state.get("tests_on", True), tests_today=scx.sent_today(self.state["test_sent"], now_ms),
             tests_max=self.SC["max_per_day"],
-            refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms)))
+            refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
+            heartbeat=self.hb.status(now_ms)))
 
     def trades_text(self, now_ms):
         lines = ["📒 <b>Your trades</b>"]
@@ -1304,6 +1356,26 @@ class Watcher:
         self._jsync_err = None if ok else note
         return ok, note
 
+    def beat(self, now_ms):
+        """The hourly "I am running" note for GitHub (Heartbeat). Never raises; a failure is logged once."""
+        lt = self.last_tick
+        info = dict(started_utc=dt.datetime.fromtimestamp(self.started_ms / 1000, dt.timezone.utc)
+                    .strftime("%Y-%m-%d %H:%M"), feed=self.feed.name, coins=list(self.coins),
+                    last_check_utc=dt.datetime.fromtimestamp(lt[0] / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")
+                    if lt else None, last_check_ok=bool(lt[1]) if lt else None, fails=self.fails,
+                    watching={lab: sum(1 for _, _, x in self.watch if x == lab) for lab in ("LIVE", "PAPER", "TEST")},
+                    open_trades=len(self.state.get("trades") or {}), paused=bool(self.paused(now_ms)),
+                    tests_on=bool(self.state.get("tests_on", True)), code_old=bool(self.code_old))
+        ok, note = self.hb.push(now_ms, info)
+        if note in ("off", "not due"):
+            return ok, note
+        if ok and getattr(self, "_hb_err", None):
+            log("GitHub heartbeat works again")
+        elif not ok and note != getattr(self, "_hb_err", None):
+            log(f"GitHub heartbeat failed: {note}")
+        self._hb_err = None if ok else note
+        return ok, note
+
     def heartbeat(self, now_ms):
         day = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)
         if day.strftime("%H:%M") < self.S["heartbeat_utc"] or self.state.get("heartbeat") == day.strftime("%Y-%m-%d"):
@@ -1343,6 +1415,7 @@ class Watcher:
                 self.tick()
                 self.sync_journal(self.now_fn())
                 self.last_tick = (self.now_fn(), True, "")
+                self.beat(self.now_fn())
                 self.heartbeat(self.now_fn())
                 if self.fails >= int(self.S["error_alert_after"]):
                     telegram("✅ Live watcher recovered.")
