@@ -7,14 +7,16 @@
   "XRP",
   "BNB"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {
   "STRK": "2026-10-10",
   "RLC": "2026-10-10",
   "MAGIC": "2026-10-10"
  },
- "runs": 345,
+ "runs": 346,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
