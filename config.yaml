@@ -32,6 +32,9 @@ market:
 universe:                    # which coins the agent watches (AGENT_PROMPT.md section 4)
   signal_coins: 7            # top 7 eligible coins by 24h volume: the ONLY coins that can give signals
   research_coins: 10         # the 7 + the next 3: those 3 are backtested only, never a signal
+  research_pinned: [BTC, ETH, SOL, BNB, XRP, ZEC, SUI]   # the operator's coins: backtested every night even when the
+                             # rules below leave one out for a while (SUI on a quiet weekend, 2026-10-10). Research
+                             # only - a pinned coin still gives signals only when it passes every rule below.
   hysteresis_runs: 2         # a new coin must be in the top 7 for 2 runs in a row to join,
                              # and a member outside the top 7 for 2 runs in a row leaves.
                              # A member that breaks a rule below leaves IMMEDIATELY.

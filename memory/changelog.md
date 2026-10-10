@@ -672,3 +672,19 @@ Newest entries at the bottom. Format: date · who · what · why.
 - Unchanged: fees, risk per trade, the trials bar, approvals (LIVE still needs 20 good paper signals and the operator's
   approvals line). `mode: shadow` switches back at any time.
 - Tests: `tests/test_research.py` now expects the mode the config gives instead of always shadow.
+
+## 2026-10-10 · Operator + Claude · Data fix: ZEC's OKX hole, pinned research coins
+- Found in the first program run (2026-10-10 00:59 UTC): ZEC 30m / 15m were UNSAFE (37.7% of the candles missing)
+  and 5m too (60%), so ZEC was not researched on those timeframes. Cause: OKX delisted the ZEC perpetual - its archive
+  has month files 2023-08 to 2023-12 and again from 2025-11 (relisted 2025-11-06, OKX instrument `listTime`).
+  `engine/okx_history.py` `stitch` filled Binance spot only BEFORE the first OKX candle, never inside a hole.
+  Now: `missing()` counts the candles an OKX frame lacks; more than 0.5% (`research.py` `OKX_HOLE_SHARE`) and the
+  Binance spot candles fill every candle OKX has none of (never after the newest OKX candle). The source note names
+  each gap of a day or more. Checked on the real data: ZEC 30m = 87,599 candles, "OKX perpetual from 2023-08-20,
+  Binance spot before and in 1 gap(s): 2023-12-19 to 2025-11-06", data GOOD.
+- The same run researched only 6 coins: on a quiet Saturday SUI, ADA, UNI and AVAX fell under the universe volume
+  rules ($50M a day). New `config.yaml` → `universe.research_pinned: [BTC, ETH, SOL, BNB, XRP, ZEC, SUI]` (the
+  operator's coins): `research.research_coins` adds any the scan left out. Research only - signals still need every
+  universe rule. Adds about 5-8 minutes a night per pinned coin outside the scan's list (limit 150 minutes).
+- Unchanged: gates, costs, the trials bar, the data-quality rules. Tests: `test_okx_history` (relisting hole),
+  `test_research` (pinned coins).

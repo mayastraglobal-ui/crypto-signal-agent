@@ -67,6 +67,16 @@ def trade(r, t, coin="BTC", d=1, oos=False, cost_r=0.1):
 
 
 class Params(unittest.TestCase):
+    def test_pinned_coins_are_always_researched(self):
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            with open(os.path.join(tmp, "universe.json"), "w") as f:
+                json.dump(dict(signal=["BTC", "ETH"], research_only=[]), f)
+            with mock.patch.object(scanner, "REPORTS", tmp):
+                self.assertEqual(research.research_coins(False, None, ["ETH", "SUI"]), ["BTC", "ETH", "SUI"])
+                self.assertEqual(research.research_coins(True, None, ["SUI"]), ["BTC", "ETH"])   # offline: never
+        self.assertIn("SUI", CFG["universe"]["research_pinned"])
+
     def test_templating_kept_every_tested_version_identical(self):
         ok, problems, _ = SP.load(RAW, RG.LABELS, scanner.TF_ORDER)
         self.assertEqual(problems, {})

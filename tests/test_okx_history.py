@@ -165,6 +165,27 @@ class Download(unittest.TestCase):
         self.assertIn("Binance spot before", note)
         self.assertEqual(oh.stitch(okx, spot.iloc[:0], 100, "15m")[1], "OKX perpetual")
 
+    def test_relisting_hole_is_filled_with_binance_spot(self):           # ZEC: OKX delisted 2024-01, back 2025-11-06
+        step = sc.TF_MS["1h"]                                             # 1h so a 2-day hole is 48 candles
+        n = 400
+        frame = lambda t, px: pd.DataFrame(dict(open_time=t * step, open=px, high=px, low=px, close=px,  # noqa: E731
+                                                volume=1.0, quote_volume=1.0))
+        spot = frame(np.arange(0, n), 1.0)
+        okx = frame(np.r_[np.arange(0, 100), np.arange(300, n)], 2.0)     # hole 100..299 (200 candles)
+        now = n * step
+        self.assertEqual(oh.missing(okx, "1h", n, now), 200)
+        self.assertEqual(oh.missing(frame(np.arange(0, n), 2.0), "1h", n, now), 0)
+        df, note = oh.stitch(okx, spot, n, "1h")
+        self.assertEqual(len(df), n)
+        self.assertEqual(df["open_time"].diff().dropna().unique().tolist(), [step])   # no hole left
+        self.assertEqual(df["close"].iloc[100:300].tolist(), [1.0] * 200)            # Binance only inside the hole
+        self.assertEqual(df["close"].iloc[:100].tolist() + df["close"].iloc[300:].tolist(), [2.0] * 200)
+        self.assertIn("in 1 gap(s): 1970-01-05 to 1970-01-13", note)
+        later = frame(np.arange(n, n + 5), 1.0)                           # never Binance after the newest OKX candle
+        self.assertEqual(len(oh.stitch(okx, pd.concat([spot, later]), n + 5, "1h")[0]), n)
+        small = frame(np.r_[np.arange(0, 50), np.arange(52, n)], 2.0)     # 2 missing candles: named, not a gap
+        self.assertIn("2 missing candle(s) from Binance spot", oh.stitch(small, spot, n, "1h")[1])
+
 
 class LongFunding(unittest.TestCase):
     def cfg(self, market="futures"):
