@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-10 01:48",
+ "utc": "2026-10-10 02:19",
  "final": false,
  "rows": [],
  "promote": [],
@@ -19,15 +19,15 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 7 of the last 7 days (last 2026-10-09)"
+   "text": "nightly research ran on 8 of the last 7 days (last 2026-10-10)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-10 01:48 UTC"
+   "text": "hourly scan: last run 2026-10-10 02:19 UTC"
   },
   {
-   "ok": false,
-   "text": "program results: none yet (reports/program.json)"
+   "ok": true,
+   "text": "program rotation: 18 of 18 strategy / timeframe tests re-tested in the last 7 days"
   },
   {
    "ok": false,
@@ -65,5 +65,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W41</b>\n\ud83d\udd35 TEST: 0 setups closed this week (+0.0R) \u00b7 0 since the start (- a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f program results: none yet (reports/program.json); live watcher journal: last entry none UTC\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W41</b>\n\ud83d\udd35 TEST: 0 setups closed this week (+0.0R) \u00b7 0 since the start (- a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f live watcher journal: last entry none UTC\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
