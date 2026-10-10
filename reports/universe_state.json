@@ -6,14 +6,16 @@
   "ZEC",
   "XRP"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {
   "STRK": "2026-10-10",
   "RLC": "2026-10-10",
   "MAGIC": "2026-10-10"
  },
- "runs": 353,
+ "runs": 354,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],

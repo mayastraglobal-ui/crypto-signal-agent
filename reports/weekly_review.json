@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-10 14:17",
+ "utc": "2026-10-10 15:17",
  "final": false,
  "rows": [],
  "promote": [],
@@ -23,7 +23,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-10 14:17 UTC"
+   "text": "hourly scan: last run 2026-10-10 15:17 UTC"
   },
   {
    "ok": true,
@@ -31,7 +31,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-10 12:25 UTC (54 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-10 13:26 UTC (52 min ago)"
   },
   {
    "ok": true,
@@ -55,6 +55,7 @@
   }
  },
  "failure_lab": null,
+ "shocks": null,
  "settings": {
   "promote_min_trades": 10,
   "promote_min_avg_r": 0.0,
