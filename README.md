@@ -440,7 +440,7 @@ and the bar.
 - The research run reports its duration (budget `research.time_budget_min`, 90 min); after 60% of the budget the rule
   test is skipped for the remaining coins.
 
-## Strategy-family gates (Phase 19 A) - in shadow mode
+## Strategy-family gates (Phase 19 A) - active since 2026-10-10
 The single "max drawdown ≤ 10R" gate is measured on the trades of ALL coins over up to 9 years, so a strategy with
 many trades is punished for its sample size (Donchian 4H: 1105 trades, +0.12R each, max drawdown 22.5R). The family
 table (`config.yaml` → `family_gates`, `engine/family_gates.py`) replaces it per group:
@@ -461,7 +461,8 @@ control twin, trials t-statistic, lookahead check). Fees, risk per trade and the
 - **Shadow mode (at least 14 days from 2026-09-26):** every research run shows the old and the new verdict side by side
   (report section 3b, `reports/research.json`, `memory/family_gates_shadow.csv`). Only the OLD verdict moves anything.
   To switch: `mode: active` AND `operator_ok: <date of your yes>`; before the shadow period ends the engine stays in
-  shadow whatever the file says.
+  shadow whatever the file says. **Switched on 2026-10-10** (operator: "turn on family gates"): the new verdict now
+  decides; `mode: shadow` switches back.
 - **Every re-evaluation counts:** each cell judged by the family table adds one row to `memory/trials.csv`
   (`re-evaluation: family gates v1`), once per rules version - on the 46 cells of the last run the t-statistic bar rises from
   3.07 to 3.27 (92 trials); new lab cards add more.

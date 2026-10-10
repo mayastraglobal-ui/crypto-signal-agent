@@ -657,3 +657,18 @@ Newest entries at the bottom. Format: date · who · what · why.
   messages ("5m candle closed ...") and the `/trades` time stop. All now in Beijing time (`engine/live.py` `bj()`).
   `/status` "Trade alerts sent today" now says the day starts 08:00 Beijing (it counts the UTC day, unchanged).
 - Display only: no rule, limit or day boundary changed.
+
+## 2026-10-10 · Operator + Claude · Family gates switched on (Phase 19 A)
+- Operator: "turn on family gates". `config.yaml` → `family_gates`: `mode: shadow` → **`active`**, `operator_ok: null`
+  → **`2026-10-10`** (the 14-day shadow period from 2026-09-26 ended today). No number in the family table changed
+  (rules version 1), so nothing is re-counted in the trials file.
+- What the shadow verdicts of the last research run (2026-10-10 00:59 UTC) say will change: 3 cells move from
+  BACKTESTING to PAPER_TRADING - `donchian_breakout@1.0|4h` (787 trades, +0.17R, t 4.28, max drawdown 13.1R - failed
+  only the old 10R rule), and the lab cards `donchian_breakout-VEXIT-S4@1.0|4h` (+0.25R, 20.8R) and `@1.1|4h` (+0.24R,
+  17.1R). Every other gate (expectancy, unseen test, walk-forward, costs +50%, ±20%, coins, trials t-statistic, bias)
+  still has to pass each night.
+- Also from now on: a trend card's live suspension and paper drawdown limit is its own Monte Carlo 95% worst drawdown
+  per 100 trades (13.9R for the 4H Donchian, never above 17R) instead of 8R; the tight group keeps 8R.
+- Unchanged: fees, risk per trade, the trials bar, approvals (LIVE still needs 20 good paper signals and the operator's
+  approvals line). `mode: shadow` switches back at any time.
+- Tests: `tests/test_research.py` now expects the mode the config gives instead of always shadow.
