@@ -63,6 +63,7 @@ from engine import lifecycle as lc
 from engine import live as lv
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
+from engine import shock as shk
 from engine import signal_center as scx
 from engine import manage as mg
 from engine import risk as rk
@@ -79,6 +80,7 @@ JOURNAL_COLS = ["time_utc", "alert_id", "event", "label", "coin", "side", "tf", 
                 "tp1", "tp2", "tp3", "price", "result_r"]
 JOURNAL_BRANCH = "journal"           # journal sync: the GitHub branch that holds a copy of journal/my_trades.csv
 DECISIONS = os.path.join(ROOT, "journal", "decisions.csv")   # PR 3: the operator's taps under the weekly review
+SHOCKS = os.path.join(ROOT, "journal", "shocks.csv")         # ⚡ the shock alarm's log (with the 1h / 4h outcome)
 SHADOW_DAYS = 14                     # a silent plan follow-up still open after 14 days is dropped
 RESULT_HINT = ("\n📒 Send your real result: <b>/result 1.2</b> (in R after fees: -1 = full stop lost, 2 = twice your "
                "risk). It teaches the agent how the plan works for you.")
@@ -97,7 +99,7 @@ CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
               "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
-              "engine/weekly_review.py"]    # changed -> "run update.bat"
+              "engine/weekly_review.py", "engine/shock.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -274,6 +276,29 @@ class OKXSwap:
         df = pd.DataFrame([[r[0], r[1], r[2], r[3], r[4], r[6], r[7] if len(r) > 7 else np.nan] for r in rows],
                           columns=["open_time", "open", "high", "low", "close", "volume", "quote_volume"])
         return sc._finish(df, tf)
+
+    def minutes(self, coin, n):
+        """The newest n CLOSED 1-minute candles (the shock alarm) as arrays open_time / open / high / low / close /
+        volume, oldest first: one call to the fast endpoint up to 300, else the history endpoint page by page."""
+        rows, after = [], None
+        while len(rows) < n:
+            p = {"instId": self.inst(coin), "bar": "1m", "limit": min(n, 300) if n <= 300 else 100}
+            if after:
+                p["after"] = after
+            data = self._get("/api/v5/market/candles" if n <= 300 else "/api/v5/market/history-candles", p)
+            if not data:
+                break
+            rows += data
+            if n <= 300:
+                break
+            after = data[-1][0]
+            time.sleep(0.12)
+            if len(data) < 100:
+                break
+        rows = sorted({r[0]: r for r in rows if len(r) < 9 or r[8] == "1"}.values(), key=lambda r: int(r[0]))[-n:]
+        a = np.array([[float(r[i]) for i in (0, 1, 2, 3, 4, 6)] for r in rows]).reshape(-1, 6)
+        return dict(open_time=a[:, 0].astype(np.int64), open=a[:, 1], high=a[:, 2], low=a[:, 3], close=a[:, 4],
+                    volume=a[:, 5])
 
 
 class SyntheticSwap:
@@ -504,6 +529,10 @@ class Watcher:
         self.jsync = JournalSync(JOURNAL)
         self.dsync = JournalSync(DECISIONS, remote="journal/decisions.csv")     # PR 3: promote taps
         self.hb = Heartbeat()                                                 # "I am running" for GitHub
+        self.ssync = JournalSync(SHOCKS, remote="journal/shocks.csv")         # ⚡ the shock log for the Sunday review
+        self.next_shock_ms = 0
+        self._shock_err = None
+        self._h1_ctx = {}         # (coin, hour) -> the shock context of that hour
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -515,6 +544,7 @@ class Watcher:
         self.SC = scx.settings(self.cfg.get("signal_center"))
         self.dq_cfg = dq.settings(self.cfg.get("data_quality"))
         self.S5 = c5m.settings(self.cfg.get("confirm_5m"))
+        self.SH = shk.settings(self.cfg.get("shock_alarm"))
         try:
             self.RK = rk.settings(self.cfg.get("risk"), (self.cfg.get("events") or [])
                                   + rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE)))
@@ -611,9 +641,12 @@ class Watcher:
         # shadow: every alert followed silently by the plan's rules (its "plan" result goes to the journal)
         # tests_on: 🔵 TEST alerts on / off (/tests) · test_sent: when each TEST alert went out (the daily cap)
         # watch_on / watch_sent: 👀 watch notes on / off (/watch) and when each went out (their own daily cap)
+        # shock_*: ⚡ the shock alarm - on / off (/shock), notes sent, last note per coin, sides swept today, shocks
+        # waiting for their 4-hour outcome
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
                          next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None,
-                         watch_on=True, watch_sent=[]).items():
+                         watch_on=True, watch_sent=[], shock_on=True, shock_sent=[], shock_last={}, shock_swept={},
+                         shock_pending=[]).items():
             st.setdefault(k, v)
         return st
 
@@ -626,6 +659,8 @@ class Watcher:
         self.state["results"] = self.state["results"][-200:]
         self.state["test_sent"] = [m for m in self.state["test_sent"] if int(m) >= now - 3 * 86_400_000]
         self.state["watch_sent"] = [m for m in self.state["watch_sent"] if int(m) >= now - 3 * 86_400_000]
+        self.state["shock_sent"] = [m for m in self.state["shock_sent"] if int(m) >= now - 3 * 86_400_000]
+        self.state["shock_last"] = {c: v for c, v in self.state["shock_last"].items() if int(v[0]) >= now - 86_400_000}
         try:
             os.makedirs(os.path.dirname(STATE), exist_ok=True)
             with open(STATE, "w") as f:
@@ -892,15 +927,21 @@ class Watcher:
             self._save_state()
 
     def wait_until(self, ms):
-        """Sleep until ms, answering Telegram commands meanwhile."""
+        """Sleep until ms, answering Telegram commands meanwhile; the ⚡ shock check runs at every minute."""
         while True:
-            rem = (ms - self.now_fn()) / 1000
+            now = self.now_fn()
+            if self.shock_ok() and now >= self.next_shock_ms:
+                self.shock_minute(now)
+                now = self.now_fn()
+            rem = (ms - now) / 1000
             if rem <= 0:
                 return
-            if self.commands_on() and rem >= 2:
-                self.poll(min(25, int(rem) - 1))
+            nxt = min(ms, self.next_shock_ms) if self.shock_ok() else ms
+            wait = max(0.0, (nxt - now) / 1000)
+            if self.commands_on() and wait >= 2:
+                self.poll(min(25, int(wait) - 1))
             else:
-                time.sleep(rem)
+                time.sleep(min(wait, rem) or 0.5)
 
     def on_update(self, u, now_ms):
         chat = str(os.environ.get("TELEGRAM_CHAT_ID", ""))
@@ -953,6 +994,12 @@ class Watcher:
                        f"(information only, at most {self.SC['watch_max_per_day']} a day). /watch off to stop them."
                        if on else "/watch on to switch them on.")
                     + ("" if self.state.get("tests_on", True) else " (TEST alerts are off too: /tests on.)"))
+        if cmd == "shock":
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state["shock_on"] = arg == "on"
+                self._save_state()
+            return self.shock_status(now_ms)
         if cmd == "tests":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1116,6 +1163,8 @@ class Watcher:
             tests_on=self.state.get("tests_on", True), tests_today=scx.sent_today(self.state["test_sent"], now_ms),
             watch_on=self.state.get("watch_on", True) and self.SC["watch_notes"],
             watch_today=scx.sent_today(self.state["watch_sent"], now_ms),
+            shock_on=self.shock_ok() and self.state.get("shock_on", True),
+            shock_today=shk.sent_today(self.state["shock_sent"], now_ms), shock_max=self.SH["max_per_day"],
             tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
             heartbeat=self.hb.status(now_ms)))
@@ -1378,6 +1427,144 @@ class Watcher:
             why.append(f"last week {last_week:+.1f}R: half size this week (playbook 6.1)")
         return (0.5 if why else 1.0), why
 
+    # ---- ⚡ the shock alarm (2026-10-10): every minute, between the 5m passes - information only ----
+    def shock_ok(self):
+        return bool(self.SH["enabled"] and hasattr(self.feed, "minutes"))
+
+    def _h1(self, coin, now_ms):
+        """The closed 1H candles of a coin as arrays (refreshed when the newest is more than an hour old)."""
+        fr = self.frames.get((coin, "1h"))
+        if fr is None or not len(fr) or int(fr["open_time"].iloc[-1]) + 2 * shk.H + 3 * shk.M <= now_ms:
+            fr = self.update(coin, "1h", now_ms)
+        fr = fr[fr["open_time"] + shk.H <= now_ms]
+        return {k: fr[k].to_numpy() for k in ("open_time", "high", "low", "close")}
+
+    def shock_minute(self, now_ms):
+        """Run the shock check once, then schedule the next one (minute boundary + check_delay_s). Never raises."""
+        self.next_shock_ms = (now_ms // shk.M + 1) * shk.M + int(self.SH["check_delay_s"]) * 1000
+        try:
+            self.shock_check(now_ms)
+            if self._shock_err:
+                log("shock check works again")
+            self._shock_err = None
+        except Exception as e:
+            note = f"{type(e).__name__}: {str(e)[:120]}"
+            if note != self._shock_err:
+                log(f"shock check failed: {note}")
+            self._shock_err = note
+
+    def shock_check(self, now_ms):
+        """⚡ One minute: measure every coin on its closed 1-minute candles, send the new shocks (one note for all
+        coins), then write the 4-hour outcomes that are due. Returns the new shocks."""
+        S, W = self.SH, int(self.SH["window_min"])
+        found, others = {}, {}
+        for coin in self.coins:
+            try:
+                m1 = self.feed.minutes(coin, W + int(S["vol_base_min"]) + 30)
+            except Exception as e:
+                log(f"shock {coin}: download failed: {e}")
+                continue
+            n = len(m1["close"])
+            if n <= W or int(m1["open_time"][-1]) + shk.M < now_ms - 3 * shk.M:     # too few or stale candles
+                continue
+            start = int(m1["open_time"][n - W])
+            key = (coin, start // shk.H)
+            if key not in self._h1_ctx:
+                self._h1_ctx = {k: v for k, v in self._h1_ctx.items() if k[1] >= start // shk.H - 1}
+                self._h1_ctx[key] = shk.context(self._h1(coin, now_ms), start, int(S["atr_n"]))
+            f = shk.measure(m1, n, self._h1_ctx[key], S)
+            if f is None:
+                continue
+            (found if f["triggers"] else others)[coin] = f
+        new = shk.decide(found, self.state, now_ms, S)
+        hit = {s["coin"] for s in new}
+        others = {c: f["move_pct"] for c, f in {**others, **found}.items() if c not in hit}
+        if new:
+            self.shock_send(new, others, now_ms)
+        self.shock_outcomes(now_ms)
+        return new
+
+    def shock_send(self, new, others, now_ms):
+        why = None
+        if not self.state.get("shock_on", True):
+            why = "off"
+        elif self.paused(now_ms):
+            why = "paused"
+        else:
+            why = shk.hold(new, self.state, now_ms, self.SH)
+        what = "SHOCK " + ", ".join(f"{s['coin']} {s['move_pct']:+.1f}% ({'+'.join(s['triggers'])})" for s in new)
+        if why is None:
+            trades = [(t["coin"], int(t["d"]), t.get("label")) for t in self.state["trades"].values()]
+            ok, err, _ = self.say(shk.text(new, others, trades, now_ms))
+            shk.sent(new, self.state, now_ms)
+            log(what + (": sent" if ok else f": NOT sent ({err})"))
+        else:
+            log(what + f": not sent ({why}) - logged for the weekly review")
+        for s in new:
+            self.state["shock_pending"].append(dict({k: s.get(k) for k in ("ms", "coin", "d", "triggers", "move_pct",
+                                                                           "move_atr", "vol_x", "level", "price")},
+                                                    sent="sent" if why is None else why))
+        self._save_state()
+
+    def shock_outcomes(self, now_ms):
+        """Shocks 4 hours old: what price did after 1h / 4h and whether a strategy alert followed -> journal/
+        shocks.csv (synced to GitHub for the Sunday review). A shock more than 3 days old is written without them."""
+        hours = int(self.SH["outcome_hours"])
+        due = [p for p in self.state["shock_pending"] if int(p["ms"]) + hours * shk.H + 6 * shk.M <= now_ms]
+        if not due:
+            return 0
+        alerts = [(a["sent_ms"], a["coin"], a["d"]) for a in self.state["alerts"].values()]
+        written = 0
+        for p in due:
+            res = None
+            try:
+                n = int((now_ms - int(p["ms"])) // tfm.TF_MS["5m"]) + 3
+                fr = self.feed.candles(p["coin"], "5m", n, recent_only=n <= 300)
+                res = shk.outcome({k: fr[k].to_numpy() for k in ("open_time", "high", "low", "close")}, int(p["ms"]),
+                                  int(p["d"]), float(p["price"]), hours)
+            except Exception as e:
+                log(f"shock outcome {p['coin']}: download failed: {e}")
+            if res is None and now_ms - int(p["ms"]) < 3 * 86_400_000:
+                continue                                            # try again at the next minute
+            try:
+                os.makedirs(os.path.dirname(SHOCKS), exist_ok=True)
+                new_file = not os.path.exists(SHOCKS)
+                with open(SHOCKS, "a", newline="", encoding="utf-8") as f:
+                    w = csv.writer(f)
+                    if new_file:
+                        w.writerow(shk.COLS)
+                    w.writerow(shk.row(p, res, alerts))
+            except OSError as e:
+                log(f"shock log not written: {e}")
+                return written
+            self.state["shock_pending"].remove(p)
+            written += 1
+        if written:
+            self._save_state()
+        return written
+
+    def shock_status(self, now_ms):
+        S = self.SH
+        if not self.shock_ok():
+            return "⚡ The shock alarm is switched off in config.yaml (shock_alarm: enabled)."
+        on = self.state.get("shock_on", True)
+        return (f"⚡ Shock alarm is <b>{'ON' if on else 'OFF'}</b>. "
+                + (f"Every minute it checks {', '.join(self.coins)} and sends a note when one moves more than "
+                   f"{S['move_atr']}x its normal 1-hour range in {S['window_min']} minutes, trades {S['vol_x']:g}x the "
+                   f"normal volume with a real move, or breaks yesterday's high / low. Information only, never a trade "
+                   f"signal. One note per coin in {S['cooldown_min']} minutes, at most {S['max_per_day']} a day "
+                   f"({shk.sent_today(self.state['shock_sent'], now_ms)} sent today); held by /pause. "
+                   "/shock off to stop them." if on else "/shock on to switch it on (shocks are still logged for the "
+                   "weekly review)."))
+
+    def sync_shocks(self, now_ms):
+        """Upload journal/shocks.csv to the branch `journal` when it changed (with the journal-sync token)."""
+        ok, note = self.ssync.push(now_ms)
+        if note not in ("off", "unchanged") and not ok and note != getattr(self, "_ssync_err", None):
+            log(f"shock log sync failed: {note}")
+        self._ssync_err = None if ok else note
+        return ok, note
+
     # ---- forever ----
     def sync_journal(self, now_ms, force=False):
         """Journal sync: upload journal/my_trades.csv to the GitHub branch `journal` when it changed (token needed)."""
@@ -1400,7 +1587,8 @@ class Watcher:
                     if lt else None, last_check_ok=bool(lt[1]) if lt else None, fails=self.fails,
                     watching={lab: sum(1 for _, _, x in self.watch if x == lab) for lab in ("LIVE", "PAPER", "TEST")},
                     open_trades=len(self.state.get("trades") or {}), paused=bool(self.paused(now_ms)),
-                    tests_on=bool(self.state.get("tests_on", True)), code_old=bool(self.code_old))
+                    tests_on=bool(self.state.get("tests_on", True)), code_old=bool(self.code_old),
+                    shock_on=bool(self.shock_ok() and self.state.get("shock_on", True)))
         ok, note = self.hb.push(now_ms, info)
         if note in ("off", "not due"):
             return ok, note
@@ -1449,6 +1637,7 @@ class Watcher:
                     self.refresh_repo()
                 self.tick()
                 self.sync_journal(self.now_fn())
+                self.sync_shocks(self.now_fn())
                 self.last_tick = (self.now_fn(), True, "")
                 self.beat(self.now_fn())
                 self.heartbeat(self.now_fn())
@@ -1595,6 +1784,83 @@ def replay_text(rep):
     return "\n".join(lines)
 
 
+def shock_replay(feed, coins, S, days=14, now_ms=None, log_fn=print):
+    """⚡ The shock alarm's check before trusting it: the last `days` days replayed minute by minute on real OKX
+    1-minute candles with the live rules (the checks, the cooldown, the daily cap; nothing is sent). Each shock gets its
+    1h / 4h outcome. Returns dict(shocks, days, summary)."""
+    now_ms = int(now_ms or time.time() * 1000)
+    start = now_ms - int(days) * 86_400_000
+    W, base = int(S["window_min"]), int(S["vol_base_min"])
+    data = {}
+    for coin in coins:
+        try:
+            m1 = feed.minutes(coin, int(days) * 1440 + base + W + 60)
+            h1 = feed.candles(coin, "1h", int(days) * 24 + 72)
+        except Exception as e:
+            log_fn(f"{coin}: download failed: {e}")
+            continue
+        data[coin] = (m1, {k: h1[k].to_numpy() for k in ("open_time", "high", "low", "close")})
+        log_fn(f"{coin}: {len(m1['close'])} one-minute candles")
+    st = dict(shock_last={}, shock_swept={}, shock_sent=[])
+    out, ctx = [], {}
+    for t in range(start // shk.M * shk.M, now_ms - shk.M, shk.M):
+        found = {}
+        for coin, (m1, h1) in data.items():
+            i = int(np.searchsorted(m1["open_time"], t - shk.M, side="right"))   # candles closed by t
+            if i <= W:
+                continue
+            s0 = int(m1["open_time"][i - W])
+            key = (coin, s0 // shk.H)
+            if key not in ctx:
+                ctx[key] = shk.context(h1, s0, int(S["atr_n"]))
+            f = shk.measure(m1, i, ctx[key], S)
+            if f and f["triggers"]:
+                found[coin] = f
+        new = shk.decide(found, st, t, S)
+        why = shk.hold(new, st, t, S) if new else None
+        if new and why is None:
+            shk.sent(new, st, t)
+        for s in new:
+            m1 = data[s["coin"]][0]
+            res = shk.outcome(m1, int(s["ms"]), s["d"], s["price"], int(S["outcome_hours"]), bar_ms=shk.M)
+            out.append(dict(s, sent=why or "sent", result=res, note_ms=t))
+    days_n = {}
+    for t in sorted({s["note_ms"] for s in out if s["sent"] == "sent"}):                # notes, not coins
+        d = dt.datetime.fromtimestamp(t / 1000, scx.BJ).strftime("%m-%d")
+        days_n[d] = days_n.get(d, 0) + 1
+    done = [s for s in out if s["result"]]
+    kinds = {}
+    for s in out:
+        for k in s["triggers"]:
+            kinds[k] = kinds.get(k, 0) + 1
+    summary = dict(shocks=len(out), sent=sum(days_n.values()), coins_sent=sum(1 for s in out if s["sent"] == "sent"),
+                   capped=sum(1 for s in out if s["sent"] == "daily cap"),
+                   wave=sum(1 for s in out if s["sent"] == "same wave"), days_with=len(days_n),
+                   max_day=max(days_n.values() or [0]), per_day=round(sum(days_n.values()) / max(1, days), 1),
+                   kinds=kinds, finished=len(done), kept=sum(1 for s in done if s["result"]["after_4h"] > 0),
+                   bigger=sum(1 for s in out if s.get("bigger")))
+    return dict(shocks=out, days=days, summary=summary, per_day=days_n)
+
+
+def shock_replay_text(rep):
+    s = rep["summary"]
+    lines = [f"⚡ Shock alarm replay of the last {rep['days']} days (real OKX 1-minute candles, nothing sent):",
+             f"  {s['shocks']} shock(s): {s['sent']} note(s) would have been sent ({s['coins_sent']} coin lines), "
+             f"{s['wave']} in the same wave as a note just sent, {s['capped']} over the daily cap",
+             f"  {s['per_day']} note(s) a day on average, at most {s['max_day']} in one Beijing day",
+             "  by kind: " + ", ".join(f"{shk.TRIGGER_NAMES.get(k, k)} {v}" for k, v in sorted(s["kinds"].items())),
+             f"  4 hours later: {s['kept']} of {s['finished']} kept going in the shock's direction", ""]
+    for x in rep["shocks"]:
+        when = dt.datetime.fromtimestamp(x["ms"] / 1000, scx.BJ).strftime("%m-%d %H:%M")
+        r = x["result"]
+        lines.append(f"  {when} BJ  {x['coin']:<5} {'UP  ' if x['d'] == 1 else 'DOWN'} {x['move_pct']:+5.1f}% "
+                     f"({abs(x['move_atr']):.1f}x 1H range) vol {x['vol_x'] or 0:.1f}x  "
+                     f"{'+'.join(x['triggers']):<22}"
+                     + (f" 1h {r['after_1h']:+.1f}% 4h {r['after_4h']:+.1f}%" if r else " (still running)")
+                     + ("  bigger" if x.get("bigger") else "") + ("" if x["sent"] == "sent" else f"  [{x['sent']}]"))
+    return "\n".join(lines)
+
+
 def windows_guard():
     """On Windows: keep the computer awake while the watcher runs (sleep blocked; the screen may still turn off), and
     switch off QuickEdit in its window (a mouse click there would freeze the watcher until a key is pressed). Returns
@@ -1710,6 +1976,8 @@ def main():
                     help="code test only: also watch strategies with this status (e.g. BACKTESTING), labelled CHECK")
     ap.add_argument("--replay", type=int, default=None, metavar="DAYS",
                     help="the Signal Center's safety check: replay the last DAYS days with the TEST alert rules")
+    ap.add_argument("--shock-replay", type=int, default=None, metavar="DAYS",
+                    help="the shock alarm's check: replay the last DAYS days minute by minute (sends nothing)")
     args = ap.parse_args()
     if args.setup_telegram:
         sys.exit(0 if setup_telegram() else 1)
@@ -1735,6 +2003,9 @@ def main():
         return
     if args.replay:
         print(replay_text(replay(w, args.replay)))
+        return
+    if args.shock_replay:
+        print(shock_replay_text(shock_replay(feed, w.coins, w.SH, args.shock_replay)))
         return
     if args.once:
         now = w.now_fn()

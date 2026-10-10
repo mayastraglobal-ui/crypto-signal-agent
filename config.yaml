@@ -431,6 +431,21 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
                              # (information only, no buttons; /watch on|off in Telegram)
   watch_max_per_day: 12      # at most 12 watch notes a Beijing day
 
+shock_alarm:                 # ⚡ 2026-10-10 (operator: "tell me when the market falls or rallies suddenly") -
+                             # engine/shock.py. The live watcher checks OKX's closed 1-minute candles every minute.
+                             # INFORMATION ONLY: never a trade signal, gate, size or approval. /shock on|off in Telegram
+                             # Tuned on a 14-day replay (live_watcher.py --shock-replay 14): ~3 notes a day, at most 7
+  enabled: true
+  window_min: 15             # the move over the last 15 minutes ...
+  move_atr: 1.8              # ... fast move: at least 1.8x the coin's normal 1-hour range (ATR 14 of the 1H candles)
+  vol_x: 5.0                 # volume spike: 15-minute volume 5x the normal (the 4 hours before) ...
+  vol_move_atr: 1.2          # ... with a move of at least 1.2x the 1-hour range
+  sweep: true                # yesterday's high / low broken (by 0.1x the 1H range), once per side and UTC day ...
+  sweep_move_atr: 1.0        # ... during a move of at least 1x the 1-hour range
+  cooldown_min: 30           # one note per coin in 30 minutes, unless the move doubles ("getting bigger")
+  wave_min: 15               # same direction within 15 min of a note = the same wave (logged), unless 2+ coins join
+  max_per_day: 8             # at most 8 notes a Beijing day (the rest are only logged); held by /pause
+
 weekly_review:               # Forward Test Program PR 3 - engine/weekly_review.py, reports/weekly_review.md (hourly;
                              # final on Sunday from 04:00 UTC, then the live watcher sends it to Telegram)
   promote_min_trades: 10     # a TEST pair (strategy / version / timeframe / coin) is a promotion candidate after 10

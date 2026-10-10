@@ -72,7 +72,8 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
-| `/pause` | No new trade alerts until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
+| `/shock on` · `/shock off` | ⚡ shock alarm on or off: a sudden fall / rally, a volume spike or yesterday's high / low broken, within about a minute (information only, see "Shock alarm" below) |
+| `/pause` | No new trade alerts (and no 👀 / ⚡ notes) until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
 | `/help` | The list |
 
@@ -142,6 +143,7 @@ it ran all week. Without the token there is no heartbeat (and no alarm).
 | `5_remove_autostart.bat` | Stop it from starting with Windows |
 | `6_journal_sync.bat` | Optional: send your journal to GitHub so the agent learns from your trades (see Journal sync) |
 | `7_replay_test_alerts.bat` | Safety check of the 🔵 TEST alerts: the last 14 days replayed with their rules on real candles - every alert it would have sent and how it ended. Sends nothing |
+| `8_replay_shocks.bat` | Check of the ⚡ shock alarm: the last 14 days replayed minute by minute - every note it would have sent and what price did 1 and 4 hours later. Sends nothing |
 | `run_watcher.bat` | The watcher itself (the start button and auto-start use it) |
 
 ## Reading an alert
@@ -202,6 +204,23 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   the best to 🟡 PAPER - only with your tap.
 - Safety check before trusting it: double-click `windows\7_replay_test_alerts.bat`. It replays the last 14 days
   with these rules on real candles and shows every alert it would have sent and how each one ended.
+
+## Shock alarm ⚡ (2026-10-10)
+
+- The strategies only look at the market when a candle closes. The shock alarm checks **every minute** whether
+  something unusual is happening on your coins and sends a short ⚡ note within about a minute:
+  - **fast move:** 15 minutes moved 1.8x the coin's normal 1-hour range;
+  - **volume spike:** 5x the normal volume with a real move;
+  - **sweep:** yesterday's high or low broken during a real move (once per side a day).
+- **Information only:** no buttons, never a trade signal. If you have a trade open on that coin, the note says
+  "check its stop on OKX". Otherwise watch, don't chase - in the 14-day replay only 35 of 75 shocks kept going 4 hours
+  later. If a strategy sees a setup, a 👀 or 🔵 message follows at the candle close.
+- Quiet by design: one note for all coins in the same minute, one per coin in 30 minutes ("getting bigger" when the
+  move doubles), a market-wide move is one wave (a second note only when 2+ more coins join), at most 8 a day.
+  The replay of 27 Sep - 10 Oct: about 3 notes a day; the 7 Oct crash came as a note at 09:58 Beijing as it started.
+- `/shock off` stops them, `/pause` holds them; held shocks are still logged.
+- Each shock is saved 4 hours later in `journal\shocks.csv` (with what price did after 1h and 4h). With journal sync
+  it reaches GitHub and the Sunday review shows "⚡ Shock alarm". Details: `docs/SHOCK_ALARM.md`.
 
 ## Good to know
 

@@ -293,10 +293,12 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
         "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
         "/watch on|off - 👀 watch notes: a TEST setup found, waiting for its 5m confirmation (information only)\n"
+        "/shock on|off - ⚡ shock alarm: a sudden fall / rally, a volume spike or yesterday's high / low broken, "
+        "within a minute (information only)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
         "/review - the latest weekly review: TEST / PAPER results, what is ready for PAPER, the system check\n"
-        "/pause - stop new trade alerts until /resume (/pause 2h = for 2 hours)\n"
+        "/pause - stop new trade alerts, 👀 and ⚡ notes until /resume (/pause 2h = for 2 hours)\n"
         "/resume - new trade alerts on again\n"
         "/help - this list\n\n"
         "Under each alert: <b>✅ Took it</b> = I follow the trade and tell you when TP1 / TP2, the stop or the time "
@@ -348,6 +350,9 @@ def status_text(i):
     if "watch_on" in i:
         lines.append(f"👀 Watch notes: {'ON' if i['watch_on'] else 'OFF (/watch on)'}"
                      + (f" · {i.get('watch_today', 0)} sent today" if i["watch_on"] else ""))
+    if "shock_on" in i:
+        lines.append(f"⚡ Shock alarm: {'ON' if i['shock_on'] else 'OFF (/shock on)'}"
+                     + (f" · {i.get('shock_today', 0)} sent today (max {i.get('shock_max')})" if i["shock_on"] else ""))
     if real:
         lines.append(f"Watching {len(real)} strategy timeframe(s):")
         lines += [f"• {sid} {tf} ({lab})" for sid, tf, lab in real]
