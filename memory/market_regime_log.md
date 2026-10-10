@@ -241,3 +241,15 @@ BTC context: 1W TRANSITION (strong) · 1D WEAK_BULL (moderate) · 4H TRANSITION 
 | UNI | EXPANSION up (moderate) | TRANSITION (weak) | EXPANSION down (weak) | STRONG_BEAR (moderate) | SHORT allowed |
 | ADA | UNCLEAR (weak) | TRANSITION (weak) | EXPANSION down (weak) | STRONG_BEAR (moderate) | SHORT allowed |
 | AVAX | WEAK_BULL (moderate) | STRONG_BULL (moderate) | EXPANSION down (weak) | STRONG_BEAR (moderate) | SHORT allowed |
+
+## 2026-10-10 (logged 00:30 UTC · source Binance)
+BTC context: 1W TRANSITION (strong) · 1D TRANSITION (weak) · 4H TRANSITION (weak) · 1H RANGE (moderate) → NO TRADE
+
+| Coin | 1W | 1D | 4H | 1H | Permission |
+|---|---|---|---|---|---|
+| BTC | TRANSITION (strong) | TRANSITION (weak) | TRANSITION (weak) | RANGE (moderate) | NO TRADE |
+| ETH | WEAK_BULL (weak) | TRANSITION (weak) | WEAK_BEAR (weak) | UNCLEAR (weak) | NO TRADE |
+| SOL | WEAK_BULL (moderate) | TRANSITION (weak) | WEAK_BEAR (moderate) | WEAK_BEAR (weak) | SHORT allowed |
+| ZEC | WEAK_BULL (weak) | TRANSITION (weak) | WEAK_BEAR (weak) | WEAK_BEAR (weak) | SHORT allowed |
+| XRP | TRANSITION (weak) | TRANSITION (weak) | WEAK_BEAR (weak) | RANGE (moderate) | NO TRADE |
+| BNB | WEAK_BULL (weak) | WEAK_BULL (moderate) | WEAK_BEAR (weak) | TRANSITION (moderate) | NO TRADE |

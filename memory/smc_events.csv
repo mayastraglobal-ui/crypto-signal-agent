@@ -12123,3 +12123,10 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-09 23:00,UNI,15m,FVG,bull,,7.27,7.28,0.272,,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-10-09 23:15,UNI,15m,FVG_RETRACE,bull,,7.27,7.28,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-09 23:15,UNI,15m,FVG_FILLED,bull,,7.27,7.28,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-09 23:30,BTC,15m,FVG_RETRACE,bull,,82535.04,82616.0,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-10 00:00,ZEC,15m,SWEEP,bull,1205.64,,,0.23,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-10 00:15,XRP,15m,FVG_FILLED,bear,,1.3951,1.3987,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-10 00:30,XRP,15m,FVG,bull,,1.3975,1.3991,0.466,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-09 23:30,BNB,15m,WEAK_BREAK,bull,742.8,,,0.047,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-10 00:00,BNB,15m,SWEEP,bear,743.28,,,0.16,,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-10 00:30,BNB,15m,OB_INVALID,bear,,742.0,743.38,,Asia,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
