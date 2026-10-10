@@ -741,3 +741,21 @@ Newest entries at the bottom. Format: date · who · what · why.
 - Claude's weekly research Routine: Sunday 09:52 -> **11:52 Beijing**, so it reads the finished nightly research
   (08:40, about 1 hour) and the nearly final weekly review (final from 12:00).
 - Needs `windows\4_update.bat` once on the PC (the heartbeat is watcher code). Tests: `tests/test_watcher_health.py`.
+
+## 2026-10-10 · Operator + Claude · 👀 Watch notes (see every TEST setup, not only the 5m-confirmed ones)
+- Operator: "build watch notes" - and the question whether a fall or a rally can be missed.
+- The 14-day replay with today's TEST rules (2026-09-25 to 10-10, real OKX candles): 18 setups, 3 alerts, 15 held by
+  the 5m check (those 15 would have made -4.77R). In the 6-9 Oct fall the rules found 8 shorts (the old rules: 0) but
+  the 5m check held 7, among them ETH 1H on 10-07 (+2.42R) and ETH 30m on 10-08 (+2.43R).
+- Why the 5m check misses fast moves: a confirming 5m candle must close within 0.2R of the planned entry
+  (`confirm_5m.zone_r`); when price runs away at once it can never confirm. Not changed (operator decision A,
+  2026-10-09): the weekly review compares with vs without the check, and the operator decides on the numbers.
+- New: `live_watcher.py` `watch_note` / `engine/live.py` `watch_text`: as soon as a merged TEST setup starts waiting
+  for its 5m candle, a short note (coin, side, timeframe, strategy, price, where its stop would be, trend, against the
+  daily) - no buttons, never a trade signal; the normal TEST alert follows if the 5m candle confirms. `/watch on|off`,
+  off also with `/tests off` and while paused, at most 12 a Beijing day (`signal_center.watch_notes`,
+  `watch_max_per_day`). `/status` and `/help` show it.
+- Rally from a deep low (answered, not changed): the trend gates (4H + 1H, fast 4H) block a long until the trend has
+  turned, and the range strategies never trade against a STRONG 4H trend - so the first leg of a V-bottom is not an
+  alert; the continuation after the turn is. Strategies 5, 6, 9 and 10 (the reversal ideas) are first tested on 12-14 Oct (rotation: 3+4, 5+6, 7+8, 9+10).
+- Tests: `tests/test_signal_center.py` (the note at once, no buttons, /watch off, the cap, the pause).

@@ -427,6 +427,9 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   cooldown_minutes: 240      # one TEST alert per coin + direction + strategy in 4 hours (versions / timeframes merged)
   confirm_5m: true           # a 5m candle must confirm the entry first (confirm_5m: settings above)
   agree_hours: 4             # ⭐ when another timeframe / strategy gave the same coin and direction within 4 hours
+  watch_notes: true          # 👀 2026-10-10: a note as soon as a TEST setup is found, while it waits for its 5m candle
+                             # (information only, no buttons; /watch on|off in Telegram)
+  watch_max_per_day: 12      # at most 12 watch notes a Beijing day
 
 weekly_review:               # Forward Test Program PR 3 - engine/weekly_review.py, reports/weekly_review.md (hourly;
                              # final on Sunday from 04:00 UTC, then the live watcher sends it to Telegram)
