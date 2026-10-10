@@ -92,3 +92,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - mechanism: funding = average premium index + clamp(interest rate - premium index, 0.05%, -0.05%); when the premium is small, the clamp returns the interest part, so funding reads exactly +0.0100%
   - strategies: none yet (relevant to any future market_structure card with funding_rate or funding_z)
   - what it means: a reading of exactly +0.0100% (this week SUI and UNI in the fact sheet) is the neutral baseline, not a sign of crowded longs. Only readings clearly above it (or a high funding_z) suggest crowding. The engine's cautious cost of 0.01% per 8 hours equals this baseline.
+
+### Margin and loss spirals (source for 'Liquidation cascades')
+- timestamp: 2026-10-10 15:30 UTC · source: Claude daily review 2026-10-10 ([C07] https://www.princeton.edu/~markus/research/papers/liquidity.pdf) · evidence: RESEARCH_FINDING: Brunnermeier and Pedersen, Review of Financial Studies 22(6), 2009 (theory model) · confidence: medium · strategy: all · asset: all · timeframe: all · regime: STRONG_BEAR, TRANSITION · review: 2027-01-08
+  What: when prices fall fast, margins rise and leveraged traders must sell (margin spiral); their losses force further sales (loss spiral). The two feed each other, so liquidity can vanish across many coins at once.
+  - mechanism: forced selling by leveraged traders, which in crypto futures shows up as exchange liquidations and a sharp drop in open interest; prices can overshoot while it lasts.
+  - strategies: none yet (queued: 'Hypothesis: rebound after a forced-selling day (from C07)' in memory/experiments.md). It also explains the 'volatility_spike' loss tag and why stops just beyond obvious levels get hit in fast falls.
+  This gives the earlier 'Liquidation cascades' record (a CLAIM, 2026-09-25) a published source for its mechanism. It does not measure how often crypto cascades reverse.
