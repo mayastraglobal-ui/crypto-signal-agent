@@ -12367,3 +12367,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 13:00,BTC,15m,FVG_FILLED,bull,,82821.19,82879.71,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-10 13:00,SUI,30m,FVG,bear,,1.1155,1.118,0.262,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-10-10 13:15,SUI,15m,SWEEP,bull,1.1098,,,0.12,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-10 13:45,BTC,15m,WEAK_BREAK,bear,82793.04,,,0.088,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-10 14:00,ETH,1h,WEAK_BREAK,bull,2499.14,,,0.021,NY AM,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-10 13:30,ETH,30m,BOS,bull,2498.88,,,0.161,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-10 13:30,ETH,15m,CHOCH,bull,2498.92,,,0.267,NY AM,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-10 13:30,ETH,15m,ORDER_BLOCK,bull,,2496.03,2497.6,,NY AM,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-10 13:45,ETH,15m,OB_RETEST,bull,,2496.03,2497.6,,NY AM,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-10 13:30,SOL,15m,SWEEP,bear,109.96,,,0.144,NY AM,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 13:45,ZEC,15m,WEAK_BREAK,bull,1231.06,,,0.393,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
