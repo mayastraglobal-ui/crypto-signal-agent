@@ -12427,3 +12427,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 14:45,SUI,15m,SWEEP,bear,1.139,,,0.116,Silver Bullet,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-10 14:45,SUI,15m,FVG,bull,,1.117,1.1294,1.73,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
 2026-10-10 15:15,SUI,15m,FVG_RETRACE,bull,,1.117,1.1294,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 17:00,ETH,1h,FVG_RETRACE,bull,,2500.02,2506.95,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 17:00,SOL,1h,FVG_RETRACE,bull,,109.99,110.37,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 17:00,SOL,30m,FVG_RETRACE,bull,,109.99,110.17,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 17:00,SOL,30m,FVG,bear,,110.26,110.41,0.42,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 16:45,SOL,15m,FVG_RETRACE,bull,,109.94,110.17,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 17:15,SOL,15m,OB_RETEST,bull,,109.72,109.94,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-10 17:15,SOL,15m,FVG_FILLED,bull,,109.94,110.17,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 16:30,XRP,30m,FVG_FILLED,bull,,1.4057,1.4072,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 16:30,XRP,15m,OB_RETEST,bull,,1.4027,1.4052,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-10 16:30,XRP,15m,FVG_FILLED,bull,,1.4052,1.408,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 17:00,SUI,30m,FVG_FILLED,bull,,1.1209,1.1294,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 17:00,SUI,15m,OB_RETEST,bull,,1.116,1.1208,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
