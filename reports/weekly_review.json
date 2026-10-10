@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-10 12:22",
+ "utc": "2026-10-10 13:18",
  "final": false,
  "rows": [],
  "promote": [],
@@ -23,15 +23,15 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-10 12:22 UTC"
+   "text": "hourly scan: last run 2026-10-10 13:18 UTC"
   },
   {
    "ok": true,
    "text": "program rotation: 18 of 18 strategy / timeframe tests re-tested in the last 7 days"
   },
   {
-   "ok": null,
-   "text": "live watcher journal: synced, no alert recorded yet"
+   "ok": true,
+   "text": "live watcher: last heartbeat 2026-10-10 11:20 UTC (63 min ago)"
   },
   {
    "ok": true,

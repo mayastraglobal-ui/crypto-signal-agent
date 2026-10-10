@@ -14,7 +14,7 @@
   "RLC": "2026-10-10",
   "MAGIC": "2026-10-10"
  },
- "runs": 351,
+ "runs": 352,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -110,7 +110,6 @@
   ],
   "MAGIC": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]
