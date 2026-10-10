@@ -12452,3 +12452,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 18:15,SOL,15m,WEAK_BREAK,bear,109.93,,,0.09,,1h,COMPRESSION,no displacement,smc-1.0,Binance
 2026-10-10 18:00,SUI,15m,WEAK_BREAK,bear,1.1173,,,0.182,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-10 18:00,SUI,15m,FVG_FILLED,bull,,1.117,1.1294,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 18:30,BTC,15m,FVG,bear,,83083.87,83118.0,0.468,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 19:00,ETH,15m,SWEEP,bear,2512.77,,,0.335,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 19:15,ETH,15m,BOS,bull,2512.77,,,0.102,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-10 19:00,SOL,1h,FVG_RETRACE,bear,,110.2,110.37,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 19:00,SOL,1h,FVG_FILLED,bear,,110.2,110.37,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-10 19:00,SOL,30m,FVG_RETRACE,bear,,110.26,110.41,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 19:00,SOL,30m,FVG_FILLED,bear,,110.26,110.41,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 19:00,SOL,30m,FVG_FILLED,bear,,110.12,110.21,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 19:00,SOL,15m,FVG,bull,,110.2,110.28,0.358,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 19:15,SOL,15m,FVG_RETRACE,bull,,110.2,110.28,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 18:30,ZEC,15m,FVG_FILLED,bull,,1224.56,1227.59,,,1h,UNCLEAR,,smc-1.0,Binance
