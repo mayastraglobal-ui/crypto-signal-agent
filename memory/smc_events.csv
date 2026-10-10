@@ -12303,3 +12303,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 05:45,SUI,15m,BREAKER_RETEST,bull,,1.0951,1.102,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-10-10 07:15,SUI,15m,FVG_RETRACE,bull,,1.0956,1.0998,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-10 08:15,SUI,15m,SWEEP,bear,1.1127,,,0.767,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 08:30,BTC,30m,FVG,bull,,82760.29,82806.0,0.318,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 09:00,BTC,30m,FVG_RETRACE,bull,,82760.29,82806.0,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 09:15,BTC,15m,SWEEP,bear,82937.49,,,0.177,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 08:30,ETH,15m,FVG_RETRACE,bull,,2494.42,2495.18,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 08:30,ETH,15m,FVG_FILLED,bull,,2494.42,2495.18,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 09:15,ETH,15m,WEAK_BREAK,bull,2497.04,,,0.079,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-10 09:15,SOL,15m,SWEEP,bear,110.14,,,0.222,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-10 08:30,ZEC,15m,FVG_FILLED,bull,,1227.0,1228.36,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-10 09:15,XRP,15m,WEAK_BREAK,bull,1.4087,,,0.361,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-10 09:00,SUI,1h,OB_RETEST,bear,,1.1216,1.139,,London,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-10 08:30,SUI,30m,CHOCH,bull,1.1127,,,0.974,London,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-10 08:30,SUI,30m,ORDER_BLOCK,bull,,1.0991,1.1057,,London,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-10 08:30,SUI,30m,FVG_FILLED,bear,,1.1116,1.1162,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 09:00,SUI,30m,FVG,bull,,1.1049,1.1178,1.309,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 08:30,SUI,15m,WEAK_BREAK,bull,1.1127,,,1.249,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-10 08:30,SUI,15m,FVG,bull,,1.1049,1.1125,1.074,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 08:45,SUI,15m,FVG,bull,,1.1175,1.1212,0.509,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-10 09:00,SUI,15m,FVG_RETRACE,bull,,1.1175,1.1212,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 08:30,BNB,30m,FVG,bull,,748.67,749.28,0.308,London,1h,UNCLEAR,,smc-1.0,Binance

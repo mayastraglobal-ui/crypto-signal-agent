@@ -5,8 +5,8 @@
   "SOL",
   "ZEC",
   "XRP",
-  "BNB",
-  "SUI"
+  "SUI",
+  "BNB"
  ],
  "in_streak": {},
  "out_streak": {},
@@ -15,7 +15,7 @@
   "RLC": "2026-10-10",
   "MAGIC": "2026-10-10"
  },
- "runs": 347,
+ "runs": 348,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -111,6 +111,7 @@
   ],
   "MAGIC": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]

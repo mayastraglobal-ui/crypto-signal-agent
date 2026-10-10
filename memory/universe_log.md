@@ -528,3 +528,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-10 08:19 UTC
 - **EXCLUDED** MAGIC - 7-day average volume $7M < $50M; 24h move +42.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $10k within 1% (need $250k)
 - **JOIN** SUI - in the top 7 for 2 runs in a row (now #7)
+
+## 2026-10-10 09:19 UTC
+- **EXCLUDED** MAGIC - 7-day average volume $7M < $50M; 24h move +41.3% is beyond ±25% - suspended for the rest of the UTC day; spread 0.181% > 0.1%; order book too thin: $12k within 1% (need $250k)

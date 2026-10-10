@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-10 08:19",
+ "utc": "2026-10-10 09:19",
  "final": false,
  "rows": [],
  "promote": [],
@@ -23,7 +23,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-10 08:19 UTC"
+   "text": "hourly scan: last run 2026-10-10 09:19 UTC"
   },
   {
    "ok": true,
@@ -54,6 +54,7 @@
    "week_total_r": 0
   }
  },
+ "failure_lab": null,
  "settings": {
   "promote_min_trades": 10,
   "promote_min_avg_r": 0.0,
