@@ -192,8 +192,9 @@ def live_table(logdf, now, keys=None):
 
 
 def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journal=None, research_runs=None,
-          scan_utc=None, S=None):
-    """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}."""
+          scan_utc=None, S=None, failure_lab=None):
+    """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}.
+    failure_lab: reports/failure_lab.json (the research run's repairs and their record)."""
     S = S or settings(None)
     cells = (program or {}).get("cells") or {}
     live = live_table(logdf, now, list(cells))
@@ -236,7 +237,18 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                 demoted=demoted or [], refused=refused or [], ideas=ideas(rows, journal, S),
                 five_min=five_min(rows, journal), system=system_check(now, research_runs, scan_utc, program, journal,
                                                                       rows),
-                totals=totals(rows), settings=S)
+                totals=totals(rows), failure_lab=failure_part(failure_lab), settings=S)
+
+
+def failure_part(fl):
+    """The Failure Lab's part of the review: counts and plain-English lines."""
+    if not fl:
+        return None
+    from engine import failure_lab as flab                     # here, not at the top: the watcher imports scanner
+    res = fl.get("results") or []
+    return dict(judged=len(res), helped=sum(bool(r.get("helped")) for r in res),
+                passed=sum(bool(r.get("passed")) for r in res), pending=len(fl.get("pending") or []),
+                new=len(fl.get("new") or []), retired=fl.get("retired") or [], lines=flab.lines(fl))
 
 
 def totals(rows):
@@ -368,6 +380,10 @@ def render(rv):
         L.append(f"- note: {fm['note']}")
     L += ["", "## Ideas for new versions", ""] + ([f"- {x}" for x in rv["ideas"]] or ["- none yet (each needs 10+ "
                                                                                    "live trades)"])
+    fl = rv.get("failure_lab")
+    L += ["", "## Failure Lab (repairs for the loss causes)", ""] + (
+        [f"- {x}" for x in fl["lines"]] if fl and fl["lines"] else
+        ["- no repair yet (the research run writes at most one a night, for a loss cause with 30+ losing trades)"])
     L += ["", "## Every live strategy / version / coin", "",
           "| Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |",
           "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
@@ -402,5 +418,10 @@ def telegram(rv):
     L += ["", "System check: " + ("✅ all parts ran" if not bad else "⚠️ " + "; ".join(bad))]
     if rv["ideas"]:
         L += ["", f"💡 {len(rv['ideas'])} idea(s) for new versions - in the weekly email and reports/weekly_review.md"]
+    fl = rv.get("failure_lab")
+    if fl and (fl["judged"] or fl["pending"]):
+        L += ["", f"🔧 Failure Lab: {fl['judged']} repair(s) judged - {fl['helped']} beat their parent, "
+                  f"{fl['passed']} reached VALIDATION; {fl['pending']} waiting for a test"
+              + (f" · stopped: {', '.join(fl['retired'])}" if fl["retired"] else "")]
     L.append("\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>")
     return "\n".join(L)

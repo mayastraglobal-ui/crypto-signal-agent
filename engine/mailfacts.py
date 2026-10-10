@@ -527,7 +527,8 @@ def program_facts(rv):
                          for p in rv.get("promote") or []],
                 demoted=[f"{d['key'].split('@')[0]} {d['key'].split('|')[1]} on {d['coin']}"
                          for d in rv.get("demoted") or []],
-                ideas=list(rv.get("ideas") or [])[:4], system="all parts ran" if not bad else "; ".join(bad))
+                ideas=list(rv.get("ideas") or [])[:4], system="all parts ran" if not bad else "; ".join(bad),
+                failure_lab=list(((rv.get("failure_lab") or {}).get("lines")) or [])[:4])
 
 
 def journal_facts(rv):

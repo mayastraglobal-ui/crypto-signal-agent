@@ -342,6 +342,10 @@ class EndToEnd(unittest.TestCase):
                 res = json.load(f)
             self.assertEqual(len(res["coins"]), 3)
             self.assertEqual(res["not_run"], {})
+            fl = res["failure_lab"]                                   # 2026-10-10: the Failure Lab ran (offline: no
+            for k in ("allowed", "considered", "new", "results", "by_kind", "pending"):   # card is written)
+                self.assertIn(k, fl)
+            self.assertTrue(os.path.exists(os.path.join(tmp, "reports", "failure_lab_offline.json")))
             cell = res["cells"]["trend_pullback@1.0|1h"]
             for k in ("all", "develop", "validate", "long", "short", "by_coin", "walk_forward", "stress",
                       "perturbation", "median_cost_r", "overfit"):

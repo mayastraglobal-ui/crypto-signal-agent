@@ -97,6 +97,11 @@ You add strategy candidates to `strategies_lab.yaml` (step 3) and events to `eve
      it as a lab card in step 3 (a new version of a program card = a NEW id in `strategies_lab.yaml`, e.g.
      `P01-BREAKOUT-V2-NOCHOP`, ONE change, `parent: "result: <id>@<version> <tf>"`, factory `failure` or
      `market_structure` as fits). Never edit `strategies_program.yaml`.
+   - the review's **Failure Lab** part (the engine's own repair cards, factory `failure`, at most one a night, shared
+     with your failure quota): which repairs beat their parent, which did not, and what the repair record says
+     (e.g. "DISP helped 3 of 4 times on breakouts"). Do not write a card that repeats a pending or tested repair (the
+     same parent + the same change). You MAY write a failure card for a loss tag the engine has no repair for, or a
+     repair kind it stopped trying, when the fact sheet's numbers support it.
 8. **Approval packs.** For each eligible strategy in the fact sheet:
    - summarise its pack in 5 plain lines: strengths, weaknesses, and what could go wrong - start from the pack's
      `Bull case`, `Bear case` and `Risk manager` lines (a VETO means: not now);

@@ -307,6 +307,11 @@ class Guard(unittest.TestCase):
         self.assertRefused("at most 10", [dict(cards[0], id="LAB-NEW-1"), dict(cards[0], id="LAB-NEW-2")], base=base)
         old = LAB_HEAD + dump([dict(c, added="2026-09-01") for c in week])             # older than 7 days: free
         self.assertEqual(review(cards[:3], base=old)[1], [])
+        # the engine's Failure Lab repair cards on main today do not use up Claude's 3 a day
+        eng = [dict(cards[0], id=f"LAB-ENG-{j}", factory="failure", source="engine failure lab: a repair",
+                    repair=dict(kind="DISP"))
+               for j in range(2)]
+        self.assertEqual(review(cards[:3], base=LAB_HEAD + dump(eng))[1], [])
 
     def test_fits_the_newest_main_and_reruns_are_skipped(self):
         plain = globals()["plain"]("X")
