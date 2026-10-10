@@ -139,6 +139,11 @@ class Review(unittest.TestCase):
         texts = [s["text"] for s in rv["system"]]
         self.assertTrue(any("nightly research ran on 7 of the last 7 days" in t for t in texts))
         self.assertTrue(all(s["ok"] is not False for s in rv["system"]))
+        eight = [dict(date=(NOW - dt.timedelta(days=i)).strftime("%Y-%m-%d")) for i in range(8)]   # 8 dates on file
+        rv3 = WR.build(NOW, log(), program(), {}, {}, [], [], dict(last_entry_utc=None), eight, "x", S)
+        texts = [s["text"] for s in rv3["system"]]
+        self.assertTrue(any("ran on 7 of the last 7 days" in t for t in texts))             # never "8 of 7"
+        self.assertIn(dict(ok=None, text="live watcher journal: synced, no alert recorded yet"), rv3["system"])
         rv2 = WR.build(NOW, log(), None, {}, {}, [], [], None, [], None, S)
         self.assertIn(False, [s["ok"] for s in rv2["system"]])
         self.assertIsNone(rv2["five_min"]["confirmed_r"])

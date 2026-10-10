@@ -123,6 +123,13 @@ Good to know: the repository is public, so the `journal` branch is too - it hold
 in R (no account, balance or keys). The token can only write files of this one repository; keep `telegram.env`
 private. When the token expires, `/status` shows "failing": make a new one and run `6_journal_sync.bat` again.
 
+**The "PC is off" alarm (2026-10-10, uses the same token):** every hour the watcher also tells GitHub it is
+running (a small `heartbeat.json` on its own branch `watcher-heartbeat`, one commit replaced each time). When the
+hourly scan hears nothing for **2 hours** (the PC is off, asleep or offline, or the watcher window was closed),
+you get **one ALERT email**: "Live watcher silent". When the watcher runs again, a **FIXED** email follows within
+an hour. `/status` shows **Heartbeat to GitHub: sent …**, and the Sunday weekly review's system check says whether
+it ran all week. Without the token there is no heartbeat (and no alarm).
+
 ## The buttons (all in the `windows` folder)
 
 | File | What it does |

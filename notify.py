@@ -777,6 +777,34 @@ def system_email():
     save(rp("system_alert_state.json"), {"state": q.get("system_state"), "since_utc": q.get("checked_utc")})
 
 
+def watcher_email():
+    """The live watcher (operator's PC): ALERT once when its hourly heartbeat stops for 2 hours (reports/
+    watcher_health.json, journal_review.py), FIXED once when it is back. Nothing when the heartbeat is not set up."""
+    h = load(rp("watcher_health.json"), {})
+    if h.get("state") == "SILENT":
+        hb = h.get("heartbeat") or {}
+        trades = int(hb.get("open_trades") or 0)
+        alert_open("scan", "watcher", dict(
+            title="Live watcher silent", impact="no Telegram alerts", utc=h.get("checked_utc"),
+            since_utc=h.get("last_utc"), thing="the live watcher on your PC", cause="no heartbeat for 2+ hours",
+            steps=["Check the PC: is it on, awake and online?",
+                   "If the watcher window is gone, double-click windows\\2_start_watcher.bat.",
+                   "Send /status in Telegram - it answers when the watcher runs."],
+            broke=h.get("text") or "no heartbeat", impact_long=(
+                "No Telegram alerts and no trade follow-up until the watcher runs again. GitHub's research, hourly "
+                "scan and emails keep working." + (f" You were following {trades} trade(s) in Telegram - check "
+                                                    "their stops on OKX." if trades else "")),
+            tried="Read the watcher's heartbeat (branch watcher-heartbeat) every hour.",
+            open_trades=trades,
+            meaning="Usually the PC is off, asleep or lost the internet. This email comes once; a FIXED email follows "
+                    "within an hour of the watcher running again.",
+            details=[f"last heartbeat {h.get('last_utc')} UTC", f"checked {h.get('checked_utc')} UTC"],
+            buttons=[("Dashboard", pages_base())]))
+    elif h.get("state") == "OK":
+        alert_close("scan", "watcher", h.get("checked_utc"), cause="heartbeat back",
+                    buttons=[("Dashboard", pages_base())])
+
+
 def risk_email():
     """ALERT when a risk halt / strategy suspension starts (this run), FIXED when it ends - one email per change."""
     rep = latest()
@@ -1027,6 +1055,7 @@ def main():
             recovered_email(sys.argv[2] if len(sys.argv) > 2 else "scan")
         elif mode == "system":
             system_email()
+            watcher_email()
             risk_email()
             reminders_email(latest())
         elif mode == "daily":

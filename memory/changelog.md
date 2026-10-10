@@ -714,3 +714,30 @@ Newest entries at the bottom. Format: date · who · what · why.
   variant-search cards); they still count in the shared weekly `failure` quota.
 - Tests: `tests/test_failure_lab.py` (new), `tests/test_research.py` (the offline run writes the Failure Lab file),
   `tests/test_lab.py` (repair cards outside Claude's limits).
+
+## 2026-10-10 · Operator + Claude · Health check of the whole agent: two small weekly-review fixes
+- Checked: every workflow of the last 9 hours (Research, Scan, Brain, Tests, Pages: all green except one Tests run on
+  Claude's briefing branch built from the main before PR #60), Claude's Routines (briefing 3x a day, daily review
+  daily; the weekly research Routine, recreated 2026-10-05, fires for the first time on 2026-10-11 09:52 Beijing),
+  data quality (all 7 signal coins GOOD), the signals log (header only since 2026-10-03: no strategy has been in PAPER
+  yet and no TEST setup has triggered since PR 2 - the market was choppy; not data loss), the scan's TEST stage (23
+  program pairs listed from reports/program.json).
+- Fixed in `engine/weekly_review.py` system check: "nightly research ran on 8 of the last 7 days" (the window had
+  8 dates: today + 7 before - now today + 6), and "live watcher journal: last entry none" shown as a fault when
+  journal sync works but no alert was sent yet - now neutral ("synced, no alert recorded yet").
+
+## 2026-10-10 · Operator + Claude · "PC is off" alarm; weekly research moved to 11:52 Beijing
+- Operator: "fix this problem" (GitHub could not see whether the live watcher on the PC runs; the weekly research at
+  09:52 Beijing could start before the nightly research finished).
+- `live_watcher.py` `Heartbeat`: every hour (the first one at start) the watcher writes `heartbeat.json` (time,
+  started, last market check, fails, strategies watched, open trades, paused, TEST on/off, code out of date) to the
+  branch `watcher-heartbeat` - ONE commit with no parent, replaced each time (no history; main and `journal` are never
+  touched). Same token as journal sync (JOURNAL_GITHUB_TOKEN, Contents: read and write); without it nothing is sent.
+  A failed send is retried at the next 5-minute pass. `/status` shows "Heartbeat to GitHub: sent ...".
+- `journal_review.py` (hourly scan) reads it into `reports/watcher_health.json`: OK (heard within 2 hours), SILENT,
+  or OFF (no heartbeat on GitHub). `notify.py system` -> `watcher_email()`: one ALERT email "Live watcher silent"
+  (what to check, 2_start_watcher.bat, open Telegram-followed trades) and one FIXED email when it is back.
+- The weekly review's system check uses the heartbeat when there is one (else the journal line as before).
+- Claude's weekly research Routine: Sunday 09:52 -> **11:52 Beijing**, so it reads the finished nightly research
+  (08:40, about 1 hour) and the nearly final weekly review (final from 12:00).
+- Needs `windows\4_update.bat` once on the PC (the heartbeat is watcher code). Tests: `tests/test_watcher_health.py`.

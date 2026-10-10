@@ -338,6 +338,8 @@ def status_text(i):
         lines.append(f"GitHub decisions refreshed {ago(i['refresh'][0], now)}: {i['refresh'][1]}")
     if i.get("journal_sync"):
         lines.append(f"Journal sync to GitHub: {i['journal_sync']}")
+    if i.get("heartbeat"):
+        lines.append(f"Heartbeat to GitHub: {i['heartbeat']}")
     if i.get("code_old"):
         lines.append("🔄 A newer watcher version is on GitHub: double-click windows\\4_update.bat on the PC.")
     return "\n".join(lines)
