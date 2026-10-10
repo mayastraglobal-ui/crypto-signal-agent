@@ -1,10 +1,10 @@
 {
  "state": "OK",
- "checked_utc": "2026-10-10 12:23",
- "last_utc": "2026-10-10 11:20",
- "age_min": 63,
+ "checked_utc": "2026-10-10 13:19",
+ "last_utc": "2026-10-10 12:25",
+ "age_min": 54,
  "heartbeat": {
-  "utc": "2026-10-10 11:20",
+  "utc": "2026-10-10 12:25",
   "started_utc": "2026-10-10 11:15",
   "feed": "OKX USDT perpetuals",
   "coins": [
@@ -16,7 +16,7 @@
    "SUI",
    "BNB"
   ],
-  "last_check_utc": "2026-10-10 11:20",
+  "last_check_utc": "2026-10-10 12:25",
   "last_check_ok": true,
   "fails": 0,
   "watching": {
@@ -29,5 +29,5 @@
   "tests_on": true,
   "code_old": false
  },
- "text": "live watcher: last heartbeat 2026-10-10 11:20 UTC (63 min ago)"
+ "text": "live watcher: last heartbeat 2026-10-10 12:25 UTC (54 min ago)"
 }
