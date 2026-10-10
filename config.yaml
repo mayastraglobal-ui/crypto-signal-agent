@@ -288,6 +288,18 @@ lab:                         # Phase 17 C: idea factories - new strategy cards p
     variant_search: 3        # e) the ENGINE's one-change variants of the best BACKTESTING cells (research run)
     lead_lag: 1              # f) cross-coin: BTC moves first, alts follow?
 
+failure_lab:                 # 2026-10-10 (operator: "build the failure lab") - engine/failure_lab.py, docs/FAILURE_LAB.md.
+                             # The research run writes one-change REPAIR cards (factory "failure", the quota above,
+                             # shared with Claude) for the loss tags that hurt a strategy, and learns which repairs work.
+  enabled: true
+  per_run: 1                 # at most 1 repair card a night (the weekly failure quota still applies)
+  min_trades: 100            # the parent cell needs 100+ backtest trades ...
+  min_losers: 30             # ... and the tag 30+ losing trades (section 17: below that it may be chance)
+  min_share: 0.25            # the tag is systematic (flag) or in 25%+ of the losses
+  near_miss_gross_r: 0.0     # a FAILED cell gets a repair only when positive BEFORE fees (a near miss)
+  retire_after: 4            # a repair kind tried 4 times without helping once is not tried again
+  max_depth: 2               # no repair of a repair of a repair
+
 attribution:                 # failure attribution (AGENT_PROMPT.md section 17) - engine/attribution.py
   range_adx: 20              # range_market: ADX(14) on the trade's own timeframe below 20 (choppy)
   low_rel_vol: 0.8           # low_relative_volume: signal-candle volume below 0.8x normal

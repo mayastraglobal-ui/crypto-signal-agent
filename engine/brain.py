@@ -225,8 +225,11 @@ def check_lab(base, new, current, library, now, quota=None, memory=None):
             probs += [f"{tag}: {x}" for x in rloop.parent_exists_problems(c, memory, LOSS_TAGS)]
         if memory is not None:                                  # Phase 18 C: a queued card is copied unchanged
             probs += [f"{tag}: {x}" for x in iq.copy_problems(c, iq.parse(memory.get(rloop.FILES["experiment"])))]
-    # Claude's own limits: the engine's variant-search cards do not use them up (they have their own quota)
-    mine = [c for c in cur + added if isinstance(c, dict) and c.get("factory") != "variant_search"]
+    # Claude's own limits: the engine's variant-search and Failure Lab repair cards do not use them up (they have
+    # their own quota; a repair card still counts in the shared weekly 'failure' quota below)
+    mine = [c for c in cur + added if isinstance(c, dict) and c.get("factory") != "variant_search"
+            and not (c.get("factory") == "failure" and isinstance(c.get("repair"), dict)
+                     and str(c.get("source") or "").startswith("engine failure lab"))]
     days = [_day(c.get("added")) for c in mine]
     for d in sorted({_day(c.get("added")) for c in added if isinstance(c, dict)} - {None}):
         n = sum(x == d for x in days)

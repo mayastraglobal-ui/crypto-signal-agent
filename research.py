@@ -42,6 +42,7 @@ from engine import cleanup as cln
 from engine import confirm5m as c5m
 from engine import data_quality as dq
 from engine import dupes
+from engine import failure_lab as flab
 from engine import bias
 from engine import btcharts as btc_mod
 from engine import debate
@@ -975,6 +976,29 @@ def main():
     log(f"Variant search: {len(new_variants)} new lab card(s) ({left} allowed this week)"
         + (" - offline: not written" if args.offline and new_variants else ""))
 
+    # ---------- Failure Lab (2026-10-10): repairs for the loss tags, learning which repairs work ----------
+    FL = flab.settings(cfg.get("failure_lab"))
+    fl_path = os.path.join(sc.REPORTS, "failure_lab_offline.json" if args.offline else "failure_lab.json")
+    fl_rows, fl_pending = flab.results(cells, by_key, (load_json(fl_path) or {}).get("results"), now_txt)
+    week_f = [c for c in lab_now or [] if c.get("factory") == "failure"
+              and str(c.get("added") or "") >= (started - dt.timedelta(days=6)).strftime("%Y-%m-%d")]
+    left_f = 0 if lab_now is None or not FL["enabled"] else \
+        min(int(FL["per_run"]), max(0, int(quota["failure"]) - len(week_f)))
+    repairs, fl_considered = flab.cards_for(cells, by_key, started.date(), left_f, rg.LABELS, sc.TF_ORDER,
+                                            flab.scoreboard(fl_rows)[0], FL, (lab_now or []) + new_variants)
+    if repairs and not args.offline:
+        append_lab(lab_path, repairs)
+    new_variants += repairs                                    # counted with the other new lab cards below
+    failure_lab = flab.summary(fl_rows, repairs, fl_pending, fl_considered, left_f, FL)
+    try:
+        with open(fl_path, "w", encoding="utf-8") as f:
+            json.dump(failure_lab, f, indent=1)
+    except OSError as e:
+        log(f"failure lab file not saved: {e}")
+    log(f"Failure Lab: {len(repairs)} repair card(s) ({left_f} allowed tonight, {fl_considered} loss tag(s) worth a "
+        f"repair), {len(fl_rows)} repair(s) judged, {len(fl_pending)} waiting"
+        + (" - offline: not written" if args.offline and repairs else ""))
+
     # ---------- near-duplicates (Phase 20 lite 4): >= 70% of trades shared on a timeframe = one idea ----------
     ND = dupes.settings(R.get("near_duplicates"))
     near_dupes = dupes.find(per, dupes.age_order(registry["versions"], by_key), ND,
@@ -1028,7 +1052,8 @@ def main():
                                                      if c["rules_adding_nothing"]}),
                variant_search=dict(allowed=left, quota=quota["variant_search"],
                                    new=[dict(id=c["id"], variant_of=c["variant_of"], evidence=c["factory_evidence"])
-                                        for c in new_variants]),
+                                        for c in new_variants if c.get("factory") == "variant_search"]),
+               failure_lab=failure_lab,
                trials=dict(trl.summary(trial_rows, alpha), added_this_run=len(trial_new),
                            file=os.path.relpath(TRIALS, sc.ROOT)),
                family_gates=dict(rules_version=FG["rules_version"], mode=fg_mode, mode_text=fg_why,

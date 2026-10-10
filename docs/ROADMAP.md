@@ -34,6 +34,7 @@ and targets, instantly.
 | 2026-10-08 | Upgrade 10 "Market weather": `engine/weather.py`, `reports/market_weather.json`, Telegram `/weather`, the 08:20 briefing email, Claude's fact sheets |
 | 2026-10-09 | Forward Test Program PR 1 "Strategy lab": 10 strategies × 4 versions (`strategies_program.yaml`), the 4H + 1H gate (1W / 1D context only), 5 years of 30m / 15m history, nightly batches, `reports/program.md` (per coin, after and before fees) - `docs/PROGRAM.md` |
 | 2026-10-09 | Forward Test Program PR 3 "weekly review": `reports/weekly_review.md` (live TEST / PAPER per strategy / version / coin, after and before fees, by market type, honest confidence, 5m comparison, ideas, system check), promote with a Telegram tap (max 5, one per strategy per coin), automatic demotion, `/review`, weekly email part |
+| 2026-10-10 | Failure Lab: the research run writes one repair card a night for a loss cause (30+ losing trades) of a testing or near-miss failed strategy, judges each repair against its parent and learns which repairs work (`engine/failure_lab.py`, `docs/FAILURE_LAB.md`) |
 | 2026-10-09 | Forward Test Program V5: the fast 4H trend (4H EMA20 / EMA50) gate on the 7 trend strategies' faster timeframes (`gate: intraday_fast`) |
 | 2026-10-09 | Forward Test Program PR 2 "Signal Center": 🔵 TEST alerts (positive pairs, 5m check, merged, ⭐, ⚠️ vs daily, max 10 a day), new alert layout with $ and ℹ️ Details, `/tests on|off`, demo book, `/weather` in Beijing time, TEST setups recorded on GitHub, `7_replay_test_alerts.bat` |
 
@@ -121,7 +122,7 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
 2. **Live price stream**: OKX WebSocket for the trades being followed, so TP / stop messages come within a second
    instead of up to 5 minutes (entry signals stay at the candle close).
 3. **Claude researches from the losses**: each week, new strategy ideas aimed at the main loss causes (the "still
-   open" part of step 5), tested like any card.
+   open" part of step 5), tested like any card. **Built 2026-10-10 as the engine's Failure Lab** (`docs/FAILURE_LAB.md`).
 4. **Health check on live strategies**: alerts of a strategy pause by themselves when its recent results drift below
    its backtest (only ever pauses - never loosens a rule).
 5. **More coins**: step 6 above (~15 coins instead of 7).

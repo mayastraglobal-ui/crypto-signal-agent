@@ -894,7 +894,8 @@ def weekly(w):
                                         pg["system"][:40])])),
                    ("bullets", ([f"Promote (tap in Telegram): {x}" for x in pg["promote"]] or
                                 ["Nothing ready for PAPER yet (10+ live TEST setups, positive after fees)."])
-                    + [f"Back to TEST: {x}" for x in pg["demoted"]] + [f"Idea: {x}" for x in pg["ideas"]])]
+                    + [f"Back to TEST: {x}" for x in pg["demoted"]] + [f"Idea: {x}" for x in pg["ideas"]]
+                    + [f"Failure Lab: {x}" for x in pg.get("failure_lab") or []])]
     if close:
         blocks.append(("bars", close[:3]))
     blocks += [("section", "3 · Learned this week"),

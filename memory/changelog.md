@@ -688,3 +688,29 @@ Newest entries at the bottom. Format: date · who · what · why.
   universe rule. Adds about 5-8 minutes a night per pinned coin outside the scan's list (limit 150 minutes).
 - Unchanged: gates, costs, the trials bar, the data-quality rules. Tests: `test_okx_history` (relisting hole),
   `test_research` (pinned coins).
+
+## 2026-10-10 · Operator + Claude · The Failure Lab (the agent repairs failing strategies by itself)
+- Operator: "build the failure lab". Before: the engine measured why trades lose (section 17 loss tags) but only
+  Claude's daily review could turn a tag into a card (factory `failure`) - it wrote 0 in its first weeks; the variant
+  search never touched a FAILED strategy.
+- New `engine/failure_lab.py`, called by `research.py` after the variant search:
+  - candidates: BACKTESTING cells and near-miss FAILED cells (positive before fees) with 100+ trades and a loss tag
+    that hurts (with < without) in 30+ losing trades (flagged or 25%+ of losses);
+  - one fixed one-change repair per tag (DISP, RVOL, ADX, HTF, DAILY, REGIME, NOTEXT, NOTLATE, RETEST, WIDESTOP,
+    TIGHTSTOP, LIMIT, FEECAP, SESSION, NEARTP - existing building blocks only);
+  - ranking: expected gain (tags known only after the entry count half) x the repair kind's record;
+  - judged once tested: helped = better than the parent on the unseen part AND overall; passed = VALIDATION+;
+  - learning: the record orders the repairs; a kind tried 4 times without helping is stopped; results kept in
+    `reports/failure_lab.json` (new, on main) even after a card retires.
+- Limits: 1 repair a night within the weekly `failure` quota (3 per 7 days, shared with Claude); one per parent;
+  depth 2; every repair is a normal lab card (same checks, every test, counted in the trials file); nothing edits a
+  running card; LIVE still needs the library, 20 paper signals and the operator's approval.
+- Shown in: the weekly review (Telegram line + report section), the weekly email, Claude's fact sheets;
+  `tasks/weekly_research.md` step 7b explains the record and may add a repair the engine has no rule for.
+- On last night's real results: 102 loss tags on 37 strategy timeframes qualify; the first repair would be
+  `P02-EMA-PULLBACK-V4-FHTF` (regime_mismatch in 84% of losses, n=163).
+- `config.yaml` → `failure_lab` (new block). Unchanged: gates, costs, the trials bar, approvals.
+- `engine/brain.py`: the engine's repair cards do not use up Claude's own 3-a-day / 10-a-week card limits (like the
+  variant-search cards); they still count in the shared weekly `failure` quota.
+- Tests: `tests/test_failure_lab.py` (new), `tests/test_research.py` (the offline run writes the Failure Lab file),
+  `tests/test_lab.py` (repair cards outside Claude's limits).
