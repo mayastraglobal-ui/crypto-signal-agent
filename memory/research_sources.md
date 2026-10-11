@@ -836,3 +836,42 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P04-MACD-SUPERTREND-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
   - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### Bitcoin intraday time series momentum (Shen, Urquhart, Wang 2022)
+- timestamp: 2026-10-11 04:00 UTC · source: https://research.birmingham.ac.uk/en/publications/bitcoin-intraday-time-series-momentum/ · evidence: RESEARCH_FINDING: peer-reviewed, Financial Review 57(2), 2022, pages 319-344 (doi 10.1111/fire.12290); only the abstract page was opened, the full text is paywalled · confidence: medium · strategy: none yet · asset: BTC · timeframe: 30m, 1h · regime: - · review: 2027-01-09
+  - title / date: "Bitcoin intraday time series momentum", Dehua Shen, Andrew Urquhart, Pengfei Wang; online 2021-10-26, printed May 2022.
+  - claim: bitcoin has no opening or closing bell, so the authors use trading volume to mark the "trading day". The first half-hour return positively predicts the last half-hour return. Predictability is strongest when the first session has the highest volume or volatility. Strongest in market downturns. They link it to liquidity provision, not to late-informed traders.
+  - evidence class: RESEARCH_FINDING (abstract only; I did not see the sample period, the costs or the size of the effect).
+  - derived hypothesis: 'Hypothesis: intraday momentum after a high-volume session (from Shen, Urquhart, Wang)' in memory/experiments.md.
+  - limitations: half-hour horizons on 30m candles means very tight stops, so costs in R are large (the fees_slippage tag is already systematic on 15m and 30m); the gains may be before costs; one coin; a "volume-defined day" is not a fixed clock time, so the rule needs care to avoid looking ahead.
+
+### The price impact of order book events (Cont, Kukanov, Stoikov 2014)
+- timestamp: 2026-10-11 04:00 UTC · source: https://arxiv.org/abs/1011.6402 · evidence: RESEARCH_FINDING: peer-reviewed, Journal of Financial Econometrics 12(1), 2014, pages 47-88; NYSE TAQ data for 50 US stocks · confidence: medium · strategy: S5-SWEEP-MSS-FVG, S6-OB-FVG · asset: all · timeframe: intraday · regime: - · review: 2027-01-09
+  - claim: over short time intervals, price changes are mainly driven by order flow imbalance (supply vs demand at the best bid and ask). The relation is linear, with a slope inversely proportional to market depth, and stable across time scales and stocks. The relation between price change and traded volume is noisier.
+  - evidence class: RESEARCH_FINDING (stocks, not crypto).
+  - what it means for SMC: a fair value gap (FVG) is the candle trace of one-sided order flow. This paper explains why price moved WHILE the imbalance happened (thin depth = big move). It says nothing about price coming BACK later to "fill" the gap - the core FVG claim.
+  - derived hypothesis: none new; the engine already tests FVG cards against control twins (see memory/smc_research.md).
+  - limitations: US stocks, short intervals; crypto depth and fees differ.
+
+### Day Trading for a Living? (Chague, De-Losso, Giovannetti 2019/2020)
+- timestamp: 2026-10-11 04:00 UTC · source: https://econpapers.repec.org/RePEc:fgv:eesptd:525 · evidence: RESEARCH_FINDING: working paper (FGV EESP Textos para discussao 525, 2020-02), full population of Brazilian equity-futures day traders · confidence: high for its market; medium for crypto · strategy: all · asset: - · timeframe: intraday · regime: - · review: 2027-01-09
+  - claim: all individuals who began day trading Brazilian equity futures in 2013-2015 and kept at it for at least 300 days: 97% lost money, only 0.4% earned more than a bank teller (US$54 per day), the top individual earned US$310 per day with a standard deviation of US$2,560. No evidence of learning by day trading.
+  - evidence class: RESEARCH_FINDING. The SSRN page (abstract_id 3423101) gave 403; I read the abstract on EconPapers.
+  - derived rule (testable): see '## How traders lose money' in reports/claude/weekly/2026-10-11.md - trading more often on lower timeframes is where our own cells lose most; the test is a cap on trades per coin per day plus the existing cost-viability gate.
+  - limitations: one country, one futures market; the abstract does not give costs; crypto retail may differ.
+
+### Reconciling Open Interest with Traded Volume in Perpetual Swaps (Giagkiozis, Said 2023)
+- timestamp: 2026-10-11 04:00 UTC · source: https://arxiv.org/abs/2310.14973 · evidence: RESEARCH_FINDING: preprint, tick-by-tick data from seven of the most liquid crypto derivatives exchanges, two periods in 2023 · confidence: medium · strategy: none yet (any future market_structure card with oi or oi_chg) · asset: BTC · timeframe: - · regime: - · review: 2027-01-09
+  - claim: open interest = the total number of outstanding contracts at a point in time. Open interest in bitcoin perpetual swaps is systematically misquoted by some of the largest derivatives exchanges; some report wholly implausible numbers, others seem to delay messages of forced trades (liquidations).
+  - evidence class: RESEARCH_FINDING (preprint; the abstract does not name the exchanges).
+  - what it means for this system: an open-interest change is only as good as the exchange's report. The fact sheet of 2026-10-11 shows OI -56.8% (BTC), -68.7% (ETH) and -59.5% (SOL) in 24h on a "quiet" volatility day - that looks more like a data or reporting step than a market event. Any oi_chg card needs a data check first.
+  - limitations: 2023 data; exchanges may have changed how they report.
+
+### [R8] Microsoft Qlib - re-check at release v0.9.8 (how one experiment is recorded)
+- timestamp: 2026-10-11 04:00 UTC · source: https://github.com/microsoft/qlib (release v0.9.8, commit 54355232463878d2eebb91fe0ee5fa7fa1f5976c) · evidence: FACT: read in the project's README.md and qlib/workflow/recorder.py at that commit (via raw.githubusercontent.com; the github.com page itself gave 403) · confidence: high for what the code does; its results were not checked · strategy: - · asset: - · timeframe: - · regime: - · review: 2027-01-09
+  - opened: README.md and qlib/workflow/recorder.py at commit 54355232463878d2eebb91fe0ee5fa7fa1f5976c (git ls-remote: HEAD = tag v0.9.8).
+  - what it does (new since the 2026-09-25 record): when a run starts, the MLflow recorder logs the exact command line, the relevant environment variables, and the uncommitted code changes (git diff, git status, git diff --cached) next to the run, because "Mlflow only log the commit id ... usually, user will have a lot of uncommitted changes". Every run carries a status (SCHEDULED, RUNNING, FINISHED, FAILED). Loading saved objects now needs an explicit trusted flag (unrestricted pickle loading is off by default). The README warns that config-driven workflows changed (per-component 'trusted: true' for local imports).
+  - what we take (idea only): a test result should name the engine version that produced it. Our memory/strategy_registry.csv records fingerprint, history_from and trades, but no engine commit and no data-window end. That is why the daily review of 2026-10-10 could not explain why many cells' trade counts fell in one day (4h breakout 1301 -> 871 trades).
+  - what we deliberately do NOT take: forecasting models, mlflow as a dependency, the Alpha158 features, any code (none was copied).
+  - licence: MIT.
+  - hypothesis: 'Hypothesis: record the engine commit and data window with every test (from R8)' in memory/experiments.md.

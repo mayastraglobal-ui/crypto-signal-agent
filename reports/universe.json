@@ -1,14 +1,18 @@
 {
- "checked_utc": "2026-10-11 03:20",
- "run": 366,
+ "checked_utc": "2026-10-11 04:19",
+ "run": 367,
  "signal": [
   "BTC",
   "ETH",
   "SOL",
   "ZEC"
  ],
- "research_only": [],
- "waiting": {},
+ "research_only": [
+  "XRP"
+ ],
+ "waiting": {
+  "XRP": 1
+ },
  "leaving": {},
  "empty_slots": 3,
  "rules": {
@@ -16,24 +20,18 @@
   "research_coins": 10,
   "hysteresis_runs": 2
  },
- "events": [
-  {
-   "coin": "XRP",
-   "action": "LEAVE",
-   "why": "not eligible: 24h volume below $50M or no longer listed"
-  }
- ],
+ "events": [],
  "candidates": [
   {
    "coin": "BTC",
-   "vol_24h": 570925978.1583794,
-   "change_24h": 0.441,
+   "vol_24h": 576482486.7467386,
+   "change_24h": 0.243,
    "listing_days": 999,
    "vol_7d_avg": 1187950267.0558941,
    "stable_dev_pct": 8.095922993966475,
-   "spread_pct": 1.2056303170646556e-05,
-   "depth_bid_usdt": 10545094.488302996,
-   "depth_ask_usdt": 14620311.364264393,
+   "spread_pct": 1.206476291716715e-05,
+   "depth_bid_usdt": 11544575.49210041,
+   "depth_ask_usdt": 13175672.991259499,
    "status": "SIGNAL",
    "volume_rank": 1,
    "eligible": true,
@@ -44,14 +42,14 @@
   },
   {
    "coin": "ETH",
-   "vol_24h": 345939021.102102,
-   "change_24h": 0.555,
+   "vol_24h": 365869506.374605,
+   "change_24h": 0.343,
    "listing_days": 999,
    "vol_7d_avg": 649857408.5637664,
    "stable_dev_pct": 8.30087866885767,
-   "spread_pct": 0.00039897941067622137,
-   "depth_bid_usdt": 7136893.868957004,
-   "depth_ask_usdt": 6110380.478342006,
+   "spread_pct": 0.00039949104841305295,
+   "depth_bid_usdt": 7388182.901702013,
+   "depth_ask_usdt": 5948763.985555995,
    "status": "SIGNAL",
    "volume_rank": 2,
    "eligible": true,
@@ -62,14 +60,14 @@
   },
   {
    "coin": "SOL",
-   "vol_24h": 94350297.99806,
-   "change_24h": -0.164,
+   "vol_24h": 96953063.44194,
+   "change_24h": -0.355,
    "listing_days": 999,
    "vol_7d_avg": 206489065.73702857,
    "stable_dev_pct": 14.374097752113856,
-   "spread_pct": 0.009127002236107247,
-   "depth_bid_usdt": 4153930.60294,
-   "depth_ask_usdt": 4003035.2546700025,
+   "spread_pct": 0.009143693137662978,
+   "depth_bid_usdt": 4261325.477079999,
+   "depth_ask_usdt": 3206548.135069999,
    "status": "SIGNAL",
    "volume_rank": 4,
    "eligible": true,
@@ -80,14 +78,14 @@
   },
   {
    "coin": "ZEC",
-   "vol_24h": 64273468.01752,
-   "change_24h": 1.119,
+   "vol_24h": 66025902.39381,
+   "change_24h": 0.15,
    "listing_days": 999,
    "vol_7d_avg": 167199576.58144143,
    "stable_dev_pct": 22.623954604111397,
-   "spread_pct": 0.0008147801112167443,
-   "depth_bid_usdt": 2374983.8380299974,
-   "depth_ask_usdt": 2470629.5474699987,
+   "spread_pct": 0.0008171637064903969,
+   "depth_bid_usdt": 1874000.3231900001,
+   "depth_ask_usdt": 2522230.8312400007,
    "status": "SIGNAL",
    "volume_rank": 5,
    "eligible": true,
@@ -98,24 +96,42 @@
   },
   {
    "coin": "STRK",
-   "vol_24h": 94708911.8172859,
-   "change_24h": 62.767,
+   "vol_24h": 102263791.2747203,
+   "change_24h": 46.856,
    "listing_days": 964,
    "vol_7d_avg": 30957566.594840914,
    "stable_dev_pct": 132.34285800019506,
-   "spread_pct": 0.0083615535766513,
-   "depth_bid_usdt": 48305.12854409996,
-   "depth_ask_usdt": 51767.83805659999,
+   "spread_pct": 0.009623249771444086,
+   "depth_bid_usdt": 43475.0527434,
+   "depth_ask_usdt": 60640.682565099996,
    "status": "EXCLUDED",
    "volume_rank": 3,
    "eligible": false,
    "reasons": [
     "7-day average volume $31M < $50M",
-    "24h move +62.8% is beyond \u00b125% - suspended for the rest of the UTC day",
-    "order book too thin: $48k within 1% (need $250k)"
+    "24h move +46.9% is beyond \u00b125% - suspended for the rest of the UTC day",
+    "order book too thin: $43k within 1% (need $250k)"
    ],
    "flags": [],
    "in_streak": 0,
+   "out_streak": 0
+  },
+  {
+   "coin": "XRP",
+   "vol_24h": 51395753.74486,
+   "change_24h": -0.812,
+   "listing_days": 999,
+   "vol_7d_avg": 145747348.68695858,
+   "stable_dev_pct": 11.31060983026484,
+   "spread_pct": 0.007179523997558171,
+   "depth_bid_usdt": 2434304.0390399983,
+   "depth_ask_usdt": 1816729.9611800003,
+   "status": "RESEARCH",
+   "volume_rank": 6,
+   "eligible": true,
+   "reasons": [],
+   "flags": [],
+   "in_streak": 1,
    "out_streak": 0
   }
  ],

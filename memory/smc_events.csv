@@ -12592,3 +12592,41 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-11 03:15,ZEC,15m,FVG_RETRACE,bull,,1229.53,1232.28,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-10-11 03:15,ZEC,15m,FVG_FILLED,bull,,1229.53,1232.28,,Asia,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-11 03:15,ZEC,15m,FVG_FILLED,bull,,1232.74,1235.12,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,BTC,1h,BOS,bear,82932.01,,,0.714,Asia,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-11 04:00,BTC,1h,FVG_FILLED,bull,,82860.0,82953.63,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-11 03:30,BTC,30m,WEAK_BREAK,bear,82934.0,,,0.096,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 03:30,BTC,30m,FVG_FILLED,bull,,82992.01,83012.68,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,BTC,30m,FVG,bear,,83011.0,83042.99,0.321,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:30,BTC,15m,WEAK_BREAK,bear,82934.0,,,0.135,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 03:30,BTC,15m,FVG_RETRACE,bull,,82830.29,82886.0,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:30,BTC,15m,FVG,bear,,82978.07,83097.39,1.94,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:45,BTC,15m,FVG_RETRACE,bear,,82978.07,83097.39,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 04:00,BTC,15m,OB_RETEST,bull,,82778.0,82830.29,,Asia,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-11 04:00,BTC,15m,FVG_FILLED,bull,,82830.29,82886.0,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:15,BTC,15m,FVG,bear,,82880.01,82926.0,0.651,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,ETH,1h,FVG_FILLED,bull,,2500.02,2506.95,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-11 03:30,ETH,30m,FVG_RETRACE,bull,,2506.19,2508.74,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:30,ETH,30m,FVG_FILLED,bull,,2506.19,2508.74,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,ETH,30m,WEAK_BREAK,bear,2503.12,,,0.803,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 04:00,ETH,30m,FVG_FILLED,bull,,2499.61,2503.54,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:30,ETH,15m,FVG,bear,,2508.54,2511.15,0.859,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:45,ETH,15m,FVG_RETRACE,bear,,2508.54,2511.15,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 04:00,ETH,15m,CHOCH,bear,2503.12,,,1.118,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-11 04:00,ETH,15m,ORDER_BLOCK,bear,,2505.62,2510.11,,Asia,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-11 04:00,ETH,15m,OB_RETEST,bull,,2497.0,2499.32,,Asia,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-11 04:00,ETH,15m,FVG_FILLED,bull,,2499.32,2503.54,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:15,ETH,15m,FVG,bear,,2502.22,2505.62,0.942,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,SOL,1h,BOS,bear,109.88,,,1.532,Asia,4h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-11 04:00,SOL,1h,ORDER_BLOCK,bear,,109.87,110.26,,Asia,4h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-11 03:30,SOL,30m,CHOCH,bear,109.87,,,1.095,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-11 03:30,SOL,30m,ORDER_BLOCK,bear,,109.87,110.17,,Asia,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-11 03:30,SOL,30m,OB_INVALID,bull,,109.62,109.87,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-11 04:00,SOL,30m,BREAKER_RETEST,bear,,109.62,109.87,,Asia,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-11 04:00,SOL,30m,FVG,bear,,109.77,110.01,0.747,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:30,SOL,15m,BREAKER_RETEST,bear,,109.72,109.94,,Asia,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-11 03:30,SOL,15m,FVG,bear,,109.73,110.01,1.406,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:45,SOL,15m,FVG_RETRACE,bear,,109.73,110.01,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 04:15,SOL,15m,FVG,bear,,109.37,109.55,0.732,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,ZEC,30m,FVG,bear,,1227.9,1233.7,0.833,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:30,ZEC,15m,FVG,bear,,1230.63,1233.7,0.619,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 04:00,ZEC,15m,OB_RETEST,bull,,1218.87,1221.43,,Asia,1h,COMPRESSION,first return into the order block,smc-1.0,Binance

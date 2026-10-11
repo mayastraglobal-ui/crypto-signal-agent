@@ -5,13 +5,15 @@
   "SOL",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "XRP": 1
+ },
  "out_streak": {},
  "suspended": {
   "STRK": "2026-10-11",
   "MAGIC": "2026-10-11"
  },
- "runs": 366,
+ "runs": 367,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],

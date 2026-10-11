@@ -637,3 +637,9 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   The engine wrote ten strong-move records for 2026-10-08 (BTC -2.9%, ETH -5.9%, SOL -7.7%, ZEC -14.0%, XRP -6.3%, BNB -6.1%, SUI -11.6%, UNI -10.1%, ADA -11.4%, AVAX -9.0%). Eight of them run 09:00 -> 17:00 or 18:00 UTC, so this was one market-wide sell-off, not ten separate chances.
   - what the engine's entries do not say: every setup in them was blocked by the permission gate (no approved strategy) or the regime gate, and the cells involved (trend_pullback, ema_9_21_cross, TRD-H4-*-noT4, liquidity_sweep_reversal) are FAILED or below the bar in the fact sheets of these days. Nothing to change.
   - process note for the operator: the fact sheets of 2026-10-09 and 2026-10-10 both say 'Missed strong moves: none in this period', although these records exist in memory/missed_trades.md. The daily review of 2026-10-09 therefore did not discuss them. The fact sheet's missed-move list seems to read a different source than the file.
+
+### Review: BNB up +3.2% (8.0x ATR), 2026-10-03 07:00 -> 2026-10-03 20:00
+- timestamp: 2026-10-11 04:00 UTC · source: Claude weekly research 2026-10-11 · evidence: FACT: the engine's missed-move record and memory/strategy_registry.csv (2026-10-11 00:58 UTC) · confidence: high · strategy: liquidity_sweep_reversal v1.0 · asset: BNB · timeframe: 5m, 15m · regime: UNCLEAR · review: 2026-10-18
+  - status: KEEP
+  - today's evidence: the blocked cells fail (BACKTEST): liquidity_sweep_reversal@1.0|15m 1440 trades -0.455R; |5m 3258 trades -0.725R. The regime gate was right to block them.
+  - action: none.

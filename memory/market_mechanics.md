@@ -99,3 +99,16 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - mechanism: forced selling by leveraged traders, which in crypto futures shows up as exchange liquidations and a sharp drop in open interest; prices can overshoot while it lasts.
   - strategies: none yet (queued: 'Hypothesis: rebound after a forced-selling day (from C07)' in memory/experiments.md). It also explains the 'volatility_spike' loss tag and why stops just beyond obvious levels get hit in fast falls.
   This gives the earlier 'Liquidation cascades' record (a CLAIM, 2026-09-25) a published source for its mechanism. It does not measure how often crypto cascades reverse.
+
+### Review: Open interest
+- timestamp: 2026-10-11 04:00 UTC · source: https://arxiv.org/abs/2310.14973 · evidence: RESEARCH_FINDING: Giagkiozis and Said (preprint, tick data from seven crypto derivatives exchanges, 2023) · confidence: medium · strategy: none yet · asset: all · timeframe: all · regime: - · review: 2026-11-10
+  - verdict: KEEP. The definition is CONFIRMED (open interest = the total number of outstanding contracts at a point in time). The reading 'price up + OI down = shorts closing, often weaker' is NOT checked by this source and stays a CLAIM.
+  - correction to the old record: 'Not in the engine yet (no OI data source)' is out of date - the engine now records open interest hourly (oi, oi_chg(n) building blocks; fact sheet 'Futures market data').
+  - mechanism: positions opened add to open interest, positions closed (by choice or by liquidation) remove it.
+  - strategies: none yet (queued: 'Hypothesis: rebound after a forced-selling day (from C07)').
+
+### Exchange-reported open interest can be wrong or late
+- timestamp: 2026-10-11 04:00 UTC · source: https://arxiv.org/abs/2310.14973 · evidence: RESEARCH_FINDING: Giagkiozis and Said (preprint, 2023): open interest in bitcoin perpetuals is systematically misquoted by some of the largest exchanges; some delay liquidation messages · confidence: medium · strategy: none yet · asset: all · timeframe: 1h · regime: - · review: 2026-11-10
+  - mechanism: open interest is what the exchange reports, not a measured market quantity; a reporting step, a delay, or a change of source looks like a huge oi_chg without any market move.
+  - strategies: none yet (any market_structure card with oi or oi_chg; also 'Hypothesis: rebound after a forced-selling day (from C07)').
+  - this week's example (FACT from the fact sheet 2026-10-11): OI -56.8% (BTC), -68.7% (ETH), -59.5% (SOL) in 24h while volatility was 'quiet' and the usual 24h move was about +-0.9% to +-1.8%. A real two-thirds drop in positions on a quiet day is unlikely; check the data before any oi_chg card is trusted.
