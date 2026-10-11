@@ -12519,3 +12519,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-10 22:45,SUI,15m,OB_INVALID,bull,,1.116,1.1208,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-10 23:00,SUI,15m,WEAK_BREAK,bear,1.1154,,,0.344,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-10 23:15,SUI,15m,BREAKER_RETEST,bear,,1.116,1.1208,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-11 00:00,ETH,30m,WEAK_BREAK,bear,2506.82,,,0.063,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-10 23:30,SOL,15m,WEAK_BREAK,bear,110.18,,,0.208,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-10 23:45,SOL,15m,FVG,bear,,110.21,110.27,0.31,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 00:00,SOL,15m,FVG_RETRACE,bear,,110.21,110.27,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-10 23:30,ZEC,30m,BOS,bear,1221.91,,,0.055,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-10 23:30,ZEC,15m,BOS,bear,1221.91,,,0.086,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 00:00,XRP,1h,BOS,bear,1.4025,,,0.017,,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-10 23:30,XRP,30m,FVG_RETRACE,bear,,1.4046,1.4055,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 00:00,XRP,30m,BOS,bear,1.4025,,,0.033,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 00:00,XRP,30m,FVG_FILLED,bear,,1.4046,1.4055,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 00:00,XRP,15m,OB_INVALID,bull,,1.4027,1.4052,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-11 00:15,XRP,15m,BREAKER_RETEST,bear,,1.4027,1.4052,,Asia,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance

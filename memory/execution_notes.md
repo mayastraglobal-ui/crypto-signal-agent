@@ -150,3 +150,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END RLC 1d data: DEGRADED: volume 50x normal on candle 10-08 00:00 UTC (possible bad data); DEGRADED: volume 73x normal on candle 10-09 00:00 UTC (possible bad data)
 - timestamp: 2026-10-10 06:24 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: RLC · timeframe: - · regime: - · review: 2026-11-09
   - problem first seen 2026-10-10 01:48 UTC UTC
+
+### START MAGIC 1d data: DEGRADED: volume 56x normal on candle 10-10 00:00 UTC (possible bad data)
+- timestamp: 2026-10-11 00:29 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: MAGIC · timeframe: - · regime: - · review: 2026-11-10
+  - signals from this data are blocked while it lasts

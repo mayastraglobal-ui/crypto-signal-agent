@@ -10,11 +10,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "STRK": "2026-10-10",
-  "RLC": "2026-10-10",
-  "MAGIC": "2026-10-10"
+  "STRK": "2026-10-11"
  },
- "runs": 362,
+ "runs": 363,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -109,7 +107,6 @@
    "volume_7d"
   ],
   "MAGIC": [
-   "big_move",
    "spread",
    "thin_book",
    "volume_7d"
@@ -158,6 +155,8 @@
    "data_degraded"
   ],
   "STRK": [],
-  "MAGIC": []
+  "MAGIC": [
+   "data_degraded"
+  ]
  }
 }

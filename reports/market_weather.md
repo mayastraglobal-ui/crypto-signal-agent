@@ -2,15 +2,15 @@
 
 What kind of day it is, from the hourly scan's own numbers (engine/weather.py). Explains the market only: it never creates a signal or changes a rule.
 
-- verdict (2026-10-10 23:16 UTC): **Choppy - stay out** - The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.
+- verdict (2026-10-11 00:29 UTC): **Choppy - stay out** - The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.
 - coins: BTC choppy, ETH choppy, SOL choppy, SUI choppy, XRP choppy, ZEC choppy
 - fits: waiting until 1D, 4H and 1H agree - no trade is the right trade · avoid: any trade; trading on feeling or headlines
-- BTC: 1D TRANSITION / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)); volatility quiet (higher than 14% of the last year); usual 24h move ±1.0%, 8 of 10 similar days within ±2.1%; crowding neutral (funding +0.0011%/8h, OI -57.0% 24h)
-- ETH: 1D TRANSITION / 4H TRANSITION / 1H RANGE (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H RANGE)); volatility quiet (higher than 12% of the last year); usual 24h move ±1.2%, 8 of 10 similar days within ±2.9%; crowding neutral (funding -0.0002%/8h, OI -68.8% 24h)
-- SOL: 1D TRANSITION / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)); volatility normal (higher than 24% of the last year); usual 24h move ±1.9%, 8 of 10 similar days within ±3.8%; crowding neutral (funding -0.0012%/8h, OI -58.9% 24h)
-- SUI: 1D TRANSITION / 4H UNCLEAR / 1H TRANSITION (timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)); volatility normal (higher than 73% of the last year); usual 24h move ±2.9%, 8 of 10 similar days within ±5.6%; crowding neutral (funding +0.0058%/8h, OI -63.9% 24h)
-- XRP: 1D TRANSITION / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)); volatility normal (higher than 36% of the last year); usual 24h move ±1.5%, 8 of 10 similar days within ±3.4%; crowding neutral (funding +0.0017%/8h, OI -72.5% 24h)
-- ZEC: 1D TRANSITION / 4H UNCLEAR / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H COMPRESSION)); volatility normal (higher than 41% of the last year); usual 24h move ±3.3%, 8 of 10 similar days within ±7.2%; crowding neutral (funding -0.0007%/8h, OI -75.1% 24h)
-- altcoins vs BTC (24h, median): +0.3%
+- BTC: 1D TRANSITION / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)); volatility quiet (higher than 13% of the last year); usual 24h move ±0.9%, 8 of 10 similar days within ±2.1%; crowding neutral (funding -0.0022%/8h, OI +1.1% 24h)
+- ETH: 1D TRANSITION / 4H TRANSITION / 1H RANGE (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H RANGE)); volatility quiet (higher than 11% of the last year); usual 24h move ±1.2%, 8 of 10 similar days within ±2.9%; crowding neutral (funding -0.0044%/8h, OI +0.9% 24h)
+- SOL: 1D TRANSITION / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H COMPRESSION)); volatility normal (higher than 22% of the last year); usual 24h move ±1.8%, 8 of 10 similar days within ±3.8%; crowding neutral (funding +0.0075%/8h, OI +0.2% 24h)
+- SUI: 1D TRANSITION / 4H UNCLEAR / 1H TRANSITION (timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)); volatility normal (higher than 67% of the last year); usual 24h move ±2.9%, 8 of 10 similar days within ±5.5%; crowding neutral (funding +0.0053%/8h, OI -63.8% 24h)
+- XRP: 1D WEAK_BULL / 4H TRANSITION / 1H COMPRESSION (timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H COMPRESSION)); volatility normal (higher than 29% of the last year); usual 24h move ±1.4%, 8 of 10 similar days within ±3.1%; crowding neutral (funding -0.0013%/8h, OI +3.2% 24h)
+- ZEC: 1D TRANSITION / 4H UNCLEAR / 1H COMPRESSION (timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H COMPRESSION)); volatility normal (higher than 32% of the last year); usual 24h move ±3.0%, 8 of 10 similar days within ±6.6%; crowding neutral (funding +0.0063%/8h, OI -75.0% 24h)
+- altcoins vs BTC (24h, median): +0.2%
 - event: US CPI (Sep data) 2026-10-14 12:30 UTC
 - Explains the market. It never creates a signal and never changes a rule, a size or an approval.
