@@ -643,3 +643,9 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - status: KEEP
   - today's evidence: the blocked cells fail (BACKTEST): liquidity_sweep_reversal@1.0|15m 1440 trades -0.455R; |5m 3258 trades -0.725R. The regime gate was right to block them.
   - action: none.
+
+### Review: BNB up +3.2% (8.0x ATR), 2026-10-03 07:00 -> 2026-10-03 20:00
+- timestamp: 2026-10-11 15:30 UTC · source: Claude daily review 2026-10-11 · evidence: FACT: the engine's missed-move record (setups blocked by the regime gate) and the failing-cell diagnoses of 2026-10-09 and 2026-10-10 · confidence: medium · strategy: liquidity_sweep_reversal v1.0 · asset: BNB · timeframe: 5m, 15m · regime: UNCLEAR · review: 2026-10-18
+  - status: KEEP
+  - today's evidence: both blocked setups came from liquidity_sweep_reversal, a failing cell (5m 2376 trades -0.85R and 15m 1055 trades -0.53R in the 2026-10-10 fact sheet, BACKTEST), and the regime was UNCLEAR, where no strategy has shown an edge. BNB left the signal list on 2026-10-10 (24h volume below $50M).
+  - action: none.
