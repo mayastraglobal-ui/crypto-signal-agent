@@ -1,18 +1,18 @@
 # Weekly review · 2026-W41
 
-Made 2026-10-11 14:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-11 15:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-11)
-- ✅ hourly scan: last run 2026-10-11 14:18 UTC
+- ✅ hourly scan: last run 2026-10-11 15:18 UTC
 - ✅ program rotation: 36 of 36 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-11 12:40 UTC (41 min ago)
-- ✅ TEST setups closed this week (GitHub record): 0
+- ✅ live watcher: last heartbeat 2026-10-11 13:45 UTC (35 min ago)
+- ✅ TEST setups closed this week (GitHub record): 1
 
 ## Totals
 
-- TEST: 0 closed setups since the start, - a trade; this week 0 (+0.00R)
+- TEST: 1 closed setups since the start, -1.31R a trade; this week 1 (-1.31R)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -25,7 +25,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## With vs without the 5m check (before fees)
 
 - watcher alerts (5m-confirmed): 1 plan results, -1.00R a trade
-- every TEST setup (GitHub, no 5m check): 0, - a trade
+- every TEST setup (GitHub, no 5m check): 1, -1.10R a trade
 
 ## Ideas for new versions
 
@@ -43,4 +43,4 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 | Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| - | - | - | - | 0 | - | - | - | - | - | no closed live setup yet |
+| P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | 1 | 0 | -1.31R | -1.10R | 1 (-1.3R) | +0.01R | -1.31R over 1 trade: too early to say anything |

@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-11 13:34",
+ "last_entry_utc": "2026-10-11 15:07",
  "days": 30,
  "all": {
   "alerts": 1,
@@ -32,15 +32,15 @@
   },
   "yours": {
    "n": 1,
-   "total_r": 1.2,
-   "avg_r": 1.2,
-   "wins": 1
+   "total_r": -1.08,
+   "avg_r": -1.08,
+   "wins": 0
   },
   "gap": {
    "n": 1,
-   "total_r": 2.2,
-   "avg_r": 2.2,
-   "wins": 1
+   "total_r": -0.08,
+   "avg_r": -0.08,
+   "wins": 0
   },
   "early": {
    "n": 0,
@@ -90,15 +90,15 @@
   },
   "yours": {
    "n": 1,
-   "total_r": 1.2,
-   "avg_r": 1.2,
-   "wins": 1
+   "total_r": -1.08,
+   "avg_r": -1.08,
+   "wins": 0
   },
   "gap": {
    "n": 1,
-   "total_r": 2.2,
-   "avg_r": 2.2,
-   "wins": 1
+   "total_r": -0.08,
+   "avg_r": -0.08,
+   "wins": 0
   },
   "early": {
    "n": 0,
@@ -125,7 +125,7 @@
    "skipped": 0,
    "plan_avg_r": -1.0,
    "plan_n": 1,
-   "your_avg_r": 1.2,
+   "your_avg_r": -1.08,
    "your_n": 1
   }
  ],
