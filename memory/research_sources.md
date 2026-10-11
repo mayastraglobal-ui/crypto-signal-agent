@@ -737,3 +737,102 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: a theory model. Traders who provide liquidity need funding (their own capital plus margin). When markets get illiquid and volatile, margins rise, which forces traders to sell, which makes markets more illiquid - a "margin spiral". Traders who hold large positions lose money on them, must sell more, and push prices down further - a "loss spiral". The two spirals reinforce each other. The model explains why liquidity can suddenly dry up, why it dries up in many assets at once, why it is linked to volatility, and why it moves with the market.
   - what it means for this system: it is the mechanism behind the 'Liquidation cascades' record in memory/market_mechanics.md (written there as a CLAIM). Crypto futures make it visible: exchanges liquidate positions automatically and open interest shows when positions are closed. It fits the 2026-10-08 sell-off, where ten coins fell at the same hours and open interest dropped sharply on 2026-10-09. It is a model, not a measured trading edge; the paper itself offers testable predictions, not a strategy.
   - derived hypothesis: 'Hypothesis: rebound after a forced-selling day (from C07)' in memory/experiments.md.
+
+### P02-EMA-PULLBACK-V4-S6@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: engine rule-significance test: P02-EMA-PULLBACK-V4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'rsi(close,14) < 65 / rsi(close,14) > 100 - 65' adds nothing to P02-EMA-PULLBACK-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V1@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing) - version V1
+  - URL: none recorded
+  - claim: Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes.
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V2@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing) - version V2
+  - URL: none recorded
+  - claim: Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes.
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V3@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing) - version V3
+  - URL: none recorded
+  - claim: Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes.
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V4@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing) - version V4
+  - URL: none recorded
+  - claim: Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes.
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P04-MACD-SUPERTREND-V1@1.0 - Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored); exit when the Supertrend flips.
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P04-MACD-SUPERTREND-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P04-MACD-SUPERTREND-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V1
+  - URL: none recorded
+  - claim: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend.
+  - derived hypothesis (tested): P04-MACD-SUPERTREND-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P04-MACD-SUPERTREND-V2@1.0 - Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored); exit when the Supertrend flips.
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P04-MACD-SUPERTREND-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V2
+  - URL: none recorded
+  - claim: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend.
+  - derived hypothesis (tested): P04-MACD-SUPERTREND-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P04-MACD-SUPERTREND-V3@1.0 - Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored); exit when the Supertrend flips.
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P04-MACD-SUPERTREND-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P04-MACD-SUPERTREND-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V3
+  - URL: none recorded
+  - claim: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend.
+  - derived hypothesis (tested): P04-MACD-SUPERTREND-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P04-MACD-SUPERTREND-V4@1.0 - Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored); exit when the Supertrend flips.
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P04-MACD-SUPERTREND-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P04-MACD-SUPERTREND-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V4
+  - URL: none recorded
+  - claim: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend.
+  - derived hypothesis (tested): P04-MACD-SUPERTREND-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V5@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 3, Fibonacci pullback (50-61.8% of the last swing) - version V5
+  - URL: none recorded
+  - claim: Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes.
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P04-MACD-SUPERTREND-V5@1.0 - Supertrend(10,3) is up and the MACD line crosses above its signal line while above zero (shorts mirrored); exit when the Supertrend flips.
+- timestamp: 2026-10-11 00:58 UTC · source: strategies_lab.yaml card P04-MACD-SUPERTREND-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-09
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 4, Trend momentum (MACD + Supertrend) - version V5
+  - URL: none recorded
+  - claim: A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend.
+  - derived hypothesis (tested): P04-MACD-SUPERTREND-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Lagging indicators: entries come after part of the move; many whipsaws when the trend is flat.
+  - test results: `memory/strategy_registry.csv` / report section 3

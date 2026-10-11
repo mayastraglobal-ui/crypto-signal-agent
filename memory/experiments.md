@@ -980,3 +980,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: a market_structure card (uses oi_chg(n)), compared with the same entry without the open-interest rule (a control). Long only after a fall of several ATR with oi_chg(24) below a threshold; first target at least 2R.
   - blocked on: the futures history is about 1081 hours (about 45 days), so there are only a handful of such days; a test now would have far fewer than 30 trades. Wait for longer history or a backfill.
   - stop if: fewer than 30 unseen-data trades, or the open-interest rule does not beat its control after costs.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0060 | 2026-10-11 00:58 | P02-EMA-PULLBACK-V4-S6@1.0 | mtf_pullback | 4h | The rule 'rsi(close,14) < 65 / rsi(close,14) > 100 - 65' adds nothing to P02-EMA-PULLBACK-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0061 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V1@1.0 | mtf_pullback | 4h | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
+| EXP-0062 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V2@1.0 | mtf_pullback | 1h, 30m, 15m | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
+| EXP-0063 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V3@1.0 | mtf_pullback | 4h | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
+| EXP-0064 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V4@1.0 | mtf_pullback | 4h | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
+| EXP-0065 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V1@1.0 | momentum | 4h | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
+| EXP-0066 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V2@1.0 | momentum | 1h, 30m, 15m | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
+| EXP-0067 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V3@1.0 | momentum | 4h | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
+| EXP-0068 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V4@1.0 | momentum | 4h | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
+| EXP-0069 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V5@1.0 | mtf_pullback | 1h, 30m, 15m | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
+| EXP-0070 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V5@1.0 | momentum | 1h, 30m, 15m | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |

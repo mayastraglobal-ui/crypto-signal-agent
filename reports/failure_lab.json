@@ -1,0 +1,29 @@
+{
+ "enabled": true,
+ "allowed": 1,
+ "considered": 83,
+ "new": [
+  {
+   "id": "P02-EMA-PULLBACK-V4-S6-FHTF",
+   "tag": "regime_mismatch",
+   "kind": "HTF",
+   "parent": "P02-EMA-PULLBACK-V4-S6@1.0|4h",
+   "evidence": "regime_mismatch in 77% of losses, n=180 losing trades (P02-EMA-PULLBACK-V4-S6@1.0 4h: 365 trades, avg +0.145R, BACKTESTING; trades with regime_mismatch -0.088R, without +0.722R); repair HTF: only when the higher timeframe trends the same way (htf_up / htf_down)"
+  }
+ ],
+ "pending": [],
+ "results": [],
+ "by_kind": {},
+ "by_tag": {},
+ "retired": [],
+ "settings": {
+  "enabled": true,
+  "per_run": 1,
+  "min_trades": 100,
+  "min_losers": 30,
+  "min_share": 0.25,
+  "near_miss_gross_r": 0.0,
+  "retire_after": 4,
+  "max_depth": 2
+ }
+}
