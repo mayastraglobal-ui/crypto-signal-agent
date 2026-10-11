@@ -828,5 +828,7 @@ Newest entries at the bottom. Format: date · who · what · why.
   sizes with it when it is lower (with a line under the alert).
 - Real check (11 Oct 16:00 UTC, OKX): BTC, SOL, ZEC, SUI at a 4H supply zone in a 4H downtrend, ETH above its 4H
   range, XRP in the upper part (90%) after a BOS up - the rally of 23:30 Beijing ran into 4H supply.
-- Tests: `tests/test_structure.py` (23).
+- Tests: `tests/test_structure.py` (23). `tests/test_risk.py` `test_size_never_follows_results` now checks that
+  losses can only LOWER the size (the brake) and never raise it, and that without the brake the size ignores results
+  - the "no increasing size after a loss" rule (AGENT_PROMPT.md section 15) is unchanged.
 

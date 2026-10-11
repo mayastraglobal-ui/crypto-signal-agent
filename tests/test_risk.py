@@ -208,7 +208,11 @@ class Sizing(unittest.TestCase):
         old = row(entry_time_utc="2026-08-01 08:00")
         losses = log(old, *[closed(-1.0, f"2026-09-{d:02d} 10:00", id=f"l{d}") for d in range(1, 20)])
         wins = log(old, *[closed(2.0, f"2026-09-{d:02d} 10:00", id=f"w{d}") for d in range(1, 20)])
-        self.assertEqual(RK.risk_pct(0.8, losses, NOW, S()), RK.risk_pct(0.8, wins, NOW, S()))
+        # 2026-10-11 drawdown brake (operator, the playbook's section 4): losses may only LOWER the size, never raise it
+        self.assertLessEqual(RK.risk_pct(0.8, losses, NOW, S())[0], RK.risk_pct(0.8, wins, NOW, S())[0])
+        self.assertLessEqual(RK.risk_pct(0.8, losses, NOW, S())[0], 0.8)
+        off = dict(S(), drawdown_brake_pct=0)                # without the brake, size ignores results entirely
+        self.assertEqual(RK.risk_pct(0.8, losses, NOW, off), RK.risk_pct(0.8, wins, NOW, off))
 
     def test_stops_only_move_towards_profit(self):
         rng = np.random.default_rng(1)
