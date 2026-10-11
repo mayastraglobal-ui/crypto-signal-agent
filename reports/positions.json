@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-11 10:18",
+ "generated_utc": "2026-10-11 11:17",
  "book": {
-  "utc": "2026-10-11 10:18",
-  "beijing": "2026-10-11 18:18",
+  "utc": "2026-10-11 11:17",
+  "beijing": "2026-10-11 19:17",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-11 10:18 UTC / 2026-10-11 18:18 Beijing",
+  "POSITION BOOK \u2014 2026-10-11 11:17 UTC / 2026-10-11 19:17 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC"
@@ -65,29 +65,29 @@
  "watching": [],
  "events_this_run": [
   {
-   "time_utc": "2026-10-11 10:18",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-11 09:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
+   "time_utc": "2026-10-11 11:17",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-11 10:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 109.49,
-   "note": "1h signal candle closed"
+   "price": 1.3911,
+   "note": "30m signal candle closed"
   },
   {
-   "time_utc": "2026-10-11 10:18",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-11 09:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
+   "time_utc": "2026-10-11 11:17",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-11 10:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 109.49,
+   "price": 1.3911,
    "note": ""
   }
  ]

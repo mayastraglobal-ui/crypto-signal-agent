@@ -1,9 +1,9 @@
 {
- "last_entry_utc": null,
+ "last_entry_utc": "2026-10-11 10:42",
  "days": 30,
  "all": {
-  "alerts": 0,
-  "took": 0,
+  "alerts": 1,
+  "took": 1,
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 0
+  "missing_result": 1
  },
  "recent": {
-  "alerts": 0,
-  "took": 0,
+  "alerts": 1,
+  "took": 1,
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
@@ -115,12 +115,21 @@
     "wins": 0
    }
   },
-  "missing_result": 0
+  "missing_result": 1
  },
- "per_strategy": [],
- "tests": {},
- "findings": [
-  "No alert in your journal yet."
+ "per_strategy": [
+  {
+   "cell": "P04-MACD-SUPERTREND-V5 30m",
+   "alerts": 1,
+   "took": 1,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
+  }
  ],
+ "tests": {},
+ "findings": [],
  "decisions": []
 }
