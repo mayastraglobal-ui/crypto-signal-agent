@@ -12570,3 +12570,25 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-11 02:00,ZEC,15m,FVG_FILLED,bull,,1226.63,1227.7,,Asia,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-11 02:00,XRP,30m,FVG_RETRACE,bear,,1.4013,1.4021,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-10-11 02:00,XRP,15m,FVG_RETRACE,bull,,1.3994,1.4002,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 02:30,BTC,30m,FVG_RETRACE,bull,,82992.01,83012.68,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 02:45,BTC,15m,BOS,bull,83106.59,,,0.254,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-11 02:45,BTC,15m,ORDER_BLOCK,bull,,83039.96,83082.01,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-11 02:45,BTC,15m,FVG_FILLED,bear,,83083.87,83118.0,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:00,BTC,15m,FVG,bull,,83082.01,83097.39,0.296,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:15,BTC,15m,OB_INVALID,bull,,83039.96,83082.01,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-11 03:15,BTC,15m,FVG_FILLED,bull,,82995.13,83012.68,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:15,BTC,15m,FVG_RETRACE,bull,,83082.01,83097.39,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:15,BTC,15m,FVG_FILLED,bull,,83082.01,83097.39,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 02:45,ETH,15m,FVG_FILLED,bear,,2511.42,2512.98,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-11 03:15,ETH,15m,FVG_RETRACE,bull,,2506.19,2507.12,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:15,ETH,15m,FVG_FILLED,bull,,2506.19,2507.12,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:15,ETH,15m,FVG_RETRACE,bull,,2507.13,2508.74,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:15,ETH,15m,FVG_FILLED,bull,,2507.13,2508.74,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:15,SOL,15m,WEAK_BREAK,bear,109.95,,,1.537,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-11 03:15,SOL,15m,OB_INVALID,bull,,109.72,109.94,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-11 02:30,ZEC,15m,FVG,bull,,1229.53,1232.28,0.635,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 02:45,ZEC,15m,FVG,bull,,1232.74,1235.12,0.552,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:00,ZEC,15m,FVG_RETRACE,bull,,1232.74,1235.12,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:15,ZEC,15m,FVG_RETRACE,bull,,1229.53,1232.28,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 03:15,ZEC,15m,FVG_FILLED,bull,,1229.53,1232.28,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 03:15,ZEC,15m,FVG_FILLED,bull,,1232.74,1235.12,,Asia,1h,COMPRESSION,,smc-1.0,Binance
