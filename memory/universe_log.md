@@ -564,3 +564,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-11 06:24 UTC
 - **EXCLUDED** BNB - 24h volume $20M < $50M
+
+## 2026-10-11 07:19 UTC
+- **JOIN** XRP - on your coin list and passes every rule (2 runs in a row)
+- **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
