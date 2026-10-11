@@ -994,3 +994,16 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0068 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V4@1.0 | momentum | 4h | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
 | EXP-0069 | 2026-10-11 00:58 | P03-FIB-PULLBACK-V5@1.0 | mtf_pullback | 1h, 30m, 15m | Inside a 4H + 1H trend, a retracement that holds the 61.8% level of the last swing leg is a pullback, not a reversal: the leg resumes. |
 | EXP-0070 | 2026-10-11 00:58 | P04-MACD-SUPERTREND-V5@1.0 | momentum | 1h, 30m, 15m | A fresh MACD momentum push in the direction of the Supertrend and of the 4H + 1H trend starts the next leg of the trend. |
+
+### Hypothesis: intraday momentum after a high-volume session (from Shen, Urquhart, Wang)
+- timestamp: 2026-10-11 04:00 UTC · source: Claude weekly research 2026-10-11 (https://research.birmingham.ac.uk/en/publications/bitcoin-intraday-time-series-momentum/) · evidence: HYPOTHESIS: derived from a peer-reviewed finding on bitcoin (first half-hour return predicts the last half-hour return; strongest when the first session has the highest volume or volatility) · confidence: low · strategy: none yet · asset: BTC, ETH · timeframe: 1h · regime: TRANSITION, COMPRESSION, WEAK_BULL, WEAK_BEAR · review: 2027-01-09
+  - hypothesis: after a 1h candle with very high relative volume (rel_vol well above 1.5) and a clear direction, the next hours continue in that direction more often than a plain trend rule says.
+  - how to test: a literature card on 1h (not 30m: costs), long after a high-volume green 1h candle, short mirrored, first target at least 2R, time stop of a few candles; compare with the same entry without the volume rule.
+  - blocked on: the literature quota and the lab limit (0 cards left today); the R4 queue is ahead of it.
+  - stop if: below +0.10R per trade after costs on unseen data, or the volume rule adds nothing.
+
+### Hypothesis: record the engine commit and data window with every test (from R8)
+- timestamp: 2026-10-11 04:00 UTC · source: Claude weekly research 2026-10-11 ([R8] https://github.com/microsoft/qlib, commit 54355232463878d2eebb91fe0ee5fa7fa1f5976c) · evidence: HYPOTHESIS: a process idea from Qlib's recorder (it logs the command, the commit and uncommitted code with each run) and our own problem (2026-10-10: many cells' trade counts fell at once, e.g. 4h breakout 1301 -> 871, and nobody could say why) · confidence: medium · strategy: all · asset: - · timeframe: - · regime: - · review: 2027-01-09
+  - hypothesis: if each row of memory/strategy_registry.csv also stores the engine commit and the last candle used, a sudden jump in a cell's trade count can be traced to a code change or a data change within one day.
+  - how to test: an engine change for the operator (pull request), not a lab card. Check after a month: every jump of more than 20% in a cell's trade count is explained by a commit or a data-window change.
+  - stop if: the extra columns explain nothing.
