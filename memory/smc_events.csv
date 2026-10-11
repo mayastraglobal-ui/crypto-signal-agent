@@ -12849,3 +12849,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-11 12:15,SUI,15m,CHOCH,bull,1.1012,,,0.639,NY AM,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
 2026-10-11 12:15,SUI,15m,ORDER_BLOCK,bull,,1.0865,1.0908,,NY AM,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
 2026-10-11 12:15,SUI,15m,FVG,bull,,1.0944,1.0971,0.664,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-11 13:00,BTC,1h,SWEEP,bear,83234.0,,,0.153,NY AM,4h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-11 12:30,BTC,30m,FVG,bull,,83090.16,83129.61,0.403,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 13:00,BTC,30m,FVG_RETRACE,bull,,83090.16,83129.61,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:30,BTC,15m,BREAKER_RETEST,bull,,83134.95,83210.01,,NY AM,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-11 12:30,BTC,15m,FVG_RETRACE,bull,,83064.01,83164.0,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:30,ETH,30m,FVG,bull,,2503.16,2505.79,0.583,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 13:00,ETH,30m,FVG_RETRACE,bull,,2503.16,2505.79,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:30,ETH,15m,FVG_RETRACE,bull,,2503.85,2506.57,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 13:15,ETH,15m,FVG_FILLED,bull,,2503.85,2506.57,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 12:30,SOL,30m,SWEEP,bear,109.81,,,0.192,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-11 12:30,SOL,15m,FVG_RETRACE,bull,,109.54,109.62,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:45,SOL,15m,FVG_FILLED,bull,,109.54,109.62,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-11 12:30,XRP,30m,FVG,bull,,1.3919,1.3942,0.659,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-11 13:00,XRP,30m,FVG_RETRACE,bull,,1.3919,1.3942,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:30,XRP,15m,FVG_RETRACE,bull,,1.3929,1.3943,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-11 12:30,SUI,30m,SWEEP,bear,1.1012,,,0.644,NY AM,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-11 12:30,SUI,30m,FVG,bull,,1.0938,1.0971,0.52,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-11 13:00,SUI,30m,WEAK_BREAK,bull,1.1012,,,0.173,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance

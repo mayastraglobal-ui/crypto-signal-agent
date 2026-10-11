@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-11 12:23",
+ "utc": "2026-10-11 13:19",
  "final": true,
  "rows": [],
  "promote": [],
@@ -9,8 +9,8 @@
  "refused": [],
  "ideas": [],
  "five_min": {
-  "confirmed_n": 0,
-  "confirmed_r": null,
+  "confirmed_n": 1,
+  "confirmed_r": -1.0,
   "all_n": 0,
   "all_gross_r": null,
   "by_strategy": [],
@@ -23,7 +23,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-11 12:23 UTC"
+   "text": "hourly scan: last run 2026-10-11 13:19 UTC"
   },
   {
    "ok": true,
@@ -31,7 +31,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-11 10:30 UTC (49 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-11 11:35 UTC (50 min ago)"
   },
   {
    "ok": true,
