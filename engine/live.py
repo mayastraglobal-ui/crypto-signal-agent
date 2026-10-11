@@ -112,6 +112,9 @@ def watch_text(a, wait_min=30):
         lines.append("Trend: " + " · ".join(f"{k.upper()} {v}" for k, v in a["regimes"].items()))
     if a.get("against"):
         lines.append(f"⚠️ Against the daily trend ({a['against']}) - context only")
+    card = a.get("structure") or {}
+    if len(card.get("lines") or []) >= 3:    # 🧭 the location line only (the alert carries the full card)
+        lines.append(card["lines"][2])
     lines += [f"Waiting up to {wait_min} min for a 5m candle to confirm. If it confirms, the 🔵 TEST alert follows "
               "with the size and the buttons.",
               "<i>Information only - not a trade signal. /watch off stops these notes.</i>"]
@@ -121,8 +124,9 @@ def watch_text(a, wait_min=30):
 def message(a):
     """Telegram text (HTML) of one alert (Forward Test Program layout, 2026-10-09). a = dict(label, coin, inst, d, tf,
     strategy, version, entry, R, tps, split, zone_r, size, risk_pct, max_hold, regimes, close_ms, sent_ms, confirm,
-    valid_bars, warnings; TEST alerts also: test (backtest on this coin), program, also, agree, against, weather,
-    market; PAPER / LIVE: same (other versions of this setup), test_agrees)."""
+    valid_bars, warnings, structure (the 🧭 card of engine/structure.py, optional); TEST alerts also: test (backtest
+    on this coin), program, also, agree, against, weather, market; PAPER / LIVE: same (other versions of this setup),
+    test_agrees)."""
     side = "LONG" if a["d"] == 1 else "SHORT"
     lab = a["label"]
     stop = a["entry"] - a["d"] * a["R"]
@@ -204,6 +208,10 @@ def message(a):
         lines.append(f"½ {w}")
     for w in a.get("warnings") or []:
         lines.append(f"⚠️ {w}")
+    card = a.get("structure") or {}
+    if card.get("lines"):                    # 🧭 2026-10-11: the 4H structure at the entry - information only
+        lines.append(SEP)
+        lines += card["lines"]
     lines.append(SEP)
     if LABEL_NOTE.get(lab):
         lines.append(f"<i>{LABEL_NOTE[lab]}</i>")
@@ -300,6 +308,7 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/watch on|off - 👀 watch notes: a TEST setup found, waiting for its 5m confirmation (information only)\n"
         "/shock on|off - ⚡ shock alarm: a sudden fall / rally, a volume spike or yesterday's high / low broken, "
         "within a minute (information only)\n"
+        "/structure - 🧭 the 4H structure of your coins (/structure BTC: trend, range, liquidity, zones)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
         "/review - the latest weekly review: TEST / PAPER results, what is ready for PAPER, the system check\n"

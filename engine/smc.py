@@ -94,7 +94,8 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
     df      : closed candles (open_time, close_time, open, high, low, close)
     feats   : engine.features.compute(df) (swings, ATR, displacement, consolidation)
     daily / weekly : closed 1D / 1W candles for PDH/PDL and PWH/PWL pools (optional)
-    Returns dict(events=[...], series=DataFrame of per-candle event flags + CONTEXT_COLUMNS, state=...)."""
+    Returns dict(events=[...], series=DataFrame of per-candle event flags + CONTEXT_COLUMNS, state=...,
+    liq_kind=dict(above=[...], below=[...]): the name of the nearest pool behind liq_above / liq_below per candle)."""
     s = settings(s)
     df = df.reset_index(drop=True)
     f = feats.reset_index(drop=True)
@@ -131,6 +132,7 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
             ctx[col] = kz == name
         ctx["in_killzone"] = kz != None      # noqa: E711 (element-wise on an object array)
     sweep_ext = {1: np.nan, -1: np.nan}
+    liq_kind = {"above": np.full(n, None, dtype=object), "below": np.full(n, None, dtype=object)}  # pool names
 
     def add(t, event, d, level=None, lo=None, hi=None, size=None, info=""):
         events.append(dict(t=int(t), time=int(ct[t]), event=event, dir=int(d),
@@ -317,10 +319,13 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
                 ctx[name + "_ob_low"][t], ctx[name + "_ob_high"][t] = act[-1]["low"], act[-1]["high"]
             ctx["in_" + name + "_ob"][t] = any(ob["born"] < t and l[t] <= ob["high"] and h[t] >= ob["low"]
                                                for ob in act)
-        up = [p["level"] for p in pools if p["side"] == 1 and p["level"] > c[t]]
-        dn = [p["level"] for p in pools if p["side"] == -1 and p["level"] < c[t]]
-        ctx["liq_above"][t] = min(up) if up else np.nan
-        ctx["liq_below"][t] = max(dn) if dn else np.nan
+        up = [p for p in pools if p["side"] == 1 and p["level"] > c[t]]
+        dn = [p for p in pools if p["side"] == -1 and p["level"] < c[t]]
+        pa = min(up, key=lambda p: p["level"]) if up else None
+        pb = max(dn, key=lambda p: p["level"]) if dn else None
+        ctx["liq_above"][t] = pa["level"] if pa else np.nan
+        ctx["liq_below"][t] = pb["level"] if pb else np.nan
+        liq_kind["above"][t], liq_kind["below"][t] = (pa or {}).get("kind"), (pb or {}).get("kind")
 
     # ---------- state at the newest candle ----------
     last = n - 1
@@ -355,4 +360,4 @@ def detect(df, feats, daily=None, weekly=None, tf_ms=None, s=None):
     series = pd.DataFrame(flags)
     for k in CONTEXT_COLUMNS:
         series[k] = ctx[k]
-    return dict(events=events, series=series, state=state)
+    return dict(events=events, series=series, state=state, liq_kind=liq_kind)

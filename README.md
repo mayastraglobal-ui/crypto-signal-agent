@@ -22,6 +22,8 @@ alert. Setup, step by step: on a Windows PC [`docs/WINDOWS_WATCHER.md`](docs/WIN
 `windows\1_setup.bat`), on a Linux server [`docs/LIVE_WATCHER.md`](docs/LIVE_WATCHER.md). What comes next: [`docs/ROADMAP.md`](docs/ROADMAP.md).
 Between candle closes it also checks every minute for sudden moves and sends an information-only ⚡ note (fast move,
 volume spike, yesterday's high / low broken): [`docs/SHOCK_ALARM.md`](docs/SHOCK_ALARM.md).
+Every alert also shows the 🧭 4H market structure at its entry (trend, liquidity, location at a zone or in the middle
+of the range) and `/structure` shows it any time - information only: [`docs/STRUCTURE_CARD.md`](docs/STRUCTURE_CARD.md).
 
 ## One-time setup (about 15 minutes, no coding)
 
@@ -588,6 +590,7 @@ decides whether the account may take a live trade **now** and how big it may be.
 | Path to TP1 | no opposing liquidity pool or support / resistance level before TP1 |
 | Duplicate | not while the same strategy / coin / timeframe is open or in its cooldown |
 | Size | account × risk% ÷ distance to the stop; risk 0.5% until 30 days after the first live entry, never above 1%; never more than 3x leverage (the position is made smaller instead) |
+| Drawdown brake | the live account 10% below its peak → 0.5% risk per trade until it is back at the peak (`drawdown_brake_pct`, the playbook's section 4) |
 
 An APPROVED signal that fails a rule is logged as **NO_TRADE** with the reason and is not emailed. Paper and
 validation signals are still logged in full (their record must stay comparable with the backtest); the

@@ -67,6 +67,7 @@ from engine import report_card as rcard
 from engine import risk as rk
 from engine import research as rs
 from engine import smc
+from engine import structure as stc
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
 from engine import universe as uni
@@ -327,6 +328,51 @@ def fear_greed(offline):
         return None
 
 
+DOMINANCE_FILE = "btc_dominance.json"
+
+
+def btc_dominance(offline, now):
+    """BTC dominance (BTC's share of the whole crypto market, CoinGecko's free /global) - the playbook's section 1
+    context. Every hourly reading is kept for 8 days in reports/btc_dominance.json so the 24h / 7d change can be shown.
+    Context only: no signal, rule or size reads it. Returns dict(pct, ch24, ch7, utc) or None."""
+    if offline:
+        return None
+    path = os.path.join(REPORTS, DOMINANCE_FILE)
+    try:
+        hist = json.load(open(path)) if os.path.exists(path) else []
+    except ValueError:
+        hist = []
+    try:
+        d = requests.get("https://api.coingecko.com/api/v3/global", timeout=15).json()["data"]
+        pct = float(d["market_cap_percentage"]["btc"])
+    except Exception as e:
+        log(f"BTC dominance not loaded ({type(e).__name__}) - shown from the last reading")
+        pct = None
+    now_txt = now.strftime("%Y-%m-%d %H:%M")
+    if pct is not None:
+        hist = [h for h in hist if h[0] != now_txt] + [[now_txt, round(pct, 3)]]
+    cut = (now - dt.timedelta(days=8)).strftime("%Y-%m-%d %H:%M")
+    hist = sorted(h for h in hist if h[0] >= cut)
+    try:
+        with open(path, "w") as f:
+            json.dump(hist, f)
+    except OSError:
+        pass
+    if not hist:
+        return None
+
+    def ago(hours):
+        """The reading closest to `hours` ago (within 3 hours), or None."""
+        want = now - dt.timedelta(hours=hours)
+        best = min(hist, key=lambda h: abs(pd.Timestamp(h[0]).to_pydatetime() - want.replace(tzinfo=None)))
+        gap = abs(pd.Timestamp(best[0]).to_pydatetime() - want.replace(tzinfo=None))
+        return best[1] if gap <= dt.timedelta(hours=3) else None
+    last = hist[-1]
+    a24, a7 = ago(24), ago(24 * 7)
+    return dict(pct=last[1], utc=last[0], ch24=None if a24 is None else round(last[1] - a24, 2),
+                ch7=None if a7 is None else round(last[1] - a7, 2))
+
+
 # =====================================================================
 # 2. INDICATORS + RULE LANGUAGE
 # =====================================================================
@@ -581,12 +627,12 @@ def load_derivs(offline, bases, now_ms):
     return {b: (h[h["coin"] == b], f[f["coin"] == b]) for b in bases}
 
 
-def market_weather(now, regimes, daily_hlc, derivs, snap, risk_out, fg, cfg, offline):
+def market_weather(now, regimes, daily_hlc, derivs, snap, risk_out, fg, cfg, offline, dom=None):
     """Upgrade 10: what kind of day it is (engine/weather.py) -> reports/market_weather.json (the live watcher's
     /weather, small enough for main) and .md. Explains only: no signal, gate, size or approval reads it."""
     try:
         w = wx.build(now, regimes, daily_hlc, derivs, snap, (risk_out or {}).get("upcoming_events"),
-                     (risk_out or {}).get("blackout_now"), fg, wx.settings(cfg.get("weather")))
+                     (risk_out or {}).get("blackout_now"), fg, wx.settings(cfg.get("weather")), dominance=dom)
     except Exception as e:                  # never let the explanation break the scan
         log(f"market weather not built ({type(e).__name__}: {e})")
         return None
@@ -1347,6 +1393,21 @@ def backtest_5m(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols
     return trades
 
 
+def structure_tag(src, signal_ms, entry, d, R, tps, S):
+    """🧭 The 4H location of a signal at its entry, as known at the newest 4H close up to the signal ("verdict;loc;
+    trend", engine/structure.py) - recorded for the weekly review, never used by a rule. '' when unknown."""
+    if not src or not S.get("enabled", True):
+        return ""
+    try:
+        res, df, atr = src
+        t = int(np.searchsorted(df["close_time"].to_numpy(), signal_ms, side="right")) - 1
+        snap = stc.snapshot(res, df, atr, t) if t >= 0 else None
+        return "" if snap is None else stc.card(snap, entry, d, R=R, tp1=tps[0] if tps else None, s=S)["tag"]
+    except Exception as e:                 # information only: a problem here never stops the scan
+        log(f"structure tag not built ({e})")
+        return ""
+
+
 def m5_arrays(frames):
     """The 5-minute protocol's input for one coin (None when there is no trustworthy 5m data)."""
     fr = frames.get("5m")
@@ -1383,10 +1444,11 @@ LOG_COLS = ["id", "signal_time_utc", "coin", "tf", "strategy", "direction", "ent
             "entry_type", "limit_bars",                                                     # step 2B limit entries
             "inval_level",                                                                  # step 3 invalidation
             "market_type",                                          # Forward Test Program: the market at the signal
-            "fees_r"]                                               # PR 3: fees + funding of a closed signal, in R
+            "fees_r",                                               # PR 3: fees + funding of a closed signal, in R
+            "structure_4h"]                                         # 🧭 4H location at the entry (verdict;loc;trend)
 TEXT_COLS = ["closed_time_utc", "version", "stage", "tp_split", "conditions", "regime_at_entry", "session", "tags",
              "state", "state_note", "entry_time_utc", "sim_tf", "confirm_5m_utc", "smc_5m", "close_reason",
-             "warnings", "next_action", "risk_blocks", "entry_type", "market_type"]
+             "warnings", "next_action", "risk_blocks", "entry_type", "market_type", "structure_4h"]
 EVENT_COLS = ["time_utc", "id", "coin", "tf", "strategy", "version", "stage", "from_state", "to_state", "price", "note"]
 
 
@@ -2085,7 +2147,8 @@ def risk_summary(logdf, now, RK, groups, pct, pct_note, calendar_problem, plans,
         if k not in suspended:
             transitions.append(dict(kind="end", what=k, text=f"{k} resumed (config.yaml -> risk -> resume)"))
     with open(state_path, "w") as f:
-        json.dump(dict(updated_utc=now.strftime("%Y-%m-%d %H:%M"), halts=halts, suspended=suspended), f, indent=1)
+        json.dump(dict(updated_utc=now.strftime("%Y-%m-%d %H:%M"), halts=halts, suspended=suspended,
+                       risk_pct=pct, risk_note=pct_note), f, indent=1)   # the watcher sizes with this % (brake)
     fmt_e = [dict(start_utc=fmt_ms(e[0]), end_utc=fmt_ms(e[1]), type=e[2], name=e[3]) for e in nxt]
     return dict(day_r=b.day_r, week_r=b.week_r, halts=halts, halts_text=[rk.STEPS[h] for h in halts],
                 suspended=suspended, drawdowns=b.dd, risk_pct=pct, risk_note=pct_note,
@@ -2398,6 +2461,8 @@ def main():
     dash_candles = {}                       # coin -> tf -> newest candles, for the dashboard charts (Phase 16)
     derivs_by_coin = load_derivs(args.offline, [u["base"] for u in coins], int(started.timestamp() * 1000))
     btc_by_tf = btc_frames(data, cfg["market"]["quote"], tfs)
+    ST = stc.settings(cfg.get("structure"))
+    struct_src = {}                         # coin -> (4H SMC result, candles, ATR) for the 🧭 location tag
     for u in coins:
         sym, base = u["symbol"], u["base"]
         try:                                # step 3: today's order flow (CVD) for the playbook strategies
@@ -2406,6 +2471,9 @@ def main():
             log(f"{base}: order flow not loaded ({e}) - CVD unknown this run")
             flow = None
         pc = prepare_coin(sym, base, data, quality, tfs, cfg, derivs_by_coin.get(base), btc_by_tf, flow)
+        fr_st = pc["frames"].get(ST["tf"])          # 🧭 the structure card's candles (information only)
+        if fr_st is not None and ST["tf"] in pc["smc"]:
+            struct_src[base] = (pc["smc"][ST["tf"]], fr_st["df"], fr_st["feats"]["atr"].to_numpy())
         m5 = m5_arrays(pc["frames"])
         if m5 is not None:
             m5_by_coin[base] = m5
@@ -2571,6 +2639,7 @@ def main():
             e50, e200 = c.ewm(span=50, adjust=False).mean().iloc[-1], c.ewm(span=200, adjust=False).mean().iloc[-1]
             btc[tf] = "UP" if c.iloc[-1] > e50 > e200 else "DOWN" if c.iloc[-1] < e50 < e200 else "SIDEWAYS"
     fg = fear_greed(args.offline)
+    dom = btc_dominance(args.offline, started)        # the playbook's BTC.D (context only)
 
     # ---------- risk engine settings (section 15; engine/risk.py) ----------
     calendar_problem = None
@@ -2661,6 +2730,7 @@ def main():
             confidence_score=round(shrunk + (0 if not against_btc else -0.05), 3), test=tst,
             market_type=scx.market_type(regimes.get(sgl["coin"], {}).get("timeframes"),
                                         regimes.get(sgl["coin"], {}).get("permission")),
+            structure_4h=structure_tag(struct_src.get(sgl["coin"]), int(sgl["signal_time"]), e, d, R, tps, ST),
             why=strat.get("logic", "").strip(), rules_met=strat["long" if d == 1 else "short"],
             exit_rule=strat.get("exit_long" if d == 1 else "exit_short"),
             context=dict(htf_trend="UP" if sgl["htf_up"] else "DOWN" if sgl["htf_down"] else "SIDEWAYS",
@@ -2716,7 +2786,7 @@ def main():
                    next_action="wait for the 5m bar" if p["confirm_5m"] else pos.next_action(pos.ACTIVE, []),
                    entry_type=p["entry_type"], limit_bars=p["limit_bars"] or np.nan,
                    inval_level=p.get("inval") if p.get("inval") is not None else np.nan,
-                   market_type=p.get("market_type") or "")
+                   market_type=p.get("market_type") or "", structure_4h=p.get("structure_4h") or "")
         if p["state"] == pos.AWAITING_FILL:
             row.update(entry_time_utc="", bars_5m=0,
                        state_note=f"limit order at {p['entry']:g}, valid {p['limit_bars']} {p['timeframe']} candles",
@@ -2935,7 +3005,7 @@ def main():
     out = dict(generated_utc=started.strftime("%Y-%m-%d %H:%M"),
                generated_beijing=started.astimezone(BJ).strftime("%Y-%m-%d %H:%M"),
                data_source=feed.name, coins_scanned=[c["base"] for c in coins],
-               market=dict(btc_trend=btc, fear_greed=fg), settings=dict(
+               market=dict(btc_trend=btc, fear_greed=fg, btc_dominance=dom), settings=dict(
                    account_usdt=acct, risk_pct=cfg["account"]["risk_per_trade_pct"],
                    fees=cfg["costs"], tp_r=tp["tp_r"], tp_split=tp["tp_split"]),
                position_book=book, position_book_text=book_text, risk=risk_out, watching=watching[:30],
@@ -2968,7 +3038,7 @@ def main():
                features_1h={b: feat_out["coins"].get(b, {}).get("1h") for b in view["signal"]},
                candle_evidence=ev_out, regime=rg_out, smc=smc_out)
     out["weather"] = market_weather(started, {b: regimes[b] for b in view["signal"] if b in regimes}, daily_hlc,
-                                    derivs_by_coin, snap, risk_out, fg, cfg, args.offline)
+                                    derivs_by_coin, snap, risk_out, fg, cfg, args.offline, dom)
     json.dump(out, open(os.path.join(REPORTS, "latest.json"), "w"), indent=1, default=float)
     out["storage"] = storage_info(args.offline)          # measured after latest.json exists
     md = render_md(out, cfg)

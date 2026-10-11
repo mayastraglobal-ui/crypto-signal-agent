@@ -362,6 +362,8 @@ risk:                        # the risk engine (AGENT_PROMPT.md section 15) - on
   min_tp1_r: 2.0             # section 14 step 9: reward to TP1 at least 2R (never widen the stop for it)
   max_risk_pct: 1.0          # account.risk_per_trade_pct is capped here ...
   first_month_risk_pct: 0.5  # ... and at 0.5% until 30 days after the first live entry
+  drawdown_brake_pct: 10     # 2026-10-11 (playbook section 4): the LIVE account 10% below its peak ...
+  drawdown_brake_risk_pct: 0.5   # ... -> 0.5% risk per trade until it is back at the peak (0 = brake off)
   max_leverage: 3            # never more than 3x: the position is made smaller instead
   calendar_horizon_days: 7   # the report lists the events of the next 7 days (it warns only when no future event is listed)
   resume: {}                 # resume a SUSPENDED strategy: "id@version|tf": "YYYY-MM-DD" (its drawdown then
@@ -453,6 +455,15 @@ shock_alarm:                 # ⚡ 2026-10-10 (operator: "tell me when the marke
   cooldown_min: 30           # one note per coin in 30 minutes, unless the move doubles ("getting bigger")
   wave_min: 15               # same direction within 15 min of a note = the same wave (logged), unless 2+ coins join
   max_per_day: 8             # at most 8 notes a Beijing day (the rest are only logged); held by /pause
+
+structure:                   # 🧭 structure card (operator request 2026-10-11, the playbook's section 2): the 4H market
+                             # structure (BOS / CHoCH, dealing range, liquidity pools, order blocks, FVGs) at the entry
+                             # of every alert, /structure in Telegram, and the "structure_4h" column of the signals log
+                             # for the weekly review. INFORMATION ONLY - it never makes, blocks or changes an alert.
+  enabled: true
+  tf: 4h
+  near_atr: 0.25             # "at a zone" = inside an active order block / open fair value gap or within 0.25 ATR of it
+  middle: [0.35, 0.65]       # dealing-range position 35% - 65% = the middle of the range (no edge)
 
 weekly_review:               # Forward Test Program PR 3 - engine/weekly_review.py, reports/weekly_review.md (hourly;
                              # final on Sunday from 04:00 UTC, then the live watcher sends it to Telegram)

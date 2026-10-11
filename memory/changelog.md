@@ -805,3 +805,30 @@ Newest entries at the bottom. Format: date · who · what · why.
   BNB $22M in 24h (7-day $53M) does not - it stays research only until it passes 2 runs in a row.
 - Tests: `tests/test_universe.py` `OwnCoins`.
 
+## 2026-10-11 · Operator + Claude · 🧭 Structure card, BTC dominance, drawdown brake (the playbook's sections 1, 2, 4)
+- Operator: "build structure card" after comparing the agent with the Crypto Trading Playbook (9 Oct). Information
+  and safety only: no strategy, gate, cost, trials bar or alert rule changes.
+- New `engine/structure.py`: `snapshot` rebuilds the 4H structure known at a candle close from `engine/smc.py`'s
+  events and series (trend = last BOS / CHoCH, dealing range, nearest liquidity above / below with its kind, active
+  order blocks and open fair value gaps); `place` / `verdict` / `card` give the location at an entry (demand / supply
+  zone within 0.25 ATR, discount / middle / premium / above / below the range -> good / middle / against / outside /
+  unknown for the direction), the room to the opposing pool in R and whether it sits before TP1; `overview` for
+  /structure; `review` for the weekly review. `engine/smc.py` also returns `liq_kind` (the pool names behind
+  liq_above / liq_below) - no existing output changed.
+- `live_watcher.py`: `keep_structure` after each prepare, `structure_card` on every alert (recomputed at the 5m
+  confirmation entry; any error = the alert goes without it), `/structure [COIN]`. `engine/live.py`: the card under
+  the plan, the location line in the 👀 note, HELP.
+- `scanner.py`: `structure_tag` -> new signals-log column `structure_4h` ("verdict;loc;trend", the newest 4H close
+  up to the signal). `engine/weekly_review.py` `location_part`: "🧭 Location at the entry" section + a Telegram line.
+- BTC dominance: `scanner.btc_dominance` (CoinGecko /global, hourly, 8 days in `reports/btc_dominance.json`) ->
+  `engine/weather.py` `dominance_read` (the playbook's BTC + BTC.D table) in /weather and the market-weather report.
+- Drawdown brake: `engine/risk.py` `drawdown_brake` / `risk_pct` (closed LIVE trades as account %; ON at 10% below
+  the peak, OFF back at the peak; 0.5% meanwhile), `config.yaml` `risk.drawdown_brake_pct: 10`,
+  `drawdown_brake_risk_pct: 0.5`. `risk_state.json` now carries `risk_pct` / `risk_note`; the watcher downloads it and
+  sizes with it when it is lower (with a line under the alert).
+- Real check (11 Oct 16:00 UTC, OKX): BTC, SOL, ZEC, SUI at a 4H supply zone in a 4H downtrend, ETH above its 4H
+  range, XRP in the upper part (90%) after a BOS up - the rally of 23:30 Beijing ran into 4H supply.
+- Tests: `tests/test_structure.py` (23). `tests/test_risk.py` `test_size_never_follows_results` now checks that
+  losses can only LOWER the size (the brake) and never raise it, and that without the brake the size ignores results
+  - the "no increasing size after a loss" rule (AGENT_PROMPT.md section 15) is unchanged.
+
