@@ -5,13 +5,16 @@
   "SOL",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "XRP": 1,
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {
   "STRK": "2026-10-11",
   "MAGIC": "2026-10-11"
  },
- "runs": 368,
+ "runs": 369,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,7 +29,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [],
+  "BNB": [
+   "volume_24h"
+  ],
   "UNI": [],
   "SUI": [],
   "AVAX": [],

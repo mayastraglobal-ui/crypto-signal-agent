@@ -561,3 +561,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-11 03:20 UTC
 - **LEAVE** XRP - not eligible: 24h volume below $50M or no longer listed
+
+## 2026-10-11 06:24 UTC
+- **EXCLUDED** BNB - 24h volume $20M < $50M
