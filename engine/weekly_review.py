@@ -28,6 +28,8 @@ import math
 import numpy as np
 import pandas as pd
 
+from engine import structure as stc
+
 DEFAULTS = dict(promote_min_trades=10, promote_min_avg_r=0.0, paper_max=5, demote_min_trades=10,
                 demote_below_r=0.0, idea_min_trades=10, idea_market_below_r=-0.20, idea_fee_gap_r=0.15,
                 idea_5m_gap_r=0.20)
@@ -239,7 +241,17 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                 demoted=demoted or [], refused=refused or [], ideas=ideas(rows, journal, S),
                 five_min=five_min(rows, journal), system=system_check(now, research_runs, scan_utc, program, journal,
                                                                       rows, watcher),
-                totals=totals(rows), failure_lab=failure_part(failure_lab), shocks=shocks or None, settings=S)
+                totals=totals(rows), failure_lab=failure_part(failure_lab), shocks=shocks or None,
+                location=location_part(logdf), settings=S)
+
+
+def location_part(logdf):
+    """🧭 Closed TEST / PAPER setups by their 4H location at the entry (structure_4h, engine/structure.py) - is a
+    setup at a fitting zone better than one in the middle of the range? Information for later, never a rule."""
+    if logdf is None or logdf.empty or "structure_4h" not in logdf:
+        return []
+    d = logdf[logdf["stage"].isin(LIVE_STAGES) & (logdf["status"] != "OPEN")].dropna(subset=["result_r"])
+    return stc.review(d[["structure_4h", "result_r"]].to_dict("records"))
 
 
 def failure_part(fl):
@@ -395,6 +407,11 @@ def render(rv):
     L += ["", "## ⚡ Shock alarm (sudden moves between candle closes, information only)", ""] + (
         [f"- {x}" for x in sv["lines"]] if sv and sv.get("lines") else
         ["- no shock log on GitHub yet (the live watcher writes journal/shocks.csv; it needs journal sync)"])
+    loc = rv.get("location") or []
+    L += ["", "## 🧭 Location at the entry (4H structure, information only)", ""] + (
+        [f"- {x['text']}: {x['n']} setup(s), {x['avg_r']:+.2f}R a trade after fees, {x['wins']} won" for x in loc]
+        + ["- a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule"]
+        if loc else ["- no closed setup with a recorded location yet (recorded from 2026-10-12)"])
     L += ["", "## Every live strategy / version / coin", "",
           "| Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |",
           "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
@@ -439,5 +456,8 @@ def telegram(rv):
         L += ["", f"⚡ Shocks: {sv['n']} this week ({sv['sent']} sent)"
                   + (f" · 4h later {sv['kept']} kept going, {sv['reversed']} reversed" if sv.get("done") else "")
                   + f" · a strategy alert followed {sv['caught']}"]
+    loc = rv.get("location") or []
+    if loc:
+        L += ["", "🧭 By 4H location: " + " · ".join(f"{x['verdict']} {x['n']} ({x['avg_r']:+.2f}R)" for x in loc)]
     L.append("\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>")
     return "\n".join(L)

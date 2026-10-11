@@ -70,6 +70,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/trades` | The trades you took that it is following, and your results of the last 30 days |
 | `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
 | `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
+| `/structure` · `/structure BTC` | 🧭 the 4H market structure of your coins: trend and last break, where price is in the 4H range, the nearest liquidity and supply / demand zones (information only, see "Structure card" below) |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
 | `/shock on` · `/shock off` | ⚡ shock alarm on or off: a sudden fall / rally, a volume spike or yesterday's high / low broken, within about a minute (information only, see "Shock alarm" below) |
@@ -230,6 +231,18 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 - `/shock off` stops them, `/pause` holds them; held shocks are still logged.
 - Each shock is saved 4 hours later in `journal\shocks.csv` (with what price did after 1h and 4h). With journal sync
   it reaches GitHub and the Sunday review shows "⚡ Shock alarm". Details: `docs/SHOCK_ALARM.md`.
+
+## Structure card 🧭 (2026-10-11)
+
+- Under every alert, 3 lines show the **4H market structure** at the entry: the direction of the last break of
+  structure (and whether it agrees with the alert), the nearest liquidity above and below (in R, with a ⚠️ when a
+  pool sits before TP1), and the **location**: ✅ at a fitting 4H zone or range edge, ⚠️ middle of the range or
+  against the direction, ℹ️ a breakout outside the range. The 👀 watch note shows the location line.
+- It answers the playbook's checklist box "price at a marked 4H zone, not in the middle of nowhere". **Information
+  only:** the strategies make the alerts exactly as before.
+- `/structure` (all coins) or `/structure SOL` (one coin's levels) any time.
+- GitHub records each setup's location; the Sunday review compares the results by location. Details:
+  `docs/STRUCTURE_CARD.md`.
 
 ## Good to know
 

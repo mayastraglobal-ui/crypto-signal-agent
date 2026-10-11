@@ -179,7 +179,29 @@ def _when(start_utc, now):
     return (t - now).total_seconds() / 3600
 
 
-def build(now, regimes, daily, derivs, snap, events, blackout_now=None, fear_greed=None, s=None):
+def dominance_read(dom, btc_change_24h, flat=0.2):
+    """The playbook's section 1 table: BTC dominance (BTC.D) with BTC's price, 24 hours. dom = dict(pct, ch24, ch7)
+    (scanner.btc_dominance). Returns the dict with 'read' added, or None. Context only."""
+    if not dom or dom.get("pct") is None:
+        return None
+    out = dict(dom)
+    ch, px = dom.get("ch24"), btc_change_24h
+    if ch is None or px is None:
+        out["read"] = "no 24h comparison yet (it needs a day of readings)"
+    elif abs(ch) < flat:
+        out["read"] = "BTC.D flat - no clear rotation between BTC and the altcoins"
+    elif px >= 0 and ch < 0:
+        out["read"] = "BTC up + BTC.D down: money rotating into altcoins (alt longs favored)"
+    elif px < 0 and ch > 0:
+        out["read"] = "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
+    elif px >= 0:
+        out["read"] = "BTC up + BTC.D up: BTC leads, altcoins lag"
+    else:
+        out["read"] = "BTC down + BTC.D down: altcoins falling less than BTC"
+    return out
+
+
+def build(now, regimes, daily, derivs, snap, events, blackout_now=None, fear_greed=None, s=None, dominance=None):
     """now = aware UTC datetime; regimes = {coin: dict(timeframes, permission, permission_reason)} (scanner);
     daily = {coin: (high, low, close)} closed 1D candles; derivs = {coin: (hourly rows, funding rows)};
     snap = {coin: dict(price, change_24h, ...)}; events = risk upcoming_events [dict(start_utc, type, name)]."""
@@ -228,7 +250,8 @@ def build(now, regimes, daily, derivs, snap, events, blackout_now=None, fear_gre
     breadth = {k: sum(x["verdict"] == k for x in coins) for k in ("UP", "DOWN", "RANGE", "CHOPPY")}
     w = dict(utc=now.strftime("%Y-%m-%d %H:%M"), verdict=dict(code=code, icon=icon, title=title, meaning=meaning,
                                                               fits=fits, avoid=avoid),
-             breadth=breadth, coins=coins, alts_vs_btc_24h=lead, fear_greed=fear_greed or None, events=soon,
+             breadth=breadth, coins=coins, alts_vs_btc_24h=lead, fear_greed=fear_greed or None,
+             btc_dominance=dominance_read(dominance, btc["change_24h"] if btc else None), events=soon,
              blackout_now=list(blackout_now or []), warnings=warnings, settings=s,
              note="Explains the market. It never creates a signal and never changes a rule, a size or an approval.")
     w["telegram"] = telegram(w)
@@ -285,6 +308,11 @@ def telegram(w):
                        + ")")
     if w.get("alts_vs_btc_24h") is not None:
         out.append(f"Altcoins vs BTC (24h): {_pct(w['alts_vs_btc_24h'])}")
+    dm = w.get("btc_dominance") or {}
+    if dm.get("pct") is not None:
+        ch = "".join(f" · {n} {dm[k]:+.2f} pt" for n, k in (("24h", "ch24"), ("7d", "ch7")) if dm.get(k) is not None)
+        out.append(f"BTC dominance: {dm['pct']:.1f}%{ch}")
+        out.append(f"   {dm['read']}")
     fg = w.get("fear_greed") or {}
     if fg.get("value") is not None:
         out.append(f"Mood (Fear & Greed): {fg.get('label') or ''} {fg['value']}".rstrip())
@@ -325,6 +353,11 @@ def md_lines(w):
                    + (")" if cr["funding_pct"] is not None else ""))
     if w.get("alts_vs_btc_24h") is not None:
         out.append(f"- altcoins vs BTC (24h, median): {_pct(w['alts_vs_btc_24h'])}")
+    dm = w.get("btc_dominance") or {}
+    if dm.get("pct") is not None:
+        out.append(f"- BTC dominance (CoinGecko): {dm['pct']:.2f}%"
+                   + (f", 24h {dm['ch24']:+.2f} pt" if dm.get("ch24") is not None else "")
+                   + (f", 7d {dm['ch7']:+.2f} pt" if dm.get("ch7") is not None else "") + f" - {dm['read']}")
     out += [f"- event: {e['name']} {e['start_utc']} UTC" for e in w.get("events") or []]
     out += [f"- warning: {x}" for x in w.get("warnings") or []]
     out.append(f"- {w['note']}")

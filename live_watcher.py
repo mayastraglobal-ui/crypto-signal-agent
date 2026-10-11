@@ -39,6 +39,7 @@ import argparse
 import base64
 import csv
 import datetime as dt
+import html
 import json
 import os
 import subprocess
@@ -64,6 +65,7 @@ from engine import live as lv
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
 from engine import shock as shk
+from engine import structure as stc
 from engine import signal_center as scx
 from engine import manage as mg
 from engine import risk as rk
@@ -93,13 +95,15 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("main", "reports/market_weather.json"), ("main", "reports/program.json"),
+              ("main", "reports/risk_state.json"),
               ("main", "reports/weekly_review.json"), ("main", "reports/promotions_state.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
               "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
-              "engine/weekly_review.py", "engine/shock.py"]    # changed -> "run update.bat"
+              "engine/weekly_review.py", "engine/shock.py", "engine/smc.py",
+              "engine/structure.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -533,6 +537,7 @@ class Watcher:
         self.next_shock_ms = 0
         self._shock_err = None
         self._h1_ctx = {}         # (coin, hour) -> the shock context of that hour
+        self.struct = {}          # coin -> 🧭 the newest 4H structure snapshot + price (for /structure)
         self.reload()
 
     # ---- configuration, strategy statuses, coins ----
@@ -545,6 +550,7 @@ class Watcher:
         self.dq_cfg = dq.settings(self.cfg.get("data_quality"))
         self.S5 = c5m.settings(self.cfg.get("confirm_5m"))
         self.SH = shk.settings(self.cfg.get("shock_alarm"))
+        self.ST = stc.settings(self.cfg.get("structure"))
         try:
             self.RK = rk.settings(self.cfg.get("risk"), (self.cfg.get("events") or [])
                                   + rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE)))
@@ -740,6 +746,7 @@ class Watcher:
             except Exception as e:
                 log(f"{coin}: prepare failed: {e}")
                 continue
+            self.keep_structure(coin, pc, now_ms)
             alerts += self.signals(coin, pc, quality, b, closed, now_ms)
             alerts += self.confirmations(coin, pc, now_ms)
         return alerts
@@ -1014,6 +1021,8 @@ class Watcher:
                        f"{self.SC['max_per_day']} a day, each confirmed by a 5m candle. " if on else
                        "GitHub still records every TEST setup for the weekly review. ")
                     + ("/tests off to stop them." if on else "/tests on to switch them on."))
+        if cmd == "structure":
+            return self.structure_text(arg, now_ms)
         if cmd == "weather":
             try:
                 with open(os.path.join(ROOT, "reports", "market_weather.json"), encoding="utf-8") as f:
@@ -1273,6 +1282,7 @@ class Watcher:
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
+            base["structure"] = self.structure_card(coin, d, entry, float(R), [float(x) for x in tps])
             if label == "TEST":
                 prog = s.get("program") or {}
                 base.update(test=stats, program=dict(name=prog.get("name"), version=prog.get("version")),
@@ -1300,6 +1310,65 @@ class Watcher:
             else:
                 out.append(self._finish(a, now_ms))
         return out
+
+    # ---- 🧭 structure card (2026-10-11): information only, never changes an alert ----
+    def keep_structure(self, coin, pc, now_ms):
+        """Remember the coin's newest 4H structure (engine/structure.py) after each prepare. Never raises."""
+        if not self.ST.get("enabled", True):
+            return
+        try:
+            tf = self.ST["tf"]
+            fr, res = pc["frames"].get(tf), (pc.get("smc") or {}).get(tf)
+            if fr is None or res is None:
+                return
+            snap = stc.snapshot(res, fr["df"], fr["feats"]["atr"].to_numpy())
+            if snap is None:
+                return
+            last = [f["df"] for f in pc["frames"].values() if f is not None and len(f["df"])]
+            newest = max(last, key=lambda df: int(df["close_time"].iloc[-1])) if last else fr["df"]
+            self.struct[coin] = dict(snap=snap, price=float(newest["close"].iloc[-1]),
+                                     price_ms=int(newest["close_time"].iloc[-1]) + 1, ms=now_ms)
+        except Exception as e:                       # the card is a convenience: alerts never wait for it
+            log(f"{coin}: structure card not built ({e})")
+
+    def structure_card(self, coin, d, entry, R, tps):
+        """The card of one alert (or None): 3 lines under the plan + its location tag."""
+        k = self.struct.get(coin)
+        if not k or not self.ST.get("enabled", True):
+            return None
+        try:
+            return stc.card(k["snap"], entry, d, R=R, tp1=tps[0] if tps else None, s=self.ST)
+        except Exception as e:
+            log(f"{coin}: structure card not built ({e})")
+            return None
+
+    def structure_text(self, arg, now_ms):
+        """/structure [COIN]: one coin's 4H picture, or one line per watched coin."""
+        if not self.ST.get("enabled", True):
+            return "🧭 The structure card is switched off in config.yaml (structure: enabled: false)."
+        coin = (arg or "").strip().upper().replace("-USDT-SWAP", "").replace("USDT", "")
+        if not self.struct:
+            return "🧭 No structure yet - it is read at the next market check (within 15 minutes). Try again soon."
+        if coin:
+            k = self.struct.get(coin)
+            if not k:
+                return f"🧭 I don't watch {html.escape(coin)}. Coins: " + ", ".join(sorted(self.struct))
+            out = stc.overview(k["snap"], k["price"], coin, self.ST)
+            return "\n".join(out + [f"Price from the {lv.bj(k['price_ms'])} close."])
+        names = {"demand": "at a demand zone", "supply": "at a supply zone", "discount": "lower part",
+                 "premium": "upper part", "middle": "middle", "above": "above the range", "below": "below the range",
+                 "unknown": "no range yet"}
+        lines = ["🧭 <b>4H structure</b> (last 4H close)"]
+        for c in self.coins:
+            k = self.struct.get(c)
+            if not k:
+                continue
+            loc, _, pos = stc.place(k["snap"], k["price"], self.ST)
+            tr = k["snap"].get("trend")
+            lines.append(f"{c}: {'UP' if tr == 1 else 'DOWN' if tr == -1 else 'no trend'} · {names[loc]}"
+                         + ("" if pos is None or not 0 <= pos <= 1 else f" ({pos * 100:.0f}%)"))
+        lines.append("/structure BTC for one coin's levels. Information only.")
+        return "\n".join(lines)
 
     def merge_same(self, alerts):
         """2026-10-11: PAPER / LIVE alerts of one pass for the same coin, direction and label are ONE trade (e.g. the
@@ -1402,6 +1471,7 @@ class Watcher:
                          confirm=f"CONFIRMED on the {lv.bj(int(m5['close_time'][j]) + 1)} 5m bar close"
                          + (f" ({', '.join(res['smc'])})" if res["smc"] else ""))
                 a["tps"] = [a["entry"] + (tp - p["entry"]) for tp in p["tps"]]   # same distances from the 5m entry
+                a["structure"] = self.structure_card(coin, a["d"], a["entry"], a["R"], a["tps"]) or p.get("structure")
                 out.append(self._finish(a, now_ms))
             else:
                 log(f"{coin} {p['tf']} {p['strategy']}: 5m {res['state']} - {res['why']}")
@@ -1426,6 +1496,14 @@ class Watcher:
             warn.append(f"reward to TP1 below {RK.get('min_tp1_r', 2.0):g}R")
         pct = float(self.cfg["account"]["risk_per_trade_pct"])
         notes = []
+        gh = self._json("reports/risk_state.json") or {}          # GitHub's risk %: first live month, drawdown brake
+        try:
+            gp = float(gh["risk_pct"]) if gh.get("risk_pct") is not None else None
+        except (TypeError, ValueError):
+            gp = None
+        if gp is not None and 0 < gp < pct:
+            pct = gp
+            warn.append(f"risk {gp:g}% - {gh.get('risk_note') or 'GitHub risk engine'}")
         if pbook:
             warn += self.pb_limits(now_ms, PB)
             fac, notes = self.pb_size(PB, a)

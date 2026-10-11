@@ -38,6 +38,8 @@ DEFAULTS = dict(
     max_risk_pct=1.0,             # section 15: never above 1%
     first_month_risk_pct=0.5,     # 0.5% while validating and in the first live month
     first_month_days=30,
+    drawdown_brake_pct=10.0,      # 2026-10-11 (the playbook's section 4): the live account 10% below its peak ...
+    drawdown_brake_risk_pct=0.5,  # ... -> 0.5% risk per trade until it is back at the peak
     max_leverage=3.0,
     calendar_horizon_days=7,      # events of the coming 7 days are listed; warn only when no future event exists
     resume={},                    # "id@version|tf": "YYYY-MM-DD" - operator resumes a suspended strategy
@@ -264,7 +266,40 @@ def risk_pct(cfg_pct, logdf, now, S):
         if pct > S["first_month_risk_pct"]:
             notes.append(f"first live month: {S['first_month_risk_pct']:g}% maximum")
             pct = S["first_month_risk_pct"]
+    brake = drawdown_brake(logdf, pct, S)
+    if brake["on"] and pct > S["drawdown_brake_risk_pct"]:
+        notes.append(f"drawdown brake: the live account is {brake['dd_pct']:.1f}% below its peak - "
+                     f"{S['drawdown_brake_risk_pct']:g}% until it is back at the peak")
+        pct = S["drawdown_brake_risk_pct"]
     return pct, "; ".join(notes)
+
+
+def drawdown_brake(logdf, pct, S):
+    """The playbook's drawdown brake (section 4): walk the closed LIVE trades in time order as account % (each
+    result in R x the risk % used then: pct, or the brake's lower % while the brake was on). The brake goes ON
+    when the account is drawdown_brake_pct below its peak and OFF again only back at the peak.
+    Returns dict(on, dd_pct, peak_pct, now_pct) - all 0 / False without closed live trades."""
+    out = dict(on=False, dd_pct=0.0, peak_pct=0.0, now_pct=0.0)
+    lim, low = float(S.get("drawdown_brake_pct") or 0), float(S.get("drawdown_brake_risk_pct") or pct)
+    if lim <= 0:
+        return out
+    live = _live(logdf)
+    if live.empty or "result_r" not in live or "state" not in live:
+        return out
+    done = _closed_r(live)
+    if "closed_time_utc" in done:
+        done = done.assign(_t=done["closed_time_utc"].astype(str)).sort_values("_t", kind="stable")
+    eq, peak, on = 0.0, 0.0, False
+    for r in done["result_r"].astype(float):
+        eq += r * (min(low, pct) if on else pct)
+        peak = max(peak, eq)
+        dd = (peak - eq) / (100 + peak) * 100
+        if dd >= lim:
+            on = True
+        elif eq >= peak:
+            on = False
+    return dict(on=on, dd_pct=round((peak - eq) / (100 + peak) * 100, 2), peak_pct=round(peak, 2),
+                now_pct=round(eq, 2))
 
 
 def size(equity, pct, entry, stop, max_leverage):
