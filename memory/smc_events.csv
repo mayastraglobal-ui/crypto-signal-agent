@@ -12803,3 +12803,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-11 08:45,ZEC,15m,FVG_FILLED,bear,,1230.63,1233.7,,London,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-11 09:00,ZEC,15m,FVG,bull,,1229.41,1231.12,0.372,London,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-11 09:15,ZEC,15m,SWEEP,bear,1242.25,,,0.577,,1h,COMPRESSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-11 09:30,ETH,30m,FVG_RETRACE,bear,,2502.89,2504.31,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-11 09:30,ETH,30m,FVG_FILLED,bear,,2502.89,2504.31,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 09:30,XRP,15m,FVG_FILLED,bull,,1.3941,1.3947,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-11 10:00,ZEC,1h,SWEEP,bear,1242.25,,,0.261,,4h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-11 09:30,ZEC,30m,SWEEP,bear,1242.25,,,0.393,,1h,COMPRESSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-11 09:30,ZEC,30m,FVG,bull,,1229.41,1232.62,0.449,,1h,COMPRESSION,,smc-1.0,Binance
