@@ -242,17 +242,77 @@ class LogOnlyChanges(unittest.TestCase):
         self.assertEqual(ev, [])
 
 
+class OwnCoins(unittest.TestCase):
+    """"Your coins only" (operator decision 2026-10-11): only the operator's coins give signals, each one that passes
+    every rule, liquidity measured on OKX perpetuals."""
+    OWN = ["BTC", "ETH", "SOL", "BNB", "XRP", "ZEC", "SUI"]
+
+    def run_(self, st, eligible, others=("STRK", "MAGIC", "UNI", "AAA")):
+        return uni.own_membership(st, self.OWN, set(eligible), list(others), U, {"BNB": ["24h volume $22M < $50M"]},
+                                  set(self.OWN) | set(others))
+
+    def test_a_stranger_never_joins_however_much_it_trades(self):
+        st, ev, view = self.run_(uni.empty_state(), {"BTC", "ETH", "SOL", "XRP", "ZEC", "SUI", "STRK"})
+        self.assertEqual(view["signal"], ["BTC", "ETH", "SOL", "XRP", "ZEC", "SUI"])        # first run: at once
+        self.assertNotIn("STRK", view["signal"])
+        self.assertEqual(view["research_only"], ["BNB", "STRK", "MAGIC", "UNI"])           # backtested only
+        self.assertEqual(view["empty_slots"], 1)
+        st2, _, _ = uni.update_membership(uni.empty_state(), ["STRK", "BTC", "ETH"], U, ALWAYS)
+        self.assertIn("STRK", st2["members"])                    # the old rule would have let it in
+        st3, ev3, view3 = self.run_(st2, {"BTC", "ETH", "STRK"})
+        self.assertNotIn("STRK", view3["signal"])
+        self.assertIn(dict(coin="STRK", action="LEAVE", why="not on your coin list (universe.own_coins)"), ev3)
+
+    def test_a_rule_break_leaves_at_once_and_rejoins_after_two_runs(self):
+        all7 = set(self.OWN)
+        st, _, _ = self.run_(uni.empty_state(), all7)
+        st, ev, view = self.run_(st, all7 - {"BNB"})
+        self.assertNotIn("BNB", view["signal"])
+        self.assertIn(dict(coin="BNB", action="LEAVE", why="not eligible: 24h volume $22M < $50M"), ev)
+        st, ev, view = self.run_(st, all7)
+        self.assertEqual(view["waiting"], {"BNB": 1})                                       # not flapping hourly
+        self.assertNotIn("BNB", view["signal"])
+        st, ev, view = self.run_(st, all7)
+        self.assertEqual(view["signal"], self.OWN)                                          # back, in list order
+        self.assertEqual(ev, [dict(coin="BNB", action="JOIN", why="on your coin list and passes every rule (2 runs "
+                                                                  "in a row)")])
+        st, _, view = self.run_(st, all7 - {"SUI"})
+        st, _, view = self.run_(st, all7)
+        st, _, view = self.run_(st, all7 - {"SUI"})
+        self.assertEqual(view["waiting"], {})                                               # the streak restarts
+
+    def test_liquidity_from_okx_perpetuals(self):
+        m = uni.measure(dict(base="XRP", quote_volume=45e6, change_pct=1.0), pd.DataFrame(
+            dict(close=np.geomspace(0.2, 2, 400), volume=np.full(400, 2e7))), (1.0, 1.0001), None, U)
+        okx = uni.apply_venue(m, dict(vol_24h=101e6, vol_7d_avg=293e6, spread_pct=0.007, depth_bid_usdt=6.6e6,
+                                      depth_ask_usdt=6.7e6), "OKX USDT perpetuals")
+        r = uni.eligibility(okx, U, 180)
+        self.assertTrue(r["ok"], r["reasons"])
+        self.assertFalse(uni.eligibility(m, U, 180)["ok"])                                  # $45M on the source
+        thin = uni.apply_venue(m, dict(vol_24h=22e6, vol_7d_avg=53e6), "OKX USDT perpetuals")
+        self.assertIn("24h volume $22M < $50M", uni.eligibility(thin, U, 180)["reasons"])
+        none = uni.apply_venue(m, None, "OKX USDT perpetuals")
+        self.assertIn("OKX USDT perpetuals numbers not available", " ".join(uni.eligibility(none, U, 180)["flags"]))
+
+
 class EndToEnd(unittest.TestCase):
     """Several offline runs in a row with scenario files (synthetic data)."""
 
-    def scan(self, tmp, scenario=None):
+    def scan(self, tmp, scenario=None, own=None):
+        """own: None = the top-7 rule (own_coins removed from the copy of config.yaml), else that coin list."""
+        import yaml
+        with open(os.path.join(ROOT, "config.yaml")) as f:
+            cfg = yaml.safe_load(f)
+        cfg["universe"]["own_coins"] = list(own or [])
+        with open(os.path.join(tmp, "config.yaml"), "w") as f:
+            yaml.safe_dump(cfg, f, sort_keys=False)
         args = ["scanner.py", "--offline"]
         if scenario is not None:
             path = os.path.join(tmp, "scenario.json")
             with open(path, "w") as f:
                 json.dump(scenario, f)
             args += ["--scenario", path]
-        p = run_copy(tmp, *args)
+        p = run_copy(tmp, *args, keep_config=True)
         self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         with open(os.path.join(tmp, "reports", "universe.json")) as f:
             u = json.load(f)
@@ -280,6 +340,26 @@ class EndToEnd(unittest.TestCase):
             for p in rep3["signals"]:                           # signals only from the signal 7
                 self.assertIn(p["coin"], u3["signal"])
             self.assertFalse(os.path.exists(os.path.join(tmp, "memory", "universe_log.md")))  # offline
+
+    def test_your_coins_only(self):                    # operator decision 2026-10-11
+        own = ["BTC", "ETH", "SOL", "BNB", "XRP", "ZEC", "SUI"]       # the synthetic market has no ZEC / SUI
+        with tempfile.TemporaryDirectory() as tmp:
+            boost = {"quote_volume": {"AVAX": 9e9}, "depth_usd": {"SOL": 100e3}}
+            u1, _ = self.scan(tmp, boost, own)
+            self.assertEqual(u1["signal"], ["BTC", "ETH", "BNB", "XRP"])          # SOL: order book too thin
+            self.assertEqual(u1["rules"]["own_coins"], own)
+            self.assertIn("SOL", u1["research_only"])                              # still backtested
+            u2, rep2 = self.scan(tmp, boost, own)
+            self.assertNotIn("AVAX", u2["signal"])                                 # the biggest volume: never
+            self.assertEqual(u2["waiting"], {})
+            for p in rep2["signals"]:
+                self.assertIn(p["coin"], u2["signal"])
+            u3, _ = self.scan(tmp, {"quote_volume": {"AVAX": 9e9}}, own)           # SOL's book is fine again
+            self.assertEqual(u3["waiting"], {"SOL": 1})
+            u4, _ = self.scan(tmp, {"quote_volume": {"AVAX": 9e9}}, own)
+            self.assertEqual(u4["signal"], ["BTC", "ETH", "SOL", "BNB", "XRP"])
+            flags = {c["coin"]: " ".join(c["flags"]) for c in u4["candidates"]}
+            self.assertIn("OKX USDT perpetuals numbers not available", flags["BTC"])   # offline: no OKX numbers
 
     def test_exclusions_show_reasons(self):
         with tempfile.TemporaryDirectory() as tmp:

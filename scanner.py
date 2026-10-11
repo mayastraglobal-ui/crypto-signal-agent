@@ -776,6 +776,45 @@ def okx_swap_stats(offline=False):
     return out
 
 
+def okx_swap_liquidity(coins, offline=False):
+    """{coin: dict(vol_24h, vol_7d_avg, spread_pct, depth_bid_usdt, depth_ask_usdt)} of OKX USDT perpetuals - the
+    liquidity where the operator trades ("your coins only", 2026-10-11). 24h volume and spread from the tickers, the
+    7-day average from the last 7 closed daily candles (quote volume), the depth within 1% from the order book
+    (contracts x contract value). A coin that cannot be measured is left out (the rules then use the data source)."""
+    if offline or not coins:
+        return {}
+    ok = OKX()
+    try:
+        tick = {t["instId"]: t for t in ok._get("/api/v5/market/tickers", {"instType": "SWAP"})}
+        ctval = {i["instId"]: float(i.get("ctVal") or 0)
+                 for i in ok._get("/api/v5/public/instruments", {"instType": "SWAP"})}
+    except Exception as e:
+        log(f"OKX perpetuals liquidity not available ({e}) - the data source's numbers are used")
+        return {}
+    out = {}
+    for c in coins:
+        iid = f"{c}-USDT-SWAP"
+        t = tick.get(iid)
+        if not t:
+            continue
+        try:
+            last, bid, ask = float(t["last"]), float(t["bidPx"] or 0), float(t["askPx"] or 0)
+            mid = (bid + ask) / 2
+            m = dict(vol_24h=float(t["volCcy24h"]) * last, spread_pct=(ask - bid) / mid * 100 if mid > 0 else None)
+            days = ok._get("/api/v5/market/candles", {"instId": iid, "bar": "1Dutc", "limit": 8})
+            q = [float(r[7]) for r in days if len(r) > 8 and r[8] == "1"][:7]
+            m["vol_7d_avg"] = sum(q) / len(q) if q else None
+            cv = ctval.get(iid) or 0
+            if cv > 0 and mid > 0:
+                book = ok._get("/api/v5/market/books", {"instId": iid, "sz": 400})[0]
+                m["depth_bid_usdt"] = uni.depth_within([(float(r[0]), float(r[1]) * cv) for r in book["bids"]], mid)
+                m["depth_ask_usdt"] = uni.depth_within([(float(r[0]), float(r[1]) * cv) for r in book["asks"]], mid)
+            out[c] = m
+        except Exception as e:
+            log(f"OKX perpetuals liquidity {c}: {e}")
+    return out
+
+
 def add_playbook(df, feats, sym, base, data, cfg, btc=None, flow=None, tf="5m"):
     """The playbook columns (pb_*, pbA_* / pbB_* / pbC_*) on the 5m candles (step 3d: also on 15m, the same rules on
     15m trigger candles): needs the coin's 15m and 1H candles
@@ -2214,8 +2253,17 @@ def main():
     ustate = json.load(open(state_path)) if os.path.exists(state_path) else uni.empty_state()
     prev_members = list(ustate["members"])
     cands, name_excluded = uni.prefilter(tickers, mkt, U)
-    pool = uni.candidate_pool(cands, always | set(prev_members), U["candidate_pool"])
-    log(f"Data source: {feed.name}; {len(cands)} coins over the volume floor, checking {len(pool)}")
+    own = [str(c).upper() for c in (U.get("own_coins") or [])]
+    if own:       # "your coins only" (2026-10-11): the operator's coins are always checked, whatever their volume here
+        by_sym = {t["symbol"]: t for t in tickers}
+        mine = [dict(by_sym[c + mkt["quote"]], base=c) for c in own if c + mkt["quote"] in by_sym]
+        pool = mine + [c for c in cands if c["base"] not in own][:max(0, int(U["candidate_pool"]) - len(mine))]
+        liq = okx_swap_liquidity(own, args.offline) if U.get("liquidity_venue") == "okx_swap" else {}
+    else:
+        pool = uni.candidate_pool(cands, always | set(prev_members), U["candidate_pool"])
+        liq = {}
+    log(f"Data source: {feed.name}; {len(cands)} coins over the volume floor, checking {len(pool)}"
+        + (f"; your coins only ({', '.join(own)})" + (", liquidity on OKX perpetuals" if liq else "") if own else ""))
     ustate, suspended = uni.update_suspensions(
         ustate, {c["base"]: c["change_pct"] for c in pool}, U, started.strftime("%Y-%m-%d"))
 
@@ -2235,6 +2283,8 @@ def main():
             depth = None
         book = (u["bid"], u["ask"]) if u.get("bid") and u.get("ask") else None
         measures[base] = uni.measure(u, daily, book, depth, U)
+        if base in own and U.get("liquidity_venue") == "okx_swap":
+            measures[base] = uni.apply_venue(measures[base], liq.get(base), "OKX USDT perpetuals")
         elig[base] = uni.eligibility(measures[base], U, mkt["min_listing_days"], rep["state"],
                                      base in suspended)
         daily_data[base] = daily
@@ -2247,7 +2297,12 @@ def main():
             not_elig[b] = [name_excluded.get(b) or ("download failed" if b in failed else
                            f"24h volume below {uni.usd(U['min_24h_volume_usdt'])} or no longer listed")]
     ustate, u_events = uni.eligibility_changes(ustate, elig)
-    ustate, m_events, view = uni.update_membership(ustate, ranked, U, always, not_elig)
+    if own:
+        ustate, m_events, view = uni.own_membership(ustate, own, {b for b, r in elig.items() if r["ok"]},
+                                                    [b for b in ranked if b not in own], U, not_elig,
+                                                    {c["base"] for c in pool if c["base"] in daily_data})
+    else:
+        ustate, m_events, view = uni.update_membership(ustate, ranked, U, always, not_elig)
     u_events += m_events
     log(f"Signal coins: {', '.join(view['signal'])} | research only: {', '.join(view['research_only'])}")
 
@@ -2855,9 +2910,12 @@ def main():
         cand_rows.append(row)
     u_out = dict(checked_utc=started.strftime("%Y-%m-%d %H:%M"), run=ustate["runs"],
                  signal=view["signal"], research_only=view["research_only"], waiting=view["waiting"],
-                 leaving=view["leaving"], empty_slots=U["signal_coins"] - len(view["signal"]),
-                 rules=dict(signal_coins=U["signal_coins"], research_coins=U["research_coins"],
-                            hysteresis_runs=U["hysteresis_runs"]),
+                 leaving=view["leaving"], empty_slots=view["empty_slots"] if own else
+                 U["signal_coins"] - len(view["signal"]),
+                 rules=dict(signal_coins=len(own) if own else U["signal_coins"], research_coins=U["research_coins"],
+                            hysteresis_runs=U["hysteresis_runs"], own_coins=own,
+                            liquidity_venue="OKX USDT perpetuals" if own and U.get("liquidity_venue") == "okx_swap"
+                            else None),
                  events=u_events, candidates=cand_rows, excluded_by_list=name_excluded)
     json.dump(u_out, open(os.path.join(REPORTS, "universe.json"), "w"), indent=1, default=float)
     json.dump(ustate, open(state_path, "w"), indent=1)
@@ -3157,9 +3215,17 @@ def write_universe_log(events, when):
 def render_universe(u, w):
     w("## 0b. Coins this run")
     n = u["rules"]["signal_coins"]
+    own = u["rules"].get("own_coins") or []
     w(f"- **Signal coins ({len(u['signal'])}/{n})** - only these can give signals: "
       + (", ".join(f"**{c}**" for c in u["signal"]) or "none"))
-    if u["empty_slots"] > 0:
+    if own:
+        w(f"- **Your coins only:** {', '.join(own)} - another coin never gives a signal. Each must pass every rule"
+          + (f" (volume, spread and depth on {u['rules']['liquidity_venue']})" if u["rules"].get("liquidity_venue")
+             else "") + f"; a coin that failed joins again after {u['rules']['hysteresis_runs']} runs in a row.")
+        out = [c for c in own if c not in u["signal"]]
+        if out:
+            w("- **Your coins out this run:** " + ", ".join(out))
+    elif u["empty_slots"] > 0:
         w(f"- {u['empty_slots']} empty slot(s): waiting for a coin to hold a top-{n} rank for "
           f"{u['rules']['hysteresis_runs']} runs in a row")
     w(f"- **Research only** - backtested, never a signal: " + (", ".join(u["research_only"]) or "none"))

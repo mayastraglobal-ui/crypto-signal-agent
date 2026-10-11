@@ -6,6 +6,10 @@ Tradable universe (AGENT_PROMPT.md section 4).
   - Hysteresis     : a new coin must rank in the top 7 for 2 runs in a row before it joins, and a
                      member must rank outside the top 7 for 2 runs in a row before it leaves.
                      A member that stops being ELIGIBLE (safety rules) is removed at once.
+  - Your coins only (operator decision 2026-10-11, `own_coins`): only the operator's own coins can give signals -
+                     every one of them that passes every rule, with the liquidity (volume, spread, depth)
+                     measured where the operator trades (OKX USDT perpetuals). Another coin can never become a
+                     signal coin, however much it trades; it can still be backtested (research only).
 
 Everything here is pure (no internet, no files): the same numbers always give the same list.
 """
@@ -25,6 +29,8 @@ DEFAULTS = dict(
     stablecoin_band_pct=2.0,
     stablecoin_days=30,
     wash_volume_flag_ratio=1000,
+    own_coins=[],             # 2026-10-11: the operator's coins - set = only these can give signals
+    liquidity_venue=None,     # "okx_swap": the volume / spread / depth rules use OKX USDT perpetuals
 )
 LEVERAGED_SUFFIXES = ("UP", "DOWN", "BULL", "BEAR")
 
@@ -116,6 +122,18 @@ def measure(ticker, daily, book=None, depth=None, u=DEFAULTS):
     return m
 
 
+def apply_venue(m, liq, venue):
+    """The liquidity numbers where the operator trades (OKX USDT perpetuals) replace the data source's: 24h volume,
+    7-day average volume, spread, order-book depth. liq None (not available) -> unchanged and flagged."""
+    if not liq:
+        return dict(m, venue=None, venue_missing=venue)
+    out = dict(m, venue=venue)
+    for k in ("vol_24h", "vol_7d_avg", "spread_pct", "depth_bid_usdt", "depth_ask_usdt"):
+        if liq.get(k) is not None:
+            out[k] = float(liq[k])
+    return out
+
+
 # ---------------------------------------------------------------------
 # 3. Eligibility (all rules must pass)
 # ---------------------------------------------------------------------
@@ -168,6 +186,9 @@ def eligibility(m, u, min_listing_days, data_state="GOOD", suspended_today=False
         elif m["vol_24h"] / thin > u["wash_volume_flag_ratio"]:
             flag("wash_volume", f"possible wash volume: 24h volume is {m['vol_24h'] / thin:,.0f}x the 1% "
                                 "order-book depth (flag only, not excluded)")
+    if m.get("venue_missing"):
+        flag("venue_missing", f"{m['venue_missing']} numbers not available - the data source's volume, spread and "
+                              "depth were used")
     if data_state == "UNSAFE":
         fail("data_unsafe", "price data UNSAFE")
     elif data_state == "DEGRADED":
@@ -276,6 +297,51 @@ def update_membership(state, ranked, u, always, not_eligible=None):
     view = dict(signal=list(st["members"]), research_only=research_extra,
                 research=list(st["members"]) + research_extra, waiting=waiting,
                 leaving=dict(st["out_streak"]), empty_slots=size - len(st["members"]))
+    return st, events, view
+
+
+def own_membership(state, own, eligible, others, u, not_eligible=None, available=None):
+    """One run with "your coins only" (own_coins set, 2026-10-11): the signal coins are the operator's coins that pass
+    every rule. A member that breaks a rule leaves at once (safety first, as before); an own coin joins when it has
+    passed for hysteresis_runs runs in a row (at once on the first run), so a coin near a limit does not flap every
+    hour. A coin not on the list never joins. own: the list (its order is kept); eligible: coins passing every rule;
+    others: other eligible coins best first (research only, never a signal); available: the coins with data this run.
+    Returns (new_state, events, view) like update_membership."""
+    need = int(u["hysteresis_runs"])
+    not_eligible = not_eligible or {}
+    avail = set(available) if available is not None else set(own) | set(others)
+    st = dict(state, members=list(state["members"]), in_streak=dict(state["in_streak"]), out_streak={})
+    first = st["runs"] == 0 or not st["members"]
+    events = []
+    for c in list(st["members"]):
+        if c not in own:
+            st["members"].remove(c)
+            events.append(dict(coin=c, action="LEAVE", why="not on your coin list (universe.own_coins)"))
+        elif c not in eligible:
+            st["members"].remove(c)
+            why = "; ".join(not_eligible.get(c, ["no longer in the candidate list"]))
+            events.append(dict(coin=c, action="LEAVE", why=f"not eligible: {why}"))
+    for c in list(st["in_streak"]):
+        if c not in own or c not in eligible or c in st["members"]:
+            st["in_streak"].pop(c)
+    for c in own:
+        if c in eligible and c not in st["members"]:
+            st["in_streak"][c] = st["in_streak"].get(c, 0) + 1
+            if first or st["in_streak"][c] >= need:
+                st["members"].append(c)
+                st["in_streak"].pop(c)
+                events.append(dict(coin=c, action="JOIN", why="on your coin list and passes every rule"
+                                   + ("" if first else f" ({need} runs in a row)")))
+    order = {c: i for i, c in enumerate(own)}
+    st["members"].sort(key=lambda c: order.get(c, 1e9))
+    st["runs"] = st["runs"] + 1
+    extra = max(0, int(u["research_coins"]) - len(own))
+    own_out = [c for c in own if c not in st["members"] and c in avail]
+    research_extra = own_out + [c for c in others if c not in own][:extra]
+    waiting = {c: n for c, n in st["in_streak"].items() if c not in st["members"]}
+    view = dict(signal=list(st["members"]), research_only=research_extra,
+                research=list(st["members"]) + research_extra, waiting=waiting, leaving={},
+                empty_slots=len(own) - len(st["members"]))
     return st, events, view
 
 

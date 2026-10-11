@@ -97,15 +97,18 @@ Main keeps the history that matters: `memory/`, `reports/signals_log.csv`, `repo
 
 ## Which coins (every run)
 
-- **Signal coins (7):** the 7 eligible coins with the most trading in the last 24 hours.
-  Only these can give signals. BTC and ETH are always included when eligible.
-- **Research coins (3 more):** the next 3. They are backtested, but never give a signal.
+- **Signal coins = your coins only** (operator decision 2026-10-11): BTC, ETH, SOL, BNB, XRP, ZEC, SUI
+  (`config.yaml` → `universe.own_coins`) - each one that is eligible. Only these can give signals; another coin never
+  does, however much it trades. Volume, spread and order-book depth are measured on **OKX USDT perpetuals**, where
+  you trade. (Without `own_coins`: the 7 eligible coins with the most trading in 24 hours.)
+- **Research coins:** your coins out of the list this hour + the 3 biggest other eligible coins. Backtested,
+  never a signal.
 - **Eligible** means ALL of: 180+ days of history · $50M+ volume in 24h and on average over 7 days ·
   no one-day volume spike (24h > 3x the 7-day average) · moved less than ±25% in 24h (otherwise
   suspended for the rest of the UTC day) · spread ≤ 0.10% · $250k+ of orders within 1% of the price
   on each side · price data not UNSAFE · not on an exclusion list · does not behave like a stablecoin.
-- **No jumping around:** a new coin must be in the top 7 for **2 runs in a row** to join, and a member
-  must be outside the top 7 for 2 runs in a row to leave. A member that breaks a rule leaves at once.
+- **No jumping around:** one of your coins that broke a rule must pass for **2 runs in a row** to join again; a
+  member that breaks a rule leaves at once. (Top-7 mode: in or out of the top 7 for 2 runs in a row.)
 - Every join, leave and exclusion is written to `memory/universe_log.md` with its reason.
   The limits are in `config.yaml` → `universe`.
 

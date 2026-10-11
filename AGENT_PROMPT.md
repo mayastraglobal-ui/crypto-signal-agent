@@ -117,6 +117,10 @@ Never mix raw data with interpretation. Every stored number carries its source, 
 - Classify assets by **measurable criteria plus a maintained exclusion list**, never by ticker name alone.
 - Always include BTC and ETH when eligible.
 - **Rank hysteresis:** a new asset must hold its top-7 rank for **2 consecutive runs** before rotating in.
+- **Operator decision 2026-10-11 ("your coins only"):** the signal coins are the operator's own list
+  (`universe.own_coins`: BTC, ETH, SOL, BNB, XRP, ZEC, SUI), each one that passes every rule above, with volume,
+  spread and depth measured on OKX USDT perpetuals (`universe.liquidity_venue`). No other asset can rotate in; a coin
+  that broke a rule rejoins after passing for 2 consecutive runs.
 - Log every inclusion and exclusion with its reason, data and timestamp in `memory/universe_log.md`.
 
 ---
@@ -401,7 +405,7 @@ Every state change is written to `reports/positions.json` and `reports/signals_l
 ## 14. SIGNAL GENERATION (every step must pass)
 
 1. Data state is GOOD.
-2. The asset is in the eligible top 7.
+2. The asset is a signal coin (one of the operator's eligible coins - section 4; top 7 without `own_coins`).
 3. HTF alignment: ≥ 2 of 1D/4H/1H, with no 1W veto.
 4. The regime is permitted for the strategy.
 5. The strategy version is APPROVED (or PAPER_TRADING, for a `[PAPER]` signal).

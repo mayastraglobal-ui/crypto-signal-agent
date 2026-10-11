@@ -791,3 +791,17 @@ Newest entries at the bottom. Format: date · who · what · why.
 - `tests/test_signal_center.py`: the merge test; the Watcher tests now follow a test clock (the synthetic candles end
   at the clock - they failed in the first ~10 minutes after every 4-hour boundary).
 
+## 2026-10-11 · Operator + Claude · Your coins only (signal coins = the operator's 7, liquidity on OKX)
+- Operator: "your coins only" - after the weekend volume dip removed XRP, SUI and BNB from the signal coins (24h volume
+  on the data source, Binance spot) while unknown coins (UNI on 9 Oct; STRK, MAGIC as candidates) could rank in.
+- `config.yaml` `universe.own_coins: [BTC, ETH, SOL, BNB, XRP, ZEC, SUI]`, `liquidity_venue: okx_swap`.
+  `engine/universe.py` `own_membership`: the signal coins are the own coins that pass every rule (a member that
+  breaks one leaves at once; it rejoins after 2 passing runs in a row, at once on the first run); no other coin ever
+  joins. Research only: own coins out this run + the 3 biggest other eligible coins. `apply_venue`: the 24h volume,
+  7-day average, spread and 1% depth of an own coin come from OKX USDT perpetuals (`scanner.okx_swap_liquidity`:
+  tickers, 7 closed daily candles, order book x contract value); unavailable -> the data source's, flagged.
+  History, the 25% move, stablecoin and data checks unchanged; the $50M limits unchanged.
+- Real check (11 Oct 04:30 UTC): BTC $1,489M, ETH $1,621M, ZEC $360M, SOL $342M, XRP $101M, SUI $96M pass on OKX;
+  BNB $22M in 24h (7-day $53M) does not - it stays research only until it passes 2 runs in a row.
+- Tests: `tests/test_universe.py` `OwnCoins`.
+
