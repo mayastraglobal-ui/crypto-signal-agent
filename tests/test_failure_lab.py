@@ -110,7 +110,8 @@ class Learning(unittest.TestCase):
         card = dict(cards()["P01-BREAKOUT-V1@1.0"], id="P01-BREAKOUT-V1-FDISP", factory="failure",
                     repair=dict(tag="false_breakout", kind="DISP", tf="4h", parent_cell="P01-BREAKOUT-V1@1.0|4h"))
         waiting = dict(card, id="P01-BREAKOUT-V1-FRETEST", repair=dict(card["repair"], kind="RETEST"))
-        cs = dict(cards(), **{"P01-BREAKOUT-V1-FDISP@1.0": card, "P01-BREAKOUT-V1-FRETEST@1.0": waiting})
+        real = {k: v for k, v in cards().items() if not v.get("repair")}      # the lab's own repairs (since 11 Oct) aside
+        cs = dict(real, **{"P01-BREAKOUT-V1-FDISP@1.0": card, "P01-BREAKOUT-V1-FRETEST@1.0": waiting})
         old = [dict(child="X-FADX@1.0|1h", parent="X@1.0|1h", tag="range_market", kind="ADX", helped=False,
                     passed=False, avg_r=0, parent_avg_r=0.1, test_r=0, parent_test_r=0.1, status="FAILED")]
         rows, pending = flab.results(cells_of(parent, child), cs, old, "2026-10-11 01:00")
