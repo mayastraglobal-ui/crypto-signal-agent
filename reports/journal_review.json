@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-11 12:20",
+ "last_entry_utc": "2026-10-11 13:34",
  "days": 30,
  "all": {
   "alerts": 1,
@@ -31,16 +31,16 @@
    "wins": 0
   },
   "yours": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
+   "n": 1,
+   "total_r": 1.2,
+   "avg_r": 1.2,
+   "wins": 1
   },
   "gap": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
+   "n": 1,
+   "total_r": 2.2,
+   "avg_r": 2.2,
+   "wins": 1
   },
   "early": {
    "n": 0,
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 0
  },
  "recent": {
   "alerts": 1,
@@ -89,16 +89,16 @@
    "wins": 0
   },
   "yours": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
+   "n": 1,
+   "total_r": 1.2,
+   "avg_r": 1.2,
+   "wins": 1
   },
   "gap": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
+   "n": 1,
+   "total_r": 2.2,
+   "avg_r": 2.2,
+   "wins": 1
   },
   "early": {
    "n": 0,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 0
  },
  "per_strategy": [
   {
@@ -125,8 +125,8 @@
    "skipped": 0,
    "plan_avg_r": -1.0,
    "plan_n": 1,
-   "your_avg_r": null,
-   "your_n": 0
+   "your_avg_r": 1.2,
+   "your_n": 1
   }
  ],
  "tests": {

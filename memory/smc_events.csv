@@ -12867,3 +12867,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-11 12:30,SUI,30m,SWEEP,bear,1.1012,,,0.644,NY AM,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-11 12:30,SUI,30m,FVG,bull,,1.0938,1.0971,0.52,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-11 13:00,SUI,30m,WEAK_BREAK,bull,1.1012,,,0.173,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-11 13:30,BTC,30m,FVG_FILLED,bull,,83090.16,83129.61,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 14:00,BTC,15m,OB_RETEST,bull,,83040.0,83064.01,,NY AM,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-11 14:00,BTC,15m,FVG_FILLED,bull,,83064.01,83164.0,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 14:00,ETH,30m,FVG_FILLED,bull,,2503.16,2505.79,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 14:15,ETH,15m,FVG,bear,,2502.81,2504.31,0.573,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-11 14:15,ZEC,15m,WEAK_BREAK,bear,1229.81,,,0.364,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-11 14:15,ZEC,15m,FVG_FILLED,bull,,1229.41,1231.12,,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-11 14:15,SUI,15m,FVG,bear,,1.1009,1.102,0.299,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
