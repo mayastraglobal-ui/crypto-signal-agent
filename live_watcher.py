@@ -573,6 +573,8 @@ class Watcher:
                 if f"{sspec.key(s)}|{tf}" in self.tests and (sspec.key(s), tf) not in have:
                     self.watch.append((s, tf, "TEST"))
         self.cards = {sspec.key(s): s for s in cards}
+        self.cell_avg = {k: float(c["avg_r"]) for k, c in reg["cells"].items()   # merging PAPER / LIVE alerts
+                         if str(c.get("avg_r", "")).strip() not in ("", "nan", "None")}
         try:
             u = json.load(open(os.path.join(ROOT, "reports", "universe.json")))
             self.coins = list(u.get("signal") or [])
@@ -1283,6 +1285,9 @@ class Watcher:
                 log(f"{coin} {tf} {s['id']}: trigger - waiting for the 5m confirmation")
                 continue
             out.append(self._finish(base, now_ms))
+        out = self.merge_same(out)
+        covered = self.covered(coin, out, now_ms)
+        test_cands = [c for c in test_cands if not self._covered_test(c, covered, out)]
         recent = [a for a in self.state["alerts"].values() if a.get("coin") == coin] + \
             [p for p in self.pending if p.get("coin") == coin]
         for a in scx.merge(test_cands):             # the Signal Center: merged, then the 5m candle confirms
@@ -1295,6 +1300,55 @@ class Watcher:
             else:
                 out.append(self._finish(a, now_ms))
         return out
+
+    def merge_same(self, alerts):
+        """2026-10-11: PAPER / LIVE alerts of one pass for the same coin, direction and label are ONE trade (e.g. the
+        three Donchian 4H versions in PAPER fire together) -> one message: the version with TP1 >= 2R and the best
+        backtest first, the others listed in 'same'. Each version keeps its own cooldown; GitHub's paper record
+        still counts every version separately."""
+        groups, rest = {}, []
+        for a in alerts:
+            if a["label"] in ("PAPER", "LIVE"):
+                groups.setdefault((a["label"], a["coin"], a["d"]), []).append(a)
+            else:
+                rest.append(a)
+        out = []
+        for g in groups.values():
+            def rank(a):
+                tp1_ok = bool(a["tps"]) and a["d"] * (a["tps"][0] - a["entry"]) / a["R"] >= 2.0 - 1e-9
+                return (not tp1_ok, -self.cell_avg.get(f"{a['strategy']}@{a['version']}|{a['tf']}", 0.0))
+            g = sorted(g, key=rank)
+            best = dict(g[0], same=[f"{a['strategy']} v{a['version']} {a['tf']}" for a in g[1:]])
+            if len(g) > 1:
+                log(f"ALERT {best['label']} {best['coin']}: {len(g)} versions of one setup merged into one message "
+                    f"({best['strategy']} {best['tf']} first)")
+            out.append(best)
+        return rest + out
+
+    def covered(self, coin, out, now_ms):
+        """Directions on this coin a PAPER / LIVE alert already covers: this pass, waiting for its 5m candle, or
+        sent within the TEST cooldown. {d: the covering alert or None}."""
+        cut = now_ms - int(self.SC["cooldown_minutes"]) * 60_000
+        cov = {}
+        for a in list(self.state["alerts"].values()) + list(self.pending):
+            if a.get("coin") == coin and a.get("label") in ("PAPER", "LIVE") and \
+                    int(a.get("sent_ms") or a.get("after_ms") or now_ms) >= cut:
+                cov.setdefault(int(a["d"]), None)
+        for a in out:
+            if a["label"] in ("PAPER", "LIVE"):
+                cov[int(a["d"])] = a
+        return cov
+
+    def _covered_test(self, c, covered, out):
+        """A TEST setup in the direction of a PAPER / LIVE alert is the same trade: no second message (GitHub still
+        records the TEST setup); it is named in this pass's PAPER / LIVE message."""
+        if int(c["d"]) not in covered:
+            return False
+        a = covered[int(c["d"])]
+        if a is not None:
+            a.setdefault("test_agrees", []).append(f"{c['strategy']} {c['tf']}")
+        log(f"{c['coin']} {c['tf']} {c['strategy']}: TEST setup not sent - a PAPER / LIVE alert covers this trade")
+        return True
 
     def pb_coin_problem(self, coin, now_ms):
         """Playbook 2.5 / 5.4 on the exchange the operator trades: the coin must be on the playbook's coin list (24h

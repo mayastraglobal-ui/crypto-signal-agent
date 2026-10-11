@@ -122,7 +122,7 @@ def message(a):
     """Telegram text (HTML) of one alert (Forward Test Program layout, 2026-10-09). a = dict(label, coin, inst, d, tf,
     strategy, version, entry, R, tps, split, zone_r, size, risk_pct, max_hold, regimes, close_ms, sent_ms, confirm,
     valid_bars, warnings; TEST alerts also: test (backtest on this coin), program, also, agree, against, weather,
-    market)."""
+    market; PAPER / LIVE: same (other versions of this setup), test_agrees)."""
     side = "LONG" if a["d"] == 1 else "SHORT"
     lab = a["label"]
     stop = a["entry"] - a["d"] * a["R"]
@@ -136,6 +136,11 @@ def message(a):
              name + (f" ({a['strategy']})" if prog.get("name") else "")]
     if a.get("agree"):
         lines.append("⭐ Same direction on: " + ", ".join(a["agree"]))
+    if a.get("same"):                        # 2026-10-11: versions of one setup, one message
+        lines.append(f"🧩 Same setup, {len(a['same']) + 1} versions agree: also " + ", ".join(a["same"])
+                     + ". <b>One trade</b> - open it once (the plan below).")
+    if a.get("test_agrees"):
+        lines.append("🔵 TEST agrees: " + ", ".join(a["test_agrees"]))
     lines.append(SEP)
     lim = a.get("limit_bars")
     if lim:                                  # roadmap step 2B: a limit-entry strategy

@@ -778,3 +778,16 @@ Newest entries at the bottom. Format: date · who · what · why.
   `reports/shocks_review.json`; the weekly review shows "⚡ Shock alarm" (+ a Telegram line).
 - Needs `windows\4_update.bat` once on the PC. New `windows\8_replay_shocks.bat`. Tests: `tests/test_shock.py`.
 
+## 2026-10-11 · Operator + Claude · One message for one setup (PAPER versions merged)
+- The research run of 11 Oct moved three Donchian 4H versions to PAPER_TRADING (donchian_breakout@1.0, -VEXIT@1.0,
+  -VEXIT-S4@1.1; the family gates, active since 10 Oct). They fire together, and with the program's P01 breakout TEST
+  cells one breakout could send 4 Telegram messages for one trade. Operator: "merge paper alerts".
+- `live_watcher.py` `merge_same`: PAPER / LIVE alerts of one pass for the same coin + direction + label -> one message,
+  the version with TP1 >= 2R and the best registry avg_r first, the others in `same` ("🧩 Same setup, N versions
+  agree ... One trade - open it once"). Each version keeps its own cooldown key. `covered` / `_covered_test`: a TEST
+  setup in the direction of a PAPER / LIVE alert on that coin (this pass, waiting for its 5m candle, or sent within
+  the TEST cooldown of 4 hours) is not sent and gets no watch note; the PAPER message shows "🔵 TEST agrees". GitHub's
+  record (paper signals per version, TEST setups) is unchanged. Emails already sent only the library card's PAPER entry.
+- `tests/test_signal_center.py`: the merge test; the Watcher tests now follow a test clock (the synthetic candles end
+  at the clock - they failed in the first ~10 minutes after every 4-hour boundary).
+
