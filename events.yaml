@@ -49,3 +49,5 @@ events:
      source: "https://www.bea.gov/news/schedule", check: official_page}
   - {utc: "2026-12-23 13:30", type: GDP, name: "US GDP (Third Estimate), 3rd Quarter 2026",
      source: "https://www.bea.gov/news/schedule", check: official_page}
+  - {utc: "2027-01-27 19:00", type: FOMC, name: "FOMC decision (Jan 26-27, 2027 meeting)",
+     source: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm", check: official_page}
