@@ -1,0 +1,6412 @@
+{
+ "checked_utc": "2026-10-11 04:19",
+ "version": "smc-1.0",
+ "note": "SMC = hypotheses to test, not doctrine. Strategies S5-S8 use these rules and are tested against control twins without SMC.",
+ "killzone_now": null,
+ "coins": {
+  "BTC": {
+   "4h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 84972.01,
+      "candles_ago": 24
+     },
+     "dealing_range": {
+      "high": 83528.98,
+      "low": 80393.56,
+      "position": 0.7738835626487036,
+      "zone": "premium"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 85528.83439999999,
+      "high": 86064.01479999999,
+      "candles_ago": 24
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 83173.29,
+       "dist_atr": 0.6
+      },
+      {
+       "kind": "swing high",
+       "level": 83528.98,
+       "dist_atr": 1.21
+      },
+      {
+       "kind": "swing high",
+       "level": 86698.99,
+       "dist_atr": 6.59
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 82545.82,
+       "dist_atr": 0.47
+      },
+      {
+       "kind": "swing low",
+       "level": 80393.56,
+       "dist_atr": 4.13
+      },
+      {
+       "kind": "swing low",
+       "level": 80126.04,
+       "dist_atr": 4.58
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 76732.99,
+       "high": 77216.76,
+       "retraced": false,
+       "candles_ago": 137
+      },
+      {
+       "dir": 1,
+       "low": 78490.79,
+       "high": 80555.54,
+       "retraced": true,
+       "candles_ago": 134
+      },
+      {
+       "dir": -1,
+       "low": 84379.31,
+       "high": 85346.77,
+       "retraced": false,
+       "candles_ago": 23
+      },
+      {
+       "dir": -1,
+       "low": 83766.55,
+       "high": 84044.0,
+       "retraced": false,
+       "candles_ago": 21
+      },
+      {
+       "dir": 1,
+       "low": 81948.03,
+       "high": 82209.2,
+       "retraced": false,
+       "candles_ago": 11
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 64166.0,
+       "high": 64409.93,
+       "state": "active",
+       "candles_ago": 315
+      },
+      {
+       "dir": 1,
+       "low": 76259.98,
+       "high": 76732.99,
+       "state": "active",
+       "candles_ago": 135
+      },
+      {
+       "dir": 1,
+       "low": 80227.27,
+       "high": 80668.15,
+       "state": "active",
+       "candles_ago": 118
+      },
+      {
+       "dir": -1,
+       "low": 86133.4,
+       "high": 86975.51,
+       "state": "active",
+       "candles_ago": 105
+      },
+      {
+       "dir": -1,
+       "low": 85550.0,
+       "high": 86378.24,
+       "state": "active",
+       "candles_ago": 24
+      }
+     ],
+     "last_sweep": {
+      "bull": 17,
+      "bear": 63
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1475,
+      "time": 1791359999999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 84379.31,
+      "zone_high": 85346.77,
+      "size_atr": 1.249,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1477,
+      "time": 1791388799999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 82900.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.146,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1477,
+      "time": 1791388799999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 83766.55,
+      "zone_high": 84044.0,
+      "size_atr": 0.353,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1481,
+      "time": 1791446399999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 82563.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.44,
+      "killzone": null,
+      "info": "sell-side liquidity swept (PDL, PWL, swing low)"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 81878.98,
+      "zone_high": 84778.0,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 80227.27,
+      "zone_high": 80668.15,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 81839.73,
+      "zone_high": 82318.0,
+      "size_atr": 0.527,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 81839.73,
+      "zone_high": 82318.0,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1486,
+      "time": 1791518399999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 81839.73,
+      "zone_high": 82318.0,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1487,
+      "time": 1791532799999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 81948.03,
+      "zone_high": 82209.2,
+      "size_atr": 0.313,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "1h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 82932.01,
+      "candles_ago": 0
+     },
+     "dealing_range": {
+      "high": 83173.29,
+      "low": 82932.01,
+      "position": -0.464190981432363,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 83038.5838,
+      "high": 83098.8471,
+      "candles_ago": 0
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 83173.29,
+       "dist_atr": 2.13
+      },
+      {
+       "kind": "PDH",
+       "level": 83173.29,
+       "dist_atr": 2.13
+      },
+      {
+       "kind": "equal highs",
+       "level": 83528.98,
+       "dist_atr": 4.28
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 82778.0,
+       "dist_atr": 0.25
+      },
+      {
+       "kind": "PDL",
+       "level": 82545.82,
+       "dist_atr": 1.66
+      },
+      {
+       "kind": "swing low",
+       "level": 82285.71,
+       "dist_atr": 3.23
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 78182.01,
+       "high": 80073.09,
+       "retraced": false,
+       "candles_ago": 541
+      },
+      {
+       "dir": -1,
+       "low": 84533.27,
+       "high": 85400.0,
+       "retraced": false,
+       "candles_ago": 97
+      },
+      {
+       "dir": -1,
+       "low": 84002.83,
+       "high": 84104.0,
+       "retraced": false,
+       "candles_ago": 90
+      },
+      {
+       "dir": 1,
+       "low": 81028.74,
+       "high": 81425.5,
+       "retraced": false,
+       "candles_ago": 56
+      },
+      {
+       "dir": 1,
+       "low": 81562.01,
+       "high": 81706.0,
+       "retraced": true,
+       "candles_ago": 55
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 69506.91,
+       "high": 70022.0,
+       "state": "active",
+       "candles_ago": 1243
+      },
+      {
+       "dir": 1,
+       "low": 71132.0,
+       "high": 72108.8,
+       "state": "active",
+       "candles_ago": 1235
+      },
+      {
+       "dir": 1,
+       "low": 76384.04,
+       "high": 76510.01,
+       "state": "active",
+       "candles_ago": 552
+      },
+      {
+       "dir": 1,
+       "low": 77982.88,
+       "high": 78182.01,
+       "state": "active",
+       "candles_ago": 542
+      },
+      {
+       "dir": -1,
+       "low": 85346.77,
+       "high": 85619.21,
+       "state": "active",
+       "candles_ago": 98
+      }
+     ],
+     "last_sweep": {
+      "bull": 33,
+      "bear": 40
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1960,
+      "time": 1791554399999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82726.41,
+      "zone_high": 82935.14,
+      "size_atr": null,
+      "killzone": "NY AM",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1960,
+      "time": 1791554399999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82726.41,
+      "zone_high": 82935.14,
+      "size_atr": null,
+      "killzone": "NY AM",
+      "info": ""
+     },
+     {
+      "t": 1965,
+      "time": 1791572399999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 82400.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.16,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1966,
+      "time": 1791575999999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 82400.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.144,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1976,
+      "time": 1791611999999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 82767.71,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.269,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1985,
+      "time": 1791644399999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 82951.88,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.169,
+      "killzone": "Silver Bullet",
+      "info": "no displacement"
+     },
+     {
+      "t": 1986,
+      "time": 1791647999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82860.0,
+      "zone_high": 82953.63,
+      "size_atr": 0.45,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1993,
+      "time": 1791673199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82860.0,
+      "zone_high": 82953.63,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 82932.01,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.714,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82860.0,
+      "zone_high": 82953.63,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "30m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 83080.98,
+      "candles_ago": 20
+     },
+     "dealing_range": {
+      "high": 83106.59,
+      "low": 82934.0,
+      "position": -0.6604670027232606,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 82861.0109,
+      "high": 82928.2102,
+      "candles_ago": 20
+     },
+     "liquidity_above": [
+      {
+       "kind": "equal highs",
+       "level": 83173.29,
+       "dist_atr": 3.55
+      },
+      {
+       "kind": "PDH",
+       "level": 83173.29,
+       "dist_atr": 3.55
+      },
+      {
+       "kind": "swing high",
+       "level": 83304.93,
+       "dist_atr": 4.87
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 82778.0,
+       "dist_atr": 0.42
+      },
+      {
+       "kind": "swing low",
+       "level": 82640.0,
+       "dist_atr": 1.81
+      },
+      {
+       "kind": "equal lows",
+       "level": 82545.82,
+       "dist_atr": 2.75
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 80939.44,
+       "high": 81335.63,
+       "retraced": false,
+       "candles_ago": 114
+      },
+      {
+       "dir": 1,
+       "low": 81562.01,
+       "high": 81687.97,
+       "retraced": true,
+       "candles_ago": 112
+      },
+      {
+       "dir": 1,
+       "low": 82600.0,
+       "high": 82650.01,
+       "retraced": true,
+       "candles_ago": 46
+      },
+      {
+       "dir": 1,
+       "low": 82760.29,
+       "high": 82806.0,
+       "retraced": true,
+       "candles_ago": 39
+      },
+      {
+       "dir": -1,
+       "low": 83011.0,
+       "high": 83042.99,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 77227.08,
+       "high": 77417.39,
+       "state": "active",
+       "candles_ago": 1101
+      },
+      {
+       "dir": 1,
+       "low": 77982.88,
+       "high": 78124.99,
+       "state": "active",
+       "candles_ago": 1084
+      },
+      {
+       "dir": -1,
+       "low": 86412.04,
+       "high": 87220.0,
+       "state": "active",
+       "candles_ago": 410
+      }
+     ],
+     "last_sweep": {
+      "bull": 27,
+      "bear": 53
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1959,
+      "time": 1791620999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82760.29,
+      "zone_high": 82806.0,
+      "size_atr": 0.318,
+      "killzone": "London",
+      "info": ""
+     },
+     {
+      "t": 1960,
+      "time": 1791622799999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82760.29,
+      "zone_high": 82806.0,
+      "size_atr": null,
+      "killzone": "London",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1971,
+      "time": 1791642599999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 82789.88,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.113,
+      "killzone": "Silver Bullet",
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1971,
+      "time": 1791642599999,
+      "event": "BOS",
+      "dir": 1,
+      "level": 82910.46,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.337,
+      "killzone": "Silver Bullet",
+      "info": "no displacement"
+     },
+     {
+      "t": 1978,
+      "time": 1791655199999,
+      "event": "BOS",
+      "dir": 1,
+      "level": 83080.98,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.343,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1994,
+      "time": 1791683999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82992.01,
+      "zone_high": 83012.68,
+      "size_atr": 0.251,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1995,
+      "time": 1791685799999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82992.01,
+      "zone_high": 83012.68,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 82934.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.096,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82992.01,
+      "zone_high": 83012.68,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 83011.0,
+      "zone_high": 83042.99,
+      "size_atr": 0.321,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "15m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 83106.59,
+      "candles_ago": 6
+     },
+     "dealing_range": {
+      "high": 83150.61,
+      "low": 82934.0,
+      "position": -0.35081482849362927,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 82979.4881,
+      "high": 83016.3118,
+      "candles_ago": 6
+     },
+     "liquidity_above": [
+      {
+       "kind": "equal highs",
+       "level": 83173.29,
+       "dist_atr": 4.46
+      },
+      {
+       "kind": "PDH",
+       "level": 83173.29,
+       "dist_atr": 4.46
+      },
+      {
+       "kind": "swing high",
+       "level": 83304.93,
+       "dist_atr": 6.32
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "equal lows",
+       "level": 82778.0,
+       "dist_atr": 1.13
+      },
+      {
+       "kind": "swing low",
+       "level": 82640.0,
+       "dist_atr": 3.08
+      },
+      {
+       "kind": "equal lows",
+       "level": 82545.82,
+       "dist_atr": 4.42
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 82535.04,
+       "high": 82616.0,
+       "retraced": true,
+       "candles_ago": 117
+      },
+      {
+       "dir": 1,
+       "low": 82600.0,
+       "high": 82659.02,
+       "retraced": true,
+       "candles_ago": 95
+      },
+      {
+       "dir": 1,
+       "low": 82664.01,
+       "high": 82743.94,
+       "retraced": false,
+       "candles_ago": 81
+      },
+      {
+       "dir": -1,
+       "low": 82978.07,
+       "high": 83097.39,
+       "retraced": true,
+       "candles_ago": 3
+      },
+      {
+       "dir": -1,
+       "low": 82880.01,
+       "high": 82926.0,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 85950.0,
+       "high": 86352.05,
+       "state": "breaker",
+       "candles_ago": 437
+      },
+      {
+       "dir": -1,
+       "low": 86531.14,
+       "high": 86698.99,
+       "state": "active",
+       "candles_ago": 433
+      },
+      {
+       "dir": -1,
+       "low": 85500.57,
+       "high": 85566.61,
+       "state": "active",
+       "candles_ago": 395
+      },
+      {
+       "dir": 1,
+       "low": 82778.0,
+       "high": 82830.29,
+       "state": "active",
+       "candles_ago": 55
+      },
+      {
+       "dir": 1,
+       "low": 83039.96,
+       "high": 83082.01,
+       "state": "breaker",
+       "candles_ago": 6
+      }
+     ],
+     "last_sweep": {
+      "bull": 21,
+      "bear": 76
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82995.13,
+      "zone_high": 83012.68,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 83082.01,
+      "zone_high": 83097.39,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 83082.01,
+      "zone_high": 83097.39,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 82934.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.135,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82830.29,
+      "zone_high": 82886.0,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82978.07,
+      "zone_high": 83097.39,
+      "size_atr": 1.94,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1996,
+      "time": 1791690299999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82978.07,
+      "zone_high": 83097.39,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82778.0,
+      "zone_high": 82830.29,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82830.29,
+      "zone_high": 82886.0,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791692099999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82880.01,
+      "zone_high": 82926.0,
+      "size_atr": 0.651,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "5m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 82885.63,
+      "candles_ago": 4
+     },
+     "dealing_range": {
+      "high": 83011.0,
+      "low": 82885.63,
+      "position": -0.2203078886496843,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 82991.53199999999,
+      "high": 83038.894,
+      "candles_ago": 4
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 83011.0,
+       "dist_atr": 3.87
+      },
+      {
+       "kind": "equal highs",
+       "level": 83173.29,
+       "dist_atr": 7.98
+      },
+      {
+       "kind": "PDH",
+       "level": 83173.29,
+       "dist_atr": 7.98
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 82778.0,
+       "dist_atr": 2.02
+      },
+      {
+       "kind": "swing low",
+       "level": 82640.0,
+       "dist_atr": 5.51
+      },
+      {
+       "kind": "equal lows",
+       "level": 82545.82,
+       "dist_atr": 7.9
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 83065.88,
+       "high": 83097.39,
+       "retraced": false,
+       "candles_ago": 13
+      },
+      {
+       "dir": -1,
+       "low": 83046.01,
+       "high": 83065.87,
+       "retraced": false,
+       "candles_ago": 12
+      },
+      {
+       "dir": -1,
+       "low": 82978.07,
+       "high": 83046.0,
+       "retraced": true,
+       "candles_ago": 11
+      },
+      {
+       "dir": -1,
+       "low": 82920.72,
+       "high": 82982.0,
+       "retraced": false,
+       "candles_ago": 4
+      },
+      {
+       "dir": -1,
+       "low": 82872.01,
+       "high": 82920.71,
+       "retraced": true,
+       "candles_ago": 3
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 82580.0,
+       "high": 82592.01,
+       "state": "active",
+       "candles_ago": 288
+      },
+      {
+       "dir": 1,
+       "low": 82778.0,
+       "high": 82830.29,
+       "state": "active",
+       "candles_ago": 165
+      },
+      {
+       "dir": 1,
+       "low": 83039.96,
+       "high": 83053.45,
+       "state": "breaker",
+       "candles_ago": 22
+      },
+      {
+       "dir": -1,
+       "low": 83089.38,
+       "high": 83150.61,
+       "state": "active",
+       "candles_ago": 12
+      },
+      {
+       "dir": -1,
+       "low": 82978.06,
+       "high": 83011.0,
+       "state": "active",
+       "candles_ago": 4
+      }
+     ],
+     "last_sweep": {
+      "bull": 65,
+      "bear": 31
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82940.0,
+      "zone_high": 82978.06,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82940.0,
+      "zone_high": 82978.06,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 82885.63,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.808,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82978.06,
+      "zone_high": 83011.0,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "BREAKER_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82819.83,
+      "zone_high": 82850.0,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82778.0,
+      "zone_high": 82830.29,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 82822.01,
+      "zone_high": 82886.0,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82920.72,
+      "zone_high": 82982.0,
+      "size_atr": 1.57,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4995,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82872.01,
+      "zone_high": 82920.71,
+      "size_atr": 1.219,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4997,
+      "time": 1791691799999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 82872.01,
+      "zone_high": 82920.71,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     }
+    ]
+   }
+  },
+  "ETH": {
+   "4h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 2538.06,
+      "candles_ago": 16
+     },
+     "dealing_range": {
+      "high": 2520.54,
+      "low": 2474.34,
+      "position": 0.5469696969696988,
+      "zone": "premium"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 2639.17,
+      "high": 2669.77,
+      "candles_ago": 16
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 2519.51,
+       "dist_atr": 0.8
+      },
+      {
+       "kind": "swing high",
+       "level": 2520.54,
+       "dist_atr": 0.84
+      },
+      {
+       "kind": "swing high",
+       "level": 2587.28,
+       "dist_atr": 3.53
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 2486.03,
+       "dist_atr": 0.55
+      },
+      {
+       "kind": "swing low",
+       "level": 2474.34,
+       "dist_atr": 1.02
+      },
+      {
+       "kind": "swing low",
+       "level": 2406.11,
+       "dist_atr": 3.77
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1929.94,
+       "high": 2067.43,
+       "retraced": false,
+       "candles_ago": 314
+      },
+      {
+       "dir": 1,
+       "low": 2108.0,
+       "high": 2221.54,
+       "retraced": false,
+       "candles_ago": 312
+      },
+      {
+       "dir": -1,
+       "low": 2623.83,
+       "high": 2690.78,
+       "retraced": false,
+       "candles_ago": 23
+      },
+      {
+       "dir": -1,
+       "low": 2584.74,
+       "high": 2605.24,
+       "retraced": true,
+       "candles_ago": 21
+      },
+      {
+       "dir": -1,
+       "low": 2465.96,
+       "high": 2527.57,
+       "retraced": true,
+       "candles_ago": 14
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1906.19,
+       "high": 1919.15,
+       "state": "active",
+       "candles_ago": 315
+      },
+      {
+       "dir": 1,
+       "low": 2379.41,
+       "high": 2419.33,
+       "state": "active",
+       "candles_ago": 225
+      },
+      {
+       "dir": -1,
+       "low": 2745.99,
+       "high": 2784.4,
+       "state": "active",
+       "candles_ago": 105
+      },
+      {
+       "dir": 1,
+       "low": 2652.2,
+       "high": 2695.38,
+       "state": "breaker",
+       "candles_ago": 70
+      },
+      {
+       "dir": -1,
+       "low": 2690.78,
+       "high": 2700.54,
+       "state": "active",
+       "candles_ago": 24
+      }
+     ],
+     "last_sweep": {
+      "bull": 21,
+      "bear": 52
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1477,
+      "time": 1791388799999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2584.74,
+      "zone_high": 2605.24,
+      "size_atr": 0.657,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1480,
+      "time": 1791431999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2584.74,
+      "zone_high": 2605.24,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1482,
+      "time": 1791460799999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 2538.06,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.021,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "OB_INVALID",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2436.41,
+      "zone_high": 2458.99,
+      "size_atr": null,
+      "killzone": null,
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2458.99,
+      "zone_high": 2470.0,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2458.99,
+      "zone_high": 2470.0,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2521.65,
+      "zone_high": 2578.93,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2436.41,
+      "zone_high": 2458.99,
+      "size_atr": null,
+      "killzone": null,
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2465.96,
+      "zone_high": 2527.57,
+      "size_atr": 1.594,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2465.96,
+      "zone_high": 2527.57,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     }
+    ]
+   },
+   "1h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 2545.19,
+      "candles_ago": 64
+     },
+     "dealing_range": {
+      "high": 2519.51,
+      "low": 2474.34,
+      "position": 0.5594421075935342,
+      "zone": "premium"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 2564.5902,
+      "high": 2574.7409000000002,
+      "candles_ago": 64
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 2519.51,
+       "dist_atr": 2.67
+      },
+      {
+       "kind": "equal highs",
+       "level": 2520.54,
+       "dist_atr": 2.81
+      },
+      {
+       "kind": "swing high",
+       "level": 2577.39,
+       "dist_atr": 10.44
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 2486.03,
+       "dist_atr": 1.82
+      },
+      {
+       "kind": "swing low",
+       "level": 2474.34,
+       "dist_atr": 3.39
+      },
+      {
+       "kind": "swing low",
+       "level": 2471.05,
+       "dist_atr": 3.83
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 2583.46,
+       "high": 2592.98,
+       "retraced": true,
+       "candles_ago": 88
+      },
+      {
+       "dir": -1,
+       "low": 2551.76,
+       "high": 2556.06,
+       "retraced": false,
+       "candles_ago": 64
+      },
+      {
+       "dir": -1,
+       "low": 2539.02,
+       "high": 2548.38,
+       "retraced": true,
+       "candles_ago": 63
+      },
+      {
+       "dir": 1,
+       "low": 2427.0,
+       "high": 2443.52,
+       "retraced": false,
+       "candles_ago": 56
+      },
+      {
+       "dir": 1,
+       "low": 2449.65,
+       "high": 2464.6,
+       "retraced": false,
+       "candles_ago": 55
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 2255.68,
+       "high": 2298.19,
+       "state": "active",
+       "candles_ago": 1236
+      },
+      {
+       "dir": 1,
+       "low": 2362.66,
+       "high": 2398.71,
+       "state": "active",
+       "candles_ago": 1219
+      },
+      {
+       "dir": 1,
+       "low": 2608.31,
+       "high": 2635.68,
+       "state": "breaker",
+       "candles_ago": 483
+      },
+      {
+       "dir": 1,
+       "low": 2652.2,
+       "high": 2667.85,
+       "state": "breaker",
+       "candles_ago": 285
+      },
+      {
+       "dir": -1,
+       "low": 2693.78,
+       "high": 2700.54,
+       "state": "active",
+       "candles_ago": 98
+      }
+     ],
+     "last_sweep": {
+      "bull": 32,
+      "bear": 8
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1953,
+      "time": 1791529199999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 2500.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.126,
+      "killzone": "London",
+      "info": "buy-side liquidity swept (swing high)"
+     },
+     {
+      "t": 1953,
+      "time": 1791529199999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2500.4,
+      "zone_high": 2511.22,
+      "size_atr": null,
+      "killzone": "London",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1954,
+      "time": 1791532799999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 2500.0,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.245,
+      "killzone": "London",
+      "info": "no displacement"
+     },
+     {
+      "t": 1958,
+      "time": 1791547199999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2442.08,
+      "zone_high": 2517.74,
+      "size_atr": null,
+      "killzone": "NY AM",
+      "info": ""
+     },
+     {
+      "t": 1966,
+      "time": 1791575999999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 2476.87,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.15,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1984,
+      "time": 1791640799999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 2499.14,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.021,
+      "killzone": "NY AM",
+      "info": "no displacement"
+     },
+     {
+      "t": 1986,
+      "time": 1791647999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2500.02,
+      "zone_high": 2506.95,
+      "size_atr": 0.826,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1987,
+      "time": 1791651599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2500.02,
+      "zone_high": 2506.95,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1990,
+      "time": 1791662399999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 2517.55,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.243,
+      "killzone": null,
+      "info": "buy-side liquidity swept (swing high)"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2500.02,
+      "zone_high": 2506.95,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "30m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 2498.88,
+      "candles_ago": 29
+     },
+     "dealing_range": {
+      "high": 2519.51,
+      "low": 2503.12,
+      "position": -0.2141549725442156,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 2494.5216,
+      "high": 2495.7048,
+      "candles_ago": 29
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 2519.51,
+       "dist_atr": 4.11
+      },
+      {
+       "kind": "equal highs",
+       "level": 2520.54,
+       "dist_atr": 4.33
+      },
+      {
+       "kind": "swing high",
+       "level": 2577.39,
+       "dist_atr": 16.08
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "equal lows",
+       "level": 2492.34,
+       "dist_atr": 1.5
+      },
+      {
+       "kind": "swing low",
+       "level": 2489.68,
+       "dist_atr": 2.05
+      },
+      {
+       "kind": "swing low",
+       "level": 2486.03,
+       "dist_atr": 2.81
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 2544.8,
+       "high": 2548.38,
+       "retraced": false,
+       "candles_ago": 128
+      },
+      {
+       "dir": -1,
+       "low": 2468.88,
+       "high": 2527.14,
+       "retraced": true,
+       "candles_ago": 120
+      },
+      {
+       "dir": 1,
+       "low": 2425.92,
+       "high": 2436.13,
+       "retraced": false,
+       "candles_ago": 114
+      },
+      {
+       "dir": 1,
+       "low": 2449.65,
+       "high": 2455.79,
+       "retraced": false,
+       "candles_ago": 112
+      },
+      {
+       "dir": 1,
+       "low": 2459.51,
+       "high": 2464.6,
+       "retraced": false,
+       "candles_ago": 111
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 2632.23,
+       "high": 2649.14,
+       "state": "breaker",
+       "candles_ago": 967
+      },
+      {
+       "dir": 1,
+       "low": 2678.79,
+       "high": 2681.69,
+       "state": "breaker",
+       "candles_ago": 356
+      }
+     ],
+     "last_sweep": {
+      "bull": 5,
+      "bear": 16
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1983,
+      "time": 1791664199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2510.68,
+      "zone_high": 2511.95,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1983,
+      "time": 1791664199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2510.68,
+      "zone_high": 2511.95,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1990,
+      "time": 1791676799999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 2506.82,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.063,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1993,
+      "time": 1791682199999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 2504.13,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.227,
+      "killzone": "Asia",
+      "info": "sell-side liquidity swept (equal lows)"
+     },
+     {
+      "t": 1993,
+      "time": 1791682199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2499.61,
+      "zone_high": 2503.54,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1994,
+      "time": 1791683999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.19,
+      "zone_high": 2508.74,
+      "size_atr": 0.574,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.19,
+      "zone_high": 2508.74,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.19,
+      "zone_high": 2508.74,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 2503.12,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.803,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2499.61,
+      "zone_high": 2503.54,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "15m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "CHOCH",
+      "dir": -1,
+      "level": 2503.12,
+      "candles_ago": 1
+     },
+     "dealing_range": {
+      "high": 2513.59,
+      "low": 2503.12,
+      "position": -0.1575931232091739,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 2508.137,
+      "high": 2510.5765,
+      "candles_ago": 1
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 2513.59,
+       "dist_atr": 3.36
+      },
+      {
+       "kind": "PDH",
+       "level": 2519.51,
+       "dist_atr": 5.0
+      },
+      {
+       "kind": "equal highs",
+       "level": 2520.54,
+       "dist_atr": 5.28
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 2496.03,
+       "dist_atr": 1.51
+      },
+      {
+       "kind": "equal lows",
+       "level": 2492.34,
+       "dist_atr": 2.53
+      },
+      {
+       "kind": "swing low",
+       "level": 2489.68,
+       "dist_atr": 3.27
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 2542.02,
+       "high": 2548.38,
+       "retraced": true,
+       "candles_ago": 259
+      },
+      {
+       "dir": -1,
+       "low": 2513.33,
+       "high": 2527.24,
+       "retraced": true,
+       "candles_ago": 243
+      },
+      {
+       "dir": 1,
+       "low": 2419.83,
+       "high": 2436.13,
+       "retraced": false,
+       "candles_ago": 230
+      },
+      {
+       "dir": -1,
+       "low": 2508.54,
+       "high": 2511.15,
+       "retraced": true,
+       "candles_ago": 3
+      },
+      {
+       "dir": -1,
+       "low": 2502.22,
+       "high": 2505.62,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 2717.94,
+       "high": 2725.13,
+       "state": "active",
+       "candles_ago": 433
+      },
+      {
+       "dir": -1,
+       "low": 2527.24,
+       "high": 2534.73,
+       "state": "active",
+       "candles_ago": 243
+      },
+      {
+       "dir": 1,
+       "low": 2496.03,
+       "high": 2497.6,
+       "state": "active",
+       "candles_ago": 59
+      },
+      {
+       "dir": 1,
+       "low": 2497.0,
+       "high": 2499.32,
+       "state": "active",
+       "candles_ago": 55
+      },
+      {
+       "dir": -1,
+       "low": 2505.62,
+       "high": 2510.11,
+       "state": "active",
+       "candles_ago": 1
+      }
+     ],
+     "last_sweep": {
+      "bull": 12,
+      "bear": 34
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.19,
+      "zone_high": 2507.12,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2507.13,
+      "zone_high": 2508.74,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2507.13,
+      "zone_high": 2508.74,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2508.54,
+      "zone_high": 2511.15,
+      "size_atr": 0.859,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1996,
+      "time": 1791690299999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2508.54,
+      "zone_high": 2511.15,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "CHOCH",
+      "dir": -1,
+      "level": 2503.12,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 1.118,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2505.62,
+      "zone_high": 2510.11,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2497.0,
+      "zone_high": 2499.32,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2499.32,
+      "zone_high": 2503.54,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791692099999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2502.22,
+      "zone_high": 2505.62,
+      "size_atr": 0.942,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "5m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 2504.31,
+      "candles_ago": 4
+     },
+     "dealing_range": {
+      "high": 2510.11,
+      "low": 2504.31,
+      "position": -0.48965517241380285,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 2506.7596,
+      "high": 2508.7282,
+      "candles_ago": 4
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 2510.11,
+       "dist_atr": 4.1
+      },
+      {
+       "kind": "swing high",
+       "level": 2513.59,
+       "dist_atr": 5.75
+      },
+      {
+       "kind": "PDH",
+       "level": 2519.51,
+       "dist_atr": 8.56
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "equal lows",
+       "level": 2495.84,
+       "dist_atr": 2.67
+      },
+      {
+       "kind": "equal lows",
+       "level": 2492.33,
+       "dist_atr": 4.34
+      },
+      {
+       "kind": "equal lows",
+       "level": 2488.63,
+       "dist_atr": 6.09
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 2512.18,
+       "high": 2512.49,
+       "retraced": false,
+       "candles_ago": 16
+      },
+      {
+       "dir": -1,
+       "low": 2511.16,
+       "high": 2511.8,
+       "retraced": false,
+       "candles_ago": 14
+      },
+      {
+       "dir": -1,
+       "low": 2510.12,
+       "high": 2511.15,
+       "retraced": false,
+       "candles_ago": 13
+      },
+      {
+       "dir": -1,
+       "low": 2506.05,
+       "high": 2508.91,
+       "retraced": false,
+       "candles_ago": 4
+      },
+      {
+       "dir": -1,
+       "low": 2503.17,
+       "high": 2506.04,
+       "retraced": false,
+       "candles_ago": 3
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 2476.8,
+       "high": 2479.71,
+       "state": "active",
+       "candles_ago": 606
+      },
+      {
+       "dir": 1,
+       "low": 2494.47,
+       "high": 2494.94,
+       "state": "active",
+       "candles_ago": 199
+      },
+      {
+       "dir": 1,
+       "low": 2497.03,
+       "high": 2497.56,
+       "state": "active",
+       "candles_ago": 165
+      },
+      {
+       "dir": -1,
+       "low": 2511.8,
+       "high": 2512.18,
+       "state": "active",
+       "candles_ago": 12
+      },
+      {
+       "dir": -1,
+       "low": 2508.64,
+       "high": 2510.11,
+       "state": "active",
+       "candles_ago": 4
+      }
+     ],
+     "last_sweep": {
+      "bull": 38,
+      "bear": 103
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 4990,
+      "time": 1791689699999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2506.14,
+      "zone_high": 2506.87,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4991,
+      "time": 1791689999999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2508.54,
+      "zone_high": 2509.88,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4991,
+      "time": 1791689999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.14,
+      "zone_high": 2508.64,
+      "size_atr": 1.678,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.14,
+      "zone_high": 2508.64,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2506.14,
+      "zone_high": 2508.64,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 2504.31,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 2.137,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2508.64,
+      "zone_high": 2510.11,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 2499.64,
+      "zone_high": 2503.54,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2506.05,
+      "zone_high": 2508.91,
+      "size_atr": 1.512,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4995,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 2503.17,
+      "zone_high": 2506.04,
+      "size_atr": 1.409,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   }
+  },
+  "SOL": {
+   "4h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "CHOCH",
+      "dir": -1,
+      "level": 118.88,
+      "candles_ago": 24
+     },
+     "dealing_range": {
+      "high": 110.79,
+      "low": 108.45,
+      "position": 0.3034188034188003,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 120.1572,
+      "high": 121.0174,
+      "candles_ago": 24
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 110.79,
+       "dist_atr": 1.08
+      },
+      {
+       "kind": "swing high",
+       "level": 110.79,
+       "dist_atr": 1.08
+      },
+      {
+       "kind": "swing high",
+       "level": 112.06,
+       "dist_atr": 1.92
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 108.95,
+       "dist_atr": 0.14
+      },
+      {
+       "kind": "swing low",
+       "level": 108.45,
+       "dist_atr": 0.47
+      },
+      {
+       "kind": "swing low",
+       "level": 105.71,
+       "dist_atr": 2.28
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 101.76,
+       "high": 104.42,
+       "retraced": false,
+       "candles_ago": 137
+      },
+      {
+       "dir": -1,
+       "low": 119.08,
+       "high": 120.42,
+       "retraced": false,
+       "candles_ago": 23
+      },
+      {
+       "dir": -1,
+       "low": 117.5,
+       "high": 117.94,
+       "retraced": false,
+       "candles_ago": 21
+      },
+      {
+       "dir": -1,
+       "low": 113.33,
+       "high": 114.22,
+       "retraced": false,
+       "candles_ago": 15
+      },
+      {
+       "dir": -1,
+       "low": 109.47,
+       "high": 113.14,
+       "retraced": true,
+       "candles_ago": 14
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 77.11,
+       "high": 77.87,
+       "state": "breaker",
+       "candles_ago": 477
+      },
+      {
+       "dir": 1,
+       "low": 74.1,
+       "high": 75.33,
+       "state": "active",
+       "candles_ago": 329
+      },
+      {
+       "dir": 1,
+       "low": 100.69,
+       "high": 102.05,
+       "state": "active",
+       "candles_ago": 137
+      },
+      {
+       "dir": 1,
+       "low": 108.1,
+       "high": 109.26,
+       "state": "active",
+       "candles_ago": 118
+      },
+      {
+       "dir": -1,
+       "low": 120.13,
+       "high": 121.29,
+       "state": "active",
+       "candles_ago": 24
+      }
+     ],
+     "last_sweep": {
+      "bull": 14,
+      "bear": 53
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1477,
+      "time": 1791388799999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 115.86,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.204,
+      "killzone": null,
+      "info": "sell-side liquidity swept (PWL, swing low)"
+     },
+     {
+      "t": 1477,
+      "time": 1791388799999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 117.5,
+      "zone_high": 117.94,
+      "size_atr": 0.261,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1480,
+      "time": 1791431999999,
+      "event": "OB_INVALID",
+      "dir": 1,
+      "level": null,
+      "zone_low": 115.86,
+      "zone_high": 117.34,
+      "size_atr": null,
+      "killzone": null,
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1481,
+      "time": 1791446399999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 115.86,
+      "zone_high": 117.34,
+      "size_atr": null,
+      "killzone": null,
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 108.1,
+      "zone_high": 109.26,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 113.33,
+      "zone_high": 114.22,
+      "size_atr": 0.469,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 107.4,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.89,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 106.67,
+      "zone_high": 111.01,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.47,
+      "zone_high": 113.14,
+      "size_atr": 1.807,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.47,
+      "zone_high": 113.14,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     }
+    ]
+   },
+   "1h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 109.88,
+      "candles_ago": 0
+     },
+     "dealing_range": {
+      "high": 110.62,
+      "low": 109.88,
+      "position": -0.9729729729729595,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 110.031,
+      "high": 110.2945,
+      "candles_ago": 0
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 110.62,
+       "dist_atr": 2.9
+      },
+      {
+       "kind": "swing high",
+       "level": 110.79,
+       "dist_atr": 3.23
+      },
+      {
+       "kind": "PDH",
+       "level": 110.79,
+       "dist_atr": 3.23
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 108.95,
+       "dist_atr": 0.42
+      },
+      {
+       "kind": "swing low",
+       "level": 108.45,
+       "dist_atr": 1.41
+      },
+      {
+       "kind": "swing low",
+       "level": 105.71,
+       "dist_atr": 6.84
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 114.45,
+       "high": 114.68,
+       "retraced": false,
+       "candles_ago": 64
+      },
+      {
+       "dir": -1,
+       "low": 113.33,
+       "high": 114.08,
+       "retraced": false,
+       "candles_ago": 63
+      },
+      {
+       "dir": -1,
+       "low": 112.89,
+       "high": 113.14,
+       "retraced": false,
+       "candles_ago": 62
+      },
+      {
+       "dir": -1,
+       "low": 109.14,
+       "high": 112.15,
+       "retraced": true,
+       "candles_ago": 59
+      },
+      {
+       "dir": 1,
+       "low": 108.27,
+       "high": 109.03,
+       "retraced": true,
+       "candles_ago": 55
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 100.9,
+       "high": 101.71,
+       "state": "active",
+       "candles_ago": 554
+      },
+      {
+       "dir": -1,
+       "low": 120.66,
+       "high": 121.2,
+       "state": "active",
+       "candles_ago": 98
+      },
+      {
+       "dir": -1,
+       "low": 118.08,
+       "high": 118.91,
+       "state": "active",
+       "candles_ago": 87
+      },
+      {
+       "dir": -1,
+       "low": 114.68,
+       "high": 115.34,
+       "state": "active",
+       "candles_ago": 64
+      },
+      {
+       "dir": -1,
+       "low": 109.87,
+       "high": 110.26,
+       "state": "active",
+       "candles_ago": 0
+      }
+     ],
+     "last_sweep": {
+      "bull": 65,
+      "bear": 125
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1966,
+      "time": 1791575999999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 109.17,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.637,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1985,
+      "time": 1791644399999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 110.24,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.451,
+      "killzone": "Silver Bullet",
+      "info": "no displacement"
+     },
+     {
+      "t": 1986,
+      "time": 1791647999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.99,
+      "zone_high": 110.37,
+      "size_atr": 0.623,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1987,
+      "time": 1791651599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.99,
+      "zone_high": 110.37,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1988,
+      "time": 1791655199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.99,
+      "zone_high": 110.37,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1988,
+      "time": 1791655199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.2,
+      "zone_high": 110.37,
+      "size_atr": 0.293,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1989,
+      "time": 1791658799999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.2,
+      "zone_high": 110.37,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1989,
+      "time": 1791658799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.2,
+      "zone_high": 110.37,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 109.88,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 1.532,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.87,
+      "zone_high": 110.26,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     }
+    ]
+   },
+   "30m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "CHOCH",
+      "dir": -1,
+      "level": 109.87,
+      "candles_ago": 1
+     },
+     "dealing_range": {
+      "high": 110.26,
+      "low": 109.87,
+      "position": -1.8205128205128382,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 110.16579999999999,
+      "high": 110.3511,
+      "candles_ago": 1
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 110.26,
+       "dist_atr": 3.42
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.62,
+       "dist_atr": 4.54
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.79,
+       "dist_atr": 5.07
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 108.95,
+       "dist_atr": 0.65
+      },
+      {
+       "kind": "PDL",
+       "level": 108.95,
+       "dist_atr": 0.65
+      },
+      {
+       "kind": "swing low",
+       "level": 108.59,
+       "dist_atr": 1.77
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 112.93,
+       "high": 113.14,
+       "retraced": false,
+       "candles_ago": 126
+      },
+      {
+       "dir": -1,
+       "low": 109.62,
+       "high": 112.21,
+       "retraced": true,
+       "candles_ago": 120
+      },
+      {
+       "dir": 1,
+       "low": 107.09,
+       "high": 107.56,
+       "retraced": false,
+       "candles_ago": 114
+      },
+      {
+       "dir": 1,
+       "low": 108.27,
+       "high": 108.95,
+       "retraced": true,
+       "candles_ago": 112
+      },
+      {
+       "dir": -1,
+       "low": 109.77,
+       "high": 110.01,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 105.36,
+       "high": 105.91,
+       "state": "active",
+       "candles_ago": 1084
+      },
+      {
+       "dir": -1,
+       "low": 121.61,
+       "high": 123.21,
+       "state": "active",
+       "candles_ago": 410
+      },
+      {
+       "dir": 1,
+       "low": 120.16,
+       "high": 120.42,
+       "state": "breaker",
+       "candles_ago": 220
+      },
+      {
+       "dir": -1,
+       "low": 117.04,
+       "high": 117.5,
+       "state": "active",
+       "candles_ago": 175
+      },
+      {
+       "dir": -1,
+       "low": 109.87,
+       "high": 110.17,
+       "state": "active",
+       "candles_ago": 1
+      }
+     ],
+     "last_sweep": {
+      "bull": 76,
+      "bear": 45
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1978,
+      "time": 1791655199999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.12,
+      "zone_high": 110.21,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1980,
+      "time": 1791658799999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.26,
+      "zone_high": 110.41,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1980,
+      "time": 1791658799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.26,
+      "zone_high": 110.41,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1980,
+      "time": 1791658799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.12,
+      "zone_high": 110.21,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1993,
+      "time": 1791682199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.62,
+      "zone_high": 109.87,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "CHOCH",
+      "dir": -1,
+      "level": 109.87,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 1.095,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.87,
+      "zone_high": 110.17,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "OB_INVALID",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.62,
+      "zone_high": 109.87,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.62,
+      "zone_high": 109.87,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.77,
+      "zone_high": 110.01,
+      "size_atr": 0.747,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "15m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 109.99,
+      "candles_ago": 55
+     },
+     "dealing_range": {
+      "high": 110.21,
+      "low": 109.95,
+      "position": -2.3846153846154854,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 109.8048,
+      "high": 109.9544,
+      "candles_ago": 55
+     },
+     "liquidity_above": [
+      {
+       "kind": "equal highs",
+       "level": 110.26,
+       "dist_atr": 3.78
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.62,
+       "dist_atr": 5.24
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.79,
+       "dist_atr": 5.93
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 108.95,
+       "dist_atr": 1.54
+      },
+      {
+       "kind": "PDL",
+       "level": 108.95,
+       "dist_atr": 1.54
+      },
+      {
+       "kind": "swing low",
+       "level": 108.59,
+       "dist_atr": 3.01
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 108.27,
+       "high": 108.53,
+       "retraced": true,
+       "candles_ago": 227
+      },
+      {
+       "dir": -1,
+       "low": 110.72,
+       "high": 110.98,
+       "retraced": true,
+       "candles_ago": 158
+      },
+      {
+       "dir": -1,
+       "low": 110.21,
+       "high": 110.27,
+       "retraced": true,
+       "candles_ago": 18
+      },
+      {
+       "dir": -1,
+       "low": 109.73,
+       "high": 110.01,
+       "retraced": true,
+       "candles_ago": 3
+      },
+      {
+       "dir": -1,
+       "low": 109.37,
+       "high": 109.55,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 114.07,
+       "high": 115.85,
+       "state": "breaker",
+       "candles_ago": 1583
+      },
+      {
+       "dir": 1,
+       "low": 120.16,
+       "high": 120.42,
+       "state": "breaker",
+       "candles_ago": 442
+      },
+      {
+       "dir": -1,
+       "low": 117.18,
+       "high": 117.5,
+       "state": "active",
+       "candles_ago": 351
+      },
+      {
+       "dir": -1,
+       "low": 116.44,
+       "high": 116.68,
+       "state": "active",
+       "candles_ago": 292
+      },
+      {
+       "dir": -1,
+       "low": 115.01,
+       "high": 115.34,
+       "state": "active",
+       "candles_ago": 263
+      }
+     ],
+     "last_sweep": {
+      "bull": 154,
+      "bear": 59
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1987,
+      "time": 1791682199999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 110.02,
+      "zone_high": 110.08,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1988,
+      "time": 1791683099999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 110.0,
+      "zone_high": 110.1,
+      "size_atr": 0.562,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1989,
+      "time": 1791683999999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 110.0,
+      "zone_high": 110.1,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1990,
+      "time": 1791684899999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 110.0,
+      "zone_high": 110.1,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 109.95,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 1.537,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "OB_INVALID",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.72,
+      "zone_high": 109.94,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.72,
+      "zone_high": 109.94,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.73,
+      "zone_high": 110.01,
+      "size_atr": 1.406,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1996,
+      "time": 1791690299999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.73,
+      "zone_high": 110.01,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1998,
+      "time": 1791692099999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.37,
+      "zone_high": 109.55,
+      "size_atr": 0.732,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "5m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 109.49,
+      "candles_ago": 5
+     },
+     "dealing_range": {
+      "high": 109.77,
+      "low": 109.49,
+      "position": -0.571428571428557,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 109.822,
+      "high": 109.92399999999999,
+      "candles_ago": 5
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 109.77,
+       "dist_atr": 2.88
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.26,
+       "dist_atr": 6.1
+      },
+      {
+       "kind": "equal highs",
+       "level": 110.62,
+       "dist_atr": 8.46
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 108.95,
+       "dist_atr": 2.49
+      },
+      {
+       "kind": "PDL",
+       "level": 108.95,
+       "dist_atr": 2.49
+      },
+      {
+       "kind": "swing low",
+       "level": 108.59,
+       "dist_atr": 4.85
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 109.9,
+       "high": 110.01,
+       "retraced": false,
+       "candles_ago": 13
+      },
+      {
+       "dir": -1,
+       "low": 109.8,
+       "high": 109.89,
+       "retraced": false,
+       "candles_ago": 12
+      },
+      {
+       "dir": -1,
+       "low": 109.73,
+       "high": 109.79,
+       "retraced": true,
+       "candles_ago": 11
+      },
+      {
+       "dir": -1,
+       "low": 109.48,
+       "high": 109.66,
+       "retraced": false,
+       "candles_ago": 4
+      },
+      {
+       "dir": -1,
+       "low": 109.3,
+       "high": 109.45,
+       "retraced": true,
+       "candles_ago": 3
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 116.58,
+       "high": 116.78,
+       "state": "active",
+       "candles_ago": 876
+      },
+      {
+       "dir": -1,
+       "low": 114.94,
+       "high": 115.09,
+       "state": "active",
+       "candles_ago": 789
+      },
+      {
+       "dir": -1,
+       "low": 112.53,
+       "high": 112.89,
+       "state": "active",
+       "candles_ago": 751
+      },
+      {
+       "dir": -1,
+       "low": 110.46,
+       "high": 110.52,
+       "state": "active",
+       "candles_ago": 58
+      },
+      {
+       "dir": -1,
+       "low": 109.55,
+       "high": 109.73,
+       "state": "active",
+       "candles_ago": 5
+      }
+     ],
+     "last_sweep": {
+      "bull": 12,
+      "bear": 116
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 4987,
+      "time": 1791688799999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.73,
+      "zone_high": 109.79,
+      "size_atr": 0.531,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4990,
+      "time": 1791689699999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.73,
+      "zone_high": 109.79,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4991,
+      "time": 1791689999999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.6,
+      "zone_high": 109.69,
+      "size_atr": 0.785,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4992,
+      "time": 1791690299999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.6,
+      "zone_high": 109.69,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 109.49,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.09,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.55,
+      "zone_high": 109.73,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 4993,
+      "time": 1791690599999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 109.6,
+      "zone_high": 109.69,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791690899999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.48,
+      "zone_high": 109.66,
+      "size_atr": 1.256,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4995,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.3,
+      "zone_high": 109.45,
+      "size_atr": 1.038,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4997,
+      "time": 1791691799999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 109.3,
+      "zone_high": 109.45,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     }
+    ]
+   }
+  },
+  "ZEC": {
+   "4h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1289.54,
+      "candles_ago": 17
+     },
+     "dealing_range": {
+      "high": 1242.25,
+      "low": 1195.86,
+      "position": 0.5662858374649742,
+      "zone": "premium"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1325.1158,
+      "high": 1351.9061,
+      "candles_ago": 17
+     },
+     "liquidity_above": [
+      {
+       "kind": "PDH",
+       "level": 1242.25,
+       "dist_atr": 0.65
+      },
+      {
+       "kind": "swing high",
+       "level": 1242.25,
+       "dist_atr": 0.65
+      },
+      {
+       "kind": "swing high",
+       "level": 1247.58,
+       "dist_atr": 0.83
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "PDL",
+       "level": 1202.41,
+       "dist_atr": 0.64
+      },
+      {
+       "kind": "swing low",
+       "level": 1195.86,
+       "dist_atr": 0.85
+      },
+      {
+       "kind": "swing low",
+       "level": 1112.77,
+       "dist_atr": 3.56
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1027.8,
+       "high": 1065.24,
+       "retraced": true,
+       "candles_ago": 209
+      },
+      {
+       "dir": -1,
+       "low": 1615.13,
+       "high": 1647.22,
+       "retraced": false,
+       "candles_ago": 80
+      },
+      {
+       "dir": -1,
+       "low": 1489.14,
+       "high": 1521.2,
+       "retraced": true,
+       "candles_ago": 73
+      },
+      {
+       "dir": -1,
+       "low": 1246.06,
+       "high": 1295.98,
+       "retraced": true,
+       "candles_ago": 16
+      },
+      {
+       "dir": 1,
+       "low": 1170.15,
+       "high": 1183.24,
+       "retraced": false,
+       "candles_ago": 12
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1098.88,
+       "high": 1133.82,
+       "state": "active",
+       "candles_ago": 148
+      },
+      {
+       "dir": 1,
+       "low": 1527.56,
+       "high": 1540.22,
+       "state": "breaker",
+       "candles_ago": 85
+      },
+      {
+       "dir": -1,
+       "low": 1540.16,
+       "high": 1569.23,
+       "state": "active",
+       "candles_ago": 74
+      },
+      {
+       "dir": -1,
+       "low": 1397.89,
+       "high": 1447.6,
+       "state": "active",
+       "candles_ago": 56
+      },
+      {
+       "dir": -1,
+       "low": 1302.5,
+       "high": 1348.0,
+       "state": "active",
+       "candles_ago": 17
+      }
+     ],
+     "last_sweep": {
+      "bull": 32,
+      "bear": 63
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1133.3,
+      "zone_high": 1168.59,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1483,
+      "time": 1791475199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1133.3,
+      "zone_high": 1168.59,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1170.15,
+      "zone_high": 1194.47,
+      "size_atr": 0.506,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1170.15,
+      "zone_high": 1194.47,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1170.15,
+      "zone_high": 1194.47,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1486,
+      "time": 1791518399999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1170.15,
+      "zone_high": 1183.24,
+      "size_atr": 0.283,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1487,
+      "time": 1791532799999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1195.87,
+      "zone_high": 1215.67,
+      "size_atr": 0.448,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1488,
+      "time": 1791547199999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1246.06,
+      "zone_high": 1295.98,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1488,
+      "time": 1791547199999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1195.87,
+      "zone_high": 1215.67,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1490,
+      "time": 1791575999999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1195.87,
+      "zone_high": 1215.67,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "1h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1201.45,
+      "candles_ago": 32
+     },
+     "dealing_range": {
+      "high": 1242.25,
+      "low": 1217.12,
+      "position": 0.1993633107839314,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1227.9263999999998,
+      "high": 1236.7187999999999,
+      "candles_ago": 32
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1242.25,
+       "dist_atr": 1.99
+      },
+      {
+       "kind": "PDH",
+       "level": 1242.25,
+       "dist_atr": 1.99
+      },
+      {
+       "kind": "swing high",
+       "level": 1247.58,
+       "dist_atr": 2.52
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1217.12,
+       "dist_atr": 0.5
+      },
+      {
+       "kind": "swing low",
+       "level": 1202.41,
+       "dist_atr": 1.95
+      },
+      {
+       "kind": "PDL",
+       "level": 1202.41,
+       "dist_atr": 1.95
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 1334.15,
+       "high": 1360.32,
+       "retraced": true,
+       "candles_ago": 97
+      },
+      {
+       "dir": -1,
+       "low": 1299.36,
+       "high": 1312.2,
+       "retraced": false,
+       "candles_ago": 71
+      },
+      {
+       "dir": -1,
+       "low": 1251.23,
+       "high": 1295.98,
+       "retraced": true,
+       "candles_ago": 70
+      },
+      {
+       "dir": 1,
+       "low": 1153.95,
+       "high": 1168.73,
+       "retraced": false,
+       "candles_ago": 55
+      },
+      {
+       "dir": 1,
+       "low": 1195.71,
+       "high": 1210.12,
+       "retraced": true,
+       "candles_ago": 48
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 1657.55,
+       "high": 1667.92,
+       "state": "active",
+       "candles_ago": 325
+      },
+      {
+       "dir": -1,
+       "low": 1567.69,
+       "high": 1599.73,
+       "state": "active",
+       "candles_ago": 301
+      },
+      {
+       "dir": -1,
+       "low": 1475.18,
+       "high": 1489.14,
+       "state": "active",
+       "candles_ago": 290
+      },
+      {
+       "dir": -1,
+       "low": 1380.0,
+       "high": 1406.8,
+       "state": "active",
+       "candles_ago": 227
+      },
+      {
+       "dir": -1,
+       "low": 1363.35,
+       "high": 1403.16,
+       "state": "active",
+       "candles_ago": 201
+      }
+     ],
+     "last_sweep": {
+      "bull": 5,
+      "bear": 114
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1949,
+      "time": 1791514799999,
+      "event": "OB_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1199.39,
+      "zone_high": 1222.02,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1949,
+      "time": 1791514799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1156.69,
+      "zone_high": 1203.41,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1950,
+      "time": 1791518399999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1195.71,
+      "zone_high": 1210.12,
+      "size_atr": 0.645,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1953,
+      "time": 1791529199999,
+      "event": "OB_INVALID",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1199.39,
+      "zone_high": 1222.02,
+      "size_atr": null,
+      "killzone": "London",
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1955,
+      "time": 1791536399999,
+      "event": "BREAKER_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1199.39,
+      "zone_high": 1222.02,
+      "size_atr": null,
+      "killzone": "London",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1960,
+      "time": 1791554399999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1195.71,
+      "zone_high": 1210.12,
+      "size_atr": null,
+      "killzone": "NY AM",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1966,
+      "time": 1791575999999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1201.45,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.005,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1976,
+      "time": 1791611999999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1225.31,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.075,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1985,
+      "time": 1791644399999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1234.93,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.056,
+      "killzone": "Silver Bullet",
+      "info": "no displacement"
+     },
+     {
+      "t": 1993,
+      "time": 1791673199999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 1220.4,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.336,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     }
+    ]
+   },
+   "30m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1221.91,
+      "candles_ago": 9
+     },
+     "dealing_range": {
+      "high": 1230.07,
+      "low": 1217.12,
+      "position": 0.38687258687260234,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1226.6158,
+      "high": 1228.1611,
+      "candles_ago": 9
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1242.25,
+       "dist_atr": 2.89
+      },
+      {
+       "kind": "PDH",
+       "level": 1242.25,
+       "dist_atr": 2.89
+      },
+      {
+       "kind": "swing high",
+       "level": 1247.58,
+       "dist_atr": 3.66
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1217.12,
+       "dist_atr": 0.72
+      },
+      {
+       "kind": "swing low",
+       "level": 1210.68,
+       "dist_atr": 1.65
+      },
+      {
+       "kind": "swing low",
+       "level": 1202.41,
+       "dist_atr": 2.83
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 1326.34,
+       "high": 1356.73,
+       "retraced": true,
+       "candles_ago": 195
+      },
+      {
+       "dir": -1,
+       "low": 1310.32,
+       "high": 1315.29,
+       "retraced": false,
+       "candles_ago": 144
+      },
+      {
+       "dir": -1,
+       "low": 1258.09,
+       "high": 1295.98,
+       "retraced": false,
+       "candles_ago": 142
+      },
+      {
+       "dir": 1,
+       "low": 1151.46,
+       "high": 1168.73,
+       "retraced": false,
+       "candles_ago": 111
+      },
+      {
+       "dir": -1,
+       "low": 1227.9,
+       "high": 1233.7,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1028.22,
+       "high": 1034.98,
+       "state": "active",
+       "candles_ago": 1685
+      },
+      {
+       "dir": -1,
+       "low": 1645.32,
+       "high": 1664.0,
+       "state": "active",
+       "candles_ago": 651
+      },
+      {
+       "dir": -1,
+       "low": 1521.0,
+       "high": 1532.79,
+       "state": "active",
+       "candles_ago": 593
+      },
+      {
+       "dir": -1,
+       "low": 1476.92,
+       "high": 1487.14,
+       "state": "active",
+       "candles_ago": 581
+      },
+      {
+       "dir": -1,
+       "low": 1362.25,
+       "high": 1370.21,
+       "state": "active",
+       "candles_ago": 196
+      }
+     ],
+     "last_sweep": {
+      "bull": 10,
+      "bear": 44
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1934,
+      "time": 1791575999999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1203.81,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.198,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1946,
+      "time": 1791597599999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1218.38,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.439,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1953,
+      "time": 1791610199999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1225.31,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.068,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1954,
+      "time": 1791611999999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 1228.1,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.135,
+      "killzone": null,
+      "info": "buy-side liquidity swept (swing high)"
+     },
+     {
+      "t": 1972,
+      "time": 1791644399999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1234.93,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.101,
+      "killzone": "Silver Bullet",
+      "info": "no displacement"
+     },
+     {
+      "t": 1987,
+      "time": 1791671399999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 1221.9,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.139,
+      "killzone": null,
+      "info": "sell-side liquidity swept (equal lows)"
+     },
+     {
+      "t": 1988,
+      "time": 1791673199999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 1220.4,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.576,
+      "killzone": null,
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 1989,
+      "time": 1791674999999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1221.91,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.055,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1993,
+      "time": 1791682199999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1230.07,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.222,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1227.9,
+      "zone_high": 1233.7,
+      "size_atr": 0.833,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "15m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "CHOCH",
+      "dir": 1,
+      "level": 1225.12,
+      "candles_ago": 11
+     },
+     "dealing_range": {
+      "high": 1239.6,
+      "low": 1218.87,
+      "position": 0.31741437530150257,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 1220.2448,
+      "high": 1222.7744,
+      "candles_ago": 11
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1239.6,
+       "dist_atr": 2.8
+      },
+      {
+       "kind": "swing high",
+       "level": 1242.25,
+       "dist_atr": 3.33
+      },
+      {
+       "kind": "PDH",
+       "level": 1242.25,
+       "dist_atr": 3.33
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1218.87,
+       "dist_atr": 1.3
+      },
+      {
+       "kind": "swing low",
+       "level": 1217.12,
+       "dist_atr": 1.65
+      },
+      {
+       "kind": "swing low",
+       "level": 1210.68,
+       "dist_atr": 2.92
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 1299.36,
+       "high": 1303.04,
+       "retraced": false,
+       "candles_ago": 288
+      },
+      {
+       "dir": -1,
+       "low": 1258.09,
+       "high": 1291.0,
+       "retraced": false,
+       "candles_ago": 286
+      },
+      {
+       "dir": 1,
+       "low": 1148.58,
+       "high": 1156.04,
+       "retraced": false,
+       "candles_ago": 225
+      },
+      {
+       "dir": 1,
+       "low": 1195.71,
+       "high": 1200.01,
+       "retraced": true,
+       "candles_ago": 199
+      },
+      {
+       "dir": -1,
+       "low": 1230.63,
+       "high": 1233.7,
+       "retraced": false,
+       "candles_ago": 3
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 1481.88,
+       "high": 1489.12,
+       "state": "active",
+       "candles_ago": 1164
+      },
+      {
+       "dir": -1,
+       "low": 1436.66,
+       "high": 1441.67,
+       "state": "active",
+       "candles_ago": 947
+      },
+      {
+       "dir": -1,
+       "low": 1354.84,
+       "high": 1361.22,
+       "state": "active",
+       "candles_ago": 393
+      },
+      {
+       "dir": 1,
+       "low": 1302.13,
+       "high": 1319.49,
+       "state": "breaker",
+       "candles_ago": 345
+      },
+      {
+       "dir": 1,
+       "low": 1218.87,
+       "high": 1221.43,
+       "state": "active",
+       "candles_ago": 11
+      }
+     ],
+     "last_sweep": {
+      "bull": 21,
+      "bear": 13
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1989,
+      "time": 1791683999999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1226.63,
+      "zone_high": 1227.7,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1989,
+      "time": 1791683999999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1226.63,
+      "zone_high": 1227.7,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1991,
+      "time": 1791685799999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1229.53,
+      "zone_high": 1232.28,
+      "size_atr": 0.635,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1992,
+      "time": 1791686699999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1232.74,
+      "zone_high": 1235.12,
+      "size_atr": 0.552,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1993,
+      "time": 1791687599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1232.74,
+      "zone_high": 1235.12,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1229.53,
+      "zone_high": 1232.28,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1229.53,
+      "zone_high": 1232.28,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1232.74,
+      "zone_high": 1235.12,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1230.63,
+      "zone_high": 1233.7,
+      "size_atr": 0.619,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1997,
+      "time": 1791691199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1218.87,
+      "zone_high": 1221.43,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     }
+    ]
+   },
+   "5m": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 1234.92,
+      "candles_ago": 23
+     },
+     "dealing_range": {
+      "high": 1227.9,
+      "low": 1220.61,
+      "position": 0.41426611796983953,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 1228.95,
+      "high": 1230.99,
+      "candles_ago": 23
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1227.9,
+       "dist_atr": 1.37
+      },
+      {
+       "kind": "equal highs",
+       "level": 1239.6,
+       "dist_atr": 5.12
+      },
+      {
+       "kind": "swing high",
+       "level": 1242.25,
+       "dist_atr": 5.97
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1220.61,
+       "dist_atr": 0.97
+      },
+      {
+       "kind": "swing low",
+       "level": 1218.87,
+       "dist_atr": 1.53
+      },
+      {
+       "kind": "swing low",
+       "level": 1217.12,
+       "dist_atr": 2.09
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1206.55,
+       "high": 1207.93,
+       "retraced": false,
+       "candles_ago": 337
+      },
+      {
+       "dir": 1,
+       "low": 1214.17,
+       "high": 1215.43,
+       "retraced": true,
+       "candles_ago": 293
+      },
+      {
+       "dir": -1,
+       "low": 1232.56,
+       "high": 1235.31,
+       "retraced": false,
+       "candles_ago": 14
+      },
+      {
+       "dir": -1,
+       "low": 1227.49,
+       "high": 1228.6,
+       "retraced": true,
+       "candles_ago": 11
+      },
+      {
+       "dir": -1,
+       "low": 1224.59,
+       "high": 1226.21,
+       "retraced": true,
+       "candles_ago": 5
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1301.33,
+       "high": 1305.69,
+       "state": "breaker",
+       "candles_ago": 1052
+      },
+      {
+       "dir": 1,
+       "low": 1302.13,
+       "high": 1312.78,
+       "state": "breaker",
+       "candles_ago": 1037
+      },
+      {
+       "dir": 1,
+       "low": 1144.07,
+       "high": 1148.55,
+       "state": "active",
+       "candles_ago": 680
+      },
+      {
+       "dir": 1,
+       "low": 1214.7,
+       "high": 1217.23,
+       "state": "active",
+       "candles_ago": 291
+      },
+      {
+       "dir": 1,
+       "low": 1220.1,
+       "high": 1221.53,
+       "state": "active",
+       "candles_ago": 42
+      }
+     ],
+     "last_sweep": {
+      "bull": 48,
+      "bear": 24
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 4989,
+      "time": 1791689699999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1223.8,
+      "zone_high": 1226.63,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 4989,
+      "time": 1791689699999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1226.26,
+      "zone_high": 1227.1,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4989,
+      "time": 1791689699999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1226.26,
+      "zone_high": 1227.1,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4990,
+      "time": 1791689999999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1227.54,
+      "zone_high": 1230.67,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 4990,
+      "time": 1791689999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1227.49,
+      "zone_high": 1228.6,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4993,
+      "time": 1791690899999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1224.59,
+      "zone_high": 1226.21,
+      "size_atr": 0.536,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791691199999,
+      "event": "WEAK_BREAK",
+      "dir": -1,
+      "level": 1222.73,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.199,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 4994,
+      "time": 1791691199999,
+      "event": "OB_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1220.1,
+      "zone_high": 1221.53,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 4994,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1221.53,
+      "zone_high": 1223.68,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791691199999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1224.59,
+      "zone_high": 1226.21,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     }
+    ]
+   }
+  },
+  "XRP": {
+   "4h": {
+    "state": {
+     "trend": "up",
+     "last_break": {
+      "kind": "BOS",
+      "dir": 1,
+      "level": 1.4074,
+      "candles_ago": 3
+     },
+     "dealing_range": {
+      "high": 1.413,
+      "low": 1.3741,
+      "position": 0.39074550128534463,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": 1,
+      "low": 1.381053,
+      "high": 1.387734,
+      "candles_ago": 3
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1.413,
+       "dist_atr": 1.24
+      },
+      {
+       "kind": "PDH",
+       "level": 1.413,
+       "dist_atr": 1.24
+      },
+      {
+       "kind": "swing high",
+       "level": 1.524,
+       "dist_atr": 7.07
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1.3741,
+       "dist_atr": 0.8
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3189,
+       "dist_atr": 3.69
+      },
+      {
+       "kind": "swing low",
+       "level": 1.2877,
+       "dist_atr": 5.33
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1.1135,
+       "high": 1.1776,
+       "retraced": false,
+       "candles_ago": 309
+      },
+      {
+       "dir": 1,
+       "low": 1.1962,
+       "high": 1.2202,
+       "retraced": false,
+       "candles_ago": 308
+      },
+      {
+       "dir": 1,
+       "low": 1.3008,
+       "high": 1.3142,
+       "retraced": false,
+       "candles_ago": 137
+      },
+      {
+       "dir": -1,
+       "low": 1.4778,
+       "high": 1.496,
+       "retraced": false,
+       "candles_ago": 23
+      },
+      {
+       "dir": -1,
+       "low": 1.4519,
+       "high": 1.4597,
+       "retraced": false,
+       "candles_ago": 21
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 1.1296,
+       "high": 1.1379,
+       "state": "breaker",
+       "candles_ago": 477
+      },
+      {
+       "dir": -1,
+       "low": 1.1057,
+       "high": 1.1153,
+       "state": "breaker",
+       "candles_ago": 453
+      },
+      {
+       "dir": 1,
+       "low": 0.9959,
+       "high": 1.0021,
+       "state": "active",
+       "candles_ago": 315
+      },
+      {
+       "dir": 1,
+       "low": 1.2202,
+       "high": 1.3441,
+       "state": "active",
+       "candles_ago": 304
+      }
+     ],
+     "last_sweep": {
+      "bull": 17,
+      "bear": 5
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "BREAKER_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3773,
+      "zone_high": 1.3856,
+      "size_atr": null,
+      "killzone": null,
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1484,
+      "time": 1791489599999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3774,
+      "zone_high": 1.3937,
+      "size_atr": 0.571,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1485,
+      "time": 1791503999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3774,
+      "zone_high": 1.3937,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1486,
+      "time": 1791518399999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3774,
+      "zone_high": 1.3937,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1492,
+      "time": 1791604799999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 1.4074,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.105,
+      "killzone": null,
+      "info": "buy-side liquidity swept (swing high)"
+     },
+     {
+      "t": 1493,
+      "time": 1791619199999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 1.4074,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.233,
+      "killzone": null,
+      "info": "buy-side liquidity swept (PDH)"
+     },
+     {
+      "t": 1493,
+      "time": 1791619199999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3975,
+      "zone_high": 1.4036,
+      "size_atr": 0.265,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1494,
+      "time": 1791633599999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3975,
+      "zone_high": 1.4036,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1495,
+      "time": 1791647999999,
+      "event": "BOS",
+      "dir": 1,
+      "level": 1.4074,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.045,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1498,
+      "time": 1791691199999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3975,
+      "zone_high": 1.4036,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "1h": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1.4025,
+      "candles_ago": 4
+     },
+     "dealing_range": {
+      "high": 1.4092,
+      "low": 1.4025,
+      "position": -1.9701492537313794,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1.4082999999999999,
+      "high": 1.41,
+      "candles_ago": 4
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1.4092,
+       "dist_atr": 3.36
+      },
+      {
+       "kind": "equal highs",
+       "level": 1.413,
+       "dist_atr": 4.0
+      },
+      {
+       "kind": "PDH",
+       "level": 1.413,
+       "dist_atr": 4.0
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1.3741,
+       "dist_atr": 2.56
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3189,
+       "dist_atr": 11.87
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3163,
+       "dist_atr": 12.31
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 1.4631,
+       "high": 1.4714,
+       "retraced": false,
+       "candles_ago": 90
+      },
+      {
+       "dir": -1,
+       "low": 1.4557,
+       "high": 1.462,
+       "retraced": false,
+       "candles_ago": 89
+      },
+      {
+       "dir": -1,
+       "low": 1.4363,
+       "high": 1.4425,
+       "retraced": true,
+       "candles_ago": 85
+      },
+      {
+       "dir": 1,
+       "low": 1.3463,
+       "high": 1.3597,
+       "retraced": false,
+       "candles_ago": 56
+      },
+      {
+       "dir": 1,
+       "low": 1.3637,
+       "high": 1.3731,
+       "retraced": true,
+       "candles_ago": 55
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1.2513,
+       "high": 1.271,
+       "state": "active",
+       "candles_ago": 584
+      },
+      {
+       "dir": 1,
+       "low": 1.2918,
+       "high": 1.3007,
+       "state": "active",
+       "candles_ago": 552
+      },
+      {
+       "dir": 1,
+       "low": 1.3163,
+       "high": 1.3332,
+       "state": "active",
+       "candles_ago": 542
+      },
+      {
+       "dir": -1,
+       "low": 1.5272,
+       "high": 1.555,
+       "state": "active",
+       "candles_ago": 201
+      },
+      {
+       "dir": -1,
+       "low": 1.495,
+       "high": 1.4996,
+       "state": "active",
+       "candles_ago": 98
+      }
+     ],
+     "last_sweep": {
+      "bull": 62,
+      "bear": 26
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1949,
+      "time": 1791514799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3623,
+      "zone_high": 1.3984,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1972,
+      "time": 1791597599999,
+      "event": "SWEEP",
+      "dir": -1,
+      "level": 1.4088,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.111,
+      "killzone": "Asia",
+      "info": "buy-side liquidity swept (PDH, equal highs)"
+     },
+     {
+      "t": 1972,
+      "time": 1791597599999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1.4074,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.121,
+      "killzone": "Asia",
+      "info": "no displacement"
+     },
+     {
+      "t": 1973,
+      "time": 1791601199999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.4026,
+      "zone_high": 1.4057,
+      "size_atr": 0.299,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1974,
+      "time": 1791604799999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.4026,
+      "zone_high": 1.4057,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1974,
+      "time": 1791604799999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.4026,
+      "zone_high": 1.4057,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1976,
+      "time": 1791611999999,
+      "event": "WEAK_BREAK",
+      "dir": 1,
+      "level": 1.41,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.103,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1976,
+      "time": 1791611999999,
+      "event": "OB_INVALID",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3984,
+      "zone_high": 1.4088,
+      "size_atr": null,
+      "killzone": null,
+      "info": "closed through the order block - it becomes a breaker"
+     },
+     {
+      "t": 1977,
+      "time": 1791615599999,
+      "event": "BREAKER_RETEST",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3984,
+      "zone_high": 1.4088,
+      "size_atr": null,
+      "killzone": "London",
+      "info": "failed order block retested from the other side"
+     },
+     {
+      "t": 1994,
+      "time": 1791676799999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1.4025,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.017,
+      "killzone": null,
+      "info": "no displacement"
+     }
+    ]
+   },
+   "30m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1.3965,
+      "candles_ago": 1
+     },
+     "dealing_range": {
+      "high": 1.4092,
+      "low": 1.3965,
+      "position": -0.5669291338582781,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1.401684,
+      "high": 1.403928,
+      "candles_ago": 1
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1.4092,
+       "dist_atr": 5.54
+      },
+      {
+       "kind": "equal highs",
+       "level": 1.413,
+       "dist_atr": 6.59
+      },
+      {
+       "kind": "PDH",
+       "level": 1.413,
+       "dist_atr": 6.59
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1.3805,
+       "dist_atr": 2.45
+      },
+      {
+       "kind": "equal lows",
+       "level": 1.3728,
+       "dist_atr": 4.59
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3189,
+       "dist_atr": 19.59
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1.3344,
+       "high": 1.3505,
+       "retraced": false,
+       "candles_ago": 114
+      },
+      {
+       "dir": 1,
+       "low": 1.3548,
+       "high": 1.3597,
+       "retraced": false,
+       "candles_ago": 113
+      },
+      {
+       "dir": 1,
+       "low": 1.3637,
+       "high": 1.3678,
+       "retraced": false,
+       "candles_ago": 112
+      },
+      {
+       "dir": 1,
+       "low": 1.369,
+       "high": 1.3731,
+       "retraced": true,
+       "candles_ago": 111
+      },
+      {
+       "dir": -1,
+       "low": 1.3953,
+       "high": 1.4007,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": 1,
+       "low": 1.3189,
+       "high": 1.3264,
+       "state": "active",
+       "candles_ago": 1084
+      },
+      {
+       "dir": -1,
+       "low": 1.5107,
+       "high": 1.523,
+       "state": "active",
+       "candles_ago": 216
+      },
+      {
+       "dir": -1,
+       "low": 1.4,
+       "high": 1.4022,
+       "state": "active",
+       "candles_ago": 1
+      }
+     ],
+     "last_sweep": {
+      "bull": 10,
+      "bear": 26
+     },
+     "killzone_now": "Asia"
+    },
+    "recent_events": [
+     {
+      "t": 1988,
+      "time": 1791673199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4046,
+      "zone_high": 1.4055,
+      "size_atr": 0.289,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1989,
+      "time": 1791674999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4046,
+      "zone_high": 1.4055,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1990,
+      "time": 1791676799999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1.4025,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.033,
+      "killzone": null,
+      "info": "no displacement"
+     },
+     {
+      "t": 1990,
+      "time": 1791676799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4046,
+      "zone_high": 1.4055,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 1992,
+      "time": 1791680399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4013,
+      "zone_high": 1.4021,
+      "size_atr": 0.254,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791683999999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4013,
+      "zone_high": 1.4021,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1995,
+      "time": 1791685799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4013,
+      "zone_high": 1.4021,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1.3965,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.772,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 1997,
+      "time": 1791689399999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4,
+      "zone_high": 1.4022,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 1998,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3953,
+      "zone_high": 1.4007,
+      "size_atr": 1.502,
+      "killzone": "Asia",
+      "info": ""
+     }
+    ]
+   },
+   "15m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1.3965,
+      "candles_ago": 3
+     },
+     "dealing_range": {
+      "high": 1.4025,
+      "low": 1.3965,
+      "position": -0.8000000000000222,
+      "zone": "below the range"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1.39908,
+      "high": 1.4006100000000001,
+      "candles_ago": 3
+     },
+     "liquidity_above": [
+      {
+       "kind": "swing high",
+       "level": 1.4025,
+       "dist_atr": 3.9
+      },
+      {
+       "kind": "swing high",
+       "level": 1.4056,
+       "dist_atr": 5.03
+      },
+      {
+       "kind": "equal highs",
+       "level": 1.4097,
+       "dist_atr": 6.51
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "swing low",
+       "level": 1.3805,
+       "dist_atr": 4.05
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3782,
+       "dist_atr": 4.88
+      },
+      {
+       "kind": "equal lows",
+       "level": 1.3728,
+       "dist_atr": 6.83
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": 1,
+       "low": 1.3359,
+       "high": 1.3505,
+       "retraced": false,
+       "candles_ago": 230
+      },
+      {
+       "dir": 1,
+       "low": 1.3548,
+       "high": 1.3593,
+       "retraced": false,
+       "candles_ago": 229
+      },
+      {
+       "dir": 1,
+       "low": 1.3841,
+       "high": 1.3877,
+       "retraced": true,
+       "candles_ago": 127
+      },
+      {
+       "dir": -1,
+       "low": 1.3973,
+       "high": 1.4007,
+       "retraced": false,
+       "candles_ago": 3
+      },
+      {
+       "dir": -1,
+       "low": 1.392,
+       "high": 1.3931,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 1.4723,
+       "high": 1.4751,
+       "state": "active",
+       "candles_ago": 362
+      },
+      {
+       "dir": -1,
+       "low": 1.4283,
+       "high": 1.435,
+       "state": "active",
+       "candles_ago": 331
+      },
+      {
+       "dir": -1,
+       "low": 1.4236,
+       "high": 1.4277,
+       "state": "active",
+       "candles_ago": 292
+      },
+      {
+       "dir": -1,
+       "low": 1.402,
+       "high": 1.4038,
+       "state": "active",
+       "candles_ago": 14
+      },
+      {
+       "dir": -1,
+       "low": 1.4008,
+       "high": 1.4025,
+       "state": "active",
+       "candles_ago": 3
+      }
+     ],
+     "last_sweep": {
+      "bull": 4,
+      "bear": 54
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 1988,
+      "time": 1791683099999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3994,
+      "zone_high": 1.4002,
+      "size_atr": 0.373,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1989,
+      "time": 1791683999999,
+      "event": "FVG_RETRACE",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3994,
+      "zone_high": 1.4002,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 1991,
+      "time": 1791685799999,
+      "event": "OB_RETEST",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.402,
+      "zone_high": 1.4038,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first return into the order block"
+     },
+     {
+      "t": 1991,
+      "time": 1791685799999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4013,
+      "zone_high": 1.402,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 1.3957,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.151,
+      "killzone": "Asia",
+      "info": "sell-side liquidity swept (PDL, swing low)"
+     },
+     {
+      "t": 1994,
+      "time": 1791688499999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3994,
+      "zone_high": 1.4002,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "BOS",
+      "dir": -1,
+      "level": 1.3965,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 1.031,
+      "killzone": "Asia",
+      "info": "with displacement"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "ORDER_BLOCK",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.4008,
+      "zone_high": 1.4025,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "last bullish candle before the displacement"
+     },
+     {
+      "t": 1995,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3973,
+      "zone_high": 1.4007,
+      "size_atr": 1.451,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 1998,
+      "time": 1791692099999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.392,
+      "zone_high": 1.3931,
+      "size_atr": 0.398,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   },
+   "5m": {
+    "state": {
+     "trend": "down",
+     "last_break": {
+      "kind": "BOS",
+      "dir": -1,
+      "level": 1.4,
+      "candles_ago": 15
+     },
+     "dealing_range": {
+      "high": 1.4025,
+      "low": 1.3872,
+      "position": 0.3725490196078434,
+      "zone": "discount"
+     },
+     "ote": {
+      "dir": -1,
+      "low": 1.401132,
+      "high": 1.401744,
+      "candles_ago": 15
+     },
+     "liquidity_above": [
+      {
+       "kind": "equal highs",
+       "level": 1.4038,
+       "dist_atr": 6.33
+      },
+      {
+       "kind": "swing high",
+       "level": 1.4056,
+       "dist_atr": 7.38
+      },
+      {
+       "kind": "equal highs",
+       "level": 1.4097,
+       "dist_atr": 9.76
+      }
+     ],
+     "liquidity_below": [
+      {
+       "kind": "equal lows",
+       "level": 1.386,
+       "dist_atr": 4.01
+      },
+      {
+       "kind": "equal lows",
+       "level": 1.3799,
+       "dist_atr": 7.56
+      },
+      {
+       "kind": "swing low",
+       "level": 1.3782,
+       "dist_atr": 8.54
+      }
+     ],
+     "open_fvgs": [
+      {
+       "dir": -1,
+       "low": 1.3995,
+       "high": 1.4007,
+       "retraced": false,
+       "candles_ago": 14
+      },
+      {
+       "dir": -1,
+       "low": 1.3973,
+       "high": 1.3984,
+       "retraced": false,
+       "candles_ago": 12
+      },
+      {
+       "dir": -1,
+       "low": 1.395,
+       "high": 1.3955,
+       "retraced": true,
+       "candles_ago": 10
+      },
+      {
+       "dir": -1,
+       "low": 1.3916,
+       "high": 1.3931,
+       "retraced": true,
+       "candles_ago": 5
+      },
+      {
+       "dir": 1,
+       "low": 1.3911,
+       "high": 1.3917,
+       "retraced": false,
+       "candles_ago": 0
+      }
+     ],
+     "order_blocks": [
+      {
+       "dir": -1,
+       "low": 1.3379,
+       "high": 1.3449,
+       "state": "breaker",
+       "candles_ago": 707
+      },
+      {
+       "dir": 1,
+       "low": 1.3957,
+       "high": 1.397,
+       "state": "breaker",
+       "candles_ago": 338
+      },
+      {
+       "dir": -1,
+       "low": 1.4082,
+       "high": 1.4097,
+       "state": "active",
+       "candles_ago": 146
+      },
+      {
+       "dir": -1,
+       "low": 1.4031,
+       "high": 1.4053,
+       "state": "active",
+       "candles_ago": 53
+      },
+      {
+       "dir": -1,
+       "low": 1.4018,
+       "high": 1.4025,
+       "state": "active",
+       "candles_ago": 15
+      }
+     ],
+     "last_sweep": {
+      "bull": 11,
+      "bear": 57
+     },
+     "killzone_now": null
+    },
+    "recent_events": [
+     {
+      "t": 4987,
+      "time": 1791689099999,
+      "event": "SWEEP",
+      "dir": 1,
+      "level": 1.3937,
+      "zone_low": null,
+      "zone_high": null,
+      "size_atr": 0.16,
+      "killzone": "Asia",
+      "info": "sell-side liquidity swept (swing low)"
+     },
+     {
+      "t": 4988,
+      "time": 1791689399999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.395,
+      "zone_high": 1.3955,
+      "size_atr": 0.388,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4989,
+      "time": 1791689699999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.395,
+      "zone_high": 1.3955,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4992,
+      "time": 1791690599999,
+      "event": "FVG_FILLED",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3914,
+      "zone_high": 1.3923,
+      "size_atr": null,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4993,
+      "time": 1791690899999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3916,
+      "zone_high": 1.3931,
+      "size_atr": 0.932,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4994,
+      "time": 1791691199999,
+      "event": "FVG",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3905,
+      "zone_high": 1.3912,
+      "size_atr": 0.426,
+      "killzone": "Asia",
+      "info": ""
+     },
+     {
+      "t": 4995,
+      "time": 1791691499999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3905,
+      "zone_high": 1.3912,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4997,
+      "time": 1791692099999,
+      "event": "FVG_RETRACE",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3916,
+      "zone_high": 1.3931,
+      "size_atr": null,
+      "killzone": null,
+      "info": "first retrace into the gap"
+     },
+     {
+      "t": 4997,
+      "time": 1791692099999,
+      "event": "FVG_FILLED",
+      "dir": -1,
+      "level": null,
+      "zone_low": 1.3905,
+      "zone_high": 1.3912,
+      "size_atr": null,
+      "killzone": null,
+      "info": ""
+     },
+     {
+      "t": 4998,
+      "time": 1791692399999,
+      "event": "FVG",
+      "dir": 1,
+      "level": null,
+      "zone_low": 1.3911,
+      "zone_high": 1.3917,
+      "size_atr": 0.349,
+      "killzone": null,
+      "info": ""
+     }
+    ]
+   }
+  }
+ }
+}
