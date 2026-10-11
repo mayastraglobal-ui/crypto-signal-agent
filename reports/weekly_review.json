@@ -1,6 +1,6 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-11 01:55",
+ "utc": "2026-10-11 02:18",
  "final": false,
  "rows": [],
  "promote": [],
@@ -19,19 +19,19 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 6 of the last 7 days (last 2026-10-10)"
+   "text": "nightly research ran on 7 of the last 7 days (last 2026-10-11)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-11 01:55 UTC"
+   "text": "hourly scan: last run 2026-10-11 02:18 UTC"
   },
   {
    "ok": true,
-   "text": "program rotation: 18 of 18 strategy / timeframe tests re-tested in the last 7 days"
+   "text": "program rotation: 36 of 36 strategy / timeframe tests re-tested in the last 7 days"
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-10 23:35 UTC (55 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-11 01:45 UTC (11 min ago)"
   },
   {
    "ok": true,
@@ -54,7 +54,17 @@
    "week_total_r": 0
   }
  },
- "failure_lab": null,
+ "failure_lab": {
+  "judged": 0,
+  "helped": 0,
+  "passed": 0,
+  "pending": 0,
+  "new": 1,
+  "retired": [],
+  "lines": [
+   "new repair P02-EMA-PULLBACK-V4-S6-FHTF: P02-EMA-PULLBACK-V4-S6@1.0 4h lost on regime_mismatch - testing HTF"
+  ]
+ },
  "shocks": null,
  "settings": {
   "promote_min_trades": 10,

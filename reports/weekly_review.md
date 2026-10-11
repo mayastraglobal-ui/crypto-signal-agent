@@ -1,13 +1,13 @@
 # Weekly review · 2026-W41
 
-Made 2026-10-11 01:55 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-11 02:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-10-10)
-- ✅ hourly scan: last run 2026-10-11 01:55 UTC
-- ✅ program rotation: 18 of 18 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-10 23:35 UTC (55 min ago)
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-10-11)
+- ✅ hourly scan: last run 2026-10-11 02:18 UTC
+- ✅ program rotation: 36 of 36 strategy / timeframe tests re-tested in the last 7 days
+- ✅ live watcher: last heartbeat 2026-10-11 01:45 UTC (11 min ago)
 - ✅ TEST setups closed this week (GitHub record): 0
 
 ## Totals
@@ -33,7 +33,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## Failure Lab (repairs for the loss causes)
 
-- no repair yet (the research run writes at most one a night, for a loss cause with 30+ losing trades)
+- new repair P02-EMA-PULLBACK-V4-S6-FHTF: P02-EMA-PULLBACK-V4-S6@1.0 4h lost on regime_mismatch - testing HTF
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
