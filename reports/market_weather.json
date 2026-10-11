@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-11 00:29",
+ "utc": "2026-10-11 01:55",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -17,7 +17,7 @@
   "UP": 0,
   "DOWN": 0,
   "RANGE": 0,
-  "CHOPPY": 6
+  "CHOPPY": 5
  },
  "coins": [
   {
@@ -34,7 +34,7 @@
    "adx": {
     "1d": 35.0,
     "4h": 26.0,
-    "1h": 17.0
+    "1h": 16.0
    },
    "vol": {
     "atr_pct": 2.42,
@@ -52,10 +52,10 @@
    },
    "crowd": {
     "funding_pct": -0.0022,
-    "oi_24h_pct": 1.1,
+    "oi_24h_pct": 0.8,
     "label": "neutral"
    },
-   "change_24h": 0.43
+   "change_24h": 0.38
   },
   {
    "coin": "ETH",
@@ -71,7 +71,7 @@
    "adx": {
     "1d": 34.0,
     "4h": 42.0,
-    "1h": 20.0
+    "1h": 19.0
    },
    "vol": {
     "atr_pct": 3.12,
@@ -89,10 +89,10 @@
    },
    "crowd": {
     "funding_pct": -0.0044,
-    "oi_24h_pct": 0.9,
+    "oi_24h_pct": 0.5,
     "label": "neutral"
    },
-   "change_24h": 0.59
+   "change_24h": 0.57
   },
   {
    "coin": "SOL",
@@ -108,7 +108,7 @@
    "adx": {
     "1d": 36.0,
     "4h": 37.0,
-    "1h": 14.0
+    "1h": 13.0
    },
    "vol": {
     "atr_pct": 4.14,
@@ -126,47 +126,10 @@
    },
    "crowd": {
     "funding_pct": 0.0075,
-    "oi_24h_pct": 0.2,
+    "oi_24h_pct": -0.4,
     "label": "neutral"
    },
-   "change_24h": 0.6
-  },
-  {
-   "coin": "SUI",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
-   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)",
-   "labels": {
-    "1w": "UNCLEAR",
-    "1d": "TRANSITION",
-    "4h": "UNCLEAR",
-    "1h": "TRANSITION"
-   },
-   "adx": {
-    "1d": 36.0,
-    "4h": 22.0,
-    "1h": 33.0
-   },
-   "vol": {
-    "atr_pct": 8.13,
-    "vol_pctile": 67.0,
-    "vol_label": "normal",
-    "usual_move_pct": 2.94,
-    "move_8of10_pct": 5.55,
-    "days": 537,
-    "basis": "similar days",
-    "price": 1.1132,
-    "band": [
-     1.051472,
-     1.174928
-    ]
-   },
-   "crowd": {
-    "funding_pct": 0.0053,
-    "oi_24h_pct": -63.8,
-    "label": "neutral"
-   },
-   "change_24h": 3.45
+   "change_24h": 0.07
   },
   {
    "coin": "XRP",
@@ -200,10 +163,10 @@
    },
    "crowd": {
     "funding_pct": -0.0013,
-    "oi_24h_pct": 3.2,
+    "oi_24h_pct": 1.6,
     "label": "neutral"
    },
-   "change_24h": 0.01
+   "change_24h": -0.68
   },
   {
    "coin": "ZEC",
@@ -219,7 +182,7 @@
    "adx": {
     "1d": 33.0,
     "4h": 23.0,
-    "1h": 17.0
+    "1h": 16.0
    },
    "vol": {
     "atr_pct": 8.59,
@@ -237,13 +200,13 @@
    },
    "crowd": {
     "funding_pct": 0.0063,
-    "oi_24h_pct": -75.0,
+    "oi_24h_pct": -0.1,
     "label": "neutral"
    },
-   "change_24h": 0.6
+   "change_24h": 0.27
   }
  ],
- "alts_vs_btc_24h": 0.17,
+ "alts_vs_btc_24h": -0.21,
  "fear_greed": {
   "value": 61,
   "label": "Greed",
@@ -253,7 +216,7 @@
   {
    "start_utc": "2026-10-14 12:30",
    "name": "US CPI (Sep data)",
-   "hours": 84.0
+   "hours": 82.6
   }
  ],
  "blackout_now": [],
@@ -266,5 +229,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-11 08:29 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H COMPRESSION\nVolatility: quiet (daily range 2.4%, higher than 13% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,258 \u2013 84,718) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0022%/8h, open interest +1.1% in 24h)\nAltcoins vs BTC (24h): +0.2%\nMood (Fear & Greed): Greed 61\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 10-14 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-11 09:55 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H COMPRESSION\nVolatility: quiet (daily range 2.4%, higher than 13% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,258 \u2013 84,718) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0022%/8h, open interest +0.8% in 24h)\nAltcoins vs BTC (24h): -0.2%\nMood (Fear & Greed): Greed 61\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 10-14 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

@@ -4,15 +4,15 @@
   "ETH",
   "SOL",
   "ZEC",
-  "XRP",
-  "SUI"
+  "XRP"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "STRK": "2026-10-11"
+  "STRK": "2026-10-11",
+  "MAGIC": "2026-10-11"
  },
- "runs": 363,
+ "runs": 364,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -107,6 +107,7 @@
    "volume_7d"
   ],
   "MAGIC": [
+   "big_move",
    "spread",
    "thin_book",
    "volume_7d"
