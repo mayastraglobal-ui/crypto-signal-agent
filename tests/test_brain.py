@@ -655,17 +655,22 @@ class CalendarFile(unittest.TestCase):
         import engine.risk as RK
         items = RK.load_calendar(os.path.join(ROOT, "events.yaml"))
         self.assertEqual(len(RK.parse_events(items)), len(items))
+        def us_summer(t):                    # US summer time: 2nd Sunday of March 07:00 UTC - 1st Sunday of Nov 06:00
+            def sunday(month, nth):
+                d = dt.datetime(t.year, month, 1)
+                return d + dt.timedelta(days=(6 - d.weekday()) % 7 + 7 * (nth - 1))
+            return sunday(3, 2) + dt.timedelta(hours=7) <= t < sunday(11, 1) + dt.timedelta(hours=6)
         for e in items:
             t = dt.datetime.strptime(e["utc"], "%Y-%m-%d %H:%M")
             self.assertLess(t.weekday(), 5, e)                                              # never a weekend
-            summer = dt.datetime(2026, 3, 8, 7) <= t < dt.datetime(2026, 11, 1, 6)       # US summer time 2026
+            summer = us_summer(t)
             if e["type"] in ("NFP", "CPI", "PCE", "GDP", "PPI"):
                 self.assertEqual(t.strftime("%H:%M"), "12:30" if summer else "13:30", e)  # 8:30 a.m. New York
             if e["type"] == "FOMC":
                 self.assertEqual(t.strftime("%H:%M"), "18:00" if summer else "19:00", e)  # 2:00 p.m. New York
             self.assertIn(e["check"], {"official_page", "official_search", "indirect", "operator"})
-        self.assertEqual({(e["utc"], e["type"]) for e in items if e["type"] == "FOMC"},
-                         {("2026-10-28 18:00", "FOMC"), ("2026-12-09 19:00", "FOMC")})
+        self.assertLessEqual({("2026-10-28 18:00", "FOMC"), ("2026-12-09 19:00", "FOMC")},  # the calendar keeps growing
+                             {(e["utc"], e["type"]) for e in items if e["type"] == "FOMC"})
 
     def test_loader(self):
         import engine.risk as RK
