@@ -205,6 +205,15 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 - Safety check before trusting it: double-click `windows\7_replay_test_alerts.bat`. It replays the last 14 days
   with these rules on real candles and shows every alert it would have sent and how each one ended.
 
+## Several versions of one setup (2026-10-11)
+
+- Since 11 Oct three versions of the Donchian 4H breakout are in 🟡 PAPER (`donchian_breakout`, `…-VEXIT`,
+  `…-VEXIT-S4` v1.1). They usually fire together: that is **one trade**. You get **one message**: the version with
+  TP1 at 2R or more and the best backtest gives the plan, and the line **🧩 Same setup, 3 versions agree** names the
+  others. Open it once.
+- A 🔵 TEST setup in the same direction on the same coin (now, or within 4 hours after a PAPER / LIVE alert) is not
+  sent again; the PAPER message says **🔵 TEST agrees**. GitHub still records every version and every TEST setup.
+
 ## Shock alarm ⚡ (2026-10-10)
 
 - The strategies only look at the market when a candle closes. The shock alarm checks **every minute** whether

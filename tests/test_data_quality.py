@@ -208,9 +208,12 @@ class CrossVenueAndSystem(unittest.TestCase):
         self.assertEqual(dq.system_state({"ETH": dq.GOOD})[0], dq.UNSAFE)   # BTC missing
 
 
-def run_copy(tmp, *args):
-    """Run scanner.py in a throw-away copy of the repo, so real reports/ are never touched."""
+def run_copy(tmp, *args, keep_config=False):
+    """Run scanner.py in a throw-away copy of the repo, so real reports/ are never touched. keep_config: use the
+    config.yaml a test already wrote into tmp."""
     for name in ("scanner.py", "notify.py", "config.yaml", "strategies.yaml", "publish_live.py", "pine_export.py"):
+        if name == "config.yaml" and keep_config and os.path.exists(os.path.join(tmp, name)):
+            continue
         shutil.copy(os.path.join(ROOT, name), tmp)
     lab = os.path.join(tmp, "strategies_lab.yaml")
     if not os.path.exists(lab):                  # an EMPTY lab: engine tests must not depend on today's lab cards

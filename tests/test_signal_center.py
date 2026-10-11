@@ -155,6 +155,11 @@ class Watcher(unittest.TestCase):
             self.addCleanup(p.stop)
         self.hour = (int(__import__("time").time() * 1000) // (4 * H)) * 4 * H
         self.now = self.hour + 8000
+        # the synthetic candles end at the clock: follow the test's clock (20 min ahead, so the 5m candles after a
+        # setup exist) - before 2026-10-11 these tests failed in the first minutes after every 4-hour boundary
+        clock = mock.patch.object(sc.time, "time", lambda: (self.now + 20 * 60_000) / 1000)
+        clock.start()
+        self.addCleanup(clock.stop)
         self.w = LW.Watcher(LW.SyntheticSwap(), send=True, git=False, now_fn=lambda: self.now)
         self.w.coins, self.w.extra = ["BTC"], []
         self.v1, self.v2 = self.w.cards["P01-BREAKOUT-V1@1.0"], self.w.cards["P01-BREAKOUT-V2@1.0"]
@@ -235,6 +240,38 @@ class Watcher(unittest.TestCase):
         self.assertFalse(self.w.watch_note(a, self.now))                   # /pause holds them too
         self.w.state["paused_until"] = 0
         self.assertTrue(self.w.watch_note(a, self.now))
+
+    def test_versions_of_one_paper_setup_are_one_message_and_cover_the_test_setup(self):   # 2026-10-11
+        cards = {k: self.w.cards[k] for k in ("donchian_breakout@1.0", "donchian_breakout-VEXIT@1.0",
+                                              "donchian_breakout-VEXIT-S4@1.1")}
+        self.w.watch = [(c, "4h", "PAPER") for c in cards.values()] + [(self.v1, "4h", "TEST")]
+        self.w.regime_fit = {}
+        self.w.cell_avg = {"donchian_breakout@1.0|4h": 0.159, "donchian_breakout-VEXIT@1.0|4h": 0.253,
+                           "donchian_breakout-VEXIT-S4@1.1|4h": 0.234}
+        with self.fire():
+            a = self.w.tick(self.now)
+        self.assertEqual(len(a), 1)                                         # one trade, one alert
+        best = a[0]
+        self.assertEqual((best["label"], best["strategy"]), ("PAPER", "donchian_breakout-VEXIT"))  # 2R TP1, best avg
+        self.assertEqual(best["same"], ["donchian_breakout-VEXIT-S4 v1.1 4h", "donchian_breakout v1.0 4h"])
+        self.assertEqual(best["test_agrees"], ["P01-BREAKOUT-V1 4h"])
+        texts = [t for t, _ in self.sent]
+        self.assertEqual(len(texts), 1)                                     # no TEST alert, no watch note
+        self.assertIn("🧩 Same setup, 3 versions agree", texts[0])
+        self.assertIn("<b>One trade</b> - open it once", texts[0])
+        self.assertIn("🔵 TEST agrees: P01-BREAKOUT-V1 4h", texts[0])
+        self.assertEqual(self.w.pending, [])
+        keys = [k for k in self.w.state["sent"] if k.startswith("BTC|-1|donchian")]
+        self.assertEqual(len(keys), 3)                                      # each version keeps its cooldown
+        self.w.watch = [(self.v2, "1h", "TEST")]                            # an hour later: TEST on the same side
+        with self.fire():
+            self.now += H
+            self.assertEqual(self.w.tick(self.now), [])
+        self.assertEqual(self.w.pending, [])                                # covered by the PAPER alert just sent
+        with self.fire(d=1):                                                # the other side is news
+            self.now += H
+            self.w.tick(self.now)
+        self.assertEqual(len(self.w.pending), 1)
 
     def test_failed_5m_check_releases_the_setup(self):
         with self.fire():
