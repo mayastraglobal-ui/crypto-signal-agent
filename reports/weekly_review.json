@@ -1,8 +1,53 @@
 {
  "week": "2026-W41",
- "utc": "2026-10-11 15:18",
+ "utc": "2026-10-11 19:18",
  "final": true,
  "rows": [
+  {
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SOL",
+   "stage": "TEST",
+   "strategy": 3,
+   "name": "Fibonacci pullback (50-61.8% of the last swing)",
+   "version": "V5",
+   "tf": "1h",
+   "live": {
+    "n": 2,
+    "win_rate": 0.0,
+    "avg_r": -1.189,
+    "total_r": -2.38,
+    "sd": 0.01131370849898477
+   },
+   "week": {
+    "n": 2,
+    "win_rate": 0.0,
+    "avg_r": -1.189,
+    "total_r": -2.38,
+    "sd": 0.01131370849898477
+   },
+   "gross": {
+    "n": 2,
+    "win_rate": 0.0,
+    "avg_r": -1.059,
+    "total_r": -2.12,
+    "sd": 0.004242640687119289
+   },
+   "by_market": {
+    "CHOPPY": {
+     "n": 2,
+     "win_rate": 0.0,
+     "avg_r": -1.189,
+     "total_r": -2.38,
+     "sd": 0.01131370849898477
+    }
+   },
+   "backtest": {
+    "n": 635,
+    "avg_r": 0.041,
+    "win_rate": 36.5
+   },
+   "confidence": "-1.19R over 2 trades: too early to say anything"
+  },
   {
    "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
    "coin": "XRP",
@@ -57,8 +102,8 @@
  "five_min": {
   "confirmed_n": 1,
   "confirmed_r": -1.0,
-  "all_n": 1,
-  "all_gross_r": -1.099,
+  "all_n": 3,
+  "all_gross_r": -1.072,
   "by_strategy": [
    {
     "strategy": "P04-MACD-SUPERTREND-V5",
@@ -77,7 +122,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-11 15:18 UTC"
+   "text": "hourly scan: last run 2026-10-11 19:18 UTC"
   },
   {
    "ok": true,
@@ -85,20 +130,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-11 13:45 UTC (35 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-11 18:05 UTC (18 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 1"
+   "text": "TEST setups closed this week (GitHub record): 3"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 1,
-   "total_r": -1.31,
-   "avg_r": -1.31,
-   "week_n": 1,
-   "week_total_r": -1.31
+   "n": 3,
+   "total_r": -3.69,
+   "avg_r": -1.23,
+   "week_n": 3,
+   "week_total_r": -3.69
   },
   "PAPER": {
    "n": 0,
@@ -131,5 +176,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W41</b>\n\ud83d\udd35 TEST: 1 setups closed this week (-1.3R) \u00b7 1 since the start (-1.31R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W41</b>\n\ud83d\udd35 TEST: 3 setups closed this week (-3.7R) \u00b7 3 since the start (-1.23R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

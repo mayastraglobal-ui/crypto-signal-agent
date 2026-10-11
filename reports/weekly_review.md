@@ -1,18 +1,18 @@
 # Weekly review · 2026-W41
 
-Made 2026-10-11 15:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-11 19:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-11)
-- ✅ hourly scan: last run 2026-10-11 15:18 UTC
+- ✅ hourly scan: last run 2026-10-11 19:18 UTC
 - ✅ program rotation: 36 of 36 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-11 13:45 UTC (35 min ago)
-- ✅ TEST setups closed this week (GitHub record): 1
+- ✅ live watcher: last heartbeat 2026-10-11 18:05 UTC (18 min ago)
+- ✅ TEST setups closed this week (GitHub record): 3
 
 ## Totals
 
-- TEST: 1 closed setups since the start, -1.31R a trade; this week 1 (-1.31R)
+- TEST: 3 closed setups since the start, -1.23R a trade; this week 3 (-3.69R)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -25,7 +25,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## With vs without the 5m check (before fees)
 
 - watcher alerts (5m-confirmed): 1 plan results, -1.00R a trade
-- every TEST setup (GitHub, no 5m check): 1, -1.10R a trade
+- every TEST setup (GitHub, no 5m check): 3, -1.07R a trade
 
 ## Ideas for new versions
 
@@ -43,4 +43,5 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 | Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---|
+| P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | 2 | 0 | -1.19R | -1.06R | 2 (-2.4R) | +0.04R | -1.19R over 2 trades: too early to say anything |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | 1 | 0 | -1.31R | -1.10R | 1 (-1.3R) | +0.01R | -1.31R over 1 trade: too early to say anything |
