@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-11 10:42",
+ "last_entry_utc": "2026-10-11 12:20",
  "days": 30,
  "all": {
   "alerts": 1,
@@ -7,9 +7,9 @@
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "plan_skipped": {
@@ -25,9 +25,9 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "yours": {
@@ -65,9 +65,9 @@
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "plan_skipped": {
@@ -83,9 +83,9 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "yours": {
@@ -123,13 +123,18 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": -1.0,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   }
  ],
- "tests": {},
+ "tests": {
+  "P04-MACD-SUPERTREND-V5": {
+   "n": 1,
+   "avg_r": -1.0
+  }
+ },
  "findings": [],
  "decisions": []
 }
