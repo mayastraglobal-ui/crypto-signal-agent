@@ -200,6 +200,27 @@ class FakeFeed:
         return pd.DataFrame(dict(h, open=h["close"], volume=1.0, close_time=h["open_time"] + H - 1))
 
 
+class OKXOrder(unittest.TestCase):
+    """2026-10-12: OKX answers newest first - the 4-hour outcome read them unsorted and was never written."""
+    def rows(self, n, step):
+        t0 = NOW - n * step                         # newest first, like OKX; the last flag = confirmed
+        return [[str(t0 + (n - 1 - i) * step), "1", "2", "0.5", str(100 + n - 1 - i), "0", "10", "1000", "1"]
+                for i in range(n)]
+
+    def test_candles_come_oldest_first_and_the_outcome_works(self):
+        f = LW.OKXSwap()
+        f._get = lambda path, params: self.rows(int(params["limit"]), 5 * M)
+        for recent in (True, False):
+            df = f.candles("BTC", "5m", 60, recent_only=recent)
+            self.assertTrue(df["open_time"].is_monotonic_increasing, recent)
+            self.assertEqual(df["open_time"].nunique(), len(df))
+        df = f.candles("BTC", "5m", 60, recent_only=True)
+        ms = int(df["open_time"].iloc[0])
+        res = shk.outcome({k: df[k].to_numpy() for k in ("open_time", "high", "low", "close")}, ms, 1, 100.0)
+        self.assertIsNotNone(res)
+        self.assertGreater(res["after_4h"], 0)                     # the close rose by 1 a candle
+
+
 class Watcher(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()

@@ -832,3 +832,12 @@ Newest entries at the bottom. Format: date · who · what · why.
   losses can only LOWER the size (the brake) and never raise it, and that without the brake the size ignores results
   - the "no increasing size after a loss" rule (AGENT_PROMPT.md section 15) is unchanged.
 
+## 2026-10-12 · Claude (operator: "take a quick look") · Fix: the shock alarm's 4-hour outcome was never written
+- Found: no `journal/shocks.csv` on the journal branch although the replay shows notes on 11-12 Oct. OKX answers
+  candles newest first; `OKXSwap.candles` passed them on unsorted, `update()` sorts but `shock_outcomes` did not, so
+  `shock.outcome` saw the wrong last candle and returned None - the shock waited (and re-downloaded every minute) for
+  3 days before being logged without its outcome. The ⚡ notes themselves were not affected (`minutes()` sorts).
+- `live_watcher.py` `OKXSwap.candles` now returns closed candles oldest first without duplicates (every caller).
+  Pending shocks younger than 3 days are written with their outcome at the next minute after the update.
+- Test: `tests/test_shock.py` `OKXOrder` (OKX-ordered rows; fails without the fix).
+
