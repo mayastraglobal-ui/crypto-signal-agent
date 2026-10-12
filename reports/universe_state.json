@@ -12,7 +12,7 @@
  "suspended": {
   "W": "2026-10-12"
  },
- "runs": 408,
+ "runs": 409,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -115,7 +115,6 @@
   ],
   "W": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]

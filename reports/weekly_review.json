@@ -1,6 +1,6 @@
 {
  "week": "2026-W42",
- "utc": "2026-10-12 21:19",
+ "utc": "2026-10-12 22:19",
  "final": false,
  "rows": [
   {
@@ -122,7 +122,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-12 21:19 UTC"
+   "text": "hourly scan: last run 2026-10-12 22:19 UTC"
   },
   {
    "ok": true,
@@ -130,7 +130,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-12 20:05 UTC (17 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-12 21:10 UTC (10 min ago)"
   },
   {
    "ok": true,
@@ -230,7 +230,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-12 20:22",
+  "checked_utc": "2026-10-12 21:20",
   "lines": [
    "19 shock(s) this week, 12 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 3, broke yesterday's high 4, broke yesterday's low 5, volume spike 12",
