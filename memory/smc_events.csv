@@ -13229,3 +13229,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 00:00,SUI,30m,OB_INVALID,bear,,1.1217,1.129,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-12 00:30,SUI,30m,BREAKER_RETEST,bull,,1.1217,1.129,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-10-11 23:45,SUI,15m,BOS,bull,1.129,,,0.018,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-12 00:45,BTC,15m,FVG_FILLED,bear,,83909.34,83971.9,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-12 00:45,ETH,15m,FVG_FILLED,bear,,2542.45,2544.99,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 01:00,SOL,30m,FVG_RETRACE,bear,,111.68,111.86,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 01:30,SOL,30m,FVG_FILLED,bear,,111.68,111.86,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 00:45,SOL,15m,BOS,bull,111.5,,,0.156,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-12 00:45,SOL,15m,FVG_RETRACE,bear,,111.68,111.81,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 01:15,SOL,15m,FVG_FILLED,bear,,111.68,111.81,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 01:00,XRP,30m,SWEEP,bear,1.4124,,,0.299,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-12 01:30,XRP,30m,FVG_FILLED,bull,,1.4058,1.4081,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 00:45,XRP,15m,SWEEP,bear,1.4124,,,0.478,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-12 01:15,XRP,15m,FVG_RETRACE,bull,,1.4053,1.407,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 01:30,XRP,15m,FVG_FILLED,bull,,1.4053,1.407,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 01:00,ZEC,1h,FVG,bull,,1260.35,1275.18,0.948,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-12 01:30,ZEC,15m,FVG,bear,,1277.93,1280.46,0.312,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 01:00,SUI,30m,FVG_RETRACE,bull,,1.1186,1.1222,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 01:30,SUI,30m,FVG_FILLED,bull,,1.1186,1.1222,,Asia,1h,RANGE,,smc-1.0,Binance
