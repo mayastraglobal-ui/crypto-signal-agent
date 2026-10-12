@@ -236,8 +236,10 @@ def details_text(a, card):
             out += ["", f"<b>Rules ({side}, all true on a closed candle)</b>"]
             out += [f"• <code>{html.escape(str(r))}</code>" for r in rules]
         gate = card.get("gate")
-        if gate in ("intraday", "intraday_reversal", "intraday_fast"):
+        if gate in ("intraday", "intraday_reversal", "intraday_fast", "intraday_momentum"):
             out.append("• market gate: " + {"intraday": "4H and 1H trend the same way",
+                                            "intraday_momentum": "the 1H is already moving this way and the 4H is not "
+                                                                 "in a strong trend against it",
                                             "intraday_fast": "the fast 4H trend (EMA20 / EMA50) and the 1H agree",
                                             "intraday_reversal": "its range regimes, never against a strong 4H trend"}[gate]
                        + " (1W / 1D are context only)")
@@ -306,13 +308,15 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "/trades - the trades you took (open ones are followed) and your results\n"
         "/result 1.2 - your real result of the last finished trade, in R after fees (-1 = full stop lost)\n"
         "/watch on|off - 👀 watch notes: a TEST setup found, waiting for its 5m confirmation (information only)\n"
+        "/momentum on|off - 🌊 strategy 11 notes: 👀 a market-wide move forming, ⚠️ a move already late (no new "
+        "trade that way), 🔄 a bounce after it (information only)\n"
         "/shock on|off - ⚡ shock alarm: a sudden fall / rally, a volume spike or yesterday's high / low broken, "
         "within a minute (information only)\n"
         "/structure - 🧭 the 4H structure of your coins (/structure BTC: trend, range, liquidity, zones)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
         "/review - the latest weekly review: TEST / PAPER results, what is ready for PAPER, the system check\n"
-        "/pause - stop new trade alerts, 👀 and ⚡ notes until /resume (/pause 2h = for 2 hours)\n"
+        "/pause - stop new trade alerts, 👀 🌊 and ⚡ notes until /resume (/pause 2h = for 2 hours)\n"
         "/resume - new trade alerts on again\n"
         "/help - this list\n\n"
         "Under each alert: <b>✅ Took it</b> = I follow the trade and tell you when TP1 / TP2, the stop or the time "
@@ -364,6 +368,9 @@ def status_text(i):
     if "watch_on" in i:
         lines.append(f"👀 Watch notes: {'ON' if i['watch_on'] else 'OFF (/watch on)'}"
                      + (f" · {i.get('watch_today', 0)} sent today" if i["watch_on"] else ""))
+    if "mom_on" in i:
+        lines.append(f"🌊 Momentum notes: {'ON' if i['mom_on'] else 'OFF (/momentum on)'}"
+                     + (f" · {i.get('mom_today', 0)} sent today (max {i.get('mom_max')})" if i["mom_on"] else ""))
     if "shock_on" in i:
         lines.append(f"⚡ Shock alarm: {'ON' if i['shock_on'] else 'OFF (/shock on)'}"
                      + (f" · {i.get('shock_today', 0)} sent today (max {i.get('shock_max')})" if i["shock_on"] else ""))

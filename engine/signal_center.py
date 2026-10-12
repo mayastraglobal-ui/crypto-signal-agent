@@ -60,6 +60,8 @@ def test_list(program, reg_cells, S, promoted=None):
     if not S.get("enabled") or not program:
         return out
     for ck, row in (program.get("cells") or {}).items():
+        if row.get("version") == "C":                     # a control version is a benchmark, never an alert
+            continue
         cell = reg_cells.get(ck) or {}
         st = cell.get("status") or row.get("status")
         promo = (promoted or {}).get(ck)

@@ -62,6 +62,7 @@ from engine import follow as fl
 from engine import journal as jr
 from engine import lifecycle as lc
 from engine import live as lv
+from engine import momentum_notes as mnt
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
 from engine import shock as shk
@@ -87,6 +88,7 @@ SHADOW_DAYS = 14                     # a silent plan follow-up still open after 
 RESULT_HINT = ("\n📒 Send your real result: <b>/result 1.2</b> (in R after fees: -1 = full stop lost, 2 = twice your "
                "risk). It teaches the agent how the plan works for you.")
 DATA_TFS = ["1w", "1d", "4h", "1h", "30m", "15m", "5m"]
+MOM_TFS = ["1h", "30m", "15m"]           # 🌊 strategy 11's momentum notes read these (prepared at every 15m close)
 REPO = os.environ.get("CRYPTO_AGENT_REPO", "mayastraglobal-ui/crypto-signal-agent")
 RAW = "https://raw.githubusercontent.com/{repo}/{branch}/{path}"
 # Without git (a Windows PC with the ZIP download): the files that carry GitHub's decisions, fetched every hour
@@ -103,7 +105,7 @@ CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
               "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
               "engine/weekly_review.py", "engine/shock.py", "engine/smc.py",
-              "engine/structure.py"]    # changed -> "run update.bat"
+              "engine/structure.py", "engine/momentum_notes.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -552,6 +554,7 @@ class Watcher:
         self.S5 = c5m.settings(self.cfg.get("confirm_5m"))
         self.SH = shk.settings(self.cfg.get("shock_alarm"))
         self.ST = stc.settings(self.cfg.get("structure"))
+        self.MN = mnt.settings(self.cfg.get("momentum_notes"))
         try:
             self.RK = rk.settings(self.cfg.get("risk"), (self.cfg.get("events") or [])
                                   + rk.load_calendar(os.path.join(ROOT, rk.CALENDAR_FILE)))
@@ -652,10 +655,12 @@ class Watcher:
         # watch_on / watch_sent: 👀 watch notes on / off (/watch) and when each went out (their own daily cap)
         # shock_*: ⚡ the shock alarm - on / off (/shock), notes sent, last note per coin, sides swept today, shocks
         # waiting for their 4-hour outcome
+        # mom_*: 🌊 strategy 11's momentum notes - on / off (/momentum), when each went out, the last note per kind /
+        # coin / direction
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
                          next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None,
                          watch_on=True, watch_sent=[], shock_on=True, shock_sent=[], shock_last={}, shock_swept={},
-                         shock_pending=[]).items():
+                         shock_pending=[], mom_on=True, mom_sent=[], mom_last={}).items():
             st.setdefault(k, v)
         return st
 
@@ -670,6 +675,8 @@ class Watcher:
         self.state["watch_sent"] = [m for m in self.state["watch_sent"] if int(m) >= now - 3 * 86_400_000]
         self.state["shock_sent"] = [m for m in self.state["shock_sent"] if int(m) >= now - 3 * 86_400_000]
         self.state["shock_last"] = {c: v for c, v in self.state["shock_last"].items() if int(v[0]) >= now - 86_400_000}
+        self.state["mom_sent"] = [m for m in self.state["mom_sent"] if int(m) >= now - 3 * 86_400_000]
+        self.state["mom_last"] = {k: v for k, v in self.state["mom_last"].items() if int(v) >= now - 2 * 86_400_000}
         try:
             os.makedirs(os.path.dirname(STATE), exist_ok=True)
             with open(STATE, "w") as f:
@@ -708,7 +715,8 @@ class Watcher:
         now_ms = now_ms or self.now_fn()
         b = lv.boundary(now_ms)
         closed = lv.closed_at(b)
-        need_tfs = sorted({tf for _, tf, _ in self.watch if tf in closed} | ({"5m"} if self.pending else set()),
+        need_tfs = sorted({tf for _, tf, _ in self.watch if tf in closed} | ({"5m"} if self.pending else set())
+                          | (set(MOM_TFS) if self.momentum_ok() and "15m" in closed else set()),
                           key=sc.TF_ORDER.index)
         alerts = self.scan(now_ms, b, closed, need_tfs) if need_tfs else []
         self.pause_check(now_ms)
@@ -727,14 +735,23 @@ class Watcher:
                         self.update(coin, tf, now_ms)
                     except Exception as e:
                         log(f"{coin} {tf}: download failed: {e}")
-        btc = sc.btc_frames(self.coin_data("BTC", now_ms)[1], self.cfg["market"]["quote"], sc.TF_ORDER)
+        cdata = {c: self.coin_data(c, now_ms) for c in dict.fromkeys(self.coins + self.extra)}
+        allD, allQ = {}, {}                          # strategy 11: every coin's candles for the market-wide breaks
+        for _, d_, q_ in cdata.values():
+            allD.update(d_)
+            allQ.update(q_)
+        btc = sc.btc_frames(cdata["BTC"][1] if "BTC" in cdata else self.coin_data("BTC", now_ms)[1],
+                            self.cfg["market"]["quote"], sc.TF_ORDER,
+                            sc.market_breadth(allD, self.cfg["market"]["quote"], self.cfg, allQ))
         prep = sorted(set(need_tfs) | {"4h"}, key=sc.TF_ORDER.index)      # 4H: the h4_* context columns
+        mom = self.momentum_ok() and "15m" in closed
+        states = {}
         try:
             derivs = sc.load_derivs(False, self.coins, now_ms)
         except Exception:
             derivs = {}
         for coin in self.coins:
-            sym, data, quality = self.coin_data(coin, now_ms)
+            sym, data, quality = cdata[coin]
             try:
                 flow = None                          # step 3: today's order flow (CVD) for playbook strategies
                 if any(s.get("gate") == "playbook" for s, _, _ in self.watch):
@@ -748,9 +765,38 @@ class Watcher:
                 log(f"{coin}: prepare failed: {e}")
                 continue
             self.keep_structure(coin, pc, now_ms)
+            if mom:
+                try:
+                    states[coin] = mnt.coin_state(pc)
+                except Exception as e:                   # never let a note break the alerts
+                    log(f"{coin}: momentum note state failed ({type(e).__name__}: {e})")
             alerts += self.signals(coin, pc, quality, b, closed, now_ms)
             alerts += self.confirmations(coin, pc, now_ms)
+        if mom:
+            self.momentum_notes(states, now_ms, closed)
         return alerts
+
+    # ---- 🌊 strategy 11's momentum notes (2026-10-13): information only, never a trade signal ----
+    def momentum_ok(self):
+        return bool(self.MN["enabled"] and self.state.get("mom_on", True))
+
+    def momentum_notes(self, states, now_ms, closed):
+        """👀 forming / ⚠️ late / 🔄 bounce notes (engine/momentum_notes.py). Never while paused, at most
+        max_per_day a Beijing day. Returns the notes sent."""
+        if self.paused(now_ms):
+            return []
+        sent = []
+        for n in mnt.plan({c: st for c, st in states.items() if st}, now_ms, closed, self.state["mom_last"], self.MN):
+            if scx.sent_today(self.state["mom_sent"], now_ms) >= self.MN["max_per_day"]:
+                log(f"MOMENTUM {n['kind']} {n['coin']}: daily maximum of {self.MN['max_per_day']} notes reached")
+                break
+            ok, err, _ = self.say(n["text"])
+            self.state["mom_last"][n["key"]] = now_ms
+            self.state["mom_sent"].append(now_ms)
+            sent.append(n)
+            if self.send:
+                log(f"MOMENTUM {n['kind']} {n['coin']} {mnt.SIDE[n['d']]}: " + ("sent" if ok else f"NOT sent ({err})"))
+        return sent
 
     # ---- Telegram out: alerts with buttons, follow-ups, replies ----
     def say(self, text, buttons=None):
@@ -1004,6 +1050,18 @@ class Watcher:
                        f"(information only, at most {self.SC['watch_max_per_day']} a day). /watch off to stop them."
                        if on else "/watch on to switch them on.")
                     + ("" if self.state.get("tests_on", True) else " (TEST alerts are off too: /tests on.)"))
+        if cmd == "momentum":
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state["mom_on"] = arg == "on"
+                self._save_state()
+            on = self.momentum_ok()
+            return (f"🌊 Momentum notes are <b>{'ON' if on else 'OFF'}</b>. "
+                    + ("👀 a market-wide breakout / breakdown forming (checked every 15 minutes), ⚠️ a move that is "
+                       "already late (no new trade that way), 🔄 a bounce after a late move. Information only, at most "
+                       f"{self.MN['max_per_day']} a day. /momentum off to stop them." if on else
+                       "/momentum on to switch them on." if self.MN["enabled"] else
+                       "Switched off in config.yaml (momentum_notes: enabled)."))
         if cmd == "shock":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1177,6 +1235,8 @@ class Watcher:
             watch_today=scx.sent_today(self.state["watch_sent"], now_ms),
             shock_on=self.shock_ok() and self.state.get("shock_on", True),
             shock_today=shk.sent_today(self.state["shock_sent"], now_ms), shock_max=self.SH["max_per_day"],
+            mom_on=self.momentum_ok(), mom_today=scx.sent_today(self.state["mom_sent"], now_ms),
+            mom_max=self.MN["max_per_day"],
             tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
             heartbeat=self.hb.status(now_ms)))

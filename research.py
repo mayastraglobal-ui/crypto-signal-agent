@@ -499,6 +499,53 @@ def main():
     signal_coins = set(json.load(open(os.path.join(sc.REPORTS, "universe.json"))).get("signal", [])) \
         if os.path.exists(os.path.join(sc.REPORTS, "universe.json")) else set(coins)
     program_cut = None                        # the coin at which tonight's program batch was dropped (time)
+
+    def fetch(base, tf_list, quiet=False):
+        """One coin's candles + data checks: OKX perpetual where it has the history, else Binance spot (cached)."""
+        sym = base + cfg["market"]["quote"]
+        data, quality, okx_frames = {}, {}, {}
+        want = [tf for tf in okx_tfs if tf in tf_list]
+        if okx is not None and want:
+            try:
+                okx_frames, okx_note = okx.coin(base, {tf: bars[tf] for tf in want}, now_ms)
+                if not quiet:
+                    log(f"{base} OKX perpetual candles: {okx_note}")
+            except Exception as e:                   # never fatal: Binance spot as before
+                log(f"{base} OKX perpetual candles failed ({e}) - Binance spot used")
+        for tf in tf_list:
+            ok_df = okx_frames.get(tf)
+            if ok_df is not None and len(ok_df) and int(ok_df["open_time"].min()) <= now_ms - (bars[tf] - 1) * sc.TF_MS[tf] \
+                    and okx_history.missing(ok_df, tf, bars[tf], now_ms) <= OKX_HOLE_SHARE * bars[tf]:
+                raw, how = ok_df, "OKX perpetual"
+            else:                                    # no OKX history (yet), a younger listing or a relisting hole
+                raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
+                if ok_df is not None and len(ok_df):
+                    raw, how = okx_history.stitch(ok_df, raw, bars[tf], tf)
+            if tf in okx_tfs and not quiet:
+                sources.setdefault(tf, {})[base] = how if how.startswith("OKX") else "Binance spot"
+            df, rep = dq.check_candles(raw, sc.TF_MS[tf], now_ms, dq_cfg)
+            data[(sym, tf)], quality[(base, tf)] = df, rep
+            if not quiet:
+                log(f"{sym} {tf}: {len(df)} candles ({how}), data {rep['state']}"
+                    + (f" - {'; '.join(rep['problems'])}" if rep["problems"] else ""))
+        return data, quality
+
+    # strategy 11: the market-wide break counts (mkt_up / mkt_dn) need every own coin's candles before the first coin
+    # is tested - only when a card tonight uses them (the same candles the coin loop reads; cached downloads)
+    breadth_by_tf = {}
+    if any(sspec.uses_breadth(x) for x in strategies):
+        btf = [tf for tf in sc.BREADTH_TFS if tf in tfs]
+        fb = {}
+        for base in sc.breadth_coins(cfg):
+            try:
+                d_, q_ = fetch(base, btf, quiet=True)
+            except Exception as e:
+                log(f"market-wide breaks: {base} not loaded ({e}) - counted without it")
+                continue
+            fb[base] = {tf: d_[(base + cfg["market"]["quote"], tf)] for tf in btf
+                        if q_[(base, tf)]["state"] != dq.UNSAFE}
+        breadth_by_tf = sc.breadth_frames(fb, btf)
+        log(f"market-wide breaks (strategy 11): {len(fb)} coins on {', '.join(btf) or '-'}")
     for base in coins:
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
@@ -509,34 +556,13 @@ def main():
             log(f"Forward Test Program: {round((time.time() - t_start) / 60)} min gone before {base} - tonight's "
                 f"batch is dropped (tested again first next night)")
         try:
-            okx_frames = {}
-            if okx is not None:
-                try:
-                    okx_frames, okx_note = okx.coin(base, {tf: bars[tf] for tf in okx_tfs}, now_ms)
-                    log(f"{base} OKX perpetual candles: {okx_note}")
-                except Exception as e:                   # never fatal: Binance spot as before
-                    log(f"{base} OKX perpetual candles failed ({e}) - Binance spot used")
-            for tf in ["1w", "1d"] + tfs:
-                ok_df = okx_frames.get(tf)
-                if ok_df is not None and len(ok_df) and int(ok_df["open_time"].min()) <= now_ms - (bars[tf] - 1) * sc.TF_MS[tf] \
-                        and okx_history.missing(ok_df, tf, bars[tf], now_ms) <= OKX_HOLE_SHARE * bars[tf]:
-                    raw, how = ok_df, "OKX perpetual"
-                else:                                    # no OKX history (yet), a younger listing or a relisting hole
-                    raw, how = history.update(feed, sym, tf, bars[tf], now_ms, cache)
-                    if ok_df is not None and len(ok_df):
-                        raw, how = okx_history.stitch(ok_df, raw, bars[tf], tf)
-                if tf in okx_tfs:
-                    sources.setdefault(tf, {})[base] = how if how.startswith("OKX") else "Binance spot"
-                df, rep = dq.check_candles(raw, sc.TF_MS[tf], now_ms, dq_cfg)
-                data[(sym, tf)], quality[(base, tf)] = df, rep
-                log(f"{sym} {tf}: {len(df)} candles ({how}), data {rep['state']}"
-                    + (f" - {'; '.join(rep['problems'])}" if rep["problems"] else ""))
+            data, quality = fetch(base, ["1w", "1d"] + tfs)
         except Exception as e:
             log(f"skip {sym}: {e}")
             skipped[base] = f"download failed: {e}"
             continue
         if base == "BTC":
-            btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs)
+            btc_by_tf = sc.btc_frames(data, cfg["market"]["quote"], tfs, breadth_by_tf)
         flow = None
         if flow_h is not None:
             try:

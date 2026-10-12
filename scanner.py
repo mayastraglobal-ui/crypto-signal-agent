@@ -509,6 +509,25 @@ def make_namespace(df, feats=None):
 
     def vp_val(n=100): return pd.Series(_vprofile(n)[2], index=df.index)
 
+    def _steps(brk, gap, win):
+        b = brk.fillna(False).to_numpy(dtype=bool)
+        before = pd.Series(b.astype(float)).shift(1).rolling(int(gap), min_periods=1).max().fillna(0).to_numpy() > 0
+        start = b & ~before                  # a break with no break in the `gap` candles before = a new step
+        return pd.Series(pd.Series(start.astype(float)).rolling(int(win), min_periods=1).sum().to_numpy(),
+                         index=df.index)
+
+    @cached
+    def steps_dn(n=20, gap=3, win=24):
+        """Strategy 11 (2026-10-13): which breakdown step of the move this is - the number of new breakdowns (a close
+        below the lowest low of the n candles before, with no breakdown in the `gap` candles before it) in the last
+        `win` candles, this one included. 1 = the first step down, 3 = the third (late: often near the bottom)."""
+        return _steps(c < lowest(l, int(n)).shift(1), gap, win)
+
+    @cached
+    def steps_up(n=20, gap=3, win=24):
+        """steps_dn mirrored: which breakout step up (a close above the highest high of the n candles before)."""
+        return _steps(c > highest(h, int(n)).shift(1), gap, win)
+
     def within(x, n):
         """x was true on this candle or one of the n-1 candles before."""
         return x.astype(float).rolling(int(n), min_periods=1).max().fillna(0) > 0
@@ -529,6 +548,7 @@ def make_namespace(df, feats=None):
               lowest=lowest, shift=shift, prev=prev, vol_sma=vol_sma, pct_rank=pct_rank,
               supertrend_dir=supertrend_dir, cross_up=cross_up, cross_down=cross_down,
               within=within, bars_since=bars_since, abs=abs, min=min, max=max, np=np,
+              steps_up=steps_up, steps_dn=steps_dn,
               vp_poc=vp_poc, vp_vah=vp_vah, vp_val=vp_val)
     if feats is not None:
         for col in feats.columns:
@@ -560,7 +580,8 @@ def make_namespace(df, feats=None):
         """BTC's return over its last n closed candles of this timeframe, in % (known at this candle's close)."""
         return (btc / btc.shift(int(n)) - 1) * 100
     ns.update(funding_rate=fr, oi=oi_, ls_ratio=_col("_ls_ratio"), taker_ratio=_col("_taker_ratio"),
-              funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret)
+              funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret,
+              mkt_up=_col("_mkt_up"), mkt_dn=_col("_mkt_dn"))          # strategy 11: market-wide breaks (counts)
     return ns
 
 
@@ -646,13 +667,76 @@ def market_weather(now, regimes, daily_hlc, derivs, snap, risk_out, fg, cfg, off
     return w
 
 
-def btc_frames(data, quote, tfs):
-    """BTC's closes per timeframe (close_time, close) for the btc_ret building block."""
+def btc_frames(data, quote, tfs, breadth=None):
+    """BTC's closes per timeframe (close_time, close) for the btc_ret building block. breadth: breadth_frames() -
+    its counts ride along as mkt_up / mkt_dn columns (matched by close time; a candle without them = unknown)."""
     out = {}
     for tf in tfs:
         d = data.get(("BTC" + quote, tf))
         if d is not None and len(d):              # + high / low: the playbook reads BTC's 15m structure
             out[tf] = d[[k for k in ("open_time", "close_time", "high", "low", "close") if k in d]]
+            b = (breadth or {}).get(tf)
+            if b is not None and len(b):
+                out[tf] = out[tf].merge(b[["close_time", "mkt_up", "mkt_dn"]], on="close_time", how="left")
+    return out
+
+
+# strategy 11 (operator request 2026-10-13: "BTC + at least 3 of the coins break the same way" - a real market move,
+# not one coin's fake break): the break the count looks for, and the timeframes it is made for
+BREADTH_N, BREADTH_WITHIN, BREADTH_TFS = 20, 2, ("1h", "30m", "15m")
+
+
+def breadth_coins(cfg):
+    """The coins counted: the operator's own coins (universe.own_coins) - the same list in backtest and live."""
+    u = cfg.get("universe") or {}
+    return list(u.get("own_coins") or u.get("research_pinned") or [])
+
+
+def market_breadth(data, quote, cfg, quality=None):
+    """breadth_frames() of the operator's coins found in data ({(symbol, tf): candles}); UNSAFE data is left out."""
+    fb = {}
+    for c in breadth_coins(cfg):
+        fr = {tf: data[(c + quote, tf)] for tf in BREADTH_TFS if (c + quote, tf) in data
+              and ((quality or {}).get((c, tf)) or {}).get("state") != dq.UNSAFE}
+        if fr:
+            fb[c] = fr
+    return breadth_frames(fb)
+
+
+def coin_breaks(df, n=BREADTH_N, within=BREADTH_WITHIN):
+    """(close_time, up, dn): the candle closed above the highest high / below the lowest low of the n candles before,
+    on this candle or one of the within-1 before it (closed candles only)."""
+    c, h, l = (df[k].astype(float) for k in ("close", "high", "low"))
+    up = (c > h.rolling(n, min_periods=n).max().shift(1)).astype(float)
+    dn = (c < l.rolling(n, min_periods=n).min().shift(1)).astype(float)
+    up = up.rolling(within, min_periods=1).max()
+    dn = dn.rolling(within, min_periods=1).max()
+    return df["close_time"].to_numpy(dtype=np.int64), up.to_numpy(), dn.to_numpy()
+
+
+def breadth_frames(frames_by_coin, tfs=BREADTH_TFS):
+    """{tf: DataFrame(close_time, mkt_up, mkt_dn, mkt_n)}: how many of the coins broke up / down at each close time
+    (coin_breaks), out of mkt_n coins with that candle. frames_by_coin: {coin: {tf: candles}}. A candle where fewer
+    than 3 coins have data counts as unknown (NaN), so a rule using it is false."""
+    out = {}
+    for tf in tfs:
+        ups, dns = [], []
+        for coin, frames in sorted(frames_by_coin.items()):
+            d = (frames or {}).get(tf)
+            if d is None or not len(d):
+                continue
+            ct, up, dn = coin_breaks(d)
+            ups.append(pd.Series(up, index=ct, name=coin))
+            dns.append(pd.Series(dn, index=ct, name=coin))
+        if not ups:
+            continue
+        U, D = pd.concat(ups, axis=1).sort_index(), pd.concat(dns, axis=1).sort_index()
+        n = U.notna().sum(axis=1)
+        ok = n >= 3
+        out[tf] = pd.DataFrame({"close_time": U.index.to_numpy(dtype=np.int64),
+                                "mkt_up": U.sum(axis=1).where(ok).to_numpy(dtype=float),
+                                "mkt_dn": D.sum(axis=1).where(ok).to_numpy(dtype=float),
+                                "mkt_n": n.to_numpy(dtype=float)})
     return out
 
 
@@ -675,6 +759,11 @@ def attach_market(df, derivs, btc):
         same = np.zeros(len(df), bool)                    # only the SAME closed candle counts (no stale BTC price)
         same[ok] = ct[idx[ok]] == df["close_time"].to_numpy(dtype=np.int64)[ok]
         df["_btc_close"] = np.where(same, vals, np.nan)
+        for k in ("mkt_up", "mkt_dn"):                    # strategy 11: market-wide breaks, the same closed candle only
+            if k in btc:
+                b = np.full(len(df), np.nan)
+                b[ok] = btc[k].to_numpy(dtype=float)[idx[ok]]
+                df["_" + k] = np.where(same, b, np.nan)
     return df
 
 
@@ -724,6 +813,10 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
     if d4 is not None and len(d4) and (quality.get((base, "4h")) or {}).get("state") != dq.UNSAFE:
         reg_hist["4h_fast"] = pd.DataFrame({"close_time": d4["close_time"].to_numpy(),
                                             "label": fast_trend(d4["close"]), "exp_dir": None})
+    d1 = data.get((sym, "1h"))               # strategy 11: is the 1H already moving (momentum_1h)
+    if d1 is not None and len(d1) and (quality.get((base, "1h")) or {}).get("state") != dq.UNSAFE:
+        reg_hist["1h_mom"] = pd.DataFrame({"close_time": d1["close_time"].to_numpy(),
+                                           "label": momentum_1h(d1["close"]), "exp_dir": None})
     frames = {}
     for tf, (df, feats) in pairs.items():
         reg = {}                            # regime of every regime timeframe, as known at each candle
@@ -752,6 +845,20 @@ def fast_trend(close):
     return out
 
 
+def momentum_1h(close, n=20, back=6):
+    """Is the 1H already moving (strategy 11, operator request 2026-10-13: "the 1H and 30m fall strongly for hours and
+    no alert, because the 4H has not turned")? DOWN when the close is below its EMA20 AND below the close `back`
+    candles earlier, UP mirrored, else FLAT. Faster than the regime label, which on 12 Oct read TRANSITION all evening
+    while every coin fell. Returns an object array (None while the EMA warms up)."""
+    c = pd.Series(np.asarray(close, dtype=float))
+    e = c.ewm(span=n, adjust=False, min_periods=n).mean()
+    old = c.shift(back)
+    up, dn = ((c > e) & (c > old)).to_numpy(), ((c < e) & (c < old)).to_numpy()
+    out = np.where(up, "UP", np.where(dn, "DOWN", "FLAT")).astype(object)
+    out[(e.isna() | old.isna()).to_numpy()] = None
+    return out
+
+
 def add_context(df, feats, reg, tf):
     """Forward Test Program building blocks: dir_1w / dir_1d / dir_4h / dir_1h = the regime direction of that
     timeframe as known at each candle (+1 bull, -1 bear, 0 neither; unknown = NaN, so a rule using it is false), and
@@ -769,6 +876,11 @@ def add_context(df, feats, reg, tf):
         new["dir_4h_fast"] = np.where(f == "UP", 1.0, np.where(f == "DOWN", -1.0, np.where(f == "FLAT", 0.0, np.nan)))
     else:
         new["dir_4h_fast"] = np.full(len(df), np.nan)
+    if "1h_mom" in reg:                     # strategy 11: +1 / -1 / 0 (unknown = NaN)
+        f = np.asarray(reg["1h_mom"][0], dtype=object)
+        new["dir_1h_mom"] = np.where(f == "UP", 1.0, np.where(f == "DOWN", -1.0, np.where(f == "FLAT", 0.0, np.nan)))
+    else:
+        new["dir_1h_mom"] = np.full(len(df), np.nan)
     new.update(sess.columns(df["open_time"].to_numpy(), df["high"].to_numpy(), df["low"].to_numpy(), TF_MS[tf]))
     return pd.concat([feats.drop(columns=[k for k in new if k in feats]), pd.DataFrame(new, index=feats.index)],
                      axis=1)
@@ -2460,7 +2572,7 @@ def main():
     watching = []                           # WATCH / SETUP_FORMING (report only)
     dash_candles = {}                       # coin -> tf -> newest candles, for the dashboard charts (Phase 16)
     derivs_by_coin = load_derivs(args.offline, [u["base"] for u in coins], int(started.timestamp() * 1000))
-    btc_by_tf = btc_frames(data, cfg["market"]["quote"], tfs)
+    btc_by_tf = btc_frames(data, cfg["market"]["quote"], tfs, market_breadth(data, cfg["market"]["quote"], cfg, quality))
     ST = stc.settings(cfg.get("structure"))
     struct_src = {}                         # coin -> (4H SMC result, candles, ATR) for the 🧭 location tag
     for u in coins:

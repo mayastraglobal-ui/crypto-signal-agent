@@ -855,3 +855,34 @@ Newest entries at the bottom. Format: date · who · what · why.
   is unchanged. Real check 13 Oct 02:20 Beijing: all 6 coins "turning down", verdict "Turning down - not confirmed".
 - Tests: `tests/test_weather.py` `Turning`.
 
+
+## 2026-10-13 · Operator + Claude · Strategy 11 "early momentum" + 🌊 momentum notes
+- Operator (12-13 Oct): every coin fell for hours on 1H / 30m (and rallied on 11 Oct) with no alert - the 4H had not
+  turned, so the 4H + 1H gates waited; "give me a watch alert while it forms, but don't tell me to short when the
+  market has almost finished falling - it goes up because it has already gone down". Operator: "build strategy 11".
+- New gate `intraday_momentum` (`engine/lifecycle.py`, `engine/strategy_spec.py`): the 1H already moving (1H close
+  beyond its EMA20 and beyond the close 6 hours earlier, `scanner.momentum_1h`, block `dir_1h_mom`) and the 4H not in
+  a STRONG trend against it; 1W / 1D context only. Strategies 1-10 keep their gates.
+- New blocks (`scanner.py`): `mkt_up` / `mkt_dn` - how many of the operator's coins (`universe.own_coins`) broke their
+  20-candle high / low on this candle or the one before (`breadth_frames`, carried with the BTC frames to every coin,
+  same closed candle only; < 3 coins with data = unknown); `steps_up` / `steps_dn(n, gap, win)` - which break step of
+  the move this is. research.py loads the own coins' 1h / 30m / 15m candles first when a card tonight uses mkt_*
+  (`fetch`, the same loader and cache as the coin loop); the hourly scan and the live watcher count from the candles
+  they already hold.
+- `strategies_program.yaml`: strategy 11 - P11-MOMENTUM-V1 (30m: market-wide break, BTC the same way, the coin moving
+  at least as hard as BTC, step 1-2, RSI not beyond 30 / 70, not more than 2.5 ATR from the EMA20), V2 (+ 24-hour level
+  + squeeze before), V3 (V2 on 1H), V4 (30m retest of the EMA20 after the break), C (control twin of V1: the plain
+  breakout under the same gate). Both directions. Program version "C" added (`PROGRAM_VERSIONS`); a control version
+  never sends a TEST alert (`engine/signal_center.test_list`). Nothing lowered: same fees, pass bar, trials counter;
+  V1 must also beat its control. First tested in the 15 Oct night batch (after 9 + 10, the never-tested order).
+- 🌊 `engine/momentum_notes.py` + live watcher: 👀 forming (every 15m close; at least 2 coins), ⚠️ late (3rd step, RSI
+  beyond 30 / 70 or > 2.5 ATR from the 30m EMA20: "no new trade that way"), 🔄 bounce (the 30m close back over its
+  EMA20 within 12 h of a ⚠️ note). Information only, at most 12 a day, cooldowns, `/momentum on|off`, held by
+  `/pause`; `config.yaml` -> `momentum_notes`. The watcher now prepares 1h / 30m / 15m at every 15m close while the
+  notes are on.
+- Real check, OKX candles 11-13 Oct (Beijing): 👀 SOL / SUI / XRP forming at 19:45 on 12 Oct; V1 SHORT SOL, SUI, XRP
+  at the 21:00 close (mkt_dn 6 of 7) -> +2R each, ZEC at 23:00 -> +2R; SOL / XRP not shorted again at 23:00 (RSI 26 /
+  28) and ⚠️ late notes for them, ⚠️ SUI / ZEC at 01:00 (3rd step, RSI 24). The same V1 lost on the 11 Oct morning
+  fake breakdowns (5 shorts) and the 12 Oct 13:00 top (3 longs): about +3R over the 3 days in a simple stop / +2R
+  check - two days prove nothing; the 5-year test decides. V4 lost 12 of 13 in that chop (the backtest will show).
+- Tests: `tests/test_strategy11.py` (16).
