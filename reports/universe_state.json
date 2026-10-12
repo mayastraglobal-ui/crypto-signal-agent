@@ -10,9 +10,10 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "W": "2026-10-12"
+  "W": "2026-10-12",
+  "STRK": "2026-10-12"
  },
- "runs": 409,
+ "runs": 410,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -104,6 +105,7 @@
    "volume_7d"
   ],
   "STRK": [
+   "big_move",
    "thin_book",
    "volume_7d"
   ],
@@ -115,6 +117,7 @@
   ],
   "W": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]

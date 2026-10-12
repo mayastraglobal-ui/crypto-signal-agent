@@ -14002,3 +14002,30 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 21:45,SUI,15m,BOS,bear,1.0619,,,0.576,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-12 22:00,SUI,15m,SWEEP,bull,1.044,,,0.196,,1h,TRANSITION,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
 2026-10-12 22:00,SUI,15m,FVG,bear,,1.0586,1.0676,1.159,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:00,BTC,1h,BOS,bear,82311.5,,,0.388,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-10-12 22:30,BTC,30m,FVG,bear,,82781.61,82860.0,0.29,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:00,BTC,30m,BOS,bear,82311.5,,,0.569,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-10-12 23:00,BTC,30m,ORDER_BLOCK,bear,,82529.41,82781.61,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 23:00,BTC,15m,CHOCH,bear,82431.44,,,1.489,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-10-12 23:00,BTC,15m,ORDER_BLOCK,bear,,82529.41,82781.61,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 23:15,BTC,15m,FVG,bear,,82270.87,82481.65,0.932,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-12 23:00,ETH,1h,FVG,bear,,2498.51,2518.99,1.146,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-12 22:30,ETH,30m,FVG,bear,,2498.51,2510.17,0.991,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:15,ETH,15m,FVG,bear,,2471.58,2480.37,0.833,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:00,SOL,1h,BOS,bear,107.16,,,0.781,,4h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-12 23:00,SOL,1h,ORDER_BLOCK,bear,,108.32,108.85,,,4h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 23:00,SOL,1h,FVG,bear,,107.55,108.32,0.775,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-12 22:30,SOL,30m,BOS,bear,107.16,,,0.086,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-12 22:30,SOL,30m,FVG,bear,,107.55,107.96,0.595,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:00,SOL,15m,SWEEP,bull,106.38,,,0.162,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-12 23:15,SOL,15m,BOS,bear,106.38,,,0.414,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-12 23:00,XRP,1h,FVG,bear,,1.3574,1.3649,0.65,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-12 22:30,XRP,30m,FVG,bear,,1.3574,1.3627,0.623,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:15,XRP,15m,SWEEP,bull,1.3431,,,0.298,,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-12 23:00,ZEC,1h,FVG,bear,,1217.57,1232.95,0.717,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 22:30,ZEC,30m,FVG,bear,,1217.57,1227.83,0.686,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-12 23:00,SUI,1h,FVG,bear,,1.0567,1.0721,1.04,,4h,RANGE,,smc-1.0,Binance
+2026-10-12 22:30,SUI,30m,FVG,bear,,1.0567,1.0659,0.891,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 23:00,SUI,30m,OB_INVALID,bull,,1.049,1.0568,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-12 23:15,SUI,15m,BOS,bear,1.0426,,,0.752,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-12 23:15,SUI,15m,FVG_FILLED,bull,,1.0358,1.0396,,,1h,TRANSITION,,smc-1.0,Binance
