@@ -568,3 +568,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-11 07:19 UTC
 - **JOIN** XRP - on your coin list and passes every rule (2 runs in a row)
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-10-12 00:31 UTC
+- **EXCLUDED** STRK - 7-day average volume $43M < $50M; order book too thin: $74k within 1% (need $250k)

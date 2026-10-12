@@ -9,11 +9,8 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {
-  "STRK": "2026-10-11",
-  "MAGIC": "2026-10-11"
- },
- "runs": 386,
+ "suspended": {},
+ "runs": 387,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -105,7 +102,6 @@
    "volume_7d"
   ],
   "STRK": [
-   "big_move",
    "thin_book",
    "volume_7d"
   ],
