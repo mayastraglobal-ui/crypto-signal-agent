@@ -13451,3 +13451,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 07:00,SUI,30m,FVG_RETRACE,bear,,1.1283,1.1328,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-12 07:00,SUI,30m,FVG_FILLED,bear,,1.1283,1.1328,,London,1h,RANGE,,smc-1.0,Binance
 2026-10-12 06:45,SUI,15m,FVG_RETRACE,bull,,1.1184,1.121,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 08:00,BTC,4h,SWEEP,bear,84199.0,,,0.265,,1d,TRANSITION,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-10-12 07:30,BTC,30m,FVG,bull,,84030.0,84106.56,0.304,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 08:00,BTC,30m,FVG_RETRACE,bull,,84030.0,84106.56,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 08:00,BTC,30m,FVG_FILLED,bull,,84030.0,84106.56,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 07:30,BTC,15m,FVG_RETRACE,bull,,84031.6,84146.0,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 07:45,BTC,15m,FVG_RETRACE,bull,,83861.91,83979.4,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 07:45,BTC,15m,FVG_FILLED,bull,,84031.6,84146.0,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 08:00,BTC,15m,FVG,bear,,84060.49,84106.56,0.254,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 08:15,BTC,15m,WEAK_BREAK,bear,83756.02,,,0.166,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-12 08:15,BTC,15m,OB_INVALID,bull,,83756.02,83861.91,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-12 08:15,BTC,15m,FVG_FILLED,bull,,83861.91,83979.4,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 08:00,ETH,15m,FVG_RETRACE,bull,,2558.3,2564.43,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 08:00,ETH,15m,FVG,bear,,2567.2,2570.88,0.429,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 08:15,ETH,15m,FVG_FILLED,bull,,2558.3,2564.43,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 08:00,SOL,4h,SWEEP,bear,112.75,,,0.431,,1d,TRANSITION,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-10-12 08:00,SOL,4h,FVG_RETRACE,bear,,113.33,114.22,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 08:00,SOL,4h,FVG_FILLED,bear,,109.47,113.14,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-12 08:00,ZEC,4h,OB_RETEST,bear,,1302.5,1348.0,,,1d,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-12 08:00,ZEC,15m,WEAK_BREAK,bear,1321.9,,,0.137,London,1h,WEAK_BULL,no displacement,smc-1.0,Binance
