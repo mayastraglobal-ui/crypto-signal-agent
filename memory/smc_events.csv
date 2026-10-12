@@ -13544,3 +13544,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 10:15,ZEC,15m,WEAK_BREAK,bear,1303.44,,,0.117,,1h,WEAK_BULL,no displacement,smc-1.0,Binance
 2026-10-12 10:00,SUI,30m,SWEEP,bull,1.1134,,,0.147,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-12 10:00,SUI,15m,SWEEP,bull,1.1134,,,0.217,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-12 11:00,SOL,1h,FVG_RETRACE,bear,,111.96,112.58,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 10:30,SOL,30m,OB_INVALID,bull,,111.56,111.87,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-12 11:00,SOL,30m,BREAKER_RETEST,bear,,111.56,111.87,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-12 11:15,SOL,15m,SWEEP,bull,111.3,,,0.317,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-12 11:00,ZEC,1h,FVG_RETRACE,bear,,1313.83,1320.18,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 11:00,ZEC,30m,FVG_RETRACE,bear,,1314.61,1320.18,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-12 11:00,ZEC,15m,FVG_RETRACE,bear,,1315.23,1320.18,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-12 11:00,ZEC,15m,FVG,bull,,1302.56,1305.88,0.394,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-12 11:15,SUI,15m,CHOCH,bear,1.1121,,,0.106,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-12 11:15,SUI,15m,ORDER_BLOCK,bear,,1.1152,1.1189,,NY AM,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 11:15,SUI,15m,OB_INVALID,bull,,1.1139,1.1184,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
