@@ -279,7 +279,8 @@ class OKXSwap:
             return pd.DataFrame(columns=["open_time", "open", "high", "low", "close", "volume", "quote_volume"])
         df = pd.DataFrame([[r[0], r[1], r[2], r[3], r[4], r[6], r[7] if len(r) > 7 else np.nan] for r in rows],
                           columns=["open_time", "open", "high", "low", "close", "volume", "quote_volume"])
-        return sc._finish(df, tf)
+        df = sc._finish(df, tf)          # OKX answers newest first: every caller gets them oldest first (2026-10-12)
+        return df.drop_duplicates("open_time", keep="last").sort_values("open_time").reset_index(drop=True)
 
     def minutes(self, coin, n):
         """The newest n CLOSED 1-minute candles (the shock alarm) as arrays open_time / open / high / low / close /
