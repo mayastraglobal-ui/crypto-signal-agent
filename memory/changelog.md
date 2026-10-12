@@ -841,3 +841,17 @@ Newest entries at the bottom. Format: date · who · what · why.
   Pending shocks younger than 3 days are written with their outcome at the next minute after the update.
 - Test: `tests/test_shock.py` `OKXOrder` (OKX-ordered rows; fails without the fix).
 
+## 2026-10-13 · Operator + Claude · Market weather: "Turning down / up - not confirmed" instead of "Choppy"
+- Operator (12 Oct night): every coin fell steadily on 15m / 30m / 1H (SOL -5%, SUI -6%, ZEC -8% from the day's high)
+  while /weather said "Choppy - stay out". The 1H regime was TRANSITION (a strong move, ADX >= 25, against EMAs that
+  still pointed up), 4H RANGE / TRANSITION, so the trend strategies correctly waited - but "choppy" did not describe
+  the chart. Operator: "fix weather wording".
+- `engine/weather.py`: `lean` (which way a timeframe already moves: its label, else momentum + structure; for
+  TRANSITION the momentum alone, the swing structure lags) and `turning` ("down" / "up" for a CHOPPY coin whose 1H -
+  not a range - already moves one way and whose 4H is not against it). New market verdicts TURNING_DOWN / TURNING_UP
+  (BTC turning and at least half the coins turning or trending the same way): "Turning down - not confirmed ... a
+  SHORT alert comes only once 1H and 4H both point down". Coins show "↘️ turning down (not confirmed)".
+- Display only: `coin_verdict` (and so the recorded `market_type`, the weekly review's market groups and every gate)
+  is unchanged. Real check 13 Oct 02:20 Beijing: all 6 coins "turning down", verdict "Turning down - not confirmed".
+- Tests: `tests/test_weather.py` `Turning`.
+

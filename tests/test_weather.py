@@ -17,6 +17,7 @@ import live_watcher as LW  # noqa: E402
 from engine import emails as em  # noqa: E402
 from engine import live as lv  # noqa: E402
 from engine import mailfacts as mf  # noqa: E402
+from engine import signal_center as scx  # noqa: E402
 from engine import weather as wx  # noqa: E402
 
 NOW = dt.datetime(2026, 10, 8, 8, 0, tzinfo=dt.timezone.utc)
@@ -96,6 +97,46 @@ class Crowding(unittest.TestCase):
         self.assertAlmostEqual(c["funding_pct"], 0.05)
         self.assertAlmostEqual(c["oi_24h_pct"], 10.0)
         self.assertEqual(wx.crowding(None, None)["label"], "unknown")
+
+
+class Turning(unittest.TestCase):
+    """2026-10-12 (operator: "fix weather wording"): a fall on 1H that 4H / 1D have not confirmed is named for it."""
+    def recs(self, h1, h4, mo1="down", su1="up", mo4="down", su4="mixed"):
+        return {"1w": dict(label="WEAK_BULL"), "1d": dict(label="TRANSITION"),
+                "4h": dict(label=h4, states=dict(momentum=mo4, structure=su4)),
+                "1h": dict(label=h1, states=dict(momentum=mo1, structure=su1))}
+
+    def test_turning_per_coin(self):
+        self.assertEqual(wx.turning(self.recs("TRANSITION", "RANGE"), "NO TRADE"), "down")       # 12 Oct
+        self.assertEqual(wx.turning(self.recs("TRANSITION", "RANGE", "up", "down", "up", "down"), "NO TRADE"), "up")
+        self.assertEqual(wx.turning(self.recs("WEAK_BEAR", "TRANSITION", mo4="neutral"), "NO TRADE"), "down")
+        self.assertIsNone(wx.turning(self.recs("RANGE", "RANGE"), "NO TRADE"))                # a range wiggle
+        self.assertIsNone(wx.turning(self.recs("TRANSITION", "WEAK_BULL"), "NO TRADE"))       # 4H against it
+        self.assertIsNone(wx.turning(self.recs("WEAK_BEAR", "WEAK_BEAR"), "SHORT allowed"))   # confirmed: DOWN
+        self.assertIsNone(wx.turning(self.recs("TRANSITION", "RANGE", mo1="neutral"), "NO TRADE"))
+
+    def test_market_verdict_and_words(self):
+        c = lambda *v: [dict(coin=k, verdict=x, turning=t) for k, (x, t) in zip(["BTC", "ETH", "SOL", "XRP"], v)]  # noqa
+        ch, dn = ("CHOPPY", None), ("CHOPPY", "down")
+        self.assertEqual(wx.market_verdict(c(dn, dn, ch, ("DOWN", None)), []), "TURNING_DOWN")
+        self.assertEqual(wx.market_verdict(c(dn, ch, ch, ch), []), "CHOPPY")          # BTC alone
+        self.assertEqual(wx.market_verdict(c(ch, dn, dn, dn), []), "CHOPPY")          # BTC not turning
+        self.assertEqual(wx.market_verdict(c(("CHOPPY", "up"), ("CHOPPY", "up"), ch, ch), []), "TURNING_UP")
+        self.assertEqual(wx.market_verdict(c(dn, dn, dn, dn), ["US CPI"]), "NEWS")
+        self.assertEqual(wx.coin_word(dict(verdict="CHOPPY", turning="down")), "turning down (not confirmed)")
+        self.assertEqual(wx.coin_word(dict(verdict="RANGE", turning=None)), "range")
+
+    def test_the_weather_text(self):
+        regs = {k: dict(timeframes=self.recs("TRANSITION", "RANGE"), permission="NO TRADE", permission_reason="t")
+                for k in ("BTC", "ETH", "SOL")}
+        w = wx.build(NOW, regs, {}, {}, {}, [])
+        self.assertEqual(w["verdict"]["code"], "TURNING_DOWN")
+        self.assertEqual([c["verdict"] for c in w["coins"]], ["CHOPPY"] * 3)      # the recorded verdict is unchanged
+        self.assertIn("Turning down - not confirmed", w["telegram"])
+        self.assertIn("↘️ BTC: turning down (not confirmed)", w["telegram"])
+        self.assertIn("SHORT alert comes only once 1H and 4H both point down", w["telegram"])
+        self.assertIn("ETH turning down", "\n".join(wx.md_lines(w)))
+        self.assertIn("BTC: turning down", scx.weather_line(w, "BTC"))
 
 
 def weather(perm_btc="NO TRADE", blackout=None, events=None):

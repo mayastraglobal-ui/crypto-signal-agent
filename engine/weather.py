@@ -37,6 +37,9 @@ RANGE_LABELS = {"RANGE", "HIGH_VOL_RANGE", "COMPRESSION"}
 ATR_N, PCT_DAYS, HIST_DAYS = 14, 365, 3 * 365
 COIN_WORD = {"UP": "trend up", "DOWN": "trend down", "RANGE": "range", "CHOPPY": "choppy"}
 COIN_ICON = {"UP": "🟢", "DOWN": "🔴", "RANGE": "🟡", "CHOPPY": "⚪"}
+TURN_WORD = {"down": "turning down (not confirmed)", "up": "turning up (not confirmed)"}   # 2026-10-12, display only
+TURN_ICON = {"down": "↘️", "up": "↗️"}
+BULL_LABELS, BEAR_LABELS = {"STRONG_BULL", "WEAK_BULL"}, {"STRONG_BEAR", "WEAK_BEAR"}
 VERDICTS = {
     "TREND_UP": ("☀️", "Trend day ↑",
                  "BTC and most coins point up on 1D / 4H / 1H.",
@@ -54,6 +57,21 @@ VERDICTS = {
               "No trend: price moves sideways between levels on 4H and 1H.",
               ["waiting - the trend strategies don't trade a range"],
               ["breakout trades without a retest", "trend trades"]),
+    # 2026-10-12 (operator: "fix weather wording"): a CHOPPY market whose 1H already moves one way - what the chart
+    # shows on 15m / 30m / 1H - is named for that, so /weather matches the chart. Display only: the signals, gates
+    # and recorded market types (coin_verdict) are unchanged.
+    "TURNING_DOWN": ("🌦", "Turning down - not confirmed",
+                     "Prices are falling on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not "
+                     "turned yet. The trend strategies wait: a SHORT alert comes only once 1H and 4H both point down.",
+                     ["waiting for the confirmation - the SHORT alerts then come by themselves",
+                      "checking the stop of any open long"],
+                     ["buying the dip (catching a falling knife)", "shorting by hand before the confirmation"]),
+    "TURNING_UP": ("🌤", "Turning up - not confirmed",
+                   "Prices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not "
+                   "turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.",
+                   ["waiting for the confirmation - the LONG alerts then come by themselves",
+                    "checking the stop of any open short"],
+                   ["chasing the rally by hand before the confirmation", "shorting into the rise"]),
     "CHOPPY": ("🌫", "Choppy - stay out",
                "The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.",
                ["waiting until 1D, 4H and 1H agree - no trade is the right trade"],
@@ -157,8 +175,54 @@ def coin_verdict(recs, permission):
     return "CHOPPY"
 
 
+def lean(rec):
+    """+1 / -1 / 0: which way one timeframe already moves (its regime label, else momentum with structure)."""
+    if not rec:
+        return 0
+    lab, st = rec.get("label"), rec.get("states") or {}
+    if lab in BULL_LABELS:
+        return 1
+    if lab in BEAR_LABELS:
+        return -1
+    if lab == "EXPANSION":
+        return {"up": 1, "down": -1}.get(rec.get("expansion_dir"), 0)
+    mo, su = st.get("momentum"), st.get("structure")
+    if lab == "TRANSITION":                  # a strong move against the old trend: the swing structure lags behind
+        return {"up": 1, "down": -1}.get(mo, 0)
+    if mo == "down" and su != "up":
+        return -1
+    if mo == "up" and su != "down":
+        return 1
+    return 0
+
+
+def turning(recs, permission):
+    """'down' / 'up' when a CHOPPY coin's 1H already moves one way (not a range) and its 4H is not against it - the
+    first part of a turn the trend strategies have not confirmed yet; else None. Display only."""
+    if coin_verdict(recs, permission) != "CHOPPY":
+        return None
+    h1 = (recs or {}).get("1h") or {}
+    if h1.get("label") in RANGE_LABELS:
+        return None
+    l1, l4 = lean(h1), lean((recs or {}).get("4h"))
+    if l1 == -1 and l4 <= 0:
+        return "down"
+    if l1 == 1 and l4 >= 0:
+        return "up"
+    return None
+
+
+def coin_word(c):
+    """'turning down (not confirmed)' for a turning coin, else the verdict's word."""
+    return TURN_WORD.get(c.get("turning")) or COIN_WORD.get(c.get("verdict"), c.get("verdict"))
+
+
+def coin_icon(c):
+    return TURN_ICON.get(c.get("turning")) or COIN_ICON.get(c.get("verdict"), "⚪")
+
+
 def market_verdict(coins, blackout_now):
-    """coins = [dict(coin, verdict)] with BTC among them."""
+    """coins = [dict(coin, verdict, turning)] with BTC among them."""
     if blackout_now:
         return "NEWS"
     v = {c["coin"]: c["verdict"] for c in coins}
@@ -168,7 +232,14 @@ def market_verdict(coins, blackout_now):
         return "TREND_UP" if ups >= n / 2 else "MIXED"
     if btc == "DOWN":
         return "TREND_DOWN" if downs >= n / 2 else "MIXED"
-    return "RANGE" if btc == "RANGE" else "CHOPPY"
+    if btc == "RANGE":
+        return "RANGE"
+    turn = {c["coin"]: c.get("turning") for c in coins}
+    for way, code in (("down", "TURNING_DOWN"), ("up", "TURNING_UP")):
+        same = sum(x == ("DOWN" if way == "down" else "UP") or turn.get(k) == way for k, x in v.items())
+        if turn.get("BTC") == way and same >= n / 2:
+            return code
+    return "CHOPPY"
 
 
 def _when(start_utc, now):
@@ -217,6 +288,7 @@ def build(now, regimes, daily, derivs, snap, events, blackout_now=None, fear_gre
         hourly, fund = (derivs or {}).get(c) or (None, None)
         coins.append(dict(
             coin=c, verdict=coin_verdict(recs, r.get("permission")), permission=r.get("permission"),
+            turning=turning(recs, r.get("permission")),
             why=r.get("permission_reason"),
             labels={tf: (recs.get(tf) or {}).get("label") for tf in ("1w", "1d", "4h", "1h")},
             adx={tf: _f(((recs.get(tf) or {}).get("values") or {}).get("adx"), 0) for tf in ("1d", "4h", "1h")},
@@ -317,7 +389,7 @@ def telegram(w):
     if fg.get("value") is not None:
         out.append(f"Mood (Fear & Greed): {fg.get('label') or ''} {fg['value']}".rstrip())
     out += ["", "<b>Coins</b>"]
-    out += [f"{COIN_ICON[c['verdict']]} {c['coin']}: {COIN_WORD[c['verdict']]}"
+    out += [f"{coin_icon(c)} {c['coin']}: {coin_word(c)}"
             + (f" · {c['crowd']['label']}" if c["crowd"]["label"] not in ("neutral", "unknown") else "")
             for c in w["coins"]]
     if w.get("events"):
@@ -336,7 +408,7 @@ def md_lines(w):
         return ["- market weather not available (no reports/market_weather.json)"]
     v = w["verdict"]
     out = [f"- verdict ({w['utc']} UTC): **{v['title']}** - {v['meaning']}",
-           f"- coins: " + ", ".join(f"{c['coin']} {COIN_WORD[c['verdict']]}" for c in w["coins"]),
+           f"- coins: " + ", ".join(f"{c['coin']} {coin_word(c)}" for c in w["coins"]),
            f"- fits: {'; '.join(v['fits'])} · avoid: {'; '.join(v['avoid'])}"]
     for c in w["coins"]:
         vol = c.get("vol") or {}
