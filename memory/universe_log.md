@@ -571,3 +571,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-12 00:31 UTC
 - **EXCLUDED** STRK - 7-day average volume $43M < $50M; order book too thin: $74k within 1% (need $250k)
+
+## 2026-10-12 10:23 UTC
+- **EXCLUDED** W - 7-day average volume $7M < $50M; 24h move +60.3% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $39k within 1% (need $250k)
