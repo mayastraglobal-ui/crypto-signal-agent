@@ -13245,3 +13245,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 01:30,ZEC,15m,FVG,bear,,1277.93,1280.46,0.312,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-10-12 01:00,SUI,30m,FVG_RETRACE,bull,,1.1186,1.1222,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-12 01:30,SUI,30m,FVG_FILLED,bull,,1.1186,1.1222,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 02:00,BTC,30m,FVG_RETRACE,bull,,83562.86,83624.79,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,BTC,30m,FVG_FILLED,bull,,83562.86,83624.79,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:00,BTC,15m,FVG_RETRACE,bull,,83562.86,83601.87,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,BTC,15m,FVG_FILLED,bull,,83562.86,83601.87,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:00,BTC,15m,FVG,bear,,83689.99,83762.0,0.526,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:15,BTC,15m,FVG_RETRACE,bear,,83689.99,83762.0,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:15,BTC,15m,FVG_FILLED,bear,,83689.99,83762.0,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 01:45,ETH,15m,BREAKER_RETEST,bull,,2535.64,2539.19,,Asia,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-12 02:00,SOL,30m,FVG_RETRACE,bull,,110.78,111.04,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,SOL,15m,FVG_RETRACE,bull,,110.78,110.97,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,ZEC,1h,FVG_RETRACE,bull,,1260.35,1275.18,,Asia,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,ZEC,30m,FVG,bear,,1275.16,1280.46,0.457,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 01:45,ZEC,15m,FVG_RETRACE,bull,,1260.35,1267.41,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 01:45,ZEC,15m,FVG_FILLED,bull,,1270.0,1275.21,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:15,ZEC,15m,FVG_RETRACE,bear,,1277.93,1280.46,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:00,SUI,15m,FVG,bear,,1.1165,1.1181,0.256,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 02:15,SUI,15m,FVG_RETRACE,bear,,1.1165,1.1181,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:15,SUI,15m,FVG_FILLED,bear,,1.1165,1.1181,,Asia,1h,RANGE,,smc-1.0,Binance
