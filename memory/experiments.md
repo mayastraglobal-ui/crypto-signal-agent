@@ -1052,3 +1052,33 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0079 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V2@1.0 | mean_reversion | 1h, 30m, 15m | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
 | EXP-0080 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V3@1.0 | mean_reversion | 4h | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
 | EXP-0081 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V4@1.0 | mean_reversion | 4h | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
+
+### Feedback: P02-EMA-PULLBACK-V4-S6-FHTF@1.0
+- timestamp: 2026-10-12 15:30 UTC · source: Claude daily review 2026-10-12 · evidence: BACKTEST_EVIDENCE: 1 cell, 291 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S6-FHTF@1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-10
+- parent: result: P02-EMA-PULLBACK-V4-S6@1.0 4h
+- hypothesis: P02-EMA-PULLBACK-V4-S6@1.0 loses on regime_mismatch (-0.09R a trade with it, +0.72R without). One change - only when the higher timeframe trends the same way (htf_up / htf_down) - should remove part of those losses and keep the rest.
+- result: BACKTEST 4h BACKTESTING 291 trades +0.036R (unseen +0.108R), t 0.347; profit factor 1.05, recovery factor 0.45 (needs 3), Monte Carlo 95% worst drawdown per 100 trades 33.7R (limit 17R). Parent: 365 trades +0.145R (unseen +0.209R).
+- teaches: the hypothesis did not hold. The higher-timeframe filter removed 74 trades and cut the average from +0.145R to +0.036R, so it removed winners, not mainly the regime_mismatch losers. The regime_mismatch tag describes the losers after the fact; the htf filter is not the same thing at entry.
+- next: stop this line
+
+### Feedback: P02-EMA-PULLBACK-V4-S6-S6@1.0
+- timestamp: 2026-10-12 15:30 UTC · source: Claude daily review 2026-10-12 · evidence: BACKTEST_EVIDENCE: 1 cell, 403 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S6-S6@1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-10
+- parent: result: P02-EMA-PULLBACK-V4-S6@1.0 4h
+- hypothesis: The rule 'close > avwap_swing_low / close < avwap_swing_high' adds nothing to P02-EMA-PULLBACK-V4-S6@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 4h BACKTESTING 403 trades +0.159R (unseen +0.174R), t 1.751; held back by Monte Carlo 95% worst drawdown per 100 trades 26.6R (limit 17R). Parent: 365 trades +0.145R (unseen +0.209R), t 1.518.
+- teaches: the hypothesis held: without the anchored-VWAP rule the card takes 38 more trades at about the same average (+0.159R vs +0.145R). It is the second rule removal in a row that did no harm (the RSI cap first), so the P02 4h pullback works as well with fewer rules. But t 1.751 is far below the bar (3.60) and the drawdown per 100 trades is well above the limit.
+- next: stop removing rules from this card (a third removal on the same 400 trades is curve-fitting). Wait for more data before any change; the open problem is the drawdown, not the entry.
+
+### Feedback: TRD-H4-BREAKOUT-S3@1.0
+- timestamp: 2026-10-12 15:30 UTC · source: Claude daily review 2026-10-12 · evidence: BACKTEST_EVIDENCE: 4 cells, 4845 trades (939 + 837 + 1458 + 1611) · confidence: low · strategy: TRD-H4-BREAKOUT-S3@1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: TRANSITION · review: 2027-01-10
+- parent: result: TRD-H4-BREAKOUT@1.0 1h
+- hypothesis: The rule 'volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5' adds nothing to TRD-H4-BREAKOUT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+- result: BACKTEST 1h BACKTESTING 939 trades +0.152R (unseen +0.273R), held back only by Monte Carlo 95% worst drawdown per 100 trades 22.0R (limit 17R); 30m BACKTESTING 837 trades +0.005R; 15m FAILED 1458 trades -0.024R; 5m FAILED 1611 trades -0.044R. Playbook: 1h +0.43R over 62 trades in TRANSITION. The parent 1h was +0.09R a trade with max drawdown 50.8R in the fact sheet of 2026-10-07 (today's parent numbers are not in the fact sheet).
+- teaches: on 1h, dropping the 1.5x volume rule did not hurt and may have helped (+0.152R now vs the parent's +0.09R a week ago - different samples, so not a clean comparison). The shorter timeframes stay near zero or negative, as for every breakout card so far.
+- next: no new variant; let the 1h cell gather data. If it later clears the drawdown gate, compare it with its parent on the same day's sample before trusting the difference.
+
+### Hypothesis: TEST alerts of strategies that fail overall will lose on average (from the 2026-10-11 TEST losses, C04, C05)
+- timestamp: 2026-10-12 15:30 UTC · source: Claude daily review 2026-10-12 · evidence: HYPOTHESIS: derived from config.yaml -> signal_center (a TEST alert needs only a positive backtest on that one coin) and the multiple-testing papers [C04] and [C05]; three TEST losses on 2026-10-11 are an example, not evidence · confidence: low · strategy: all TEST-stage cells · asset: signal coins · timeframe: all · regime: - · review: 2027-01-10
+  - hypothesis: when a strategy is FAILED across all coins but positive on one coin, its TEST alerts on that coin will on average do no better than the strategy's all-coin backtest average, because the coin was picked after the fact from many coin x strategy x timeframe cells.
+  - how to test: no lab card - an engine report for the operator. Once 30 or more TEST signals have closed, compare their average R with (a) the per-coin backtest average that qualified them and (b) the strategy's all-coin average. If (a) is far above the result and (b) is close, the per-coin selection adds nothing.
+  - stop if: TEST results match the per-coin backtest averages after 30 or more closed signals.
