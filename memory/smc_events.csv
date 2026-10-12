@@ -13750,3 +13750,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 15:00,SUI,15m,FVG,bear,,1.0887,1.0923,0.425,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-12 15:15,SUI,15m,BREAKER_RETEST,bear,,1.0865,1.0908,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-10-12 15:15,SUI,15m,FVG_RETRACE,bear,,1.0887,1.0923,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 16:00,BTC,4h,BOS,bear,82804.65,,,0.122,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-12 16:00,BTC,4h,ORDER_BLOCK,bear,,83500.0,84352.0,,,1d,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 16:00,BTC,4h,FVG_FILLED,bull,,83202.66,83572.96,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-12 16:15,BTC,15m,FVG_FILLED,bear,,82694.27,82810.52,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 15:30,ETH,15m,FVG,bull,,2525.43,2528.93,0.362,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 15:45,ETH,15m,FVG_RETRACE,bull,,2525.43,2528.93,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 16:00,SOL,4h,BOS,bear,108.96,,,0.032,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-12 16:00,SOL,4h,ORDER_BLOCK,bear,,111.39,113.4,,,1d,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 16:00,SOL,4h,FVG_FILLED,bull,,109.81,111.2,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-12 16:00,SOL,1h,FVG,bear,,109.26,109.7,0.483,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-12 15:30,SOL,30m,FVG,bear,,109.26,109.44,0.257,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 16:00,XRP,4h,SWEEP,bull,1.3741,,,0.217,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-12 16:00,XRP,4h,CHOCH,bear,1.3872,,,0.541,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-12 16:00,XRP,4h,ORDER_BLOCK,bear,,1.4036,1.4214,,,1d,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-12 15:30,XRP,30m,FVG,bear,,1.3801,1.3834,0.4,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 15:30,XRP,15m,FVG_RETRACE,bear,,1.3798,1.3834,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 16:00,SUI,4h,SWEEP,bull,1.0865,,,0.316,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-12 16:00,SUI,4h,FVG_RETRACE,bull,,1.0731,1.0816,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 16:15,SUI,15m,FVG_FILLED,bear,,1.0887,1.0923,,,1h,UNCLEAR,,smc-1.0,Binance
