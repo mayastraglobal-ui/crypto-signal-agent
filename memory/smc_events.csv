@@ -13263,3 +13263,36 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-12 02:00,SUI,15m,FVG,bear,,1.1165,1.1181,0.256,Asia,1h,RANGE,,smc-1.0,Binance
 2026-10-12 02:15,SUI,15m,FVG_RETRACE,bear,,1.1165,1.1181,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-12 02:15,SUI,15m,FVG_FILLED,bear,,1.1165,1.1181,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 02:30,BTC,15m,FVG,bull,,83689.99,83778.47,0.607,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:45,BTC,15m,FVG,bull,,83783.51,83840.0,0.389,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 03:00,BTC,15m,FVG_RETRACE,bull,,83689.99,83778.47,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 03:00,BTC,15m,FVG_RETRACE,bull,,83783.51,83840.0,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 03:00,BTC,15m,FVG_FILLED,bull,,83783.51,83840.0,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:15,BTC,15m,FVG_FILLED,bull,,83689.99,83778.47,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:00,ETH,1h,SWEEP,bear,2555.22,,,0.883,Asia,4h,TRANSITION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-12 03:00,ETH,1h,FVG_FILLED,bear,,2551.76,2556.06,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:30,ETH,30m,SWEEP,bear,2555.22,,,1.217,Asia,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-12 02:30,ETH,30m,FVG_RETRACE,bear,,2558.98,2561.98,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:30,ETH,30m,FVG_FILLED,bear,,2558.98,2561.98,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:00,ETH,30m,FVG,bull,,2542.9,2545.78,0.308,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 02:30,ETH,15m,SWEEP,bear,2555.22,,,1.625,Asia,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-12 02:30,ETH,15m,WEAK_BREAK,bull,2550.95,,,0.094,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-12 02:30,ETH,15m,FVG_RETRACE,bear,,2558.98,2562.71,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:30,ETH,15m,FVG_FILLED,bear,,2558.98,2562.71,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 02:30,ETH,15m,FVG,bull,,2542.4,2548.04,0.836,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 02:45,ETH,15m,FVG,bull,,2548.28,2551.2,0.433,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:00,ETH,15m,FVG_RETRACE,bull,,2542.4,2548.04,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 03:00,ETH,15m,FVG_RETRACE,bull,,2548.28,2551.2,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-12 03:00,ETH,15m,FVG_FILLED,bull,,2548.28,2551.2,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:15,ETH,15m,FVG,bear,,2547.71,2551.2,0.532,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-12 03:00,SOL,30m,FVG,bull,,111.67,111.98,0.575,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 02:30,SOL,15m,SWEEP,bear,112.0,,,0.899,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-12 02:45,SOL,15m,BOS,bull,112.0,,,0.319,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-12 02:45,SOL,15m,FVG,bull,,111.84,111.98,0.348,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 03:15,SOL,15m,FVG_RETRACE,bull,,111.84,111.98,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-12 03:15,SOL,15m,FVG_FILLED,bull,,111.84,111.98,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-12 02:30,ZEC,30m,FVG_RETRACE,bear,,1275.16,1280.46,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-12 02:30,ZEC,30m,FVG_FILLED,bear,,1275.16,1280.46,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:30,ZEC,15m,FVG_FILLED,bear,,1277.93,1280.46,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 02:30,ZEC,15m,FVG,bull,,1272.78,1275.34,0.303,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-12 03:15,ZEC,15m,FVG_RETRACE,bull,,1272.78,1275.34,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
