@@ -172,4 +172,4 @@ def weather_line(w, coin):
     c = next((x for x in w.get("coins") or [] if x.get("coin") == coin), None)
     from engine import weather as wx
     return f"{w['verdict'].get('icon', '')} {w['verdict'].get('title', '')}".strip() + \
-        (f" · {coin}: {wx.COIN_WORD.get(c['verdict'], c['verdict'])}" if c else "")
+        (f" · {coin}: {wx.coin_word(c)}" if c else "")

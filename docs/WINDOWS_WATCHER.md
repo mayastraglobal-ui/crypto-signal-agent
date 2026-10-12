@@ -69,7 +69,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/status` | Is it running, the last market check, which strategies it watches, paused or not, a newer version waiting |
 | `/trades` | The trades you took that it is following, and your results of the last 30 days |
 | `/result 1.2` | Your real result of the last finished trade, in R after fees (-1 = the full stop lost, 2 = twice what you risked). `/result <id> 1.2` for an older one (ids in `/trades`) |
-| `/weather` | What kind of market day it is: **trend up / trend down / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
+| `/weather` | What kind of market day it is: **trend up / trend down / turning down or up (not confirmed) / range / choppy / news risk**, BTC's usual 24h move (measured from the past, not a forecast), crowding (funding, open interest), the next events, what fits today and what to avoid. Times in Beijing time. Made by GitHub's hourly scan; it never creates a signal or changes a rule |
 | `/structure` · `/structure BTC` | 🧭 the 4H market structure of your coins: trend and last break, where price is in the 4H range, the nearest liquidity and supply / demand zones (information only, see "Structure card" below) |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
