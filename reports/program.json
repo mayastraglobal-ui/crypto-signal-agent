@@ -1,16 +1,16 @@
 {
- "updated_utc": "2026-10-11 00:58",
+ "updated_utc": "2026-10-12 01:01",
  "tested_tonight": [
-  3,
-  4
- ],
- "why": {
-  "3": "never tested yet",
-  "4": "never tested yet"
- },
- "next_night": [
   5,
   6
+ ],
+ "why": {
+  "5": "never tested yet",
+  "6": "never tested yet"
+ },
+ "next_night": [
+  7,
+  8
  ],
  "strategies": {
   "1": "Breakout (Donchian + volume + ADX)",
@@ -3396,6 +3396,1210 @@
     "recovery factor -0.95 (net -676.7R / max drawdown 715.3R) - needs 3",
     "Monte Carlo 95% worst drawdown per 100 trades 42.0R - limit 17R",
     "longest drawdown 1829 days = 100% of the tested period (limit 55%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V1@1.0|4h": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V1",
+   "id": "P05-RANGE-REVERSAL-V1",
+   "tf": "4h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 385,
+   "win_rate": 48.6,
+   "avg_r": -0.136,
+   "gross_avg_r": -0.09,
+   "pf": 0.74,
+   "test_avg_r": -0.122,
+   "test_trades": 106,
+   "long_avg_r": -0.057,
+   "short_avg_r": -0.198,
+   "fees_avg_r": 0.046,
+   "coins": {
+    "BNB": {
+     "n": 57,
+     "win_rate": 49.1,
+     "avg_r": -0.097,
+     "gross_avg_r": -0.039,
+     "total_r": -5.5,
+     "positive": false,
+     "test_n": 21,
+     "test_avg_r": -0.025
+    },
+    "BTC": {
+     "n": 60,
+     "win_rate": 41.7,
+     "avg_r": -0.233,
+     "gross_avg_r": -0.17,
+     "total_r": -14.0,
+     "positive": false,
+     "test_n": 16,
+     "test_avg_r": -0.26
+    },
+    "ETH": {
+     "n": 67,
+     "win_rate": 52.2,
+     "avg_r": -0.095,
+     "gross_avg_r": -0.046,
+     "total_r": -6.4,
+     "positive": false,
+     "test_n": 20,
+     "test_avg_r": 0.042
+    },
+    "SOL": {
+     "n": 40,
+     "win_rate": 57.5,
+     "avg_r": 0.003,
+     "gross_avg_r": 0.033,
+     "total_r": 0.1,
+     "positive": true,
+     "test_n": 7,
+     "test_avg_r": -0.046
+    },
+    "SUI": {
+     "n": 34,
+     "win_rate": 50.0,
+     "avg_r": -0.164,
+     "gross_avg_r": -0.132,
+     "total_r": -5.6,
+     "positive": false,
+     "test_n": 11,
+     "test_avg_r": -0.014
+    },
+    "XRP": {
+     "n": 77,
+     "win_rate": 45.5,
+     "avg_r": -0.175,
+     "gross_avg_r": -0.131,
+     "total_r": -13.4,
+     "positive": false,
+     "test_n": 22,
+     "test_avg_r": -0.255
+    },
+    "ZEC": {
+     "n": 50,
+     "win_rate": 48.0,
+     "avg_r": -0.153,
+     "gross_avg_r": -0.118,
+     "total_r": -7.6,
+     "positive": false,
+     "test_n": 9,
+     "test_avg_r": -0.33
+    }
+   },
+   "positive_coins": [
+    "SOL"
+   ],
+   "why_not": [
+    "avg -0.14R/trade (needs +0.10R)",
+    "profit factor 0.74",
+    "max drawdown 57.6R",
+    "longest drawdown 3249 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V2@1.0|1h": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V2",
+   "id": "P05-RANGE-REVERSAL-V2",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 1428,
+   "win_rate": 45.8,
+   "avg_r": -0.231,
+   "gross_avg_r": -0.152,
+   "pf": 0.59,
+   "test_avg_r": -0.244,
+   "test_trades": 439,
+   "long_avg_r": -0.256,
+   "short_avg_r": -0.212,
+   "fees_avg_r": 0.079,
+   "coins": {
+    "BNB": {
+     "n": 248,
+     "win_rate": 47.6,
+     "avg_r": -0.25,
+     "gross_avg_r": -0.158,
+     "total_r": -61.9,
+     "positive": false,
+     "test_n": 74,
+     "test_avg_r": -0.346
+    },
+    "BTC": {
+     "n": 228,
+     "win_rate": 45.2,
+     "avg_r": -0.274,
+     "gross_avg_r": -0.16,
+     "total_r": -62.5,
+     "positive": false,
+     "test_n": 65,
+     "test_avg_r": -0.353
+    },
+    "ETH": {
+     "n": 212,
+     "win_rate": 46.2,
+     "avg_r": -0.191,
+     "gross_avg_r": -0.108,
+     "total_r": -40.5,
+     "positive": false,
+     "test_n": 61,
+     "test_avg_r": -0.246
+    },
+    "SOL": {
+     "n": 181,
+     "win_rate": 38.7,
+     "avg_r": -0.361,
+     "gross_avg_r": -0.301,
+     "total_r": -65.3,
+     "positive": false,
+     "test_n": 52,
+     "test_avg_r": -0.223
+    },
+    "SUI": {
+     "n": 95,
+     "win_rate": 48.4,
+     "avg_r": -0.112,
+     "gross_avg_r": -0.058,
+     "total_r": -10.6,
+     "positive": false,
+     "test_n": 31,
+     "test_avg_r": -0.121
+    },
+    "XRP": {
+     "n": 212,
+     "win_rate": 43.4,
+     "avg_r": -0.268,
+     "gross_avg_r": -0.19,
+     "total_r": -56.7,
+     "positive": false,
+     "test_n": 71,
+     "test_avg_r": -0.126
+    },
+    "ZEC": {
+     "n": 252,
+     "win_rate": 50.4,
+     "avg_r": -0.127,
+     "gross_avg_r": -0.07,
+     "total_r": -32.0,
+     "positive": false,
+     "test_n": 85,
+     "test_avg_r": -0.227
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.23R/trade (needs +0.10R)",
+    "profit factor 0.59",
+    "max drawdown 335.0R",
+    "longest drawdown 3306 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V2@1.0|30m": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V2",
+   "id": "P05-RANGE-REVERSAL-V2",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 4268,
+   "win_rate": 46.1,
+   "avg_r": -0.256,
+   "gross_avg_r": -0.13,
+   "pf": 0.57,
+   "test_avg_r": -0.326,
+   "test_trades": 1304,
+   "long_avg_r": -0.262,
+   "short_avg_r": -0.251,
+   "fees_avg_r": 0.127,
+   "coins": {
+    "BNB": {
+     "n": 641,
+     "win_rate": 44.5,
+     "avg_r": -0.331,
+     "gross_avg_r": -0.168,
+     "total_r": -212.1,
+     "positive": false,
+     "test_n": 195,
+     "test_avg_r": -0.516
+    },
+    "BTC": {
+     "n": 643,
+     "win_rate": 40.7,
+     "avg_r": -0.431,
+     "gross_avg_r": -0.228,
+     "total_r": -276.9,
+     "positive": false,
+     "test_n": 185,
+     "test_avg_r": -0.525
+    },
+    "ETH": {
+     "n": 591,
+     "win_rate": 43.1,
+     "avg_r": -0.328,
+     "gross_avg_r": -0.188,
+     "total_r": -194.0,
+     "positive": false,
+     "test_n": 174,
+     "test_avg_r": -0.402
+    },
+    "SOL": {
+     "n": 604,
+     "win_rate": 47.5,
+     "avg_r": -0.175,
+     "gross_avg_r": -0.082,
+     "total_r": -105.9,
+     "positive": false,
+     "test_n": 190,
+     "test_avg_r": -0.18
+    },
+    "SUI": {
+     "n": 478,
+     "win_rate": 48.5,
+     "avg_r": -0.178,
+     "gross_avg_r": -0.101,
+     "total_r": -85.2,
+     "positive": false,
+     "test_n": 143,
+     "test_avg_r": -0.281
+    },
+    "XRP": {
+     "n": 615,
+     "win_rate": 48.3,
+     "avg_r": -0.223,
+     "gross_avg_r": -0.103,
+     "total_r": -136.9,
+     "positive": false,
+     "test_n": 210,
+     "test_avg_r": -0.209
+    },
+    "ZEC": {
+     "n": 696,
+     "win_rate": 50.4,
+     "avg_r": -0.119,
+     "gross_avg_r": -0.038,
+     "total_r": -82.5,
+     "positive": false,
+     "test_n": 207,
+     "test_avg_r": -0.191
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "avg -0.26R/trade (needs +0.10R)",
+    "profit factor 0.57",
+    "max drawdown 1109.4R",
+    "longest drawdown 1659 days = 91% of the tested period (limit 60%)",
+    "loss clustering: 18 losses in a row as it happened, random orders stay at or below 16 in 95% of cases",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V2@1.0|15m": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V2",
+   "id": "P05-RANGE-REVERSAL-V2",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 10548,
+   "win_rate": 42.1,
+   "avg_r": -0.375,
+   "gross_avg_r": -0.194,
+   "pf": 0.45,
+   "test_avg_r": -0.423,
+   "test_trades": 3243,
+   "long_avg_r": -0.373,
+   "short_avg_r": -0.378,
+   "fees_avg_r": 0.182,
+   "coins": {
+    "BNB": {
+     "n": 1635,
+     "win_rate": 39.3,
+     "avg_r": -0.49,
+     "gross_avg_r": -0.256,
+     "total_r": -801.8,
+     "positive": false,
+     "test_n": 493,
+     "test_avg_r": -0.556
+    },
+    "BTC": {
+     "n": 1531,
+     "win_rate": 34.1,
+     "avg_r": -0.62,
+     "gross_avg_r": -0.325,
+     "total_r": -948.7,
+     "positive": false,
+     "test_n": 454,
+     "test_avg_r": -0.756
+    },
+    "ETH": {
+     "n": 1506,
+     "win_rate": 41.8,
+     "avg_r": -0.403,
+     "gross_avg_r": -0.197,
+     "total_r": -606.4,
+     "positive": false,
+     "test_n": 453,
+     "test_avg_r": -0.464
+    },
+    "SOL": {
+     "n": 1533,
+     "win_rate": 43.2,
+     "avg_r": -0.316,
+     "gross_avg_r": -0.186,
+     "total_r": -484.9,
+     "positive": false,
+     "test_n": 469,
+     "test_avg_r": -0.363
+    },
+    "SUI": {
+     "n": 1168,
+     "win_rate": 47.6,
+     "avg_r": -0.208,
+     "gross_avg_r": -0.098,
+     "total_r": -243.0,
+     "positive": false,
+     "test_n": 366,
+     "test_avg_r": -0.265
+    },
+    "XRP": {
+     "n": 1589,
+     "win_rate": 43.3,
+     "avg_r": -0.341,
+     "gross_avg_r": -0.173,
+     "total_r": -541.1,
+     "positive": false,
+     "test_n": 523,
+     "test_avg_r": -0.346
+    },
+    "ZEC": {
+     "n": 1586,
+     "win_rate": 46.8,
+     "avg_r": -0.211,
+     "gross_avg_r": -0.098,
+     "total_r": -334.2,
+     "positive": false,
+     "test_n": 485,
+     "test_avg_r": -0.201
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "not cost-viable: fees + slippage 0.29R per trade (stop must be \u2265 4x the round-trip cost)",
+    "avg -0.38R/trade (needs +0.10R)",
+    "profit factor 0.45",
+    "max drawdown 3960.2R",
+    "longest drawdown 1829 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V3@1.0|4h": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V3",
+   "id": "P05-RANGE-REVERSAL-V3",
+   "tf": "4h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 75,
+   "win_rate": 52.0,
+   "avg_r": -0.127,
+   "gross_avg_r": -0.084,
+   "pf": 0.74,
+   "test_avg_r": 0.075,
+   "test_trades": 26,
+   "long_avg_r": -0.123,
+   "short_avg_r": -0.13,
+   "fees_avg_r": 0.043,
+   "coins": {
+    "BNB": {
+     "n": 10,
+     "win_rate": 30.0,
+     "avg_r": -0.515,
+     "gross_avg_r": -0.466,
+     "total_r": -5.1,
+     "positive": false,
+     "test_n": 4,
+     "test_avg_r": -0.65
+    },
+    "BTC": {
+     "n": 9,
+     "win_rate": 77.8,
+     "avg_r": 0.4,
+     "gross_avg_r": 0.466,
+     "total_r": 3.6,
+     "positive": true,
+     "test_n": 2,
+     "test_avg_r": 0.494
+    },
+    "ETH": {
+     "n": 12,
+     "win_rate": 58.3,
+     "avg_r": -0.096,
+     "gross_avg_r": -0.043,
+     "total_r": -1.2,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": 0.408
+    },
+    "SOL": {
+     "n": 13,
+     "win_rate": 53.8,
+     "avg_r": -0.158,
+     "gross_avg_r": -0.13,
+     "total_r": -2.1,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 0.448
+    },
+    "SUI": {
+     "n": 11,
+     "win_rate": 45.5,
+     "avg_r": -0.333,
+     "gross_avg_r": -0.302,
+     "total_r": -3.7,
+     "positive": false,
+     "test_n": 6,
+     "test_avg_r": -0.263
+    },
+    "XRP": {
+     "n": 10,
+     "win_rate": 60.0,
+     "avg_r": 0.031,
+     "gross_avg_r": 0.079,
+     "total_r": 0.3,
+     "positive": true,
+     "test_n": 6,
+     "test_avg_r": 0.17
+    },
+    "ZEC": {
+     "n": 10,
+     "win_rate": 40.0,
+     "avg_r": -0.137,
+     "gross_avg_r": -0.107,
+     "total_r": -1.4,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": 0.668
+    }
+   },
+   "positive_coins": [
+    "BTC",
+    "XRP"
+   ],
+   "why_not": [
+    "avg -0.13R/trade (needs +0.10R)",
+    "profit factor 0.74",
+    "max drawdown 14.4R",
+    "longest drawdown 2574 days = 83% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P05-RANGE-REVERSAL-V4@1.0|4h": {
+   "strategy": 5,
+   "name": "Range reversal (RSI + Bollinger)",
+   "version": "V4",
+   "id": "P05-RANGE-REVERSAL-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 362,
+   "win_rate": 35.6,
+   "avg_r": 0.05,
+   "gross_avg_r": 0.109,
+   "pf": 1.07,
+   "test_avg_r": 0.156,
+   "test_trades": 101,
+   "long_avg_r": 0.133,
+   "short_avg_r": -0.017,
+   "fees_avg_r": 0.059,
+   "coins": {
+    "BNB": {
+     "n": 54,
+     "win_rate": 35.2,
+     "avg_r": 0.086,
+     "gross_avg_r": 0.156,
+     "total_r": 4.6,
+     "positive": true,
+     "test_n": 20,
+     "test_avg_r": 0.071
+    },
+    "BTC": {
+     "n": 58,
+     "win_rate": 39.7,
+     "avg_r": 0.148,
+     "gross_avg_r": 0.228,
+     "total_r": 8.6,
+     "positive": true,
+     "test_n": 16,
+     "test_avg_r": -0.161
+    },
+    "ETH": {
+     "n": 65,
+     "win_rate": 35.4,
+     "avg_r": 0.207,
+     "gross_avg_r": 0.269,
+     "total_r": 13.5,
+     "positive": true,
+     "test_n": 19,
+     "test_avg_r": 0.994
+    },
+    "SOL": {
+     "n": 37,
+     "win_rate": 48.6,
+     "avg_r": 0.277,
+     "gross_avg_r": 0.315,
+     "total_r": 10.2,
+     "positive": true,
+     "test_n": 7,
+     "test_avg_r": 0.514
+    },
+    "SUI": {
+     "n": 32,
+     "win_rate": 18.8,
+     "avg_r": -0.44,
+     "gross_avg_r": -0.397,
+     "total_r": -14.1,
+     "positive": false,
+     "test_n": 10,
+     "test_avg_r": 0.06
+    },
+    "XRP": {
+     "n": 68,
+     "win_rate": 39.7,
+     "avg_r": 0.103,
+     "gross_avg_r": 0.158,
+     "total_r": 7.0,
+     "positive": true,
+     "test_n": 20,
+     "test_avg_r": -0.106
+    },
+    "ZEC": {
+     "n": 48,
+     "win_rate": 27.1,
+     "avg_r": -0.246,
+     "gross_avg_r": -0.199,
+     "total_r": -11.8,
+     "positive": false,
+     "test_n": 9,
+     "test_avg_r": -0.449
+    }
+   },
+   "positive_coins": [
+    "BNB",
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+   ],
+   "why_not": [
+    "avg +0.05R/trade (needs +0.10R)",
+    "profit factor 1.07",
+    "max drawdown 25.3R"
+   ]
+  },
+  "P06-VWAP-REVERSION-V1@1.0|4h": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V1",
+   "id": "P06-VWAP-REVERSION-V1",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 1,
+   "win_rate": 0.0,
+   "avg_r": -1.089,
+   "gross_avg_r": -1.029,
+   "pf": 0.0,
+   "test_avg_r": -1.089,
+   "test_trades": 1,
+   "long_avg_r": 0.0,
+   "short_avg_r": -1.089,
+   "fees_avg_r": 0.06,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.089,
+     "gross_avg_r": -1.029,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.089
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "avg -1.09R/trade (needs +0.10R)",
+    "profit factor 0.00",
+    "only 1 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P06-VWAP-REVERSION-V2@1.0|1h": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V2",
+   "id": "P06-VWAP-REVERSION-V2",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 83,
+   "win_rate": 43.4,
+   "avg_r": -0.199,
+   "gross_avg_r": -0.129,
+   "pf": 0.55,
+   "test_avg_r": -0.11,
+   "test_trades": 18,
+   "long_avg_r": -0.214,
+   "short_avg_r": -0.188,
+   "fees_avg_r": 0.07,
+   "coins": {
+    "BNB": {
+     "n": 15,
+     "win_rate": 60.0,
+     "avg_r": -0.147,
+     "gross_avg_r": -0.055,
+     "total_r": -2.2,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": 0.28
+    },
+    "BTC": {
+     "n": 15,
+     "win_rate": 20.0,
+     "avg_r": -0.713,
+     "gross_avg_r": -0.599,
+     "total_r": -10.7,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.912
+    },
+    "ETH": {
+     "n": 14,
+     "win_rate": 14.3,
+     "avg_r": -0.281,
+     "gross_avg_r": -0.218,
+     "total_r": -3.9,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": -0.139
+    },
+    "SOL": {
+     "n": 17,
+     "win_rate": 64.7,
+     "avg_r": 0.175,
+     "gross_avg_r": 0.228,
+     "total_r": 3.0,
+     "positive": true,
+     "test_n": 3,
+     "test_avg_r": 0.06
+    },
+    "SUI": {
+     "n": 10,
+     "win_rate": 40.0,
+     "avg_r": -0.176,
+     "gross_avg_r": -0.139,
+     "total_r": -1.8,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 0.724
+    },
+    "XRP": {
+     "n": 5,
+     "win_rate": 60.0,
+     "avg_r": -0.131,
+     "gross_avg_r": -0.077,
+     "total_r": -0.7,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 7,
+     "win_rate": 57.1,
+     "avg_r": -0.04,
+     "gross_avg_r": 0.009,
+     "total_r": -0.3,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -0.161
+    }
+   },
+   "positive_coins": [
+    "SOL"
+   ],
+   "why_not": [
+    "avg -0.20R/trade (needs +0.10R)",
+    "profit factor 0.55",
+    "max drawdown 19.4R",
+    "longest drawdown 3296 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P06-VWAP-REVERSION-V2@1.0|30m": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V2",
+   "id": "P06-VWAP-REVERSION-V2",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 937,
+   "win_rate": 40.4,
+   "avg_r": -0.227,
+   "gross_avg_r": -0.111,
+   "pf": 0.64,
+   "test_avg_r": -0.276,
+   "test_trades": 418,
+   "long_avg_r": -0.261,
+   "short_avg_r": -0.195,
+   "fees_avg_r": 0.115,
+   "coins": {
+    "BNB": {
+     "n": 158,
+     "win_rate": 38.0,
+     "avg_r": -0.375,
+     "gross_avg_r": -0.225,
+     "total_r": -59.2,
+     "positive": false,
+     "test_n": 69,
+     "test_avg_r": -0.407
+    },
+    "BTC": {
+     "n": 113,
+     "win_rate": 30.1,
+     "avg_r": -0.605,
+     "gross_avg_r": -0.396,
+     "total_r": -68.3,
+     "positive": false,
+     "test_n": 61,
+     "test_avg_r": -0.688
+    },
+    "ETH": {
+     "n": 105,
+     "win_rate": 29.5,
+     "avg_r": -0.42,
+     "gross_avg_r": -0.298,
+     "total_r": -44.1,
+     "positive": false,
+     "test_n": 58,
+     "test_avg_r": -0.312
+    },
+    "SOL": {
+     "n": 136,
+     "win_rate": 42.6,
+     "avg_r": -0.187,
+     "gross_avg_r": -0.093,
+     "total_r": -25.5,
+     "positive": false,
+     "test_n": 64,
+     "test_avg_r": -0.224
+    },
+    "SUI": {
+     "n": 136,
+     "win_rate": 44.9,
+     "avg_r": -0.012,
+     "gross_avg_r": 0.062,
+     "total_r": -1.7,
+     "positive": false,
+     "test_n": 50,
+     "test_avg_r": -0.021
+    },
+    "XRP": {
+     "n": 100,
+     "win_rate": 44.0,
+     "avg_r": -0.172,
+     "gross_avg_r": -0.058,
+     "total_r": -17.2,
+     "positive": false,
+     "test_n": 62,
+     "test_avg_r": -0.157
+    },
+    "ZEC": {
+     "n": 189,
+     "win_rate": 48.1,
+     "avg_r": 0.02,
+     "gross_avg_r": 0.092,
+     "total_r": 3.7,
+     "positive": true,
+     "test_n": 54,
+     "test_avg_r": -0.038
+    }
+   },
+   "positive_coins": [
+    "ZEC"
+   ],
+   "why_not": [
+    "avg -0.23R/trade (needs +0.10R)",
+    "profit factor 0.64",
+    "max drawdown 232.5R",
+    "longest drawdown 1671 days = 92% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P06-VWAP-REVERSION-V2@1.0|15m": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V2",
+   "id": "P06-VWAP-REVERSION-V2",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 3911,
+   "win_rate": 34.5,
+   "avg_r": -0.335,
+   "gross_avg_r": -0.169,
+   "pf": 0.56,
+   "test_avg_r": -0.384,
+   "test_trades": 1666,
+   "long_avg_r": -0.35,
+   "short_avg_r": -0.321,
+   "fees_avg_r": 0.167,
+   "coins": {
+    "BNB": {
+     "n": 696,
+     "win_rate": 32.3,
+     "avg_r": -0.442,
+     "gross_avg_r": -0.227,
+     "total_r": -307.9,
+     "positive": false,
+     "test_n": 256,
+     "test_avg_r": -0.549
+    },
+    "BTC": {
+     "n": 501,
+     "win_rate": 28.5,
+     "avg_r": -0.616,
+     "gross_avg_r": -0.33,
+     "total_r": -308.7,
+     "positive": false,
+     "test_n": 264,
+     "test_avg_r": -0.648
+    },
+    "ETH": {
+     "n": 431,
+     "win_rate": 31.8,
+     "avg_r": -0.439,
+     "gross_avg_r": -0.257,
+     "total_r": -189.4,
+     "positive": false,
+     "test_n": 217,
+     "test_avg_r": -0.429
+    },
+    "SOL": {
+     "n": 514,
+     "win_rate": 34.2,
+     "avg_r": -0.312,
+     "gross_avg_r": -0.179,
+     "total_r": -160.6,
+     "positive": false,
+     "test_n": 258,
+     "test_avg_r": -0.366
+    },
+    "SUI": {
+     "n": 530,
+     "win_rate": 38.5,
+     "avg_r": -0.154,
+     "gross_avg_r": -0.056,
+     "total_r": -81.6,
+     "positive": false,
+     "test_n": 159,
+     "test_avg_r": -0.234
+    },
+    "XRP": {
+     "n": 457,
+     "win_rate": 36.3,
+     "avg_r": -0.323,
+     "gross_avg_r": -0.156,
+     "total_r": -147.8,
+     "positive": false,
+     "test_n": 256,
+     "test_avg_r": -0.297
+    },
+    "ZEC": {
+     "n": 782,
+     "win_rate": 38.2,
+     "avg_r": -0.147,
+     "gross_avg_r": -0.041,
+     "total_r": -115.1,
+     "positive": false,
+     "test_n": 256,
+     "test_avg_r": -0.109
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "not cost-viable: fees + slippage 0.27R per trade (stop must be \u2265 4x the round-trip cost)",
+    "avg -0.34R/trade (needs +0.10R)",
+    "profit factor 0.56",
+    "max drawdown 1312.2R",
+    "longest drawdown 1822 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P06-VWAP-REVERSION-V3@1.0|4h": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V3",
+   "id": "P06-VWAP-REVERSION-V3",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 0,
+   "win_rate": 0.0,
+   "avg_r": 0.0,
+   "gross_avg_r": 0.0,
+   "pf": 0.0,
+   "test_avg_r": 0.0,
+   "test_trades": 0,
+   "long_avg_r": 0.0,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.0,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 0 trades",
+    "avg +0.00R/trade (needs +0.10R)",
+    "profit factor 0.00",
+    "only 0 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P06-VWAP-REVERSION-V4@1.0|4h": {
+   "strategy": 6,
+   "name": "VWAP reversion",
+   "version": "V4",
+   "id": "P06-VWAP-REVERSION-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-12 01:01",
+   "trades": 1,
+   "win_rate": 0.0,
+   "avg_r": -1.089,
+   "gross_avg_r": -1.029,
+   "pf": 0.0,
+   "test_avg_r": -1.089,
+   "test_trades": 1,
+   "long_avg_r": 0.0,
+   "short_avg_r": -1.089,
+   "fees_avg_r": 0.06,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.089,
+     "gross_avg_r": -1.029,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.089
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "avg -1.09R/trade (needs +0.10R)",
+    "profit factor 0.00",
+    "only 1 unseen-test trades",
     "not profitable in BOTH train and unseen test"
    ]
   }

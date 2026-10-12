@@ -1038,3 +1038,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: when the paper signals close, split them by the engine's market-weather verdict at entry (choppy vs trending) and by regime; compare each group with the backtest average of the same regime in the playbook. If the paper losses come only in choppy entries, the backtest still describes the strategy; if they also come in trending entries, the edge is in doubt.
   - stop if: after 20 or more paper signals, trending-weather entries are also below the backtest average.
   - not a rule change: the engine's own kill rule (last 20 paper signals below -0.10R or 8R drawdown) stays as it is.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0071 | 2026-10-12 01:01 | TRD-H4-BREAKOUT-S3@1.0 | breakout | 1h, 30m, 15m, 5m | The rule 'volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5' adds nothing to TRD-H4-BREAKOUT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0072 | 2026-10-12 01:01 | P02-EMA-PULLBACK-V4-S6-S6@1.0 | mtf_pullback | 4h | The rule 'close > avwap_swing_low / close < avwap_swing_high' adds nothing to P02-EMA-PULLBACK-V4-S6@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0073 | 2026-10-12 01:01 | P02-EMA-PULLBACK-V4-S6-FHTF@1.0 | mtf_pullback | 4h | P02-EMA-PULLBACK-V4-S6@1.0 loses on regime_mismatch (-0.09R a trade with it, +0.72R without). One change - only when the higher timeframe trends the same way (htf_up / htf_down) - should remove part of those losses and keep the rest. |
+| EXP-0074 | 2026-10-12 01:01 | P05-RANGE-REVERSAL-V1@1.0 | mean_reversion | 4h | In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band. |
+| EXP-0075 | 2026-10-12 01:01 | P05-RANGE-REVERSAL-V2@1.0 | mean_reversion | 1h, 30m, 15m | In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band. |
+| EXP-0076 | 2026-10-12 01:01 | P05-RANGE-REVERSAL-V3@1.0 | mean_reversion | 4h | In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band. |
+| EXP-0077 | 2026-10-12 01:01 | P05-RANGE-REVERSAL-V4@1.0 | mean_reversion | 4h | In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band. |
+| EXP-0078 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V1@1.0 | mean_reversion | 4h | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
+| EXP-0079 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V2@1.0 | mean_reversion | 1h, 30m, 15m | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
+| EXP-0080 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V3@1.0 | mean_reversion | 4h | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |
+| EXP-0081 | 2026-10-12 01:01 | P06-VWAP-REVERSION-V4@1.0 | mean_reversion | 4h | In a range, a stretch far from the day's volume-weighted average price snaps back to it. |

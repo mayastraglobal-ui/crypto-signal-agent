@@ -649,3 +649,59 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - status: KEEP
   - today's evidence: both blocked setups came from liquidity_sweep_reversal, a failing cell (5m 2376 trades -0.85R and 15m 1055 trades -0.53R in the 2026-10-10 fact sheet, BACKTEST), and the regime was UNCLEAR, where no strategy has shown an edge. BNB left the signal list on 2026-10-10 (24h volume below $50M).
   - action: none.
+
+### BTC up +1.3% (6.6x ATR), 2026-10-11 03:00 -> 2026-10-11 16:00
+- timestamp: 2026-10-12 01:01 UTC · source: engine: daily research run · evidence: FACT: move of 6.6x the 1H ATR within 12 hours; 112 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: COMPRESSION · review: 2026-10-19
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+
+### ETH up +2.0% (7.0x ATR), 2026-10-11 10:00 -> 2026-10-11 17:00
+- timestamp: 2026-10-12 01:01 UTC · source: engine: daily research run · evidence: FACT: move of 7.0x the 1H ATR within 12 hours; 112 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: COMPRESSION · review: 2026-10-19
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### SOL up +2.7% (5.9x ATR), 2026-10-11 10:00 -> 2026-10-11 17:00
+- timestamp: 2026-10-12 01:01 UTC · source: engine: daily research run · evidence: FACT: move of 5.9x the 1H ATR within 12 hours; 112 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-19
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### XRP up +2.6% (6.1x ATR), 2026-10-11 03:00 -> 2026-10-11 16:00
+- timestamp: 2026-10-12 01:01 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 112 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: XRP · timeframe: 1h · regime: COMPRESSION · review: 2026-10-19
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P05-RANGE-REVERSAL-V2 v1.0 15m: signal
+  - P05-RANGE-REVERSAL-V2 v1.0 30m: signal
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### ZEC up +5.2% (6.1x ATR), 2026-10-11 05:00 -> 2026-10-11 18:00
+- timestamp: 2026-10-12 01:01 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 112 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: COMPRESSION · review: 2026-10-19
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate

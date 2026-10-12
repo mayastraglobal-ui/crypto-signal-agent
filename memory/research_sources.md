@@ -883,3 +883,102 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: a time-series momentum strategy (long markets that went up, short markets that went down, using 1-, 3- and 12-month trends) in 67 markets across commodities, equity indices, bonds and currencies, rebuilt back to 1880, was positive in every decade to 2016 after simulated transaction costs and a 2-and-20 fee. Each of the three horizons was positive in every decade on its own. Returns follow a "smile": best in extreme up or down years, including most deep bear markets. Its own stress periods are sharp reversals across many markets and long periods without clear trends; its drawdowns reached about 25% and lasted a long time. The authors note the paper is written by managers of trend-following funds (AQR).
   - what it means for this system: it is the strongest long-run evidence for the idea family behind our only passing cells (the 4h breakouts). It also says what to expect: trend following loses in trendless, choppy markets - our playbook shows the same (breakout and trend families lose in RANGE and TRANSITION, and the market weather has said "Choppy - stay out" for four days). The paper's horizons are 1 to 12 months on monthly data; our 4h trades last days, so this is support for the family, not proof for our cards. Conflict of interest: the authors run trend-following funds.
   - derived hypothesis: 'Hypothesis: judge paper trend signals by market weather (from C08)' in memory/experiments.md.
+
+### TRD-H4-BREAKOUT-S3@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-S3@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-10
+  - title / source: engine rule-significance test: TRD-H4-BREAKOUT@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5' adds nothing to TRD-H4-BREAKOUT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-S3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V4-S6-S6@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6-S6@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6-S6 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-10
+  - title / source: engine rule-significance test: P02-EMA-PULLBACK-V4-S6@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > avwap_swing_low / close < avwap_swing_high' adds nothing to P02-EMA-PULLBACK-V4-S6@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-S6@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V4-S6-FHTF@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6-FHTF@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6-FHTF v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-10
+  - title / source: engine failure lab: a repair of P02-EMA-PULLBACK-V4-S6@1.0 for its loss tag regime_mismatch
+  - URL: none recorded
+  - claim: P02-EMA-PULLBACK-V4-S6@1.0 loses on regime_mismatch (-0.09R a trade with it, +0.72R without). One change - only when the higher timeframe trends the same way (htf_up / htf_down) - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-FHTF@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P05-RANGE-REVERSAL-V1@1.0 - In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes back inside; exit at the middle band.
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P05-RANGE-REVERSAL-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P05-RANGE-REVERSAL-V1 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V1
+  - URL: none recorded
+  - claim: In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band.
+  - derived hypothesis (tested): P05-RANGE-REVERSAL-V1@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before 2R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P05-RANGE-REVERSAL-V2@1.0 - In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes back inside; exit at the middle band.
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P05-RANGE-REVERSAL-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P05-RANGE-REVERSAL-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V2
+  - URL: none recorded
+  - claim: In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band.
+  - derived hypothesis (tested): P05-RANGE-REVERSAL-V2@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 1h, 30m, 15m
+  - limitations: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before 2R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P05-RANGE-REVERSAL-V3@1.0 - In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes back inside; exit at the middle band.
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P05-RANGE-REVERSAL-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P05-RANGE-REVERSAL-V3 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V3
+  - URL: none recorded
+  - claim: In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band.
+  - derived hypothesis (tested): P05-RANGE-REVERSAL-V3@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before 2R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P05-RANGE-REVERSAL-V4@1.0 - In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes back inside; exit at the middle band.
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P05-RANGE-REVERSAL-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P05-RANGE-REVERSAL-V4 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 5, Range reversal (RSI + Bollinger) - version V4
+  - URL: none recorded
+  - claim: In a range, a close back inside the Bollinger band after an RSI extreme is the over-reaction ending: price returns to the middle band.
+  - derived hypothesis (tested): P05-RANGE-REVERSAL-V4@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before 2R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P06-VWAP-REVERSION-V1@1.0 - Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit back at the VWAP (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P06-VWAP-REVERSION-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P06-VWAP-REVERSION-V1 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V1
+  - URL: none recorded
+  - claim: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  - derived hypothesis (tested): P06-VWAP-REVERSION-V1@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from it.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P06-VWAP-REVERSION-V2@1.0 - Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit back at the VWAP (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P06-VWAP-REVERSION-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P06-VWAP-REVERSION-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V2
+  - URL: none recorded
+  - claim: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  - derived hypothesis (tested): P06-VWAP-REVERSION-V2@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 1h, 30m, 15m
+  - limitations: The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from it.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P06-VWAP-REVERSION-V3@1.0 - Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit back at the VWAP (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P06-VWAP-REVERSION-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P06-VWAP-REVERSION-V3 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V3
+  - URL: none recorded
+  - claim: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  - derived hypothesis (tested): P06-VWAP-REVERSION-V3@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from it.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P06-VWAP-REVERSION-V4@1.0 - Price is stretched more than 2 ATR below today's VWAP with RSI under 35 and the candle closes green; exit back at the VWAP (shorts mirrored).
+- timestamp: 2026-10-12 01:01 UTC · source: strategies_lab.yaml card P06-VWAP-REVERSION-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P06-VWAP-REVERSION-V4 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-01-10
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 6, VWAP reversion - version V4
+  - URL: none recorded
+  - claim: In a range, a stretch far from the day's volume-weighted average price snaps back to it.
+  - derived hypothesis (tested): P06-VWAP-REVERSION-V4@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: The VWAP resets every UTC day (00:00): on 4H it has few candles; a trend day keeps price away from it.
+  - test results: `memory/strategy_registry.csv` / report section 3

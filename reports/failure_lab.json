@@ -1,20 +1,48 @@
 {
  "enabled": true,
  "allowed": 1,
- "considered": 83,
+ "considered": 74,
  "new": [
   {
-   "id": "P02-EMA-PULLBACK-V4-S6-FHTF",
-   "tag": "regime_mismatch",
-   "kind": "HTF",
-   "parent": "P02-EMA-PULLBACK-V4-S6@1.0|4h",
-   "evidence": "regime_mismatch in 77% of losses, n=180 losing trades (P02-EMA-PULLBACK-V4-S6@1.0 4h: 365 trades, avg +0.145R, BACKTESTING; trades with regime_mismatch -0.088R, without +0.722R); repair HTF: only when the higher timeframe trends the same way (htf_up / htf_down)"
+   "id": "TRD-H4-BREAKOUT-S3-FDISP",
+   "tag": "false_breakout",
+   "kind": "DISP",
+   "parent": "TRD-H4-BREAKOUT-S3@1.0|30m",
+   "evidence": "false_breakout in 78% of losses, n=417 losing trades (TRD-H4-BREAKOUT-S3@1.0 30m: 837 trades, avg +0.005R, BACKTESTING; trades with false_breakout -0.236R, without +0.567R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
   }
  ],
  "pending": [],
- "results": [],
- "by_kind": {},
- "by_tag": {},
+ "results": [
+  {
+   "child": "P02-EMA-PULLBACK-V4-S6-FHTF@1.0|4h",
+   "parent": "P02-EMA-PULLBACK-V4-S6@1.0|4h",
+   "tag": "regime_mismatch",
+   "kind": "HTF",
+   "status": "BACKTESTING",
+   "trades": 291,
+   "avg_r": 0.036,
+   "test_r": 0.108,
+   "parent_avg_r": 0.145,
+   "parent_test_r": 0.219,
+   "helped": false,
+   "passed": false,
+   "checked": "2026-10-12 01:01"
+  }
+ ],
+ "by_kind": {
+  "HTF": {
+   "tried": 1,
+   "helped": 0,
+   "passed": 0
+  }
+ },
+ "by_tag": {
+  "regime_mismatch": {
+   "tried": 1,
+   "helped": 0,
+   "passed": 0
+  }
+ },
  "retired": [],
  "settings": {
   "enabled": true,

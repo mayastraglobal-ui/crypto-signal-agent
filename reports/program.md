@@ -1,6 +1,6 @@
 # Forward Test Program - backtest results
 
-Updated 2026-10-11 00:58 UTC. Tested tonight: strategies 3, 4; next night: 5, 6.
+Updated 2026-10-12 01:01 UTC. Tested tonight: strategies 5, 6; next night: 7, 8.
 
 10 strategies x 4 versions (strategies_program.yaml). Every number includes OKX fees and funding ('after fees'); 'before fees' shows what the rules alone made. 'Test' = the unseen last 30% of each coin's history. A coin counts as positive with >= 5 trades and an average above 0R after fees.
 
@@ -61,4 +61,26 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 | V5 | 1h | FAILED | 2387 | 32 | -0.10R | -0.04R | -0.06R | SUI | 2026-10-11 00:58 |
 | V5 | 30m | FAILED | 3360 | 33 | -0.11R | -0.03R | +0.00R | SUI, XRP | 2026-10-11 00:58 |
 | V5 | 15m | FAILED | 5024 | 33 | -0.14R | -0.02R | -0.07R | - | 2026-10-11 00:58 |
+
+## 5. Range reversal (RSI + Bollinger)
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| V1 | 4h | FAILED | 385 | 49 | -0.14R | -0.09R | -0.12R | SOL | 2026-10-12 01:01 |
+| V2 | 1h | FAILED | 1428 | 46 | -0.23R | -0.15R | -0.24R | - | 2026-10-12 01:01 |
+| V2 | 30m | FAILED | 4268 | 46 | -0.26R | -0.13R | -0.33R | - | 2026-10-12 01:01 |
+| V2 | 15m | FAILED | 10548 | 42 | -0.38R | -0.19R | -0.42R | - | 2026-10-12 01:01 |
+| V3 | 4h | FAILED | 75 | 52 | -0.13R | -0.08R | +0.07R | BTC, XRP | 2026-10-12 01:01 |
+| V4 | 4h | BACKTESTING | 362 | 36 | +0.05R | +0.11R | +0.16R | BNB, BTC, ETH, SOL, XRP | 2026-10-12 01:01 |
+
+## 6. VWAP reversion
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| V1 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-12 01:01 |
+| V2 | 1h | FAILED | 83 | 43 | -0.20R | -0.13R | -0.11R | SOL | 2026-10-12 01:01 |
+| V2 | 30m | FAILED | 937 | 40 | -0.23R | -0.11R | -0.28R | ZEC | 2026-10-12 01:01 |
+| V2 | 15m | FAILED | 3911 | 34 | -0.34R | -0.17R | -0.38R | - | 2026-10-12 01:01 |
+| V3 | 4h | BACKTESTING | 0 | 0 | +0.00R | +0.00R | +0.00R | - | 2026-10-12 01:01 |
+| V4 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-12 01:01 |
 
