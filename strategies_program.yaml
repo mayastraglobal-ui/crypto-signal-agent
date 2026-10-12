@@ -3624,3 +3624,465 @@
     regime never turned bear (UNCLEAR / TRANSITION) while the 1H was STRONG_BEAR, so no short passed; the fast 4H trend
     turned DOWN on 8 Oct 08:00 UTC'
   added: '2026-10-09'
+
+# ---------------------------------------------------------------------
+#  STRATEGY 11 - early momentum (operator request 2026-10-13, docs/STRATEGY_11.md)
+#  On 11-12 Oct every coin rallied / fell for hours on 1H / 30m with no alert: the 4H had not turned, so the trend
+#  gates waited. Strategy 11 has its own gate, intraday_momentum: the 1H already moving that way (1H close beyond its
+#  EMA20 and beyond the close 6 hours earlier) and the 4H not in a STRONG trend against it. To keep the fake breaks
+#  out it asks for a MARKET-WIDE break (mkt_up / mkt_dn: at least 3 of the operator's coins), BTC moving the same way,
+#  the coin moving at least as hard as BTC, and an EARLY step only (steps_up / steps_dn <= 2, RSI not stretched, not
+#  more than 2.5 ATR from the EMA20) - never the 3rd break near the bottom. Both directions, tested separately.
+#    V1  30m early break                 V2  V1 + 24-hour level + squeeze before     V3  V2 on 1H
+#    V4  30m retest (pullback to the EMA20 after the break)                          C   control: the plain breakout
+#  The control is a benchmark (V1 must beat it) and never sends an alert.
+# ---------------------------------------------------------------------
+- id: P11-MOMENTUM-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 11
+    name: Early momentum (market-wide break, early steps only)
+    version: V1
+  source: 'Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours
+    on every coin, no alert because the 4H had not turned) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC ETH SOL XRP SUI ZEC fell 2.5-9% on 30m / 1H on 2026-10-12 with no alert (4H not turned)'
+  hypothesis: When most of the coins break their 20-candle low (high) together, BTC moves the same way and the 1H is already
+    moving, the first one or two breaks of the move still run - before the 4H has turned.
+  timeframes:
+  - 30m
+  description: 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down within
+    2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown step in
+    12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+  params:
+    n: 20
+    vol_x: 1.5
+    breadth: 3
+    rs_n: 8
+    max_step: 2
+    rsi_floor: 30
+    max_ext: 2.5
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_up >= {breadth}
+  - btc_ret({rs_n}) > 0
+  - (close / shift(close,{rs_n}) - 1) * 100 >= btc_ret({rs_n})
+  - steps_up({n},3,24) <= {max_step}
+  - rsi(close,14) < 100 - {rsi_floor}
+  - (close - ema(close,20)) / atr(14) < {max_ext}
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_dn >= {breadth}
+  - btc_ret({rs_n}) < 0
+  - (close / shift(close,{rs_n}) - 1) * 100 <= btc_ret({rs_n})
+  - steps_dn({n},3,24) <= {max_step}
+  - rsi(close,14) > {rsi_floor}
+  - (ema(close,20) - close) / atr(14) < {max_ext}
+  exit_long: &id001
+  - close < prev(lowest(low,10))
+  exit_short: &id002
+  - close > prev(highest(high,10))
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  control_twin: P11-MOMENTUM-C
+  known_weaknesses: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start
+    stretched (one huge candle).
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders still positioned the old way when the whole market turns: their stop-losses beyond the 20-candle low
+      / high (and liquidations on leverage) push the first steps of the move'
+    mechanism: a break on most coins at once (with BTC moving the same way) is a market move, not one coin's fake break; the
+      first one or two steps still have room, and the coin moving harder than BTC carries it
+    fails_when: 'one-coin breaks, chop around a range edge, and late steps (3rd break, RSI stretched): the move is often near
+      its end and bounces'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-13): strategy 11 V1 - early market-wide break on 30m, steps 1-2 only, not stretched'
+  added: '2026-10-13'
+- id: P11-MOMENTUM-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 11
+    name: Early momentum (market-wide break, early steps only)
+    version: V2
+  source: 'Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours
+    on every coin, no alert because the 4H had not turned) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC ETH SOL XRP SUI ZEC fell 2.5-9% on 30m / 1H on 2026-10-12 with no alert (4H not turned)'
+  hypothesis: V1 is stronger when the break also takes out the 24-hour low (high), where many stops sit, and comes out of
+    a quiet squeeze (fresh energy).
+  timeframes:
+  - 30m
+  description: V1, plus the close is beyond the 24-hour low / high (48 candles) and the Bollinger width was in its lowest
+    25% of 100 candles within the last 12 candles (a squeeze before the move).
+  params:
+    n: 20
+    vol_x: 1.5
+    breadth: 3
+    rs_n: 8
+    max_step: 2
+    rsi_floor: 30
+    max_ext: 2.5
+    lvl_n: 48
+    squeeze: 0.25
+    sq_bars: 12
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_up >= {breadth}
+  - btc_ret({rs_n}) > 0
+  - (close / shift(close,{rs_n}) - 1) * 100 >= btc_ret({rs_n})
+  - steps_up({n},3,24) <= {max_step}
+  - rsi(close,14) < 100 - {rsi_floor}
+  - (close - ema(close,20)) / atr(14) < {max_ext}
+  - close > prev(highest(high,{lvl_n}))
+  - within(pct_rank(bb_width(close,20,2),100) < {squeeze}, {sq_bars})
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_dn >= {breadth}
+  - btc_ret({rs_n}) < 0
+  - (close / shift(close,{rs_n}) - 1) * 100 <= btc_ret({rs_n})
+  - steps_dn({n},3,24) <= {max_step}
+  - rsi(close,14) > {rsi_floor}
+  - (ema(close,20) - close) / atr(14) < {max_ext}
+  - close < prev(lowest(low,{lvl_n}))
+  - within(pct_rank(bb_width(close,20,2),100) < {squeeze}, {sq_bars})
+  exit_long: *id001
+  exit_short: *id002
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  known_weaknesses: Fewer signals; the 24-hour level can be far away, so some good early breaks are skipped.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders still positioned the old way when the whole market turns: their stop-losses beyond the 20-candle low
+      / high (and liquidations on leverage) push the first steps of the move'
+    mechanism: a break on most coins at once (with BTC moving the same way) is a market move, not one coin's fake break; the
+      first one or two steps still have room, and the coin moving harder than BTC carries it
+    fails_when: 'one-coin breaks, chop around a range edge, and late steps (3rd break, RSI stretched): the move is often near
+      its end and bounces'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-13): strategy 11 V2 - V1 + break of the 24-hour level + squeeze before the move'
+  added: '2026-10-13'
+- id: P11-MOMENTUM-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 11
+    name: Early momentum (market-wide break, early steps only)
+    version: V3
+  source: 'Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours
+    on every coin, no alert because the 4H had not turned) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC ETH SOL XRP SUI ZEC fell 2.5-9% on 30m / 1H on 2026-10-12 with no alert (4H not turned)'
+  hypothesis: 'The same as V2 on 1H closes: later than 30m but steadier, fewer fake breaks.'
+  timeframes:
+  - 1h
+  description: 'V2 on 1H candles: the level is the 24-hour low / high (24 candles), the step count looks back 24 hours.'
+  params:
+    n: 20
+    vol_x: 1.5
+    breadth: 3
+    rs_n: 8
+    max_step: 2
+    rsi_floor: 30
+    max_ext: 2.5
+    lvl_n: 24
+    squeeze: 0.25
+    sq_bars: 12
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_up >= {breadth}
+  - btc_ret({rs_n}) > 0
+  - (close / shift(close,{rs_n}) - 1) * 100 >= btc_ret({rs_n})
+  - steps_up({n},3,24) <= {max_step}
+  - rsi(close,14) < 100 - {rsi_floor}
+  - (close - ema(close,20)) / atr(14) < {max_ext}
+  - close > prev(highest(high,{lvl_n}))
+  - within(pct_rank(bb_width(close,20,2),100) < {squeeze}, {sq_bars})
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_dn >= {breadth}
+  - btc_ret({rs_n}) < 0
+  - (close / shift(close,{rs_n}) - 1) * 100 <= btc_ret({rs_n})
+  - steps_dn({n},3,24) <= {max_step}
+  - rsi(close,14) > {rsi_floor}
+  - (ema(close,20) - close) / atr(14) < {max_ext}
+  - close < prev(lowest(low,{lvl_n}))
+  - within(pct_rank(bb_width(close,20,2),100) < {squeeze}, {sq_bars})
+  exit_long: *id001
+  exit_short: *id002
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  known_weaknesses: Later entries than 30m (the first step can be half over); fewer signals.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders still positioned the old way when the whole market turns: their stop-losses beyond the 20-candle low
+      / high (and liquidations on leverage) push the first steps of the move'
+    mechanism: a break on most coins at once (with BTC moving the same way) is a market move, not one coin's fake break; the
+      first one or two steps still have room, and the coin moving harder than BTC carries it
+    fails_when: 'one-coin breaks, chop around a range edge, and late steps (3rd break, RSI stretched): the move is often near
+      its end and bounces'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-13): strategy 11 V3 - V2 on 1H'
+  added: '2026-10-13'
+- id: P11-MOMENTUM-V4
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 11
+    name: Early momentum (market-wide break, early steps only)
+    version: V4
+  source: 'Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours
+    on every coin, no alert because the 4H had not turned) - version V4'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'missed_move: BTC ETH SOL XRP SUI ZEC fell 2.5-9% on 30m / 1H on 2026-10-12 with no alert (4H not turned)'
+  hypothesis: After a fresh market-wide break, the first pullback to the 30m EMA20 that is rejected continues the move at
+    a better price - instead of selling the low (buying the high).
+  timeframes:
+  - 30m
+  description: Within 8 candles after a 30m breakdown (a close below the 20-candle low) while at least 3 coins broke down,
+    price pulls back up to the EMA20 and this candle closes red below it; only the 1st or 2nd step (longs mirrored). Stop
+    0.3 ATR beyond the candle's high (low).
+  params:
+    n: 20
+    breadth: 3
+    rt_bars: 8
+    max_step: 2
+  long:
+  - within(close > prev(highest(high,{n})), {rt_bars})
+  - within(mkt_up >= {breadth}, {rt_bars})
+  - low <= ema(close,20)
+  - close > ema(close,20)
+  - close > open
+  - steps_up({n},3,24) <= {max_step}
+  short:
+  - within(close < prev(lowest(low,{n})), {rt_bars})
+  - within(mkt_dn >= {breadth}, {rt_bars})
+  - high >= ema(close,20)
+  - close < ema(close,20)
+  - close < open
+  - steps_dn({n},3,24) <= {max_step}
+  exit_long: *id001
+  exit_short: *id002
+  stop:
+    method: structure
+    long_level: low
+    short_level: high
+    buffer_atr: 0.3
+    max_width_atr: 2.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  known_weaknesses: Strong moves often never pull back to the EMA20 (missed); a pullback can turn into the bounce.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders still positioned the old way when the whole market turns: their stop-losses beyond the 20-candle low
+      / high (and liquidations on leverage) push the first steps of the move'
+    mechanism: a break on most coins at once (with BTC moving the same way) is a market move, not one coin's fake break; the
+      first one or two steps still have room, and the coin moving harder than BTC carries it
+    fails_when: 'one-coin breaks, chop around a range edge, and late steps (3rd break, RSI stretched): the move is often near
+      its end and bounces'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when its live
+      results turn negative
+  changelog:
+  - '1.0 (2026-10-13): strategy 11 V4 - the retest entry: pullback to the 30m EMA20 after a market-wide break'
+  added: '2026-10-13'
+- id: P11-MOMENTUM-C
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 11
+    name: Early momentum (market-wide break, early steps only)
+    version: C
+  source: 'Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours
+    on every coin, no alert because the 4H had not turned) - version C'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  hypothesis: 'Control: the plain 30m breakout under the same gate - V1 must beat it, or its extras add nothing.'
+  timeframes:
+  - 30m
+  description: 30m close below the 20-candle low with 1.5x volume, the 1H moving down and the 4H not strongly up (longs mirrored).
+    No market-wide, BTC, step or stretch check.
+  params:
+    n: 20
+    vol_x: 1.5
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  exit_long: *id001
+  exit_short: *id002
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  twin_of: P11-MOMENTUM-V1
+  known_weaknesses: 'A benchmark, never an alert: many fake breaks.'
+  changelog:
+  - '1.0 (2026-10-13): strategy 11 control - V1 without its extras (benchmark, never alerts)'
+  added: '2026-10-13'

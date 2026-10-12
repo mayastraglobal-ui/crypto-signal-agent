@@ -63,6 +63,10 @@ def gate_arrays(spec, tf, reg, n):
             d4 = np.where(f == "UP", 1, np.where(f == "DOWN", -1, 0))
         d1 = dirs("1h")
         perm_long, perm_short = (d4 == 1) & (d1 == 1), (d4 == -1) & (d1 == -1)
+    elif spec["gate"] == "intraday_momentum":        # strategy 11: the 1H already moving, 4H not STRONG against
+        m = lab("1h_mom")
+        perm_long = (m == "UP") & (lab("4h") != "STRONG_BEAR")
+        perm_short = (m == "DOWN") & (lab("4h") != "STRONG_BULL")
     elif spec["gate"] == "intraday_reversal":        # ... never against a STRONG 4H trend; 1W / 1D never block
         perm_long, perm_short = lab("4h") != "STRONG_BEAR", lab("4h") != "STRONG_BULL"
     elif spec["gate"] == "mean_reversion":

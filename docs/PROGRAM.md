@@ -29,6 +29,10 @@ All rules are written with the engine's building blocks (`strategies.yaml` heade
 | 8 | Session open breakout | first break of the Asia range in London / New York | Asia high / low, sessions, volume | 4H + 1H |
 | 9 | Liquidity sweep + structure shift | stops under a low taken, then a strong close above recent highs | sweep, displacement | 4H + 1H |
 | 10 | Crowding fade | crowded side (funding, open interest) and price turns against it | funding, open interest | range |
+| 11 | Early momentum (added 2026-10-13) | the first 1-2 steps of a market-wide break (3+ coins), never a late step | 20-candle break, volume, `mkt_up` / `mkt_dn`, `steps_up` / `steps_dn`, RSI, ATR | 1H moving, 4H not strongly against |
+
+Strategy 11 has its own versions (V1 30m, V2 + 24-hour level and squeeze, V3 on 1H, V4 retest, C = control that
+never alerts) and its own gate: [`docs/STRATEGY_11.md`](STRATEGY_11.md).
 
 ## The 4 versions of each strategy
 
@@ -55,6 +59,10 @@ Each version differs from V1 in **one** way, so the results show what each chang
   regime label stayed UNCLEAR / TRANSITION while the 1H was STRONG_BEAR, so no short passed; the fast 4H trend turned
   DOWN on 8 Oct 08:00 UTC (about 83,000) and caught the leg to 81,000 (not the 86,000 -> 83,000 part - any moving
   average is a little late).
+
+- **1H moving + 4H not strongly against** (`gate: intraday_momentum`, strategy 11, 2026-10-13): the 1H close beyond
+  its EMA20 and beyond the close 6 hours earlier (`dir_1h_mom`), and the 4H not in a STRONG trend the other way. Why:
+  on 12 Oct every coin fell for hours on 1H / 30m while the 1H regime read TRANSITION and the 4H RANGE.
 
 ## How it is tested
 

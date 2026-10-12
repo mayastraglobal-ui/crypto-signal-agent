@@ -441,6 +441,22 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
                              # (information only, no buttons; /watch on|off in Telegram)
   watch_max_per_day: 12      # at most 12 watch notes a Beijing day
 
+momentum_notes:              # 🌊 strategy 11 (operator request 2026-10-13) - engine/momentum_notes.py. The live watcher
+                             # tells the phases of a market-wide move apart. INFORMATION ONLY: never a trade signal,
+                             # gate, size or approval (strategy 11's versions send the 🔵 TEST alerts once positive in
+                             # the 5-year backtest). /momentum on|off in Telegram
+  enabled: true
+  near_atr: 0.3              # 👀 forming (every 15m close): the 15m price within 0.3 x the 30m ATR of the 30m 20-candle
+  vol_x: 1.2                 # low / high (not broken yet), 15m volume >= 1.2x its average, the 1H moving that way, the
+  min_coins: 2               # 4H not strongly against it, and at least 2 coins doing the same (or already broken)
+  late_step: 3               # ⚠️ late (30m close): a break that is the 3rd step or later, RSI beyond 30 / 70, or more
+  late_rsi: 30               # than 2.5 ATR from the 30m EMA20 - "no new trade that way, protect profits"
+  late_ext: 2.5
+  bounce_hours: 12           # 🔄 bounce: within 12 hours of a ⚠️ late note, the 30m close crosses back over its EMA20
+  max_per_day: 12            # at most 12 notes a Beijing day
+  forming_cooldown_min: 120  # one 👀 note per coin + direction in 2 hours
+  late_cooldown_min: 240     # one ⚠️ note per coin + direction in 4 hours (one 🔄 note per ⚠️ note)
+
 shock_alarm:                 # ⚡ 2026-10-10 (operator: "tell me when the market falls or rallies suddenly") -
                              # engine/shock.py. The live watcher checks OKX's closed 1-minute candles every minute.
                              # INFORMATION ONLY: never a trade signal, gate, size or approval. /shock on|off in Telegram

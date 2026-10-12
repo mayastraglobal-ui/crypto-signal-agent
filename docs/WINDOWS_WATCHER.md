@@ -73,6 +73,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/structure` · `/structure BTC` | 🧭 the 4H market structure of your coins: trend and last break, where price is in the 4H range, the nearest liquidity and supply / demand zones (information only, see "Structure card" below) |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
+| `/momentum on` · `/momentum off` | 🌊 strategy 11 notes on or off: 👀 a market-wide breakout / breakdown forming, ⚠️ a move already late (no new trade that way), 🔄 a bounce after it (information only, see "Momentum notes" below) |
 | `/shock on` · `/shock off` | ⚡ shock alarm on or off: a sudden fall / rally, a volume spike or yesterday's high / low broken, within about a minute (information only, see "Shock alarm" below) |
 | `/pause` | No new trade alerts (and no 👀 / ⚡ notes) until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |
 | `/resume` | New trade alerts on again |
@@ -243,6 +244,16 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 - `/structure` (all coins) or `/structure SOL` (one coin's levels) any time.
 - GitHub records each setup's location; the Sunday review compares the results by location. Details:
   `docs/STRUCTURE_CARD.md`.
+
+## Momentum notes 🌊 (strategy 11, 2026-10-13)
+
+- 👀 **forming** (checked every 15 minutes): a coin presses on its 30m low / high with rising volume, the 1H already
+  moves that way, and at least 2 coins do the same - a market-wide break may come at the next 30m close.
+- ⚠️ **late**: a 30m break that is already stretched (3rd step, RSI below 30 / above 70, or far from the 30m
+  average) - **no new trade that way**; if you are in, take profit or tighten your stop.
+- 🔄 **bounce**: after a ⚠️ note, the 30m close is back over its average - the move may be over.
+- **Information only.** The 🔵 strategy 11 trade alerts come only after its 5-year backtest (results Friday 16 Oct).
+  At most 12 notes a day; `/momentum off` stops them, `/pause` holds them. Details: `docs/STRATEGY_11.md`.
 
 ## Good to know
 

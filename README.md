@@ -24,6 +24,9 @@ Between candle closes it also checks every minute for sudden moves and sends an 
 volume spike, yesterday's high / low broken): [`docs/SHOCK_ALARM.md`](docs/SHOCK_ALARM.md).
 Every alert also shows the 🧭 4H market structure at its entry (trend, liquidity, location at a zone or in the middle
 of the range) and `/structure` shows it any time - information only: [`docs/STRUCTURE_CARD.md`](docs/STRUCTURE_CARD.md).
+Strategy 11 (early momentum) looks for the first steps of a market-wide move before the 4H turns, and the watcher's 🌊
+notes say when a move is forming (👀), already late (⚠️ no new trade that way) or bouncing (🔄):
+[`docs/STRATEGY_11.md`](docs/STRATEGY_11.md).
 
 ## One-time setup (about 15 minutes, no coding)
 
