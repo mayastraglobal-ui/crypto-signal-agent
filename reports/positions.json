@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-13 00:32",
+ "generated_utc": "2026-10-13 02:00",
  "book": {
-  "utc": "2026-10-13 00:32",
-  "beijing": "2026-10-13 08:32",
+  "utc": "2026-10-13 02:00",
+  "beijing": "2026-10-13 10:00",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-13 00:32 UTC / 2026-10-13 08:32 Beijing",
+  "POSITION BOOK \u2014 2026-10-13 02:00 UTC / 2026-10-13 10:00 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC"
@@ -63,58 +63,5 @@
   }
  },
  "watching": [],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-13 00:32",
-   "id": "BTC-1h-P01-BREAKOUT-V5-2026-10-12 23:59",
-   "coin": "BTC",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 81850.0,
-   "note": "1h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-13 00:32",
-   "id": "BTC-1h-P01-BREAKOUT-V5-2026-10-12 23:59",
-   "coin": "BTC",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 81850.0,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-13 00:32",
-   "id": "ETH-1h-P01-BREAKOUT-V5-2026-10-12 23:59",
-   "coin": "ETH",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 2447.17,
-   "note": "1h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-13 00:32",
-   "id": "ETH-1h-P01-BREAKOUT-V5-2026-10-12 23:59",
-   "coin": "ETH",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 2447.17,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
