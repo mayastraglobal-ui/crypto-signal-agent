@@ -14195,3 +14195,54 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-13 02:15,SOL,15m,FVG_FILLED,bear,,104.66,105.45,,Asia,1h,EXPANSION,,smc-1.0,Binance
 2026-10-13 02:15,XRP,15m,FVG,bull,,1.3507,1.3531,0.277,Asia,1h,EXPANSION,,smc-1.0,Binance
 2026-10-13 02:15,ZEC,15m,FVG,bull,,1179.28,1186.32,0.477,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,BTC,1h,FVG,bull,,81959.53,82418.47,0.893,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-13 02:30,BTC,30m,OB_RETEST,bear,,82529.41,82781.61,,Asia,1h,EXPANSION,first return into the order block,smc-1.0,Binance
+2026-10-13 02:30,BTC,30m,FVG_RETRACE,bear,,82781.61,82860.0,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,BTC,30m,FVG_FILLED,bear,,82270.87,82529.41,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,BTC,30m,FVG,bull,,82204.08,82418.47,0.553,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,BTC,30m,OB_INVALID,bear,,82529.41,82781.61,,Asia,1h,EXPANSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-13 03:00,BTC,30m,FVG_RETRACE,bear,,82968.54,83050.46,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,BTC,30m,FVG_FILLED,bear,,82968.54,83050.46,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,BTC,30m,FVG_FILLED,bear,,82781.61,82860.0,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,BTC,30m,FVG,bull,,82471.18,82676.0,0.525,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,BTC,15m,FVG,bull,,82471.18,82708.0,0.831,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:45,BTC,15m,OB_INVALID,bear,,82529.41,82781.61,,Asia,1h,EXPANSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-13 02:45,BTC,15m,FVG_FILLED,bear,,82745.35,82898.0,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:45,BTC,15m,FVG_RETRACE,bull,,82471.18,82708.0,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,BTC,15m,FVG_RETRACE,bear,,82972.67,83050.46,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,BTC,15m,FVG_FILLED,bear,,82972.67,83050.46,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,ETH,1h,FVG_RETRACE,bear,,2471.58,2483.52,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,ETH,1h,FVG_FILLED,bear,,2471.58,2483.52,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-13 03:00,ETH,1h,FVG,bull,,2451.0,2463.16,0.53,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-13 02:30,ETH,30m,FVG_RETRACE,bear,,2471.58,2487.45,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,ETH,30m,FVG,bull,,2456.3,2463.16,0.385,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,ETH,30m,FVG_FILLED,bear,,2471.58,2487.45,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,ETH,30m,FVG,bull,,2466.47,2478.36,0.662,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,ETH,15m,FVG,bull,,2466.47,2475.08,0.632,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,SOL,1h,FVG_RETRACE,bear,,105.98,106.3,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,SOL,1h,FVG_FILLED,bear,,105.98,106.3,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-13 02:30,SOL,30m,FVG_RETRACE,bear,,106.62,106.94,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,SOL,30m,FVG_FILLED,bear,,104.49,105.41,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,SOL,30m,FVG,bull,,104.68,105.28,0.552,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,SOL,30m,FVG_FILLED,bear,,106.62,106.94,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,SOL,30m,FVG,bull,,105.38,106.11,0.679,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,SOL,15m,FVG,bull,,105.38,105.8,0.514,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,XRP,1h,FVG_RETRACE,bear,,1.3574,1.3649,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 03:00,XRP,1h,FVG_FILLED,bear,,1.3574,1.3649,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-13 03:00,XRP,1h,FVG,bull,,1.3452,1.3531,0.531,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-13 02:30,XRP,30m,FVG_RETRACE,bear,,1.3574,1.3627,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,XRP,30m,FVG_FILLED,bear,,1.3574,1.3627,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,XRP,30m,FVG,bull,,1.3488,1.3531,0.377,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,XRP,30m,FVG,bull,,1.3542,1.3577,0.307,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,XRP,15m,FVG,bull,,1.3542,1.357,0.33,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,XRP,15m,FVG_FILLED,bear,,1.3546,1.3642,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:15,XRP,15m,FVG,bull,,1.3614,1.3635,0.268,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,ZEC,1h,FVG_FILLED,bear,,1170.07,1197.0,,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-13 03:00,ZEC,1h,FVG,bull,,1170.07,1186.32,0.614,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-13 02:30,ZEC,30m,FVG_FILLED,bear,,1186.66,1197.0,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,ZEC,30m,FVG,bull,,1181.32,1186.32,0.261,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 03:00,SUI,1h,FVG_FILLED,bear,,1.0301,1.0438,,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-13 02:30,SUI,30m,FVG_RETRACE,bear,,1.0366,1.0438,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,SUI,30m,FVG_FILLED,bear,,1.0366,1.0438,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-13 02:30,SUI,15m,FVG_RETRACE,bear,,1.0413,1.0438,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-13 02:30,SUI,15m,FVG_FILLED,bear,,1.0413,1.0438,,Asia,1h,EXPANSION,,smc-1.0,Binance

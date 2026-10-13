@@ -35,3 +35,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - regime and timing: all three were shorts in a WEAK_BEAR hour while the engine's market weather said "Choppy - stay out"; the at-entry conditions were range_market, low_relative_volume and wrong_session, and the tags say regime_mismatch.
   - stop / target: the two SOL losses had MAE -2.77R and -2.96R, far beyond the 1R stop, and volatility_spike: one large 1h candle went through the stop (the loss after costs was -1.18R and -1.20R). The XRP loss had MAE -1.52R. MFE was small in all three (+0.17R to +0.31R): the trades never went their way.
   - sample size: three trades - an example, not a pattern. Systematic or random cannot be told from three trades; the selection effect is the systematic part to watch.
+
+### BTC SHORT 1h P01-BREAKOUT-V5 v1.0 - SL -1.15R
+- timestamp: 2026-10-13 03:20 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.15R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-10-20
+  - signal 2026-10-12 23:59 UTC, closed 2026-10-13 02:59 UTC, stage TEST
+  - MAE -1.47R / MFE +0.96R
+  - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 1h P01-BREAKOUT-V5 v1.0 - SL -1.10R
+- timestamp: 2026-10-13 03:20 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-20
+  - signal 2026-10-12 23:59 UTC, closed 2026-10-13 02:59 UTC, stage TEST
+  - MAE -1.37R / MFE +1.02R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
