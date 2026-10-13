@@ -1082,3 +1082,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: when a strategy is FAILED across all coins but positive on one coin, its TEST alerts on that coin will on average do no better than the strategy's all-coin backtest average, because the coin was picked after the fact from many coin x strategy x timeframe cells.
   - how to test: no lab card - an engine report for the operator. Once 30 or more TEST signals have closed, compare their average R with (a) the per-coin backtest average that qualified them and (b) the strategy's all-coin average. If (a) is far above the result and (b) is close, the per-coin selection adds nothing.
   - stop if: TEST results match the per-coin backtest averages after 30 or more closed signals.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0082 | 2026-10-13 01:02 | TRD-H4-BREAKOUT-S3-FDISP@1.0 | breakout | 1h, 30m, 15m, 5m | TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout (-0.24R a trade with it, +0.57R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+| EXP-0083 | 2026-10-13 01:02 | P07-SQUEEZE-RETEST-V1@1.0 | breakout | 4h | A breakout out of a volatility squeeze that survives its first retest is real: the new move continues. |
+| EXP-0084 | 2026-10-13 01:02 | P07-SQUEEZE-RETEST-V2@1.0 | breakout | 1h, 30m, 15m | A breakout out of a volatility squeeze that survives its first retest is real: the new move continues. |
+| EXP-0085 | 2026-10-13 01:02 | P07-SQUEEZE-RETEST-V3@1.0 | breakout | 4h | A breakout out of a volatility squeeze that survives its first retest is real: the new move continues. |
+| EXP-0086 | 2026-10-13 01:02 | P07-SQUEEZE-RETEST-V4@1.0 | breakout | 4h | A breakout out of a volatility squeeze that survives its first retest is real: the new move continues. |
+| EXP-0087 | 2026-10-13 01:02 | P08-SESSION-BREAKOUT-V1@1.0 | breakout | 1h | The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs. |
+| EXP-0088 | 2026-10-13 01:02 | P08-SESSION-BREAKOUT-V2@1.0 | breakout | 30m, 15m | The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs. |
+| EXP-0089 | 2026-10-13 01:02 | P08-SESSION-BREAKOUT-V3@1.0 | breakout | 1h | The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs. |
+| EXP-0090 | 2026-10-13 01:02 | P08-SESSION-BREAKOUT-V4@1.0 | breakout | 1h | The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs. |
+| EXP-0091 | 2026-10-13 01:02 | P07-SQUEEZE-RETEST-V5@1.0 | breakout | 1h, 30m, 15m | A breakout out of a volatility squeeze that survives its first retest is real: the new move continues. |
+| EXP-0092 | 2026-10-13 01:02 | P08-SESSION-BREAKOUT-V5@1.0 | breakout | 30m, 15m | The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs. |

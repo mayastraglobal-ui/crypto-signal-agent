@@ -990,3 +990,102 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: chart patterns can be found by a fixed computer rule instead of by eye (smoothing prices with kernel regression, then finding 10 patterns such as head-and-shoulders and double bottoms). On US stocks 1962-1996, the return distribution after a pattern differs from the normal return distribution: for 7 of the 10 patterns on NYSE/AMEX and all 10 on Nasdaq (goodness-of-fit test). With the stricter Kolmogorov-Smirnov test, 5 of 10 on NYSE/AMEX. Adding volume trends changed little. The authors stress that "informativeness does not guarantee a profitable trading strategy".
   - what it means for this system: it is the right test for our SMC and candle-pattern blocks: compare what happens after a pattern with what happens after a random candle, before asking whether it makes money after costs. Our engine already does a version of this (reports/feature_evidence.json and the noSMC control twins). The paper's patterns carried some information on 1962-1996 stocks; that says nothing yet about crypto 15m charts, and a small change in the return distribution may not pay for our fees (the cost test, e.g. 0.25R to 0.31R per trade on 15m cards this week).
   - derived hypothesis: none new; the control-twin rule in strategies_lab.yaml already makes every SMC card face a pattern-free twin.
+
+### TRD-H4-BREAKOUT-S3-FDISP@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-S3-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-S3-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-11
+  - title / source: engine failure lab: a repair of TRD-H4-BREAKOUT-S3@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout (-0.24R a trade with it, +0.57R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-S3-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P07-SQUEEZE-RETEST-V1@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V1
+  - URL: none recorded
+  - claim: A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P07-SQUEEZE-RETEST-V2@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V2
+  - URL: none recorded
+  - claim: A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P07-SQUEEZE-RETEST-V3@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V3
+  - URL: none recorded
+  - claim: A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P07-SQUEEZE-RETEST-V4@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V4
+  - URL: none recorded
+  - claim: A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P08-SESSION-BREAKOUT-V1@1.0 - During London or New York (08:00-21:00 UTC), price closes for the first time above today's Asia high (00:00-08:00 UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P08-SESSION-BREAKOUT-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P08-SESSION-BREAKOUT-V1 v1.0 · asset: research coins · timeframe: 1h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New York) - version V1
+  - URL: none recorded
+  - claim: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs.
+  - derived hypothesis (tested): P08-SESSION-BREAKOUT-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h
+  - limitations: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at the London open are common.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P08-SESSION-BREAKOUT-V2@1.0 - During London or New York (08:00-21:00 UTC), price closes for the first time above today's Asia high (00:00-08:00 UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P08-SESSION-BREAKOUT-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P08-SESSION-BREAKOUT-V2 v1.0 · asset: research coins · timeframe: 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New York) - version V2
+  - URL: none recorded
+  - claim: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs.
+  - derived hypothesis (tested): P08-SESSION-BREAKOUT-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 30m, 15m
+  - limitations: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at the London open are common.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P08-SESSION-BREAKOUT-V3@1.0 - During London or New York (08:00-21:00 UTC), price closes for the first time above today's Asia high (00:00-08:00 UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P08-SESSION-BREAKOUT-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P08-SESSION-BREAKOUT-V3 v1.0 · asset: research coins · timeframe: 1h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New York) - version V3
+  - URL: none recorded
+  - claim: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs.
+  - derived hypothesis (tested): P08-SESSION-BREAKOUT-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h
+  - limitations: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at the London open are common.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P08-SESSION-BREAKOUT-V4@1.0 - During London or New York (08:00-21:00 UTC), price closes for the first time above today's Asia high (00:00-08:00 UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P08-SESSION-BREAKOUT-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P08-SESSION-BREAKOUT-V4 v1.0 · asset: research coins · timeframe: 1h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New York) - version V4
+  - URL: none recorded
+  - claim: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs.
+  - derived hypothesis (tested): P08-SESSION-BREAKOUT-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h
+  - limitations: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at the London open are common.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P07-SQUEEZE-RETEST-V5@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 7, Squeeze breakout & retest - version V5
+  - URL: none recorded
+  - claim: A breakout out of a volatility squeeze that survives its first retest is real: the new move continues.
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P08-SESSION-BREAKOUT-V5@1.0 - During London or New York (08:00-21:00 UTC), price closes for the first time above today's Asia high (00:00-08:00 UTC) with 1.3x volume (shorts: below the Asia low); exit back at the middle of the Asia range.
+- timestamp: 2026-10-13 01:02 UTC · source: strategies_lab.yaml card P08-SESSION-BREAKOUT-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P08-SESSION-BREAKOUT-V5 v1.0 · asset: research coins · timeframe: 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-11
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 8, Session open breakout (Asia range -> London / New York) - version V5
+  - URL: none recorded
+  - claim: The quiet Asia session builds a range; the first break of it when London / New York volume arrives, in the 4H + 1H trend direction, runs.
+  - derived hypothesis (tested): P08-SESSION-BREAKOUT-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 30m, 15m
+  - limitations: Fixed UTC session hours (no summer-time shift); a wide Asia range leaves little room; false breaks at the London open are common.
+  - test results: `memory/strategy_registry.csv` / report section 3

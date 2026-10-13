@@ -1,14 +1,14 @@
 {
  "enabled": true,
  "allowed": 1,
- "considered": 74,
+ "considered": 107,
  "new": [
   {
-   "id": "TRD-H4-BREAKOUT-S3-FDISP",
+   "id": "TRD-H4-BREAKOUT-FDISP",
    "tag": "false_breakout",
    "kind": "DISP",
-   "parent": "TRD-H4-BREAKOUT-S3@1.0|30m",
-   "evidence": "false_breakout in 78% of losses, n=417 losing trades (TRD-H4-BREAKOUT-S3@1.0 30m: 837 trades, avg +0.005R, BACKTESTING; trades with false_breakout -0.236R, without +0.567R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
+   "parent": "TRD-H4-BREAKOUT@1.0|30m",
+   "evidence": "false_breakout in 75% of losses, n=253 losing trades (TRD-H4-BREAKOUT@1.0 30m: 559 trades, avg +0.100R, BACKTESTING; trades with false_breakout -0.185R, without +0.642R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
   }
  ],
  "pending": [],
@@ -26,7 +26,22 @@
    "parent_test_r": 0.219,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-12 01:01"
+   "checked": "2026-10-13 01:02"
+  },
+  {
+   "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
+   "parent": "TRD-H4-BREAKOUT-S3@1.0|30m",
+   "tag": "false_breakout",
+   "kind": "DISP",
+   "status": "BACKTESTING",
+   "trades": 412,
+   "avg_r": 0.187,
+   "test_r": 0.364,
+   "parent_avg_r": 0.005,
+   "parent_test_r": 0.191,
+   "helped": true,
+   "passed": false,
+   "checked": "2026-10-13 01:02"
   }
  ],
  "by_kind": {
@@ -34,12 +49,22 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
+  },
+  "DISP": {
+   "tried": 1,
+   "helped": 1,
+   "passed": 0
   }
  },
  "by_tag": {
   "regime_mismatch": {
    "tried": 1,
    "helped": 0,
+   "passed": 0
+  },
+  "false_breakout": {
+   "tried": 1,
+   "helped": 1,
    "passed": 0
   }
  },

@@ -1174,3 +1174,101 @@
     kind: DISP
     tf: 30m
     parent_cell: TRD-H4-BREAKOUT-S3@1.0|30m
+- id: TRD-H4-BREAKOUT-FDISP
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - RANGE
+  - TRANSITION
+  source: 'engine failure lab: a repair of TRD-H4-BREAKOUT@1.0 for its loss tag false_breakout'
+  hypothesis: TRD-H4-BREAKOUT@1.0 loses on false_breakout (-0.18R a trade with it, +0.64R without). One change -
+    a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those
+    losses and keep the rest.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  - 5m
+  description: 'Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume
+    (shorts mirrored); limit entry at the close.'
+  logic: trend4h_long, then on the trade timeframe a close above the previous 20-candle high with volume above 1.5
+    x its 20-candle average. Limit at the close for 2 candles (maker fee). Stop 2 ATR; targets 2R and 3R; exit when
+    the 4H window closes. No trade when fees + slippage would cost more than 0.25R.
+  long:
+  - trend4h_long == 1
+  - close > prev(highest(high,20))
+  - volume > vol_sma(20) * 1.5
+  - within(displacement_up, 3)
+  short:
+  - trend4h_short == 1
+  - close < prev(lowest(low,20))
+  - volume > vol_sma(20) * 1.5
+  - within(displacement_down, 3)
+  exit_long:
+  - trend4h_long != 1
+  exit_short:
+  - trend4h_short != 1
+  entry:
+    type: limit
+    offset_atr: 0
+    valid_bars: 2
+  stop:
+    method: atr
+    atr: 2.0
+    max_cost_r: 0.25
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: 'Buys strength after a move: late entries in an old 4H trend; the limit at the close misses
+    breakouts that never look back.'
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - COMPRESSION
+    - RANGE
+    - TRANSITION
+    who_pays: traders short under the faster range top whose stops fuel the next leg of the 4H trend
+    mechanism: inside a measured 4H trend, a faster-timeframe breakout with volume is new participation in the trend's
+      direction
+    fails_when: late in a 4H trend (exhaustion) and in chop around the 4H breakout level
+    kill_rule: FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer
+      beats TRD-H4-BREAKOUT-noT4
+  changelog:
+  - '1.0 (2026-10-13): engine failure lab - TRD-H4-BREAKOUT@1.0 repaired for false_breakout: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  params: {}
+  added: '2026-10-13'
+  factory: failure
+  variant_of: TRD-H4-BREAKOUT@1.0
+  parent: 'result: TRD-H4-BREAKOUT@1.0 30m'
+  evidence_class: BACKTEST_EVIDENCE
+  factory_evidence: 'false_breakout in 75% of losses, n=253 losing trades (TRD-H4-BREAKOUT@1.0 30m: 559 trades,
+    avg +0.100R, BACKTESTING; trades with false_breakout -0.185R, without +0.642R); repair DISP: a strong candle
+    (displacement) in the trade direction within the last 3 candles'
+  repair:
+    tag: false_breakout
+    kind: DISP
+    tf: 30m
+    parent_cell: TRD-H4-BREAKOUT@1.0|30m
