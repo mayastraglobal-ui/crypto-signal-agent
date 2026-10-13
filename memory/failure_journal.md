@@ -51,3 +51,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### Root cause: BTC and ETH TEST shorts of 2026-10-12 23:59 UTC - one breakout signal on two correlated coins
+- timestamp: 2026-10-13 15:30 UTC · source: Claude daily review 2026-10-13 · evidence: MODEL_OUTPUT: reading of the two engine entries (BTC SHORT 1h P01-BREAKOUT-V5 -1.15R, MAE -1.47R / MFE +0.96R; ETH SHORT 1h P01-BREAKOUT-V5 -1.10R, MAE -1.37R / MFE +1.02R) with the backtest verdict of 2026-10-10 and config.yaml -> signal_center · confidence: medium · strategy: P01-BREAKOUT-V5 v1.0 · asset: BTC, ETH · timeframe: 1h · regime: TRANSITION · review: 2026-10-20
+  The engine's tag (false_breakout) is not changed. My reading:
+  - strategy: P01-BREAKOUT-V5 1h FAILED across all coins (-0.02R a trade, profit factor 0.96, on 2026-10-10, BACKTEST); the alerts came from the per-coin TEST selection, as with the three TEST losses of 2026-10-11 (see 'Root cause: three TEST losses on 2026-10-11 ...').
+  - timing: both signals fired at the same candle (2026-10-12 23:59 UTC), outside the killzones, with overextended_entry and wrong_session at entry. BTC and ETH move together, so this was one bet taken twice, not two independent trades.
+  - stop / target: both went about +1R in favour (MFE +0.96R and +1.02R) and then reversed to the stop. The first target of a lab card is at least 2R, so neither reached it. One trade's worth of evidence, but it fits the false_breakout tag that is systematic in many breakout backtests (32 tests in the fact sheet of 2026-10-11).
+  - regime: the market weather said "Choppy - stay out" on both coins; breakouts fail most in such markets (C08).
+  - sample size: two trades on one signal; not a pattern. Five TEST losses are now in the journal (2026-10-11 and 2026-10-13).
