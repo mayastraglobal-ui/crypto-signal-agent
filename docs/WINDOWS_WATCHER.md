@@ -247,6 +247,10 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 
 ## Momentum notes 🌊 (strategy 11, 2026-10-13)
 
+**Off by default since the evening of 13 Oct.** `/momentum on` switches them on. The 5-year check found that trading
+these market-wide 30m breaks lost about −0.1R a trade after fees (`docs/STRATEGY_11.md`, "What 5 years say"). When on,
+each check sends one message for all coins.
+
 - 👀 **forming** (checked every 15 minutes): a coin presses on its 30m low / high with rising volume, the 1H already
   moves that way, and at least 2 coins do the same - a market-wide break may come at the next 30m close.
 - ⚠️ **late**: a 30m break that is already stretched (3rd step, RSI below 30 / above 70, or far from the 30m

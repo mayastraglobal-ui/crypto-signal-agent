@@ -886,3 +886,23 @@ Newest entries at the bottom. Format: date · who · what · why.
   fake breakdowns (5 shorts) and the 12 Oct 13:00 top (3 longs): about +3R over the 3 days in a simple stop / +2R
   check - two days prove nothing; the 5-year test decides. V4 lost 12 of 13 in that chop (the backtest will show).
 - Tests: `tests/test_strategy11.py` (16).
+
+## 2026-10-13 · Operator + Claude · First live morning of strategy 11: fixes, fewer messages, 5-year check
+- Operator (13 Oct 12:00 Beijing): many "breakdown forming" notes, then only "late fall", a 🔵 TEST SHORT whose entry
+  was the bottom, too many messages. Replay of 05:45-11:00: 👀 forming x4 at 05:45 (right: the fall started at 06:00),
+  ⚠️ late x4 at 06:00 (wrong in practice: the fall went on to 08:30), 15 momentum notes in all; the TEST SHORT ETH
+  08:05 (P01-BREAKOUT-V5 1h: FAILED overall, -0.02R over 3,762 trades, ETH +0.01R over 717) stopped -1.10R; the
+  operator pressed ✅ Took it at 11:40, after the plan's stop at 10:15, and the demo book booked -1.67R at once.
+- 5-year check (Binance 30m, 7 coins; breaks beyond the 20-candle low / high, 1.5x volume, >= 3 coins, 1H moving;
+  1.5 ATR stop, 2R target, 12 h, 0.12% costs): shorts 11,321 breaks -0.115R, longs 9,206 -0.123R. Step 2-3 shorts
+  worse than step 1, the most stretched least bad; the most overbought breakouts kept rising most - "late" is not a
+  reliable "bounce". docs/STRATEGY_11.md "What 5 years say".
+- Changes: `momentum_notes.enabled: false` (operator's `/momentum on|off` is `mom_choice` in the state; the first
+  version's `mom_on` is ignored), one message per check for all coins (`plan` returns coins / keys), `min_coins` 3,
+  `max_per_day` 6. `steps_up` / `steps_dn` count only since the last close back over the EMA20 (a new move).
+  `signal_center.alert_list` + `alert_skip_failed: true`, `alert_min_avg_r: 0.10`: Telegram TEST alerts only from
+  cells not FAILED and positive overall, on coins >= +0.10R (10 cells, 9 of them 4H, instead of 30); the hourly scan
+  still records every TEST setup of `test_list` (weekly review unchanged). `Watcher.too_late`: ✅ Took it after the
+  shadow plan ended (`alerts[id].plan_end`) or reached TP1 is refused with a "too late" message.
+- Strategy 11's cards are unchanged apart from the step counter (never tested yet); the 15 Oct night test decides.
+- Tests: `tests/test_strategy11.py` (20).

@@ -34,7 +34,7 @@ def coin(n=120, avg=0.3, win=45.0, test_n=30, test_avg=0.2):
 
 def program(**cells):
     return {"cells": {ck: dict(strategy=int(ck[1:3]), name="Breakout", version=ck.split("@")[0][-2:],
-                               status="BACKTESTING", coins=c) for ck, c in cells.items()}}
+                               status="BACKTESTING", avg_r=0.2, coins=c) for ck, c in cells.items()}}
 
 
 class TestList(unittest.TestCase):

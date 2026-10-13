@@ -576,7 +576,8 @@ class Watcher:
         self.program = self._json("reports/program.json")
         self.weather = self._json("reports/market_weather.json")
         self.promoted = (self._json("reports/promotions_state.json") or {}).get("active") or {}   # PR 3
-        self.tests = scx.test_list(self.program, reg["cells"], self.SC, self.promoted)
+        self.tests = scx.alert_list(scx.test_list(self.program, reg["cells"], self.SC, self.promoted), self.program,
+                                    reg["cells"], self.SC)        # GitHub still records every TEST setup
         have = {(sspec.key(s), tf) for s, tf, _ in self.watch}
         for s in cards:
             for tf in s["timeframes"]:
@@ -655,12 +656,13 @@ class Watcher:
         # watch_on / watch_sent: 👀 watch notes on / off (/watch) and when each went out (their own daily cap)
         # shock_*: ⚡ the shock alarm - on / off (/shock), notes sent, last note per coin, sides swept today, shocks
         # waiting for their 4-hour outcome
-        # mom_*: 🌊 strategy 11's momentum notes - on / off (/momentum), when each went out, the last note per kind /
-        # coin / direction
+        # mom_*: 🌊 strategy 11's momentum notes - mom_choice: the operator's /momentum on|off (None = config.yaml's
+        # momentum_notes.enabled; the old mom_on key is ignored), when each went out, the last note per kind / coin /
+        # direction
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
                          next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None,
                          watch_on=True, watch_sent=[], shock_on=True, shock_sent=[], shock_last={}, shock_swept={},
-                         shock_pending=[], mom_on=True, mom_sent=[], mom_last={}).items():
+                         shock_pending=[], mom_choice=None, mom_sent=[], mom_last={}).items():
             st.setdefault(k, v)
         return st
 
@@ -778,7 +780,8 @@ class Watcher:
 
     # ---- 🌊 strategy 11's momentum notes (2026-10-13): information only, never a trade signal ----
     def momentum_ok(self):
-        return bool(self.MN["enabled"] and self.state.get("mom_on", True))
+        ch = self.state.get("mom_choice")
+        return bool(self.MN["enabled"] if ch is None else ch)
 
     def momentum_notes(self, states, now_ms, closed):
         """👀 forming / ⚠️ late / 🔄 bounce notes (engine/momentum_notes.py). Never while paused, at most
@@ -788,14 +791,17 @@ class Watcher:
         sent = []
         for n in mnt.plan({c: st for c, st in states.items() if st}, now_ms, closed, self.state["mom_last"], self.MN):
             if scx.sent_today(self.state["mom_sent"], now_ms) >= self.MN["max_per_day"]:
-                log(f"MOMENTUM {n['kind']} {n['coin']}: daily maximum of {self.MN['max_per_day']} notes reached")
+                log(f"MOMENTUM {n['kind']} {', '.join(n['coins'])}: daily maximum of {self.MN['max_per_day']} notes "
+                    "reached")
                 break
             ok, err, _ = self.say(n["text"])
-            self.state["mom_last"][n["key"]] = now_ms
+            for k in n["keys"]:
+                self.state["mom_last"][k] = now_ms
             self.state["mom_sent"].append(now_ms)
             sent.append(n)
             if self.send:
-                log(f"MOMENTUM {n['kind']} {n['coin']} {mnt.SIDE[n['d']]}: " + ("sent" if ok else f"NOT sent ({err})"))
+                log(f"MOMENTUM {n['kind']} {mnt.SIDE[n['d']]} {', '.join(n['coins'])}: "
+                    + ("sent" if ok else f"NOT sent ({err})"))
         return sent
 
     # ---- Telegram out: alerts with buttons, follow-ups, replies ----
@@ -890,6 +896,23 @@ class Watcher:
         except OSError as e:
             log(f"journal not written: {e}")
 
+    def too_late(self, aid, a):
+        """✅ Took it pressed after the setup already played out (2026-10-13: ETH pressed 3.5 hours after the alert, the
+        plan had hit its stop 1.5 hours before - the demo book then booked -1.67R at once). The text why, or None."""
+        pe = a.get("plan_end")
+        side = "LONG" if a["d"] == 1 else "SHORT"
+        if pe:
+            what = {"stop": "hit its stop", "tp": "reached its targets", "time": "reached its time stop",
+                    "expired": "expired (the limit order was not filled)"}.get(pe.get("kind"), "finished")
+            return (f"⏰ <b>Too late</b> - this {side} {a['coin']} setup already {what} at {lv.bj(pe['at_ms'])}"
+                    + (f" (plan {pe['r']:+.2f}R)" if pe.get("r") is not None else "")
+                    + ". Not recorded as a trade - don't enter it now; wait for the next alert.")
+        sh = self.state["shadow"].get(aid) or {}
+        if int(sh.get("hit") or 0) >= 1:
+            return (f"⏰ <b>Too late</b> - this {side} {a['coin']} setup already reached TP1: most of the move is done "
+                    "and the stop is far away now. Not recorded as a trade - wait for the next alert.")
+        return None
+
     # ---- the trades the operator took ----
     def _advance(self, t, now_ms, cache):
         """Walk one trade through the 5m candles closed since its last check; None when the download failed."""
@@ -940,6 +963,9 @@ class Watcher:
                 self.journal(t, "plan" if t.get("filled", True) else "plan not filled", fin["at_ms"], fin["px"],
                              fin.get("result_r"))
                 self.state["shadow"].pop(sid)
+                if sid in self.state["alerts"]:            # ✅ Took it after this = too late (2026-10-13)
+                    self.state["alerts"][sid]["plan_end"] = dict(kind=fin["kind"], at_ms=int(fin["at_ms"]),
+                                                                 r=fin.get("result_r"))
             elif now_ms - int(t["taken_ms"]) > SHADOW_DAYS * 86_400_000:
                 self.state["shadow"].pop(sid)                  # no stop, target or time stop in 14 days: dropped
 
@@ -1053,15 +1079,15 @@ class Watcher:
         if cmd == "momentum":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
-                self.state["mom_on"] = arg == "on"
+                self.state["mom_choice"] = arg == "on"
                 self._save_state()
             on = self.momentum_ok()
             return (f"🌊 Momentum notes are <b>{'ON' if on else 'OFF'}</b>. "
                     + ("👀 a market-wide breakout / breakdown forming (checked every 15 minutes), ⚠️ a move that is "
                        "already late (no new trade that way), 🔄 a bounce after a late move. Information only, at most "
                        f"{self.MN['max_per_day']} a day. /momentum off to stop them." if on else
-                       "/momentum on to switch them on." if self.MN["enabled"] else
-                       "Switched off in config.yaml (momentum_notes: enabled)."))
+                       "/momentum on to switch them on. (Off by default since 13 Oct: in 5 years of 30m candles, "
+                       "trading these breaks lost about -0.1R a trade after fees - docs/STRATEGY_11.md.)"))
         if cmd == "shock":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1106,6 +1132,9 @@ class Watcher:
             toast = "Details sent below."
         elif a.get("choice") in ("closed", "done") or action == "noop":
             toast = "This trade is already finished."
+        elif action == "took" and a.get("choice") != "took" and self.too_late(aid, a):
+            toast = "Too late - not recorded."
+            self.say(self.too_late(aid, a))
         elif action == "took" and a.get("choice") != "took":
             a["choice"] = "took"
             self.state["trades"][aid] = fl.open_trade(a, aid, now_ms, self.cfg.get("trade_plan"))

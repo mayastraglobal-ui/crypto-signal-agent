@@ -509,24 +509,32 @@ def make_namespace(df, feats=None):
 
     def vp_val(n=100): return pd.Series(_vprofile(n)[2], index=df.index)
 
-    def _steps(brk, gap, win):
+    def _steps(brk, gap, win, back):
         b = brk.fillna(False).to_numpy(dtype=bool)
         before = pd.Series(b.astype(float)).shift(1).rolling(int(gap), min_periods=1).max().fillna(0).to_numpy() > 0
         start = b & ~before                  # a break with no break in the `gap` candles before = a new step
-        return pd.Series(pd.Series(start.astype(float)).rolling(int(win), min_periods=1).sum().to_numpy(),
-                         index=df.index)
+        cs = np.cumsum(start)
+        pos = np.arange(len(b))
+        # a close back over the EMA20 ends the move (2026-10-13: the night's steps counted again in the morning's
+        # new fall, after a 3-hour recovery): count only the steps since then, within the last `win` candles
+        last_back = np.maximum.accumulate(np.where(back.fillna(False).to_numpy(dtype=bool), pos, -1))
+        lo = np.maximum(pos - int(win), last_back)
+        cnt = cs - np.where(lo >= 0, cs[np.maximum(lo, 0)], 0)
+        return pd.Series(cnt.astype(float), index=df.index)
 
     @cached
     def steps_dn(n=20, gap=3, win=24):
         """Strategy 11 (2026-10-13): which breakdown step of the move this is - the number of new breakdowns (a close
         below the lowest low of the n candles before, with no breakdown in the `gap` candles before it) in the last
-        `win` candles, this one included. 1 = the first step down, 3 = the third (late: often near the bottom)."""
-        return _steps(c < lowest(l, int(n)).shift(1), gap, win)
+        `win` candles, this one included, counted only since the last close back above the EMA20 (a new move starts
+        there). 1 = the first step down, 3 = the third (late: often near the bottom)."""
+        return _steps(c < lowest(l, int(n)).shift(1), gap, win, c > ema(c, 20))
 
     @cached
     def steps_up(n=20, gap=3, win=24):
-        """steps_dn mirrored: which breakout step up (a close above the highest high of the n candles before)."""
-        return _steps(c > highest(h, int(n)).shift(1), gap, win)
+        """steps_dn mirrored: which breakout step up (a close above the highest high of the n candles before), counted
+        since the last close back below the EMA20."""
+        return _steps(c > highest(h, int(n)).shift(1), gap, win, c < ema(c, 20))
 
     def within(x, n):
         """x was true on this candle or one of the n-1 candles before."""

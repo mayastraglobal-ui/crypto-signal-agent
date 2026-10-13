@@ -23,8 +23,8 @@ import math
 
 import numpy as np
 
-DEFAULTS = dict(enabled=True, near_atr=0.3, vol_x=1.2, min_coins=2, late_step=3, late_rsi=30.0, late_ext=2.5,
-                bounce_hours=12, max_per_day=12, forming_cooldown_min=120, late_cooldown_min=240)
+DEFAULTS = dict(enabled=False, near_atr=0.3, vol_x=1.2, min_coins=3, late_step=3, late_rsi=30.0, late_ext=2.5,
+                bounce_hours=12, max_per_day=6, forming_cooldown_min=120, late_cooldown_min=240)
 SIDE = {1: "LONG", -1: "SHORT"}
 
 
@@ -144,74 +144,78 @@ def move_pct(st, d):
 
 
 def plan(states, now_ms, closed, sent, S):
-    """Which notes to send now. states: {coin: coin_state}; closed: the timeframes that just closed; sent: the notes
-    state {'kind|coin|d': ms}. Returns [dict(kind, coin, d, key, text)] - the caller records and caps them."""
+    """Which notes to send now - ONE message per kind and direction (2026-10-13, operator: "too many messages": one
+    message per coin sent 15 notes in a morning). states: {coin: coin_state}; closed: the timeframes that just closed;
+    sent: the notes state {'kind|coin|d': ms}. Returns [dict(kind, d, coins, keys, text)] - the caller records every
+    key and caps the count."""
     out = []
+
+    def cool(key, minutes):
+        return key in sent and now_ms - int(sent[key]) < minutes * 60_000
+
     if "15m" in closed:
-        groups = {}
         for d in (-1, 1):
             hits = {c: forming(st, d, S) for c, st in states.items()}
             hits = {c: v for c, v in hits.items() if v is not None}
             broke = [c for c, st in states.items() if st and (st["brk_dn"] if d == -1 else st["brk_up"])]
-            groups[d] = (hits, broke)
-        for d, (hits, broke) in groups.items():
             if len(set(hits) | set(broke)) < S["min_coins"]:
                 continue
-            for c, lvl in sorted(hits.items()):
-                key = f"forming|{c}|{d}"
-                if key in sent and now_ms - int(sent[key]) < S["forming_cooldown_min"] * 60_000:
-                    continue
-                st = states[c]
-                others = sorted((set(hits) | set(broke)) - {c})
-                out.append(dict(kind="forming", coin=c, d=d, key=key, text=forming_text(c, d, st, lvl, others)))
+            new = {c: v for c, v in sorted(hits.items()) if not cool(f"forming|{c}|{d}", S["forming_cooldown_min"])}
+            if new:
+                out.append(dict(kind="forming", d=d, coins=list(new), keys=[f"forming|{c}|{d}" for c in new],
+                                text=forming_text(d, {c: (states[c], v) for c, v in new.items()}, sorted(broke))))
     if "30m" in closed:
-        for c, st in sorted(states.items()):
-            for d in (-1, 1):
-                why = late(st, d, S)
-                key = f"late|{c}|{d}"
-                if why and not (key in sent and now_ms - int(sent[key]) < S["late_cooldown_min"] * 60_000):
-                    out.append(dict(kind="late", coin=c, d=d, key=key, text=late_text(c, d, st, why)))
-                bk = sent.get(f"bounce|{c}|{d}")
-                if key in sent and now_ms - int(sent[key]) <= S["bounce_hours"] * 3_600_000 and \
-                        (bk is None or int(bk) < int(sent[key])) and bounce(st, d):
-                    out.append(dict(kind="bounce", coin=c, d=d, key=f"bounce|{c}|{d}", text=bounce_text(c, d, st)))
+        for d in (-1, 1):
+            lates = {c: late(st, d, S) for c, st in sorted(states.items())}
+            lates = {c: w for c, w in lates.items() if w and not cool(f"late|{c}|{d}", S["late_cooldown_min"])}
+            if lates:
+                out.append(dict(kind="late", d=d, coins=list(lates), keys=[f"late|{c}|{d}" for c in lates],
+                                text=late_text(d, {c: (states[c], w) for c, w in lates.items()})))
+            backs = []
+            for c, st in sorted(states.items()):
+                lk, bk = sent.get(f"late|{c}|{d}"), sent.get(f"bounce|{c}|{d}")
+                if lk is not None and now_ms - int(lk) <= S["bounce_hours"] * 3_600_000 and \
+                        (bk is None or int(bk) < int(lk)) and bounce(st, d):
+                    backs.append(c)
+            if backs:
+                out.append(dict(kind="bounce", d=d, coins=backs, keys=[f"bounce|{c}|{d}" for c in backs],
+                                text=bounce_text(d, {c: states[c] for c in backs})))
     return out
 
 
-def forming_text(coin, d, st, lvl, others):
-    word = "breakdown" if d == -1 else "breakout"
-    away = abs(st["m15_close"] / lvl - 1) * 100
-    return "\n".join([
-        f"👀 <b>{coin} - {word} forming</b> (30m)",
-        f"Price {_p(st['m15_close'])} is {away:.2f}% from the 30m {'support' if d == -1 else 'resistance'} "
-        f"{_p(lvl)} · 15m volume {st.get('m15_vol_x') or 0:.1f}x · 1H {'falling' if d == -1 else 'rising'}",
-        "Same on " + (", ".join(others) if others else "-") + " - a market-wide move may start at the next 30m close.",
-        f"Watch the next 30m close {'below' if d == -1 else 'above'} {_p(lvl)}. A 🔵 strategy 11 alert comes only if "
-        "the break happens and the version is positive in its backtest.",
-        "<i>Information only - not a trade signal. /momentum off stops these notes.</i>"])
+def forming_text(d, hits, broke):
+    """hits: {coin: (state, level)}; broke: the coins already through their level."""
+    word = "Breakdown" if d == -1 else "Breakout"
+    lines = [f"👀 <b>{word} forming</b> (30m) · 1H {'falling' if d == -1 else 'rising'}"]
+    for c, (st, lvl) in hits.items():
+        away = abs(st["m15_close"] / lvl - 1) * 100
+        lines.append(f"• {c} {_p(st['m15_close'])} - {away:.2f}% from {'support' if d == -1 else 'resistance'} "
+                     f"{_p(lvl)}")
+    if broke:
+        lines.append("Already through: " + ", ".join(broke))
+    lines += [f"Watch the next 30m close {'below' if d == -1 else 'above'} the level. Not a trade signal by itself.",
+              "<i>Information only. /momentum off stops these notes.</i>"]
+    return "\n".join(lines)
 
 
-def late_text(coin, d, st, why):
-    mv = move_pct(st, d)
+def late_text(d, lates):
+    """lates: {coin: (state, reasons)}."""
     side = "short" if d == -1 else "long"
-    return "\n".join([
-        f"⚠️ <b>{coin} - late {'fall' if d == -1 else 'rally'}</b> (30m)",
-        f"{'Down' if d == -1 else 'Up'} {abs(mv):.1f}% from the 24-hour {'high' if d == -1 else 'low'}"
-        if mv is not None else f"Price {_p(st['close'])}",
-        "Stretched: " + "; ".join(why) + ".",
-        f"<b>No new {side} now</b> - this is where moves often bounce. Already {side}: take profit or tighten "
-        "your stop.",
-        "<i>Information only. /momentum off stops these notes.</i>"])
+    lines = [f"⚠️ <b>{'Fall' if d == -1 else 'Rally'} is stretched</b> (30m) - risky to start a new {side} here"]
+    for c, (st, why) in lates.items():
+        mv = move_pct(st, d)
+        lines.append(f"• {c}" + (f" {'down' if d == -1 else 'up'} {abs(mv):.1f}% in 24h" if mv is not None else "")
+                     + " · " + "; ".join(why))
+    lines += [f"Moves this stretched often bounce soon. Already {side}: take profit or tighten your stop.",
+              "<i>Information only. /momentum off stops these notes.</i>"]
+    return "\n".join(lines)
 
 
-def bounce_text(coin, d, st):
-    return "\n".join([
-        f"🔄 <b>{coin} - bounce after the {'fall' if d == -1 else 'rally'}</b> (30m)",
-        f"The 30m close {_p(st['close'])} is back {'above' if d == -1 else 'below'} its average {_p(st['ema'])}: the "
-        f"stretched {'fall' if d == -1 else 'rally'} may be over.",
-        f"Shorts: protect profits. A bounce {'long' if d == -1 else 'short'} is NOT a tested strategy - wait for a "
-        "🔵 alert. If price turns back down at the average, strategy 11's retest version (V4) may alert."
-        if d == -1 else
-        f"Longs: protect profits. A bounce short is NOT a tested strategy - wait for a 🔵 alert. If price turns back "
-        "up at the average, strategy 11's retest version (V4) may alert.",
-        "<i>Information only. /momentum off stops these notes.</i>"])
+def bounce_text(d, states):
+    """states: {coin: state} back over their 30m average after a stretched move."""
+    lines = [f"🔄 <b>Bounce after the {'fall' if d == -1 else 'rally'}</b> (30m) - back {'above' if d == -1 else 'below'} "
+             "the 30m average"]
+    lines += [f"• {c} {_p(st['close'])} (average {_p(st['ema'])})" for c, st in states.items()]
+    lines += [f"{'Shorts' if d == -1 else 'Longs'}: protect profits. A bounce trade is NOT a tested strategy.",
+              "<i>Information only. /momentum off stops these notes.</i>"]
+    return "\n".join(lines)

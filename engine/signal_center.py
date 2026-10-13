@@ -22,7 +22,8 @@ import datetime as dt
 import math
 
 DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades=5, max_per_day=10,
-                cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12)
+                cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12,
+                alert_skip_failed=True, alert_min_avg_r=0.10)
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -34,6 +35,8 @@ def settings(section):
               "watch_max_per_day"):
         s[k] = int(s[k])
     s["min_avg_r"] = float(s["min_avg_r"])
+    s["alert_min_avg_r"] = float(s["alert_min_avg_r"])
+    s["alert_skip_failed"] = bool(s["alert_skip_failed"])
     return s
 
 
@@ -49,6 +52,24 @@ def qualifies(row, S):
         return False
     tn, ta = int(row.get("test_n") or 0), row.get("test_avg_r")
     return not (tn >= S["test_min_trades"] and ta is not None and float(ta) < 0)
+
+
+def alert_list(tests, program, reg_cells, S):
+    """Which of test_list() reach Telegram (2026-10-13, operator: "too many messages", a TEST SHORT at the bottom).
+    18 of the 30 TEST cells were FAILED overall and alerted only because one or two coins came out slightly positive
+    (e.g. P01-BREAKOUT-V5 1h: -0.02R over 3,762 trades, ETH +0.01R over 717 - a coin flip). Telegram now gets only
+    cells that are not FAILED and positive overall, on coins averaging >= alert_min_avg_r after fees. GitHub keeps
+    recording every TEST setup of test_list() (the weekly review is unchanged)."""
+    out = {}
+    for ck, coins in (tests or {}).items():
+        row = ((program or {}).get("cells") or {}).get(ck) or {}
+        st = (reg_cells.get(ck) or {}).get("status") or row.get("status")
+        if S["alert_skip_failed"] and (st == "FAILED" or float(row.get("avg_r") or 0) <= 0):
+            continue
+        keep = {c: x for c, x in coins.items() if float(x["avg_r"]) >= S["alert_min_avg_r"]}
+        if keep:
+            out[ck] = keep
+    return out
 
 
 def test_list(program, reg_cells, S, promoted=None):
