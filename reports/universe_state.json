@@ -10,10 +10,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "W": "2026-10-12",
-  "STRK": "2026-10-12"
+  "STRK": "2026-10-13"
  },
- "runs": 410,
+ "runs": 411,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,7 +28,8 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h"
+   "volume_24h",
+   "volume_7d"
   ],
   "UNI": [],
   "SUI": [],
@@ -106,8 +106,7 @@
   ],
   "STRK": [
    "big_move",
-   "thin_book",
-   "volume_7d"
+   "thin_book"
   ],
   "MAGIC": [
    "big_move",
@@ -116,8 +115,6 @@
    "volume_7d"
   ],
   "W": [
-   "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]
