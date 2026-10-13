@@ -335,6 +335,9 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_body_pct: 0.5          # confirming bar closes in the trade direction with a body >= 50% of its range
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
+  compare_tfs: [4h]          # 2026-10-13 (operator: "test 4H without 5m check"): every 4H setup that waits for its 5m
+                             # candle also gets a silent twin entered at the 4H close (no 5m check); the journal records
+                             # both, the Sunday review compares them. Alerts are unchanged. [] = off
 
 approval:                    # PAPER_TRADING -> APPROVED (AGENT_PROMPT.md section 12) - only the operator changes these
   min_paper_signals: 20      # at least 20 closed paper signals ...
@@ -440,20 +443,26 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   watch_notes: true          # 👀 2026-10-10: a note as soon as a TEST setup is found, while it waits for its 5m candle
                              # (information only, no buttons; /watch on|off in Telegram)
   watch_max_per_day: 12      # at most 12 watch notes a Beijing day
+  alert_skip_failed: true    # 2026-10-13 (operator: "too many messages", a TEST SHORT at the bottom): Telegram gets TEST
+  alert_min_avg_r: 0.10      # alerts only from cells NOT FAILED and positive overall, on coins averaging >= +0.10R after
+                             # fees (18 of 30 cells were FAILED overall, e.g. +0.01R on ETH). GitHub still records every
+                             # TEST setup above for the weekly review. false / 0.0 = the old wider list
 
 momentum_notes:              # 🌊 strategy 11 (operator request 2026-10-13) - engine/momentum_notes.py. The live watcher
                              # tells the phases of a market-wide move apart. INFORMATION ONLY: never a trade signal,
                              # gate, size or approval (strategy 11's versions send the 🔵 TEST alerts once positive in
                              # the 5-year backtest). /momentum on|off in Telegram
-  enabled: true
+  enabled: false             # 2026-10-13: OFF by default (/momentum on still switches them on). Operator: "too many
+                             # messages"; and the 5-year check (docs/STRATEGY_11.md "What 5 years say") found that
+                             # trading market-wide 30m breaks lost about -0.1R a trade after fees, early or late
   near_atr: 0.3              # 👀 forming (every 15m close): the 15m price within 0.3 x the 30m ATR of the 30m 20-candle
   vol_x: 1.2                 # low / high (not broken yet), 15m volume >= 1.2x its average, the 1H moving that way, the
-  min_coins: 2               # 4H not strongly against it, and at least 2 coins doing the same (or already broken)
+  min_coins: 3               # 4H not strongly against it, and at least 3 coins doing the same (or already broken)
   late_step: 3               # ⚠️ late (30m close): a break that is the 3rd step or later, RSI beyond 30 / 70, or more
   late_rsi: 30               # than 2.5 ATR from the 30m EMA20 - "no new trade that way, protect profits"
   late_ext: 2.5
   bounce_hours: 12           # 🔄 bounce: within 12 hours of a ⚠️ late note, the 30m close crosses back over its EMA20
-  max_per_day: 12            # at most 12 notes a Beijing day
+  max_per_day: 6             # at most 6 notes a Beijing day (one message per check, all coins in it)
   forming_cooldown_min: 120  # one 👀 note per coin + direction in 2 hours
   late_cooldown_min: 240     # one ⚠️ note per coin + direction in 4 hours (one 🔄 note per ⚠️ note)
 

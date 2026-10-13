@@ -82,7 +82,47 @@ The usual bar applies, with nothing lowered:
 
 A version that is positive on a coin sends 🔵 TEST alerts there. PAPER and LIVE follow only with your tap.
 
-## 🌊 Momentum notes (information only, from the next update)
+## What 5 years say (checked 2026-10-13, after the first live morning)
+
+The first live morning (13 Oct) went badly:
+- 👀 forming at 05:45 was right;
+- ⚠️ late at 06:00, at the start of a fall that continued to 08:30;
+- a 🔵 SHORT from an old strategy at the bottom (08:05);
+- about 20 messages in total.
+
+So the idea itself was checked on 5 years of Binance 30m candles for the 7 coins. The sample: every 30m close
+beyond the 20-candle low / high with 1.5× volume, at least 3 coins breaking together, and the 1H moving that way.
+Each break was traded with a 1.5 ATR stop, a 2R target, a 12-hour limit and 0.12% costs.
+
+| | Breaks | Average after costs | Win % | Price 4 hours later |
+|---|---|---|---|---|
+| SHORT after a market-wide breakdown | 11,321 | **−0.12R** | 35% | slightly **higher** (−0.13% for the short) |
+| LONG after a market-wide breakout | 9,206 | **−0.12R** | 36% | slightly higher (+0.07%) |
+
+What that means:
+- On average a market-wide 30m break does **not** keep going far enough to pay the fees, early or late. This matches
+  the program's own result: the same ideas lose on 1H / 30m / 15m and earn only on 4H.
+- **"Late" does not mean "bounce" in a reliable way:**
+  - shorts on step 2–3 did a little worse than on step 1 (−0.18R / −0.16R vs −0.09R);
+  - very stretched breakdowns (3.5+ ATR from the EMA20) were the least bad (−0.03R);
+  - on the long side, the most stretched breakouts (RSI above 80) kept rising the most.
+- The only slightly positive groups were found by looking at the data:
+  - shorts at step 1 with RSI 20–25 (+0.03R, 968 breaks);
+  - longs at step 1 with RSI above 80 (+0.10R, 501 breaks).
+
+  Finding them this way is how false strategies are made, so they are not used.
+
+Changes on 13 Oct:
+- The 🌊 notes are **off by default** (`/momentum on` switches them on). When on: one message per check for all
+  coins, at least 3 coins, at most 6 a day.
+- The step counter restarts after a close back over the 30m EMA20.
+- Strategy 11 still gets its 5-year test (15 Oct night). Expect it to fail; if a version passes the full bar, it will
+  alert like any other.
+- 🔵 TEST alerts on Telegram come only from strategies **not FAILED and positive overall**, on coins averaging at
+  least +0.10R. That is 10 strategy timeframes, 9 of them 4H, instead of 30. GitHub still records every TEST setup.
+- ✅ Took it pressed after the plan already hit its stop or TP1 is refused ("too late").
+
+## 🌊 Momentum notes (information only, off by default since 13 Oct)
 
 | Note | When | Text |
 |---|---|---|

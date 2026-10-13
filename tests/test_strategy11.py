@@ -83,6 +83,14 @@ class Blocks(unittest.TestCase):
         self.assertEqual(ns["steps_up"](20, 3, 24).to_numpy()[41], 0)
         self.assertEqual(ns["steps_dn"](20, 3, 4).to_numpy()[41], 1)   # an older step left the window
 
+    def test_a_close_back_over_the_average_starts_a_new_move(self):
+        # three breakdowns, then a recovery above the EMA20, then a new breakdown: step 1 again, not step 4
+        c = [100.0] * 30 + [99, 98.5, 98.6, 98.7, 98.8, 98.9, 98, 98.1, 98.2, 98.3, 98.4, 97] + \
+            [99.5, 100.5, 101, 100.5, 100] + [96.0]
+        st = sc.make_namespace(candles(c))["steps_dn"](20, 3, 24).to_numpy()
+        self.assertEqual(st[41], 3)
+        self.assertEqual(st[-1], 1)                                 # the night's steps do not count in the new fall
+
     def test_breadth_counts_coins_breaking_the_same_way(self):
         flat = [100.0] * 30
         down = flat[:-1] + [95.0]
@@ -154,6 +162,19 @@ class Cards(unittest.TestCase):
         cells.update({f"P{k:02d}@1.0|4h": dict(status="FAILED", last_checked_utc="2026-10-14") for k in (9, 10)})
         self.assertIn(11, PG.batch(cards, cells, 2)[0])
 
+    def test_telegram_gets_only_cells_with_a_real_edge(self):
+        row = lambda avg: dict(n=40, avg_r=avg, win_rate=50, test_n=10, test_avg_r=0.2)
+        p = dict(cells={"A@1.0|4h": dict(strategy=1, version="V1", status="BACKTESTING", avg_r=0.19,
+                                         coins={"BTC": row(0.38), "XRP": row(0.07)}),
+                        "B@1.0|1h": dict(strategy=1, version="V5", status="FAILED", avg_r=-0.02,
+                                         coins={"ETH": row(0.01), "BTC": row(0.2)})})
+        S = SCX.settings(None)
+        tests = SCX.test_list(p, {}, S)
+        self.assertEqual(sorted(tests), ["A@1.0|4h", "B@1.0|1h"])                 # GitHub still records both
+        self.assertEqual(SCX.alert_list(tests, p, {}, S), {"A@1.0|4h": {"BTC": tests["A@1.0|4h"]["BTC"]}})
+        wide = SCX.settings(dict(alert_skip_failed=False, alert_min_avg_r=0.0))
+        self.assertEqual(SCX.alert_list(tests, p, {}, wide), tests)                # the old wider list
+
     def test_control_never_sends_a_test_alert(self):
         row = dict(n=40, avg_r=0.3, win_rate=50, test_n=10, test_avg_r=0.2)
         p = dict(cells={"P11-MOMENTUM-C@1.0|30m": dict(strategy=11, version="C", status="FAILED", coins={"SOL": row}),
@@ -172,7 +193,13 @@ def state(**kw):
 
 
 class Notes(unittest.TestCase):
-    S = MN.settings(None)
+    S = MN.settings(dict(enabled=True))
+
+    def test_off_by_default_and_tighter(self):
+        d = MN.settings(None)
+        self.assertFalse(d["enabled"])
+        self.assertEqual((d["min_coins"], d["max_per_day"]), (3, 6))
+        self.assertFalse(MN.settings(CFG.get("momentum_notes"))["enabled"])
 
     def test_forming_needs_the_level_close_volume_and_the_gate(self):
         self.assertEqual(MN.forming(state(), -1, self.S), 99.8)               # 0.2 ATR above the 30m low
@@ -192,32 +219,34 @@ class Notes(unittest.TestCase):
         self.assertIn("4.0 ATR below", why[2])
         self.assertEqual(MN.late(state(brk_dn=True, step_dn=3.0, mom="UP"), -1, self.S), [])   # not this gate
 
-    def test_plan_needs_a_market_wide_move_and_cools_down(self):
-        one = {"SOL": state(), "BTC": state(m15_close=101.0)}
-        self.assertEqual(MN.plan(one, 10, ["15m"], {}, self.S), [])            # only SOL: not market-wide
-        two = {"SOL": state(), "SUI": state(), "BTC": state(brk_dn=True)}
-        out = MN.plan(two, 10, ["15m"], {}, self.S)
-        self.assertEqual([(n["kind"], n["coin"]) for n in out], [("forming", "SOL"), ("forming", "SUI")])
-        self.assertIn("Same on BTC, SUI", out[0]["text"])
+    def test_plan_needs_a_market_wide_move_one_message_and_cools_down(self):
+        two = {"SOL": state(), "SUI": state(), "BTC": state(m15_close=101.0)}
+        self.assertEqual(MN.plan(two, 10, ["15m"], {}, self.S), [])            # 2 coins: not market-wide
+        three = {"SOL": state(), "SUI": state(), "BTC": state(brk_dn=True)}
+        out = MN.plan(three, 10, ["15m"], {}, self.S)
+        self.assertEqual(len(out), 1)                                           # ONE message for all coins
+        self.assertEqual((out[0]["kind"], out[0]["coins"]), ("forming", ["SOL", "SUI"]))
+        self.assertIn("• SOL", out[0]["text"])
+        self.assertIn("Already through: BTC", out[0]["text"])
         self.assertIn("Information only", out[0]["text"])
-        sent = {n["key"]: 10 for n in out}
-        self.assertEqual(MN.plan(two, 10 + 60 * 60_000, ["15m"], sent, self.S), [])        # within 2 hours
-        self.assertEqual(len(MN.plan(two, 10 + 121 * 60_000, ["15m"], sent, self.S)), 2)
+        sent = {k: 10 for k in out[0]["keys"]}
+        self.assertEqual(MN.plan(three, 10 + 60 * 60_000, ["15m"], sent, self.S), [])        # within 2 hours
+        self.assertEqual(len(MN.plan(three, 10 + 121 * 60_000, ["15m"], sent, self.S)), 1)
 
     def test_late_then_bounce_once(self):
         lt = {"SOL": state(brk_dn=True, step_dn=3.0, rsi=23.0, close=97.0, ema=99.0, prev_close=97.5, prev_ema=99.2)}
         out = MN.plan(lt, 0, ["15m", "30m"], {}, self.S)
         self.assertEqual([n["kind"] for n in out], ["late"])
-        self.assertIn("No new short now", out[0]["text"])
-        self.assertIn("Down 6.7% from the 24-hour high", out[0]["text"])
-        sent = {out[0]["key"]: 0}
+        self.assertIn("risky to start a new short", out[0]["text"])
+        self.assertIn("SOL down 6.7% in 24h", out[0]["text"])
+        sent = {out[0]["keys"][0]: 0}
         back = {"SOL": state(close=99.5, ema=99.2, prev_close=98.9, prev_ema=99.3)}
         b = MN.plan(back, 3 * 3_600_000, ["15m", "30m"], sent, self.S)
         self.assertEqual([n["kind"] for n in b], ["bounce"])
         self.assertIn("NOT a tested strategy", b[0]["text"])
-        sent[b[0]["key"]] = 3 * 3_600_000
+        sent[b[0]["keys"][0]] = 3 * 3_600_000
         self.assertEqual(MN.plan(back, 4 * 3_600_000, ["15m", "30m"], sent, self.S), [])   # once per late note
-        self.assertEqual(MN.plan(back, 13 * 3_600_000, ["30m"], {out[0]["key"]: 0}, self.S), [])   # too long after
+        self.assertEqual(MN.plan(back, 13 * 3_600_000, ["30m"], {out[0]["keys"][0]: 0}, self.S), [])   # too long after
 
 
 class Watcher(unittest.TestCase):
@@ -230,23 +259,47 @@ class Watcher(unittest.TestCase):
         self.w = LW.Watcher(LW.SyntheticSwap(), send=False, git=False)
 
     def test_command_switches_notes_off_and_on(self):
-        self.assertIn("ON", self.w.command("momentum", "", 0))
+        self.assertFalse(self.w.momentum_ok())                    # off by default (config.yaml)
+        self.w.state["mom_on"] = True                             # the old key from the first version is ignored
+        self.assertFalse(self.w.momentum_ok())
+        self.assertIn("OFF", self.w.command("momentum", "", 0))
+        self.assertIn("ON", self.w.command("momentum", "on", 0))
+        self.assertTrue(self.w.momentum_ok())
         self.assertIn("OFF", self.w.command("momentum", "off", 0))
         self.assertFalse(self.w.momentum_ok())
-        self.assertIn("ON", self.w.command("momentum", "on", 0))
         self.assertIn("/momentum", lv.HELP)
         self.assertIn("Momentum notes", self.w.status_text(0))
 
     def test_notes_cap_pause_and_record(self):
         st = {c: state() for c in ("SOL", "SUI", "XRP")}
+        up = {c: state(mom="UP", m15_close=103.9, high20=104.0) for c in ("BTC", "ETH", "ZEC")}
         with mock.patch.object(self.w, "say", return_value=(True, "", None)) as say:
-            self.w.MN = dict(self.w.MN, max_per_day=2)
-            sent = self.w.momentum_notes(st, 10, ["15m"])
-            self.assertEqual(len(sent), 2)                         # the daily cap
-            self.assertEqual(say.call_count, 2)
-            self.assertIn("forming|SOL|-1", self.w.state["mom_last"])
+            self.w.MN = dict(self.w.MN, max_per_day=1)
+            sent = self.w.momentum_notes(dict(st, **up), 10, ["15m"])
+            self.assertEqual(len(sent), 1)                         # the daily cap: 1 message (3 coins in it)
+            self.assertEqual(say.call_count, 1)
+            for c in ("SOL", "SUI", "XRP"):
+                self.assertIn(f"forming|{c}|-1", self.w.state["mom_last"])
             self.w.state["paused_until"] = -1
             self.assertEqual(self.w.momentum_notes(st, 20, ["15m"]), [])
+
+    def test_took_it_after_the_plan_ended_is_refused(self):
+        a = dict(label="TEST", coin="ETH", inst="ETH-USDT-SWAP", d=-1, tf="1h", strategy="P01", version="1.0",
+                 entry=2439.5, R=38.0, tps=[2363.5], split=[1.0], max_hold=60, close_ms=0, sent_ms=0, choice=None,
+                 plan_end=dict(kind="stop", at_ms=8100_000, r=-1.0))
+        self.w.state["alerts"]["x1"] = a
+        with mock.patch.object(self.w, "say", return_value=(True, "", None)) as say:
+            toast = self.w.on_button(dict(id="q", data="took|x1"), 12_600_000)
+        self.assertEqual(toast, "Too late - not recorded.")
+        self.assertIn("already hit its stop", say.call_args[0][0])
+        self.assertNotIn("x1", self.w.state["trades"])
+        self.assertIsNone(a["choice"])
+        b = dict(a, plan_end=None)
+        self.w.state["alerts"]["x2"] = b
+        self.w.state["shadow"]["x2"] = dict(hit=1)
+        self.assertIn("already reached TP1", self.w.too_late("x2", b))
+        self.w.state["shadow"]["x2"] = dict(hit=0)
+        self.assertIsNone(self.w.too_late("x2", b))
 
 
 if __name__ == "__main__":
