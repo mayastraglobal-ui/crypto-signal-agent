@@ -12,7 +12,7 @@
  "suspended": {
   "STRK": "2026-10-13"
  },
- "runs": 424,
+ "runs": 425,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -122,7 +122,9 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [],
+  "ZEC": [
+   "wash_volume"
+  ],
   "XRP": [],
   "SOL": [],
   "PROVE": [
