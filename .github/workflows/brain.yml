@@ -8,7 +8,9 @@ name: Brain (apply Claude's task work)
 
 on:
   schedule:
-    - cron: "*/15 * * * *"  # every 15 minutes (a quick check; most runs find nothing new and stop)
+    - cron: "47 * * * *"    # once an hour at minute 47 (2026-10-13: was every 15 minutes - 96 runs a day, most found
+                            # nothing). Claude's tasks push at about :30-:45 (briefings 00:20 / 06:20 / 13:20 UTC,
+                            # daily review 15:30 UTC), so their work still lands within minutes
   workflow_dispatch:         # lets you press "Run workflow" by hand
 
 permissions:

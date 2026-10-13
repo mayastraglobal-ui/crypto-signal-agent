@@ -194,7 +194,7 @@ def live_table(logdf, now, keys=None):
 
 
 def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journal=None, research_runs=None,
-          scan_utc=None, S=None, failure_lab=None, watcher=None, shocks=None):
+          scan_utc=None, S=None, failure_lab=None, watcher=None, shocks=None, track=None):
     """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}.
     failure_lab: reports/failure_lab.json (the research run's repairs and their record); watcher: reports/
     watcher_health.json (the live watcher's hourly heartbeat, journal_review.py); shocks: reports/shocks_review.json
@@ -235,7 +235,11 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                             why=f"{cd['live']['n']} live TEST setups, {cd['live']['avg_r']:+.2f}R a trade after fees "
                                 f"({cd['live']['win_rate']:.0f}% won); 5-year backtest on {cd['coin']} "
                                 f"{float(cd['backtest']['avg_r']):+.2f}R over {cd['backtest']['n']} trades"))
-    return dict(week=f"{now.isocalendar()[0]}-W{now.isocalendar()[1]:02d}", utc=now.strftime("%Y-%m-%d %H:%M"),
+    tk = None
+    if track:                                         # 📈 2026-10-13: the live track record in one line
+        tk = dict(total=track.get("total"), paused=[f"{p['key'].split('@')[0]} {p['key'].split('|')[1]} {p['coin']}"
+                                                    for p in track.get("paused") or []])
+    return dict(track=tk, week=f"{now.isocalendar()[0]}-W{now.isocalendar()[1]:02d}", utc=now.strftime("%Y-%m-%d %H:%M"),
                 final=now.weekday() == 6 and now.hour >= 4, rows=rows, promote=promote,
                 paper=[dict(key=k, coins=cs) for k, cs in sorted((promos_active or {}).items())],
                 demoted=demoted or [], refused=refused or [], ideas=ideas(rows, journal, S),
@@ -412,6 +416,13 @@ def render(rv):
     cl = jr.compare_lines(fm.get("side_by_side"))
     L += ["- the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):"] + \
         ([f"  - {x}" for x in cl] or ["  - none yet (each 4H setup that waits for its 5m candle adds one)"])
+    tk = rv.get("track") or {}
+    t2 = tk.get("total") or {}
+    L += ["", "## 📈 Live track record and drift monitor", "",
+          (f"- every live setup: {t2['n']} closed, {_r(t2['avg_r'])} a trade, {t2['total_r']:+.2f}R, worst drawdown "
+           f"{t2['max_dd_r']:.2f}R (after fees)" if t2.get("n") else "- no closed live setup yet"),
+          "- paused by the drift monitor: " + (", ".join(tk.get("paused") or []) or "nothing"),
+          "- the full table: reports/track_record.md"]
     L += ["", "## Ideas for new versions", ""] + ([f"- {x}" for x in rv["ideas"]] or ["- none yet (each needs 10+ "
                                                                                    "live trades)"])
     fl = rv.get("failure_lab")
@@ -471,6 +482,12 @@ def telegram(rv):
         L += ["", f"⚡ Shocks: {sv['n']} this week ({sv['sent']} sent)"
                   + (f" · 4h later {sv['kept']} kept going, {sv['reversed']} reversed" if sv.get("done") else "")
                   + f" · a strategy alert followed {sv['caught']}"]
+    tk = rv.get("track")
+    if tk and tk.get("total") and tk["total"].get("n"):
+        t2 = tk["total"]
+        L += ["", f"📈 Track record (all live setups, after fees): {t2['n']} closed · {_r(t2['avg_r'])} a trade · "
+                  f"{t2['total_r']:+.1f}R · worst drawdown {t2['max_dd_r']:.1f}R"
+              + (f" · 🚨 paused: {', '.join(tk['paused'])}" if tk.get("paused") else "") + " (/track)"]
     for tf, c in ((rv.get("five_min") or {}).get("side_by_side") or {}).items():
         p, r = c["twin_passed"], c["twin_rejected"]
         if p["n"] or r["n"]:

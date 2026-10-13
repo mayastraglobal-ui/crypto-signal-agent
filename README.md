@@ -27,6 +27,9 @@ of the range) and `/structure` shows it any time - information only: [`docs/STRU
 Strategy 11 (early momentum) looks for the first steps of a market-wide move before the 4H turns, and the watcher's 🌊
 notes say when a move is forming (👀), already late (⚠️ no new trade that way) or bouncing (🔄):
 [`docs/STRATEGY_11.md`](docs/STRATEGY_11.md).
+📈 The live track record shows every TEST / PAPER / LIVE result after fees next to its 5-year backtest (`/track`).
+🚨 The drift monitor pauses a strategy's alerts on a coin when its live results leave what the backtest calls normal
+(the safe direction only): [`docs/TRACK_RECORD.md`](docs/TRACK_RECORD.md).
 
 ## One-time setup (about 15 minutes, no coding)
 
@@ -333,7 +336,7 @@ researches**; every number comes from the engine (`brain_pack.py` prints the fac
 | Weekly research | Sunday 10:00 Beijing | `tasks/weekly_research.md` | `reports/claude/weekly/` (in `[WEEKLY]`), sources, 1-2 candidate strategies **added to the strategy lab**, event calendar entries |
 
 **How Claude's work reaches main safely:** a task never writes to main. It pushes to its own branch
-(`claude/brain-briefing`, `-daily`, `-weekly`). Every 15 minutes the **Brain workflow** (`brain.yml`, always run
+(`claude/brain-briefing`, `-daily`, `-weekly`). Once an hour (minute 47) the **Brain workflow** (`brain.yml`, always run
 from main) checks new pushes with `brain_guard.py`:
 - allowed: new files in `reports/claude/` with the expected name, new records **added at the end** of the
   knowledge files (lessons, failure journal, missed trades, sources, coin notes, feature notes, SMC research,

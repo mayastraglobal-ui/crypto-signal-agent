@@ -470,6 +470,20 @@ momentum_notes:              # 🌊 strategy 11 (operator request 2026-10-13) - 
   forming_cooldown_min: 120  # one 👀 note per coin + direction in 2 hours
   late_cooldown_min: 240     # one ⚠️ note per coin + direction in 4 hours (one 🔄 note per ⚠️ note)
 
+track_record:                # 📈 2026-10-13 (operator: "build track record ... perfectly safe way") -
+                             # engine/track_record.py. The hourly scan writes reports/track_record.json / .md: every
+                             # TEST / PAPER / LIVE result after fees, live vs the 5-year backtest per coin. The DRIFT
+                             # MONITOR pauses a pair's Telegram alerts (safe direction only) when its live results are
+                             # outside what its backtest calls normal; GitHub keeps recording it and the pause ends by
+                             # itself when the checks clear. It never promotes or changes a rule, gate, size or cost.
+  enabled: true
+  streak_p: 0.05             # a losing run that long appears in < 5% of n-trade periods at the backtest's win rate
+  min_streak: 3              # ... looked at from 3 losses in a row
+  avg_min_n: 15              # the average check needs 15+ live setups: below 0R and more than avg_z standard errors
+  avg_z: 2.0                 # below the backtest average (the live spread, at least sd_floor R)
+  sd_floor: 1.0
+  curve_points: 60           # points kept of the equity curve
+
 shock_alarm:                 # ⚡ 2026-10-10 (operator: "tell me when the market falls or rallies suddenly") -
                              # engine/shock.py. The live watcher checks OKX's closed 1-minute candles every minute.
                              # INFORMATION ONLY: never a trade signal, gate, size or approval. /shock on|off in Telegram
