@@ -63,6 +63,7 @@ from engine import journal as jr
 from engine import lifecycle as lc
 from engine import live as lv
 from engine import momentum_notes as mnt
+from engine import track_record as trk
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
 from engine import shock as shk
@@ -97,7 +98,7 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("main", "reports/market_weather.json"), ("main", "reports/program.json"),
-              ("main", "reports/library_tests.json"),
+              ("main", "reports/library_tests.json"), ("main", "reports/track_record.json"),
               ("main", "reports/risk_state.json"),
               ("main", "reports/weekly_review.json"), ("main", "reports/promotions_state.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
@@ -106,7 +107,7 @@ CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
               "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
               "engine/weekly_review.py", "engine/shock.py", "engine/smc.py",
-              "engine/structure.py", "engine/momentum_notes.py"]    # changed -> "run update.bat"
+              "engine/structure.py", "engine/momentum_notes.py", "engine/track_record.py"]    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -577,6 +578,8 @@ class Watcher:
         self.program = scx.with_library(self._json("reports/program.json"),         # + the operator's library
                                         (self._json("reports/library_tests.json") or {}).get("cells"))   # TEST rows
         self.weather = self._json("reports/market_weather.json")
+        self.track = self._json("reports/track_record.json")        # 📈 2026-10-13: the live track record
+        self.drift_paused = {(p["key"], p["coin"]) for p in (self.track or {}).get("paused") or []}
         self.promoted = (self._json("reports/promotions_state.json") or {}).get("active") or {}   # PR 3
         self.tests = scx.alert_list(scx.test_list(self.program, reg["cells"], self.SC, self.promoted), self.program,
                                     reg["cells"], self.SC)        # GitHub still records every TEST setup
@@ -644,6 +647,20 @@ class Watcher:
         self.reload()
         if self.send:
             self.weekly_review(self.now_fn())
+            self.drift_notes()
+
+    def drift_notes(self):
+        """🚨 One Telegram note when the drift monitor (GitHub's hourly track record) pauses a pair, one when the pause
+        ends. Sent even while /pause holds new alerts (it is about the safety of the alerts). Returns the notes."""
+        if not self.track:
+            return []
+        notes, known = trk.change_notes(self.track, set(self.state.get("drift_known") or []))
+        for n in notes:
+            self.say(n)
+        self.state["drift_known"] = sorted(known)
+        if notes:
+            self._save_state()
+        return notes
 
     # ---- local state (duplicate guard, heartbeat) ----
     def _load_state(self):
@@ -1080,6 +1097,9 @@ class Watcher:
                        f"(information only, at most {self.SC['watch_max_per_day']} a day). /watch off to stop them."
                        if on else "/watch on to switch them on.")
                     + ("" if self.state.get("tests_on", True) else " (TEST alerts are off too: /tests on.)"))
+        if cmd == "track":
+            return trk.telegram(self.track) if self.track else ("📈 No track record yet - GitHub's hourly scan writes "
+                                                               "it and the watcher downloads it every hour.")
         if cmd == "momentum":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1269,6 +1289,7 @@ class Watcher:
             shock_on=self.shock_ok() and self.state.get("shock_on", True),
             shock_today=shk.sent_today(self.state["shock_sent"], now_ms), shock_max=self.SH["max_per_day"],
             mom_on=self.momentum_ok(), mom_today=scx.sent_today(self.state["mom_sent"], now_ms),
+            drift_paused=sorted(f"{k.split('@')[0]} {k.split('|')[1]} {c}" for k, c in self.drift_paused),
             mom_max=self.MN["max_per_day"],
             tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
@@ -1322,6 +1343,8 @@ class Watcher:
             promo = self.promoted.get(f"{sspec.key(s)}|{tf}")
             if label == "PAPER" and promo is not None and coin not in promo:
                 continue                             # PR 3: PAPER by your tap - only on the promoted coins
+            if (f"{sspec.key(s)}|{tf}", coin) in self.drift_paused:
+                continue                             # 🚨 the drift monitor paused this pair (GitHub keeps recording it)
             df, t = fr["df"], fr["n"] - 1
             if int(df["close_time"].iloc[t]) != b - 1:              # the candle that just closed must be there
                 log(f"{coin} {tf}: newest candle not in yet - skipped this close")
@@ -1921,20 +1944,30 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
     coins = coins or w.coins
     tests = [(s, tf) for s, tf, lab in w.watch if lab == "TEST"]
     cands = []
-    for coin in coins:
-        if not any(coin in (w.tests.get(f"{sspec.key(s)}|{tf}") or {}) for s, tf in tests):
-            continue
-        for tf in REPLAY_TFS:                        # enough candles: the replay window + the indicators' warm-up
+    with_tests = [c for c in coins if any(c in (w.tests.get(f"{sspec.key(s)}|{tf}") or {}) for s, tf in tests)]
+    # 2026-10-13 fix: every coin gets BTC's closes (btc_ret) and the market-wide break counts (mkt_up / mkt_dn) as in
+    # the live watcher - the replay used to give them to BTC only, so cards using them never fired on the others
+    extra = [c for c in dict.fromkeys(["BTC"] + list(w.coins) + list(sc.breadth_coins(w.cfg))) if c not in with_tests]
+    for coin in with_tests + extra:
+        tfs = REPLAY_TFS if coin in with_tests or coin == "BTC" else [t for t in REPLAY_TFS if t in sc.BREADTH_TFS]
+        for tf in tfs:                               # enough candles: the replay window + the indicators' warm-up
             n = int((now_ms - start) // sc.TF_MS[tf]) + 600
             try:
                 w.frames[(coin, tf)] = w.feed.candles(coin, tf, n if tf not in ("1w", "1d") else 600)
             except Exception as e:
                 log_fn(f"{coin} {tf}: download failed: {e}")
+    allD, allQ = {}, {}
+    for coin in dict.fromkeys(with_tests + extra):
+        _, d_, q_ = w.coin_data(coin, now_ms)
+        allD.update(d_)
+        allQ.update(q_)
+    quote = w.cfg["market"]["quote"]
+    btc = sc.btc_frames(allD, quote, sc.TF_ORDER, sc.market_breadth(allD, quote, w.cfg, allQ))
+    for coin in with_tests:
         sym, data, quality = w.coin_data(coin, now_ms)
         try:
             pc = sc.prepare_coin(sym, coin, data, quality, [t for t in sc.TF_ORDER if (sym, t) in data], w.cfg,
-                                 None, sc.btc_frames(data, w.cfg["market"]["quote"], sc.TF_ORDER) if coin == "BTC"
-                                 else None)
+                                 None, btc)
         except Exception as e:
             log_fn(f"{coin}: prepare failed: {e}")
             continue

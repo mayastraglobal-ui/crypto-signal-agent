@@ -73,6 +73,7 @@ Send these to your bot in Telegram (or type `/` and pick one). The bot only answ
 | `/structure` · `/structure BTC` | 🧭 the 4H market structure of your coins: trend and last break, where price is in the 4H range, the nearest liquidity and supply / demand zones (information only, see "Structure card" below) |
 | `/tests on` · `/tests off` | 🔵 TEST alerts on or off (see "TEST alerts" below). `/tests` alone shows which it is |
 | `/watch on` · `/watch off` | 👀 watch notes on or off: a TEST setup found, still waiting for its 5m candle (information only) |
+| `/track` | 📈 the live track record: every TEST / PAPER / LIVE result after fees, live vs the 5-year backtest, and what the 🚨 drift monitor paused (`docs/TRACK_RECORD.md`) |
 | `/momentum on` · `/momentum off` | 🌊 strategy 11 notes on or off: 👀 a market-wide breakout / breakdown forming, ⚠️ a move already late (no new trade that way), 🔄 a bounce after it (information only, see "Momentum notes" below) |
 | `/shock on` · `/shock off` | ⚡ shock alarm on or off: a sudden fall / rally, a volume spike or yesterday's high / low broken, within about a minute (information only, see "Shock alarm" below) |
 | `/pause` | No new trade alerts (and no 👀 / ⚡ notes) until `/resume`. `/pause 2h` or `/pause 30m` = for a while, then on again by itself |

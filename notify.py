@@ -16,7 +16,7 @@ dashboard.
   python notify.py brain result.json -> the BRIEFING (08:20; 14:20 / 21:20: the changes, or a short "No change") and DAILY
                                emails for Claude's reports the Brain guard applied, and an ALERT when the guard refused
                                a Claude task's push (FIXED when that task's next push is applied)
-  python notify.py watchdog -> (the Brain workflow, every 15 minutes) the BRIEFING (08:20 / 14:20 / 21:20) or the
+  python notify.py watchdog -> (the Brain workflow, hourly at minute 47) the BRIEFING (08:20 / 14:20 / 21:20) or the
                                DAILY review from engine numbers only when Claude's file is 40 minutes late - also
                                when the task wrote nothing at all (once per slot: a later Claude file sends no
                                second email); ALERT when no scan ran for 2 hours or a Claude task (briefing, daily
@@ -706,7 +706,7 @@ def watchdog(now=None):
             nothing="The engine's numbers still arrive. If it happens again tomorrow, open the Claude task.",
             broke=f"No {rel.split('/')[-1]} 60 minutes after {em.bj(utc_text(t), '%H:%M')} Beijing",
             impact_long="Claude's summary is missing from this email; signals and the engine's numbers are not affected.",
-            tried="The Brain workflow looks for it every 15 minutes.", open_trades=open_trades(rep),
+            tried="The Brain workflow looks for it every hour (minute 47).", open_trades=open_trades(rep),
             meaning="The scheduled Claude task did not run, stopped early, or its push was refused.",
             buttons=[("Open the Brain runs", repo_link("/actions/workflows/brain.yml"))]))
     folder = {"missing|briefing": "briefings", "missing|daily": "daily", "missing|weekly": "weekly"}

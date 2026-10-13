@@ -56,6 +56,7 @@ from engine import sessions as sess
 from engine import signal_center as scx
 from engine import weekly_review as wrv
 from engine import trend4h as t4
+from engine import track_record as trk
 from engine import regime_fit as rfit
 from engine import memory as mem
 from engine import positions as pos
@@ -2996,6 +2997,7 @@ def main():
     daily = mail.daily(view["signal"], snap, watching, [p for p in plans if p["stage"] != "TEST"], book, btc, fg,
                        sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
+    track_record(started, logdf, cfg, args.offline)                     # 📈 the live track record + drift monitor
     weekly_review(started, logdf, registry, cfg, args.offline)          # PR 3: the Forward Test Program review
     weekly = None
     if digest.is_weekly_time(started):
@@ -3345,6 +3347,26 @@ def read_json(name, offline=False):
     return None
 
 
+def track_record(now, logdf, cfg, offline):
+    """📈 reports/track_record.json / .md (engine/track_record.py, 2026-10-13): every TEST / PAPER / LIVE result after
+    fees, live vs the 5-year backtest, and the drift monitor's pauses (the live watcher reads them). Never fatal."""
+    try:
+        sfx = "_offline" if offline else ""
+        tr = trk.build(logdf, now.strftime("%Y-%m-%d %H:%M"), read_json("research", offline),
+                       program_with_library(cfg, offline, write=False), read_json("track_record", offline),
+                       trk.settings(cfg.get("track_record")))
+        with open(os.path.join(REPORTS, f"track_record{sfx}.json"), "w") as f:
+            json.dump(tr, f, indent=1, default=float)
+        with open(os.path.join(REPORTS, f"track_record{sfx}.md"), "w") as f:
+            f.write("\n".join(trk.md_lines(tr)) + "\n")
+        if tr["paused"]:
+            log("drift monitor: paused " + ", ".join(f"{p['key']} {p['coin']}" for p in tr["paused"]))
+        return tr
+    except Exception as e:
+        log(f"track record not built ({type(e).__name__}: {e})")
+        return None
+
+
 def weekly_review(now, logdf, registry, cfg, offline):
     """PR 3: reports/weekly_review.json / .md - the program's live results, promotion candidates, demotions, ideas,
     5m comparison and system check (engine/weekly_review.py). Written every hour (final on Sunday from 04:00 UTC,
@@ -3356,7 +3378,8 @@ def weekly_review(now, logdf, registry, cfg, offline):
                        st.get("demoted"), st.get("refused"), read_json("journal_review", False),
                        read_json("research_counts", offline), now.strftime("%Y-%m-%d %H:%M"),
                        wrv.settings(cfg.get("weekly_review")), read_json("failure_lab", offline),
-                       read_json("watcher_health", False), read_json("shocks_review", False))
+                       read_json("watcher_health", False), read_json("shocks_review", False),
+                       track=read_json("track_record", offline))
     except Exception as e:
         log(f"weekly review not built ({type(e).__name__}: {e})")
         return None

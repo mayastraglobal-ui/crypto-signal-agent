@@ -935,3 +935,21 @@ Newest entries at the bottom. Format: date · who · what · why.
   as every TEST alert (not FAILED, positive overall, coins >= +0.10R with 20+ trades): BTC, XRP, SOL (+ BNB, not a
   signal coin today). Demo book only; PAPER / LIVE still need the full bar.
 - Tests: `tests/test_library_tests.py` (5).
+
+## 2026-10-13 · Operator + Claude · Small fixes + 📈 live track record + 🚨 drift monitor
+- Operator: "build small fixes and build track record - perfectly safe way".
+- Small fixes: `.github/workflows/brain.yml` hourly at minute 47 (was every 15 minutes: 96 runs a day, most found
+  nothing; Claude's tasks push at about :30-:45, the watchdog's windows are open-ended, so nothing is missed - notify.py
+  texts updated). `live_watcher.replay` gives every coin BTC's closes and the market-wide break counts (it gave them
+  to BTC only, so btc_ret / mkt_* cards never fired on the others in the replay; live alerts were not affected).
+- `engine/track_record.py`: per stage and per strategy / coin from reports/signals_log.csv (TEST / PAPER_TRADING /
+  APPROVED, closed, after fees): trades, win %, average, total, worst drawdown, losing runs, the equity curve, next to
+  research.json's by_coin backtest. Drift monitor: a losing run with chance < 5% at the backtest's win rate
+  (1 - (1 - q^L)^(n - L + 1)), or 15+ setups averaging < 0R and > 2 standard errors below the backtest -> the pair is
+  paused (verdict drift); weaker signs = watch. The pause keeps its start time and ends by itself when the checks clear
+  (GitHub keeps recording). No backtest on the coin = never paused. It never promotes or changes anything else.
+- `scanner.track_record` writes reports/track_record.json / .md every hour (never fatal). The live watcher downloads
+  the json (SYNC_FILES), skips paused pairs in `signals` for every label, sends one 🚨 / ✅ note per change
+  (`drift_notes`, state `drift_known`), `/track`, a /status line. Weekly review: a Telegram line and a section.
+- First record: 5 closed TEST setups, all losses (-5.94R), all from cells that no longer reach Telegram since 13 Oct.
+- Tests: `tests/test_track_record.py` (13).

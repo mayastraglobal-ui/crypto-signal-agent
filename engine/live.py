@@ -312,6 +312,8 @@ HELP = ("🤖 <b>Crypto watcher commands</b>\n"
         "trade that way), 🔄 a bounce after it (information only)\n"
         "/shock on|off - ⚡ shock alarm: a sudden fall / rally, a volume spike or yesterday's high / low broken, "
         "within a minute (information only)\n"
+        "/track - 📈 the live track record: every TEST / PAPER / LIVE result after fees, live vs backtest, what the "
+        "drift monitor paused\n"
         "/structure - 🧭 the 4H structure of your coins (/structure BTC: trend, range, liquidity, zones)\n"
         "/weather - what kind of market day it is (trend, range or choppy), the usual 24h move, crowding, events\n"
         "/tests on · /tests off - 🔵 TEST alerts (strategies positive in the 5-year backtest) on or off\n"
@@ -368,6 +370,8 @@ def status_text(i):
     if "watch_on" in i:
         lines.append(f"👀 Watch notes: {'ON' if i['watch_on'] else 'OFF (/watch on)'}"
                      + (f" · {i.get('watch_today', 0)} sent today" if i["watch_on"] else ""))
+    if i.get("drift_paused"):
+        lines.append("🚨 Paused by the drift monitor: " + ", ".join(i["drift_paused"]) + " (/track)")
     if "mom_on" in i:
         lines.append(f"🌊 Momentum notes: {'ON' if i['mom_on'] else 'OFF (/momentum on)'}"
                      + (f" · {i.get('mom_today', 0)} sent today (max {i.get('mom_max')})" if i["mom_on"] else ""))
