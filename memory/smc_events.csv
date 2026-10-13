@@ -14568,3 +14568,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-13 15:00,SUI,15m,OB_RETEST,bull,,1.0389,1.0478,,Silver Bullet,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-10-13 15:00,SUI,15m,FVG_RETRACE,bull,,1.0478,1.0504,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-13 15:00,SUI,15m,FVG_FILLED,bull,,1.0478,1.0504,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-13 15:45,BTC,15m,FVG_FILLED,bull,,83426.01,83520.0,,,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-10-13 15:45,SOL,15m,OB_RETEST,bull,,106.68,107.2,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-13 15:45,SOL,15m,FVG_FILLED,bull,,107.2,107.89,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-13 15:45,XRP,15m,OB_RETEST,bull,,1.3613,1.368,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-13 15:45,XRP,15m,FVG_FILLED,bull,,1.368,1.3726,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-13 16:00,SUI,15m,SWEEP,bull,1.0373,,,0.56,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
