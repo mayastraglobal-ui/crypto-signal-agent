@@ -906,3 +906,18 @@ Newest entries at the bottom. Format: date · who · what · why.
   shadow plan ended (`alerts[id].plan_end`) or reached TP1 is refused with a "too late" message.
 - Strategy 11's cards are unchanged apart from the step counter (never tested yet); the 15 Oct night test decides.
 - Tests: `tests/test_strategy11.py` (20).
+
+## 2026-10-13 · Operator + Claude · 4H side-by-side: with vs without the 5m check
+- Operator: "test 4H without 5m check". Why: the 14-day replay (old TEST list) - the 5 setups the 5m check confirmed
+  made -2.28R, the 30 it removed would have made +0.95R (12 won); a 5m candle is small next to a 4H setup. Too few to
+  decide (operator decision A keeps the check), so the agent now measures it on the same setups.
+- `live_watcher.py`: `twin_5m` - every setup on a timeframe in `confirm_5m.compare_tfs` (config: [4h]) that waits for
+  its 5m candle gets a silent shadow entered at the signal close (`no5m`); `twin_mark` sets passed / rejected / no 5m
+  data from `confirmations`; when it ends the journal gets "plan no5m <verdict>" (journal sync -> GitHub). Nothing is
+  sent; alerts, gates and the 5m check are unchanged.
+- `engine/journal.py`: twin rows are not alerts (`trades` skips them); `compare_5m` per timeframe (every setup without
+  the check / the passed / the rejected / the alerts sent, plan results before fees), `compare_lines`; in
+  reports/journal_review.md. `engine/weekly_review.py`: "With vs without the 5m check" gets the same-setup lines and
+  a Telegram line; an idea line once passed and rejected both have 10+ results and differ by >= 0.20R ("your
+  decision whether to switch it off there").
+- Tests: `tests/test_five_min_compare.py` (6).

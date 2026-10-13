@@ -27,6 +27,7 @@ SKIP_R = 0.20             # skipped alerts this much better / worse than the tak
 COLS = ["time_utc", "alert_id", "event", "label", "coin", "side", "tf", "strategy", "version", "entry", "stop",
         "tp1", "tp2", "tp3", "price", "result_r"]
 FOLLOW_FINAL = ("tp1", "tp2", "tp3", "stop", "time", "invalid")
+TWIN_EVENT = "plan no5m"     # 2026-10-13: the watcher's silent twin of a 4H setup, entered without the 5m check
 
 
 def _num(x):
@@ -49,6 +50,8 @@ def trades(rows):
     out = {}
     for r in rows:
         aid, ev = r["alert_id"], r["event"].strip()
+        if ev.startswith(TWIN_EVENT):                 # the 5m side-by-side twins are not alerts (compare_5m)
+            continue
         t = out.get(aid)
         if t is None:
             t = out[aid] = dict(id=aid, time=r.get("time_utc"), label=r.get("label"), coin=r.get("coin"),
@@ -161,7 +164,46 @@ def review(rows, now_ms, days=30):
             x["sum"] += float(t["plan_r"])
     tests = {k: dict(n=x["n"], avg_r=round(x["sum"] / x["n"], 3)) for k, x in sorted(tests.items())}
     return dict(last_entry_utc=last, days=days, all=a, recent=r, per_strategy=per, tests=tests,
+                compare_5m=compare_5m(rows),
                 findings=findings(a) or ([] if ts else ["No alert in your journal yet."]))
+
+
+def compare_5m(rows):
+    """The 4H side-by-side record (operator 2026-10-13: "test 4H without 5m check"), per timeframe:
+      twin_all       every setup that waited for its 5m candle, entered at the signal close (no 5m check)
+      twin_passed    ... of those, the setups the 5m check passed
+      twin_rejected  ... the setups the 5m check rejected (no alert was sent for them)
+      sent           the alerts actually sent (5m-confirmed entry), their plan result
+    All plan results before fees, the same follow-up rules. {tf: {name: stats}}."""
+    tw = {}
+    for r in rows:
+        ev = (r.get("event") or "").strip()
+        if not ev.startswith(TWIN_EVENT):
+            continue
+        tf, v, x = r.get("tf") or "?", ev[len(TWIN_EVENT):].strip(), _num(r.get("result_r"))
+        g = tw.setdefault(tf, dict(all=[], passed=[], rejected=[]))
+        g["all"].append(x)
+        if v in ("passed", "rejected"):
+            g[v].append(x)
+    sent = {}
+    for t in trades(rows):
+        if t["tf"] in tw and t["plan_r"] is not None:
+            sent.setdefault(t["tf"], []).append(t["plan_r"])
+    return {tf: dict(twin_all=_stats(g["all"]), twin_passed=_stats(g["passed"]), twin_rejected=_stats(g["rejected"]),
+                     sent=_stats(sent.get(tf, []))) for tf, g in sorted(tw.items())}
+
+
+def compare_lines(cmp):
+    """Plain lines for the side-by-side record (empty when there is none yet)."""
+    out = []
+
+    def f(s):
+        return f"{s['avg_r']:+.2f}R over {s['n']}" if s["n"] else "none yet"
+    for tf, c in (cmp or {}).items():
+        out.append(f"{tf}: every setup without the 5m check {f(c['twin_all'])} · the ones the 5m check passed "
+                   f"{f(c['twin_passed'])} · the ones it rejected {f(c['twin_rejected'])} · alerts sent (5m entry) "
+                   f"{f(c['sent'])} (plan results, before fees)")
+    return out
 
 
 DECISION_COLS = ["time_utc", "week", "action", "key", "coin"]
@@ -194,6 +236,9 @@ def lines(rv):
         out += [f"  - {p['cell']} · {p['alerts']} · {p['took']} · "
                 + (f"{p['plan_avg_r']:+.2f}R ({p['plan_n']})" if p["plan_n"] else "-") + " · "
                 + (f"{p['your_avg_r']:+.2f}R ({p['your_n']})" if p["your_n"] else "-") for p in rv["per_strategy"]]
+    cl = compare_lines(rv.get("compare_5m"))
+    if cl:
+        out += ["- With vs without the 5m check (the same setups):"] + [f"  - {x}" for x in cl]
     out += ["- Findings:"] + [f"  - {x}" for x in rv.get("findings") or ["none yet (each needs "
                                                                          f"{MIN_N}+ trades)"]]
     return out

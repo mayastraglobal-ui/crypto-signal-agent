@@ -298,6 +298,16 @@ def ideas(rows, journal, S):
                 x["all_gross_r"] - x["confirmed_r"] >= S["idea_5m_gap_r"]:
             out.append(f"{x['strategy']}: the 5m check made it worse ({x['confirmed_r']:+.2f}R confirmed vs "
                        f"{x['all_gross_r']:+.2f}R for every setup, before fees) - consider TEST alerts without it")
+    for tf, c in (fm.get("side_by_side") or {}).items():
+        p, r = c["twin_passed"], c["twin_rejected"]
+        if p["n"] >= S["idea_min_trades"] and r["n"] >= S["idea_min_trades"]:
+            if r["avg_r"] - p["avg_r"] >= S["idea_5m_gap_r"]:
+                out.append(f"{tf}: the setups the 5m check REJECTED did better ({r['avg_r']:+.2f}R over {r['n']}) than "
+                           f"the ones it passed ({p['avg_r']:+.2f}R over {p['n']}) - the 5m check hurts on {tf}; your "
+                           "decision whether to switch it off there")
+            elif p["avg_r"] - r["avg_r"] >= S["idea_5m_gap_r"]:
+                out.append(f"{tf}: the 5m check helps - the setups it passed did {p['avg_r']:+.2f}R, the rejected "
+                           f"{r['avg_r']:+.2f}R")
     return out[:8]
 
 
@@ -326,6 +336,7 @@ def five_min(rows, journal):
     all_sum = sum(x["all_sum"] for x in by.values())
     return dict(confirmed_n=conf_n, confirmed_r=round(conf_sum / conf_n, 3) if conf_n else None, all_n=all_n,
                 all_gross_r=round(all_sum / all_n, 3) if all_n else None, by_strategy=out,
+                side_by_side=(journal or {}).get("compare_5m") or {},
                 note=None if journal else "the watcher's alerts reach GitHub only with journal sync "
                                           "(windows\\6_journal_sync.bat)")
 
@@ -397,6 +408,10 @@ def render(rv):
           f"- every TEST setup (GitHub, no 5m check): {fm['all_n']}, {_r(fm['all_gross_r'])} a trade"]
     if fm.get("note"):
         L.append(f"- note: {fm['note']}")
+    from engine import journal as jr                 # 2026-10-13: the same setups, with and without the check
+    cl = jr.compare_lines(fm.get("side_by_side"))
+    L += ["- the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):"] + \
+        ([f"  - {x}" for x in cl] or ["  - none yet (each 4H setup that waits for its 5m candle adds one)"])
     L += ["", "## Ideas for new versions", ""] + ([f"- {x}" for x in rv["ideas"]] or ["- none yet (each needs 10+ "
                                                                                    "live trades)"])
     fl = rv.get("failure_lab")
@@ -456,6 +471,11 @@ def telegram(rv):
         L += ["", f"⚡ Shocks: {sv['n']} this week ({sv['sent']} sent)"
                   + (f" · 4h later {sv['kept']} kept going, {sv['reversed']} reversed" if sv.get("done") else "")
                   + f" · a strategy alert followed {sv['caught']}"]
+    for tf, c in ((rv.get("five_min") or {}).get("side_by_side") or {}).items():
+        p, r = c["twin_passed"], c["twin_rejected"]
+        if p["n"] or r["n"]:
+            L += ["", f"🔬 {tf} with vs without the 5m check: passed {_r(p['avg_r'])} ({p['n']}) · rejected "
+                      f"{_r(r['avg_r'])} ({r['n']}) - same setups, before fees"]
     loc = rv.get("location") or []
     if loc:
         L += ["", "🧭 By 4H location: " + " · ".join(f"{x['verdict']} {x['n']} ({x['avg_r']:+.2f}R)" for x in loc)]

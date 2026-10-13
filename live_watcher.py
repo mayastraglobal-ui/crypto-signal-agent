@@ -960,8 +960,10 @@ class Watcher:
             evs = self._advance(t, now_ms, cache)
             fin = next((e for e in evs or [] if e.get("final")), None)
             if fin:
-                self.journal(t, "plan" if t.get("filled", True) else "plan not filled", fin["at_ms"], fin["px"],
-                             fin.get("result_r"))
+                name = "plan" if t.get("filled", True) else "plan not filled"
+                if t.get("no5m"):                         # the 4H side-by-side twin (no 5m check)
+                    name = f"plan no5m {t.get('five_min') or 'undecided'}"
+                self.journal(t, name, fin["at_ms"], fin["px"], fin.get("result_r"))
                 self.state["shadow"].pop(sid)
                 if sid in self.state["alerts"]:            # ✅ Took it after this = too late (2026-10-13)
                     self.state["alerts"][sid]["plan_end"] = dict(kind=fin["kind"], at_ms=int(fin["at_ms"]),
@@ -1381,7 +1383,7 @@ class Watcher:
                 test_cands.append(base)
                 continue
             if s.get("confirm_5m"):
-                self.pending.append(dict(base, after_ms=b, coin=coin))
+                self.pending.append(dict(base, after_ms=b, coin=coin, twin=self.twin_5m(base, now_ms)))
                 log(f"{coin} {tf} {s['id']}: trigger - waiting for the 5m confirmation")
                 continue
             out.append(self._finish(base, now_ms))
@@ -1394,7 +1396,7 @@ class Watcher:
             a["agree"] = scx.agreement(a, recent, now_ms, self.SC, others=test_cands + out)
             if self.SC["confirm_5m"]:
                 self.state["sent"][a["key"]] = now_ms          # reserved: no duplicate while it waits
-                self.pending.append(dict(a, after_ms=b, reserved_ms=now_ms))
+                self.pending.append(dict(a, after_ms=b, reserved_ms=now_ms, twin=self.twin_5m(a, now_ms)))
                 log(f"{coin} {a['tf']} {a['strategy']}: TEST trigger - waiting for the 5m confirmation")
                 self.watch_note(a, now_ms)
             else:
@@ -1551,11 +1553,14 @@ class Watcher:
             if m5 is None:
                 if now_ms - p["after_ms"] < 2 * sc.TF_MS["1h"]:      # no 5m data: give up after 2 hours
                     keep.append(p)
+                else:
+                    self.twin_mark(p, "no 5m data")
                 continue
             res = c5m.check(m5, p["after_ms"], p["d"], p["entry"], p["entry"] - p["d"] * p["R"], self.S5)
             if res["state"] == c5m.AWAITING:
                 keep.append(p)
             elif res["state"] == c5m.CONFIRMED:
+                self.twin_mark(p, "passed")
                 j = res["idx"]
                 a = dict(p, entry=float(m5["close"][j]), close_ms=int(m5["close_time"][j]),
                          confirm=f"CONFIRMED on the {lv.bj(int(m5['close_time'][j]) + 1)} 5m bar close"
@@ -1564,11 +1569,35 @@ class Watcher:
                 a["structure"] = self.structure_card(coin, a["d"], a["entry"], a["R"], a["tps"]) or p.get("structure")
                 out.append(self._finish(a, now_ms))
             else:
+                self.twin_mark(p, "rejected")
                 log(f"{coin} {p['tf']} {p['strategy']}: 5m {res['state']} - {res['why']}")
                 if p.get("reserved_ms") is not None and self.state["sent"].get(p["key"]) == p["reserved_ms"]:
                     self.state["sent"].pop(p["key"])            # a TEST setup that failed may alert again
         self.pending = keep
         return out
+
+    # ---- the 4H side-by-side record (operator 2026-10-13: "test 4H without 5m check") ----
+    def twin_5m(self, p, now_ms):
+        """A silent twin of a setup that waits for its 5m candle: the same plan entered at the signal candle's close
+        (no 5m check), followed like every alert's plan and written to the journal as "plan no5m <passed | rejected>"
+        once it ends. Only for the timeframes in confirm_5m.compare_tfs (default 4H). Never sends anything and never
+        changes the alert. Returns the twin's id or None."""
+        if p.get("tf") not in (self.S5.get("compare_tfs") or []):
+            return None
+        self.state["next_id"] = int(self.state["next_id"]) + 1
+        sid = f"n5{int(now_ms) // 1000:x}{self.state['next_id'] % 1000:03d}"
+        a = {k: p.get(k) for k in ("label", "coin", "inst", "d", "tf", "strategy", "version", "entry", "R", "tps",
+                                   "split", "max_hold", "close_ms", "limit_bars", "manage", "inval", "be_frac")}
+        t = fl.open_trade(a, sid, int(p["close_ms"]) + 1, self.cfg.get("trade_plan"))
+        t.update(no5m=True, five_min=None)
+        self.state["shadow"][sid] = t
+        return sid
+
+    def twin_mark(self, p, verdict):
+        """What the 5m check decided for the twin's setup: passed / rejected / no 5m data."""
+        t = self.state["shadow"].get(p.get("twin") or "")
+        if t is not None:
+            t["five_min"] = verdict
 
     def _finish(self, a, now_ms):
         RK = self.RK

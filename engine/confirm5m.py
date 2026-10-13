@@ -31,6 +31,7 @@ NEEDS = ["body_pct", "rel_vol", "displacement_up", "displacement_down", "bull_en
 def settings(section):
     s = dict(DEFAULTS)
     s.update(section or {})
+    s["compare_tfs"] = list(s.get("compare_tfs") or [])
     return s
 
 

@@ -335,6 +335,9 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_body_pct: 0.5          # confirming bar closes in the trade direction with a body >= 50% of its range
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
+  compare_tfs: [4h]          # 2026-10-13 (operator: "test 4H without 5m check"): every 4H setup that waits for its 5m
+                             # candle also gets a silent twin entered at the 4H close (no 5m check); the journal records
+                             # both, the Sunday review compares them. Alerts are unchanged. [] = off
 
 approval:                    # PAPER_TRADING -> APPROVED (AGENT_PROMPT.md section 12) - only the operator changes these
   min_paper_signals: 20      # at least 20 closed paper signals ...

@@ -196,6 +196,16 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   buttons, never a trade signal. If the 5m candle confirms, the normal 🔵 TEST alert follows. At most 12 a day;
   `/watch off` stops them (and `/tests off` or `/pause` holds them too). Why: in the 14 days before 10 Oct the 5m check
   held back 15 of 18 setups, among them the two best shorts of the 6-9 Oct fall - you now see every setup.
+- **4H with vs without the 5m check** (2026-10-13): every 4H setup that waits for its 5m candle also gets a silent
+  twin, entered at the 4H close with no 5m check. Nothing extra is sent and the alerts do not change. Your journal
+  records the twin's plan result and whether the 5m check passed or rejected that setup. The Sunday review
+  ("With vs without the 5m check") then compares, on the same setups:
+  - the ones the check passed;
+  - the ones it rejected;
+  - the alerts actually sent.
+
+  Once both groups have 10+ results it says whether the check helps or hurts on 4H. Switching it off stays your
+  decision. Needs journal sync; `config.yaml` → `confirm_5m.compare_tfs`.
 - **⭐** = another timeframe or strategy gave the same coin and direction in the last 4 hours. Versions and
   timeframes of one strategy are merged into one alert.
 - At most **10 TEST alerts a day** (Beijing day), the strongest backtest first; one per coin + direction + strategy
