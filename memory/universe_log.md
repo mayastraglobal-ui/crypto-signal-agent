@@ -595,3 +595,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** BNB - 24h volume $39M < $50M; 7-day average volume $46M < $50M
 - **EXCLUDED** STRK - 24h move -28.6% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $86k within 1% (need $250k)
 - **EXCLUDED** W - 7-day average volume $15M < $50M; order book too thin: $28k within 1% (need $250k)
+
+## 2026-10-13 11:22 UTC
+- **EXCLUDED** UNI - order book too thin: $206k within 1% (need $250k)
