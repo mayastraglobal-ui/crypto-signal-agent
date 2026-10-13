@@ -447,6 +447,10 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   alert_min_avg_r: 0.10      # alerts only from cells NOT FAILED and positive overall, on coins averaging >= +0.10R after
                              # fees (18 of 30 cells were FAILED overall, e.g. +0.01R on ETH). GitHub still records every
                              # TEST setup above for the weekly review. false / 0.0 = the old wider list
+  library_tests:             # 2026-10-13 (operator: "build 1H test alerts"): library strategies that send 🔵 TEST alerts
+  - TRD-H4-BREAKOUT-S3@1.0|1h   # like the program's, with the same per-coin bar - "4H trend + 1H entry": +0.15R over
+                             # 939 trades, unseen part +0.27R; blocked from PAPER only by its drawdown (Monte Carlo
+                             # 95% 22R per 100 trades, limit 17R). Demo book only; real money still needs the full bar
 
 momentum_notes:              # 🌊 strategy 11 (operator request 2026-10-13) - engine/momentum_notes.py. The live watcher
                              # tells the phases of a market-wide move apart. INFORMATION ONLY: never a trade signal,

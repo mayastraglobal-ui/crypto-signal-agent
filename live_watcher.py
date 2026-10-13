@@ -97,6 +97,7 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "memory/strategy_registry.csv"),
               ("main", "reports/universe.json"), ("main", "reports/regime_fit.json"),
               ("main", "reports/market_weather.json"), ("main", "reports/program.json"),
+              ("main", "reports/library_tests.json"),
               ("main", "reports/risk_state.json"),
               ("main", "reports/weekly_review.json"), ("main", "reports/promotions_state.json"),
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
@@ -573,7 +574,8 @@ class Watcher:
                     self.watch.append((s, tf, label))
         # the Signal Center (Forward Test Program PR 2): 🔵 TEST alerts for program cells positive on a coin in the
         # 5-year backtest (reports/program.json) - only where the cell does not already alert as PAPER / LIVE
-        self.program = self._json("reports/program.json")
+        self.program = scx.with_library(self._json("reports/program.json"),         # + the operator's library
+                                        (self._json("reports/library_tests.json") or {}).get("cells"))   # TEST rows
         self.weather = self._json("reports/market_weather.json")
         self.promoted = (self._json("reports/promotions_state.json") or {}).get("active") or {}   # PR 3
         self.tests = scx.alert_list(scx.test_list(self.program, reg["cells"], self.SC, self.promoted), self.program,

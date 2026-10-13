@@ -2786,7 +2786,7 @@ def main():
     # the Signal Center (Forward Test Program PR 2): program cells positive on a coin in the 5-year backtest are
     # recorded as stage TEST (silent tracking for the weekly review) - never emailed, never in the risk book
     SC = scx.settings(cfg.get("signal_center"))
-    program_rep = read_json("program", args.offline)
+    program_rep = program_with_library(cfg, args.offline)
     promo_state = read_json("promotions_state", args.offline) or {}
     promoted = promo_state.get("active") or {}          # PR 3: PAPER by the operator's tap - only on these coins
     tests = scx.test_list(program_rep, registry["cells"], SC, promoted)
@@ -3317,6 +3317,22 @@ def read_text(path):
         return f.read()
 
 
+def program_with_library(cfg, offline=False, write=True):
+    """reports/program.json plus the operator's library TEST strategies (signal_center.library_tests, 2026-10-13: the
+    "4H trend + 1H entry" strategy) from the nightly research.json. write: also save their rows as
+    reports/library_tests.json (small - the live watcher downloads it). Never fatal: the program alone on a problem."""
+    program = read_json("program", offline)
+    try:
+        lib = scx.library_rows(read_json("research", offline), scx.settings(cfg.get("signal_center"))["library_tests"])
+    except Exception as e:
+        log(f"library TEST rows not built ({type(e).__name__}: {e})")
+        return program
+    if write and lib:
+        with open(os.path.join(REPORTS, "library_tests_offline.json" if offline else "library_tests.json"), "w") as f:
+            json.dump(dict(cells=lib), f, indent=1)
+    return scx.with_library(program, lib)
+
+
 def read_json(name, offline=False):
     """reports/<name>.json (offline runs prefer reports/<name>_offline.json), or None."""
     for path in ([os.path.join(REPORTS, f"{name}_offline.json")] if offline else []) + [os.path.join(REPORTS,
@@ -3335,7 +3351,8 @@ def weekly_review(now, logdf, registry, cfg, offline):
     when the live watcher sends it to Telegram). Never fatal."""
     try:
         st = read_json("promotions_state", offline) or {}
-        rv = wrv.build(now, logdf, read_json("program", offline), registry["cells"], st.get("active") or {},
+        rv = wrv.build(now, logdf, program_with_library(cfg, offline, write=False), registry["cells"],
+                       st.get("active") or {},
                        st.get("demoted"), st.get("refused"), read_json("journal_review", False),
                        read_json("research_counts", offline), now.strftime("%Y-%m-%d %H:%M"),
                        wrv.settings(cfg.get("weekly_review")), read_json("failure_lab", offline),
