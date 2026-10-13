@@ -598,3 +598,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-13 11:22 UTC
 - **EXCLUDED** UNI - order book too thin: $206k within 1% (need $250k)
+
+## 2026-10-13 12:28 UTC
+- **ELIGIBLE** UNI - passes every rule again
