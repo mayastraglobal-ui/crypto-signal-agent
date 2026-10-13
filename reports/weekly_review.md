@@ -1,13 +1,13 @@
 # Weekly review · 2026-W42
 
-Made 2026-10-13 07:25 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-13 08:24 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-13)
-- ✅ hourly scan: last run 2026-10-13 07:25 UTC
+- ✅ hourly scan: last run 2026-10-13 08:24 UTC
 - ✅ program rotation: 65 of 65 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-13 05:46 UTC (43 min ago)
+- ✅ live watcher: last heartbeat 2026-10-13 06:55 UTC (31 min ago)
 - ✅ TEST setups closed this week (GitHub record): 5
 
 ## Totals
@@ -28,6 +28,12 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 - every TEST setup (GitHub, no 5m check): 5, -1.06R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
   - none yet (each 4H setup that waits for its 5m candle adds one)
+
+## 📈 Live track record and drift monitor
+
+- every live setup: 5 closed, -1.19R a trade, -5.94R, worst drawdown 5.94R (after fees)
+- paused by the drift monitor: nothing
+- the full table: reports/track_record.md
 
 ## Ideas for new versions
 

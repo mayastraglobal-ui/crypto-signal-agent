@@ -1,0 +1,188 @@
+{
+ "utc": "2026-10-13 08:24",
+ "settings": {
+  "enabled": true,
+  "streak_p": 0.05,
+  "min_streak": 3,
+  "avg_min_n": 15,
+  "avg_z": 2.0,
+  "sd_floor": 1.0,
+  "curve_points": 60
+ },
+ "total": {
+  "n": 5,
+  "wins": 0,
+  "win_rate": 0.0,
+  "avg_r": -1.188,
+  "total_r": -5.94,
+  "max_dd_r": 5.94,
+  "cur_loss_run": 5,
+  "max_loss_run": 5,
+  "sd": 0.077
+ },
+ "by_stage": {
+  "TEST": {
+   "label": "\ud83d\udd35 TEST",
+   "n": 5,
+   "wins": 0,
+   "win_rate": 0.0,
+   "avg_r": -1.188,
+   "total_r": -5.94,
+   "max_dd_r": 5.94,
+   "cur_loss_run": 5,
+   "max_loss_run": 5,
+   "sd": 0.077
+  },
+  "PAPER_TRADING": {
+   "label": "\ud83d\udfe1 PAPER",
+   "n": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_r": null,
+   "total_r": 0.0,
+   "max_dd_r": 0.0,
+   "cur_loss_run": 0,
+   "max_loss_run": 0,
+   "sd": null
+  },
+  "APPROVED": {
+   "label": "\ud83d\udfe2 LIVE",
+   "n": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_r": null,
+   "total_r": 0.0,
+   "max_dd_r": 0.0,
+   "cur_loss_run": 0,
+   "max_loss_run": 0,
+   "sd": null
+  }
+ },
+ "pairs": [
+  {
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SOL",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.189,
+    "total_r": -2.38,
+    "max_dd_r": 2.38,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.011
+   },
+   "backtest": {
+    "n": 635,
+    "avg_r": 0.041,
+    "win_rate": 36.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-11 15:59"
+  },
+  {
+   "key": "P01-BREAKOUT-V5@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.149,
+    "total_r": -1.15,
+    "max_dd_r": 1.15,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 689,
+    "avg_r": 0.024,
+    "win_rate": 35.0
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-13 02:59"
+  },
+  {
+   "key": "P01-BREAKOUT-V5@1.0|1h",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.102,
+    "total_r": -1.1,
+    "max_dd_r": 1.1,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 717,
+    "avg_r": 0.011,
+    "win_rate": 33.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-13 02:59"
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
+   "coin": "XRP",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.309,
+    "total_r": -1.31,
+    "max_dd_r": 1.31,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 499,
+    "avg_r": 0.01,
+    "win_rate": 36.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-11 14:59"
+  }
+ ],
+ "paused": [],
+ "resumed": [],
+ "curve": [
+  {
+   "t": "2026-10-11 14:59",
+   "r": -1.31
+  },
+  {
+   "t": "2026-10-11 15:59",
+   "r": -2.49
+  },
+  {
+   "t": "2026-10-11 15:59",
+   "r": -3.69
+  },
+  {
+   "t": "2026-10-13 02:59",
+   "r": -4.84
+  },
+  {
+   "t": "2026-10-13 02:59",
+   "r": -5.94
+  }
+ ],
+ "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."
+}
