@@ -196,6 +196,13 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   buttons, never a trade signal. If the 5m candle confirms, the normal 🔵 TEST alert follows. At most 12 a day;
   `/watch off` stops them (and `/tests off` or `/pause` holds them too). Why: in the 14 days before 10 Oct the 5m check
   held back 15 of 18 setups, among them the two best shorts of the 6-9 Oct fall - you now see every setup.
+- **"4H trend + 1H entry" TEST alerts** (2026-10-13): your 6 Oct strategy TRD-H4-BREAKOUT-S3 on 1H now sends 🔵 TEST
+  alerts too. It trades a 1H breakout only while the 4H trend window points the same way. 5 years: +0.15R a trade over
+  939 trades, +0.27R on the unseen last part. It alerts on BTC (+0.34R), XRP (+0.28R) and SOL (+0.17R), about 1-2 a
+  week in trending markets and none in sideways ones. It is blocked from 🟡 PAPER only by its deep losing streaks
+  (worst about 32R), so it stays in the **demo book**. Like every TEST alert it waits for the 5m candle and is merged
+  with the same coin's other alerts (⭐ when two strategies agree - one trade, not two). `config.yaml` →
+  `signal_center.library_tests`.
 - **4H with vs without the 5m check** (2026-10-13): every 4H setup that waits for its 5m candle also gets a silent
   twin, entered at the 4H close with no 5m check. Nothing extra is sent and the alerts do not change. Your journal
   records the twin's plan result and whether the 5m check passed or rejected that setup. The Sunday review

@@ -23,7 +23,7 @@ import math
 
 DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades=5, max_per_day=10,
                 cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12,
-                alert_skip_failed=True, alert_min_avg_r=0.10)
+                alert_skip_failed=True, alert_min_avg_r=0.10, library_tests=())
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -37,6 +37,7 @@ def settings(section):
     s["min_avg_r"] = float(s["min_avg_r"])
     s["alert_min_avg_r"] = float(s["alert_min_avg_r"])
     s["alert_skip_failed"] = bool(s["alert_skip_failed"])
+    s["library_tests"] = [str(x) for x in (s.get("library_tests") or [])]
     return s
 
 
@@ -52,6 +53,40 @@ def qualifies(row, S):
         return False
     tn, ta = int(row.get("test_n") or 0), row.get("test_avg_r")
     return not (tn >= S["test_min_trades"] and ta is not None and float(ta) < 0)
+
+
+def library_rows(research, keys):
+    """🔵 TEST rows for library strategies the operator named (signal_center.library_tests, e.g. the 6 Oct
+    "4H trend + 1H entry" TRD-H4-BREAKOUT-S3@1.0|1h: +0.15R over 939 trades, blocked from PAPER only by its drawdown).
+    research: reports/research.json (the nightly 5-year results). Returns {'id@ver|tf': row} in the layout of
+    reports/program.json, so test_list / alert_list treat them like program cells (the same per-coin bar). The coins'
+    unseen-test part is not split per coin in research.json, so that check is skipped for these rows."""
+    out = {}
+    cells = (research or {}).get("cells") or {}
+    for ck in keys or []:
+        c = cells.get(ck)
+        if not c:
+            continue
+        ev = c.get("evidence") or {}
+        sid, rest = ck.split("@", 1)
+        coins = {coin: dict(n=int(x.get("n") or 0), avg_r=float(x.get("avg_r") or 0), win_rate=x.get("win_rate"),
+                            test_n=0, test_avg_r=None, positive=bool(float(x.get("avg_r") or 0) > 0))
+                 for coin, x in (ev.get("by_coin") or {}).items()}
+        out[ck] = dict(strategy=sid, name=sid, version=rest.split("|")[0], tf=c.get("tf") or rest.split("|")[1],
+                       status=c.get("status"), trades=int((ev.get("all") or {}).get("n") or 0),
+                       avg_r=float((ev.get("all") or {}).get("avg_r") or 0),
+                       test_avg_r=(ev.get("validate") or {}).get("avg_r"), tested_utc=research.get("run_utc"),
+                       library=True, coins=coins)
+    return out
+
+
+def with_library(program, lib):
+    """reports/program.json with the library TEST rows added (a copy; program.json itself never changes)."""
+    if not lib:
+        return program
+    p = dict(program or {})
+    p["cells"] = dict((program or {}).get("cells") or {}, **lib)
+    return p
 
 
 def alert_list(tests, program, reg_cells, S):

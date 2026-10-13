@@ -921,3 +921,17 @@ Newest entries at the bottom. Format: date · who · what · why.
   a Telegram line; an idea line once passed and rejected both have 10+ results and differ by >= 0.20R ("your
   decision whether to switch it off there").
 - Tests: `tests/test_five_min_compare.py` (6).
+
+## 2026-10-13 · Operator + Claude · 🔵 TEST alerts for the "4H trend + 1H entry" strategy
+- Operator: "build 1H test alerts". The only 1H idea with an edge is the operator's own 6 Oct card TRD-H4-BREAKOUT-S3
+  1h (1H breakout only while the 4H trend window points the same way): 939 trades +0.152R, unseen part +0.273R, by coin
+  BTC +0.34R (175), XRP +0.28R (117), SOL +0.17R (120), BNB +0.13R, ETH +0.06R, SUI +0.05R, ZEC -0.03R. Status
+  BACKTESTING: blocked from PAPER by the Monte Carlo drawdown (95% 22R per 100 trades, limit 17R) - unchanged.
+- `config.yaml` `signal_center.library_tests: [TRD-H4-BREAKOUT-S3@1.0|1h]` (the operator's list; nothing is added by
+  itself). `engine/signal_center.py` `library_rows` (research.json's by_coin -> program.json's layout; the per-coin
+  unseen-test check is skipped - not split per coin there) and `with_library` (a copy; program.json never changes).
+  `scanner.program_with_library` adds them for the hourly scan's TEST recording and the weekly review and writes
+  reports/library_tests.json; the live watcher downloads it (SYNC_FILES) and adds it to its TEST list. The same bar
+  as every TEST alert (not FAILED, positive overall, coins >= +0.10R with 20+ trades): BTC, XRP, SOL (+ BNB, not a
+  signal coin today). Demo book only; PAPER / LIVE still need the full bar.
+- Tests: `tests/test_library_tests.py` (5).
