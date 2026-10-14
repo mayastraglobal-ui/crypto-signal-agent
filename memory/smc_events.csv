@@ -14761,3 +14761,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-14 02:45,ZEC,15m,FVG_RETRACE,bull,,1261.62,1266.85,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-14 02:45,ZEC,15m,FVG_FILLED,bull,,1261.62,1266.85,,Asia,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-14 03:00,SUI,1h,BOS,bull,1.061,,,0.054,Asia,4h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-14 04:00,BTC,1h,SWEEP,bear,83850.0,,,0.268,Asia,4h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 04:00,BTC,1h,FVG,bull,,83454.01,83650.02,0.494,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-14 04:00,BTC,30m,SWEEP,bear,83850.0,,,0.435,Asia,1h,HIGH_VOL_RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 04:00,BTC,30m,FVG_FILLED,bear,,83592.01,83870.88,,Asia,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-10-14 04:30,BTC,30m,FVG_RETRACE,bull,,83443.8,83650.02,,,1h,HIGH_VOL_RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 03:45,BTC,15m,SWEEP,bear,83850.0,,,0.666,Asia,1h,HIGH_VOL_RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 03:45,BTC,15m,FVG_FILLED,bear,,83807.82,83915.77,,Asia,1h,HIGH_VOL_RANGE,,smc-1.0,Binance
+2026-10-14 04:15,BTC,15m,FVG_RETRACE,bull,,83400.0,83650.02,,,1h,HIGH_VOL_RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 04:00,ETH,30m,SWEEP,bear,2520.51,,,0.211,Asia,1h,HIGH_VOL_RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 03:45,ETH,15m,SWEEP,bear,2520.51,,,0.332,Asia,1h,HIGH_VOL_RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 04:15,ETH,15m,OB_RETEST,bull,,2503.82,2509.74,,,1h,HIGH_VOL_RANGE,first return into the order block,smc-1.0,Binance
+2026-10-14 04:00,SOL,30m,SWEEP,bear,108.04,,,0.466,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 03:45,SOL,15m,BOS,bull,108.04,,,0.14,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-14 04:00,ZEC,4h,OB_RETEST,bear,,1282.27,1349.3,,,1d,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-14 04:00,ZEC,4h,FVG_RETRACE,bear,,1249.37,1262.0,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-14 04:00,ZEC,4h,FVG_FILLED,bear,,1249.37,1262.0,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-14 04:00,SUI,1h,SWEEP,bear,1.0647,,,0.327,Asia,4h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-14 04:00,SUI,30m,SWEEP,bear,1.0653,,,0.441,Asia,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-14 03:45,SUI,15m,BOS,bull,1.0653,,,0.136,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-14 03:45,SUI,15m,FVG_FILLED,bear,,1.0634,1.0668,,Asia,1h,UNCLEAR,,smc-1.0,Binance
