@@ -1,22 +1,23 @@
 {
- "utc": "2026-10-14 12:38",
+ "utc": "2026-10-14 13:37",
  "verdict": {
-  "code": "NEWS",
-  "icon": "\u26c8",
-  "title": "News risk - stay out",
-  "meaning": "A high-impact event is close. Price can jump both ways in seconds.",
+  "code": "CHOPPY",
+  "icon": "\ud83c\udf2b",
+  "title": "Choppy - stay out",
+  "meaning": "The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.",
   "fits": [
-   "waiting until the event has passed"
+   "waiting until 1D, 4H and 1H agree - no trade is the right trade"
   ],
   "avoid": [
-   "any new trade"
+   "any trade",
+   "trading on feeling or headlines"
   ]
  },
  "breadth": {
   "UP": 0,
   "DOWN": 0,
-  "RANGE": 0,
-  "CHOPPY": 6
+  "RANGE": 1,
+  "CHOPPY": 5
  },
  "coins": [
   {
@@ -24,17 +25,17 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H RANGE)",
+   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H HIGH_VOL_RANGE)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "UNCLEAR",
-    "1h": "RANGE"
+    "1h": "HIGH_VOL_RANGE"
    },
    "adx": {
     "1d": 30.0,
     "4h": 21.0,
-    "1h": 13.0
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 2.58,
@@ -52,10 +53,10 @@
    },
    "crowd": {
     "funding_pct": 0.0015,
-    "oi_24h_pct": -2.8,
+    "oi_24h_pct": 0.9,
     "label": "neutral"
    },
-   "change_24h": -0.69
+   "change_24h": -0.57
   },
   {
    "coin": "ETH",
@@ -72,7 +73,7 @@
    "adx": {
     "1d": 30.0,
     "4h": 28.0,
-    "1h": 10.0
+    "1h": 11.0
    },
    "vol": {
     "atr_pct": 3.38,
@@ -90,10 +91,10 @@
    },
    "crowd": {
     "funding_pct": 0.0018,
-    "oi_24h_pct": -0.7,
+    "oi_24h_pct": -1.5,
     "label": "neutral"
    },
-   "change_24h": -0.8
+   "change_24h": -1.1
   },
   {
    "coin": "SOL",
@@ -128,10 +129,10 @@
    },
    "crowd": {
     "funding_pct": 0.0048,
-    "oi_24h_pct": -1.0,
+    "oi_24h_pct": -2.0,
     "label": "neutral"
    },
-   "change_24h": -0.5
+   "change_24h": -0.82
   },
   {
    "coin": "SUI",
@@ -148,7 +149,7 @@
    "adx": {
     "1d": 30.0,
     "4h": 24.0,
-    "1h": 16.0
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 7.67,
@@ -166,10 +167,10 @@
    },
    "crowd": {
     "funding_pct": 0.0009,
-    "oi_24h_pct": 0.1,
+    "oi_24h_pct": -65.6,
     "label": "neutral"
    },
-   "change_24h": -0.56
+   "change_24h": -1.01
   },
   {
    "coin": "XRP",
@@ -186,7 +187,7 @@
    "adx": {
     "1d": 29.0,
     "4h": 41.0,
-    "1h": 15.0
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 4.14,
@@ -204,27 +205,27 @@
    },
    "crowd": {
     "funding_pct": 0.0022,
-    "oi_24h_pct": 0.8,
+    "oi_24h_pct": 0.2,
     "label": "neutral"
    },
-   "change_24h": -0.13
+   "change_24h": -0.15
   },
   {
    "coin": "ZEC",
-   "verdict": "CHOPPY",
+   "verdict": "RANGE",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H RANGE, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H RANGE, 1H RANGE)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "RANGE",
-    "1h": "UNCLEAR"
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 30.0,
     "4h": 18.0,
-    "1h": 20.0
+    "1h": 19.0
    },
    "vol": {
     "atr_pct": 8.55,
@@ -242,29 +243,27 @@
    },
    "crowd": {
     "funding_pct": 0.0068,
-    "oi_24h_pct": 3.2,
+    "oi_24h_pct": -76.1,
     "label": "neutral"
    },
-   "change_24h": 2.91
+   "change_24h": 2.41
   }
  ],
- "alts_vs_btc_24h": 0.19,
+ "alts_vs_btc_24h": -0.25,
  "fear_greed": {
   "value": 62,
   "label": "Greed",
   "yesterday": 57
  },
  "btc_dominance": {
-  "pct": 59.789,
-  "utc": "2026-10-14 12:38",
-  "ch24": 0.44,
+  "pct": 59.299,
+  "utc": "2026-10-14 13:37",
+  "ch24": 0.02,
   "ch7": null,
-  "read": "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
+  "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
  "events": [],
- "blackout_now": [
-  "US CPI (Sep data)"
- ],
+ "blackout_now": [],
  "warnings": [],
  "settings": {
   "funding_long_pct": 0.03,
@@ -274,5 +273,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\u26c8 <b>Market weather \u00b7 10-14 20:38 Beijing</b>\nVerdict: <b>News risk - stay out</b>\nA high-impact event is close. Price can jump both ways in seconds.\n\nBTC trend: 1D TRANSITION \u00b7 4H UNCLEAR \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,397 \u2013 84,941) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0015%/8h, open interest -2.8% in 24h)\nAltcoins vs BTC (24h): +0.2%\nBTC dominance: 59.8% \u00b7 24h +0.44 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Greed 62\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\nFits today: waiting until the event has passed\nAvoid: any new trade\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-14 21:37 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H UNCLEAR \u00b7 1H HIGH_VOL_RANGE\nVolatility: normal (daily range 2.6%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,397 \u2013 84,941) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0015%/8h, open interest +0.9% in 24h)\nAltcoins vs BTC (24h): -0.2%\nBTC dominance: 59.3% \u00b7 24h +0.02 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 62\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\ud83d\udfe1 ZEC: range\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

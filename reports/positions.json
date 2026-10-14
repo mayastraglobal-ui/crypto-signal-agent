@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-14 12:38",
+ "generated_utc": "2026-10-14 13:37",
  "book": {
-  "utc": "2026-10-14 12:38",
-  "beijing": "2026-10-14 20:38",
+  "utc": "2026-10-14 13:37",
+  "beijing": "2026-10-14 21:37",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-14 12:38 UTC / 2026-10-14 20:38 Beijing",
+  "POSITION BOOK \u2014 2026-10-14 13:37 UTC / 2026-10-14 21:37 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -37,9 +37,7 @@
   "groups": [
    "BTC+ETH+SOL+SUI+XRP"
   ],
-  "blackout_now": [
-   "US CPI (Sep data)"
-  ],
+  "blackout_now": [],
   "upcoming_events": [],
   "next_event": null,
   "calendar_warning": null,
