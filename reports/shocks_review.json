@@ -1,23 +1,23 @@
 {
- "n": 34,
- "sent": 25,
- "done": 34,
- "kept": 15,
+ "n": 40,
+ "sent": 30,
+ "done": 40,
+ "kept": 21,
  "reversed": 19,
- "avg_after_4h": -0.27,
+ "avg_after_4h": 0.11,
  "caught": 2,
  "by_coin": {
-  "XRP": 5,
-  "SOL": 7,
-  "ETH": 7,
-  "SUI": 3,
-  "BTC": 6,
-  "ZEC": 6
+  "XRP": 6,
+  "SOL": 8,
+  "ETH": 8,
+  "SUI": 4,
+  "BTC": 7,
+  "ZEC": 7
  },
  "by_kind": {
   "sweep_low": 9,
-  "volume": 20,
-  "move": 8,
+  "volume": 26,
+  "move": 13,
   "sweep_high": 6
  },
  "biggest": [
@@ -27,6 +27,14 @@
    "side": "UP",
    "move_pct": 3.47,
    "after_4h": -2.09,
+   "caught": false
+  },
+  {
+   "time_utc": "2026-10-14 12:31",
+   "coin": "SUI",
+   "side": "DOWN",
+   "move_pct": -3.29,
+   "after_4h": 1.09,
    "caught": false
   },
   {
@@ -52,27 +60,19 @@
    "move_pct": 2.31,
    "after_4h": -2.04,
    "caught": false
-  },
-  {
-   "time_utc": "2026-10-13 00:53",
-   "coin": "SOL",
-   "side": "DOWN",
-   "move_pct": -2.01,
-   "after_4h": -5.67,
-   "caught": false
   }
  ],
- "checked_utc": "2026-10-14 16:35",
+ "checked_utc": "2026-10-14 17:33",
  "lines": [
-  "34 shock(s) this week, 25 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-  "by kind: fast move 8, broke yesterday's high 6, broke yesterday's low 9, volume spike 20",
-  "by coin: SOL 7, ETH 7, BTC 6, ZEC 6, XRP 5, SUI 3",
-  "4 hours later: 15 kept going, 19 reversed (average -0.27% in the shock's direction)",
-  "followed by a strategy alert in the same direction within 4h: 2 of 34 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+  "40 shock(s) this week, 30 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+  "by kind: fast move 13, broke yesterday's high 6, broke yesterday's low 9, volume spike 26",
+  "by coin: SOL 8, ETH 8, BTC 7, ZEC 7, XRP 6, SUI 4",
+  "4 hours later: 21 kept going, 19 reversed (average +0.11% in the shock's direction)",
+  "followed by a strategy alert in the same direction within 4h: 2 of 40 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
   "  2026-10-12 04:44 UTC ZEC UP +3.5% -> 4h later -2.1% (no strategy alert)",
+  "  2026-10-14 12:31 UTC SUI DOWN -3.3% -> 4h later +1.1% (no strategy alert)",
   "  2026-10-12 21:46 UTC ZEC DOWN -3.2% -> 4h later +1.4% (no strategy alert)",
   "  2026-10-12 21:46 UTC SUI DOWN -2.4% -> 4h later +1.5% (no strategy alert)",
-  "  2026-10-14 01:50 UTC ZEC UP +2.3% -> 4h later -2.0% (no strategy alert)",
-  "  2026-10-13 00:53 UTC SOL DOWN -2.0% -> 4h later -5.7% (no strategy alert)"
+  "  2026-10-14 01:50 UTC ZEC UP +2.3% -> 4h later -2.0% (no strategy alert)"
  ]
 }
