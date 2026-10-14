@@ -27,6 +27,8 @@ of the range) and `/structure` shows it any time - information only: [`docs/STRU
 Strategy 11 (early momentum) looks for the first steps of a market-wide move before the 4H turns, and the watcher's 🌊
 notes say when a move is forming (👀), already late (⚠️ no new trade that way) or bouncing (🔄):
 [`docs/STRATEGY_11.md`](docs/STRATEGY_11.md).
+Strategy 12 (follow the leader) buys the coin rising the most compared with BTC when BTC jumps 3% in a day (long only,
+tested like every strategy): [`docs/STRATEGY_12.md`](docs/STRATEGY_12.md).
 📈 The live track record shows every TEST / PAPER / LIVE result after fees next to its 5-year backtest (`/track`).
 🚨 The drift monitor pauses a strategy's alerts on a coin when its live results leave what the backtest calls normal
 (the safe direction only): [`docs/TRACK_RECORD.md`](docs/TRACK_RECORD.md).

@@ -953,3 +953,27 @@ Newest entries at the bottom. Format: date · who · what · why.
   (`drift_notes`, state `drift_known`), `/track`, a /status line. Weekly review: a Telegram line and a section.
 - First record: 5 closed TEST setups, all losses (-5.94R), all from cells that no longer reach Telegram since 13 Oct.
 - Tests: `tests/test_track_record.py` (13).
+
+## 2026-10-14 · Operator + Claude · Strategy 12 "follow the leader" + save retry
+- Why: the operator asked whether weaker coins fall harder when BTC falls and how to make money from it (idea b). The
+  5-year study (Binance 4H, 7 coins): the coins do move harder (SOL about 1.4x BTC), but shorting the weakest after a
+  BTC fall pays nothing (about 0R, unseen negative). After BTC rises 3%+ in 24 hours, buying the leader (the coin rising
+  most vs BTC) averaged +0.10R over 271 (unseen +0.10R), the laggard -0.18R, BTC -0.08R, every coin -0.05R; leader minus
+  laggard +0.27R (t 3.7). Honest: about 0R without ZEC, 2 of 6 years negative. The operator: "build strategy 12".
+- New block `lead_rank(n)` (strategy_spec FUNCTIONS, BREADTH_BLOCKS): the coin's rank among universe.own_coins other
+  than BTC by gain minus BTC's over n closed candles (1 = strongest), n in 3 / 6 / 12 / 24 on 4H / 1H
+  (`scanner.LEAD_NS`, `LEAD_TFS`); unknown for other n, BTC, other coins or fewer than 3 rankable coins.
+  `scanner.leader_frames`, `market_frames` (joined with strategy 11's counts; market_breadth uses it, research.py's
+  pre-pass too on `MARKET_TFS`), `btc_frames` carries the `lead_<n>_<COIN>` columns, `attach_market(..., base)` hands
+  each coin its own as `_lead_<n>`; prepare_coin passes the coin.
+- strategies_program.yaml: P12-LEADER-V1 (4H, 24h), V2 (4H, 12h), V3 (1H, 24h), C (control: V1 without the leader
+  pick, never alerts). Long only: the short rule `close < 0` never fires (the validator needs a short rule; the short
+  mirror lost in the study). Gate intraday_reversal, 1.5 ATR stop, 2R, time stop 48 hours. Through the engine on the
+  5-year data (simple scoring): V1 337 trades +0.10R (unseen +0.12R), V2 246 +0.28R, V3 625 -0.03R, C 2,206 -0.03R.
+  Tested first on 16 Oct (never-tested order: 1 + 11 on 15 Oct).
+- live_watcher: `self.extra` = BTC + every own coin not in the signal list (BNB, below the $50M volume rule, was missing
+  live, so the strategy 11 counts used 6 coins live vs 7 in the backtest); downloaded only, never signalled. The
+  replay downloads `MARKET_TFS` (4H too) for those coins.
+- scan.yml / research.yml: the save step re-syncs and pushes up to 4 times (10 / 20 / 30 s apart), like the Brain and
+  Pine workflows - the scan of 14 Oct 15:37 UTC lost its results to a GitHub "Internal Server Error".
+- Tests: `tests/test_strategy12.py` (12); tests/test_program.py counts (56 cards, strategies 1-12, 88 timeframes).

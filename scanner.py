@@ -588,8 +588,12 @@ def make_namespace(df, feats=None):
     def btc_ret(n=1):
         """BTC's return over its last n closed candles of this timeframe, in % (known at this candle's close)."""
         return (btc / btc.shift(int(n)) - 1) * 100
+    def lead_rank(n=6):
+        """Strategy 12: this coin's rank among the operator's coins other than BTC by its gain minus BTC's over the
+        last n closed candles (1 = the strongest). Unknown for an n outside LEAD_NS, for BTC and for other coins."""
+        return _col(f"_lead_{int(n)}")
     ns.update(funding_rate=fr, oi=oi_, ls_ratio=_col("_ls_ratio"), taker_ratio=_col("_taker_ratio"),
-              funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret,
+              funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret, lead_rank=lead_rank,
               mkt_up=_col("_mkt_up"), mkt_dn=_col("_mkt_dn"))          # strategy 11: market-wide breaks (counts)
     return ns
 
@@ -677,8 +681,9 @@ def market_weather(now, regimes, daily_hlc, derivs, snap, risk_out, fg, cfg, off
 
 
 def btc_frames(data, quote, tfs, breadth=None):
-    """BTC's closes per timeframe (close_time, close) for the btc_ret building block. breadth: breadth_frames() -
-    its counts ride along as mkt_up / mkt_dn columns (matched by close time; a candle without them = unknown)."""
+    """BTC's closes per timeframe (close_time, close) for the btc_ret building block. breadth: market_breadth() -
+    its counts ride along as mkt_up / mkt_dn columns and the strategy 12 leader ranks as lead_<n>_<COIN> columns
+    (matched by close time; a candle without them = unknown)."""
     out = {}
     for tf in tfs:
         d = data.get(("BTC" + quote, tf))
@@ -686,7 +691,8 @@ def btc_frames(data, quote, tfs, breadth=None):
             out[tf] = d[[k for k in ("open_time", "close_time", "high", "low", "close") if k in d]]
             b = (breadth or {}).get(tf)
             if b is not None and len(b):
-                out[tf] = out[tf].merge(b[["close_time", "mkt_up", "mkt_dn"]], on="close_time", how="left")
+                keep = ["close_time"] + [k for k in b.columns if k in ("mkt_up", "mkt_dn") or k.startswith("lead_")]
+                out[tf] = out[tf].merge(b[keep], on="close_time", how="left")
     return out
 
 
@@ -702,14 +708,61 @@ def breadth_coins(cfg):
 
 
 def market_breadth(data, quote, cfg, quality=None):
-    """breadth_frames() of the operator's coins found in data ({(symbol, tf): candles}); UNSAFE data is left out."""
+    """market_frames() of the operator's coins found in data ({(symbol, tf): candles}); UNSAFE data is left out."""
     fb = {}
     for c in breadth_coins(cfg):
-        fr = {tf: data[(c + quote, tf)] for tf in BREADTH_TFS if (c + quote, tf) in data
+        fr = {tf: data[(c + quote, tf)] for tf in MARKET_TFS if (c + quote, tf) in data
               and ((quality or {}).get((c, tf)) or {}).get("state") != dq.UNSAFE}
         if fr:
             fb[c] = fr
-    return breadth_frames(fb)
+    return market_frames(fb)
+
+
+# strategy 12 (operator request 2026-10-14: "build strategy 12" - when BTC jumps, buy the coin already rising the
+# most compared with BTC): each coin's rank among the operator's coins other than BTC, over these n candles of the
+# 4H / 1H (the rule lead_rank(n) reads them; another n reads "unknown")
+LEAD_NS, LEAD_TFS = (3, 6, 12, 24), ("4h", "1h")
+MARKET_TFS = tuple(t for t in ("4h", "1h", "30m", "15m") if t in BREADTH_TFS or t in LEAD_TFS)
+
+
+def leader_frames(frames_by_coin, tfs=LEAD_TFS, ns=LEAD_NS):
+    """{tf: DataFrame(close_time, lead_<n>_<COIN>, ...)}: each coin's rank (1 = the strongest; ties share a rank)
+    among the coins other than BTC, by its return minus BTC's return over its last n closed candles. frames_by_coin:
+    {coin: {tf: candles}}. Unknown (NaN) where the coin or BTC has no value at that close time, or where fewer than 3
+    coins can be ranked - a rule using it is then false. BTC itself is never ranked."""
+    out = {}
+    for tf in tfs:
+        closes = {}
+        for coin, frames in sorted(frames_by_coin.items()):
+            d = (frames or {}).get(tf)
+            if d is not None and len(d):
+                closes[coin] = pd.Series(d["close"].astype(float).to_numpy(),
+                                         index=d["close_time"].to_numpy(dtype=np.int64))
+        alts = [c for c in closes if c != "BTC"]
+        if "BTC" not in closes or len(alts) < 3:
+            continue
+        times = pd.Index(sorted(set().union(*[set(x.index) for x in closes.values()])), dtype=np.int64)
+        cols = {"close_time": times.to_numpy(dtype=np.int64)}
+        for n in ns:
+            ret = {c: (x / x.shift(int(n)) - 1).reindex(times) for c, x in closes.items()}   # each on its own candles
+            rel = pd.DataFrame({c: ret[c] - ret["BTC"] for c in alts}, index=times)
+            rank = rel.rank(axis=1, ascending=False, method="min")
+            rank[rel.notna().sum(axis=1) < 3] = np.nan
+            for c in alts:
+                cols[f"lead_{int(n)}_{c}"] = rank[c].to_numpy(dtype=float)
+        out[tf] = pd.DataFrame(cols)
+    return out
+
+
+def market_frames(frames_by_coin, tfs=MARKET_TFS):
+    """breadth_frames() (strategy 11) and leader_frames() (strategy 12) joined per timeframe on the close time."""
+    out = {}
+    for part in (breadth_frames(frames_by_coin, [t for t in tfs if t in BREADTH_TFS]),
+                 leader_frames(frames_by_coin, [t for t in tfs if t in LEAD_TFS])):
+        for tf, d in part.items():
+            out[tf] = d if tf not in out else \
+                out[tf].merge(d, on="close_time", how="outer").sort_values("close_time").reset_index(drop=True)
+    return out
 
 
 def coin_breaks(df, n=BREADTH_N, within=BREADTH_WITHIN):
@@ -749,9 +802,10 @@ def breadth_frames(frames_by_coin, tfs=BREADTH_TFS):
     return out
 
 
-def attach_market(df, derivs, btc):
+def attach_market(df, derivs, btc, base=None):
     """Phase 17 C: the futures data (engine/derivs.align - as known at each close) and BTC's close on the same
-    timeframe as columns of the candle table. Missing data -> NaN (the building blocks read 'unknown')."""
+    timeframe as columns of the candle table. Missing data -> NaN (the building blocks read 'unknown').
+    base: this coin - its strategy 12 leader ranks (btc lead_<n>_<base>) become the _lead_<n> columns."""
     h, f = derivs if derivs is not None else (pd.DataFrame(columns=dv.HOURLY_COLS), pd.DataFrame(columns=dv.FUNDING_COLS))
     a = dv.align(df["close_time"].to_numpy(), df["open_time"].to_numpy(), h, f)
     for k in ("funding_rate", "oi", "ls_ratio", "taker_ratio"):
@@ -768,11 +822,12 @@ def attach_market(df, derivs, btc):
         same = np.zeros(len(df), bool)                    # only the SAME closed candle counts (no stale BTC price)
         same[ok] = ct[idx[ok]] == df["close_time"].to_numpy(dtype=np.int64)[ok]
         df["_btc_close"] = np.where(same, vals, np.nan)
-        for k in ("mkt_up", "mkt_dn"):                    # strategy 11: market-wide breaks, the same closed candle only
-            if k in btc:
+        lead = {f"lead_{n}_{base}": f"_lead_{n}" for n in LEAD_NS} if base else {}
+        for k, col in {"mkt_up": "_mkt_up", "mkt_dn": "_mkt_dn", **lead}.items():
+            if k in btc:                                  # strategies 11 / 12: market-wide, the same closed candle only
                 b = np.full(len(df), np.nan)
                 b[ok] = btc[k].to_numpy(dtype=float)[idx[ok]]
-                df["_" + k] = np.where(same, b, np.nan)
+                df[col] = np.where(same, b, np.nan)
     return df
 
 
@@ -789,7 +844,7 @@ def prepare_coin(sym, base, data, quality, tfs, cfg, derivs=None, btc=None, flow
         if df is None or len(df) < 300 or quality[(base, tf)]["state"] == dq.UNSAFE:
             continue    # never backtest on data we cannot trust
         df = add_htf(df.copy(), data.get((sym, HTF[tf])))
-        df = attach_market(df, derivs, (btc or {}).get(tf))
+        df = attach_market(df, derivs, (btc or {}).get(tf), base)
         feats = fe.compute(df, TF_MS[tf], fe_cfg)
         feats.index = df.index
         res = smc.detect(df, feats, data.get((sym, "1d")), data.get((sym, "1w")), TF_MS[tf], smc_cfg)
