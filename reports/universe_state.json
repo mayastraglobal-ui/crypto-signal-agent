@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 444,
+ "runs": 445,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -115,6 +115,9 @@
   "W": [
    "thin_book",
    "volume_7d"
+  ],
+  "TRX": [
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -163,6 +166,7 @@
   "MAGIC": [
    "data_degraded"
   ],
-  "W": []
+  "W": [],
+  "TRX": []
  }
 }

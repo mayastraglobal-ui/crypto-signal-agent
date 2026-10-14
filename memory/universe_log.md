@@ -610,3 +610,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-14 07:40 UTC
 - **FLAG** ZEC - possible wash volume: 24h volume is 1,037x the 1% order-book depth (flag only, not excluded)
+
+## 2026-10-14 10:32 UTC
+- **EXCLUDED** TRX - 7-day average volume $26M < $50M
