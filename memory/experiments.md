@@ -1117,3 +1117,34 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0100 | 2026-10-14 01:13 | P10-CROWDING-FADE-V3@1.0 | liquidity_reversal | 4h | When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way. |
 | EXP-0101 | 2026-10-14 01:13 | P10-CROWDING-FADE-V4@1.0 | liquidity_reversal | 4h | When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way. |
 | EXP-0102 | 2026-10-14 01:13 | P09-SWEEP-MSS-V5@1.0 | liquidity_reversal | 1h, 30m, 15m | A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes. |
+
+### Feedback: TRD-H4-BREAKOUT-FDISP@1.0
+- timestamp: 2026-10-14 15:30 UTC · source: Claude daily review 2026-10-14 · evidence: BACKTEST_EVIDENCE: 4 cells, 3036 trades (449 + 703 + 777 + 1107) · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP@1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-12
+- parent: result: TRD-H4-BREAKOUT@1.0 30m
+- hypothesis: TRD-H4-BREAKOUT@1.0 loses on false_breakout (-0.18R a trade with it, +0.64R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+- result: BACKTEST 30m BACKTESTING 449 trades +0.177R (unseen +0.306R) and 1h BACKTESTING 703 trades +0.132R (unseen +0.257R), each held back only by Monte Carlo 95% worst drawdown per 100 trades (21.6R and 22.5R, limit 17R); 15m FAILED 777 trades -0.021R; 5m FAILED 1107 trades -0.177R.
+- teaches: the same displacement rule gives almost the same result on the parent with the volume rule (this card) as on the parent without it (TRD-H4-BREAKOUT-S3-FDISP: 30m 467 trades +0.169R, 1h 747 trades +0.125R today). So the gain comes from the displacement rule, not from the volume rule, and it repeats on two related parents (not independent tests: they share most trades). It helps on 30m and 1h, not on 15m or 5m.
+- next: no further change. Two near-copies now wait on the same drawdown gate; if both reach PAPER_TRADING, treat their paper signals as one test.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0
+- timestamp: 2026-10-14 15:30 UTC · source: Claude daily review 2026-10-14 (update: the 15m cell changed status) · evidence: BACKTEST_EVIDENCE: 4 cells, 3169 trades (467 + 747 + 803 + 1152) · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP@1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-12
+- parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+- hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout (-0.24R a trade with it, +0.57R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+- result: BACKTEST 30m BACKTESTING 467 trades +0.169R (unseen +0.299R); 1h BACKTESTING 747 trades +0.125R (unseen +0.263R), Monte Carlo 95% worst drawdown per 100 trades 23.4R (limit 17R); 15m BACKTESTING -> FAILED, 803 trades -0.017R; 5m FAILED 1152 trades -0.175R.
+- teaches: one more day of data left the 30m and 1h results almost unchanged (30m +0.187R -> +0.169R, 1h +0.126R -> +0.125R) and confirmed that the rule does nothing for 15m. The pattern "works on 30m and 1h, not below" now holds for both FDISP cards.
+- next: no further change; same as yesterday.
+
+### Feedback: donchian_breakout-VEXIT-S4@1.1
+- timestamp: 2026-10-14 15:30 UTC · source: Claude daily review 2026-10-14 (update: the 30m cell changed status) · evidence: BACKTEST_EVIDENCE: 3 cells, 4265 trades (722 + 2052 + 1491) · confidence: medium · strategy: donchian_breakout-VEXIT-S4@1.1 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-12
+- parent: source: [C03] Common Risk Factors in Cryptocurrency (Liu, Tsyvinski, Wu)
+- hypothesis: One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last 126 candles (21 days on 4h), shorts only when it rose less. Coins that beat the market over 1 to 4 weeks kept beating it in the paper, among large coins; the filter should drop breakouts that go against relative strength.
+- result: BACKTEST 4h PAPER_TRADING 722 trades +0.213R (unseen +0.244R); 30m FAILED -> BACKTESTING, 1491 trades +0.003R (needs +0.12R); 1h FAILED 2052 trades -0.026R. No paper signal has closed yet.
+- teaches: the 30m cell keeps flipping between FAILED and BACKTESTING at an average of about 0R; the flips are noise around zero, not information. Only the 4h cell matters, and it is now judged by paper results.
+- next: stop this line (unchanged); ignore 30m status flips in future reviews unless its average moves clearly above the bar.
+
+### Hypothesis: score TEST and PAPER signals by correlated group, as the risk engine does (from C11)
+- timestamp: 2026-10-14 15:30 UTC · source: Claude daily review 2026-10-14 ([C11] https://www.shortform.com/pdf/market-wizards-pdf-jack-d-schwager and https://www.ninjatrader.com/futures/blogs/futures-trading-book-review-5-takeaways-from-the-little-book-of-market-wizards/) · evidence: HYPOTHESIS: derived from secondary summaries of a trading book (CLAIM: the interviewed traders cap the risk of each trade and never let one idea decide the account) and one observed case (BTC and ETH TEST shorts from the same strategy at 2026-10-12 23:59 UTC, -1.15R and -1.10R) · confidence: low · strategy: TEST and PAPER stages · asset: signal coins · timeframe: all · regime: - · review: 2027-01-12
+  - hypothesis: when two TEST or PAPER signals of the same strategy and direction fire within the same hour on coins whose returns move together, they are one idea. Counting them as two inflates both the number of samples and the measured losses or wins.
+  - what exists already: for LIVE positions the risk engine allows only 1 position per direction in a group of coins whose 1h returns correlate at 0.7 or more (config.yaml -> risk -> corr_threshold). The TEST alerts' cooldown is per coin, so this grouping does not reach TEST and PAPER results.
+  - how to test: an engine report, not a lab card - for the operator. Re-count closed TEST and PAPER results with same-hour, same-direction, correlated signals merged into one; compare the sample size and the average R with the plain count.
+  - stop if: such clusters turn out to be rare (under 10% of TEST and PAPER signals).
