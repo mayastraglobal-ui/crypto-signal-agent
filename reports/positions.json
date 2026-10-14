@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-14 11:32",
+ "generated_utc": "2026-10-14 12:38",
  "book": {
-  "utc": "2026-10-14 11:32",
-  "beijing": "2026-10-14 19:32",
+  "utc": "2026-10-14 12:38",
+  "beijing": "2026-10-14 20:38",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,10 +20,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-14 11:32 UTC / 2026-10-14 19:32 Beijing",
+  "POSITION BOOK \u2014 2026-10-14 12:38 UTC / 2026-10-14 20:38 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC"
+  "Risk:      no halt \u00b7 risk per trade 0.5%"
  ],
  "risk": {
   "day_r": 0.0,
@@ -40,15 +40,8 @@
   "blackout_now": [
    "US CPI (Sep data)"
   ],
-  "upcoming_events": [
-   {
-    "start_utc": "2026-10-14 12:30",
-    "end_utc": "2026-10-14 12:30",
-    "type": "CPI",
-    "name": "US CPI (Sep data)"
-   }
-  ],
-  "next_event": "US CPI (Sep data) 2026-10-14 12:30 UTC",
+  "upcoming_events": [],
+  "next_event": null,
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],

@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-14 11:32",
+ "utc": "2026-10-14 12:38",
  "verdict": {
   "code": "NEWS",
   "icon": "\u26c8",
@@ -51,11 +51,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0063,
-    "oi_24h_pct": -1.4,
+    "funding_pct": 0.0015,
+    "oi_24h_pct": -2.8,
     "label": "neutral"
    },
-   "change_24h": -0.12
+   "change_24h": -0.69
   },
   {
    "coin": "ETH",
@@ -89,11 +89,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0039,
-    "oi_24h_pct": -4.4,
+    "funding_pct": 0.0018,
+    "oi_24h_pct": -0.7,
     "label": "neutral"
    },
-   "change_24h": -0.07
+   "change_24h": -0.8
   },
   {
    "coin": "SOL",
@@ -109,8 +109,8 @@
    },
    "adx": {
     "1d": 31.0,
-    "4h": 34.0,
-    "1h": 14.0
+    "4h": 35.0,
+    "1h": 13.0
    },
    "vol": {
     "atr_pct": 4.48,
@@ -127,11 +127,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0089,
-    "oi_24h_pct": -3.0,
+    "funding_pct": 0.0048,
+    "oi_24h_pct": -1.0,
     "label": "neutral"
    },
-   "change_24h": 0.41
+   "change_24h": -0.5
   },
   {
    "coin": "SUI",
@@ -165,11 +165,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0019,
-    "oi_24h_pct": 0.5,
+    "funding_pct": 0.0009,
+    "oi_24h_pct": 0.1,
     "label": "neutral"
    },
-   "change_24h": 1.33
+   "change_24h": -0.56
   },
   {
    "coin": "XRP",
@@ -203,11 +203,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0029,
-    "oi_24h_pct": 2.0,
+    "funding_pct": 0.0022,
+    "oi_24h_pct": 0.8,
     "label": "neutral"
    },
-   "change_24h": 1.03
+   "change_24h": -0.13
   },
   {
    "coin": "ZEC",
@@ -223,8 +223,8 @@
    },
    "adx": {
     "1d": 30.0,
-    "4h": 19.0,
-    "1h": 21.0
+    "4h": 18.0,
+    "1h": 20.0
    },
    "vol": {
     "atr_pct": 8.55,
@@ -241,39 +241,31 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.01,
-    "oi_24h_pct": -0.3,
+    "funding_pct": 0.0068,
+    "oi_24h_pct": 3.2,
     "label": "neutral"
    },
-   "change_24h": 3.46
+   "change_24h": 2.91
   }
  ],
- "alts_vs_btc_24h": 1.15,
+ "alts_vs_btc_24h": 0.19,
  "fear_greed": {
   "value": 62,
   "label": "Greed",
   "yesterday": 57
  },
  "btc_dominance": {
-  "pct": 59.811,
-  "utc": "2026-10-14 11:32",
-  "ch24": 0.47,
+  "pct": 59.789,
+  "utc": "2026-10-14 12:38",
+  "ch24": 0.44,
   "ch7": null,
   "read": "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
  },
- "events": [
-  {
-   "start_utc": "2026-10-14 12:30",
-   "name": "US CPI (Sep data)",
-   "hours": 1.0
-  }
- ],
+ "events": [],
  "blackout_now": [
   "US CPI (Sep data)"
  ],
- "warnings": [
-  "High-impact event within 24 hours: no new trades from 1 hour before to 1 hour after."
- ],
+ "warnings": [],
  "settings": {
   "funding_long_pct": 0.03,
   "funding_short_pct": -0.01,
@@ -282,5 +274,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\u26c8 <b>Market weather \u00b7 10-14 19:32 Beijing</b>\nVerdict: <b>News risk - stay out</b>\nA high-impact event is close. Price can jump both ways in seconds.\n\nBTC trend: 1D TRANSITION \u00b7 4H UNCLEAR \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,397 \u2013 84,941) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0063%/8h, open interest -1.4% in 24h)\nAltcoins vs BTC (24h): +1.1%\nBTC dominance: 59.8% \u00b7 24h +0.47 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Greed 62\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\n<b>Events</b>\n\u2022 US CPI (Sep data) 10-14 20:30 Beijing\n\n\u26a0\ufe0f High-impact event within 24 hours: no new trades from 1 hour before to 1 hour after.\n\nFits today: waiting until the event has passed\nAvoid: any new trade\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\u26c8 <b>Market weather \u00b7 10-14 20:38 Beijing</b>\nVerdict: <b>News risk - stay out</b>\nA high-impact event is close. Price can jump both ways in seconds.\n\nBTC trend: 1D TRANSITION \u00b7 4H UNCLEAR \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,397 \u2013 84,941) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0015%/8h, open interest -2.8% in 24h)\nAltcoins vs BTC (24h): +0.2%\nBTC dominance: 59.8% \u00b7 24h +0.44 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Greed 62\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\nFits today: waiting until the event has passed\nAvoid: any new trade\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

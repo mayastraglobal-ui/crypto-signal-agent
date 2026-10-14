@@ -14973,3 +14973,27 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-14 11:00,ZEC,15m,FVG_RETRACE,bear,,1245.83,1253.91,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-14 10:45,SUI,15m,FVG_FILLED,bear,,1.0479,1.0514,,,1h,RANGE,,smc-1.0,Binance
 2026-10-14 11:30,SUI,15m,FVG_RETRACE,bear,,1.0558,1.0585,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:30,BTC,30m,OB_RETEST,bear,,83572.0,84146.72,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-14 12:15,BTC,15m,FVG_RETRACE,bear,,83559.28,83766.38,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:15,BTC,15m,FVG_FILLED,bear,,83559.28,83766.38,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:30,BTC,15m,FVG,bull,,83508.01,83654.0,0.78,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:15,ETH,15m,BOS,bull,2507.52,,,1.477,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-14 12:15,ETH,15m,FVG_RETRACE,bear,,2510.66,2514.91,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:15,ETH,15m,FVG_FILLED,bear,,2510.66,2514.91,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:30,ETH,15m,FVG,bull,,2505.26,2509.15,0.52,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:00,SOL,30m,FVG_RETRACE,bear,,107.27,107.46,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:30,SOL,30m,FVG_FILLED,bear,,107.27,107.46,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:15,SOL,15m,FVG_RETRACE,bear,,107.35,107.77,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:15,SOL,15m,FVG_FILLED,bear,,107.35,107.77,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:00,XRP,4h,SWEEP,bear,1.3824,,,0.202,,1d,TRANSITION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-14 12:00,XRP,4h,FVG_RETRACE,bear,,1.3829,1.3953,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:30,XRP,30m,OB_INVALID,bear,,1.3736,1.3801,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-14 12:30,XRP,30m,OB_INVALID,bear,,1.3739,1.3786,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-14 12:15,XRP,15m,BOS,bull,1.3759,,,0.874,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-14 12:15,XRP,15m,ORDER_BLOCK,bull,,1.3704,1.3755,,NY AM,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-14 12:15,XRP,15m,FVG_FILLED,bear,,1.3743,1.3775,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-14 12:00,ZEC,4h,FVG_RETRACE,bull,,1228.99,1241.82,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-14 12:00,ZEC,4h,FVG_FILLED,bull,,1228.99,1241.82,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-14 12:15,ZEC,15m,WEAK_BREAK,bull,1246.81,,,0.539,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-14 12:15,ZEC,15m,FVG_FILLED,bear,,1245.83,1253.91,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-14 12:15,SUI,15m,FVG_FILLED,bear,,1.0558,1.0585,,NY AM,1h,RANGE,,smc-1.0,Binance
