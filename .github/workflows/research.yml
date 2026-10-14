@@ -62,9 +62,15 @@ jobs:
           git config merge.append.driver "python3 append_merge.py %O %A %B"   # .gitattributes: merge=append
           git add reports memory strategies_lab.yaml   # + the engine's variant-search cards (Phase 17 C)
           git commit -m "Research $(date -u +'%Y-%m-%d %H:%M') UTC" || echo "Nothing new"
-          bash git_sync.sh                         # newest main; clashing generated reports: this run's copies win
-          python memory_guard.py --after-sync      # the merge broke no append-only file and no lab card
-          git push
+          # newest main (git_sync.sh: clashing generated reports - this run's copies win), the merge broke no
+          # append-only file and no lab card, then push. Retried: GitHub sometimes answers a push with "Internal
+          # Server Error" (scan of 14 Oct 2026, 15:37 UTC lost its results that way).
+          for i in 1 2 3 4; do
+            bash git_sync.sh && python memory_guard.py --after-sync && git push && exit 0
+            echo "save: try $i failed - retrying"
+            sleep $((i * 10))
+          done
+          exit 1
 
       - name: Publish the large report files (branch live-reports, one commit, no history)
         run: python publish_live.py
