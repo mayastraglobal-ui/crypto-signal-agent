@@ -596,10 +596,10 @@ class Watcher:
             self.coins = list(u.get("signal") or [])
         except (OSError, ValueError):
             self.coins = ["BTC", "ETH"]
-        if "BTC" not in self.coins:
-            self.extra = ["BTC"]                                    # btc_ret building block
-        else:
-            self.extra = []
+        # downloaded but never signalled: BTC (the btc_ret building block) and the rest of the operator's own coins
+        # (2026-10-14: the market-wide counts of strategy 11 and the leader ranks of strategy 12 count the same coins
+        # live as in the backtest - BNB was missing live, below the volume rule)
+        self.extra = [c for c in dict.fromkeys(["BTC"] + sc.breadth_coins(self.cfg)) if c not in self.coins]
         try:                                                        # roadmap step 5: strategies by market type
             self.regime_fit = json.load(open(os.path.join(ROOT, "reports", "regime_fit.json")))
         except (OSError, ValueError):
@@ -1949,7 +1949,7 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
     # the live watcher - the replay used to give them to BTC only, so cards using them never fired on the others
     extra = [c for c in dict.fromkeys(["BTC"] + list(w.coins) + list(sc.breadth_coins(w.cfg))) if c not in with_tests]
     for coin in with_tests + extra:
-        tfs = REPLAY_TFS if coin in with_tests or coin == "BTC" else [t for t in REPLAY_TFS if t in sc.BREADTH_TFS]
+        tfs = REPLAY_TFS if coin in with_tests or coin == "BTC" else [t for t in REPLAY_TFS if t in sc.MARKET_TFS]
         for tf in tfs:                               # enough candles: the replay window + the indicators' warm-up
             n = int((now_ms - start) // sc.TF_MS[tf]) + 600
             try:

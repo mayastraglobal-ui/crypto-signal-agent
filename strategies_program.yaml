@@ -4086,3 +4086,280 @@
   changelog:
   - '1.0 (2026-10-13): strategy 11 control - V1 without its extras (benchmark, never alerts)'
   added: '2026-10-13'
+- id: P12-LEADER-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 12
+    name: Follow the leader (buy the strongest coin when BTC jumps)
+    version: V1
+  source: 'Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of
+    idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-14: 271 BTC +3% days in 5 years (Binance 4H, 7 coins), buying the leader +0.10R (unseen +0.10R),
+    the laggard -0.18R, every coin -0.05R'
+  hypothesis: When BTC jumps, the coin already leading the jump keeps rising for a day or two - more than BTC and more than
+    the coins that have not moved yet.
+  timeframes:
+  - 4h
+  description: 'BTC closes up at least 3% over the last 24 hours (6 candles of 4H) for the first candle, and this coin is
+    the one rising the most compared with BTC over those 24 hours among the operator''s coins: buy it. Long only (its short rule close < 0 never fires: the short mirror lost in the study).'
+  params:
+    look: 6
+    jump: 3
+  long:
+  - btc_ret({look}) >= {jump}
+  - prev(btc_ret({look})) < {jump}
+  - lead_rank({look}) == 1
+  short:
+  - close < 0
+  exit_long: []
+  exit_short: []
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    short:
+    - 2R
+    split:
+    - 1.0
+  time_stop_bars: 12
+  cooldown_bars: 6
+  control_twin: P12-LEADER-C
+  known_weaknesses: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast;
+    few trades (about 1 a week on 4H).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - EXPANSION
+    - TRANSITION
+    - RANGE
+    who_pays: 'traders who sell the strongest coin too early (or short it) when the market jumps, and those who buy the ''cheap''
+      coins that have not moved yet: money keeps rotating into the leader'
+    mechanism: when BTC jumps, new money chases the coin moving hardest; its lead over BTC tends to last a day or two
+    fails_when: one-coin news pumps that reverse, the late part of a long rally, choppy weeks where a 3% BTC day is noise;
+      the 2026-10-14 study leaned on ZEC's 2025 rally (about 0R without ZEC)
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative or it does not beat its control; demoted by
+      the weekly review when its live results turn negative
+  changelog:
+  - '1.0 (2026-10-14): strategy 12 V1 - BTC +3% in 24 hours, buy the leader of those 24 hours on the 4H close; 1.5 ATR stop,
+    2R target, 48-hour time stop'
+  added: '2026-10-14'
+- id: P12-LEADER-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 12
+    name: Follow the leader (buy the strongest coin when BTC jumps)
+    version: V2
+  source: 'Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of
+    idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-14: 271 BTC +3% days in 5 years (Binance 4H, 7 coins), buying the leader +0.10R (unseen +0.10R),
+    the laggard -0.18R, every coin -0.05R'
+  hypothesis: A sharper BTC jump (3% in 12 hours) shows the leader more clearly than a slow 24-hour rise.
+  timeframes:
+  - 4h
+  description: 'V1 measured over 12 hours (3 candles of 4H): BTC up at least 3% in 12 hours for the first candle, buy the
+    coin leading over those 12 hours. A faster, sharper jump. Long only (its short rule close < 0 never fires: the short mirror lost in the study).'
+  params:
+    look: 3
+    jump: 3
+  long:
+  - btc_ret({look}) >= {jump}
+  - prev(btc_ret({look})) < {jump}
+  - lead_rank({look}) == 1
+  short:
+  - close < 0
+  exit_long: []
+  exit_short: []
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    short:
+    - 2R
+    split:
+    - 1.0
+  time_stop_bars: 12
+  cooldown_bars: 3
+  known_weaknesses: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast;
+    few trades (about 1 a week on 4H).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - EXPANSION
+    - TRANSITION
+    - RANGE
+    who_pays: 'traders who sell the strongest coin too early (or short it) when the market jumps, and those who buy the ''cheap''
+      coins that have not moved yet: money keeps rotating into the leader'
+    mechanism: when BTC jumps, new money chases the coin moving hardest; its lead over BTC tends to last a day or two
+    fails_when: one-coin news pumps that reverse, the late part of a long rally, choppy weeks where a 3% BTC day is noise;
+      the 2026-10-14 study leaned on ZEC's 2025 rally (about 0R without ZEC)
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative or it does not beat its control; demoted by
+      the weekly review when its live results turn negative
+  changelog:
+  - '1.0 (2026-10-14): strategy 12 V2 - V1 over 12 hours (the study''s best version, found by searching - expect less)'
+  added: '2026-10-14'
+- id: P12-LEADER-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 12
+    name: Follow the leader (buy the strongest coin when BTC jumps)
+    version: V3
+  source: 'Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of
+    idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-14: 271 BTC +3% days in 5 years (Binance 4H, 7 coins), buying the leader +0.10R (unseen +0.10R),
+    the laggard -0.18R, every coin -0.05R'
+  hypothesis: 'The same leader effect, entered at the 1H close: earlier than V1.'
+  timeframes:
+  - 1h
+  description: 'V1 on 1H closes: BTC up at least 3% over the last 24 hours (24 candles of 1H) for the first candle, buy the
+    leader of those 24 hours at the 1H close - up to 3 hours earlier than V1. Long only (its short rule close < 0 never fires: the short mirror lost in the study).'
+  params:
+    look: 24
+    jump: 3
+  long:
+  - btc_ret({look}) >= {jump}
+  - prev(btc_ret({look})) < {jump}
+  - lead_rank({look}) == 1
+  short:
+  - close < 0
+  exit_long: []
+  exit_short: []
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    short:
+    - 2R
+    split:
+    - 1.0
+  time_stop_bars: 48
+  cooldown_bars: 24
+  known_weaknesses: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast;
+    few trades (about 1 a week on 4H).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - EXPANSION
+    - TRANSITION
+    - RANGE
+    who_pays: 'traders who sell the strongest coin too early (or short it) when the market jumps, and those who buy the ''cheap''
+      coins that have not moved yet: money keeps rotating into the leader'
+    mechanism: when BTC jumps, new money chases the coin moving hardest; its lead over BTC tends to last a day or two
+    fails_when: one-coin news pumps that reverse, the late part of a long rally, choppy weeks where a 3% BTC day is noise;
+      the 2026-10-14 study leaned on ZEC's 2025 rally (about 0R without ZEC)
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative or it does not beat its control; demoted by
+      the weekly review when its live results turn negative
+  changelog:
+  - '1.0 (2026-10-14): strategy 12 V3 - V1 entered on 1H closes (earlier entry)'
+  added: '2026-10-14'
+- id: P12-LEADER-C
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_reversal
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 12
+    name: Follow the leader (buy the strongest coin when BTC jumps)
+    version: C
+  source: 'Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of
+    idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version C'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  hypothesis: 'Control: buying any coin after a BTC jump - the benchmark the leader pick must beat.'
+  timeframes:
+  - 4h
+  description: 'Control: V1 without the leader rank - buy every coin when BTC closes up at least 3% in 24 hours. V1 must beat
+    it, or picking the leader adds nothing.'
+  params:
+    look: 6
+    jump: 3
+  long:
+  - btc_ret({look}) >= {jump}
+  - prev(btc_ret({look})) < {jump}
+  short:
+  - close < 0
+  exit_long: []
+  exit_short: []
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    short:
+    - 2R
+    split:
+    - 1.0
+  time_stop_bars: 12
+  cooldown_bars: 6
+  twin_of: P12-LEADER-V1
+  known_weaknesses: 'A benchmark, never an alert: buys every coin after a BTC jump, the laggards too.'
+  changelog:
+  - '1.0 (2026-10-14): strategy 12 control - V1 without the leader rank (benchmark, never alerts)'
+  added: '2026-10-14'

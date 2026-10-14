@@ -31,8 +31,12 @@ All rules are written with the engine's building blocks (`strategies.yaml` heade
 | 10 | Crowding fade | crowded side (funding, open interest) and price turns against it | funding, open interest | range |
 | 11 | Early momentum (added 2026-10-13) | the first 1-2 steps of a market-wide break (3+ coins), never a late step | 20-candle break, volume, `mkt_up` / `mkt_dn`, `steps_up` / `steps_dn`, RSI, ATR | 1H moving, 4H not strongly against |
 
+| 12 | Follow the leader (added 2026-10-14) | BTC up 3%+ in 24 hours: buy the coin rising most vs BTC (long only) | `btc_ret`, `lead_rank` | 4H not in a STRONG bear |
+
 Strategy 11 has its own versions (V1 30m, V2 + 24-hour level and squeeze, V3 on 1H, V4 retest, C = control that
 never alerts) and its own gate: [`docs/STRATEGY_11.md`](STRATEGY_11.md).
+Strategy 12 has its own versions too (V1 4H over 24 hours, V2 4H over 12 hours, V3 on 1H, C = control that buys every
+coin and never alerts): [`docs/STRATEGY_12.md`](STRATEGY_12.md).
 
 ## The 4 versions of each strategy
 

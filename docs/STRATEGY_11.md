@@ -73,7 +73,8 @@ Every 🔵 TEST alert also waits for the **5m confirmation**, as all TEST alerts
 Research tests the program 2 strategies a night, the ones never tested first:
 - 13 Oct night: 7 + 8;
 - 14 Oct night: 9 + 10;
-- **15 Oct night: 11**, results on **Friday 16 Oct** in `reports/program.md`.
+- **15 Oct (08:40 Beijing): 1 + 11**, results about 09:45 the same morning in `reports/program.md` (corrected 14 Oct).
+- 16 Oct: strategy 12 ([`docs/STRATEGY_12.md`](STRATEGY_12.md)).
 
 The usual bar applies, with nothing lowered:
 - 5 years of data, fees and funding, the unseen last 30%;
@@ -116,7 +117,7 @@ Changes on 13 Oct:
 - The 🌊 notes are **off by default** (`/momentum on` switches them on). When on: one message per check for all
   coins, at least 3 coins, at most 6 a day.
 - The step counter restarts after a close back over the 30m EMA20.
-- Strategy 11 still gets its 5-year test (15 Oct night). Expect it to fail; if a version passes the full bar, it will
+- Strategy 11 still gets its 5-year test (15 Oct morning). Expect it to fail; if a version passes the full bar, it will
   alert like any other.
 - 🔵 TEST alerts on Telegram come only from strategies **not FAILED and positive overall**, on coins averaging at
   least +0.10R. That is 10 strategy timeframes, 9 of them 4H, instead of 30. GitHub still records every TEST setup.

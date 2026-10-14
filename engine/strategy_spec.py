@@ -111,12 +111,15 @@ FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "mac
              "cross_up", "cross_down", "within", "bars_since", "abs", "min", "max",
              "funding_z", "oi_chg", "btc_ret",                  # Phase 17 C
              "steps_up", "steps_dn",                            # strategy 11: which breakout step of a move this is
+             "lead_rank",                                       # strategy 12: the coin's rank vs BTC (1 = strongest)
              "vp_poc", "vp_vah", "vp_val"}                      # Phase 18 C: volume profile of the last n candles
 MARKET_BLOCKS = {"funding_rate", "oi", "ls_ratio", "taker_ratio", "funding_z", "oi_chg"}   # futures data
 LEAD_BLOCKS = {"btc_ret"}
 # strategy 11 (2026-10-13): market-wide breaks - how many of the operator's coins closed beyond their 20-candle high /
 # low on this candle or the one before (scanner.breadth_frames; the watched coins, the same in backtest and live)
-BREADTH_BLOCKS = {"mkt_up", "mkt_dn"}
+# strategy 12 (2026-10-14): lead_rank(n) - which of the operator's coins rises the most vs BTC (scanner.leader_frames);
+# like the counts it needs every own coin's candles first
+BREADTH_BLOCKS = {"mkt_up", "mkt_dn", "lead_rank"}
 COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
            "funding_rate", "oi", "ls_ratio", "taker_ratio",           # Phase 17 C: futures market structure
            # engine/features.py
@@ -573,7 +576,7 @@ def _names(expr):
 
 
 def uses_breadth(card):
-    """Does a rule of this card read the market-wide break counts (mkt_up / mkt_dn)?"""
+    """Does a rule of this card read a market-wide block (the break counts mkt_up / mkt_dn, the leader rank)?"""
     names = set()
     for k in ("long", "short", "exit_long", "exit_short"):
         for r in card.get(k) or []:

@@ -530,11 +530,12 @@ def main():
                     + (f" - {'; '.join(rep['problems'])}" if rep["problems"] else ""))
         return data, quality
 
-    # strategy 11: the market-wide break counts (mkt_up / mkt_dn) need every own coin's candles before the first coin
-    # is tested - only when a card tonight uses them (the same candles the coin loop reads; cached downloads)
+    # strategies 11 / 12: the market-wide break counts (mkt_up / mkt_dn) and the leader ranks (lead_rank) need every
+    # own coin's candles before the first coin is tested - only when a card tonight uses them (the same candles the
+    # coin loop reads; cached downloads)
     breadth_by_tf = {}
     if any(sspec.uses_breadth(x) for x in strategies):
-        btf = [tf for tf in sc.BREADTH_TFS if tf in tfs]
+        btf = [tf for tf in sc.MARKET_TFS if tf in tfs]
         fb = {}
         for base in sc.breadth_coins(cfg):
             try:
@@ -544,8 +545,8 @@ def main():
                 continue
             fb[base] = {tf: d_[(base + cfg["market"]["quote"], tf)] for tf in btf
                         if q_[(base, tf)]["state"] != dq.UNSAFE}
-        breadth_by_tf = sc.breadth_frames(fb, btf)
-        log(f"market-wide breaks (strategy 11): {len(fb)} coins on {', '.join(btf) or '-'}")
+        breadth_by_tf = sc.market_frames(fb, btf)
+        log(f"market-wide breaks + leader ranks (strategies 11 / 12): {len(fb)} coins on {', '.join(btf) or '-'}")
     for base in coins:
         sym = base + cfg["market"]["quote"]
         data, quality = {}, {}
