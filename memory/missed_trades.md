@@ -852,3 +852,34 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - donchian_breakout-VEXIT-S4 v1.0 30m: blocked by the regime gate
   - donchian_breakout-VEXIT-S4 v1.1 1h: blocked by the regime gate
   - trend_pullback v1.0 30m: blocked by the regime gate
+
+### BTC up +3.0% (5.3x ATR), 2026-10-13 00:00 -> 2026-10-13 08:00
+- timestamp: 2026-10-14 01:13 UTC · source: engine: daily research run · evidence: FACT: move of 5.3x the 1H ATR within 12 hours; 123 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-10-21
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### ETH up +4.7% (5.5x ATR), 2026-10-13 00:00 -> 2026-10-13 07:00
+- timestamp: 2026-10-14 01:13 UTC · source: engine: daily research run · evidence: FACT: move of 5.5x the 1H ATR within 12 hours; 123 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-21
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### UNI up +9.6% (5.4x ATR), 2026-10-13 00:00 -> 2026-10-13 09:00
+- timestamp: 2026-10-14 01:13 UTC · source: engine: daily research run · evidence: FACT: move of 5.4x the 1H ATR within 12 hours; 123 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: UNI · timeframe: 1h · regime: EXPANSION · review: 2026-10-21
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - R4-CLUC v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate

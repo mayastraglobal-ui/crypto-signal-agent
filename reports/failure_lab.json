@@ -1,16 +1,8 @@
 {
  "enabled": true,
- "allowed": 1,
- "considered": 107,
- "new": [
-  {
-   "id": "TRD-H4-BREAKOUT-FDISP",
-   "tag": "false_breakout",
-   "kind": "DISP",
-   "parent": "TRD-H4-BREAKOUT@1.0|30m",
-   "evidence": "false_breakout in 75% of losses, n=253 losing trades (TRD-H4-BREAKOUT@1.0 30m: 559 trades, avg +0.100R, BACKTESTING; trades with false_breakout -0.185R, without +0.642R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
-  }
- ],
+ "allowed": 0,
+ "considered": 0,
+ "new": [],
  "pending": [],
  "results": [
   {
@@ -19,14 +11,29 @@
    "tag": "regime_mismatch",
    "kind": "HTF",
    "status": "BACKTESTING",
-   "trades": 291,
-   "avg_r": 0.036,
-   "test_r": 0.108,
-   "parent_avg_r": 0.145,
-   "parent_test_r": 0.219,
+   "trades": 330,
+   "avg_r": 0.025,
+   "test_r": 0.041,
+   "parent_avg_r": 0.123,
+   "parent_test_r": 0.135,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-13 01:02"
+   "checked": "2026-10-14 01:13"
+  },
+  {
+   "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
+   "parent": "TRD-H4-BREAKOUT@1.0|30m",
+   "tag": "false_breakout",
+   "kind": "DISP",
+   "status": "BACKTESTING",
+   "trades": 449,
+   "avg_r": 0.177,
+   "test_r": 0.306,
+   "parent_avg_r": 0.09,
+   "parent_test_r": 0.205,
+   "helped": true,
+   "passed": false,
+   "checked": "2026-10-14 01:13"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -34,14 +41,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "BACKTESTING",
-   "trades": 412,
-   "avg_r": 0.187,
-   "test_r": 0.364,
-   "parent_avg_r": 0.005,
-   "parent_test_r": 0.191,
+   "trades": 467,
+   "avg_r": 0.169,
+   "test_r": 0.299,
+   "parent_avg_r": 0.002,
+   "parent_test_r": 0.143,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-13 01:02"
+   "checked": "2026-10-14 01:13"
   }
  ],
  "by_kind": {
@@ -51,8 +58,8 @@
    "passed": 0
   },
   "DISP": {
-   "tried": 1,
-   "helped": 1,
+   "tried": 2,
+   "helped": 2,
    "passed": 0
   }
  },
@@ -63,8 +70,8 @@
    "passed": 0
   },
   "false_breakout": {
-   "tried": 1,
-   "helped": 1,
+   "tried": 2,
+   "helped": 2,
    "passed": 0
   }
  },

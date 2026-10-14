@@ -1,16 +1,16 @@
 {
- "updated_utc": "2026-10-13 01:02",
+ "updated_utc": "2026-10-14 01:13",
  "tested_tonight": [
-  7,
-  8
- ],
- "why": {
-  "7": "never tested yet",
-  "8": "never tested yet"
- },
- "next_night": [
   9,
   10
+ ],
+ "why": {
+  "9": "never tested yet",
+  "10": "never tested yet"
+ },
+ "next_night": [
+  1,
+  11
  ],
  "strategies": {
   "1": "Breakout (Donchian + volume + ADX)",
@@ -6240,6 +6240,1642 @@
     "recovery factor -0.97 (net -489.3R / max drawdown 505.3R) - needs 3",
     "Monte Carlo 95% worst drawdown per 100 trades 50.5R - limit 17R",
     "longest drawdown 1793 days = 99% of the tested period (limit 55%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V1@1.0|4h": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V1",
+   "id": "P09-SWEEP-MSS-V1",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 4,
+   "win_rate": 25.0,
+   "avg_r": -0.615,
+   "gross_avg_r": -0.585,
+   "pf": 0.22,
+   "test_avg_r": -1.032,
+   "test_trades": 2,
+   "long_avg_r": -0.458,
+   "short_avg_r": -1.087,
+   "fees_avg_r": 0.03,
+   "coins": {
+    "BNB": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 0.69,
+     "gross_avg_r": 0.699,
+     "total_r": 0.7,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.087,
+     "gross_avg_r": -1.021,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.044,
+     "gross_avg_r": -1.012,
+     "total_r": -1.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.044
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.02,
+     "gross_avg_r": -1.005,
+     "total_r": -1.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.02
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 4 trades",
+    "avg -0.62R/trade (needs +0.10R)",
+    "profit factor 0.22",
+    "longest drawdown 3019 days = 100% of the tested period (limit 60%)",
+    "only 2 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V2@1.0|1h": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V2",
+   "id": "P09-SWEEP-MSS-V2",
+   "tf": "1h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 13,
+   "win_rate": 46.2,
+   "avg_r": 0.116,
+   "gross_avg_r": 0.159,
+   "pf": 1.22,
+   "test_avg_r": 0.612,
+   "test_trades": 5,
+   "long_avg_r": -0.325,
+   "short_avg_r": 0.632,
+   "fees_avg_r": 0.043,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 0.894,
+     "gross_avg_r": 0.98,
+     "total_r": 0.9,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": 0.894
+    },
+    "ETH": {
+     "n": 2,
+     "win_rate": 50.0,
+     "avg_r": -0.385,
+     "gross_avg_r": -0.351,
+     "total_r": -0.8,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 3,
+     "win_rate": 33.3,
+     "avg_r": -0.529,
+     "gross_avg_r": -0.491,
+     "total_r": -1.6,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.07
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 2,
+     "win_rate": 100.0,
+     "avg_r": 2.452,
+     "gross_avg_r": 2.5,
+     "total_r": 4.9,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": 2.462
+    },
+    "XRP": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -0.612,
+     "gross_avg_r": -0.545,
+     "total_r": -0.6,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 4,
+     "win_rate": 25.0,
+     "avg_r": -0.329,
+     "gross_avg_r": -0.298,
+     "total_r": -1.3,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 0.386
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 13 trades",
+    "longest drawdown 2823 days = 90% of the tested period (limit 60%)",
+    "only 5 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V2@1.0|30m": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V2",
+   "id": "P09-SWEEP-MSS-V2",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 35,
+   "win_rate": 34.3,
+   "avg_r": -0.043,
+   "gross_avg_r": 0.012,
+   "pf": 0.92,
+   "test_avg_r": -0.036,
+   "test_trades": 13,
+   "long_avg_r": 0.285,
+   "short_avg_r": -0.237,
+   "fees_avg_r": 0.056,
+   "coins": {
+    "BNB": {
+     "n": 4,
+     "win_rate": 25.0,
+     "avg_r": -0.571,
+     "gross_avg_r": -0.492,
+     "total_r": -2.3,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.201
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.075,
+     "gross_avg_r": -1.024,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 4,
+     "win_rate": 25.0,
+     "avg_r": -0.277,
+     "gross_avg_r": -0.222,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.111
+    },
+    "SOL": {
+     "n": 4,
+     "win_rate": 50.0,
+     "avg_r": 0.696,
+     "gross_avg_r": 0.737,
+     "total_r": 2.8,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 0.682
+    },
+    "SUI": {
+     "n": 6,
+     "win_rate": 16.7,
+     "avg_r": -0.481,
+     "gross_avg_r": -0.43,
+     "total_r": -2.9,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": -0.742
+    },
+    "UNI": {
+     "n": 7,
+     "win_rate": 28.6,
+     "avg_r": 0.052,
+     "gross_avg_r": 0.092,
+     "total_r": 0.4,
+     "positive": true,
+     "test_n": 1,
+     "test_avg_r": -1.078
+    },
+    "XRP": {
+     "n": 5,
+     "win_rate": 40.0,
+     "avg_r": -0.359,
+     "gross_avg_r": -0.268,
+     "total_r": -1.8,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": -0.257
+    },
+    "ZEC": {
+     "n": 4,
+     "win_rate": 75.0,
+     "avg_r": 1.121,
+     "gross_avg_r": 1.161,
+     "total_r": 4.5,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 2.278
+    }
+   },
+   "positive_coins": [
+    "UNI"
+   ],
+   "why_not": [
+    "avg -0.04R/trade (needs +0.10R)",
+    "profit factor 0.92",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V2@1.0|15m": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V2",
+   "id": "P09-SWEEP-MSS-V2",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 102,
+   "win_rate": 32.4,
+   "avg_r": -0.245,
+   "gross_avg_r": -0.16,
+   "pf": 0.62,
+   "test_avg_r": -0.414,
+   "test_trades": 46,
+   "long_avg_r": -0.361,
+   "short_avg_r": -0.134,
+   "fees_avg_r": 0.086,
+   "coins": {
+    "BNB": {
+     "n": 11,
+     "win_rate": 18.2,
+     "avg_r": -0.683,
+     "gross_avg_r": -0.586,
+     "total_r": -7.5,
+     "positive": false,
+     "test_n": 6,
+     "test_avg_r": -0.295
+    },
+    "BTC": {
+     "n": 12,
+     "win_rate": 25.0,
+     "avg_r": -0.603,
+     "gross_avg_r": -0.448,
+     "total_r": -7.2,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.745
+    },
+    "ETH": {
+     "n": 8,
+     "win_rate": 0.0,
+     "avg_r": -0.74,
+     "gross_avg_r": -0.648,
+     "total_r": -5.9,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": -0.774
+    },
+    "SOL": {
+     "n": 12,
+     "win_rate": 25.0,
+     "avg_r": -0.486,
+     "gross_avg_r": -0.407,
+     "total_r": -5.8,
+     "positive": false,
+     "test_n": 7,
+     "test_avg_r": -0.276
+    },
+    "SUI": {
+     "n": 17,
+     "win_rate": 41.2,
+     "avg_r": -0.081,
+     "gross_avg_r": -0.018,
+     "total_r": -1.4,
+     "positive": false,
+     "test_n": 8,
+     "test_avg_r": -0.714
+    },
+    "UNI": {
+     "n": 18,
+     "win_rate": 44.4,
+     "avg_r": 0.047,
+     "gross_avg_r": 0.119,
+     "total_r": 0.8,
+     "positive": true,
+     "test_n": 9,
+     "test_avg_r": -0.339
+    },
+    "XRP": {
+     "n": 7,
+     "win_rate": 42.9,
+     "avg_r": 0.46,
+     "gross_avg_r": 0.57,
+     "total_r": 3.2,
+     "positive": true,
+     "test_n": 3,
+     "test_avg_r": 0.324
+    },
+    "ZEC": {
+     "n": 17,
+     "win_rate": 41.2,
+     "avg_r": -0.072,
+     "gross_avg_r": -0.013,
+     "total_r": -1.2,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.305
+    }
+   },
+   "positive_coins": [
+    "UNI",
+    "XRP"
+   ],
+   "why_not": [
+    "avg -0.25R/trade (needs +0.10R)",
+    "profit factor 0.62",
+    "max drawdown 32.1R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V3@1.0|4h": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V3",
+   "id": "P09-SWEEP-MSS-V3",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 1,
+   "win_rate": 0.0,
+   "avg_r": -1.02,
+   "gross_avg_r": -1.005,
+   "pf": 0.0,
+   "test_avg_r": -1.02,
+   "test_trades": 1,
+   "long_avg_r": -1.02,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.014,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.02,
+     "gross_avg_r": -1.005,
+     "total_r": -1.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.02
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "avg -1.02R/trade (needs +0.10R)",
+    "profit factor 0.00",
+    "only 1 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V4@1.0|4h": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V4",
+   "id": "P09-SWEEP-MSS-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 4,
+   "win_rate": 25.0,
+   "avg_r": -0.383,
+   "gross_avg_r": -0.351,
+   "pf": 0.51,
+   "test_avg_r": -1.032,
+   "test_trades": 2,
+   "long_avg_r": -0.148,
+   "short_avg_r": -1.087,
+   "fees_avg_r": 0.031,
+   "coins": {
+    "BNB": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 1.62,
+     "gross_avg_r": 1.634,
+     "total_r": 1.6,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.087,
+     "gross_avg_r": -1.021,
+     "total_r": -1.1,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.044,
+     "gross_avg_r": -1.012,
+     "total_r": -1.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.044
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.02,
+     "gross_avg_r": -1.005,
+     "total_r": -1.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.02
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 4 trades",
+    "avg -0.38R/trade (needs +0.10R)",
+    "profit factor 0.51",
+    "longest drawdown 3019 days = 100% of the tested period (limit 60%)",
+    "only 2 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V5@1.0|1h": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V5",
+   "id": "P09-SWEEP-MSS-V5",
+   "tf": "1h",
+   "status": "FAILED",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 44,
+   "win_rate": 36.4,
+   "avg_r": -0.177,
+   "gross_avg_r": -0.134,
+   "pf": 0.7,
+   "test_avg_r": -0.446,
+   "test_trades": 18,
+   "long_avg_r": -0.38,
+   "short_avg_r": -0.022,
+   "fees_avg_r": 0.043,
+   "coins": {
+    "BNB": {
+     "n": 5,
+     "win_rate": 0.0,
+     "avg_r": -0.869,
+     "gross_avg_r": -0.824,
+     "total_r": -4.3,
+     "positive": false,
+     "test_n": 4,
+     "test_avg_r": -0.941
+    },
+    "BTC": {
+     "n": 3,
+     "win_rate": 66.7,
+     "avg_r": 0.096,
+     "gross_avg_r": 0.182,
+     "total_r": 0.3,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": -0.113
+    },
+    "ETH": {
+     "n": 9,
+     "win_rate": 55.6,
+     "avg_r": -0.197,
+     "gross_avg_r": -0.152,
+     "total_r": -1.8,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": -1.086
+    },
+    "SOL": {
+     "n": 9,
+     "win_rate": 33.3,
+     "avg_r": -0.35,
+     "gross_avg_r": -0.309,
+     "total_r": -3.2,
+     "positive": false,
+     "test_n": 4,
+     "test_avg_r": -0.594
+    },
+    "SUI": {
+     "n": 2,
+     "win_rate": 50.0,
+     "avg_r": 0.32,
+     "gross_avg_r": 0.349,
+     "total_r": 0.6,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": -1.046
+    },
+    "UNI": {
+     "n": 6,
+     "win_rate": 50.0,
+     "avg_r": 0.631,
+     "gross_avg_r": 0.673,
+     "total_r": 3.8,
+     "positive": true,
+     "test_n": 1,
+     "test_avg_r": 2.462
+    },
+    "XRP": {
+     "n": 4,
+     "win_rate": 25.0,
+     "avg_r": 0.045,
+     "gross_avg_r": 0.084,
+     "total_r": 0.2,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": -0.842
+    },
+    "ZEC": {
+     "n": 6,
+     "win_rate": 16.7,
+     "avg_r": -0.566,
+     "gross_avg_r": -0.536,
+     "total_r": -3.4,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 0.386
+    }
+   },
+   "positive_coins": [
+    "UNI"
+   ],
+   "why_not": [
+    "avg -0.18R/trade (needs +0.10R)",
+    "profit factor 0.70",
+    "longest drawdown 3139 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V5@1.0|30m": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V5",
+   "id": "P09-SWEEP-MSS-V5",
+   "tf": "30m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 103,
+   "win_rate": 29.1,
+   "avg_r": -0.287,
+   "gross_avg_r": -0.226,
+   "pf": 0.58,
+   "test_avg_r": -0.404,
+   "test_trades": 37,
+   "long_avg_r": -0.171,
+   "short_avg_r": -0.4,
+   "fees_avg_r": 0.061,
+   "coins": {
+    "BNB": {
+     "n": 14,
+     "win_rate": 35.7,
+     "avg_r": -0.272,
+     "gross_avg_r": -0.182,
+     "total_r": -3.8,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.768
+    },
+    "BTC": {
+     "n": 13,
+     "win_rate": 23.1,
+     "avg_r": -0.557,
+     "gross_avg_r": -0.485,
+     "total_r": -7.2,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": -1.129
+    },
+    "ETH": {
+     "n": 8,
+     "win_rate": 25.0,
+     "avg_r": -0.37,
+     "gross_avg_r": -0.305,
+     "total_r": -3.0,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": -1.088
+    },
+    "SOL": {
+     "n": 17,
+     "win_rate": 35.3,
+     "avg_r": 0.072,
+     "gross_avg_r": 0.127,
+     "total_r": 1.2,
+     "positive": true,
+     "test_n": 7,
+     "test_avg_r": 0.006
+    },
+    "SUI": {
+     "n": 13,
+     "win_rate": 15.4,
+     "avg_r": -0.531,
+     "gross_avg_r": -0.481,
+     "total_r": -6.9,
+     "positive": false,
+     "test_n": 4,
+     "test_avg_r": -0.607
+    },
+    "UNI": {
+     "n": 15,
+     "win_rate": 26.7,
+     "avg_r": -0.292,
+     "gross_avg_r": -0.253,
+     "total_r": -4.4,
+     "positive": false,
+     "test_n": 3,
+     "test_avg_r": -0.659
+    },
+    "XRP": {
+     "n": 7,
+     "win_rate": 42.9,
+     "avg_r": -0.251,
+     "gross_avg_r": -0.164,
+     "total_r": -1.8,
+     "positive": false,
+     "test_n": 5,
+     "test_avg_r": -0.147
+    },
+    "ZEC": {
+     "n": 16,
+     "win_rate": 31.2,
+     "avg_r": -0.232,
+     "gross_avg_r": -0.186,
+     "total_r": -3.7,
+     "positive": false,
+     "test_n": 8,
+     "test_avg_r": -0.058
+    }
+   },
+   "positive_coins": [
+    "SOL"
+   ],
+   "why_not": [
+    "avg -0.29R/trade (needs +0.10R)",
+    "profit factor 0.58",
+    "max drawdown 31.9R",
+    "longest drawdown 1782 days = 100% of the tested period (limit 60%)",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P09-SWEEP-MSS-V5@1.0|15m": {
+   "strategy": 9,
+   "name": "Liquidity sweep + structure shift",
+   "version": "V5",
+   "id": "P09-SWEEP-MSS-V5",
+   "tf": "15m",
+   "status": "FAILED",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 225,
+   "win_rate": 30.7,
+   "avg_r": -0.278,
+   "gross_avg_r": -0.185,
+   "pf": 0.59,
+   "test_avg_r": -0.502,
+   "test_trades": 106,
+   "long_avg_r": -0.393,
+   "short_avg_r": -0.183,
+   "fees_avg_r": 0.093,
+   "coins": {
+    "BNB": {
+     "n": 22,
+     "win_rate": 22.7,
+     "avg_r": -0.679,
+     "gross_avg_r": -0.556,
+     "total_r": -14.9,
+     "positive": false,
+     "test_n": 14,
+     "test_avg_r": -0.637
+    },
+    "BTC": {
+     "n": 30,
+     "win_rate": 33.3,
+     "avg_r": -0.285,
+     "gross_avg_r": -0.124,
+     "total_r": -8.6,
+     "positive": false,
+     "test_n": 15,
+     "test_avg_r": -0.666
+    },
+    "ETH": {
+     "n": 18,
+     "win_rate": 0.0,
+     "avg_r": -0.96,
+     "gross_avg_r": -0.835,
+     "total_r": -17.3,
+     "positive": false,
+     "test_n": 11,
+     "test_avg_r": -1.025
+    },
+    "SOL": {
+     "n": 36,
+     "win_rate": 30.6,
+     "avg_r": -0.273,
+     "gross_avg_r": -0.191,
+     "total_r": -9.8,
+     "positive": false,
+     "test_n": 19,
+     "test_avg_r": -0.166
+    },
+    "SUI": {
+     "n": 30,
+     "win_rate": 33.3,
+     "avg_r": -0.115,
+     "gross_avg_r": -0.055,
+     "total_r": -3.4,
+     "positive": false,
+     "test_n": 10,
+     "test_avg_r": -0.789
+    },
+    "UNI": {
+     "n": 31,
+     "win_rate": 38.7,
+     "avg_r": -0.12,
+     "gross_avg_r": -0.05,
+     "total_r": -3.7,
+     "positive": false,
+     "test_n": 12,
+     "test_avg_r": -0.433
+    },
+    "XRP": {
+     "n": 19,
+     "win_rate": 47.4,
+     "avg_r": 0.192,
+     "gross_avg_r": 0.292,
+     "total_r": 3.6,
+     "positive": true,
+     "test_n": 11,
+     "test_avg_r": -0.063
+    },
+    "ZEC": {
+     "n": 39,
+     "win_rate": 30.8,
+     "avg_r": -0.217,
+     "gross_avg_r": -0.156,
+     "total_r": -8.4,
+     "positive": false,
+     "test_n": 14,
+     "test_avg_r": -0.436
+    }
+   },
+   "positive_coins": [
+    "XRP"
+   ],
+   "why_not": [
+    "avg -0.28R/trade (needs +0.10R)",
+    "profit factor 0.59",
+    "max drawdown 67.3R",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V1@1.0|4h": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V1",
+   "id": "P10-CROWDING-FADE-V1",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 1,
+   "win_rate": 100.0,
+   "avg_r": 1.97,
+   "gross_avg_r": 1.99,
+   "pf": 99.0,
+   "test_avg_r": 1.97,
+   "test_trades": 1,
+   "long_avg_r": 1.97,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.02,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 1.97,
+     "gross_avg_r": 1.99,
+     "total_r": 2.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": 1.97
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "only 1 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V2@1.0|1h": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V2",
+   "id": "P10-CROWDING-FADE-V2",
+   "tf": "1h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 2,
+   "win_rate": 100.0,
+   "avg_r": 1.626,
+   "gross_avg_r": 1.649,
+   "pf": 99.0,
+   "test_avg_r": 1.626,
+   "test_trades": 2,
+   "long_avg_r": 1.626,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.023,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 2,
+     "win_rate": 100.0,
+     "avg_r": 1.626,
+     "gross_avg_r": 1.649,
+     "total_r": 3.3,
+     "positive": false,
+     "test_n": 2,
+     "test_avg_r": 1.626
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 2 trades",
+    "only 2 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V2@1.0|30m": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V2",
+   "id": "P10-CROWDING-FADE-V2",
+   "tf": "30m",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 6,
+   "win_rate": 66.7,
+   "avg_r": 0.433,
+   "gross_avg_r": 0.464,
+   "pf": 2.22,
+   "test_avg_r": 0.433,
+   "test_trades": 6,
+   "long_avg_r": 0.433,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.031,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 6,
+     "win_rate": 66.7,
+     "avg_r": 0.433,
+     "gross_avg_r": 0.464,
+     "total_r": 2.6,
+     "positive": true,
+     "test_n": 6,
+     "test_avg_r": 0.433
+    }
+   },
+   "positive_coins": [
+    "ZEC"
+   ],
+   "why_not": [
+    "only 6 trades",
+    "longest drawdown 10 days = 62% of the tested period (limit 60%)",
+    "only 6 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V2@1.0|15m": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V2",
+   "id": "P10-CROWDING-FADE-V2",
+   "tf": "15m",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 7,
+   "win_rate": 28.6,
+   "avg_r": -0.203,
+   "gross_avg_r": -0.171,
+   "pf": 0.69,
+   "test_avg_r": -0.203,
+   "test_trades": 7,
+   "long_avg_r": -0.203,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.032,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 7,
+     "win_rate": 28.6,
+     "avg_r": -0.203,
+     "gross_avg_r": -0.171,
+     "total_r": -1.4,
+     "positive": false,
+     "test_n": 7,
+     "test_avg_r": -0.203
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 7 trades",
+    "avg -0.20R/trade (needs +0.10R)",
+    "profit factor 0.69",
+    "longest drawdown 6 days = 100% of the tested period (limit 60%)",
+    "only 7 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V3@1.0|4h": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V3",
+   "id": "P10-CROWDING-FADE-V3",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 1,
+   "win_rate": 100.0,
+   "avg_r": 1.97,
+   "gross_avg_r": 1.99,
+   "pf": 99.0,
+   "test_avg_r": 1.97,
+   "test_trades": 1,
+   "long_avg_r": 1.97,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.02,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 1.97,
+     "gross_avg_r": 1.99,
+     "total_r": 2.0,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": 1.97
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "only 1 unseen-test trades",
+    "not profitable in BOTH train and unseen test"
+   ]
+  },
+  "P10-CROWDING-FADE-V4@1.0|4h": {
+   "strategy": 10,
+   "name": "Crowding fade (funding + open interest)",
+   "version": "V4",
+   "id": "P10-CROWDING-FADE-V4",
+   "tf": "4h",
+   "status": "BACKTESTING",
+   "tested_utc": "2026-10-14 01:13",
+   "trades": 1,
+   "win_rate": 100.0,
+   "avg_r": 1.593,
+   "gross_avg_r": 1.612,
+   "pf": 99.0,
+   "test_avg_r": 1.593,
+   "test_trades": 1,
+   "long_avg_r": 1.593,
+   "short_avg_r": 0.0,
+   "fees_avg_r": 0.019,
+   "coins": {
+    "BNB": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "BTC": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ETH": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SOL": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "SUI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "UNI": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "XRP": {
+     "n": 0,
+     "win_rate": 0.0,
+     "avg_r": 0.0,
+     "gross_avg_r": 0.0,
+     "total_r": 0.0,
+     "positive": false,
+     "test_n": 0,
+     "test_avg_r": null
+    },
+    "ZEC": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 1.593,
+     "gross_avg_r": 1.612,
+     "total_r": 1.6,
+     "positive": false,
+     "test_n": 1,
+     "test_avg_r": 1.593
+    }
+   },
+   "positive_coins": [],
+   "why_not": [
+    "only 1 trades",
+    "only 1 unseen-test trades",
     "not profitable in BOTH train and unseen test"
    ]
   }

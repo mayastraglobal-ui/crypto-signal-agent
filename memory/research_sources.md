@@ -1097,3 +1097,93 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim (abstract): moving-average and trading-range-break rules on the Dow Jones index 1897-1986, tested with bootstrap methods, gave returns that do not fit four standard random models (random walk, AR(1), GARCH-M, EGARCH); buy signals were followed by higher and less volatile returns than sell signals, and returns after sell signals were negative. The follow-up abstract says it re-tests the same 26 rules, expanded, on 100 years of daily Dow data with White's Reality Check to correct for data-snooping; its result is not stated in the abstract, so I cite none.
   - what it means for this system: this is the classic evidence for the rule families behind ema_9_21_cross, macd_trend_cross and donchian_breakout. It is from one stock index, daily data, before costs, mostly before the rules were widely known; and the very next major study was about data-snooping - the same multiple-testing worry as our trials counter. Our own results agree only in part: daily-style trend rules on slow timeframes (4h breakouts) hold up, the fast versions (5m to 1h crosses) lose after costs.
   - derived hypothesis: none (abstract only; a hypothesis from an unread full text would be a guess).
+
+### TRD-H4-BREAKOUT-FDISP@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-12
+  - title / source: engine failure lab: a repair of TRD-H4-BREAKOUT@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: TRD-H4-BREAKOUT@1.0 loses on false_breakout (-0.18R a trade with it, +0.64R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P09-SWEEP-MSS-V1@1.0 - Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored). Plain building blocks, no SMC detector.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P09-SWEEP-MSS-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P09-SWEEP-MSS-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V1
+  - URL: none recorded
+  - claim: A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes.
+  - derived hypothesis (tested): P09-SWEEP-MSS-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop is wide.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P09-SWEEP-MSS-V2@1.0 - Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored). Plain building blocks, no SMC detector.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P09-SWEEP-MSS-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P09-SWEEP-MSS-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V2
+  - URL: none recorded
+  - claim: A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes.
+  - derived hypothesis (tested): P09-SWEEP-MSS-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop is wide.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P09-SWEEP-MSS-V3@1.0 - Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored). Plain building blocks, no SMC detector.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P09-SWEEP-MSS-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P09-SWEEP-MSS-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V3
+  - URL: none recorded
+  - claim: A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes.
+  - derived hypothesis (tested): P09-SWEEP-MSS-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop is wide.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P09-SWEEP-MSS-V4@1.0 - Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored). Plain building blocks, no SMC detector.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P09-SWEEP-MSS-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P09-SWEEP-MSS-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V4
+  - URL: none recorded
+  - claim: A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes.
+  - derived hypothesis (tested): P09-SWEEP-MSS-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop is wide.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P10-CROWDING-FADE-V1@1.0 - Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P10-CROWDING-FADE-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P10-CROWDING-FADE-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version V1
+  - URL: none recorded
+  - claim: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way.
+  - derived hypothesis (tested): P10-CROWDING-FADE-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION on 4h
+  - limitations: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding can stay extreme for a long time.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P10-CROWDING-FADE-V2@1.0 - Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P10-CROWDING-FADE-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P10-CROWDING-FADE-V2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version V2
+  - URL: none recorded
+  - claim: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way.
+  - derived hypothesis (tested): P10-CROWDING-FADE-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION on 1h, 30m, 15m
+  - limitations: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding can stay extreme for a long time.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P10-CROWDING-FADE-V3@1.0 - Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P10-CROWDING-FADE-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P10-CROWDING-FADE-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version V3
+  - URL: none recorded
+  - claim: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way.
+  - derived hypothesis (tested): P10-CROWDING-FADE-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION on 4h
+  - limitations: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding can stay extreme for a long time.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P10-CROWDING-FADE-V4@1.0 - Longs are crowded (funding above 0.03% and open interest up 3%) and price starts to fall (a red candle closing below the previous low): short. Mirrored for crowded shorts (funding below -0.01%).
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P10-CROWDING-FADE-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P10-CROWDING-FADE-V4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 10, Crowding fade (funding + open interest) - version V4
+  - URL: none recorded
+  - claim: When one side is crowded (high funding, rising open interest) and price turns against it, their forced exits push price further the other way.
+  - derived hypothesis (tested): P10-CROWDING-FADE-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION on 4h
+  - limitations: Futures data (funding, open interest) only goes back about 1 year, so the backtest has few trades; crowding can stay extreme for a long time.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P09-SWEEP-MSS-V5@1.0 - Inside the trend, price dips below the 20-candle low (a sweep of the stops there), then within 5 candles a strong candle closes above the highest high of the last 5 (structure shift); stop below the sweep low (shorts mirrored). Plain building blocks, no SMC detector.
+- timestamp: 2026-10-14 01:13 UTC · source: strategies_lab.yaml card P09-SWEEP-MSS-V5@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P09-SWEEP-MSS-V5 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-12
+  - title / source: Forward Test Program (operator plan 2026-10-09): strategy 9, Liquidity sweep + structure shift - version V5
+  - URL: none recorded
+  - claim: A sweep of the stops under a pullback low followed by a strong close above the recent highs is the end of the pullback: the trend resumes.
+  - derived hypothesis (tested): P09-SWEEP-MSS-V5@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: A sweep can be the start of a real breakdown; the structure-shift candle is often large, so the stop is wide.
+  - test results: `memory/strategy_registry.csv` / report section 3

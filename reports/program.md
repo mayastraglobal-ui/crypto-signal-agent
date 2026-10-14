@@ -1,6 +1,6 @@
 # Forward Test Program - backtest results
 
-Updated 2026-10-13 01:02 UTC. Tested tonight: strategies 7, 8; next night: 9, 10.
+Updated 2026-10-14 01:13 UTC. Tested tonight: strategies 9, 10; next night: 1, 11.
 
 10 strategies x 4 versions (strategies_program.yaml). Every number includes OKX fees and funding ('after fees'); 'before fees' shows what the rules alone made. 'Test' = the unseen last 30% of each coin's history. A coin counts as positive with >= 5 trades and an average above 0R after fees.
 
@@ -109,4 +109,29 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 | V4 | 1h | FAILED | 1164 | 33 | -0.08R | -0.02R | -0.06R | BTC, XRP | 2026-10-13 01:02 |
 | V5 | 30m | FAILED | 1622 | 34 | -0.19R | -0.09R | -0.20R | SUI | 2026-10-13 01:02 |
 | V5 | 15m | FAILED | 1893 | 32 | -0.26R | -0.12R | -0.26R | - | 2026-10-13 01:02 |
+
+## 9. Liquidity sweep + structure shift
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| V1 | 4h | BACKTESTING | 4 | 25 | -0.61R | -0.58R | -1.03R | - | 2026-10-14 01:13 |
+| V2 | 1h | BACKTESTING | 13 | 46 | +0.12R | +0.16R | +0.61R | - | 2026-10-14 01:13 |
+| V2 | 30m | FAILED | 35 | 34 | -0.04R | +0.01R | -0.04R | UNI | 2026-10-14 01:13 |
+| V2 | 15m | FAILED | 102 | 32 | -0.24R | -0.16R | -0.41R | UNI, XRP | 2026-10-14 01:13 |
+| V3 | 4h | BACKTESTING | 1 | 0 | -1.02R | -1.00R | -1.02R | - | 2026-10-14 01:13 |
+| V4 | 4h | BACKTESTING | 4 | 25 | -0.38R | -0.35R | -1.03R | - | 2026-10-14 01:13 |
+| V5 | 1h | FAILED | 44 | 36 | -0.18R | -0.13R | -0.45R | UNI | 2026-10-14 01:13 |
+| V5 | 30m | FAILED | 103 | 29 | -0.29R | -0.23R | -0.40R | SOL | 2026-10-14 01:13 |
+| V5 | 15m | FAILED | 225 | 31 | -0.28R | -0.18R | -0.50R | XRP | 2026-10-14 01:13 |
+
+## 10. Crowding fade (funding + open interest)
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| V1 | 4h | BACKTESTING | 1 | 100 | +1.97R | +1.99R | +1.97R | - | 2026-10-14 01:13 |
+| V2 | 1h | BACKTESTING | 2 | 100 | +1.63R | +1.65R | +1.63R | - | 2026-10-14 01:13 |
+| V2 | 30m | BACKTESTING | 6 | 67 | +0.43R | +0.46R | +0.43R | ZEC | 2026-10-14 01:13 |
+| V2 | 15m | BACKTESTING | 7 | 29 | -0.20R | -0.17R | -0.20R | - | 2026-10-14 01:13 |
+| V3 | 4h | BACKTESTING | 1 | 100 | +1.97R | +1.99R | +1.97R | - | 2026-10-14 01:13 |
+| V4 | 4h | BACKTESTING | 1 | 100 | +1.59R | +1.61R | +1.59R | - | 2026-10-14 01:13 |
 
