@@ -15503,3 +15503,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-15 08:00,ZEC,15m,FVG_RETRACE,bear,,1105.09,1112.4,,London,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-15 08:00,SUI,4h,BREAKER_RETEST,bear,,1.005,1.0598,,,1d,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
 2026-10-15 08:00,SUI,15m,FVG_RETRACE,bear,,0.993,1.0024,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-15 09:00,XRP,30m,FVG_FILLED,bear,,1.3079,1.3186,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-15 09:15,XRP,15m,FVG_FILLED,bear,,1.3102,1.3206,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-15 08:45,ZEC,15m,FVG_FILLED,bear,,1105.09,1112.4,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-15 09:00,SUI,30m,FVG_FILLED,bear,,0.9924,1.0006,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-15 08:45,SUI,15m,FVG_FILLED,bear,,0.993,1.0024,,London,1h,WEAK_BEAR,,smc-1.0,Binance
