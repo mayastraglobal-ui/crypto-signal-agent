@@ -9,8 +9,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 462,
+ "suspended": {
+  "WAL": "2026-10-15"
+ },
+ "runs": 463,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -117,6 +119,12 @@
   ],
   "TRX": [
    "volume_7d"
+  ],
+  "WAL": [
+   "big_move",
+   "spread",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -168,6 +176,7 @@
    "data_degraded"
   ],
   "W": [],
-  "TRX": []
+  "TRX": [],
+  "WAL": []
  }
 }

@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-15 04:30",
+ "generated_utc": "2026-10-15 05:30",
  "book": {
-  "utc": "2026-10-15 04:30",
-  "beijing": "2026-10-15 12:30",
+  "utc": "2026-10-15 05:30",
+  "beijing": "2026-10-15 13:30",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-15 04:30 UTC / 2026-10-15 12:30 Beijing",
+  "POSITION BOOK \u2014 2026-10-15 05:30 UTC / 2026-10-15 13:30 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -257,55 +257,29 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-15 04:30",
-   "id": "ETH-4h-P01-BREAKOUT-V1-2026-10-15 03:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
+   "time_utc": "2026-10-15 05:30",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-15 05:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 2359.63,
-   "note": "4h signal candle closed"
+   "price": 1.306,
+   "note": "30m signal candle closed"
   },
   {
-   "time_utc": "2026-10-15 04:30",
-   "id": "ETH-4h-P01-BREAKOUT-V1-2026-10-15 03:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
+   "time_utc": "2026-10-15 05:30",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-15 05:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 2359.63,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-15 04:30",
-   "id": "ETH-4h-P01-BREAKOUT-V4-2026-10-15 03:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 2359.63,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-15 04:30",
-   "id": "ETH-4h-P01-BREAKOUT-V4-2026-10-15 03:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 2359.63,
+   "price": 1.306,
    "note": ""
   }
  ]

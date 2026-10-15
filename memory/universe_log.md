@@ -631,3 +631,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-15 03:30 UTC
 - **EXCLUDED** BNB - 7-day average volume $41M < $50M
+
+## 2026-10-15 05:30 UTC
+- **EXCLUDED** WAL - 7-day average volume $8M < $50M; 24h move +25.2% is beyond ±25% - suspended for the rest of the UTC day; spread 0.129% > 0.1%; order book too thin: $9k within 1% (need $250k)
