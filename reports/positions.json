@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-15 06:38",
+ "generated_utc": "2026-10-15 07:41",
  "book": {
-  "utc": "2026-10-15 06:38",
-  "beijing": "2026-10-15 14:38",
+  "utc": "2026-10-15 07:41",
+  "beijing": "2026-10-15 15:41",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-15 06:38 UTC / 2026-10-15 14:38 Beijing",
+  "POSITION BOOK \u2014 2026-10-15 07:41 UTC / 2026-10-15 15:41 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -255,58 +255,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-15 06:38",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-15 05:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 101.47,
-   "note": "1h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-15 06:38",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-15 05:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 101.47,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-15 06:38",
-   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-10-15 05:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.9777,
-   "note": "1h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-15 06:38",
-   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-10-15 05:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.9777,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
