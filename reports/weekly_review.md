@@ -1,18 +1,18 @@
 # Weekly review · 2026-W42
 
-Made 2026-10-15 15:35 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-15 16:33 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-15)
-- ✅ hourly scan: last run 2026-10-15 15:35 UTC
+- ✅ hourly scan: last run 2026-10-15 16:33 UTC
 - ✅ program rotation: 89 of 89 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-15 14:06 UTC (29 min ago)
-- ✅ TEST setups closed this week (GitHub record): 15
+- ✅ live watcher: last heartbeat 2026-10-15 15:11 UTC (26 min ago)
+- ✅ TEST setups closed this week (GitHub record): 19
 
 ## Totals
 
-- TEST: 15 closed setups since the start, -0.70R a trade; this week 15 (-10.58R)
+- TEST: 19 closed setups since the start, -0.67R a trade; this week 19 (-12.76R)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -25,13 +25,13 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## With vs without the 5m check (before fees)
 
 - watcher alerts (5m-confirmed): 2 plan results, -1.00R a trade
-- every TEST setup (GitHub, no 5m check): 15, -0.62R a trade
+- every TEST setup (GitHub, no 5m check): 19, -0.60R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
   - none yet (each 4H setup that waits for its 5m candle adds one)
 
 ## 📈 Live track record and drift monitor
 
-- every live setup: 15 closed, -0.70R a trade, -10.58R, worst drawdown 10.58R (after fees)
+- every live setup: 19 closed, -0.67R a trade, -12.75R, worst drawdown 12.75R (after fees)
 - paused by the drift monitor: nothing
 - the full table: reports/track_record.md
 
@@ -62,8 +62,8 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## 🧭 Location at the entry (4H structure, information only)
 
 - middle of the 4H range: 1 setup(s), +2.42R a trade after fees, 1 won
-- at a zone or edge against the direction: 8 setup(s), -0.75R a trade after fees, 1 won
-- outside the 4H range (breakout): 3 setup(s), -1.11R a trade after fees, 0 won
+- at a zone or edge against the direction: 9 setup(s), -0.56R a trade after fees, 2 won
+- outside the 4H range (breakout): 6 setup(s), -1.07R a trade after fees, 0 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
 ## Every live strategy / version / coin
@@ -73,6 +73,9 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | 6 | 33 | -0.20R | -0.12R | 6 (-1.2R) | +0.04R | -0.20R over 6 trades: too early to say anything |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | 4 | 0 | -1.15R | -1.05R | 4 (-4.6R) | +0.01R | -1.15R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | ETH | TEST | 2 | 0 | -0.74R | -0.68R | 2 (-1.5R) | +0.01R | -0.74R over 2 trades: too early to say anything |
+| P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | 2 | 50 | -0.04R | -0.01R | 2 (-0.1R) | +0.01R | -0.04R over 2 trades: too early to say anything |
+| P01-BREAKOUT-V1 | 4h | ETH | TEST | 1 | 0 | -1.05R | -1.01R | 1 (-1.1R) | +0.25R | -1.05R over 1 trade: too early to say anything |
+| P01-BREAKOUT-V4 | 4h | ETH | TEST | 1 | 0 | -1.05R | -1.01R | 1 (-1.1R) | +0.23R | -1.05R over 1 trade: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | BTC | TEST | 1 | 0 | -1.15R | -1.05R | 1 (-1.1R) | +0.02R | -1.15R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | TEST | 1 | 0 | -1.07R | -1.02R | 1 (-1.1R) | +0.03R | -1.07R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | TEST | 1 | 0 | -1.07R | -1.02R | 1 (-1.1R) | +0.01R | -1.07R over 1 trade: too early to say anything |

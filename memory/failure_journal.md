@@ -124,3 +124,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session NY AM, conditions: no_displacement
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 4h P01-BREAKOUT-V1 v1.0 - SL -1.05R
+- timestamp: 2026-10-15 16:33 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: ETH · timeframe: 4h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 03:59 UTC, closed 2026-10-15 15:59 UTC, stage TEST
+  - MAE -1.02R / MFE +0.41R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h P01-BREAKOUT-V4 v1.0 - SL -1.05R
+- timestamp: 2026-10-15 16:33 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V4 v1.0 · asset: ETH · timeframe: 4h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 03:59 UTC, closed 2026-10-15 15:59 UTC, stage TEST
+  - MAE -1.02R / MFE +0.41R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.04R
+- timestamp: 2026-10-15 16:33 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SUI · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 05:59 UTC, closed 2026-10-15 15:59 UTC, stage TEST
+  - MAE -1.37R / MFE +0.43R
+  - at entry: session outside killzones, conditions: overextended_entry, wrong_session
+  - what happened: regime_mismatch
+  - root cause / fix: (review)

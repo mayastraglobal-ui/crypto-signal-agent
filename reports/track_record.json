@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-15 15:35",
+ "utc": "2026-10-15 16:33",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,28 +10,28 @@
   "curve_points": 60
  },
  "total": {
-  "n": 15,
-  "wins": 2,
-  "win_rate": 13.3,
-  "avg_r": -0.705,
-  "total_r": -10.58,
-  "max_dd_r": 10.58,
-  "cur_loss_run": 4,
+  "n": 19,
+  "wins": 3,
+  "win_rate": 15.8,
+  "avg_r": -0.671,
+  "total_r": -12.75,
+  "max_dd_r": 12.75,
+  "cur_loss_run": 3,
   "max_loss_run": 5,
-  "sd": 1.02
+  "sd": 0.99
  },
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 15,
-   "wins": 2,
-   "win_rate": 13.3,
-   "avg_r": -0.705,
-   "total_r": -10.58,
-   "max_dd_r": 10.58,
-   "cur_loss_run": 4,
+   "n": 19,
+   "wins": 3,
+   "win_rate": 15.8,
+   "avg_r": -0.671,
+   "total_r": -12.75,
+   "max_dd_r": 12.75,
+   "cur_loss_run": 3,
    "max_loss_run": 5,
-   "sd": 1.02
+   "sd": 0.99
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -135,6 +135,81 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-15 14:59"
+  },
+  {
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 1,
+    "win_rate": 50.0,
+    "avg_r": -0.042,
+    "total_r": -0.08,
+    "max_dd_r": 1.04,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": 1.409
+   },
+   "backtest": {
+    "n": 342,
+    "avg_r": 0.009,
+    "win_rate": 37.4
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-15 15:59"
+  },
+  {
+   "key": "P01-BREAKOUT-V1@1.0|4h",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.046,
+    "total_r": -1.05,
+    "max_dd_r": 1.05,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 202,
+    "avg_r": 0.252,
+    "win_rate": 40.6
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-15 15:59"
+  },
+  {
+   "key": "P01-BREAKOUT-V4@1.0|4h",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.046,
+    "total_r": -1.05,
+    "max_dd_r": 1.05,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 168,
+    "avg_r": 0.228,
+    "win_rate": 38.7
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-15 15:59"
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|1h",
@@ -274,6 +349,22 @@
   {
    "t": "2026-10-15 15:29",
    "r": -10.58
+  },
+  {
+   "t": "2026-10-15 15:59",
+   "r": -9.62
+  },
+  {
+   "t": "2026-10-15 15:59",
+   "r": -10.67
+  },
+  {
+   "t": "2026-10-15 15:59",
+   "r": -11.72
+  },
+  {
+   "t": "2026-10-15 15:59",
+   "r": -12.75
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."

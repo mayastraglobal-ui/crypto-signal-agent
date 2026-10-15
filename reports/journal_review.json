@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-13 03:45",
+ "last_entry_utc": "2026-10-15 15:45",
  "days": 30,
  "all": {
   "alerts": 2,
@@ -149,7 +149,34 @@
    "avg_r": -1.0
   }
  },
- "compare_5m": {},
+ "compare_5m": {
+  "4h": {
+   "twin_all": {
+    "n": 1,
+    "total_r": -1.0,
+    "avg_r": -1.0,
+    "wins": 0
+   },
+   "twin_passed": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "twin_rejected": {
+    "n": 1,
+    "total_r": -1.0,
+    "avg_r": -1.0,
+    "wins": 0
+   },
+   "sent": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  }
+ },
  "findings": [],
  "decisions": []
 }
