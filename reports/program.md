@@ -1,6 +1,6 @@
 # Forward Test Program - backtest results
 
-Updated 2026-10-14 01:13 UTC. Tested tonight: strategies 9, 10; next night: 1, 11.
+Updated 2026-10-15 01:11 UTC. Tested tonight: strategies 11, 12; next night: 1, 2, 12.
 
 10 strategies x 4 versions (strategies_program.yaml). Every number includes OKX fees and funding ('after fees'); 'before fees' shows what the rules alone made. 'Test' = the unseen last 30% of each coin's history. A coin counts as positive with >= 5 trades and an average above 0R after fees.
 
@@ -134,4 +134,23 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 | V2 | 15m | BACKTESTING | 7 | 29 | -0.20R | -0.17R | -0.20R | - | 2026-10-14 01:13 |
 | V3 | 4h | BACKTESTING | 1 | 100 | +1.97R | +1.99R | +1.97R | - | 2026-10-14 01:13 |
 | V4 | 4h | BACKTESTING | 1 | 100 | +1.59R | +1.61R | +1.59R | - | 2026-10-14 01:13 |
+
+## 11. Early momentum (market-wide break, early steps only)
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| C | 30m | FAILED | 11724 | 33 | -0.19R | -0.07R | -0.20R | - | 2026-10-15 01:11 |
+| V1 | 30m | FAILED | 4210 | 32 | -0.22R | -0.11R | -0.23R | - | 2026-10-15 01:11 |
+| V2 | 30m | FAILED | 1128 | 30 | -0.26R | -0.14R | -0.24R | - | 2026-10-15 01:11 |
+| V3 | 1h | FAILED | 2514 | 32 | -0.13R | -0.05R | -0.18R | - | 2026-10-15 01:11 |
+| V4 | 30m | FAILED | 3989 | 30 | -0.27R | -0.14R | -0.23R | - | 2026-10-15 01:11 |
+
+## 12. Follow the leader (buy the strongest coin when BTC jumps)
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| C | 4h | FAILED | 2810 | 42 | -0.00R | +0.03R | -0.07R | BTC, SOL, ZEC | 2026-10-15 01:11 |
+| V1 | 4h | BACKTESTING | 573 | 44 | +0.11R | +0.14R | +0.21R | ETH, SOL, SUI, XRP, ZEC | 2026-10-15 01:11 |
+| V2 | 4h | VALIDATION | 497 | 47 | +0.19R | +0.22R | +0.35R | BNB, ETH, SOL, SUI, XRP, ZEC | 2026-10-15 01:11 |
+| V3 | 1h | FAILED | 835 | 35 | -0.03R | +0.01R | -0.02R | XRP, ZEC | 2026-10-15 01:11 |
 

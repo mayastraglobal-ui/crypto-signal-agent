@@ -1148,3 +1148,15 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - what exists already: for LIVE positions the risk engine allows only 1 position per direction in a group of coins whose 1h returns correlate at 0.7 or more (config.yaml -> risk -> corr_threshold). The TEST alerts' cooldown is per coin, so this grouping does not reach TEST and PAPER results.
   - how to test: an engine report, not a lab card - for the operator. Re-count closed TEST and PAPER results with same-hour, same-direction, correlated signals merged into one; compare the sample size and the average R with the plain count.
   - stop if: such clusters turn out to be rare (under 10% of TEST and PAPER signals).
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0103 | 2026-10-15 01:11 | P11-MOMENTUM-V1@1.0 | momentum | 30m | When most of the coins break their 20-candle low (high) together, BTC moves the same way and the 1H is already moving, the first one or two breaks of the move still run - before the 4H has turned. |
+| EXP-0104 | 2026-10-15 01:11 | P11-MOMENTUM-V2@1.0 | momentum | 30m | V1 is stronger when the break also takes out the 24-hour low (high), where many stops sit, and comes out of a quiet squeeze (fresh energy). |
+| EXP-0105 | 2026-10-15 01:11 | P11-MOMENTUM-V3@1.0 | momentum | 1h | The same as V2 on 1H closes: later than 30m but steadier, fewer fake breaks. |
+| EXP-0106 | 2026-10-15 01:11 | P11-MOMENTUM-V4@1.0 | momentum | 30m | After a fresh market-wide break, the first pullback to the 30m EMA20 that is rejected continues the move at a better price - instead of selling the low (buying the high). |
+| EXP-0107 | 2026-10-15 01:11 | P11-MOMENTUM-C@1.0 (control twin of P11-MOMENTUM-V1) | momentum | 30m | Control: the plain 30m breakout under the same gate - V1 must beat it, or its extras add nothing. |
+| EXP-0108 | 2026-10-15 01:11 | P12-LEADER-V1@1.0 | momentum | 4h | When BTC jumps, the coin already leading the jump keeps rising for a day or two - more than BTC and more than the coins that have not moved yet. |
+| EXP-0109 | 2026-10-15 01:11 | P12-LEADER-V2@1.0 | momentum | 4h | A sharper BTC jump (3% in 12 hours) shows the leader more clearly than a slow 24-hour rise. |
+| EXP-0110 | 2026-10-15 01:11 | P12-LEADER-V3@1.0 | momentum | 1h | The same leader effect, entered at the 1H close: earlier than V1. |
+| EXP-0111 | 2026-10-15 01:11 | P12-LEADER-C@1.0 (control twin of P12-LEADER-V1) | momentum | 4h | Control: buying any coin after a BTC jump - the benchmark the leader pick must beat. |

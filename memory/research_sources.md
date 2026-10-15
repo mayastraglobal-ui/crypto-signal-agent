@@ -1195,3 +1195,84 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim (as the summaries report it): the interviewed traders share a few habits. They cap the risk of every trade (the summary credits Bruce Kovner with a limit of 1% of capital per trade); they decide the exit before they enter and cut losing trades quickly; they are selective and pass on trades that do not fit their criteria; they use rules to keep emotions out; and they adapt when markets change. Success comes from protecting the downside and a few large winners, not from being right often.
   - what it means for this system: most of these principles are already enforced by the engine - risk per trade 0.5% of capital (half the 1% the summary credits to Kovner), a stop on every trade, day and week loss limits (-3R / -6R), at most 3 open positions and 1 per direction in a correlated coin group, the event blackout, and "no trade is a valid result". What is missing is the same discipline in how TEST and PAPER results are counted: correlated signals are scored as separate trades. Evidence class is CLAIM: these are summaries, not the book, and interviews with winners are a survivor sample.
   - derived hypothesis: 'Hypothesis: score TEST and PAPER signals by correlated group, as the risk engine does (from C11)' in memory/experiments.md.
+
+### P11-MOMENTUM-V1@1.0 - 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down within 2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown step in 12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V1 v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours on every coin, no alert because the 4H had not turned) - version V1
+  - URL: none recorded
+  - claim: When most of the coins break their 20-candle low (high) together, BTC moves the same way and the 1H is already moving, the first one or two breaks of the move still run - before the 4H has turned.
+  - derived hypothesis (tested): P11-MOMENTUM-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m, and beats its control twin P11-MOMENTUM-C
+  - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-V2@1.0 - V1, plus the close is beyond the 24-hour low / high (48 candles) and the Bollinger width was in its lowest 25% of 100 candles within the last 12 candles (a squeeze before the move).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V2 v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours on every coin, no alert because the 4H had not turned) - version V2
+  - URL: none recorded
+  - claim: V1 is stronger when the break also takes out the 24-hour low (high), where many stops sit, and comes out of a quiet squeeze (fresh energy).
+  - derived hypothesis (tested): P11-MOMENTUM-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: Fewer signals; the 24-hour level can be far away, so some good early breaks are skipped.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-V3@1.0 - V2 on 1H candles: the level is the 24-hour low / high (24 candles), the step count looks back 24 hours.
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V3 v1.0 · asset: research coins · timeframe: 1h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours on every coin, no alert because the 4H had not turned) - version V3
+  - URL: none recorded
+  - claim: The same as V2 on 1H closes: later than 30m but steadier, fewer fake breaks.
+  - derived hypothesis (tested): P11-MOMENTUM-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 1h
+  - limitations: Later entries than 30m (the first step can be half over); fewer signals.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-V4@1.0 - Within 8 candles after a 30m breakdown (a close below the 20-candle low) while at least 3 coins broke down, price pulls back up to the EMA20 and this candle closes red below it; only the 1st or 2nd step (longs mirrored). Stop 0.3 ATR beyond the candle's high (low).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V4@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V4 v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours on every coin, no alert because the 4H had not turned) - version V4
+  - URL: none recorded
+  - claim: After a fresh market-wide break, the first pullback to the 30m EMA20 that is rejected continues the move at a better price - instead of selling the low (buying the high).
+  - derived hypothesis (tested): P11-MOMENTUM-V4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: Strong moves often never pull back to the EMA20 (missed); a pullback can turn into the bounce.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-C@1.0 - 30m close below the 20-candle low with 1.5x volume, the 1H moving down and the 4H not strongly up (longs mirrored). No market-wide, BTC, step or stretch check.
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P11-MOMENTUM-C@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: control twin - a benchmark, not an idea · confidence: untested idea · strategy: P11-MOMENTUM-C v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 11, operator request 2026-10-13 after the 11-12 Oct moves (1H / 30m fell for hours on every coin, no alert because the 4H had not turned) - version C
+  - URL: none recorded
+  - claim: Control: the plain 30m breakout under the same gate - V1 must beat it, or its extras add nothing.
+  - derived hypothesis (tested): P11-MOMENTUM-C@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: A benchmark, never an alert: many fake breaks.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P12-LEADER-V1@1.0 - BTC closes up at least 3% over the last 24 hours (6 candles of 4H) for the first candle, and this coin is the one rising the most compared with BTC over those 24 hours among the operator's coins: buy it. Long only (its short rule close < 0 never fires: the short mirror lost in the study).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P12-LEADER-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P12-LEADER-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V1
+  - URL: none recorded
+  - claim: When BTC jumps, the coin already leading the jump keeps rising for a day or two - more than BTC and more than the coins that have not moved yet.
+  - derived hypothesis (tested): P12-LEADER-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h, and beats its control twin P12-LEADER-C
+  - limitations: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast; few trades (about 1 a week on 4H).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P12-LEADER-V2@1.0 - V1 measured over 12 hours (3 candles of 4H): BTC up at least 3% in 12 hours for the first candle, buy the coin leading over those 12 hours. A faster, sharper jump. Long only (its short rule close < 0 never fires: the short mirror lost in the study).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P12-LEADER-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P12-LEADER-V2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V2
+  - URL: none recorded
+  - claim: A sharper BTC jump (3% in 12 hours) shows the leader more clearly than a slow 24-hour rise.
+  - derived hypothesis (tested): P12-LEADER-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast; few trades (about 1 a week on 4H).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P12-LEADER-V3@1.0 - V1 on 1H closes: BTC up at least 3% over the last 24 hours (24 candles of 1H) for the first candle, buy the leader of those 24 hours at the 1H close - up to 3 hours earlier than V1. Long only (its short rule close < 0 never fires: the short mirror lost in the study).
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P12-LEADER-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P12-LEADER-V3 v1.0 · asset: research coins · timeframe: 1h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version V3
+  - URL: none recorded
+  - claim: The same leader effect, entered at the 1H close: earlier than V1.
+  - derived hypothesis (tested): P12-LEADER-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 1h
+  - limitations: Long only; at most one coin per BTC jump (the leader); a leader pushed by its own news can reverse fast; few trades (about 1 a week on 4H).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P12-LEADER-C@1.0 - Control: V1 without the leader rank - buy every coin when BTC closes up at least 3% in 24 hours. V1 must beat it, or picking the leader adds nothing.
+- timestamp: 2026-10-15 01:11 UTC · source: strategies_lab.yaml card P12-LEADER-C@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: control twin - a benchmark, not an idea · confidence: untested idea · strategy: P12-LEADER-C v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-13
+  - title / source: Forward Test Program: strategy 12, operator request 2026-10-14 ("build strategy 12") after the 5-year study of idea (b): when BTC jumps, the coin already rising the most vs BTC kept rising - version C
+  - URL: none recorded
+  - claim: Control: buying any coin after a BTC jump - the benchmark the leader pick must beat.
+  - derived hypothesis (tested): P12-LEADER-C@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: A benchmark, never an alert: buys every coin after a BTC jump, the laggards too.
+  - test results: `memory/strategy_registry.csv` / report section 3
