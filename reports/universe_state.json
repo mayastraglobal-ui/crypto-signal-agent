@@ -12,7 +12,7 @@
  "suspended": {
   "WAL": "2026-10-15"
  },
- "runs": 479,
+ "runs": 480,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -134,7 +134,9 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [],
+  "ZEC": [
+   "wash_volume"
+  ],
   "XRP": [],
   "SOL": [],
   "PROVE": [
