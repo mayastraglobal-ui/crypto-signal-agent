@@ -634,3 +634,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-15 05:30 UTC
 - **EXCLUDED** WAL - 7-day average volume $8M < $50M; 24h move +25.2% is beyond ±25% - suspended for the rest of the UTC day; spread 0.129% > 0.1%; order book too thin: $9k within 1% (need $250k)
+
+## 2026-10-15 08:34 UTC
+- **EXCLUDED** SPCXB - only 125 days of history (need 180); 7-day average volume $20M < $50M

@@ -12,7 +12,7 @@
  "suspended": {
   "WAL": "2026-10-15"
  },
- "runs": 465,
+ "runs": 466,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -125,6 +125,10 @@
    "spread",
    "thin_book",
    "volume_7d"
+  ],
+  "SPCXB": [
+   "history",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -177,6 +181,7 @@
   ],
   "W": [],
   "TRX": [],
-  "WAL": []
+  "WAL": [],
+  "SPCXB": []
  }
 }
