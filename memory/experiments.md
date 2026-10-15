@@ -1160,3 +1160,25 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0109 | 2026-10-15 01:11 | P12-LEADER-V2@1.0 | momentum | 4h | A sharper BTC jump (3% in 12 hours) shows the leader more clearly than a slow 24-hour rise. |
 | EXP-0110 | 2026-10-15 01:11 | P12-LEADER-V3@1.0 | momentum | 1h | The same leader effect, entered at the 1H close: earlier than V1. |
 | EXP-0111 | 2026-10-15 01:11 | P12-LEADER-C@1.0 (control twin of P12-LEADER-V1) | momentum | 4h | Control: buying any coin after a BTC jump - the benchmark the leader pick must beat. |
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0
+- timestamp: 2026-10-15 15:30 UTC · source: Claude daily review 2026-10-15 (update: the 15m cell changed status) · evidence: BACKTEST_EVIDENCE: 4 cells, 2797 trades (412 + 679 + 708 + 998) · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP@1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-13
+- parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+- hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout (-0.24R a trade with it, +0.57R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+- result: BACKTEST 30m BACKTESTING 412 trades +0.187R (unseen +0.364R); 1h BACKTESTING 679 trades +0.126R (unseen +0.271R); 15m FAILED -> BACKTESTING at 708 trades +0.005R (needs +0.10R); 5m FAILED 998 trades -0.182R.
+- teaches: the 15m flip back to BACKTESTING comes with an average of +0.005R - noise around zero, the same as the 30m flips of the v1.1 card. The 30m and 1h numbers are back to the 2026-10-13 sample.
+- next: no change (as on 2026-10-14). Future reviews should not write a new Feedback for a status flip whose average stays within 0.05R of zero.
+
+### Feedback: donchian_breakout-VEXIT-S4@1.1
+- timestamp: 2026-10-15 15:30 UTC · source: Claude daily review 2026-10-15 (update: the 30m cell changed status) · evidence: BACKTEST_EVIDENCE: 3 cells, 3707 trades (633 + 1795 + 1279) · confidence: medium · strategy: donchian_breakout-VEXIT-S4@1.1 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-13
+- parent: source: [C03] Common Risk Factors in Cryptocurrency (Liu, Tsyvinski, Wu)
+- hypothesis: One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last 126 candles (21 days on 4h), shorts only when it rose less. Coins that beat the market over 1 to 4 weeks kept beating it in the paper, among large coins; the filter should drop breakouts that go against relative strength.
+- result: BACKTEST 4h PAPER_TRADING 633 trades +0.234R (unseen +0.225R); 30m BACKTESTING -> FAILED, 1279 trades -0.005R; 1h FAILED 1795 trades -0.010R. Paper: no closed signal yet; the 4h cell is on the watch list for ETH and SOL shorts today.
+- teaches: nothing new; the 30m cell flips around 0R.
+- next: stop this line (unchanged).
+
+### Hypothesis: who_pays lines should name a forced or utilitarian counterparty (from C12)
+- timestamp: 2026-10-15 15:30 UTC · source: Claude daily review 2026-10-15 ([C12] https://dailyspeculations.com/reviews/books/trading-exchanges-harris.html and https://www.turtletrader.com/larry-harris-review) · evidence: HYPOTHESIS: derived from two book reviews (CLAIM: Harris sorts traders into profit-motivated ones, who cannot profit from each other in total, and utilitarian ones such as hedgers and investors, who trade for other reasons and pay for it) and our edge blocks · confidence: low · strategy: all lab and library cards with an edge block · asset: - · timeframe: - · regime: - · review: 2027-01-13
+  - hypothesis: cards whose edge block names a counterparty who must trade (liquidated or stopped-out traders, hedgers, index or mandate flows - "forced_flow" or "risk_premium") hold up better on unseen data than cards whose who_pays line names other profit-seeking traders who are merely "wrong" (most "behavioural" mean-reversion cards).
+  - how to test: no new card - a tally from the existing registry for the operator or the weekly research: group every tested cell by its edge type and compare the share that reached BACKTESTING or better, and the unseen-part average. Our current evidence fits the idea (the only cells in PAPER are forced_flow breakouts; the behavioural R4 mean-reversion cards all FAILED), but that is a handful of cards.
+  - stop if: the edge types show no difference once 20 or more cards per type have been tested.
