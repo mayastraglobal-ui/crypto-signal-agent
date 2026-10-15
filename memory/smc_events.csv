@@ -15754,3 +15754,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-15 18:30,ZEC,30m,FVG_FILLED,bear,,1222.58,1241.32,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-15 17:45,ZEC,15m,FVG,bull,,1215.97,1222.74,0.41,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-15 18:15,ZEC,15m,OB_RETEST,bear,,1241.32,1254.97,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-15 18:45,BTC,15m,FVG_RETRACE,bear,,82217.85,82430.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-15 19:00,BTC,15m,FVG,bull,,82217.85,82310.0,0.314,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:15,BTC,15m,FVG_FILLED,bear,,82217.85,82430.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:15,BTC,15m,FVG,bull,,82330.45,82409.99,0.283,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:30,ETH,30m,SWEEP,bear,2458.8,,,0.191,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-15 18:45,ETH,15m,FVG_RETRACE,bear,,2440.94,2445.44,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-15 18:45,ETH,15m,FVG_FILLED,bear,,2440.94,2445.44,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:00,ETH,15m,FVG,bull,,2440.94,2448.1,0.599,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:30,ETH,15m,SWEEP,bear,2458.8,,,0.322,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-15 18:45,SOL,15m,FVG_RETRACE,bear,,105.52,105.87,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-15 18:45,SOL,15m,FVG_FILLED,bear,,105.52,105.87,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-15 19:00,SOL,15m,FVG,bull,,105.52,105.76,0.397,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-15 19:00,ZEC,1h,FVG,bull,,1196.97,1225.17,0.99,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-15 19:15,ZEC,15m,SWEEP,bear,1241.47,,,0.461,,1h,EXPANSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-15 19:15,ZEC,15m,FVG_FILLED,bear,,1227.5,1244.44,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-15 19:30,SUI,30m,SWEEP,bear,1.0371,,,0.472,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-15 18:45,SUI,15m,BOS,bull,1.0365,,,0.102,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-15 19:15,SUI,15m,FVG_RETRACE,bear,,1.0397,1.0567,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
