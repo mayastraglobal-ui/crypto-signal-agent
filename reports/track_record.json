@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-15 13:41",
+ "utc": "2026-10-15 14:34",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,28 +10,28 @@
   "curve_points": 60
  },
  "total": {
-  "n": 7,
+  "n": 8,
   "wins": 1,
-  "win_rate": 14.3,
-  "avg_r": -0.659,
-  "total_r": -4.61,
+  "win_rate": 12.5,
+  "avg_r": -0.71,
+  "total_r": -5.68,
   "max_dd_r": 5.94,
-  "cur_loss_run": 1,
+  "cur_loss_run": 2,
   "max_loss_run": 5,
-  "sd": 1.359
+  "sd": 1.267
  },
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 7,
+   "n": 8,
    "wins": 1,
-   "win_rate": 14.3,
-   "avg_r": -0.659,
-   "total_r": -4.61,
+   "win_rate": 12.5,
+   "avg_r": -0.71,
+   "total_r": -5.68,
    "max_dd_r": 5.94,
-   "cur_loss_run": 1,
+   "cur_loss_run": 2,
    "max_loss_run": 5,
-   "sd": 1.359
+   "sd": 1.267
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -158,6 +158,31 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-13 02:59"
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.068,
+    "total_r": -1.07,
+    "max_dd_r": 1.07,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 343,
+    "avg_r": 0.009,
+    "win_rate": 36.2
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-15 14:29"
   }
  ],
  "paused": [],
@@ -190,6 +215,10 @@
   {
    "t": "2026-10-15 02:59",
    "r": -4.61
+  },
+  {
+   "t": "2026-10-15 14:29",
+   "r": -5.68
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."

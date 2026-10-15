@@ -68,3 +68,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: range_market, overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: -
   - root cause / fix: (review)
+
+### SUI SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.07R
+- timestamp: 2026-10-15 14:34 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: SUI · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 12:59 UTC, closed 2026-10-15 14:29 UTC, stage TEST
+  - MAE -1.06R / MFE +0.47R
+  - at entry: session NY AM, conditions: no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
