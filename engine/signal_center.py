@@ -13,7 +13,9 @@ measure the live results and promote the best to PAPER with the operator's tap.
     a FAILED cell still qualifies on a positive coin (it may have failed on other coins), but never once its live
     results failed it (the same live record that pauses any strategy: 20 signals averaging below -0.10R);
   * one alert per coin + direction + strategy (the best version / timeframe; the others are named) - merge();
-  * at most max_per_day TEST alerts per Beijing day, the best first; a 5m candle must confirm first (live watcher);
+  * at most max_per_day TEST alerts per Beijing day, the best first; on 30m and faster a 5m candle must confirm first
+    (live watcher; 4H / 1H alert at the candle close since 2026-10-15 - needs_5m);
+  * 🌊 at most wave_max alerts per wave: the same direction within wave_hours (wave_filter);
   * ⭐ when another timeframe or strategy gave the same coin and direction within agree_hours;
   * ⚠️ when the trade goes against the daily regime (1W / 1D never block a TEST alert - they are context).
 Pure functions only: no internet, no files.
@@ -23,7 +25,8 @@ import math
 
 DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades=5, max_per_day=10,
                 cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12,
-                alert_skip_failed=True, alert_min_avg_r=0.10, library_tests=())
+                alert_skip_failed=True, alert_min_avg_r=0.10, library_tests=(),
+                confirm_5m_tfs=("30m", "15m", "5m"), wave_max=2, wave_hours=8)
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -38,7 +41,53 @@ def settings(section):
     s["alert_min_avg_r"] = float(s["alert_min_avg_r"])
     s["alert_skip_failed"] = bool(s["alert_skip_failed"])
     s["library_tests"] = [str(x) for x in (s.get("library_tests") or [])]
+    s["confirm_5m_tfs"] = [str(x) for x in (s.get("confirm_5m_tfs") or [])]
+    s["wave_max"], s["wave_hours"] = int(s["wave_max"]), float(s["wave_hours"])
     return s
+
+
+def needs_5m(tf, S):
+    """Does a TEST setup on this timeframe wait for its 5m candle? 2026-10-15 (operator: "remove 5m check for 4H and
+    1H"): only the timeframes in confirm_5m_tfs (default 30m and faster). The 4H / 1H strategies were proven in the
+    5-year backtest WITHOUT a 5m check, and over the 90 days to 15 Oct the setups it threw away did as well as the
+    ones it kept (4H +0.65R vs +0.52R a trade) while it removed 5 of 6."""
+    return bool(S.get("confirm_5m")) and tf in (S.get("confirm_5m_tfs") or [])
+
+
+def wave_filter(tests, waves, now_ms, S):
+    """🌊 One alert per wave (2026-10-15): TEST alerts in the same direction within wave_hours of the first one are a
+    wave (a market-wide move gives 8-11 setups at once); only the first wave_max are sent, the strongest backtest
+    evidence first when several come together. The 90 days to 15 Oct: 2 per wave kept +29R of +43R with a worst drop
+    of 6.8R instead of 17.5R. waves: {"1" / "-1": {start, n, note}} (changed in place). wave_max 0 = off.
+    Returns (send, over) - each sent alert gets a['wave'] = (number in the wave, wave_max)."""
+    if int(S.get("wave_max") or 0) <= 0:
+        return list(tests), []
+    send, over = [], []
+    span = float(S["wave_hours"]) * 3_600_000
+    for a in sorted(tests, key=lambda x: -float((x.get("test") or {}).get("score") or 0)):
+        k = str(int(a["d"]))
+        w = waves.get(k)
+        if w is None or now_ms - int(w["start"]) > span:
+            w = waves[k] = dict(start=int(now_ms), n=0, note=False)
+        if w["n"] < S["wave_max"]:
+            w["n"] += 1
+            a["wave"] = (w["n"], S["wave_max"])
+            send.append(a)
+        else:
+            over.append(a)
+    return send, over
+
+
+def wave_text(over, wave_max):
+    """The one note per wave for the setups over the wave maximum (information only, no buttons)."""
+    d = int(over[0]["d"])
+    side = "LONG" if d == 1 else "SHORT"
+    items = ", ".join(f"{a['coin']} ({a['strategy']} {a['tf']})" for a in over)
+    return (f"🌊 <b>Wave: more {side} setups</b>\n"
+            f"Also signalling {side}: {items}.\n"
+            f"You already got the first {wave_max} alerts of this wave - the market moves together, so more of the same "
+            f"trade mostly adds risk. Not sent as trades; GitHub records them.\n"
+            "<i>Information only.</i>")
 
 
 def score(n, avg_r):

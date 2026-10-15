@@ -678,10 +678,11 @@ class Watcher:
         # mom_*: 🌊 strategy 11's momentum notes - mom_choice: the operator's /momentum on|off (None = config.yaml's
         # momentum_notes.enabled; the old mom_on key is ignored), when each went out, the last note per kind / coin /
         # direction
+        # waves: 🌊 the TEST alert wave per direction {"1" / "-1": {start, n, note}} (signal_center.wave_filter)
         for k, v in dict(sent={}, heartbeat=None, alerts={}, trades={}, results=[], paused_until=0, tg_offset=None,
                          next_id=0, shadow={}, tests_on=True, test_sent=[], review_week=None, review=None,
                          watch_on=True, watch_sent=[], shock_on=True, shock_sent=[], shock_last={}, shock_swept={},
-                         shock_pending=[], mom_choice=None, mom_sent=[], mom_last={}).items():
+                         shock_pending=[], mom_choice=None, mom_sent=[], mom_last={}, waves={}).items():
             st.setdefault(k, v)
         return st
 
@@ -846,7 +847,10 @@ class Watcher:
             if not self.state.get("tests_on", True):
                 keep, drop = [], tests
             else:
-                keep, drop = scx.cap(tests, scx.sent_today(self.state["test_sent"], now_ms), self.SC)
+                send, over = scx.wave_filter(tests, self.state.setdefault("waves", {}), now_ms, self.SC)
+                if over:
+                    self.wave_note(over, now_ms)
+                keep, drop = scx.cap(send, scx.sent_today(self.state["test_sent"], now_ms), self.SC)
             for a in drop:
                 log(f"ALERT TEST {a['coin']} {a['tf']} {a['strategy']}: not sent ("
                     + ("TEST alerts off" if not self.state.get("tests_on", True) else
@@ -867,6 +871,22 @@ class Watcher:
                 st = self.state["alerts"][aid]                  # journal sync: the alert and its silent plan follow-up
                 self.journal(dict(st, id=aid), "alert", int(st["sent_ms"]))
                 self.state["shadow"][aid] = fl.open_trade(st, aid, int(st["sent_ms"]), self.cfg.get("trade_plan"))
+
+    def wave_note(self, over, now_ms):
+        """🌊 The setups over the wave maximum (2026-10-15): one note per wave and direction naming them (information
+        only, no buttons; never while paused); later ones in the same wave are only logged. GitHub records them all."""
+        for d in sorted({int(a["d"]) for a in over}):
+            these = [a for a in over if int(a["d"]) == d]
+            for a in these:
+                log(f"ALERT TEST {a['coin']} {a['tf']} {a['strategy']}: not sent (wave maximum of "
+                    f"{self.SC['wave_max']} reached) - GitHub still records it")
+            w = self.state["waves"].get(str(d)) or {}
+            if w.get("note") or self.paused(now_ms):
+                continue
+            w["note"] = True
+            ok, err, _ = self.say(scx.wave_text(these, self.SC["wave_max"]))
+            if self.send:
+                log("WAVE note: " + ("sent" if ok else f"NOT sent ({err})"))
 
     def watch_note(self, a, now_ms):
         """👀 Watch note (2026-10-10): the operator sees a TEST setup at once, while it waits for its 5m confirmation
@@ -1416,16 +1436,20 @@ class Watcher:
         covered = self.covered(coin, out, now_ms)
         test_cands = [c for c in test_cands if not self._covered_test(c, covered, out)]
         recent = [a for a in self.state["alerts"].values() if a.get("coin") == coin] + \
-            [p for p in self.pending if p.get("coin") == coin]
+            [p for p in self.pending if p.get("coin") == coin and not p.get("verdict_only")]
         for a in scx.merge(test_cands):             # the Signal Center: merged, then the 5m candle confirms
             a["agree"] = scx.agreement(a, recent, now_ms, self.SC, others=test_cands + out)
-            if self.SC["confirm_5m"]:
+            if scx.needs_5m(a["tf"], self.SC):      # 30m and faster: a 5m candle confirms first
                 self.state["sent"][a["key"]] = now_ms          # reserved: no duplicate while it waits
                 self.pending.append(dict(a, after_ms=b, reserved_ms=now_ms, twin=self.twin_5m(a, now_ms)))
                 log(f"{coin} {a['tf']} {a['strategy']}: TEST trigger - waiting for the 5m confirmation")
                 self.watch_note(a, now_ms)
-            else:
-                out.append(self._finish(a, now_ms))
+            else:                                    # 4H / 1H (2026-10-15): at the candle close, as backtested
+                f = self._finish(a, now_ms)
+                out.append(f)
+                if self.SC["confirm_5m"] and a["tf"] in (self.S5.get("compare_tfs") or []):
+                    # the side-by-side record goes on: what the 5m check WOULD have said, never sent
+                    self.pending.append(dict(f, after_ms=b, verdict_only=True, twin=self.twin_5m(f, now_ms)))
         return out
 
     # ---- 🧭 structure card (2026-10-11): information only, never changes an alert ----
@@ -1584,6 +1608,8 @@ class Watcher:
             res = c5m.check(m5, p["after_ms"], p["d"], p["entry"], p["entry"] - p["d"] * p["R"], self.S5)
             if res["state"] == c5m.AWAITING:
                 keep.append(p)
+            elif p.get("verdict_only"):                # the alert already went out at the 4H / 1H close
+                self.twin_mark(p, "passed" if res["state"] == c5m.CONFIRMED else "rejected")
             elif res["state"] == c5m.CONFIRMED:
                 self.twin_mark(p, "passed")
                 j = res["idx"]
@@ -1998,7 +2024,7 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
                                   program=dict(name=prog.get("name"), version=prog.get("version")),
                                   against=scx.against_daily(d, recs), m5=m5, key=None))
     # in time order, exactly as live: merged per close, cooldown, the 5m candle, the daily cap
-    out, dropped, sent, reserved = [], [], [], {}
+    out, dropped, sent, reserved, waves = [], [], [], {}, {}
     for close_ms in sorted({c["close_ms"] for c in cands}):
         now_c = close_ms + 1
         batch = [c for c in cands if c["close_ms"] == close_ms]
@@ -2019,8 +2045,8 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
                 r = sc.simulate_trade(o, h, l, c, j0, a["d"], entry, a["R"], w.cfg, max(1, hold), 5 / 60, tps=tps,
                                       split=a["split"])
                 return None if r is None else dict(r=round(float(r["r"]), 2), reason=r["reason"])
-            res = c5m.check(m5, now_c, a["d"], a["entry"], a["entry"] - a["d"] * a["R"], w.S5) if w.SC["confirm_5m"] \
-                else dict(state=c5m.CONFIRMED, idx=c5m.first_bar(m5, now_c) - 1)
+            res = c5m.check(m5, now_c, a["d"], a["entry"], a["entry"] - a["d"] * a["R"], w.S5) \
+                if scx.needs_5m(a["tf"], w.SC) else dict(state=c5m.CONFIRMED, idx=c5m.first_bar(m5, now_c) - 1)
             if res["state"] != c5m.CONFIRMED:          # what it would have done without the 5m check (next 5m open)
                 j0 = c5m.first_bar(m5, now_c)
                 dropped.append(dict(a, why=f"5m {res['state']}: {res['why']}",
@@ -2030,6 +2056,10 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
             shift = float(m5["close"][j]) - a["entry"]
             a.update(entry=float(m5["close"][j]), tps=[x + shift for x in a["tps"]],
                      sent_ms=int(m5["close_time"][j]) + 1)
+            if not scx.wave_filter([a], waves, a["sent_ms"], w.SC)[0]:
+                reserved[a["key"]] = now_c                # as live: _finish already marked it sent (the cooldown)
+                dropped.append(dict(a, why="wave maximum reached"))
+                continue
             if scx.sent_today(sent, a["sent_ms"]) >= w.SC["max_per_day"]:
                 dropped.append(dict(a, why="daily maximum reached"))
                 continue
@@ -2047,6 +2077,7 @@ def replay(w, days=14, now_ms=None, coins=None, log_fn=print):
                    max_day=max([scx.sent_today([x["sent_ms"] for x in out], a["sent_ms"]) for a in out] or [0]),
                    days_with_alerts=len(days_seen), not_confirmed=sum(1 for a in dropped if a["why"].startswith("5m")),
                    capped=sum(1 for a in dropped if a["why"] == "daily maximum reached"),
+                   waved=sum(1 for a in dropped if a["why"] == "wave maximum reached"),
                    unconfirmed_finished=len(unc), unconfirmed_won=sum(1 for r in unc if r > 0),
                    unconfirmed_total_r=round(sum(unc), 2))
     return dict(alerts=out, dropped=dropped, days=days, summary=summary)
@@ -2056,7 +2087,8 @@ def replay_text(rep):
     s = rep["summary"]
     lines = [f"Replay of the last {rep['days']} days with the 🔵 TEST alert rules (real OKX candles):",
              f"  {s['alerts']} alert(s) on {s['days_with_alerts']} day(s), at most {s['max_day']} in one Beijing day; "
-             f"{s['not_confirmed']} setup(s) not confirmed by a 5m candle, {s['capped']} over the daily maximum",
+             f"{s['not_confirmed']} setup(s) not confirmed by a 5m candle, {s['capped']} over the daily maximum, "
+             f"{s.get('waved', 0)} over the wave maximum",
              f"  plan results: {s['finished']} finished ({s['won']} won, total {s['total_r']:+.2f}R after fees), "
              f"{s['open']} still open",
              f"  the setups the 5m check removed, if entered anyway: {s['unconfirmed_finished']} finished "

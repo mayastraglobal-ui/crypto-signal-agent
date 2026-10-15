@@ -190,8 +190,17 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   was **positive after fees in the 5-year backtest** (at least 20 trades, the unseen last part not negative). It is
   not paper trading and not proven live: it shows the setup as it forms on the real chart, long or short.
 - 1W / 1D never block a TEST alert. When the trade goes against the daily trend you see **⚠️ Against the daily trend**.
-- A **5m candle must confirm** the entry first (body in the trade's direction, normal volume, close near the entry,
-  within 30 minutes) - otherwise no alert.
+- **4H and 1H alerts come at the candle close** (since 15 Oct 2026, your decision): no 5m check, the same entry as in
+  their 5-year backtest. Why: over the 90 days to 15 Oct the 5m check threw away 5 of every 6 setups, and the ones it
+  threw away did as well (4H: +0.65R a trade vs +0.52R for the ones it kept).
+- **30m and faster** still wait for a **5m candle** to confirm the entry (body in the trade's direction, normal volume,
+  close near the entry, within 30 minutes) - otherwise no alert. `config.yaml` → `signal_center.confirm_5m_tfs`.
+- **🌊 At most 2 alerts per wave** (since 15 Oct 2026): a wave = TEST alerts in the same direction (all buys or all
+  sells) within 8 hours of the first. In a market-wide move 8-11 coins/strategies can signal at once; you get the first
+  2 (the strongest backtest first), tagged "🌊 Wave alert 1 of 2", and **one** short note naming the others
+  (information only). GitHub still records every setup. Over the 90 days to 15 Oct: +29R instead of +43R for "send
+  everything", but the worst drop was 6.8R instead of 17.5R. `config.yaml` → `signal_center.wave_max` (0 = off),
+  `wave_hours`.
 - **👀 Watch notes** (2026-10-10): as soon as a TEST setup is found you get a short note - coin, side, timeframe,
   strategy, price, where its stop would be, the trend - while it waits for that 5m candle. **Information only**: no
   buttons, never a trade signal. If the 5m candle confirms, the normal 🔵 TEST alert follows. At most 12 a day;
@@ -204,8 +213,9 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   (worst about 32R), so it stays in the **demo book**. Like every TEST alert it waits for the 5m candle and is merged
   with the same coin's other alerts (⭐ when two strategies agree - one trade, not two). `config.yaml` →
   `signal_center.library_tests`.
-- **4H with vs without the 5m check** (2026-10-13): every 4H setup that waits for its 5m candle also gets a silent
-  twin, entered at the 4H close with no 5m check. Nothing extra is sent and the alerts do not change. Your journal
+- **4H with vs without the 5m check** (2026-10-13; since 15 Oct for 4H and 1H, which no longer wait): every 4H / 1H
+  setup still runs the 5m check silently, and a twin entered at the candle close records whether the check would
+  have passed or rejected it. Nothing extra is sent and the alerts do not change. Your journal
   records the twin's plan result and whether the 5m check passed or rejected that setup. The Sunday review
   ("With vs without the 5m check") then compares, on the same setups:
   - the ones the check passed;
