@@ -14,7 +14,7 @@
   "paused": []
  },
  "week": "2026-W42",
- "utc": "2026-10-15 16:33",
+ "utc": "2026-10-15 17:30",
  "final": false,
  "rows": [
   {
@@ -463,7 +463,34 @@
     "all_gross_r": -1.042
    }
   ],
-  "side_by_side": {},
+  "side_by_side": {
+   "4h": {
+    "twin_all": {
+     "n": 1,
+     "total_r": -1.0,
+     "avg_r": -1.0,
+     "wins": 0
+    },
+    "twin_passed": {
+     "n": 0,
+     "total_r": 0.0,
+     "avg_r": null,
+     "wins": 0
+    },
+    "twin_rejected": {
+     "n": 1,
+     "total_r": -1.0,
+     "avg_r": -1.0,
+     "wins": 0
+    },
+    "sent": {
+     "n": 0,
+     "total_r": 0.0,
+     "avg_r": null,
+     "wins": 0
+    }
+   }
+  },
   "note": null
  },
  "system": [
@@ -473,7 +500,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-15 16:33 UTC"
+   "text": "hourly scan: last run 2026-10-15 17:30 UTC"
   },
   {
    "ok": true,
@@ -481,7 +508,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-15 15:11 UTC (26 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-15 16:20 UTC (14 min ago)"
   },
   {
    "ok": true,
@@ -582,7 +609,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-15 15:37",
+  "checked_utc": "2026-10-15 16:34",
   "lines": [
    "49 shock(s) this week, 36 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 16, broke yesterday's high 6, broke yesterday's low 13, volume spike 32",
@@ -630,5 +657,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W42</b>\n\ud83d\udd35 TEST: 19 setups closed this week (-12.8R) \u00b7 19 since the start (-0.67R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 3 repair(s) judged - 2 beat their parent, 0 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 49 this week (36 sent) \u00b7 4h later 27 kept going, 22 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (all live setups, after fees): 19 closed \u00b7 -0.67R a trade \u00b7 -12.8R \u00b7 worst drawdown 12.8R (/track)\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 9 (-0.56R) \u00b7 outside 6 (-1.07R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W42</b>\n\ud83d\udd35 TEST: 19 setups closed this week (-12.8R) \u00b7 19 since the start (-0.67R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 3 repair(s) judged - 2 beat their parent, 0 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 49 this week (36 sent) \u00b7 4h later 27 kept going, 22 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (all live setups, after fees): 19 closed \u00b7 -0.67R a trade \u00b7 -12.8R \u00b7 worst drawdown 12.8R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 9 (-0.56R) \u00b7 outside 6 (-1.07R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
