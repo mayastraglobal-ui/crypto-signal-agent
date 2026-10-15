@@ -644,3 +644,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-15 12:38 UTC
 - **EXCLUDED** PUMP - 7-day average volume $30M < $50M
+
+## 2026-10-15 15:35 UTC
+- **EXCLUDED** PUMP - 7-day average volume $30M < $50M; order book too thin: $240k within 1% (need $250k)

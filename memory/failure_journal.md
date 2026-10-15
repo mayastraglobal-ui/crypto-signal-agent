@@ -76,3 +76,51 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session NY AM, conditions: no_displacement
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 1h P01-BREAKOUT-V5 v1.0 - exit-rule -0.39R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.39R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-10-22
+  - signal 2026-10-15 02:59 UTC, closed 2026-10-15 14:59 UTC, stage TEST
+  - MAE -0.37R / MFE +1.11R
+  - at entry: session Asia, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.09R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 05:29 UTC, closed 2026-10-15 15:29 UTC, stage TEST
+  - MAE -1.42R / MFE +0.89R
+  - at entry: session outside killzones, conditions: wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### SOL SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.06R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 05:59 UTC, closed 2026-10-15 14:59 UTC, stage TEST
+  - MAE -1.30R / MFE +0.20R
+  - at entry: session outside killzones, conditions: overextended_entry, wrong_session
+  - what happened: indicator_lag
+  - root cause / fix: (review)
+
+### SOL SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.09R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 10:59 UTC, closed 2026-10-15 14:59 UTC, stage TEST
+  - MAE -1.46R / MFE +0.80R
+  - at entry: session outside killzones, conditions: low_relative_volume, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### SOL SHORT 1h P04-MACD-SUPERTREND-V2 v1.0 - SL -1.07R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 11:59 UTC, closed 2026-10-15 14:59 UTC, stage TEST
+  - MAE -1.18R / MFE +0.52R
+  - at entry: session NY AM, conditions: low_relative_volume, no_displacement
+  - what happened: volatility_spike
+  - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.10R
+- timestamp: 2026-10-15 15:35 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: STRONG_BEAR · review: 2026-10-22
+  - signal 2026-10-15 13:29 UTC, closed 2026-10-15 14:59 UTC, stage TEST
+  - MAE -1.49R / MFE +0.56R
+  - at entry: session NY AM, conditions: no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
