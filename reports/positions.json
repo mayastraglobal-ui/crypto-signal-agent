@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-14 23:27",
+ "generated_utc": "2026-10-15 00:38",
  "book": {
-  "utc": "2026-10-14 23:27",
-  "beijing": "2026-10-15 07:27",
+  "utc": "2026-10-15 00:38",
+  "beijing": "2026-10-15 08:38",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-14 23:27 UTC / 2026-10-15 07:27 Beijing",
+  "POSITION BOOK \u2014 2026-10-15 00:38 UTC / 2026-10-15 08:38 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -90,7 +90,7 @@
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SOL",
    "tf": "4h",
    "strategy": "donchian_breakout",
    "version": "1.0",
@@ -101,7 +101,7 @@
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SOL",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT",
    "version": "1.0",
@@ -112,7 +112,7 @@
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SOL",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT-S4",
    "version": "1.1",
@@ -130,7 +130,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -141,7 +141,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -156,5 +156,32 @@
    "missing": null
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-15 00:38",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-14 23:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 104.29,
+   "note": "1h signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-15 00:38",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-14 23:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 104.29,
+   "note": ""
+  }
+ ]
 }
