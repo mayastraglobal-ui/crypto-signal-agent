@@ -1,13 +1,13 @@
 # Weekly review · 2026-W42
 
-Made 2026-10-15 02:04 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-15 02:30 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-10-14)
-- ✅ hourly scan: last run 2026-10-15 02:04 UTC
-- ✅ program rotation: 80 of 80 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-15 00:01 UTC (38 min ago)
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-10-15)
+- ✅ hourly scan: last run 2026-10-15 02:30 UTC
+- ✅ program rotation: 89 of 89 strategy / timeframe tests re-tested in the last 7 days
+- ✅ live watcher: last heartbeat 2026-10-15 01:05 UTC (60 min ago)
 - ✅ TEST setups closed this week (GitHub record): 5
 
 ## Totals
@@ -41,9 +41,9 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## Failure Lab (repairs for the loss causes)
 
-- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.03R vs parent +0.12R, unseen +0.04R vs +0.14R - did not help
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.18R vs parent +0.09R, unseen +0.31R vs +0.20R - helped
-- TRD-H4-BREAKOUT-S3-FDISP@1.0 30m (DISP for false_breakout): +0.17R vs parent +0.00R, unseen +0.30R vs +0.14R - helped
+- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.04R vs parent +0.14R, unseen +0.11R vs +0.22R - did not help
+- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.38R vs +0.26R - helped
+- TRD-H4-BREAKOUT-S3-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.01R, unseen +0.36R vs +0.19R - helped
 - repair record: DISP helped 2 of 2, HTF helped 0 of 1
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
