@@ -60,3 +60,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - stop / target: both went about +1R in favour (MFE +0.96R and +1.02R) and then reversed to the stop. The first target of a lab card is at least 2R, so neither reached it. One trade's worth of evidence, but it fits the false_breakout tag that is systematic in many breakout backtests (32 tests in the fact sheet of 2026-10-11).
   - regime: the market weather said "Choppy - stay out" on both coins; breakouts fail most in such markets (C08).
   - sample size: two trades on one signal; not a pattern. Five TEST losses are now in the journal (2026-10-11 and 2026-10-13).
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.09R
+- timestamp: 2026-10-15 03:30 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-22
+  - signal 2026-10-15 02:29 UTC, closed 2026-10-15 02:59 UTC, stage TEST
+  - MAE -1.09R / MFE +0.35R
+  - at entry: session Asia, conditions: range_market, overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)

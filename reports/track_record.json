@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-15 02:30",
+ "utc": "2026-10-15 03:30",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,28 +10,28 @@
   "curve_points": 60
  },
  "total": {
-  "n": 5,
-  "wins": 0,
-  "win_rate": 0.0,
-  "avg_r": -1.188,
-  "total_r": -5.94,
+  "n": 7,
+  "wins": 1,
+  "win_rate": 14.3,
+  "avg_r": -0.659,
+  "total_r": -4.61,
   "max_dd_r": 5.94,
-  "cur_loss_run": 5,
+  "cur_loss_run": 1,
   "max_loss_run": 5,
-  "sd": 0.077
+  "sd": 1.359
  },
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 5,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_r": -1.188,
-   "total_r": -5.94,
+   "n": 7,
+   "wins": 1,
+   "win_rate": 14.3,
+   "avg_r": -0.659,
+   "total_r": -4.61,
    "max_dd_r": 5.94,
-   "cur_loss_run": 5,
+   "cur_loss_run": 1,
    "max_loss_run": 5,
-   "sd": 0.077
+   "sd": 1.359
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -65,15 +65,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 2,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.189,
-    "total_r": -2.38,
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": 0.014,
+    "total_r": 0.04,
     "max_dd_r": 2.38,
-    "cur_loss_run": 2,
+    "cur_loss_run": 0,
     "max_loss_run": 2,
-    "sd": 0.011
+    "sd": 2.083
    },
    "backtest": {
     "n": 635,
@@ -82,7 +82,32 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-11 15:59"
+   "last_utc": "2026-10-15 02:59"
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
+   "coin": "XRP",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.2,
+    "total_r": -2.4,
+    "max_dd_r": 2.4,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.153
+   },
+   "backtest": {
+    "n": 499,
+    "avg_r": 0.01,
+    "win_rate": 36.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-15 02:59"
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|1h",
@@ -133,31 +158,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-13 02:59"
-  },
-  {
-   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
-   "coin": "XRP",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.309,
-    "total_r": -1.31,
-    "max_dd_r": 1.31,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 499,
-    "avg_r": 0.01,
-    "win_rate": 36.3
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-11 14:59"
   }
  ],
  "paused": [],
@@ -182,6 +182,14 @@
   {
    "t": "2026-10-13 02:59",
    "r": -5.94
+  },
+  {
+   "t": "2026-10-15 02:59",
+   "r": -3.52
+  },
+  {
+   "t": "2026-10-15 02:59",
+   "r": -4.61
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."

@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-15 02:30",
+ "generated_utc": "2026-10-15 03:30",
  "book": {
-  "utc": "2026-10-15 02:30",
-  "beijing": "2026-10-15 10:30",
+  "utc": "2026-10-15 03:30",
+  "beijing": "2026-10-15 11:30",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-15 02:30 UTC / 2026-10-15 10:30 Beijing",
+  "POSITION BOOK \u2014 2026-10-15 03:30 UTC / 2026-10-15 11:30 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -290,29 +290,81 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-15 02:30",
+   "time_utc": "2026-10-15 03:30",
+   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-10-14 17:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "TP1_HIT",
+   "price": 1.0268,
+   "note": "TP1 reached - stop moved to breakeven"
+  },
+  {
+   "time_utc": "2026-10-15 03:30",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-14 23:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "TP1_HIT",
+   "price": null,
+   "note": "TP1 reached - stop moved to breakeven"
+  },
+  {
+   "time_utc": "2026-10-15 03:30",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-10-14 23:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TP2 +2.42R"
+  },
+  {
+   "time_utc": "2026-10-15 03:30",
    "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-15 02:29",
    "coin": "XRP",
    "tf": "30m",
    "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.09R"
+  },
+  {
+   "time_utc": "2026-10-15 03:30",
+   "id": "ETH-1h-P01-BREAKOUT-V5-2026-10-15 02:59",
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 1.2996,
-   "note": "30m signal candle closed"
+   "price": 2380.66,
+   "note": "1h signal candle closed"
   },
   {
-   "time_utc": "2026-10-15 02:30",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-15 02:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
+   "time_utc": "2026-10-15 03:30",
+   "id": "ETH-1h-P01-BREAKOUT-V5-2026-10-15 02:59",
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 1.2996,
+   "price": 2380.66,
    "note": ""
   }
  ]

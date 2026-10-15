@@ -170,3 +170,15 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START ZEC 5m data: DEGRADED: volume 61x normal on candle 10-15 02:15 UTC (possible bad data)
 - timestamp: 2026-10-15 02:30 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-11-14
   - signals from this data are blocked while it lasts
+
+### END BNB 5m data: DEGRADED: volume 71x normal on candle 10-15 02:20 UTC (possible bad data); DEGRADED: volume 61x normal on candle 10-15 02:25 UTC (possible bad data)
+- timestamp: 2026-10-15 03:30 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: BNB · timeframe: - · regime: - · review: 2026-11-14
+  - problem first seen 2026-10-15 02:30 UTC UTC
+
+### END SUI 5m data: DEGRADED: volume 59x normal on candle 10-15 02:20 UTC (possible bad data)
+- timestamp: 2026-10-15 03:30 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: SUI · timeframe: - · regime: - · review: 2026-11-14
+  - problem first seen 2026-10-15 02:30 UTC UTC
+
+### END ZEC 5m data: DEGRADED: volume 61x normal on candle 10-15 02:15 UTC (possible bad data)
+- timestamp: 2026-10-15 03:30 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-11-14
+  - problem first seen 2026-10-15 02:30 UTC UTC
