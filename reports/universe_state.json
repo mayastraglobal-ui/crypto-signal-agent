@@ -12,7 +12,7 @@
  "suspended": {
   "WAL": "2026-10-15"
  },
- "runs": 469,
+ "runs": 470,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -62,7 +62,6 @@
    "thin_book"
   ],
   "PUMP": [
-   "thin_book",
    "volume_7d"
   ],
   "HBAR": [],

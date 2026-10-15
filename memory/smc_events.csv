@@ -15517,3 +15517,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-15 11:00,ETH,15m,FVG_FILLED,bull,,2361.12,2368.37,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-15 11:00,SOL,30m,FVG,bear,,102.53,102.79,0.293,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-15 11:00,XRP,30m,FVG,bear,,1.3131,1.3159,0.266,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-15 12:00,SOL,30m,FVG_RETRACE,bear,,102.53,102.79,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-15 11:45,SOL,15m,FVG_RETRACE,bear,,102.61,102.79,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-15 12:00,XRP,30m,FVG_RETRACE,bear,,1.3131,1.3159,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-15 12:00,ZEC,4h,OB_INVALID,bull,,1098.88,1133.82,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
