@@ -162,6 +162,9 @@ class Watcher(unittest.TestCase):
         self.addCleanup(clock.stop)
         self.w = LW.Watcher(LW.SyntheticSwap(), send=True, git=False, now_fn=lambda: self.now)
         self.w.coins, self.w.extra = ["BTC"], []
+        # these tests check the 5m-wait mechanism itself: 4H / 1H wait here too (live since 2026-10-15 only 30m and
+        # faster wait - tests/test_waves.py checks the 4H / 1H path)
+        self.w.SC = dict(self.w.SC, confirm_5m_tfs=["4h", "1h", "30m", "15m", "5m"])
         self.v1, self.v2 = self.w.cards["P01-BREAKOUT-V1@1.0"], self.w.cards["P01-BREAKOUT-V2@1.0"]
         self.w.tests = {"P01-BREAKOUT-V1@1.0|4h": {"BTC": dict(coin(), score=3.3, strategy=1, version="V1")},
                         "P01-BREAKOUT-V2@1.0|1h": {"BTC": dict(coin(), score=5.0, strategy=1, version="V2")}}

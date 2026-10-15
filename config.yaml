@@ -335,9 +335,11 @@ confirm_5m:                  # 5-minute entry confirmation (AGENT_PROMPT.md sect
   min_body_pct: 0.5          # confirming bar closes in the trade direction with a body >= 50% of its range
   min_rel_vol: 1.0           # ... relative volume >= 1.0
   zone_r: 0.2                # ... and closes within the planned entry +- 0.2R
-  compare_tfs: [4h]          # 2026-10-13 (operator: "test 4H without 5m check"): every 4H setup that waits for its 5m
+  compare_tfs: [4h, 1h]      # 2026-10-13 (operator: "test 4H without 5m check"): every 4H setup that waits for its 5m
                              # candle also gets a silent twin entered at the 4H close (no 5m check); the journal records
                              # both, the Sunday review compares them. Alerts are unchanged. [] = off
+                             # 2026-10-15: 4H / 1H no longer wait (signal_center.confirm_5m_tfs) - their twin still
+                             # records what the 5m check WOULD have said (passed / rejected), so the comparison goes on
 
 approval:                    # PAPER_TRADING -> APPROVED (AGENT_PROMPT.md section 12) - only the operator changes these
   min_paper_signals: 20      # at least 20 closed paper signals ...
@@ -438,7 +440,14 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   test_min_trades: 5         # ... and its unseen last 30% not negative (when it holds >= 5 trades)
   max_per_day: 10            # at most 10 TEST alerts a Beijing day (the strongest backtest evidence first)
   cooldown_minutes: 240      # one TEST alert per coin + direction + strategy in 4 hours (versions / timeframes merged)
-  confirm_5m: true           # a 5m candle must confirm the entry first (confirm_5m: settings above)
+  confirm_5m: true           # a 5m candle must confirm the entry first (confirm_5m: settings above) ...
+  confirm_5m_tfs: [30m, 15m, 5m]   # ... only on these timeframes. 2026-10-15 (operator: "remove 5m check for 4H and
+                             # 1H"): 4H / 1H TEST alerts go out at the candle close, as in their 5-year backtest; over the
+                             # 90 days to 15 Oct the 5m check removed 5 of 6 setups and the removed ones did as well
+                             # (4H +0.65R vs +0.52R a trade). The 5m verdict is still recorded silently (compare_tfs).
+  wave_max: 2                # 🌊 at most 2 TEST alerts per wave: the same direction within wave_hours of the first;
+  wave_hours: 8              # the rest get one information note. 90 days to 15 Oct: +29R of +43R, worst drop 6.8R
+                             # instead of 17.5R. 0 = off
   agree_hours: 4             # ⭐ when another timeframe / strategy gave the same coin and direction within 4 hours
   watch_notes: true          # 👀 2026-10-10: a note as soon as a TEST setup is found, while it waits for its 5m candle
                              # (information only, no buttons; /watch on|off in Telegram)

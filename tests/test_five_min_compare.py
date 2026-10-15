@@ -41,8 +41,8 @@ class Watcher(unittest.TestCase):
             self.addCleanup(p.stop)
         self.w = LW.Watcher(LW.SyntheticSwap(), send=False, git=False)
 
-    def test_config_compares_4h_only(self):
-        self.assertEqual(c5m.settings(CFG.get("confirm_5m"))["compare_tfs"], ["4h"])
+    def test_config_compares_4h_and_1h(self):                       # 1H added 2026-10-15 (4H / 1H skip the 5m wait)
+        self.assertEqual(c5m.settings(CFG.get("confirm_5m"))["compare_tfs"], ["4h", "1h"])
         self.assertEqual(c5m.settings(None)["compare_tfs"], [])
 
     def test_a_4h_setup_gets_a_twin_entered_at_the_signal_close(self):

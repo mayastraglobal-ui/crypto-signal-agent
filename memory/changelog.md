@@ -977,3 +977,24 @@ Newest entries at the bottom. Format: date · who · what · why.
 - scan.yml / research.yml: the save step re-syncs and pushes up to 4 times (10 / 20 / 30 s apart), like the Brain and
   Pine workflows - the scan of 14 Oct 15:37 UTC lost its results to a GitHub "Internal Server Error".
 - Tests: `tests/test_strategy12.py` (12); tests/test_program.py counts (56 cards, strategies 1-12, 88 timeframes).
+
+## 2026-10-15 · Operator + Claude · TEST alerts: 4H / 1H at the candle close, at most 2 per wave
+- Why: the operator saw no alerts in the 12-15 Oct fall. The 30-day replay showed the 4H / 1H / 30m strategies found
+  42 setups but the 5m check sent only 7. Over 90 days (to 15 Oct): with the 5m check 18 alerts, +10.5R; without it
+  102, +43.4R, worst drop 17.5R, 8 losses in a row. On 4H the setups the 5m check threw away did as well as the ones
+  it kept (+0.65R vs +0.52R a trade): it removed trades, it did not pick better ones - and the 5-year backtests that
+  proved these strategies never used a 5m check. Grouping alerts into waves (same direction within 8 hours): the first
+  2 per wave +29.0R, worst drop 6.8R, 4 losses in a row (1 per wave +13.4R; the highest timeframe first +7.3R).
+  The operator: "remove 5m check + one alert per wave", "build it".
+- signal_center: `needs_5m(tf)` - only `confirm_5m_tfs` (30m, 15m, 5m) wait for the 5m candle; `wave_filter` - at most
+  `wave_max` (2) TEST alerts per direction within `wave_hours` (8) of the wave's first alert, the strongest backtest
+  evidence first; `wave_text` - one note naming the rest. 0 = off.
+- live_watcher: 4H / 1H TEST alerts at the candle close (`_finish` at once); the 5m check still runs silently for them
+  (a verdict-only pending item) and marks the silent twin passed / rejected - the side-by-side record now covers 4H and
+  1H (`confirm_5m.compare_tfs: [4h, 1h]`). `deliver` applies the wave filter before the daily cap and sends one 🌊 note
+  per wave (never while paused); the alert text says "🌊 Wave alert 1 of 2". The replay applies the same rules.
+- Check: the agent's own 90-day replay with the new rules - 44 alerts on 25 days (at most 5 in a Beijing day), 23 won,
+  +30.0R after fees; 20 30m setups not confirmed by their 5m candle; 27 over the wave maximum.
+- PAPER / LIVE alerts unchanged (they never had the 5m check). Nothing lowered: gates, costs, the pass bar, the daily cap.
+- Tests: `tests/test_waves.py` (7); the 5m-wait mechanism tests keep 4H / 1H waiting inside the test;
+  tests/test_five_min_compare.py config [4h, 1h]. Full suite 949 passed.

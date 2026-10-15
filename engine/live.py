@@ -140,6 +140,8 @@ def message(a):
              name + (f" ({a['strategy']})" if prog.get("name") else "")]
     if a.get("agree"):
         lines.append("⭐ Same direction on: " + ", ".join(a["agree"]))
+    if a.get("wave"):                        # 2026-10-15: at most wave_max TEST alerts per market-wide wave
+        lines.append(f"🌊 Wave alert {a['wave'][0]} of {a['wave'][1]} ({side} side, 8 hours)")
     if a.get("same"):                        # 2026-10-11: versions of one setup, one message
         lines.append(f"🧩 Same setup, {len(a['same']) + 1} versions agree: also " + ", ".join(a["same"])
                      + ". <b>One trade</b> - open it once (the plan below).")
