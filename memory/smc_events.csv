@@ -16165,3 +16165,62 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-16 13:45,ZEC,15m,FVG_RETRACE,bear,,1223.59,1228.77,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-16 13:45,ZEC,15m,FVG_FILLED,bear,,1223.59,1228.77,,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-10-16 14:30,SUI,15m,FVG_FILLED,bear,,1.0428,1.0481,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,BTC,30m,OB_INVALID,bull,,82015.31,82183.22,,Silver Bullet,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 15:30,BTC,30m,CHOCH,bear,81842.2,,,0.758,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-16 15:30,BTC,30m,ORDER_BLOCK,bear,,81868.0,82488.01,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-16 14:45,BTC,15m,FVG,bull,,82221.98,82291.57,0.288,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-16 15:00,BTC,15m,FVG_RETRACE,bull,,82221.98,82291.57,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,BTC,15m,FVG_FILLED,bull,,82221.98,82291.57,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:15,BTC,15m,SWEEP,bull,81688.0,,,0.76,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-16 15:15,BTC,15m,OB_INVALID,bull,,81842.2,82019.33,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 15:15,BTC,15m,FVG_FILLED,bull,,81616.01,81755.01,,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:15,BTC,15m,FVG,bear,,81978.01,82291.57,1.148,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,BTC,15m,WEAK_BREAK,bear,81689.76,,,0.39,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-16 15:30,BTC,15m,FVG,bear,,81770.28,81953.85,0.665,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,ETH,30m,WEAK_BREAK,bear,2445.0,,,0.425,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-16 15:30,ETH,30m,OB_INVALID,bull,,2448.77,2455.49,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 14:45,ETH,15m,FVG,bull,,2468.85,2473.0,0.418,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,ETH,15m,FVG_RETRACE,bull,,2468.85,2473.0,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,ETH,15m,FVG_FILLED,bull,,2468.85,2473.0,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:15,ETH,15m,SWEEP,bull,2440.93,,,0.458,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-16 15:15,ETH,15m,BOS,bear,2448.71,,,0.006,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-16 15:15,ETH,15m,FVG,bear,,2459.81,2473.0,1.155,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,ETH,15m,FVG,bear,,2450.0,2459.04,0.777,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,SOL,1h,FVG_RETRACE,bear,,105.9,106.57,,Silver Bullet,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,SOL,1h,FVG_FILLED,bear,,105.9,106.57,,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-16 15:00,SOL,15m,FVG_RETRACE,bull,,105.9,106.06,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,SOL,15m,FVG_FILLED,bull,,105.9,106.06,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:15,SOL,15m,SWEEP,bull,104.59,,,0.305,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-16 15:15,SOL,15m,CHOCH,bear,105.09,,,0.477,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-16 15:15,SOL,15m,ORDER_BLOCK,bear,,106.16,106.61,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-16 15:15,SOL,15m,FVG,bear,,105.67,106.16,0.852,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,SOL,15m,FVG_RETRACE,bull,,103.52,103.98,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:30,SOL,15m,FVG_FILLED,bull,,104.35,104.6,,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,SOL,15m,FVG,bear,,104.89,105.65,1.258,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,XRP,1h,FVG_RETRACE,bear,,1.3381,1.3415,,Silver Bullet,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,XRP,1h,FVG_FILLED,bear,,1.3381,1.3415,,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-16 15:00,XRP,30m,CHOCH,bear,1.3323,,,0.533,Silver Bullet,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-16 15:00,XRP,30m,ORDER_BLOCK,bear,,1.3295,1.3419,,Silver Bullet,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-16 15:00,XRP,30m,OB_INVALID,bull,,1.3323,1.3378,,Silver Bullet,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 15:30,XRP,30m,FVG_RETRACE,bull,,1.3147,1.3218,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:30,XRP,30m,FVG_FILLED,bull,,1.3147,1.3218,,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,XRP,15m,WEAK_BREAK,bear,1.3323,,,0.719,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-16 15:00,XRP,15m,OB_INVALID,bull,,1.3337,1.3375,,Silver Bullet,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 15:15,XRP,15m,FVG,bear,,1.3283,1.3367,1.296,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,XRP,15m,FVG,bear,,1.3176,1.328,1.576,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,ZEC,30m,FVG,bear,,1209.59,1213.62,0.269,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-16 15:00,ZEC,15m,BOS,bear,1211.58,,,0.214,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-16 15:15,ZEC,15m,FVG,bear,,1209.59,1218.49,0.802,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-16 15:30,ZEC,15m,FVG_FILLED,bull,,1187.48,1191.93,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-16 15:30,ZEC,15m,FVG,bear,,1201.52,1208.87,0.625,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-16 15:30,SUI,30m,CHOCH,bear,1.0375,,,1.048,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-16 15:30,SUI,30m,ORDER_BLOCK,bear,,1.0383,1.0536,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-16 15:30,SUI,30m,OB_INVALID,bull,,1.037,1.0453,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 14:45,SUI,15m,FVG,bull,,1.0475,1.0494,0.262,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:00,SUI,15m,FVG_RETRACE,bull,,1.0475,1.0494,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 15:00,SUI,15m,FVG_FILLED,bull,,1.0475,1.0494,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:15,SUI,15m,CHOCH,bear,1.0375,,,0.708,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-16 15:15,SUI,15m,ORDER_BLOCK,bear,,1.0494,1.0555,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-16 15:15,SUI,15m,OB_INVALID,bull,,1.037,1.0444,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-16 15:15,SUI,15m,FVG,bear,,1.0439,1.0494,0.678,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 15:30,SUI,15m,FVG,bear,,1.0326,1.0435,1.282,,1h,RANGE,,smc-1.0,Binance
