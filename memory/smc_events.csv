@@ -15880,3 +15880,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-16 01:00,SUI,30m,BOS,bull,1.0415,,,0.252,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-10-16 01:00,SUI,15m,BOS,bull,1.0415,,,0.473,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-10-16 02:00,SUI,15m,FVG,bear,,1.0379,1.0401,0.38,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-16 02:15,ETH,15m,OB_RETEST,bear,,2439.95,2445.0,,Asia,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-16 02:30,SOL,30m,FVG_FILLED,bull,,105.05,105.37,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-16 02:15,SOL,15m,OB_RETEST,bear,,105.48,105.73,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-16 02:30,XRP,30m,SWEEP,bull,1.3314,,,0.142,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-16 02:15,XRP,15m,SWEEP,bull,1.3314,,,0.255,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-16 02:30,SUI,30m,FVG,bear,,1.0374,1.0401,0.288,Asia,1h,RANGE,,smc-1.0,Binance
