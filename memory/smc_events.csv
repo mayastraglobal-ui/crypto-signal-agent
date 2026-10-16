@@ -16339,3 +16339,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-16 20:30,XRP,15m,BOS,bull,1.3038,,,0.123,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-10-16 22:15,ETH,15m,WEAK_BREAK,bull,2421.77,,,0.246,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-10-16 22:15,SUI,15m,SWEEP,bear,1.0219,,,0.239,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-16 23:00,ETH,1h,FVG_FILLED,bear,,2420.0,2425.96,,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-16 22:30,ETH,15m,FVG,bull,,2419.04,2422.22,0.336,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 22:30,SUI,15m,WEAK_BREAK,bull,1.0219,,,0.083,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-16 22:30,SUI,15m,FVG,bull,,1.0186,1.0206,0.287,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 23:00,SUI,15m,FVG_RETRACE,bull,,1.0186,1.0206,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
