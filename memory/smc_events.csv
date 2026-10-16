@@ -15950,3 +15950,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-16 05:30,SUI,30m,FVG_FILLED,bear,,1.0374,1.0401,,,1h,RANGE,,smc-1.0,Binance
 2026-10-16 05:15,SUI,15m,BOS,bull,1.0388,,,0.426,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-10-16 05:15,SUI,15m,FVG_FILLED,bear,,1.0379,1.0401,,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 06:00,ETH,1h,FVG_RETRACE,bear,,2447.5,2455.99,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-16 06:00,ETH,1h,FVG_FILLED,bear,,2447.5,2455.99,,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-16 05:45,ETH,15m,BREAKER_RETEST,bull,,2439.95,2445.0,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-16 06:00,SOL,1h,SWEEP,bear,106.51,,,0.121,,4h,STRONG_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-16 05:45,SOL,15m,BREAKER_RETEST,bull,,105.48,105.73,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-16 05:45,SOL,15m,BREAKER_RETEST,bull,,105.26,105.7,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-16 05:45,SOL,15m,FVG_RETRACE,bull,,105.61,105.73,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 05:45,SOL,15m,FVG_RETRACE,bull,,105.73,105.89,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-16 05:45,SOL,15m,FVG_FILLED,bull,,105.73,105.89,,,1h,RANGE,,smc-1.0,Binance
+2026-10-16 06:00,ZEC,30m,FVG,bull,,1214.9,1219.26,0.267,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-16 05:45,ZEC,15m,FVG_RETRACE,bull,,1214.9,1224.1,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
