@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-10-16 00:38 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
+Updated 2026-10-16 02:09 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -25,7 +25,7 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | 2 | 0 | -0.74R | +0.01R | -1.49R | 1.49R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | 2 | 50 | -0.04R | +0.01R | -0.08R | 1.04R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
-| P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.23R | -1.05R | 1.05R | ✅ |
+| P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V5 | 1h | BTC | 🔵 TEST | 1 | 0 | -1.15R | +0.02R | -1.15R | 1.15R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | 1 | 0 | -1.07R | +0.03R | -1.07R | 1.07R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | 1 | 0 | -1.07R | +0.01R | -1.07R | 1.07R | ✅ |

@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-16 00:38",
+ "utc": "2026-10-16 02:09",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -15,9 +15,9 @@
  },
  "breadth": {
   "UP": 0,
-  "DOWN": 0,
+  "DOWN": 1,
   "RANGE": 0,
-  "CHOPPY": 6
+  "CHOPPY": 5
  },
  "coins": [
   {
@@ -35,7 +35,7 @@
    "adx": {
     "1d": 26.0,
     "4h": 39.0,
-    "1h": 19.0
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 2.67,
@@ -52,28 +52,28 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0043,
-    "oi_24h_pct": -3.8,
+    "funding_pct": 0.0054,
+    "oi_24h_pct": 1.8,
     "label": "neutral"
    },
-   "change_24h": 0.88
+   "change_24h": 0.51
   },
   {
    "coin": "ETH",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
+   "verdict": "DOWN",
+   "permission": "SHORT allowed",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H TRANSITION)",
+   "why": "4H/1H bearish, 1W WEAK_BULL",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "WEAK_BEAR",
-    "1h": "TRANSITION"
+    "1h": "WEAK_BEAR"
    },
    "adx": {
     "1d": 30.0,
     "4h": 38.0,
-    "1h": 30.0
+    "1h": 27.0
    },
    "vol": {
     "atr_pct": 3.89,
@@ -90,28 +90,28 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0072,
-    "oi_24h_pct": -6.7,
+    "funding_pct": 0.0075,
+    "oi_24h_pct": -70.3,
     "label": "neutral"
    },
-   "change_24h": 0.82
+   "change_24h": 0.86
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H RANGE)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "WEAK_BEAR",
-    "1h": "UNCLEAR"
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 30.0,
     "4h": 41.0,
-    "1h": 20.0
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 4.7,
@@ -128,28 +128,28 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0075,
-    "oi_24h_pct": -1.7,
+    "funding_pct": 0.0044,
+    "oi_24h_pct": 159.0,
     "label": "neutral"
    },
-   "change_24h": 1.0
+   "change_24h": 1.11
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
+   "turning": null,
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H RANGE)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "UNCLEAR"
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 27.0,
     "4h": 31.0,
-    "1h": 21.0
+    "1h": 20.0
    },
    "vol": {
     "atr_pct": 7.78,
@@ -166,28 +166,28 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0059,
-    "oi_24h_pct": -2.5,
+    "funding_pct": 0.0086,
+    "oi_24h_pct": 170.4,
     "label": "neutral"
    },
-   "change_24h": 1.77
+   "change_24h": 1.75
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H RANGE)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "UNCLEAR"
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 27.0,
     "4h": 47.0,
-    "1h": 21.0
+    "1h": 19.0
    },
    "vol": {
     "atr_pct": 4.43,
@@ -204,11 +204,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": 0.0088,
-    "oi_24h_pct": -4.2,
+    "funding_pct": 0.01,
+    "oi_24h_pct": 266.5,
     "label": "neutral"
    },
-   "change_24h": 0.55
+   "change_24h": 0.6
   },
   {
    "coin": "ZEC",
@@ -225,7 +225,7 @@
    "adx": {
     "1d": 28.0,
     "4h": 21.0,
-    "1h": 37.0
+    "1h": 35.0
    },
    "vol": {
     "atr_pct": 9.07,
@@ -243,22 +243,22 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 4.5,
+    "oi_24h_pct": -74.1,
     "label": "neutral"
    },
-   "change_24h": 7.81
+   "change_24h": 7.61
   }
  ],
- "alts_vs_btc_24h": 0.12,
+ "alts_vs_btc_24h": 0.6,
  "fear_greed": {
   "value": 63,
   "label": "Greed",
   "yesterday": 53
  },
  "btc_dominance": {
-  "pct": 59.358,
-  "utc": "2026-10-16 00:38",
-  "ch24": 0.07,
+  "pct": 59.331,
+  "utc": "2026-10-16 02:09",
+  "ch24": -0.02,
   "ch7": null,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
@@ -273,5 +273,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-16 08:38 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H RANGE\nVolatility: normal (daily range 2.7%, higher than 27% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (80,450 \u2013 84,042) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0043%/8h, open interest -3.8% in 24h)\nAltcoins vs BTC (24h): +0.1%\nBTC dominance: 59.4% \u00b7 24h +0.07 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 63\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u2197\ufe0f SUI: turning up (not confirmed)\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-16 10:09 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H RANGE\nVolatility: normal (daily range 2.7%, higher than 27% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (80,450 \u2013 84,042) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0054%/8h, open interest +1.8% in 24h)\nAltcoins vs BTC (24h): +0.6%\nBTC dominance: 59.3% \u00b7 24h -0.02 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 63\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\ud83d\udd34 ETH: trend down\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u26aa ZEC: choppy\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
