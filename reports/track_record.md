@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-10-16 16:30 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
+Updated 2026-10-16 17:28 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
