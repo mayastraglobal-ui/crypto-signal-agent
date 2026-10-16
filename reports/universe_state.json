@@ -9,10 +9,8 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {
-  "WAL": "2026-10-15"
- },
- "runs": 481,
+ "suspended": {},
+ "runs": 482,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -30,7 +28,9 @@
   "BNB": [
    "volume_7d"
   ],
-  "UNI": [],
+  "UNI": [
+   "volume_7d"
+  ],
   "SUI": [],
   "AVAX": [],
   "ENA": [
@@ -134,7 +134,9 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [],
+  "ZEC": [
+   "wash_volume"
+  ],
   "XRP": [],
   "SOL": [],
   "PROVE": [
