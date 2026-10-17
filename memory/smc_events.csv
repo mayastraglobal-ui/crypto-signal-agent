@@ -16595,3 +16595,47 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 15:15,ZEC,15m,FVG,bear,,1163.11,1165.71,0.355,,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-17 15:00,SUI,1h,OB_RETEST,bear,,0.9963,1.0073,,Silver Bullet,4h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-10-17 15:00,SUI,1h,FVG_RETRACE,bear,,0.9939,1.0016,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 16:00,BTC,1h,WEAK_BREAK,bear,81416.0,,,0.254,,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-17 16:00,BTC,30m,BOS,bear,81416.0,,,0.541,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,BTC,30m,ORDER_BLOCK,bear,,81548.01,81610.01,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 15:30,BTC,15m,FVG_FILLED,bull,,81525.56,81548.01,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 16:00,BTC,15m,CHOCH,bear,81465.36,,,1.588,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,BTC,15m,ORDER_BLOCK,bear,,81540.85,81598.01,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 16:15,BTC,15m,FVG,bear,,81446.56,81467.19,0.265,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 16:00,ETH,30m,FVG,bear,,2419.54,2425.11,0.766,,1h,RANGE,,smc-1.0,Binance
+2026-10-17 15:30,ETH,15m,CHOCH,bear,2420.07,,,0.95,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 15:30,ETH,15m,ORDER_BLOCK,bear,,2426.27,2429.35,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 15:30,ETH,15m,OB_INVALID,bull,,2418.82,2424.71,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-17 15:45,ETH,15m,BREAKER_RETEST,bear,,2418.82,2424.71,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-17 15:45,ETH,15m,FVG,bear,,2419.54,2422.47,0.583,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 16:00,ETH,15m,SWEEP,bull,2409.59,,,0.4,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 15:30,SOL,30m,SWEEP,bull,103.83,,,0.189,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 16:00,SOL,30m,CHOCH,bear,103.83,,,0.543,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,SOL,30m,ORDER_BLOCK,bear,,103.94,104.43,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 15:30,SOL,15m,SWEEP,bull,103.83,,,0.274,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 16:00,SOL,15m,BOS,bear,103.83,,,0.749,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,SOL,15m,ORDER_BLOCK,bear,,103.8,104.14,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 16:15,SOL,15m,OB_RETEST,bear,,103.8,104.14,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-10-17 15:30,XRP,30m,FVG_RETRACE,bull,,1.2998,1.301,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 15:30,XRP,30m,FVG_FILLED,bull,,1.2998,1.301,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 16:00,XRP,30m,SWEEP,bull,1.2929,,,0.59,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 16:00,XRP,30m,FVG,bear,,1.2982,1.301,0.581,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 16:00,XRP,15m,SWEEP,bull,1.2929,,,0.789,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 15:30,ZEC,30m,CHOCH,bear,1153.55,,,0.309,,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-10-17 15:30,ZEC,30m,ORDER_BLOCK,bear,,1162.59,1177.8,,,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 15:30,ZEC,30m,FVG_FILLED,bull,,1146.73,1153.73,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 16:00,ZEC,30m,FVG,bear,,1153.88,1161.32,0.664,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 15:30,ZEC,15m,WEAK_BREAK,bear,1153.55,,,0.433,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-17 15:30,ZEC,15m,OB_INVALID,bull,,1151.33,1158.19,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-17 15:30,ZEC,15m,FVG_FILLED,bull,,1147.0,1153.73,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 15:30,ZEC,15m,FVG_RETRACE,bear,,1163.11,1165.71,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 15:45,ZEC,15m,BREAKER_RETEST,bear,,1151.33,1158.19,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-17 15:45,ZEC,15m,FVG,bear,,1153.88,1156.47,0.312,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 16:00,ZEC,15m,SWEEP,bull,1141.01,,,0.122,,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-17 16:00,SUI,4h,BOS,bear,1.0003,,,0.651,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-17 16:00,SUI,30m,BOS,bear,0.9848,,,0.416,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,SUI,30m,ORDER_BLOCK,bear,,0.9901,0.9967,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 16:00,SUI,30m,FVG_RETRACE,bull,,0.9769,0.9837,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 16:00,SUI,30m,FVG,bear,,0.9898,0.9936,0.566,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 16:00,SUI,15m,BOS,bear,0.9848,,,0.567,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-17 16:00,SUI,15m,ORDER_BLOCK,bear,,0.9936,0.9968,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
