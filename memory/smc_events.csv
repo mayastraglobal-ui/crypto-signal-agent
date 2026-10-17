@@ -16368,3 +16368,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 00:45,SUI,15m,FVG,bear,,1.009,1.0142,0.9,Asia,1h,RANGE,,smc-1.0,Binance
 2026-10-17 01:15,SUI,15m,FVG_RETRACE,bear,,1.009,1.0142,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-17 02:00,SUI,15m,SWEEP,bull,1.0023,,,0.129,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 02:15,SOL,15m,SWEEP,bear,104.74,,,0.39,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 02:15,SOL,15m,CHOCH,bull,104.63,,,0.195,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-17 02:15,SOL,15m,ORDER_BLOCK,bull,,104.2,104.46,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-17 02:15,ZEC,15m,SWEEP,bear,1155.7,,,0.347,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
