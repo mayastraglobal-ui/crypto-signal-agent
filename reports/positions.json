@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-17 21:24",
+ "generated_utc": "2026-10-17 22:24",
  "book": {
-  "utc": "2026-10-17 21:24",
-  "beijing": "2026-10-18 05:24",
+  "utc": "2026-10-17 22:24",
+  "beijing": "2026-10-18 06:24",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-17 21:24 UTC / 2026-10-18 05:24 Beijing",
+  "POSITION BOOK \u2014 2026-10-17 22:24 UTC / 2026-10-18 06:24 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -189,5 +189,58 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-17 22:24",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-17 21:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.9666,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-17 22:24",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-17 21:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.9666,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-17 22:24",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-17 21:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.9666,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-17 22:24",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-17 21:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.9666,
+   "note": ""
+  }
+ ]
 }
