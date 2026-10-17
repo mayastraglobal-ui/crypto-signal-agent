@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-17 19:23",
+ "generated_utc": "2026-10-17 20:25",
  "book": {
-  "utc": "2026-10-17 19:23",
-  "beijing": "2026-10-18 03:23",
+  "utc": "2026-10-17 20:25",
+  "beijing": "2026-10-18 04:25",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-17 19:23 UTC / 2026-10-18 03:23 Beijing",
+  "POSITION BOOK \u2014 2026-10-17 20:25 UTC / 2026-10-18 04:25 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -57,7 +57,7 @@
  },
  "watching": [
   {
-   "coin": "ETH",
+   "coin": "XRP",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -95,6 +95,17 @@
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
@@ -143,17 +154,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
   },
   {
    "coin": "XRP",
