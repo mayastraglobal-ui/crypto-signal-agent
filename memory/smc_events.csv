@@ -16748,3 +16748,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 19:45,SUI,15m,OB_RETEST,bear,,0.9936,0.9968,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-10-17 20:00,SUI,15m,FVG,bull,,0.99,0.9919,0.438,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-17 20:15,SUI,15m,FVG_RETRACE,bull,,0.99,0.9919,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-17 20:30,BTC,30m,WEAK_BREAK,bull,81616.01,,,0.164,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-17 20:30,BTC,30m,OB_INVALID,bear,,81548.01,81610.01,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-17 20:30,BTC,30m,FVG,bull,,81551.52,81597.5,0.381,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 21:00,BTC,30m,BREAKER_RETEST,bull,,81548.01,81610.01,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-17 21:15,BTC,15m,SWEEP,bear,81690.96,,,0.123,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-17 21:15,BTC,15m,WEAK_BREAK,bull,81659.06,,,0.091,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-17 21:00,ETH,15m,WEAK_BREAK,bull,2421.33,,,0.053,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-17 21:00,ETH,15m,FVG_FILLED,bear,,2419.54,2422.47,,,1h,RANGE,,smc-1.0,Binance
+2026-10-17 20:30,SOL,15m,OB_INVALID,bear,,103.8,104.14,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-17 20:45,SOL,15m,BREAKER_RETEST,bull,,103.8,104.14,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-17 21:15,XRP,15m,FVG_FILLED,bear,,1.3034,1.3062,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 21:00,ZEC,1h,FVG_FILLED,bear,,1148.06,1161.32,,,4h,RANGE,,smc-1.0,Binance
+2026-10-17 21:00,ZEC,30m,OB_RETEST,bear,,1162.59,1177.8,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-17 21:00,ZEC,30m,FVG_FILLED,bear,,1153.88,1161.32,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 21:15,SUI,15m,SWEEP,bear,0.9939,,,0.679,,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
