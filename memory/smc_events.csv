@@ -16433,3 +16433,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 04:30,SUI,30m,FVG_RETRACE,bull,,1.0063,1.0104,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-17 05:15,SUI,15m,WEAK_BREAK,bull,1.0162,,,0.248,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-10-17 05:15,SUI,15m,OB_RETEST,bear,,1.0195,1.0218,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-17 05:30,BTC,15m,FVG,bull,,81567.0,81598.96,0.348,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 05:45,BTC,15m,FVG_RETRACE,bull,,81567.0,81598.96,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-17 06:15,BTC,15m,FVG_FILLED,bull,,81567.0,81598.96,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-17 06:30,ETH,30m,SWEEP,bear,2432.89,,,0.206,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 06:30,ETH,15m,SWEEP,bear,2432.89,,,0.404,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 06:30,ETH,15m,FVG,bull,,2429.3,2430.61,0.312,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 05:30,ZEC,15m,FVG,bull,,1157.63,1163.83,0.919,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 05:45,ZEC,15m,FVG_RETRACE,bull,,1157.63,1163.83,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 06:00,SUI,1h,FVG_FILLED,bear,,1.0105,1.0194,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-17 05:30,SUI,30m,FVG_FILLED,bear,,1.009,1.0195,,,1h,RANGE,,smc-1.0,Binance
+2026-10-17 05:45,SUI,15m,FVG,bear,,1.0127,1.0144,0.362,,1h,RANGE,,smc-1.0,Binance
