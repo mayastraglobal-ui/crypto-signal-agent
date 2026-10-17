@@ -16575,3 +16575,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 13:30,SUI,30m,FVG,bear,,0.992,0.9977,0.876,NY AM,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-17 14:00,SUI,30m,FVG_RETRACE,bear,,0.992,0.9977,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-17 13:45,SUI,15m,FVG_RETRACE,bear,,0.992,0.9985,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:45,BTC,15m,FVG,bull,,81525.56,81548.01,0.346,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 15:15,BTC,15m,FVG_RETRACE,bull,,81525.56,81548.01,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 15:00,ETH,1h,FVG_RETRACE,bear,,2429.35,2433.37,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:30,ETH,15m,SWEEP,bull,2422.23,,,0.53,Silver Bullet,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 15:00,SOL,1h,FVG_RETRACE,bear,,104.24,104.62,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:45,SOL,15m,FVG,bull,,104.12,104.23,0.423,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-17 15:00,SOL,15m,FVG_RETRACE,bull,,104.12,104.23,,Silver Bullet,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 15:15,SOL,15m,FVG_FILLED,bull,,104.12,104.23,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 15:00,XRP,1h,OB_RETEST,bear,,1.3036,1.3093,,Silver Bullet,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-17 15:00,XRP,1h,FVG_RETRACE,bear,,1.2998,1.306,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:30,XRP,30m,FVG_RETRACE,bear,,1.3023,1.3062,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:30,XRP,30m,FVG_FILLED,bear,,1.2981,1.3001,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 15:00,XRP,30m,FVG,bull,,1.2998,1.301,0.276,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 14:45,XRP,15m,FVG_RETRACE,bear,,1.3034,1.3062,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:30,ZEC,15m,FVG_RETRACE,bear,,1176.36,1178.0,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-17 14:30,ZEC,15m,FVG_FILLED,bear,,1170.45,1172.25,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-17 14:45,ZEC,15m,FVG_FILLED,bear,,1176.36,1178.0,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-17 15:15,ZEC,15m,FVG,bear,,1163.11,1165.71,0.355,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 15:00,SUI,1h,OB_RETEST,bear,,0.9963,1.0073,,Silver Bullet,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-17 15:00,SUI,1h,FVG_RETRACE,bear,,0.9939,1.0016,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
