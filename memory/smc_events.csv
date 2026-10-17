@@ -16372,3 +16372,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 02:15,SOL,15m,CHOCH,bull,104.63,,,0.195,Asia,1h,RANGE,with displacement,smc-1.0,Binance
 2026-10-17 02:15,SOL,15m,ORDER_BLOCK,bull,,104.2,104.46,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
 2026-10-17 02:15,ZEC,15m,SWEEP,bear,1155.7,,,0.347,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 02:30,BTC,15m,WEAK_BREAK,bear,81489.79,,,0.487,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-17 02:45,BTC,15m,FVG,bear,,81492.01,81538.01,0.367,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 03:00,BTC,15m,FVG_RETRACE,bear,,81492.01,81538.01,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-17 02:30,SOL,30m,SWEEP,bear,104.74,,,0.205,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 02:30,SOL,30m,FVG_RETRACE,bear,,104.81,105.65,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-17 02:30,SOL,15m,OB_RETEST,bull,,104.2,104.46,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-17 03:00,XRP,1h,FVG_RETRACE,bear,,1.3067,1.3093,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 02:30,ZEC,30m,SWEEP,bear,1155.7,,,0.204,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-17 03:00,SUI,1h,FVG_RETRACE,bear,,1.0105,1.0194,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
