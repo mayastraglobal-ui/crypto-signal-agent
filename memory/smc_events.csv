@@ -16493,3 +16493,38 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 10:30,SUI,30m,SWEEP,bull,1.0003,,,0.677,,1h,RANGE,"sell-side liquidity swept (PDL, equal lows, swing low)",smc-1.0,Binance
 2026-10-17 11:00,SUI,15m,FVG,bull,,1.0024,1.0051,0.738,,1h,COMPRESSION,,smc-1.0,Binance
 2026-10-17 11:15,SUI,15m,FVG_RETRACE,bull,,1.0024,1.0051,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 11:30,BTC,15m,WEAK_BREAK,bear,81572.0,,,0.024,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-17 11:30,BTC,15m,FVG_RETRACE,bull,,81620.01,81639.0,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 11:30,BTC,15m,FVG_FILLED,bull,,81620.01,81639.0,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 11:45,BTC,15m,FVG,bear,,81608.16,81640.0,0.509,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 12:00,BTC,15m,FVG_RETRACE,bear,,81608.16,81640.0,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 12:30,ETH,30m,WEAK_BREAK,bear,2433.1,,,0.334,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-17 11:30,ETH,15m,FVG_FILLED,bull,,2437.45,2438.62,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 11:45,ETH,15m,FVG,bear,,2436.46,2438.5,0.595,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 12:15,ETH,15m,WEAK_BREAK,bear,2433.1,,,0.329,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-17 12:30,ETH,15m,SWEEP,bull,2430.62,,,0.992,NY AM,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-17 12:30,ETH,15m,FVG_RETRACE,bull,,2429.3,2430.61,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-17 12:30,ETH,15m,FVG_FILLED,bull,,2429.3,2430.61,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 12:30,ETH,15m,FVG,bear,,2432.43,2433.37,0.268,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-17 12:30,SOL,30m,WEAK_BREAK,bear,104.62,,,0.706,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-17 12:30,SOL,30m,FVG_FILLED,bull,,104.61,104.9,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 12:15,SOL,15m,CHOCH,bear,104.62,,,1.351,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-17 12:15,SOL,15m,ORDER_BLOCK,bear,,104.62,104.76,,NY AM,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 12:15,SOL,15m,OB_INVALID,bull,,104.38,104.6,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-17 12:15,SOL,15m,FVG_FILLED,bull,,104.6,104.9,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 12:30,SOL,15m,BREAKER_RETEST,bear,,104.38,104.6,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-17 12:30,SOL,15m,FVG,bear,,104.44,104.66,1.068,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 12:30,XRP,30m,BOS,bear,1.3036,,,0.704,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-17 12:30,XRP,30m,ORDER_BLOCK,bear,,1.3072,1.3093,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 11:30,XRP,15m,FVG_RETRACE,bull,,1.3062,1.3072,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-17 11:30,XRP,15m,FVG_FILLED,bull,,1.3062,1.3072,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 12:15,XRP,15m,CHOCH,bear,1.3036,,,0.376,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-17 12:15,XRP,15m,ORDER_BLOCK,bear,,1.3075,1.3092,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-17 12:30,XRP,15m,FVG,bear,,1.3034,1.3062,1.144,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-17 12:00,ZEC,4h,FVG_FILLED,bear,,1153.92,1181.19,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-17 11:45,ZEC,15m,FVG_RETRACE,bull,,1170.31,1172.56,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-17 11:45,ZEC,15m,FVG,bear,,1176.36,1178.0,0.287,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-17 12:15,ZEC,15m,FVG_FILLED,bull,,1170.31,1172.56,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 12:30,ZEC,15m,FVG,bear,,1170.45,1172.25,0.324,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-17 12:00,SUI,4h,SWEEP,bull,1.0003,,,0.138,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-17 11:45,SUI,15m,FVG_FILLED,bull,,1.0024,1.0051,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
