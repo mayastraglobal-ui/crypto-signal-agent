@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-10-17 00:39 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
+Updated 2026-10-17 02:10 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -14,7 +14,7 @@ Updated 2026-10-17 00:39 UTC by the hourly scan (engine/track_record.py). Every 
 - nothing paused: every strategy's live results are inside what its backtest calls normal.
 
 Warning signs (no pause yet):
-- P04-MACD-SUPERTREND-V5@1.0 30m on XRP: 4 losses in a row - in its backtest (36% won) a run that long shows up in 16% of 4-trade periods
+- P04-MACD-SUPERTREND-V5@1.0 30m on XRP: 4 losses in a row - in its backtest (36% won) a run that long shows up in 17% of 4-trade periods
 
 ## Per strategy and coin (live vs 5-year backtest)
 
@@ -27,7 +27,7 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V5 | 1h | BTC | 🔵 TEST | 1 | 0 | -1.15R | +0.02R | -1.15R | 1.15R | ✅ |
-| P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | 1 | 0 | -1.07R | +0.03R | -1.07R | 1.07R | ✅ |
+| P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | 1 | 0 | -1.07R | +0.02R | -1.07R | 1.07R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | 1 | 0 | -1.07R | +0.01R | -1.07R | 1.07R | ✅ |
 
 ## Equity curve (all stages, R after fees)

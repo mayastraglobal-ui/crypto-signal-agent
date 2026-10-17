@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-17 00:39",
+ "utc": "2026-10-17 02:10",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -76,13 +76,13 @@
     "sd": 0.109
    },
    "backtest": {
-    "n": 499,
-    "avg_r": 0.01,
-    "win_rate": 36.3
+    "n": 501,
+    "avg_r": 0.005,
+    "win_rate": 36.1
    },
    "verdict": "watch",
    "why": [
-    "4 losses in a row - in its backtest (36% won) a run that long shows up in 16% of 4-trade periods"
+    "4 losses in a row - in its backtest (36% won) a run that long shows up in 17% of 4-trade periods"
    ],
    "last_utc": "2026-10-15 15:29"
   },
@@ -103,7 +103,7 @@
     "sd": 1.518
    },
    "backtest": {
-    "n": 635,
+    "n": 638,
     "avg_r": 0.041,
     "win_rate": 36.5
    },
@@ -153,9 +153,9 @@
     "sd": 1.409
    },
    "backtest": {
-    "n": 342,
-    "avg_r": 0.009,
-    "win_rate": 37.4
+    "n": 343,
+    "avg_r": 0.012,
+    "win_rate": 37.6
    },
    "verdict": "ok",
    "why": [],
@@ -253,9 +253,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 151,
-    "avg_r": 0.03,
-    "win_rate": 36.4
+    "n": 152,
+    "avg_r": 0.023,
+    "win_rate": 36.2
    },
    "verdict": "ok",
    "why": [],
@@ -278,9 +278,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 343,
-    "avg_r": 0.009,
-    "win_rate": 36.2
+    "n": 344,
+    "avg_r": 0.006,
+    "win_rate": 36.0
    },
    "verdict": "ok",
    "why": [],
