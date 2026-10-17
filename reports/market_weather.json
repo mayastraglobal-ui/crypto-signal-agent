@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-16 23:24",
+ "utc": "2026-10-17 00:39",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -33,30 +33,30 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 26.0,
-    "4h": 45.0,
-    "1h": 15.0
+    "1d": 25.0,
+    "4h": 46.0,
+    "1h": 16.0
    },
    "vol": {
-    "atr_pct": 2.67,
-    "vol_pctile": 27.0,
+    "atr_pct": 2.59,
+    "vol_pctile": 22.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.0,
-    "move_8of10_pct": 2.18,
-    "days": 401,
+    "usual_move_pct": 0.99,
+    "move_8of10_pct": 2.16,
+    "days": 369,
     "basis": "similar days",
-    "price": 82245.93,
+    "price": 81615.64,
     "band": [
-     80449.565083,
-     84042.294917
+     79854.607401,
+     83376.672599
     ]
    },
    "crowd": {
-    "funding_pct": 0.0051,
-    "oi_24h_pct": 2.2,
+    "funding_pct": 0.01,
+    "oi_24h_pct": 1.7,
     "label": "neutral"
    },
-   "change_24h": -0.51
+   "change_24h": -0.97
   },
   {
    "coin": "ETH",
@@ -71,30 +71,30 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 30.0,
-    "4h": 32.0,
-    "1h": 17.0
+    "1d": 29.0,
+    "4h": 31.0,
+    "1h": 16.0
    },
    "vol": {
-    "atr_pct": 3.89,
-    "vol_pctile": 35.0,
+    "atr_pct": 3.84,
+    "vol_pctile": 32.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.45,
-    "move_8of10_pct": 3.16,
-    "days": 363,
+    "usual_move_pct": 1.41,
+    "move_8of10_pct": 3.08,
+    "days": 352,
     "basis": "similar days",
-    "price": 2442.08,
+    "price": 2423.54,
     "band": [
-     2364.836934,
-     2519.323066
+     2348.906449,
+     2498.173551
     ]
    },
    "crowd": {
-    "funding_pct": 0.0022,
-    "oi_24h_pct": -69.1,
+    "funding_pct": 0.0079,
+    "oi_24h_pct": -0.3,
     "label": "neutral"
    },
-   "change_24h": -0.62
+   "change_24h": -0.9
   },
   {
    "coin": "SOL",
@@ -114,25 +114,25 @@
     "1h": 19.0
    },
    "vol": {
-    "atr_pct": 4.7,
-    "vol_pctile": 39.0,
+    "atr_pct": 4.63,
+    "vol_pctile": 37.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.99,
-    "move_8of10_pct": 4.38,
-    "days": 324,
+    "usual_move_pct": 2.13,
+    "move_8of10_pct": 4.41,
+    "days": 314,
     "basis": "similar days",
-    "price": 105.44,
+    "price": 104.45,
     "band": [
-     100.823316,
-     110.056684
+     99.839505,
+     109.060495
     ]
    },
    "crowd": {
-    "funding_pct": 0.0032,
-    "oi_24h_pct": -0.0,
+    "funding_pct": -0.0007,
+    "oi_24h_pct": -62.7,
     "label": "neutral"
    },
-   "change_24h": -0.89
+   "change_24h": -1.16
   },
   {
    "coin": "SUI",
@@ -147,68 +147,68 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 27.0,
+    "1d": 26.0,
     "4h": 27.0,
-    "1h": 16.0
+    "1h": 15.0
    },
    "vol": {
-    "atr_pct": 7.78,
-    "vol_pctile": 64.0,
+    "atr_pct": 7.52,
+    "vol_pctile": 60.0,
     "vol_label": "normal",
-    "usual_move_pct": 2.72,
+    "usual_move_pct": 2.71,
     "move_8of10_pct": 5.46,
-    "days": 501,
+    "days": 492,
     "basis": "similar days",
-    "price": 1.0369,
+    "price": 1.0211,
     "band": [
-     0.980283,
-     1.093517
+     0.965354,
+     1.076846
     ]
    },
    "crowd": {
-    "funding_pct": 0.0019,
-    "oi_24h_pct": -64.9,
+    "funding_pct": 0.01,
+    "oi_24h_pct": -65.0,
     "label": "neutral"
    },
-   "change_24h": -0.92
+   "change_24h": -3.23
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "down",
-   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H TRANSITION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
-    "4h": "WEAK_BEAR",
+    "4h": "TRANSITION",
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 27.0,
+    "1d": 26.0,
     "4h": 44.0,
-    "1h": 25.0
+    "1h": 26.0
    },
    "vol": {
-    "atr_pct": 4.43,
-    "vol_pctile": 39.0,
+    "atr_pct": 4.27,
+    "vol_pctile": 35.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.49,
-    "move_8of10_pct": 3.41,
-    "days": 388,
+    "usual_move_pct": 1.47,
+    "move_8of10_pct": 3.31,
+    "days": 386,
     "basis": "similar days",
-    "price": 1.3349,
+    "price": 1.3115,
     "band": [
-     1.28932,
-     1.38048
+     1.26815,
+     1.35485
     ]
    },
    "crowd": {
-    "funding_pct": 0.0066,
-    "oi_24h_pct": -0.2,
+    "funding_pct": 0.01,
+    "oi_24h_pct": -73.6,
     "label": "neutral"
    },
-   "change_24h": -1.57
+   "change_24h": -2.29
   },
   {
    "coin": "ZEC",
@@ -223,42 +223,42 @@
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 28.0,
-    "4h": 17.0,
+    "1d": 27.0,
+    "4h": 18.0,
     "1h": 28.0
    },
    "vol": {
-    "atr_pct": 9.07,
-    "vol_pctile": 37.0,
+    "atr_pct": 9.49,
+    "vol_pctile": 43.0,
     "vol_label": "normal",
-    "usual_move_pct": 3.26,
-    "move_8of10_pct": 7.14,
-    "days": 466,
+    "usual_move_pct": 3.29,
+    "move_8of10_pct": 7.19,
+    "days": 432,
     "basis": "similar days",
-    "price": 1221.4,
+    "price": 1148.83,
     "band": [
-     1134.227857,
-     1308.572143
+     1066.196381,
+     1231.463619
     ]
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -1.0,
+    "oi_24h_pct": -77.1,
     "label": "neutral"
    },
-   "change_24h": -5.63
+   "change_24h": -6.86
   }
  ],
- "alts_vs_btc_24h": -0.41,
+ "alts_vs_btc_24h": -1.32,
  "fear_greed": {
-  "value": 63,
+  "value": 55,
   "label": "Greed",
-  "yesterday": 53
+  "yesterday": 63
  },
  "btc_dominance": {
-  "pct": 59.361,
-  "utc": "2026-10-16 23:24",
-  "ch24": 0.05,
+  "pct": 59.367,
+  "utc": "2026-10-17 00:39",
+  "ch24": 0.01,
   "ch7": null,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
@@ -273,5 +273,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-17 07:24 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H RANGE\nVolatility: normal (daily range 2.7%, higher than 27% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (80,450 \u2013 84,042) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0051%/8h, open interest +2.2% in 24h)\nAltcoins vs BTC (24h): -0.4%\nBTC dominance: 59.4% \u00b7 24h +0.05 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 63\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u2198\ufe0f XRP: turning down (not confirmed)\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-17 08:39 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D TRANSITION \u00b7 4H TRANSITION \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (79,855 \u2013 83,377) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +1.7% in 24h)\nAltcoins vs BTC (24h): -1.3%\nBTC dominance: 59.4% \u00b7 24h +0.01 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 55\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u2198\ufe0f XRP: turning down (not confirmed)\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
