@@ -17254,3 +17254,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-18 15:00,SUI,1h,FVG,bear,,0.9701,0.9804,0.908,Silver Bullet,4h,TRANSITION,,smc-1.0,Binance
 2026-10-18 14:45,SUI,15m,OB_INVALID,bull,,0.9595,0.9765,,Silver Bullet,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-18 15:00,SUI,15m,BREAKER_RETEST,bear,,0.9595,0.9765,,Silver Bullet,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 15:45,BTC,15m,SWEEP,bull,81037.0,,,0.221,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-18 15:45,SOL,15m,SWEEP,bull,101.91,,,0.399,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-18 16:00,XRP,1h,SWEEP,bull,1.2701,,,0.158,,4h,WEAK_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 16:00,XRP,30m,SWEEP,bull,1.2701,,,0.221,,1h,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 15:45,XRP,15m,SWEEP,bull,1.2701,,,0.289,,1h,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 15:45,XRP,15m,BOS,bear,1.2721,,,0.351,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-18 16:00,ZEC,4h,BOS,bear,1099.05,,,0.321,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-18 15:45,ZEC,15m,SWEEP,bull,1080.64,,,0.502,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-18 15:45,ZEC,15m,OB_INVALID,bull,,1088.84,1098.28,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-18 15:45,ZEC,15m,FVG,bear,,1093.67,1096.6,0.299,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 15:30,SUI,30m,OB_INVALID,bull,,0.9595,0.9769,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-18 16:00,SUI,30m,BREAKER_RETEST,bear,,0.9595,0.9769,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
