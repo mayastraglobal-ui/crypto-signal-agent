@@ -172,3 +172,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: low_relative_volume, wrong_session
   - what happened: regime_mismatch, indicator_lag
   - root cause / fix: (review)
+
+### SOL SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.14R
+- timestamp: 2026-10-18 22:24 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.14R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-25
+  - signal 2026-10-18 19:59 UTC, closed 2026-10-18 21:59 UTC, stage TEST
+  - MAE -1.21R / MFE +0.31R
+  - at entry: session outside killzones, conditions: overextended_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### XRP SHORT 15m P01-BREAKOUT-V2 v1.0 - SL -1.19R
+- timestamp: 2026-10-18 22:24 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.19R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: XRP · timeframe: 15m · regime: WEAK_BEAR · review: 2026-10-25
+  - signal 2026-10-18 19:44 UTC, closed 2026-10-18 21:29 UTC, stage TEST
+  - MAE -1.15R / MFE +0.33R
+  - at entry: session outside killzones, conditions: overextended_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V5 v1.0 - SL -1.09R
+- timestamp: 2026-10-18 22:24 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-25
+  - signal 2026-10-18 19:59 UTC, closed 2026-10-18 21:59 UTC, stage TEST
+  - MAE -1.16R / MFE +0.03R
+  - at entry: session outside killzones, conditions: overextended_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)

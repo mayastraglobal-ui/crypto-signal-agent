@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-18 21:24",
+ "utc": "2026-10-18 22:24",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 23,
+  "n": 26,
   "wins": 4,
-  "win_rate": 17.4,
-  "avg_r": -0.593,
-  "total_r": -13.64,
-  "max_dd_r": 16.04,
-  "cur_loss_run": 0,
+  "win_rate": 15.4,
+  "avg_r": -0.656,
+  "total_r": -17.06,
+  "max_dd_r": 17.06,
+  "cur_loss_run": 3,
   "max_loss_run": 6,
-  "sd": 1.118
+  "sd": 1.064
  },
  "yours": {
   "n": 1,
@@ -32,29 +32,29 @@
   "sd": null
  },
  "silent": {
-  "n": 21,
+  "n": 24,
   "wins": 4,
-  "win_rate": 19.0,
-  "avg_r": -0.55,
-  "total_r": -11.54,
-  "max_dd_r": 13.95,
-  "cur_loss_run": 0,
+  "win_rate": 16.7,
+  "avg_r": -0.624,
+  "total_r": -14.97,
+  "max_dd_r": 14.97,
+  "cur_loss_run": 3,
   "max_loss_run": 5,
-  "sd": 1.163
+  "sd": 1.103
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 23,
+   "n": 26,
    "wins": 4,
-   "win_rate": 17.4,
-   "avg_r": -0.593,
-   "total_r": -13.64,
-   "max_dd_r": 16.04,
-   "cur_loss_run": 0,
+   "win_rate": 15.4,
+   "avg_r": -0.656,
+   "total_r": -17.06,
+   "max_dd_r": 17.06,
+   "cur_loss_run": 3,
    "max_loss_run": 6,
-   "sd": 1.118
+   "sd": 1.064
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -187,6 +187,32 @@
    "sent": false
   },
   {
+   "key": "P01-BREAKOUT-V5@1.0|30m",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.091,
+    "total_r": -2.18,
+    "max_dd_r": 2.18,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.005
+   },
+   "backtest": {
+    "n": 338,
+    "avg_r": 0.02,
+    "win_rate": 35.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-18 21:59",
+   "sent": false
+  },
+  {
    "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
    "coin": "SUI",
    "stage": "TEST",
@@ -239,6 +265,58 @@
    "sent": true
   },
   {
+   "key": "P01-BREAKOUT-V2@1.0|15m",
+   "coin": "XRP",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.192,
+    "total_r": -1.19,
+    "max_dd_r": 1.19,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 234,
+    "avg_r": 0.004,
+    "win_rate": 35.9
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-18 21:29",
+   "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "SOL",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.14,
+    "total_r": -1.14,
+    "max_dd_r": 1.14,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 170,
+    "avg_r": 0.07,
+    "win_rate": 37.1
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-18 21:59",
+   "sent": false
+  },
+  {
    "key": "P01-BREAKOUT-V4@1.0|4h",
    "coin": "ETH",
    "stage": "TEST",
@@ -288,32 +366,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-13 02:59",
-   "sent": false
-  },
-  {
-   "key": "P01-BREAKOUT-V5@1.0|30m",
-   "coin": "SUI",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.088,
-    "total_r": -1.09,
-    "max_dd_r": 1.09,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 338,
-    "avg_r": 0.02,
-    "win_rate": 35.5
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-18 01:29",
    "sent": false
   },
   {
@@ -437,6 +489,18 @@
   {
    "t": "2026-10-18 19:59",
    "r": -13.64
+  },
+  {
+   "t": "2026-10-18 21:29",
+   "r": -14.83
+  },
+  {
+   "t": "2026-10-18 21:59",
+   "r": -15.97
+  },
+  {
+   "t": "2026-10-18 21:59",
+   "r": -17.06
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-18 21:24",
+ "generated_utc": "2026-10-18 22:24",
  "book": {
-  "utc": "2026-10-18 21:24",
-  "beijing": "2026-10-19 05:24",
+  "utc": "2026-10-18 22:24",
+  "beijing": "2026-10-19 06:24",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-18 21:24 UTC / 2026-10-19 05:24 Beijing",
+  "POSITION BOOK \u2014 2026-10-18 22:24 UTC / 2026-10-19 06:24 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -288,5 +288,45 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-18 22:24",
+   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-18 19:59",
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.14R"
+  },
+  {
+   "time_utc": "2026-10-18 22:24",
+   "id": "XRP-15m-P01-BREAKOUT-V2-2026-10-18 19:44",
+   "coin": "XRP",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.19R"
+  },
+  {
+   "time_utc": "2026-10-18 22:24",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-18 19:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.09R"
+  }
+ ]
 }
