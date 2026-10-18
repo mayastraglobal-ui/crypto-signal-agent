@@ -17272,3 +17272,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-18 17:15,ZEC,15m,FVG_RETRACE,bear,,1093.67,1096.6,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-18 17:15,ZEC,15m,FVG_FILLED,bear,,1093.67,1096.6,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-18 17:00,SUI,1h,OB_INVALID,bull,,0.9595,0.9769,,,4h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-18 17:30,BTC,15m,FVG,bull,,81109.52,81158.5,0.349,,1h,RANGE,,smc-1.0,Binance
+2026-10-18 17:45,BTC,15m,FVG_RETRACE,bull,,81109.52,81158.5,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-18 18:00,BTC,15m,FVG_FILLED,bull,,81109.52,81158.5,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 18:15,BTC,15m,SWEEP,bear,81259.21,,,0.177,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-18 17:30,ETH,30m,FVG_RETRACE,bear,,2368.55,2371.77,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 17:30,ETH,30m,FVG_FILLED,bear,,2368.55,2371.77,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 17:30,ETH,15m,FVG,bull,,2368.0,2372.58,0.603,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 17:45,ETH,15m,FVG_RETRACE,bull,,2368.0,2372.58,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 17:45,ETH,15m,FVG_FILLED,bull,,2368.0,2372.58,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 17:30,ZEC,15m,FVG,bull,,1085.46,1089.24,0.402,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-18 17:45,ZEC,15m,FVG_RETRACE,bull,,1085.46,1089.24,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 17:45,ZEC,15m,FVG_FILLED,bull,,1085.46,1089.24,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-18 18:00,SUI,1h,BREAKER_RETEST,bear,,0.9595,0.9769,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 17:30,SUI,15m,FVG,bull,,0.9592,0.9606,0.26,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-18 17:45,SUI,15m,FVG_RETRACE,bull,,0.9592,0.9606,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 17:45,SUI,15m,FVG_FILLED,bull,,0.9592,0.9606,,,1h,TRANSITION,,smc-1.0,Binance

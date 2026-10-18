@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-18 17:25",
+ "utc": "2026-10-18 18:28",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -25,12 +25,12 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D UNCLEAR, 4H TRANSITION, 1H RANGE)",
+   "why": "timeframes disagree (1D UNCLEAR, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "UNCLEAR",
     "4h": "TRANSITION",
-    "1h": "RANGE"
+    "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 24.0,
@@ -53,27 +53,27 @@
    },
    "crowd": {
     "funding_pct": 0.0064,
-    "oi_24h_pct": 0.2,
+    "oi_24h_pct": 0.1,
     "label": "neutral"
    },
-   "change_24h": -0.11
+   "change_24h": -0.47
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "down",
-   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H TRANSITION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "WEAK_BEAR",
-    "1h": "UNCLEAR"
+    "1h": "TRANSITION"
    },
    "adx": {
     "1d": 29.0,
     "4h": 31.0,
-    "1h": 25.0
+    "1h": 27.0
    },
    "vol": {
     "atr_pct": 4.05,
@@ -91,10 +91,10 @@
    },
    "crowd": {
     "funding_pct": 0.004,
-    "oi_24h_pct": -0.2,
+    "oi_24h_pct": -0.1,
     "label": "neutral"
    },
-   "change_24h": -1.31
+   "change_24h": -2.21
   },
   {
    "coin": "SOL",
@@ -129,27 +129,27 @@
    },
    "crowd": {
     "funding_pct": -0.0013,
-    "oi_24h_pct": -0.4,
+    "oi_24h_pct": -0.6,
     "label": "neutral"
    },
-   "change_24h": -0.89
+   "change_24h": -1.52
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "down",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H WEAK_BEAR)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "TRANSITION"
+    "1h": "WEAK_BEAR"
    },
    "adx": {
     "1d": 25.0,
     "4h": 38.0,
-    "1h": 29.0
+    "1h": 30.0
    },
    "vol": {
     "atr_pct": 7.97,
@@ -167,10 +167,10 @@
    },
    "crowd": {
     "funding_pct": -0.002,
-    "oi_24h_pct": -0.4,
+    "oi_24h_pct": -1.5,
     "label": "neutral"
    },
-   "change_24h": -1.18
+   "change_24h": -2.56
   },
   {
    "coin": "XRP",
@@ -187,7 +187,7 @@
    "adx": {
     "1d": 26.0,
     "4h": 52.0,
-    "1h": 30.0
+    "1h": 31.0
    },
    "vol": {
     "atr_pct": 4.47,
@@ -205,10 +205,10 @@
    },
    "crowd": {
     "funding_pct": 0.0006,
-    "oi_24h_pct": 2.2,
+    "oi_24h_pct": 2.7,
     "label": "neutral"
    },
-   "change_24h": -1.35
+   "change_24h": -1.79
   },
   {
    "coin": "ZEC",
@@ -225,7 +225,7 @@
    "adx": {
     "1d": 27.0,
     "4h": 22.0,
-    "1h": 25.0
+    "1h": 26.0
    },
    "vol": {
     "atr_pct": 9.89,
@@ -243,23 +243,23 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 6.0,
+    "oi_24h_pct": 2.1,
     "label": "neutral"
    },
-   "change_24h": -2.63
+   "change_24h": -4.82
   }
  ],
- "alts_vs_btc_24h": -1.2,
+ "alts_vs_btc_24h": -1.74,
  "fear_greed": {
   "value": 53,
   "label": "Neutral",
   "yesterday": 55
  },
  "btc_dominance": {
-  "pct": 60.12,
-  "utc": "2026-10-18 17:25",
-  "ch24": 0.67,
-  "ch7": 0.52,
+  "pct": 60.153,
+  "utc": "2026-10-18 18:28",
+  "ch24": 0.73,
+  "ch7": 0.56,
   "read": "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
  },
  "events": [],
@@ -273,5 +273,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-19 01:25 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D UNCLEAR \u00b7 4H TRANSITION \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 25% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (79,704 \u2013 83,278) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0064%/8h, open interest +0.2% in 24h)\nAltcoins vs BTC (24h): -1.2%\nBTC dominance: 60.1% \u00b7 24h +0.67 pt \u00b7 7d +0.52 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Neutral 53\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u2198\ufe0f ETH: turning down (not confirmed)\n\u2198\ufe0f SOL: turning down (not confirmed)\n\u2198\ufe0f SUI: turning down (not confirmed)\n\u2198\ufe0f XRP: turning down (not confirmed)\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-19 02:28 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D UNCLEAR \u00b7 4H TRANSITION \u00b7 1H UNCLEAR\nVolatility: normal (daily range 2.6%, higher than 25% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (79,704 \u2013 83,278) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0064%/8h, open interest +0.1% in 24h)\nAltcoins vs BTC (24h): -1.7%\nBTC dominance: 60.2% \u00b7 24h +0.73 pt \u00b7 7d +0.56 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Neutral 53\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u2198\ufe0f ETH: turning down (not confirmed)\n\u2198\ufe0f SOL: turning down (not confirmed)\n\u2198\ufe0f SUI: turning down (not confirmed)\n\u2198\ufe0f XRP: turning down (not confirmed)\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
