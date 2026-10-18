@@ -24,6 +24,25 @@ In Telegram, `/track` gives the short version. The Sunday review adds one line, 
 The setups are the GitHub record (no 5m check). The alerts actually sent (5m-confirmed) are in the journal review,
 and the 4H side-by-side record compares both.
 
+## Your alerts vs the silent research records (2026-10-18)
+
+GitHub records **every** 🔵 TEST setup of every program strategy that was positive on a coin in its backtest, also the
+weak ones that never reach your Telegram (since 13 Oct only the strategies that are not FAILED and average at least
++0.10R on that coin send alerts). Mixing them made the headline look much worse than your real alerts: on 18 Oct it
+said 22 closed, -16.04R, while your alerts were 1 trade (-1.05R).
+
+So the track record, `/track` and the Sunday review now show two groups:
+
+| Group | What it is |
+|---|---|
+| **Your alerts** (the headline) | setups whose strategy / coin is on the watcher's alert list (`signal_center.alert_pairs`), plus every 🟡 PAPER / 🟢 LIVE signal. Versions of one setup (same coin, direction and candle - one merged Telegram alert) count **once** |
+| **Silent research records** | every other positive program pair. They are kept on purpose: they show whether the research's weaker results hold up live (this week they lost, as their near-zero backtest predicted) |
+
+- The per-strategy table has a **Sent to you** column (✅ yes / silent).
+- The 🚨 drift monitor pauses only pairs that can reach you (a silent pair never alerts, so there is nothing to pause).
+- The list is today's alert list; when a strategy joins or leaves it, its past records move with it.
+- Nothing else changed: the same results, the same checks, the same files.
+
 ## The drift monitor
 
 For every strategy and coin with live results, it asks every hour: **is this still inside what its own backtest

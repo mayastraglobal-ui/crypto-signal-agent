@@ -998,3 +998,19 @@ Newest entries at the bottom. Format: date · who · what · why.
 - PAPER / LIVE alerts unchanged (they never had the 5m check). Nothing lowered: gates, costs, the pass bar, the daily cap.
 - Tests: `tests/test_waves.py` (7); the 5m-wait mechanism tests keep 4H / 1H waiting inside the test;
   tests/test_five_min_compare.py config [4h, 1h]. Full suite 949 passed.
+
+## 2026-10-18 · Operator + Claude · Track report: your alerts apart from the silent research records
+- Why: the first weekly review (W42) said "TEST 22 closed, -16.05R" - 20 of them were silent GitHub records of weak
+  program pairs (30m / 1H "V5" versions, backtest +0.01R to +0.04R, off Telegram since 13 Oct); the operator's real
+  alert list had one trade (ETH 4H short, -1.05R, recorded twice as V1 + V4). The operator: "fix the track report".
+- `signal_center.alert_pairs(program, reg_cells, S)`: {(cell, coin)} on the watcher's alert list (test_list ->
+  alert_list). `scanner.alert_pairs(cfg, offline, registry)` (program.json + library rows, the registry's statuses;
+  None when unknown) is passed to `track_record` and `weekly_review`.
+- `track_record.build(..., alerts)`: each pair gets `sent`; `yours` (pairs on the list + every PAPER / LIVE signal;
+  versions of one setup - same coin, direction, candle - counted once) and `silent`; the drift monitor pauses only pairs
+  that can alert. /track and track_record.md lead with "Your alerts"; the table has a "Sent to you" column. Without the
+  list (None) everything stays as before.
+- `weekly_review`: rows get `sent`; totals YOURS / SILENT; the Totals section, the track line, the table ("Sent to
+  you") and the Telegram message lead with your alerts.
+- Real data (18 Oct): your alerts 1 closed, -1.05R; silent records 20, -13.95R; all 22, -16.04R; nothing paused.
+- Tests: `tests/test_track_split.py` (6); tests/test_weekly_review.py table row (+ the column). Docs: TRACK_RECORD.md.

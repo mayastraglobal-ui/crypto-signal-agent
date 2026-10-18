@@ -46,6 +46,14 @@ def settings(section):
     return s
 
 
+def alert_pairs(program, reg_cells, S, promoted=None):
+    """{(cell key, coin)} whose 🔵 TEST setups can reach Telegram - the live watcher's own list (test_list, then
+    alert_list). 2026-10-18: the track record and the weekly review show these "your alerts" apart from the silent
+    research records (every other positive program pair GitHub records). PAPER / LIVE signals always reach Telegram."""
+    al = alert_list(test_list(program, reg_cells, S, promoted), program, reg_cells, S)
+    return {(k, c) for k, coins in al.items() for c in coins}
+
+
 def needs_5m(tf, S):
     """Does a TEST setup on this timeframe wait for its 5m candle? 2026-10-15 (operator: "remove 5m check for 4H and
     1H"): only the timeframes in confirm_5m_tfs (default 30m and faster). The 4H / 1H strategies were proven in the

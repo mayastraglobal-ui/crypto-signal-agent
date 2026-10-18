@@ -3052,7 +3052,7 @@ def main():
     daily = mail.daily(view["signal"], snap, watching, [p for p in plans if p["stage"] != "TEST"], book, btc, fg,
                        sys_state,
                        (research or {}).get("changes", []), (research or {}).get("run_utc"), risk_out, len(final))
-    track_record(started, logdf, cfg, args.offline)                     # 📈 the live track record + drift monitor
+    track_record(started, logdf, cfg, args.offline, registry)           # 📈 the live track record + drift monitor
     weekly_review(started, logdf, registry, cfg, args.offline)          # PR 3: the Forward Test Program review
     weekly = None
     if digest.is_weekly_time(started):
@@ -3402,14 +3402,29 @@ def read_json(name, offline=False):
     return None
 
 
-def track_record(now, logdf, cfg, offline):
+def alert_pairs(cfg, offline, registry=None):
+    """{(cell key, coin)} whose 🔵 TEST setups can reach the operator's Telegram - the live watcher's list
+    (signal_center.alert_pairs on program.json + the library TEST rows, the registry's statuses). None when unknown."""
+    try:
+        reg = (registry or {}).get("cells")
+        if reg is None:
+            reg = lc.registry_from_frame(pd.read_csv(REGISTRY, dtype={"version": str}))["cells"]
+        return scx.alert_pairs(program_with_library(cfg, offline, write=False), reg,
+                               scx.settings(cfg.get("signal_center")))
+    except Exception as e:
+        log(f"alert list not known ({type(e).__name__}: {e}) - the track record shows every setup together")
+        return None
+
+
+def track_record(now, logdf, cfg, offline, registry=None):
     """📈 reports/track_record.json / .md (engine/track_record.py, 2026-10-13): every TEST / PAPER / LIVE result after
-    fees, live vs the 5-year backtest, and the drift monitor's pauses (the live watcher reads them). Never fatal."""
+    fees, live vs the 5-year backtest, and the drift monitor's pauses (the live watcher reads them). Since 2026-10-18
+    the headline is the operator's own alerts (alert_pairs), the silent research records apart. Never fatal."""
     try:
         sfx = "_offline" if offline else ""
         tr = trk.build(logdf, now.strftime("%Y-%m-%d %H:%M"), read_json("research", offline),
                        program_with_library(cfg, offline, write=False), read_json("track_record", offline),
-                       trk.settings(cfg.get("track_record")))
+                       trk.settings(cfg.get("track_record")), alerts=alert_pairs(cfg, offline, registry))
         with open(os.path.join(REPORTS, f"track_record{sfx}.json"), "w") as f:
             json.dump(tr, f, indent=1, default=float)
         with open(os.path.join(REPORTS, f"track_record{sfx}.md"), "w") as f:
@@ -3434,7 +3449,7 @@ def weekly_review(now, logdf, registry, cfg, offline):
                        read_json("research_counts", offline), now.strftime("%Y-%m-%d %H:%M"),
                        wrv.settings(cfg.get("weekly_review")), read_json("failure_lab", offline),
                        read_json("watcher_health", False), read_json("shocks_review", False),
-                       track=read_json("track_record", offline))
+                       track=read_json("track_record", offline), alerts=alert_pairs(cfg, offline, registry))
     except Exception as e:
         log(f"weekly review not built ({type(e).__name__}: {e})")
         return None

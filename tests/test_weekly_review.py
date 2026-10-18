@@ -113,7 +113,7 @@ class Review(unittest.TestCase):
         self.assertTrue(rv["final"])
         md = WR.render(rv)
         for want in ("## System check", "## Promote to 🟡 PAPER (your tap)", "## With vs without the 5m check",
-                     "| P01-BREAKOUT-V2 | 1h | BTC | TEST | 12 |"):
+                     "| P01-BREAKOUT-V2 | 1h | BTC | TEST | - | 12 |"):
             self.assertIn(want, md)
         tg = WR.telegram(rv)
         self.assertIn("Ready for 🟡 PAPER", tg)

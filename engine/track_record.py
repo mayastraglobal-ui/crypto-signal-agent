@@ -111,9 +111,12 @@ def backtests(research, program=None):
     return out
 
 
-def build(logdf, now_utc, research=None, program=None, prev=None, S=None):
+def build(logdf, now_utc, research=None, program=None, prev=None, S=None, alerts=None):
     """The track record dict (reports/track_record.json). logdf: the signals log; prev: the last file (the drift
-    pauses' start times are kept). now_utc: 'YYYY-MM-DD HH:MM'."""
+    pauses' start times are kept). now_utc: 'YYYY-MM-DD HH:MM'. alerts: {(cell key, coin)} whose TEST setups reach
+    Telegram (signal_center.alert_pairs; None = unknown) - 2026-10-18 (operator: "fix the track report"): the headline
+    is YOUR alerts (those pairs + every PAPER / LIVE signal); the other TEST pairs are silent research records GitHub
+    keeps for the weekly review, shown apart, and the drift monitor pauses only pairs that can reach you."""
     S = S or settings(None)
     bts = backtests(research, program)
     prev_paused = {(p["key"], p["coin"]): p for p in (prev or {}).get("paused") or []}
@@ -133,10 +136,11 @@ def build(logdf, now_utc, research=None, program=None, prev=None, S=None):
             stage = g["stage"].iloc[-1]
             bt = bts.get((k, coin))
             verdict, why = drift(st, bt, S) if S["enabled"] else ("ok", [])
+            sent = None if alerts is None else (stage != "TEST" or (k, coin) in alerts)
             row = dict(key=k, coin=coin, stage=stage, label=STAGES.get(stage, stage), live=st, backtest=bt,
-                       verdict=verdict, why=why, last_utc=str(g["closed_time_utc"].iloc[-1] or ""))
+                       verdict=verdict, why=why, last_utc=str(g["closed_time_utc"].iloc[-1] or ""), sent=sent)
             pairs.append(row)
-            if verdict == "drift":
+            if verdict == "drift" and sent is not False:     # a silent pair never alerts: nothing to pause
                 since = (prev_paused.get((k, coin)) or {}).get("since_utc") or now_utc
                 paused.append(dict(key=k, coin=coin, label=row["label"], since_utc=since, why=why))
         eq = np.cumsum(d["result_r"].to_numpy(dtype=float))
@@ -149,12 +153,22 @@ def build(logdf, now_utc, research=None, program=None, prev=None, S=None):
         r = d[d["stage"] == stage]["result_r"].tolist() if d is not None and len(d) else []
         by_stage[stage] = dict(label=label, **stats(r))
     total = stats(d["result_r"].tolist() if d is not None and len(d) else [])
+    if alerts is None or d is None or not len(d):
+        yours, silent = total, stats([])
+    else:
+        mine = (d["stage"] != "TEST") | pd.Series([(k, c) in alerts for k, c in zip(d["key"], d["coin"])], index=d.index)
+        # versions of one setup (same coin, direction and candle) are ONE merged Telegram alert: counted once
+        same = [c for c in ("coin", "direction", "signal_time_utc") if c in d.columns]
+        y = d[mine].drop_duplicates(subset=same, keep="first") if len(same) == 3 else d[mine]
+        yours, silent = stats(y["result_r"].tolist()), stats(d.loc[~mine, "result_r"].tolist())
     pairs.sort(key=lambda p: ({"drift": 0, "watch": 1, "ok": 2}[p["verdict"]], -p["live"]["n"]))
     resumed = [dict(key=k, coin=c) for (k, c) in prev_paused if (k, c) not in {(p["key"], p["coin"]) for p in paused}]
-    return dict(utc=now_utc, settings=S, total=total, by_stage=by_stage, pairs=pairs, paused=paused, resumed=resumed,
-                curve=curve_rows,
+    return dict(utc=now_utc, settings=S, total=total, yours=yours, silent=silent, alerts_known=alerts is not None,
+                by_stage=by_stage, pairs=pairs, paused=paused, resumed=resumed, curve=curve_rows,
                 note="Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). "
-                     "The alerts actually sent (5m-confirmed) are in the journal review.")
+                     "'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); "
+                     "the silent research records are the other positive program pairs GitHub keeps for the research. "
+                     "The alerts actually sent and your ✅ / ❌ are in the journal review.")
 
 
 def _r(x):
@@ -168,7 +182,11 @@ def md_lines(tr):
          f"Updated {tr['utc']} UTC by the hourly scan (engine/track_record.py). {tr['note']}", "",
          "| Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |",
          "|---|---:|---:|---:|---:|---:|---:|"]
-    for s in list(tr["by_stage"].values()) + [dict(t, label="**All**")]:
+    rows = list(tr["by_stage"].values()) + [dict(t, label="**All**")]
+    if tr.get("alerts_known"):                     # 2026-10-18: your alerts first, the silent records apart
+        rows = [dict(tr["yours"], label="**Your alerts** (could reach your Telegram)"),
+                dict(tr["silent"], label="Silent research records (never sent to you)")] + rows
+    for s in rows:
         wr = "-" if s["win_rate"] is None else f"{s['win_rate']:.0f}"
         L.append(f"| {s['label']} | {s['n']} | {wr} | {_r(s['avg_r'])} | {s['total_r']:+.2f}R | {s['max_dd_r']:.2f}R | "
                  f"{s['max_loss_run']} |")
@@ -185,15 +203,16 @@ def md_lines(tr):
         L += ["", "Warning signs (no pause yet):"] + [f"- {p['key'].replace('|', ' ')} on {p['coin']}: "
                                                       + "; ".join(p["why"]) for p in watch]
     L += ["", "## Per strategy and coin (live vs 5-year backtest)", "",
-          "| Strategy | TF | Coin | Stage | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |",
-          "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
-    for p in tr["pairs"]:
+          "| Strategy | TF | Coin | Stage | Sent to you | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |",
+          "|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
+    for p in sorted(tr["pairs"], key=lambda p: p.get("sent") is False):
         lv, bt = p["live"], p["backtest"] or {}
-        L.append(f"| {p['key'].split('@')[0]} | {p['key'].split('|')[1]} | {p['coin']} | {p['label']} | {lv['n']} | "
-                 f"{lv['win_rate']:.0f} | {_r(lv['avg_r'])} | {_r(bt.get('avg_r'))} | {lv['total_r']:+.2f}R | "
+        sent = {True: "✅ yes", False: "silent", None: "-"}[p.get("sent")]
+        L.append(f"| {p['key'].split('@')[0]} | {p['key'].split('|')[1]} | {p['coin']} | {p['label']} | {sent} | "
+                 f"{lv['n']} | {lv['win_rate']:.0f} | {_r(lv['avg_r'])} | {_r(bt.get('avg_r'))} | {lv['total_r']:+.2f}R | "
                  f"{lv['max_dd_r']:.2f}R | {dict(drift='🚨 paused', watch='⚠️ watch', ok='✅')[p['verdict']]} |")
     if not tr["pairs"]:
-        L.append("| - | - | - | - | 0 | - | - | - | - | - | no closed live setup yet |")
+        L.append("| - | - | - | - | - | 0 | - | - | - | - | - | no closed live setup yet |")
     if tr["curve"]:
         L += ["", "## Equity curve (all stages, R after fees)", "", "| Closed | Running total |", "|---|---:|"]
         L += [f"| {c['t']} | {c['r']:+.2f}R |" for c in tr["curve"][-20:]]
@@ -203,18 +222,27 @@ def md_lines(tr):
 def telegram(tr, limit=8):
     """/track: the scorecard in a few lines."""
     t = tr["total"]
-    L = [f"📈 <b>Live track record</b> · {tr['utc']} UTC",
-         f"All: {t['n']} closed · {_r(t['avg_r'])} a trade · total {t['total_r']:+.2f}R · worst drawdown "
-         f"{t['max_dd_r']:.2f}R (after fees)"]
-    for s in tr["by_stage"].values():
-        if s["n"]:
-            L.append(f"{s['label']}: {s['n']} · {s['win_rate']:.0f}% won · {_r(s['avg_r'])} · {s['total_r']:+.2f}R")
+    L = [f"📈 <b>Live track record</b> · {tr['utc']} UTC"]
+    if tr.get("alerts_known"):                     # 2026-10-18: your alerts are the headline
+        y, s0 = tr["yours"], tr["silent"]
+        L.append(f"<b>Your alerts</b>: {y['n']} closed · {_r(y['avg_r'])} a trade · total {y['total_r']:+.2f}R · "
+                 f"worst drawdown {y['max_dd_r']:.2f}R (after fees)" if y["n"] else
+                 "<b>Your alerts</b>: no closed setup yet")
+        if s0["n"]:
+            L.append(f"Silent research records (strategies NOT sent to you): {s0['n']} · {_r(s0['avg_r'])} a trade · "
+                     f"{s0['total_r']:+.2f}R - GitHub keeps them to check the research")
+    else:
+        L.append(f"All: {t['n']} closed · {_r(t['avg_r'])} a trade · total {t['total_r']:+.2f}R · worst drawdown "
+                 f"{t['max_dd_r']:.2f}R (after fees)")
+        for s in tr["by_stage"].values():
+            if s["n"]:
+                L.append(f"{s['label']}: {s['n']} · {s['win_rate']:.0f}% won · {_r(s['avg_r'])} · {s['total_r']:+.2f}R")
     if tr["paused"]:
         L += ["", "🚨 <b>Paused by the drift monitor</b>:"]
         L += [f"• {p['key'].split('@')[0]} {p['key'].split('|')[1]} {p['coin']}: {p['why'][0]}" for p in tr["paused"]]
-    top = [p for p in tr["pairs"] if p["live"]["n"]][:limit]
+    top = [p for p in tr["pairs"] if p["live"]["n"] and p.get("sent") is not False][:limit]
     if top:
-        L += ["", "Live vs backtest:"]
+        L += ["", "Your alerts, live vs backtest:" if tr.get("alerts_known") else "Live vs backtest:"]
         L += [f"{dict(drift='🚨', watch='⚠️', ok='✅')[p['verdict']]} {p['key'].split('@')[0]} {p['key'].split('|')[1]} "
               f"{p['coin']}: {p['live']['n']} · {_r(p['live']['avg_r'])} (backtest {_r((p['backtest'] or {}).get('avg_r'))})"
               for p in top]
