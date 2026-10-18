@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-18 20:24",
+ "generated_utc": "2026-10-18 21:24",
  "book": {
-  "utc": "2026-10-18 20:24",
-  "beijing": "2026-10-19 04:24",
+  "utc": "2026-10-18 21:24",
+  "beijing": "2026-10-19 05:24",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-18 20:24 UTC / 2026-10-19 04:24 Beijing",
+  "POSITION BOOK \u2014 2026-10-18 21:24 UTC / 2026-10-19 05:24 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -288,97 +288,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-18 07:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "TP1_HIT",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "TP2 +2.40R"
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-18 19:59",
-   "coin": "SOL",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 100.83,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-18 19:59",
-   "coin": "SOL",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 100.83,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "XRP-15m-P01-BREAKOUT-V2-2026-10-18 19:44",
-   "coin": "XRP",
-   "tf": "15m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.2595,
-   "note": "15m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "XRP-15m-P01-BREAKOUT-V2-2026-10-18 19:44",
-   "coin": "XRP",
-   "tf": "15m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.2595,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-18 19:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.9419,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-18 20:24",
-   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-18 19:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.9419,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
