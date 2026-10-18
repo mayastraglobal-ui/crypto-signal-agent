@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-18 02:09",
+ "generated_utc": "2026-10-18 02:27",
  "book": {
-  "utc": "2026-10-18 02:09",
-  "beijing": "2026-10-18 10:09",
+  "utc": "2026-10-18 02:27",
+  "beijing": "2026-10-18 10:27",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-18 02:09 UTC / 2026-10-18 10:09 Beijing",
+  "POSITION BOOK \u2014 2026-10-18 02:27 UTC / 2026-10-18 10:27 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -189,32 +189,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-18 02:09",
-   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-17 21:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.09R"
-  },
-  {
-   "time_utc": "2026-10-18 02:09",
-   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-17 21:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.09R"
-  }
- ]
+ "events_this_run": []
 }
