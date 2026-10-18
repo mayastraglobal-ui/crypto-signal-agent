@@ -1,13 +1,13 @@
 # Weekly review · 2026-W42
 
-Made 2026-10-18 16:27 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-18 17:25 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-18)
-- ✅ hourly scan: last run 2026-10-18 16:27 UTC
+- ✅ hourly scan: last run 2026-10-18 17:25 UTC
 - ✅ program rotation: 89 of 89 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-18 15:21 UTC (5 min ago)
+- ✅ live watcher: last heartbeat 2026-10-18 16:26 UTC (1 min ago)
 - ✅ TEST setups closed this week (GitHub record): 19
 
 ## Totals
@@ -52,11 +52,11 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 73 shock(s) this week, 59 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 31, broke yesterday's high 10, broke yesterday's low 14, volume spike 38
-- by coin: BTC 15, ETH 15, XRP 12, ZEC 12, SOL 11, SUI 8
-- 4 hours later: 35 kept going, 38 reversed (average -0.07% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 2 of 73 - the strategies missed most shocks: material for the research (a reversal or sweep version)
+- 66 shock(s) this week, 54 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 29, broke yesterday's high 9, broke yesterday's low 14, volume spike 31
+- by coin: ETH 14, BTC 13, ZEC 11, XRP 11, SOL 10, SUI 7
+- 4 hours later: 30 kept going, 36 reversed (average -0.13% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 2 of 66 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-10-15 02:29 UTC ETH DOWN -3.6% -> 4h later -1.4% (no strategy alert)
 -   2026-10-15 02:25 UTC SUI DOWN -3.5% -> 4h later -0.6% (no strategy alert)
 -   2026-10-12 04:44 UTC ZEC UP +3.5% -> 4h later -2.1% (no strategy alert)
