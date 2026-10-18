@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-18 11:25",
+ "utc": "2026-10-18 12:30",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -20,6 +20,29 @@
   "max_loss_run": 6,
   "sd": 0.928
  },
+ "yours": {
+  "n": 1,
+  "wins": 0,
+  "win_rate": 0.0,
+  "avg_r": -1.046,
+  "total_r": -1.05,
+  "max_dd_r": 1.05,
+  "cur_loss_run": 1,
+  "max_loss_run": 1,
+  "sd": null
+ },
+ "silent": {
+  "n": 20,
+  "wins": 3,
+  "win_rate": 15.0,
+  "avg_r": -0.697,
+  "total_r": -13.95,
+  "max_dd_r": 13.95,
+  "cur_loss_run": 4,
+  "max_loss_run": 5,
+  "sd": 0.97
+ },
+ "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
@@ -84,7 +107,8 @@
    "why": [
     "4 losses in a row - in its backtest (36% won) a run that long shows up in 17% of 4-trade periods"
    ],
-   "last_utc": "2026-10-15 15:29"
+   "last_utc": "2026-10-15 15:29",
+   "sent": false
   },
   {
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
@@ -109,7 +133,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 14:59"
+   "last_utc": "2026-10-15 14:59",
+   "sent": false
   },
   {
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
@@ -134,7 +159,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-18 09:59"
+   "last_utc": "2026-10-18 09:59",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|1h",
@@ -159,7 +185,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 14:59"
+   "last_utc": "2026-10-15 14:59",
+   "sent": false
   },
   {
    "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
@@ -184,7 +211,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-18 01:29"
+   "last_utc": "2026-10-18 01:29",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V1@1.0|4h",
@@ -209,7 +237,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 15:59"
+   "last_utc": "2026-10-15 15:59",
+   "sent": true
   },
   {
    "key": "P01-BREAKOUT-V4@1.0|4h",
@@ -234,7 +263,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 15:59"
+   "last_utc": "2026-10-15 15:59",
+   "sent": true
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|1h",
@@ -259,7 +289,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-13 02:59"
+   "last_utc": "2026-10-13 02:59",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|30m",
@@ -284,7 +315,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-18 01:29"
+   "last_utc": "2026-10-18 01:29",
+   "sent": false
   },
   {
    "key": "P04-MACD-SUPERTREND-V2@1.0|1h",
@@ -309,7 +341,8 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 14:59"
+   "last_utc": "2026-10-15 14:59",
+   "sent": false
   }
  ],
  "paused": [],
@@ -404,5 +437,5 @@
    "r": -16.04
   }
  ],
- "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."
+ "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
 }
