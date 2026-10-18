@@ -164,3 +164,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, wrong_session
   - what happened: false_breakout, indicator_lag
   - root cause / fix: (review)
+
+### SUI SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.11R
+- timestamp: 2026-10-18 10:25 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SUI · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-25
+  - signal 2026-10-18 05:59 UTC, closed 2026-10-18 09:59 UTC, stage TEST
+  - MAE -1.26R / MFE +0.11R
+  - at entry: session outside killzones, conditions: low_relative_volume, wrong_session
+  - what happened: regime_mismatch, indicator_lag
+  - root cause / fix: (review)

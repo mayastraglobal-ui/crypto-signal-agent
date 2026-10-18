@@ -1,13 +1,13 @@
 # 📈 Live track record
 
-Updated 2026-10-18 09:26 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
+Updated 2026-10-18 10:25 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| 🔵 TEST | 21 | 14 | -0.71R | -14.93R | 14.93R | 5 |
+| 🔵 TEST | 22 | 14 | -0.73R | -16.04R | 16.04R | 6 |
 | 🟡 PAPER | 0 | - | - | +0.00R | 0.00R | 0 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 21 | 14 | -0.71R | -14.93R | 14.93R | 5 |
+| **All** | 22 | 14 | -0.73R | -16.04R | 16.04R | 6 |
 
 ## 🚨 Drift monitor
 
@@ -22,8 +22,8 @@ Warning signs (no pause yet):
 |---|---|---|---|---:|---:|---:|---:|---:|---:|---|
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | 4 | 0 | -1.15R | +0.01R | -4.58R | 4.58R | ⚠️ watch |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | 6 | 33 | -0.20R | +0.04R | -1.22R | 2.38R | ✅ |
+| P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | 3 | 33 | -0.40R | +0.01R | -1.19R | 2.15R | ✅ |
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | 2 | 0 | -0.74R | +0.01R | -1.49R | 1.49R | ✅ |
-| P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | 2 | 50 | -0.04R | +0.01R | -0.08R | 1.04R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | 2 | 0 | -1.08R | +0.01R | -2.16R | 2.16R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
@@ -35,7 +35,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-11 15:59 | -2.49R |
 | 2026-10-11 15:59 | -3.69R |
 | 2026-10-13 02:59 | -4.84R |
 | 2026-10-13 02:59 | -5.94R |
@@ -55,3 +54,4 @@ Warning signs (no pause yet):
 | 2026-10-15 15:59 | -12.75R |
 | 2026-10-18 01:29 | -13.84R |
 | 2026-10-18 01:29 | -14.93R |
+| 2026-10-18 09:59 | -16.04R |

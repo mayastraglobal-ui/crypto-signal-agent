@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-18 09:26",
+ "utc": "2026-10-18 10:25",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,28 +10,28 @@
   "curve_points": 60
  },
  "total": {
-  "n": 21,
+  "n": 22,
   "wins": 3,
-  "win_rate": 14.3,
-  "avg_r": -0.711,
-  "total_r": -14.93,
-  "max_dd_r": 14.93,
-  "cur_loss_run": 5,
-  "max_loss_run": 5,
-  "sd": 0.947
+  "win_rate": 13.6,
+  "avg_r": -0.729,
+  "total_r": -16.04,
+  "max_dd_r": 16.04,
+  "cur_loss_run": 6,
+  "max_loss_run": 6,
+  "sd": 0.928
  },
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 21,
+   "n": 22,
    "wins": 3,
-   "win_rate": 14.3,
-   "avg_r": -0.711,
-   "total_r": -14.93,
-   "max_dd_r": 14.93,
-   "cur_loss_run": 5,
-   "max_loss_run": 5,
-   "sd": 0.947
+   "win_rate": 13.6,
+   "avg_r": -0.729,
+   "total_r": -16.04,
+   "max_dd_r": 16.04,
+   "cur_loss_run": 6,
+   "max_loss_run": 6,
+   "sd": 0.928
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -112,6 +112,31 @@
    "last_utc": "2026-10-15 14:59"
   },
   {
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": -0.397,
+    "total_r": -1.19,
+    "max_dd_r": 2.15,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 1.171
+   },
+   "backtest": {
+    "n": 343,
+    "avg_r": 0.012,
+    "win_rate": 37.6
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-18 09:59"
+  },
+  {
    "key": "P01-BREAKOUT-V5@1.0|1h",
    "coin": "ETH",
    "stage": "TEST",
@@ -135,31 +160,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-15 14:59"
-  },
-  {
-   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
-   "coin": "SUI",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": -0.042,
-    "total_r": -0.08,
-    "max_dd_r": 1.04,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": 1.409
-   },
-   "backtest": {
-    "n": 343,
-    "avg_r": 0.012,
-    "win_rate": 37.6
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-15 15:59"
   },
   {
    "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
@@ -398,6 +398,10 @@
   {
    "t": "2026-10-18 01:29",
    "r": -14.93
+  },
+  {
+   "t": "2026-10-18 09:59",
+   "r": -16.04
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). The alerts actually sent (5m-confirmed) are in the journal review."
