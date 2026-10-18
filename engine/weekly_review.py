@@ -194,11 +194,13 @@ def live_table(logdf, now, keys=None):
 
 
 def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journal=None, research_runs=None,
-          scan_utc=None, S=None, failure_lab=None, watcher=None, shocks=None, track=None):
+          scan_utc=None, S=None, failure_lab=None, watcher=None, shocks=None, track=None, alerts=None):
     """The weekly review dict (reports/weekly_review.json). now: UTC datetime. promos_active: {key: [coins]}.
     failure_lab: reports/failure_lab.json (the research run's repairs and their record); watcher: reports/
     watcher_health.json (the live watcher's hourly heartbeat, journal_review.py); shocks: reports/shocks_review.json
-    (the ⚡ shock alarm's week, journal_review.py)."""
+    (the ⚡ shock alarm's week, journal_review.py); alerts: {(cell key, coin)} whose TEST setups reach Telegram
+    (signal_center.alert_pairs; 2026-10-18: totals and table show the operator's alerts apart from the silent research
+    records; None = unknown)."""
     S = S or settings(None)
     cells = (program or {}).get("cells") or {}
     live = live_table(logdf, now, list(cells))
@@ -214,7 +216,8 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                    name=c.get("name"), version=c.get("version"), tf=k.split("|")[1], live=a, week=x["week"],
                    gross=x["gross"], by_market=x["by_market"],
                    backtest=dict(n=bt.get("n"), avg_r=bt.get("avg_r"), win_rate=bt.get("win_rate")) if bt else None,
-                   confidence=confidence(a["n"], a["avg_r"], a["sd"]))
+                   confidence=confidence(a["n"], a["avg_r"], a["sd"]),
+                   sent=None if alerts is None else (stage != "TEST" or (k, coin) in alerts))
         rows.append(row)
         if row["stage"] == "TEST" and (k, coin) not in in_paper and a["n"] >= S["promote_min_trades"] and \
                 a["avg_r"] > S["promote_min_avg_r"] and bt and float(bt.get("avg_r") or 0) > 0:
@@ -237,7 +240,8 @@ def build(now, logdf, program, reg_cells, promos_active, demoted, refused, journ
                                 f"{float(cd['backtest']['avg_r']):+.2f}R over {cd['backtest']['n']} trades"))
     tk = None
     if track:                                         # 📈 2026-10-13: the live track record in one line
-        tk = dict(total=track.get("total"), paused=[f"{p['key'].split('@')[0]} {p['key'].split('|')[1]} {p['coin']}"
+        tk = dict(total=track.get("total"), yours=track.get("yours"), silent=track.get("silent"),
+                  alerts_known=track.get("alerts_known"), paused=[f"{p['key'].split('@')[0]} {p['key'].split('|')[1]} {p['coin']}"
                                                     for p in track.get("paused") or []])
     return dict(track=tk, week=f"{now.isocalendar()[0]}-W{now.isocalendar()[1]:02d}", utc=now.strftime("%Y-%m-%d %H:%M"),
                 final=now.weekday() == 6 and now.hour >= 4, rows=rows, promote=promote,
@@ -271,13 +275,15 @@ def failure_part(fl):
 
 def totals(rows):
     out = {}
-    for st in ("TEST", "PAPER"):
-        n = sum(r["live"]["n"] for r in rows if r["stage"] == st)
-        tot = sum(r["live"]["total_r"] for r in rows if r["stage"] == st)
-        wn = sum(r["week"]["n"] for r in rows if r["stage"] == st)
-        wt = sum(r["week"]["total_r"] for r in rows if r["stage"] == st)
+    for st, pick in (("TEST", lambda r: r["stage"] == "TEST"), ("PAPER", lambda r: r["stage"] == "PAPER"),
+                     ("YOURS", lambda r: r.get("sent") is True), ("SILENT", lambda r: r.get("sent") is False)):
+        n = sum(r["live"]["n"] for r in rows if pick(r))
+        tot = sum(r["live"]["total_r"] for r in rows if pick(r))
+        wn = sum(r["week"]["n"] for r in rows if pick(r))
+        wt = sum(r["week"]["total_r"] for r in rows if pick(r))
         out[st] = dict(n=n, total_r=round(tot, 2), avg_r=round(tot / n, 3) if n else None, week_n=wn,
                        week_total_r=round(wt, 2))
+    out["known"] = any(r.get("sent") is not None for r in rows)
     return out
 
 
@@ -390,9 +396,15 @@ def render(rv):
          "Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.", "",
          "## System check", ""]
     L += [f"- {'✅' if s['ok'] else '⚪' if s['ok'] is None else '⚠️'} {s['text']}" for s in rv["system"]]
-    L += ["", "## Totals", "",
-          f"- TEST: {t['TEST']['n']} closed setups since the start, {_r(t['TEST']['avg_r'])} a trade; this week "
-          f"{t['TEST']['week_n']} ({t['TEST']['week_total_r']:+.2f}R)",
+    L += ["", "## Totals", ""]
+    if t.get("known"):                               # 2026-10-18: your alerts first, the silent records apart
+        y, s0 = t["YOURS"], t["SILENT"]
+        L += [f"- **Your alerts** (setups that could reach your Telegram): {y['n']} closed since the start, "
+              f"{_r(y['avg_r'])} a trade; this week {y['week_n']} ({y['week_total_r']:+.2f}R)",
+              f"- Silent research records (strategies NOT sent to you, kept to check the research): {s0['n']} closed, "
+              f"{_r(s0['avg_r'])} a trade; this week {s0['week_n']} ({s0['week_total_r']:+.2f}R)"]
+    L += [f"- TEST: {t['TEST']['n']} closed setups since the start, {_r(t['TEST']['avg_r'])} a trade; this week "
+          f"{t['TEST']['week_n']} ({t['TEST']['week_total_r']:+.2f}R)" + (" (both groups)" if t.get("known") else ""),
           f"- PAPER: {t['PAPER']['n']} closed signals, {_r(t['PAPER']['avg_r'])} a trade; this week "
           f"{t['PAPER']['week_n']} ({t['PAPER']['week_total_r']:+.2f}R)", "", "## Promote to 🟡 PAPER (your tap)", ""]
     L += [f"{i + 1}. {p['name'] or p['key']} {p['version']} {p['tf']} on {p['coin']} - {p['why']}. {p['confidence']}."
@@ -409,7 +421,8 @@ def render(rv):
     fm = rv["five_min"]
     L += ["", "## With vs without the 5m check (before fees)", "",
           f"- watcher alerts (5m-confirmed): {fm['confirmed_n']} plan results, {_r(fm['confirmed_r'])} a trade",
-          f"- every TEST setup (GitHub, no 5m check): {fm['all_n']}, {_r(fm['all_gross_r'])} a trade"]
+          f"- every TEST setup (GitHub, no 5m check - your alerts and the silent records): {fm['all_n']}, "
+          f"{_r(fm['all_gross_r'])} a trade"]
     if fm.get("note"):
         L.append(f"- note: {fm['note']}")
     from engine import journal as jr                 # 2026-10-13: the same setups, with and without the check
@@ -418,10 +431,16 @@ def render(rv):
         ([f"  - {x}" for x in cl] or ["  - none yet (each 4H setup that waits for its 5m candle adds one)"])
     tk = rv.get("track") or {}
     t2 = tk.get("total") or {}
-    L += ["", "## 📈 Live track record and drift monitor", "",
-          (f"- every live setup: {t2['n']} closed, {_r(t2['avg_r'])} a trade, {t2['total_r']:+.2f}R, worst drawdown "
-           f"{t2['max_dd_r']:.2f}R (after fees)" if t2.get("n") else "- no closed live setup yet"),
-          "- paused by the drift monitor: " + (", ".join(tk.get("paused") or []) or "nothing"),
+    L += ["", "## 📈 Live track record and drift monitor", ""]
+    if tk.get("alerts_known"):
+        y, s0 = tk.get("yours") or {}, tk.get("silent") or {}
+        L += [(f"- **your alerts**: {y['n']} closed, {_r(y['avg_r'])} a trade, {y['total_r']:+.2f}R, worst drawdown "
+               f"{y['max_dd_r']:.2f}R (after fees)" if y.get("n") else "- **your alerts**: no closed setup yet"),
+              f"- silent research records: {s0.get('n', 0)} closed, {_r(s0.get('avg_r'))} a trade"]
+    else:
+        L.append(f"- every live setup: {t2['n']} closed, {_r(t2['avg_r'])} a trade, {t2['total_r']:+.2f}R, worst "
+                 f"drawdown {t2['max_dd_r']:.2f}R (after fees)" if t2.get("n") else "- no closed live setup yet")
+    L += ["- paused by the drift monitor: " + (", ".join(tk.get("paused") or []) or "nothing"),
           "- the full table: reports/track_record.md"]
     L += ["", "## Ideas for new versions", ""] + ([f"- {x}" for x in rv["ideas"]] or ["- none yet (each needs 10+ "
                                                                                    "live trades)"])
@@ -439,25 +458,34 @@ def render(rv):
         + ["- a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule"]
         if loc else ["- no closed setup with a recorded location yet (recorded from 2026-10-12)"])
     L += ["", "## Every live strategy / version / coin", "",
-          "| Strategy | TF | Coin | Stage | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |",
-          "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
-    for r in sorted(rv["rows"], key=lambda r: (r["stage"] != "PAPER", -r["live"]["n"])):
+          "| Strategy | TF | Coin | Stage | Sent to you | Live | Win % | After fees | Before fees | This week | Backtest | "
+          "Confidence |",
+          "|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
+    for r in sorted(rv["rows"], key=lambda r: (r["stage"] != "PAPER", r.get("sent") is False, -r["live"]["n"])):
         bt = r["backtest"] or {}
-        L.append(f"| {r['key'].split('@')[0]} | {r['tf']} | {r['coin']} | {r['stage']} | {r['live']['n']} | "
+        sent = {True: "✅ yes", False: "silent", None: "-"}[r.get("sent")]
+        L.append(f"| {r['key'].split('@')[0]} | {r['tf']} | {r['coin']} | {r['stage']} | {sent} | {r['live']['n']} | "
                  f"{r['live']['win_rate']:.0f} | {_r(r['live']['avg_r'])} | "
                  f"{_r(r['gross']['avg_r']) if r.get('gross') else '-'} | {r['week']['n']} ({r['week']['total_r']:+.1f}R) | "
                  f"{_r(bt.get('avg_r'))} | {r['confidence']} |")
     if not rv["rows"]:
-        L.append("| - | - | - | - | 0 | - | - | - | - | - | no closed live setup yet |")
+        L.append("| - | - | - | - | - | 0 | - | - | - | - | - | no closed live setup yet |")
     return "\n".join(L) + "\n"
 
 
 def telegram(rv):
     """The weekly Telegram message (the watcher adds one ✅ Promote button per candidate)."""
     t = rv["totals"]
-    L = [f"📊 <b>Weekly review · {rv['week']}</b>",
-         f"🔵 TEST: {t['TEST']['week_n']} setups closed this week ({t['TEST']['week_total_r']:+.1f}R) · "
-         f"{t['TEST']['n']} since the start ({_r(t['TEST']['avg_r'])} a trade, after fees)",
+    L = [f"📊 <b>Weekly review · {rv['week']}</b>"]
+    if t.get("known"):                               # 2026-10-18: your alerts are the headline
+        y, s0 = t["YOURS"], t["SILENT"]
+        L += [f"🔵 <b>Your TEST alerts</b>: {y['week_n']} closed this week ({y['week_total_r']:+.1f}R) · {y['n']} since "
+              f"the start ({_r(y['avg_r'])} a trade, after fees)",
+              f"Silent research records (not sent to you): {s0['week_n']} this week ({s0['week_total_r']:+.1f}R)"]
+    else:
+        L.append(f"🔵 TEST: {t['TEST']['week_n']} setups closed this week ({t['TEST']['week_total_r']:+.1f}R) · "
+                 f"{t['TEST']['n']} since the start ({_r(t['TEST']['avg_r'])} a trade, after fees)")
+    L += [
          f"🟡 PAPER: {t['PAPER']['week_n']} this week ({t['PAPER']['week_total_r']:+.1f}R)", ""]
     if rv["promote"]:
         L.append("<b>Ready for 🟡 PAPER</b> (tap to promote):")
@@ -483,7 +511,12 @@ def telegram(rv):
                   + (f" · 4h later {sv['kept']} kept going, {sv['reversed']} reversed" if sv.get("done") else "")
                   + f" · a strategy alert followed {sv['caught']}"]
     tk = rv.get("track")
-    if tk and tk.get("total") and tk["total"].get("n"):
+    if tk and tk.get("alerts_known") and (tk.get("yours") or {}).get("n"):
+        t2 = tk["yours"]
+        L += ["", f"📈 Track record (your alerts, after fees): {t2['n']} closed · {_r(t2['avg_r'])} a trade · "
+                  f"{t2['total_r']:+.1f}R · worst drawdown {t2['max_dd_r']:.1f}R"
+              + (f" · 🚨 paused: {', '.join(tk['paused'])}" if tk.get("paused") else "") + " (/track)"]
+    elif tk and not tk.get("alerts_known") and tk.get("total") and tk["total"].get("n"):
         t2 = tk["total"]
         L += ["", f"📈 Track record (all live setups, after fees): {t2['n']} closed · {_r(t2['avg_r'])} a trade · "
                   f"{t2['total_r']:+.1f}R · worst drawdown {t2['max_dd_r']:.1f}R"
