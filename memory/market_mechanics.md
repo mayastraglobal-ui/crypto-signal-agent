@@ -112,3 +112,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - mechanism: open interest is what the exchange reports, not a measured market quantity; a reporting step, a delay, or a change of source looks like a huge oi_chg without any market move.
   - strategies: none yet (any market_structure card with oi or oi_chg; also 'Hypothesis: rebound after a forced-selling day (from C07)').
   - this week's example (FACT from the fact sheet 2026-10-11): OI -56.8% (BTC), -68.7% (ETH), -59.5% (SOL) in 24h while volatility was 'quiet' and the usual 24h move was about +-0.9% to +-1.8%. A real two-thirds drop in positions on a quiet day is unlikely; check the data before any oi_chg card is trusted.
+
+### Review: Stop clusters and liquidity pools
+- timestamp: 2026-10-18 04:00 UTC · source: https://www.newyorkfed.org/research/staff_reports/sr150.html and https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr125.html · evidence: RESEARCH_FINDING: Osler, NY Fed Staff Reports 150 (price cascades, 1996-1998 minute quotes) and 125 (one dealing bank's stop-loss and take-profit orders) · confidence: medium · strategy: liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET, S8-PDH-PDL-SWEEP · asset: all · timeframe: intraday · regime: - · review: 2026-11-17
+  - verdict: first half CONFIRMED, second half REJECTED. Stops do cluster - at round numbers' edges: stop buys just above, stop sells just below (SR 125). But when price reaches them, trends speed up and the effect lasts hours (SR 150); the reversal comes from take-profit orders AT the level, not from the stops beyond it. 'Sweep the pool, then reverse' is not what the evidence shows.
+  - mechanism: stop orders are market orders in the direction of the move (positive feedback); take-profit orders are against it (negative feedback, smaller and shorter).
+  - strategies: liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET, S8-PDH-PDL-SWEEP (all bet on the reversal; liquidity_sweep_reversal 5m 3236 trades -0.73R BACKTEST); the breakout cards bet on the acceleration.
+  - source class: currency markets; crypto not tested by these papers.
