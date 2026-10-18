@@ -17239,3 +17239,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-18 13:30,SUI,15m,ORDER_BLOCK,bear,,0.9807,0.9831,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
 2026-10-18 13:30,SUI,15m,OB_INVALID,bull,,0.9775,0.9819,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-18 13:45,SUI,15m,FVG,bear,,0.9739,0.9798,1.134,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-18 15:00,BTC,1h,FVG,bear,,81563.68,81920.0,1.225,Silver Bullet,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 15:00,ETH,1h,FVG,bear,,2397.96,2413.14,1.017,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 14:45,ETH,15m,BOS,bear,2383.44,,,0.77,Silver Bullet,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-18 14:45,ETH,15m,ORDER_BLOCK,bear,,2392.72,2398.5,,Silver Bullet,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-18 15:00,ETH,15m,FVG,bear,,2380.36,2385.0,0.579,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 15:15,ETH,15m,FVG_RETRACE,bear,,2380.36,2385.0,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 15:00,SOL,1h,FVG,bear,,103.05,103.93,1.109,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 15:00,XRP,1h,FVG,bear,,1.2838,1.2943,1.187,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 15:00,ZEC,1h,OB_RETEST,bull,,1075.33,1097.96,,Silver Bullet,4h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-18 15:00,ZEC,1h,FVG,bear,,1118.03,1125.2,0.409,Silver Bullet,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 15:00,ZEC,15m,FVG,bear,,1099.82,1105.31,0.597,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 15:15,ZEC,15m,FVG_RETRACE,bear,,1099.82,1105.31,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 15:00,SUI,1h,FVG,bear,,0.9701,0.9804,0.908,Silver Bullet,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 14:45,SUI,15m,OB_INVALID,bull,,0.9595,0.9765,,Silver Bullet,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-18 15:00,SUI,15m,BREAKER_RETEST,bear,,0.9595,0.9765,,Silver Bullet,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
