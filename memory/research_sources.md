@@ -1301,3 +1301,39 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
   - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### Currency Orders and Exchange-Rate Dynamics (Osler, NY Fed Staff Report 125 / Journal of Finance 2003)
+- timestamp: 2026-10-18 04:00 UTC · source: https://www.newyorkfed.org/medialibrary/media/research/staff_reports/sr125.html · evidence: RESEARCH_FINDING: stop-loss and take-profit orders at a large foreign-exchange dealing bank (the staff report PDF, March 2001; published in the Journal of Finance 2003) · confidence: medium · strategy: donchian_breakout, TRD-H4-BREAKOUT-FDISP, S8-PDH-PDL-SWEEP, liquidity_sweep_reversal · asset: all · timeframe: intraday · regime: - · review: 2027-01-16
+  - claim: two technical predictions have a microstructure cause. (1) Trends tend to reverse at support and resistance levels, because take-profit orders cluster at round numbers. (2) Trends gain momentum once those levels are crossed, because stop-loss orders cluster just beyond them (stop buys just above, stop sells just below).
+  - evidence class: RESEARCH_FINDING (currency market, one bank's orders).
+  - derived hypothesis: a breakout that really runs into resting stops should show it at once, as a fast, large candle. That fits the engine's Failure Lab result 'DISP helped 2 of 2' (a displacement candle filter on the false_breakout losses). No new card.
+  - limitations: currencies, 1999-2000, one dealer; crypto order books and stop habits may differ; round numbers are not a building block here.
+
+### Stop-Loss Orders and Price Cascades in Currency Markets (Osler, NY Fed Staff Report 150) - re-opened
+- timestamp: 2026-10-18 04:00 UTC · source: https://www.newyorkfed.org/research/staff_reports/sr150.html · evidence: RESEARCH_FINDING: minute-by-minute quotes for dollar-mark, dollar-yen and dollar-pound, 1996-1998 · confidence: medium · strategy: S8-PDH-PDL-SWEEP, liquidity_sweep_reversal, S5-SWEEP-MSS-FVG · asset: all · timeframe: intraday · regime: - · review: 2027-01-16
+  - claim: trends are unusually rapid when rates reach levels where stop-loss orders cluster; the response to stop-loss orders is larger and lasts longer than the response to take-profit orders; most results are significant for hours, not for days.
+  - evidence class: RESEARCH_FINDING. First used on 2026-09-27 (memory/smc_research.md); re-opened this run for the market-mechanics review of 'Stop clusters and liquidity pools'.
+  - new detail: the effect lasts hours, not days - relevant to the timeframe of any card built on it.
+
+### Technical Analysis and Liquidity Provision (Kavajecz, Odders-White, Review of Financial Studies 2004)
+- timestamp: 2026-10-18 04:00 UTC · source: https://ideas.repec.org/a/oup/rfinst/v17y2004i4p1043-1071.html · evidence: RESEARCH_FINDING: peer-reviewed, Review of Financial Studies 17(4), pages 1043-1071; abstract only (the full text is paywalled) · confidence: medium · strategy: S6-OB-FVG, S5-SWEEP-MSS-FVG · asset: - · timeframe: intraday · regime: - · review: 2027-01-16
+  - claim: support and resistance levels coincide with peaks in depth on the limit order book, and moving-average forecasts reveal where depth sits; the link comes from technical rules LOCATING depth that is already on the book, not from them predicting new information.
+  - evidence class: RESEARCH_FINDING (US stocks).
+  - what it means for SMC: an 'order block' can mark where resting orders are. That says where price may slow down, not which way it goes next, and not that 'institutions' will defend it.
+  - limitations: stocks; abstract only; crypto books are thinner and change faster.
+
+### Just How Much Do Individual Investors Lose by Trading? (Barber, Lee, Liu, Odean, Review of Financial Studies 2009)
+- timestamp: 2026-10-18 04:00 UTC · source: https://ideas.repec.org/a/oup/rfinst/v22y2009i2p609-632.html (also opened: the authors' PDF at https://faculty.haas.berkeley.edu/odean/papers%20current%20versions/justhowmuchdoindividualinvestorslose_rfs_2009.pdf) · evidence: RESEARCH_FINDING: peer-reviewed, Review of Financial Studies 22(2), pages 609-632; the complete trading history of all investors in Taiwan · confidence: high for its market · strategy: all · asset: - · timeframe: - · regime: - · review: 2027-01-16
+  - claim: the aggregate portfolio of individuals suffers an annual performance penalty of 3.8 percentage points (2.2% of Taiwan's GDP). Virtually all individual trading losses trace to their aggressive orders (orders that take liquidity at the market). Institutions gain 1.5 points a year, on both aggressive and passive trades.
+  - evidence class: RESEARCH_FINDING.
+  - derived hypothesis: 'Hypothesis: a limit entry instead of a market entry on the 30m breakout repair (from Barber, Lee, Liu, Odean)' in memory/experiments.md.
+  - limitations: Taiwan stocks, 1995-1999, with a transaction tax; crypto fees and spreads differ.
+
+### [R3] freqtrade - re-check at release 2026.9 (lookahead and recursive checks, the website docs)
+- timestamp: 2026-10-18 04:00 UTC · source: https://www.freqtrade.io/en/stable/lookahead-analysis/ and https://www.freqtrade.io/en/stable/recursive-analysis/ (the 'stable' docs = release 2026.9, commit 1f394eaebc2f46a83d26971388628707802f8602 per git ls-remote: refs/heads/stable = refs/tags/2026.9) · evidence: FACT: read in the project's documentation at that release · confidence: high for what the tools do; their results were not checked · strategy: all · asset: - · timeframe: - · regime: - · review: 2027-01-16
+  - opened: the two documentation pages on freqtrade.io (the 2026-09-25 record read the same docs in the repository at commit c0a991f5632cb900075ff2864b6671ed71a319d7).
+  - new points: (1) 'Signals that are not triggered will not have been verified' - a false negative: a strategy can be reported as non-biased only because a signal type never fired in the check. (2) A biased strategy found online can rarely be salvaged: 'Usually the bias in the strategy is THE driving factor for too good to be true profits'. (3) Pair-list-dependent rules (ranking against other coins) give false positives when the check runs on one pair. (4) Recursive check: only the last row is compared; the aim is a variance low enough not to change decisions, not zero.
+  - what we take (idea only): a card with too few signal candles on the bias-check coin should be reported as 'not verified', not as clean. engine/bias.py picks its cuts from signal times on one coin (report line 'on <coin>'); I did not see in the code how a card with 0 signals there is reported. Cross-coin cards (btc_ret, P12-LEADER 'leader' rules) are the false-positive risk named in point (3).
+  - what we deliberately do NOT take: its code (GPL-3.0 - nothing was copied); per-signal re-runs of the full backtest; the percentage-only recursive report.
+  - licence: GPL-3.0 (ideas only).
+  - hypothesis: 'Hypothesis: a card with no signal on the bias-check coin is not verified (from R3)' in memory/experiments.md.

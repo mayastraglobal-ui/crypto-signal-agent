@@ -1193,3 +1193,16 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
 |---|---|---|---|---|---|
 | EXP-0112 | 2026-10-18 01:12 | P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 | mtf_pullback | 4h | The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+
+### Hypothesis: a limit entry instead of a market entry on the 30m breakout repair (from Barber, Lee, Liu, Odean)
+- timestamp: 2026-10-18 04:00 UTC · source: Claude weekly research 2026-10-18 (https://ideas.repec.org/a/oup/rfinst/v22y2009i2p609-632.html) · evidence: HYPOTHESIS: derived from a peer-reviewed finding (virtually all individual trading losses trace to aggressive orders; Taiwan, all investors) and the operator's own journal (2 trades taken, real result -1.14R vs plan -1.00R, a gap of -0.14R per trade over 2 - far too few to mean anything) · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP · asset: signal coins · timeframe: 30m · regime: - · review: 2027-01-16
+  - hypothesis: on TRD-H4-BREAKOUT-FDISP@1.0 30m (396 trades, +0.19R, unseen +0.375R, BACKTEST), a limit entry a little behind the signal close keeps most of the winners and pays the maker fee instead of the taker fee, so the average R after costs rises.
+  - how to test: a NEW lab id that changes ONE thing: entry: {type: limit, offset_atr: 0.25, valid_bars: 3} (README 'Limit entries'), factory literature, parent 'result: TRD-H4-BREAKOUT-FDISP@1.0 30m'. Compare with the market-entry parent on the same period.
+  - blocked on: the lab limit (0 cards allowed on 2026-10-18) and the literature quota timing; the card can be written by the daily review when a slot is free.
+  - stop if: the fill rate is so low that the trade count falls below 100, or the average R after costs is not above the parent's.
+
+### Hypothesis: a card with no signal on the bias-check coin is not verified (from R3)
+- timestamp: 2026-10-18 04:00 UTC · source: Claude weekly research 2026-10-18 ([R3] https://www.freqtrade.io/en/stable/lookahead-analysis/, release 2026.9, commit 1f394eaebc2f46a83d26971388628707802f8602) · evidence: HYPOTHESIS: a process idea from freqtrade's caveat ('Signals that are not triggered will not have been verified', a false negative) and engine/bias.py (cuts are picked from signal times on one coin) · confidence: medium · strategy: all · asset: - · timeframe: - · regime: - · review: 2027-01-16
+  - hypothesis: cards with 0 or very few signal candles on the bias-check coin (for example S6-OB-FVG 15m with 0 trades) pass the lookahead check without being tested; they should be reported as 'not verified' and blocked from PAPER until checked on a coin where they fire.
+  - how to test: an engine change for the operator (pull request), not a lab card. List the cards the last check marked clean and their signal count on the check coin; any card with fewer than 6 signal candles is 'not verified'.
+  - stop if: every card checked so far had 6 or more signal candles on the check coin.
