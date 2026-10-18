@@ -16897,3 +16897,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-17 23:00,SUI,1h,FVG,bear,,0.9773,0.9911,1.112,,4h,TRANSITION,,smc-1.0,Binance
 2026-10-17 23:00,SUI,30m,FVG_RETRACE,bear,,0.9765,0.9911,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-17 22:45,SUI,15m,FVG_RETRACE,bear,,0.9765,0.9913,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,BTC,1h,FVG_RETRACE,bear,,81458.01,81597.5,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,BTC,15m,WEAK_BREAK,bull,81458.01,,,0.232,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-18 00:00,ETH,4h,SWEEP,bull,2393.48,,,1.049,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 00:00,ETH,4h,FVG_FILLED,bull,,2381.12,2423.16,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-18 00:00,ETH,4h,FVG_RETRACE,bear,,2421.33,2433.1,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,ETH,1h,FVG_RETRACE,bear,,2398.44,2418.36,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,ETH,30m,FVG_RETRACE,bear,,2403.0,2419.04,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,ETH,15m,FVG_RETRACE,bear,,2403.0,2420.86,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,SOL,4h,SWEEP,bull,102.49,,,0.698,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 00:00,SOL,1h,FVG_RETRACE,bear,,103.35,104.04,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 00:00,XRP,4h,SWEEP,bull,1.284,,,0.67,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-18 00:30,XRP,15m,SWEEP,bear,1.296,,,0.112,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-18 00:00,ZEC,4h,BOS,bear,1133.0,,,0.131,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-18 00:00,SUI,4h,SWEEP,bull,0.9595,,,0.245,,1d,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-18 00:00,SUI,1h,FVG_RETRACE,bear,,0.9773,0.9911,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
