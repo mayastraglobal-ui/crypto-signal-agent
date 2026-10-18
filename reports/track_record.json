@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-18 19:23",
+ "utc": "2026-10-18 20:24",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 22,
-  "wins": 3,
-  "win_rate": 13.6,
-  "avg_r": -0.729,
-  "total_r": -16.04,
+  "n": 23,
+  "wins": 4,
+  "win_rate": 17.4,
+  "avg_r": -0.593,
+  "total_r": -13.64,
   "max_dd_r": 16.04,
-  "cur_loss_run": 6,
+  "cur_loss_run": 0,
   "max_loss_run": 6,
-  "sd": 0.928
+  "sd": 1.118
  },
  "yours": {
   "n": 1,
@@ -32,29 +32,29 @@
   "sd": null
  },
  "silent": {
-  "n": 20,
-  "wins": 3,
-  "win_rate": 15.0,
-  "avg_r": -0.697,
-  "total_r": -13.95,
+  "n": 21,
+  "wins": 4,
+  "win_rate": 19.0,
+  "avg_r": -0.55,
+  "total_r": -11.54,
   "max_dd_r": 13.95,
-  "cur_loss_run": 4,
+  "cur_loss_run": 0,
   "max_loss_run": 5,
-  "sd": 0.97
+  "sd": 1.163
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 22,
-   "wins": 3,
-   "win_rate": 13.6,
-   "avg_r": -0.729,
-   "total_r": -16.04,
+   "n": 23,
+   "wins": 4,
+   "win_rate": 17.4,
+   "avg_r": -0.593,
+   "total_r": -13.64,
    "max_dd_r": 16.04,
-   "cur_loss_run": 6,
+   "cur_loss_run": 0,
    "max_loss_run": 6,
-   "sd": 0.928
+   "sd": 1.118
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -83,34 +83,6 @@
  },
  "pairs": [
   {
-   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
-   "coin": "XRP",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 4,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.146,
-    "total_r": -4.58,
-    "max_dd_r": 4.58,
-    "cur_loss_run": 4,
-    "max_loss_run": 4,
-    "sd": 0.109
-   },
-   "backtest": {
-    "n": 501,
-    "avg_r": 0.005,
-    "win_rate": 36.1
-   },
-   "verdict": "watch",
-   "why": [
-    "4 losses in a row - in its backtest (36% won) a run that long shows up in 17% of 4-trade periods"
-   ],
-   "last_utc": "2026-10-15 15:29",
-   "sent": false
-  },
-  {
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
    "coin": "SOL",
    "stage": "TEST",
@@ -134,6 +106,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-15 14:59",
+   "sent": false
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
+   "coin": "XRP",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 5,
+    "wins": 1,
+    "win_rate": 20.0,
+    "avg_r": -0.436,
+    "total_r": -2.18,
+    "max_dd_r": 4.58,
+    "cur_loss_run": 0,
+    "max_loss_run": 4,
+    "sd": 1.59
+   },
+   "backtest": {
+    "n": 501,
+    "avg_r": 0.005,
+    "win_rate": 36.1
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-18 19:59",
    "sent": false
   },
   {
@@ -435,6 +433,10 @@
   {
    "t": "2026-10-18 09:59",
    "r": -16.04
+  },
+  {
+   "t": "2026-10-18 19:59",
+   "r": -13.64
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
