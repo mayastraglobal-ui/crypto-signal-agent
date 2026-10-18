@@ -16997,3 +16997,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-18 04:00,SUI,15m,FVG,bull,,0.9892,0.9915,0.383,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-18 04:15,SUI,15m,FVG_RETRACE,bull,,0.9892,0.9915,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-18 04:15,SUI,15m,FVG_FILLED,bull,,0.9892,0.9915,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 05:00,BTC,15m,FVG,bear,,81836.02,81895.85,0.469,,1h,RANGE,,smc-1.0,Binance
+2026-10-18 05:15,BTC,15m,FVG_RETRACE,bear,,81836.02,81895.85,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-18 04:30,ETH,30m,BREAKER_RETEST,bull,,2419.04,2422.63,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 05:00,ETH,15m,FVG,bear,,2419.81,2422.0,0.348,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 05:00,SOL,1h,BREAKER_RETEST,bull,,104.04,104.25,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 04:30,SOL,30m,BREAKER_RETEST,bull,,103.94,104.43,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 04:30,SOL,30m,BREAKER_RETEST,bull,,104.1,104.25,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 04:30,SOL,15m,FVG_FILLED,bull,,104.21,104.39,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 04:30,SOL,15m,FVG,bear,,104.27,104.39,0.315,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-18 05:00,SOL,15m,FVG,bear,,104.03,104.2,0.46,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 04:30,XRP,30m,BREAKER_RETEST,bull,,1.3006,1.3033,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-18 04:30,XRP,15m,FVG,bear,,1.3008,1.3026,0.418,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 05:00,XRP,15m,FVG,bear,,1.2974,1.2997,0.56,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 05:15,ZEC,15m,FVG_RETRACE,bull,,1127.94,1133.03,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 04:30,SUI,15m,FVG,bear,,0.9886,0.9915,0.519,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 05:00,SUI,15m,FVG,bear,,0.9845,0.987,0.46,,1h,WEAK_BEAR,,smc-1.0,Binance

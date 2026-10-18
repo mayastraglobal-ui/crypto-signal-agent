@@ -14,7 +14,7 @@
   "paused": []
  },
  "week": "2026-W42",
- "utc": "2026-10-18 04:28",
+ "utc": "2026-10-18 05:26",
  "final": true,
  "rows": [
   {
@@ -545,7 +545,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-18 04:28 UTC"
+   "text": "hourly scan: last run 2026-10-18 05:26 UTC"
   },
   {
    "ok": true,
@@ -553,7 +553,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-18 03:00 UTC (29 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-18 04:06 UTC (23 min ago)"
   },
   {
    "ok": true,
@@ -592,23 +592,23 @@
   ]
  },
  "shocks": {
-  "n": 73,
-  "sent": 58,
-  "done": 73,
+  "n": 71,
+  "sent": 57,
+  "done": 71,
   "kept": 35,
-  "reversed": 38,
+  "reversed": 36,
   "avg_after_4h": -0.06,
   "caught": 2,
   "by_coin": {
-   "SOL": 12,
-   "ETH": 16,
    "SUI": 8,
    "BTC": 13,
+   "ETH": 15,
+   "SOL": 11,
    "XRP": 12,
    "ZEC": 12
   },
   "by_kind": {
-   "volume": 39,
+   "volume": 37,
    "move": 31,
    "sweep_high": 9,
    "sweep_low": 14
@@ -655,13 +655,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-18 03:29",
+  "checked_utc": "2026-10-18 04:29",
   "lines": [
-   "73 shock(s) this week, 58 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 31, broke yesterday's high 9, broke yesterday's low 14, volume spike 39",
-   "by coin: ETH 16, BTC 13, SOL 12, XRP 12, ZEC 12, SUI 8",
-   "4 hours later: 35 kept going, 38 reversed (average -0.06% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 2 of 73 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "71 shock(s) this week, 57 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 31, broke yesterday's high 9, broke yesterday's low 14, volume spike 37",
+   "by coin: ETH 15, BTC 13, XRP 12, ZEC 12, SOL 11, SUI 8",
+   "4 hours later: 35 kept going, 36 reversed (average -0.06% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 2 of 71 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-10-15 02:29 UTC ETH DOWN -3.6% -> 4h later -1.4% (no strategy alert)",
    "  2026-10-15 02:25 UTC SUI DOWN -3.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-10-12 04:44 UTC ZEC UP +3.5% -> 4h later -2.1% (no strategy alert)",
@@ -703,5 +703,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W42</b>\n\ud83d\udd35 TEST: 21 setups closed this week (-14.9R) \u00b7 21 since the start (-0.71R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 3 repair(s) judged - 2 beat their parent, 0 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 73 this week (58 sent) \u00b7 4h later 35 kept going, 38 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (all live setups, after fees): 21 closed \u00b7 -0.71R a trade \u00b7 -14.9R \u00b7 worst drawdown 14.9R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 9 (-0.56R) \u00b7 outside 8 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W42</b>\n\ud83d\udd35 TEST: 21 setups closed this week (-14.9R) \u00b7 21 since the start (-0.71R a trade, after fees)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 3 repair(s) judged - 2 beat their parent, 0 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 71 this week (57 sent) \u00b7 4h later 35 kept going, 36 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (all live setups, after fees): 21 closed \u00b7 -0.71R a trade \u00b7 -14.9R \u00b7 worst drawdown 14.9R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 9 (-0.56R) \u00b7 outside 8 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
