@@ -324,3 +324,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-10-16 01:10 UTC
 - **P01-BREAKOUT-V2@1.0 30m**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; recovery factor -0.08 (net -7.2R / max drawdown 86.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 29.7R - limit 17R; longest drawdown 1620 days = 89% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+
+## 2026-10-18 01:12 UTC
+- **P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h**: FORMALIZED → **BACKTESTING** (profit factor 1.16; recovery factor 2.55 (net +184.6R / max drawdown 72.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 28.3R - limit 17R)

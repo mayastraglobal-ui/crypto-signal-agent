@@ -1189,3 +1189,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - how to test: an engine check, not a lab card - for the operator. For P12-LEADER-V2 4h, run the same targets, stop and time stop from random entry candles (many repeats), and compare the card's average R with the random-entry average. The edge is the difference, not the raw average.
   - stop if: the random-entry average is near 0R (then the raw result already reflects the rule).
   - note: cards that trade both directions (the 4h breakouts) are less exposed to this, because a drift helps one side and hurts the other.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0112 | 2026-10-18 01:12 | P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 | mtf_pullback | 4h | The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
