@@ -17109,3 +17109,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-18 09:30,SUI,15m,FVG,bull,,0.9803,0.9831,0.581,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-18 09:45,SUI,15m,FVG_RETRACE,bear,,0.9886,0.9915,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-18 09:45,SUI,15m,FVG_FILLED,bear,,0.9886,0.9915,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-18 11:00,BTC,1h,FVG,bull,,81774.19,82093.75,1.265,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 10:30,BTC,30m,FVG,bull,,82034.27,82121.87,0.546,,1h,RANGE,,smc-1.0,Binance
+2026-10-18 11:00,BTC,30m,FVG_RETRACE,bull,,82034.27,82121.87,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:15,BTC,15m,FVG,bear,,82131.2,82177.11,0.411,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-18 11:00,ETH,1h,FVG,bull,,2414.08,2418.99,0.385,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 11:00,ETH,30m,FVG_RETRACE,bull,,2414.08,2419.32,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:15,ETH,15m,FVG,bear,,2420.43,2422.12,0.316,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-18 11:00,SOL,1h,FVG,bull,,103.37,103.85,0.653,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 10:30,SOL,30m,FVG_RETRACE,bull,,103.31,103.89,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:00,XRP,1h,FVG,bull,,1.2942,1.2974,0.403,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 10:30,XRP,30m,FVG_RETRACE,bull,,1.2932,1.299,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:15,XRP,15m,FVG_RETRACE,bull,,1.2932,1.2961,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 10:30,ZEC,30m,FVG_RETRACE,bull,,1127.75,1133.2,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:15,ZEC,15m,FVG,bear,,1132.24,1135.07,0.364,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-18 11:00,SUI,1h,FVG,bull,,0.9827,0.9857,0.281,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-18 10:30,SUI,30m,FVG_RETRACE,bull,,0.9819,0.9858,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-18 11:15,SUI,15m,FVG,bear,,0.987,0.9883,0.283,NY AM,1h,TRANSITION,,smc-1.0,Binance
