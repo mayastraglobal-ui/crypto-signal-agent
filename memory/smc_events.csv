@@ -17850,3 +17850,41 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-19 08:00,ZEC,4h,FVG,bull,,1136.08,1157.13,0.462,,1d,TRANSITION,,smc-1.0,Binance
 2026-10-19 08:00,SUI,30m,SWEEP,bear,1.0127,,,0.707,London,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
 2026-10-19 08:15,SUI,15m,FVG_FILLED,bull,,1.0076,1.0091,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,BTC,30m,WEAK_BREAK,bear,82574.57,,,0.967,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 09:45,BTC,15m,FVG,bull,,82845.99,82967.34,0.741,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:00,BTC,15m,FVG_RETRACE,bull,,82845.99,82967.34,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 10:00,BTC,15m,FVG_FILLED,bull,,82845.99,82967.34,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:15,BTC,15m,FVG,bear,,82886.01,82967.34,0.468,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,BTC,15m,CHOCH,bear,82574.57,,,1.394,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-19 10:30,BTC,15m,ORDER_BLOCK,bear,,82967.34,83096.01,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 10:30,BTC,15m,FVG_FILLED,bull,,82549.45,82733.66,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,BTC,15m,FVG,bear,,82705.38,82754.0,0.253,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:00,ETH,1h,FVG_RETRACE,bear,,2446.0,2455.09,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 10:00,ETH,30m,SWEEP,bear,2444.79,,,0.142,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 10:30,ETH,30m,BOS,bear,2427.24,,,0.361,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-19 10:30,ETH,30m,ORDER_BLOCK,bear,,2432.32,2442.63,,,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 09:45,ETH,15m,SWEEP,bear,2444.79,,,0.235,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 09:45,ETH,15m,FVG,bull,,2436.82,2440.65,0.613,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 10:00,ETH,15m,FVG_RETRACE,bull,,2436.82,2440.65,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 10:15,ETH,15m,FVG_FILLED,bull,,2436.82,2440.65,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 10:30,ETH,15m,BOS,bear,2427.24,,,0.59,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-19 10:30,ETH,15m,ORDER_BLOCK,bear,,2440.65,2446.27,,,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 10:30,ETH,15m,FVG,bear,,2435.12,2437.1,0.285,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 10:30,SOL,30m,CHOCH,bear,105.45,,,1.132,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-19 10:30,SOL,30m,ORDER_BLOCK,bear,,105.45,105.93,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 10:15,SOL,15m,WEAK_BREAK,bear,105.45,,,0.064,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 10:15,SOL,15m,FVG,bear,,105.64,105.75,0.354,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,XRP,30m,CHOCH,bear,1.3105,,,1.24,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-19 10:30,XRP,30m,ORDER_BLOCK,bear,,1.3125,1.317,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 09:45,XRP,15m,FVG,bull,,1.3148,1.3162,0.394,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:00,XRP,15m,FVG_RETRACE,bull,,1.3148,1.3162,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 10:00,XRP,15m,FVG_FILLED,bull,,1.3148,1.3162,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:15,XRP,15m,FVG,bear,,1.3148,1.3162,0.39,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,XRP,15m,CHOCH,bear,1.3105,,,2.033,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-19 10:30,XRP,15m,ORDER_BLOCK,bear,,1.3133,1.317,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 10:30,ZEC,30m,WEAK_BREAK,bear,1157.92,,,0.823,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 10:30,ZEC,15m,CHOCH,bear,1157.92,,,1.372,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-19 10:30,ZEC,15m,ORDER_BLOCK,bear,,1165.63,1173.99,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-19 10:15,SUI,15m,WEAK_BREAK,bear,1.0048,,,0.021,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 10:15,SUI,15m,FVG,bear,,1.0079,1.0102,0.48,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 10:30,SUI,15m,FVG_FILLED,bull,,1.001,1.0051,,,1h,TRANSITION,,smc-1.0,Binance
