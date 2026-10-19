@@ -17914,3 +17914,39 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-19 11:30,ZEC,15m,FVG,bear,,1137.29,1140.34,0.351,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-10-19 11:00,SUI,30m,FVG,bear,,1.0006,1.0055,0.623,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-19 10:45,SUI,15m,FVG,bear,,1.0006,1.0038,0.586,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:00,BTC,4h,FVG_RETRACE,bull,,82227.28,82484.27,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,BTC,4h,FVG_FILLED,bull,,82227.28,82484.27,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-19 12:00,BTC,1h,FVG,bear,,82424.0,82738.58,0.856,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,BTC,30m,FVG_RETRACE,bear,,82480.01,82754.0,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 11:45,BTC,15m,FVG_RETRACE,bear,,82266.64,82338.0,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,BTC,15m,FVG_FILLED,bear,,82266.64,82338.0,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:00,ETH,4h,SWEEP,bear,2441.66,,,0.119,,1d,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 12:00,ETH,1h,FVG,bear,,2426.14,2432.32,0.384,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-19 11:45,ETH,15m,FVG_RETRACE,bear,,2419.5,2424.41,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:15,ETH,15m,FVG_FILLED,bear,,2419.5,2424.41,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 12:00,SOL,4h,FVG_RETRACE,bull,,104.34,105.11,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,SOL,1h,FVG,bear,,104.98,105.45,0.595,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-19 12:30,SOL,30m,FVG_RETRACE,bear,,105.03,105.47,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:15,SOL,15m,FVG_RETRACE,bear,,105.03,105.34,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:30,SOL,15m,FVG_FILLED,bear,,105.03,105.34,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 12:30,SOL,15m,FVG,bull,,104.91,105.05,0.375,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 12:00,XRP,4h,FVG_RETRACE,bull,,1.2772,1.3016,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,XRP,1h,FVG,bear,,1.3055,1.3125,0.775,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,XRP,30m,OB_RETEST,bear,,1.3125,1.317,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-19 12:30,XRP,30m,FVG_RETRACE,bear,,1.3066,1.3131,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:30,XRP,15m,FVG_FILLED,bear,,1.3066,1.3111,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,XRP,15m,FVG,bull,,1.3055,1.3086,0.694,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:00,ZEC,4h,FVG_RETRACE,bull,,1136.08,1157.13,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,ZEC,4h,FVG_FILLED,bull,,1136.08,1157.13,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:00,ZEC,1h,FVG_FILLED,bull,,1136.08,1142.35,,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-19 12:00,ZEC,1h,FVG,bear,,1145.12,1162.06,0.906,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-19 12:30,ZEC,30m,FVG_RETRACE,bear,,1148.79,1165.01,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 11:45,ZEC,15m,FVG_RETRACE,bear,,1137.29,1140.34,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 11:45,ZEC,15m,FVG_FILLED,bear,,1137.29,1140.34,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,ZEC,15m,FVG_RETRACE,bear,,1148.79,1161.57,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:00,SUI,1h,FVG,bear,,0.9993,1.0048,0.492,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,SUI,30m,FVG_RETRACE,bear,,1.0006,1.0055,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:30,SUI,30m,FVG_FILLED,bear,,1.0006,1.0055,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:15,SUI,15m,FVG_RETRACE,bear,,1.0006,1.0038,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 12:30,SUI,15m,FVG_FILLED,bear,,1.0006,1.0038,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 12:30,SUI,15m,FVG,bull,,0.9977,1.0015,0.73,NY AM,1h,TRANSITION,,smc-1.0,Binance
