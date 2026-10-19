@@ -17829,3 +17829,24 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-19 07:45,ZEC,15m,FVG_FILLED,bear,,1163.83,1170.17,,London,1h,TRANSITION,,smc-1.0,Binance
 2026-10-19 07:45,SUI,15m,BOS,bull,1.0122,,,0.624,London,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-19 07:45,SUI,15m,FVG_FILLED,bear,,1.0127,1.0144,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 08:00,BTC,4h,SWEEP,bear,82940.81,,,0.276,,1d,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-19 08:00,BTC,4h,FVG_FILLED,bear,,82083.04,83028.7,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-19 08:00,BTC,4h,FVG,bull,,82227.28,82484.27,0.33,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-19 08:00,BTC,1h,SWEEP,bear,82940.81,,,0.664,London,4h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 08:00,BTC,1h,FVG_RETRACE,bear,,83102.73,83338.0,,London,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 08:00,BTC,30m,SWEEP,bear,82940.81,,,1.019,London,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-19 08:00,ETH,1h,SWEEP,bear,2441.66,,,0.194,London,4h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 08:00,ETH,30m,SWEEP,bear,2441.66,,,0.304,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 08:15,ETH,15m,SWEEP,bull,2428.65,,,0.218,London,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-19 08:15,ETH,15m,FVG,bear,,2431.22,2433.08,0.296,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 08:30,ETH,15m,FVG_RETRACE,bear,,2431.22,2433.08,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-19 08:30,ETH,15m,FVG_FILLED,bear,,2431.22,2433.08,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 08:00,SOL,4h,FVG,bull,,104.34,105.11,0.396,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-19 08:00,SOL,30m,SWEEP,bear,105.99,,,0.451,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 08:00,XRP,1h,SWEEP,bear,1.3168,,,0.568,London,4h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 08:15,XRP,15m,FVG,bear,,1.3138,1.3155,0.455,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 08:30,XRP,15m,FVG_RETRACE,bear,,1.3138,1.3155,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 08:30,XRP,15m,FVG_FILLED,bear,,1.3138,1.3155,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 08:00,ZEC,4h,FVG,bull,,1136.08,1157.13,0.462,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-19 08:00,SUI,30m,SWEEP,bear,1.0127,,,0.707,London,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-19 08:15,SUI,15m,FVG_FILLED,bull,,1.0076,1.0091,,London,1h,TRANSITION,,smc-1.0,Binance
