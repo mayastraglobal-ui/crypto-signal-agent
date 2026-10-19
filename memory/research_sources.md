@@ -1337,3 +1337,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - what we deliberately do NOT take: its code (GPL-3.0 - nothing was copied); per-signal re-runs of the full backtest; the percentage-only recursive report.
   - licence: GPL-3.0 (ideas only).
   - hypothesis: 'Hypothesis: a card with no signal on the bias-check coin is not verified (from R3)' in memory/experiments.md.
+
+### TRD-H4-BREAKOUT-FDISP-S2@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-19 01:14 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-FDISP-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-FDISP-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-17
+  - title / source: engine rule-significance test: TRD-H4-BREAKOUT-FDISP@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-FDISP-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-BREAKOUT-S3-FDISP-S2@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-19 01:14 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-S3-FDISP-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-17
+  - title / source: engine rule-significance test: TRD-H4-BREAKOUT-S3-FDISP@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-S3-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-S3-FDISP-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-10-19 01:14 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-17
+  - title / source: engine failure lab: a repair of TRD-H4-BREAKOUT-FDISP@1.0 for its loss tag overextended_entry
+  - URL: none recorded
+  - claim: TRD-H4-BREAKOUT-FDISP@1.0 loses on overextended_entry (+0.11R a trade with it, +0.57R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3

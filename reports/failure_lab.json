@@ -1,14 +1,14 @@
 {
  "enabled": true,
  "allowed": 1,
- "considered": 97,
+ "considered": 138,
  "new": [
   {
-   "id": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "id": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "tag": "overextended_entry",
    "kind": "NOTEXT",
-   "parent": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
-   "evidence": "overextended_entry in 87% of losses, n=200 losing trades (TRD-H4-BREAKOUT-FDISP@1.0 30m: 396 trades, avg +0.190R, BACKTESTING; trades with overextended_entry +0.111R, without +0.571R); repair NOTEXT: no entry more than 2 ATR beyond the 20 EMA (not overextended)"
+   "parent": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
+   "evidence": "overextended_entry in 85% of losses, n=203 losing trades (TRD-H4-BREAKOUT-S3-FDISP@1.0 30m: 412 trades, avg +0.187R, BACKTESTING; trades with overextended_entry +0.108R, without +0.519R); repair NOTEXT: no entry more than 2 ATR beyond the 20 EMA (not overextended)"
   }
  ],
  "pending": [],
@@ -26,7 +26,22 @@
    "parent_test_r": 0.219,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-18 01:12"
+   "checked": "2026-10-19 01:14"
+  },
+  {
+   "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
+   "parent": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
+   "tag": "overextended_entry",
+   "kind": "NOTEXT",
+   "status": "VALIDATION",
+   "trades": 79,
+   "avg_r": 0.413,
+   "test_r": 0.492,
+   "parent_avg_r": 0.19,
+   "parent_test_r": 0.375,
+   "helped": true,
+   "passed": true,
+   "checked": "2026-10-19 01:14"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -37,11 +52,11 @@
    "trades": 396,
    "avg_r": 0.19,
    "test_r": 0.375,
-   "parent_avg_r": 0.1,
+   "parent_avg_r": 0.102,
    "parent_test_r": 0.255,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-18 01:12"
+   "checked": "2026-10-19 01:14"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -52,11 +67,11 @@
    "trades": 412,
    "avg_r": 0.187,
    "test_r": 0.364,
-   "parent_avg_r": 0.004,
+   "parent_avg_r": 0.007,
    "parent_test_r": 0.191,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-18 01:12"
+   "checked": "2026-10-19 01:14"
   }
  ],
  "by_kind": {
@@ -64,6 +79,11 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
+  },
+  "NOTEXT": {
+   "tried": 1,
+   "helped": 1,
+   "passed": 1
   },
   "DISP": {
    "tried": 2,
@@ -76,6 +96,11 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
+  },
+  "overextended_entry": {
+   "tried": 1,
+   "helped": 1,
+   "passed": 1
   },
   "false_breakout": {
    "tried": 2,

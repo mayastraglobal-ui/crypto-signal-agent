@@ -1206,3 +1206,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: cards with 0 or very few signal candles on the bias-check coin (for example S6-OB-FVG 15m with 0 trades) pass the lookahead check without being tested; they should be reported as 'not verified' and blocked from PAPER until checked on a coin where they fire.
   - how to test: an engine change for the operator (pull request), not a lab card. List the cards the last check marked clean and their signal count on the check coin; any card with fewer than 6 signal candles is 'not verified'.
   - stop if: every card checked so far had 6 or more signal candles on the check coin.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0113 | 2026-10-19 01:14 | TRD-H4-BREAKOUT-FDISP-S2@1.0 | breakout | 1h, 30m, 15m, 5m | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0114 | 2026-10-19 01:14 | TRD-H4-BREAKOUT-S3-FDISP-S2@1.0 | breakout | 1h, 30m, 15m, 5m | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-S3-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0115 | 2026-10-19 01:14 | TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 | breakout | 1h, 30m, 15m, 5m | TRD-H4-BREAKOUT-FDISP@1.0 loses on overextended_entry (+0.11R a trade with it, +0.57R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest. |
