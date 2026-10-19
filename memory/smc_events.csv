@@ -17812,3 +17812,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-19 05:45,ZEC,15m,FVG_RETRACE,bear,,1163.83,1170.17,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-19 06:00,SUI,15m,FVG,bull,,1.0076,1.0091,0.283,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-19 06:15,SUI,15m,FVG_RETRACE,bull,,1.0076,1.0091,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 07:30,BTC,30m,BOS,bull,82882.0,,,0.009,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 07:45,BTC,15m,SWEEP,bear,83102.73,,,0.406,London,1h,TRANSITION,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-10-19 07:00,ETH,1h,BREAKER_RETEST,bull,,2410.67,2429.43,,London,4h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-19 07:00,ETH,15m,BREAKER_RETEST,bull,,2426.27,2429.35,,London,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-19 07:45,ETH,15m,SWEEP,bear,2441.66,,,0.513,London,1h,UNCLEAR,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-10-19 07:45,ETH,15m,FVG_FILLED,bear,,2436.46,2438.5,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-19 07:45,SOL,15m,SWEEP,bear,105.99,,,0.709,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 07:45,SOL,15m,OB_RETEST,bear,,106.16,106.61,,London,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-19 07:45,SOL,15m,FVG_FILLED,bear,,105.67,106.16,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 07:30,XRP,30m,BOS,bull,1.3165,,,0.13,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 07:30,XRP,30m,FVG_RETRACE,bear,,1.3173,1.328,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 07:30,XRP,15m,BOS,bull,1.3165,,,0.224,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 07:30,XRP,15m,FVG_RETRACE,bear,,1.3176,1.328,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-19 07:30,ZEC,15m,BOS,bull,1167.49,,,0.039,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 07:45,ZEC,15m,FVG_FILLED,bear,,1163.83,1170.17,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-19 07:45,SUI,15m,BOS,bull,1.0122,,,0.624,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 07:45,SUI,15m,FVG_FILLED,bear,,1.0127,1.0144,,London,1h,TRANSITION,,smc-1.0,Binance
