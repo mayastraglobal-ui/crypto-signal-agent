@@ -17723,3 +17723,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-19 01:45,SUI,15m,OB_INVALID,bear,,0.9977,1.0012,,Asia,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-19 02:00,SUI,15m,BREAKER_RETEST,bull,,0.9977,1.0012,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
 2026-10-19 02:15,SUI,15m,BOS,bull,1.0045,,,0.049,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-19 02:30,ETH,30m,BREAKER_RETEST,bull,,2413.14,2418.58,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-19 02:30,ETH,15m,BREAKER_RETEST,bull,,2414.5,2418.58,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-19 02:30,SOL,30m,SWEEP,bear,105.28,,,0.345,Asia,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-19 02:30,ZEC,30m,SWEEP,bear,1184.95,,,0.446,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-19 02:30,ZEC,30m,FVG,bull,,1159.72,1166.62,0.432,Asia,1h,TRANSITION,,smc-1.0,Binance
