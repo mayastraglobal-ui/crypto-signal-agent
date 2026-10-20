@@ -18284,3 +18284,17 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-20 03:00,SUI,15m,OB_INVALID,bear,,0.9916,0.9977,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-20 03:00,SUI,15m,FVG_FILLED,bear,,0.9968,0.9984,,Asia,1h,RANGE,,smc-1.0,Binance
 2026-10-20 03:15,SUI,15m,BREAKER_RETEST,bull,,0.9916,0.9977,,Asia,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-20 04:00,BTC,4h,OB_RETEST,bull,,80785.78,81282.93,,,1d,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-20 04:00,BTC,4h,FVG_FILLED,bull,,81282.93,82010.58,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-20 04:00,BTC,30m,OB_RETEST,bear,,82042.0,82270.43,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-20 04:00,BTC,15m,FVG,bull,,81942.01,82002.21,0.309,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-20 04:00,ETH,4h,FVG_FILLED,bull,,2379.59,2403.47,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-20 04:00,ETH,15m,OB_INVALID,bear,,2407.52,2411.96,,Asia,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-20 04:15,ETH,15m,BREAKER_RETEST,bull,,2407.52,2411.96,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-20 04:30,SOL,15m,SWEEP,bear,105.45,,,0.129,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-20 04:00,XRP,15m,WEAK_BREAK,bull,1.3066,,,0.022,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-20 04:00,XRP,15m,OB_INVALID,bear,,1.3039,1.3063,,Asia,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-20 04:00,XRP,15m,FVG,bull,,1.3027,1.305,0.527,Asia,1h,RANGE,,smc-1.0,Binance
+2026-10-20 04:15,XRP,15m,BREAKER_RETEST,bull,,1.3039,1.3063,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-20 04:15,XRP,15m,FVG_RETRACE,bull,,1.3027,1.305,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-20 04:00,SUI,15m,WEAK_BREAK,bull,1.0028,,,0.032,Asia,1h,RANGE,no displacement,smc-1.0,Binance
