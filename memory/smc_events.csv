@@ -18302,3 +18302,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-20 05:15,BTC,15m,FVG_RETRACE,bull,,81942.01,82002.21,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-20 05:30,ZEC,30m,SWEEP,bear,1153.62,,,0.258,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-20 05:15,ZEC,15m,WEAK_BREAK,bull,1153.62,,,0.056,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-20 06:00,BTC,1h,FVG_RETRACE,bull,,81948.7,82050.94,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 06:00,BTC,1h,FVG_FILLED,bull,,81948.7,82050.94,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-20 06:30,BTC,30m,FVG,bear,,81784.01,81976.76,0.761,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-20 05:45,BTC,15m,FVG_FILLED,bull,,81942.01,82002.21,,,1h,RANGE,,smc-1.0,Binance
+2026-10-20 06:00,BTC,15m,FVG_RETRACE,bull,,81715.71,81778.42,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-20 06:15,BTC,15m,FVG_FILLED,bull,,81715.71,81778.42,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-20 06:15,BTC,15m,FVG,bear,,81738.69,81836.47,0.583,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-20 06:30,BTC,15m,FVG_RETRACE,bear,,81738.69,81836.47,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-20 06:00,ETH,30m,FVG,bear,,2407.07,2410.0,0.268,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-20 06:30,ETH,30m,FVG,bear,,2398.06,2406.36,0.781,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-20 06:00,SOL,30m,FVG,bear,,104.95,105.14,0.347,,1h,RANGE,,smc-1.0,Binance
+2026-10-20 05:45,SOL,15m,FVG,bear,,104.85,104.97,0.342,,1h,RANGE,,smc-1.0,Binance
+2026-10-20 06:00,SOL,15m,FVG_RETRACE,bear,,104.85,104.97,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-20 06:15,SOL,15m,FVG_FILLED,bull,,104.3,104.68,,London,1h,RANGE,,smc-1.0,Binance
+2026-10-20 05:45,XRP,15m,FVG_FILLED,bull,,1.3027,1.305,,,1h,RANGE,,smc-1.0,Binance
+2026-10-20 06:30,ZEC,30m,FVG,bear,,1141.89,1146.54,0.341,London,1h,RANGE,,smc-1.0,Binance
+2026-10-20 06:15,ZEC,15m,BOS,bear,1138.73,,,0.85,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-20 06:00,SUI,15m,BOS,bear,0.9931,,,0.241,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
