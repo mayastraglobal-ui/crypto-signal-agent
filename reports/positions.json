@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-20 07:40",
+ "generated_utc": "2026-10-20 08:33",
  "book": {
-  "utc": "2026-10-20 07:40",
-  "beijing": "2026-10-20 15:40",
+  "utc": "2026-10-20 08:33",
+  "beijing": "2026-10-20 16:33",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-20 07:40 UTC / 2026-10-20 15:40 Beijing",
+  "POSITION BOOK \u2014 2026-10-20 08:33 UTC / 2026-10-20 16:33 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -163,7 +163,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -175,6 +175,39 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -211,32 +244,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-20 07:40",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-20 07:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.2991,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-20 07:40",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-20 07:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.2991,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
