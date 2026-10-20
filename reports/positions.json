@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-20 13:41",
+ "generated_utc": "2026-10-20 14:33",
  "book": {
-  "utc": "2026-10-20 13:41",
-  "beijing": "2026-10-20 21:41",
+  "utc": "2026-10-20 14:33",
+  "beijing": "2026-10-20 22:33",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-20 13:41 UTC / 2026-10-20 21:41 Beijing",
+  "POSITION BOOK \u2014 2026-10-20 14:33 UTC / 2026-10-20 22:33 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -255,5 +255,19 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-20 14:33",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-20 07:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.19R"
+  }
+ ]
 }

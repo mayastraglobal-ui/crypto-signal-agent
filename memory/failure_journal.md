@@ -196,3 +196,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, wrong_session
   - what happened: -
   - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.19R
+- timestamp: 2026-10-20 14:33 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.19R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: WEAK_BEAR · review: 2026-10-27
+  - signal 2026-10-20 07:29 UTC, closed 2026-10-20 13:59 UTC, stage TEST
+  - MAE -1.05R / MFE +0.82R
+  - at entry: session London, conditions: range_market, low_relative_volume, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
