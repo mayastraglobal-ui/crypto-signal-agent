@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-20 06:36",
+ "generated_utc": "2026-10-20 07:40",
  "book": {
-  "utc": "2026-10-20 06:36",
-  "beijing": "2026-10-20 14:36",
+  "utc": "2026-10-20 07:40",
+  "beijing": "2026-10-20 15:40",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-20 06:36 UTC / 2026-10-20 14:36 Beijing",
+  "POSITION BOOK \u2014 2026-10-20 07:40 UTC / 2026-10-20 15:40 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -163,7 +163,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -211,5 +211,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-20 07:40",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-20 07:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1.2991,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-20 07:40",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-10-20 07:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1.2991,
+   "note": ""
+  }
+ ]
 }
