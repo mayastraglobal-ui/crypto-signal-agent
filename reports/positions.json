@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-20 12:38",
+ "generated_utc": "2026-10-20 13:41",
  "book": {
-  "utc": "2026-10-20 12:38",
-  "beijing": "2026-10-20 20:38",
+  "utc": "2026-10-20 13:41",
+  "beijing": "2026-10-20 21:41",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-20 12:38 UTC / 2026-10-20 20:38 Beijing",
+  "POSITION BOOK \u2014 2026-10-20 13:41 UTC / 2026-10-20 21:41 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -124,28 +124,6 @@
   },
   {
    "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
    "tf": "4h",
    "strategy": "donchian_breakout",
    "version": "1.0",
@@ -198,28 +176,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
   },
   {
    "coin": "XRP",
