@@ -18645,3 +18645,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-20 19:30,ZEC,30m,FVG_FILLED,bull,,1199.33,1204.57,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-20 19:30,ZEC,15m,WEAK_BREAK,bear,1199.66,,,0.469,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-10-20 19:30,ZEC,15m,FVG_FILLED,bull,,1195.49,1202.85,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-20 20:00,BTC,4h,FVG,bull,,81664.01,82337.54,0.822,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-20 20:00,BTC,30m,FVG_RETRACE,bear,,82586.01,82708.82,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 19:45,BTC,15m,FVG_RETRACE,bear,,82586.01,82658.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 20:00,BTC,15m,FVG_FILLED,bear,,82586.01,82658.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:00,ETH,4h,FVG,bull,,2392.29,2425.12,0.845,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:00,ETH,1h,FVG_RETRACE,bull,,2413.65,2427.0,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 20:15,ETH,15m,FVG_RETRACE,bear,,2441.74,2445.48,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 20:00,SOL,4h,FVG,bull,,104.5,105.31,0.427,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:00,SOL,15m,FVG_RETRACE,bear,,106.18,106.38,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-20 20:00,XRP,4h,FVG,bull,,1.3027,1.3161,0.631,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-20 19:45,XRP,15m,FVG_FILLED,bear,,1.3232,1.3262,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:00,XRP,15m,FVG,bull,,1.3244,1.3268,0.353,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:15,XRP,15m,FVG_RETRACE,bull,,1.3244,1.3268,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-20 20:00,ZEC,4h,WEAK_BREAK,bull,1191.76,,,0.383,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-20 20:00,ZEC,4h,FVG,bull,,1151.92,1184.41,0.708,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-20 20:15,ZEC,15m,FVG,bull,,1200.07,1203.76,0.284,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-20 20:00,SUI,4h,WEAK_BREAK,bull,1.018,,,0.188,,1d,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-20 20:00,SUI,4h,FVG,bull,,0.9963,1.0066,0.382,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-20 20:30,SUI,30m,BOS,bull,1.024,,,0.098,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-20 20:15,SUI,15m,BOS,bull,1.024,,,0.05,,1h,RANGE,no displacement,smc-1.0,Binance
