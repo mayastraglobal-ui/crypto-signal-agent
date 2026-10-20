@@ -18298,3 +18298,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-20 04:15,XRP,15m,BREAKER_RETEST,bull,,1.3039,1.3063,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-10-20 04:15,XRP,15m,FVG_RETRACE,bull,,1.3027,1.305,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-20 04:00,SUI,15m,WEAK_BREAK,bull,1.0028,,,0.032,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-20 05:00,BTC,1h,FVG,bull,,81948.7,82050.94,0.273,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-20 05:15,BTC,15m,FVG_RETRACE,bull,,81942.01,82002.21,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-20 05:30,ZEC,30m,SWEEP,bear,1153.62,,,0.258,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-20 05:15,ZEC,15m,WEAK_BREAK,bull,1153.62,,,0.056,,1h,RANGE,no displacement,smc-1.0,Binance
