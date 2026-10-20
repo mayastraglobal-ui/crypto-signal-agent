@@ -1,14 +1,14 @@
 {
  "enabled": true,
  "allowed": 1,
- "considered": 138,
+ "considered": 109,
  "new": [
   {
-   "id": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "tag": "overextended_entry",
-   "kind": "NOTEXT",
-   "parent": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
-   "evidence": "overextended_entry in 85% of losses, n=203 losing trades (TRD-H4-BREAKOUT-S3-FDISP@1.0 30m: 412 trades, avg +0.187R, BACKTESTING; trades with overextended_entry +0.108R, without +0.519R); repair NOTEXT: no entry more than 2 ATR beyond the 20 EMA (not overextended)"
+   "id": "donchian_breakout-VEXIT-FDISP",
+   "tag": "false_breakout",
+   "kind": "DISP",
+   "parent": "donchian_breakout-VEXIT@1.0|30m",
+   "evidence": "false_breakout in 70% of losses, n=706 losing trades (donchian_breakout-VEXIT@1.0 30m: 1502 trades, avg -0.055R, FAILED; trades with false_breakout -0.361R, without +0.429R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
   }
  ],
  "pending": [],
@@ -23,10 +23,10 @@
    "avg_r": 0.036,
    "test_r": 0.108,
    "parent_avg_r": 0.145,
-   "parent_test_r": 0.219,
+   "parent_test_r": 0.23,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-19 01:14"
+   "checked": "2026-10-20 01:15"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -41,7 +41,7 @@
    "parent_test_r": 0.375,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-19 01:14"
+   "checked": "2026-10-20 01:15"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -56,7 +56,22 @@
    "parent_test_r": 0.255,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-19 01:14"
+   "checked": "2026-10-20 01:15"
+  },
+  {
+   "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
+   "parent": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
+   "tag": "overextended_entry",
+   "kind": "NOTEXT",
+   "status": "VALIDATION",
+   "trades": 91,
+   "avg_r": 0.41,
+   "test_r": 0.549,
+   "parent_avg_r": 0.187,
+   "parent_test_r": 0.364,
+   "helped": true,
+   "passed": true,
+   "checked": "2026-10-20 01:15"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -71,7 +86,7 @@
    "parent_test_r": 0.191,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-19 01:14"
+   "checked": "2026-10-20 01:15"
   }
  ],
  "by_kind": {
@@ -81,9 +96,9 @@
    "passed": 0
   },
   "NOTEXT": {
-   "tried": 1,
-   "helped": 1,
-   "passed": 1
+   "tried": 2,
+   "helped": 2,
+   "passed": 2
   },
   "DISP": {
    "tried": 2,
@@ -98,9 +113,9 @@
    "passed": 0
   },
   "overextended_entry": {
-   "tried": 1,
-   "helped": 1,
-   "passed": 1
+   "tried": 2,
+   "helped": 2,
+   "passed": 2
   },
   "false_breakout": {
    "tried": 2,
