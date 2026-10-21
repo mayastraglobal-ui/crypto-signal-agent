@@ -19121,3 +19121,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 15:30,SUI,15m,OB_RETEST,bear,,1.0494,1.0555,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
 2026-10-21 15:30,SUI,15m,FVG_FILLED,bear,,1.0439,1.0494,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-10-21 15:30,SUI,15m,FVG_RETRACE,bull,,1.0374,1.042,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-21 16:00,BTC,4h,OB_INVALID,bear,,83500.0,84352.0,,,1d,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 16:00,BTC,4h,OB_INVALID,bear,,83169.0,83958.0,,,1d,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 16:00,BTC,4h,FVG_RETRACE,bear,,84379.31,85346.77,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-21 16:00,BTC,1h,FVG,bull,,83968.58,84380.0,0.964,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-21 16:00,ETH,4h,CHOCH,bull,2478.0,,,0.974,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-21 16:00,ETH,4h,ORDER_BLOCK,bull,,2442.8,2465.5,,,1d,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 16:00,SOL,4h,SWEEP,bear,108.67,,,0.144,,1d,TRANSITION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-21 16:00,SOL,4h,CHOCH,bull,108.25,,,0.138,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-21 16:00,SOL,4h,ORDER_BLOCK,bull,,105.85,107.13,,,1d,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 16:00,SOL,1h,SWEEP,bear,108.67,,,0.291,,4h,UNCLEAR,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-10-21 16:00,SOL,30m,FVG,bull,,108.06,108.33,0.412,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-21 16:30,SOL,30m,FVG_RETRACE,bull,,108.06,108.33,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-21 16:00,XRP,1h,BREAKER_RETEST,bull,,1.362,1.3759,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-21 16:00,XRP,1h,FVG,bull,,1.3667,1.3734,0.554,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-21 16:00,SUI,4h,WEAK_BREAK,bull,1.0438,,,0.241,,1d,UNCLEAR,no displacement,smc-1.0,Binance

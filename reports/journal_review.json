@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-10-15 15:45",
+ "last_entry_utc": "2026-10-21 16:00",
  "days": 30,
  "all": {
-  "alerts": 2,
+  "alerts": 3,
   "took": 2,
   "skipped": 0,
-  "no_answer": 0,
+  "no_answer": 1,
   "plan_took": {
    "n": 2,
    "total_r": -2.0,
@@ -60,10 +60,10 @@
   "missing_result": 0
  },
  "recent": {
-  "alerts": 2,
+  "alerts": 3,
   "took": 2,
   "skipped": 0,
-  "no_answer": 0,
+  "no_answer": 1,
   "plan_took": {
    "n": 2,
    "total_r": -2.0,
@@ -137,6 +137,16 @@
    "plan_n": 1,
    "your_avg_r": -1.08,
    "your_n": 1
+  },
+  {
+   "cell": "donchian_breakout-VEXIT-FDISP 4h",
+   "alerts": 1,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
   }
  ],
  "tests": {
