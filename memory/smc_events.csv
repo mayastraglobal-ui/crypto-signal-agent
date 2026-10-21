@@ -18978,3 +18978,32 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 12:30,ZEC,30m,SWEEP,bear,1297.99,,,0.266,NY AM,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-21 12:30,ZEC,15m,SWEEP,bear,1297.99,,,0.398,NY AM,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-21 12:30,ZEC,15m,FVG_RETRACE,bear,,1301.19,1304.62,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 13:30,BTC,30m,BOS,bull,83713.91,,,0.152,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-21 13:30,BTC,30m,ORDER_BLOCK,bull,,83449.95,83650.0,,NY AM,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 13:15,BTC,15m,BOS,bull,83713.91,,,0.725,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-21 13:15,BTC,15m,ORDER_BLOCK,bull,,83449.95,83636.01,,NY AM,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 13:30,BTC,15m,FVG,bull,,83636.01,83750.0,0.65,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-21 13:00,ETH,1h,FVG,bull,,2459.36,2465.21,0.39,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-21 13:30,ETH,30m,SWEEP,bear,2494.0,,,0.401,NY AM,1h,TRANSITION,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-10-21 13:15,ETH,15m,SWEEP,bear,2494.0,,,0.584,NY AM,1h,TRANSITION,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-10-21 13:15,ETH,15m,BOS,bull,2473.6,,,1.762,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-21 13:30,ETH,15m,FVG,bull,,2472.73,2479.3,0.774,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-21 13:30,SOL,30m,SWEEP,bear,107.26,,,1.064,NY AM,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-21 13:15,SOL,15m,WEAK_BREAK,bull,107.26,,,0.628,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-21 13:15,SOL,15m,OB_INVALID,bear,,106.69,107.13,,NY AM,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 13:30,SOL,15m,FVG,bull,,107.04,107.21,0.481,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-21 13:15,XRP,15m,CHOCH,bull,1.3621,,,0.402,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-10-21 13:15,XRP,15m,ORDER_BLOCK,bull,,1.3557,1.3586,,NY AM,1h,WEAK_BULL,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 13:30,XRP,15m,FVG,bull,,1.3584,1.3624,0.802,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-21 13:00,ZEC,1h,BOS,bull,1296.45,,,0.05,NY AM,4h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-21 13:00,ZEC,1h,OB_INVALID,bear,,1277.24,1293.55,,NY AM,4h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 13:30,ZEC,30m,FVG_FILLED,bear,,1314.61,1320.18,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 13:30,ZEC,30m,FVG_FILLED,bear,,1296.58,1304.62,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 13:15,ZEC,15m,SWEEP,bear,1315.44,,,0.713,NY AM,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-21 13:15,ZEC,15m,FVG_FILLED,bear,,1315.23,1320.18,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 13:15,ZEC,15m,FVG_FILLED,bear,,1301.19,1304.62,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 13:30,ZEC,15m,FVG,bull,,1298.23,1312.77,1.367,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 13:30,SUI,30m,SWEEP,bear,1.041,,,0.423,NY AM,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-21 13:15,SUI,15m,BOS,bull,1.0375,,,0.911,NY AM,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-21 13:15,SUI,15m,ORDER_BLOCK,bull,,1.0329,1.0366,,NY AM,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-21 13:30,SUI,15m,FVG,bull,,1.0358,1.0382,0.518,NY AM,1h,UNCLEAR,,smc-1.0,Binance

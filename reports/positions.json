@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-21 12:38",
+ "generated_utc": "2026-10-21 13:40",
  "book": {
-  "utc": "2026-10-21 12:38",
-  "beijing": "2026-10-21 20:38",
+  "utc": "2026-10-21 13:40",
+  "beijing": "2026-10-21 21:40",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-21 12:38 UTC / 2026-10-21 20:38 Beijing",
+  "POSITION BOOK \u2014 2026-10-21 13:40 UTC / 2026-10-21 21:40 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -58,6 +58,28 @@
  "watching": [
   {
    "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "trend4h_long == 1"
+  },
+  {
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "trend4h_long == 1"
+  },
+  {
+   "coin": "BTC",
    "tf": "4h",
    "strategy": "donchian_breakout",
    "version": "1.0",
@@ -88,28 +110,6 @@
    "state": "SETUP_FORMING",
    "rules_true": "2/3",
    "missing": "btc_ret(3) >= 3"
-  },
-  {
-   "coin": "BTC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
   },
   {
    "coin": "BTC",
@@ -255,5 +255,58 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-21 13:40",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 13:29",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 83750.01,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-21 13:40",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 13:29",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 83750.01,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-21 13:40",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-21 13:14",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 83830.0,
+   "note": "15m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-21 13:40",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-21 13:14",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 83830.0,
+   "note": ""
+  }
+ ]
 }
