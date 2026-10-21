@@ -1,16 +1,17 @@
 {
- "utc": "2026-10-21 04:32",
+ "utc": "2026-10-21 05:31",
  "verdict": {
-  "code": "CHOPPY",
-  "icon": "\ud83c\udf2b",
-  "title": "Choppy - stay out",
-  "meaning": "The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.",
+  "code": "TURNING_UP",
+  "icon": "\ud83c\udf24",
+  "title": "Turning up - not confirmed",
+  "meaning": "Prices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.",
   "fits": [
-   "waiting until 1D, 4H and 1H agree - no trade is the right trade"
+   "waiting for the confirmation - the LONG alerts then come by themselves",
+   "checking the stop of any open short"
   ],
   "avoid": [
-   "any trade",
-   "trading on feeling or headlines"
+   "chasing the rally by hand before the confirmation",
+   "shorting into the rise"
   ]
  },
  "breadth": {
@@ -24,7 +25,7 @@
    "coin": "BTC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": null,
+   "turning": "up",
    "why": "timeframes disagree (1D UNCLEAR, 4H WEAK_BULL, 1H TRANSITION)",
    "labels": {
     "1w": "STRONG_BULL",
@@ -35,7 +36,7 @@
    "adx": {
     "1d": 20.0,
     "4h": 27.0,
-    "1h": 29.0
+    "1h": 30.0
    },
    "vol": {
     "atr_pct": 2.54,
@@ -53,10 +54,10 @@
    },
    "crowd": {
     "funding_pct": 0.0055,
-    "oi_24h_pct": -1.1,
+    "oi_24h_pct": -0.3,
     "label": "neutral"
    },
-   "change_24h": 0.96
+   "change_24h": 1.16
   },
   {
    "coin": "ETH",
@@ -91,10 +92,10 @@
    },
    "crowd": {
     "funding_pct": 0.0097,
-    "oi_24h_pct": 1.8,
+    "oi_24h_pct": 1.3,
     "label": "neutral"
    },
-   "change_24h": 1.5
+   "change_24h": 1.81
   },
   {
    "coin": "SOL",
@@ -111,7 +112,7 @@
    "adx": {
     "1d": 28.0,
     "4h": 26.0,
-    "1h": 23.0
+    "1h": 22.0
    },
    "vol": {
     "atr_pct": 4.88,
@@ -129,10 +130,10 @@
    },
    "crowd": {
     "funding_pct": 0.0072,
-    "oi_24h_pct": -2.7,
+    "oi_24h_pct": -2.8,
     "label": "neutral"
    },
-   "change_24h": 0.76
+   "change_24h": 1.32
   },
   {
    "coin": "SUI",
@@ -167,10 +168,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 9.7,
+    "oi_24h_pct": 10.2,
     "label": "neutral"
    },
-   "change_24h": 2.63
+   "change_24h": 2.85
   },
   {
    "coin": "XRP",
@@ -187,7 +188,7 @@
    "adx": {
     "1d": 24.0,
     "4h": 33.0,
-    "1h": 34.0
+    "1h": 35.0
    },
    "vol": {
     "atr_pct": 4.45,
@@ -205,10 +206,10 @@
    },
    "crowd": {
     "funding_pct": 0.0057,
-    "oi_24h_pct": -1.1,
+    "oi_24h_pct": -0.7,
     "label": "neutral"
    },
-   "change_24h": 2.18
+   "change_24h": 2.69
   },
   {
    "coin": "ZEC",
@@ -225,7 +226,7 @@
    "adx": {
     "1d": 25.0,
     "4h": 21.0,
-    "1h": 39.0
+    "1h": 40.0
    },
    "vol": {
     "atr_pct": 9.59,
@@ -243,23 +244,23 @@
    },
    "crowd": {
     "funding_pct": 0.0058,
-    "oi_24h_pct": 18.0,
+    "oi_24h_pct": 19.0,
     "label": "neutral"
    },
-   "change_24h": 10.33
+   "change_24h": 10.11
   }
  ],
- "alts_vs_btc_24h": 1.22,
+ "alts_vs_btc_24h": 1.53,
  "fear_greed": {
   "value": 63,
   "label": "Greed",
   "yesterday": 55
  },
  "btc_dominance": {
-  "pct": 59.519,
-  "utc": "2026-10-21 04:32",
+  "pct": 59.52,
+  "utc": "2026-10-21 05:31",
   "ch24": -0.07,
-  "ch7": 0.26,
+  "ch7": 0.29,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
  "events": [],
@@ -273,5 +274,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-21 12:32 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D UNCLEAR \u00b7 4H WEAK_BULL \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.5%, higher than 20% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,279 \u2013 84,777) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0055%/8h, open interest -1.1% in 24h)\nAltcoins vs BTC (24h): +1.2%\nBTC dominance: 59.5% \u00b7 24h -0.07 pt \u00b7 7d +0.26 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 63\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u2197\ufe0f ETH: turning up (not confirmed)\n\u26aa SOL: choppy\n\u2197\ufe0f SUI: turning up (not confirmed)\n\u2197\ufe0f XRP: turning up (not confirmed)\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf24 <b>Market weather \u00b7 10-21 13:31 Beijing</b>\nVerdict: <b>Turning up - not confirmed</b>\nPrices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.\n\nBTC trend: 1D UNCLEAR \u00b7 4H WEAK_BULL \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.5%, higher than 20% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (81,279 \u2013 84,777) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0055%/8h, open interest -0.3% in 24h)\nAltcoins vs BTC (24h): +1.5%\nBTC dominance: 59.5% \u00b7 24h -0.07 pt \u00b7 7d +0.29 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 63\n\n<b>Coins</b>\n\u2197\ufe0f BTC: turning up (not confirmed)\n\u2197\ufe0f ETH: turning up (not confirmed)\n\u26aa SOL: choppy\n\u2197\ufe0f SUI: turning up (not confirmed)\n\u2197\ufe0f XRP: turning up (not confirmed)\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\nFits today: waiting for the confirmation - the LONG alerts then come by themselves; checking the stop of any open short\nAvoid: chasing the rally by hand before the confirmation; shorting into the rise\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
