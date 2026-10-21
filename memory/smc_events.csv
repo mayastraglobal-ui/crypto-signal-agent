@@ -19232,3 +19232,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 20:00,ZEC,4h,FVG,bull,,1294.79,1330.45,0.764,,1d,TRANSITION,,smc-1.0,Binance
 2026-10-21 19:45,ZEC,15m,FVG_FILLED,bear,,1345.28,1357.25,,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-10-21 19:45,SUI,15m,FVG_RETRACE,bear,,1.0437,1.052,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-21 21:00,BTC,30m,FVG_FILLED,bear,,84488.0,84638.76,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 20:45,BTC,15m,FVG_FILLED,bear,,84430.5,84706.23,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 21:00,BTC,15m,FVG,bull,,84574.0,84661.65,0.458,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 21:15,BTC,15m,FVG_RETRACE,bull,,84574.0,84661.65,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
