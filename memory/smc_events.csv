@@ -19148,3 +19148,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 17:30,ZEC,15m,BOS,bull,1350.0,,,0.351,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
 2026-10-21 17:30,ZEC,15m,OB_RETEST,bear,,1354.84,1361.22,,,1h,STRONG_BULL,first return into the order block,smc-1.0,Binance
 2026-10-21 17:30,ZEC,15m,FVG_FILLED,bear,,1326.34,1354.84,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:30,SOL,30m,BOS,bull,108.92,,,0.146,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-21 18:30,SOL,15m,SWEEP,bear,109.07,,,0.128,,1h,TRANSITION,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-10-21 18:30,SOL,15m,BOS,bull,108.88,,,0.277,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-21 18:00,XRP,30m,BOS,bull,1.3882,,,0.022,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-21 18:00,XRP,30m,OB_INVALID,bear,,1.3736,1.3836,,,1h,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 18:30,XRP,30m,FVG_FILLED,bear,,1.392,1.3965,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:30,XRP,30m,FVG,bull,,1.3821,1.3879,0.639,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:00,XRP,15m,BOS,bull,1.3882,,,0.03,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-21 18:30,XRP,15m,SWEEP,bear,1.3952,,,0.61,,1h,STRONG_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-21 18:30,XRP,15m,FVG_FILLED,bear,,1.3937,1.3965,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:30,XRP,15m,FVG,bull,,1.3888,1.3927,0.595,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:00,ZEC,1h,FVG_FILLED,bear,,1334.15,1360.32,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-21 18:00,ZEC,30m,OB_RETEST,bear,,1362.25,1370.21,,,1h,STRONG_BULL,first return into the order block,smc-1.0,Binance
+2026-10-21 18:00,ZEC,30m,FVG,bull,,1343.13,1353.39,0.633,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 17:45,ZEC,15m,OB_INVALID,bear,,1354.84,1361.22,,,1h,STRONG_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 17:45,ZEC,15m,FVG,bull,,1343.63,1353.39,0.779,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 18:00,ZEC,15m,BREAKER_RETEST,bull,,1354.84,1361.22,,,1h,STRONG_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-21 18:30,SUI,30m,OB_INVALID,bear,,1.0383,1.0536,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 18:30,SUI,15m,BOS,bull,1.0528,,,0.227,,1h,RANGE,no displacement,smc-1.0,Binance

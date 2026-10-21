@@ -9,8 +9,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 619,
+ "suspended": {
+  "IOST": "2026-10-21"
+ },
+ "runs": 620,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -130,6 +132,11 @@
   "SPCXB": [
    "history",
    "volume_7d"
+  ],
+  "IOST": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -183,6 +190,7 @@
   "W": [],
   "TRX": [],
   "WAL": [],
-  "SPCXB": []
+  "SPCXB": [],
+  "IOST": []
  }
 }

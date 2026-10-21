@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-21 17:30",
+ "generated_utc": "2026-10-21 18:33",
  "book": {
-  "utc": "2026-10-21 17:30",
-  "beijing": "2026-10-22 01:30",
+  "utc": "2026-10-21 18:33",
+  "beijing": "2026-10-22 02:33",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -72,13 +72,13 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-21 17:30 UTC / 2026-10-22 01:30 Beijing",
+  "POSITION BOOK \u2014 2026-10-21 18:33 UTC / 2026-10-22 02:33 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING)",
   "Closed:    none",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5%"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -93,8 +93,15 @@
    "BTC+ETH+SOL+SUI+XRP"
   ],
   "blackout_now": [],
-  "upcoming_events": [],
-  "next_event": null,
+  "upcoming_events": [
+   {
+    "start_utc": "2026-10-28 18:00",
+    "end_utc": "2026-10-28 18:00",
+    "type": "FOMC",
+    "name": "FOMC decision (Oct 27-28 meeting) + press conference"
+   }
+  ],
+  "next_event": "FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
@@ -141,7 +148,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -152,7 +159,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
