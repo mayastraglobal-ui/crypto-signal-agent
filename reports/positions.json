@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-21 14:33",
+ "generated_utc": "2026-10-21 15:34",
  "book": {
-  "utc": "2026-10-21 14:33",
-  "beijing": "2026-10-21 22:33",
+  "utc": "2026-10-21 15:34",
+  "beijing": "2026-10-21 23:34",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-21 14:33 UTC / 2026-10-21 22:33 Beijing",
+  "POSITION BOOK \u2014 2026-10-21 15:34 UTC / 2026-10-21 23:34 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -97,7 +97,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -108,7 +108,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -257,21 +257,21 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-21 14:33",
-   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-21 13:14",
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 13:29",
    "coin": "BTC",
-   "tf": "15m",
+   "tf": "30m",
    "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.36R"
+   "to_state": "TP1_HIT",
+   "price": 83750.01,
+   "note": "TP1 reached - stop moved to breakeven"
   },
   {
-   "time_utc": "2026-10-21 14:33",
-   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 13:59",
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 14:59",
    "coin": "BTC",
    "tf": "1h",
    "strategy": "P01-BREAKOUT-V2",
@@ -279,12 +279,12 @@
    "stage": "TEST",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 83826.01,
+   "price": 84575.71,
    "note": "1h signal candle closed"
   },
   {
-   "time_utc": "2026-10-21 14:33",
-   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 13:59",
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 14:59",
    "coin": "BTC",
    "tf": "1h",
    "strategy": "P01-BREAKOUT-V2",
@@ -292,7 +292,59 @@
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 83826.01,
+   "price": 84575.71,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 84575.71,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 84575.71,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 84575.71,
+   "note": "15m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-21 15:34",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 84575.71,
    "note": ""
   }
  ]
