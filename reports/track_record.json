@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-21 00:39",
+ "utc": "2026-10-21 02:16",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -203,9 +203,9 @@
     "sd": 0.005
    },
    "backtest": {
-    "n": 338,
-    "avg_r": 0.02,
-    "win_rate": 35.5
+    "n": 340,
+    "avg_r": 0.013,
+    "win_rate": 35.3
    },
    "verdict": "ok",
    "why": [],
@@ -281,9 +281,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 234,
-    "avg_r": 0.004,
-    "win_rate": 35.9
+    "n": 235,
+    "avg_r": -0.001,
+    "win_rate": 35.7
    },
    "verdict": "ok",
    "why": [],
@@ -307,9 +307,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 170,
-    "avg_r": 0.07,
-    "win_rate": 37.1
+    "n": 171,
+    "avg_r": 0.063,
+    "win_rate": 36.8
    },
    "verdict": "ok",
    "why": [],
@@ -359,8 +359,8 @@
     "sd": null
    },
    "backtest": {
-    "n": 690,
-    "avg_r": 0.023,
+    "n": 691,
+    "avg_r": 0.021,
     "win_rate": 34.9
    },
    "verdict": "ok",
