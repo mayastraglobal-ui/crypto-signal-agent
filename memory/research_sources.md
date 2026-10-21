@@ -1373,3 +1373,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
   - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-FDISP@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-10-21 01:16 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-01-19
+  - title / source: engine failure lab: a repair of donchian_breakout-VEXIT@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: donchian_breakout-VEXIT@1.0 loses on false_breakout (-0.36R a trade with it, +0.43R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3

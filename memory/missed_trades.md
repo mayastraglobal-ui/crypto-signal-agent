@@ -1064,3 +1064,55 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### BTC up +2.2% (5.3x ATR), 2026-10-20 11:00 -> 2026-10-20 15:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 5.3x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: UNCLEAR · review: 2026-10-28
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ETH up +3.7% (6.1x ATR), 2026-10-20 11:00 -> 2026-10-20 15:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-28
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - PB-B-APLUS v1.0 15m: no valid stop / target
+  - PB-B-APLUS v1.0 5m: no valid stop / target
+  - PB-B-GRADED v1.0 15m: no valid stop / target
+  - PB-B-GRADED v1.0 5m: no valid stop / target
+  - PB-B-SWEEP v1.0 5m: no valid stop / target
+  - PB-B-SWEEP-15M v1.0 15m: no valid stop / target
+  - PB-B-SWEEP-LIMIT v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### SOL up +3.5% (5.1x ATR), 2026-10-20 11:00 -> 2026-10-20 15:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: RANGE · review: 2026-10-28
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### XRP up +3.8% (6.1x ATR), 2026-10-20 10:00 -> 2026-10-20 15:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: XRP · timeframe: 1h · regime: WEAK_BEAR · review: 2026-10-28
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - PB-B-GRADED v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ZEC up +11.9% (7.6x ATR), 2026-10-20 09:00 -> 2026-10-20 22:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 7.6x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: RANGE · review: 2026-10-28
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### BNB up +1.9% (5.3x ATR), 2026-10-20 11:00 -> 2026-10-20 23:00
+- timestamp: 2026-10-21 01:16 UTC · source: engine: daily research run · evidence: FACT: move of 5.3x the 1H ATR within 12 hours; 146 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: RANGE · review: 2026-10-28
+  - verdict: identifiable: at least one strategy had a valid signal before the move (research-only coin)
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: signal
