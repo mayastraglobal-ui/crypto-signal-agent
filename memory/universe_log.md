@@ -684,3 +684,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-20 12:38 UTC
 - **FLAG** ZEC - possible wash volume: 24h volume is 1,146x the 1% order-book depth (flag only, not excluded)
+
+## 2026-10-21 17:30 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,092x the 1% order-book depth (flag only, not excluded)

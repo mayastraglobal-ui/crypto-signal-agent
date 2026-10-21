@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-21 16:32",
+ "generated_utc": "2026-10-21 17:30",
  "book": {
-  "utc": "2026-10-21 16:32",
-  "beijing": "2026-10-22 00:32",
+  "utc": "2026-10-21 17:30",
+  "beijing": "2026-10-22 01:30",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -72,7 +72,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-21 16:32 UTC / 2026-10-22 00:32 Beijing",
+  "POSITION BOOK \u2014 2026-10-21 17:30 UTC / 2026-10-22 01:30 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open +0.00R \u00b7 HOLD (PAPER_TRADING)",
@@ -141,7 +141,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -152,7 +152,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -277,162 +277,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-FDISP-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-FDISP-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P01-BREAKOUT-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P01-BREAKOUT-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V4-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 84540.01,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-21 16:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V4-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 84540.01,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
