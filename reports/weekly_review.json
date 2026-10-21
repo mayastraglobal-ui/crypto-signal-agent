@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W43",
- "utc": "2026-10-21 02:16",
+ "utc": "2026-10-21 02:30",
  "final": false,
  "rows": [
   {
@@ -125,9 +125,9 @@
     }
    },
    "backtest": {
-    "n": 234,
-    "avg_r": 0.004,
-    "win_rate": 35.9
+    "n": 235,
+    "avg_r": -0.001,
+    "win_rate": 35.7
    },
    "confidence": "-1.19R over 1 trade: too early to say anything",
    "sent": false
@@ -171,9 +171,9 @@
     }
    },
    "backtest": {
-    "n": 170,
-    "avg_r": 0.07,
-    "win_rate": 37.1
+    "n": 171,
+    "avg_r": 0.063,
+    "win_rate": 36.8
    },
    "confidence": "-1.14R over 1 trade: too early to say anything",
    "sent": false
@@ -263,8 +263,8 @@
     }
    },
    "backtest": {
-    "n": 690,
-    "avg_r": 0.023,
+    "n": 691,
+    "avg_r": 0.021,
     "win_rate": 34.9
    },
    "confidence": "-1.15R over 1 trade: too early to say anything",
@@ -362,9 +362,9 @@
     }
    },
    "backtest": {
-    "n": 338,
-    "avg_r": 0.02,
-    "win_rate": 35.5
+    "n": 340,
+    "avg_r": 0.013,
+    "win_rate": 35.3
    },
    "confidence": "-1.09R over 2 trades: too early to say anything",
    "sent": false
@@ -673,11 +673,11 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 6 of the last 7 days (last 2026-10-20)"
+   "text": "nightly research ran on 7 of the last 7 days (last 2026-10-21)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-21 02:16 UTC"
+   "text": "hourly scan: last run 2026-10-21 02:30 UTC"
   },
   {
    "ok": true,
@@ -685,7 +685,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-20 23:40 UTC (60 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-21 01:52 UTC (25 min ago)"
   },
   {
    "ok": true,
@@ -724,41 +724,40 @@
   "known": true
  },
  "failure_lab": {
-  "judged": 5,
-  "helped": 4,
+  "judged": 6,
+  "helped": 5,
   "passed": 2,
   "pending": 0,
-  "new": 1,
+  "new": 0,
   "retired": [],
   "lines": [
-   "new repair donchian_breakout-VEXIT-FDISP: donchian_breakout-VEXIT@1.0 30m lost on false_breakout - testing DISP",
-   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.04R vs parent +0.14R, unseen +0.11R vs +0.23R - did not help",
+   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.03R vs parent +0.14R, unseen +0.10R vs +0.23R - did not help",
    "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.38R - passed",
    "TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.38R vs +0.26R - helped",
    "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.55R vs +0.36R - passed",
    "TRD-H4-BREAKOUT-S3-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.01R, unseen +0.36R vs +0.19R - helped",
-   "repair record: NOTEXT helped 2 of 2, DISP helped 2 of 2, HTF helped 0 of 1"
+   "repair record: DISP helped 3 of 3, NOTEXT helped 2 of 2, HTF helped 0 of 1"
   ]
  },
  "shocks": {
-  "n": 84,
-  "sent": 63,
-  "done": 84,
-  "kept": 41,
-  "reversed": 43,
+  "n": 82,
+  "sent": 61,
+  "done": 82,
+  "kept": 40,
+  "reversed": 42,
   "avg_after_4h": -0.05,
   "caught": 0,
   "by_coin": {
-   "ZEC": 13,
    "XRP": 17,
    "BTC": 16,
    "ETH": 18,
    "SOL": 9,
-   "SUI": 11
+   "SUI": 11,
+   "ZEC": 11
   },
   "by_kind": {
-   "sweep_high": 8,
-   "volume": 35,
+   "sweep_high": 7,
+   "volume": 34,
    "move": 42,
    "sweep_low": 13
   },
@@ -804,13 +803,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-21 00:40",
+  "checked_utc": "2026-10-21 02:17",
   "lines": [
-   "84 shock(s) this week, 63 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 42, broke yesterday's high 8, broke yesterday's low 13, volume spike 35",
-   "by coin: ETH 18, XRP 17, BTC 16, ZEC 13, SUI 11, SOL 9",
-   "4 hours later: 41 kept going, 43 reversed (average -0.05% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 0 of 84 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "82 shock(s) this week, 61 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 42, broke yesterday's high 7, broke yesterday's low 13, volume spike 34",
+   "by coin: ETH 18, XRP 17, BTC 16, SUI 11, ZEC 11, SOL 9",
+   "4 hours later: 40 kept going, 42 reversed (average -0.05% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 0 of 82 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-10-15 02:29 UTC ETH DOWN -3.6% -> 4h later -1.4% (no strategy alert)",
    "  2026-10-15 02:25 UTC SUI DOWN -3.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-10-14 12:31 UTC SUI DOWN -3.3% -> 4h later +1.1% (no strategy alert)",
@@ -852,5 +851,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 20 this week (-10.2R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 5 repair(s) judged - 4 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 84 this week (63 sent) \u00b7 4h later 41 kept going, 43 reversed \u00b7 a strategy alert followed 0\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 13 (-0.47R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 20 this week (-10.2R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 6 repair(s) judged - 5 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 82 this week (61 sent) \u00b7 4h later 40 kept going, 42 reversed \u00b7 a strategy alert followed 0\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 13 (-0.47R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

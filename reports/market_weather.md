@@ -2,7 +2,7 @@
 
 What kind of day it is, from the hourly scan's own numbers (engine/weather.py). Explains the market only: it never creates a signal or changes a rule.
 
-- verdict (2026-10-21 02:16 UTC): **Turning up - not confirmed** - Prices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.
+- verdict (2026-10-21 02:30 UTC): **Turning up - not confirmed** - Prices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.
 - coins: BTC turning up (not confirmed), ETH turning up (not confirmed), SOL turning up (not confirmed), SUI turning up (not confirmed), XRP turning up (not confirmed), ZEC turning up (not confirmed)
 - fits: waiting for the confirmation - the LONG alerts then come by themselves; checking the stop of any open short · avoid: chasing the rally by hand before the confirmation; shorting into the rise
 - BTC: 1D UNCLEAR / 4H WEAK_BULL / 1H TRANSITION (timeframes disagree (1D UNCLEAR, 4H WEAK_BULL, 1H TRANSITION)); volatility normal (higher than 20% of the last year); usual 24h move ±1.0%, 8 of 10 similar days within ±2.1%; crowding neutral (funding +0.0055%/8h, OI +0.6% 24h)
@@ -11,6 +11,6 @@ What kind of day it is, from the hourly scan's own numbers (engine/weather.py). 
 - SUI: 1D UNCLEAR / 4H TRANSITION / 1H UNCLEAR (timeframes disagree (1D UNCLEAR, 4H TRANSITION, 1H UNCLEAR)); volatility normal (higher than 54% of the last year); usual 24h move ±2.7%, 8 of 10 similar days within ±5.3%; crowding neutral (funding +0.0100%/8h, OI +11.1% 24h)
 - XRP: 1D UNCLEAR / 4H TRANSITION / 1H TRANSITION (timeframes disagree (1D UNCLEAR, 4H TRANSITION, 1H TRANSITION)); volatility normal (higher than 40% of the last year); usual 24h move ±1.5%, 8 of 10 similar days within ±3.4%; crowding neutral (funding +0.0057%/8h, OI +0.1% 24h)
 - ZEC: 1D TRANSITION / 4H RANGE / 1H WEAK_BULL (timeframes disagree (1D TRANSITION, 4H RANGE, 1H WEAK_BULL)); volatility normal (higher than 44% of the last year); usual 24h move ±3.4%, 8 of 10 similar days within ±7.3%; crowding neutral (funding +0.0058%/8h, OI +20.4% 24h)
-- altcoins vs BTC (24h, median): +1.2%
+- altcoins vs BTC (24h, median): +1.1%
 - BTC dominance (CoinGecko): 59.49%, 24h -0.06 pt, 7d +0.30 pt - BTC.D flat - no clear rotation between BTC and the altcoins
 - Explains the market. It never creates a signal and never changes a rule, a size or an approval.
