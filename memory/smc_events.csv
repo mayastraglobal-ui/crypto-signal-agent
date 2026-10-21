@@ -19236,3 +19236,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 20:45,BTC,15m,FVG_FILLED,bear,,84430.5,84706.23,,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-10-21 21:00,BTC,15m,FVG,bull,,84574.0,84661.65,0.458,,1h,STRONG_BULL,,smc-1.0,Binance
 2026-10-21 21:15,BTC,15m,FVG_RETRACE,bull,,84574.0,84661.65,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 22:30,BTC,15m,FVG_FILLED,bull,,84574.0,84661.65,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 21:45,ETH,15m,FVG,bull,,2494.42,2497.09,0.336,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:15,ETH,15m,FVG_RETRACE,bull,,2494.42,2497.09,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 22:15,ETH,15m,FVG_FILLED,bull,,2494.42,2497.09,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:30,ETH,15m,WEAK_BREAK,bear,2490.48,,,0.158,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-21 22:30,ETH,15m,FVG,bear,,2495.37,2497.31,0.256,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:30,SOL,15m,FVG,bear,,108.01,108.12,0.268,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-21 22:30,XRP,30m,CHOCH,bear,1.3784,,,0.483,,1h,STRONG_BULL,with displacement,smc-1.0,Binance
+2026-10-21 22:30,XRP,30m,ORDER_BLOCK,bear,,1.3829,1.3869,,,1h,STRONG_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-21 22:30,XRP,15m,WEAK_BREAK,bear,1.3784,,,0.74,,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-21 21:45,ZEC,15m,FVG,bull,,1347.39,1351.9,0.397,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:15,ZEC,15m,FVG_RETRACE,bull,,1347.39,1351.9,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 22:15,ZEC,15m,FVG_FILLED,bull,,1347.39,1351.9,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:30,ZEC,15m,FVG,bear,,1350.0,1353.01,0.281,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 22:15,SUI,15m,SWEEP,bull,1.04,,,0.155,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-21 22:30,SUI,15m,WEAK_BREAK,bear,1.04,,,0.642,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-21 22:30,SUI,15m,FVG,bear,,1.0411,1.0436,0.473,,1h,RANGE,,smc-1.0,Binance
