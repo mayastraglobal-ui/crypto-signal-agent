@@ -204,3 +204,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session London, conditions: range_market, low_relative_volume, no_displacement
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### BTC LONG 15m P01-BREAKOUT-V2 v1.0 - SL -1.36R
+- timestamp: 2026-10-21 14:33 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.36R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 15m · regime: WEAK_BULL · review: 2026-10-28
+  - signal 2026-10-21 13:14 UTC, closed 2026-10-21 13:44 UTC, stage TEST
+  - MAE -1.60R / MFE +0.23R
+  - at entry: session NY AM, conditions: overextended_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)

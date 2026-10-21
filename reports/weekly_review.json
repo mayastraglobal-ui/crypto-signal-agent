@@ -1,15 +1,15 @@
 {
  "track": {
   "total": {
-   "n": 27,
+   "n": 28,
    "wins": 4,
-   "win_rate": 14.8,
-   "avg_r": -0.676,
-   "total_r": -18.25,
-   "max_dd_r": 18.25,
-   "cur_loss_run": 4,
+   "win_rate": 14.3,
+   "avg_r": -0.7,
+   "total_r": -19.61,
+   "max_dd_r": 19.61,
+   "cur_loss_run": 5,
    "max_loss_run": 6,
-   "sd": 1.048
+   "sd": 1.037
   },
   "yours": {
    "n": 1,
@@ -23,21 +23,21 @@
    "sd": null
   },
   "silent": {
-   "n": 25,
+   "n": 26,
    "wins": 4,
-   "win_rate": 16.0,
-   "avg_r": -0.646,
-   "total_r": -16.16,
-   "max_dd_r": 16.16,
-   "cur_loss_run": 4,
+   "win_rate": 15.4,
+   "avg_r": -0.674,
+   "total_r": -17.52,
+   "max_dd_r": 17.52,
+   "cur_loss_run": 5,
    "max_loss_run": 5,
-   "sd": 1.085
+   "sd": 1.072
   },
   "alerts_known": true,
   "paused": []
  },
  "week": "2026-W43",
- "utc": "2026-10-21 13:40",
+ "utc": "2026-10-21 14:33",
  "final": false,
  "rows": [
   {
@@ -85,6 +85,52 @@
    },
    "confidence": "-1.05R over 1 trade: too early to say anything",
    "sent": true
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|15m",
+   "coin": "BTC",
+   "stage": "TEST",
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "tf": "15m",
+   "live": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.357,
+    "total_r": -1.36,
+    "sd": 0.0
+   },
+   "week": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.357,
+    "total_r": -1.36,
+    "sd": 0.0
+   },
+   "gross": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.119,
+    "total_r": -1.12,
+    "sd": 0.0
+   },
+   "by_market": {
+    "UP": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.357,
+     "total_r": -1.36,
+     "sd": 0.0
+    }
+   },
+   "backtest": {
+    "n": 245,
+    "avg_r": 0.072,
+    "win_rate": 38.8
+   },
+   "confidence": "-1.36R over 1 trade: too early to say anything",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V2@1.0|15m",
@@ -622,8 +668,8 @@
  "five_min": {
   "confirmed_n": 2,
   "confirmed_r": -1.0,
-  "all_n": 27,
-  "all_gross_r": -0.599,
+  "all_n": 28,
+  "all_gross_r": -0.618,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V5",
@@ -677,7 +723,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-21 13:40 UTC"
+   "text": "hourly scan: last run 2026-10-21 14:33 UTC"
   },
   {
    "ok": true,
@@ -685,20 +731,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-21 11:36 UTC (63 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-21 12:41 UTC (60 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 22"
+   "text": "TEST setups closed this week (GitHub record): 23"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 27,
-   "total_r": -18.26,
-   "avg_r": -0.676,
-   "week_n": 22,
-   "week_total_r": -12.33
+   "n": 28,
+   "total_r": -19.62,
+   "avg_r": -0.701,
+   "week_n": 23,
+   "week_total_r": -13.69
   },
   "PAPER": {
    "n": 0,
@@ -715,11 +761,11 @@
    "week_total_r": -2.1
   },
   "SILENT": {
-   "n": 25,
-   "total_r": -16.16,
-   "avg_r": -0.646,
-   "week_n": 20,
-   "week_total_r": -10.23
+   "n": 26,
+   "total_r": -17.52,
+   "avg_r": -0.674,
+   "week_n": 21,
+   "week_total_r": -11.59
   },
   "known": true
  },
@@ -740,11 +786,11 @@
   ]
  },
  "shocks": {
-  "n": 75,
-  "sent": 57,
-  "done": 75,
+  "n": 76,
+  "sent": 58,
+  "done": 76,
   "kept": 36,
-  "reversed": 39,
+  "reversed": 40,
   "avg_after_4h": -0.21,
   "caught": 0,
   "by_coin": {
@@ -753,13 +799,13 @@
    "SOL": 8,
    "SUI": 10,
    "XRP": 16,
-   "BTC": 15
+   "BTC": 16
   },
   "by_kind": {
    "move": 37,
    "sweep_low": 13,
    "volume": 27,
-   "sweep_high": 7
+   "sweep_high": 8
   },
   "biggest": [
    {
@@ -803,13 +849,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-21 12:39",
+  "checked_utc": "2026-10-21 13:41",
   "lines": [
-   "75 shock(s) this week, 57 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 37, broke yesterday's high 7, broke yesterday's low 13, volume spike 27",
-   "by coin: ETH 16, XRP 16, BTC 15, ZEC 10, SUI 10, SOL 8",
-   "4 hours later: 36 kept going, 39 reversed (average -0.21% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 0 of 75 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "76 shock(s) this week, 58 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 37, broke yesterday's high 8, broke yesterday's low 13, volume spike 27",
+   "by coin: ETH 16, XRP 16, BTC 16, ZEC 10, SUI 10, SOL 8",
+   "4 hours later: 36 kept going, 40 reversed (average -0.21% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 0 of 76 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-10-15 02:29 UTC ETH DOWN -3.6% -> 4h later -1.4% (no strategy alert)",
    "  2026-10-15 02:25 UTC SUI DOWN -3.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-10-19 14:47 UTC ZEC UP +3.1% -> 4h later -2.0% (no strategy alert)",
@@ -828,8 +874,8 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 13,
-   "avg_r": -0.474,
+   "n": 14,
+   "avg_r": -0.537,
    "wins": 3
   },
   {
@@ -851,5 +897,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 20 this week (-10.2R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 6 repair(s) judged - 5 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 75 this week (57 sent) \u00b7 4h later 36 kept going, 39 reversed \u00b7 a strategy alert followed 0\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 13 (-0.47R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 21 this week (-11.6R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 6 repair(s) judged - 5 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 76 this week (58 sent) \u00b7 4h later 36 kept going, 40 reversed \u00b7 a strategy alert followed 0\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 14 (-0.54R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
