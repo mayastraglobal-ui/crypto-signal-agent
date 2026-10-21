@@ -19216,3 +19216,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-21 19:15,SUI,15m,WEAK_BREAK,bear,1.0417,,,0.488,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-10-21 19:15,SUI,15m,FVG_FILLED,bull,,1.0374,1.042,,,1h,RANGE,,smc-1.0,Binance
 2026-10-21 19:15,SUI,15m,FVG,bear,,1.0437,1.052,1.299,,1h,RANGE,,smc-1.0,Binance
+2026-10-21 20:00,BTC,4h,BREAKER_RETEST,bull,,83500.0,84352.0,,,1d,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-21 20:00,BTC,4h,FVG,bull,,83713.91,84180.09,0.574,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-21 20:00,BTC,1h,FVG_RETRACE,bull,,83968.58,84380.0,,,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 20:00,BTC,30m,FVG_RETRACE,bear,,84488.0,84638.76,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 20:00,ETH,4h,FVG,bull,,2473.6,2483.85,0.273,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-21 20:00,ETH,30m,FVG_RETRACE,bear,,2499.0,2512.88,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 20:00,SOL,30m,FVG_RETRACE,bear,,108.12,108.53,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 20:00,XRP,4h,FVG_FILLED,bear,,1.3829,1.3953,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-21 20:00,XRP,4h,FVG,bull,,1.3693,1.3766,0.335,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-21 19:45,XRP,15m,FVG_RETRACE,bear,,1.3879,1.3934,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-21 20:00,XRP,15m,FVG_FILLED,bear,,1.3879,1.3934,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 20:00,ZEC,4h,OB_INVALID,bear,,1302.5,1348.0,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 20:00,ZEC,4h,OB_INVALID,bear,,1282.27,1349.3,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-21 20:00,ZEC,4h,FVG,bull,,1294.79,1330.45,0.764,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-21 19:45,ZEC,15m,FVG_FILLED,bear,,1345.28,1357.25,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-21 19:45,SUI,15m,FVG_RETRACE,bear,,1.0437,1.052,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
