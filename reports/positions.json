@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-22 14:34",
+ "generated_utc": "2026-10-22 15:35",
  "book": {
-  "utc": "2026-10-22 14:34",
-  "beijing": "2026-10-22 22:34",
+  "utc": "2026-10-22 15:35",
+  "beijing": "2026-10-22 23:35",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -60,7 +60,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 14:34 UTC / 2026-10-22 22:34 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 15:35 UTC / 2026-10-22 23:35 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -251,5 +251,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-22 15:35",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-22 15:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.9764,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-22 15:35",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-22 15:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.9764,
+   "note": ""
+  }
+ ]
 }
