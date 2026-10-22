@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W43",
- "utc": "2026-10-22 02:31",
+ "utc": "2026-10-22 03:31",
  "final": false,
  "rows": [
   {
@@ -523,11 +523,11 @@
     "sd": 1.5176605681113284
    },
    "week": {
-    "n": 4,
-    "win_rate": 50.0,
-    "avg_r": 0.288,
-    "total_r": 1.15,
-    "sd": 1.6936809026496107
+    "n": 3,
+    "win_rate": 33.3,
+    "avg_r": -0.422,
+    "total_r": -1.27,
+    "sd": 1.1299612087737054
    },
    "gross": {
     "n": 6,
@@ -714,11 +714,11 @@
     "sd": 1.4554194813409178
    },
    "week": {
-    "n": 5,
-    "win_rate": 20.0,
-    "avg_r": -0.412,
-    "total_r": -2.06,
-    "sd": 1.5748825987990343
+    "n": 4,
+    "win_rate": 25.0,
+    "avg_r": -0.242,
+    "total_r": -0.97,
+    "sd": 1.7647814548360747
    },
    "gross": {
     "n": 6,
@@ -799,9 +799,9 @@
      "wins": 0
     },
     "sent": {
-     "n": 0,
-     "total_r": 0.0,
-     "avg_r": null,
+     "n": 1,
+     "total_r": -1.0,
+     "avg_r": -1.0,
      "wins": 0
     }
    }
@@ -815,7 +815,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-22 02:31 UTC"
+   "text": "hourly scan: last run 2026-10-22 03:31 UTC"
   },
   {
    "ok": true,
@@ -823,11 +823,11 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-22 01:41 UTC (32 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-22 01:41 UTC (52 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 28"
+   "text": "TEST setups closed this week (GitHub record): 26"
   }
  ],
  "totals": {
@@ -835,8 +835,8 @@
    "n": 33,
    "total_r": -21.98,
    "avg_r": -0.666,
-   "week_n": 28,
-   "week_total_r": -16.05
+   "week_n": 26,
+   "week_total_r": -17.38
   },
   "PAPER": {
    "n": 0,
@@ -856,8 +856,8 @@
    "n": 31,
    "total_r": -19.88,
    "avg_r": -0.641,
-   "week_n": 26,
-   "week_total_r": -13.95
+   "week_n": 24,
+   "week_total_r": -15.28
   },
   "known": true
  },
@@ -878,44 +878,28 @@
   ]
  },
  "shocks": {
-  "n": 80,
-  "sent": 61,
-  "done": 80,
-  "kept": 38,
-  "reversed": 42,
-  "avg_after_4h": -0.2,
+  "n": 72,
+  "sent": 56,
+  "done": 72,
+  "kept": 33,
+  "reversed": 39,
+  "avg_after_4h": -0.25,
   "caught": 1,
   "by_coin": {
-   "ZEC": 10,
-   "ETH": 16,
-   "SOL": 9,
-   "SUI": 11,
-   "XRP": 17,
-   "BTC": 17
+   "ZEC": 9,
+   "SOL": 8,
+   "BTC": 16,
+   "ETH": 14,
+   "XRP": 16,
+   "SUI": 9
   },
   "by_kind": {
-   "sweep_low": 13,
-   "volume": 28,
-   "move": 37,
-   "sweep_high": 11
+   "volume": 22,
+   "sweep_high": 11,
+   "move": 35,
+   "sweep_low": 9
   },
   "biggest": [
-   {
-    "time_utc": "2026-10-15 02:29",
-    "coin": "ETH",
-    "side": "DOWN",
-    "move_pct": -3.62,
-    "after_4h": -1.45,
-    "caught": false
-   },
-   {
-    "time_utc": "2026-10-15 02:25",
-    "coin": "SUI",
-    "side": "DOWN",
-    "move_pct": -3.55,
-    "after_4h": -0.59,
-    "caught": false
-   },
    {
     "time_utc": "2026-10-19 14:47",
     "coin": "ZEC",
@@ -939,20 +923,36 @@
     "move_pct": -3.02,
     "after_4h": 0.27,
     "caught": false
+   },
+   {
+    "time_utc": "2026-10-20 15:14",
+    "coin": "SUI",
+    "side": "DOWN",
+    "move_pct": -2.86,
+    "after_4h": -0.37,
+    "caught": false
+   },
+   {
+    "time_utc": "2026-10-20 14:00",
+    "coin": "ZEC",
+    "side": "UP",
+    "move_pct": 2.75,
+    "after_4h": 3.33,
+    "caught": false
    }
   ],
-  "checked_utc": "2026-10-22 02:13",
+  "checked_utc": "2026-10-22 02:33",
   "lines": [
-   "80 shock(s) this week, 61 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 37, broke yesterday's high 11, broke yesterday's low 13, volume spike 28",
-   "by coin: XRP 17, BTC 17, ETH 16, SUI 11, ZEC 10, SOL 9",
-   "4 hours later: 38 kept going, 42 reversed (average -0.20% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 1 of 80 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
-   "  2026-10-15 02:29 UTC ETH DOWN -3.6% -> 4h later -1.4% (no strategy alert)",
-   "  2026-10-15 02:25 UTC SUI DOWN -3.5% -> 4h later -0.6% (no strategy alert)",
+   "72 shock(s) this week, 56 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 35, broke yesterday's high 11, broke yesterday's low 9, volume spike 22",
+   "by coin: BTC 16, XRP 16, ETH 14, ZEC 9, SUI 9, SOL 8",
+   "4 hours later: 33 kept going, 39 reversed (average -0.25% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 1 of 72 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-10-19 14:47 UTC ZEC UP +3.1% -> 4h later -2.0% (no strategy alert)",
    "  2026-10-20 15:14 UTC ZEC DOWN -3.0% -> 4h later -1.6% (no strategy alert)",
-   "  2026-10-16 16:52 UTC ZEC DOWN -3.0% -> 4h later +0.3% (no strategy alert)"
+   "  2026-10-16 16:52 UTC ZEC DOWN -3.0% -> 4h later +0.3% (no strategy alert)",
+   "  2026-10-20 15:14 UTC SUI DOWN -2.9% -> 4h later -0.4% (no strategy alert)",
+   "  2026-10-20 14:00 UTC ZEC UP +2.8% -> 4h later +3.3% (no strategy alert)"
   ]
  },
  "location": [
@@ -989,5 +989,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 26 this week (-13.9R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 6 repair(s) judged - 5 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 80 this week (61 sent) \u00b7 4h later 38 kept going, 42 reversed \u00b7 a strategy alert followed 1\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 19 (-0.52R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W43</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 2 since the start (-1.05R a trade, after fees)\nSilent research records (not sent to you): 24 this week (-15.3R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 6 repair(s) judged - 5 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 72 this week (56 sent) \u00b7 4h later 33 kept going, 39 reversed \u00b7 a strategy alert followed 1\n\n\ud83d\udcc8 Track record (your alerts, after fees): 1 closed \u00b7 -1.05R a trade \u00b7 -1.1R \u00b7 worst drawdown 1.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 19 (-0.52R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
