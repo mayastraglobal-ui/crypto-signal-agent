@@ -19843,3 +19843,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 21:45,ZEC,15m,FVG_RETRACE,bull,,1213.68,1218.55,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-22 21:45,ZEC,15m,FVG_FILLED,bull,,1213.68,1218.55,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-22 21:45,SUI,15m,FVG_RETRACE,bull,,0.9727,0.9764,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-22 22:30,BTC,30m,FVG_RETRACE,bull,,81364.02,81444.01,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 22:30,BTC,30m,FVG_FILLED,bull,,81364.02,81444.01,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 22:30,ETH,30m,FVG_RETRACE,bull,,2385.44,2390.19,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-22 22:30,ETH,30m,FVG_FILLED,bull,,2385.44,2390.19,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 22:30,ETH,15m,OB_RETEST,bull,,2377.89,2384.21,,,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-22 22:30,ETH,15m,FVG_FILLED,bull,,2384.21,2392.79,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 22:45,ETH,15m,FVG,bear,,2387.7,2390.86,0.423,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 22:45,SOL,15m,FVG_FILLED,bull,,103.44,103.85,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-22 23:00,ZEC,30m,SWEEP,bull,1206.13,,,0.146,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 23:00,ZEC,15m,SWEEP,bull,1206.13,,,0.219,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 22:45,SUI,15m,FVG_FILLED,bull,,0.9727,0.9764,,,1h,WEAK_BEAR,,smc-1.0,Binance
