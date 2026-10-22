@@ -1,10 +1,10 @@
 {
  "state": "OK",
- "checked_utc": "2026-10-22 08:38",
- "last_utc": "2026-10-22 08:11",
- "age_min": 27,
+ "checked_utc": "2026-10-22 09:35",
+ "last_utc": "2026-10-22 09:25",
+ "age_min": 10,
  "heartbeat": {
-  "utc": "2026-10-22 08:11",
+  "utc": "2026-10-22 09:25",
   "started_utc": "2026-10-18 13:11",
   "feed": "OKX USDT perpetuals",
   "coins": [
@@ -15,7 +15,7 @@
    "ZEC",
    "SUI"
   ],
-  "last_check_utc": "2026-10-22 08:11",
+  "last_check_utc": "2026-10-22 09:25",
   "last_check_ok": true,
   "fails": 0,
   "watching": {
@@ -29,5 +29,5 @@
   "code_old": false,
   "shock_on": true
  },
- "text": "live watcher: last heartbeat 2026-10-22 08:11 UTC (27 min ago)"
+ "text": "live watcher: last heartbeat 2026-10-22 09:25 UTC (10 min ago)"
 }
