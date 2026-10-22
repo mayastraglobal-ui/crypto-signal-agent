@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 643,
+ "runs": 644,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -135,6 +135,10 @@
    "spread",
    "thin_book",
    "volume_7d"
+  ],
+  "SNDKB": [
+   "history",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -189,6 +193,7 @@
   "TRX": [],
   "WAL": [],
   "SPCXB": [],
-  "IOST": []
+  "IOST": [],
+  "SNDKB": []
  }
 }
