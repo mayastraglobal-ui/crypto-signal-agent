@@ -19815,3 +19815,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 20:30,XRP,30m,FVG_FILLED,bull,,1.3001,1.3095,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-22 20:30,XRP,15m,SWEEP,bull,1.3028,,,0.489,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-22 20:30,SUI,15m,SWEEP,bull,0.9723,,,0.419,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 21:30,BTC,30m,FVG_FILLED,bear,,81458.42,81555.01,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 21:00,BTC,15m,FVG_FILLED,bull,,81274.01,81340.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 21:30,BTC,15m,FVG,bull,,81303.44,81456.0,0.877,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 21:30,ETH,30m,FVG_FILLED,bear,,2388.19,2394.0,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 21:30,ETH,15m,CHOCH,bull,2393.77,,,0.123,,1h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-10-22 21:30,ETH,15m,ORDER_BLOCK,bull,,2377.89,2384.21,,,1h,STRONG_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-22 21:30,ETH,15m,FVG_FILLED,bear,,2384.9,2394.0,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 21:30,ETH,15m,FVG,bull,,2384.21,2392.79,1.008,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-22 21:30,SOL,30m,FVG_RETRACE,bear,,104.06,104.27,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-22 20:45,SOL,15m,SWEEP,bull,103.15,,,0.181,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 21:30,SOL,15m,SWEEP,bear,103.93,,,0.38,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-22 21:30,SOL,15m,FVG_FILLED,bear,,103.86,104.08,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-22 21:30,SOL,15m,FVG,bull,,103.44,103.85,0.946,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-22 21:00,XRP,30m,BOS,bear,1.3028,,,0.218,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 20:45,XRP,15m,BOS,bear,1.3028,,,0.536,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 21:30,XRP,15m,FVG,bull,,1.3011,1.3075,1.133,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 21:30,ZEC,15m,FVG,bull,,1213.68,1218.55,0.407,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 20:45,SUI,15m,BOS,bear,0.9723,,,0.351,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-22 21:30,SUI,15m,FVG,bull,,0.9727,0.9764,0.735,,1h,WEAK_BEAR,,smc-1.0,Binance

@@ -1,13 +1,13 @@
 # Weekly review · 2026-W43
 
-Made 2026-10-22 20:31 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-10-22 21:30 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-10-22)
-- ✅ hourly scan: last run 2026-10-22 20:31 UTC
+- ✅ hourly scan: last run 2026-10-22 21:30 UTC
 - ✅ program rotation: 89 of 89 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-10-22 19:00 UTC (34 min ago)
+- ✅ live watcher: last heartbeat 2026-10-22 20:05 UTC (27 min ago)
 - ✅ TEST setups closed this week (GitHub record): 17
 
 ## Totals
