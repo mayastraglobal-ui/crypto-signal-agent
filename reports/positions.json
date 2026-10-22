@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-22 19:33",
+ "generated_utc": "2026-10-22 20:31",
  "book": {
-  "utc": "2026-10-22 19:33",
-  "beijing": "2026-10-23 03:33",
+  "utc": "2026-10-22 20:31",
+  "beijing": "2026-10-23 04:31",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -60,7 +60,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 19:33 UTC / 2026-10-23 03:33 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 20:31 UTC / 2026-10-23 04:31 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -119,59 +119,59 @@
  },
  "watching": [
   {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
    "coin": "SOL",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "btc_ret(3) >= 3"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
    "state": "WATCH",
    "rules_true": "1/3",
    "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
   },
   {
    "coin": "SOL",
