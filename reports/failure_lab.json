@@ -14,11 +14,11 @@
    "trades": 292,
    "avg_r": 0.032,
    "test_r": 0.097,
-   "parent_avg_r": 0.145,
-   "parent_test_r": 0.23,
+   "parent_avg_r": 0.142,
+   "parent_test_r": 0.219,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -33,7 +33,7 @@
    "parent_test_r": 0.375,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -48,7 +48,7 @@
    "parent_test_r": 0.255,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -63,7 +63,7 @@
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -74,11 +74,11 @@
    "trades": 412,
    "avg_r": 0.187,
    "test_r": 0.364,
-   "parent_avg_r": 0.008,
+   "parent_avg_r": 0.004,
    "parent_test_r": 0.191,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -86,14 +86,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "FAILED",
-   "trades": 1088,
-   "avg_r": -0.009,
+   "trades": 1089,
+   "avg_r": -0.01,
    "test_r": 0.091,
    "parent_avg_r": -0.055,
-   "parent_test_r": 0.024,
+   "parent_test_r": 0.027,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-21 01:16"
+   "checked": "2026-10-22 01:13"
   }
  ],
  "by_kind": {

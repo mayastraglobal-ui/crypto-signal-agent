@@ -1116,3 +1116,37 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
   - rsi2_dip_buy v1.0 15m: signal
+
+### BTC up +2.4% (5.7x ATR), 2026-10-21 05:00 -> 2026-10-21 18:00
+- timestamp: 2026-10-22 01:13 UTC · source: engine: daily research run · evidence: FACT: move of 5.7x the 1H ATR within 12 hours; 150 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: TRANSITION · review: 2026-10-29
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P02-EMA-PULLBACK-V2 v1.0 15m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V2 v1.0 30m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V5 v1.0 15m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V5 v1.0 30m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V2 v1.0 15m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V2 v1.0 30m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V5 v1.0 15m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V5 v1.0 30m: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+
+### XRP up +4.1% (6.0x ATR), 2026-10-21 06:00 -> 2026-10-21 18:00
+- timestamp: 2026-10-22 01:13 UTC · source: engine: daily research run · evidence: FACT: move of 6.0x the 1H ATR within 12 hours; 150 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: XRP · timeframe: 1h · regime: TRANSITION · review: 2026-10-29
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P02-EMA-PULLBACK-V2 v1.0 15m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V5 v1.0 15m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V2 v1.0 15m: blocked by the regime gate
+  - P03-FIB-PULLBACK-V5 v1.0 15m: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
