@@ -19697,3 +19697,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 15:15,SUI,15m,BOS,bear,0.9783,,,1.054,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
 2026-10-22 15:15,SUI,15m,ORDER_BLOCK,bear,,0.9816,0.9878,,,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
 2026-10-22 15:15,SUI,15m,FVG_RETRACE,bull,,0.9596,0.9736,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-22 16:00,ETH,4h,FVG_FILLED,bull,,2392.29,2425.12,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-22 16:00,ETH,1h,SWEEP,bull,2395.55,,,0.547,,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 16:00,ETH,1h,OB_RETEST,bull,,2382.68,2391.45,,,4h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-22 16:30,ETH,30m,WEAK_BREAK,bear,2395.0,,,0.006,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 16:00,XRP,4h,FVG_RETRACE,bull,,1.3027,1.3161,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-22 16:00,ZEC,4h,FVG_FILLED,bull,,1223.69,1251.18,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 16:00,ZEC,1h,SWEEP,bull,1226.0,,,0.372,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 16:00,ZEC,1h,OB_RETEST,bull,,1199.66,1223.69,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-22 16:00,SUI,4h,SWEEP,bull,0.9763,,,0.252,,1d,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 16:00,SUI,1h,SWEEP,bull,0.9763,,,0.594,,4h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 15:45,SUI,15m,OB_RETEST,bear,,0.9816,0.9878,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
