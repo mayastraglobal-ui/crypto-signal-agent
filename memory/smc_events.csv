@@ -19429,3 +19429,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 03:00,SUI,30m,FVG,bear,,1.0106,1.0133,0.317,Asia,1h,RANGE,,smc-1.0,Binance
 2026-10-22 03:30,SUI,30m,FVG_RETRACE,bear,,1.0106,1.0133,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-22 03:30,SUI,15m,SWEEP,bull,1.0044,,,0.412,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 04:00,BTC,4h,BREAKER_RETEST,bull,,83169.0,83958.0,,,1d,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-22 04:00,BTC,4h,FVG_FILLED,bull,,83713.91,84180.09,,,1d,RANGE,,smc-1.0,Binance
+2026-10-22 04:00,BTC,1h,FVG,bear,,83015.23,83403.64,0.866,Asia,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-22 04:00,ETH,4h,OB_RETEST,bull,,2442.8,2465.5,,,1d,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-22 04:00,ETH,1h,SWEEP,bull,2436.87,,,0.151,Asia,4h,UNCLEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-22 04:00,ETH,30m,SWEEP,bull,2436.87,,,0.219,Asia,1h,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-22 04:00,SOL,4h,OB_INVALID,bull,,105.85,107.13,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-22 04:00,SOL,4h,FVG_RETRACE,bull,,104.5,105.31,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 04:00,SOL,1h,SWEEP,bull,105.31,,,0.3,Asia,4h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 04:00,XRP,4h,FVG,bear,,1.3698,1.3766,0.293,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 04:00,XRP,1h,OB_RETEST,bull,,1.3325,1.3384,,Asia,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-22 04:00,XRP,1h,FVG_RETRACE,bull,,1.3384,1.3427,,Asia,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 04:00,XRP,1h,FVG_FILLED,bull,,1.3384,1.3427,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-10-22 04:00,XRP,30m,FVG_RETRACE,bull,,1.3384,1.3403,,Asia,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-22 04:00,XRP,30m,FVG_FILLED,bull,,1.3384,1.3403,,Asia,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-22 03:45,XRP,15m,FVG_RETRACE,bull,,1.3367,1.3403,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-22 04:00,ZEC,4h,FVG_FILLED,bull,,1294.79,1330.45,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 04:00,SUI,4h,FVG_RETRACE,bull,,0.9963,1.0066,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance

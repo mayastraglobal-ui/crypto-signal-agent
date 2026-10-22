@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-10-22 03:31 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-10-22 04:32 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 1 | 0 | -1.05R | -1.05R | 1.05R | 1 |
+| **Your alerts** (could reach your Telegram) | 2 | 0 | -1.06R | -2.13R | 2.13R | 2 |
 | Silent research records (never sent to you) | 31 | 16 | -0.64R | -19.87R | 19.87R | 6 |
-| 🔵 TEST | 33 | 15 | -0.67R | -21.96R | 21.96R | 6 |
-| 🟡 PAPER | 0 | - | - | +0.00R | 0.00R | 0 |
+| 🔵 TEST | 36 | 14 | -0.70R | -25.27R | 25.27R | 6 |
+| 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 33 | 15 | -0.67R | -21.96R | 21.96R | 6 |
+| **All** | 39 | 13 | -0.73R | -28.52R | 28.52R | 9 |
 
 ## 🚨 Drift monitor
 
@@ -19,8 +19,14 @@ Updated 2026-10-22 03:31 UTC by the hourly scan (engine/track_record.py). Every 
 
 | Strategy | TF | Coin | Stage | Sent to you | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
+| P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.08R | +0.38R | -1.08R | 1.08R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
+| P07-SQUEEZE-RETEST-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.11R | +0.24R | -1.11R | 1.11R | ✅ |
+| P07-SQUEEZE-RETEST-V4 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.11R | +0.43R | -1.11R | 1.11R | ✅ |
+| donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.53R | -1.08R | 1.08R | ✅ |
+| donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.52R | -1.08R | 1.08R | ✅ |
+| donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.27R | -1.08R | 1.08R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 6 | 33 | -0.20R | +0.04R | -1.22R | 2.38R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 6 | 17 | -0.56R | +0.01R | -3.37R | 4.58R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 3 | 33 | -0.40R | +0.01R | -1.19R | 2.15R | ✅ |
@@ -39,12 +45,6 @@ Updated 2026-10-22 03:31 UTC by the hourly scan (engine/track_record.py). Every 
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-15 14:59 | -9.49R |
-| 2026-10-15 15:29 | -10.58R |
-| 2026-10-15 15:59 | -9.62R |
-| 2026-10-15 15:59 | -10.67R |
-| 2026-10-15 15:59 | -11.72R |
-| 2026-10-15 15:59 | -12.75R |
 | 2026-10-18 01:29 | -13.84R |
 | 2026-10-18 01:29 | -14.93R |
 | 2026-10-18 09:59 | -16.04R |
@@ -59,3 +59,9 @@ Updated 2026-10-22 03:31 UTC by the hourly scan (engine/track_record.py). Every 
 | 2026-10-21 23:59 | -20.05R |
 | 2026-10-22 01:59 | -20.80R |
 | 2026-10-22 01:59 | -21.96R |
+| 2026-10-22 03:59 | -23.05R |
+| 2026-10-22 03:59 | -24.13R |
+| 2026-10-22 03:59 | -25.22R |
+| 2026-10-22 03:59 | -26.30R |
+| 2026-10-22 03:59 | -27.41R |
+| 2026-10-22 03:59 | -28.52R |

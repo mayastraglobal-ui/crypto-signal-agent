@@ -244,3 +244,51 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
   - what happened: -
   - root cause / fix: (review)
+
+### BTC LONG 4h donchian_breakout v1.0 - SL -1.08R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage PAPER_TRADING
+  - MAE -1.14R / MFE +0.22R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC LONG 4h donchian_breakout-VEXIT v1.0 - SL -1.08R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage PAPER_TRADING
+  - MAE -1.14R / MFE +0.22R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC LONG 4h donchian_breakout-VEXIT-FDISP v1.0 - SL -1.08R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage PAPER_TRADING
+  - MAE -1.14R / MFE +0.22R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC LONG 4h P01-BREAKOUT-V1 v1.0 - SL -1.08R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage TEST
+  - MAE -1.14R / MFE +0.22R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC LONG 4h P07-SQUEEZE-RETEST-V1 v1.0 - SL -1.11R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V1 v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage TEST
+  - MAE -1.52R / MFE +0.29R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC LONG 4h P07-SQUEEZE-RETEST-V4 v1.0 - SL -1.11R
+- timestamp: 2026-10-22 04:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V4 v1.0 · asset: BTC · timeframe: 4h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 15:59 UTC, closed 2026-10-22 03:59 UTC, stage TEST
+  - MAE -1.52R / MFE +0.29R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
