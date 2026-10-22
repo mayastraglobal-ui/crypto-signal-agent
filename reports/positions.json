@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-21 23:28",
+ "generated_utc": "2026-10-22 00:39",
  "book": {
-  "utc": "2026-10-21 23:28",
-  "beijing": "2026-10-22 07:28",
+  "utc": "2026-10-22 00:39",
+  "beijing": "2026-10-22 08:39",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -20,7 +20,7 @@
     "tp1": 86179.4021893355,
     "sim_tf": "4h",
     "since": "2026-10-21 15:59",
-    "open_r": -0.03,
+    "open_r": -0.27,
     "next_action": "HOLD"
    },
    {
@@ -37,7 +37,7 @@
     "tp1": 87818.79437867098,
     "sim_tf": "4h",
     "since": "2026-10-21 15:59",
-    "open_r": -0.03,
+    "open_r": -0.27,
     "next_action": "HOLD"
    },
    {
@@ -54,7 +54,7 @@
     "tp1": 87818.79437867098,
     "sim_tf": "4h",
     "since": "2026-10-21 15:59",
-    "open_r": -0.03,
+    "open_r": -0.27,
     "next_action": "HOLD"
    }
   ],
@@ -72,10 +72,10 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-21 23:28 UTC / 2026-10-22 07:28 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 00:39 UTC / 2026-10-22 08:39 Beijing",
   "Active:    none",
   "Awaiting:  none",
-  "Paper:     BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.03R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.03R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.03R \u00b7 HOLD (PAPER_TRADING)",
+  "Paper:     BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING)",
   "Closed:    none",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -317,5 +317,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-22 00:39",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 13:29",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE +1.15R"
+  },
+  {
+   "time_utc": "2026-10-22 00:39",
+   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.91R"
+  }
+ ]
 }

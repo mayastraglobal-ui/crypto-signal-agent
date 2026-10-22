@@ -9,10 +9,8 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {
-  "IOST": "2026-10-21"
- },
- "runs": 625,
+ "suspended": {},
+ "runs": 626,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -134,7 +132,6 @@
    "volume_7d"
   ],
   "IOST": [
-   "big_move",
    "spread",
    "thin_book",
    "volume_7d"
