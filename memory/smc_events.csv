@@ -19631,3 +19631,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 10:45,SUI,15m,FVG_RETRACE,bull,,0.9865,0.988,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-22 10:45,SUI,15m,FVG_FILLED,bull,,0.9865,0.988,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-22 11:00,SUI,15m,FVG_RETRACE,bull,,0.9821,0.9861,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 12:00,BTC,4h,FVG_FILLED,bull,,81664.01,82337.54,,,1d,RANGE,,smc-1.0,Binance
+2026-10-22 12:00,BTC,4h,FVG,bear,,82267.79,82670.74,0.47,,1d,RANGE,,smc-1.0,Binance
+2026-10-22 12:00,ETH,4h,FVG_RETRACE,bull,,2392.29,2425.12,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 12:30,SOL,30m,FVG_RETRACE,bull,,104.06,104.27,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 12:30,SOL,30m,FVG_FILLED,bull,,104.33,104.46,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 12:15,SOL,15m,BOS,bear,104.45,,,0.461,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 12:15,SOL,15m,FVG_RETRACE,bull,,103.9,104.27,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 12:15,SOL,15m,FVG_FILLED,bull,,104.33,104.5,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 12:30,XRP,30m,SWEEP,bull,1.3252,,,0.489,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 11:45,XRP,15m,FVG_RETRACE,bear,,1.3301,1.3314,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 12:15,XRP,15m,BOS,bear,1.3252,,,0.1,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 12:15,XRP,15m,FVG_FILLED,bull,,1.3244,1.3268,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 12:00,ZEC,4h,SWEEP,bull,1250.66,,,0.523,,1d,UNCLEAR,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-10-22 12:00,ZEC,1h,OB_RETEST,bear,,1263.13,1284.59,,NY AM,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-22 12:00,ZEC,1h,FVG_FILLED,bear,,1254.95,1263.13,,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-10-22 12:00,ZEC,30m,OB_RETEST,bear,,1263.13,1284.59,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-22 11:45,ZEC,15m,SWEEP,bear,1262.15,,,0.495,NY AM,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-22 12:00,SUI,4h,FVG,bear,,0.993,1.0,0.29,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 12:30,SUI,30m,FVG_FILLED,bull,,0.9842,0.9861,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 12:15,SUI,15m,SWEEP,bull,0.9846,,,0.535,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance

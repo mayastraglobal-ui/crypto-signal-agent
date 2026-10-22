@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-22 11:33",
+ "generated_utc": "2026-10-22 12:39",
  "book": {
-  "utc": "2026-10-22 11:33",
-  "beijing": "2026-10-22 19:33",
+  "utc": "2026-10-22 12:39",
+  "beijing": "2026-10-22 20:39",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -60,7 +60,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 11:33 UTC / 2026-10-22 19:33 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 12:39 UTC / 2026-10-22 20:39 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -87,6 +87,18 @@
     "end_utc": "2026-10-28 18:00",
     "type": "FOMC",
     "name": "FOMC decision (Oct 27-28 meeting) + press conference"
+   },
+   {
+    "start_utc": "2026-10-29 12:30",
+    "end_utc": "2026-10-29 12:30",
+    "type": "GDP",
+    "name": "US GDP (Advance Estimate), 3rd Quarter 2026"
+   },
+   {
+    "start_utc": "2026-10-29 12:30",
+    "end_utc": "2026-10-29 12:30",
+    "type": "PCE",
+    "name": "US PCE / Personal Income and Outlays (Sep data)"
    }
   ],
   "next_event": "FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC",
