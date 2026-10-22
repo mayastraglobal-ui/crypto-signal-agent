@@ -19483,3 +19483,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 05:45,SUI,15m,BOS,bear,1.0009,,,0.088,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-10-22 06:00,SUI,15m,SWEEP,bull,0.998,,,0.465,,1h,UNCLEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
 2026-10-22 06:00,SUI,15m,OB_RETEST,bull,,0.9919,0.9975,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-22 06:45,BTC,15m,FVG,bear,,82630.0,82773.07,0.739,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 07:15,BTC,15m,SWEEP,bull,82337.54,,,0.258,London,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-22 07:30,BTC,15m,FVG,bear,,82346.5,82465.0,0.633,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 07:00,SOL,1h,OB_RETEST,bull,,104.01,104.46,,London,4h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-10-22 06:45,SOL,15m,FVG,bear,,104.75,104.86,0.28,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 07:00,XRP,15m,SWEEP,bull,1.3403,,,0.227,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 07:15,XRP,15m,BOS,bear,1.3403,,,0.172,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 07:00,ZEC,1h,FVG,bear,,1272.2,1283.13,0.472,London,4h,TRANSITION,,smc-1.0,Binance
