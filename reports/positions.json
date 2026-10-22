@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-22 04:32",
+ "generated_utc": "2026-10-22 05:32",
  "book": {
-  "utc": "2026-10-22 04:32",
-  "beijing": "2026-10-22 12:32",
+  "utc": "2026-10-22 05:32",
+  "beijing": "2026-10-22 13:32",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -60,7 +60,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 04:32 UTC / 2026-10-22 12:32 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 05:32 UTC / 2026-10-22 13:32 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -239,84 +239,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-donchian_breakout-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.08R"
-  },
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.08R"
-  },
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-donchian_breakout-VEXIT-FDISP-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.08R"
-  },
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-P01-BREAKOUT-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.08R"
-  },
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V1-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.11R"
-  },
-  {
-   "time_utc": "2026-10-22 04:32",
-   "id": "BTC-4h-P07-SQUEEZE-RETEST-V4-2026-10-21 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.11R"
-  }
- ]
+ "events_this_run": []
 }
