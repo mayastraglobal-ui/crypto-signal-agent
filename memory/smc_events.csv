@@ -19491,3 +19491,39 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-22 07:00,XRP,15m,SWEEP,bull,1.3403,,,0.227,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-22 07:15,XRP,15m,BOS,bear,1.3403,,,0.172,London,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-22 07:00,ZEC,1h,FVG,bear,,1272.2,1283.13,0.472,London,4h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,BTC,4h,FVG_RETRACE,bull,,81664.01,82337.54,,,1d,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-22 08:00,BTC,4h,FVG,bear,,82991.57,84057.59,1.218,,1d,RANGE,,smc-1.0,Binance
+2026-10-22 08:00,BTC,1h,FVG,bear,,82531.17,82647.05,0.27,London,4h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,BTC,30m,FVG_FILLED,bull,,82171.8,82905.43,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,BTC,30m,FVG,bear,,82338.83,82465.0,0.44,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:30,BTC,30m,FVG_RETRACE,bull,,81625.72,82100.0,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 08:00,BTC,15m,SWEEP,bull,82211.21,,,0.563,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-22 08:00,BTC,15m,FVG_FILLED,bull,,82171.8,82833.71,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:15,BTC,15m,FVG_RETRACE,bull,,81776.01,82100.0,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 08:00,ETH,4h,OB_INVALID,bull,,2442.8,2465.5,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-22 08:00,ETH,4h,FVG,bear,,2448.38,2470.53,0.603,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:30,ETH,30m,FVG_FILLED,bull,,2413.65,2456.06,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:15,ETH,15m,BOS,bear,2426.19,,,0.872,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 08:30,ETH,15m,FVG_FILLED,bull,,2413.65,2451.46,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:30,ETH,15m,FVG,bear,,2420.23,2426.69,0.85,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,SOL,4h,FVG_FILLED,bull,,104.5,105.31,,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,SOL,4h,FVG,bear,,105.72,106.72,0.546,,1d,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:30,SOL,30m,OB_INVALID,bull,,104.17,104.6,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-22 08:15,SOL,15m,BOS,bear,104.22,,,0.251,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 08:30,SOL,15m,FVG,bear,,104.15,104.25,0.278,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,XRP,4h,FVG,bear,,1.353,1.3614,0.37,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 08:30,XRP,30m,SWEEP,bull,1.3314,,,0.107,London,1h,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-22 08:30,XRP,30m,BOS,bear,1.337,,,0.71,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 08:15,XRP,15m,BOS,bear,1.3371,,,0.2,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-22 08:15,XRP,15m,FVG_FILLED,bull,,1.3367,1.3403,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:30,XRP,15m,SWEEP,bull,1.3314,,,0.156,London,1h,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-10-22 08:30,XRP,15m,FVG,bear,,1.3361,1.3389,0.543,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,ZEC,1h,FVG_RETRACE,bear,,1272.2,1283.13,,London,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-22 08:00,ZEC,1h,FVG_FILLED,bear,,1272.2,1283.13,,London,4h,TRANSITION,,smc-1.0,Binance
+2026-10-22 08:00,ZEC,30m,FVG_RETRACE,bear,,1272.2,1277.32,,London,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-22 08:00,ZEC,30m,FVG_FILLED,bear,,1272.2,1277.32,,London,1h,WEAK_BULL,,smc-1.0,Binance
+2026-10-22 08:00,SUI,4h,FVG_FILLED,bull,,0.9963,1.0066,,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 08:00,SUI,4h,FVG,bear,,1.0088,1.0267,0.719,,1d,UNCLEAR,,smc-1.0,Binance
+2026-10-22 08:30,SUI,30m,OB_INVALID,bull,,0.9919,0.9975,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-22 08:15,SUI,15m,OB_INVALID,bull,,0.9919,0.9975,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-22 08:30,SUI,15m,FVG,bear,,0.9886,0.991,0.47,London,1h,TRANSITION,,smc-1.0,Binance
