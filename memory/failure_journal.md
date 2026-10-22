@@ -228,3 +228,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
   - what happened: -
   - root cause / fix: (review)
+
+### BTC LONG 1h P01-BREAKOUT-V2 v1.0 - exit-rule -0.75R
+- timestamp: 2026-10-22 02:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.75R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 13:59 UTC, closed 2026-10-22 01:59 UTC, stage TEST
+  - MAE -0.57R / MFE +1.44R
+  - at entry: session NY AM, conditions: overextended_entry, no_displacement
+  - what happened: -
+  - root cause / fix: (review)
+
+### BTC LONG 1h P01-BREAKOUT-V2 v1.0 - SL -1.16R
+- timestamp: 2026-10-22 02:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.16R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-29
+  - signal 2026-10-21 14:59 UTC, closed 2026-10-22 01:59 UTC, stage TEST
+  - MAE -1.38R / MFE +0.38R
+  - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
+  - what happened: -
+  - root cause / fix: (review)

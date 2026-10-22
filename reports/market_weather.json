@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-22 00:39",
+ "utc": "2026-10-22 02:12",
  "verdict": {
   "code": "MIXED",
   "icon": "\u26c5",
@@ -35,7 +35,7 @@
    "adx": {
     "1d": 19.0,
     "4h": 30.0,
-    "1h": 47.0
+    "1h": 43.0
    },
    "vol": {
     "atr_pct": 2.46,
@@ -53,27 +53,27 @@
    },
    "crowd": {
     "funding_pct": -0.0047,
-    "oi_24h_pct": 6.6,
+    "oi_24h_pct": 2.8,
     "label": "neutral"
    },
-   "change_24h": 1.44
+   "change_24h": 0.52
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H STRONG_BULL)",
+   "turning": null,
+   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "UNCLEAR",
-    "1h": "STRONG_BULL"
+    "1h": "TRANSITION"
    },
    "adx": {
     "1d": 28.0,
     "4h": 23.0,
-    "1h": 34.0
+    "1h": 31.0
    },
    "vol": {
     "atr_pct": 4.06,
@@ -91,27 +91,27 @@
    },
    "crowd": {
     "funding_pct": 0.0036,
-    "oi_24h_pct": -1.6,
+    "oi_24h_pct": -4.4,
     "label": "neutral"
    },
-   "change_24h": 0.96
+   "change_24h": -0.17
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H WEAK_BULL)",
+   "turning": null,
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "WEAK_BULL"
+    "1h": "TRANSITION"
    },
    "adx": {
     "1d": 27.0,
     "4h": 25.0,
-    "1h": 27.0
+    "1h": 25.0
    },
    "vol": {
     "atr_pct": 4.74,
@@ -129,10 +129,10 @@
    },
    "crowd": {
     "funding_pct": 0.0039,
-    "oi_24h_pct": 3.1,
+    "oi_24h_pct": 0.2,
     "label": "neutral"
    },
-   "change_24h": 0.52
+   "change_24h": -0.31
   },
   {
    "coin": "SUI",
@@ -149,7 +149,7 @@
    "adx": {
     "1d": 22.0,
     "4h": 25.0,
-    "1h": 16.0
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 6.98,
@@ -167,10 +167,10 @@
    },
    "crowd": {
     "funding_pct": 0.0006,
-    "oi_24h_pct": -1.0,
+    "oi_24h_pct": -4.1,
     "label": "neutral"
    },
-   "change_24h": -0.2
+   "change_24h": -1.38
   },
   {
    "coin": "XRP",
@@ -187,7 +187,7 @@
    "adx": {
     "1d": 23.0,
     "4h": 33.0,
-    "1h": 55.0
+    "1h": 49.0
    },
    "vol": {
     "atr_pct": 4.22,
@@ -205,10 +205,10 @@
    },
    "crowd": {
     "funding_pct": 0.009,
-    "oi_24h_pct": 3.3,
+    "oi_24h_pct": 1.3,
     "label": "neutral"
    },
-   "change_24h": 2.11
+   "change_24h": 1.01
   },
   {
    "coin": "ZEC",
@@ -225,7 +225,7 @@
    "adx": {
     "1d": 24.0,
     "4h": 28.0,
-    "1h": 55.0
+    "1h": 50.0
    },
    "vol": {
     "atr_pct": 9.36,
@@ -243,30 +243,30 @@
    },
    "crowd": {
     "funding_pct": 0.0005,
-    "oi_24h_pct": 13.7,
+    "oi_24h_pct": 5.3,
     "label": "neutral"
    },
-   "change_24h": 4.23
+   "change_24h": 3.06
   }
  ],
- "alts_vs_btc_24h": -0.48,
+ "alts_vs_btc_24h": -0.69,
  "fear_greed": {
   "value": 68,
   "label": "Greed",
   "yesterday": 63
  },
  "btc_dominance": {
-  "pct": 59.685,
-  "utc": "2026-10-22 00:39",
-  "ch24": 0.14,
-  "ch7": 0.4,
+  "pct": 59.587,
+  "utc": "2026-10-22 02:12",
+  "ch24": 0.1,
+  "ch7": 0.24,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
  "events": [
   {
    "start_utc": "2026-10-28 18:00",
    "name": "FOMC decision (Oct 27-28 meeting) + press conference",
-   "hours": 161.3
+   "hours": 159.8
   }
  ],
  "blackout_now": [],
@@ -279,5 +279,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\u26c5 <b>Market weather \u00b7 10-22 08:39 Beijing</b>\nVerdict: <b>Mixed day</b>\nBTC has a direction, but most coins don't follow it.\n\nBTC trend: 1D RANGE \u00b7 4H WEAK_BULL \u00b7 1H STRONG_BULL\nVolatility: quiet (daily range 2.5%, higher than 16% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (82,328 \u2013 85,858) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0047%/8h, open interest +6.6% in 24h)\nAltcoins vs BTC (24h): -0.5%\nBTC dominance: 59.7% \u00b7 24h +0.14 pt \u00b7 7d +0.40 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 68\n\n<b>Coins</b>\n\ud83d\udfe2 BTC: trend up\n\u2197\ufe0f ETH: turning up (not confirmed)\n\u2197\ufe0f SOL: turning up (not confirmed)\n\u26aa SUI: choppy\n\u2197\ufe0f XRP: turning up (not confirmed)\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\nFits today: only coins whose own timeframes agree; smaller expectations\nAvoid: trading coins marked choppy\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\u26c5 <b>Market weather \u00b7 10-22 10:12 Beijing</b>\nVerdict: <b>Mixed day</b>\nBTC has a direction, but most coins don't follow it.\n\nBTC trend: 1D RANGE \u00b7 4H WEAK_BULL \u00b7 1H STRONG_BULL\nVolatility: quiet (daily range 2.5%, higher than 16% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (82,328 \u2013 85,858) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0047%/8h, open interest +2.8% in 24h)\nAltcoins vs BTC (24h): -0.7%\nBTC dominance: 59.6% \u00b7 24h +0.10 pt \u00b7 7d +0.24 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Greed 68\n\n<b>Coins</b>\n\ud83d\udfe2 BTC: trend up\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\u26aa SUI: choppy\n\u2197\ufe0f XRP: turning up (not confirmed)\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\nFits today: only coins whose own timeframes agree; smaller expectations\nAvoid: trading coins marked choppy\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

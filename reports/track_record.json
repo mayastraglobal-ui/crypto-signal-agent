@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-22 00:39",
+ "utc": "2026-10-22 02:12",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 31,
+  "n": 33,
   "wins": 5,
-  "win_rate": 16.1,
-  "avg_r": -0.647,
-  "total_r": -20.05,
-  "max_dd_r": 20.29,
-  "cur_loss_run": 1,
+  "win_rate": 15.2,
+  "avg_r": -0.666,
+  "total_r": -21.96,
+  "max_dd_r": 21.96,
+  "cur_loss_run": 3,
   "max_loss_run": 6,
-  "sd": 1.039
+  "sd": 1.01
  },
  "yours": {
   "n": 1,
@@ -32,29 +32,29 @@
   "sd": null
  },
  "silent": {
-  "n": 29,
+  "n": 31,
   "wins": 5,
-  "win_rate": 17.2,
-  "avg_r": -0.619,
-  "total_r": -17.96,
-  "max_dd_r": 18.2,
-  "cur_loss_run": 1,
+  "win_rate": 16.1,
+  "avg_r": -0.641,
+  "total_r": -19.87,
+  "max_dd_r": 19.87,
+  "cur_loss_run": 3,
   "max_loss_run": 6,
-  "sd": 1.07
+  "sd": 1.038
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 31,
+   "n": 33,
    "wins": 5,
-   "win_rate": 16.1,
-   "avg_r": -0.647,
-   "total_r": -20.05,
-   "max_dd_r": 20.29,
-   "cur_loss_run": 1,
+   "win_rate": 15.2,
+   "avg_r": -0.666,
+   "total_r": -21.96,
+   "max_dd_r": 21.96,
+   "cur_loss_run": 3,
    "max_loss_run": 6,
-   "sd": 1.039
+   "sd": 1.01
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -151,9 +151,9 @@
     "sd": 1.171
    },
    "backtest": {
-    "n": 343,
-    "avg_r": 0.012,
-    "win_rate": 37.6
+    "n": 344,
+    "avg_r": 0.009,
+    "win_rate": 37.5
    },
    "verdict": "ok",
    "why": [],
@@ -184,6 +184,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-21 19:14",
+   "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -0.958,
+    "total_r": -1.92,
+    "max_dd_r": 1.92,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.289
+   },
+   "backtest": {
+    "n": 353,
+    "avg_r": 0.116,
+    "win_rate": 36.0
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-22 01:59",
    "sent": false
   },
   {
@@ -573,6 +599,14 @@
   {
    "t": "2026-10-21 23:59",
    "r": -20.05
+  },
+  {
+   "t": "2026-10-22 01:59",
+   "r": -20.8
+  },
+  {
+   "t": "2026-10-22 01:59",
+   "r": -21.96
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

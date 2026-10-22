@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-22 00:39",
+ "generated_utc": "2026-10-22 02:12",
  "book": {
-  "utc": "2026-10-22 00:39",
-  "beijing": "2026-10-22 08:39",
+  "utc": "2026-10-22 02:12",
+  "beijing": "2026-10-22 10:12",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -72,7 +72,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 00:39 UTC / 2026-10-22 08:39 Beijing",
+  "POSITION BOOK \u2014 2026-10-22 02:12 UTC / 2026-10-22 10:12 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 LONG \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 84,540.01 \u00b7 stop 82,900.62 \u00b7 open -0.27R \u00b7 HOLD (PAPER_TRADING)",
@@ -137,7 +137,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -319,30 +319,30 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-22 00:39",
-   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 13:29",
+   "time_utc": "2026-10-22 02:12",
+   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 13:59",
    "coin": "BTC",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "TP1_HIT",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "EXIT_RULE +1.15R"
-  },
-  {
-   "time_utc": "2026-10-22 00:39",
-   "id": "BTC-30m-P01-BREAKOUT-V2-2026-10-21 14:59",
-   "coin": "BTC",
-   "tf": "30m",
+   "tf": "1h",
    "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "POSITION_ACTIVE",
    "to_state": "CLOSED",
    "price": null,
-   "note": "EXIT_RULE -0.91R"
+   "note": "EXIT_RULE -0.75R"
+  },
+  {
+   "time_utc": "2026-10-22 02:12",
+   "id": "BTC-1h-P01-BREAKOUT-V2-2026-10-21 14:59",
+   "coin": "BTC",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.16R"
   }
  ]
 }
