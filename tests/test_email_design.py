@@ -775,7 +775,8 @@ class Alerts(unittest.TestCase):
         sent_path = os.path.join(self.rep, "brain_sent.json")
         at = lambda h, m: dt.datetime(2026, 9, 26, h, m, tzinfo=dt.timezone.utc)  # noqa: E731
         with mock.patch.object(notify, "ROOT", self.tmp), mock.patch.object(notify, "BRAIN_SENT", sent_path), \
-                mock.patch.object(notify, "FALLBACK_SENT", os.path.join(self.rep, "fallback_sent.json")):
+                mock.patch.object(notify, "FALLBACK_SENT", os.path.join(self.rep, "fallback_sent.json")), \
+                mock.patch.object(notify, "CLAUDE_SLOTS", ("08:20", "14:20", "21:20")):   # the old 3-a-day Claude task
             notify.late_tasks(at(13, 55))                                 # 35 minutes: Claude still has time
             self.assertEqual(self.subjects(), [])
             notify.late_tasks(at(14, 0))                                  # 40 minutes: the engine's email
@@ -807,6 +808,28 @@ class Alerts(unittest.TestCase):
             notify.late_tasks(at(16, 25))                                 # over 3 hours: never a stale one
             notify.late_tasks(at(7, 5))                                   # 14:20 (06:20 UTC): its file is there
             self.assertEqual(self.subjects(), [])
+
+    def test_1420_2120_are_engine_only_since_23_oct(self):
+        """2026-10-23 (operator: "fix brain 1 a day"): Claude writes only the 08:20 briefing. 14:20 / 21:20 = the
+        engine's changes-only email at its time, no late note, and never a "missing" ALERT."""
+        self.assertEqual(notify.CLAUDE_SLOTS, ("08:20",))
+        self.write("latest.json", dict(rep_file(), generated_utc="2026-09-26 13:07"))
+        os.makedirs(os.path.join(self.rep, "claude", "daily"))
+        for rel in ("briefings/2026-09-26-0820.md", "daily/2026-09-25.md"):
+            with open(os.path.join(self.rep, "claude", rel), "w") as f:
+                f.write("# x\n")
+        sent_path = os.path.join(self.rep, "brain_sent.json")
+        at = lambda h, m: dt.datetime(2026, 9, 26, h, m, tzinfo=dt.timezone.utc)  # noqa: E731
+        with mock.patch.object(notify, "ROOT", self.tmp), mock.patch.object(notify, "BRAIN_SENT", sent_path), \
+                mock.patch.object(notify, "FALLBACK_SENT", os.path.join(self.rep, "fallback_sent.json")):
+            notify.late_tasks(at(13, 20))                                 # 21:20 Beijing: no waiting for Claude
+            self.assertNotIn("late", self.sent[0]["text"])
+            self.assertEqual(self.subjects(), ["21:20 · No change since 14:20 · 1 trade open"])
+            notify.late_tasks(at(13, 50))
+            self.assertEqual(self.subjects(), [])                             # once per slot
+            notify.watchdog(at(14, 30))                                       # 70 minutes on: nothing is "missing"
+            self.assertEqual(self.subjects(), [])
+            self.assertEqual([x for x in notify.due_times(at(14, 30)) if x[0] == "briefing" and x[1] != "08:20"], [])
 
     def test_task_wrote_nothing_0820_briefing_and_daily_review_still_go_out(self):
         """28 Sep: the Claude task could not run a single command, so it wrote nothing - the emails still go out."""
