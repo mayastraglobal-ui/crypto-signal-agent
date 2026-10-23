@@ -1,71 +1,28 @@
 {
- "generated_utc": "2026-10-22 23:29",
+ "generated_utc": "2026-10-23 00:41",
  "book": {
-  "utc": "2026-10-22 23:29",
-  "beijing": "2026-10-23 07:29",
+  "utc": "2026-10-23 00:41",
+  "beijing": "2026-10-23 08:41",
   "active": [],
   "awaiting": [],
   "paper": [],
-  "closed_today": [
-   {
-    "id": "BTC-4h-donchian_breakout-2026-10-21 15:59",
-    "coin": "BTC",
-    "direction": "LONG",
-    "tf": "4h",
-    "strategy": "donchian_breakout",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "CLOSED",
-    "reason": "SL",
-    "result_r": -1.084,
-    "live": false
-   },
-   {
-    "id": "BTC-4h-donchian_breakout-VEXIT-2026-10-21 15:59",
-    "coin": "BTC",
-    "direction": "LONG",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "CLOSED",
-    "reason": "SL",
-    "result_r": -1.084,
-    "live": false
-   },
-   {
-    "id": "BTC-4h-donchian_breakout-VEXIT-FDISP-2026-10-21 15:59",
-    "coin": "BTC",
-    "direction": "LONG",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FDISP",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "CLOSED",
-    "reason": "SL",
-    "result_r": -1.084,
-    "live": false
-   }
-  ],
+  "closed_today": [],
   "limit_orders": [],
   "day_r": 0.0,
   "week_r": 0.0,
-  "paper_day_r": -3.25,
+  "paper_day_r": 0.0,
   "heat": 0,
   "limits": {
    "day_r": -3,
    "week_r": -6,
    "heat": 3
   },
-  "empty": false
+  "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-22 23:29 UTC / 2026-10-23 07:29 Beijing",
-  "Active:    none",
-  "Awaiting:  none",
-  "Paper:     none",
-  "Closed:    BTC LONG 4h donchian_breakout SL -1.08R (paper) | BTC LONG 4h donchian_breakout-VEXIT SL -1.08R (paper) | BTC LONG 4h donchian_breakout-VEXIT-FDISP SL -1.08R (paper)",
-  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3 \u00b7 paper today -3.25R",
+  "POSITION BOOK \u2014 2026-10-23 00:41 UTC / 2026-10-23 08:41 Beijing",
+  "No open or pending positions.",
+  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
  ],
  "risk": {
@@ -78,7 +35,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+SUI+XRP"
+   "BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -205,6 +162,28 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
   },
   {
    "coin": "XRP",

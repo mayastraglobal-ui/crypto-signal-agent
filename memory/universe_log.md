@@ -711,3 +711,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-22 22:28 UTC
 - **FLAG** ZEC - possible wash volume: 24h volume is 1,424x the 1% order-book depth (flag only, not excluded)
+
+## 2026-10-23 00:41 UTC
+- **EXCLUDED** SNDKB - only 134 days of history (need 180); 7-day average volume $36M < $50M
+- **EXCLUDED** SOXLB - only 108 days of history (need 180); 7-day average volume $29M < $50M; order book too thin: $220k within 1% (need $250k)
