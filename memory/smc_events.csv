@@ -20186,3 +20186,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-23 14:45,SUI,15m,BREAKER_RETEST,bear,,0.9911,0.9981,,Silver Bullet,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-10-23 14:45,SUI,15m,FVG_RETRACE,bear,,0.993,0.9963,,Silver Bullet,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-23 15:00,SUI,15m,FVG_FILLED,bear,,0.993,0.9963,,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-23 16:00,XRP,4h,FVG_FILLED,bull,,1.3117,1.3172,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 16:00,XRP,15m,FVG_RETRACE,bear,,1.3121,1.3137,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 16:00,XRP,15m,FVG_FILLED,bear,,1.3121,1.3137,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 16:00,SUI,4h,FVG_FILLED,bull,,0.9809,0.9883,,,1d,UNCLEAR,,smc-1.0,Binance
