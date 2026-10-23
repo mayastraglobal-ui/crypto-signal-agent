@@ -725,3 +725,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-23 17:30 UTC
 - **EXCLUDED** BNB - 24h volume $48M < $50M; 7-day average volume $33M < $50M
+
+## 2026-10-23 21:29 UTC
+- **EXCLUDED** SNDKB - only 134 days of history (need 180); 7-day average volume $36M < $50M; order book too thin: $244k within 1% (need $250k)
