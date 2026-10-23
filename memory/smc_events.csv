@@ -20043,3 +20043,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-23 10:30,SUI,30m,FVG_RETRACE,bear,,0.9938,0.9962,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-23 09:45,SUI,15m,FVG,bear,,0.9931,0.9962,0.707,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-23 10:00,SUI,15m,FVG_RETRACE,bear,,0.9931,0.9962,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 11:15,SOL,15m,FVG,bear,,104.07,104.15,0.281,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-23 11:30,SOL,15m,FVG_RETRACE,bear,,104.07,104.15,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-23 11:30,SOL,15m,FVG_FILLED,bear,,104.07,104.15,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-10-23 11:15,XRP,15m,SWEEP,bull,1.3169,,,0.33,NY AM,1h,WEAK_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-10-23 11:00,ZEC,30m,BOS,bear,1213.24,,,0.383,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-23 11:30,ZEC,30m,SWEEP,bull,1203.74,,,0.385,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-23 10:45,ZEC,15m,SWEEP,bull,1211.21,,,0.237,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-23 11:15,ZEC,15m,SWEEP,bull,1203.74,,,0.617,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-23 11:15,ZEC,15m,FVG_RETRACE,bull,,1198.02,1202.38,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 11:00,SUI,15m,BOS,bear,0.9886,,,0.116,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-23 11:00,SUI,15m,BREAKER_RETEST,bull,,0.9816,0.9878,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-23 11:15,SUI,15m,FVG_RETRACE,bull,,0.984,0.9866,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 11:15,SUI,15m,FVG_FILLED,bull,,0.9873,0.989,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 11:15,SUI,15m,FVG,bear,,0.9883,0.9896,0.309,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 11:30,SUI,15m,FVG_RETRACE,bear,,0.9883,0.9896,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 11:30,SUI,15m,FVG_FILLED,bear,,0.9883,0.9896,,NY AM,1h,TRANSITION,,smc-1.0,Binance
