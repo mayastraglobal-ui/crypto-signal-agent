@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-23 13:39",
+ "generated_utc": "2026-10-23 14:36",
  "book": {
-  "utc": "2026-10-23 13:39",
-  "beijing": "2026-10-23 21:39",
+  "utc": "2026-10-23 14:36",
+  "beijing": "2026-10-23 22:36",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-23 13:39 UTC / 2026-10-23 21:39 Beijing",
+  "POSITION BOOK \u2014 2026-10-23 14:36 UTC / 2026-10-23 22:36 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -171,7 +171,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -182,7 +182,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
