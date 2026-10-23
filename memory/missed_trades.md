@@ -1150,3 +1150,48 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - rsi2_dip_buy v1.0 15m: blocked by the regime gate
   - trend_pullback v1.0 15m: blocked by the regime gate
+
+### BTC down -3.5% (7.4x ATR), 2026-10-21 21:00 -> 2026-10-22 09:00
+- timestamp: 2026-10-23 01:18 UTC · source: engine: daily research run · evidence: FACT: move of 7.4x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: STRONG_BULL · review: 2026-10-30
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ETH down -3.6% (5.2x ATR), 2026-10-21 21:00 -> 2026-10-22 10:00
+- timestamp: 2026-10-23 01:18 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: STRONG_BULL · review: 2026-10-30
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P05-RANGE-REVERSAL-V1 v1.0 4h: blocked by the regime gate
+  - P05-RANGE-REVERSAL-V2 v1.0 1h: blocked by the regime gate
+  - P05-RANGE-REVERSAL-V4 v1.0 4h: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+
+### SOL down -4.1% (5.2x ATR), 2026-10-21 21:00 -> 2026-10-22 09:00
+- timestamp: 2026-10-23 01:18 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: WEAK_BULL · review: 2026-10-30
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P05-RANGE-REVERSAL-V2 v1.0 1h: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the permission gate
+
+### SUI down -6.0% (5.6x ATR), 2026-10-21 21:00 -> 2026-10-22 09:00
+- timestamp: 2026-10-23 01:18 UTC · source: engine: daily research run · evidence: FACT: move of 5.6x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: RANGE · review: 2026-10-30
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### BNB down -2.4% (6.3x ATR), 2026-10-21 21:00 -> 2026-10-22 09:00
+- timestamp: 2026-10-23 01:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.3x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: STRONG_BULL · review: 2026-10-30
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
