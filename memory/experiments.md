@@ -1214,3 +1214,57 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0115 | 2026-10-19 01:14 | TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 | breakout | 1h, 30m, 15m, 5m | TRD-H4-BREAKOUT-FDISP@1.0 loses on overextended_entry (+0.11R a trade with it, +0.57R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest. |
 | EXP-0116 | 2026-10-20 01:15 | TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 | breakout | 1h, 30m, 15m, 5m | TRD-H4-BREAKOUT-S3-FDISP@1.0 loses on overextended_entry (+0.11R a trade with it, +0.52R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest. |
 | EXP-0117 | 2026-10-21 01:16 | donchian_breakout-VEXIT-FDISP@1.0 | breakout | 4h, 1h, 30m | donchian_breakout-VEXIT@1.0 loses on false_breakout (-0.36R a trade with it, +0.43R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+
+### Feedback: P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 1 cell, 1734 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S2 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-21
+  - parent: result: P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h
+  - hypothesis: The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0 (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 1734 trades +0.105R (unseen +0.105R); failed gates: profit factor 1.16, recovery factor 2.52 (needs 3), Monte Carlo 95% worst drawdown per 100 trades 28.5R (limit 17R).
+  - teaches: the hypothesis held in part: removing the rule gave far more trades (1734 vs 292) and a higher average (+0.105R vs +0.032R). It is still a weak cell: the drawdown, not the entry, is what blocks it.
+  - next: stop this line. Another removal on the same cell would only be curve-fitting; wait for more data.
+
+### Feedback: TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 4 cells, 607 trades · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-21
+  - parent: result: TRD-H4-BREAKOUT-FDISP@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-FDISP@1.0 loses on overextended_entry. One change - no entry more than 2 ATR beyond the 20 EMA - should remove part of those losses.
+  - result: 30m VALIDATION 79 trades +0.413R (unseen +0.492R); 1h FAILED 59 trades -0.290R; 15m FAILED 200 trades -0.151R; 5m FAILED 269 trades -0.270R. Failed cells miss the +0.10R average, profit factor and drawdown gates.
+  - teaches: the repair worked on 30m only (79 trades, a small sample) and failed on 1h, 15m and 5m, so it is not a general fix. The failure lab record is NOTEXT helped 2 of 2 on 30m.
+  - next: stop this line for 15m, 1h and 5m. Let the 30m VALIDATION cell collect forward trades before any further change.
+
+### Feedback: TRD-H4-BREAKOUT-FDISP-S2@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 4 cells, 3589 trades · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-01-21
+  - parent: result: TRD-H4-BREAKOUT-FDISP@1.0 1h
+  - hypothesis: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-FDISP@1.0.
+  - result: 1h BACKTESTING 776 trades +0.190R (unseen +0.223R); 30m BACKTESTING 541 trades +0.164R (unseen +0.276R); 15m BACKTESTING 929 trades +0.022R; 5m FAILED 1343 trades -0.094R. 1h and 30m fail only Monte Carlo drawdown (19.6R and 21.0R vs limit 17R).
+  - teaches: the hypothesis held: the simpler card has more trades (776 vs 639 on 1h) and the same or better average. The open problem is the drawdown, not the entry.
+  - next: stop removing rules from this card. The useful next test is a risk-side change, not another entry removal.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 4 cells, 689 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-21
+  - parent: result: TRD-H4-BREAKOUT-S3-FDISP@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-S3-FDISP@1.0 loses on overextended_entry. One change - no entry more than 2 ATR beyond the 20 EMA - should remove part of those losses.
+  - result: 30m VALIDATION 91 trades +0.410R (unseen +0.549R); 1h FAILED 72 trades -0.200R; 15m FAILED 218 trades -0.086R; 5m FAILED 308 trades -0.258R.
+  - teaches: same pattern as the FDISP twin: it works on 30m only, on a small sample (91 trades), and fails on the other three timeframes.
+  - next: stop this line except the 30m VALIDATION cell, which waits for forward trades.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP-S2@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 4 cells, 3952 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-01-21
+  - parent: result: TRD-H4-BREAKOUT-S3-FDISP@1.0 1h
+  - hypothesis: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-S3-FDISP@1.0.
+  - result: 1h BACKTESTING 891 trades +0.172R (unseen +0.139R); 30m BACKTESTING 618 trades +0.131R (unseen +0.200R); 15m BACKTESTING 993 trades +0.041R; 5m FAILED 1450 trades -0.060R. 1h and 30m fail only Monte Carlo drawdown (20.6R vs limit 17R).
+  - teaches: the hypothesis held again: more trades, similar average. Two twins now agree, so the result is not a fluke of one card.
+  - next: stop this line. The shared blocker is the drawdown limit, which no entry change has solved.
+
+### Feedback: donchian_breakout-VEXIT-FDISP@1.0
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: BACKTEST_EVIDENCE: 3 cells, 3384 trades · confidence: low · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-21
+  - parent: result: donchian_breakout-VEXIT@1.0 30m
+  - hypothesis: donchian_breakout-VEXIT@1.0 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 4h PAPER_TRADING 623 trades +0.258R (unseen +0.255R); 1h BACKTESTING 1672 trades +0.015R; 30m FAILED 1089 trades -0.010R.
+  - teaches: on 4h the repair kept the result (+0.258R vs +0.251R) with 192 fewer trades, so it did not add an edge; on 1h and 30m it did not rescue the cell.
+  - next: stop this line. The 4h cell is already in PAPER_TRADING; further changes would only be curve-fitting.
+
+### Hypothesis: add a tail-loss check to the drawdown test (from C14)
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: research coins · timeframe: - · regime: - · review: 2027-01-21
+  - hypothesis: for cards with many small wins and rare large losses (such as rsi2_dip_buy), the average R and t value can look good while one rare loss dominates. Report the worst single loss and the worst 1% of trades in R next to the Monte Carlo drawdown.
+  - how to test: an engine report check for the operator (pull request), not a lab card. List the cards whose worst loss is more than 3R and whether the existing drawdown gate already catches them.
+  - stop if: every card with such losses already fails the Monte Carlo drawdown gate.

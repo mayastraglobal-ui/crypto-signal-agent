@@ -1382,3 +1382,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): donchian_breakout-VEXIT-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [C14] Fooled by Randomness (Taleb 2001) - from a book summary
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: CLAIM: a summary of the book, not the book · confidence: low · strategy: - · asset: - · timeframe: - · regime: - · review: 2027-01-21
+  - title / source: James Clear, 'Fooled by Randomness - book summary'
+  - URL: https://jamesclear.com/book-summaries/fooled-by-randomness (opened in this run)
+  - claim: outsized success is mostly variance and luck; survivorship bias hides the failures; judge a bet by its payoff and downside, not only its odds.
+  - what it means for us: the 456-test trials counter (t >= 3.70) already fights luck among many tests. The new point is rare large losses: see 'Hypothesis: add a tail-loss check to the drawdown test (from C14)'.
+  - limitations: a secondary summary; I did not read the book and the year 2001 was not on the page.

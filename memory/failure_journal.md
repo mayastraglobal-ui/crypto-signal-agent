@@ -300,3 +300,9 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: no_displacement, wrong_session
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### Root cause: SUI 30m P01-BREAKOUT-V5 SHORT TEST loss 2026-10-23
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: MODEL_OUTPUT: 1 trade, engine tags false_breakout and regime_mismatch · confidence: low · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 30m · regime: - · review: 2026-10-30
+  - facts (engine): -1.11R stopped out; MAE -1.25R, MFE +0.674R; TEST record, not LIVE or PAPER.
+  - my reading: the trade was +0.67R in profit first, then reversed, which fits the tag false_breakout. The weather that day was 'Choppy - stay out', which fits regime_mismatch.
+  - one trade is a story, not a lesson. The engine's cell P01-BREAKOUT-V5 30m is already FAILED (2795 trades, -0.08R). No rule change.
