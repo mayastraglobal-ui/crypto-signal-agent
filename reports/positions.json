@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-23 02:31",
+ "generated_utc": "2026-10-23 03:32",
  "book": {
-  "utc": "2026-10-23 02:31",
-  "beijing": "2026-10-23 10:31",
+  "utc": "2026-10-23 03:32",
+  "beijing": "2026-10-23 11:32",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-23 02:31 UTC / 2026-10-23 10:31 Beijing",
+  "POSITION BOOK \u2014 2026-10-23 03:32 UTC / 2026-10-23 11:32 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -230,5 +230,19 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-23 03:32",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-22 15:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.11R"
+  }
+ ]
 }
