@@ -1014,3 +1014,15 @@ Newest entries at the bottom. Format: date · who · what · why.
   you") and the Telegram message lead with your alerts.
 - Real data (18 Oct): your alerts 1 closed, -1.05R; silent records 20, -13.95R; all 22, -16.04R; nothing paused.
 - Tests: `tests/test_track_split.py` (6); tests/test_weekly_review.py table row (+ the column). Docs: TRACK_RECORD.md.
+
+## 2026-10-23 · Operator + Claude · Brain: one Claude briefing a day, a fresh session each run
+- The Claude briefings and daily reviews stopped on 18 Oct: the account's weekly usage limit was reached. Each scheduled
+  task reused ONE session that kept growing (briefing ~770k tokens of old conversation, daily review ~680k), so every
+  run re-read all of it, 3 briefings a day.
+- Operator: "fix brain 1 a day". The 3 scheduled Claude tasks were recreated to start a fresh session every run (same
+  prompts, same times; the session attaches the repository itself): briefing 08:20 Beijing only, daily review 23:23,
+  weekly research Sunday 11:52.
+- `notify.py`: `CLAUDE_SLOTS = ("08:20",)`. The 14:20 / 21:20 emails are the engine's changes-only emails at their time
+  (no "Claude was late" note, no "missing" ALERT); 08:20 and the daily review keep the 40-minute late email and the
+  60-minute ALERT. `tasks/briefing.md`, `tasks/COMMON.md` updated. Tests: `tests/test_email_design.py`
+  (test_1420_2120_are_engine_only_since_23_oct; the old 3-a-day test patches CLAUDE_SLOTS).

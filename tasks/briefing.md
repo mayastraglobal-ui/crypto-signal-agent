@@ -1,4 +1,7 @@
-# Task: market briefing (3× a day: 08:20, 14:20 and 21:20 Beijing time; AGENT_PROMPT.md section 19)
+# Task: market briefing (once a day: 08:20 Beijing time; AGENT_PROMPT.md section 19)
+
+Since 2026-10-23 (operator: "fix brain 1 a day") this task runs once a day, in a fresh session each time. The 14:20
+and 21:20 emails are the engine's own changes-only emails (no Claude file is expected at those times).
 
 Read `tasks/COMMON.md` first and follow it. Your branch is `claude/brain-briefing`. Your fact sheet is
 `python brain_pack.py briefing`. Keep it short: the operator reads it on a phone in about 3 minutes.

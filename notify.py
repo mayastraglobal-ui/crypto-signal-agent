@@ -81,6 +81,9 @@ LATE_NOTE = "(engine only - Claude's briefing was late)"
 LATE_NOTE_DAILY = "(engine only - Claude's daily review was late)"
 TASKS_DUE = [("briefing", "08:20", (0, 20)), ("briefing", "14:20", (6, 20)), ("briefing", "21:20", (13, 20)),
              ("daily", "23:30", (15, 30))]   # (task, Beijing slot, UTC hour / minute); the weekly: Sunday 02:00 UTC
+CLAUDE_SLOTS = ("08:20",)                    # 2026-10-23 (operator: "fix brain 1 a day"): Claude writes only the 08:20
+                                             # briefing; 14:20 / 21:20 are the engine's changes-only emails at their time
+                                             # (no late note, no "missing" ALERT). Its Claude tasks had hit the weekly limit
 WEEKLY_DUE = (2, 0)
 WORKFLOWS = {"failed": "scan", "research_failed": "research", "brain_failed": "brain"}
 THING = {"scan": "hourly scan", "research": "daily research run", "brain": "Brain workflow", "tests": "tests on main"}
@@ -611,10 +614,11 @@ def brain_email(result_path):
 
 # ---------------------------------------------------------------- watchdog (the Brain workflow) ---------------------
 def late_tasks(now=None):
-    """08:20 / 14:20 / 21:20 briefings and the 23:30 daily review: Claude's file is not on main 40 minutes after its
-    time (the task ran late, failed, or could not run a single command and wrote nothing) -> the engine's own email
+    """The Claude briefing (CLAUDE_SLOTS: 08:20) and the 23:30 daily review: Claude's file is not on main 40 minutes
+    after its time (the task ran late, failed, or could not run a single command and wrote nothing) -> the engine's own email
     from its numbers only, marked LATE_NOTE / LATE_NOTE_DAILY, once. The slot's file goes into brain_sent.json, so
-    a Claude file that arrives later sends no second email."""
+    a Claude file that arrives later sends no second email. The other briefing slots (14:20 / 21:20) have no Claude
+    task: the engine's changes-only email goes out at their time, without the late note."""
     now = now or now_utc()
     rep = latest()
     if not rep:
@@ -624,7 +628,9 @@ def late_tasks(now=None):
         for back in (1, 0):
             d = (now - dt.timedelta(days=back)).date()
             t = dt.datetime(d.year, d.month, d.day, h, mi, tzinfo=dt.timezone.utc)
-            if not t + dt.timedelta(minutes=LATE_BRIEF_MIN) <= now < t + dt.timedelta(hours=LATE_BRIEF_MAX_H):
+            claude = task != "briefing" or slot in CLAUDE_SLOTS
+            wait = dt.timedelta(minutes=LATE_BRIEF_MIN if claude else 0)   # an engine-only slot: no Claude file to wait for
+            if not t + wait <= now < t + dt.timedelta(hours=LATE_BRIEF_MAX_H):
                 continue
             bj_day = t.astimezone(em.BJ).strftime("%Y-%m-%d")
             if task == "briefing":
@@ -636,7 +642,8 @@ def late_tasks(now=None):
             if rel in sent or scan_sent or os.path.exists(os.path.join(ROOT, rel)):
                 continue                       # Claude's file arrived (the Brain run emails it) or already sent
             if task == "briefing":
-                ok = send_mail(briefing_mail(None, rep, slot, rep.get("generated_utc"), "brain", note=LATE_NOTE))
+                ok = send_mail(briefing_mail(None, rep, slot, rep.get("generated_utc"), "brain",
+                                             note=LATE_NOTE if claude else None))
                 if ok:
                     save_snapshot("brain", rep, slot)
             else:
@@ -644,7 +651,8 @@ def late_tasks(now=None):
             if ok:
                 sent.append(rel)
                 save(BRAIN_SENT, sent[-500:])
-                print(f"{slot} {task}: Claude's file is late - the engine's email went out.")
+                print(f"{slot} {task}: " + ("Claude's file is late - the engine's email went out." if claude else
+                                            "the engine's email went out (no Claude task at this time)."))
 
 
 def due_times(now):
@@ -653,6 +661,8 @@ def due_times(now):
     for back in (1, 0):
         d = (now - dt.timedelta(days=back)).date()
         for task, slot, (h, mi) in TASKS_DUE:
+            if task == "briefing" and slot not in CLAUDE_SLOTS:
+                continue                       # no Claude task at this time: nothing can be missing
             t = dt.datetime(d.year, d.month, d.day, h, mi, tzinfo=dt.timezone.utc)
             bj_day = t.astimezone(em.BJ).strftime("%Y-%m-%d")
             rel = (f"reports/claude/briefings/{bj_day}-{slot.replace(':', '')}.md" if task == "briefing" else
