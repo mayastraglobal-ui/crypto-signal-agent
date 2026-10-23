@@ -19969,3 +19969,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-23 05:00,SUI,15m,FVG_RETRACE,bear,,0.9916,0.9931,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-23 05:15,SUI,15m,WEAK_BREAK,bull,0.9963,,,0.554,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-10-23 05:15,SUI,15m,FVG_FILLED,bear,,0.9916,0.9931,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 06:00,BTC,15m,FVG_FILLED,bear,,81803.9,81883.86,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 06:30,ETH,30m,FVG_FILLED,bear,,2403.49,2409.02,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 06:15,ETH,15m,FVG_RETRACE,bear,,2407.69,2410.73,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 05:45,SOL,15m,FVG_FILLED,bear,,104.44,104.55,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 05:45,SOL,15m,FVG_RETRACE,bull,,104.05,104.21,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 06:00,XRP,30m,WEAK_BREAK,bull,1.3257,,,0.108,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-23 06:00,XRP,30m,FVG,bull,,1.3203,1.3227,0.368,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 06:30,XRP,30m,FVG_RETRACE,bull,,1.3203,1.3227,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 05:45,XRP,15m,OB_INVALID,bear,,1.3208,1.3273,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-23 06:00,XRP,15m,BREAKER_RETEST,bull,,1.3208,1.3273,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-23 06:00,XRP,15m,FVG,bull,,1.3248,1.3264,0.385,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 06:15,XRP,15m,FVG_RETRACE,bull,,1.3248,1.3264,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 06:15,XRP,15m,FVG_FILLED,bull,,1.3248,1.3264,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 06:30,ZEC,15m,SWEEP,bear,1231.31,,,0.522,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-23 06:00,SUI,30m,FVG,bull,,0.993,0.995,0.299,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 06:30,SUI,30m,FVG_RETRACE,bull,,0.993,0.995,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
