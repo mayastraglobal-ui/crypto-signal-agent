@@ -19942,3 +19942,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-23 02:45,SUI,15m,FVG,bull,,0.984,0.9866,0.538,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-10-23 03:00,SUI,15m,FVG,bull,,0.9873,0.989,0.344,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-10-23 03:30,SUI,15m,FVG_RETRACE,bull,,0.9873,0.989,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 04:30,BTC,15m,FVG,bear,,81803.9,81883.86,0.431,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 04:30,ETH,15m,FVG_RETRACE,bull,,2397.12,2403.64,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 04:30,ETH,15m,FVG_FILLED,bull,,2404.96,2411.85,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 04:30,ETH,15m,FVG,bear,,2407.69,2410.73,0.4,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 04:00,SOL,15m,FVG_RETRACE,bear,,104.44,104.55,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-23 04:30,SOL,15m,BOS,bear,104.04,,,0.413,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-23 04:30,SOL,15m,FVG,bear,,104.13,104.25,0.358,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-23 04:30,XRP,15m,FVG,bear,,1.3197,1.3216,0.453,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-23 04:00,SUI,4h,FVG_RETRACE,bear,,0.993,1.0,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-23 04:30,SUI,15m,FVG,bear,,0.9916,0.9931,0.33,,1h,TRANSITION,,smc-1.0,Binance
