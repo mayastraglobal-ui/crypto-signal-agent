@@ -1195,3 +1195,159 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
   - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+
+### Review: LTC up +14.2% (8.0x ATR), 2026-09-24 01:00 -> 2026-09-24 14:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SOL up +4.8% (5.5x ATR), 2026-09-25 07:00 -> 2026-09-25 19:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SUI up +13.4% (7.3x ATR), 2026-09-25 08:00 -> 2026-09-25 21:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ENA up +18.4% (7.5x ATR), 2026-09-25 08:00 -> 2026-09-25 21:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: UNI up +8.2% (5.3x ATR), 2026-09-25 07:00 -> 2026-09-25 13:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SOL and ENA 2026-09-25 moves: "identifiable" only through failing cells
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ZEC up +10.4% (8.6x ATR), 2026-09-26 09:00 -> 2026-09-26 22:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ZEC up +7.1% (6.3x ATR), 2026-09-26 13:00 -> 2026-09-27 02:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SUI up +10.7% (6.4x ATR), 2026-09-26 20:00 -> 2026-09-27 09:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ENA up +9.0% (5.1x ATR), 2026-09-27 08:00 -> 2026-09-27 19:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: BTC down -2.4% (7.6x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ZEC down -8.9% (7.0x ATR), 2026-09-28 12:00 -> 2026-09-28 20:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SOL down -4.1% (5.1x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: LINK up +13.0% (9.3x ATR), 2026-09-28 09:00 -> 2026-09-28 21:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: UNI down -8.6% (5.9x ATR), 2026-09-27 23:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: BNB down -2.6% (7.2x ATR), 2026-09-27 21:00 -> 2026-09-28 10:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ZEC down -11.5% (9.0x ATR), 2026-09-28 13:00 -> 2026-09-29 02:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: AVAX up +14.3% (7.0x ATR), 2026-09-29 02:00 -> 2026-09-29 12:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: BTC up +2.7% (6.1x ATR), 2026-09-30 06:00 -> 2026-09-30 13:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: ENA up +12.9% (7.5x ATR), 2026-09-30 06:00 -> 2026-09-30 14:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: BTC down -2.9% (5.2x ATR), 2026-10-02 12:00 -> 2026-10-02 19:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: SOL up +5.4% (6.0x ATR), 2026-10-01 16:00 -> 2026-10-02 05:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: XRP down -4.8% (5.8x ATR), 2026-10-02 09:00 -> 2026-10-02 19:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: AVAX down -6.2% (5.5x ATR), 2026-10-02 12:00 -> 2026-10-02 21:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: LINK down -6.1% (5.4x ATR), 2026-10-02 12:00 -> 2026-10-02 21:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### Review: BNB up +3.2% (8.0x ATR), 2026-10-03 07:00 -> 2026-10-03 20:00
+- timestamp: 2026-10-23 18:10 UTC · source: Claude daily review 2026-10-23 · evidence: FACT: the engine's missed-move record and today's fact sheet (no new move listed) · confidence: medium · strategy: - · asset: research coins · timeframe: 1h · regime: - · review: 2026-10-30
+  - status: KEEP
+  - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
+  - action: none. One large move is not a reason to change a rule (section 17.4).
