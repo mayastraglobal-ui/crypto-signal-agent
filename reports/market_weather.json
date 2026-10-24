@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-24 02:20",
+ "utc": "2026-10-24 02:29",
  "verdict": {
   "code": "TURNING_DOWN",
   "icon": "\ud83c\udf26",
@@ -57,7 +57,7 @@
     "oi_24h_pct": -3.0,
     "label": "neutral"
    },
-   "change_24h": -0.73
+   "change_24h": -0.85
   },
   {
    "coin": "ETH",
@@ -95,7 +95,7 @@
     "oi_24h_pct": -0.7,
     "label": "neutral"
    },
-   "change_24h": -0.71
+   "change_24h": -0.84
   },
   {
    "coin": "SOL",
@@ -133,7 +133,7 @@
     "oi_24h_pct": 0.0,
     "label": "neutral"
    },
-   "change_24h": -1.64
+   "change_24h": -1.59
   },
   {
    "coin": "XRP",
@@ -171,7 +171,7 @@
     "oi_24h_pct": -3.3,
     "label": "neutral"
    },
-   "change_24h": -1.85
+   "change_24h": -1.96
   },
   {
    "coin": "ZEC",
@@ -209,18 +209,18 @@
     "oi_24h_pct": -9.8,
     "label": "neutral"
    },
-   "change_24h": -3.34
+   "change_24h": -3.88
   }
  ],
- "alts_vs_btc_24h": -1.02,
+ "alts_vs_btc_24h": -0.92,
  "fear_greed": {
   "value": 51,
   "label": "Neutral",
   "yesterday": 50
  },
  "btc_dominance": {
-  "pct": 59.462,
-  "utc": "2026-10-24 02:20",
+  "pct": 59.469,
+  "utc": "2026-10-24 02:29",
   "ch24": 0.04,
   "ch7": 0.13,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
@@ -229,17 +229,17 @@
   {
    "start_utc": "2026-10-28 18:00",
    "name": "FOMC decision (Oct 27-28 meeting) + press conference",
-   "hours": 111.7
+   "hours": 111.5
   },
   {
    "start_utc": "2026-10-29 12:30",
    "name": "US GDP (Advance Estimate), 3rd Quarter 2026",
-   "hours": 130.2
+   "hours": 130.0
   },
   {
    "start_utc": "2026-10-29 12:30",
    "name": "US PCE / Personal Income and Outlays (Sep data)",
-   "hours": 130.2
+   "hours": 130.0
   }
  ],
  "blackout_now": [],
@@ -252,5 +252,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf26 <b>Market weather \u00b7 10-24 10:20 Beijing</b>\nVerdict: <b>Turning down - not confirmed</b>\nPrices are falling on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a SHORT alert comes only once 1H and 4H both point down.\n\nBTC trend: 1D RANGE \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.5%, higher than 21% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (79,479 \u2013 82,900) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -3.0% in 24h)\nAltcoins vs BTC (24h): -1.0%\nBTC dominance: 59.5% \u00b7 24h +0.04 pt \u00b7 7d +0.13 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Neutral 51\n\n<b>Coins</b>\n\u2198\ufe0f BTC: turning down (not confirmed)\n\u2198\ufe0f ETH: turning down (not confirmed)\n\u2198\ufe0f SOL: turning down (not confirmed)\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\u2022 US GDP (Advance Estimate), 3rd Quarter 2026 10-29 20:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Sep data) 10-29 20:30 Beijing\n\nFits today: waiting for the confirmation - the SHORT alerts then come by themselves; checking the stop of any open long\nAvoid: buying the dip (catching a falling knife); shorting by hand before the confirmation\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf26 <b>Market weather \u00b7 10-24 10:29 Beijing</b>\nVerdict: <b>Turning down - not confirmed</b>\nPrices are falling on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a SHORT alert comes only once 1H and 4H both point down.\n\nBTC trend: 1D RANGE \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.5%, higher than 21% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (79,479 \u2013 82,900) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -3.0% in 24h)\nAltcoins vs BTC (24h): -0.9%\nBTC dominance: 59.5% \u00b7 24h +0.04 pt \u00b7 7d +0.13 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Neutral 51\n\n<b>Coins</b>\n\u2198\ufe0f BTC: turning down (not confirmed)\n\u2198\ufe0f ETH: turning down (not confirmed)\n\u2198\ufe0f SOL: turning down (not confirmed)\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: turning down (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\u2022 US GDP (Advance Estimate), 3rd Quarter 2026 10-29 20:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Sep data) 10-29 20:30 Beijing\n\nFits today: waiting for the confirmation - the SHORT alerts then come by themselves; checking the stop of any open long\nAvoid: buying the dip (catching a falling knife); shorting by hand before the confirmation\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
