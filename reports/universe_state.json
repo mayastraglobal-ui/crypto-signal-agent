@@ -8,8 +8,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 683,
+ "suspended": {
+  "BMT": "2026-10-24"
+ },
+ "runs": 684,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -25,7 +27,6 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
@@ -145,6 +146,11 @@
    "history",
    "thin_book",
    "volume_7d"
+  ],
+  "BMT": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -199,6 +205,7 @@
   "SPCXB": [],
   "IOST": [],
   "SNDKB": [],
-  "SOXLB": []
+  "SOXLB": [],
+  "BMT": []
  }
 }

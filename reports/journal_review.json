@@ -1,9 +1,9 @@
 {
- "last_entry_utc": "2026-10-22 05:24",
+ "last_entry_utc": "2026-10-24 16:03",
  "days": 30,
  "all": {
-  "alerts": 3,
-  "took": 3,
+  "alerts": 4,
+  "took": 4,
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 0
+  "missing_result": 1
  },
  "recent": {
-  "alerts": 3,
-  "took": 3,
+  "alerts": 4,
+  "took": 4,
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
@@ -115,9 +115,19 @@
     "wins": 0
    }
   },
-  "missing_result": 0
+  "missing_result": 1
  },
  "per_strategy": [
+  {
+   "cell": "P01-BREAKOUT-V1 4h",
+   "alerts": 1,
+   "took": 1,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
+  },
   {
    "cell": "P01-BREAKOUT-V5 1h",
    "alerts": 1,
