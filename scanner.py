@@ -2616,6 +2616,8 @@ def main():
     gate_counts = {}                        # (id, version, tf) -> signal candles blocked by each gate
     rule_errors = {}                        # id@version -> problems while evaluating its rules
     live = []      # candidate signals
+    SCP = scx.settings(cfg.get("signal_center"))     # 🎯 2026-10-25: TEST setups use the pullback entry (as live)
+    promoted_cells = (read_json("promotions_state", args.offline) or {}).get("active") or {}
     snap = {}      # coin snapshot for report
     fe_cfg = fe.settings(cfg.get("features"))
     feat_last = {}                          # (coin, tf) -> features of the newest closed candles
@@ -2711,6 +2713,12 @@ def main():
                         continue
                     a = df["_atr"].iloc[t_i]
                     lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
+                    promo = promoted_cells.get(f"{sspec.key(s)}|{tf}")
+                    graded = (tracked in ("VALIDATION", "PAPER_TRADING", "APPROVED") and
+                              not (promo is not None and base not in promo)) or (promo is not None and base in promo)
+                    pull = None if graded else scx.pullback_entry(s, tf, SCP)    # a TEST record: the 🎯 pullback
+                    if pull:
+                        lim, levs = pull, None
                     lpx = None
                     if lim:                         # step 2B: a limit order at the close -/+ offset x ATR, or at a level
                         lpx = float(cols[levs[0 if d == 1 else 1]][t_i]) if levs else float(df["close"].iloc[t_i] - d * lim[0] * a)

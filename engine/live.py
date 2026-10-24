@@ -153,6 +153,9 @@ def message(a):
         until = a["close_ms"] + 1 + int(lim) * tfm.TF_MS[a["tf"]]
         lines.append(f"Entry: <b>{'BUY' if a['d'] == 1 else 'SELL'} LIMIT {fmt_px(a['entry'])}</b> · cancel at "
                      f"{bj(until)} if not filled ({int(lim)} {a['tf']} candles)")
+        if a.get("pullback"):                # 🎯 2026-10-25: a TEST setup waits for a small pullback
+            lines.append("🎯 Pullback entry: wait for this price, do not chase. Not filled = skip it "
+                         "(5-year test: +0.30R a trade instead of +0.25R)")
     else:
         zlo, zhi = sorted((a["entry"] - a["zone_r"] * a["R"], a["entry"] + a["zone_r"] * a["R"]))
         lines.append(f"Entry: <b>{fmt_px(a['entry'])}</b> (zone {fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])})")

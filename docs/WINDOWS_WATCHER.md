@@ -201,6 +201,13 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
   (information only). GitHub still records every setup. Over the 90 days to 15 Oct: +29R instead of +43R for "send
   everything", but the worst drop was 6.8R instead of 17.5R. `config.yaml` → `signal_center.wave_max` (0 = off),
   `wave_hours`.
+- **🎯 Pullback entry** (since 25 Oct 2026): a 4H / 1H TEST alert is a **limit order** 0.25 ATR better than the
+  candle close (a buy below it, a sell above it) - "Entry: SELL LIMIT ..." with the time to cancel it. Place it and
+  wait: not filled within 6 candles (24 hours on 4H) = skip the trade, the watcher tells you. The stop and the TPs
+  move with the better price. Over 5+ years on the 12 alert strategies x their coins: +0.30R a trade instead of
+  +0.25R, 44.7% won instead of 42.7%, 7% fewer trades (the ones that never came back); a 1 ATR pullback was worse
+  (+0.21R). GitHub records the TEST setups the same way. `config.yaml` → `signal_center.pullback` (false = the old
+  market entry), `pullback_offset_atr`, `pullback_bars`, `pullback_tfs`.
 - **👀 Watch notes** (2026-10-10): as soon as a TEST setup is found you get a short note - coin, side, timeframe,
   strategy, price, where its stop would be, the trend - while it waits for that 5m candle. **Information only**: no
   buttons, never a trade signal. If the 5m candle confirms, the normal 🔵 TEST alert follows. At most 12 a day;

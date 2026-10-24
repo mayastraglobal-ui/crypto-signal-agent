@@ -448,6 +448,11 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   wave_max: 2                # 🌊 at most 2 TEST alerts per wave: the same direction within wave_hours of the first;
   wave_hours: 8              # the rest get one information note. 90 days to 15 Oct: +29R of +43R, worst drop 6.8R
                              # instead of 17.5R. 0 = off
+  pullback: true             # 🎯 2026-10-25 (operator: "add pullback entry"): a 4H / 1H TEST setup is a LIMIT order
+  pullback_offset_atr: 0.25  # 0.25 ATR behind the signal close (a long below, a short above), waiting
+  pullback_bars: 6           # 6 candles (24 hours on 4H); not filled = no trade. 5+ years, the 12 alert strategies x
+  pullback_tfs: [4h, 1h]     # their coins: +0.30R a trade instead of +0.25R, 44.7% won instead of 42.7%, 7% fewer
+                             # trades; 1 ATR was worse (+0.21R). A card's own limit entry is kept. false = market entry
   agree_hours: 4             # ⭐ when another timeframe / strategy gave the same coin and direction within 4 hours
   watch_notes: true          # 👀 2026-10-10: a note as soon as a TEST setup is found, while it waits for its 5m candle
                              # (information only, no buttons; /watch on|off in Telegram)

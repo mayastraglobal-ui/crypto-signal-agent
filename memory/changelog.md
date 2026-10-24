@@ -1034,3 +1034,16 @@ Newest entries at the bottom. Format: date · who · what · why.
 - The 08:20 briefing of 24 Oct was written but never saved: the session's `git push -f` was blocked as a risky
   command. `tasks/COMMON.md`: before the commit, `git merge -s ours` of the old branch tip, then a normal
   (fast-forward) push - brain_guard's diff from the merge-base with main shows only the run's own files (tested).
+
+## 2026-10-25 · Operator + Claude · 🎯 Pullback entry for 4H / 1H TEST alerts
+- Operator: "when you give me alert market already fall down too much or bull too much" -> "add pullback entry".
+- Tested first (the agent's own engine, 5+ years, the 12 alert strategies x their alert coins, 7 variants): a limit
+  order 0.25 ATR behind the signal close, valid 6 candles: +0.30R a trade instead of +0.25R (market), 2,884 trades
+  instead of 3,092, 44.7% won instead of 42.7%, total +864R vs +786R, better in 7 of 10 years and for 9 of 12
+  strategies; 0.5 ATR / 6 similar (+0.29R); 1 ATR worse (+0.21R / +0.24R: the best trades never come back).
+- `engine/signal_center.py`: `pullback_entry(card, tf, S)` (settings pullback, pullback_offset_atr 0.25,
+  pullback_bars 6, pullback_tfs [4h, 1h]); a card's own limit entry and 5m-confirmed cards keep theirs.
+  `live_watcher.py`: a TEST setup on those timeframes is a limit (the existing limit follow-up: fill / cancel), no 5m
+  side-by-side record for it; `engine/live.py`: the "🎯 Pullback entry" line. `scanner.py`: the hourly scan's TEST
+  records use the same entry (PAPER / LIVE / VALIDATION and promoted coins unchanged). No card changed (fingerprints
+  and 5-year records stay). Docs: WINDOWS_WATCHER.md. Tests: tests/test_pullback.py (5).

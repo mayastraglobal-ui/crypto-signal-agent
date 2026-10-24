@@ -26,7 +26,8 @@ import math
 DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades=5, max_per_day=10,
                 cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12,
                 alert_skip_failed=True, alert_min_avg_r=0.10, library_tests=(),
-                confirm_5m_tfs=("30m", "15m", "5m"), wave_max=2, wave_hours=8)
+                confirm_5m_tfs=("30m", "15m", "5m"), wave_max=2, wave_hours=8,
+                pullback=True, pullback_offset_atr=0.25, pullback_bars=6, pullback_tfs=("4h", "1h"))
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -43,7 +44,23 @@ def settings(section):
     s["library_tests"] = [str(x) for x in (s.get("library_tests") or [])]
     s["confirm_5m_tfs"] = [str(x) for x in (s.get("confirm_5m_tfs") or [])]
     s["wave_max"], s["wave_hours"] = int(s["wave_max"]), float(s["wave_hours"])
+    s["pullback"] = bool(s["pullback"])
+    s["pullback_offset_atr"], s["pullback_bars"] = float(s["pullback_offset_atr"]), int(s["pullback_bars"])
+    s["pullback_tfs"] = [str(x) for x in (s.get("pullback_tfs") or [])]
     return s
+
+
+def pullback_entry(card, tf, S):
+    """(offset_atr, valid_bars) of the 🎯 pullback entry of a TEST setup, else None (2026-10-25, operator: "add
+    pullback entry" - the alert came after the big candle and the price came back). A limit order pullback_offset_atr
+    x ATR behind the signal close, waiting pullback_bars candles; not filled = no trade. Over 5+ years on the 12 alert
+    strategies x their coins: +0.30R a trade instead of +0.25R (2,884 trades instead of 3,092; 44.7% won instead of
+    42.7%; better in 7 of 10 years), a 1 ATR pullback was worse (+0.21R). Only pullback_tfs (4H / 1H: the alert
+    list); a card's own limit entry and the 5m-confirmed cards keep their own entry."""
+    if not S.get("pullback") or tf not in (S.get("pullback_tfs") or []) or card.get("confirm_5m") or \
+            (card.get("entry") or {}).get("type") == "limit":
+        return None
+    return float(S["pullback_offset_atr"]), int(S["pullback_bars"])
 
 
 def alert_pairs(program, reg_cells, S, promoted=None):

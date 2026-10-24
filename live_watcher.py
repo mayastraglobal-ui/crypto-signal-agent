@@ -1379,6 +1379,9 @@ class Watcher:
                 continue
             entry, atr = float(df["close"].iloc[t]), float(df["_atr"].iloc[t])
             lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
+            pull = scx.pullback_entry(s, tf, self.SC) if label == "TEST" else None
+            if pull:                                 # 🎯 2026-10-25: a TEST setup waits for a small pullback
+                lim, levs = pull, None
             if lim:                                  # roadmap step 2B: limit order at the close -/+ offset x ATR
                 lpx = float(cols[levs[0 if d == 1 else 1]][t]) if levs else entry - d * lim[0] * atr
                 if np.isfinite(lpx):                 # step 3: an unknown level = market entry (playbook)
@@ -1413,7 +1416,8 @@ class Watcher:
             base = dict(label=label, coin=coin, inst=self.feed.inst(coin), d=d, tf=tf, strategy=s["id"],
                         version=s["version"], entry=entry, R=float(R), tps=[float(x) for x in tps], split=split,
                         zone_r=float(self.S["entry_zone_r"]), max_hold=s.get("time_stop_bars"),
-                        limit_bars=lim[1] if lim else None, manage=s.get("manage"), gate=s.get("gate"),
+                        limit_bars=lim[1] if lim else None, pullback=bool(pull and lim), manage=s.get("manage"),
+                        gate=s.get("gate"),
                         pb_late=self._col(fr, "pb_late", t), pb_half=self._col(fr, f"pbB_half_{'long' if d == 1 else 'short'}", t)
                         if s["id"].startswith("PB-B") else False, pb_grade=sc.half_size_reason(s, fr.get("feats"), d, t),
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
@@ -1447,7 +1451,7 @@ class Watcher:
             else:                                    # 4H / 1H (2026-10-15): at the candle close, as backtested
                 f = self._finish(a, now_ms)
                 out.append(f)
-                if self.SC["confirm_5m"] and a["tf"] in (self.S5.get("compare_tfs") or []):
+                if self.SC["confirm_5m"] and a["tf"] in (self.S5.get("compare_tfs") or []) and not a.get("limit_bars"):
                     # the side-by-side record goes on: what the 5m check WOULD have said, never sent
                     self.pending.append(dict(f, after_ms=b, verdict_only=True, twin=self.twin_5m(f, now_ms)))
         return out
