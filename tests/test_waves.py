@@ -109,7 +109,8 @@ class Watcher(unittest.TestCase):
         return mock.patch.object(sc, "strategy_signals", fake)
 
     def test_4h_alerts_at_the_close_and_records_the_5m_verdict_silently(self):
-        with self.fire():
+        self.w.SC = dict(self.w.SC, pullback=False)        # a market entry (2026-10-25: TEST 4H / 1H = a pullback limit,
+        with self.fire():                                  # which has no 5m side-by-side - tests/test_pullback.py)
             a = self.w.tick(self.now)
         self.assertEqual(len(a), 1)                                        # no waiting: sent at the 4H close
         self.assertEqual((a[0]["tf"], a[0]["wave"]), ("4h", (1, 2)))
