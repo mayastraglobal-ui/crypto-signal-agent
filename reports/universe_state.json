@@ -11,7 +11,7 @@
  "suspended": {
   "BMT": "2026-10-24"
  },
- "runs": 685,
+ "runs": 686,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -149,6 +149,7 @@
   ],
   "BMT": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
