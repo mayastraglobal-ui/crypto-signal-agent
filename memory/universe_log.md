@@ -734,3 +734,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-23 23:27 UTC
 - **EXCLUDED** SNDKB - only 134 days of history (need 180); 7-day average volume $36M < $50M
+
+## 2026-10-24 00:44 UTC
+- **EXCLUDED** SUI - one-day volume spike: 24h $595M is 4.1x the 7-day average
+- **LEAVE** SUI - not eligible: one-day volume spike: 24h $595M is 4.1x the 7-day average
