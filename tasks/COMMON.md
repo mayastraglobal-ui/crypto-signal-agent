@@ -138,11 +138,14 @@ the end of the fact sheet.
 
 ## End of every run
 ```bash
+# a normal push, never a force push (2026-10-24: a force push was blocked as risky and the 08:20 briefing was lost):
+# first take the old branch tip in as a parent WITHOUT its files, so the push below is a fast-forward
+git fetch origin <your task branch> && git merge -s ours --no-edit FETCH_HEAD || true
 git add <your file> memory/        # + events.yaml (weekly) / strategies_lab.yaml when you added to them
 git commit -m "<Briefing|Daily review|Weekly research> <date>"
-git push -f origin <your task branch>
+git push origin HEAD:<your task branch>
 ```
-Within about 15 minutes, the Brain workflow checks your push, copies it to main and emails briefings. If it
+Within a few minutes (the push starts the Brain workflow), the Brain workflow checks your push, copies it to main and emails briefings. If it
 refuses the push, the operator gets a [SYSTEM] email with the reasons, and nothing from this run is saved.
 
 Every output ends with two short sections (the engine's weekly report card reads them - Phase 17 D), then the
