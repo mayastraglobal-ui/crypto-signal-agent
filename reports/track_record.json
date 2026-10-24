@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-24 00:44",
+ "utc": "2026-10-24 02:20",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -517,9 +517,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 139,
-    "avg_r": 0.245,
-    "win_rate": 43.2
+    "n": 140,
+    "avg_r": 0.235,
+    "win_rate": 42.9
    },
    "verdict": "ok",
    "why": [],
@@ -543,9 +543,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 123,
-    "avg_r": 0.427,
-    "win_rate": 43.1
+    "n": 124,
+    "avg_r": 0.415,
+    "win_rate": 42.7
    },
    "verdict": "ok",
    "why": [],

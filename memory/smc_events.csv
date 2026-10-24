@@ -20374,3 +20374,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-24 00:00,ZEC,1h,FVG,bear,,1186.84,1220.2,1.306,,4h,RANGE,,smc-1.0,Binance
 2026-10-23 23:30,ZEC,30m,FVG,bear,,1179.49,1218.0,2.123,,1h,RANGE,,smc-1.0,Binance
 2026-10-24 00:00,ZEC,30m,FVG_RETRACE,bear,,1179.49,1218.0,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-24 01:00,BTC,1h,OB_INVALID,bull,,80785.78,81194.07,,Asia,4h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-24 01:00,BTC,1h,FVG_RETRACE,bear,,81200.0,81330.0,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-24 02:00,BTC,1h,BREAKER_RETEST,bear,,80785.78,81194.07,,Asia,4h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-24 01:00,BTC,30m,OB_INVALID,bull,,80785.78,81070.86,,Asia,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-24 01:30,BTC,30m,BREAKER_RETEST,bear,,80785.78,81070.86,,Asia,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-24 00:45,BTC,15m,FVG,bear,,80855.25,80946.41,0.438,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 01:30,BTC,15m,FVG_RETRACE,bear,,80855.25,80946.41,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-24 02:00,BTC,15m,FVG_FILLED,bear,,80855.25,80946.41,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 01:00,ETH,1h,FVG_RETRACE,bear,,2388.29,2396.88,,Asia,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-24 00:45,ETH,15m,FVG,bear,,2378.1,2381.2,0.351,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-24 01:15,ETH,15m,FVG_RETRACE,bear,,2378.1,2381.2,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-24 02:00,ETH,15m,FVG_FILLED,bear,,2378.1,2381.2,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 02:15,ETH,15m,FVG,bull,,2378.46,2381.74,0.437,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 01:15,XRP,15m,FVG_RETRACE,bear,,1.289,1.2918,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-24 01:30,XRP,15m,FVG_FILLED,bear,,1.289,1.2918,,Asia,1h,TRANSITION,,smc-1.0,Binance
