@@ -1,0 +1,25 @@
+{
+ "utc": "2026-10-24 12:11",
+ "started_utc": "2026-10-18 13:11",
+ "feed": "OKX USDT perpetuals",
+ "coins": [
+  "BTC",
+  "ETH",
+  "SOL",
+  "XRP",
+  "ZEC"
+ ],
+ "last_check_utc": "2026-10-24 12:11",
+ "last_check_ok": true,
+ "fails": 0,
+ "watching": {
+  "LIVE": 0,
+  "PAPER": 4,
+  "TEST": 12
+ },
+ "open_trades": 0,
+ "paused": false,
+ "tests_on": true,
+ "code_old": false,
+ "shock_on": true
+}
