@@ -1026,3 +1026,11 @@ Newest entries at the bottom. Format: date · who · what · why.
   (no "Claude was late" note, no "missing" ALERT); 08:20 and the daily review keep the 40-minute late email and the
   60-minute ALERT. `tasks/briefing.md`, `tasks/COMMON.md` updated. Tests: `tests/test_email_design.py`
   (test_1420_2120_are_engine_only_since_23_oct; the old 3-a-day test patches CLAUDE_SLOTS).
+
+## 2026-10-24 · Operator + Claude · Brain: started by the task's push, and no force push
+- GitHub delayed the hourly Brain runs by up to 5 hours on 24 Oct (06:06 -> 11:37 -> 14:53 -> 18:21 UTC), so Claude's
+  daily review (pushed 15:25 UTC) was emailed at 18:22 UTC. `.github/workflows/brain.yml` now also runs on a push to
+  claude/brain-briefing / -daily / -weekly (it still checks out main and runs main's guard).
+- The 08:20 briefing of 24 Oct was written but never saved: the session's `git push -f` was blocked as a risky
+  command. `tasks/COMMON.md`: before the commit, `git merge -s ours` of the old branch tip, then a normal
+  (fast-forward) push - brain_guard's diff from the merge-base with main shows only the run's own files (tested).
