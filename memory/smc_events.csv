@@ -20390,3 +20390,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-24 01:15,XRP,15m,FVG_RETRACE,bear,,1.289,1.2918,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-24 01:30,XRP,15m,FVG_FILLED,bear,,1.289,1.2918,,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-10-24 02:30,ETH,15m,FVG_RETRACE,bull,,2378.46,2381.74,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-24 03:15,ETH,15m,SWEEP,bear,2388.4,,,0.274,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-24 03:15,ETH,15m,WEAK_BREAK,bull,2385.0,,,0.113,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-24 03:15,SOL,15m,SWEEP,bear,102.98,,,0.44,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-24 03:15,SOL,15m,FVG_RETRACE,bear,,102.99,103.56,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-24 03:15,SOL,15m,FVG,bull,,102.64,102.74,0.29,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 03:30,SOL,15m,FVG_RETRACE,bull,,102.64,102.74,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
