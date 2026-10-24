@@ -20400,3 +20400,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-24 04:00,SOL,15m,FVG_FILLED,bull,,102.64,102.74,,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-10-24 04:00,ZEC,4h,FVG,bear,,1185.79,1223.72,0.862,,1d,UNCLEAR,,smc-1.0,Binance
 2026-10-24 05:15,SOL,15m,SWEEP,bull,102.51,,,0.217,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-24 05:45,BTC,15m,FVG,bear,,80804.01,80842.0,0.315,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 06:00,BTC,15m,FVG_RETRACE,bear,,80804.01,80842.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-24 05:30,ETH,15m,BOS,bear,2379.89,,,0.414,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-24 05:30,ETH,15m,FVG_FILLED,bull,,2378.46,2381.74,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 05:30,ETH,15m,FVG,bear,,2380.79,2382.52,0.337,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 06:00,SOL,30m,FVG,bear,,102.48,102.65,0.364,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-24 05:30,SOL,15m,BOS,bear,102.51,,,0.765,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-24 05:30,SOL,15m,ORDER_BLOCK,bear,,102.65,102.8,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-24 06:00,XRP,15m,BOS,bear,1.2888,,,0.152,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-24 06:30,ZEC,30m,SWEEP,bull,1163.7,,,0.119,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
