@@ -1837,3 +1837,76 @@
     kind: DISP
     tf: 30m
     parent_cell: donchian_breakout-VEXIT@1.0|30m
+- id: P07-SQUEEZE-RETEST-V4-S2
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine rule-significance test: P07-SQUEEZE-RETEST-V4@1.0 without one entry rule'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P07-SQUEEZE-RETEST-V4@1.0 4h'
+  hypothesis: 'The rule ''retest_up / retest_down'' adds nothing to P07-SQUEEZE-RETEST-V4@1.0: the simpler card
+    without it should do at least as well on new data (fewer rules = less room for overfitting).'
+  timeframes:
+  - 4h
+  description: After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back
+    to the broken level and closes above it again with a green candle (shorts mirrored).
+  params:
+    bb_n: 20
+    rank_n: 100
+    sq: 0.2
+    lb: 30
+  long:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - close > open
+  short:
+  - within(pct_rank(bb_width(close,{bb_n},2),{rank_n}) < {sq}, {lb})
+  - close < open
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 80
+  cooldown_bars: 0
+  known_weaknesses: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders who faded the breakout and have to buy back when the retest holds
+    mechanism: low volatility is followed by high volatility; a retest that holds shows the broken level has turned
+      from resistance into support
+    fails_when: 'false breakouts in chop: price falls back into the old range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-10-24): P07-SQUEEZE-RETEST-V4@1.0 without entry rule ''retest_up / retest_down'' (rule significance
+    test)'
+  added: '2026-10-24'
+  factory: variant_search
+  variant_of: P07-SQUEEZE-RETEST-V4@1.0
+  factory_evidence: 'P07-SQUEEZE-RETEST-V4@1.0 4h: with the rule 723 trades avg +0.060R; without rule 2 (retest_up
+    / retest_down): 1756 trades avg +0.143R - the rule does not improve the result'

@@ -1351,3 +1351,28 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - status: KEEP
   - today's evidence: the fact sheet lists no new information on this move; the daily research run reports no strong missed move in its latest period.
   - action: none. One large move is not a reason to change a rule (section 17.4).
+
+### BNB up +2.2% (5.3x ATR), 2026-10-22 23:00 -> 2026-10-23 12:00
+- timestamp: 2026-10-24 01:21 UTC · source: engine: daily research run · evidence: FACT: move of 5.3x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: TRANSITION · review: 2026-10-31
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+
+### SUI down -5.0% (5.2x ATR), 2026-10-23 13:00 -> 2026-10-23 23:00
+- timestamp: 2026-10-24 01:21 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 147 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: UNCLEAR · review: 2026-10-31
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - P02-EMA-PULLBACK-V4-S6 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-S6 v1.0 4h: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 1h: blocked by the regime gate
+  - trend_pullback v1.0 30m: blocked by the regime gate

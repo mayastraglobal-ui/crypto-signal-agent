@@ -1,6 +1,6 @@
 # Forward Test Program - backtest results
 
-Updated 2026-10-23 01:18 UTC. Tested tonight: strategies 4, 5, 12; next night: 6, 7, 12.
+Updated 2026-10-24 01:21 UTC. Tested tonight: strategies 6, 7, 12; next night: 8, 9, 12.
 
 10 strategies x 4 versions (strategies_program.yaml). Every number includes OKX fees and funding ('after fees'); 'before fees' shows what the rules alone made. 'Test' = the unseen last 30% of each coin's history. A coin counts as positive with >= 5 trades and an average above 0R after fees.
 
@@ -77,26 +77,26 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 
 | Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
-| V1 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-18 01:12 |
-| V2 | 1h | FAILED | 84 | 43 | -0.20R | -0.13R | -0.14R | SOL | 2026-10-18 01:12 |
-| V2 | 30m | FAILED | 946 | 40 | -0.23R | -0.12R | -0.28R | ZEC | 2026-10-18 01:12 |
-| V2 | 15m | FAILED | 3929 | 35 | -0.33R | -0.17R | -0.39R | - | 2026-10-18 01:12 |
-| V3 | 4h | BACKTESTING | 0 | 0 | +0.00R | +0.00R | +0.00R | - | 2026-10-18 01:12 |
-| V4 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-18 01:12 |
+| V1 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-24 01:21 |
+| V2 | 1h | FAILED | 84 | 43 | -0.20R | -0.13R | -0.14R | SOL | 2026-10-24 01:21 |
+| V2 | 30m | FAILED | 948 | 40 | -0.23R | -0.12R | -0.29R | ZEC | 2026-10-24 01:21 |
+| V2 | 15m | FAILED | 3940 | 35 | -0.33R | -0.17R | -0.39R | - | 2026-10-24 01:21 |
+| V3 | 4h | BACKTESTING | 0 | 0 | +0.00R | +0.00R | +0.00R | - | 2026-10-24 01:21 |
+| V4 | 4h | BACKTESTING | 1 | 0 | -1.09R | -1.03R | -1.09R | - | 2026-10-24 01:21 |
 
 ## 7. Squeeze breakout & retest
 
 | Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
-| V1 | 4h | BACKTESTING | 794 | 35 | +0.02R | +0.06R | +0.18R | BTC, ETH, SOL, XRP | 2026-10-19 01:14 |
-| V2 | 1h | BACKTESTING | 1046 | 35 | +0.02R | +0.08R | +0.02R | BNB, BTC, SOL, XRP | 2026-10-19 01:14 |
-| V2 | 30m | FAILED | 850 | 32 | -0.10R | -0.02R | -0.17R | ETH, SUI | 2026-10-19 01:14 |
-| V2 | 15m | FAILED | 1683 | 29 | -0.22R | -0.09R | -0.27R | - | 2026-10-19 01:14 |
-| V3 | 4h | BACKTESTING | 249 | 36 | +0.05R | +0.09R | +0.03R | BTC, ETH, SOL, XRP | 2026-10-19 01:14 |
-| V4 | 4h | BACKTESTING | 722 | 34 | +0.06R | +0.11R | +0.34R | BNB, BTC, ETH, SOL, XRP | 2026-10-19 01:14 |
-| V5 | 1h | FAILED | 2502 | 33 | -0.05R | +0.02R | -0.06R | ZEC | 2026-10-19 01:14 |
-| V5 | 30m | FAILED | 1942 | 31 | -0.17R | -0.07R | -0.17R | - | 2026-10-19 01:14 |
-| V5 | 15m | FAILED | 3733 | 29 | -0.26R | -0.11R | -0.27R | - | 2026-10-19 01:14 |
+| V1 | 4h | BACKTESTING | 795 | 35 | +0.02R | +0.06R | +0.17R | BTC, ETH, SOL, XRP | 2026-10-24 01:21 |
+| V2 | 1h | BACKTESTING | 1046 | 35 | +0.02R | +0.08R | +0.03R | BNB, BTC, SOL, XRP | 2026-10-24 01:21 |
+| V2 | 30m | FAILED | 850 | 32 | -0.11R | -0.02R | -0.17R | ETH, SUI | 2026-10-24 01:21 |
+| V2 | 15m | FAILED | 1675 | 29 | -0.23R | -0.10R | -0.28R | - | 2026-10-24 01:21 |
+| V3 | 4h | BACKTESTING | 249 | 36 | +0.05R | +0.09R | +0.03R | BTC, ETH, SOL, XRP | 2026-10-24 01:21 |
+| V4 | 4h | BACKTESTING | 723 | 34 | +0.06R | +0.11R | +0.33R | BNB, BTC, ETH, SOL, XRP | 2026-10-24 01:21 |
+| V5 | 1h | FAILED | 2504 | 32 | -0.05R | +0.02R | -0.06R | ZEC | 2026-10-24 01:21 |
+| V5 | 30m | FAILED | 1939 | 31 | -0.17R | -0.07R | -0.19R | - | 2026-10-24 01:21 |
+| V5 | 15m | FAILED | 3729 | 28 | -0.26R | -0.12R | -0.28R | - | 2026-10-24 01:21 |
 
 ## 8. Session open breakout (Asia range -> London / New York)
 
@@ -149,8 +149,8 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 
 | Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
-| C | 4h | FAILED | 2810 | 42 | -0.00R | +0.03R | -0.08R | BTC, SOL, ZEC | 2026-10-23 01:18 |
-| V1 | 4h | BACKTESTING | 573 | 44 | +0.11R | +0.14R | +0.20R | ETH, SOL, SUI, XRP, ZEC | 2026-10-23 01:18 |
-| V2 | 4h | VALIDATION | 497 | 47 | +0.19R | +0.22R | +0.37R | BNB, ETH, SOL, SUI, XRP, ZEC | 2026-10-23 01:18 |
-| V3 | 1h | FAILED | 835 | 35 | -0.03R | +0.01R | -0.03R | XRP, ZEC | 2026-10-23 01:18 |
+| C | 4h | FAILED | 2810 | 42 | -0.00R | +0.03R | -0.08R | BTC, SOL, ZEC | 2026-10-24 01:21 |
+| V1 | 4h | BACKTESTING | 573 | 44 | +0.11R | +0.14R | +0.20R | ETH, SOL, SUI, XRP, ZEC | 2026-10-24 01:21 |
+| V2 | 4h | VALIDATION | 497 | 47 | +0.19R | +0.22R | +0.37R | BNB, ETH, SOL, SUI, XRP, ZEC | 2026-10-24 01:21 |
+| V3 | 1h | FAILED | 835 | 35 | -0.03R | +0.01R | -0.04R | XRP, ZEC | 2026-10-24 01:21 |
 
