@@ -738,3 +738,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-24 00:44 UTC
 - **EXCLUDED** SUI - one-day volume spike: 24h $595M is 4.1x the 7-day average
 - **LEAVE** SUI - not eligible: one-day volume spike: 24h $595M is 4.1x the 7-day average
+
+## 2026-10-24 07:34 UTC
+- **EXCLUDED** BNB - 24h volume $48M < $50M; 7-day average volume $37M < $50M
