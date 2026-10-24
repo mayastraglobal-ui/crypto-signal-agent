@@ -1390,3 +1390,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: outsized success is mostly variance and luck; survivorship bias hides the failures; judge a bet by its payoff and downside, not only its odds.
   - what it means for us: the 456-test trials counter (t >= 3.70) already fights luck among many tests. The new point is rare large losses: see 'Hypothesis: add a tail-loss check to the drawdown test (from C14)'.
   - limitations: a secondary summary; I did not read the book and the year 2001 was not on the page.
+
+### [C15] Options expiries and max pain - from a news explainer
+- timestamp: 2026-10-24 15:35 UTC · source: Claude daily review 2026-10-24 · evidence: CLAIM: a news article, not Deribit's own research · confidence: low · strategy: - · asset: BTC, ETH · timeframe: - · regime: - · review: 2027-01-22
+  - title / source: Decrypt, 'Billion Bitcoin Options Expire: What It Means' (dated 2026-08-27 on the page)
+  - URL: https://decrypt.co/376752/billion-bitcoin-options-expire-what-it-means (opened in this run)
+  - claim: max pain is the strike where most contracts expire worthless; a big gap between spot and max pain raises dealer hedging; the article does not claim pinning, and says a $15bn expiry in June 2025 and a $13.3bn one in December barely moved Bitcoin.
+  - what it means for us: the evidence for a max-pain 'magnet' is weak. The Deribit expiry data in feeds.json is context for the operator, not a filter. I could not open a Deribit research article, so none is cited.
+  - limitations: a secondary news source; sizes and dates are the article's claims, not checked.

@@ -1268,3 +1268,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: for cards with many small wins and rare large losses (such as rsi2_dip_buy), the average R and t value can look good while one rare loss dominates. Report the worst single loss and the worst 1% of trades in R next to the Monte Carlo drawdown.
   - how to test: an engine report check for the operator (pull request), not a lab card. List the cards whose worst loss is more than 3R and whether the existing drawdown gate already catches them.
   - stop if: every card with such losses already fails the Monte Carlo drawdown gate.
+
+### Hypothesis: BTC moves are no larger in the 24h around big options expiries (from C15)
+- timestamp: 2026-10-24 15:35 UTC · source: Claude daily review 2026-10-24 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: BTC · timeframe: 1h · regime: - · review: 2027-01-22
+  - hypothesis: the 24h range of BTC around a weekly Deribit expiry with large open interest is not larger than on other days; if it is, a 'no new entry on expiry morning' filter could help.
+  - how to test: an engine research check for the operator (pull request), using stored Deribit expiry dates and BTC 1h candles. Compare the 24h range in ATR units on expiry days against all other days; count the samples first.
+  - stop if: the difference is inside the noise (fewer than 30 expiries or |t| < 2).
