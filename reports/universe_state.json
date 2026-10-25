@@ -6,12 +6,14 @@
   "XRP",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {
-  "BMT": "2026-10-24"
+  "BMT": "2026-10-25"
  },
- "runs": 686,
+ "runs": 687,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,9 +34,7 @@
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [
-   "volume_spike"
-  ],
+  "SUI": [],
   "AVAX": [],
   "ENA": [
    "volume_7d"
@@ -149,7 +149,6 @@
   ],
   "BMT": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]

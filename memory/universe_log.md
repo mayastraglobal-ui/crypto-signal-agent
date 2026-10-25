@@ -748,3 +748,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-24 23:05 UTC
 - **EXCLUDED** BMT - 7-day average volume $8M < $50M; 24h move +73.4% is beyond ±25% - suspended for the rest of the UTC day; spread 0.103% > 0.1%; order book too thin: $23k within 1% (need $250k)
+
+## 2026-10-25 01:02 UTC
+- **ELIGIBLE** SUI - passes every rule again
+- **EXCLUDED** BMT - 7-day average volume $17M < $50M; 24h move +43.3% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $29k within 1% (need $250k)
