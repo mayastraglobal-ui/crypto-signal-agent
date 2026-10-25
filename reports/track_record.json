@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-25 11:12",
+ "utc": "2026-10-25 16:00",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 40,
-  "wins": 5,
-  "win_rate": 12.5,
-  "avg_r": -0.741,
-  "total_r": -29.63,
+  "n": 41,
+  "wins": 6,
+  "win_rate": 14.6,
+  "avg_r": -0.708,
+  "total_r": -29.01,
   "max_dd_r": 29.63,
-  "cur_loss_run": 10,
+  "cur_loss_run": 0,
   "max_loss_run": 10,
-  "sd": 0.93
+  "sd": 0.942
  },
  "yours": {
   "n": 2,
@@ -32,29 +32,29 @@
   "sd": 0.027
  },
  "silent": {
-  "n": 32,
-  "wins": 5,
-  "win_rate": 15.6,
-  "avg_r": -0.656,
-  "total_r": -20.98,
+  "n": 33,
+  "wins": 6,
+  "win_rate": 18.2,
+  "avg_r": -0.617,
+  "total_r": -20.36,
   "max_dd_r": 20.98,
-  "cur_loss_run": 4,
+  "cur_loss_run": 0,
   "max_loss_run": 6,
-  "sd": 1.025
+  "sd": 1.033
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 37,
-   "wins": 5,
-   "win_rate": 13.5,
-   "avg_r": -0.713,
-   "total_r": -26.38,
+   "n": 38,
+   "wins": 6,
+   "win_rate": 15.8,
+   "avg_r": -0.678,
+   "total_r": -25.76,
    "max_dd_r": 26.38,
-   "cur_loss_run": 7,
+   "cur_loss_run": 0,
    "max_loss_run": 7,
-   "sd": 0.962
+   "sd": 0.973
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -163,6 +163,32 @@
    "sent": false
   },
   {
+   "key": "P01-BREAKOUT-V2@1.0|15m",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": -0.471,
+    "total_r": -1.41,
+    "max_dd_r": 2.04,
+    "cur_loss_run": 0,
+    "max_loss_run": 2,
+    "sd": 1.006
+   },
+   "backtest": {
+    "n": 245,
+    "avg_r": 0.072,
+    "win_rate": 38.8
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-25 11:44",
+   "sent": false
+  },
+  {
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
    "coin": "SUI",
    "stage": "TEST",
@@ -186,32 +212,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-18 09:59",
-   "sent": false
-  },
-  {
-   "key": "P01-BREAKOUT-V2@1.0|15m",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 2,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.018,
-    "total_r": -2.04,
-    "max_dd_r": 2.04,
-    "cur_loss_run": 2,
-    "max_loss_run": 2,
-    "sd": 0.479
-   },
-   "backtest": {
-    "n": 245,
-    "avg_r": 0.072,
-    "win_rate": 38.8
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-21 19:14",
    "sent": false
   },
   {
@@ -793,6 +793,10 @@
   {
    "t": "2026-10-23 02:59",
    "r": -29.63
+  },
+  {
+   "t": "2026-10-25 11:44",
+   "r": -29.01
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
