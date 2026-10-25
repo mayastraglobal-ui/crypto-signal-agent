@@ -1443,3 +1443,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - what we deliberately do NOT take: its code (nothing was copied); its candle-based method for now (our engine would need new data paths); its live-trading parts.
   - licence: MIT (shown on the repository front page).
   - hypothesis: 'Hypothesis: report where the real drawdown sits among the shuffled drawdowns (from R5)' in memory/experiments.md.
+
+### [C19] The 12 March 2020 crypto crash - from a Coin Metrics analysis
+- timestamp: 2026-10-25 15:40 UTC · source: Claude daily review 2026-10-25 · evidence: CLAIM: one analysis, not an official post-mortem · confidence: low · strategy: - · asset: BTC · timeframe: 1h · regime: - · review: 2027-01-23
+  - title / source: Coin Metrics, 'State of the Network: Issue 43 - The BitMEX Liquidation Spiral'
+  - URL: https://coinmetrics.substack.com/p/coin-metrics-state-of-the-network-bf8?open=false (opened in this run)
+  - claim: on March 12-13, 2020 Bitcoin fell from about 7,300 to 5,690 and later from about 5,800 to 3,900. Forced liquidations on BitMEX pushed the price down, which caused more liquidations. About 1.1 billion contracts of longs were liquidated. The price recovered after BitMEX slowed to a crawl at 02:16 UTC on March 13. Spreads stayed wider afterwards. The article does not discuss funding.
+  - what it means for us: a fast fall can be driven by forced selling and not by news. The volatility_spike loss tag and the data-quality halts are the right protections; I cannot say from this article if they would have worked. See 'Hypothesis: add a liquidation-cascade halt test to the risk engine (from C19)'.
+  - limitations: one analysis, the numbers are the article's claims; I found no official BitMEX post-mortem, and the exchange outage cause (DDoS) is the article's account.

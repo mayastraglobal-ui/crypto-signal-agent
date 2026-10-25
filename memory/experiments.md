@@ -1290,3 +1290,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: Jesse's docs read a backtest by its place among simulated runs (Original against Worst 5%, Median, Best 5%). The engine reports only the 95% worst drawdown per 100 trades. If the real max drawdown of a card is far better than the median of its shuffled drawdowns, the card may owe its smooth curve to lucky ordering.
   - how to test: an engine report check for the operator (pull request): add one column with the percentile of the real drawdown among the shuffled ones, for cards in VALIDATION and PAPER_TRADING. Count how many cards fall in the top 5%.
   - stop if: no card falls outside 5% to 95%, or the shuffled runs already use the real order.
+
+### Feedback: P07-SQUEEZE-RETEST-V4-S2@1.0
+- timestamp: 2026-10-25 15:40 UTC · source: Claude daily review 2026-10-25 · evidence: BACKTEST_EVIDENCE: 1 cell, 1871 trades · confidence: low · strategy: P07-SQUEEZE-RETEST-V4-S2 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-23
+  - parent: result: P07-SQUEEZE-RETEST-V4@1.0 4h
+  - hypothesis: The rule 'retest_up / retest_down' adds nothing to P07-SQUEEZE-RETEST-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 1871 trades +0.139R (unseen +0.115R); held back by Monte Carlo 95% worst drawdown per 100 trades 24.7R (limit 17R). Parent: 723 trades avg +0.060R.
+  - teaches: the hypothesis held: without the retest rule the card has 2.6 times more trades (1871 vs 723) and a higher average (+0.139R vs +0.060R), so the retest rule was cutting good trades. It is still a weak cell: the drawdown, not the entry, is the blocker, as with the other removal cards.
+  - next: stop this line. A further rule removal would be a third look at the same data; the open problem is the drawdown, not the entry.
+
+### Hypothesis: add a liquidation-cascade halt test to the risk engine (from C19)
+- timestamp: 2026-10-25 15:40 UTC · source: Claude daily review 2026-10-25 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: BTC, ETH · timeframe: 1h · regime: - · review: 2027-01-23
+  - hypothesis: after a fast fall with falling open interest (forced selling), the next 4 hours are dominated by the cascade and entries have worse results than normal days.
+  - how to test: an engine research check for the operator (pull request), not a lab card. Use stored hourly open interest and BTC 1h candles: mark hours with oi_chg(4) below its 5th percentile and a fall of more than 3 ATR, and compare the average R of all cards entered in the next 4 hours with other hours. Count the samples first.
+  - stop if: fewer than 30 such episodes, or the difference is inside the noise.
