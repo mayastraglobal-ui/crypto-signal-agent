@@ -119,3 +119,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - mechanism: stop orders are market orders in the direction of the move (positive feedback); take-profit orders are against it (negative feedback, smaller and shorter).
   - strategies: liquidity_sweep_reversal, S5-SWEEP-MSS-FVG, S7-SILVER-BULLET, S8-PDH-PDL-SWEEP (all bet on the reversal; liquidity_sweep_reversal 5m 3236 trades -0.73R BACKTEST); the breakout cards bet on the acceleration.
   - source class: currency markets; crypto not tested by these papers.
+
+### Review: Scheduled macro releases
+- timestamp: 2026-10-25 04:00 UTC · source: https://ideas.repec.org:443/a/eee/ecofin/v62y2022ics1062940822000833.html (Wen, Bouri, Xu, Zhao 2022, abstract) and the Fed, BEA and BLS release pages opened for the event calendar · evidence: RESEARCH_FINDING: the abstract says Bitcoin's intraday momentum and reversal change around FOMC announcements; the release dates are FACT from the official pages · confidence: medium · strategy: all · asset: BTC, ETH, LTC, XRP · timeframe: intraday · regime: - · review: 2027-01-23
+  - mechanism: fixed-time announcements change how the next hours behave (momentum or reversal), so entries near them have a different risk than entries on a normal hour
+  - strategies: all live entries (the risk engine's +-60 minute blackout); no card uses the release time as a rule
+  - verdict: KEEP. CONFIRMED in part: a paper finds that FOMC announcements change intraday behaviour in Bitcoin. NOT CONFIRMED: that crypto 'often moves sharply in the minutes after, in either direction' and the spread widening; the abstract gives no size, minutes or spread. The blackout stays as a cautious rule, not a proven one.
+  - not checked: CPI, NFP and PCE reactions; the paper's data ends in May 2020.

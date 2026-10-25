@@ -73,3 +73,11 @@ Gate types: S5-S7 = trend (2 of 1D/4H/1H + weekly veto); S8 = reversal (2 of 1D/
   - our BACKTEST numbers: S6-OB-FVG 15m 0 trades; S6-OB-FVG-noSMC 15m FAILED, 94 trades, -0.159R; S5-SWEEP-MSS-FVG 15m 12 trades -0.839R, 30m 9 trades -0.653R (twin noSMC 29 trades +0.074R and 13 trades -0.023R). Too few trades to judge the SMC ingredient.
   - why retail traders fail with it: order blocks are drawn after the move, so every chart has one; they enter at the block with a stop just beyond it, exactly where Osler finds stop orders cluster; they read a level as a direction.
   - status: unproven; keep testing against the twins.
+
+### Kill zones and the Silver Bullet - a fixed clock window is only as good as the hours that really behave differently
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25; https://ideas.repec.org:443/a/eee/ecofin/v62y2022ics1062940822000833.html · evidence: RESEARCH_FINDING: Wen, Bouri, Xu, Zhao (2022), abstract only, plus the engine's BACKTEST line from the fact sheet · confidence: low · strategy: S7-SILVER-BULLET · asset: BTC · timeframe: intraday · regime: - · review: 2027-01-23
+  - ICT / SMC claim: price is "delivered" in fixed daily windows (kill zones, the one-hour Silver Bullet), so entries inside them have a better chance than the same setup at another hour.
+  - what the source shows: Bitcoin has real intraday patterns, both momentum and reversal, and which one appears changes with big price jumps, FOMC announcements and liquidity levels. The abstract does not give the hours, so it neither confirms nor rejects the ICT windows. It does say the pattern is not fixed: it moves with conditions.
+  - our BACKTEST numbers: S7-SILVER-BULLET-5M 15m: "too few trades vs its twin" (fact sheet, 2026-10-25). Nothing to judge yet.
+  - why retail traders fail with it: a window with few trades hides that the sample is small; the window is learned from charts after the fact; the rule ignores that the same hour behaves differently on FOMC days or in thin liquidity (the paper's point); on 5m the fees are a large share of R.
+  - status: unproven; keep testing against the twin. The matching hypothesis is in memory/experiments.md ('shock alarm moves reverse more often when the jump is large').

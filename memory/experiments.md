@@ -1278,3 +1278,15 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
 |---|---|---|---|---|---|
 | EXP-0118 | 2026-10-25 01:12 | P07-SQUEEZE-RETEST-V4-S2@1.0 | breakout | 4h | The rule 'retest_up / retest_down' adds nothing to P07-SQUEEZE-RETEST-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+
+### Hypothesis: shock alarm moves reverse more often when the jump is large (from C16)
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: BTC, ETH, SOL, XRP, ZEC, SUI · timeframe: 1h · regime: - · review: 2027-01-23
+  - hypothesis: Wen et al. find intraday momentum AND reversal in Bitcoin, depending on the size of the jump. In the shock alarm this week 34 shocks kept going and 40 reversed after 4 hours (74 shocks, average -0.25% in the shock's direction). If the move after a shock depends on the jump size in ATR units, a small set of rules (fade the biggest, follow the rest) could be tested.
+  - how to test: an engine research check for the operator (pull request), not a lab card: group the stored shocks by jump size in ATR, count the samples first, and compare the 4-hour outcome per group with fees. Use only shocks the engine stored itself.
+  - stop if: fewer than 30 shocks per group, or the difference between groups is inside the noise (|t| < 2).
+
+### Hypothesis: report where the real drawdown sits among the shuffled drawdowns (from R5)
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: research coins · timeframe: - · regime: - · review: 2027-01-23
+  - hypothesis: Jesse's docs read a backtest by its place among simulated runs (Original against Worst 5%, Median, Best 5%). The engine reports only the 95% worst drawdown per 100 trades. If the real max drawdown of a card is far better than the median of its shuffled drawdowns, the card may owe its smooth curve to lucky ordering.
+  - how to test: an engine report check for the operator (pull request): add one column with the percentile of the real drawdown among the shuffled ones, for cards in VALIDATION and PAPER_TRADING. Count how many cards fall in the top 5%.
+  - stop if: no card falls outside 5% to 95%, or the shuffled runs already use the real order.
