@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-25 16:00",
+ "generated_utc": "2026-10-25 18:53",
  "book": {
-  "utc": "2026-10-25 16:00",
-  "beijing": "2026-10-26 00:00",
+  "utc": "2026-10-25 18:53",
+  "beijing": "2026-10-26 02:53",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-25 16:00 UTC / 2026-10-26 00:00 Beijing",
+  "POSITION BOOK \u2014 2026-10-25 18:53 UTC / 2026-10-26 02:53 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -160,7 +160,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -331,17 +331,30 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-25 16:00",
-   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-25 05:44",
-   "coin": "BTC",
-   "tf": "15m",
-   "strategy": "P01-BREAKOUT-V2",
+   "time_utc": "2026-10-25 18:53",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V2-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "TP1_HIT",
    "to_state": "CLOSED",
    "price": null,
-   "note": "EXIT_RULE +0.62R"
+   "note": "BE +0.89R"
+  },
+  {
+   "time_utc": "2026-10-25 18:53",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "BE +0.89R"
   }
  ]
 }
