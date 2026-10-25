@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-25 01:02",
+ "generated_utc": "2026-10-25 05:55",
  "book": {
-  "utc": "2026-10-25 01:02",
-  "beijing": "2026-10-25 09:02",
+  "utc": "2026-10-25 05:55",
+  "beijing": "2026-10-25 13:55",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-25 01:02 UTC / 2026-10-25 09:02 Beijing",
+  "POSITION BOOK \u2014 2026-10-25 05:55 UTC / 2026-10-25 13:55 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -35,7 +35,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+XRP+ZEC"
+   "BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -171,7 +171,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -285,6 +285,160 @@
    "missing": "close < 0"
   },
   {
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
+   "missing": null
+  },
+  {
    "coin": "XRP",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
@@ -318,5 +472,84 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-25 05:44",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 80582.71,
+   "note": "15m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "BTC-15m-P01-BREAKOUT-V2-2026-10-25 05:44",
+   "coin": "BTC",
+   "tf": "15m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 80582.71,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V2-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.928,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V2-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.928,
+   "note": ""
+  },
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.928,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-10-25 05:55",
+   "id": "SUI-30m-P04-MACD-SUPERTREND-V5-2026-10-25 05:29",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.928,
+   "note": ""
+  }
+ ]
 }

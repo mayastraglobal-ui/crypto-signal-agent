@@ -4,16 +4,15 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC"
+  "ZEC",
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {
   "BMT": "2026-10-25"
  },
- "runs": 687,
+ "runs": 688,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
