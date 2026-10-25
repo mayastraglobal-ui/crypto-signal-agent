@@ -1407,3 +1407,39 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P07-SQUEEZE-RETEST-V4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
   - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [C16] Intraday return predictability in cryptocurrency markets: momentum, reversal, or both (Wen, Bouri, Xu, Zhao)
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25 · evidence: RESEARCH_FINDING: peer-reviewed paper, abstract opened (full text not read) · confidence: medium · strategy: - · asset: BTC, ETH, LTC, XRP · timeframe: intraday · regime: - · review: 2027-01-23
+  - title / source: Wen, Bouri, Xu, Zhao (2022), North American Journal of Economics and Finance 62
+  - URL: https://ideas.repec.org:443/a/eee/ecofin/v62y2022ics1062940822000833.html (opened in this run)
+  - claim: Bitcoin shows both intraday momentum and intraday reversal (March 2013 to May 2020 high-frequency data). Which one shows up changes around large price jumps, FOMC announcements, liquidity levels and the COVID-19 outbreak. The same holds for Ethereum, Litecoin and Ripple. A timing strategy built on the predictors beat always-long and buy-and-hold. Reversal is called a feature of crypto markets.
+  - what it means for us: after a sudden move the next hours can go either way, and the paper says the size of the jump, the FOMC and the liquidity decide which. This matches the engine's shock alarm this week: 34 shocks kept going and 40 reversed 4 hours later.
+  - derived hypothesis: see 'Hypothesis: shock alarm moves reverse more often when the jump is large (from C16)' in memory/experiments.md.
+  - limitations: only the abstract was opened, so the sampling frequency, the hours and the strategy's costs are unknown. Data ends in 2020. Fees and slippage are not in the abstract.
+
+### [C17] Day trading for a living? (Chague, De-Losso, Giovannetti)
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25 · evidence: RESEARCH_FINDING: working paper, abstract page opened · confidence: medium · strategy: - · asset: Brazilian equity index futures (not crypto) · timeframe: intraday · regime: - · review: 2027-01-23
+  - title / source: Chague, De-Losso, Giovannetti, FGV EESP Textos para discussao 525, February 2020
+  - URL: https://econpapers.repec.org/RePEc:fgv:eesptd:525 (opened in this run)
+  - claim: of everyone who began day trading Brazilian equity futures in 2013-2015 and kept going for at least 300 days, 97% lost money, only 0.4% earned more than a bank teller (US$54 a day), and the best trader made about US$310 a day with a standard deviation of US$2,560. No sign that traders improved over time. The authors say individuals can barely compete with high-frequency traders.
+  - what it means for us: persistence does not turn a losing method into a winning one. Our own scoreboard looks the same: the shorter the timeframe, the worse the result (liquidity_sweep_reversal 5m -0.66R to -0.78R over 358 to 683 trades in the weak-trend regimes, against 4h cells that stay positive).
+  - derived hypothesis: no new card; the existing cost-viability gate (round-trip cost at most 0.25R) already is the matching rule. The weekly research asks the operator to read TEST alerts on 5m and 15m as test records only.
+  - limitations: one country, one market, 2013-2015, a selected group (those who lasted 300 days). A CXO Advisory summary reports other percentages, so only the paper's own page is cited here. Crypto is not covered.
+
+### [C18] Dynamic time series momentum of cryptocurrencies (Borgards)
+- timestamp: 2026-10-25 04:00 UTC · source: Claude weekly research 2026-10-25 · evidence: RESEARCH_FINDING: peer-reviewed paper, abstract page opened · confidence: medium · strategy: donchian_breakout family, P01-BREAKOUT, P12-LEADER · asset: 20 coins · timeframe: interday and intraday · regime: - · review: 2027-01-23
+  - title / source: Borgards (2021), North American Journal of Economics and Finance 57
+  - URL: https://econpapers.repec.org/RePEc:eee:ecofin:v:57:y:2021:i:c:s1062940821000590 (opened in this run)
+  - claim: in 20 coins, large shares of formation periods are followed by momentum periods; crypto momentum periods are larger and longer than in US stocks at all frequencies, which the author puts down to a weak link to intrinsic value and more noise traders. A momentum strategy beat buy-and-hold in crypto with higher risk-adjusted return and lower downside risk. At turning points volatility rises briefly and sharply, giving an impulse in the momentum direction.
+  - what it means for us: a second source behind the trend idea of the 4h breakout cards (donchian_breakout-VEXIT 4h PAPER_TRADING, +0.25R over 815 trades in BACKTEST). It also fits why short timeframes need a displacement filter: the impulse at a turn is what the FDISP repair asks for.
+  - derived hypothesis: none new (the 4h breakout line already exists; a new card would be a duplicate).
+  - limitations: only the abstract was opened; the strategy's costs and the sample years are not on the page. A published momentum edge may have shrunk since the paper.
+
+### [R5] Jesse - Monte Carlo documentation, re-read at release v3.4.0
+- timestamp: 2026-10-25 04:00 UTC · source: https://docs.jesse.trade/docs/monte-carlo/ and https://docs.jesse.trade/docs/monte-carlo/interpreting-results and https://github.com/jesse-ai/jesse (release v3.4.0 = commit 34dc9dfc369958fc613782662f4e20436f5a1388 per git ls-remote; master head 9a3ebe075d9d0af5f012f921f46c2286f234af68) · evidence: FACT: read in the project's documentation; I did not open its code · confidence: high for what the docs say; the engine's own numbers were not re-tested · strategy: all · asset: - · timeframe: - · regime: - · review: 2027-01-23
+  - opened: the two documentation pages on docs.jesse.trade and the repository front page on github.com. The front page shows no release; the tag list gives v3.4.0 as the newest tag, so the commit above is the tag's, and the docs are the live site (the docs version is not shown).
+  - new points: (1) two methods: trade-order shuffling (does the timing of trades matter?) and candle-based (does the strategy hold up on slightly different price data?). (2) The result table has four columns: Original, Worst 5%, Median, Best 5%. (3) 'Original better than Best 5%' = likely overfitted; 'near the median' = the target; a narrow spread between Worst 5% and Best 5% = consistent. (4) at least 1,000 scenarios for shuffling and 100 or more for candles; accept the numbers as they come out, no cherry-picking.
+  - what we take (idea only): show WHERE the real backtest sits among the shuffled runs (a percentile), not only the 95% worst drawdown. A real drawdown far better than the shuffled median is a warning, not a bonus. The pages do not say how to read an Original worse than the Worst 5%, and they do not list drawdown or losing streak as metrics, so I do not claim Jesse reports them.
+  - what we deliberately do NOT take: its code (nothing was copied); its candle-based method for now (our engine would need new data paths); its live-trading parts.
+  - licence: MIT (shown on the repository front page).
+  - hypothesis: 'Hypothesis: report where the real drawdown sits among the shuffled drawdowns (from R5)' in memory/experiments.md.
