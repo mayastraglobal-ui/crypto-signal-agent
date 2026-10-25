@@ -1,8 +1,16 @@
 {
  "enabled": true,
- "allowed": 0,
- "considered": 0,
- "new": [],
+ "allowed": 1,
+ "considered": 128,
+ "new": [
+  {
+   "id": "donchian_breakout-VEXIT-S4-FDISP",
+   "tag": "false_breakout",
+   "kind": "DISP",
+   "parent": "donchian_breakout-VEXIT-S4@1.1|30m",
+   "evidence": "false_breakout in 70% of losses, n=586 losing trades (donchian_breakout-VEXIT-S4@1.1 30m: 1285 trades, avg -0.008R, FAILED; trades with false_breakout -0.322R, without +0.474R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
+  }
+ ],
  "pending": [],
  "results": [
   {
@@ -18,7 +26,7 @@
    "parent_test_r": 0.206,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -33,7 +41,7 @@
    "parent_test_r": 0.375,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -48,7 +56,7 @@
    "parent_test_r": 0.255,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -63,7 +71,7 @@
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -74,11 +82,11 @@
    "trades": 411,
    "avg_r": 0.181,
    "test_r": 0.364,
-   "parent_avg_r": 0.005,
+   "parent_avg_r": 0.006,
    "parent_test_r": 0.191,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -86,14 +94,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "FAILED",
-   "trades": 1088,
+   "trades": 1091,
    "avg_r": -0.009,
-   "test_r": 0.086,
-   "parent_avg_r": -0.054,
-   "parent_test_r": 0.024,
+   "test_r": 0.091,
+   "parent_avg_r": -0.055,
+   "parent_test_r": 0.026,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-24 01:21"
+   "checked": "2026-10-25 01:12"
   }
  ],
  "by_kind": {

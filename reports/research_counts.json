@@ -810,5 +810,33 @@
   "near_duplicates": 23,
   "ideas": 60,
   "new_cards": 1
+ },
+ {
+  "date": "2026-10-25",
+  "run_utc": "2026-10-25 01:12",
+  "backtests": 1043,
+  "per_coin": {
+   "BNB": 149,
+   "BTC": 149,
+   "ETH": 149,
+   "SOL": 149,
+   "SUI": 149,
+   "XRP": 149,
+   "ZEC": 149
+  },
+  "strategies": 72,
+  "tests": 149,
+  "tests_per_coin": 149,
+  "coins": 7,
+  "best_avg_r": 0.387,
+  "best_cell": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 30m",
+  "cells_testing": 78,
+  "cells_failed": 135,
+  "cells_paper": 4,
+  "lab_cards": 25,
+  "sources": 43,
+  "near_duplicates": 23,
+  "ideas": 62,
+  "new_cards": 3
  }
 ]

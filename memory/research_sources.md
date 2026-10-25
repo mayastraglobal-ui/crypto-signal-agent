@@ -1398,3 +1398,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: max pain is the strike where most contracts expire worthless; a big gap between spot and max pain raises dealer hedging; the article does not claim pinning, and says a $15bn expiry in June 2025 and a $13.3bn one in December barely moved Bitcoin.
   - what it means for us: the evidence for a max-pain 'magnet' is weak. The Deribit expiry data in feeds.json is context for the operator, not a filter. I could not open a Deribit research article, so none is cited.
   - limitations: a secondary news source; sizes and dates are the article's claims, not checked.
+
+### P07-SQUEEZE-RETEST-V4-S2@1.0 - After a Bollinger squeeze (width in its lowest 20%), price breaks the 20-candle range, comes back to the broken level and closes above it again with a green candle (shorts mirrored).
+- timestamp: 2026-10-25 01:12 UTC · source: strategies_lab.yaml card P07-SQUEEZE-RETEST-V4-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P07-SQUEEZE-RETEST-V4-S2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-23
+  - title / source: engine rule-significance test: P07-SQUEEZE-RETEST-V4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'retest_up / retest_down' adds nothing to P07-SQUEEZE-RETEST-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P07-SQUEEZE-RETEST-V4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Few signals (a squeeze, a breakout AND a retest); a deep retest is often a failed breakout.
+  - test results: `memory/strategy_registry.csv` / report section 3

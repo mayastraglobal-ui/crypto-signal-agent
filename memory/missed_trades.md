@@ -1376,3 +1376,35 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - rsi2_dip_buy v1.0 30m: blocked by the regime gate
   - trend_pullback v1.0 1h: blocked by the regime gate
   - trend_pullback v1.0 30m: blocked by the regime gate
+
+### ETH down -2.6% (5.0x ATR), 2026-10-24 13:00 -> 2026-10-24 16:00
+- timestamp: 2026-10-25 01:12 UTC · source: engine: daily research run · evidence: FACT: move of 5.0x the 1H ATR within 12 hours; 149 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: TRANSITION · review: 2026-11-01
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### BNB down -2.5% (5.1x ATR), 2026-10-24 04:00 -> 2026-10-24 16:00
+- timestamp: 2026-10-25 01:12 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 149 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: TRANSITION · review: 2026-11-01
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+
+### BNB up +2.8% (5.5x ATR), 2026-10-24 15:00 -> 2026-10-25 01:00
+- timestamp: 2026-10-25 01:12 UTC · source: engine: daily research run · evidence: FACT: move of 5.5x the 1H ATR within 12 hours; 149 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: TRANSITION · review: 2026-11-01
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate

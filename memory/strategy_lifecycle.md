@@ -356,3 +356,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-10-24 01:21 UTC
 - **TRD-H4-PULLBACK@1.0 15m**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.00 (net +0.5R / max drawdown 108.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 29.2R - limit 17R; longest drawdown 1706 days = 93% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+
+## 2026-10-25 01:12 UTC
+- **P07-SQUEEZE-RETEST-V4-S2@1.0 4h**: FORMALIZED → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 24.7R - limit 17R)

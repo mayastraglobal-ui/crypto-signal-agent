@@ -1274,3 +1274,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: the 24h range of BTC around a weekly Deribit expiry with large open interest is not larger than on other days; if it is, a 'no new entry on expiry morning' filter could help.
   - how to test: an engine research check for the operator (pull request), using stored Deribit expiry dates and BTC 1h candles. Compare the 24h range in ATR units on expiry days against all other days; count the samples first.
   - stop if: the difference is inside the noise (fewer than 30 expiries or |t| < 2).
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0118 | 2026-10-25 01:12 | P07-SQUEEZE-RETEST-V4-S2@1.0 | breakout | 4h | The rule 'retest_up / retest_down' adds nothing to P07-SQUEEZE-RETEST-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
