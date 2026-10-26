@@ -21721,3 +21721,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-26 09:00,SUI,15m,FVG,bull,,0.914,0.9159,0.332,London,1h,TRANSITION,,smc-1.0,Binance
 2026-10-26 09:15,SUI,15m,FVG_RETRACE,bull,,0.914,0.9159,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-26 09:15,SUI,15m,FVG_FILLED,bull,,0.914,0.9159,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-26 10:45,BTC,15m,FVG_RETRACE,bear,,80451.86,80500.51,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-26 10:45,ETH,15m,FVG_RETRACE,bear,,2332.05,2334.57,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
