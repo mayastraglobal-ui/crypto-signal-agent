@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-26 00:06",
+ "generated_utc": "2026-10-26 04:36",
  "book": {
-  "utc": "2026-10-26 00:06",
-  "beijing": "2026-10-26 08:06",
+  "utc": "2026-10-26 04:36",
+  "beijing": "2026-10-26 12:36",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-26 00:06 UTC / 2026-10-26 08:06 Beijing",
+  "POSITION BOOK \u2014 2026-10-26 04:36 UTC / 2026-10-26 12:36 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -75,6 +75,39 @@
   }
  },
  "watching": [
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
   {
    "coin": "BTC",
    "tf": "4h",
@@ -160,7 +193,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -171,40 +204,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.1",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -215,7 +215,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
