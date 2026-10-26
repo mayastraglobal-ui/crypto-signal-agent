@@ -400,6 +400,8 @@ def status_text(i):
         lines.append(f"Journal sync to GitHub: {i['journal_sync']}")
     if i.get("heartbeat"):
         lines.append(f"Heartbeat to GitHub: {i['heartbeat']}")
+    if i.get("scan_kick"):
+        lines.append(f"Late-scan kick: {i['scan_kick']}")
     if i.get("code_old"):
         lines.append("🔄 A newer watcher version is on GitHub: double-click windows\\4_update.bat on the PC.")
     return "\n".join(lines)
