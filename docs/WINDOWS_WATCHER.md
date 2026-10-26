@@ -118,11 +118,21 @@ higher than the backtest's" is for you to decide on.
 1. On GitHub (signed in), open https://github.com/settings/personal-access-tokens/new
 2. **Token name**: `crypto journal` · **Expiration**: 1 year · **Repository access**: *Only select repositories* →
    `mayastraglobal-ui/crypto-signal-agent`
-3. **Permissions** → Repository permissions → **Contents: Read and write**. Nothing else.
+3. **Permissions** → Repository permissions → **Contents: Read and write** and **Actions: Read and write**
+   (since 2026-10-26: the watcher starts a late GitHub scan - see "Late-scan kick" below). Nothing else.
 4. **Generate token** and copy it (it starts with `github_pat_`).
 5. On the PC, double-click **`windows\6_journal_sync.bat`**, paste the token, press Enter. It uploads your journal
    once to check the token, saves it in `telegram.env` (private, never uploaded) and restarts the watcher.
 6. `/status` in Telegram now shows **Journal sync to GitHub: uploaded …**.
+
+**Late-scan kick (since 2026-10-26).** GitHub sometimes starts the "hourly" scan only every 3-5 hours (24-26 Oct:
+every run that started worked - the schedule itself was late). With the token above the watcher checks every 20
+minutes: when no scan waits or runs and the newest one started more than 75 minutes ago, it starts one (the same as
+pressing "Run workflow" on GitHub); the nightly research too when it is 26 hours late. `/status` shows **Late-scan
+kick: …**. **A token made before 26 Oct has no Actions permission:** open
+https://github.com/settings/personal-access-tokens, click the token → **Edit** → Repository permissions →
+**Actions: Read and write** → **Update** (the token itself stays the same; nothing to paste again). Without it the
+watcher says "the token needs Actions: Read and write" and everything else works as before.
 
 Good to know: the repository is public, so the `journal` branch is too - it holds your alerts, choices and results
 in R (no account, balance or keys). The token can only write files of this one repository; keep `telegram.env`

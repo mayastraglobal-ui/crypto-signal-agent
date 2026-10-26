@@ -522,6 +522,70 @@ class Heartbeat(JournalSync):
         return f"sent {lv.ago(ms, now_ms)} - GitHub emails you if it stops" if ok else f"⚠️ failing: {note}"
 
 
+
+class ScanKick(JournalSync):
+    """2026-10-26 (operator: "I got mail: no scan for 2 hours"): GitHub started the hourly scan only every 3-5 hours
+    (24-26 Oct: every run that started succeeded - the schedule itself was late or skipped). The watcher is always on,
+    so every check_min minutes it looks at each workflow's newest run: none waiting or running and the newest one
+    started more than late_min minutes ago -> it starts one (workflow_dispatch on main - the "Run workflow" button).
+    The scan still checks out main and runs as before; a late scheduled run that comes too is harmless (they queue).
+    Needs the journal token with Actions: Read and write (docs/WINDOWS_WATCHER.md); without it: off, said once."""
+    WORKFLOWS = (("scan.yml", 75), ("research.yml", 26 * 60))     # (file, minutes late) - research: once a day
+
+    def __init__(self, http=None, check_min=20):
+        super().__init__(None, http=http)
+        self.check_ms = int(check_min) * 60_000
+        self.next_ms = 0
+        self.denied_until = 0
+        self.last = None          # (ms, ok, note)
+
+    def check(self, now_ms):
+        """Start the late workflows. Returns a list of notes (empty = nothing to say); never raises."""
+        if not self.token() or now_ms < self.next_ms or now_ms < self.denied_until:
+            return []
+        self.next_ms = now_ms + self.check_ms
+        notes = []
+        try:
+            for wf, late_min in self.WORKFLOWS:
+                code, body = self._call("GET", f"/actions/workflows/{wf}/runs?per_page=1&branch=main")
+                if code in (401, 403, 404):
+                    self.denied_until = now_ms + 6 * 3_600_000
+                    self.last = (now_ms, False, "the token needs Actions: Read and write")
+                    return [f"scan kick off: GitHub answered HTTP {code} - give the journal token Actions: Read and write"]
+                if code != 200:
+                    raise RuntimeError(f"HTTP {code} {body.get('message', '')}".strip())
+                runs = body.get("workflow_runs") or []
+                if runs and runs[0].get("status") != "completed":
+                    continue                                   # one is waiting or running
+                age = None
+                if runs:
+                    t0 = dt.datetime.strptime(runs[0]["created_at"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
+                    age = (now_ms - t0.timestamp() * 1000) / 60_000
+                if age is not None and age < late_min:
+                    continue
+                code, body = self._call("POST", f"/actions/workflows/{wf}/dispatches", json=dict(ref="main"))
+                if code in (401, 403, 404):
+                    self.denied_until = now_ms + 6 * 3_600_000
+                    self.last = (now_ms, False, "the token needs Actions: Read and write")
+                    return [f"scan kick off: GitHub answered HTTP {code} - give the journal token Actions: Read and write"]
+                if code != 204:
+                    raise RuntimeError(f"start {wf}: HTTP {code} {body.get('message', '')}".strip())
+                notes.append(f"started {wf} (GitHub's schedule was {round(age) if age is not None else '?'} min late)")
+            self.last = (now_ms, True, "; ".join(notes) or "on time")
+        except Exception as e:
+            self.last = (now_ms, False, str(e)[:120])
+            notes.append(f"scan kick failed: {self.last[2]}")
+        return notes
+
+    def status(self, now_ms):
+        if not self.token():
+            return None
+        if not self.last:
+            return "on, first check within 20 minutes"
+        ms, ok, note = self.last
+        return f"checked {lv.ago(ms, now_ms)}: {note}" if ok else f"⚠️ {note}"
+
+
 class Watcher:
     def __init__(self, feed, send=True, git=True, now_fn=None, also=()):
         self.feed, self.send, self.git, self.also = feed, send, git, list(also or ())
@@ -538,6 +602,7 @@ class Watcher:
         self.jsync = JournalSync(JOURNAL)
         self.dsync = JournalSync(DECISIONS, remote="journal/decisions.csv")     # PR 3: promote taps
         self.hb = Heartbeat()                                                 # "I am running" for GitHub
+        self.kick = ScanKick()                                                # starts a late GitHub scan
         self.ssync = JournalSync(SHOCKS, remote="journal/shocks.csv")         # ⚡ the shock log for the Sunday review
         self.next_shock_ms = 0
         self._shock_err = None
@@ -1313,7 +1378,7 @@ class Watcher:
             mom_max=self.MN["max_per_day"],
             tests_max=self.SC["max_per_day"],
             refresh=self.last_refresh, code_old=self.code_old, journal_sync=self.jsync.status(now_ms),
-            heartbeat=self.hb.status(now_ms)))
+            heartbeat=self.hb.status(now_ms), scan_kick=self.kick.status(now_ms)))
 
     def trades_text(self, now_ms):
         lines = ["📒 <b>Your trades</b>"]
@@ -1946,6 +2011,8 @@ class Watcher:
                 self.sync_shocks(self.now_fn())
                 self.last_tick = (self.now_fn(), True, "")
                 self.beat(self.now_fn())
+                for note in self.kick.check(self.now_fn()):              # 2026-10-26: GitHub's schedule ran late
+                    log(note)
                 self.heartbeat(self.now_fn())
                 if self.fails >= int(self.S["error_alert_after"]):
                     telegram("✅ Live watcher recovered.")

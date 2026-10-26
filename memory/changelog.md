@@ -1047,3 +1047,14 @@ Newest entries at the bottom. Format: date · who · what · why.
   side-by-side record for it; `engine/live.py`: the "🎯 Pullback entry" line. `scanner.py`: the hourly scan's TEST
   records use the same entry (PAPER / LIVE / VALIDATION and promoted coins unchanged). No card changed (fingerprints
   and 5-year records stay). Docs: WINDOWS_WATCHER.md. Tests: tests/test_pullback.py (5).
+
+## 2026-10-26 · Operator + Claude · Late-scan kick: the PC watcher starts a scan GitHub forgot
+- Operator: "I got mail: no scan for 2 hours". GitHub Actions started the hourly scan only every 3-5 hours from 24 Oct
+  (runs 24 Oct 17:20, 20:37, 23:04 ... 26 Oct 00:05, 04:35 UTC); every run that started succeeded - the schedule
+  itself was late or skipped (the nightly research too: 26 Oct at about 04:40 instead of 00:40).
+- `live_watcher.py`: `ScanKick` (the journal token): every 20 minutes, per workflow (scan.yml 75 minutes, research.yml
+  26 hours), when the newest run on main is completed and older than that, a workflow_dispatch on main (the "Run
+  workflow" button). HTTP 401 / 403 / 404 = the token lacks Actions: read and write -> said once, off for 6 hours.
+  `/status`: "Late-scan kick: ...". The Telegram alerts never depended on GitHub (the watcher's own 5-minute checks).
+- Docs: WINDOWS_WATCHER.md (token permission + how to add Actions to an existing token). Tests:
+  tests/test_scan_kick.py (5).
