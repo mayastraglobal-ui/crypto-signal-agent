@@ -1304,3 +1304,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: after a fast fall with falling open interest (forced selling), the next 4 hours are dominated by the cascade and entries have worse results than normal days.
   - how to test: an engine research check for the operator (pull request), not a lab card. Use stored hourly open interest and BTC 1h candles: mark hours with oi_chg(4) below its 5th percentile and a fall of more than 3 ATR, and compare the average R of all cards entered in the next 4 hours with other hours. Count the samples first.
   - stop if: fewer than 30 such episodes, or the difference is inside the noise.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0119 | 2026-10-26 05:13 | TRD-H4-PULLBACK-S2@1.0 | mtf_pullback | 1h, 30m, 15m, 5m | The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to TRD-H4-PULLBACK@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0120 | 2026-10-26 05:13 | P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 | mtf_pullback | 4h | The rule 'close > open / close < open' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0121 | 2026-10-26 05:13 | donchian_breakout-VEXIT-S4-FDISP@1.0 | breakout | 4h, 1h, 30m | donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.32R a trade with it, +0.47R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |

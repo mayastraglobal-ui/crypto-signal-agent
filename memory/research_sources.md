@@ -1451,3 +1451,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: on March 12-13, 2020 Bitcoin fell from about 7,300 to 5,690 and later from about 5,800 to 3,900. Forced liquidations on BitMEX pushed the price down, which caused more liquidations. About 1.1 billion contracts of longs were liquidated. The price recovered after BitMEX slowed to a crawl at 02:16 UTC on March 13. Spreads stayed wider afterwards. The article does not discuss funding.
   - what it means for us: a fast fall can be driven by forced selling and not by news. The volatility_spike loss tag and the data-quality halts are the right protections; I cannot say from this article if they would have worked. See 'Hypothesis: add a liquidation-cascade halt test to the risk engine (from C19)'.
   - limitations: one analysis, the numbers are the article's claims; I found no official BitMEX post-mortem, and the exchange outage cause (DDoS) is the article's account.
+
+### TRD-H4-PULLBACK-S2@1.0 - Inside the 4H Donchian trend window: price dips to the EMA20 and closes back above it with a bullish candle (shorts mirrored); limit entry 0.25 ATR below the close.
+- timestamp: 2026-10-26 05:13 UTC · source: strategies_lab.yaml card TRD-H4-PULLBACK-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-PULLBACK-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-01-24
+  - title / source: engine rule-significance test: TRD-H4-PULLBACK@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to TRD-H4-PULLBACK@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): TRD-H4-PULLBACK-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Only trades while a 4H breakout is active (a few windows a month per coin); on 5m most stops are too close for the fee cap; the limit misses pullbacks that turn at once.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-10-26 05:13 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S4 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-24
+  - title / source: engine rule-significance test: P02-EMA-PULLBACK-V4-S6-FHTF@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > open / close < open' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-S4-FDISP@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-10-26 05:13 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-S4-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-01-24
+  - title / source: engine failure lab: a repair of donchian_breakout-VEXIT-S4@1.1 for its loss tag false_breakout
+  - URL: https://www.nber.org/papers/w25882
+  - claim: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.32R a trade with it, +0.47R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-S4-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3

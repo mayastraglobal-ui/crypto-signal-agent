@@ -2178,3 +2178,89 @@
     kind: DISP
     tf: 30m
     parent_cell: donchian_breakout-VEXIT-S4@1.1|30m
+- id: P01-BREAKOUT-V2-FDISP
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine failure lab: a repair of P01-BREAKOUT-V2@1.0 for its loss tag false_breakout'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P01-BREAKOUT-V2@1.0 30m'
+  hypothesis: P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.51R without). One change -
+    a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those
+    losses and keep the rest.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts:
+    below the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - within(displacement_up, 3)
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - within(displacement_down, 3)
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the
+      longest published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-10-26): engine failure lab - P01-BREAKOUT-V2@1.0 repaired for false_breakout: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  added: '2026-10-26'
+  factory: failure
+  variant_of: P01-BREAKOUT-V2@1.0
+  factory_evidence: 'false_breakout in 72% of losses, n=591 losing trades (P01-BREAKOUT-V2@1.0 30m: 1261 trades,
+    avg -0.010R, FAILED; trades with false_breakout -0.322R, without +0.513R); repair DISP: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  repair:
+    tag: false_breakout
+    kind: DISP
+    tf: 30m
+    parent_cell: P01-BREAKOUT-V2@1.0|30m

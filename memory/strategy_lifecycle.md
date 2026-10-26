@@ -359,3 +359,14 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-10-25 01:12 UTC
 - **P07-SQUEEZE-RETEST-V4-S2@1.0 4h**: FORMALIZED → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 24.7R - limit 17R)
+
+## 2026-10-26 05:13 UTC
+- **P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h**: FORMALIZED → **BACKTESTING** (avg +0.06R/trade (needs +0.10R); profit factor 1.09; recovery factor 0.87 (net +23.4R / max drawdown 27.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 31.7R - limit 17R)
+- **S5-SWEEP-MSS-FVG-noSMC@1.0 15m**: BACKTESTING → **FAILED** (avg +0.05R/trade (needs +0.10R); profit factor 1.10; not profitable in BOTH train and unseen test)
+- **TRD-H4-PULLBACK-S2@1.0 15m**: FORMALIZED → **BACKTESTING** (avg +0.05R/trade (needs +0.10R); profit factor 1.09; recovery factor 2.18 (net +142.8R / max drawdown 65.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.9R - limit 17R; longest drawdown 1326 days = 73% of the tested period (limit 55%))
+- **TRD-H4-PULLBACK-S2@1.0 1h**: FORMALIZED → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 19.1R - limit 17R)
+- **TRD-H4-PULLBACK-S2@1.0 30m**: FORMALIZED → **BACKTESTING** (profit factor 1.19; Monte Carlo 95% worst drawdown per 100 trades 21.3R - limit 17R)
+- **TRD-H4-PULLBACK-S2@1.0 5m**: FORMALIZED → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; recovery factor -0.16 (net -23.4R / max drawdown 142.3R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 30.5R - limit 17R; longest drawdown 626 days = 87% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 1h**: FORMALIZED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.05 (net +2.5R / max drawdown 55.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 28.5R - limit 17R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.05R/trade (needs +0.10R); profit factor 1.08; recovery factor 1.11 (net +47.3R / max drawdown 42.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.4R - limit 17R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.62 of the average trade, needs 3.71 after 474 trials; HIGH OVERFITTING RISK: 53% of the profit from window 5)
