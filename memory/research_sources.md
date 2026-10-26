@@ -1478,3 +1478,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): donchian_breakout-VEXIT-S4-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [C20] Terra / LUNA (May 2022) - from a Harvard Law School forum analysis
+- timestamp: 2026-10-26 15:45 UTC · source: Claude daily review 2026-10-26 · evidence: CLAIM: one analysis of a paper, not the paper · confidence: low · strategy: - · asset: LUNA, UST · timeframe: - · regime: - · review: 2027-01-24
+  - title / source: 'Anatomy of a Run: The Terra Luna Crash' (Liu, Schoar, Makarov), Harvard Law School Forum on Corporate Governance, 2023-05-22
+  - URL: https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/ (opened in this run)
+  - claim: UST was held at 1 USD by a swap contract with LUNA, not by off-chain assets; Anchor's 19.5% yield was subsidized (about 6 million USD a day by April 2022); LUNA fell from its 5 April peak; the first signs of the run were on 7 May 2022 (two large addresses withdrew 375M UST); wealthier, more sophisticated investors ran first and lost less; LUNA supply rose from about 1 billion to 6 trillion in three days.
+  - what it means for us: warning signs existed for weeks (subsidy, falling collateral, falling Anchor deposits). Our USDT pairs have a different risk (a centralised issuer), and I did not see in this article anything about USDT. See 'Hypothesis: add a stablecoin-peg check to the data-quality halts (from C20)'.
+  - limitations: a forum summary of a paper; the numbers are the article's claims and I did not open the SSRN paper.

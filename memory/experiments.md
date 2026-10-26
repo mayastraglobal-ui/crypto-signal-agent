@@ -1310,3 +1310,33 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0119 | 2026-10-26 05:13 | TRD-H4-PULLBACK-S2@1.0 | mtf_pullback | 1h, 30m, 15m, 5m | The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to TRD-H4-PULLBACK@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0120 | 2026-10-26 05:13 | P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 | mtf_pullback | 4h | The rule 'close > open / close < open' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0121 | 2026-10-26 05:13 | donchian_breakout-VEXIT-S4-FDISP@1.0 | breakout | 4h, 1h, 30m | donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.32R a trade with it, +0.47R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+
+### Feedback: P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0
+- timestamp: 2026-10-26 15:45 UTC · source: Claude daily review 2026-10-26 · evidence: BACKTEST_EVIDENCE: 1 cell, 369 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S4 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-24
+  - parent: result: P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h
+  - hypothesis: The rule 'close > open / close < open' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF@1.0 (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 369 trades +0.063R (unseen +0.188R); failed gates: avg +0.06R (needs +0.10R), profit factor 1.09, recovery factor 0.87 (needs 3), Monte Carlo 95% worst drawdown per 100 trades 31.7R (limit 17R). Parent on 2026-10-23: 292 trades +0.032R.
+  - teaches: removing the candle-colour rule gave a few more trades (369 vs 292) and a slightly higher average, but the card is still weak: the average is below the +0.10R bar and the drawdown is nearly twice the limit. This card line has now had three one-rule removals on about 300 trades.
+  - next: stop this line. A fourth removal on the same 300 trades would only be curve-fitting.
+
+### Feedback: TRD-H4-PULLBACK-S2@1.0
+- timestamp: 2026-10-26 15:45 UTC · source: Claude daily review 2026-10-26 · evidence: BACKTEST_EVIDENCE: 4 cells, 8486 trades · confidence: low · strategy: TRD-H4-PULLBACK-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-01-24
+  - parent: result: TRD-H4-PULLBACK@1.0 15m
+  - hypothesis: The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to TRD-H4-PULLBACK@1.0 (fewer rules = less room for overfitting).
+  - result: 1h BACKTESTING 1572 trades +0.153R (unseen +0.205R); 30m BACKTESTING 1513 trades +0.113R (unseen +0.228R); 15m BACKTESTING 2608 trades +0.055R (unseen +0.144R); 5m FAILED 2793 trades -0.008R. 1h fails only Monte Carlo drawdown (19.1R vs limit 17R); 30m and 15m also fail drawdown (21.3R, 25.9R); 15m also fails the +0.10R average and the longest-drawdown limit. Parent 15m: 1921 trades +0.002R.
+  - teaches: the hypothesis held: the simpler card has more trades and a better average on 15m (+0.055R vs +0.002R) and is positive on 1h, 30m and 15m, with unseen results above the train results. The 1h cell is close: only the drawdown gate is missing, by 2.1R.
+  - next: stop removing rules. If it is tested again, test one risk-side change on the 1h cell (for example a tighter stop or a smaller position cap) as a new card with parent 'experiment: Feedback: TRD-H4-PULLBACK-S2@1.0', when the daily quota allows it.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0
+- timestamp: 2026-10-26 15:45 UTC · source: Claude daily review 2026-10-26 · evidence: BACKTEST_EVIDENCE: 3 cells, 2740 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-24
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.32R a trade with it, +0.47R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 4h VALIDATION 470 trades +0.249R (unseen +0.366R); 1h BACKTESTING 1345 trades +0.002R; 30m BACKTESTING 925 trades +0.051R. The engine's note on 4h: t-statistic 3.62, needs 3.71 after 474 trials; HIGH OVERFITTING RISK, 53% of the profit from window 5. Parent 4h: 633 trades +0.234R.
+  - teaches: on 4h the repair kept the average (+0.249R vs +0.234R) with 163 fewer trades and the unseen part is higher, so it did not hurt; but the t value is just under the bar and half the profit comes from one window, so it is not yet reliable. On 1h and 30m it did not rescue the cell.
+  - next: stop this line on 1h and 30m. Let the 4h VALIDATION cell collect forward trades and watch the window-5 concentration; no further change.
+
+### Hypothesis: add a stablecoin-peg check to the data-quality halts (from C20)
+- timestamp: 2026-10-26 15:45 UTC · source: Claude daily review 2026-10-26 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: BTC, ETH, USDT pairs · timeframe: 1h · regime: - · review: 2027-01-24
+  - hypothesis: a stablecoin trading below 0.98 USD on a major venue is an early warning of forced selling in the pairs we trade, and new entries should wait.
+  - how to test: an engine feature for the operator (pull request), not a lab card. Add a USDT/USD price feed, log hours with a deviation above 0.5%, and check later if those hours have worse results. There may be no such hour in our data, so first count the samples.
+  - stop if: the feed shows no deviation above 0.5% in the stored history (nothing to test).
