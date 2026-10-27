@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-26 23:55",
+ "utc": "2026-10-27 01:25",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -15,9 +15,9 @@
  },
  "breadth": {
   "UP": 0,
-  "DOWN": 0,
+  "DOWN": 1,
   "RANGE": 0,
-  "CHOPPY": 6
+  "CHOPPY": 5
  },
  "coins": [
   {
@@ -33,22 +33,22 @@
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 17.0,
+    "1d": 18.0,
     "4h": 36.0,
-    "1h": 32.0
+    "1h": 31.0
    },
    "vol": {
-    "atr_pct": 2.68,
-    "vol_pctile": 30.0,
+    "atr_pct": 2.58,
+    "vol_pctile": 24.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.0,
-    "move_8of10_pct": 2.16,
-    "days": 400,
+    "usual_move_pct": 0.95,
+    "move_8of10_pct": 2.1,
+    "days": 367,
     "basis": "similar days",
-    "price": 80154.09,
+    "price": 80150.56,
     "band": [
-     78422.396952,
-     81885.783048
+     78467.633228,
+     81833.486772
     ]
    },
    "crowd": {
@@ -56,7 +56,7 @@
     "oi_24h_pct": 3.8,
     "label": "neutral"
    },
-   "change_24h": -0.06
+   "change_24h": -0.2
   },
   {
    "coin": "ETH",
@@ -71,36 +71,36 @@
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 28.0,
+    "1d": 29.0,
     "4h": 38.0,
-    "1h": 36.0
+    "1h": 34.0
    },
    "vol": {
-    "atr_pct": 4.43,
-    "vol_pctile": 49.0,
+    "atr_pct": 4.17,
+    "vol_pctile": 43.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.66,
-    "move_8of10_pct": 3.75,
-    "days": 482,
+    "usual_move_pct": 1.6,
+    "move_8of10_pct": 3.49,
+    "days": 434,
     "basis": "similar days",
-    "price": 2329.87,
+    "price": 2324.55,
     "band": [
-     2242.449015,
-     2417.290985
+     2243.515028,
+     2405.584972
     ]
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 2.7,
+    "oi_24h_pct": 3.3,
     "label": "neutral"
    },
-   "change_24h": -0.35
+   "change_24h": -0.52
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "down",
+   "turning": null,
    "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H TRANSITION)",
    "labels": {
     "1w": "WEAK_BULL",
@@ -109,106 +109,106 @@
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 26.0,
+    "1d": 27.0,
     "4h": 27.0,
-    "1h": 30.0
+    "1h": 29.0
    },
    "vol": {
-    "atr_pct": 4.61,
-    "vol_pctile": 37.0,
+    "atr_pct": 4.27,
+    "vol_pctile": 26.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.99,
-    "move_8of10_pct": 4.37,
-    "days": 316,
+    "usual_move_pct": 1.78,
+    "move_8of10_pct": 3.73,
+    "days": 229,
     "basis": "similar days",
-    "price": 101.4,
+    "price": 100.95,
     "band": [
-     96.972847,
-     105.827153
+     97.181012,
+     104.718988
     ]
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 3.3,
+    "oi_24h_pct": 3.2,
     "label": "neutral"
    },
-   "change_24h": -0.53
+   "change_24h": -0.97
   },
   {
    "coin": "SUI",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
+   "verdict": "DOWN",
+   "permission": "SHORT allowed",
    "turning": null,
-   "why": "timeframes disagree (1D UNCLEAR, 4H STRONG_BEAR, 1H TRANSITION)",
+   "why": "1D/4H bearish, 1W UNCLEAR",
    "labels": {
     "1w": "UNCLEAR",
-    "1d": "UNCLEAR",
+    "1d": "WEAK_BEAR",
     "4h": "STRONG_BEAR",
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 22.0,
+    "1d": 23.0,
     "4h": 38.0,
-    "1h": 40.0
+    "1h": 38.0
    },
    "vol": {
-    "atr_pct": 7.11,
-    "vol_pctile": 54.0,
+    "atr_pct": 6.47,
+    "vol_pctile": 40.0,
     "vol_label": "normal",
-    "usual_move_pct": 2.67,
-    "move_8of10_pct": 5.32,
-    "days": 441,
+    "usual_move_pct": 2.65,
+    "move_8of10_pct": 5.26,
+    "days": 347,
     "basis": "similar days",
-    "price": 0.9205,
+    "price": 0.9184,
     "band": [
-     0.871575,
-     0.969425
+     0.870058,
+     0.966742
     ]
    },
    "crowd": {
-    "funding_pct": 0.01,
-    "oi_24h_pct": 1.5,
+    "funding_pct": -0.0026,
+    "oi_24h_pct": 2.5,
     "label": "neutral"
    },
-   "change_24h": -0.54
+   "change_24h": -0.75
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": null,
-   "why": "timeframes disagree (1D WEAK_BEAR, 4H UNCLEAR, 1H TRANSITION)",
+   "turning": "up",
+   "why": "timeframes disagree (1D WEAK_BEAR, 4H UNCLEAR, 1H UNCLEAR)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "WEAK_BEAR",
     "4h": "UNCLEAR",
-    "1h": "TRANSITION"
+    "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 19.0,
-    "4h": 23.0,
-    "1h": 28.0
+    "4h": 22.0,
+    "1h": 25.0
    },
    "vol": {
-    "atr_pct": 4.43,
-    "vol_pctile": 40.0,
+    "atr_pct": 4.14,
+    "vol_pctile": 32.0,
     "vol_label": "normal",
-    "usual_move_pct": 1.49,
-    "move_8of10_pct": 3.41,
-    "days": 393,
+    "usual_move_pct": 1.42,
+    "move_8of10_pct": 3.31,
+    "days": 370,
     "basis": "similar days",
-    "price": 1.2962,
+    "price": 1.3092,
     "band": [
-     1.251941,
-     1.340459
+     1.265852,
+     1.352548
     ]
    },
    "crowd": {
-    "funding_pct": 0.01,
-    "oi_24h_pct": -1.6,
+    "funding_pct": 0.0085,
+    "oi_24h_pct": -2.1,
     "label": "neutral"
    },
-   "change_24h": 0.51
+   "change_24h": 0.53
   },
   {
    "coin": "ZEC",
@@ -223,60 +223,60 @@
     "1h": "WEAK_BULL"
    },
    "adx": {
-    "1d": 19.0,
+    "1d": 18.0,
     "4h": 13.0,
-    "1h": 13.0
+    "1h": 12.0
    },
    "vol": {
-    "atr_pct": 10.12,
-    "vol_pctile": 55.0,
+    "atr_pct": 9.38,
+    "vol_pctile": 41.0,
     "vol_label": "normal",
-    "usual_move_pct": 3.41,
-    "move_8of10_pct": 7.16,
-    "days": 378,
+    "usual_move_pct": 3.26,
+    "move_8of10_pct": 7.18,
+    "days": 450,
     "basis": "similar days",
-    "price": 1213.76,
+    "price": 1233.26,
     "band": [
-     1126.79845,
-     1300.72155
+     1144.76387,
+     1321.75613
     ]
    },
    "crowd": {
-    "funding_pct": 0.0069,
-    "oi_24h_pct": 3.1,
+    "funding_pct": 0.01,
+    "oi_24h_pct": 4.3,
     "label": "neutral"
    },
-   "change_24h": 2.23
+   "change_24h": 0.69
   }
  ],
- "alts_vs_btc_24h": -0.29,
+ "alts_vs_btc_24h": -0.32,
  "fear_greed": {
-  "value": 50,
+  "value": 48,
   "label": "Neutral",
-  "yesterday": 54
+  "yesterday": 50
  },
  "btc_dominance": {
-  "pct": 59.433,
-  "utc": "2026-10-26 23:55",
-  "ch24": -0.57,
-  "ch7": -0.14,
+  "pct": 59.442,
+  "utc": "2026-10-27 01:25",
+  "ch24": -0.56,
+  "ch7": -0.1,
   "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [
   {
    "start_utc": "2026-10-28 18:00",
    "name": "FOMC decision (Oct 27-28 meeting) + press conference",
-   "hours": 42.1
+   "hours": 40.6
   },
   {
    "start_utc": "2026-10-29 12:30",
    "name": "US GDP (Advance Estimate), 3rd Quarter 2026",
-   "hours": 60.6
+   "hours": 59.1
   },
   {
    "start_utc": "2026-10-29 12:30",
    "name": "US PCE / Personal Income and Outlays (Sep data)",
-   "hours": 60.6
+   "hours": 59.1
   }
  ],
  "blackout_now": [],
@@ -289,5 +289,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-27 07:55 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D RANGE \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.7%, higher than 30% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (78,422 \u2013 81,886) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +3.8% in 24h)\nAltcoins vs BTC (24h): -0.3%\nBTC dominance: 59.4% \u00b7 24h -0.57 pt \u00b7 7d -0.14 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Neutral 50\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u2198\ufe0f SOL: turning down (not confirmed)\n\u26aa SUI: choppy\n\u26aa XRP: choppy\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\u2022 US GDP (Advance Estimate), 3rd Quarter 2026 10-29 20:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Sep data) 10-29 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-27 09:25 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D RANGE \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: normal (daily range 2.6%, higher than 24% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (78,468 \u2013 81,833) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +3.8% in 24h)\nAltcoins vs BTC (24h): -0.3%\nBTC dominance: 59.4% \u00b7 24h -0.56 pt \u00b7 7d -0.10 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Neutral 48\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\ud83d\udd34 SUI: trend down\n\u2197\ufe0f XRP: turning up (not confirmed)\n\u2197\ufe0f ZEC: turning up (not confirmed)\n\n<b>Events</b>\n\u2022 FOMC decision (Oct 27-28 meeting) + press conference 10-29 02:00 Beijing\n\u2022 US GDP (Advance Estimate), 3rd Quarter 2026 10-29 20:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Sep data) 10-29 20:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
