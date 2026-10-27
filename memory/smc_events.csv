@@ -22159,3 +22159,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-27 05:15,ZEC,15m,SWEEP,bear,1227.19,,,0.346,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-27 05:45,ZEC,15m,SWEEP,bull,1217.0,,,0.578,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
 2026-10-27 05:15,SUI,15m,SWEEP,bear,0.9131,,,0.103,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 07:00,BTC,1h,BOS,bear,79728.57,,,0.16,London,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-27 07:00,BTC,30m,SWEEP,bull,79640.0,,,0.346,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 07:00,BTC,15m,SWEEP,bull,79640.0,,,0.525,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 07:15,BTC,15m,WEAK_BREAK,bear,79640.0,,,0.216,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-27 07:30,ETH,30m,SWEEP,bull,2302.22,,,0.141,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 06:45,ETH,15m,WEAK_BREAK,bear,2308.03,,,0.009,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-27 07:00,SOL,1h,BOS,bear,99.93,,,0.474,London,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-27 06:45,SOL,15m,FVG_RETRACE,bear,,100.01,100.1,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-27 07:00,SOL,15m,BOS,bear,99.77,,,0.667,London,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-10-27 07:00,SOL,15m,ORDER_BLOCK,bear,,99.82,100.01,,London,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-27 07:15,SOL,15m,FVG,bear,,99.74,99.82,0.301,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-27 07:30,SOL,15m,OB_RETEST,bear,,99.82,100.01,,London,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-27 07:30,SOL,15m,FVG_RETRACE,bear,,99.74,99.82,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-27 07:30,SOL,15m,FVG_FILLED,bear,,99.74,99.82,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-27 07:00,ZEC,30m,BREAKER_RETEST,bear,,1215.93,1238.59,,London,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-27 07:00,SUI,15m,SWEEP,bull,0.9057,,,0.231,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 07:15,SUI,15m,WEAK_BREAK,bear,0.9057,,,0.312,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-27 07:15,SUI,15m,OB_INVALID,bull,,0.9046,0.9127,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-27 07:30,SUI,15m,BREAKER_RETEST,bear,,0.9046,0.9127,,London,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
