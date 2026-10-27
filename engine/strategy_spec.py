@@ -74,7 +74,7 @@ MAX_RE = re.compile(r"^max\((.+),(.+)\)$")
 MIN_RE = re.compile(r"^min\((.+),(.+)\)$")          # 'min' = whichever is CLOSER (step 3: "1R or VWAP, first")
 NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 PARAM_RE = re.compile(r"\{(\w+)\}")
-TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets"]
+TEMPLATE_KEYS = ["long", "short", "exit_long", "exit_short", "stop", "targets", "entry"]   # entry: a limit level
 CONFIRM_TFS = ["30m", "15m"]           # the 5-minute protocol (section 8) runs after a closed 15m / 30m trigger
 
 # ---------- the strategy lab (Phase 17) ----------
@@ -114,7 +114,7 @@ FUNCTIONS = {"ema", "sma", "rsi", "atr", "adx", "macd_line", "macd_signal", "mac
              "lead_rank",                                       # strategy 12: the coin's rank vs BTC (1 = strongest)
              "vp_poc", "vp_vah", "vp_val"}                      # Phase 18 C: volume profile of the last n candles
 MARKET_BLOCKS = {"funding_rate", "oi", "ls_ratio", "taker_ratio", "funding_z", "oi_chg"}   # futures data
-LEAD_BLOCKS = {"btc_ret"}
+LEAD_BLOCKS = {"btc_ret", "btc_close"}
 # strategy 11 (2026-10-13): market-wide breaks - how many of the operator's coins closed beyond their 20-candle high /
 # low on this candle or the one before (scanner.breadth_frames; the watched coins, the same in backtest and live)
 # strategy 12 (2026-10-14): lead_rank(n) - which of the operator's coins rises the most vs BTC (scanner.leader_frames);
@@ -139,6 +139,7 @@ COLUMNS = {"open", "high", "low", "close", "volume", "htf_up", "htf_down",
            # Forward Test Program: the regime direction of each regime timeframe as known at the candle (+1 bull,
            # -1 bear, 0 neither - context for rules such as "the daily agrees"), and the trading sessions (UTC)
            "mkt_up", "mkt_dn",                                         # strategy 11: market-wide breaks
+           "btc_close",                                                # strategy 13: BTC's close on this candle
            "dir_1w", "dir_1d", "dir_4h", "dir_1h", "dir_4h_fast", "dir_1h_mom", "sess_asia", "sess_london", "sess_ny", "asia_high", "asia_low",
            # engine/smc.py (this timeframe)
            "smc_bear_ob_high", "smc_bear_ob_low", "smc_bos_down", "smc_bos_up", "smc_bull_ob_high",
@@ -180,7 +181,7 @@ def _fill(x, p):
 
 
 def placeholders(spec):
-    """Names used as {name} in the rules, stop and targets."""
+    """Names used as {name} in the rules, stop, targets and the entry (a limit level)."""
     found = set()
 
     def walk(x):
@@ -392,6 +393,8 @@ def check(spec, labels, timeframes):
         errs.append("time_stop_bars must be a positive whole number")
     errs += entry_problems(spec)
     errs += manage_problems(spec)
+    if not isinstance(spec.get("one_trade", False), bool):
+        errs.append("one_trade must be true or false")
     c5 = spec.get("confirm_5m", False)
     if not isinstance(c5, bool):
         errs.append("confirm_5m must be true or false")

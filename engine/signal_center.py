@@ -56,9 +56,10 @@ def pullback_entry(card, tf, S):
     x ATR behind the signal close, waiting pullback_bars candles; not filled = no trade. Over 5+ years on the 12 alert
     strategies x their coins: +0.30R a trade instead of +0.25R (2,884 trades instead of 3,092; 44.7% won instead of
     42.7%; better in 7 of 10 years), a 1 ATR pullback was worse (+0.21R). Only pullback_tfs (4H / 1H: the alert
-    list); a card's own limit entry and the 5m-confirmed cards keep their own entry."""
+    list); a card's own limit entry, a card that says entry: {type: market} (strategy 13: a breakout that runs must
+    not be missed) and the 5m-confirmed cards keep their own entry."""
     if not S.get("pullback") or tf not in (S.get("pullback_tfs") or []) or card.get("confirm_5m") or \
-            (card.get("entry") or {}).get("type") == "limit":
+            (card.get("entry") or {}).get("type") in ("limit", "market"):
         return None
     return float(S["pullback_offset_atr"]), int(S["pullback_bars"])
 

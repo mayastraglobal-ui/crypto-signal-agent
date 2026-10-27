@@ -43,13 +43,14 @@ class Cards(unittest.TestCase):
     def test_forty_cards_load_and_are_lab_cards(self):
         cards, problems = loaded()
         self.assertFalse({k: v for k, v in problems.items() if str(k).startswith("program")})
-        self.assertEqual(len(cards), 56)                                    # 10 x V1-V4 + 7 V5 (2026-10-09)
+        self.assertEqual(len(cards), 60)                                    # 10 x V1-V4 + 7 V5 (2026-10-09)
         #                                                                     + strategy 11: V1-V4 + C (2026-10-13)
         #                                                                     + strategy 12: V1-V3 + C (2026-10-14)
+        #                                                                     + strategy 13: V1-V3 + C (2026-10-27)
         self.assertTrue(all(c["lab"] for c in cards))                       # never APPROVED from this file
-        self.assertEqual(sorted({PG.number(c) for c in cards}), list(range(1, 13)))
-        self.assertEqual(sum(len(c["timeframes"]) for c in cards), 88)
-        self.assertEqual(len({c["id"] for c in cards}), 56)
+        self.assertEqual(sorted({PG.number(c) for c in cards}), list(range(1, 14)))
+        self.assertEqual(sum(len(c["timeframes"]) for c in cards), 92)
+        self.assertEqual(len({c["id"] for c in cards}), 60)
 
     def test_each_version_differs_from_v1_in_one_way(self):
         by = {(c["program"]["strategy"], c["program"]["version"]): c for c in RAW}
@@ -291,13 +292,13 @@ class Batches(unittest.TestCase):
 
     def test_modes(self):
         cards = self.cards()
-        self.assertEqual(PG.batch(cards, {}, 2, "all")[0], list(range(1, 13)))
+        self.assertEqual(PG.batch(cards, {}, 2, "all")[0], list(range(1, 14)))
         self.assertEqual(PG.batch(cards, {}, 2, "none")[0], [])
         self.assertEqual(PG.batch(cards, {}, 2, "4,9,77")[0], [4, 9])
         run, skipped = PG.select(cards + [dict(id="X", version="1.0")], [1])
         self.assertEqual({PG.number(c) for c in run if PG.is_program(c)}, {1})
         self.assertIn("X", [c["id"] for c in run])                       # the library always runs
-        self.assertEqual(len(skipped), 51)                                 # 56 cards - strategy 1 (V1-V5)
+        self.assertEqual(len(skipped), 55)                                 # 60 cards - strategy 1 (V1-V5)
 
     def test_carried_cells_keep_their_results_and_take_the_registry_status(self):
         cards = self.cards()

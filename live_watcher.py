@@ -121,6 +121,27 @@ def trail_on_5m(m5, card, trail):
     return dict(trail_long=m["tl"].to_numpy(dtype=float), trail_short=m["ts"].to_numpy(dtype=float))
 
 
+def channel_on_5m(m5, card, n, d, from_ms=0):
+    """{chan_line, chan_exit} for each closed 5m candle - strategy 13's trend exit, on the card's own candles: the exit
+    line known by then (the lowest low - shorts: highest high - of the newest n closed card candles) and chan_exit =
+    True from the 5m candle that closes the first card candle (closed at or after from_ms, the trade's entry) beyond
+    the line of the n candles before it (the card's exit rule close < prev(lowest(low,n))) - on every later 5m candle
+    too, so a card candle that arrives late still closes the trade at the next pass. Too few card candles -> unknown
+    (no line, no exit)."""
+    if card is None or len(card) <= n:
+        return dict(chan_line=np.full(len(m5), np.nan), chan_exit=np.zeros(len(m5), dtype=bool))
+    lo = card["low" if d == 1 else "high"].astype(float)
+    line = lo.rolling(n, min_periods=n).min() if d == 1 else lo.rolling(n, min_periods=n).max()
+    c = card["close"].astype(float)
+    beyond = ((c < line.shift(1)) if d == 1 else (c > line.shift(1))).to_numpy()
+    m = tfm.align_higher(m5, pd.DataFrame({"close_time": card["close_time"].to_numpy(), "ln": line.to_numpy()}), ["ln"])
+    ends = card["close_time"].to_numpy(dtype=np.int64)[beyond]
+    ends = ends[ends >= int(from_ms)]
+    ct5 = m5["close_time"].to_numpy(dtype=np.int64)
+    return dict(chan_line=m["ln"].to_numpy(dtype=float),
+                chan_exit=ct5 >= ends.min() if len(ends) else np.zeros(len(m5), dtype=bool))
+
+
 def log(*a):
     line = " ".join([dt.datetime.now(dt.timezone.utc).strftime("%H:%M:%S")] + [str(x) for x in a])
     print(line, flush=True)
@@ -773,8 +794,9 @@ class Watcher:
 
     # ---- data ----
     def update(self, coin, tf, now_ms):
-        """Keep the newest S['bars'] closed candles of coin x tf (full download once, then the newest 100)."""
-        key, n = (coin, tf), int(self.S["bars"])
+        """Keep the newest S['bars'] closed candles of coin x tf (S['bars_tf'] for the timeframes it names; full
+        download once, then the newest 100)."""
+        key, n = (coin, tf), int((self.S.get("bars_tf") or {}).get(tf, self.S["bars"]))
         have = self.frames.get(key)
         if have is None or len(have) < 300:
             new = self.feed.candles(coin, tf, n)
@@ -1032,20 +1054,27 @@ class Watcher:
             return None
         tc = t.get("trail_cfg") or {}
         if t.get("trailing") and len(closed) and "atr_n" in tc:   # the trailing ATR exit: on the card's own candles
-            key = (t["coin"], t["tf"])
-            if key not in cache:
-                try:
-                    raw = self.update(t["coin"], t["tf"], now_ms)
-                    cache[key] = raw[raw["close_time"] < now_ms]
-                except Exception as e:
-                    log(f"follow {t['coin']} {t['tf']}: download failed: {e}")
-                    cache[key] = None
-            closed = closed.assign(**trail_on_5m(closed, cache[key], tc))
+            closed = closed.assign(**trail_on_5m(closed, self._card_candles(t, now_ms, cache), tc))
         elif t.get("trailing") and len(closed):      # step 3: the playbook's trail (last 5m swing / EMA9)
             tl, ts = mg.trail_levels(closed["high"].to_numpy(), closed["low"].to_numpy(), closed["close"].to_numpy(),
                                      int(tc.get("swing_n", 3)), int(tc.get("ema", 9)))
             closed = closed.assign(trail_long=tl, trail_short=ts)
+        if t.get("chan_n") and len(closed):          # strategy 13: the trend exit, on the card's own candles
+            closed = closed.assign(**channel_on_5m(closed, self._card_candles(t, now_ms, cache), int(t["chan_n"]),
+                                                   t["d"], int(t.get("chan_from") or 0)))
         return fl.step(t, closed[closed["open_time"] >= t["checked_ms"]].to_dict("records"))
+
+    def _card_candles(self, t, now_ms, cache):
+        """The closed candles of the trade's own timeframe (once per pass and coin); None when the download failed."""
+        key = (t["coin"], t["tf"])
+        if key not in cache:
+            try:
+                raw = self.update(t["coin"], t["tf"], now_ms)
+                cache[key] = raw[raw["close_time"] < now_ms]
+            except Exception as e:
+                log(f"follow {t['coin']} {t['tf']}: download failed: {e}")
+                cache[key] = None
+        return cache[key]
 
     def follow(self, now_ms):
         cache = {}
@@ -1072,8 +1101,9 @@ class Watcher:
                 if sid in self.state["alerts"]:            # ✅ Took it after this = too late (2026-10-13)
                     self.state["alerts"][sid]["plan_end"] = dict(kind=fin["kind"], at_ms=int(fin["at_ms"]),
                                                                  r=fin.get("result_r"))
-            elif now_ms - int(t["taken_ms"]) > SHADOW_DAYS * 86_400_000:
-                self.state["shadow"].pop(sid)                  # no stop, target or time stop in 14 days: dropped
+            elif now_ms - int(t["taken_ms"]) > max(SHADOW_DAYS * 86_400_000,
+                                                    int(t.get("end_ms") or 0) - int(t["taken_ms"]) + 86_400_000):
+                self.state["shadow"].pop(sid)     # no stop, target or time stop in 14 days (or its max hold): dropped
 
     def _end_trade(self, tid, choice, now_ms, r, how):
         t = self.state["trades"].pop(tid, None)
@@ -1435,13 +1465,19 @@ class Watcher:
                 log(f"{coin} {tf}: newest candle not in yet - skipped this close")
                 continue
             try:
-                L, S, _, _, cols = sc.strategy_signals(s, tf, fr, self.cfg)
+                L, S, XL, XS, cols = sc.strategy_signals(s, tf, fr, self.cfg)
             except Exception as e:
                 log(f"RULE ERROR {s['id']} {tf}: {e}")
                 continue
             d = 1 if L[t] else (-1 if S[t] else 0)
             if d == 0:
                 continue
+            if s.get("one_trade"):                   # strategy 13: one trade per coin at a time, as in the backtest
+                open_now = []
+                tr = sc.backtest(df, L, S, XL, XS, s, self.cfg, tf, cols, None, open_now)
+                if not sc.backtest_takes(s, tr, open_now, t, fr["n"]):
+                    log(f"{coin} {tf} {s['id']}: no alert - its trade from an earlier signal is still open")
+                    continue
             entry, atr = float(df["close"].iloc[t]), float(df["_atr"].iloc[t])
             lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
             pull = scx.pullback_entry(s, tf, self.SC) if label == "TEST" else None
@@ -1486,6 +1522,7 @@ class Watcher:
                         pb_late=self._col(fr, "pb_late", t), pb_half=self._col(fr, f"pbB_half_{'long' if d == 1 else 'short'}", t)
                         if s["id"].startswith("PB-B") else False, pb_grade=sc.half_size_reason(s, fr.get("feats"), d, t),
                         inval=self._inval(s, d, cols, t), be_frac=self._be_frac(d, bool(lim)),
+                        chan_n=fl.channel_exit(s, d), chan_line=self._chan_line(s, d, df),
                         regimes={k: v["label"] for k, v in pc["recs"].items()}, close_ms=b - 1,
                         valid_bars=int(self.cfg["signals"]["lookback_bars"]), key=key)
             base["structure"] = self.structure_card(coin, d, entry, float(R), [float(x) for x in tps])
@@ -1654,6 +1691,16 @@ class Watcher:
         if not iv:
             return None
         v = float(cols[iv["long" if d == 1 else "short"]][t])
+        return v if np.isfinite(v) else None
+
+    @staticmethod
+    def _chan_line(s, d, df):
+        """Strategy 13: the trend exit line at the signal (the lowest low - shorts: highest high - of the newest n
+        candles), shown in the alert; None for other cards."""
+        n = fl.channel_exit(s, d)
+        if not n or len(df) < n:
+            return None
+        v = float(df["low"].iloc[-n:].min() if d == 1 else df["high"].iloc[-n:].max())
         return v if np.isfinite(v) else None
 
     def _be_frac(self, d, limit):

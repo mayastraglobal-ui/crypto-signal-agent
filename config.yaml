@@ -65,7 +65,7 @@ universe:                    # which coins the agent watches (AGENT_PROMPT.md se
 timeframes:
   "1w": 500      # ~10 years, or since the coin was listed (higher-timeframe context)
   "1d": 1000     # ~2.7 years (higher-timeframe context + later long backtests)
-  "4h": 1500     # ~250 days
+  "4h": 2700     # ~450 days (strategy 13: its 200-day average = 1200 4H candles, then room to see its open trade)
   "1h": 2000     # ~83 days
   "30m": 2000    # ~42 days
   "15m": 2000    # ~21 days

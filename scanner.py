@@ -594,7 +594,8 @@ def make_namespace(df, feats=None):
         return _col(f"_lead_{int(n)}")
     ns.update(funding_rate=fr, oi=oi_, ls_ratio=_col("_ls_ratio"), taker_ratio=_col("_taker_ratio"),
               funding_z=funding_z, oi_chg=oi_chg, btc_ret=btc_ret, lead_rank=lead_rank,
-              mkt_up=_col("_mkt_up"), mkt_dn=_col("_mkt_dn"))          # strategy 11: market-wide breaks (counts)
+              mkt_up=_col("_mkt_up"), mkt_dn=_col("_mkt_dn"),          # strategy 11: market-wide breaks (counts)
+              btc_close=btc)            # strategy 13: BTC's close on this candle, e.g. btc_close > sma(btc_close,1200)
     return ns
 
 
@@ -1434,7 +1435,10 @@ def limit_fill(h, l, t, d, price, valid_bars):
     return None, t + valid_bars <= n - 1
 
 
-def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None):
+def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=None, skipped=None, open_out=None):
+    """The trades of one card on one coin x timeframe, one at a time. open_out (a list, optional) receives
+    dict(signal_idx, entry_idx) of the trade still open when the data ends (or of the limit order still waiting:
+    entry_idx None) - then the backtest is not flat at the newest candle (backtest_takes, strategy 13)."""
     o, h, l, c = (df[k].to_numpy() for k in ("open", "high", "low", "close"))
     lim, levs = sspec.limit_entry(strat), sspec.limit_levels(strat)
     man = strat.get("manage") or {}
@@ -1466,6 +1470,8 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
             j0, complete = limit_fill(h, l, t, d, entry, lim[1])
             if j0 is None:
                 if not complete:                 # the data ends while the order still waits
+                    if open_out is not None:
+                        open_out.append(dict(signal_idx=t, entry_idx=None))
                     break
                 if skipped is not None:
                     skipped["limit_unfilled"] = skipped.get("limit_unfilled", 0) + 1
@@ -1486,6 +1492,8 @@ def backtest(df, sig_long, sig_short, ex_long, ex_short, strat, cfg, tf, cols=No
                              entry_fee=fee_in, fill_bar=fee_in is not None, manage=man,
                              trail=None if trails is None else trails[0 if d == 1 else 1], inval=inval)
         if res is None:
+            if open_out is not None:
+                open_out.append(dict(signal_idx=t, entry_idx=j0))
             break
         res.update(entry_idx=j0, signal_idx=t, dir=d, entry_time=int(ot[j0]), entry=float(entry), R=float(R),
                    tp1=float(tps[0]), tps=[float(x) for x in tps],
@@ -1597,11 +1605,26 @@ def m5_arrays(frames):
     return arr
 
 
-def run_backtest(df, L, S, XL, XS, strat, cfg, tf, cols=None, skipped=None, m5=None, S5=None):
+def run_backtest(df, L, S, XL, XS, strat, cfg, tf, cols=None, skipped=None, m5=None, S5=None, open_out=None):
     """backtest() - or backtest_5m() for a card with confirm_5m (it needs the coin's 5m arrays)."""
     if strat.get("confirm_5m"):
         return backtest_5m(df, L, S, XL, XS, strat, cfg, tf, cols, m5, True, skipped, S5)
-    return backtest(df, L, S, XL, XS, strat, cfg, tf, cols, skipped)
+    return backtest(df, L, S, XL, XS, strat, cfg, tf, cols, skipped, open_out)
+
+
+def backtest_takes(strat, trades, open_out, t, n):
+    """Strategy 13 (2026-10-27): a card with one_trade: true signals live / in the hourly record only when its own
+    backtest on the same candles takes the signal of candle t - one trade per coin at a time, exactly as tested (a
+    55-day breakout is true on every new 4H high of a rally: without this, every new high would be a new alert).
+    trades / open_out: backtest() on the n candles. Cards without one_trade: always True."""
+    if not strat.get("one_trade"):
+        return True
+    if any(int(x["signal_idx"]) == t for x in list(trades) + list(open_out)):
+        return True
+    if t < n - 1 or open_out:              # the backtest saw candle t and skipped it, or a trade is still open
+        return False
+    free = max([int(x["exit_idx"]) + int(strat.get("cooldown_bars", 0)) for x in trades], default=0)
+    return free <= t                       # the newest candle (never entered in the backtest): free by then
 
 
 stats = rs.stats          # summary of trades (engine/research.py), in time order
@@ -2697,7 +2720,8 @@ def main():
                     log(f"RULE ERROR in {s['id']} {tf}: {e}")
                     rule_errors.setdefault(sspec.key(s), set()).add(f"{tf}: {e}")
                     continue
-                tr = run_backtest(df, L, S, XL, XS, s, cfg, tf, cols, gc, m5, S5)
+                open_now = []
+                tr = run_backtest(df, L, S, XL, XS, s, cfg, tf, cols, gc, m5, S5, open_now)
                 mark_oos_for(s, tr, n, cfg, m5)
                 per.setdefault(k3, {})[base] = tr
                 if base in signal_set and (XL is not None or XS is not None):
@@ -2709,7 +2733,7 @@ def main():
                 for k in range(min(n - 1, max(lb, -(-scan_ms // TF_MS[tf])))):
                     t_i = n - 1 - k
                     d = 1 if L[t_i] else (-1 if S[t_i] else 0)
-                    if d == 0:
+                    if d == 0 or not backtest_takes(s, tr, open_now, t_i, n):   # strategy 13: one trade at a time
                         continue
                     a = df["_atr"].iloc[t_i]
                     lim, levs = sspec.limit_entry(s), sspec.limit_levels(s)
