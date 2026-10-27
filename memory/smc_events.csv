@@ -22376,3 +22376,24 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-27 14:00,SUI,30m,FVG_FILLED,bull,,0.9148,0.9169,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-27 13:45,SUI,15m,OB_RETEST,bull,,0.9109,0.9133,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-10-27 13:45,SUI,15m,FVG_FILLED,bull,,0.9123,0.9169,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-10-27 15:30,BTC,30m,BOS,bull,80497.31,,,0.01,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-27 15:30,BTC,15m,SWEEP,bear,80553.6,,,0.728,,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-27 15:30,BTC,15m,BOS,bull,80497.31,,,0.013,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-27 14:30,ETH,30m,FVG_FILLED,bull,,2317.78,2324.64,,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-27 15:30,ETH,30m,SWEEP,bear,2352.46,,,0.259,,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-27 15:30,ETH,30m,BOS,bull,2341.91,,,0.326,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-27 15:30,ETH,15m,SWEEP,bear,2352.46,,,0.337,,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-27 15:30,ETH,15m,BOS,bull,2341.91,,,0.425,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-27 15:30,SOL,30m,SWEEP,bear,101.23,,,0.132,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,SOL,15m,SWEEP,bear,101.23,,,0.167,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,XRP,30m,SWEEP,bear,1.3283,,,0.122,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,XRP,30m,BOS,bull,1.322,,,0.217,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-27 15:30,XRP,15m,SWEEP,bear,1.3283,,,0.16,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,XRP,15m,BOS,bull,1.322,,,0.284,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-10-27 15:30,XRP,15m,ORDER_BLOCK,bull,,1.3145,1.3205,,,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-27 15:30,ZEC,30m,OB_INVALID,bear,,1263.13,1284.59,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-27 14:45,ZEC,15m,BOS,bull,1277.99,,,0.328,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-27 14:45,ZEC,15m,FVG,bull,,1271.82,1276.4,0.459,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-10-27 15:15,ZEC,15m,SWEEP,bear,1284.59,,,0.325,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,SUI,30m,SWEEP,bear,0.9252,,,0.25,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 15:30,SUI,15m,SWEEP,bear,0.9252,,,0.325,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
