@@ -306,3 +306,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - facts (engine): -1.11R stopped out; MAE -1.25R, MFE +0.674R; TEST record, not LIVE or PAPER.
   - my reading: the trade was +0.67R in profit first, then reversed, which fits the tag false_breakout. The weather that day was 'Choppy - stay out', which fits regime_mismatch.
   - one trade is a story, not a lesson. The engine's cell P01-BREAKOUT-V5 30m is already FAILED (2795 trades, -0.08R). No rule change.
+
+### SOL SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.20R
+- timestamp: 2026-10-27 13:25 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.20R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-03
+  - signal 2026-10-27 11:59 UTC, closed 2026-10-27 12:59 UTC, stage TEST
+  - MAE -1.48R / MFE +0.56R
+  - at entry: session NY AM, conditions: low_relative_volume
+  - what happened: -
+  - root cause / fix: (review)

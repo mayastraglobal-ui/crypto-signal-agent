@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-27 11:55",
+ "utc": "2026-10-27 13:25",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 43,
+  "n": 44,
   "wins": 8,
-  "win_rate": 18.6,
-  "avg_r": -0.633,
-  "total_r": -27.23,
+  "win_rate": 18.2,
+  "avg_r": -0.646,
+  "total_r": -28.42,
   "max_dd_r": 29.63,
-  "cur_loss_run": 0,
+  "cur_loss_run": 1,
   "max_loss_run": 10,
-  "sd": 0.981
+  "sd": 0.973
  },
  "yours": {
   "n": 2,
@@ -32,29 +32,29 @@
   "sd": 0.027
  },
  "silent": {
-  "n": 35,
+  "n": 36,
   "wins": 8,
-  "win_rate": 22.9,
-  "avg_r": -0.531,
-  "total_r": -18.58,
+  "win_rate": 22.2,
+  "avg_r": -0.549,
+  "total_r": -19.77,
   "max_dd_r": 20.98,
-  "cur_loss_run": 0,
+  "cur_loss_run": 1,
   "max_loss_run": 6,
-  "sd": 1.063
+  "sd": 1.053
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 40,
+   "n": 41,
    "wins": 8,
-   "win_rate": 20.0,
-   "avg_r": -0.599,
-   "total_r": -23.98,
+   "win_rate": 19.5,
+   "avg_r": -0.614,
+   "total_r": -25.17,
    "max_dd_r": 26.38,
-   "cur_loss_run": 0,
+   "cur_loss_run": 1,
    "max_loss_run": 7,
-   "sd": 1.009
+   "sd": 1.001
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -116,15 +116,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 6,
+    "n": 7,
     "wins": 2,
-    "win_rate": 33.3,
-    "avg_r": -0.204,
-    "total_r": -1.22,
-    "max_dd_r": 2.38,
-    "cur_loss_run": 1,
+    "win_rate": 28.6,
+    "avg_r": -0.346,
+    "total_r": -2.42,
+    "max_dd_r": 2.46,
+    "cur_loss_run": 2,
     "max_loss_run": 2,
-    "sd": 1.518
+    "sd": 1.435
    },
    "backtest": {
     "n": 638,
@@ -133,7 +133,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-15 14:59",
+   "last_utc": "2026-10-27 12:59",
    "sent": false
   },
   {
@@ -831,6 +831,10 @@
   {
    "t": "2026-10-25 16:59",
    "r": -27.23
+  },
+  {
+   "t": "2026-10-27 12:59",
+   "r": -28.42
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
