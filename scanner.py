@@ -3822,21 +3822,32 @@ def render_derivs(d, w):
     w(f"Checked {d['checked_utc']} UTC. History is saved every hour from now on (exchanges keep only ~30 days).\n")
     w("Every building block reads ONE series, the main source (OKX), in backtests and live; Binance is kept as a separate "
       "research series and never mixed in (their levels differ).\n")
-    w("| Coin | State | Main source | Main history | Funding now | Long/short | Taker buy/sell | Problems |")
-    w("|---|---|---|---|---|---|---|---|")
+    w("| Coin | State | Main source | Main history | Funding now | Long/short | Taker buy/sell | Liquidated 24h (longs / shorts) | Problems |")
+    w("|---|---|---|---|---|---|---|---|---|")
     num = lambda x, f: "-" if x is None or x != x else f.format(x)
     for c, x in d["coins"].items():
         last = x.get("last") or {}
         w(f"| {c} | {x['state']} | {(x.get('fetch') or {}).get('source') or '-'} | {x.get('hours', 0)} h"
           + (f" since {x['first_utc']}" if x.get("first_utc") else "") + f" | {num(last.get('funding_pct'), '{:+.4f}%')} | "
-          f"{num(last.get('ls_ratio'), '{:.2f}')} | {num(last.get('taker_ratio'), '{:.2f}')} | "
+          f"{num(last.get('ls_ratio'), '{:.2f}')} | {num(last.get('taker_ratio'), '{:.2f}')} | {liq_cell(x)} | "
           f"{'; '.join((x.get('problems') or []) + ((x.get('fetch') or {}).get('errors') or []))[:160] or '-'} |")
+    w("\n*Liquidations (2026-10-28): OKX keeps only about a day, so they are recorded every hour from now on "
+      "(`reports/liquidations.csv.gz`, 5-minute buckets). Record only - no strategy uses them yet.*")
     blocked = sorted({b for x in d["coins"].values() for b in (x.get("fetch") or {}).get("blocked") or []})
     if blocked:
         w(f"\n*{', '.join(blocked).capitalize()} futures API: blocked from GitHub's servers (HTTP 451) - expected, not a "
           "problem. The main series (OKX) is complete; Binance research history comes from the data.binance.vision "
           "files.*")
     w("")
+
+
+def liq_cell(x):
+    """'$1.4M / $2.5M' - the coin's liquidated longs / shorts of the last 24 hours (OKX); '-' when not recorded."""
+    lq = x.get("liquidations") or {}
+    if not lq.get("buckets"):
+        return "-"
+    usd = lambda v: f"${v / 1e6:.1f}M" if v >= 1e6 else f"${v / 1e3:.0f}k"           # noqa: E731
+    return f"{usd(float(lq.get('long_24h_usd') or 0))} / {usd(float(lq.get('short_24h_usd') or 0))}"
 
 
 def render_dq(q, w):

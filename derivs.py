@@ -7,6 +7,8 @@ ratio and taker buy/sell ratio. Appended to reports/derivs_hourly.csv.gz and rep
 the live-reports branch (publish_live.py) - the history is kept from now on, because the exchanges keep only ~30
 days of hourly open interest. Older days are back-filled from data.binance.vision files, a few per run.
 Writes reports/derivs_quality.json (small, on main) for the report and Claude's fact sheet.
+Liquidations (2026-10-28): OKX's filled liquidation orders (it keeps only ~24 hours) -> 5-minute buckets in
+reports/liquidations.csv.gz (live-reports branch). Record only - no building block reads them yet.
 
 Two SEPARATE series (never mixed - their levels differ): OKX = the main series, the only one the building blocks read;
 Binance (its API when reachable + data.binance.vision files) = research only. A failure is recorded and never stops
@@ -30,6 +32,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 REPORTS = os.path.join(ROOT, "reports")
 HOURLY = os.path.join(REPORTS, "derivs_hourly.csv.gz")
 FUNDING = os.path.join(REPORTS, "funding.csv.gz")
+LIQ = os.path.join(REPORTS, "liquidations.csv.gz")
+LIQ_PAGES = 30                      # 100 orders a page: up to 3,000 per coin and run (BTC had ~600 a day, 27 Oct)
 QUALITY = os.path.join(REPORTS, "derivs_quality.json")
 FAPI = "https://fapi.binance.com"
 OKX = "https://www.okx.com"
@@ -84,6 +88,29 @@ def fetch_binance(coin, fetch=get):
                               fetch(FAPI + "/futures/data/takerlongshortRatio", p))
     funding = D.binance_funding(coin, fetch(FAPI + "/fapi/v1/fundingRate", dict(symbol=sym, limit=1000)))
     return hourly, funding
+
+
+def ct_values(fetch=get):
+    """{instId: coins per contract} of OKX's USDT perpetuals (to turn liquidated contracts into USD)."""
+    data = fetch(OKX + "/api/v5/public/instruments", dict(instType="SWAP")).get("data") or []
+    return {x["instId"]: float(x["ctVal"]) for x in data if x.get("ctVal")}
+
+
+def fetch_liquidations(coin, ct_val, fetch=get, pages=LIQ_PAGES):
+    """OKX's filled liquidation orders of one coin, newest first, page by page until the list ends (it keeps only
+    about a day). Returns events (engine/derivs.okx_liquidations)."""
+    out, after = [], None
+    for _ in range(pages):
+        p = dict(instType="SWAP", instFamily=f"{coin}-USDT", state="filled", limit=100)
+        if after:
+            p["after"] = after
+        data = fetch(OKX + "/api/v5/public/liquidation-orders", p).get("data") or []
+        details = [x for g in data for x in g.get("details") or []]
+        if not details:
+            break
+        out += D.okx_liquidations([data], ct_val)
+        after = min(int(x["ts"]) for x in details)
+    return out
 
 
 def geo_blocked(e):
@@ -150,27 +177,43 @@ def pd_month(times):
 def run(now, fetch=get, coin_list=None):
     S = settings()
     hourly, funding = D.read(HOURLY, D.HOURLY_COLS), D.read(FUNDING, D.FUNDING_COLS)
-    for path, df in ((HOURLY, hourly), (FUNDING, funding)):
+    liq = D.read(LIQ, D.LIQ_COLS)
+    for path, df in ((HOURLY, hourly), (FUNDING, funding), (LIQ, liq)):
         if os.path.exists(path) and os.path.getsize(path) > 200 and not len(df):
             raise RuntimeError(f"{path} exists but cannot be read - nothing written (history is never replaced)")
-    n_before = (len(hourly), len(funding))
+    n_before = (len(hourly), len(funding), len(liq))
     status, blocked_run = {}, set()
+    try:
+        ctv = ct_values(fetch)
+    except Exception as e:
+        ctv, ct_err = {}, f"liquidations: contract sizes not read ({type(e).__name__})"
+    else:
+        ct_err = None
     for c in coin_list or coins():
         h, f, got, errs, blocked = fetch_live(c, fetch, blocked_run)
+        if ct_err:
+            errs.append(ct_err)
+        elif f"{c}-USDT-SWAP" in ctv:
+            try:
+                liq = D.merge_liq(liq, c, fetch_liquidations(c, ctv[f"{c}-USDT-SWAP"], fetch))
+            except Exception as e:
+                errs.append(f"liquidations: {type(e).__name__}: {str(e)[:100]}")
         blocked_run.update(blocked)
         bh, bf, berr = backfill(c, D.series(hourly, "binance_files"), D.series(funding, "binance_files"), now, S, fetch)
         hourly = D.merge(hourly, h + bh, "ts")
         funding = D.merge(funding, f + bf, "time")
         status[c] = dict(source=D.MAIN_SOURCE if got.get(D.MAIN_SOURCE) else None, sources=got,
                          new_hourly=len(h), backfilled_hours=len(bh), errors=errs + berr, blocked=blocked)
-    if len(hourly) < n_before[0] or len(funding) < n_before[1]:
+    if len(hourly) < n_before[0] or len(funding) < n_before[1] or len(liq) < n_before[2]:
         raise RuntimeError("history would shrink - nothing written")              # never lose history
     os.makedirs(REPORTS, exist_ok=True)
     hourly.to_csv(HOURLY, index=False, compression="gzip")
     funding.to_csv(FUNDING, index=False, compression="gzip")
+    liq.to_csv(LIQ, index=False, compression="gzip")
     q = D.quality(*D.clean(hourly, funding), list(status), int(now.timestamp() * 1000))
     for c in q:
         q[c]["fetch"] = status[c]
+        q[c]["liquidations"] = D.liq_quality(liq, c, int(now.timestamp() * 1000))
     with open(QUALITY, "w") as f:
         json.dump(dict(checked_utc=now.strftime("%Y-%m-%d %H:%M"), coins=q), f, indent=1, default=float)
     return q

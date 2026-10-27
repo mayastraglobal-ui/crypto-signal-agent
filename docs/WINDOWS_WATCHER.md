@@ -203,8 +203,13 @@ Candle closed 10:30 UTC (18:30 Beijing) · sent 10:35 UTC
 - **4H and 1H alerts come at the candle close** (since 15 Oct 2026, your decision): no 5m check, the same entry as in
   their 5-year backtest. Why: over the 90 days to 15 Oct the 5m check threw away 5 of every 6 setups, and the ones it
   threw away did as well (4H: +0.65R a trade vs +0.52R for the ones it kept).
-- **30m and faster** still wait for a **5m candle** to confirm the entry (body in the trade's direction, normal volume,
-  close near the entry, within 30 minutes) - otherwise no alert. `config.yaml` → `signal_center.confirm_5m_tfs`.
+- **Only 4H and 1H TEST alerts reach Telegram** (since 28 Oct 2026, your decision: "build 1+2+3"). 35 of the 38
+  30m / 15m strategy tests FAILED and their October records lost about −13R. GitHub still records the 30m / 15m
+  setups silently, for the weekly review. PAPER / LIVE alerts are not affected. `config.yaml` →
+  `signal_center.alert_tfs` (`[]` = every timeframe again).
+- **30m and faster** (only if you turn them on again) wait for a **5m candle** to confirm the entry (body in the
+  trade's direction, normal volume, close near the entry, within 30 minutes) - otherwise no alert.
+  `config.yaml` → `signal_center.confirm_5m_tfs`.
 - **🌊 At most 2 alerts per wave** (since 15 Oct 2026): a wave = TEST alerts in the same direction (all buys or all
   sells) within 8 hours of the first. In a market-wide move 8-11 coins/strategies can signal at once; you get the first
   2 (the strongest backtest first), tagged "🌊 Wave alert 1 of 2", and **one** short note naming the others

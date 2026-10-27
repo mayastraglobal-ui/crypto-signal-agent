@@ -356,6 +356,9 @@ def market_data_lines(rep):
         last = x.get("last") or {}
         out.append(f"- {c}: {x['state']} · {x.get('hours', 0)} h of history · funding {num(last.get('funding_pct'), '{:+.4f}%')}"
                    f" · long/short {num(last.get('ls_ratio'), '{:.2f}')} · taker buy/sell {num(last.get('taker_ratio'), '{:.2f}')}"
+                   + (f" · liquidated 24h longs ${float(lq['long_24h_usd']):,.0f} / shorts ${float(lq['short_24h_usd']):,.0f}"
+                      f" (recorded since {lq['first_utc']} UTC - record only, no building block yet)"
+                      if (lq := x.get("liquidations") or {}).get("buckets") else "")
                    + (f" · ! {'; '.join(x['problems'])}" if x.get("problems") else ""))
     return out
 

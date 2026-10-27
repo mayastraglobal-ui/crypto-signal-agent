@@ -29,7 +29,8 @@ BRANCH = "live-reports"
 LIVE_FILES = ["reports/latest.json", "reports/smc.json", "reports/features.json", "reports/regime.json",
               "reports/feature_evidence.json", "reports/data_quality.json", "reports/research.json",
               "reports/dashboard_data.json",
-              "reports/derivs_hourly.csv.gz", "reports/funding.csv.gz"]   # Phase 17 C: growing history, carried over
+              "reports/derivs_hourly.csv.gz", "reports/funding.csv.gz",    # Phase 17 C: growing history, carried over
+              "reports/liquidations.csv.gz"]                                 # 2026-10-28: OKX liquidations, carried over
 README = """# live-reports
 
 The newest copy of the large report files of the Crypto Signal Agent, replaced on every run
@@ -46,6 +47,7 @@ The newest copy of the large report files of the Crypto Signal Agent, replaced o
 | reports/research.json | daily research run | Layers A/B/C, stress, +-20%, failure attribution, missed moves |
 | reports/derivs_hourly.csv.gz | hourly scan (derivs.py) | futures data history: open interest, long/short, taker ratio |
 | reports/funding.csv.gz | hourly scan (derivs.py) | funding rate history (every settlement) |
+| reports/liquidations.csv.gz | hourly scan (derivs.py) | OKX liquidations in 5-minute buckets (long / short USD) |
 
 The history that matters (memory/, signals_log.csv, strategy_scoreboard.csv, daily reports, latest.md)
 is on the main branch.

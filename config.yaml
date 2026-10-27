@@ -461,6 +461,9 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
   alert_min_avg_r: 0.10      # alerts only from cells NOT FAILED and positive overall, on coins averaging >= +0.10R after
                              # fees (18 of 30 cells were FAILED overall, e.g. +0.01R on ETH). GitHub still records every
                              # TEST setup above for the weekly review. false / 0.0 = the old wider list
+  alert_tfs: [4h, 1h]        # 2026-10-28 (operator: "build 1+2+3"): TEST alerts only on 4H / 1H - 35 of 38 30m / 15m
+                             # cells FAILED, October's 30m / 15m records -13R. GitHub still records them silently;
+                             # PAPER / LIVE alerts are not affected. [] = every timeframe again
   library_tests:             # 2026-10-13 (operator: "build 1H test alerts"): library strategies that send 🔵 TEST alerts
   - TRD-H4-BREAKOUT-S3@1.0|1h   # like the program's, with the same per-coin bar - "4H trend + 1H entry": +0.15R over
                              # 939 trades, unseen part +0.27R; blocked from PAPER only by its drawdown (Monte Carlo
