@@ -1344,3 +1344,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
 |---|---|---|---|---|---|
 | EXP-0122 | 2026-10-27 05:31 | P01-BREAKOUT-V2-FDISP@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.51R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+
+### Feedback: P01-BREAKOUT-V2-FDISP@1.0
+- timestamp: 2026-10-27 15:45 UTC · source: Claude daily review 2026-10-27 · evidence: BACKTEST_EVIDENCE: 3 cells, 3740 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: - · review: 2027-01-25
+  - parent: result: P01-BREAKOUT-V2@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.51R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - result: 1h BACKTESTING 1469 trades +0.006R (unseen +0.048R); 30m BACKTESTING 909 trades +0.023R (unseen +0.122R); 15m FAILED 1362 trades -0.046R (unseen +0.042R). Failed gates on all three: average below +0.10R, profit factor 0.93 to 1.04, Monte Carlo drawdown 27.5R to 33.2R (limit 17R), not profitable in BOTH train and unseen test. Parent results on 2026-10-18 were 15m -0.06R, 1h -0.01R, 30m -0.01R.
+  - teaches: the repair moved all three cells up by 0.02R to 0.03R, the same direction as the earlier DISP repairs (the failure lab shows DISP helped 3 of 3 before this), but the cells are still at about zero. The displacement rule lifts a weak card slightly; it does not make it an edge.
+  - next: stop this line. The false_breakout loss tag is already used by the failure factory this week (3 of 3), and a further change on a card at +0.01R would be curve-fitting.
+
+### Hypothesis: check the exchange before trading, with a withdrawal-status warning (from C21)
+- timestamp: 2026-10-27 15:45 UTC · source: Claude daily review 2026-10-27 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: exchange risk · timeframe: - · regime: - · review: 2027-01-25
+  - hypothesis: a rule 'no new entries while the venue we trade on has a Binance announcement of wallet or withdrawal suspension' costs little and protects against counterparty events.
+  - how to test: a check for the operator (pull request), not a lab card. Count in reports/feeds.json history how many hours had a withdrawal or maintenance notice that touched the traded coins, and whether the engine's trades in those hours differ. Count the samples first; a rare event cannot be tested on trade results, only listed.
+  - stop if: there are fewer than 30 such hours in the stored history (nothing to measure).

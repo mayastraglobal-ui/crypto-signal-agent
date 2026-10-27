@@ -1495,3 +1495,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P01-BREAKOUT-V2-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [C21] FTX (November 2022) - from a law-firm summary of press reports
+- timestamp: 2026-10-27 15:45 UTC · source: Claude daily review 2026-10-27 · evidence: CLAIM: secondary reporting, not the court filings · confidence: low · strategy: - · asset: FTT, exchange risk · timeframe: - · regime: - · review: 2027-01-25
+  - title / source: BakerHostetler, 'Stunning Collapse of Global Cryptocurrency Exchange FTX Leads to Bankruptcy'
+  - URL: https://www.bakerlaw.com/insights/stunning-collapse-of-global-cryptocurrency-exchange-ftx-leads-to-bankruptcy/ (opened in this run)
+  - claim: reports cited by the firm say FTX had about 900 million USD in easy-to-sell assets against about 9 billion USD in liabilities the day before it filed for Chapter 11 (with more than 130 affiliates, in Delaware, around 11 November 2022); the Bahamas commission appointed a provisional liquidator; about 662 million USD of unauthorized withdrawals reportedly followed on about 12 November. The page does not say when withdrawals were paused.
+  - what it means for us: customer money on an exchange is counterparty risk, and the end came within days. Our engine only reads market data and the operator keeps the account; a rule on exchange notices is the closest check. See 'Hypothesis: check the exchange before trading, with a withdrawal-status warning (from C21)'.
+  - limitations: a secondary summary of press reports; the figures are reported, not court-verified. Axios and Blockworks pages returned 403 and were not read, so none is cited.
