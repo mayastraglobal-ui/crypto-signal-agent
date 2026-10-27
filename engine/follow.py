@@ -12,14 +12,34 @@ trade.
 Step 3 (the operator's playbook) adds the card's manage block, with the backtest's rules: after TP1 the stop goes to
 entry + fees (be_plus_fees) and trails the last confirmed 5m swing / EMA9 (a message when it should move by 0.25R
 or more); no +0.5R within N candles -> exit (progress); a close beyond the setup's invalidation level -> exit.
+Strategy 13 (2026-10-27, the daily Turtle) rides the trend with no target: its early-exit rule IS the exit. For a card
+whose exit is the one channel rule "close < prev(lowest(low,N))" (shorts mirrored) the follow-up tells the exit line
+when it has moved up by 0.25R or more (above the stop: until then the stop protects), and the exit itself at the close
+of the card candle beyond it - the backtest's rule (it closes at that candle's close).
 Pure: no internet, no files. A trade is a plain dict, so it can live in the watcher's JSON state.
 """
 import datetime as dt
+import re
 
 from engine import live as lv
 from engine import timeframes as tfm
 
 FIVE = tfm.TF_MS["5m"]
+CHANNEL = {1: re.compile(r"^close<prev\(lowest\(low,(\d+)\)\)$"), -1: re.compile(r"^close>prev\(highest\(high,(\d+)\)\)$")}
+
+
+def channel_exit(card, d):
+    """Strategy 13: N when the card's early exit for direction d is the single channel rule close < prev(lowest(low,N))
+    (shorts: close > prev(highest(high,N))) - the follow-up then tells the exit line and the exit. Else None."""
+    rules = (card or {}).get("exit_long" if d == 1 else "exit_short") or []
+    m = CHANNEL[d].match(str(rules[0]).replace(" ", "")) if len(rules) == 1 else None
+    return int(m.group(1)) if m else None
+
+
+def days_text(n, tf):
+    """'20-day' for 120 4H candles; else '120-candle'."""
+    days = n * tfm.TF_MS[tf] / 86_400_000
+    return f"{days:g}-day" if days >= 1 and days == int(days) else f"{n}-candle"
 
 
 def open_trade(a, aid, taken_ms, tp_cfg=None):
@@ -36,7 +56,8 @@ def open_trade(a, aid, taken_ms, tp_cfg=None):
     extra = dict(be_price=entry * (1 + d * float(a.get("be_frac") or 0)) if man.get("be_plus_fees") else entry,
                  progress=man.get("progress"), trailing=bool(man.get("trail")), trail_cfg=man.get("trail"),
                  last_trail=None, told_stop=None,
-                 inval=a.get("inval"), inval_every_ms=tfm.TF_MS[iv_every] if iv_every else None, bars_in=0, mfe=0.0)
+                 inval=a.get("inval"), inval_every_ms=tfm.TF_MS[iv_every] if iv_every else None, bars_in=0, mfe=0.0,
+                 chan_n=a.get("chan_n"), chan_from=start, told_line=None)
     return dict(extra, id=aid, label=a["label"], coin=a["coin"], inst=a.get("inst", a["coin"]), d=int(a["d"]), tf=a["tf"],
                 filled=not lim, fill_by_ms=start + int(lim) * tfm.TF_MS[a["tf"]] if lim else None,
                 max_hold=int(a["max_hold"]) if a.get("max_hold") else None,
@@ -50,7 +71,9 @@ def open_trade(a, aid, taken_ms, tp_cfg=None):
 
 def step(t, bars):
     """Walk the trade through closed 5m candles (dicts with open_time, open, high, low, close), oldest first; only
-    candles not seen yet count. Changes t and returns the events: dict(kind='tp'|'stop'|'time', at_ms, px, ...)."""
+    candles not seen yet count. Changes t and returns the events: dict(kind='tp'|'stop'|'time', at_ms, px, ...).
+    Strategy 13 (t['chan_n']): the candles also carry chan_line (the exit line known then) and chan_exit (True on the
+    5m candle that closes a card candle beyond the line before it) - events 'line' and 'channel'."""
     out, d = [], t["d"]
     for b in bars:
         ot = int(b["open_time"])
@@ -114,6 +137,15 @@ def step(t, bars):
         if t["hit"] > 0 and ((d == 1 and c <= t["stop"]) or (d == -1 and c >= t["stop"])):
             out.append(_close(t, "stop", t["stop"], at))                         # back through the moved stop
             continue
+        if t.get("chan_n") and b.get("chan_exit"):
+            out.append(_close(t, "channel", c, at))                              # strategy 13: the trend is over
+            continue
+        ln = b.get("chan_line")
+        if t.get("chan_n") and ln is not None and ln == ln and d * (ln - t["stop"]) > 0:
+            told = t.get("told_line")
+            if told is None or d * (ln - told) >= 0.25 * t["R"]:                  # the exit line moved up 0.25R+
+                t["told_line"] = float(ln)
+                out.append(dict(kind="line", px=float(ln), at_ms=at))
         iv, every = t.get("inval"), t.get("inval_every_ms")
         if iv is not None and (not every or at % every == 0) and d * (c - iv) < 0:
             out.append(_close(t, "invalid", c, at))                              # the setup is invalidated
@@ -166,6 +198,15 @@ def text(t, ev):
                 "Stopped at break-even + fees after TP1" if abs(ev["px"] - t.get("be_price", t["entry"])) < 1e-12 else
                 f"Moved stop hit after TP{ev['hit']}")
         return f"🛑 {what} · {_head(t)}\nStop {px(ev['px'])}. If OKX hasn't closed it, close it now. {when}{done}"
+    if ev["kind"] in ("line", "channel"):
+        n = days_text(int(t["chan_n"]), t["tf"])
+        low = f"the {n} low" if t["d"] == 1 else f"the {n} high"
+        if ev["kind"] == "line":
+            return (f"📈 Exit line moved · {_head(t)}\nThe trend exit is now <b>{px(ev['px'])}</b> ({low}). I tell you "
+                    f"when a {t['tf']} candle closes {'below' if t['d'] == 1 else 'above'} it. Can't watch? Move your "
+                    f"OKX stop-loss to {px(ev['px'])} (only ever {'up' if t['d'] == 1 else 'down'}). {when}")
+        return (f"🚪 Trend exit · {_head(t)}\nA {t['tf']} candle closed {'below' if t['d'] == 1 else 'above'} {low} → "
+                f"<b>close the trade at market</b> (about {px(ev['px'])}). {when}{done}")
     if ev["kind"] == "invalid":
         return (f"❌ Setup invalidated · {_head(t)}\nA close beyond {px(t['inval'])} → <b>exit at market</b> "
                 f"(about {px(ev['px'])}). {when}{done}")
@@ -182,5 +223,6 @@ def summary(t):
              "no target yet" if t["hit"] == 0 else f"TP{t['hit']} hit")
     end = (f", time stop {dt.datetime.fromtimestamp(t['end_ms'] / 1000, lv.BJ):%d %b %H:%M} Beijing"
            if t.get("end_ms") else "")
-    return (f"• {side} {t['coin']} {t['tf']} ({t['label']}) · entry {px(t['entry'])} · stop {px(t['stop'])} · "
+    line = f" · exit line {px(t['told_line'])}" if t.get("told_line") is not None else ""
+    return (f"• {side} {t['coin']} {t['tf']} ({t['label']}) · entry {px(t['entry'])} · stop {px(t['stop'])}{line} · "
             f"{state}{end}")

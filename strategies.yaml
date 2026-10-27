@@ -38,6 +38,8 @@
 #                      need: {long: column, short: column, min_r: 2.0} -> no trade unless that level
 #                      is at least 2R away
 #    time_stop_bars    close after this many candles; cooldown_bars = candles to wait after a trade
+#    one_trade         (optional, strategy 13) true = live alerts and the hourly record only when the card's own
+#                      backtest on the same candles takes the signal: one trade per coin at a time, as tested
 #    control_twin      the same idea WITHOUT its special (e.g. SMC) ingredient - it must be beaten
 #    edge              WHY it should make money (hypothesis, not proof): type (behavioural / forced_flow /
 #                      risk_premium / structural), works_in (regimes), who_pays (who is on the other side and why
@@ -85,6 +87,7 @@
 #                                          which would look into the future)
 #                                          (Phase 18 C - all from closed candles only)
 #    btc_ret(4)                         -> BTC's % return over its last n candles (lead-lag ideas)
+#    btc_close                          -> (strategy 13) BTC's close on this candle: btc_close > sma(btc_close,1200)
 #                                          (futures data is recorded hourly since Phase 17 C: history is short at
 #                                          first; unknown values make a rule false)
 #    h4_* (below 4H only)               -> the same SMC context from the newest CLOSED 4H candle,

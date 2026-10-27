@@ -4363,3 +4363,258 @@
   changelog:
   - '1.0 (2026-10-14): strategy 12 control - V1 without the leader rank (benchmark, never alerts)'
   added: '2026-10-14'
+# ---------------------------------------------------------------------
+#  STRATEGY 13 - the daily Turtle (operator request 2026-10-27: "build strategy 13"), long only. The classic trend
+#  follower most trend traders use: buy when price breaks its 55-day high, keep the trade while the trend runs, exit
+#  when price closes below its 20-day low. No fixed target: a few big trends pay for the many small losses. Built on
+#  4H candles with day-sized windows (55 days = 330 candles, 20 days = 120, 200 days = 1200; the agent trades 4H /
+#  1H, the daily is context only). Stop 5 ATR(14) of 4H ~= 2 daily ATR (median ratio 2.65 on the 7 coins).
+#  The 2026-10-27 study (daily candles since 2017, 7 coins, long only, 0.1% a side + funding, 24 versions compared -
+#  so expect less): plain +2.28R a trade (223 trades, 33% won, 2018 -11R, 2022 -13R); BTC above its 200-day
+#  average +2.92R (166, 38% won, 2018 / 2022 0R); a strong breakout day + the coin above its 200-day average +2.67R
+#  (123, drawdown 14R); a chandelier exit instead of the 20-day low was worse (+1.08R) and is not built. Shorts lost
+#  (-0.14R): long only (the short rule close < 0 never fires).
+#  These cards through the engine (4H since 2017, 7 coins, the nightly costs; checked 2026-10-27): V1 +1.83R a trade
+#  (156 trades, 40% won, unseen last 30% +1.27R, drawdown 20.5R), V2 +2.01R (123, 46%, unseen +1.89R, drawdown 14.9R,
+#  2018 / 2022 0R), V3 +1.93R (127, unseen +1.56R, drawdown 16.0R), C +0.21R (467). Not built: a retest limit at the
+#  broken level (+1.91R, unseen only +0.99R; its backtest re-places the limit higher at every new high, which a live
+#  order cannot do - its live record would not match the test).
+#  One trade at a time (one_trade: true): the breakout rule is true on every new 4H high of a rally; live and in the
+#  hourly record a signal counts only when the card's own backtest on the same candles takes it - the trade from the
+#  first break is still open, so the later highs are not new trades (as tested). A "new trend only" rule instead
+#  (a close below the 20-day low since the last break) blocked the re-entries after a stop: +1.51R a trade, not +1.83R.
+#    V1  plain 55-day breakout              V2  V1 + BTC above its 200-day average (the bull-market filter)
+#    V3  strong breakout + the coin above its own 200-day average
+#    C   control: the same breakout with quick fixed targets (2R / 3R, 5-day hold), no 20-day exit - shows whether
+#        riding the trend is what makes the money. A benchmark, never an alert.
+#  Market entry (entry: market): the 🎯 pullback rule of the TEST alerts does not apply - the big trends
+#  rarely come back, and missing one costs more than the better price saves.
+# ---------------------------------------------------------------------
+- id: P13-TURTLE-V1
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: intraday_reversal
+  regimes: &id013
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  program:
+    strategy: 13
+    name: Daily Turtle (55-day breakout, ride the trend)
+    version: V1
+  source: 'Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle
+    study (since 2017, 7 coins, long only) - version V1'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-27: the Turtle 55-day breakout / 20-day exit on daily candles since 2017, 7 coins,
+    long only: +2.28R a trade over 223 trades (33% won), unseen last 30% +1.63R; shorts -0.14R'
+  hypothesis: A close above the 55-day high starts a trend often enough that holding until a close below the 20-day
+    low makes money, although most breakouts fail.
+  timeframes:
+  - 4h
+  description: 'A 4H close above the highest high of the last 55 days (330 candles): buy at the next open, one trade
+    per coin at a time. Stop 5 ATR (about 2 daily ATR). Exit at a 4H close below the lowest low of the last 20 days
+    (120 candles). No fixed target. Long only.'
+  params:
+    n: 330
+    exit_n: 120
+  long:
+  - close > prev(highest(high,{n}))
+  short:
+  - close < 0
+  exit_long: &id014
+  - close < prev(lowest(low,{exit_n}))
+  exit_short: []
+  entry:
+    type: market
+  stop:
+    method: atr
+    atr: 5.0
+  targets: &id015
+    long:
+    - 40R
+    short:
+    - 40R
+    split:
+    - 1.0
+  time_stop_bars: 1200
+  cooldown_bars: 0
+  one_trade: true
+  control_twin: P13-TURTLE-C
+  known_weaknesses: Most trades lose (about 2 in 3) - a small loss or the full stop; long losing streaks in sideways
+    years; the exit gives back part of the profit at the end of every trend; long only, so nothing in a bear market.
+  edge: &id016
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders who sell a new high too early ("it is too high now") or short it, and late buyers who chase at the
+      top: under-reaction to the start of a trend, then herding into it'
+    mechanism: 'trends persist (time-series momentum, the longest published record of any trading rule): a 55-day high
+      marks new demand, and holding until the 20-day low lets the rare large trend pay for the many failed breaks'
+    fails_when: sideways years with many false breakouts (2018-2019, 2022 on the daily study), and sharp crashes through
+      the stop
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative or it does not beat its control; demoted
+      by the weekly review when its live results turn negative
+  changelog:
+  - '1.0 (2026-10-27): strategy 13 V1 - the daily Turtle on 4H: 55-day breakout, one trade at a time, 5 ATR stop, exit at
+    a close below the 20-day low, long only'
+  added: '2026-10-27'
+- id: P13-TURTLE-V2
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: intraday_reversal
+  regimes: *id013
+  program:
+    strategy: 13
+    name: Daily Turtle (55-day breakout, ride the trend)
+    version: V2
+  source: 'Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle
+    study (since 2017, 7 coins, long only) - version V2'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-27: the Turtle with BTC above its 200-day average: +2.92R a trade over 166 trades
+    (38% won), unseen last 30% +2.34R, 2018 and 2022 0R (no trades), worst drawdown 20R instead of 25R'
+  hypothesis: Breakouts work in a bull market and fail in a bear market; only buying while BTC is above its 200-day
+    average skips the bear years.
+  timeframes:
+  - 4h
+  description: 'V1, and only while BTC closes above its 200-day average (1200 4H candles) - the standard bull-market
+    filter. In a bear market it waits.'
+  params:
+    n: 330
+    exit_n: 120
+    trend_n: 1200
+  long:
+  - close > prev(highest(high,{n}))
+  - btc_close > sma(btc_close,{trend_n})
+  short:
+  - close < 0
+  exit_long: *id014
+  exit_short: []
+  entry:
+    type: market
+  stop:
+    method: atr
+    atr: 5.0
+  targets: *id015
+  time_stop_bars: 1200
+  cooldown_bars: 0
+  one_trade: true
+  known_weaknesses: Fewer trades; misses the first part of a new bull market (BTC must first get back above its 200-day
+    average); the other V1 weaknesses.
+  edge: *id016
+  changelog:
+  - '1.0 (2026-10-27): strategy 13 V2 - V1 only while BTC is above its 200-day average'
+  added: '2026-10-27'
+- id: P13-TURTLE-V3
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: intraday_reversal
+  regimes: *id013
+  program:
+    strategy: 13
+    name: Daily Turtle (55-day breakout, ride the trend)
+    version: V3
+  source: 'Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle
+    study (since 2017, 7 coins, long only) - version V3'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  parent: 'experiment: study 2026-10-27: the Turtle entered only after a strong breakout day (close in its top 25%, range
+    above 1 ATR) with the coin above its 200-day average: +2.67R a trade over 123 trades, worst drawdown 14R (the
+    smallest), 2018 / 2022 -2R'
+  hypothesis: A breakout that closes strong on a big range has real buyers behind it (fewer fake breaks), and a coin
+    above its own 200-day average is in its own bull market.
+  timeframes:
+  - 4h
+  description: 'V1, and the last 24 hours (6 candles) closed in the top 25% of their range, that range bigger than its
+    20-day average (a strong breakout day), and the coin above its own 200-day average (1200 candles).'
+  params:
+    n: 330
+    exit_n: 120
+    trend_n: 1200
+    top: 0.25
+    rng_n: 120
+  long:
+  - close > prev(highest(high,{n}))
+  - highest(high,6) - close <= {top} * (highest(high,6) - lowest(low,6))
+  - highest(high,6) - lowest(low,6) > sma(highest(high,6) - lowest(low,6),{rng_n})
+  - close > sma(close,{trend_n})
+  short:
+  - close < 0
+  exit_long: *id014
+  exit_short: []
+  entry:
+    type: market
+  stop:
+    method: atr
+    atr: 5.0
+  targets: *id015
+  time_stop_bars: 1200
+  cooldown_bars: 0
+  one_trade: true
+  known_weaknesses: Fewer trades; a weak-looking start of a real trend is skipped;
+    the other V1 weaknesses.
+  edge: *id016
+  changelog:
+  - '1.0 (2026-10-27): strategy 13 V3 - V1 after a strong 24-hour breakout, with the coin above its 200-day average'
+  added: '2026-10-27'
+- id: P13-TURTLE-C
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: intraday_reversal
+  regimes: *id013
+  program:
+    strategy: 13
+    name: Daily Turtle (55-day breakout, ride the trend)
+    version: C
+  source: 'Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle
+    study (since 2017, 7 coins, long only) - version C'
+  evidence_class: 'HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so'
+  hypothesis: 'Control: the same breakout with quick fixed targets - V1 must beat it, or riding the trend
+    adds nothing.'
+  timeframes:
+  - 4h
+  description: 'Control: the V1 breakout with quick fixed targets (TP 2R / 3R, half at each, 30 candles = 5 days max
+    hold), no 20-day exit.'
+  params:
+    n: 330
+  long:
+  - close > prev(highest(high,{n}))
+  short:
+  - close < 0
+  exit_long: []
+  exit_short: []
+  entry:
+    type: market
+  stop:
+    method: atr
+    atr: 5.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  one_trade: true
+  twin_of: P13-TURTLE-V1
+  known_weaknesses: 'A benchmark, never an alert: takes quick profits from moves that may run much further.'
+  changelog:
+  - '1.0 (2026-10-27): strategy 13 control - V1 with quick fixed targets (2R / 3R) (benchmark, never alerts)'
+  added: '2026-10-27'

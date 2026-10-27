@@ -1058,3 +1058,28 @@ Newest entries at the bottom. Format: date · who · what · why.
   `/status`: "Late-scan kick: ...". The Telegram alerts never depended on GitHub (the watcher's own 5-minute checks).
 - Docs: WINDOWS_WATCHER.md (token permission + how to add Actions to an existing token). Tests:
   tests/test_scan_kick.py (5).
+
+## 2026-10-27 · Operator + Claude · Strategy 13: the daily Turtle (long only)
+- Operator: "build strategy 13" - the trend follower most traders use, made more advanced, long only. Study first
+  (daily candles since 2017, 7 coins, 24 versions compared): plain +2.28R a trade (223 trades), BTC above its 200-day
+  average +2.92R (2018 / 2022 0R), strong breakout day + own 200-day average +2.67R (drawdown 14R), chandelier exit
+  worse (+1.08R), shorts lost (-0.14R).
+- `strategies_program.yaml`: P13-TURTLE-V1 / V2 / V3 / C on 4H (55 days = 330 candles, 20 days = 120, 200 days =
+  1200): a close above the 55-day high, stop 5 ATR (~2 daily ATR), exit at a close below the 20-day low, 40R safety
+  target, 1200-candle max hold, long only; V2 + `btc_close > sma(btc_close,1200)`; V3 + strong 24 hours + `close >
+  sma(close,1200)`; C = 2R / 3R, 30 candles. Through the engine: V1 +1.83R (156, unseen +1.27R, DD 20.5R), V2 +2.01R
+  (123, unseen +1.89R, DD 14.9R), V3 +1.93R (127, unseen +1.56R), C +0.21R (467). A retest-limit V4 (+1.91R, unseen
+  +0.99R) was not built: its backtest re-places the limit higher at every new high, which a live order cannot do.
+- Engine: `btc_close` building block (scanner namespace, strategy_spec COLUMNS / LEAD_BLOCKS); card field
+  `one_trade` with `scanner.backtest_takes` (backtest() reports its open trade via `open_out`): the hourly record and
+  the watcher take a signal only when the card's own backtest on the same candles does (224 windowed checks, 1
+  difference); `entry: {type: market}` exempt from the TEST pullback (`signal_center.pullback_entry`); the entry block
+  is filled from params (`TEMPLATE_KEYS`).
+- 4H history: `config.yaml` timeframes 4h 1500 -> 2700 (the hourly scan), `live_watcher` `bars_tf` {4h: 2700} (other
+  timeframes 500 as before).
+- Follow-up (`engine/follow.py`, `live_watcher.channel_on_5m`): for a card whose exit is the one rule `close <
+  prev(lowest(low,N))`, "📈 Exit line moved" (+0.25R, above the stop) and "🚪 Trend exit" at the close beyond it;
+  the alert shows "Target: none - ride the trend" and the exit line; `hold_text` in days for 14+ days; a silent plan
+  record is kept until its max hold. No other card changed (fingerprints and records stay). Docs:
+  docs/STRATEGY_13.md, PROGRAM.md, README.md, ROADMAP.md. Tests: tests/test_strategy13.py (15).
+
