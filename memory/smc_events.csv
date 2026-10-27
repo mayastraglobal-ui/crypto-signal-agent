@@ -22207,3 +22207,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-27 08:45,ZEC,15m,FVG_RETRACE,bull,,1233.34,1236.61,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-10-27 08:00,SUI,30m,SWEEP,bear,0.9136,,,0.199,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-27 08:00,SUI,15m,SWEEP,bear,0.9136,,,0.319,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-27 10:15,BTC,15m,WEAK_BREAK,bear,79558.49,,,0.327,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-27 10:15,ETH,15m,CHOCH,bear,2300.84,,,0.373,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-27 10:15,ETH,15m,ORDER_BLOCK,bear,,2307.6,2313.1,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-27 10:15,SOL,15m,BOS,bear,99.46,,,0.947,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-10-27 10:15,SOL,15m,ORDER_BLOCK,bear,,99.6,99.92,,,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-27 10:00,XRP,30m,SWEEP,bull,1.2939,,,0.145,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 09:45,XRP,15m,WEAK_BREAK,bear,1.2958,,,0.15,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-27 10:00,XRP,15m,SWEEP,bull,1.2939,,,0.221,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-27 10:00,XRP,15m,FVG_RETRACE,bull,,1.2919,1.2936,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-27 10:00,XRP,15m,FVG,bear,,1.297,1.2988,0.443,,1h,RANGE,,smc-1.0,Binance
+2026-10-27 10:15,XRP,15m,OB_RETEST,bull,,1.2853,1.2919,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-10-27 10:15,XRP,15m,FVG_FILLED,bull,,1.2919,1.2936,,,1h,RANGE,,smc-1.0,Binance
+2026-10-27 10:15,XRP,15m,FVG_RETRACE,bear,,1.297,1.2988,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-27 10:00,ZEC,1h,FVG_RETRACE,bull,,1223.89,1235.87,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-27 10:00,ZEC,15m,BOS,bull,1245.32,,,0.401,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-27 09:45,SUI,15m,WEAK_BREAK,bear,0.9071,,,0.29,,1h,TRANSITION,no displacement,smc-1.0,Binance
