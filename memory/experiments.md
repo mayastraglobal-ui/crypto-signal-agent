@@ -1340,3 +1340,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: a stablecoin trading below 0.98 USD on a major venue is an early warning of forced selling in the pairs we trade, and new entries should wait.
   - how to test: an engine feature for the operator (pull request), not a lab card. Add a USDT/USD price feed, log hours with a deviation above 0.5%, and check later if those hours have worse results. There may be no such hour in our data, so first count the samples.
   - stop if: the feed shows no deviation above 0.5% in the stored history (nothing to test).
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0122 | 2026-10-27 05:31 | P01-BREAKOUT-V2-FDISP@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.51R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |

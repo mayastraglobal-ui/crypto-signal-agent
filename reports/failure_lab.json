@@ -1,17 +1,19 @@
 {
  "enabled": true,
  "allowed": 1,
- "considered": 157,
+ "considered": 145,
  "new": [
   {
-   "id": "P01-BREAKOUT-V2-FDISP",
+   "id": "P11-MOMENTUM-V1-FDISP",
    "tag": "false_breakout",
    "kind": "DISP",
-   "parent": "P01-BREAKOUT-V2@1.0|30m",
-   "evidence": "false_breakout in 72% of losses, n=591 losing trades (P01-BREAKOUT-V2@1.0 30m: 1261 trades, avg -0.010R, FAILED; trades with false_breakout -0.322R, without +0.513R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
+   "parent": "P11-MOMENTUM-V1@1.0|30m",
+   "evidence": "false_breakout in 77% of losses, n=2246 losing trades (P11-MOMENTUM-V1@1.0 30m: 4255 trades, avg -0.223R, FAILED; trades with false_breakout -0.505R, without +0.382R); repair DISP: a strong candle (displacement) in the trade direction within the last 3 candles"
   }
  ],
- "pending": [],
+ "pending": [
+  "P01-BREAKOUT-V2-FDISP"
+ ],
  "results": [
   {
    "child": "P02-EMA-PULLBACK-V4-S6-FHTF@1.0|4h",
@@ -26,7 +28,7 @@
    "parent_test_r": 0.206,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -41,7 +43,7 @@
    "parent_test_r": 0.375,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -56,7 +58,7 @@
    "parent_test_r": 0.255,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -71,7 +73,7 @@
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -86,7 +88,7 @@
    "parent_test_r": 0.191,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -101,7 +103,7 @@
    "parent_test_r": 0.024,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP@1.0|30m",
@@ -116,7 +118,7 @@
    "parent_test_r": 0.063,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-26 05:13"
+   "checked": "2026-10-27 05:31"
   }
  ],
  "by_kind": {

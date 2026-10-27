@@ -2264,3 +2264,110 @@
     kind: DISP
     tf: 30m
     parent_cell: P01-BREAKOUT-V2@1.0|30m
+- id: P11-MOMENTUM-V1-FDISP
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: intraday_momentum
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - RANGE
+  - HIGH_VOL_RANGE
+  - WEAK_BEAR
+  - STRONG_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - TRANSITION
+  - UNCLEAR
+  source: 'engine failure lab: a repair of P11-MOMENTUM-V1@1.0 for its loss tag false_breakout'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P11-MOMENTUM-V1@1.0 30m'
+  hypothesis: P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.38R without). One change -
+    a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those
+    losses and keep the rest.
+  timeframes:
+  - 30m
+  description: 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down
+    within 2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown
+    step in 12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+  params:
+    n: 20
+    vol_x: 1.5
+    breadth: 3
+    rs_n: 8
+    max_step: 2
+    rsi_floor: 30
+    max_ext: 2.5
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_up >= {breadth}
+  - btc_ret({rs_n}) > 0
+  - (close / shift(close,{rs_n}) - 1) * 100 >= btc_ret({rs_n})
+  - steps_up({n},3,24) <= {max_step}
+  - rsi(close,14) < 100 - {rsi_floor}
+  - (close - ema(close,20)) / atr(14) < {max_ext}
+  - within(displacement_up, 3)
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - mkt_dn >= {breadth}
+  - btc_ret({rs_n}) < 0
+  - (close / shift(close,{rs_n}) - 1) * 100 <= btc_ret({rs_n})
+  - steps_dn({n},3,24) <= {max_step}
+  - rsi(close,14) > {rsi_floor}
+  - (ema(close,20) - close) / atr(14) < {max_ext}
+  - within(displacement_down, 3)
+  exit_long:
+  - close < prev(lowest(low,10))
+  exit_short:
+  - close > prev(highest(high,10))
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 4
+  known_weaknesses: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that
+    start stretched (one huge candle).
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - TRANSITION
+    who_pays: 'traders still positioned the old way when the whole market turns: their stop-losses beyond the 20-candle
+      low / high (and liquidations on leverage) push the first steps of the move'
+    mechanism: a break on most coins at once (with BTC moving the same way) is a market move, not one coin's fake
+      break; the first one or two steps still have room, and the coin moving harder than BTC carries it
+    fails_when: 'one-coin breaks, chop around a range edge, and late steps (3rd break, RSI stretched): the move
+      is often near its end and bounces'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-10-27): engine failure lab - P11-MOMENTUM-V1@1.0 repaired for false_breakout: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  added: '2026-10-27'
+  factory: failure
+  variant_of: P11-MOMENTUM-V1@1.0
+  factory_evidence: 'false_breakout in 77% of losses, n=2246 losing trades (P11-MOMENTUM-V1@1.0 30m: 4255 trades,
+    avg -0.223R, FAILED; trades with false_breakout -0.505R, without +0.382R); repair DISP: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  repair:
+    tag: false_breakout
+    kind: DISP
+    tf: 30m
+    parent_cell: P11-MOMENTUM-V1@1.0|30m
