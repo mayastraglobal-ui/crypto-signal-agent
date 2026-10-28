@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-28 08:30",
+ "last_entry_utc": "2026-10-28 12:29",
  "days": 30,
  "all": {
   "alerts": 4,
@@ -31,15 +31,15 @@
    "wins": 0
   },
   "yours": {
-   "n": 3,
-   "total_r": -3.48,
-   "avg_r": -1.16,
+   "n": 4,
+   "total_r": -4.68,
+   "avg_r": -1.17,
    "wins": 0
   },
   "gap": {
-   "n": 3,
-   "total_r": -0.48,
-   "avg_r": -0.16,
+   "n": 4,
+   "total_r": -0.68,
+   "avg_r": -0.17,
    "wins": 0
   },
   "early": {
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 0
  },
  "recent": {
   "alerts": 4,
@@ -89,15 +89,15 @@
    "wins": 0
   },
   "yours": {
-   "n": 3,
-   "total_r": -3.48,
-   "avg_r": -1.16,
+   "n": 4,
+   "total_r": -4.68,
+   "avg_r": -1.17,
    "wins": 0
   },
   "gap": {
-   "n": 3,
-   "total_r": -0.48,
-   "avg_r": -0.16,
+   "n": 4,
+   "total_r": -0.68,
+   "avg_r": -0.17,
    "wins": 0
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 0
  },
  "per_strategy": [
   {
@@ -125,8 +125,8 @@
    "skipped": 0,
    "plan_avg_r": -1.0,
    "plan_n": 1,
-   "your_avg_r": null,
-   "your_n": 0
+   "your_avg_r": -1.2,
+   "your_n": 1
   },
   {
    "cell": "P01-BREAKOUT-V5 1h",
