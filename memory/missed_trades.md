@@ -1408,3 +1408,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ZEC up +7.3% (5.2x ATR), 2026-10-27 06:00 -> 2026-10-27 17:00
+- timestamp: 2026-10-28 06:13 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 158 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: RANGE · review: 2026-11-04
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: signal
+  - rsi2_dip_buy v1.0 1h: signal
+  - rsi2_dip_buy v1.0 30m: signal

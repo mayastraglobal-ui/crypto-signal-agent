@@ -1,6 +1,6 @@
 # Forward Test Program - backtest results
 
-Updated 2026-10-27 05:31 UTC. Tested tonight: strategies 2, 11, 12; next night: 3, 4, 12.
+Updated 2026-10-28 06:13 UTC. Tested tonight: strategies 3, 12, 13; next night: 4, 5, 12, 13.
 
 10 strategies x 4 versions (strategies_program.yaml). Every number includes OKX fees and funding ('after fees'); 'before fees' shows what the rules alone made. 'Test' = the unseen last 30% of each coin's history. A coin counts as positive with >= 5 trades and an average above 0R after fees.
 
@@ -38,15 +38,15 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 
 | Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
-| V1 | 4h | FAILED | 254 | 35 | -0.09R | -0.04R | -0.10R | XRP, ZEC | 2026-10-22 01:13 |
-| V2 | 1h | FAILED | 2393 | 34 | -0.09R | -0.02R | -0.11R | SOL | 2026-10-22 01:13 |
-| V2 | 30m | FAILED | 2806 | 35 | -0.14R | -0.03R | -0.09R | - | 2026-10-22 01:13 |
-| V2 | 15m | FAILED | 4735 | 34 | -0.23R | -0.08R | -0.18R | - | 2026-10-22 01:13 |
-| V3 | 4h | FAILED | 87 | 31 | -0.14R | -0.10R | -0.16R | XRP, ZEC | 2026-10-22 01:13 |
-| V4 | 4h | FAILED | 251 | 31 | -0.03R | +0.02R | -0.15R | XRP, ZEC | 2026-10-22 01:13 |
-| V5 | 1h | FAILED | 5126 | 34 | -0.12R | -0.05R | -0.13R | SOL, SUI | 2026-10-22 01:13 |
-| V5 | 30m | FAILED | 6223 | 34 | -0.19R | -0.07R | -0.14R | - | 2026-10-22 01:13 |
-| V5 | 15m | FAILED | 10447 | 33 | -0.28R | -0.11R | -0.26R | - | 2026-10-22 01:13 |
+| V1 | 4h | FAILED | 254 | 35 | -0.09R | -0.04R | -0.10R | XRP, ZEC | 2026-10-28 06:13 |
+| V2 | 1h | FAILED | 2402 | 34 | -0.09R | -0.02R | -0.12R | - | 2026-10-28 06:13 |
+| V2 | 30m | FAILED | 2804 | 35 | -0.14R | -0.03R | -0.08R | - | 2026-10-28 06:13 |
+| V2 | 15m | FAILED | 4730 | 34 | -0.23R | -0.08R | -0.18R | - | 2026-10-28 06:13 |
+| V3 | 4h | FAILED | 87 | 31 | -0.14R | -0.10R | -0.16R | XRP, ZEC | 2026-10-28 06:13 |
+| V4 | 4h | FAILED | 251 | 31 | -0.03R | +0.02R | -0.15R | XRP, ZEC | 2026-10-28 06:13 |
+| V5 | 1h | FAILED | 5142 | 34 | -0.12R | -0.05R | -0.13R | SOL, SUI | 2026-10-28 06:13 |
+| V5 | 30m | FAILED | 6226 | 34 | -0.19R | -0.07R | -0.13R | - | 2026-10-28 06:13 |
+| V5 | 15m | FAILED | 10450 | 33 | -0.28R | -0.11R | -0.26R | - | 2026-10-28 06:13 |
 
 ## 4. Trend momentum (MACD + Supertrend)
 
@@ -149,8 +149,17 @@ Versions: V1 base (4H) · V2 faster (1H / 30m / 15m) · V3 + daily agrees · V4 
 
 | Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
-| C | 4h | FAILED | 2810 | 42 | -0.00R | +0.03R | -0.09R | BTC, SOL, ZEC | 2026-10-27 05:31 |
-| V1 | 4h | BACKTESTING | 573 | 44 | +0.11R | +0.14R | +0.21R | ETH, SOL, SUI, XRP, ZEC | 2026-10-27 05:31 |
-| V2 | 4h | VALIDATION | 497 | 47 | +0.19R | +0.22R | +0.37R | BNB, ETH, SOL, SUI, XRP, ZEC | 2026-10-27 05:31 |
-| V3 | 1h | FAILED | 835 | 35 | -0.03R | +0.01R | -0.04R | XRP, ZEC | 2026-10-27 05:31 |
+| C | 4h | FAILED | 2810 | 42 | -0.00R | +0.03R | -0.08R | BTC, SOL, ZEC | 2026-10-28 06:13 |
+| V1 | 4h | BACKTESTING | 573 | 44 | +0.11R | +0.14R | +0.21R | ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
+| V2 | 4h | VALIDATION | 497 | 47 | +0.19R | +0.22R | +0.37R | BNB, ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
+| V3 | 1h | FAILED | 835 | 35 | -0.03R | +0.01R | -0.04R | XRP, ZEC | 2026-10-28 06:13 |
+
+## 13. Daily Turtle (55-day breakout, ride the trend)
+
+| Version | TF | Status | Trades | Win % | After fees | Before fees | Test | Positive coins | Tested |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| C | 4h | PAPER_TRADING | 467 | 51 | +0.21R | +0.23R | +0.21R | BNB, BTC, ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
+| V1 | 4h | VALIDATION | 156 | 40 | +1.83R | +1.94R | +1.27R | BNB, BTC, ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
+| V2 | 4h | VALIDATION | 123 | 46 | +2.01R | +2.13R | +1.89R | BNB, BTC, ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
+| V3 | 4h | VALIDATION | 127 | 40 | +1.93R | +2.04R | +1.56R | BNB, BTC, ETH, SOL, SUI, XRP, ZEC | 2026-10-28 06:13 |
 

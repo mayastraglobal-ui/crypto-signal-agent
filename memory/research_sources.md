@@ -1503,3 +1503,48 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: reports cited by the firm say FTX had about 900 million USD in easy-to-sell assets against about 9 billion USD in liabilities the day before it filed for Chapter 11 (with more than 130 affiliates, in Delaware, around 11 November 2022); the Bahamas commission appointed a provisional liquidator; about 662 million USD of unauthorized withdrawals reportedly followed on about 12 November. The page does not say when withdrawals were paused.
   - what it means for us: customer money on an exchange is counterparty risk, and the end came within days. Our engine only reads market data and the operator keeps the account; a rule on exchange notices is the closest check. See 'Hypothesis: check the exchange before trading, with a withdrawal-status warning (from C21)'.
   - limitations: a secondary summary of press reports; the figures are reported, not court-verified. Axios and Blockworks pages returned 403 and were not read, so none is cited.
+
+### P11-MOMENTUM-V1-FDISP@1.0 - 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down within 2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown step in 12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+- timestamp: 2026-10-28 06:13 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V1-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V1-FDISP v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-26
+  - title / source: engine failure lab: a repair of P11-MOMENTUM-V1@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.38R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P11-MOMENTUM-V1-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P13-TURTLE-V1@1.0 - A 4H close above the highest high of the last 55 days (330 candles): buy at the next open, one trade per coin at a time. Stop 5 ATR (about 2 daily ATR). Exit at a 4H close below the lowest low of the last 20 days (120 candles). No fixed target. Long only.
+- timestamp: 2026-10-28 06:13 UTC · source: strategies_lab.yaml card P13-TURTLE-V1@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P13-TURTLE-V1 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-26
+  - title / source: Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle study (since 2017, 7 coins, long only) - version V1
+  - URL: none recorded
+  - claim: A close above the 55-day high starts a trend often enough that holding until a close below the 20-day low makes money, although most breakouts fail.
+  - derived hypothesis (tested): P13-TURTLE-V1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h, and beats its control twin P13-TURTLE-C
+  - limitations: Most trades lose (about 2 in 3) - a small loss or the full stop; long losing streaks in sideways years; the exit gives back part of the profit at the end of every trend; long only, so nothing in a bear market.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P13-TURTLE-V2@1.0 - V1, and only while BTC closes above its 200-day average (1200 4H candles) - the standard bull-market filter. In a bear market it waits.
+- timestamp: 2026-10-28 06:13 UTC · source: strategies_lab.yaml card P13-TURTLE-V2@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P13-TURTLE-V2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-26
+  - title / source: Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle study (since 2017, 7 coins, long only) - version V2
+  - URL: none recorded
+  - claim: Breakouts work in a bull market and fail in a bear market; only buying while BTC is above its 200-day average skips the bear years.
+  - derived hypothesis (tested): P13-TURTLE-V2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: Fewer trades; misses the first part of a new bull market (BTC must first get back above its 200-day average); the other V1 weaknesses.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P13-TURTLE-V3@1.0 - V1, and the last 24 hours (6 candles) closed in the top 25% of their range, that range bigger than its 20-day average (a strong breakout day), and the coin above its own 200-day average (1200 candles).
+- timestamp: 2026-10-28 06:13 UTC · source: strategies_lab.yaml card P13-TURTLE-V3@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: not tested when recorded · confidence: untested idea · strategy: P13-TURTLE-V3 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-26
+  - title / source: Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle study (since 2017, 7 coins, long only) - version V3
+  - URL: none recorded
+  - claim: A breakout that closes strong on a big range has real buyers behind it (fewer fake breaks), and a coin above its own 200-day average is in its own bull market.
+  - derived hypothesis (tested): P13-TURTLE-V3@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: Fewer trades; a weak-looking start of a real trend is skipped; the other V1 weaknesses.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P13-TURTLE-C@1.0 - Control: the V1 breakout with quick fixed targets (TP 2R / 3R, half at each, 30 candles = 5 days max hold), no 20-day exit.
+- timestamp: 2026-10-28 06:13 UTC · source: strategies_lab.yaml card P13-TURTLE-C@1.0 · evidence: HYPOTHESIS: an idea family to be tested; no evidence until the backtest and the live tracking say so: control twin - a benchmark, not an idea · confidence: untested idea · strategy: P13-TURTLE-C v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-01-26
+  - title / source: Forward Test Program: strategy 13, operator request 2026-10-27 ("build strategy 13") after the daily Turtle study (since 2017, 7 coins, long only) - version C
+  - URL: none recorded
+  - claim: Control: the same breakout with quick fixed targets - V1 must beat it, or riding the trend adds nothing.
+  - derived hypothesis (tested): P13-TURTLE-C@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: A benchmark, never an alert: takes quick profits from moves that may run much further.
+  - test results: `memory/strategy_registry.csv` / report section 3

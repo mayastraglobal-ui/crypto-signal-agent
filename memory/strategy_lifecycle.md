@@ -375,3 +375,10 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **P01-BREAKOUT-V2-FDISP@1.0 15m**: FORMALIZED → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.93; recovery factor -0.61 (net -63.0R / max drawdown 103.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 33.2R - limit 17R; longest drawdown 1737 days = 95% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
 - **P01-BREAKOUT-V2-FDISP@1.0 1h**: FORMALIZED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.24 (net +9.5R / max drawdown 40.2R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 28.9R - limit 17R; not profitable in BOTH train and unseen test)
 - **P01-BREAKOUT-V2-FDISP@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.02R/trade (needs +0.10R); profit factor 1.04; recovery factor 0.34 (net +20.9R / max drawdown 62.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 27.5R - limit 17R; not profitable in BOTH train and unseen test)
+
+## 2026-10-28 06:13 UTC
+- **P11-MOMENTUM-V1-FDISP@1.0 30m**: FORMALIZED → **FAILED** (avg -0.23R/trade (needs +0.10R); profit factor 0.69; recovery factor -0.96 (net -554.7R / max drawdown 578.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 48.2R - limit 17R; longest drawdown 1636 days = 90% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P13-TURTLE-C@1.0 4h**: FORMALIZED → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
+- **P13-TURTLE-V1@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.41 of the average trade, needs 3.71 after 490 trials; HIGH OVERFITTING RISK: 50% of the profit from window 2)
+- **P13-TURTLE-V2@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.11 of the average trade, needs 3.71 after 490 trials)
+- **P13-TURTLE-V3@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.07 of the average trade, needs 3.71 after 490 trials)

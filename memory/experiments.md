@@ -1358,3 +1358,11 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: a rule 'no new entries while the venue we trade on has a Binance announcement of wallet or withdrawal suspension' costs little and protects against counterparty events.
   - how to test: a check for the operator (pull request), not a lab card. Count in reports/feeds.json history how many hours had a withdrawal or maintenance notice that touched the traded coins, and whether the engine's trades in those hours differ. Count the samples first; a rare event cannot be tested on trade results, only listed.
   - stop if: there are fewer than 30 such hours in the stored history (nothing to measure).
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0123 | 2026-10-28 06:13 | P11-MOMENTUM-V1-FDISP@1.0 | momentum | 30m | P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.38R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+| EXP-0124 | 2026-10-28 06:13 | P13-TURTLE-V1@1.0 | trend_following | 4h | A close above the 55-day high starts a trend often enough that holding until a close below the 20-day low makes money, although most breakouts fail. |
+| EXP-0125 | 2026-10-28 06:13 | P13-TURTLE-V2@1.0 | trend_following | 4h | Breakouts work in a bull market and fail in a bear market; only buying while BTC is above its 200-day average skips the bear years. |
+| EXP-0126 | 2026-10-28 06:13 | P13-TURTLE-V3@1.0 | trend_following | 4h | A breakout that closes strong on a big range has real buyers behind it (fewer fake breaks), and a coin above its own 200-day average is in its own bull market. |
+| EXP-0127 | 2026-10-28 06:13 | P13-TURTLE-C@1.0 (control twin of P13-TURTLE-V1) | trend_following | 4h | Control: the same breakout with quick fixed targets - V1 must beat it, or riding the trend adds nothing. |
