@@ -764,3 +764,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-26 22:35 UTC
 - **EXCLUDED** BNB - 24h volume $49M < $50M; 7-day average volume $45M < $50M
+
+## 2026-10-28 11:16 UTC
+- **EXCLUDED** BNB - 7-day average volume $48M < $50M
