@@ -780,3 +780,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-28 18:46 UTC
 - **EXCLUDED** BNB - 7-day average volume $48M < $50M
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-10-28 21:40 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,089x the 1% order-book depth (flag only, not excluded)
