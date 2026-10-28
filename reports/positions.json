@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-28 12:39",
+ "generated_utc": "2026-10-28 14:01",
  "book": {
-  "utc": "2026-10-28 12:39",
-  "beijing": "2026-10-28 20:39",
+  "utc": "2026-10-28 14:01",
+  "beijing": "2026-10-28 22:01",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-28 12:39 UTC / 2026-10-28 20:39 Beijing",
+  "POSITION BOOK \u2014 2026-10-28 14:01 UTC / 2026-10-28 22:01 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
@@ -635,28 +635,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/5",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
   },
   {
    "coin": "ZEC",
