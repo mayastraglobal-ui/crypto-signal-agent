@@ -1,26 +1,26 @@
 {
  "track": {
   "total": {
-   "n": 44,
+   "n": 45,
    "wins": 8,
-   "win_rate": 18.2,
-   "avg_r": -0.646,
-   "total_r": -28.42,
+   "win_rate": 17.8,
+   "avg_r": -0.65,
+   "total_r": -29.26,
    "max_dd_r": 29.63,
-   "cur_loss_run": 1,
+   "cur_loss_run": 2,
    "max_loss_run": 10,
-   "sd": 0.973
+   "sd": 0.962
   },
   "yours": {
-   "n": 2,
+   "n": 3,
    "wins": 0,
    "win_rate": 0.0,
-   "avg_r": -1.065,
-   "total_r": -2.13,
-   "max_dd_r": 2.13,
-   "cur_loss_run": 2,
-   "max_loss_run": 2,
-   "sd": 0.027
+   "avg_r": -0.989,
+   "total_r": -2.97,
+   "max_dd_r": 2.97,
+   "cur_loss_run": 3,
+   "max_loss_run": 3,
+   "sd": 0.133
   },
   "silent": {
    "n": 36,
@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W44",
- "utc": "2026-10-27 23:41",
+ "utc": "2026-10-28 01:02",
  "final": false,
  "rows": [
   {
@@ -49,27 +49,34 @@
    "version": "V1",
    "tf": "4h",
    "live": {
-    "n": 1,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.084,
-    "total_r": -1.08,
-    "sd": 0.0
+    "avg_r": -0.961,
+    "total_r": -1.92,
+    "sd": 0.1746553749530773
    },
    "week": {
-    "n": 1,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.084,
-    "total_r": -1.08,
-    "sd": 0.0
+    "avg_r": -0.961,
+    "total_r": -1.92,
+    "sd": 0.1746553749530773
    },
    "gross": {
-    "n": 1,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.025,
-    "total_r": -1.03,
-    "sd": 0.0
+    "avg_r": -0.88,
+    "total_r": -1.76,
+    "sd": 0.20576807332528543
    },
    "by_market": {
+    "CHOPPY": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -0.837,
+     "total_r": -0.84,
+     "sd": 0.0
+    },
     "UP": {
      "n": 1,
      "win_rate": 0.0,
@@ -83,7 +90,7 @@
     "avg_r": 0.371,
     "win_rate": 44.9
    },
-   "confidence": "-1.08R over 1 trade: too early to say anything",
+   "confidence": "-0.96R over 2 trades: too early to say anything",
    "sent": true
   },
   {
@@ -958,8 +965,8 @@
  "five_min": {
   "confirmed_n": 2,
   "confirmed_r": -1.0,
-  "all_n": 41,
-  "all_gross_r": -0.517,
+  "all_n": 42,
+  "all_gross_r": -0.522,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V5",
@@ -1009,11 +1016,11 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 7 of the last 7 days (last 2026-10-27)"
+   "text": "nightly research ran on 6 of the last 7 days (last 2026-10-27)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-27 23:41 UTC"
+   "text": "hourly scan: last run 2026-10-28 01:02 UTC"
   },
   {
    "ok": true,
@@ -1021,20 +1028,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-27 22:10 UTC (37 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-27 23:15 UTC (28 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 14"
+   "text": "TEST setups closed this week (GitHub record): 15"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 41,
-   "total_r": -25.18,
-   "avg_r": -0.614,
-   "week_n": 14,
-   "week_total_r": -6.92
+   "n": 42,
+   "total_r": -26.02,
+   "avg_r": -0.62,
+   "week_n": 15,
+   "week_total_r": -7.76
   },
   "PAPER": {
    "n": 0,
@@ -1044,11 +1051,11 @@
    "week_total_r": 0
   },
   "YOURS": {
-   "n": 5,
-   "total_r": -5.4,
-   "avg_r": -1.08,
-   "week_n": 3,
-   "week_total_r": -3.3
+   "n": 6,
+   "total_r": -6.24,
+   "avg_r": -1.04,
+   "week_n": 4,
+   "week_total_r": -4.14
   },
   "SILENT": {
    "n": 36,
@@ -1141,7 +1148,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-27 22:47",
+  "checked_utc": "2026-10-27 23:43",
   "lines": [
    "52 shock(s) this week, 40 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 16, broke yesterday's high 7, broke yesterday's low 12, volume spike 25",
@@ -1166,8 +1173,8 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 30,
-   "avg_r": -0.544,
+   "n": 31,
+   "avg_r": -0.554,
    "wins": 7
   },
   {
@@ -1189,5 +1196,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W44</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 3 closed this week (-3.3R) \u00b7 5 since the start (-1.08R a trade, after fees)\nSilent research records (not sent to you): 11 this week (-3.6R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 7 repair(s) judged - 6 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 52 this week (40 sent) \u00b7 4h later 19 kept going, 33 reversed \u00b7 a strategy alert followed 3\n\n\ud83d\udcc8 Track record (your alerts, after fees): 2 closed \u00b7 -1.06R a trade \u00b7 -2.1R \u00b7 worst drawdown 2.1R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 30 (-0.54R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W44</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 4 closed this week (-4.1R) \u00b7 6 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 11 this week (-3.6R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 7 repair(s) judged - 6 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 52 this week (40 sent) \u00b7 4h later 19 kept going, 33 reversed \u00b7 a strategy alert followed 3\n\n\ud83d\udcc8 Track record (your alerts, after fees): 3 closed \u00b7 -0.99R a trade \u00b7 -3.0R \u00b7 worst drawdown 3.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (1) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 1 (+2.42R) \u00b7 against 31 (-0.55R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

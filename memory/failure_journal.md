@@ -314,3 +314,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session NY AM, conditions: low_relative_volume
   - what happened: -
   - root cause / fix: (review)
+
+### BTC SHORT 4h P01-BREAKOUT-V1 v1.0 - exit-rule -0.84R
+- timestamp: 2026-10-28 01:02 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.84R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: BTC · timeframe: 4h · regime: EXPANSION · review: 2026-11-04
+  - signal 2026-10-24 15:59 UTC, closed 2026-10-27 23:59 UTC, stage TEST
+  - MAE -0.96R / MFE +0.28R
+  - at entry: session -, conditions: htf_conflict, overextended_entry, no_displacement
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)

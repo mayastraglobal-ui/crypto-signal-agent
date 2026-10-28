@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-10-27 23:41 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-10-28 01:02 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 2 | 0 | -1.06R | -2.13R | 2.13R | 2 |
+| **Your alerts** (could reach your Telegram) | 3 | 0 | -0.99R | -2.97R | 2.97R | 3 |
 | Silent research records (never sent to you) | 36 | 22 | -0.55R | -19.77R | 20.98R | 6 |
-| 🔵 TEST | 41 | 20 | -0.61R | -25.17R | 26.38R | 7 |
+| 🔵 TEST | 42 | 19 | -0.62R | -26.01R | 26.38R | 7 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 44 | 18 | -0.65R | -28.42R | 29.63R | 10 |
+| **All** | 45 | 18 | -0.65R | -29.26R | 29.63R | 10 |
 
 ## 🚨 Drift monitor
 
@@ -22,7 +22,7 @@ Warning signs (no pause yet):
 
 | Strategy | TF | Coin | Stage | Sent to you | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.08R | +0.37R | -1.08R | 1.08R | ✅ |
+| P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 2 | 0 | -0.96R | +0.37R | -1.92R | 1.92R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
 | P07-SQUEEZE-RETEST-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.11R | +0.23R | -1.11R | 1.11R | ✅ |
@@ -49,7 +49,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-18 21:59 | -15.97R |
 | 2026-10-18 21:59 | -17.06R |
 | 2026-10-20 13:59 | -18.25R |
 | 2026-10-21 13:44 | -19.61R |
@@ -69,3 +68,4 @@ Warning signs (no pause yet):
 | 2026-10-25 16:59 | -28.12R |
 | 2026-10-25 16:59 | -27.23R |
 | 2026-10-27 12:59 | -28.42R |
+| 2026-10-27 23:59 | -29.26R |
