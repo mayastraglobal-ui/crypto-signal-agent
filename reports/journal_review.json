@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-24 16:03",
+ "last_entry_utc": "2026-10-28 08:30",
  "days": 30,
  "all": {
   "alerts": 4,
@@ -7,8 +7,8 @@
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -25,8 +25,8 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -65,8 +65,8 @@
   "skipped": 0,
   "no_answer": 0,
   "plan_took": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -83,8 +83,8 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -123,8 +123,8 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": -1.0,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   },
@@ -160,6 +160,10 @@
   }
  ],
  "tests": {
+  "P01-BREAKOUT-V1": {
+   "n": 1,
+   "avg_r": -1.0
+  },
   "P01-BREAKOUT-V5": {
    "n": 1,
    "avg_r": -1.0
@@ -172,8 +176,8 @@
  "compare_5m": {
   "4h": {
    "twin_all": {
-    "n": 1,
-    "total_r": -1.0,
+    "n": 2,
+    "total_r": -2.0,
     "avg_r": -1.0,
     "wins": 0
    },
@@ -184,14 +188,14 @@
     "wins": 0
    },
    "twin_rejected": {
-    "n": 1,
-    "total_r": -1.0,
+    "n": 2,
+    "total_r": -2.0,
     "avg_r": -1.0,
     "wins": 0
    },
    "sent": {
-    "n": 1,
-    "total_r": -1.0,
+    "n": 2,
+    "total_r": -2.0,
     "avg_r": -1.0,
     "wins": 0
    }
