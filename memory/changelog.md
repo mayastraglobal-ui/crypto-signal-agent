@@ -1083,3 +1083,26 @@ Newest entries at the bottom. Format: date · who · what · why.
   record is kept until its max hold. No other card changed (fingerprints and records stay). Docs:
   docs/STRATEGY_13.md, PROGRAM.md, README.md, ROADMAP.md. Tests: tests/test_strategy13.py (15).
 
+## 2026-10-28 · Operator + Claude · TEST alerts on 4H / 1H only, liquidation recording, regime risk measured
+- Operator: "build 1+2+3" (1 remove the 30m / 15m TEST alerts, 2 regime risk test, 3 record liquidations).
+- 1: `engine/signal_center.py` `alert_tfs` (default [] = all; `config.yaml` [4h, 1h]) in `alert_list()` - also what
+  the track record counts as "your alerts". 35 of 38 30m / 15m cells FAILED; October's 30m / 15m records -13R. On 28
+  Oct all 11 TEST alert cells were 4H already (the 13 Oct filter), so this mainly locks the short timeframes out.
+  GitHub keeps recording them silently; PAPER / LIVE unchanged.
+- 2: measured, NOT built. Rule fixed in advance: RANGE / HIGH_VOL_RANGE / COMPRESSION at entry (the gate's regime
+  timeframe) -> 0.25% risk instead of 0.5%. On the strategies that can reach Telegram (33 TEST pairs + 4 PAPER cells,
+  the engine's backtest since 2017, 6,001 trades): only 260 trades started in chop, and they did BETTER (+0.37R vs
+  +0.23R); regime-sized total +1,383R vs +1,431R, worst drawdown 98.6R vs 94.3R, unseen part worse (5.56 vs 6.04
+  profit per drawdown) - the bar (drawdown -20%, profit per drawdown better, unseen not worse) failed on every point.
+  The strategies' own regime lists and the regime-fit filter already keep them out of chop. (The all-strategy pool,
+  failed cards included, had looked promising: -0.03R in RANGE vs +0.19R in WEAK_BULL on 4H.)
+- 3: `derivs.py` records OKX's filled liquidation orders (public, no key; OKX keeps about 24 hours) every hour, up to
+  30 pages a coin: `engine/derivs.py` `okx_liquidations` (USD = contracts x ctVal x bankruptcy price; long = posSide
+  long or a forced sell in net mode), `liq_buckets` (5-minute buckets: long / short USD, counts, largest), `merge_liq`
+  (a bucket inside the fresh window takes the fresh count - never counted twice; the cut-off first bucket and all
+  older buckets are kept - never shrinks), `liq_quality`. `reports/liquidations.csv.gz` travels on live-reports
+  (`publish_live.LIVE_FILES`, .gitignore). Report section 0b: "Liquidated 24h (longs / shorts)"; the Brain fact sheet
+  shows it. Record only: no building block yet (the research can test cascade / cluster ideas after a few months).
+  Measured 27 Oct: about 25 s per scan for 7 coins (BTC 608 liquidations in 24 h, ETH 1,081).
+- Tests: tests/test_liquidations.py (9). Docs: WINDOWS_WATCHER.md, ROADMAP.md.
+

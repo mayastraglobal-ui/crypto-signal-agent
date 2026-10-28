@@ -383,7 +383,7 @@ class Recorder(unittest.TestCase):
         self.tmp = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, self.tmp, True)
         for name, f in (("HOURLY", "derivs_hourly.csv.gz"), ("FUNDING", "funding.csv.gz"),
-                        ("QUALITY", "derivs_quality.json"), ("REPORTS", "")):
+                        ("QUALITY", "derivs_quality.json"), ("LIQ", "liquidations.csv.gz"), ("REPORTS", "")):
             p = mock.patch.object(derivs, name, os.path.join(self.tmp, f) if f else self.tmp)
             p.start()
             self.addCleanup(p.stop)

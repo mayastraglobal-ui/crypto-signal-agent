@@ -27,7 +27,8 @@ DEFAULTS = dict(enabled=True, min_coin_trades=20, min_avg_r=0.0, test_min_trades
                 cooldown_minutes=240, confirm_5m=True, agree_hours=4, watch_notes=True, watch_max_per_day=12,
                 alert_skip_failed=True, alert_min_avg_r=0.10, library_tests=(),
                 confirm_5m_tfs=("30m", "15m", "5m"), wave_max=2, wave_hours=8,
-                pullback=True, pullback_offset_atr=0.25, pullback_bars=6, pullback_tfs=("4h", "1h"))
+                pullback=True, pullback_offset_atr=0.25, pullback_bars=6, pullback_tfs=("4h", "1h"),
+                alert_tfs=())
 BJ = dt.timezone(dt.timedelta(hours=8))
 OWN_LABEL = ("PAPER_TRADING", "APPROVED")      # these alert as 🟡 PAPER / 🟢 LIVE instead (VALIDATION does not alert)
 
@@ -47,6 +48,7 @@ def settings(section):
     s["pullback"] = bool(s["pullback"])
     s["pullback_offset_atr"], s["pullback_bars"] = float(s["pullback_offset_atr"]), int(s["pullback_bars"])
     s["pullback_tfs"] = [str(x) for x in (s.get("pullback_tfs") or [])]
+    s["alert_tfs"] = [str(x) for x in (s.get("alert_tfs") or [])]
     return s
 
 
@@ -169,9 +171,13 @@ def alert_list(tests, program, reg_cells, S):
     18 of the 30 TEST cells were FAILED overall and alerted only because one or two coins came out slightly positive
     (e.g. P01-BREAKOUT-V5 1h: -0.02R over 3,762 trades, ETH +0.01R over 717 - a coin flip). Telegram now gets only
     cells that are not FAILED and positive overall, on coins averaging >= alert_min_avg_r after fees. GitHub keeps
-    recording every TEST setup of test_list() (the weekly review is unchanged)."""
+    recording every TEST setup of test_list() (the weekly review is unchanged).
+    2026-10-28 (operator: "build 1+2+3"): only the timeframes in alert_tfs (config: 4H / 1H; empty = all) - 35 of the
+    38 30m / 15m cells FAILED and the October 30m / 15m records lost about -13R; GitHub keeps recording them."""
     out = {}
     for ck, coins in (tests or {}).items():
+        if S.get("alert_tfs") and ck.rsplit("|", 1)[-1] not in S["alert_tfs"]:
+            continue
         row = ((program or {}).get("cells") or {}).get(ck) or {}
         st = (reg_cells.get(ck) or {}).get("status") or row.get("status")
         if S["alert_skip_failed"] and (st == "FAILED" or float(row.get("avg_r") or 0) <= 0):

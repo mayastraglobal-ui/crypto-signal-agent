@@ -18,6 +18,11 @@ taker buy/sell volume ratio - free public data, no API key.
     its hour; a funding rate from its settlement time; too-old values (max age) become "unknown" (NaN), so rules that
     use them stay false and no live signal is built on stale data.
 
+  * Liquidations (2026-10-28, operator: "record liquidations"): OKX's public list of filled liquidation orders keeps
+    only about the last 24 hours, so derivs.py records it every hour into reports/liquidations.csv.gz (live-reports
+    branch) as 5-minute buckets per coin: long / short liquidated USD, counts, the largest single one. RECORD ONLY:
+    no building block reads it yet - the research can test liquidation ideas once a few months are recorded.
+
 Pure functions; the fetching is in derivs.py.
 """
 import csv
@@ -36,6 +41,8 @@ RESEARCH_SOURCES = ("binance", "binance_files")   # kept separately, research on
 SOURCE_CODE = {"okx": 1, "binance": 2, "binance_files": 3, "synthetic": 4}
 MAX_AGE_H = {"hourly": 3, "funding": 9}        # older than this = unknown (hourly stats / funding settlements)
 LIMITS = dict(ls_ratio=(0.01, 100.0), taker_ratio=(0.01, 100.0), rate=(-0.03, 0.03))   # beyond = impossible / outlier
+LIQ_COLS = ["ts", "coin", "long_usd", "short_usd", "long_n", "short_n", "max_usd"]   # ts = start of the 5 minutes
+LIQ_BUCKET_MS = 300_000
 
 
 def _f(x):
@@ -91,6 +98,63 @@ def okx_funding(coin, data):
     """OKX /public/funding-rate-history -> rows (realizedRate when given, else fundingRate)."""
     return [dict(time=int(x["fundingTime"]), coin=coin, source="okx",
                  rate=_f(x.get("realizedRate") or x.get("fundingRate"))) for x in (data or {}).get("data") or []]
+
+
+def okx_liquidations(pages, ct_val):
+    """/api/v5/public/liquidation-orders pages (instType SWAP, state filled) -> events dict(ts, long: bool, usd).
+    long = a LONG position was liquidated (posSide long; in net mode a forced sell). usd = contracts x contract value
+    (coins per contract, ct_val) x bankruptcy price. Unknown sizes / prices are skipped."""
+    out = []
+    for page in pages or []:
+        for g in page or []:
+            for x in g.get("details") or []:
+                ts, sz, px = _f(x.get("ts")), _f(x.get("sz")), _f(x.get("bkPx"))
+                if not (ts == ts and sz == sz and px == px and sz > 0 and px > 0):
+                    continue
+                pos = str(x.get("posSide") or "")
+                long_ = pos == "long" or (pos not in ("long", "short") and str(x.get("side")) == "sell")
+                out.append(dict(ts=int(ts), long=long_, usd=sz * float(ct_val) * px))
+    return out
+
+
+def liq_buckets(coin, events):
+    """Events -> 5-minute bucket rows (LIQ_COLS), oldest first."""
+    rows = {}
+    for e in events:
+        b = rows.setdefault(int(e["ts"]) // LIQ_BUCKET_MS * LIQ_BUCKET_MS,
+                            dict(long_usd=0.0, short_usd=0.0, long_n=0, short_n=0, max_usd=0.0))
+        side = "long" if e["long"] else "short"
+        b[side + "_usd"] += e["usd"]
+        b[side + "_n"] += 1
+        b["max_usd"] = max(b["max_usd"], e["usd"])
+    return [dict(ts=t, coin=coin, **{k: round(v, 2) if isinstance(v, float) else v for k, v in x.items()})
+            for t, x in sorted(rows.items())]
+
+
+def merge_liq(old, coin, events):
+    """The stored buckets with this run's events of one coin. OKX returns the WHOLE recent window each time, so a
+    bucket inside it takes the fresh count (never added twice); the window's oldest bucket may be cut off, so an
+    existing value there is kept; every other stored bucket stays (history never shrinks)."""
+    new = pd.DataFrame(liq_buckets(coin, events), columns=LIQ_COLS)
+    if not len(new):
+        return old if old is not None else new
+    if old is None or not len(old):
+        return new.sort_values(["coin", "ts"]).reset_index(drop=True)
+    first = int(min(e["ts"] for e in events)) // LIQ_BUCKET_MS * LIQ_BUCKET_MS
+    if ((old["coin"] == coin) & (old["ts"] == first)).any():
+        new = new[new["ts"] != first]
+    out = pd.concat([new, old], ignore_index=True).drop_duplicates(["coin", "ts"], keep="first")
+    return out.sort_values(["coin", "ts"]).reset_index(drop=True)[LIQ_COLS]
+
+
+def liq_quality(liq, coin, now_ms):
+    """Per coin: buckets recorded, since when, and the last 24 hours (USD) - for the report and the fact sheet."""
+    d = liq[liq["coin"] == coin] if liq is not None and len(liq) else pd.DataFrame(columns=LIQ_COLS)
+    day = d[d["ts"] >= now_ms - 24 * HOUR_MS]
+    first = int(d["ts"].min()) if len(d) else None
+    return dict(buckets=int(len(d)),
+                first_utc=pd.to_datetime(first, unit="ms").strftime("%Y-%m-%d %H:%M") if first is not None else None,
+                long_24h_usd=round(float(day["long_usd"].sum()), 0), short_24h_usd=round(float(day["short_usd"].sum()), 0))
 
 
 def _csv_rows(text):
