@@ -4,13 +4,12 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC",
-  "SUI"
+  "ZEC"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 735,
+ "runs": 736,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,12 +25,15 @@
    "volume_7d"
   ],
   "BNB": [
+   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [],
+  "SUI": [
+   "volume_24h"
+  ],
   "AVAX": [],
   "ENA": [
    "volume_7d"
@@ -141,7 +143,6 @@
   ],
   "SOXLB": [
    "history",
-   "thin_book",
    "volume_7d"
   ],
   "BMT": [
