@@ -22954,3 +22954,57 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 18:15,SUI,15m,FVG_FILLED,bull,,0.9235,0.9247,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 18:45,SUI,15m,CHOCH,bull,0.9291,,,2.078,,1h,TRANSITION,with displacement,smc-1.0,Binance
 2026-10-28 18:45,SUI,15m,ORDER_BLOCK,bull,,0.9237,0.9277,,,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 19:00,BTC,1h,FVG_FILLED,bear,,80927.51,81311.74,,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-28 20:00,BTC,1h,OB_INVALID,bear,,81351.05,81558.01,,,4h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,BTC,1h,FVG_RETRACE,bear,,81341.96,81449.13,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-28 20:00,BTC,1h,FVG_FILLED,bear,,81341.96,81449.13,,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-28 19:00,BTC,30m,FVG_FILLED,bear,,80969.48,81311.74,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,BTC,30m,OB_INVALID,bear,,81351.05,81558.01,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 19:45,BTC,15m,BOS,bull,81327.24,,,0.025,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 20:00,BTC,15m,FVG_FILLED,bear,,81435.96,81500.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,BTC,15m,FVG_RETRACE,bear,,81341.96,81384.89,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 20:00,BTC,15m,FVG_FILLED,bear,,81341.96,81384.89,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,BTC,15m,FVG,bull,,81244.01,81318.0,0.323,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:00,ETH,1h,OB_RETEST,bear,,2366.0,2373.29,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-28 19:00,ETH,1h,FVG_RETRACE,bear,,2362.33,2368.1,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 19:00,ETH,1h,FVG_FILLED,bear,,2362.33,2368.1,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:00,ETH,1h,FVG_FILLED,bear,,2346.89,2359.91,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,ETH,1h,FVG,bull,,2348.0,2353.07,0.326,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:00,ETH,30m,OB_RETEST,bear,,2366.0,2373.29,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-28 19:00,ETH,30m,FVG_FILLED,bear,,2349.83,2361.44,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,ETH,15m,BOS,bull,2368.4,,,0.344,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 20:00,ETH,15m,FVG_FILLED,bear,,2365.6,2368.52,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,ETH,15m,FVG,bull,,2360.43,2363.26,0.314,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:00,SOL,1h,OB_RETEST,bear,,102.49,102.98,,,4h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-10-28 20:00,SOL,1h,OB_INVALID,bear,,102.49,102.98,,,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,SOL,1h,FVG_FILLED,bear,,101.75,102.59,,,4h,RANGE,,smc-1.0,Binance
+2026-10-28 20:00,SOL,30m,FVG_FILLED,bear,,102.06,102.68,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:00,SOL,15m,FVG,bull,,101.6,101.91,0.652,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,SOL,15m,WEAK_BREAK,bull,102.56,,,1.087,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 20:00,SOL,15m,OB_INVALID,bear,,102.82,102.98,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,SOL,15m,FVG_FILLED,bear,,102.18,102.68,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,XRP,4h,FVG_FILLED,bull,,1.3086,1.3166,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-10-28 19:00,XRP,1h,FVG_RETRACE,bear,,1.3251,1.3283,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-28 19:00,XRP,1h,FVG_FILLED,bear,,1.3251,1.3283,,,4h,RANGE,,smc-1.0,Binance
+2026-10-28 20:00,XRP,1h,FVG,bull,,1.3211,1.324,0.305,,4h,RANGE,,smc-1.0,Binance
+2026-10-28 19:00,XRP,15m,FVG,bull,,1.3223,1.325,0.474,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-28 19:15,XRP,15m,FVG_RETRACE,bull,,1.3223,1.325,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-28 20:00,XRP,15m,BOS,bull,1.3324,,,0.564,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-28 20:00,XRP,15m,FVG,bull,,1.3296,1.3314,0.321,,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-28 20:00,ZEC,4h,FVG_FILLED,bull,,1264.97,1286.0,,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-10-28 19:00,ZEC,1h,FVG_RETRACE,bear,,1293.09,1298.11,,,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-10-28 19:00,ZEC,1h,FVG_FILLED,bear,,1293.09,1298.11,,,4h,RANGE,,smc-1.0,Binance
+2026-10-28 19:00,SUI,1h,OB_RETEST,bear,,0.9393,0.946,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-28 19:00,SUI,1h,FVG_RETRACE,bear,,0.9301,0.9394,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 19:00,SUI,1h,FVG_FILLED,bear,,0.9301,0.9394,,,4h,TRANSITION,,smc-1.0,Binance
+2026-10-28 20:00,SUI,1h,CHOCH,bull,0.9484,,,0.334,,4h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-28 20:00,SUI,1h,ORDER_BLOCK,bull,,0.9188,0.9287,,,4h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 20:00,SUI,1h,OB_INVALID,bear,,0.9393,0.946,,,4h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,SUI,1h,FVG,bull,,0.9293,0.9373,0.83,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-28 20:00,SUI,30m,CHOCH,bull,0.9484,,,0.39,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-28 20:00,SUI,30m,ORDER_BLOCK,bull,,0.92,0.926,,,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 20:00,SUI,30m,OB_INVALID,bear,,0.9393,0.946,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 19:00,SUI,15m,FVG,bull,,0.9277,0.9344,1.046,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 19:45,SUI,15m,OB_INVALID,bear,,0.9406,0.9428,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,SUI,15m,OB_INVALID,bear,,0.9426,0.9462,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 20:00,SUI,15m,OB_INVALID,bear,,0.9426,0.9462,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
