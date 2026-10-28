@@ -22604,3 +22604,15 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 04:30,SUI,15m,FVG,bear,,0.9395,0.9409,0.35,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 04:45,SUI,15m,FVG_RETRACE,bear,,0.9395,0.9409,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-10-28 04:45,SUI,15m,FVG_FILLED,bear,,0.9395,0.9409,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 07:00,BTC,15m,WEAK_BREAK,bear,80900.56,,,0.309,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 06:00,ETH,15m,WEAK_BREAK,bear,2352.2,,,0.013,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 06:30,SOL,15m,FVG,bull,,101.91,102.04,0.505,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 06:45,SOL,15m,FVG_RETRACE,bull,,101.91,102.04,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 06:00,XRP,1h,FVG,bear,,1.33,1.3334,0.364,,4h,RANGE,,smc-1.0,Binance
+2026-10-28 06:00,XRP,30m,OB_INVALID,bull,,1.3268,1.3313,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 06:30,XRP,30m,BREAKER_RETEST,bear,,1.3268,1.3313,,London,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-28 06:30,ZEC,15m,WEAK_BREAK,bear,1311.02,,,0.432,London,1h,STRONG_BULL,no displacement,smc-1.0,Binance
+2026-10-28 06:00,SUI,15m,WEAK_BREAK,bear,0.935,,,0.313,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 06:30,SUI,15m,FVG,bull,,0.9361,0.9371,0.269,London,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 06:45,SUI,15m,FVG_RETRACE,bull,,0.9361,0.9371,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 06:45,SUI,15m,FVG_FILLED,bull,,0.9361,0.9371,,London,1h,TRANSITION,,smc-1.0,Binance
