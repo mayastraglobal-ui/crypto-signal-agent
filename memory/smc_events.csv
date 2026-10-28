@@ -22874,3 +22874,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 12:45,SUI,15m,SWEEP,bull,0.9261,,,0.504,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-28 12:45,SUI,15m,FVG_FILLED,bull,,0.9252,0.9288,,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 14:00,SUI,15m,SWEEP,bull,0.9221,,,0.742,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 14:15,ETH,15m,WEAK_BREAK,bear,2335.4,,,0.54,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 15:00,SOL,1h,BOS,bear,101.04,,,0.178,Silver Bullet,4h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-28 15:00,SOL,1h,ORDER_BLOCK,bear,,102.49,102.98,,Silver Bullet,4h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-10-28 14:30,SOL,30m,SWEEP,bull,100.6,,,0.277,Silver Bullet,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 14:30,SOL,30m,WEAK_BREAK,bear,101.04,,,0.851,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 14:15,SOL,15m,OB_INVALID,bull,,101.04,101.3,,Silver Bullet,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 14:30,SOL,15m,SWEEP,bull,100.6,,,0.348,Silver Bullet,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 15:00,SOL,15m,BREAKER_RETEST,bear,,101.04,101.3,,Silver Bullet,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-28 14:30,XRP,15m,WEAK_BREAK,bear,1.3132,,,0.294,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 14:30,XRP,15m,OB_INVALID,bull,,1.3145,1.3205,,Silver Bullet,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 15:00,XRP,15m,BREAKER_RETEST,bear,,1.3145,1.3205,,Silver Bullet,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-28 14:30,ZEC,15m,FVG_RETRACE,bull,,1271.82,1276.4,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 14:30,ZEC,15m,FVG_FILLED,bull,,1271.82,1276.4,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 14:15,SUI,15m,SWEEP,bull,0.9193,,,0.341,Silver Bullet,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 15:15,SUI,15m,FVG,bull,,0.9221,0.9238,0.363,,1h,TRANSITION,,smc-1.0,Binance
