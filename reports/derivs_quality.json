@@ -1,5 +1,5 @@
 {
- "checked_utc": "2026-10-28 18:35",
+ "checked_utc": "2026-10-28 18:46",
  "coins": {
   "BTC": {
    "state": "GOOD",
@@ -8,7 +8,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -17,7 +17,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 3421539011.9564,
     "ls_ratio": 2.07,
@@ -39,10 +39,10 @@
     ]
    },
    "liquidations": {
-    "buckets": 97,
+    "buckets": 98,
     "first_utc": "2026-10-27 01:50",
-    "long_24h_usd": 3153624.0,
-    "short_24h_usd": 4698765.0
+    "long_24h_usd": 3129699.0,
+    "short_24h_usd": 5918010.0
    }
   },
   "ETH": {
@@ -52,7 +52,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -61,7 +61,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 1789317994.6433,
     "ls_ratio": 2.59,
@@ -83,10 +83,10 @@
     ]
    },
    "liquidations": {
-    "buckets": 124,
+    "buckets": 125,
     "first_utc": "2026-10-27 01:05",
-    "long_24h_usd": 3520647.0,
-    "short_24h_usd": 4012198.0
+    "long_24h_usd": 3559570.0,
+    "short_24h_usd": 8033285.0
    }
   },
   "SOL": {
@@ -96,7 +96,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -105,7 +105,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 374153046.2686,
     "ls_ratio": 3.15,
@@ -127,10 +127,10 @@
     ]
    },
    "liquidations": {
-    "buckets": 81,
+    "buckets": 82,
     "first_utc": "2026-10-27 02:25",
     "long_24h_usd": 731976.0,
-    "short_24h_usd": 1784000.0
+    "short_24h_usd": 1809803.0
    }
   },
   "XRP": {
@@ -140,7 +140,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -149,7 +149,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 113621289.2657,
     "ls_ratio": 3.25,
@@ -171,10 +171,10 @@
     ]
    },
    "liquidations": {
-    "buckets": 69,
+    "buckets": 70,
     "first_utc": "2026-10-27 01:20",
     "long_24h_usd": 360055.0,
-    "short_24h_usd": 268873.0
+    "short_24h_usd": 271652.0
    }
   },
   "ZEC": {
@@ -184,7 +184,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -193,7 +193,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 162698093.1398,
     "ls_ratio": 0.63,
@@ -215,10 +215,10 @@
     ]
    },
    "liquidations": {
-    "buckets": 125,
+    "buckets": 126,
     "first_utc": "2026-10-27 01:05",
     "long_24h_usd": 599845.0,
-    "short_24h_usd": 967499.0
+    "short_24h_usd": 1066371.0
    }
   },
   "BNB": {
@@ -228,7 +228,7 @@
     "binance": 880,
     "binance_files": 9408
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -237,7 +237,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 56395893.98,
     "ls_ratio": 2.47,
@@ -272,7 +272,7 @@
     "binance": 956,
     "binance_files": 9432
    },
-   "age_h": -0.4,
+   "age_h": -0.2,
    "hours": 1516,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
@@ -281,7 +281,7 @@
     "okx"
    ],
    "funding_rows": 200,
-   "funding_age_h": 2.6,
+   "funding_age_h": 2.8,
    "last": {
     "oi_usd": 37053773.0162,
     "ls_ratio": 3.2,
@@ -306,7 +306,7 @@
     "buckets": 29,
     "first_utc": "2026-10-27 03:00",
     "long_24h_usd": 35968.0,
-    "short_24h_usd": 46059.0
+    "short_24h_usd": 47675.0
    }
   }
  }

@@ -22937,3 +22937,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 18:00,ZEC,15m,FVG,bull,,1272.39,1281.06,1.039,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 18:15,ZEC,15m,SWEEP,bear,1293.09,,,0.868,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-10-28 18:15,ZEC,15m,FVG_RETRACE,bull,,1272.39,1281.06,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 18:45,BTC,15m,FVG_FILLED,bear,,81055.43,81311.74,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:45,ETH,15m,FVG_FILLED,bear,,2350.51,2361.44,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:30,SUI,30m,OB_RETEST,bear,,0.9393,0.946,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-28 18:30,SUI,30m,FVG_RETRACE,bear,,0.9313,0.9396,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 18:30,SUI,30m,FVG_FILLED,bear,,0.9313,0.9396,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 16:30,SUI,15m,FVG_RETRACE,bull,,0.9221,0.9238,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 16:45,SUI,15m,FVG_FILLED,bull,,0.9221,0.9238,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:00,SUI,15m,FVG,bull,,0.9235,0.9247,0.262,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,SWEEP,bear,0.9301,,,2.336,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,BREAKER_RETEST,bear,,0.9378,0.9421,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,OB_RETEST,bear,,0.9406,0.9428,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,FVG_RETRACE,bear,,0.9317,0.9396,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,FVG_FILLED,bear,,0.9317,0.9396,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,FVG_RETRACE,bull,,0.9235,0.9247,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 18:15,SUI,15m,FVG_FILLED,bull,,0.9235,0.9247,,,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 18:45,SUI,15m,CHOCH,bull,0.9291,,,2.078,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-28 18:45,SUI,15m,ORDER_BLOCK,bull,,0.9237,0.9277,,,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance

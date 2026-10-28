@@ -776,3 +776,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-28 18:36 UTC
 - **ELIGIBLE** SUI - passes every rule again
+
+## 2026-10-28 18:46 UTC
+- **EXCLUDED** BNB - 7-day average volume $48M < $50M
+- **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
