@@ -773,3 +773,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** SUI - 24h volume $49M < $50M
 - **EXCLUDED** SOXLB - only 113 days of history (need 180); 7-day average volume $32M < $50M
 - **LEAVE** SUI - not eligible: 24h volume $49M < $50M
+
+## 2026-10-28 18:36 UTC
+- **ELIGIBLE** SUI - passes every rule again

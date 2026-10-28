@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-28 17:01",
+ "generated_utc": "2026-10-28 18:36",
  "book": {
-  "utc": "2026-10-28 17:01",
-  "beijing": "2026-10-29 01:01",
+  "utc": "2026-10-28 18:36",
+  "beijing": "2026-10-29 02:36",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,10 +20,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-28 17:01 UTC / 2026-10-29 01:01 Beijing",
+  "POSITION BOOK \u2014 2026-10-28 18:36 UTC / 2026-10-29 02:36 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Advance Estimate), 3rd Quarter 2026 2026-10-29 12:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -42,12 +42,6 @@
   ],
   "upcoming_events": [
    {
-    "start_utc": "2026-10-28 18:00",
-    "end_utc": "2026-10-28 18:00",
-    "type": "FOMC",
-    "name": "FOMC decision (Oct 27-28 meeting) + press conference"
-   },
-   {
     "start_utc": "2026-10-29 12:30",
     "end_utc": "2026-10-29 12:30",
     "type": "GDP",
@@ -60,7 +54,7 @@
     "name": "US PCE / Personal Income and Outlays (Sep data)"
    }
   ],
-  "next_event": "FOMC decision (Oct 27-28 meeting) + press conference 2026-10-28 18:00 UTC",
+  "next_event": "US GDP (Advance Estimate), 3rd Quarter 2026 2026-10-29 12:30 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
