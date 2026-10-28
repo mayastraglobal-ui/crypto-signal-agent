@@ -22521,3 +22521,37 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 00:30,ZEC,15m,FVG,bear,,1304.46,1309.51,0.558,Asia,1h,STRONG_BULL,,smc-1.0,Binance
 2026-10-28 00:00,SUI,4h,WEAK_BREAK,bull,0.9312,,,0.119,,1d,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-10-28 00:00,SUI,4h,FVG_FILLED,bear,,0.9213,0.9348,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-10-28 01:15,BTC,15m,SWEEP,bull,80638.0,,,0.118,Asia,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 01:45,BTC,15m,FVG_FILLED,bear,,80816.01,80909.77,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 02:15,BTC,15m,BOS,bull,81034.0,,,0.067,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 02:30,ETH,30m,SWEEP,bear,2365.4,,,0.413,Asia,1h,TRANSITION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-28 01:30,ETH,15m,FVG_FILLED,bear,,2348.83,2350.34,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 01:45,ETH,15m,BOS,bull,2354.47,,,0.652,Asia,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-10-28 01:45,ETH,15m,ORDER_BLOCK,bull,,2340.78,2346.94,,Asia,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 02:30,ETH,15m,SWEEP,bear,2365.4,,,0.629,Asia,1h,TRANSITION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-28 02:30,ETH,15m,FVG_FILLED,bear,,2364.31,2366.63,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 02:00,SOL,30m,BOS,bull,101.52,,,0.385,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-28 02:30,SOL,30m,SWEEP,bear,101.88,,,0.354,Asia,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-10-28 01:45,SOL,15m,CHOCH,bull,101.52,,,0.527,Asia,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-28 01:45,SOL,15m,ORDER_BLOCK,bull,,101.04,101.3,,Asia,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 02:30,SOL,15m,SWEEP,bear,101.98,,,0.153,Asia,1h,UNCLEAR,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-10-28 02:00,XRP,1h,FVG_FILLED,bear,,1.3303,1.3371,,Asia,4h,RANGE,,smc-1.0,Binance
+2026-10-28 02:00,XRP,30m,BOS,bull,1.3346,,,0.658,Asia,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-10-28 02:00,XRP,30m,ORDER_BLOCK,bull,,1.3268,1.3313,,Asia,1h,EXPANSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 02:00,XRP,30m,FVG_FILLED,bear,,1.3322,1.3388,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-28 01:45,XRP,15m,BOS,bull,1.3346,,,0.55,Asia,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-10-28 01:45,XRP,15m,ORDER_BLOCK,bull,,1.3254,1.3291,,Asia,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-10-28 01:45,XRP,15m,FVG_RETRACE,bear,,1.3361,1.3389,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-28 02:00,XRP,15m,FVG_FILLED,bear,,1.3361,1.3389,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-28 02:00,XRP,15m,FVG,bull,,1.3325,1.3345,0.464,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-10-28 02:15,XRP,15m,FVG_RETRACE,bull,,1.3325,1.3345,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 02:30,XRP,15m,SWEEP,bear,1.3432,,,0.271,Asia,1h,EXPANSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-28 01:30,ZEC,30m,FVG_RETRACE,bear,,1303.87,1309.28,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-28 01:30,ZEC,30m,FVG_FILLED,bear,,1303.87,1309.28,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-28 01:30,ZEC,15m,FVG_RETRACE,bear,,1304.46,1309.51,,Asia,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-10-28 01:30,ZEC,15m,FVG_FILLED,bear,,1304.46,1309.51,,Asia,1h,STRONG_BULL,,smc-1.0,Binance
+2026-10-28 02:00,SUI,1h,BOS,bull,0.9367,,,0.095,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-10-28 02:00,SUI,30m,BOS,bull,0.9367,,,0.143,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 02:00,SUI,30m,FVG_FILLED,bear,,0.935,0.9368,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-10-28 01:45,SUI,15m,BOS,bull,0.935,,,0.08,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-10-28 02:30,SUI,15m,SWEEP,bear,0.9415,,,0.389,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
