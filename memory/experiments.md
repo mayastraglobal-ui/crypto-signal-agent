@@ -1366,3 +1366,17 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0125 | 2026-10-28 06:13 | P13-TURTLE-V2@1.0 | trend_following | 4h | Breakouts work in a bull market and fail in a bear market; only buying while BTC is above its 200-day average skips the bear years. |
 | EXP-0126 | 2026-10-28 06:13 | P13-TURTLE-V3@1.0 | trend_following | 4h | A breakout that closes strong on a big range has real buyers behind it (fewer fake breaks), and a coin above its own 200-day average is in its own bull market. |
 | EXP-0127 | 2026-10-28 06:13 | P13-TURTLE-C@1.0 (control twin of P13-TURTLE-V1) | trend_following | 4h | Control: the same breakout with quick fixed targets - V1 must beat it, or riding the trend adds nothing. |
+
+### Feedback: P11-MOMENTUM-V1-FDISP@1.0
+- timestamp: 2026-10-28 15:50 UTC · source: Claude daily review 2026-10-28 · evidence: BACKTEST_EVIDENCE: 1 cell, 2394 trades · confidence: low · strategy: P11-MOMENTUM-V1-FDISP v1.0 · asset: research coins · timeframe: 30m · regime: - · review: 2027-01-26
+  - parent: result: P11-MOMENTUM-V1@1.0 30m
+  - hypothesis: P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.38R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - result: 30m FAILED 2394 trades -0.232R (unseen -0.271R); failed gates: average -0.23R (needs +0.10R), profit factor 0.69, recovery factor -0.96, Monte Carlo 95% worst drawdown per 100 trades 48.2R (limit 17R), longest drawdown 1636 days = 90% of the tested period, not profitable in BOTH train and unseen test.
+  - teaches: the displacement repair did not rescue this card. The 'without false_breakout' figure (+0.38R) came from the trades the card does not take, not from a rule we can add, so the repair kept most of the losers. This is the first DISP repair in the failure lab that did not help (it helped 3 of 3 earlier on the TRD-H4-BREAKOUT cards).
+  - next: stop this line. The momentum family is deep in negative territory (P11 cells lose in the UNCLEAR and RANGE playbook), and one more change would only add to the trials counter (490 tests).
+
+### Hypothesis: cap the number of coins that can be open in the same direction (from C22)
+- timestamp: 2026-10-28 15:50 UTC · source: Claude daily review 2026-10-28 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: research coins · timeframe: - · regime: - · review: 2027-01-26
+  - hypothesis: 3AC's failure came from correlated, leveraged bets. The engine already caps heat at 3; check whether open trades on different coins are in practice one bet (crypto coins move together) and whether the cap should count correlated coins as one.
+  - how to test: an engine check for the operator (pull request), not a lab card. From the stored PAPER and TEST trades, find days with 2 or more trades open in the same direction on different coins and compare their combined loss days with single-trade loss days. Count the samples first.
+  - stop if: fewer than 30 such days, or the combined losses are not larger than the heat cap already allows.

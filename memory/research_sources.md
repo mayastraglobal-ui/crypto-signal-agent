@@ -1548,3 +1548,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P13-TURTLE-C@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
   - limitations: A benchmark, never an alert: takes quick profits from moves that may run much further.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### [C22] Three Arrows Capital (2022) - from a news-site summary
+- timestamp: 2026-10-28 15:50 UTC · source: Claude daily review 2026-10-28 · evidence: CLAIM: one secondary article · confidence: low · strategy: - · asset: BTC, crypto funds · timeframe: - · regime: - · review: 2027-01-26
+  - title / source: The Fintech Report (thefr.com), 'Learning from Three Arrows Capital's collapse'
+  - URL: https://thefr.com/news/learning-from-three-arrows-capitals-collapse (opened in this run)
+  - claim: few lenders received collateral, so the article estimates 3AC was leveraged at least three times its assets; some collateral was promised to more than one lender; the fund's returns came in rising markets and not in bearish ones; it filed for bankruptcy in July 2022 owing more than 2.8 billion USD. The article does not discuss Luna or margin calls.
+  - what it means for us: leverage and correlated bets turn a normal drawdown into a failure. Our risk per trade is 0.5%, heat is capped at 3, and the day/week limits are -3R and -6R: that is the right shape. See 'Hypothesis: cap the number of coins that can be open in the same direction (from C22)'.
+  - limitations: one secondary article; figures are its estimates. CNBC returned 403 and Learnsignal 429, so neither is cited. Search results also mention a 27 June 2022 BVI liquidation order, which I did not open and do not cite.
