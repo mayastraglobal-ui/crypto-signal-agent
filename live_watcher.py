@@ -655,7 +655,7 @@ class Watcher:
         self.watch = []           # (card, tf, label)
         for s in cards:
             for tf in s["timeframes"]:
-                st = (reg["cells"].get(f"{sspec.key(s)}|{tf}") or {}).get("status")
+                st = sc.lab_status(s, (reg["cells"].get(f"{sspec.key(s)}|{tf}") or {}).get("status"))   # never a control
                 label = lv.alert_label(st, s.get("lab"), self.S)
                 if label:
                     self.watch.append((s, tf, label))
