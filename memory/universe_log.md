@@ -789,3 +789,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-29 01:56 UTC
 - **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-10-29 09:47 UTC
+- **EXCLUDED** GOOGLB - only 114 days of history (need 180); 7-day average volume $7M < $50M
