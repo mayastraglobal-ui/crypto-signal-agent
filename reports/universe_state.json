@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 749,
+ "runs": 750,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -149,6 +149,11 @@
   ],
   "GOOGLB": [
    "history",
+   "thin_book",
+   "volume_7d"
+  ],
+  "U": [
+   "stablecoin",
    "volume_7d"
   ]
  },
@@ -206,6 +211,7 @@
   "SNDKB": [],
   "SOXLB": [],
   "BMT": [],
-  "GOOGLB": []
+  "GOOGLB": [],
+  "U": []
  }
 }

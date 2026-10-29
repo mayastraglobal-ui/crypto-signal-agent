@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 09:47",
+ "generated_utc": "2026-10-29 11:06",
  "book": {
-  "utc": "2026-10-29 09:47",
-  "beijing": "2026-10-29 17:47",
+  "utc": "2026-10-29 11:06",
+  "beijing": "2026-10-29 19:06",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 09:47 UTC / 2026-10-29 17:47 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 11:06 UTC / 2026-10-29 19:06 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Advance Estimate), 3rd Quarter 2026 2026-10-29 12:30 UTC"
@@ -566,28 +566,6 @@
   },
   {
    "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -906,5 +884,19 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-29 11:06",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-29 01:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.76R"
+  }
+ ]
 }
