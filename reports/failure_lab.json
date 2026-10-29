@@ -21,7 +21,7 @@
    "parent_test_r": 0.206,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -36,7 +36,7 @@
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -51,7 +51,7 @@
    "parent_test_r": 0.246,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -66,7 +66,7 @@
    "parent_test_r": 0.354,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -81,7 +81,7 @@
    "parent_test_r": 0.184,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -92,11 +92,11 @@
    "trades": 1093,
    "avg_r": -0.011,
    "test_r": 0.082,
-   "parent_avg_r": -0.055,
-   "parent_test_r": 0.023,
+   "parent_avg_r": -0.056,
+   "parent_test_r": 0.021,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP@1.0|30m",
@@ -107,11 +107,11 @@
    "trades": 924,
    "avg_r": 0.052,
    "test_r": 0.123,
-   "parent_avg_r": -0.009,
-   "parent_test_r": 0.06,
+   "parent_avg_r": -0.01,
+   "parent_test_r": 0.058,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-28 06:13"
+   "checked": "2026-10-29 06:23"
   }
  ],
  "by_kind": {

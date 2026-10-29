@@ -1417,3 +1417,26 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - rsi2_dip_buy v1.0 15m: signal
   - rsi2_dip_buy v1.0 1h: signal
   - rsi2_dip_buy v1.0 30m: signal
+
+### BNB up +2.2% (5.2x ATR), 2026-10-28 06:00 -> 2026-10-28 12:00
+- timestamp: 2026-10-29 06:23 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 164 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BULL · review: 2026-11-05
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P02-EMA-PULLBACK-V4-S6 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-FHTF v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-FHTF-S2 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-FHTF-S4 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-S6 v1.0 4h: blocked by the regime gate
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - bb_squeeze_breakout v1.0 15m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: signal
+  - rsi2_dip_buy v1.0 30m: signal
+  - trend_pullback v1.0 15m: blocked by the permission gate
+  - trend_pullback v1.0 1h: blocked by the permission gate
+  - trend_pullback v1.0 30m: blocked by the permission gate
+  - trend_pullback v1.0 4h: blocked by the regime gate
