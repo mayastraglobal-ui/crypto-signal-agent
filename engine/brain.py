@@ -325,6 +325,8 @@ def review(changes, main_files, now=None, branch=None, quota=None):
                 (skipped.append(p) if cur == new else probs.append(f"{p}: already exists on main - files are never "
                                                                     "overwritten (use a new file name)"))
                 continue
+            if esum.kind_of(p):                              # a too-long summary line is shortened, not refused
+                new = esum.fit(new)[0]
             probs += [f"{p}: {x}" for x in lint(new)]
             if p.startswith("reports/claude/briefings/"):
                 probs += [f"{p}: {x}" for x in check_briefing(new)]

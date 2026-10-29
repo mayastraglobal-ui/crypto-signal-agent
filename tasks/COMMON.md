@@ -50,7 +50,7 @@ the end of the fact sheet.
      numbers plus these lines; your whole file becomes a page on the dashboard that the email links to. Each line is
      `- key: text` - plain text only (no `*`, backticks, `#`, links or URLs), one sentence, numbers only from the
      fact sheet. The Brain guard refuses the push when the block is missing or breaks a rule.
-     - briefing: `headline` (at most 8 words), `sub` (at most 20 words), `do`, `dont` (one sentence each),
+     - briefing: `headline` (at most 8 words - count them), `sub` (at most 20 words), `do`, `dont` (one sentence each),
        optional `mood` (Calm, Busy, Volatile or Risk-off - kept in the page; the email does not show it). The 14:20
        and 21:20 emails (engine only since 2026-10-23: the briefing task runs once a day, at 08:20) show only what the engine saw change since the previous briefing (none = a 3-line "No change" email; no briefing or daily review file 40 minutes after its time = the engine sends that email alone, and your late file is then not emailed);
      - daily review: `lesson` (the lesson of the day), `tomorrow` (what to watch or not do), optional `sub`,

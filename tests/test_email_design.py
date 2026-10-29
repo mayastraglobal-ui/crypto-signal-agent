@@ -609,6 +609,20 @@ class SummaryBlock(unittest.TestCase):
         self.assertTrue(any("missing" in p for p in esum.problems(self.GOOD.replace("- do: Wait for a LIVE email.\n", ""),
                                                                   "briefing")))
         self.assertTrue(any("no '## Email summary'" in p for p in esum.problems("# x\n", "daily")))
+        fixed, cut = esum.fit(bad)                           # 2026-10-29: too long = shortened, not refused
+        self.assertEqual(cut, ["'headline' cut from 9 to 8 words"])
+        self.assertEqual(esum.parse(fixed)["headline"], "one two three four five six seven eight...")
+        self.assertEqual(esum.problems(fixed, "briefing"), [])
+        self.assertEqual(esum.fit(self.GOOD), (self.GOOD, []))
+        self.assertTrue(fixed.endswith("## Position book\n"))          # the rest of the report is untouched
+
+    def test_the_guard_shortens_a_long_headline_instead_of_refusing(self):
+        long_ = self.GOOD.replace("Nothing to trade. Wait.", "one two three four five six seven eight nine")
+        p = "reports/claude/briefings/2026-10-29-0820.md"
+        _, probs, _ = brain.review([dict(path=p, status="A", base=None, new=long_)], {p: None})
+        self.assertFalse([x for x in probs if "words" in x])             # (this sample misses other sections)
+        src = open(os.path.join(ROOT, "engine", "brain.py"), encoding="utf-8").read()
+        self.assertIn("new = esum.fit(new)[0]", src)                       # what is applied is the shortened text
         self.assertEqual(esum.problems("## Email summary\n- lesson: a\n- tomorrow: b\n", "daily"), [])
         self.assertTrue(any("unknown key" in p for p in esum.problems("## Email summary\n- lesson: a\n- tomorrow: b\n"
                                                                       "- color: red\n", "daily")))
