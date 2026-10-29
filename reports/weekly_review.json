@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W44",
- "utc": "2026-10-29 15:41",
+ "utc": "2026-10-29 16:52",
  "final": false,
  "rows": [
   {
@@ -1126,7 +1126,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-10-29 15:41 UTC"
+   "text": "hourly scan: last run 2026-10-29 16:52 UTC"
   },
   {
    "ok": true,
@@ -1134,7 +1134,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-10-29 14:05 UTC (7 min ago)"
+   "text": "live watcher: last heartbeat 2026-10-29 15:05 UTC (37 min ago)"
   },
   {
    "ok": true,
@@ -1190,11 +1190,11 @@
   ]
  },
  "shocks": {
-  "n": 54,
-  "sent": 41,
-  "done": 54,
+  "n": 55,
+  "sent": 42,
+  "done": 55,
   "kept": 15,
-  "reversed": 39,
+  "reversed": 40,
   "avg_after_4h": -0.44,
   "caught": 2,
   "by_coin": {
@@ -1203,12 +1203,13 @@
    "ETH": 11,
    "SOL": 10,
    "SUI": 7,
-   "ZEC": 5
+   "ZEC": 5,
+   "BNB": 1
   },
   "by_kind": {
    "move": 16,
    "volume": 27,
-   "sweep_low": 16,
+   "sweep_low": 17,
    "sweep_high": 5
   },
   "biggest": [
@@ -1253,13 +1254,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-10-29 14:12",
+  "checked_utc": "2026-10-29 15:42",
   "lines": [
-   "54 shock(s) this week, 41 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 16, broke yesterday's high 5, broke yesterday's low 16, volume spike 27",
-   "by coin: BTC 12, ETH 11, SOL 10, XRP 9, SUI 7, ZEC 5",
-   "4 hours later: 15 kept going, 39 reversed (average -0.44% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 2 of 54 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "55 shock(s) this week, 42 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 16, broke yesterday's high 5, broke yesterday's low 17, volume spike 27",
+   "by coin: BTC 12, ETH 11, SOL 10, XRP 9, SUI 7, ZEC 5, BNB 1",
+   "4 hours later: 15 kept going, 40 reversed (average -0.44% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 2 of 55 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-10-24 14:17 UTC ZEC DOWN -2.8% -> 4h later -3.1% (no strategy alert)",
    "  2026-10-23 22:33 UTC ZEC DOWN -2.6% -> 4h later +1.6% (no strategy alert)",
    "  2026-10-23 22:56 UTC SUI DOWN -2.6% -> 4h later -2.5% (no strategy alert)",
@@ -1301,5 +1302,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W44</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-0.8R) \u00b7 6 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 10 this week (-4.4R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 7 repair(s) judged - 6 beat their parent, 2 reached VALIDATION; 2 waiting for a test\n\n\u26a1 Shocks: 54 this week (41 sent) \u00b7 4h later 15 kept going, 39 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (your alerts, after fees): 3 closed \u00b7 -0.99R a trade \u00b7 -3.0R \u00b7 worst drawdown 3.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 33 (-0.59R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W44</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-0.8R) \u00b7 6 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 10 this week (-4.4R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 7 repair(s) judged - 6 beat their parent, 2 reached VALIDATION; 2 waiting for a test\n\n\u26a1 Shocks: 55 this week (42 sent) \u00b7 4h later 15 kept going, 40 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (your alerts, after fees): 3 closed \u00b7 -0.99R a trade \u00b7 -3.0R \u00b7 worst drawdown 3.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 33 (-0.59R) \u00b7 outside 10 (-1.08R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

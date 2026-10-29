@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-10-28 12:29",
+ "last_entry_utc": "2026-10-29 16:00",
  "days": 30,
  "all": {
-  "alerts": 4,
+  "alerts": 5,
   "took": 4,
   "skipped": 0,
-  "no_answer": 0,
+  "no_answer": 1,
   "plan_took": {
    "n": 4,
    "total_r": -4.0,
@@ -60,10 +60,10 @@
   "missing_result": 0
  },
  "recent": {
-  "alerts": 4,
+  "alerts": 5,
   "took": 4,
   "skipped": 0,
-  "no_answer": 0,
+  "no_answer": 1,
   "plan_took": {
    "n": 4,
    "total_r": -4.0,
@@ -157,6 +157,16 @@
    "plan_n": 1,
    "your_avg_r": -1.2,
    "your_n": 1
+  },
+  {
+   "cell": "donchian_breakout-VEXIT-S4 4h",
+   "alerts": 1,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
   }
  ],
  "tests": {

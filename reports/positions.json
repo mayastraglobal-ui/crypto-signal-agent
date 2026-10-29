@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 15:41",
+ "generated_utc": "2026-10-29 16:52",
  "book": {
-  "utc": "2026-10-29 15:41",
-  "beijing": "2026-10-29 23:41",
+  "utc": "2026-10-29 16:52",
+  "beijing": "2026-10-30 00:52",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 15:41 UTC / 2026-10-29 23:41 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 16:52 UTC / 2026-10-30 00:52 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -79,7 +79,117 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
    "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "1/2",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "1/2",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "1/2",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "1/2",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "adx(14) > 20"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "adx(14) > 20"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "adx(14) > 20"
+  },
+  {
+   "coin": "ZEC",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -90,40 +200,7 @@
    "missing": "btc_ret(3) >= 3"
   },
   {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "XRP",
+   "coin": "ZEC",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -136,12 +213,12 @@
   {
    "coin": "ZEC",
    "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
+   "strategy": "P13-TURTLE-V3",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "SETUP_FORMING",
-   "rules_true": "1/2",
+   "rules_true": "3/4",
    "missing": "close > prev(highest(high,330))"
   },
   {
@@ -304,17 +381,6 @@
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
@@ -341,6 +407,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
   },
   {
    "coin": "ETH",
@@ -385,17 +462,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
   },
   {
    "coin": "ETH",
@@ -590,17 +656,6 @@
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
@@ -729,52 +784,8 @@
   },
   {
    "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.1",
-   "stage": "PAPER_TRADING",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
@@ -784,13 +795,13 @@
   },
   {
    "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "1/3",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -836,17 +847,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
   },
   {
    "coin": "ZEC",
@@ -884,30 +884,30 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-29 15:41",
-   "id": "SOL-1h-P01-BREAKOUT-V2-2026-10-29 01:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V2",
+   "time_utc": "2026-10-29 16:52",
+   "id": "ZEC-4h-P04-MACD-SUPERTREND-V1-2026-10-29 15:59",
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V1",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.08R"
+   "from_state": "",
+   "to_state": "AWAITING_FILL",
+   "price": 1347.4443258537053,
+   "note": "4h signal closed - limit order placed"
   },
   {
-   "time_utc": "2026-10-29 15:41",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-29 01:59",
-   "coin": "SOL",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
+   "time_utc": "2026-10-29 16:52",
+   "id": "ZEC-4h-P04-MACD-SUPERTREND-V4-2026-10-29 15:59",
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V4",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.13R"
+   "from_state": "",
+   "to_state": "AWAITING_FILL",
+   "price": 1347.4443258537053,
+   "note": "4h signal closed - limit order placed"
   }
  ]
 }
