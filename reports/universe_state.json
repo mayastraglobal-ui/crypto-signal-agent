@@ -3,7 +3,6 @@
   "BTC",
   "ETH",
   "SOL",
-  "BNB",
   "XRP",
   "ZEC",
   "SUI"
@@ -11,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 756,
+ "runs": 757,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,13 +25,17 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [],
+  "BNB": [
+   "volume_spike"
+  ],
   "UNI": [
+   "thin_book",
    "volume_7d"
   ],
   "SUI": [],
   "AVAX": [],
   "ENA": [
+   "thin_book",
    "volume_7d"
   ],
   "SAGA": [
@@ -149,6 +152,7 @@
   ],
   "GOOGLB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "U": [
@@ -157,7 +161,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [
    "wash_volume"

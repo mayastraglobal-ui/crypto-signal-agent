@@ -812,3 +812,11 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-29 19:51 UTC
 - **EXCLUDED** GOOGLB - only 114 days of history (need 180); 7-day average volume $7M < $50M
+
+## 2026-10-29 21:16 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,225x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** BNB - one-day volume spike: 24h $190M is 3.7x the 7-day average
+- **EXCLUDED** GOOGLB - only 114 days of history (need 180); 7-day average volume $7M < $50M; order book too thin: $192k within 1% (need $250k)
+- **EXCLUDED** ENA - 7-day average volume $38M < $50M; order book too thin: $196k within 1% (need $250k)
+- **EXCLUDED** UNI - 7-day average volume $28M < $50M; order book too thin: $190k within 1% (need $250k)
+- **LEAVE** BNB - not eligible: one-day volume spike: 24h $190M is 3.7x the 7-day average

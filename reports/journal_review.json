@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-10-29 16:00",
+ "last_entry_utc": "2026-10-29 20:40",
  "days": 30,
  "all": {
   "alerts": 5,
@@ -19,14 +19,14 @@
    "wins": 0
   },
   "plan_no_answer": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "plan_all": {
-   "n": 4,
-   "total_r": -4.0,
+   "n": 5,
+   "total_r": -5.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -77,14 +77,14 @@
    "wins": 0
   },
   "plan_no_answer": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
    "wins": 0
   },
   "plan_all": {
-   "n": 4,
-   "total_r": -4.0,
+   "n": 5,
+   "total_r": -5.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -163,8 +163,8 @@
    "alerts": 1,
    "took": 0,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": -1.0,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   }
@@ -204,8 +204,8 @@
     "wins": 0
    },
    "sent": {
-    "n": 2,
-    "total_r": -2.0,
+    "n": 3,
+    "total_r": -3.0,
     "avg_r": -1.0,
     "wins": 0
    }

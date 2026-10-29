@@ -182,3 +182,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END ZEC 5m data: DEGRADED: volume 61x normal on candle 10-15 02:15 UTC (possible bad data)
 - timestamp: 2026-10-15 03:30 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-11-14
   - problem first seen 2026-10-15 02:30 UTC UTC
+
+### START BNB 5m data: DEGRADED: volume 87x normal on candle 10-29 21:05 UTC (possible bad data)
+- timestamp: 2026-10-29 21:16 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: BNB · timeframe: - · regime: - · review: 2026-11-28
+  - signals from this data are blocked while it lasts

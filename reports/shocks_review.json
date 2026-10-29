@@ -1,10 +1,10 @@
 {
- "n": 60,
- "sent": 45,
- "done": 60,
+ "n": 61,
+ "sent": 46,
+ "done": 61,
  "kept": 15,
- "reversed": 45,
- "avg_after_4h": -0.52,
+ "reversed": 46,
+ "avg_after_4h": -0.61,
  "caught": 4,
  "by_coin": {
   "BTC": 13,
@@ -12,11 +12,11 @@
   "SOL": 11,
   "SUI": 7,
   "XRP": 9,
-  "ZEC": 7,
+  "ZEC": 8,
   "BNB": 1
  },
  "by_kind": {
-  "move": 17,
+  "move": 18,
   "volume": 31,
   "sweep_low": 17,
   "sweep_high": 6
@@ -29,6 +29,14 @@
    "move_pct": 3.02,
    "after_4h": 0.28,
    "caught": true
+  },
+  {
+   "time_utc": "2026-10-29 16:08",
+   "coin": "ZEC",
+   "side": "UP",
+   "move_pct": 2.82,
+   "after_4h": -6.03,
+   "caught": false
   },
   {
    "time_utc": "2026-10-24 14:17",
@@ -53,27 +61,19 @@
    "move_pct": -2.57,
    "after_4h": -2.47,
    "caught": false
-  },
-  {
-   "time_utc": "2026-10-25 11:52",
-   "coin": "ZEC",
-   "side": "UP",
-   "move_pct": 2.3,
-   "after_4h": -0.36,
-   "caught": false
   }
  ],
- "checked_utc": "2026-10-29 19:52",
+ "checked_utc": "2026-10-29 21:18",
  "lines": [
-  "60 shock(s) this week, 45 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-  "by kind: fast move 17, broke yesterday's high 6, broke yesterday's low 17, volume spike 31",
-  "by coin: BTC 13, ETH 12, SOL 11, XRP 9, SUI 7, ZEC 7, BNB 1",
-  "4 hours later: 15 kept going, 45 reversed (average -0.52% in the shock's direction)",
-  "followed by a strategy alert in the same direction within 4h: 4 of 60 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+  "61 shock(s) this week, 46 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+  "by kind: fast move 18, broke yesterday's high 6, broke yesterday's low 17, volume spike 31",
+  "by coin: BTC 13, ETH 12, SOL 11, XRP 9, ZEC 8, SUI 7, BNB 1",
+  "4 hours later: 15 kept going, 46 reversed (average -0.61% in the shock's direction)",
+  "followed by a strategy alert in the same direction within 4h: 4 of 61 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
   "  2026-10-29 14:37 UTC ZEC UP +3.0% -> 4h later +0.3% (a strategy alerted)",
+  "  2026-10-29 16:08 UTC ZEC UP +2.8% -> 4h later -6.0% (no strategy alert)",
   "  2026-10-24 14:17 UTC ZEC DOWN -2.8% -> 4h later -3.1% (no strategy alert)",
   "  2026-10-23 22:33 UTC ZEC DOWN -2.6% -> 4h later +1.6% (no strategy alert)",
-  "  2026-10-23 22:56 UTC SUI DOWN -2.6% -> 4h later -2.5% (no strategy alert)",
-  "  2026-10-25 11:52 UTC ZEC UP +2.3% -> 4h later -0.4% (no strategy alert)"
+  "  2026-10-23 22:56 UTC SUI DOWN -2.6% -> 4h later -2.5% (no strategy alert)"
  ]
 }
