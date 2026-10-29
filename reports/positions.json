@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 02:22",
+ "generated_utc": "2026-10-29 03:46",
  "book": {
-  "utc": "2026-10-29 02:22",
-  "beijing": "2026-10-29 10:22",
+  "utc": "2026-10-29 03:46",
+  "beijing": "2026-10-29 11:46",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 02:22 UTC / 2026-10-29 10:22 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 03:46 UTC / 2026-10-29 11:46 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Advance Estimate), 3rd Quarter 2026 2026-10-29 12:30 UTC"
@@ -167,6 +167,28 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BNB",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "BNB",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
   },
   {
    "coin": "BNB",
@@ -517,7 +539,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "0/5",
    "missing": null
   },
   {
@@ -528,7 +550,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "0/4",
    "missing": null
   },
   {
@@ -638,7 +660,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "0/5",
    "missing": null
   },
   {
@@ -649,7 +671,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "0/4",
    "missing": null
   },
   {
@@ -996,47 +1018,60 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-29 02:22",
+   "time_utc": "2026-10-29 03:46",
    "id": "SOL-1h-P01-BREAKOUT-V2-2026-10-29 01:59",
    "coin": "SOL",
    "tf": "1h",
    "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 100.08990971061449,
-   "note": "1h signal closed - limit order placed"
-  },
-  {
-   "time_utc": "2026-10-29 02:22",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-29 01:59",
-   "coin": "SOL",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
+   "from_state": "AWAITING_FILL",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 99.87,
-   "note": "30m signal candle closed"
+   "price": 100.08990971061449,
+   "note": "limit 100.09 filled in the 2026-10-29 02:00 UTC candle"
   },
   {
-   "time_utc": "2026-10-29 02:22",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-29 01:59",
+   "time_utc": "2026-10-29 03:46",
+   "id": "SOL-1h-P01-BREAKOUT-V2-2026-10-29 01:59",
    "coin": "SOL",
-   "tf": "30m",
+   "tf": "1h",
    "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 99.87,
-   "note": ""
+   "price": 100.08990971061449,
+   "note": "entry at 2026-10-29 02:00 UTC (limit)"
   },
   {
-   "time_utc": "2026-10-29 02:22",
+   "time_utc": "2026-10-29 03:46",
    "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 01:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.916035335680167,
+   "note": "limit 0.916035 filled in the 2026-10-29 02:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-10-29 03:46",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 01:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.916035335680167,
+   "note": "entry at 2026-10-29 02:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-10-29 03:46",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 02:59",
    "coin": "SUI",
    "tf": "1h",
    "strategy": "P01-BREAKOUT-V5",
@@ -1044,34 +1079,8 @@
    "stage": "TEST",
    "from_state": "",
    "to_state": "AWAITING_FILL",
-   "price": 0.916035335680167,
+   "price": 0.9132488831315837,
    "note": "1h signal closed - limit order placed"
-  },
-  {
-   "time_utc": "2026-10-29 02:22",
-   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-29 01:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.9132,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-29 02:22",
-   "id": "SUI-30m-P01-BREAKOUT-V5-2026-10-29 01:59",
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.9132,
-   "note": ""
   }
  ]
 }
