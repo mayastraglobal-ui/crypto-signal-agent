@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 16:52",
+ "generated_utc": "2026-10-29 18:16",
  "book": {
-  "utc": "2026-10-29 16:52",
-  "beijing": "2026-10-30 00:52",
+  "utc": "2026-10-29 18:16",
+  "beijing": "2026-10-30 02:16",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 16:52 UTC / 2026-10-30 00:52 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 18:16 UTC / 2026-10-30 02:16 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -685,6 +685,28 @@
   },
   {
    "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -790,7 +812,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -882,32 +904,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-29 16:52",
-   "id": "ZEC-4h-P04-MACD-SUPERTREND-V1-2026-10-29 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P04-MACD-SUPERTREND-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 1347.4443258537053,
-   "note": "4h signal closed - limit order placed"
-  },
-  {
-   "time_utc": "2026-10-29 16:52",
-   "id": "ZEC-4h-P04-MACD-SUPERTREND-V4-2026-10-29 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P04-MACD-SUPERTREND-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 1347.4443258537053,
-   "note": "4h signal closed - limit order placed"
-  }
- ]
+ "events_this_run": []
 }
