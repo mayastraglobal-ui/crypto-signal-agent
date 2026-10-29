@@ -820,3 +820,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** ENA - 7-day average volume $38M < $50M; order book too thin: $196k within 1% (need $250k)
 - **EXCLUDED** UNI - 7-day average volume $28M < $50M; order book too thin: $190k within 1% (need $250k)
 - **LEAVE** BNB - not eligible: one-day volume spike: 24h $190M is 3.7x the 7-day average
+
+## 2026-10-29 21:44 UTC
+- **EXCLUDED** UNI - 7-day average volume $28M < $50M
+- **EXCLUDED** TRX - 7-day average volume $23M < $50M; behaves like a stablecoin (price stayed within ±1.51% for 30 days); order book too thin: $101k within 1% (need $250k)

@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 757,
+ "runs": 758,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,7 +29,6 @@
    "volume_spike"
   ],
   "UNI": [
-   "thin_book",
    "volume_7d"
   ],
   "SUI": [],
@@ -120,6 +119,8 @@
    "volume_7d"
   ],
   "TRX": [
+   "stablecoin",
+   "thin_book",
    "volume_7d"
   ],
   "WAL": [
@@ -161,9 +162,7 @@
   ]
  },
  "last_flags": {
-  "BTC": [
-   "wash_volume"
-  ],
+  "BTC": [],
   "ETH": [],
   "ZEC": [
    "wash_volume"
