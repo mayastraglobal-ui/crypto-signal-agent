@@ -1,13 +1,14 @@
 {
  "claude/brain-briefing": {
-  "sha": "b3a270c0994aa8ade45310a370857f5c26e6a4cd",
-  "subject": "Briefing 2026-10-28",
-  "when": "2026-10-28 00:22",
-  "status": "applied",
-  "problems": [],
-  "applied": [
-   "reports/claude/briefings/2026-10-28-0820.md"
-  ]
+  "sha": "84b9d65def2e5c8125c3b3fc2a0da5f3db43c4bc",
+  "subject": "Briefing 2026-10-29",
+  "when": "2026-10-29 00:22",
+  "status": "rejected",
+  "problems": [
+   "reports/claude/briefings/2026-10-29-0820.md: '## Email summary': 'headline' has 9 words - at most 8",
+   "reports/claude/briefings/2026-10-29-0820.md: '## Email summary': 'sub' has 22 words - at most 20"
+  ],
+  "applied": []
  },
  "claude/brain-daily": {
   "sha": "a588a8b534c188e5083bab201701f623a022a8de",
