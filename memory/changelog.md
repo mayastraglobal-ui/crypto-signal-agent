@@ -1106,3 +1106,13 @@ Newest entries at the bottom. Format: date · who · what · why.
   Measured 27 Oct: about 25 s per scan for 7 coins (BTC 608 liquidations in 24 h, ETH 1,081).
 - Tests: tests/test_liquidations.py (9). Docs: WINDOWS_WATCHER.md, ROADMAP.md.
 
+## 2026-10-29 · Claude (operator status check) · A control twin never alerts, even when it passes
+- The 28 Oct research put strategy 13's control P13-TURTLE-C (the 55-day breakout with quick 2R / 3R targets, the
+  benchmark V1-V3 must beat) in PAPER_TRADING (+0.21R over 467 trades, unseen +0.21R). The live watcher would have
+  sent 🟡 PAPER alerts for it on the same breakouts as V1-V3 (TEST), against the program rule "the control is a
+  benchmark and never sends an alert" (signal_center.test_list already skipped version C; the PAPER path did not).
+- `scanner.lab_status()`: a card with `twin_of` that reaches PAPER_TRADING / APPROVED is tracked as VALIDATION
+  (recorded silently, no PAPER email); `live_watcher.py` builds its watch list through it. The registry keeps the
+  research verdict. V1-V3 (VALIDATION; only the multiple-testing bar left: t 3.07-3.41, needs 3.71 after 490
+  trials) send TEST alerts on BNB / BTC / ETH / XRP / ZEC as before. Test: tests/test_strategy13.py.
+

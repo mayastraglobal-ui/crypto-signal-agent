@@ -1174,7 +1174,12 @@ def emailable_now(plans):
 
 
 def lab_status(spec, status):
-    """A lab card is never APPROVED (the operator moves it into strategies.yaml first): it stays in paper."""
+    """A lab card is never APPROVED (the operator moves it into strategies.yaml first): it stays in paper.
+    A control twin (twin_of: the benchmark its strategy must beat) never alerts or emails: one that passes the paper
+    bar is tracked as VALIDATION - recorded silently (2026-10-29: strategy 13's control P13-TURTLE-C passed and
+    would have sent PAPER alerts on the same breakouts as V1-V3)."""
+    if spec.get("twin_of") and status in ("PAPER_TRADING", "APPROVED"):
+        return "VALIDATION"
     return "PAPER_TRADING" if spec.get("lab") and status == "APPROVED" else status
 
 

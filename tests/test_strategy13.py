@@ -95,6 +95,18 @@ class Cards(unittest.TestCase):
                                                      coins={"SOL": row})})
         self.assertEqual(list(SCX.test_list(p, {}, SCX.settings(None))), ["P13-TURTLE-V1@1.0|4h"])
 
+    def test_a_control_that_passes_never_alerts_or_emails(self):
+        cards, _ = program_cards()
+        c = cards["P13-TURTLE-C"]
+        self.assertEqual(sc.lab_status(c, "PAPER_TRADING"), "VALIDATION")       # recorded silently
+        self.assertIsNone(lv.alert_label(sc.lab_status(c, "PAPER_TRADING"), c.get("lab"),
+                                         lv.settings(CFG.get("live_watcher"))))
+        v1 = cards["P13-TURTLE-V1"]
+        self.assertEqual(lv.alert_label(sc.lab_status(v1, "PAPER_TRADING"), v1.get("lab"),
+                                        lv.settings(CFG.get("live_watcher"))), "PAPER")
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("st = sc.lab_status(s, (reg[\"cells\"].get(", src)
+
     def test_other_cards_keep_the_pullback(self):
         S = SCX.settings(None)
         self.assertIsNotNone(SCX.pullback_entry(dict(id="x"), "4h", S))
