@@ -1116,3 +1116,20 @@ Newest entries at the bottom. Format: date · who · what · why.
   research verdict. V1-V3 (VALIDATION; only the multiple-testing bar left: t 3.07-3.41, needs 3.71 after 490
   trials) send TEST alerts on BNB / BTC / ETH / XRP / ZEC as before. Test: tests/test_strategy13.py.
 
+## 2026-10-29 · Operator + Claude · Trend portfolio (paper)
+- Operator: "build trend portfolio" after the 29 Oct online research and test: the multi-lookback Donchian idea of
+  Zarattini, Pagani & Barbon (2025, SSRN 5209907), our own version. Test (Binance daily since 2018, the 7 own coins,
+  0.10% a side + funding 0.01% / 8 h): 35% a year, Sharpe 1.40, worst drop 26% vs buy and hold 36% / 0.81 / 75%;
+  2018 +1%, 2022 -11%; other lookback sets 1.30-1.40, costs x2 1.36; without ZEC 2025 -4%, 2026 -6%.
+- `engine/trend_portfolio.py`: 9 signals per coin (lookbacks 5 / 10 / 20 / 30 / 60 / 90 / 150 / 250 / 360 days; ON at
+  a close above the lookback's highest high, OFF below the ratcheting mid-line), target = the share ON, equal parts,
+  long only, no leverage; `update()` books each new daily close in a paper account ($1,000 from the first day; costs as
+  the backtest; a missed day is caught up, a day never booked twice); `backtest()`; Telegram / Markdown text.
+  Reproduces the study: since 2018 35.1% a year, Sharpe 1.40, worst drop 26.0%.
+- `trend_portfolio.py` (scan workflow, after scanner.py, continue-on-error): once per daily close, 1,000 daily candles
+  per own coin (Binance spot, data checks; BTC needed) -> `reports/trend_portfolio.json` / `.md`.
+- `live_watcher.py`: downloads the file (SYNC_FILES), one Telegram message per new day (also during /pause),
+  `/portfolio`, `/portfolio off|on`; HELP line. `config.yaml` -> `trend_portfolio`. Paper only: no real-money change,
+  the alert strategies are not affected. Docs: docs/TREND_PORTFOLIO.md, README, WINDOWS_WATCHER.md, ROADMAP.md.
+  Tests: tests/test_trend_portfolio.py (13).
+

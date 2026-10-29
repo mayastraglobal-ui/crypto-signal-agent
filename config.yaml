@@ -469,6 +469,17 @@ signal_center:               # Forward Test Program PR 2 (operator plan 2026-10-
                              # 939 trades, unseen part +0.27R; blocked from PAPER only by its drawdown (Monte Carlo
                              # 95% 22R per 100 trades, limit 17R). Demo book only; real money still needs the full bar
 
+trend_portfolio:             # 📊 2026-10-29 (operator: "build trend portfolio") - PAPER ONLY (docs/TREND_PORTFOLIO.md).
+                             # Daily candles: 9 trend signals per own coin (ON at a close above the lookback's high,
+                             # OFF below its ratcheting mid-line); target = the share ON, equal parts, long only, no
+                             # leverage. Backtest since 2018 (7 coins, costs): ~35% a year, Sharpe 1.40, worst drop 26%
+                             # (holding: worst drop ~72-75%). trend_portfolio.py books it once per daily close; the live
+                             # watcher sends one Telegram message a day (/portfolio, /portfolio off)
+  enabled: true
+  telegram: true
+  lookbacks: [5, 10, 20, 30, 60, 90, 150, 250, 360]   # days - fixed before testing; never tuned on results
+  paper_capital: 1000        # the paper account starts with this (USDT) on its first day
+
 momentum_notes:              # 🌊 strategy 11 (operator request 2026-10-13) - engine/momentum_notes.py. The live watcher
                              # tells the phases of a market-wide move apart. INFORMATION ONLY: never a trade signal,
                              # gate, size or approval (strategy 11's versions send the 🔵 TEST alerts once positive in

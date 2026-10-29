@@ -64,6 +64,7 @@ from engine import lifecycle as lc
 from engine import live as lv
 from engine import momentum_notes as mnt
 from engine import track_record as trk
+from engine import trend_portfolio as tpf
 from engine import regime_fit as rfit
 from engine import scalp_playbook as spb
 from engine import shock as shk
@@ -101,13 +102,15 @@ SYNC_FILES = [("main", "config.yaml"), ("main", "events.yaml"), ("main", "strate
               ("main", "reports/library_tests.json"), ("main", "reports/track_record.json"),
               ("main", "reports/risk_state.json"),
               ("main", "reports/weekly_review.json"), ("main", "reports/promotions_state.json"),
+              ("main", "reports/trend_portfolio.json"),                 # 📊 2026-10-29: the paper trend portfolio
               ("live-reports", "reports/derivs_hourly.csv.gz"), ("live-reports", "reports/funding.csv.gz")]
 CODE_FILES = ["live_watcher.py", "scanner.py", "engine/live.py", "engine/follow.py", "engine/scalp_playbook.py",
               "engine/manage.py", "engine/flow_history.py", "engine/trend4h.py", "engine/regime_fit.py",
               "engine/journal.py", "engine/sessions.py", "engine/strategy_spec.py",
               "engine/lifecycle.py", "engine/signal_center.py", "engine/weather.py",
               "engine/weekly_review.py", "engine/shock.py", "engine/smc.py",
-              "engine/structure.py", "engine/momentum_notes.py", "engine/track_record.py"]    # changed -> "run update.bat"
+              "engine/structure.py", "engine/momentum_notes.py", "engine/track_record.py",
+              "engine/trend_portfolio.py"]                                                    # changed -> "run update.bat"
 
 
 def trail_on_5m(m5, card, trail):
@@ -734,6 +737,21 @@ class Watcher:
         if self.send:
             self.weekly_review(self.now_fn())
             self.drift_notes()
+            self.portfolio_note()
+
+    def portfolio_note(self):
+        """📊 The paper trend portfolio (GitHub books it once per daily close): one Telegram message per new day, unless
+        /portfolio off (or trend_portfolio.telegram: false). Sent even while /pause holds new alerts (it is a
+        once-a-day plan, not a trade alert). Returns True when sent."""
+        st = self._json("reports/trend_portfolio.json")
+        S = tpf.settings(self.cfg.get("trend_portfolio"))
+        if not st or not st.get("coins") or not S["enabled"] or not S["telegram"] or \
+                not self.state.get("portfolio_on", True) or st.get("day") == self.state.get("portfolio_day"):
+            return False
+        self.state["portfolio_day"] = st["day"]
+        self.say(tpf.telegram_text(st))
+        self._save_state()
+        return True
 
     def drift_notes(self):
         """🚨 One Telegram note when the drift monitor (GitHub's hourly track record) pauses a pair, one when the pause
@@ -1198,6 +1216,15 @@ class Watcher:
             return "▶️ New trade alerts are on again."
         if cmd == "result":
             return self.result(arg, now_ms)
+        if cmd == "portfolio":
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state["portfolio_on"] = arg == "on"
+                self._save_state()
+                return (f"📊 The daily trend portfolio message is <b>{arg.upper()}</b>. "
+                        + ("/portfolio shows it any time." if arg == "off" else "It comes once a day after the daily "
+                           "close (from about 08:00 Beijing)."))
+            return tpf.telegram_text(self._json("reports/trend_portfolio.json"))
         if cmd == "review":
             rv = self._json("reports/weekly_review.json")
             return (rv or {}).get("telegram") or "📊 No weekly review yet - GitHub's hourly scan writes it."
