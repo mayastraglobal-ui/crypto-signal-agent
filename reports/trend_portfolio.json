@@ -1,0 +1,133 @@
+{
+ "version": 1,
+ "day_ms": 1793145600000,
+ "day": "2026-10-28",
+ "updated_utc": "2026-10-29 01:57",
+ "started": "2026-10-28",
+ "start_capital": 1000.0,
+ "equity": 999.78,
+ "invested_usd": 222.18,
+ "weights": {
+  "BNB": 0.4444,
+  "BTC": 0.2222,
+  "ETH": 0.2222,
+  "SOL": 0.2222,
+  "SUI": 0.0,
+  "XRP": 0.0,
+  "ZEC": 0.4444
+ },
+ "coins": {
+  "BNB": {
+   "on": 4,
+   "n": 9,
+   "weight": 0.4444,
+   "yesterday": 0.3333,
+   "price": 759.85,
+   "usd": 63.48,
+   "change_usd": 15.87,
+   "longest_on": 150
+  },
+  "BTC": {
+   "on": 2,
+   "n": 9,
+   "weight": 0.2222,
+   "yesterday": 0.2222,
+   "price": 81343.5,
+   "usd": 31.74,
+   "change_usd": 0.0,
+   "longest_on": 150
+  },
+  "ETH": {
+   "on": 2,
+   "n": 9,
+   "weight": 0.2222,
+   "yesterday": 0.2222,
+   "price": 2359.68,
+   "usd": 31.74,
+   "change_usd": 0.0,
+   "longest_on": 150
+  },
+  "SOL": {
+   "on": 2,
+   "n": 9,
+   "weight": 0.2222,
+   "yesterday": 0.2222,
+   "price": 102.44,
+   "usd": 31.74,
+   "change_usd": 0.0,
+   "longest_on": 150
+  },
+  "SUI": {
+   "on": 0,
+   "n": 9,
+   "weight": 0.0,
+   "yesterday": 0.0,
+   "price": 0.9433,
+   "usd": 0.0,
+   "change_usd": 0.0,
+   "longest_on": 0
+  },
+  "XRP": {
+   "on": 0,
+   "n": 9,
+   "weight": 0.0,
+   "yesterday": 0.0,
+   "price": 1.326,
+   "usd": 0.0,
+   "change_usd": 0.0,
+   "longest_on": 0
+  },
+  "ZEC": {
+   "on": 4,
+   "n": 9,
+   "weight": 0.4444,
+   "yesterday": 0.4444,
+   "price": 1311.01,
+   "usd": 63.48,
+   "change_usd": 0.0,
+   "longest_on": 360
+  }
+ },
+ "history": [
+  {
+   "day": "2026-10-28",
+   "equity": 999.78,
+   "ret_pct": -0.022,
+   "weights": {
+    "BNB": 0.4444,
+    "BTC": 0.2222,
+    "ETH": 0.2222,
+    "SOL": 0.2222,
+    "SUI": 0.0,
+    "XRP": 0.0,
+    "ZEC": 0.4444
+   }
+  }
+ ],
+ "lookbacks": [
+  5,
+  10,
+  20,
+  30,
+  60,
+  90,
+  150,
+  250,
+  360
+ ],
+ "backtest": {
+  "since": "2024-02-03",
+  "days": 999,
+  "portfolio": {
+   "cagr_pct": 29.7,
+   "sharpe": 1.39,
+   "max_dd_pct": 17.2
+  },
+  "hold": {
+   "cagr_pct": 59.5,
+   "sharpe": 1.06,
+   "max_dd_pct": 51.5
+  }
+ },
+ "problems": []
+}

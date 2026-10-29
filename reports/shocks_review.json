@@ -1,23 +1,23 @@
 {
- "n": 51,
- "sent": 37,
- "done": 51,
- "kept": 15,
+ "n": 49,
+ "sent": 36,
+ "done": 49,
+ "kept": 13,
  "reversed": 36,
- "avg_after_4h": -0.41,
+ "avg_after_4h": -0.48,
  "caught": 2,
  "by_coin": {
-  "BTC": 12,
-  "SUI": 7,
   "ZEC": 5,
   "XRP": 8,
+  "BTC": 11,
   "ETH": 10,
-  "SOL": 9
+  "SOL": 9,
+  "SUI": 6
  },
  "by_kind": {
-  "volume": 26,
-  "sweep_low": 12,
+  "sweep_low": 11,
   "move": 16,
+  "volume": 24,
   "sweep_high": 5
  },
  "biggest": [
@@ -62,13 +62,13 @@
    "caught": false
   }
  ],
- "checked_utc": "2026-10-29 00:27",
+ "checked_utc": "2026-10-29 01:57",
  "lines": [
-  "51 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-  "by kind: fast move 16, broke yesterday's high 5, broke yesterday's low 12, volume spike 26",
-  "by coin: BTC 12, ETH 10, SOL 9, XRP 8, SUI 7, ZEC 5",
-  "4 hours later: 15 kept going, 36 reversed (average -0.41% in the shock's direction)",
-  "followed by a strategy alert in the same direction within 4h: 2 of 51 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+  "49 shock(s) this week, 36 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+  "by kind: fast move 16, broke yesterday's high 5, broke yesterday's low 11, volume spike 24",
+  "by coin: BTC 11, ETH 10, SOL 9, XRP 8, SUI 6, ZEC 5",
+  "4 hours later: 13 kept going, 36 reversed (average -0.48% in the shock's direction)",
+  "followed by a strategy alert in the same direction within 4h: 2 of 49 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
   "  2026-10-24 14:17 UTC ZEC DOWN -2.8% -> 4h later -3.1% (no strategy alert)",
   "  2026-10-23 22:33 UTC ZEC DOWN -2.6% -> 4h later +1.6% (no strategy alert)",
   "  2026-10-23 22:56 UTC SUI DOWN -2.6% -> 4h later -2.5% (no strategy alert)",
