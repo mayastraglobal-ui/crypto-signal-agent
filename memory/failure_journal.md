@@ -330,3 +330,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### SUI SHORT 1h P01-BREAKOUT-V5 v1.0 - exit-rule -0.73R
+- timestamp: 2026-10-29 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.73R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-05
+  - signal 2026-10-29 01:59 UTC, closed 2026-10-29 13:59 UTC, stage TEST
+  - MAE -0.81R / MFE +0.76R
+  - at entry: session Asia, conditions: wrong_session
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 1h P01-BREAKOUT-V5 v1.0 - exit-rule -0.82R
+- timestamp: 2026-10-29 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.82R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-05
+  - signal 2026-10-29 02:59 UTC, closed 2026-10-29 13:59 UTC, stage TEST
+  - MAE -0.90R / MFE +0.49R
+  - at entry: session Asia, conditions: wrong_session
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)

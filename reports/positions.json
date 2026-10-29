@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 12:41",
+ "generated_utc": "2026-10-29 14:11",
  "book": {
-  "utc": "2026-10-29 12:41",
-  "beijing": "2026-10-29 20:41",
+  "utc": "2026-10-29 14:11",
+  "beijing": "2026-10-29 22:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 12:41 UTC / 2026-10-29 20:41 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 14:11 UTC / 2026-10-29 22:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -37,10 +37,7 @@
   "groups": [
    "BNB+BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
-  "blackout_now": [
-   "US GDP (Advance Estimate), 3rd Quarter 2026",
-   "US PCE / Personal Income and Outlays (Sep data)"
-  ],
+  "blackout_now": [],
   "upcoming_events": [],
   "next_event": null,
   "calendar_warning": null,
@@ -885,5 +882,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-10-29 14:11",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 01:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.73R"
+  },
+  {
+   "time_utc": "2026-10-29 14:11",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 02:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.82R"
+  }
+ ]
 }

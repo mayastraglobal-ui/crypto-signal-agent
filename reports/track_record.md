@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-10-29 12:41 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-10-29 14:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 3 | 0 | -0.99R | -2.97R | 2.97R | 3 |
-| Silent research records (never sent to you) | 37 | 22 | -0.56R | -20.54R | 20.98R | 6 |
-| 🔵 TEST | 43 | 19 | -0.62R | -26.78R | 26.78R | 7 |
+| Silent research records (never sent to you) | 39 | 20 | -0.57R | -22.09R | 22.09R | 6 |
+| 🔵 TEST | 45 | 18 | -0.63R | -28.33R | 28.33R | 7 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 46 | 17 | -0.65R | -30.03R | 30.03R | 10 |
+| **All** | 48 | 17 | -0.66R | -31.58R | 31.58R | 10 |
 
 ## 🚨 Drift monitor
 
@@ -39,6 +39,7 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 2 | 0 | -0.96R | +0.11R | -1.92R | 1.92R | ✅ |
 | P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 2 | 50 | +0.12R | +0.07R | +0.24R | 0.91R | ✅ |
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | silent | 2 | 0 | -0.74R | +0.01R | -1.49R | 1.49R | ✅ |
+| P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 2 | 0 | -0.78R | +0.09R | -1.55R | 1.55R | ✅ |
 | P01-BREAKOUT-V2 | 15m | XRP | 🔵 TEST | silent | 1 | 0 | -1.19R | -0.01R | -1.19R | 1.19R | ✅ |
 | P01-BREAKOUT-V2 | 30m | SOL | 🔵 TEST | silent | 1 | 0 | -1.14R | +0.06R | -1.14R | 1.14R | ✅ |
 | P01-BREAKOUT-V5 | 1h | BTC | 🔵 TEST | silent | 1 | 0 | -1.15R | +0.02R | -1.15R | 1.15R | ✅ |
@@ -49,8 +50,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-20 13:59 | -18.25R |
-| 2026-10-21 13:44 | -19.61R |
 | 2026-10-21 19:14 | -20.29R |
 | 2026-10-21 23:59 | -19.14R |
 | 2026-10-21 23:59 | -20.05R |
@@ -69,3 +68,5 @@ Warning signs (no pause yet):
 | 2026-10-27 12:59 | -28.42R |
 | 2026-10-27 23:59 | -29.26R |
 | 2026-10-29 10:59 | -30.03R |
+| 2026-10-29 13:59 | -30.76R |
+| 2026-10-29 13:59 | -31.58R |
