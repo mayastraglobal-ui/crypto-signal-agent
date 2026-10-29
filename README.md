@@ -34,6 +34,8 @@ tested like every strategy): [`docs/STRATEGY_12.md`](docs/STRATEGY_12.md).
 Strategy 13 (the daily Turtle) buys a break of the 55-day high and rides the trend until a close below the 20-day
 low, with no fixed target (long only; the watcher tells you when the exit line moves and when to close):
 [`docs/STRATEGY_13.md`](docs/STRATEGY_13.md).
+📊 The trend portfolio (paper) holds each coin by how many of its 9 daily trends are up: one Telegram message a day,
+a $1,000 paper account on GitHub (`/portfolio`): [`docs/TREND_PORTFOLIO.md`](docs/TREND_PORTFOLIO.md).
 📈 The live track record shows every TEST / PAPER / LIVE result after fees next to its 5-year backtest (`/track`).
 🚨 The drift monitor pauses a strategy's alerts on a coin when its live results leave what the backtest calls normal
 (the safe direction only): [`docs/TRACK_RECORD.md`](docs/TRACK_RECORD.md).
