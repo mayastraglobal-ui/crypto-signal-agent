@@ -1133,3 +1133,12 @@ Newest entries at the bottom. Format: date · who · what · why.
   the alert strategies are not affected. Docs: docs/TREND_PORTFOLIO.md, README, WINDOWS_WATCHER.md, ROADMAP.md.
   Tests: tests/test_trend_portfolio.py (13).
 
+## 2026-10-29 · Claude (operator: "I haven't got the email briefing today") · A too-long summary line is shortened
+- The Brain wrote the 08:20 briefing on time, but the guard refused it (reports/claude/runs.csv: the first refusal in
+  79 runs): its '## Email summary' headline had 9 words (limit 8) and its sub 22 (limit 20). The operator got the
+  "Claude briefing refused" ALERT at 08:22 Beijing and, at the watchdog's next run (10:52 Beijing), the engine's own
+  briefing marked late - not Claude's.
+- `engine/summary.py` `fit()`: an over-long summary line is cut to its word limit (ending in '...'); `engine/brain.py`
+  applies the shortened text. Every other rule of the guard still refuses. `tasks/COMMON.md`: "count them".
+  Tests: tests/test_email_design.py.
+

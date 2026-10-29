@@ -10,7 +10,7 @@ puts into the email next to its own numbers. The full report is published as a p
     - dont: Don't chase the SUI +13% candle.
 
 Which keys each report needs (KEYS); the Brain guard refuses a report whose block is missing or breaks a rule
-(problems()). Pure functions.
+(problems()) - except a line that is only too long: fit() shortens it first. Pure functions.
 """
 import re
 
@@ -56,6 +56,33 @@ def parse(text):
             k = m.group(1).lower().replace("'", "")
             out.setdefault(k, m.group(2))
     return out
+
+
+def fit(text):
+    """The report with every over-long summary line cut to its word limit (MAX_WORDS / MAX_WORDS_OTHER, ending in
+    '...'). 2026-10-29: the 08:20 briefing was refused - and its email lost - for a headline of 9 words (limit 8) and a
+    sub of 22 (limit 20); a length is cosmetic, so the guard shortens it instead (every other rule still refuses).
+    Returns (text, [what was cut])."""
+    lines = (text or "").split("\n")
+    try:
+        start = lines.index(HEADING) + 1
+    except ValueError:
+        return text, []
+    cut = []
+    for i in range(start, len(lines)):
+        if lines[i].startswith("## "):
+            break
+        m = _LINE.match(lines[i])
+        if not m:
+            continue
+        k, v = m.group(1).lower().replace("'", ""), m.group(2)
+        limit = MAX_WORDS.get(k, MAX_WORDS_OTHER)
+        words = v.split()
+        if len(words) > limit:
+            short = " ".join(words[:limit]).rstrip(",;:-") + "..."
+            lines[i] = f"- {m.group(1)}: {short}"
+            cut.append(f"'{k}' cut from {len(words)} to {limit} words")
+    return "\n".join(lines), cut
 
 
 def problems(text, kind):
