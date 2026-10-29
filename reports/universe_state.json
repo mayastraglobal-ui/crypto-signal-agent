@@ -7,10 +7,12 @@
   "ZEC",
   "SUI"
  ],
- "in_streak": {},
+ "in_streak": {
+  "BNB": 1
+ },
  "out_streak": {},
  "suspended": {},
- "runs": 741,
+ "runs": 742,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -25,9 +27,7 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [
-   "volume_7d"
-  ],
+  "BNB": [],
   "UNI": [
    "volume_7d"
   ],

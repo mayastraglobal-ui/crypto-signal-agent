@@ -23086,3 +23086,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-28 21:45,SUI,15m,FVG_FILLED,bull,,0.9439,0.947,,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 22:30,SUI,15m,FVG,bear,,0.9479,0.9499,0.297,,1h,TRANSITION,,smc-1.0,Binance
 2026-10-28 22:45,SUI,15m,FVG_RETRACE,bear,,0.9479,0.9499,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-10-28 23:15,XRP,15m,SWEEP,bull,1.3253,,,0.135,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-28 23:30,ZEC,30m,BOS,bull,1316.0,,,0.029,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-28 23:15,ZEC,15m,FVG_RETRACE,bull,,1303.89,1308.16,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-28 23:30,ZEC,15m,WEAK_BREAK,bull,1313.49,,,0.287,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-28 23:30,ZEC,15m,OB_INVALID,bear,,1312.48,1315.33,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-28 23:45,ZEC,15m,BREAKER_RETEST,bull,,1312.48,1315.33,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
