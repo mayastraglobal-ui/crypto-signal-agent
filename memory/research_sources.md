@@ -1556,3 +1556,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: few lenders received collateral, so the article estimates 3AC was leveraged at least three times its assets; some collateral was promised to more than one lender; the fund's returns came in rising markets and not in bearish ones; it filed for bankruptcy in July 2022 owing more than 2.8 billion USD. The article does not discuss Luna or margin calls.
   - what it means for us: leverage and correlated bets turn a normal drawdown into a failure. Our risk per trade is 0.5%, heat is capped at 3, and the day/week limits are -3R and -6R: that is the right shape. See 'Hypothesis: cap the number of coins that can be open in the same direction (from C22)'.
   - limitations: one secondary article; figures are its estimates. CNBC returned 403 and Learnsignal 429, so neither is cited. Search results also mention a 27 June 2022 BVI liquidation order, which I did not open and do not cite.
+
+### [C23] A systematic trader on process - not opened
+- timestamp: 2026-10-29 15:45 UTC · source: Claude daily review 2026-10-29 · evidence: CLAIM: nothing was read, so nothing is claimed · confidence: low · strategy: - · asset: - · timeframe: - · regime: - · review: 2027-01-27
+  - title / source: none. The plan asks for one long interview with a systematic or crypto trader.
+  - URL: none. I searched and found a Toby Crabel interview article (Interactive Brokers) and a Better System Trader episode page, but the first returned 403 and the second showed no description, guest or date. I read no interview, so I cite nothing.
+  - claim: none.
+  - what it means for us: nothing yet. The item stays 'not studied'; try again with another source (the plan's question: how they decide an edge is dead and how they size positions).
+  - limitations: no source opened. Search-result snippets are not evidence and are not recorded as a finding.
