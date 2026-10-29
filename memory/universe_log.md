@@ -824,3 +824,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-29 21:44 UTC
 - **EXCLUDED** UNI - 7-day average volume $28M < $50M
 - **EXCLUDED** TRX - 7-day average volume $23M < $50M; behaves like a stablecoin (price stayed within ±1.51% for 30 days); order book too thin: $101k within 1% (need $250k)
+
+## 2026-10-29 23:11 UTC
+- **EXCLUDED** ENA - 7-day average volume $38M < $50M

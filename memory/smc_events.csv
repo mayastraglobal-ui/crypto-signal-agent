@@ -25847,3 +25847,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-29 21:30,SUI,30m,BREAKER_RETEST,bear,,0.8876,0.8963,,,1h,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
 2026-10-29 21:30,SUI,30m,FVG,bear,,0.9001,0.9102,0.709,,1h,EXPANSION,,smc-1.0,Binance
 2026-10-29 21:30,SUI,15m,FVG_RETRACE,bear,,0.8904,0.9152,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-29 22:00,BTC,1h,FVG,bear,,79811.23,80778.0,1.491,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-29 22:15,BTC,15m,FVG,bear,,79059.79,79169.85,0.251,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-29 22:30,BTC,15m,FVG_RETRACE,bear,,79059.79,79169.85,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-29 22:30,BTC,15m,FVG_FILLED,bear,,79059.79,79169.85,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-29 22:00,ETH,1h,FVG,bear,,2294.88,2327.05,1.243,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-29 22:00,SOL,1h,FVG,bear,,98.11,99.8,1.319,,4h,RANGE,,smc-1.0,Binance
+2026-10-29 22:00,SOL,30m,FVG_RETRACE,bear,,97.92,98.42,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-29 22:00,XRP,1h,BREAKER_RETEST,bear,,1.2513,1.271,,,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-29 22:00,XRP,1h,BREAKER_RETEST,bear,,1.2562,1.2772,,,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-10-29 22:00,XRP,1h,FVG,bear,,1.2649,1.2808,1.024,,4h,RANGE,,smc-1.0,Binance
+2026-10-29 22:00,ZEC,1h,BREAKER_RETEST,bear,,1261.63,1277.11,,,4h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-10-29 22:00,ZEC,1h,FVG,bear,,1298.5,1316.78,0.531,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-10-29 21:45,ZEC,15m,FVG,bull,,1259.65,1269.97,0.428,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-29 22:00,ZEC,15m,FVG_RETRACE,bull,,1259.65,1269.97,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-10-29 22:15,ZEC,15m,FVG_FILLED,bull,,1259.65,1269.97,,,1h,EXPANSION,,smc-1.0,Binance
+2026-10-29 22:00,SUI,1h,FVG,bear,,0.9006,0.9278,1.545,,4h,UNCLEAR,,smc-1.0,Binance
+2026-10-29 22:00,SUI,30m,FVG_RETRACE,bear,,0.9001,0.9102,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
