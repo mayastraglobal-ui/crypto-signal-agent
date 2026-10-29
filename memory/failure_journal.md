@@ -346,3 +346,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: wrong_session
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### SOL SHORT 1h P01-BREAKOUT-V2 v1.0 - SL -1.08R
+- timestamp: 2026-10-29 15:41 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 1h · regime: EXPANSION · review: 2026-11-05
+  - signal 2026-10-29 01:59 UTC, closed 2026-10-29 14:59 UTC, stage TEST
+  - MAE -1.21R / MFE +0.47R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
+
+### SOL SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.13R
+- timestamp: 2026-10-29 15:41 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.13R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 30m · regime: EXPANSION · review: 2026-11-05
+  - signal 2026-10-29 01:59 UTC, closed 2026-10-29 14:59 UTC, stage TEST
+  - MAE -1.78R / MFE +0.47R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)

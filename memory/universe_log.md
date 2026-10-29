@@ -799,3 +799,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-29 14:11 UTC
 - **EXCLUDED** GOOGLB - only 114 days of history (need 180); 7-day average volume $7M < $50M
+
+## 2026-10-29 15:41 UTC
+- **EXCLUDED** GOOGLB - only 114 days of history (need 180); 7-day average volume $7M < $50M; order book too thin: $228k within 1% (need $250k)

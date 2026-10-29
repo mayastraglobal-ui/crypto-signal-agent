@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-29 14:11",
+ "generated_utc": "2026-10-29 15:41",
  "book": {
-  "utc": "2026-10-29 14:11",
-  "beijing": "2026-10-29 22:11",
+  "utc": "2026-10-29 15:41",
+  "beijing": "2026-10-29 23:41",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-29 14:11 UTC / 2026-10-29 22:11 Beijing",
+  "POSITION BOOK \u2014 2026-10-29 15:41 UTC / 2026-10-29 23:41 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -884,30 +884,30 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-29 14:11",
-   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 01:59",
-   "coin": "SUI",
+   "time_utc": "2026-10-29 15:41",
+   "id": "SOL-1h-P01-BREAKOUT-V2-2026-10-29 01:59",
+   "coin": "SOL",
    "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
+   "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "POSITION_ACTIVE",
    "to_state": "CLOSED",
    "price": null,
-   "note": "EXIT_RULE -0.73R"
+   "note": "SL -1.08R"
   },
   {
-   "time_utc": "2026-10-29 14:11",
-   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-29 02:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
+   "time_utc": "2026-10-29 15:41",
+   "id": "SOL-30m-P01-BREAKOUT-V2-2026-10-29 01:59",
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
    "from_state": "POSITION_ACTIVE",
    "to_state": "CLOSED",
    "price": null,
-   "note": "EXIT_RULE -0.82R"
+   "note": "SL -1.13R"
   }
  ]
 }
