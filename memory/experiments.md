@@ -1380,3 +1380,19 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: 3AC's failure came from correlated, leveraged bets. The engine already caps heat at 3; check whether open trades on different coins are in practice one bet (crypto coins move together) and whether the cap should count correlated coins as one.
   - how to test: an engine check for the operator (pull request), not a lab card. From the stored PAPER and TEST trades, find days with 2 or more trades open in the same direction on different coins and compare their combined loss days with single-trade loss days. Count the samples first.
   - stop if: fewer than 30 such days, or the combined losses are not larger than the heat cap already allows.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0
+- timestamp: 2026-10-30 15:45 UTC · source: Claude daily review 2026-10-30 · evidence: BACKTEST_EVIDENCE: 3 cells, 2747 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-28
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.32R a trade with it, +0.47R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - result: 4h BACKTESTING 471 trades +0.246R (unseen +0.349R), back from VALIDATION because Monte Carlo 95% worst drawdown per 100 trades is 17.2R (limit 17R) - the only failed gate; 30m BACKTESTING 928 trades +0.043R (unseen +0.109R); 1h FAILED 1348 trades -0.000R. Update to my 2026-10-26 record (4h then 470 trades +0.249R, VALIDATION).
+  - teaches: the 4h cell is within 0.2R of the drawdown limit, so the status flips with a few new trades; this is a close call, not a result. It is also the only cell of this card with a clear positive average. The 1h and 30m cells stay at about zero.
+  - next: stop this line on 1h and 30m (1h is now FAILED). Leave the 4h cell alone: no change, and wait for the engine to settle its status.
+
+### Feedback: donchian_breakout-VEXIT-S4@1.0
+- timestamp: 2026-10-30 15:45 UTC · source: Claude daily review 2026-10-30 · evidence: BACKTEST_EVIDENCE: 3 cells, 5282 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-28
+  - parent: result: donchian_breakout-VEXIT@1.0 4h
+  - hypothesis: The rule 'adx(14) > 20 / adx(14) > 20' adds nothing to donchian_breakout-VEXIT@1.0 (fewer rules = less room for overfitting).
+  - result: 4h PAPER_TRADING 928 trades +0.239R (unseen +0.192R); 1h FAILED 2565 trades -0.023R; 30m FAILED 1789 trades -0.059R. The 4h cell moved from BACKTESTING to PAPER_TRADING on 2026-10-30.
+  - teaches: the simpler 4h card (without ADX) reached PAPER_TRADING with 928 trades, the same average as its parent (+0.251R, 815 trades), so the ADX filter was not needed. The 1h and 30m cells never worked.
+  - next: stop this line on 1h and 30m. The 4h cell now produces paper signals; the useful next test is a real change to this base, not more rule removals.

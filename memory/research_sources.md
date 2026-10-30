@@ -1564,3 +1564,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: none.
   - what it means for us: nothing yet. The item stays 'not studied'; try again with another source (the plan's question: how they decide an edge is dead and how they size positions).
   - limitations: no source opened. Search-result snippets are not evidence and are not recorded as a finding.
+
+### [C24] A discretionary trader on risk - not opened
+- timestamp: 2026-10-30 15:45 UTC · source: Claude daily review 2026-10-30 · evidence: CLAIM: nothing was read, so nothing is claimed · confidence: low · strategy: - · asset: - · timeframe: - · regime: - · review: 2027-01-28
+  - title / source: none. The plan asks for one interview with a professional discretionary trader (who, where, when).
+  - URL: none. I searched; the results were summaries of the Market Wizards books and trading-education pages. The one page I opened (turtletrader.com quotes) holds a few Richard Dennis and Michael Covel quotes but no interview and nothing on position size after losses. I read no interview and cite nothing.
+  - claim: none.
+  - what it means for us: nothing yet. The item stays 'not studied'. Plain words for the operator, from the engine's own limits (not from a source): the engine stops for the day at -3R and for the week at -6R, and risks 0.5% per trade.
+  - limitations: no source opened. Names in search snippets (for example Schwartz, McKay, Lipschutz) are not evidence and are not recorded.

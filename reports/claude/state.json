@@ -10,14 +10,15 @@
   ]
  },
  "claude/brain-daily": {
-  "sha": "b1c60e66b27960a351f2bbc7791478240c82496c",
-  "subject": "Daily review 2026-10-29",
-  "when": "2026-10-29 15:34",
+  "sha": "83652b37780f1d62b2e6d57ac61061f419f13699",
+  "subject": "Daily review 2026-10-30",
+  "when": "2026-10-30 15:26",
   "status": "applied",
   "problems": [],
   "applied": [
+   "memory/experiments.md",
    "memory/research_sources.md",
-   "reports/claude/daily/2026-10-29.md"
+   "reports/claude/daily/2026-10-30.md"
   ]
  },
  "claude/brain-weekly": {
