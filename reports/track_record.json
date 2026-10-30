@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-30 13:06",
+ "utc": "2026-10-30 15:49",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 54,
+  "n": 55,
   "wins": 8,
-  "win_rate": 14.8,
-  "avg_r": -0.694,
-  "total_r": -37.49,
-  "max_dd_r": 37.49,
-  "cur_loss_run": 11,
-  "max_loss_run": 11,
-  "sd": 0.885
+  "win_rate": 14.5,
+  "avg_r": -0.699,
+  "total_r": -38.45,
+  "max_dd_r": 38.45,
+  "cur_loss_run": 12,
+  "max_loss_run": 12,
+  "sd": 0.877
  },
  "yours": {
   "n": 3,
@@ -32,29 +32,29 @@
   "sd": 0.133
  },
  "silent": {
-  "n": 45,
+  "n": 46,
   "wins": 8,
-  "win_rate": 17.8,
-  "avg_r": -0.622,
-  "total_r": -28.0,
-  "max_dd_r": 28.0,
-  "cur_loss_run": 10,
-  "max_loss_run": 10,
-  "sd": 0.954
+  "win_rate": 17.4,
+  "avg_r": -0.63,
+  "total_r": -28.97,
+  "max_dd_r": 28.97,
+  "cur_loss_run": 11,
+  "max_loss_run": 11,
+  "sd": 0.945
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 51,
+   "n": 52,
    "wins": 8,
-   "win_rate": 15.7,
-   "avg_r": -0.671,
-   "total_r": -34.24,
-   "max_dd_r": 34.24,
-   "cur_loss_run": 11,
-   "max_loss_run": 11,
-   "sd": 0.906
+   "win_rate": 15.4,
+   "avg_r": -0.677,
+   "total_r": -35.2,
+   "max_dd_r": 35.2,
+   "cur_loss_run": 12,
+   "max_loss_run": 12,
+   "sd": 0.898
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -555,6 +555,32 @@
    "sent": false
   },
   {
+   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -0.964,
+    "total_r": -0.96,
+    "max_dd_r": 0.96,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 354,
+    "avg_r": 0.001,
+    "win_rate": 37.6
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-30 15:14",
+   "sent": false
+  },
+  {
    "key": "P04-MACD-SUPERTREND-V2@1.0|1h",
    "coin": "SOL",
    "stage": "TEST",
@@ -981,6 +1007,10 @@
   {
    "t": "2026-10-30 05:59",
    "r": -37.49
+  },
+  {
+   "t": "2026-10-30 15:14",
+   "r": -38.45
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

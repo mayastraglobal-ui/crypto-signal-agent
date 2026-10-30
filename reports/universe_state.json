@@ -12,7 +12,7 @@
  "suspended": {
   "INTCB": "2026-10-30"
  },
- "runs": 769,
+ "runs": 770,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -142,6 +142,7 @@
   ],
   "SNDKB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "SOXLB": [

@@ -394,3 +394,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### ETH SHORT 15m P04-MACD-SUPERTREND-V2 v1.0 - exit-rule -0.96R
+- timestamp: 2026-10-30 15:49 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.96R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: ETH · timeframe: 15m · regime: WEAK_BEAR · review: 2026-11-06
+  - signal 2026-10-30 08:14 UTC, closed 2026-10-30 15:14 UTC, stage TEST
+  - MAE -0.98R / MFE +1.03R
+  - at entry: session London, conditions: -
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
