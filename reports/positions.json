@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-30 01:51",
+ "generated_utc": "2026-10-30 03:21",
  "book": {
-  "utc": "2026-10-30 01:51",
-  "beijing": "2026-10-30 09:51",
+  "utc": "2026-10-30 03:21",
+  "beijing": "2026-10-30 11:21",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-30 01:51 UTC / 2026-10-30 09:51 Beijing",
+  "POSITION BOOK \u2014 2026-10-30 03:21 UTC / 2026-10-30 11:21 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -542,6 +542,28 @@
   },
   {
    "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -741,17 +763,30 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-30 01:51",
+   "time_utc": "2026-10-30 03:21",
    "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-30 00:59",
    "coin": "SUI",
    "tf": "1h",
    "strategy": "P01-BREAKOUT-V5",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
    "price": 0.8601896169831901,
-   "note": "1h signal closed - limit order placed"
+   "note": "limit 0.86019 filled in the 2026-10-30 01:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-10-30 03:21",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-30 00:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.8601896169831901,
+   "note": "entry at 2026-10-30 01:00 UTC (limit)"
   }
  ]
 }
