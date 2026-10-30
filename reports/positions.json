@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-30 08:30",
+ "generated_utc": "2026-10-30 10:01",
  "book": {
-  "utc": "2026-10-30 08:30",
-  "beijing": "2026-10-30 16:30",
+  "utc": "2026-10-30 10:01",
+  "beijing": "2026-10-30 18:01",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-30 08:30 UTC / 2026-10-30 16:30 Beijing",
+  "POSITION BOOK \u2014 2026-10-30 10:01 UTC / 2026-10-30 18:01 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -407,6 +407,28 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
   },
   {
    "coin": "SOL",
@@ -1003,32 +1025,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-30 08:30",
-   "id": "ETH-15m-P04-MACD-SUPERTREND-V2-2026-10-30 08:14",
-   "coin": "ETH",
-   "tf": "15m",
-   "strategy": "P04-MACD-SUPERTREND-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 2232.9,
-   "note": "15m signal candle closed"
-  },
-  {
-   "time_utc": "2026-10-30 08:30",
-   "id": "ETH-15m-P04-MACD-SUPERTREND-V2-2026-10-30 08:14",
-   "coin": "ETH",
-   "tf": "15m",
-   "strategy": "P04-MACD-SUPERTREND-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 2232.9,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
