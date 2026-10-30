@@ -26168,3 +26168,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-30 10:45,SUI,15m,FVG_FILLED,bear,,0.8867,0.8899,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-30 11:00,SUI,15m,OB_INVALID,bear,,0.8899,0.8931,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-10-30 11:15,SUI,15m,BREAKER_RETEST,bull,,0.8899,0.8931,,NY AM,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-10-30 12:00,BTC,15m,SWEEP,bull,77345.88,,,0.392,NY AM,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-30 12:00,BTC,15m,FVG,bear,,77488.01,77570.0,0.303,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-30 12:15,BTC,15m,FVG_RETRACE,bear,,77488.01,77570.0,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-30 12:15,BTC,15m,FVG_FILLED,bear,,77488.01,77570.0,,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-30 12:00,ETH,30m,FVG_RETRACE,bull,,2231.57,2242.1,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-30 12:00,ETH,30m,FVG_FILLED,bull,,2231.57,2242.1,,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-30 11:45,ETH,15m,FVG_RETRACE,bull,,2231.57,2241.35,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-30 12:00,ETH,15m,FVG_FILLED,bull,,2231.57,2241.35,,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-10-30 12:00,ZEC,30m,WEAK_BREAK,bear,1240.53,,,0.041,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-30 12:30,ZEC,30m,FVG,bear,,1252.94,1260.36,0.342,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-30 13:00,ZEC,30m,FVG_RETRACE,bear,,1252.94,1260.36,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-30 11:45,ZEC,15m,FVG_FILLED,bull,,1256.78,1262.66,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-30 12:00,ZEC,15m,WEAK_BREAK,bear,1240.53,,,0.066,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-10-30 12:00,ZEC,15m,FVG,bear,,1252.45,1260.36,0.588,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-10-30 12:30,ZEC,15m,FVG_RETRACE,bear,,1252.45,1260.36,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance

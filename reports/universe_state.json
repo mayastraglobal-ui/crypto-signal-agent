@@ -9,8 +9,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 768,
+ "suspended": {
+  "INTCB": "2026-10-30"
+ },
+ "runs": 769,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -140,7 +142,6 @@
   ],
   "SNDKB": [
    "history",
-   "thin_book",
    "volume_7d"
   ],
   "SOXLB": [
@@ -159,6 +160,12 @@
   ],
   "U": [
    "stablecoin",
+   "volume_7d"
+  ],
+  "INTCB": [
+   "big_move",
+   "history",
+   "thin_book",
    "volume_7d"
   ]
  },
@@ -223,6 +230,7 @@
   "GOOGLB": [
    "data_degraded"
   ],
-  "U": []
+  "U": [],
+  "INTCB": []
  }
 }
