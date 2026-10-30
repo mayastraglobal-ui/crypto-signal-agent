@@ -827,3 +827,10 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-29 23:11 UTC
 - **EXCLUDED** ENA - 7-day average volume $38M < $50M
+
+## 2026-10-30 00:36 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,039x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** TRX - 7-day average volume $35M < $50M; order book too thin: $118k within 1% (need $250k)
+- **EXCLUDED** ENA - 7-day average volume $45M < $50M; order book too thin: $173k within 1% (need $250k)
+- **FLAG** GOOGLB - price data DEGRADED - stays in the list, but no signals
+- **EXCLUDED** LINK - 7-day average volume $21M < $50M

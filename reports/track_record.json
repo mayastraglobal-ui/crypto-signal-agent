@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-29 23:11",
+ "utc": "2026-10-30 00:36",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 50,
+  "n": 52,
   "wins": 8,
-  "win_rate": 16.0,
-  "avg_r": -0.676,
-  "total_r": -33.79,
-  "max_dd_r": 33.79,
-  "cur_loss_run": 7,
+  "win_rate": 15.4,
+  "avg_r": -0.689,
+  "total_r": -35.83,
+  "max_dd_r": 35.83,
+  "cur_loss_run": 9,
   "max_loss_run": 10,
-  "sd": 0.917
+  "sd": 0.901
  },
  "yours": {
   "n": 3,
@@ -32,29 +32,29 @@
   "sd": 0.133
  },
  "silent": {
-  "n": 41,
+  "n": 43,
   "wins": 8,
-  "win_rate": 19.5,
-  "avg_r": -0.593,
-  "total_r": -24.3,
-  "max_dd_r": 24.3,
-  "cur_loss_run": 6,
-  "max_loss_run": 6,
-  "sd": 0.994
+  "win_rate": 18.6,
+  "avg_r": -0.612,
+  "total_r": -26.34,
+  "max_dd_r": 26.34,
+  "cur_loss_run": 8,
+  "max_loss_run": 8,
+  "sd": 0.974
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 47,
+   "n": 49,
    "wins": 8,
-   "win_rate": 17.0,
-   "avg_r": -0.65,
-   "total_r": -30.54,
-   "max_dd_r": 30.54,
-   "cur_loss_run": 7,
-   "max_loss_run": 7,
-   "sd": 0.94
+   "win_rate": 16.3,
+   "avg_r": -0.665,
+   "total_r": -32.57,
+   "max_dd_r": 32.57,
+   "cur_loss_run": 9,
+   "max_loss_run": 9,
+   "sd": 0.923
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -527,6 +527,32 @@
    "sent": false
   },
   {
+   "key": "P04-MACD-SUPERTREND-V1@1.0|4h",
+   "coin": "ZEC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.019,
+    "total_r": -1.02,
+    "max_dd_r": 1.02,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 47,
+    "avg_r": 0.168,
+    "win_rate": 38.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-29 23:59",
+   "sent": false
+  },
+  {
    "key": "P04-MACD-SUPERTREND-V2@1.0|1h",
    "coin": "SOL",
    "stage": "TEST",
@@ -576,6 +602,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-25 16:59",
+   "sent": false
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V4@1.0|4h",
+   "coin": "ZEC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.019,
+    "total_r": -1.02,
+    "max_dd_r": 1.02,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 46,
+    "avg_r": 0.276,
+    "win_rate": 43.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-10-29 23:59",
    "sent": false
   },
   {
@@ -911,6 +963,14 @@
   {
    "t": "2026-10-29 14:59",
    "r": -33.79
+  },
+  {
+   "t": "2026-10-29 23:59",
+   "r": -34.81
+  },
+  {
+   "t": "2026-10-29 23:59",
+   "r": -35.83
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

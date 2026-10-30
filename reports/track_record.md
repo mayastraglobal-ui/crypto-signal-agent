@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-10-29 23:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-10-30 00:36 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 3 | 0 | -0.99R | -2.97R | 2.97R | 3 |
-| Silent research records (never sent to you) | 41 | 20 | -0.59R | -24.30R | 24.30R | 6 |
-| 🔵 TEST | 47 | 17 | -0.65R | -30.54R | 30.54R | 7 |
+| Silent research records (never sent to you) | 43 | 19 | -0.61R | -26.34R | 26.34R | 8 |
+| 🔵 TEST | 49 | 16 | -0.67R | -32.57R | 32.57R | 9 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 50 | 16 | -0.68R | -33.79R | 33.79R | 10 |
+| **All** | 52 | 15 | -0.69R | -35.83R | 35.83R | 10 |
 
 ## 🚨 Drift monitor
 
@@ -44,15 +44,15 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V2 | 15m | XRP | 🔵 TEST | silent | 1 | 0 | -1.19R | -0.01R | -1.19R | 1.19R | ✅ |
 | P01-BREAKOUT-V2 | 1h | SOL | 🔵 TEST | silent | 1 | 0 | -1.08R | +0.03R | -1.08R | 1.08R | ✅ |
 | P01-BREAKOUT-V5 | 1h | BTC | 🔵 TEST | silent | 1 | 0 | -1.15R | +0.02R | -1.15R | 1.15R | ✅ |
+| P04-MACD-SUPERTREND-V1 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.17R | -1.02R | 1.02R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 1 | 0 | -1.07R | +0.02R | -1.07R | 1.07R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 100 | +0.89R | +0.17R | +0.89R | 0.00R | ✅ |
+| P04-MACD-SUPERTREND-V4 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.28R | -1.02R | 1.02R | ✅ |
 
 ## Equity curve (all stages, R after fees)
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-21 23:59 | -20.05R |
-| 2026-10-22 01:59 | -20.80R |
 | 2026-10-22 01:59 | -21.96R |
 | 2026-10-22 03:59 | -23.05R |
 | 2026-10-22 03:59 | -24.13R |
@@ -71,3 +71,5 @@ Warning signs (no pause yet):
 | 2026-10-29 13:59 | -31.58R |
 | 2026-10-29 14:59 | -32.66R |
 | 2026-10-29 14:59 | -33.79R |
+| 2026-10-29 23:59 | -34.81R |
+| 2026-10-29 23:59 | -35.83R |

@@ -190,3 +190,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END BNB 5m data: DEGRADED: volume 87x normal on candle 10-29 21:05 UTC (possible bad data)
 - timestamp: 2026-10-29 21:44 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: BNB · timeframe: - · regime: - · review: 2026-11-28
   - problem first seen 2026-10-29 21:16 UTC UTC
+
+### START GOOGLB 1d data: DEGRADED: volume 50x normal on candle 10-29 00:00 UTC (possible bad data)
+- timestamp: 2026-10-30 00:36 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: GOOGLB · timeframe: - · regime: - · review: 2026-11-29
+  - signals from this data are blocked while it lasts

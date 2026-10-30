@@ -362,3 +362,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### ZEC LONG 4h P04-MACD-SUPERTREND-V1 v1.0 - SL -1.02R
+- timestamp: 2026-10-30 00:36 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V1 v1.0 · asset: ZEC · timeframe: 4h · regime: WEAK_BULL · review: 2026-11-06
+  - signal 2026-10-29 15:59 UTC, closed 2026-10-29 23:59 UTC, stage TEST
+  - MAE -1.62R / MFE +0.58R
+  - at entry: session -, conditions: range_market
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### ZEC LONG 4h P04-MACD-SUPERTREND-V4 v1.0 - SL -1.02R
+- timestamp: 2026-10-30 00:36 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V4 v1.0 · asset: ZEC · timeframe: 4h · regime: WEAK_BULL · review: 2026-11-06
+  - signal 2026-10-29 15:59 UTC, closed 2026-10-29 23:59 UTC, stage TEST
+  - MAE -1.62R / MFE +0.58R
+  - at entry: session -, conditions: range_market
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
