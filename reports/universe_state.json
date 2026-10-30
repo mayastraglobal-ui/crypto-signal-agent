@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 763,
+ "runs": 764,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,6 +29,7 @@
    "volume_spike"
   ],
   "UNI": [
+   "thin_book",
    "volume_7d"
   ],
   "SUI": [],
@@ -153,6 +154,7 @@
   ],
   "GOOGLB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "U": [
