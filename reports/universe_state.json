@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 767,
+ "runs": 768,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -140,6 +140,7 @@
   ],
   "SNDKB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "SOXLB": [
@@ -153,6 +154,7 @@
   ],
   "GOOGLB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "U": [
@@ -161,7 +163,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [
    "wash_volume"

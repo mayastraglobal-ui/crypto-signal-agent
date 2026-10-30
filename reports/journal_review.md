@@ -2,7 +2,7 @@
 
 From journal/my_trades.csv on the branch `journal` (the live watcher's Telegram buttons, the plan result of every alert and your /result replies). Plan = the backtest rules followed on 5m candles, before fees. Report only: nothing here changes a strategy, a gate or a cost.
 
-Last journal entry: 2026-10-30 04:01 UTC
+Last journal entry: 2026-10-30 10:05 UTC
 - Last 30 days: 6 alerts · took 5 · skipped 0 · no answer 1
   - plan result: took -1.00R avg over 4 · skipped no result yet · no answer -1.00R avg over 1
   - your real results: -1.17R avg over 4 · gap to the plan -0.17R per trade (4)
