@@ -834,3 +834,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** ENA - 7-day average volume $45M < $50M; order book too thin: $173k within 1% (need $250k)
 - **FLAG** GOOGLB - price data DEGRADED - stays in the list, but no signals
 - **EXCLUDED** LINK - 7-day average volume $21M < $50M
+
+## 2026-10-30 01:51 UTC
+- **FLAG** ETH - possible wash volume: 24h volume is 1,246x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** ENA - 7-day average volume $45M < $50M

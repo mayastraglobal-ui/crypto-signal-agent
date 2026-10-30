@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-30 00:36",
+ "generated_utc": "2026-10-30 01:51",
  "book": {
-  "utc": "2026-10-30 00:36",
-  "beijing": "2026-10-30 08:36",
+  "utc": "2026-10-30 01:51",
+  "beijing": "2026-10-30 09:51",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-30 00:36 UTC / 2026-10-30 08:36 Beijing",
+  "POSITION BOOK \u2014 2026-10-30 01:51 UTC / 2026-10-30 09:51 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -421,6 +421,28 @@
   },
   {
    "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -719,30 +741,17 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-10-30 00:36",
-   "id": "ZEC-4h-P04-MACD-SUPERTREND-V1-2026-10-29 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P04-MACD-SUPERTREND-V1",
+   "time_utc": "2026-10-30 01:51",
+   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-30 00:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V5",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.02R"
-  },
-  {
-   "time_utc": "2026-10-30 00:36",
-   "id": "ZEC-4h-P04-MACD-SUPERTREND-V4-2026-10-29 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P04-MACD-SUPERTREND-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.02R"
+   "from_state": "",
+   "to_state": "AWAITING_FILL",
+   "price": 0.8601896169831901,
+   "note": "1h signal closed - limit order placed"
   }
  ]
 }

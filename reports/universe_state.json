@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 760,
+ "runs": 761,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -34,7 +34,6 @@
   "SUI": [],
   "AVAX": [],
   "ENA": [
-   "thin_book",
    "volume_7d"
   ],
   "SAGA": [
@@ -163,10 +162,10 @@
   ]
  },
  "last_flags": {
-  "BTC": [
+  "BTC": [],
+  "ETH": [
    "wash_volume"
   ],
-  "ETH": [],
   "ZEC": [
    "wash_volume"
   ],
