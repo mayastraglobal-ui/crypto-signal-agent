@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-30 06:12",
+ "generated_utc": "2026-10-30 07:46",
  "book": {
-  "utc": "2026-10-30 06:12",
-  "beijing": "2026-10-30 14:12",
+  "utc": "2026-10-30 07:46",
+  "beijing": "2026-10-30 15:46",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-30 06:12 UTC / 2026-10-30 14:12 Beijing",
+  "POSITION BOOK \u2014 2026-10-30 07:46 UTC / 2026-10-30 15:46 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -110,6 +110,17 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "close > prev(highest(high,20))"
   },
   {
    "coin": "ZEC",
@@ -686,17 +697,6 @@
   {
    "coin": "ZEC",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "3/5",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -794,19 +794,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-10-30 06:12",
-   "id": "SUI-1h-P01-BREAKOUT-V5-2026-10-30 00:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.03R"
-  }
- ]
+ "events_this_run": []
 }

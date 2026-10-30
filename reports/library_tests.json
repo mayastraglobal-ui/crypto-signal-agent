@@ -9,7 +9,7 @@
    "trades": 939,
    "avg_r": 0.152,
    "test_avg_r": 0.263,
-   "tested_utc": "2026-10-29 06:23",
+   "tested_utc": "2026-10-30 06:22",
    "library": true,
    "coins": {
     "BTC": {
@@ -36,14 +36,6 @@
      "test_avg_r": null,
      "positive": true
     },
-    "BNB": {
-     "n": 141,
-     "avg_r": 0.131,
-     "win_rate": 38.3,
-     "test_n": 0,
-     "test_avg_r": null,
-     "positive": true
-    },
     "XRP": {
      "n": 117,
      "avg_r": 0.281,
@@ -64,6 +56,14 @@
      "n": 52,
      "avg_r": 0.047,
      "win_rate": 36.5,
+     "test_n": 0,
+     "test_avg_r": null,
+     "positive": true
+    },
+    "BNB": {
+     "n": 141,
+     "avg_r": 0.131,
+     "win_rate": 38.3,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
