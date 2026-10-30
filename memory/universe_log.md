@@ -838,3 +838,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-30 01:51 UTC
 - **FLAG** ETH - possible wash volume: 24h volume is 1,246x the 1% order-book depth (flag only, not excluded)
 - **EXCLUDED** ENA - 7-day average volume $45M < $50M
+
+## 2026-10-30 04:46 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,087x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** GOOGLB - only 115 days of history (need 180); 7-day average volume $19M < $50M
