@@ -382,3 +382,8 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **P13-TURTLE-V1@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.41 of the average trade, needs 3.71 after 490 trials; HIGH OVERFITTING RISK: 50% of the profit from window 2)
 - **P13-TURTLE-V2@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.11 of the average trade, needs 3.71 after 490 trials)
 - **P13-TURTLE-V3@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.07 of the average trade, needs 3.71 after 490 trials)
+
+## 2026-10-30 06:22 UTC
+- **donchian_breakout-VEXIT-S4@1.0 4h**: BACKTESTING → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 1h**: BACKTESTING → **FAILED** (avg -0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor -0.01 (net -0.5R / max drawdown 55.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 29.7R - limit 17R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: VALIDATION → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 17.2R - limit 17R)

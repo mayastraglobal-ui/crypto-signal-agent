@@ -14,14 +14,14 @@
    "tag": "regime_mismatch",
    "kind": "HTF",
    "status": "BACKTESTING",
-   "trades": 292,
-   "avg_r": 0.032,
-   "test_r": 0.097,
-   "parent_avg_r": 0.142,
-   "parent_test_r": 0.206,
+   "trades": 294,
+   "avg_r": 0.025,
+   "test_r": 0.075,
+   "parent_avg_r": 0.135,
+   "parent_test_r": 0.186,
    "helped": false,
    "passed": false,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0|30m",
@@ -32,11 +32,11 @@
    "trades": 78,
    "avg_r": 0.387,
    "test_r": 0.492,
-   "parent_avg_r": 0.19,
+   "parent_avg_r": 0.183,
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -45,13 +45,13 @@
    "kind": "DISP",
    "status": "BACKTESTING",
    "trades": 393,
-   "avg_r": 0.19,
+   "avg_r": 0.183,
    "test_r": 0.364,
-   "parent_avg_r": 0.104,
+   "parent_avg_r": 0.099,
    "parent_test_r": 0.246,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -62,11 +62,11 @@
    "trades": 90,
    "avg_r": 0.387,
    "test_r": 0.549,
-   "parent_avg_r": 0.187,
+   "parent_avg_r": 0.183,
    "parent_test_r": 0.354,
    "helped": true,
    "passed": true,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -74,14 +74,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "BACKTESTING",
-   "trades": 409,
-   "avg_r": 0.187,
+   "trades": 408,
+   "avg_r": 0.183,
    "test_r": 0.354,
-   "parent_avg_r": 0.01,
+   "parent_avg_r": 0.008,
    "parent_test_r": 0.184,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -89,14 +89,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "FAILED",
-   "trades": 1093,
-   "avg_r": -0.011,
-   "test_r": 0.082,
-   "parent_avg_r": -0.056,
-   "parent_test_r": 0.021,
+   "trades": 1097,
+   "avg_r": -0.018,
+   "test_r": 0.071,
+   "parent_avg_r": -0.061,
+   "parent_test_r": 0.014,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP@1.0|30m",
@@ -104,14 +104,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "BACKTESTING",
-   "trades": 924,
-   "avg_r": 0.052,
-   "test_r": 0.123,
-   "parent_avg_r": -0.01,
-   "parent_test_r": 0.058,
+   "trades": 928,
+   "avg_r": 0.043,
+   "test_r": 0.109,
+   "parent_avg_r": -0.016,
+   "parent_test_r": 0.048,
    "helped": true,
    "passed": false,
-   "checked": "2026-10-29 06:23"
+   "checked": "2026-10-30 06:22"
   }
  ],
  "by_kind": {
