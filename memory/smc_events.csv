@@ -26783,3 +26783,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-31 17:00,XRP,1h,FVG,bull,,1.2504,1.2526,0.315,,4h,WEAK_BEAR,,smc-1.0,Binance
 2026-10-31 17:15,XRP,15m,FVG_RETRACE,bull,,1.2513,1.2525,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-10-31 17:15,ZEC,15m,FVG_FILLED,bull,,1278.89,1281.05,,,1h,RANGE,,smc-1.0,Binance
+2026-10-31 18:00,BTC,1h,SWEEP,bear,77745.33,,,0.162,,4h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-31 18:00,BTC,30m,SWEEP,bear,77745.33,,,0.332,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-31 18:00,BTC,15m,SWEEP,bear,77745.33,,,0.627,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-31 18:00,BTC,15m,WEAK_BREAK,bull,77696.01,,,0.283,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 18:00,ETH,1h,SWEEP,bear,2255.58,,,0.307,,4h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-31 18:00,ETH,30m,SWEEP,bear,2255.58,,,0.624,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-31 17:45,ETH,15m,OB_INVALID,bear,,2249.94,2253.5,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-31 18:00,ETH,15m,SWEEP,bear,2255.58,,,1.022,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-31 18:00,ETH,15m,WEAK_BREAK,bull,2254.16,,,0.429,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 18:00,ETH,15m,OB_INVALID,bear,,2243.77,2254.8,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-10-31 18:00,XRP,1h,FVG_RETRACE,bull,,1.2504,1.2526,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-10-31 17:30,XRP,30m,FVG_RETRACE,bull,,1.2513,1.2526,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-31 18:00,XRP,15m,SWEEP,bear,1.2566,,,0.215,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
