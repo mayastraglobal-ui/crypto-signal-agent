@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-10-31 18:10",
+ "generated_utc": "2026-10-31 19:11",
  "book": {
-  "utc": "2026-10-31 18:10",
-  "beijing": "2026-11-01 02:10",
+  "utc": "2026-10-31 19:11",
+  "beijing": "2026-11-01 03:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-10-31 18:10 UTC / 2026-11-01 02:10 Beijing",
+  "POSITION BOOK \u2014 2026-10-31 19:11 UTC / 2026-11-01 03:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -489,7 +489,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {

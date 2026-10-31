@@ -26796,3 +26796,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-31 18:00,XRP,1h,FVG_RETRACE,bull,,1.2504,1.2526,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-10-31 17:30,XRP,30m,FVG_RETRACE,bull,,1.2513,1.2526,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-10-31 18:00,XRP,15m,SWEEP,bear,1.2566,,,0.215,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-10-31 18:15,BTC,15m,FVG,bull,,77656.62,77700.0,0.533,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 18:45,BTC,15m,FVG_RETRACE,bull,,77656.62,77700.0,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-31 19:00,BTC,15m,FVG_FILLED,bull,,77656.62,77700.0,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 19:00,ETH,1h,WEAK_BREAK,bull,2255.58,,,0.016,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-10-31 18:30,ETH,30m,WEAK_BREAK,bull,2255.58,,,0.296,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 18:15,ETH,15m,BREAKER_RETEST,bull,,2243.77,2254.8,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-31 18:15,ETH,15m,FVG,bull,,2253.89,2254.78,0.266,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 18:15,SOL,15m,BOS,bull,96.19,,,0.048,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 18:30,SOL,15m,SWEEP,bear,96.22,,,0.291,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-10-31 18:30,BNB,30m,FVG,bull,,706.44,706.97,0.256,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 19:00,BNB,30m,FVG_RETRACE,bull,,706.44,706.97,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-31 18:15,BNB,15m,FVG,bull,,706.17,706.97,0.606,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 18:45,BNB,15m,FVG_RETRACE,bull,,706.17,706.97,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
