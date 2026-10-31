@@ -1396,3 +1396,19 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 4h PAPER_TRADING 928 trades +0.239R (unseen +0.192R); 1h FAILED 2565 trades -0.023R; 30m FAILED 1789 trades -0.059R. The 4h cell moved from BACKTESTING to PAPER_TRADING on 2026-10-30.
   - teaches: the simpler 4h card (without ADX) reached PAPER_TRADING with 928 trades, the same average as its parent (+0.251R, 815 trades), so the ADX filter was not needed. The 1h and 30m cells never worked.
   - next: stop this line on 1h and 30m. The 4h cell now produces paper signals; the useful next test is a real change to this base, not more rule removals.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0
+- timestamp: 2026-10-31 15:45 UTC · source: Claude daily review 2026-10-31 · evidence: BACKTEST_EVIDENCE: 4 cells, 3074 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-01-29
+  - parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout (-0.24R a trade with it, +0.57R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - result: 30m BACKTESTING 456 trades +0.164R (unseen +0.335R); 1h BACKTESTING 715 trades +0.121R (unseen +0.269R); 15m FAILED 779 trades -0.004R (unseen +0.059R, newly FAILED on 2026-10-31); 5m FAILED 1124 trades -0.179R. Gates that still fail on a BACKTESTING cell: profit factor 1.19, recovery factor 2.93 (needs 3), Monte Carlo 95% worst drawdown per 100 trades 22.4R (limit 17R).
+  - teaches: the repair helped as the failure lab predicted on 30m and 1h (positive after fees, unseen part higher), but not on 15m and 5m. The recovery factor is 0.07 from its bar, so this is the closest breakout cell, still held back by the drawdown.
+  - next: stop changing the entry. Leave the 30m and 1h cells to collect more data; a new card would have to change the risk side, as a new card with parent 'experiment: Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0', and only when the quota allows.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0 (update 2026-10-31)
+- timestamp: 2026-10-31 15:45 UTC · source: Claude daily review 2026-10-31 · evidence: BACKTEST_EVIDENCE: 3 cells, 3011 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-29
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 4h VALIDATION 503 trades +0.260R (unseen +0.371R) again, with the engine's warning HIGH OVERFITTING RISK: 59% of the profit from window 5; 30m BACKTESTING 1058 trades +0.043R; 1h FAILED 1450 trades -0.005R. Update to my records of 2026-10-26 and 2026-10-30.
+  - teaches: the 4h status flipped VALIDATION -> BACKTESTING -> VALIDATION in 5 days on a drawdown of about 17R: it sits on the limit, so a status change is not news. The profit concentration rose from 53% to 59% in one window; that is the warning to keep.
+  - next: no change and no new record for this card until it is PAPER_TRADING, FAILED, or 2 weeks have passed.

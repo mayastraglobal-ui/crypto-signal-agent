@@ -1572,3 +1572,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: none.
   - what it means for us: nothing yet. The item stays 'not studied'. Plain words for the operator, from the engine's own limits (not from a source): the engine stops for the day at -3R and for the week at -6R, and risks 0.5% per trade.
   - limitations: no source opened. Names in search snippets (for example Schwartz, McKay, Lipschutz) are not evidence and are not recorded.
+
+### Review: [C01] Time Series Momentum (Moskowitz, Ooi, Pedersen 2012) - second pass of the reading plan
+- timestamp: 2026-10-31 15:45 UTC · source: Claude daily review 2026-10-31 · evidence: FACT: no new source opened; the first record of 2026-09-27 stands · confidence: medium · strategy: donchian_breakout, donchian_breakout-VEXIT · asset: all · timeframe: monthly (paper) · regime: - · review: 2027-01-29
+  - status: KEEP
+  - today's item is C01 again because all 24 items have been studied once (24 of 24). I did not repeat the reading: the 2026-09-27 record (the authors' PDF, read in full) and its hypothesis ('slow own-trend filter for the 4h breakout') are in the files.
+  - what is new from our own data: the 4h breakout cards are the ones that move up (donchian_breakout-VEXIT-S4 4h reached PAPER_TRADING on 2026-10-30) while the 1h and 30m cells of the same cards are FAILED. That agrees with the paper's point that trends pay on slow horizons. It is a hint, not a test, and the queued filter hypothesis is still untested.
+  - action: none. The slow own-trend filter stays queued; it needs a lab card with parent 'source: [C01] Time Series Momentum' when the quota allows.
