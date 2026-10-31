@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-31 00:40",
+ "utc": "2026-10-31 07:19",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 55,
+  "n": 56,
   "wins": 8,
-  "win_rate": 14.5,
-  "avg_r": -0.699,
-  "total_r": -38.45,
-  "max_dd_r": 38.45,
-  "cur_loss_run": 12,
-  "max_loss_run": 12,
-  "sd": 0.877
+  "win_rate": 14.3,
+  "avg_r": -0.705,
+  "total_r": -39.5,
+  "max_dd_r": 39.5,
+  "cur_loss_run": 13,
+  "max_loss_run": 13,
+  "sd": 0.871
  },
  "yours": {
   "n": 3,
@@ -32,29 +32,29 @@
   "sd": 0.133
  },
  "silent": {
-  "n": 46,
+  "n": 47,
   "wins": 8,
-  "win_rate": 17.4,
-  "avg_r": -0.63,
-  "total_r": -28.97,
-  "max_dd_r": 28.97,
-  "cur_loss_run": 11,
-  "max_loss_run": 11,
-  "sd": 0.945
+  "win_rate": 17.0,
+  "avg_r": -0.638,
+  "total_r": -30.01,
+  "max_dd_r": 30.01,
+  "cur_loss_run": 12,
+  "max_loss_run": 12,
+  "sd": 0.936
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 52,
+   "n": 53,
    "wins": 8,
-   "win_rate": 15.4,
-   "avg_r": -0.677,
-   "total_r": -35.2,
-   "max_dd_r": 35.2,
-   "cur_loss_run": 12,
-   "max_loss_run": 12,
-   "sd": 0.898
+   "win_rate": 15.1,
+   "avg_r": -0.684,
+   "total_r": -36.25,
+   "max_dd_r": 36.25,
+   "cur_loss_run": 13,
+   "max_loss_run": 13,
+   "sd": 0.891
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -116,15 +116,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 3,
+    "n": 4,
     "wins": 0,
     "win_rate": 0.0,
-    "avg_r": -0.861,
-    "total_r": -2.58,
-    "max_dd_r": 2.58,
-    "cur_loss_run": 3,
-    "max_loss_run": 3,
-    "sd": 0.152
+    "avg_r": -0.906,
+    "total_r": -3.62,
+    "max_dd_r": 3.62,
+    "cur_loss_run": 4,
+    "max_loss_run": 4,
+    "sd": 0.154
    },
    "backtest": {
     "n": 260,
@@ -133,9 +133,9 @@
    },
    "verdict": "watch",
    "why": [
-    "3 losses in a row - in its backtest (34% won) a run that long shows up in 28% of 3-trade periods"
+    "4 losses in a row - in its backtest (34% won) a run that long shows up in 19% of 4-trade periods"
    ],
-   "last_utc": "2026-10-30 05:59",
+   "last_utc": "2026-10-31 00:59",
    "sent": false
   },
   {
@@ -1011,6 +1011,10 @@
   {
    "t": "2026-10-30 15:14",
    "r": -38.45
+  },
+  {
+   "t": "2026-10-31 00:59",
+   "r": -39.5
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

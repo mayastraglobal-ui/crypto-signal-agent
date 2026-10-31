@@ -875,3 +875,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** TRX - order book too thin: $154k within 1% (need $250k)
 - **EXCLUDED** UNI - 7-day average volume $41M < $50M
 - **ELIGIBLE** ENA - passes every rule again
+
+## 2026-10-31 07:19 UTC
+- **ELIGIBLE** TRX - passes every rule again
+- **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
