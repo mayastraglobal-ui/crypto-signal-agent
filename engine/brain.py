@@ -340,6 +340,8 @@ def review(changes, main_files, now=None, branch=None, quota=None):
             added = new[len(c.get("base") or ""):]
             if not added.strip():
                 continue
+            if p == EXPERIMENTS:
+                added = rloop.fit_feedback_titles(added)[0]
             if len(added.encode()) > MAX_KB * 1024:
                 probs.append(f"{p}: addition larger than {MAX_KB} KB")
             if cur is not None and cur.endswith(added):

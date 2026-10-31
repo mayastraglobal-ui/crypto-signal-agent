@@ -1142,3 +1142,8 @@ Newest entries at the bottom. Format: date · who · what · why.
   applies the shortened text. Every other rule of the guard still refuses. `tasks/COMMON.md`: "count them".
   Tests: tests/test_email_design.py.
 
+
+## 2026-10-31 · Claude (BUILD mode, operator: "haven't got today's review email" / "hourly scan is too late") · daily review fix + on-time scans
+- **Daily review refused for one title:** the 23:30 review was refused (nothing applied, no Claude review email) only because a feedback record was titled "Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0 (update 2026-10-31)". `research_loop.fit_feedback_titles()` now cuts extra words after `<id>@<version>` before the Brain guard's checks (an update is another record with the same title; its timestamp dates it). A title without `<id>@<version>` is still refused. Checked on the refused push itself: it now applies.
+- **Scans on time:** GitHub started only 9 of 48 scheduled scans in 2 days (every run that started worked). The PC watcher's kick now checks every 5 minutes (was 20) and starts the scan when none started since this hour's minute 7 (was: 75 minutes old) - one scan about :07-:12 every hour while the PC is on; the Brain's hourly check (minute 47) is kicked the same way. When the PC is off: `scan.yml` has four cron minutes (7, 22, 37, 52) and a gate job - a scheduled run scans only when the last scan saved (reports/latest.md) 45+ minutes ago, else it cancels itself (not counted as a failure); `brain.yml` got a second minute (17). Started runs (Run workflow, the kick) always scan.
+- Tests: `tests/test_scan_kick.py` (clock-hour rule, Brain kick, workflow gate), `tests/test_learn.py` (title fix + guard). Watcher code changed: `windows\4_update.bat` on the PC.

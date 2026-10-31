@@ -127,10 +127,13 @@ higher than the backtest's" is for you to decide on.
 6. `/status` in Telegram now shows **Journal sync to GitHub: uploaded …**.
 
 **Late-scan kick (since 2026-10-26).** GitHub sometimes starts the "hourly" scan only every 3-5 hours (24-26 Oct:
-every run that started worked - the schedule itself was late). With the token above the watcher checks every 20
-minutes: when no scan waits or runs and the newest one started more than 75 minutes ago, it starts one (the same as
-pressing "Run workflow" on GitHub); the nightly research too when it is 26 hours late. `/status` shows **Late-scan
-kick: …**. **A token made before 26 Oct has no Actions permission:** open
+every run that started worked - the schedule itself was late). With the token above the watcher checks every **5
+minutes** (since 2026-10-31; was 20): when no scan waits or runs and none started since this hour's minute 7, it starts
+one (the same as pressing "Run workflow" on GitHub) - so the scan runs at about :07-:12 **every hour** while the PC is
+on. The same for the Brain's hourly check (minute 47: the late briefing / review email), and the nightly research when
+it is 26 hours late. `/status` shows **Late-scan kick: …**. **When the PC is off** GitHub's own schedule is all there
+is: since 2026-10-31 it has four chances an hour (minutes 7, 22, 37, 52), and a scheduled run scans only when the last
+scan saved 45+ minutes ago (otherwise it cancels itself). **A token made before 26 Oct has no Actions permission:** open
 https://github.com/settings/personal-access-tokens, click the token → **Edit** → Repository permissions →
 **Actions: Read and write** → **Update** (the token itself stays the same; nothing to paste again). Without it the
 watcher says "the token needs Actions: Read and write" and everything else works as before.

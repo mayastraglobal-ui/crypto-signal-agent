@@ -11,6 +11,8 @@ on:
     - cron: "47 * * * *"    # once an hour at minute 47 (2026-10-13: was every 15 minutes - 96 runs a day, most found
                             # nothing). Claude's tasks push at about :30-:45 (briefings 00:20 / 06:20 / 13:20 UTC,
                             # daily review 15:30 UTC), so their work still lands within minutes
+    - cron: "17 * * * *"    # 2026-10-31: GitHub started only about 1 in 5 hourly runs - a second chance an hour, so the
+                            # watchdog's late email (40 minutes after a task's time) does not wait hours
   push:                      # 2026-10-24: GitHub delayed the hourly runs by up to 5 hours, so Claude's review was
     branches:                # emailed hours late. A task push now starts this workflow at once; it still checks
       - claude/brain-briefing    # out MAIN and runs main's guard (the task branch is rebuilt from main every run)

@@ -711,11 +711,14 @@ class Workflows(unittest.TestCase):
         folder = os.path.join(ROOT, ".github", "workflows")
         for name in sorted(os.listdir(folder)):
             wf = yaml.safe_load(read(os.path.join(folder, name)))
-            for job in wf["jobs"].values():
+            for jid, job in wf["jobs"].items():
                 self.assertEqual(job["runs-on"], "ubuntu-24.04", name)
                 uses = [s["uses"] for s in job["steps"] if "uses" in s]
                 self.assertNotIn("actions/checkout@v4", uses, name)
                 self.assertNotIn("actions/setup-python@v5", uses, name)
+                if (name, jid) == ("scan.yml", "gate"):                 # 2026-10-31: one gh api call, no checkout
+                    self.assertEqual(uses, [], name)
+                    continue
                 self.assertTrue(any(u == "actions/checkout@v5" for u in uses), name)
 
     def test_brain_save_step_without_reports_claude(self):
