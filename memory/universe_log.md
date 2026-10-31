@@ -890,3 +890,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-31 21:16 UTC
 - **EXCLUDED** BNB - 24h volume $50M < $50M
 - **LEAVE** BNB - not eligible: 24h volume $50M < $50M
+
+## 2026-10-31 23:11 UTC
+- **ELIGIBLE** TRX - passes every rule again
