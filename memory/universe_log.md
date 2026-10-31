@@ -882,3 +882,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-10-31 09:48 UTC
 - **EXCLUDED** TRX - order book too thin: $182k within 1% (need $250k)
+
+## 2026-10-31 15:01 UTC
+- **EXCLUDED** SUI - 24h volume $45M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $45M < $50M
