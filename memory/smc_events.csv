@@ -26821,3 +26821,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-10-31 19:30,ZEC,15m,SWEEP,bull,1277.34,,,0.107,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-31 20:00,ZEC,15m,SWEEP,bull,1273.2,,,0.467,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-10-31 20:00,ZEC,15m,WEAK_BREAK,bear,1277.34,,,0.603,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-10-31 21:15,BTC,15m,BOS,bear,77562.94,,,1.322,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 21:15,BTC,15m,BREAKER_RETEST,bull,,77469.56,77548.99,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-31 21:15,BTC,15m,FVG_FILLED,bull,,77509.29,77580.2,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 21:00,SOL,30m,BOS,bear,95.77,,,0.195,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 20:45,SOL,15m,SWEEP,bull,95.63,,,0.113,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-10-31 20:45,SOL,15m,WEAK_BREAK,bear,95.77,,,0.566,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 21:00,SOL,15m,FVG,bear,,95.75,95.81,0.342,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 21:15,SOL,15m,FVG_FILLED,bull,,95.55,95.62,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 21:00,XRP,1h,FVG_FILLED,bull,,1.2504,1.2526,,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-10-31 21:00,XRP,30m,FVG_FILLED,bull,,1.2513,1.2526,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 20:15,XRP,15m,FVG,bear,,1.2536,1.2542,0.287,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 20:30,XRP,15m,BOS,bear,1.2521,,,0.144,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-10-31 20:45,XRP,15m,BREAKER_RETEST,bull,,1.2482,1.251,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-10-31 20:45,XRP,15m,FVG_RETRACE,bull,,1.2502,1.2511,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-10-31 20:45,XRP,15m,FVG_FILLED,bull,,1.2502,1.2511,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 20:45,XRP,15m,FVG_FILLED,bull,,1.2513,1.2525,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-10-31 21:00,ZEC,1h,WEAK_BREAK,bear,1273.2,,,0.244,,4h,RANGE,no displacement,smc-1.0,Binance
+2026-10-31 20:30,ZEC,30m,WEAK_BREAK,bear,1273.2,,,0.2,,1h,RANGE,no displacement,smc-1.0,Binance
