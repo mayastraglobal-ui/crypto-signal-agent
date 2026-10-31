@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily review 2026-10-27</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Daily review 2026-10-27</h1>
+<h2>Summary</h2>
+<ul><li>A quiet day for LIVE and PAPER: no signal closed, no open position, day and week at +0.00R. No halt.</li><li>One TEST record lost: SOL 1h P03-FIB-PULLBACK-V5 SHORT, -1.20R (MAE -1.48R, MFE +0.559R). It is a TEST record, not LIVE or PAPER.</li><li>Market weather is "Turning down - not confirmed". BTC is 80,045.00 (79,702.63 yesterday). Fear &amp; Greed is 48 (Neutral).</li><li>The FOMC decision is tomorrow, 2026-10-28 at 18:00 UTC; US GDP and PCE follow on 2026-10-29 at 12:30 UTC.</li><li>Lab cards changed: P01-BREAKOUT-V2-FDISP 15m went to FAILED; 1h and 30m to BACKTESTING. Its feedback record is written.</li><li>Curriculum C21 (FTX): counterparty risk. One hypothesis queued.</li></ul>
+<h2>Email summary</h2>
+<ul><li>lesson: The displacement repair lifted a weak breakout card by about 0.02R to 0.03R, but it is still near zero.</li><li>tomorrow: Stand aside around the FOMC decision at 18:00 UTC on October 28 and do not trade the first move.</li><li>sub: No signals closed; a SOL test short lost 1.20R ahead of the FOMC decision.</li><li>watch: The FOMC decision on 2026-10-28 at 18:00 UTC, then GDP and PCE on 2026-10-29 at 12:30 UTC.</li><li>avoid: Do not trade the first move after the FOMC decision.</li></ul>
+<h2>Results (LIVE / PAPER / VALIDATION)</h2>
+<table><tr><th>Book</th><th>Closed (last 24 h)</th><th>Won</th><th>Total</th></tr><tr><td>LIVE</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>PAPER</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>VALIDATION</td><td>0</td><td>0</td><td>+0.00R</td></tr></table>
+<ul><li>TEST record (engine, listed under VALIDATION): SOL 1h P03-FIB-PULLBACK-V5 SHORT, -1.20R SL.</li><li>No live signal. Watching (not signals): ZEC LONG 4h P12-LEADER-V2 is SETUP_FORMING (VALIDATION); other P12-LEADER-V2 lines and SOL SHORT 30m watch lines on two TRD-H4-BREAKOUT cards.</li><li>Position book: no open positions, heat 0/3.</li></ul>
+<h2>Losses and why</h2>
+<ol><li>SOL 1h P03-FIB-PULLBACK-V5 SHORT: -1.20R, MAE -1.48R, MFE +0.559R. The engine gave no tags (nan).</li><li>Questions (section 17.3), short form:</li><li>Strategy: the cell is already FAILED (5126 trades, -0.12R on 1h in the lab table).</li><li>Regime: the weather was "Turning down - not confirmed", so a short was early; SOL 4h was WEAK_BEAR, 1h WEAK_BEAR.</li><li>Timing/stop: it was +0.56R in profit before it reversed, then went 1.48R against the entry (more than the stop, which fits slippage on a fast move).</li><li>Sample: 1 trade, random.</li><li>No failure_journal record: without tags the only thing I can add is my reading, and one trade is not a lesson.</li></ol>
+<h2>Missed moves</h2>
+<ul><li>The engine found no strong missed move in this period.</li></ul>
+<h2>Regime</h2>
+<ul><li>Data state GOOD.</li><li>BTC 1W / 1D / 4H / 1H = STRONG_BULL / RANGE / TRANSITION / WEAK_BEAR. ZEC is in a range with a +1.7% 30m momentum. SOL and SUI are in a trend down.</li><li>Weather: "Turning down - not confirmed": a SHORT alert comes only once 1H and 4H both point down.</li><li>Lifecycle changes (lab cards only): P01-BREAKOUT-V2-FDISP 15m FORMALIZED -&gt; FAILED, 1h and 30m -&gt; BACKTESTING.</li></ul>
+<h2>Refinements queued</h2>
+<ul><li>None. No failing cell has a new diagnosis and the failure factory quota is used (3 of 3 this week). Lab cards added: none.</li></ul>
+<h2>Research loop</h2>
+<ul><li><strong>P01-BREAKOUT-V2-FDISP@1.0</strong> (parent: result: P01-BREAKOUT-V2@1.0 30m): 1h +0.006R over 1469 trades, 30m +0.023R over 909, 15m FAILED -0.046R over 1362. All three miss the average, profit factor and drawdown gates. The repair helped a little and made no edge. Next: stop this line. Record <code>Feedback: P01-BREAKOUT-V2-FDISP@1.0</code> in <code>memory/experiments.md</code>.</li></ul>
+<h2>Curriculum</h2>
+<ul><li>Item C21, FTX (November 2022). I opened a BakerHostetler summary: <a href="https://www.bakerlaw.com/insights/stunning-collapse-of-global-cryptocurrency-exchange-ftx-leads-to-bankruptcy/.">https://www.bakerlaw.com/insights/stunning-collapse-of-global-cryptocurrency-exchange-ftx-leads-to-bankruptcy/.</a> Axios and Blockworks returned 403 and are not cited. Class: CLAIM.</li><li>Points: about 900 million USD of easy-to-sell assets against about 9 billion USD of liabilities the day before the Chapter 11 filing; about 662 million USD of reported unauthorized withdrawals the day after. The page does not say when withdrawals were paused.</li><li>Record <code>[C21] ...</code> in <code>memory/research_sources.md</code>. Hypothesis (for the operator): an exchange-notice check.</li></ul>
+<h2>Monthly clean-up</h2>
+<ul><li>Not this month.</li></ul>
+<h2>Reviews done</h2>
+<ul><li>The fact sheet still lists the same missed-move records. I reviewed them on 2026-10-23 (all KEEP); nothing new is known, so I wrote no duplicates.</li></ul>
+<h2>Lessons</h2>
+<ul><li>No new lesson today.</li></ul>
+<h2>Tomorrow</h2>
+<ul><li>Watch: the FOMC decision (2026-10-28 at 18:00 UTC), then GDP and PCE (2026-10-29 at 12:30 UTC).</li><li>Do NOT trade the first move after the decision, buy the dip, or short by hand.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li><a href="https://www.axios.com/2022/11/17/ftx-bankruptcy-sbf-john-ray-declaration">https://www.axios.com/2022/11/17/ftx-bankruptcy-sbf-john-ray-declaration</a> (403 blocked)</li><li><a href="https://blockworks.com/news/the-last-10-days-in-the-ftx-saga-a-timeline">https://blockworks.com/news/the-last-10-days-in-the-ftx-saga-a-timeline</a> (403 blocked)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-10-27 15:27 UTC, finished 2026-10-27 15:50 UTC; problems: two pages blocked (403)</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/daily/2026-10-27.md · Research signal. Not financial advice.</footer></main></body></html>
