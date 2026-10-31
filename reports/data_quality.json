@@ -1,0 +1,523 @@
+{
+ "checked_utc": "2026-10-31 20:10",
+ "system_state": "GOOD",
+ "reason": "all checks passed",
+ "status_code": "SIGNALS_ALLOWED",
+ "data_source": "Binance",
+ "second_exchange": "OKX",
+ "failed_downloads": [],
+ "blocked_signals": [],
+ "coins": {
+  "BTC": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.071,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 480,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "ETH": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.039,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 480,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "SOL": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.083,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 324,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "BNB": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.024,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 468,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "XRP": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.064,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 443,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "ZEC": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.041,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 397,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  },
+  "SUI": {
+   "state": "GOOD",
+   "cross_venue": {
+    "state": "GOOD",
+    "deviation_pct": 0.033,
+    "note": ""
+   },
+   "timeframes": {
+    "1w": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 182,
+     "last_close_ms": 1792972799999
+    },
+    "1d": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 999,
+     "last_close_ms": 1793404799999
+    },
+    "4h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 2699,
+     "last_close_ms": 1793476799999
+    },
+    "1h": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "30m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "15m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 1999,
+     "last_close_ms": 1793476799999
+    },
+    "5m": {
+     "state": "GOOD",
+     "problems": [],
+     "notes": [
+      "1 unfinished candle(s) ignored (UNCONFIRMED)"
+     ],
+     "bars": 4999,
+     "last_close_ms": 1793477399999
+    }
+   }
+  }
+ }
+}
