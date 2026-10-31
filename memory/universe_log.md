@@ -879,3 +879,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-10-31 07:19 UTC
 - **ELIGIBLE** TRX - passes every rule again
 - **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-10-31 09:48 UTC
+- **EXCLUDED** TRX - order book too thin: $182k within 1% (need $250k)

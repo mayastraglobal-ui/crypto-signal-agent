@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 773,
+ "runs": 774,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -116,7 +116,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "TRX": [],
+  "TRX": [
+   "thin_book"
+  ],
   "WAL": [
    "big_move",
    "spread",

@@ -1,9 +1,5 @@
 {
- "issues": {
-  "cross|TRX": "TRX price differs between exchanges (DEGRADED, 1.68%)"
- },
- "since": {
-  "cross|TRX": "2026-10-31 07:19 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }
