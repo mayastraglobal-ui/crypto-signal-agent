@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-31 15:01",
+ "utc": "2026-10-31 16:35",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -14,9 +14,9 @@
   ]
  },
  "breadth": {
-  "UP": 1,
+  "UP": 0,
   "DOWN": 1,
-  "RANGE": 0,
+  "RANGE": 1,
   "CHOPPY": 4
  },
  "coins": [
@@ -25,16 +25,16 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D RANGE, 4H WEAK_BEAR, 1H RANGE)",
+   "why": "timeframes disagree (1D RANGE, 4H WEAK_BEAR, 1H COMPRESSION)",
    "labels": {
     "1w": "STRONG_BULL",
     "1d": "RANGE",
     "4h": "WEAK_BEAR",
-    "1h": "RANGE"
+    "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 19.0,
-    "4h": 28.0,
+    "4h": 29.0,
     "1h": 16.0
    },
    "vol": {
@@ -53,10 +53,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 1.8,
+    "oi_24h_pct": 0.7,
     "label": "neutral"
    },
-   "change_24h": 0.1
+   "change_24h": 0.06
   },
   {
    "coin": "BNB",
@@ -72,8 +72,8 @@
    },
    "adx": {
     "1d": 24.0,
-    "4h": 35.0,
-    "1h": 18.0
+    "4h": 36.0,
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 3.36,
@@ -90,11 +90,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0219,
-    "oi_24h_pct": -4.7,
-    "label": "leaning short"
+    "funding_pct": 0.0035,
+    "oi_24h_pct": -3.5,
+    "label": "neutral"
    },
-   "change_24h": 1.09
+   "change_24h": 0.5
   },
   {
    "coin": "ETH",
@@ -128,11 +128,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0086,
-    "oi_24h_pct": 0.5,
+    "funding_pct": -0.0049,
+    "oi_24h_pct": -0.6,
     "label": "neutral"
    },
-   "change_24h": 0.24
+   "change_24h": 0.69
   },
   {
    "coin": "SOL",
@@ -149,7 +149,7 @@
    "adx": {
     "1d": 29.0,
     "4h": 26.0,
-    "1h": 19.0
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 4.26,
@@ -166,11 +166,11 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0061,
-    "oi_24h_pct": 0.7,
+    "funding_pct": 0.01,
+    "oi_24h_pct": 1.5,
     "label": "neutral"
    },
-   "change_24h": 0.9
+   "change_24h": 0.69
   },
   {
    "coin": "XRP",
@@ -186,8 +186,8 @@
    },
    "adx": {
     "1d": 18.0,
-    "4h": 23.0,
-    "1h": 15.0
+    "4h": 24.0,
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 4.26,
@@ -204,27 +204,27 @@
     ]
    },
    "crowd": {
-    "funding_pct": -0.0016,
-    "oi_24h_pct": 12.6,
+    "funding_pct": 0.002,
+    "oi_24h_pct": 3.5,
     "label": "neutral"
    },
-   "change_24h": 0.14
+   "change_24h": 0.24
   },
   {
    "coin": "ZEC",
-   "verdict": "UP",
-   "permission": "LONG allowed",
+   "verdict": "RANGE",
+   "permission": "NO TRADE",
    "turning": null,
-   "why": "1D/4H/1H bullish, 1W STRONG_BULL",
+   "why": "timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H RANGE)",
    "labels": {
     "1w": "STRONG_BULL",
     "1d": "WEAK_BULL",
-    "4h": "WEAK_BULL",
-    "1h": "WEAK_BULL"
+    "4h": "RANGE",
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 16.0,
-    "4h": 12.0,
+    "4h": 11.0,
     "1h": 18.0
    },
    "vol": {
@@ -243,30 +243,30 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 10.4,
+    "oi_24h_pct": 11.4,
     "label": "neutral"
    },
-   "change_24h": 2.65
+   "change_24h": 3.63
   }
  ],
- "alts_vs_btc_24h": 0.8,
+ "alts_vs_btc_24h": 0.63,
  "fear_greed": {
   "value": 30,
   "label": "Fear",
   "yesterday": 30
  },
  "btc_dominance": {
-  "pct": 59.252,
-  "utc": "2026-10-31 15:01",
-  "ch24": -0.03,
-  "ch7": -0.29,
+  "pct": 59.228,
+  "utc": "2026-10-31 16:35",
+  "ch24": -0.06,
+  "ch7": -0.38,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
  "events": [
   {
    "start_utc": "2026-11-06 13:30",
    "name": "US jobs report / Employment Situation (Oct data)",
-   "hours": 142.5
+   "hours": 140.9
   }
  ],
  "blackout_now": [],
@@ -279,5 +279,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 10-31 23:01 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D RANGE \u00b7 4H WEAK_BEAR \u00b7 1H RANGE\nVolatility: normal (daily range 2.6%, higher than 25% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (75,744 \u2013 78,994) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +1.8% in 24h)\nAltcoins vs BTC (24h): +0.8%\nBTC dominance: 59.3% \u00b7 24h -0.03 pt \u00b7 7d -0.29 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Fear 30\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy \u00b7 leaning short\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 11-01 00:35 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D RANGE \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.6%, higher than 25% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (75,744 \u2013 78,994) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +0.7% in 24h)\nAltcoins vs BTC (24h): +0.6%\nBTC dominance: 59.2% \u00b7 24h -0.06 pt \u00b7 7d -0.38 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Fear 30\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa BNB: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe1 ZEC: range\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
