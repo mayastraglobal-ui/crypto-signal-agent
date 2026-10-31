@@ -553,10 +553,17 @@ class ScanKick(JournalSync):
     so every check_min minutes it looks at each workflow's newest run: none waiting or running and the newest one
     started more than late_min minutes ago -> it starts one (workflow_dispatch on main - the "Run workflow" button).
     The scan still checks out main and runs as before; a late scheduled run that comes too is harmless (they queue).
-    Needs the journal token with Actions: Read and write (docs/WINDOWS_WATCHER.md); without it: off, said once."""
-    WORKFLOWS = (("scan.yml", 75), ("research.yml", 26 * 60))     # (file, minutes late) - research: once a day
+    Needs the journal token with Actions: Read and write (docs/WINDOWS_WATCHER.md); without it: off, said once.
+    2026-10-31 (operator: "hourly scan is too late"): GitHub still started only 9 of 48 scheduled scans in 2 days, and
+    "75 minutes late, checked every 20" gave a scan only every ~90 minutes. Now ONE RUN PER CLOCK HOUR: every
+    check_min (5) minutes, an hourly workflow whose newest run started before this hour's minute (scan :07, the Brain's
+    watchdog :47 - their cron minutes; a run up to SLACK_MIN before it counts) is started -> the scan runs at about
+    :07-:12 every hour while the PC is on. The Brain is kicked too, so its late-email backstop comes on time."""
+    WORKFLOWS = (("scan.yml", 7, None), ("brain.yml", 47, None),       # (file, minute of the hour, minutes late)
+                 ("research.yml", None, 26 * 60))                       # research: once a day, by age
+    SLACK_MIN = 10
 
-    def __init__(self, http=None, check_min=20):
+    def __init__(self, http=None, check_min=5):
         super().__init__(None, http=http)
         self.check_ms = int(check_min) * 60_000
         self.next_ms = 0
@@ -570,7 +577,7 @@ class ScanKick(JournalSync):
         self.next_ms = now_ms + self.check_ms
         notes = []
         try:
-            for wf, late_min in self.WORKFLOWS:
+            for wf, minute, late_min in self.WORKFLOWS:
                 code, body = self._call("GET", f"/actions/workflows/{wf}/runs?per_page=1&branch=main")
                 if code in (401, 403, 404):
                     self.denied_until = now_ms + 6 * 3_600_000
@@ -581,12 +588,22 @@ class ScanKick(JournalSync):
                 runs = body.get("workflow_runs") or []
                 if runs and runs[0].get("status") != "completed":
                     continue                                   # one is waiting or running
-                age = None
+                t0 = None
                 if runs:
                     t0 = dt.datetime.strptime(runs[0]["created_at"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
-                    age = (now_ms - t0.timestamp() * 1000) / 60_000
-                if age is not None and age < late_min:
-                    continue
+                if minute is not None:
+                    now = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)
+                    due = now.replace(minute=minute, second=0, microsecond=0)
+                    if due > now:
+                        due -= dt.timedelta(hours=1)
+                    if t0 is not None and t0 >= due - dt.timedelta(minutes=self.SLACK_MIN):
+                        continue                               # this hour's run started (or one just before it)
+                    why = f"no run since {due:%H:%M} UTC"
+                else:
+                    age = (now_ms - t0.timestamp() * 1000) / 60_000 if t0 is not None else None
+                    if age is not None and age < late_min:
+                        continue
+                    why = f"GitHub's schedule was {round(age) if age is not None else '?'} min late"
                 code, body = self._call("POST", f"/actions/workflows/{wf}/dispatches", json=dict(ref="main"))
                 if code in (401, 403, 404):
                     self.denied_until = now_ms + 6 * 3_600_000
@@ -594,7 +611,7 @@ class ScanKick(JournalSync):
                     return [f"scan kick off: GitHub answered HTTP {code} - give the journal token Actions: Read and write"]
                 if code != 204:
                     raise RuntimeError(f"start {wf}: HTTP {code} {body.get('message', '')}".strip())
-                notes.append(f"started {wf} (GitHub's schedule was {round(age) if age is not None else '?'} min late)")
+                notes.append(f"started {wf} ({why})")
             self.last = (now_ms, True, "; ".join(notes) or "on time")
         except Exception as e:
             self.last = (now_ms, False, str(e)[:120])
@@ -605,7 +622,7 @@ class ScanKick(JournalSync):
         if not self.token():
             return None
         if not self.last:
-            return "on, first check within 20 minutes"
+            return f"on, first check within {self.check_ms // 60_000} minutes"
         ms, ok, note = self.last
         return f"checked {lv.ago(ms, now_ms)}: {note}" if ok else f"⚠️ {note}"
 

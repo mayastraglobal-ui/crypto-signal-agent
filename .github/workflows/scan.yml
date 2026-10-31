@@ -3,6 +3,9 @@ name: Crypto Signal Scan
 on:
   schedule:
     - cron: "7 * * * *"     # every hour at minute 7 (UTC). GitHub may start it a few minutes late.
+    - cron: "22 * * * *"    # 2026-10-31: GitHub started only 9 of 48 scheduled scans in 2 days. Four chances an hour;
+    - cron: "37 * * * *"    # the gate job below lets a scheduled run scan only when the last scan saved 45+ minutes
+    - cron: "52 * * * *"    # ago (otherwise it cancels itself), so it is still about one scan an hour.
   workflow_dispatch:         # lets you press "Run workflow" by hand
     inputs:
       test_email:
@@ -25,6 +28,8 @@ concurrency:
 
 jobs:
   scan:
+    needs: gate
+    if: ${{ needs.gate.outputs.run == 'true' }}
     runs-on: ubuntu-24.04   # pinned: ubuntu-latest moves to Ubuntu 26 on 19 Oct 2026
     timeout-minutes: 30
     env:
@@ -136,3 +141,36 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 notify.py failed
+
+  gate:
+    # A scheduled run scans only when the last scan saved (reports/latest.md on main) 45+ minutes ago; a started run
+    # (Run workflow, the PC watcher's kick) always scans. A run with nothing to do cancels itself: a cancelled run is
+    # not counted by the "failed twice in a row" email (notify.earlier_runs skips it).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: write         # only to cancel this run
+      contents: read
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+    steps:
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run=true
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            last=$(gh api "repos/${{ github.repository }}/commits?path=reports/latest.md&sha=main&per_page=1" \
+                   --jq '.[0].commit.committer.date' || echo "")
+            if [ -n "$last" ]; then
+              age=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 60 ))
+              echo "last scan saved $age minutes ago ($last)"
+              [ "$age" -lt 45 ] && run=false
+            fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+          if [ "$run" = "false" ]; then
+            echo "A scan saved less than 45 minutes ago - this scheduled run is not needed."
+            gh run cancel "${{ github.run_id }}" --repo "${{ github.repository }}"
+            sleep 60
+          fi

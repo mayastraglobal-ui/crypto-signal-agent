@@ -146,6 +146,24 @@ class Feedback(unittest.TestCase):
         self.assertEqual(probs, [])
         self.assertEqual(applies[0]["kind"], "append")
 
+    def test_extra_words_after_the_key_are_cut_not_refused(self):
+        # 2026-10-31: the whole daily review was refused for "Feedback: <id>@1.0 (update 2026-10-31)"
+        for title in ("donchian_breakout-VEXIT-S4-FDISP@1.0 (update 2026-10-31)", "`LAB-PLAIN-1@1.0` - second look",
+                      "LAB-PLAIN-1@1.0: update"):
+            text, cut = RL.fit_feedback_titles(fb(key=title))
+            self.assertEqual(len(cut), 1, title)
+            self.assertIn(f"### Feedback: {title.split('@')[0].strip('`')}@1.0\n", text)
+            self.assertEqual(RL.feedback_problems(text), [])
+        self.assertEqual(RL.fit_feedback_titles(fb()), (fb(), []))                 # a good title: unchanged
+        self.assertEqual(RL.fit_feedback_titles(fb(key="my idea"))[1], [])          # no <id>@<version>: still refused
+        p = "memory/experiments.md"
+        base = "# Experiments\n\n| # | a |\n|---|---|\n| EXP-0001 | x |\n"
+        applies, probs, _ = B.review([test_brain.change(p, "M", base, base + fb(key="LAB-PLAIN-1@1.0 (update)"))],
+                                     {p: base})
+        self.assertEqual(probs, [])
+        self.assertIn("### Feedback: LAB-PLAIN-1@1.0\n", applies[0]["text"])
+        self.assertNotIn("(update)", applies[0]["text"])
+
     def test_due_until_written_and_again_after_a_status_change(self):
         card = dict(test_lab.plain(1), lab=True, parent="result: trend_pullback@1.0 1h")
         cards = {"LAB-PLAIN-1@1.0": card, "trend_pullback@1.0": dict(test_lab.lib("trend_pullback"), lab=False)}

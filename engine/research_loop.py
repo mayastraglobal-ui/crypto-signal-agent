@@ -86,6 +86,25 @@ def feedback_records(text):
     return out
 
 
+def fit_feedback_titles(added):
+    """Brain guard (2026-10-31: the daily review was refused only because a title read 'Feedback: <id>@1.0 (update
+    2026-10-31)'): a feedback title with extra words after '<id>@<version>' is cut back to 'Feedback: <id>@<version>'
+    (an update is just another record with the same title; its timestamp line dates it). A title with no
+    '<id>@<version>' at its start is left as it is, for feedback_problems to refuse. Returns (text, [what was cut])."""
+    lines, cut = added.split("\n"), []
+    for i, ln in enumerate(lines):
+        if not ln.startswith("### " + FEEDBACK):
+            continue
+        key = ln[len("### " + FEEDBACK):].strip()
+        if KEY_RE.match(key):
+            continue
+        m = re.match(r"^[`*]*(\S+?@\d+(?:\.\d+)*)[`*]*(?=$|[\s(\[,;:])", key)
+        if m:
+            lines[i] = f"### {FEEDBACK} {m.group(1)}"
+            cut.append(f"'{key}' -> '{m.group(1)}'")
+    return "\n".join(lines), cut
+
+
 def feedback_problems(added):
     """Brain guard: a 'Feedback: <id>@<version>' record in memory/experiments.md has all five detail lines, a result
     with the engine's numbers and a next step ('stop this line' or the next hypothesis)."""
