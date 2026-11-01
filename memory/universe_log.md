@@ -902,3 +902,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-01 11:11 UTC
 - **ELIGIBLE** BNB - passes every rule again
+
+## 2026-11-01 12:11 UTC
+- **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
