@@ -896,3 +896,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-01 00:11 UTC
 - **EXCLUDED** TRX - order book too thin: $65k within 1% (need $250k)
+
+## 2026-11-01 02:05 UTC
+- **ELIGIBLE** TRX - passes every rule again

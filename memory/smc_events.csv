@@ -26927,3 +26927,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 00:45,XRP,15m,FVG_FILLED,bear,,1.2534,1.2542,,Asia,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-01 01:00,XRP,15m,WEAK_BREAK,bull,1.2564,,,0.098,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
 2026-11-01 01:00,ZEC,1h,FVG_RETRACE,bear,,1256.97,1266.32,,Asia,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 02:00,BTC,1h,FVG,bull,,77596.26,77662.91,0.281,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-01 01:45,BTC,15m,CHOCH,bull,77764.01,,,0.029,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-01 01:45,BTC,15m,ORDER_BLOCK,bull,,77662.91,77744.35,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-01 02:00,BTC,15m,OB_RETEST,bull,,77662.91,77744.35,,Asia,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-01 02:00,ETH,1h,FVG,bull,,2257.27,2262.32,0.535,Asia,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-01 01:30,ETH,30m,FVG,bull,,2257.55,2262.32,0.927,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-01 02:00,ETH,30m,CHOCH,bull,2268.76,,,0.338,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-01 02:00,ETH,30m,ORDER_BLOCK,bull,,2253.96,2257.27,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-01 02:00,ETH,30m,OB_RETEST,bear,,2270.0,2285.29,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-01 01:15,ETH,15m,FVG,bull,,2260.47,2262.32,0.548,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-01 01:45,ETH,15m,CHOCH,bull,2268.76,,,0.489,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-01 01:45,ETH,15m,ORDER_BLOCK,bull,,2262.81,2268.18,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-01 02:00,ETH,15m,OB_RETEST,bull,,2262.81,2268.18,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-01 01:30,SOL,30m,FVG,bull,,95.62,95.72,0.332,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 02:00,SOL,30m,FVG_FILLED,bear,,95.68,95.91,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 02:00,SOL,30m,FVG_RETRACE,bull,,95.62,95.72,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 01:45,SOL,15m,FVG_FILLED,bear,,95.75,95.91,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 01:30,XRP,30m,FVG,bull,,1.2533,1.2542,0.292,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 02:00,XRP,30m,FVG_RETRACE,bull,,1.2533,1.2542,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 02:00,XRP,30m,FVG_FILLED,bull,,1.2533,1.2542,,Asia,1h,COMPRESSION,,smc-1.0,Binance
