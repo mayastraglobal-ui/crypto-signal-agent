@@ -899,3 +899,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-01 02:05 UTC
 - **ELIGIBLE** TRX - passes every rule again
+
+## 2026-11-01 11:11 UTC
+- **ELIGIBLE** BNB - passes every rule again
