@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-01 00:11",
+ "utc": "2026-11-01 01:11",
  "verdict": {
   "code": "CHOPPY",
   "icon": "\ud83c\udf2b",
@@ -53,27 +53,27 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -0.6,
+    "oi_24h_pct": -1.0,
     "label": "neutral"
    },
-   "change_24h": 0.3
+   "change_24h": 0.22
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H STRONG_BEAR, 1H COMPRESSION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H STRONG_BEAR, 1H RANGE)",
    "labels": {
     "1w": "RANGE",
     "1d": "TRANSITION",
     "4h": "STRONG_BEAR",
-    "1h": "COMPRESSION"
+    "1h": "RANGE"
    },
    "adx": {
     "1d": 31.0,
     "4h": 32.0,
-    "1h": 12.0
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 3.7,
@@ -91,10 +91,10 @@
    },
    "crowd": {
     "funding_pct": 0.0003,
-    "oi_24h_pct": 1.8,
+    "oi_24h_pct": 2.2,
     "label": "neutral"
    },
-   "change_24h": 0.49
+   "change_24h": 0.71
   },
   {
    "coin": "SOL",
@@ -111,7 +111,7 @@
    "adx": {
     "1d": 30.0,
     "4h": 27.0,
-    "1h": 15.0
+    "1h": 14.0
    },
    "vol": {
     "atr_pct": 4.14,
@@ -129,10 +129,10 @@
    },
    "crowd": {
     "funding_pct": 0.0058,
-    "oi_24h_pct": -1.5,
+    "oi_24h_pct": -2.2,
     "label": "neutral"
    },
-   "change_24h": -0.88
+   "change_24h": -1.16
   },
   {
    "coin": "XRP",
@@ -170,7 +170,7 @@
     "oi_24h_pct": 2.6,
     "label": "neutral"
    },
-   "change_24h": -0.48
+   "change_24h": -0.32
   },
   {
    "coin": "ZEC",
@@ -187,7 +187,7 @@
    "adx": {
     "1d": 16.0,
     "4h": 10.0,
-    "1h": 16.0
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 8.58,
@@ -205,21 +205,21 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 6.6,
+    "oi_24h_pct": 4.3,
     "label": "neutral"
    },
-   "change_24h": -1.74
+   "change_24h": -2.52
   }
  ],
- "alts_vs_btc_24h": -0.98,
+ "alts_vs_btc_24h": -0.96,
  "fear_greed": {
   "value": 34,
   "label": "Fear",
   "yesterday": 30
  },
  "btc_dominance": {
-  "pct": 59.243,
-  "utc": "2026-11-01 00:11",
+  "pct": 59.24,
+  "utc": "2026-11-01 01:11",
   "ch24": 0.11,
   "ch7": -0.23,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
@@ -228,7 +228,7 @@
   {
    "start_utc": "2026-11-06 13:30",
    "name": "US jobs report / Employment Situation (Oct data)",
-   "hours": 133.3
+   "hours": 132.3
   }
  ],
  "blackout_now": [],
@@ -241,5 +241,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf2b <b>Market weather \u00b7 11-01 08:11 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D UNCLEAR \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.5%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (75,952 \u2013 79,212) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -0.6% in 24h)\nAltcoins vs BTC (24h): -1.0%\nBTC dominance: 59.2% \u00b7 24h +0.11 pt \u00b7 7d -0.23 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Fear 34\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe1 ZEC: range\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf2b <b>Market weather \u00b7 11-01 09:11 Beijing</b>\nVerdict: <b>Choppy - stay out</b>\nThe timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.\n\nBTC trend: 1D UNCLEAR \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.5%, higher than 22% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.1% (75,952 \u2013 79,212) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -1.0% in 24h)\nAltcoins vs BTC (24h): -1.0%\nBTC dominance: 59.2% \u00b7 24h +0.11 pt \u00b7 7d -0.23 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Fear 34\n\n<b>Coins</b>\n\u26aa BTC: choppy\n\u26aa ETH: choppy\n\u26aa SOL: choppy\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe1 ZEC: range\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\nFits today: waiting until 1D, 4H and 1H agree - no trade is the right trade\nAvoid: any trade; trading on feeling or headlines\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
