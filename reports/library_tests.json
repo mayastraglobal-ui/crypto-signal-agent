@@ -6,10 +6,10 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 984,
-   "avg_r": 0.146,
-   "test_avg_r": 0.266,
-   "tested_utc": "2026-10-31 06:13",
+   "trades": 1075,
+   "avg_r": 0.118,
+   "test_avg_r": 0.21,
+   "tested_utc": "2026-11-01 06:46",
    "library": true,
    "coins": {
     "BTC": {
@@ -52,14 +52,6 @@
      "test_avg_r": null,
      "positive": false
     },
-    "SUI": {
-     "n": 52,
-     "avg_r": 0.047,
-     "win_rate": 36.5,
-     "test_n": 0,
-     "test_avg_r": null,
-     "positive": true
-    },
     "BNB": {
      "n": 141,
      "avg_r": 0.131,
@@ -68,13 +60,21 @@
      "test_avg_r": null,
      "positive": true
     },
-    "ENA": {
-     "n": 45,
-     "avg_r": 0.014,
-     "win_rate": 33.3,
+    "SUI": {
+     "n": 52,
+     "avg_r": 0.047,
+     "win_rate": 36.5,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
+    },
+    "TRX": {
+     "n": 136,
+     "avg_r": -0.116,
+     "win_rate": 30.9,
+     "test_n": 0,
+     "test_avg_r": null,
+     "positive": false
     }
    }
   }
