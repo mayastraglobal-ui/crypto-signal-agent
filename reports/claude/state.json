@@ -20,18 +20,18 @@
   "applied": []
  },
  "claude/brain-weekly": {
-  "sha": "c855ab21374067bd72c39cf5922ba9d1e40205d6",
-  "subject": "Merge branch 'claude/brain-weekly' of https://github.com/mayastraglobal-ui/crypto-signal-agent into claude/brain-weekly",
-  "when": "2026-10-25 03:57",
+  "sha": "14b19a7d5dd3dfe68d759663567acdfd99119f45",
+  "subject": "Merge remote-tracking branch 'origin/claude/brain-weekly' into claude/brain-weekly",
+  "when": "2026-11-01 03:58",
   "status": "applied",
   "problems": [],
   "applied": [
-   "events.yaml",
    "memory/experiments.md",
    "memory/market_mechanics.md",
    "memory/research_sources.md",
    "memory/smc_research.md",
-   "reports/claude/weekly/2026-10-25.md"
+   "reports/claude/weekly/2026-11-01.md",
+   "strategies_lab.yaml"
   ]
  }
 }
