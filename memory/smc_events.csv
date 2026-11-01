@@ -27198,3 +27198,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 14:30,BNB,30m,SWEEP,bear,716.0,,,0.555,NY AM,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
 2026-11-01 15:00,BNB,30m,BOS,bull,715.88,,,0.347,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-01 14:15,BNB,15m,BOS,bull,715.88,,,0.169,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-01 15:45,BTC,15m,SWEEP,bear,78123.52,,,0.161,Silver Bullet,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-01 15:45,BTC,15m,FVG_FILLED,bear,,78052.01,78125.69,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-11-01 15:30,ETH,30m,BREAKER_RETEST,bull,,2266.88,2270.54,,Silver Bullet,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-01 16:00,BNB,4h,FVG,bull,,708.07,710.69,0.264,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-01 15:15,BNB,15m,SWEEP,bear,717.43,,,0.187,Silver Bullet,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-01 15:15,BNB,15m,FVG,bull,,715.98,716.61,0.377,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-01 15:30,BNB,15m,FVG_RETRACE,bull,,715.98,716.61,,Silver Bullet,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-01 15:30,BNB,15m,FVG_FILLED,bull,,715.98,716.61,,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-01 15:45,BNB,15m,FVG,bear,,714.6,716.61,1.188,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-01 16:00,BNB,15m,FVG_RETRACE,bear,,714.6,716.61,,Silver Bullet,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
