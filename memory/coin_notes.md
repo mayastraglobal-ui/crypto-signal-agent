@@ -282,3 +282,48 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - 24h volume now: 144M
   - strategies profitable on it in the research run (>= 5 trades): P02-EMA-PULLBACK-V1@1.0 4h (47 trades, +0.09R); P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h (251 trades, +0.07R); P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (47 trades, +0.17R); P02-EMA-PULLBACK-V4-S6-S6@1.0 4h (58 trades, +0.17R); P02-EMA-PULLBACK-V4-S6@1.0 4h (57 trades, +0.15R); P03-FIB-PULLBACK-V1@1.0 4h (47 trades, +0.15R); P03-FIB-PULLBACK-V3@1.0 4h (15 trades, +0.00R); P03-FIB-PULLBACK-V4@1.0 4h (46 trades, +0.15R)
   - interpretation: (review)
+
+### BTC - weekly facts 2026-11-01
+- timestamp: 2026-11-01 00:11 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: BTC · timeframe: 1d, 1h · regime: - · review: 2026-12-01
+  - daily range (last 90 days): median 2.4%, 90th percentile 4.5%
+  - 1D regime (last 90 days): TRANSITION 30%, WEAK_BULL 28%, COMPRESSION 13%, RANGE 12%, UNCLEAR 11%, STRONG_BULL 4%, EXPANSION 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 481M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (198 trades, +0.37R); P01-BREAKOUT-V2-FDISP@1.0 15m (177 trades, +0.07R); P01-BREAKOUT-V2-FDISP@1.0 1h (256 trades, +0.25R); P01-BREAKOUT-V2-FDISP@1.0 30m (121 trades, +0.19R); P01-BREAKOUT-V2@1.0 15m (248 trades, +0.07R); P01-BREAKOUT-V2@1.0 1h (355 trades, +0.11R); P01-BREAKOUT-V2@1.0 30m (165 trades, +0.07R); P01-BREAKOUT-V3@1.0 4h (60 trades, +0.57R)
+  - interpretation: (review)
+
+### ETH - weekly facts 2026-11-01
+- timestamp: 2026-11-01 00:11 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: ETH · timeframe: 1d, 1h · regime: - · review: 2026-12-01
+  - daily range (last 90 days): median 3.1%, 90th percentile 6.1%
+  - 1D regime (last 90 days): WEAK_BULL 33%, TRANSITION 30%, COMPRESSION 14%, STRONG_BULL 12%, RANGE 4%, EXPANSION 4%, UNCLEAR 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 133M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (203 trades, +0.25R); P01-BREAKOUT-V2-FDISP@1.0 30m (127 trades, +0.10R); P01-BREAKOUT-V2@1.0 30m (174 trades, +0.12R); P01-BREAKOUT-V3@1.0 4h (68 trades, +0.22R); P01-BREAKOUT-V4@1.0 4h (169 trades, +0.22R); P01-BREAKOUT-V5@1.0 1h (720 trades, +0.01R); P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h (295 trades, +0.17R); P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h (53 trades, +0.27R)
+  - interpretation: (review)
+
+### SOL - weekly facts 2026-11-01
+- timestamp: 2026-11-01 00:11 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: SOL · timeframe: 1d, 1h · regime: - · review: 2026-12-01
+  - daily range (last 90 days): median 3.9%, 90th percentile 7.6%
+  - 1D regime (last 90 days): TRANSITION 42%, WEAK_BULL 28%, COMPRESSION 10%, RANGE 7%, WEAK_BEAR 4%, EXPANSION 4%, STRONG_BULL 3%, UNCLEAR 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 70M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (127 trades, +0.30R); P01-BREAKOUT-V2-FDISP@1.0 15m (178 trades, +0.04R); P01-BREAKOUT-V2-FDISP@1.0 1h (176 trades, +0.09R); P01-BREAKOUT-V2-FDISP@1.0 30m (135 trades, +0.06R); P01-BREAKOUT-V2@1.0 1h (245 trades, +0.03R); P01-BREAKOUT-V2@1.0 30m (174 trades, +0.06R); P01-BREAKOUT-V3@1.0 4h (38 trades, +0.07R); P01-BREAKOUT-V4@1.0 4h (108 trades, +0.30R)
+  - interpretation: (review)
+
+### XRP - weekly facts 2026-11-01
+- timestamp: 2026-11-01 00:11 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: XRP · timeframe: 1d, 1h · regime: - · review: 2026-12-01
+  - daily range (last 90 days): median 4.1%, 90th percentile 9.9%
+  - 1D regime (last 90 days): TRANSITION 53%, WEAK_BEAR 13%, RANGE 12%, WEAK_BULL 11%, UNCLEAR 7%, EXPANSION 3%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 28M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (194 trades, +0.07R); P01-BREAKOUT-V2-FDISP@1.0 15m (168 trades, +0.05R); P01-BREAKOUT-V2-FDISP@1.0 1h (248 trades, +0.05R); P01-BREAKOUT-V2-FDISP@1.0 30m (119 trades, +0.02R); P01-BREAKOUT-V3@1.0 4h (64 trades, +0.23R); P01-BREAKOUT-V4@1.0 4h (168 trades, +0.04R); P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (51 trades, +0.05R); P02-EMA-PULLBACK-V4-S6-S6@1.0 4h (77 trades, +0.36R)
+  - interpretation: (review)
+
+### ZEC - weekly facts 2026-11-01
+- timestamp: 2026-11-01 00:11 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: ZEC · timeframe: 1d, 1h · regime: - · review: 2026-12-01
+  - daily range (last 90 days): median 7.8%, 90th percentile 15.6%
+  - 1D regime (last 90 days): STRONG_BULL 44%, COMPRESSION 18%, WEAK_BULL 13%, TRANSITION 13%, UNCLEAR 4%, EXPANSION 3%, HIGH_VOL_RANGE 2%, RANGE 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 80M
+  - strategies profitable on it in the research run (>= 5 trades): P02-EMA-PULLBACK-V1@1.0 4h (47 trades, +0.09R); P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h (252 trades, +0.07R); P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h (60 trades, +0.14R); P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (48 trades, +0.14R); P02-EMA-PULLBACK-V4-S6-S6@1.0 4h (59 trades, +0.15R); P02-EMA-PULLBACK-V4-S6@1.0 4h (58 trades, +0.13R); P03-FIB-PULLBACK-V1@1.0 4h (47 trades, +0.15R); P03-FIB-PULLBACK-V3@1.0 4h (15 trades, +0.00R)
+  - interpretation: (review)
