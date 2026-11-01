@@ -26947,3 +26947,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 01:30,XRP,30m,FVG,bull,,1.2533,1.2542,0.292,Asia,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-01 02:00,XRP,30m,FVG_RETRACE,bull,,1.2533,1.2542,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-01 02:00,XRP,30m,FVG_FILLED,bull,,1.2533,1.2542,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 03:00,BTC,1h,SWEEP,bear,77796.01,,,0.426,Asia,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-01 02:30,BTC,30m,SWEEP,bear,77796.01,,,0.856,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-11-01 02:15,BTC,15m,SWEEP,bear,77796.01,,,1.355,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-11-01 02:30,SOL,30m,FVG_FILLED,bull,,95.62,95.72,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 02:15,XRP,15m,BOS,bear,1.251,,,0.439,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-01 02:15,XRP,15m,ORDER_BLOCK,bear,,1.2542,1.2573,,Asia,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-01 03:00,ZEC,30m,WEAK_BREAK,bear,1244.14,,,0.35,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-01 02:45,ZEC,15m,FVG,bear,,1250.48,1253.54,0.452,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-01 03:00,ZEC,15m,BOS,bear,1244.14,,,0.516,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-01 03:00,ZEC,15m,ORDER_BLOCK,bear,,1256.0,1263.31,,Asia,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
