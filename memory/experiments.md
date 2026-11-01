@@ -1396,3 +1396,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 4h PAPER_TRADING 928 trades +0.239R (unseen +0.192R); 1h FAILED 2565 trades -0.023R; 30m FAILED 1789 trades -0.059R. The 4h cell moved from BACKTESTING to PAPER_TRADING on 2026-10-30.
   - teaches: the simpler 4h card (without ADX) reached PAPER_TRADING with 928 trades, the same average as its parent (+0.251R, 815 trades), so the ADX filter was not needed. The 1h and 30m cells never worked.
   - next: stop this line on 1h and 30m. The 4h cell now produces paper signals; the useful next test is a real change to this base, not more rule removals.
+
+### Hypothesis: how many losing trades first reached +1R (from C27)
+- timestamp: 2026-11-01 04:30 UTC · source: Claude weekly research 2026-11-01 · evidence: HYPOTHESIS: untested · confidence: low · strategy: - · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-30
+  - hypothesis: Odean finds investors sell winners early and hold losers. A rule-based exit avoids the habit, but a trade that first reaches +1R and then ends as a full stop is the same waste. If a large share of the losing trades of the 4h trend cards had a best point (MFE) of at least +1R, a break-even or trailing rule could change the result.
+  - how to test: an engine report check for the operator (pull request), not a lab card: for each 4h cell in VALIDATION or PAPER_TRADING, list the share of losing backtest trades with MFE of at least 1R and the average R if the stop had moved to break-even at +1R, after fees.
+  - stop if: fewer than 100 losing trades per cell, or the share is under 10%.

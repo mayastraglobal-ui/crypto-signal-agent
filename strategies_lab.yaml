@@ -2454,3 +2454,137 @@
     kind: HTF
     tf: 4h
     parent_cell: P02-EMA-PULLBACK-V4-S6@1.0|4h
+- id: R4-HLHB
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  source: R4 freqtrade-strategies, file user_data/strategies/hlhb.py (commit f3340ce) - the idea rewritten in our
+    building blocks; no code copied (GPL-3.0)
+  source_url: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/hlhb.py
+  evidence_class: 'UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any
+    idea'
+  factory: literature
+  factory_evidence: 'freqtrade-strategies hlhb.py: entries as in the file (RSI on the high-low midpoint, 4H as in
+    the file); its mirror-image exits are left to the stop, targets and time stop; first target 2R'
+  parent: 'source: [R4] freqtrade-strategies'
+  hypothesis: When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts.
+  timeframes:
+  - 4h
+  - 1h
+  description: 'The ''HLHB'' system: EMA 5 crosses EMA 10 while RSI(10) crosses 50 and ADX is above 25.'
+  params:
+    fast: 5
+    slow: 10
+    rsi_n: 10
+    adx_min: 25
+  long:
+  - cross_up(ema(close,{fast}), ema(close,{slow}))
+  - cross_up(rsi((high+low)/2,{rsi_n}), 50)
+  - adx(14) > {adx_min}
+  short:
+  - cross_down(ema(close,{fast}), ema(close,{slow}))
+  - cross_down(rsi((high+low)/2,{rsi_n}), 50)
+  - adx(14) > {adx_min}
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: Two crosses on the same candle are rare - few trades; whipsaws when ADX is high but fading.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who fade the start of a move that momentum and trend strength already confirm
+    mechanism: trends persist once momentum (RSI 50) and direction (EMA cross) turn together with ADX > 25
+    fails_when: choppy markets where the EMAs cross back and forth
+    kill_rule: unseen-data average below 0R, or walk-forward fails
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies hlhb.py (R4) - entries as in the file (RSI on the high-low midpoint,
+    4H as in the file); its mirror-image exits are left to the stop, targets and time stop; first target 2R'
+  added: '2026-11-01'
+- id: R4-AOMACD
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/AwesomeMacd.py (commit f3340ce) - the
+    idea rewritten in our building blocks; no code copied (GPL-3.0)
+  source_url: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/AwesomeMacd.py
+  evidence_class: 'UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any
+    idea'
+  factory: literature
+  factory_evidence: 'freqtrade-strategies berlinguyinca/AwesomeMacd.py: entry as in the file (AO = SMA5 - SMA34
+    of the high-low midpoint); mirror-image short; first target 2R'
+  parent: 'source: [R4] freqtrade-strategies'
+  hypothesis: When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the
+    trend.
+  timeframes:
+  - 1h
+  - 30m
+  description: MACD above zero and the Awesome Oscillator crossing above zero.
+  params:
+    ao_fast: 5
+    ao_slow: 34
+  long:
+  - macd_line(close) > 0
+  - cross_up(sma((high+low)/2,{ao_fast}) - sma((high+low)/2,{ao_slow}), 0)
+  short:
+  - macd_line(close) < 0
+  - cross_down(sma((high+low)/2,{ao_fast}) - sma((high+low)/2,{ao_slow}), 0)
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Two lagging momentum indicators - late entries after the move is under way.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who keep fading a trend whose momentum is turning back up
+    mechanism: 'momentum is persistent: a zero cross of the Awesome Oscillator inside a positive MACD marks a new
+      push'
+    fails_when: ranges, where both oscillators hover around zero
+    kill_rule: unseen-data average below 0R, or walk-forward fails
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies AwesomeMacd.py (R4) - entry as in the file (AO = SMA5 - SMA34 of the
+    high-low midpoint); mirror-image short; first target 2R'
+  added: '2026-11-01'

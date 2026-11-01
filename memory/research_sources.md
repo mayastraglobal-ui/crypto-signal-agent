@@ -1572,3 +1572,48 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - claim: none.
   - what it means for us: nothing yet. The item stays 'not studied'. Plain words for the operator, from the engine's own limits (not from a source): the engine stops for the day at -3R and for the week at -6R, and risks 0.5% per trade.
   - limitations: no source opened. Names in search snippets (for example Schwartz, McKay, Lipschutz) are not evidence and are not recorded.
+
+### [C25] A century of evidence on trend-following investing (Hurst, Ooi, Pedersen)
+- timestamp: 2026-11-01 04:30 UTC · source: Claude weekly research 2026-11-01 · evidence: RESEARCH_FINDING: peer-reviewed journal article, publisher summary page opened (the PDF was not read) · confidence: medium · strategy: P13-TURTLE-C, donchian_breakout family · asset: futures markets, not crypto · timeframe: monthly · regime: - · review: 2027-01-30
+  - title / source: Hurst, Ooi, Pedersen (2017), Journal of Portfolio Management, fall issue
+  - URL: https://www.aqr.com/Insights/Research/Journal-Article/A-Century-of-Evidence-on-Trend-Following-Investing (opened in this run)
+  - claim: a time series momentum strategy (long markets with positive recent returns, short those with negative) built back to 1880 was consistently profitable over the next 110 years. The authors set out to test whether trend-following's recent strength was a fluke.
+  - what it means for us: a long record behind the idea of the 4h trend and breakout cards (P13-TURTLE-C is in PAPER_TRADING, donchian_breakout-VEXIT-S4 and -FDISP too). It is the source a missing edge block for P13-TURTLE could name: trends persist, so late traders add fuel.
+  - derived hypothesis: none new; the 4h breakout line already exists.
+  - limitations: the page does not list the markets, Sharpe ratios or drawdowns, and says nothing about sideways markets. The data are monthly futures, not crypto 4h candles. The article is from 2017, so it cannot show whether the edge shrank since.
+
+### [C26] Support for resistance: technical analysis and intraday exchange rates (Osler)
+- timestamp: 2026-11-01 04:30 UTC · source: Claude weekly research 2026-11-01 · evidence: RESEARCH_FINDING: Federal Reserve Bank of New York economists' article, abstract page opened · confidence: medium · strategy: S5-SWEEP-MSS-FVG, S8-PDH-PDL-SWEEP · asset: exchange rates (not crypto) · timeframe: intraday · regime: - · review: 2027-01-30
+  - title / source: Osler (2000), Economic Policy Review 6(2), Federal Reserve Bank of New York
+  - URL: https://www.newyorkfed.org/research/epr/00v06n2/0007osle.html (opened in this run)
+  - claim: support and resistance levels given to customers by six firms active in the foreign exchange market 'help to predict intraday trend interruptions'. The predictive power varies across exchange rates and firms.
+  - what it means for us: published levels do carry some information about where a move may pause. That is weaker than a claim that price reverses there. It supports treating levels as places to be careful, and keeping the SMC 'key level' cards in testing against their no-SMC twins.
+  - derived hypothesis: none new.
+  - limitations: only the abstract was opened; no hit rate, no currency pairs, no costs. Levels from professional firms are not the same as levels drawn by a retail trader on a chart. Crypto is not covered.
+
+### [C27] Are investors reluctant to realize their losses? (Odean)
+- timestamp: 2026-11-01 04:30 UTC · source: Claude weekly research 2026-11-01 · evidence: RESEARCH_FINDING: Journal of Finance article (1998), the author's own web page with the abstract opened; the journal page was not opened · confidence: medium · strategy: - · asset: US stocks (not crypto) · timeframe: - · regime: - · review: 2027-01-30
+  - title / source: Odean (1998), Journal of Finance 53(5); journal and year are from a search result, the opened page does not state them
+  - URL: https://faculty.haas.berkeley.edu/odean/papers/disposition/disposition.html (opened in this run)
+  - claim: in the trading records of 10,000 accounts at a large discount broker, investors strongly prefer to sell winners over losers (the 'disposition effect'). Rebalancing and trading costs do not explain it, and later performance does not justify it.
+  - what it means for us: the human habit is to cut winners early and hold losers. A system with fixed stops and targets avoids the second half but the first half still shows in our data: the fact sheet's closed signals include SUI 30m P01-BREAKOUT-V5 -0.64R with a best point of +1.791R, and BTC 4h ones that never passed +0.3R.
+  - derived hypothesis: see 'Hypothesis: how many losing trades first reached +1R (from C27)' in memory/experiments.md.
+  - limitations: US stock accounts from an earlier era; the page gives no years or proportions. It is a human habit, so it does not apply to a rule-based exit directly.
+
+### [C28] The intraday dynamics of bitcoin (Eross, McGroarty, Urquhart, Wolfe)
+- timestamp: 2026-11-01 04:30 UTC · source: Claude weekly research 2026-11-01 · evidence: RESEARCH_FINDING: peer-reviewed article, abstract page opened (full text not read) · confidence: medium · strategy: S7-SILVER-BULLET, all intraday cards · asset: BTC · timeframe: 5m · regime: - · review: 2027-01-30
+  - title / source: Eross, McGroarty, Urquhart, Wolfe (2019), Research in International Business and Finance 49
+  - URL: https://econpapers.repec.org/RePEc:eee:riibaf:v:49:y:2019:i:c:p:71-81 (opened in this run)
+  - claim: four years of tick data from the leading bitcoin exchange (GMT timestamps, 5-minute bars): volume rises through the day and falls from about 4 pm until midnight; volatility is fairly steady but peaks around the opening hours of the three major stock markets; liquidity is highest at those opens and lowest in the early morning.
+  - what it means for us: bitcoin does have a daily rhythm that follows the stock-market opens, which is the sort of thing a 'session' idea needs. It does not say a setup works better in a given hour, only that volume, volatility and liquidity differ by hour. See the 'Review: Trading sessions and weekends' record in memory/market_mechanics.md.
+  - derived hypothesis: none new.
+  - limitations: the abstract is a summary; the exact hours and sample years are not on the page. It does not address weekends. Old data (before 2019).
+
+### [R4] freqtrade-strategies - re-check at commit f3340ce (HLHB, AwesomeMacd and the README)
+- timestamp: 2026-11-01 04:30 UTC · source: https://github.com/freqtrade/freqtrade-strategies (HEAD = commit f3340ce11f5bdf62f598522e64d1f5638eaa13f5 per git ls-remote on 2026-11-01, unchanged since the 2026-09-25 record) · evidence: FACT: read in the project's files at that commit; the strategies themselves are UNVERIFIED_OPINION (no results published) · confidence: high for what the files say; low for their edge · strategy: R4-HLHB, R4-AOMACD · asset: - · timeframe: 4h, 1h · regime: - · review: 2027-01-30
+  - opened: the repository front page, user_data/strategies/hlhb.py and user_data/strategies/berlinguyinca/AwesomeMacd.py at the commit above.
+  - new points: (1) the README says the strategies are 'for educational purposes only' and 'mostly should serve as a starting point', and that results depend heavily on pairs, timeframe and timerange. (2) hlhb.py: 4h candles; entry when RSI(10) crosses 50, EMA 5 crosses EMA 10 and ADX is above 25. The file's price series is labelled 'hl2' but, in the page summary I got, it is an average of open and close; the queued card R4-HLHB uses the high-low midpoint. I did not see the file's lines myself, so this is unconfirmed. (3) AwesomeMacd.py: 1h candles; entry when MACD is above 0 and the Awesome Oscillator crosses above 0; the file credits Gert Wohlgemuth and says it was converted from a C# strategy in the Mynt project. Neither file publishes backtest results.
+  - what we take (idea only): the two queued cards, R4-HLHB and R4-AOMACD, were added to the lab unchanged (the guard refuses a changed queue card). They carry factory literature and parent 'source: [R4] freqtrade-strategies'.
+  - what we deliberately do NOT take: the files' code (nothing copied); their wide stops (about 32% and 25%) and ROI tables, which are tuned for a different risk model; their exits, which our engine replaces with an ATR stop and 2R / 3R targets.
+  - licence: GPL-3.0 (ideas only).
+  - hypothesis: none this week. The two earlier R4 cards (BBRSI, CLUC) both FAILED, so the expectation is low.
