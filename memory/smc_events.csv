@@ -27004,3 +27004,32 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 09:00,SOL,15m,FVG,bull,,95.46,95.72,1.281,London,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-01 08:45,XRP,15m,FVG_FILLED,bear,,1.2543,1.2553,,London,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-01 09:00,ZEC,15m,FVG,bull,,1247.32,1250.4,0.579,London,1h,RANGE,,smc-1.0,Binance
+2026-11-01 09:30,BTC,30m,OB_RETEST,bull,,77850.0,78035.61,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-01 09:30,BTC,15m,OB_RETEST,bull,,77940.89,78025.41,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-01 09:30,BTC,15m,FVG_RETRACE,bull,,78019.49,78191.07,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,BTC,15m,FVG_FILLED,bull,,78019.49,78191.07,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-01 09:45,BTC,15m,FVG,bear,,78094.72,78192.0,0.929,London,1h,RANGE,,smc-1.0,Binance
+2026-11-01 10:00,BTC,15m,FVG_RETRACE,bear,,78094.72,78192.0,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,ETH,30m,OB_RETEST,bull,,2267.98,2271.04,,London,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-01 09:30,ETH,15m,FVG_RETRACE,bull,,2271.04,2273.22,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,ETH,15m,FVG_FILLED,bull,,2271.04,2273.22,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-01 09:45,ETH,15m,FVG,bear,,2271.81,2273.76,0.514,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-01 10:00,ETH,15m,FVG_RETRACE,bear,,2271.81,2273.76,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,SOL,30m,SWEEP,bull,95.36,,,0.299,London,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-01 09:30,SOL,15m,SWEEP,bull,95.34,,,0.347,London,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-01 09:30,SOL,15m,FVG_RETRACE,bull,,95.46,95.72,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,SOL,15m,FVG_FILLED,bull,,95.46,95.72,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 09:45,SOL,15m,FVG,bear,,95.57,95.77,0.869,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 10:00,SOL,15m,FVG_RETRACE,bear,,95.57,95.77,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,XRP,30m,BOS,bear,1.2513,,,0.326,London,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-01 09:30,XRP,30m,ORDER_BLOCK,bear,,1.2523,1.2555,,London,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-01 10:00,XRP,30m,OB_RETEST,bear,,1.2523,1.2555,,London,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-01 09:30,XRP,15m,BOS,bear,1.2513,,,0.515,London,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-01 09:30,XRP,15m,ORDER_BLOCK,bear,,1.2532,1.2555,,London,1h,COMPRESSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-01 09:30,XRP,15m,FVG_FILLED,bull,,1.2501,1.251,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 09:45,XRP,15m,FVG,bear,,1.2515,1.2534,0.852,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 10:00,XRP,15m,OB_RETEST,bear,,1.2532,1.2555,,London,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-01 10:00,XRP,15m,FVG_RETRACE,bear,,1.2515,1.2534,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 10:00,XRP,15m,FVG_FILLED,bear,,1.2515,1.2534,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 09:15,ZEC,15m,FVG_RETRACE,bull,,1247.32,1250.4,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 09:30,ZEC,15m,FVG_FILLED,bull,,1247.32,1250.4,,London,1h,RANGE,,smc-1.0,Binance
