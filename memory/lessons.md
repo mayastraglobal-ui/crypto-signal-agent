@@ -20,3 +20,10 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - ema_9_21_cross@1.0|30m: 337 trades, -0.20R; atr 1.5->1.8 gives -0.11R
   - bb_squeeze_breakout@1.0|30m: 486 trades, -0.20R; atr 1.5->1.8 gives -0.17R
   Lesson: a stop_too_tight tag alone is not a reason to widen a stop. In these cells the entry had no edge; a wider stop only made the loss smaller. A refinement for these cells must change the entry or the regime, not the stop. Source: fact sheet 2026-09-26 06:21 UTC (research run 2026-09-26 00:50).
+
+### Re-check: A 20% wider stop did not rescue any failing cell (stop_too_tight is a symptom, not the fix)
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 40 tests with the tag stop_too_tight in the 2026-11-01 research run (original lesson: 12 tests, 113 to 3022 trades each) · confidence: medium · strategy: - · asset: research coins · timeframe: - · regime: - · review: 2026-11-30
+  - status: CONFIRMED
+  - engine numbers (fact sheet 2026-11-01, monthly clean-up): 'stop_too_tight: systematic in 40 test(s) now - STILL HOLDS' at 36 days since the lesson; the original lesson cited 12 tests.
+  - the tag is now present in more than three times as many tests as when the lesson was written and the lesson's advice (change the entry or the regime, not the stop) has not been contradicted.
+  - I did not recompute any trade count; the per-cell trade counts of the original lesson are unchanged.

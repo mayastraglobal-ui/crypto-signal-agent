@@ -27185,3 +27185,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 13:30,SOL,30m,FVG_RETRACE,bear,,95.09,95.22,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-01 13:30,SOL,15m,FVG_RETRACE,bear,,95.09,95.24,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-01 13:45,XRP,15m,FVG_FILLED,bear,,1.252,1.2534,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-01 14:30,BTC,30m,FVG_FILLED,bear,,78037.89,78090.32,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-01 14:15,BTC,15m,FVG_RETRACE,bear,,78052.01,78125.69,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 15:00,ETH,30m,OB_INVALID,bear,,2266.88,2270.54,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-01 14:15,ETH,15m,OB_RETEST,bear,,2268.86,2270.54,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-01 14:45,ETH,15m,OB_INVALID,bear,,2268.86,2270.54,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-01 15:00,ETH,15m,BREAKER_RETEST,bull,,2268.86,2270.54,,NY AM,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-01 14:30,SOL,30m,FVG_FILLED,bear,,95.09,95.22,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-01 14:30,SOL,15m,OB_RETEST,bear,,95.25,95.35,,NY AM,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-01 14:30,SOL,15m,FVG_FILLED,bear,,95.09,95.24,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-01 15:00,BNB,1h,BOS,bull,716.0,,,0.22,NY AM,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-01 14:30,BNB,30m,SWEEP,bear,716.0,,,0.555,NY AM,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-01 15:00,BNB,30m,BOS,bull,715.88,,,0.347,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-01 14:15,BNB,15m,BOS,bull,715.88,,,0.169,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance

@@ -10,14 +10,16 @@
   ]
  },
  "claude/brain-daily": {
-  "sha": "7efe6ec9093ac92ced85fde6c0e1a98ac53b024e",
-  "subject": "Daily review 2026-10-31",
-  "when": "2026-10-31 15:24",
-  "status": "rejected",
-  "problems": [
-   "memory/experiments.md: record 'Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0 (update 2026-10-31)': the title must be 'Feedback: <id>@<version>'"
-  ],
-  "applied": []
+  "sha": "e96d583f6b5886052813da6edb6f4828d928866f",
+  "subject": "Daily review 2026-11-01",
+  "when": "2026-11-01 15:25",
+  "status": "applied",
+  "problems": [],
+  "applied": [
+   "memory/experiments.md",
+   "memory/lessons.md",
+   "reports/claude/daily/2026-11-01.md"
+  ]
  },
  "claude/brain-weekly": {
   "sha": "14b19a7d5dd3dfe68d759663567acdfd99119f45",
