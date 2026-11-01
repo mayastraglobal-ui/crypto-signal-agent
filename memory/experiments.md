@@ -1408,3 +1408,59 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0128 | 2026-11-01 06:46 | P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 | mtf_pullback | 4h | The rule 'htf_up / htf_down' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0129 | 2026-11-01 06:46 | R4-HLHB@1.0 | trend_following | 4h, 1h | When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts. |
 | EXP-0130 | 2026-11-01 06:46 | R4-AOMACD@1.0 | momentum | 1h, 30m | When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the trend. |
+
+### Feedback: P01-BREAKOUT-V2-FDISP@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 3 cells, 4334 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: - · review: 2027-01-30
+  - parent: result: P01-BREAKOUT-V2@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2@1.0 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 1h BACKTESTING 1699 trades +0.018R (unseen +0.054R); 30m FAILED 1051 trades -0.003R (unseen +0.044R, was BACKTESTING on 2026-10-27); 15m FAILED 1584 trades -0.056R. All cells fail the +0.10R average, profit factor and the drawdown limit (29.6R to 34.2R vs 17R).
+  - teaches: the cells sit at about zero, and the 30m cell flipped back to FAILED within 5 days. The displacement rule did not create an edge on this card.
+  - next: stop this line (as in my record of 2026-10-27).
+
+### Feedback: P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 1 cell, 527 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-30
+  - parent: result: P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h
+  - hypothesis: The rule 'htf_up / htf_down' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 527 trades +0.132R (unseen +0.175R); failed gates: profit factor 1.20, recovery factor 2.11 (needs 3), Monte Carlo 95% worst drawdown per 100 trades 26.9R (limit 17R). Parent on 2026-10-26: 369 trades +0.063R.
+  - teaches: the hypothesis held: without the higher-timeframe rule the card has more trades (527 vs 369) and a higher average (+0.132R vs +0.063R), with the unseen part also higher. This is the fifth removal in this family on about 300 to 500 trades, so I treat the result with caution.
+  - next: stop this line. Another removal would be curve-fitting; the blocker is the drawdown (26.9R).
+
+### Feedback: R4-AOMACD@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 2 cells, 1834 trades · confidence: low · strategy: R4-AOMACD v1.0 · asset: research coins · timeframe: 1h, 30m · regime: - · review: 2027-01-30
+  - parent: source: [R4] freqtrade-strategies
+  - hypothesis: When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the trend.
+  - result: 1h FAILED 631 trades -0.023R (unseen -0.028R); 30m FAILED 1203 trades -0.183R (unseen -0.100R). Gates failed: average, profit factor, drawdown (32.5R and 45.5R vs 17R), and not profitable in both train and test.
+  - teaches: momentum resumption with a public indicator pair did not work on our coins and costs. Like R4-BBRSI and R4-CLUC (both retired), a freqtrade community card did not survive our fees and gates.
+  - next: stop this line.
+
+### Feedback: R4-HLHB@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 2 cells, 346 trades · confidence: low · strategy: R4-HLHB v1.0 · asset: research coins · timeframe: 1h, 4h · regime: - · review: 2027-01-30
+  - parent: source: [R4] freqtrade-strategies
+  - hypothesis: When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts.
+  - result: 1h BACKTESTING 295 trades +0.090R (unseen +0.036R); failed gates: average (needs +0.10R), profit factor 1.16, recovery factor 1.73, drawdown 21.9R vs 17R. 4h FAILED 51 trades +0.228R (unseen -0.287R): too few trades and negative on unseen data.
+  - teaches: the 1h cell is near but not at the bar, and its unseen part (+0.036R) is below its train part, which is the usual sign of a fit that does not hold. The 4h result is a 51-trade story, not a result.
+  - next: stop this line unless the 1h cell gains 100 more trades with a positive unseen part; no change to the rules.
+
+### Feedback: TRD-H4-BREAKOUT-FDISP@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 4 cells, 2864 trades · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-30
+  - parent: result: TRD-H4-BREAKOUT@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT@1.0 loses on false_breakout (-0.18R a trade with it, +0.64R without). One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 429 trades +0.168R (unseen +0.332R); 1h BACKTESTING 722 trades +0.119R (unseen +0.221R); 15m BACKTESTING 728 trades +0.008R (was FAILED, back on 2026-11-01); 5m FAILED 985 trades -0.171R. The best cell fails profit factor 1.19, recovery factor 2.61 and drawdown 23.3R vs 17R.
+  - teaches: the repair helped on slow cells (30m, 1h) and not on 15m and 5m, as before (my record of 2026-10-14 had the same split); the 15m status flips with a few trades, so it is not news.
+  - next: no more entry changes. The slow cells stay under observation.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 4 cells, 2990 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-30
+  - parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout. One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 446 trades +0.188R (unseen +0.335R); 1h BACKTESTING 770 trades +0.103R (unseen +0.230R); 15m BACKTESTING 750 trades +0.018R (was FAILED on 2026-10-31); 5m FAILED 1024 trades -0.171R. The best cell fails profit factor 1.16, recovery factor 2.08 and drawdown 24.6R vs 17R. My record of 2026-10-31 had 30m 456 trades +0.164R.
+  - teaches: same pattern as its sibling TRD-H4-BREAKOUT-FDISP: the repair works on 30m and 1h only. The 15m cell flips FAILED/BACKTESTING near zero.
+  - next: no more entry changes; the two siblings are one idea, so I count them as one test.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0
+- timestamp: 2026-11-01 15:50 UTC · source: Claude daily review 2026-11-01 · evidence: BACKTEST_EVIDENCE: 3 cells, 3159 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-30
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout. One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 4h BACKTESTING 551 trades +0.213R (unseen +0.359R), back from VALIDATION; only the drawdown gate fails (18.8R vs 17R, was 17.2R on 2026-10-30); 1h BACKTESTING 1569 trades +0.004R (was FAILED); 30m BACKTESTING 1039 trades +0.031R.
+  - teaches: the 4h drawdown moved from 17.2R to 18.8R as trades were added, so it is drifting away from the limit, and the average fell from +0.260R to +0.213R. The cell is worse, not better, with more data.
+  - next: no change. Third status flip in 6 days: I will not write another record for this card until it is PAPER_TRADING or FAILED.
