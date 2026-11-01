@@ -27171,3 +27171,17 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-01 12:15,ZEC,15m,SWEEP,bull,1242.0,,,0.399,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-01 12:30,ZEC,15m,SWEEP,bull,1220.79,,,0.282,NY AM,1h,RANGE,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
 2026-11-01 12:30,ZEC,15m,BOS,bear,1242.0,,,2.315,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-01 14:00,BTC,30m,FVG_RETRACE,bear,,78037.89,78090.32,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 13:15,BTC,15m,BREAKER_RETEST,bear,,77940.89,78025.41,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-01 13:15,BTC,15m,FVG_FILLED,bear,,77916.25,77950.19,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-01 13:45,BTC,15m,SWEEP,bear,78025.53,,,0.189,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-01 14:00,BTC,15m,BOS,bull,78025.53,,,0.11,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-01 13:30,ETH,30m,OB_RETEST,bear,,2266.88,2270.54,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-01 13:30,ETH,30m,FVG_RETRACE,bear,,2264.38,2266.88,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 13:30,ETH,30m,FVG_FILLED,bear,,2264.38,2266.88,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-01 14:00,ETH,30m,BREAKER_RETEST,bear,,2267.98,2271.04,,NY AM,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-01 13:15,ETH,15m,FVG_RETRACE,bear,,2264.38,2267.08,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-01 13:45,ETH,15m,FVG_FILLED,bear,,2264.38,2267.08,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-01 13:30,SOL,30m,FVG_RETRACE,bear,,95.09,95.22,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 13:30,SOL,15m,FVG_RETRACE,bear,,95.09,95.24,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-01 13:45,XRP,15m,FVG_FILLED,bear,,1.252,1.2534,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
