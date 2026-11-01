@@ -1617,3 +1617,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - what we deliberately do NOT take: the files' code (nothing copied); their wide stops (about 32% and 25%) and ROI tables, which are tuned for a different risk model; their exits, which our engine replaces with an ATR stop and 2R / 3R targets.
   - licence: GPL-3.0 (ideas only).
   - hypothesis: none this week. The two earlier R4 cards (BBRSI, CLUC) both FAILED, so the expectation is low.
+
+### P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-11-01 06:46 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-01-30
+  - title / source: engine rule-significance test: P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'htf_up / htf_down' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### R4-HLHB@1.0 - The 'HLHB' system: EMA 5 crosses EMA 10 while RSI(10) crosses 50 and ADX is above 25.
+- timestamp: 2026-11-01 06:46 UTC · source: strategies_lab.yaml card R4-HLHB@1.0 · evidence: UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any idea: not tested when recorded · confidence: untested idea · strategy: R4-HLHB v1.0 · asset: research coins · timeframe: 4h, 1h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-30
+  - title / source: R4 freqtrade-strategies, file user_data/strategies/hlhb.py (commit f3340ce) - the idea rewritten in our building blocks; no code copied (GPL-3.0)
+  - URL: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/hlhb.py
+  - claim: When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts.
+  - derived hypothesis (tested): R4-HLHB@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 4h, 1h
+  - limitations: Two crosses on the same candle are rare - few trades; whipsaws when ADX is high but fading.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### R4-AOMACD@1.0 - MACD above zero and the Awesome Oscillator crossing above zero.
+- timestamp: 2026-11-01 06:46 UTC · source: strategies_lab.yaml card R4-AOMACD@1.0 · evidence: UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any idea: not tested when recorded · confidence: untested idea · strategy: R4-AOMACD v1.0 · asset: research coins · timeframe: 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR · review: 2027-01-30
+  - title / source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/AwesomeMacd.py (commit f3340ce) - the idea rewritten in our building blocks; no code copied (GPL-3.0)
+  - URL: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/AwesomeMacd.py
+  - claim: When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the trend.
+  - derived hypothesis (tested): R4-AOMACD@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR on 1h, 30m
+  - limitations: Two lagging momentum indicators - late entries after the move is under way.
+  - test results: `memory/strategy_registry.csv` / report section 3

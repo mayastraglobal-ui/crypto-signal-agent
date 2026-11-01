@@ -2588,3 +2588,246 @@
   - '1.0: rewritten from freqtrade-strategies AwesomeMacd.py (R4) - entry as in the file (AO = SMA5 - SMA34 of the
     high-low midpoint); mirror-image short; first target 2R'
   added: '2026-11-01'
+- id: P01-BREAKOUT-V4-S1
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine rule-significance test: P01-BREAKOUT-V4@1.0 without one entry rule'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P01-BREAKOUT-V4@1.0 4h'
+  hypothesis: 'The rule ''close > prev(highest(high,20)) / close < prev(lowest(low,20))'' adds nothing to P01-BREAKOUT-V4@1.0:
+    the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).'
+  timeframes:
+  - 4h
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts:
+    below the lowest low).'
+  params:
+    vol_x: 1.5
+    adx_min: 20
+  long:
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  short:
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 120
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the
+      longest published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-11-01): P01-BREAKOUT-V4@1.0 without entry rule ''close > prev(highest(high,20)) / close < prev(lowest(low,20))''
+    (rule significance test)'
+  added: '2026-11-01'
+  factory: variant_search
+  variant_of: P01-BREAKOUT-V4@1.0
+  factory_evidence: 'P01-BREAKOUT-V4@1.0 4h: with the rule 1122 trades avg +0.162R; without rule 1 (close > prev(highest(high,20))
+    / close < prev(lowest(low,20))): 1581 trades avg +0.188R - the rule does not improve the result'
+- id: TRD-H4-BREAKOUT-S2
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  - COMPRESSION
+  - RANGE
+  - TRANSITION
+  source: 'engine rule-significance test: TRD-H4-BREAKOUT@1.0 without one entry rule'
+  hypothesis: 'The rule ''close > prev(highest(high,20)) / close < prev(lowest(low,20))'' adds nothing to TRD-H4-BREAKOUT@1.0:
+    the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).'
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  - 5m
+  description: 'Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume
+    (shorts mirrored); limit entry at the close.'
+  logic: trend4h_long, then on the trade timeframe a close above the previous 20-candle high with volume above 1.5
+    x its 20-candle average. Limit at the close for 2 candles (maker fee). Stop 2 ATR; targets 2R and 3R; exit when
+    the 4H window closes. No trade when fees + slippage would cost more than 0.25R.
+  long:
+  - trend4h_long == 1
+  - volume > vol_sma(20) * 1.5
+  short:
+  - trend4h_short == 1
+  - volume > vol_sma(20) * 1.5
+  exit_long:
+  - trend4h_long != 1
+  exit_short:
+  - trend4h_short != 1
+  entry:
+    type: limit
+    offset_atr: 0
+    valid_bars: 2
+  stop:
+    method: atr
+    atr: 2.0
+    max_cost_r: 0.25
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 48
+  cooldown_bars: 3
+  known_weaknesses: 'Buys strength after a move: late entries in an old 4H trend; the limit at the close misses
+    breakouts that never look back.'
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    - COMPRESSION
+    - RANGE
+    - TRANSITION
+    who_pays: traders short under the faster range top whose stops fuel the next leg of the 4H trend
+    mechanism: inside a measured 4H trend, a faster-timeframe breakout with volume is new participation in the trend's
+      direction
+    fails_when: late in a 4H trend (exhaustion) and in chop around the 4H breakout level
+    kill_rule: FAILED by the research when the unseen-data part of the backtest turns negative, or when it no longer
+      beats TRD-H4-BREAKOUT-noT4
+  changelog:
+  - '1.0 (2026-11-01): TRD-H4-BREAKOUT@1.0 without entry rule ''close > prev(highest(high,20)) / close < prev(lowest(low,20))''
+    (rule significance test)'
+  added: '2026-11-01'
+  factory: variant_search
+  variant_of: TRD-H4-BREAKOUT@1.0
+  parent: 'result: TRD-H4-BREAKOUT@1.0 1h'
+  evidence_class: BACKTEST_EVIDENCE
+  factory_evidence: 'TRD-H4-BREAKOUT@1.0 1h: with the rule 931 trades avg +0.079R; without rule 2 (close > prev(highest(high,20))
+    / close < prev(lowest(low,20))): 1520 trades avg +0.105R - the rule does not improve the result'
+- id: P01-BREAKOUT-V5-FDISP
+  version: '1.0'
+  status: FORMALIZED
+  family: breakout
+  gate: intraday_fast
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine failure lab: a repair of P01-BREAKOUT-V5@1.0 for its loss tag false_breakout'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P01-BREAKOUT-V5@1.0 15m'
+  hypothesis: P01-BREAKOUT-V5@1.0 loses on false_breakout (-0.44R a trade with it, +0.32R without). One change -
+    a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those
+    losses and keep the rest.
+  timeframes:
+  - 1h
+  - 30m
+  - 15m
+  description: 'Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts:
+    below the lowest low).'
+  params:
+    n: 20
+    vol_x: 1.5
+    adx_min: 20
+    exit_n: 10
+  long:
+  - close > prev(highest(high,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - within(displacement_up, 3)
+  short:
+  - close < prev(lowest(low,{n}))
+  - volume > vol_sma(20) * {vol_x}
+  - adx(14) > {adx_min}
+  - within(displacement_down, 3)
+  exit_long:
+  - close < prev(lowest(low,{exit_n}))
+  exit_short:
+  - close > prev(highest(high,{exit_n}))
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  edge:
+    type: forced_flow
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    - EXPANSION
+    who_pays: traders fading the breakout at the range edge, whose stops then add fuel to the move
+    mechanism: a close outside a 20-candle range with 1.5x volume marks new participation; trend following has the
+      longest published record of the idea families
+    fails_when: 'choppy ranges and low volume: most breakouts fall back inside the range'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-11-01): engine failure lab - P01-BREAKOUT-V5@1.0 repaired for false_breakout: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  added: '2026-11-01'
+  factory: failure
+  variant_of: P01-BREAKOUT-V5@1.0
+  factory_evidence: 'false_breakout in 69% of losses, n=2314 losing trades (P01-BREAKOUT-V5@1.0 15m: 4940 trades,
+    avg -0.138R, FAILED; trades with false_breakout -0.436R, without +0.322R); repair DISP: a strong candle (displacement)
+    in the trade direction within the last 3 candles'
+  repair:
+    tag: false_breakout
+    kind: DISP
+    tf: 15m
+    parent_cell: P01-BREAKOUT-V5@1.0|15m

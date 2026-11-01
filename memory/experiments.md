@@ -1402,3 +1402,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - hypothesis: Odean finds investors sell winners early and hold losers. A rule-based exit avoids the habit, but a trade that first reaches +1R and then ends as a full stop is the same waste. If a large share of the losing trades of the 4h trend cards had a best point (MFE) of at least +1R, a break-even or trailing rule could change the result.
   - how to test: an engine report check for the operator (pull request), not a lab card: for each 4h cell in VALIDATION or PAPER_TRADING, list the share of losing backtest trades with MFE of at least 1R and the average R if the stop had moved to break-even at +1R, after fees.
   - stop if: fewer than 100 losing trades per cell, or the share is under 10%.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0128 | 2026-11-01 06:46 | P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 | mtf_pullback | 4h | The rule 'htf_up / htf_down' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0129 | 2026-11-01 06:46 | R4-HLHB@1.0 | trend_following | 4h, 1h | When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts. |
+| EXP-0130 | 2026-11-01 06:46 | R4-AOMACD@1.0 | momentum | 1h, 30m | When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the trend. |
