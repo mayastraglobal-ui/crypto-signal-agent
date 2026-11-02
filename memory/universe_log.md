@@ -921,3 +921,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-02 21:12 UTC
 - **ELIGIBLE** SUI - passes every rule again
+
+## 2026-11-02 22:11 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,141x the 1% order-book depth (flag only, not excluded)
+- **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
