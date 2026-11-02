@@ -1,12 +1,12 @@
 {
  "version": 1,
- "day_ms": 1793404800000,
- "day": "2026-10-31",
- "updated_utc": "2026-11-01 00:12",
+ "day_ms": 1793491200000,
+ "day": "2026-11-01",
+ "updated_utc": "2026-11-02 00:34",
  "started": "2026-10-28",
  "start_capital": 1000.0,
- "equity": 986.89,
- "invested_usd": 156.64,
+ "equity": 986.67,
+ "invested_usd": 156.61,
  "weights": {
   "BNB": 0.2222,
   "BTC": 0.2222,
@@ -22,8 +22,8 @@
    "n": 9,
    "weight": 0.2222,
    "yesterday": 0.2222,
-   "price": 703.95,
-   "usd": 31.33,
+   "price": 712.69,
+   "usd": 31.32,
    "change_usd": 0.0,
    "longest_on": 150
   },
@@ -32,8 +32,8 @@
    "n": 9,
    "weight": 0.2222,
    "yesterday": 0.2222,
-   "price": 77582.02,
-   "usd": 31.33,
+   "price": 78354.0,
+   "usd": 31.32,
    "change_usd": 0.0,
    "longest_on": 150
   },
@@ -42,7 +42,7 @@
    "n": 9,
    "weight": 0.1111,
    "yesterday": 0.1111,
-   "price": 2255.66,
+   "price": 2275.31,
    "usd": 15.66,
    "change_usd": 0.0,
    "longest_on": 150
@@ -52,7 +52,7 @@
    "n": 9,
    "weight": 0.1111,
    "yesterday": 0.1111,
-   "price": 95.54,
+   "price": 94.53,
    "usd": 15.66,
    "change_usd": 0.0,
    "longest_on": 150
@@ -62,7 +62,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.8994,
+   "price": 0.9007,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -72,7 +72,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 1.2519,
+   "price": 1.2507,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -82,8 +82,8 @@
    "n": 9,
    "weight": 0.4444,
    "yesterday": 0.4444,
-   "price": 1251.42,
-   "usd": 62.66,
+   "price": 1234.56,
+   "usd": 62.65,
    "change_usd": 0.0,
    "longest_on": 360
   }
@@ -144,6 +144,20 @@
     "XRP": 0.0,
     "ZEC": 0.4444
    }
+  },
+  {
+   "day": "2026-11-01",
+   "equity": 986.67,
+   "ret_pct": -0.022,
+   "weights": {
+    "BNB": 0.2222,
+    "BTC": 0.2222,
+    "ETH": 0.1111,
+    "SOL": 0.1111,
+    "SUI": 0.0,
+    "XRP": 0.0,
+    "ZEC": 0.4444
+   }
   }
  ],
  "lookbacks": [
@@ -158,16 +172,16 @@
   360
  ],
  "backtest": {
-  "since": "2024-02-06",
+  "since": "2024-02-07",
   "days": 999,
   "portfolio": {
-   "cagr_pct": 28.6,
-   "sharpe": 1.34,
+   "cagr_pct": 28.1,
+   "sharpe": 1.33,
    "max_dd_pct": 17.2
   },
   "hold": {
-   "cagr_pct": 56.9,
-   "sharpe": 1.04,
+   "cagr_pct": 55.1,
+   "sharpe": 1.02,
    "max_dd_pct": 51.5
   }
  },

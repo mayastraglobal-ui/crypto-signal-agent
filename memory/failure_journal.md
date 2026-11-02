@@ -410,3 +410,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### SOL LONG 4h P05-RANGE-REVERSAL-V4 v1.0 - SL -1.06R
+- timestamp: 2026-11-02 00:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P05-RANGE-REVERSAL-V4 v1.0 · asset: SOL · timeframe: 4h · regime: RANGE · review: 2026-11-09
+  - signal 2026-10-30 03:59 UTC, closed 2026-11-01 23:59 UTC, stage TEST
+  - MAE -1.06R / MFE +0.28R
+  - at entry: session -, conditions: range_market
+  - what happened: trend_reversal
+  - root cause / fix: (review)
+
+### SOL SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.20R
+- timestamp: 2026-11-02 00:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.20R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 30m · regime: WEAK_BEAR · review: 2026-11-09
+  - signal 2026-11-01 19:29 UTC, closed 2026-11-02 00:29 UTC, stage TEST
+  - MAE -1.16R / MFE +1.16R
+  - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
