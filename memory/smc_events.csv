@@ -27950,3 +27950,33 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-02 16:00,ZEC,15m,WEAK_BREAK,bear,1256.72,,,0.203,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-02 16:00,ZEC,15m,OB_RETEST,bull,,1237.73,1248.84,,Silver Bullet,1h,RANGE,first return into the order block,smc-1.0,Binance
 2026-11-02 16:00,ZEC,15m,FVG_FILLED,bull,,1248.84,1263.22,,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-11-02 17:00,BTC,1h,BREAKER_RETEST,bear,,77620.0,77914.67,,,4h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:30,BTC,30m,BREAKER_RETEST,bear,,77620.0,77914.67,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:30,BTC,30m,FVG,bear,,77685.74,77790.0,0.347,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 16:15,BTC,15m,BREAKER_RETEST,bear,,77662.91,77744.35,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:15,BTC,15m,BREAKER_RETEST,bear,,77620.0,77815.09,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:15,BTC,15m,BREAKER_RETEST,bear,,77602.72,77748.02,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:15,BTC,15m,FVG,bear,,77685.74,77783.19,0.358,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 17:00,ETH,1h,FVG,bear,,2278.08,2283.4,0.36,,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-02 16:30,ETH,30m,FVG_FILLED,bull,,2263.88,2267.59,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-02 16:30,ETH,30m,FVG,bear,,2278.08,2286.11,0.664,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-02 16:15,ETH,15m,OB_INVALID,bull,,2270.08,2277.0,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-02 16:15,ETH,15m,FVG_FILLED,bull,,2263.88,2266.84,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-02 16:15,ETH,15m,FVG,bear,,2278.08,2284.54,0.604,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-02 16:30,ETH,15m,BREAKER_RETEST,bear,,2270.08,2277.0,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:30,SOL,30m,FVG,bear,,93.76,94.17,0.626,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 17:00,SOL,30m,FVG_RETRACE,bear,,93.76,94.17,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-02 16:15,SOL,15m,BREAKER_RETEST,bear,,93.69,93.97,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:15,SOL,15m,FVG,bear,,93.76,93.95,0.336,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 16:45,SOL,15m,BREAKER_RETEST,bear,,93.79,94.08,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:45,SOL,15m,FVG_RETRACE,bear,,93.76,93.95,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-02 16:30,ZEC,30m,CHOCH,bear,1237.73,,,0.521,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-02 16:30,ZEC,30m,ORDER_BLOCK,bear,,1260.31,1273.49,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-02 16:30,ZEC,30m,OB_RETEST,bull,,1220.12,1234.76,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-02 16:30,ZEC,30m,FVG_FILLED,bull,,1234.76,1250.0,,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 17:00,ZEC,30m,FVG,bear,,1242.38,1246.52,0.283,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 16:30,ZEC,15m,OB_RETEST,bull,,1220.12,1234.76,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-02 16:30,ZEC,15m,OB_INVALID,bull,,1237.73,1248.84,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-02 16:30,ZEC,15m,FVG_FILLED,bull,,1230.19,1243.89,,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 16:45,ZEC,15m,BREAKER_RETEST,bear,,1237.73,1248.84,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 16:45,ZEC,15m,FVG,bear,,1242.38,1246.15,0.311,,1h,RANGE,,smc-1.0,Binance
