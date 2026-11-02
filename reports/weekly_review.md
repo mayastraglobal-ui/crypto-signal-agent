@@ -1,13 +1,13 @@
 # Weekly review · 2026-W45
 
-Made 2026-11-02 04:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-02 05:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 6 of the last 7 days (last 2026-11-01)
-- ✅ hourly scan: last run 2026-11-02 04:11 UTC
+- ✅ hourly scan: last run 2026-11-02 05:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-02 02:45 UTC (27 min ago)
+- ✅ live watcher: last heartbeat 2026-11-02 03:50 UTC (22 min ago)
 - ✅ TEST setups closed this week (GitHub record): 15
 
 ## Totals
@@ -56,9 +56,9 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
 - 57 shock(s) this week, 41 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 20, broke yesterday's high 7, broke yesterday's low 13, volume spike 32
-- by coin: SOL 11, ETH 11, ZEC 10, XRP 8, BTC 7, SUI 5, BNB 5
-- 4 hours later: 25 kept going, 32 reversed (average +0.21% in the shock's direction)
+- by kind: fast move 20, broke yesterday's high 7, broke yesterday's low 12, volume spike 33
+- by coin: ETH 11, ZEC 10, SOL 10, BTC 8, XRP 8, SUI 5, BNB 5
+- 4 hours later: 26 kept going, 31 reversed (average +0.23% in the shock's direction)
 - followed by a strategy alert in the same direction within 4h: 2 of 57 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-10-29 20:43 UTC BNB DOWN -5.3% -> 4h later +1.0% (no strategy alert)
 -   2026-10-29 20:47 UTC SUI DOWN -5.2% -> 4h later +2.4% (no strategy alert)
