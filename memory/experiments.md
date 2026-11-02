@@ -1479,3 +1479,59 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0131 | 2026-11-02 06:44 | P01-BREAKOUT-V4-S1@1.0 | breakout | 4h | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to P01-BREAKOUT-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0132 | 2026-11-02 06:44 | TRD-H4-BREAKOUT-S2@1.0 | breakout | 1h, 30m, 15m, 5m | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
 | EXP-0133 | 2026-11-02 06:44 | P01-BREAKOUT-V5-FDISP@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V5@1.0 loses on false_breakout (-0.44R a trade with it, +0.32R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |
+
+### Feedback: P01-BREAKOUT-V2-FDISP@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 3 cells, 3744 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: - · review: 2027-01-31
+  - parent: result: P01-BREAKOUT-V2@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2@1.0 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 1h BACKTESTING 1471 trades +0.005R; 30m BACKTESTING 909 trades +0.018R (unseen +0.112R; it flipped FAILED -> BACKTESTING again); 15m FAILED 1364 trades -0.050R. All fail the +0.10R average, profit factor and drawdown (27.8R to 32.4R vs 17R).
+  - teaches: no change in meaning since 2026-11-01: the cells sit at zero and flip status on a few trades.
+  - next: stop this line; no further record for this card unless a cell reaches VALIDATION or PAPER_TRADING.
+
+### Feedback: P01-BREAKOUT-V4-S1@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 1 cell, 1357 trades · confidence: low · strategy: P01-BREAKOUT-V4-S1 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-01-31
+  - parent: result: P01-BREAKOUT-V4@1.0 4h
+  - hypothesis: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to P01-BREAKOUT-V4@1.0 (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 1357 trades +0.213R (unseen +0.119R); only the Monte Carlo drawdown fails (21.7R vs 17R). Parent (lab table of 2026-10-23): 962 trades +0.18R, t 3.35.
+  - teaches: the hypothesis held: more trades (1357 vs 962) and a slightly higher average. But the unseen part (+0.119R) is lower than the train part, a mild sign that the extra trades are weaker.
+  - next: stop removing rules. The blocker is the drawdown, as for the other 4h breakout cards.
+
+### Feedback: P01-BREAKOUT-V5-FDISP@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 3 cells, 8059 trades · confidence: low · strategy: P01-BREAKOUT-V5-FDISP v1.0 · asset: research coins · timeframe: 15m, 1h, 30m · regime: - · review: 2027-01-31
+  - parent: result: P01-BREAKOUT-V5@1.0 15m
+  - hypothesis: P01-BREAKOUT-V5@1.0 loses on false_breakout (-0.44R a trade with it, +0.32R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 15m FAILED 3042 trades -0.127R (unseen -0.115R); 30m FAILED 2031 trades -0.075R; 1h FAILED 2986 trades -0.008R. All three FAILED on average, profit factor, drawdown and the train/unseen test.
+  - teaches: the displacement repair did not rescue P01-BREAKOUT-V5. Its parent P01-BREAKOUT-V5 kept losing as TEST shorts on SUI (2026-10-23 to 2026-10-31), so the live-test losses and the backtest agree.
+  - next: stop this line.
+
+### Feedback: TRD-H4-BREAKOUT-FDISP@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 4 cells, 2669 trades · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-01-31
+  - parent: result: TRD-H4-BREAKOUT@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT@1.0 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 391 trades +0.189R (unseen +0.364R); 1h BACKTESTING 639 trades +0.138R (unseen +0.255R); 15m FAILED 682 trades -0.006R (flipped back from BACKTESTING); 5m FAILED 957 trades -0.180R. The best cell fails only the Monte Carlo drawdown (23.7R vs 17R).
+  - teaches: same split as on 2026-11-01: slow cells positive, fast cells at zero or below. The 30m cell has 391 trades (429 on 2026-11-01) and the average stayed between +0.17R and +0.19R.
+  - next: no change; no further record for this card.
+
+### Feedback: TRD-H4-BREAKOUT-S2@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 4 cells, 7393 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-01-31
+  - parent: result: TRD-H4-BREAKOUT@1.0 1h
+  - hypothesis: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT@1.0 (fewer rules = less room for overfitting).
+  - result: 1h BACKTESTING 1334 trades +0.123R (unseen +0.161R); 30m BACKTESTING 1129 trades +0.031R; 15m BACKTESTING 2021 trades +0.010R; 5m FAILED 2909 trades -0.070R. The 1h cell fails only the drawdown (22.2R vs 17R).
+  - teaches: the hypothesis held on 1h: about twice the trades of the parent's 1h cell with a similar average. The same pattern as in the other removal cards of this family (more trades, drawdown unchanged).
+  - next: stop this line; the drawdown, not the entry, is the open problem.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 3 cells, 2748 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-31
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout. One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses.
+  - result: 4h BACKTESTING 471 trades +0.246R (unseen +0.349R); drawdown 17.1R vs 17R is the only failed gate; 30m BACKTESTING 927 trades +0.044R; 1h FAILED 1350 trades -0.002R.
+  - teaches: the 4h drawdown swings between 17.1R and 18.8R between runs, on the limit; the status flips are noise. The average stays about +0.25R.
+  - next: no change; no further record unless it reaches PAPER_TRADING or FAILED.
+
+### Feedback: donchian_breakout-VEXIT-S4@1.1
+- timestamp: 2026-11-02 16:15 UTC · source: Claude daily review 2026-11-02 · evidence: BACKTEST_EVIDENCE: 3 cells, 3733 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4 v1.1 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-01-31
+  - parent: source: [C03] Common Risk Factors in Cryptocurrency (Liu, Tsyvinski, Wu)
+  - hypothesis: One change to donchian_breakout-VEXIT-S4@1.0: longs only when the coin rose more than BTC over the last 126 candles (21 days on 4h), shorts only when it rose less.
+  - result: 4h BACKTESTING 634 trades +0.232R (unseen +0.212R), after leaving PAPER_TRADING today (the engine: failed the long-history test 2 runs in a row); drawdown 18.0R vs 17R; 1h FAILED 1808 trades -0.016R; 30m FAILED 1291 trades -0.018R. Last record: 2026-10-15.
+  - teaches: the relative-strength filter did not add to its parent: the parent S4@1.0 has 928 trades at +0.239R on 4h, against 634 trades at +0.232R here, so about the same average on fewer trades; the parent reached PAPER_TRADING on 2026-10-30 and this card has now left it. The source's claim (coins that beat the market keep beating it) did not help a breakout card.
+  - next: stop this line; the relative-strength idea from [C03] did not pass its test as a filter.
