@@ -3,14 +3,13 @@
   "BTC",
   "ETH",
   "SOL",
-  "BNB",
   "XRP",
   "ZEC"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 823,
+ "runs": 824,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -25,7 +24,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [],
+  "BNB": [
+   "volume_24h"
+  ],
   "UNI": [
    "volume_7d"
   ],

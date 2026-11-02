@@ -905,3 +905,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-01 12:11 UTC
 - **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-02 13:11 UTC
+- **EXCLUDED** BNB - 24h volume $48M < $50M
+- **LEAVE** BNB - not eligible: 24h volume $48M < $50M
