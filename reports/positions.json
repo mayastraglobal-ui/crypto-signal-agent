@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-02 00:32",
+ "generated_utc": "2026-11-02 01:11",
  "book": {
-  "utc": "2026-11-02 00:32",
-  "beijing": "2026-11-02 08:32",
+  "utc": "2026-11-02 01:11",
+  "beijing": "2026-11-02 09:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-02 00:32 UTC / 2026-11-02 08:32 Beijing",
+  "POSITION BOOK \u2014 2026-11-02 01:11 UTC / 2026-11-02 09:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -434,7 +434,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -878,32 +878,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-02 00:32",
-   "id": "SOL-4h-P05-RANGE-REVERSAL-V4-2026-10-30 03:59",
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P05-RANGE-REVERSAL-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.06R"
-  },
-  {
-   "time_utc": "2026-11-02 00:32",
-   "id": "SOL-30m-P01-BREAKOUT-V2-2026-11-01 19:29",
-   "coin": "SOL",
-   "tf": "30m",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.20R"
-  }
- ]
+ "events_this_run": []
 }
