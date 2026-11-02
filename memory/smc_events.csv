@@ -27776,3 +27776,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-02 10:00,ZEC,1h,FVG_RETRACE,bull,,1241.55,1249.17,,London,4h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-02 09:45,ZEC,15m,WEAK_BREAK,bear,1253.85,,,0.6,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-02 09:45,ZEC,15m,FVG,bear,,1255.74,1258.0,0.271,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-02 10:30,BTC,30m,FVG,bear,,78082.91,78142.99,0.307,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 10:15,BTC,15m,OB_INVALID,bull,,78044.24,78214.37,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-02 10:30,BTC,15m,FVG,bear,,78040.01,78082.89,0.325,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 10:45,BTC,15m,FVG_RETRACE,bear,,78040.01,78082.89,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-02 11:00,BTC,15m,BREAKER_RETEST,bear,,78044.24,78214.37,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-02 11:00,SOL,1h,SWEEP,bull,94.14,,,0.353,,4h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-02 10:30,SOL,30m,WEAK_BREAK,bear,94.14,,,0.021,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-02 10:30,SOL,30m,FVG,bear,,94.34,94.51,0.363,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 10:15,SOL,15m,WEAK_BREAK,bear,94.17,,,0.239,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-02 10:30,SOL,15m,FVG,bear,,94.2,94.33,0.397,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 10:45,SOL,15m,FVG_RETRACE,bear,,94.2,94.33,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-02 10:30,BNB,30m,FVG,bear,,707.58,708.94,0.639,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 11:00,BNB,30m,WEAK_BREAK,bear,706.09,,,0.103,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-02 11:00,BNB,15m,WEAK_BREAK,bear,706.09,,,0.164,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-02 10:30,XRP,15m,FVG,bear,,1.2496,1.2514,0.537,,1h,RANGE,,smc-1.0,Binance
+2026-11-02 10:45,XRP,15m,FVG_RETRACE,bear,,1.2496,1.2514,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
