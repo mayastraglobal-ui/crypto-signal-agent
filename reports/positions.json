@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-02 11:11",
+ "generated_utc": "2026-11-02 12:11",
  "book": {
-  "utc": "2026-11-02 11:11",
-  "beijing": "2026-11-02 19:11",
+  "utc": "2026-11-02 12:11",
+  "beijing": "2026-11-02 20:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-02 11:11 UTC / 2026-11-02 19:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-02 12:11 UTC / 2026-11-02 20:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -87,17 +87,6 @@
   },
   {
    "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SOL",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -440,61 +429,6 @@
   {
    "coin": "SOL",
    "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "2/5",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -502,17 +436,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
   },
   {
    "coin": "SOL",
@@ -542,32 +465,10 @@
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
   },
   {
    "coin": "SOL",
