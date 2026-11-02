@@ -1473,3 +1473,9 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 4h BACKTESTING 551 trades +0.213R (unseen +0.359R), back from VALIDATION; only the drawdown gate fails (18.8R vs 17R, was 17.2R on 2026-10-30); 1h BACKTESTING 1569 trades +0.004R (was FAILED); 30m BACKTESTING 1039 trades +0.031R.
   - teaches: the 4h drawdown moved from 17.2R to 18.8R as trades were added, so it is drifting away from the limit, and the average fell from +0.260R to +0.213R. The cell is worse, not better, with more data.
   - next: no change. Third status flip in 6 days: I will not write another record for this card until it is PAPER_TRADING or FAILED.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0131 | 2026-11-02 06:44 | P01-BREAKOUT-V4-S1@1.0 | breakout | 4h | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to P01-BREAKOUT-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0132 | 2026-11-02 06:44 | TRD-H4-BREAKOUT-S2@1.0 | breakout | 1h, 30m, 15m, 5m | The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |
+| EXP-0133 | 2026-11-02 06:44 | P01-BREAKOUT-V5-FDISP@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V5@1.0 loses on false_breakout (-0.44R a trade with it, +0.32R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |

@@ -1612,3 +1612,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - ema_9_21_cross v1.0 15m: blocked by the regime gate
   - ema_9_21_cross v1.0 5m: blocked by the regime gate
   - trend_pullback v1.0 15m: blocked by the regime gate
+
+### ETH up +2.2% (6.3x ATR), 2026-11-01 19:00 -> 2026-11-02 04:00
+- timestamp: 2026-11-02 06:44 UTC · source: engine: daily research run · evidence: FACT: move of 6.3x the 1H ATR within 12 hours; 176 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: TRANSITION · review: 2026-11-09
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P02-EMA-PULLBACK-V2 v1.0 15m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V2 v1.0 30m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V5 v1.0 15m: blocked by the regime gate
+  - P02-EMA-PULLBACK-V5 v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+
+### ZEC up +5.1% (5.1x ATR), 2026-11-01 19:00 -> 2026-11-02 05:00
+- timestamp: 2026-11-02 06:44 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 176 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: UNCLEAR · review: 2026-11-09
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
