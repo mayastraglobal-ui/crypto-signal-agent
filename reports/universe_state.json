@@ -7,10 +7,12 @@
   "XRP",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {},
- "runs": 831,
+ "runs": 832,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,9 +31,7 @@
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [
-   "volume_24h"
-  ],
+  "SUI": [],
   "AVAX": [],
   "ENA": [],
   "SAGA": [
@@ -166,9 +166,7 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [
-   "wash_volume"
-  ],
+  "ZEC": [],
   "XRP": [],
   "SOL": [],
   "PROVE": [
