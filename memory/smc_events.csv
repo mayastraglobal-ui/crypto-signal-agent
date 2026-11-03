@@ -28462,3 +28462,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-03 07:30,SOL,30m,FVG_FILLED,bear,,92.07,92.24,,London,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-03 07:45,SOL,15m,FVG,bull,,91.81,92.05,0.63,London,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-03 07:30,XRP,15m,FVG,bull,,1.2504,1.2514,0.31,London,1h,RANGE,,smc-1.0,Binance
+2026-11-03 08:00,BTC,4h,SWEEP,bull,76705.0,,,0.428,,1d,UNCLEAR,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-11-03 08:00,BTC,30m,FVG_FILLED,bear,,76786.01,76933.8,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-03 08:00,ETH,1h,BREAKER_RETEST,bear,,2247.84,2265.17,,London,4h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-03 08:00,ZEC,4h,SWEEP,bull,1126.25,,,0.146,,1d,RANGE,sell-side liquidity swept (PDL),smc-1.0,Binance
