@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import tempfile
+import types
 import unittest
 from unittest import mock
 
@@ -139,10 +140,254 @@ class Turning(unittest.TestCase):
         self.assertIn("BTC: turning down", scx.weather_line(w, "BTC"))
 
 
+class DailyTrend(unittest.TestCase):
+    """2026-11-03 (operator: "BTC fell from 87,000 to 76,000 and /weather says turning down"): when BTC's daily chart
+    clearly trends, the verdict names that trend and says the strategies still wait; a 1H bounce inside it is a
+    bounce, not "turning up". Display only: the recorded coin verdicts (the market types) are unchanged."""
+    def fall(self, n=400, drop=0.12):
+        c = np.r_[np.linspace(80, 100, n - 40), np.linspace(100, 100 * (1 - drop), 40)]
+        c = c * (1 + 0.004 * np.sin(np.arange(n)))                        # small daily wiggles
+        return c * 1.01, c * 0.99, c
+
+    def test_price_trend(self):
+        p = wx.price_trend(*self.fall())
+        self.assertEqual(p["dir"], "down")
+        self.assertLess(p["chg_pct"], -5)
+        self.assertEqual(p["swing"], "lower highs and lower lows")
+        h, lo, c = (200 - a for a in self.fall())                         # the mirror image: a rise
+        self.assertEqual(wx.price_trend(lo, h, c)["dir"], "up")
+        flat = np.full(400, 100.0) * (1 + 0.01 * np.sin(np.arange(400)))
+        self.assertEqual(wx.price_trend(flat * 1.01, flat * 0.99, flat)["dir"], "sideways")
+        self.assertIsNone(wx.price_trend(*(a[:50] for a in self.fall())))
+        t = wx.price_text(p)
+        self.assertTrue(t.startswith("DOWN · -"))
+        self.assertIn("lower highs and lower lows", t)
+        self.assertNotIn("average", t)                                     # operator: no 50 / 200-day averages
+
+    def test_daily_view(self):
+        dn, up = dict(price=dict(dir="down")), dict(price=dict(dir="up"))
+        self.assertEqual(wx.daily_view("TURNING_DOWN", dn), "DOWNTREND_WAIT")
+        self.assertEqual(wx.daily_view("CHOPPY", dn), "DOWNTREND_WAIT")
+        self.assertEqual(wx.daily_view("TURNING_UP", dn), "BOUNCE_DOWNTREND")
+        self.assertEqual(wx.daily_view("TURNING_DOWN", up), "DIP_UPTREND")
+        self.assertEqual(wx.daily_view("CHOPPY", up), "UPTREND_WAIT")
+        for code in ("TREND_DOWN", "TREND_UP", "MIXED", "RANGE", "NEWS"):
+            self.assertEqual(wx.daily_view(code, dn), code)                # confirmed / other verdicts stay
+        self.assertEqual(wx.daily_view("CHOPPY", dict(price=dict(dir="sideways"))), "CHOPPY")
+        self.assertEqual(wx.daily_view("TURNING_DOWN", None), "TURNING_DOWN")
+        self.assertEqual(wx.coin_word(dict(verdict="CHOPPY", turning="down", price=dict(dir="down"))),
+                         "downtrend on the daily chart (not confirmed)")
+        self.assertEqual(wx.coin_word(dict(verdict="CHOPPY", turning="up", price=dict(dir="down"))),
+                         "bounce in a downtrend (daily)")
+        self.assertEqual(wx.coin_word(dict(verdict="DOWN", turning=None, price=dict(dir="down"))), "trend down")
+
+    def test_the_3_nov_case(self):
+        rc = Turning().recs("WEAK_BEAR", "UNCLEAR", mo4="down", su4="mixed")
+        regs = {k: dict(timeframes=rc, permission="NO TRADE", permission_reason="t") for k in ("BTC", "ETH", "SOL")}
+        w = wx.build(NOW, regs, {k: self.fall() for k in regs}, {}, {}, [])
+        self.assertEqual(w["verdict"]["code"], "DOWNTREND_WAIT")
+        self.assertEqual([c["verdict"] for c in w["coins"]], ["CHOPPY"] * 3)    # the recorded verdict is unchanged
+        t = w["telegram"]
+        self.assertIn("Downtrend - the strategies wait", t)
+        self.assertIn("BTC price trend (daily chart): <b>DOWN", t)
+        self.assertIn("Strategy alerts (need 4H and 1H to agree)", t)
+        self.assertIn("↘️ BTC: downtrend on the daily chart (not confirmed)", t)
+        self.assertNotIn("Turning", t)
+        self.assertIn("daily price trend DOWN", "\n".join(wx.md_lines(w)))
+
+
+class LiveCandles(unittest.TestCase):
+    """2026-11-03 (operator: "daily / 4H / 1H: the trend from the last closed candles and the live candle, well
+    organized"; chose 1D 2 / 4H 3 / 1H 3 closed candles, the majority colour, BTC in full + one line per other coin,
+    2 strategy lines at the bottom, a day from 08:00 Beijing): the /weather candle report, read from OKX when asked."""
+    T = 1_762_000_000_000
+
+    def rows(self, d1=((100, 101), (101, 99)), h4=((98, 98.5), (98.5, 98.2), (98.2, 97.9)),
+             h1=((97.9, 98.0), (98.0, 97.95), (97.95, 98.1))):
+        q = lambda t, o, c, closed: (t, o, max(o, c) * 1.01, min(o, c) * 0.99, c, closed)  # noqa: E731
+        mk = lambda done, now: [q(self.T + i, o, c, True) for i, (o, c) in enumerate(done)] + \
+            [q(self.T + 9, *now, False)]                                                # noqa: E731
+        return {"1d": mk(list(d1), (99, 99.5)), "4h": mk(list(h4), (97.9, 97.7)), "1h": mk(list(h1), (98.1, 98.4))}
+
+    def test_trend_rule(self):
+        b, r = [dict(dir="bull", pct=1.0)], [dict(dir="bear", pct=-1.98)]
+        self.assertEqual(wx.trend_of(b + r + r), "bear")                                # 2 of 3 red
+        self.assertEqual(wx.trend_of(b + r), "bear")                                    # a tie: the bigger move
+        self.assertEqual(wx.trend_of([dict(dir="bull", pct=1.0), dict(dir="bear", pct=-1.0)]), "mixed")
+        self.assertIsNone(wx.trend_of([]))
+        self.assertEqual(wx.TREND_N, {"1d": 2, "4h": 3, "1h": 3})
+
+    def test_report(self):
+        rep = wx.candle_report({"BTC": self.rows(), "ETH": self.rows(d1=((50, 51), (51, 52)))}, ["BTC", "ETH"])
+        b = rep["coins"][0]
+        self.assertEqual(len(b["1d"]["closed"]), 2)
+        self.assertEqual(b["1d"]["trend"], "bear")                     # +1.0% then -1.98%: a tie, the bigger move
+        self.assertEqual(b["1d"]["now"]["dir"], "bull")                 # today so far
+        self.assertEqual([x["dir"] for x in b["4h"]["closed"]], ["bull", "bear", "bear"])
+        self.assertEqual(b["4h"]["trend"], "bear")
+        self.assertEqual(b["1h"]["trend"], "bull")                     # bull, bear (-0.05%), bull
+        self.assertEqual(b["price"], 98.4)
+        self.assertEqual(rep["coins"][1]["1d"]["trend"], "bull")
+        self.assertEqual(wx.candle(100, 100.04)["dir"], "flat")
+
+    def test_text(self):
+        w = dict(verdict=dict(title="Downtrend - the strategies wait for a clean 4H / 1H"),
+                 events=[dict(name="US jobs report", start_utc="2026-11-06 13:30")])
+        t = wx.candles_text(wx.candle_report({"BTC": self.rows(), "SOL": self.rows()}, ["BTC", "SOL"]),
+                            "11-03 17:30 Beijing", wx.strategy_note(w))
+        lines = t.split("\n")
+        self.assertEqual(lines[0], "📊 <b>BTC 98.40</b> · 11-03 17:30 Beijing")
+        self.assertEqual(lines[1], "🔴 <b>BEARISH · 2 of 3 timeframes red</b>")                  # A
+        self.assertIn("   Yesterday high 102.01 · low 98.01 → ↔️ now inside yesterday's range", lines)   # B
+        for head in ("📅 <b>DAILY</b>", "⏱ <b>4 HOUR</b>", "⏰ <b>1 HOUR</b>"):
+            self.assertIn(head, lines)
+        self.assertIn("   Trend: <b>🔴 BEAR</b>  (🟢 +1.0% · 🔴 -2.0%)", lines)
+        self.assertIn("   Today live: 🟢 BULL +0.5%", lines)
+        self.assertIn("   Trend: <b>🔴 BEAR</b>  (🟢 🔴 🔴)", lines)
+        self.assertIn("   Live candle: 🔴 BEAR -0.2%", lines)
+        self.assertIn("<code>SOL </code> 🔴(🟢) · 🔴(🔴) · 🟢(🟢)", lines)
+        self.assertIn("🧠 Strategy alerts: Downtrend - the strategies wait for a clean 4H / 1H", lines)
+        self.assertIn("📅 Next event: US jobs report 11-06 21:30 Beijing", lines)
+        self.assertNotIn("average", t)
+        self.assertIsNone(wx.candles_text(None, "x"))
+        self.assertEqual(wx.strategy_note(None), [])
+
+    def test_summary_levels_and_change_note(self):
+        x = lambda d, h4, h1: {"1d": dict(trend=d), "4h": dict(trend=h4), "1h": dict(trend=h1)}  # noqa: E731
+        self.assertEqual(wx.overall(x("bear", "bear", "bear")), ("🔴", "BEARISH · all 3 timeframes red"))
+        self.assertEqual(wx.overall(x("bull", "bull", "bear"))[0], "🟢")
+        self.assertEqual(wx.overall(x("bull", "bear", "mixed"))[0], "⚪")
+        c = dict(price=95.0, **{"1d": dict(prev=dict(high=102.0, low=98.0))})
+        self.assertEqual(wx.range_side(c), "below")
+        self.assertIn("⬇️ now BELOW yesterday's low (weak)", wx.range_note(c))
+        self.assertEqual(wx.range_side(dict(c, price=103.0)), "above")
+        self.assertIsNone(wx.range_note(dict(price=1.0, **{"1d": {}})))
+        t = wx.trend_change_text("BTC", "4h", "bear", "bull", [dict(dir="bull", pct=1)] * 3, 77000)
+        self.assertIn("⏱ 4H trend changed · <b>BTC</b> 77,000", t)
+        self.assertIn("🔴 BEAR → 🟢 BULL", t)
+        self.assertIn("/trendalert off", t)
+        self.assertIn("⏰ 1H trend changed", wx.trend_change_text("BTC", "1h", "bull", "bear",
+                                                                  [dict(dir="bear", pct=-1)] * 3, 77000))
+
+    def notes_watcher(self, rows, state=None):
+        said = []
+
+        class Feed:
+            name = "fake"
+
+            def recent(s, coin, tf, n=3):
+                return rows(tf)
+        w = LW.Watcher.__new__(LW.Watcher)
+        w.cfg, w.feed, w.state, w.say = dict(universe=dict(own_coins=["BTC"])), Feed(), dict(state or {}), said.append
+        w._save_state, w._json = (lambda: None), (lambda rel: None)
+        return w, said
+
+    def test_morning_report_once_a_day(self):                                          # C
+        day = 1_762_128_000_000                                                         # 2026-11-03 00:00 UTC
+        w, said = self.notes_watcher(lambda tf: self.rows()[tf])
+        w.state["trend_seen"] = {"1d": 0, "4h": 0}                                     # D out of the way
+        LW.Watcher.TREND_TFS, keep = (), LW.Watcher.TREND_TFS
+        try:
+            self.assertEqual(w.candle_notes(day + 3 * 60_000), [])                     # 08:03 Beijing: not yet
+            self.assertEqual(w.candle_notes(day + 6 * 60_000), ["morning"])
+            self.assertIn("☀️ Morning candle report", said[0])
+            self.assertEqual(w.candle_notes(day + 30 * 60_000), [])                    # once a day
+            w.state["morning_day"] = None
+            self.assertEqual(w.candle_notes(day + 3 * 3_600_000), [])                  # 11:00 Beijing: too late
+            w.state["morning_on"] = False
+            self.assertEqual(w.candle_notes(day + 6 * 60_000), [])                     # /morning off
+        finally:
+            LW.Watcher.TREND_TFS = keep
+
+    def test_trend_change_note(self):                                                  # D
+        H4 = 4 * 3_600_000
+        t0 = 1_762_128_000_000                                                          # a 4H close
+        colours = {"v": [(1, 0.9), (1, 0.9), (1, 0.9)]}                                 # 3 red
+
+        def rows(tf):
+            if tf != "4h":
+                raise RuntimeError("only 4H in this test")
+            base = now["t"] // H4 * H4 - 3 * H4
+            return [(base + i * H4, o, o, c, c, True) for i, (o, c) in enumerate(colours["v"])] + \
+                [(base + 3 * H4, 1, 1, 1, 1, False)]
+        now = {"t": t0 + 2 * 60_000}
+        w, said = self.notes_watcher(rows, dict(morning_on=False))
+        w.candle_notes(now["t"])
+        self.assertEqual((w.state["trend_last"]["4h"], said), ("bear", []))           # first close: remembered only
+        w.candle_notes(now["t"] + 60_000)
+        self.assertEqual(said, [])                                                      # the same close: nothing
+        colours["v"] = [(1, 0.9), (1, 1.1), (1, 1.1)]                                   # 2 of 3 green
+        now["t"] = t0 + H4 + 2 * 60_000
+        self.assertEqual(w.candle_notes(now["t"]), ["4h"])
+        self.assertIn("🔴 BEAR → 🟢 BULL", said[0])
+        colours["v"] = [(1, 1.1), (1, 1.1), (1, 0.9)]
+        now["t"] = t0 + 2 * H4 + 30_000                                                 # under a minute after the close
+        self.assertEqual(w.candle_notes(now["t"]), [])
+        now["t"] = t0 + 2 * H4 + 2 * 60_000
+        w.state["trend_alert_on"] = False
+        self.assertEqual(w.candle_notes(now["t"]), [])                                  # /trendalert off: still bull
+        self.assertEqual(w.state["trend_last"]["4h"], "bull")
+
+    def test_1h_flip_note(self):                                                       # operator: "1H option 1"
+        self.assertEqual(LW.Watcher.TREND_TFS, ("1d", "4h", "1h"))
+        H1, t0 = 3_600_000, 1_762_128_000_000
+        colours = {"v": [(1, 1.1)] * 3}
+
+        def rows(tf):
+            if tf != "1h":
+                raise RuntimeError("only 1H in this test")
+            base = now["t"] // H1 * H1 - 3 * H1
+            return [(base + i * H1, o, o, c, c, True) for i, (o, c) in enumerate(colours["v"])] + \
+                [(base + 3 * H1, 1, 1, 1, 1, False)]
+        now = {"t": t0 + 2 * 60_000}
+        w, said = self.notes_watcher(rows, dict(morning_on=False))
+        w.candle_notes(now["t"])
+        colours["v"] = [(1, 1.1), (1, 0.9), (1, 0.9)]
+        now["t"] = t0 + H1 + 2 * 60_000
+        self.assertEqual(w.candle_notes(now["t"]), ["1h"])
+        self.assertIn("⏰ 1H trend changed", said[0])
+        self.assertIn("🟢 BULL → 🔴 BEAR", said[0])
+
+    def test_commands(self):
+        w, _ = self.notes_watcher(lambda tf: [])
+        self.assertIn("is now <b>OFF</b>", LW.Watcher.command(w, "morning", "off", self.T))
+        self.assertFalse(w.state["morning_on"])
+        self.assertIn("<b>ON</b>", LW.Watcher.command(w, "trendalert", "", self.T))
+        for c in ("/morning on|off", "/trendalert on|off"):
+            self.assertIn(c, lv.HELP)
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("self.candle_notes(self.now_fn())", src)
+
+    def test_watcher_command(self):
+        class Feed:
+            name = "fake"
+
+            def recent(s, coin, tf, n=3):
+                assert n == wx.TREND_N[tf] + 1                         # the closed candles + the live one
+                return self.rows()[tf]
+        w = types.SimpleNamespace(cfg=dict(universe=dict(own_coins=["BTC", "ETH"])), feed=Feed())
+        t = LW.Watcher.candles_now(w, self.T, dict(verdict=dict(title="Choppy - stay out")))
+        self.assertIn("📊 <b>BTC", t)
+        self.assertIn("<code>ETH </code>", t)
+        self.assertIn("🧠 Strategy alerts: Choppy - stay out", t)
+
+        class Down:
+            name = "down"
+
+            def recent(s, coin, tf, n=3):
+                raise RuntimeError("OKX request failed")
+        self.assertIsNone(LW.Watcher.candles_now(types.SimpleNamespace(cfg=w.cfg, feed=Down()), self.T))
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("live = self.candles_now(now_ms, w)", src)
+        self.assertIn("return live or lv.weather_text(w, now_ms)", src)
+        self.assertIn("/weather - the candles right now", lv.HELP)
+
+
 def weather(perm_btc="NO TRADE", blackout=None, events=None):
     regs = {"BTC": regime(perm_btc, "WEAK_BULL", "TRANSITION", "WEAK_BEAR"), "ETH": regime("LONG allowed"),
             "SOL": regime("NO TRADE", "WEAK_BULL", "RANGE", "RANGE")}
-    return wx.build(NOW, regs, {"BTC": daily(), "ETH": daily(seed=2)}, {}, {"BTC": dict(change_24h=-2.0),
+    # seeds 4 / 5: sideways daily charts (2026-11-03: a trending daily chart now names the verdict - DailyTrend)
+    return wx.build(NOW, regs, {"BTC": daily(seed=4), "ETH": daily(seed=5)}, {}, {"BTC": dict(change_24h=-2.0),
                                                                           "ETH": dict(change_24h=-1.0),
                                                                           "SOL": dict(change_24h=0.0)},
                     events or [], blackout, dict(value=64, label="Greed"))

@@ -165,6 +165,18 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
     (funding, 24h open interest), altcoins vs BTC, Fear & Greed, events. Telegram `/weather`, the 08:20 briefing email
     (and "Market weather: x → y" in the 14:20 / 21:20 changes), Claude's fact sheets. Explains only - no signal, gate,
     size or approval reads it. Not included: BTC dominance (no data source in the agent yet) and a dashboard tile.
+    **2026-11-03** (operator: "BTC fell from 87,000 to 76,000 and /weather says turning down"): every coin also gets
+    its daily **price trend** - the 30-day change, the 20- / 50-day averages and the swing of the last 30 days, what
+    the chart shows. When BTC's daily chart trends and the strategy filter has not confirmed it, the verdict says
+    "Downtrend - the strategies wait for a clean 4H / 1H" (or "Bounce inside a downtrend", and the up mirrors)
+    instead of "Turning down / up - not confirmed" or "Choppy". Still display only. The same day (operator: "show me
+    today's candles, not 50-day averages"): `/weather` starts with a **live candle report** the PC watcher reads from
+    OKX when asked - per own coin yesterday's daily candle (= today's trend, bull / bear), today's candle so far, the
+    last 2 closed 4H and 1H candles and the open ones - then GitHub's strategy view; no average values are shown.
+    Re-laid out the same day to the operator's plan: 📅 DAILY / ⏱ 4 HOUR / ⏰ 1 HOUR, each a trend from the last
+    2 / 3 / 3 closed candles (majority colour) and the live candle, one line per other coin, 2 strategy lines.
+    Then (operator: "build A B C D"): a one-line summary on top, yesterday's high / low, the report every morning at
+    08:05 Beijing (`/morning on|off`) and a note when BTC's Daily, 4H or 1H trend flips (`/trendalert on|off`).
 11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
     ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
     every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07

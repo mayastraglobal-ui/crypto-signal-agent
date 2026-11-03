@@ -74,6 +74,7 @@ from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
+from engine import weather as wx
 
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)     # the scanner's feature tables
 ROOT = sc.ROOT
@@ -310,6 +311,13 @@ class OKXSwap:
         df = sc._finish(df, tf)          # OKX answers newest first: every caller gets them oldest first (2026-10-12)
         return df.drop_duplicates("open_time", keep="last").sort_values("open_time").reset_index(drop=True)
 
+    def recent(self, coin, tf, n=3):
+        """The newest n candles INCLUDING the one still open, oldest first: [(open_time, open, high, low, close,
+        closed)] - the live candle report of /weather (2026-11-03). One call to the fast endpoint."""
+        rows = self._get("/api/v5/market/candles", {"instId": self.inst(coin), "bar": sc.OKX.BAR[tf], "limit": n})
+        return [(int(r[0]), float(r[1]), float(r[2]), float(r[3]), float(r[4]), len(r) < 9 or r[8] == "1")
+                for r in reversed(rows or [])]
+
     def minutes(self, coin, n):
         """The newest n CLOSED 1-minute candles (the shock alarm) as arrays open_time / open / high / low / close /
         volume, oldest first: one call to the fast endpoint up to 300, else the history endpoint page by page."""
@@ -347,6 +355,11 @@ class SyntheticSwap:
 
     def candles(self, coin, tf, n, recent_only=False):
         return self.f.klines(coin + "USDT", tf, n)
+
+    def recent(self, coin, tf, n=3):
+        d = self.f.klines(coin + "USDT", tf, n)
+        return [(int(t), float(o), float(h), float(lo), float(c), i < len(d) - 1)
+                for i, (t, o, h, lo, c) in enumerate(zip(d["open_time"], d["open"], d["high"], d["low"], d["close"]))]
 
 
 # ---------------------------------------------------------------- Telegram
@@ -1233,6 +1246,17 @@ class Watcher:
             return "▶️ New trade alerts are on again."
         if cmd == "result":
             return self.result(arg, now_ms)
+        if cmd in ("morning", "trendalert"):
+            key = "morning_on" if cmd == "morning" else "trend_alert_on"
+            arg = (arg or "").strip().lower()
+            if arg in ("on", "off"):
+                self.state[key] = arg == "on"
+                self._save_state()
+            on = self.state.get(key, True)
+            what = ("☀️ The morning candle report (08:05 Beijing)" if cmd == "morning" else
+                    "🔔 The BTC trend-change notes (Daily / 4H / 1H)")
+            return f"{what} {'is' if arg not in ('on', 'off') else 'is now'} <b>{'ON' if on else 'OFF'}</b>. " \
+                f"/{cmd} {'off' if on else 'on'} to switch it {'off' if on else 'on'}."
         if cmd == "portfolio":
             arg = (arg or "").strip().lower()
             if arg in ("on", "off"):
@@ -1297,10 +1321,76 @@ class Watcher:
                     w = json.load(f)
             except (OSError, ValueError):
                 w = None
-            return lv.weather_text(w, now_ms)
+            live = self.candles_now(now_ms, w)
+            return live or lv.weather_text(w, now_ms)                 # OKX not answering: GitHub's full weather
         if cmd is None:
             return "I only understand commands. Send /help for the list."
         return f"I don't know /{cmd}. Send /help for the list."
+
+    MORNING_UTC = (0, 5, 2)          # C: the morning report from 00:05 UTC (08:05 Beijing), sent until 02:00 UTC at most
+    TREND_TFS = ("1d", "4h", "1h")    # D: BTC's trend-change notes on these timeframes (1h: operator "1H option 1")
+
+    def candle_notes(self, now_ms):
+        """2026-11-03 (operator: "build C and D"). C: the /weather candle report once a day after the daily close
+        (08:05 Beijing; /morning off stops it). D: a note when BTC's Daily, 4H or 1H trend (the majority colour of the
+        last closed candles) flips between BULL and BEAR, checked once per candle close (/trendalert off stops it). Both
+        are information, sent even during /pause; OKX not answering = tried again on the next pass. Returns notes."""
+        sent = []
+        t = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)
+        h, m, until = self.MORNING_UTC
+        day = t.strftime("%Y-%m-%d")
+        if self.state.get("morning_on", True) and self.state.get("morning_day") != day and \
+                (t.hour, t.minute) >= (h, m) and t.hour < until:
+            txt = self.candles_now(now_ms, self._json("reports/market_weather.json"), title="☀️ Morning candle report")
+            if txt:
+                self.state["morning_day"] = day
+                self.say(txt)
+                sent.append("morning")
+        last = self.state.setdefault("trend_last", {})
+        seen = self.state.setdefault("trend_seen", {})
+        for tf in self.TREND_TFS:
+            ms = sc.TF_MS[tf]
+            closed_open = now_ms // ms * ms - ms                   # the newest candle that has closed
+            if seen.get(tf) == closed_open or now_ms - (closed_open + ms) < 60_000:
+                continue                                           # done for this close, or OKX may not have it yet
+            try:
+                rows = self.feed.recent("BTC", tf, wx.TREND_N[tf] + 1)
+            except Exception as e:                                 # noqa: BLE001 - tried again next pass
+                log(f"trend note {tf}: {type(e).__name__}: {str(e)[:80]}")
+                continue
+            done = [q for q in rows if q[5]]
+            if not done or int(done[-1][0]) != closed_open:
+                continue                                           # OKX has not confirmed the close yet
+            closed = [wx.candle(q[1], q[4]) for q in done][-wx.TREND_N[tf]:]
+            new = wx.trend_of(closed)
+            seen[tf] = closed_open
+            if new not in ("bull", "bear"):
+                continue                                           # mixed: keep the last clear trend
+            old = last.get(tf)
+            last[tf] = new
+            if old and old != new and self.state.get("trend_alert_on", True):
+                self.say(wx.trend_change_text("BTC", tf, old, new, closed, float(rows[-1][4])))
+                sent.append(tf)
+        self._save_state()
+        return sent
+
+    def candles_now(self, now_ms, w=None, title=None):
+        """2026-11-03 (operator: "daily / 4H / 1H: the trend from the last closed candles and the live candle, well
+        organized"): the /weather candle report of the operator's own coins, read from OKX when asked (3 short calls
+        a coin), with 2 short strategy lines from GitHub's weather `w` at the bottom. None when OKX does not answer -
+        /weather then shows GitHub's full weather."""
+        rows, coins = {}, ["BTC"]
+        try:
+            coins = list(dict.fromkeys(["BTC"] + list(sc.breadth_coins(self.cfg))))
+            for c in coins:
+                rows[c] = {tf: self.feed.recent(c, tf, wx.TREND_N[tf] + 1) for tf in wx.TREND_N}
+        except Exception as e:                                       # noqa: BLE001 - an answer without it is fine
+            log(f"/weather candles: {type(e).__name__}: {str(e)[:80]}")
+            if "BTC" not in rows:
+                return None
+        return wx.candles_text(wx.candle_report(rows, [c for c in coins if c in rows]), wx.beijing(
+            dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")),
+            wx.strategy_note(w), title)
 
     def on_button(self, cq, now_ms):
         action, _, aid = (cq.get("data") or "").partition("|")
@@ -2105,6 +2195,10 @@ class Watcher:
                 for note in self.kick.check(self.now_fn()):              # 2026-10-26: GitHub's schedule ran late
                     log(note)
                 self.heartbeat(self.now_fn())
+                try:                                                     # 2026-11-03: morning report, trend notes
+                    self.candle_notes(self.now_fn())
+                except Exception as e:                                   # noqa: BLE001 - never stops a pass
+                    log(f"candle notes: {type(e).__name__}: {str(e)[:100]}")
                 if self.fails >= int(self.S["error_alert_after"]):
                     telegram("✅ Live watcher recovered.")
                 self.fails = 0
