@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-03 01:16",
+ "generated_utc": "2026-11-03 02:16",
  "book": {
-  "utc": "2026-11-03 01:16",
-  "beijing": "2026-11-03 09:16",
+  "utc": "2026-11-03 02:16",
+  "beijing": "2026-11-03 10:16",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-03 01:16 UTC / 2026-11-03 09:16 Beijing",
+  "POSITION BOOK \u2014 2026-11-03 02:16 UTC / 2026-11-03 10:16 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -35,7 +35,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+SUI+XRP+ZEC"
+   "BTC+ETH+SOL+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -76,17 +76,6 @@
   },
   {
    "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -460,171 +449,6 @@
    "missing": "close < 0"
   },
   {
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
    "coin": "XRP",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
@@ -867,32 +691,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-03 01:16",
-   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-11-02 22:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.8760696073123301,
-   "note": "limit 0.87607 filled in the 2026-11-03 00:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-03 01:16",
-   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-11-02 22:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.8760696073123301,
-   "note": "entry at 2026-11-03 00:00 UTC (limit)"
-  }
- ]
+ "events_this_run": []
 }
