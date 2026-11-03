@@ -1535,3 +1535,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 4h BACKTESTING 634 trades +0.232R (unseen +0.212R), after leaving PAPER_TRADING today (the engine: failed the long-history test 2 runs in a row); drawdown 18.0R vs 17R; 1h FAILED 1808 trades -0.016R; 30m FAILED 1291 trades -0.018R. Last record: 2026-10-15.
   - teaches: the relative-strength filter did not add to its parent: the parent S4@1.0 has 928 trades at +0.239R on 4h, against 634 trades at +0.232R here, so about the same average on fewer trades; the parent reached PAPER_TRADING on 2026-10-30 and this card has now left it. The source's claim (coins that beat the market keep beating it) did not help a breakout card.
   - next: stop this line; the relative-strength idea from [C03] did not pass its test as a filter.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0134 | 2026-11-03 07:11 | P11-MOMENTUM-V3-FDISP@1.0 | momentum | 1h | P11-MOMENTUM-V3@1.0 loses on false_breakout (-0.44R a trade with it, +0.34R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest. |

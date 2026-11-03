@@ -1636,3 +1636,34 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the regime gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### BTC down -1.9% (5.2x ATR), 2026-11-02 08:00 -> 2026-11-02 21:00
+- timestamp: 2026-11-03 07:11 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 181 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: RANGE · review: 2026-11-10
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P02-EMA-PULLBACK-V4-S6 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6 v1.0 4h: blocked by the regime gate
+  - P02-EMA-PULLBACK-V4-S6-S6 v1.0 4h: blocked by the regime gate
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: blocked by the regime gate
+  - PB-B-GRADED v1.0 15m: no valid stop / target
+  - PB-B-GRADED v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - macd_trend_cross v1.0 1h: blocked by the regime gate
+  - macd_trend_cross v1.0 30m: blocked by the regime gate
+
+### ZEC down -9.3% (7.9x ATR), 2026-11-02 11:00 -> 2026-11-03 00:00
+- timestamp: 2026-11-03 07:11 UTC · source: engine: daily research run · evidence: FACT: move of 7.9x the 1H ATR within 12 hours; 181 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: RANGE · review: 2026-11-10
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the regime gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - ema_9_21_cross v1.0 30m: blocked by the regime gate
