@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-03 03:11",
+ "generated_utc": "2026-11-03 04:21",
  "book": {
-  "utc": "2026-11-03 03:11",
-  "beijing": "2026-11-03 11:11",
+  "utc": "2026-11-03 04:21",
+  "beijing": "2026-11-03 12:21",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-03 03:11 UTC / 2026-11-03 11:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-03 04:21 UTC / 2026-11-03 12:21 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -35,7 +35,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+XRP+ZEC"
+   "BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -86,15 +86,15 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
+   "strategy": "P13-TURTLE-V2",
    "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
+   "stage": "VALIDATION",
+   "direction": "LONG",
    "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
+   "rules_true": "1/2",
+   "missing": "close > prev(highest(high,330))"
   },
   {
    "coin": "XRP",
@@ -449,7 +449,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
    "version": "1.0",
@@ -460,7 +460,7 @@
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "version": "1.0",
@@ -471,37 +471,103 @@
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout",
+   "strategy": "P12-LEADER-V2",
    "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
+   "stage": "VALIDATION",
+   "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/3",
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
+   "strategy": "P12-LEADER-V2",
    "version": "1.0",
-   "stage": "PAPER_TRADING",
+   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V1",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V1",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/4",
    "missing": null
   },
   {
-   "coin": "XRP",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "strategy": "P13-TURTLE-V3",
    "version": "1.0",
-   "stage": "PAPER_TRADING",
+   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
-   "missing": null
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
   },
   {
    "coin": "XRP",
