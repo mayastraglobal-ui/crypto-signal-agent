@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-03 00:04",
+ "generated_utc": "2026-11-03 01:16",
  "book": {
-  "utc": "2026-11-03 00:04",
-  "beijing": "2026-11-03 08:04",
+  "utc": "2026-11-03 01:16",
+  "beijing": "2026-11-03 09:16",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-03 00:04 UTC / 2026-11-03 08:04 Beijing",
+  "POSITION BOOK \u2014 2026-11-03 01:16 UTC / 2026-11-03 09:16 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -867,5 +867,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-03 01:16",
+   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-11-02 22:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 0.8760696073123301,
+   "note": "limit 0.87607 filled in the 2026-11-03 00:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-03 01:16",
+   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-11-02 22:59",
+   "coin": "SUI",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 0.8760696073123301,
+   "note": "entry at 2026-11-03 00:00 UTC (limit)"
+  }
+ ]
 }
