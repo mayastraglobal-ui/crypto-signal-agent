@@ -28657,3 +28657,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-03 14:45,ETH,15m,FVG_FILLED,bear,,2287.92,2292.04,,NY AM,1h,RANGE,,smc-1.0,Binance
 2026-11-03 15:00,XRP,1h,FVG_RETRACE,bull,,1.2627,1.2757,,NY AM,4h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-03 15:15,XRP,15m,WEAK_BREAK,bear,1.2757,,,0.052,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-03 15:45,BTC,15m,FVG_FILLED,bear,,77422.01,77576.0,,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-03 16:00,BTC,15m,FVG,bull,,77449.18,77560.0,0.49,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-03 16:00,ETH,30m,OB_INVALID,bear,,2283.4,2296.55,,Silver Bullet,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-03 16:00,SOL,30m,BOS,bull,93.67,,,0.151,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-03 15:45,SOL,15m,SWEEP,bear,93.67,,,0.305,Silver Bullet,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-03 16:00,SOL,15m,BOS,bull,93.67,,,0.195,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-03 16:00,SOL,15m,FVG,bull,,93.35,93.52,0.418,Silver Bullet,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-03 16:00,XRP,4h,CHOCH,bull,1.2646,,,1.077,,1d,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-03 16:00,XRP,4h,ORDER_BLOCK,bull,,1.2449,1.2555,,,1d,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-03 16:00,XRP,4h,AMD,bull,,,,,,1d,WEAK_BEAR,consolidation -> sweep (5 candle(s) ago) -> CHoCH,smc-1.0,Binance
+2026-11-03 16:00,XRP,4h,OB_RETEST,bear,,1.2857,1.3127,,,1d,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-03 16:00,XRP,4h,FVG_FILLED,bear,,1.2493,1.279,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-03 16:00,XRP,15m,FVG,bull,,1.2757,1.2778,0.366,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-03 16:00,ZEC,4h,FVG,bull,,1145.4,1175.05,0.692,,1d,RANGE,,smc-1.0,Binance
+2026-11-03 16:00,SUI,4h,FVG,bull,,0.8732,0.8811,0.449,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-03 16:00,SUI,30m,SWEEP,bear,0.8999,,,0.211,Silver Bullet,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-03 16:00,SUI,15m,SWEEP,bear,0.8999,,,0.276,Silver Bullet,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
