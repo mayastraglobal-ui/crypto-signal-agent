@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-02 23:11",
+ "generated_utc": "2026-11-03 00:04",
  "book": {
-  "utc": "2026-11-02 23:11",
-  "beijing": "2026-11-03 07:11",
+  "utc": "2026-11-03 00:04",
+  "beijing": "2026-11-03 08:04",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-02 23:11 UTC / 2026-11-03 07:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-03 00:04 UTC / 2026-11-03 08:04 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -35,7 +35,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BNB+BTC+ETH+SOL+SUI+XRP+ZEC"
+   "BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -64,17 +64,6 @@
  },
  "watching": [
   {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
    "coin": "BTC",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
@@ -95,17 +84,6 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
    "coin": "SUI",
@@ -161,105 +139,6 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "2/4",
-   "missing": null
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
   },
   {
    "coin": "BTC",
@@ -479,6 +358,50 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -566,7 +489,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -577,7 +500,18 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
    "missing": null
   },
   {
@@ -588,7 +522,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -933,19 +867,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-02 23:11",
-   "id": "SUI-1h-P03-FIB-PULLBACK-V5-2026-11-02 22:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 0.8760696073123301,
-   "note": "1h signal closed - limit order placed"
-  }
- ]
+ "events_this_run": []
 }
