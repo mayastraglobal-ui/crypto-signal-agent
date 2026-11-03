@@ -74,6 +74,7 @@ from engine import manage as mg
 from engine import risk as rk
 from engine import strategy_spec as sspec
 from engine import timeframes as tfm
+from engine import weather as wx
 
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)     # the scanner's feature tables
 ROOT = sc.ROOT
@@ -310,6 +311,12 @@ class OKXSwap:
         df = sc._finish(df, tf)          # OKX answers newest first: every caller gets them oldest first (2026-10-12)
         return df.drop_duplicates("open_time", keep="last").sort_values("open_time").reset_index(drop=True)
 
+    def recent(self, coin, tf, n=3):
+        """The newest n candles INCLUDING the one still open, oldest first: [(open_time, open, close, closed)] - the
+        live candle report of /weather (2026-11-03). One call to the fast endpoint."""
+        rows = self._get("/api/v5/market/candles", {"instId": self.inst(coin), "bar": sc.OKX.BAR[tf], "limit": n})
+        return [(int(r[0]), float(r[1]), float(r[4]), len(r) < 9 or r[8] == "1") for r in reversed(rows or [])]
+
     def minutes(self, coin, n):
         """The newest n CLOSED 1-minute candles (the shock alarm) as arrays open_time / open / high / low / close /
         volume, oldest first: one call to the fast endpoint up to 300, else the history endpoint page by page."""
@@ -347,6 +354,11 @@ class SyntheticSwap:
 
     def candles(self, coin, tf, n, recent_only=False):
         return self.f.klines(coin + "USDT", tf, n)
+
+    def recent(self, coin, tf, n=3):
+        d = self.f.klines(coin + "USDT", tf, n)
+        return [(int(t), float(o), float(c), i < len(d) - 1)
+                for i, (t, o, c) in enumerate(zip(d["open_time"], d["open"], d["close"]))]
 
 
 # ---------------------------------------------------------------- Telegram
@@ -1297,10 +1309,28 @@ class Watcher:
                     w = json.load(f)
             except (OSError, ValueError):
                 w = None
-            return lv.weather_text(w, now_ms)
+            live = self.candles_now(now_ms)
+            return (live + "\n\n— <b>Strategy view</b> (GitHub's hourly scan) —\n" if live else "") + \
+                lv.weather_text(w, now_ms)
         if cmd is None:
             return "I only understand commands. Send /help for the list."
         return f"I don't know /{cmd}. Send /help for the list."
+
+    def candles_now(self, now_ms):
+        """2026-11-03 (operator: "show me today's candles - yesterday's daily, the last 2 closed 4H and 1H - bull or
+        bear"): the live candle report of the operator's own coins, read from OKX when /weather is asked (3 short
+        calls a coin). None when OKX does not answer - /weather then shows GitHub's part only."""
+        rows, coins = {}, ["BTC"]
+        try:
+            coins = list(dict.fromkeys(["BTC"] + list(sc.breadth_coins(self.cfg))))
+            for c in coins:
+                rows[c] = {tf: self.feed.recent(c, tf, 3) for tf in ("1d", "4h", "1h")}
+        except Exception as e:                                       # noqa: BLE001 - an answer without it is fine
+            log(f"/weather candles: {type(e).__name__}: {str(e)[:80]}")
+            if "BTC" not in rows:
+                return None
+        return wx.candles_text(wx.candle_report(rows, [c for c in coins if c in rows]), wx.beijing(
+            dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")))
 
     def on_button(self, cq, now_ms):
         action, _, aid = (cq.get("data") or "").partition("|")

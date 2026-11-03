@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import tempfile
+import types
 import unittest
 from unittest import mock
 
@@ -160,7 +161,8 @@ class DailyTrend(unittest.TestCase):
         self.assertIsNone(wx.price_trend(*(a[:50] for a in self.fall())))
         t = wx.price_text(p)
         self.assertTrue(t.startswith("DOWN · -"))
-        self.assertIn("below its 20-day", t)
+        self.assertIn("lower highs and lower lows", t)
+        self.assertNotIn("average", t)                                     # operator: no 50 / 200-day averages
 
     def test_daily_view(self):
         dn, up = dict(price=dict(dir="down")), dict(price=dict(dir="up"))
@@ -188,10 +190,64 @@ class DailyTrend(unittest.TestCase):
         t = w["telegram"]
         self.assertIn("Downtrend - the strategies wait", t)
         self.assertIn("BTC price trend (daily chart): <b>DOWN", t)
-        self.assertIn("Strategy filter (trades when 4H and 1H agree)", t)
+        self.assertIn("Strategy alerts (need 4H and 1H to agree)", t)
         self.assertIn("↘️ BTC: downtrend on the daily chart (not confirmed)", t)
         self.assertNotIn("Turning", t)
         self.assertIn("daily price trend DOWN", "\n".join(wx.md_lines(w)))
+
+
+class LiveCandles(unittest.TestCase):
+    """2026-11-03 (operator: "show me yesterday's daily candle, the last 2 closed 4H / 1H candles - bull or bear -
+    and the trend from the last daily close"): the live candle report of /weather, read from OKX when asked."""
+    T = 1_762_000_000_000
+
+    def rows(self, d1=(100, 98), d1_now=(98, 98.5), h4=((98, 98.5), (98.5, 98.2)), h1=((98.2, 98.3), (98.3, 98.3))):
+        mk = lambda done, now: [(self.T + i, o, c, True) for i, (o, c) in enumerate(done)] + \
+            ([(self.T + 9, *now, False)] if now else [])                               # noqa: E731
+        return {"1d": mk([(99, 100), d1], d1_now), "4h": mk(list(h4), (98.2, 98.0)), "1h": mk(list(h1), (98.3, 98.6))}
+
+    def test_report(self):
+        rep = wx.candle_report({"BTC": self.rows(), "ETH": self.rows(d1=(50, 51))}, ["BTC", "ETH"])
+        b = rep["coins"][0]
+        self.assertEqual((rep["trend"], rep["red"], rep["green"], rep["n"]), ("bear", 1, 1, 2))
+        self.assertEqual(b["1d"]["closed"][-1], dict(dir="bear", pct=-2.0))            # yesterday only
+        self.assertEqual(b["1d"]["now"]["dir"], "bull")                                 # today so far
+        self.assertEqual([x["dir"] for x in b["4h"]["closed"]], ["bull", "bear"])       # the last 2 closed, oldest first
+        self.assertEqual(b["1h"]["closed"][-1]["dir"], "flat")                          # under 0.05%
+        self.assertEqual(b["price"], 98.6)
+        self.assertEqual(wx.candle(100, 100.04)["dir"], "flat")
+
+    def test_text(self):
+        t = wx.candles_text(wx.candle_report({"BTC": self.rows(), "SOL": self.rows(d1=(10, 10.5))}, ["BTC", "SOL"]),
+                            "11-03 17:30 Beijing")
+        self.assertIn("Trend today: 🔴 BEAR</b> - BTC's daily candle closed 🔴 -2.0% yesterday", t)
+        self.assertIn("• 1D: yesterday 🔴 -2.0% · today so far 🟢 +0.5%", t)
+        self.assertIn("• 4H: last 2 closed 🟢 +0.5% → 🔴 -0.3% · now 🔴 -0.2%", t)
+        self.assertIn("🟢 <b>SOL</b>", t)
+        self.assertIn("not a signal", t)
+        self.assertNotIn("average", t)
+        self.assertIsNone(wx.candles_text(None, "x"))
+
+    def test_watcher_command(self):
+        class Feed:
+            name = "fake"
+
+            def recent(s, coin, tf, n=3):
+                return self.rows()[tf]
+        w = types.SimpleNamespace(cfg=dict(universe=dict(own_coins=["BTC", "ETH"])), feed=Feed())
+        t = LW.Watcher.candles_now(w, self.T)
+        self.assertIn("Market now", t)
+        self.assertIn("<b>ETH</b>", t)
+
+        class Down:
+            name = "down"
+
+            def recent(s, coin, tf, n=3):
+                raise RuntimeError("OKX request failed")
+        self.assertIsNone(LW.Watcher.candles_now(types.SimpleNamespace(cfg=w.cfg, feed=Down()), self.T))
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("live = self.candles_now(now_ms)", src)
+        self.assertIn("/weather - the candles right now", lv.HELP)
 
 
 def weather(perm_btc="NO TRADE", blackout=None, events=None):

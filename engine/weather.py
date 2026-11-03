@@ -179,20 +179,13 @@ def price_trend(high, low, close, days=30, min_move=5.0):
 
 
 def price_text(p):
-    """'DOWN · -9.4% in 30 days · below its 20-day (80,120) and 50-day (82,400) averages · lower highs and lower
-    lows' - the daily chart in words."""
+    """'DOWN · -9.4% in 30 days · lower highs and lower lows' - the daily chart in words (no averages: operator
+    2026-11-03)."""
     if not p:
         return None
-    side = "below" if p["dir"] == "down" else "above" if p["dir"] == "up" else None
     out = [p["dir"].upper(), f"{_pct(p['chg_pct'])} in {p['days']} days"]
-    if side:
-        out.append(f"{side} its 20-day ({_price(p['sma20'])}) and 50-day ({_price(p['sma50'])}) averages")
-    else:
-        out.append(f"20-day average {_price(p['sma20'])}, 50-day {_price(p['sma50'])}")
     if p.get("swing"):
         out.append(p["swing"])
-    if p.get("near200"):
-        out.append(f"testing its 200-day average ({_price(p['sma200'])})")
     return " · ".join(out)
 
 
@@ -208,6 +201,73 @@ def daily_view(code, btc):
     if p == "up":
         return "DIP_UPTREND" if code == "TURNING_DOWN" else "UPTREND_WAIT"
     return code
+
+
+FLAT_PCT = 0.05                     # a candle that moved less than this % is flat (⚪)
+CANDLE_ICON = {"bull": "🟢", "bear": "🔴", "flat": "⚪"}
+
+
+def candle(o, c):
+    """dict(dir bull / bear / flat, pct) of one candle (close against its open)."""
+    pct = (float(c) / float(o) - 1) * 100 if o else 0.0
+    return dict(dir="bull" if pct >= FLAT_PCT else "bear" if pct <= -FLAT_PCT else "flat", pct=round(pct, 2))
+
+
+def candle_report(rows, order=None):
+    """2026-11-03 (operator: "show me today's candles: yesterday's daily candle, the last 2 closed 4H and 1H candles
+    - bull or bear - and the trend from the last daily close"). rows = {coin: {tf: [(open_time, open, close, closed)
+    ...]}} oldest first, tf in 1d / 4h / 1h, the newest one may still be open (closed False). Per coin: the last
+    closed daily candle (the coin's trend for today), today's candle so far, the last 2 closed 4H / 1H candles and the
+    open one. Display only - never a signal."""
+    out = []
+    for coin in order or sorted(rows):
+        r = rows.get(coin) or {}
+        x = dict(coin=coin)
+        for tf, k in (("1d", 1), ("4h", 2), ("1h", 2)):
+            cs = r.get(tf) or []
+            done = [candle(o, c) for _, o, c, closed in cs if closed][-k:]
+            live = [candle(o, c) for _, o, c, closed in cs if not closed][-1:]
+            x[tf] = dict(closed=done, now=live[0] if live else None)
+        last = x["1d"]["closed"]
+        x["trend"] = last[-1]["dir"] if last else None
+        x["price"] = next((float(cs[-1][2]) for cs in (r.get("1h"), r.get("4h"), r.get("1d")) if cs), None)
+        out.append(x)
+    btc = next((x for x in out if x["coin"] == "BTC"), out[0] if out else None)
+    red = sum(x["trend"] == "bear" for x in out)
+    green = sum(x["trend"] == "bull" for x in out)
+    return dict(coins=out, trend=(btc or {}).get("trend"), red=red, green=green, n=len(out))
+
+
+def _c(x):
+    return f"{CANDLE_ICON[x['dir']]} {x['pct']:+.1f}%" if x else "?"
+
+
+def candles_text(rep, when):
+    """The live part of /weather (Telegram HTML). when = 'MM-DD HH:MM Beijing'."""
+    if not rep or not rep.get("coins"):
+        return None
+    word = {"bull": "🟢 BULL", "bear": "🔴 BEAR", "flat": "⚪ FLAT"}
+    btc = rep["coins"][0]
+    d = btc["1d"]["closed"]
+    out = [f"🕯 <b>Market now · {when}</b> (live OKX candles)",
+           f"<b>Trend today: {word.get(rep['trend'], '?')}</b> - BTC's daily candle closed "
+           + (f"{_c(d[-1])} yesterday" if d else "? yesterday")
+           + f"; {rep['red']} of {rep['n']} coins closed red, {rep['green']} green.",
+           "<i>A day = 08:00 to 08:00 Beijing (00:00 UTC).</i>", "",
+           f"<b>BTC</b> {_price(btc['price'])}",
+           f"• 1D: yesterday {_c(d[-1] if d else None)} · today so far {_c(btc['1d']['now'])}"]
+    for tf, name in (("4h", "4H"), ("1h", "1H")):
+        cl = btc[tf]["closed"]
+        out.append(f"• {name}: last 2 closed {' → '.join(_c(x) for x in cl) or '?'} · now {_c(btc[tf]['now'])}")
+    if len(rep["coins"]) > 1:
+        out += ["", "<b>Other coins</b> (1D yesterday / today · 4H last 2 · 1H last 2)"]
+        for x in rep["coins"][1:]:
+            dd = x["1d"]["closed"]
+            icons = lambda tf: "".join(CANDLE_ICON[c["dir"]] for c in x[tf]["closed"]) or "?"  # noqa: E731
+            out.append(f"{CANDLE_ICON.get(x['trend'], '⚪')} <b>{x['coin']}</b> {_price(x['price'])}: "
+                       f"{_c(dd[-1] if dd else None)} / {_c(x['1d']['now'])} · 4H {icons('4h')} · 1H {icons('1h')}")
+    out += ["", "<i>Candles explain the market only - one red or green candle is not a signal.</i>"]
+    return "\n".join(out)
 
 
 def vol_label(pctile):
@@ -463,7 +523,7 @@ def telegram(w):
         pt = price_text(btc.get("price"))
         if pt:
             out.append(f"BTC price trend (daily chart): <b>{pt}</b>")
-        out.append(f"Strategy filter (trades when 4H and 1H agree): 1D {lb.get('1d') or '?'} · "
+        out.append(f"Strategy alerts (need 4H and 1H to agree): 1D {lb.get('1d') or '?'} · "
                    f"4H {lb.get('4h') or '?'} · 1H {lb.get('1h') or '?'}")
         if btc.get("vol"):
             out.append(f"Volatility: {btc['vol']['vol_label']} (daily range {btc['vol']['atr_pct']:.1f}%, "

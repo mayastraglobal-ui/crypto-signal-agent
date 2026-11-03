@@ -169,7 +169,10 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
     its daily **price trend** - the 30-day change, the 20- / 50-day averages and the swing of the last 30 days, what
     the chart shows. When BTC's daily chart trends and the strategy filter has not confirmed it, the verdict says
     "Downtrend - the strategies wait for a clean 4H / 1H" (or "Bounce inside a downtrend", and the up mirrors)
-    instead of "Turning down / up - not confirmed" or "Choppy". Still display only.
+    instead of "Turning down / up - not confirmed" or "Choppy". Still display only. The same day (operator: "show me
+    today's candles, not 50-day averages"): `/weather` starts with a **live candle report** the PC watcher reads from
+    OKX when asked - per own coin yesterday's daily candle (= today's trend, bull / bear), today's candle so far, the
+    last 2 closed 4H and 1H candles and the open ones - then GitHub's strategy view; no average values are shown.
 11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
     ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
     every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07
