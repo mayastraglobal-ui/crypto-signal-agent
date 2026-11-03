@@ -2,7 +2,7 @@
 
 What kind of day it is, from the hourly scan's own numbers (engine/weather.py). Explains the market only: it never creates a signal or changes a rule.
 
-- verdict (2026-11-03 14:11 UTC): **Downtrend - the strategies wait for a clean 4H / 1H** - BTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.
+- verdict (2026-11-03 14:16 UTC): **Downtrend - the strategies wait for a clean 4H / 1H** - BTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.
 - coins: BTC downtrend on the daily chart (not confirmed), ETH downtrend on the daily chart (not confirmed), SOL downtrend on the daily chart (not confirmed), SUI downtrend on the daily chart (not confirmed), XRP bounce in a downtrend (daily), ZEC downtrend on the daily chart (not confirmed)
 - fits: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails · avoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows
 - BTC: daily price trend DOWN · -9.4% in 30 days · lower highs and lower lows; 1D UNCLEAR / 4H TRANSITION / 1H WEAK_BEAR (timeframes disagree (1D UNCLEAR, 4H TRANSITION, 1H WEAK_BEAR)); volatility normal (higher than 25% of the last year); usual 24h move ±0.9%, 8 of 10 similar days within ±2.1%; crowding neutral (funding +0.0100%/8h, OI -0.1% 24h)
