@@ -173,6 +173,8 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
     today's candles, not 50-day averages"): `/weather` starts with a **live candle report** the PC watcher reads from
     OKX when asked - per own coin yesterday's daily candle (= today's trend, bull / bear), today's candle so far, the
     last 2 closed 4H and 1H candles and the open ones - then GitHub's strategy view; no average values are shown.
+    Re-laid out the same day to the operator's plan: 📅 DAILY / ⏱ 4 HOUR / ⏰ 1 HOUR, each a trend from the last
+    2 / 3 / 3 closed candles (majority colour) and the live candle, one line per other coin, 2 strategy lines.
 11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
     ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
     every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07

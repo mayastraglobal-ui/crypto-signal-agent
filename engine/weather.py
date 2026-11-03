@@ -213,61 +213,89 @@ def candle(o, c):
     return dict(dir="bull" if pct >= FLAT_PCT else "bear" if pct <= -FLAT_PCT else "flat", pct=round(pct, 2))
 
 
+TREND_N = {"1d": 2, "4h": 3, "1h": 3}          # closed candles that decide each timeframe's trend (operator 2026-11-03)
+WORD = {"bull": "🟢 BULL", "bear": "🔴 BEAR", "flat": "⚪ FLAT", "mixed": "⚪ MIXED"}
+
+
+def trend_of(cs):
+    """bull / bear / mixed from closed candles: the colour most of them have; a tie -> the bigger net move."""
+    if not cs:
+        return None
+    up, dn = sum(c["dir"] == "bull" for c in cs), sum(c["dir"] == "bear" for c in cs)
+    if up != dn:
+        return "bull" if up > dn else "bear"
+    net = sum(c["pct"] for c in cs)
+    return "bull" if net >= FLAT_PCT else "bear" if net <= -FLAT_PCT else "mixed"
+
+
 def candle_report(rows, order=None):
-    """2026-11-03 (operator: "show me today's candles: yesterday's daily candle, the last 2 closed 4H and 1H candles
-    - bull or bear - and the trend from the last daily close"). rows = {coin: {tf: [(open_time, open, close, closed)
-    ...]}} oldest first, tf in 1d / 4h / 1h, the newest one may still be open (closed False). Per coin: the last
-    closed daily candle (the coin's trend for today), today's candle so far, the last 2 closed 4H / 1H candles and the
-    open one. Display only - never a signal."""
+    """2026-11-03 (operator: "daily trend from yesterday's last 1 / 2 closed candles and today's live candle; 4H and
+    1H the same with the last 2 / 3 closed candles"; then chose 1D 2 / 4H 3 / 1H 3, the majority colour, a tie -> the
+    bigger move). rows = {coin: {tf: [(open_time, open, close, closed) ...]}} oldest first, tf 1d / 4h / 1h, the
+    newest one may still be open (closed False). Per coin and timeframe: the closed candles used, their trend and the
+    live candle. Display only - never a signal."""
     out = []
     for coin in order or sorted(rows):
         r = rows.get(coin) or {}
         x = dict(coin=coin)
-        for tf, k in (("1d", 1), ("4h", 2), ("1h", 2)):
+        for tf, k in TREND_N.items():
             cs = r.get(tf) or []
             done = [candle(o, c) for _, o, c, closed in cs if closed][-k:]
             live = [candle(o, c) for _, o, c, closed in cs if not closed][-1:]
-            x[tf] = dict(closed=done, now=live[0] if live else None)
-        last = x["1d"]["closed"]
-        x["trend"] = last[-1]["dir"] if last else None
+            x[tf] = dict(closed=done, trend=trend_of(done), now=live[0] if live else None)
         x["price"] = next((float(cs[-1][2]) for cs in (r.get("1h"), r.get("4h"), r.get("1d")) if cs), None)
         out.append(x)
-    btc = next((x for x in out if x["coin"] == "BTC"), out[0] if out else None)
-    red = sum(x["trend"] == "bear" for x in out)
-    green = sum(x["trend"] == "bull" for x in out)
-    return dict(coins=out, trend=(btc or {}).get("trend"), red=red, green=green, n=len(out))
+    return dict(coins=out)
 
 
 def _c(x):
     return f"{CANDLE_ICON[x['dir']]} {x['pct']:+.1f}%" if x else "?"
 
 
-def candles_text(rep, when):
-    """The live part of /weather (Telegram HTML). when = 'MM-DD HH:MM Beijing'."""
+def _live(x):
+    return f"{WORD[x['dir']]} {x['pct']:+.1f}%" if x else "?"
+
+
+def candles_text(rep, when, strategy=None):
+    """The candle report of /weather (Telegram HTML): BTC in full - DAILY / 4 HOUR / 1 HOUR, each with its trend
+    (from the closed candles) and its live candle - then one line per other coin, then `strategy` (short lines).
+    when = 'MM-DD HH:MM Beijing'."""
     if not rep or not rep.get("coins"):
         return None
-    word = {"bull": "🟢 BULL", "bear": "🔴 BEAR", "flat": "⚪ FLAT"}
     btc = rep["coins"][0]
-    d = btc["1d"]["closed"]
-    out = [f"🕯 <b>Market now · {when}</b> (live OKX candles)",
-           f"<b>Trend today: {word.get(rep['trend'], '?')}</b> - BTC's daily candle closed "
-           + (f"{_c(d[-1])} yesterday" if d else "? yesterday")
-           + f"; {rep['red']} of {rep['n']} coins closed red, {rep['green']} green.",
-           "<i>A day = 08:00 to 08:00 Beijing (00:00 UTC).</i>", "",
-           f"<b>BTC</b> {_price(btc['price'])}",
-           f"• 1D: yesterday {_c(d[-1] if d else None)} · today so far {_c(btc['1d']['now'])}"]
-    for tf, name in (("4h", "4H"), ("1h", "1H")):
-        cl = btc[tf]["closed"]
-        out.append(f"• {name}: last 2 closed {' → '.join(_c(x) for x in cl) or '?'} · now {_c(btc[tf]['now'])}")
+    out = [f"📊 <b>{btc['coin']} {_price(btc['price'])}</b> · {when}"]
+    for tf, name, icon, live in (("1d", "DAILY", "📅", "Today live"), ("4h", "4 HOUR", "⏱", "Live candle"),
+                                 ("1h", "1 HOUR", "⏰", "Live candle")):
+        x = btc[tf]
+        used = (" · ".join(_c(c) for c in x["closed"]) if tf == "1d" else
+                " ".join(CANDLE_ICON[c["dir"]] for c in x["closed"]))
+        out += ["", f"{icon} <b>{name}</b>",
+                f"   Trend: <b>{WORD.get(x['trend'], '?')}</b>  ({used or '?'})",
+                f"   {live}: {_live(x['now'])}"]
     if len(rep["coins"]) > 1:
-        out += ["", "<b>Other coins</b> (1D yesterday / today · 4H last 2 · 1H last 2)"]
-        for x in rep["coins"][1:]:
-            dd = x["1d"]["closed"]
-            icons = lambda tf: "".join(CANDLE_ICON[c["dir"]] for c in x[tf]["closed"]) or "?"  # noqa: E731
-            out.append(f"{CANDLE_ICON.get(x['trend'], '⚪')} <b>{x['coin']}</b> {_price(x['price'])}: "
-                       f"{_c(dd[-1] if dd else None)} / {_c(x['1d']['now'])} · 4H {icons('4h')} · 1H {icons('1h')}")
-    out += ["", "<i>Candles explain the market only - one red or green candle is not a signal.</i>"]
+        out += ["", "<b>Other coins</b>   Day · 4H · 1H trend (live)"]
+        ic = lambda d: CANDLE_ICON.get(d, "⚪") if d != "mixed" else "⚪"  # noqa: E731
+        for c in rep["coins"][1:]:
+            cells = " · ".join(f"{ic(c[tf]['trend'])}({ic((c[tf]['now'] or {}).get('dir'))})" for tf in TREND_N)
+            out.append(f"<code>{c['coin']:<4}</code> {cells}")
+    out += ["", f"<i>Trend = the last {TREND_N['1d']} closed daily, {TREND_N['4h']} closed 4H and {TREND_N['1h']} "
+                "closed 1H candles (most colours win). A day starts 08:00 Beijing.</i>"]
+    if strategy:
+        out += [""] + list(strategy)
     return "\n".join(out)
+
+
+def strategy_note(w, now=None):
+    """Two short lines from GitHub's weather for the bottom of the candle report: what the strategy alerts do and the
+    next event."""
+    if not w or not w.get("verdict"):
+        return []
+    v = w["verdict"]
+    out = [f"🧠 Strategy alerts: {v.get('title', '?')}"]
+    ev = (w.get("events") or [None])[0]
+    if ev:
+        out.append(f"📅 Next event: {html.escape(str(ev.get('name')))} {beijing(ev.get('start_utc'))}")
+    return out
 
 
 def vol_label(pctile):

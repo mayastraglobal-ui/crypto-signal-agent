@@ -1309,28 +1309,29 @@ class Watcher:
                     w = json.load(f)
             except (OSError, ValueError):
                 w = None
-            live = self.candles_now(now_ms)
-            return (live + "\n\n— <b>Strategy view</b> (GitHub's hourly scan) —\n" if live else "") + \
-                lv.weather_text(w, now_ms)
+            live = self.candles_now(now_ms, w)
+            return live or lv.weather_text(w, now_ms)                 # OKX not answering: GitHub's full weather
         if cmd is None:
             return "I only understand commands. Send /help for the list."
         return f"I don't know /{cmd}. Send /help for the list."
 
-    def candles_now(self, now_ms):
-        """2026-11-03 (operator: "show me today's candles - yesterday's daily, the last 2 closed 4H and 1H - bull or
-        bear"): the live candle report of the operator's own coins, read from OKX when /weather is asked (3 short
-        calls a coin). None when OKX does not answer - /weather then shows GitHub's part only."""
+    def candles_now(self, now_ms, w=None):
+        """2026-11-03 (operator: "daily / 4H / 1H: the trend from the last closed candles and the live candle, well
+        organized"): the /weather candle report of the operator's own coins, read from OKX when asked (3 short calls
+        a coin), with 2 short strategy lines from GitHub's weather `w` at the bottom. None when OKX does not answer -
+        /weather then shows GitHub's full weather."""
         rows, coins = {}, ["BTC"]
         try:
             coins = list(dict.fromkeys(["BTC"] + list(sc.breadth_coins(self.cfg))))
             for c in coins:
-                rows[c] = {tf: self.feed.recent(c, tf, 3) for tf in ("1d", "4h", "1h")}
+                rows[c] = {tf: self.feed.recent(c, tf, wx.TREND_N[tf] + 1) for tf in wx.TREND_N}
         except Exception as e:                                       # noqa: BLE001 - an answer without it is fine
             log(f"/weather candles: {type(e).__name__}: {str(e)[:80]}")
             if "BTC" not in rows:
                 return None
         return wx.candles_text(wx.candle_report(rows, [c for c in coins if c in rows]), wx.beijing(
-            dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")))
+            dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc).strftime("%Y-%m-%d %H:%M")),
+            wx.strategy_note(w))
 
     def on_button(self, cq, now_ms):
         action, _, aid = (cq.get("data") or "").partition("|")
