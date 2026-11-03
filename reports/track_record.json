@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-03 12:11",
+ "utc": "2026-11-03 13:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 59,
+  "n": 60,
   "wins": 8,
-  "win_rate": 13.6,
-  "avg_r": -0.716,
-  "total_r": -42.24,
-  "max_dd_r": 42.24,
-  "cur_loss_run": 16,
-  "max_loss_run": 16,
-  "sd": 0.852
+  "win_rate": 13.3,
+  "avg_r": -0.722,
+  "total_r": -43.33,
+  "max_dd_r": 43.33,
+  "cur_loss_run": 17,
+  "max_loss_run": 17,
+  "sd": 0.846
  },
  "yours": {
   "n": 4,
@@ -32,29 +32,29 @@
   "sd": 0.114
  },
  "silent": {
-  "n": 49,
+  "n": 50,
   "wins": 8,
-  "win_rate": 16.3,
-  "avg_r": -0.647,
-  "total_r": -31.7,
-  "max_dd_r": 31.7,
-  "cur_loss_run": 14,
-  "max_loss_run": 14,
-  "sd": 0.92
+  "win_rate": 16.0,
+  "avg_r": -0.656,
+  "total_r": -32.78,
+  "max_dd_r": 32.78,
+  "cur_loss_run": 15,
+  "max_loss_run": 15,
+  "sd": 0.913
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 56,
+   "n": 57,
    "wins": 8,
-   "win_rate": 14.3,
-   "avg_r": -0.696,
-   "total_r": -38.99,
-   "max_dd_r": 38.99,
-   "cur_loss_run": 16,
-   "max_loss_run": 16,
-   "sd": 0.87
+   "win_rate": 14.0,
+   "avg_r": -0.703,
+   "total_r": -40.08,
+   "max_dd_r": 40.08,
+   "cur_loss_run": 17,
+   "max_loss_run": 17,
+   "sd": 0.864
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -136,6 +136,34 @@
     "4 losses in a row - in its backtest (34% won) a run that long shows up in 19% of 4-trade periods"
    ],
    "last_utc": "2026-10-31 00:59",
+   "sent": false
+  },
+  {
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 4,
+    "wins": 1,
+    "win_rate": 25.0,
+    "avg_r": -0.57,
+    "total_r": -2.28,
+    "max_dd_r": 3.24,
+    "cur_loss_run": 3,
+    "max_loss_run": 3,
+    "sd": 1.017
+   },
+   "backtest": {
+    "n": 345,
+    "avg_r": 0.016,
+    "win_rate": 37.7
+   },
+   "verdict": "watch",
+   "why": [
+    "3 losses in a row - in its backtest (38% won) a run that long shows up in 43% of 4-trade periods"
+   ],
+   "last_utc": "2026-11-03 12:59",
    "sent": false
   },
   {
@@ -242,32 +270,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-25 11:44",
-   "sent": false
-  },
-  {
-   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
-   "coin": "SUI",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 3,
-    "wins": 1,
-    "win_rate": 33.3,
-    "avg_r": -0.397,
-    "total_r": -1.19,
-    "max_dd_r": 2.15,
-    "cur_loss_run": 2,
-    "max_loss_run": 2,
-    "sd": 1.171
-   },
-   "backtest": {
-    "n": 345,
-    "avg_r": 0.016,
-    "win_rate": 37.7
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-18 09:59",
    "sent": false
   },
   {
@@ -1081,6 +1083,10 @@
   {
    "t": "2026-11-03 10:59",
    "r": -42.24
+  },
+  {
+   "t": "2026-11-03 12:59",
+   "r": -43.33
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
