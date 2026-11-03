@@ -933,3 +933,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-03 02:16 UTC
 - **EXCLUDED** SUI - 24h volume $50M < $50M
 - **LEAVE** SUI - not eligible: 24h volume $50M < $50M
+
+## 2026-11-03 03:11 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,102x the 1% order-book depth (flag only, not excluded)
+- **ELIGIBLE** SUI - passes every rule again
