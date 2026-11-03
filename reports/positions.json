@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-03 10:13",
+ "generated_utc": "2026-11-03 11:16",
  "book": {
-  "utc": "2026-11-03 10:13",
-  "beijing": "2026-11-03 18:13",
+  "utc": "2026-11-03 11:16",
+  "beijing": "2026-11-03 19:16",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-03 10:13 UTC / 2026-11-03 18:13 Beijing",
+  "POSITION BOOK \u2014 2026-11-03 11:16 UTC / 2026-11-03 19:16 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -603,5 +603,19 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-03 11:16",
+   "id": "ZEC-1h-P07-SQUEEZE-RETEST-V5-2026-11-02 20:59",
+   "coin": "ZEC",
+   "tf": "1h",
+   "strategy": "P07-SQUEEZE-RETEST-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.49R"
+  }
+ ]
 }

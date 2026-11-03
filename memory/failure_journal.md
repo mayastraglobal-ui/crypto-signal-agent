@@ -426,3 +426,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### ZEC SHORT 1h P07-SQUEEZE-RETEST-V5 v1.0 - exit-rule -0.49R
+- timestamp: 2026-11-03 11:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.49R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V5 v1.0 · asset: ZEC · timeframe: 1h · regime: EXPANSION · review: 2026-11-10
+  - signal 2026-11-02 20:59 UTC, closed 2026-11-03 10:59 UTC, stage TEST
+  - MAE -0.53R / MFE +0.73R
+  - at entry: session outside killzones, conditions: htf_conflict, overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)

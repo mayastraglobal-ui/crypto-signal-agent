@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-03 10:13 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-03 11:16 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 4 | 0 | -1.01R | -4.02R | 4.02R | 4 |
-| Silent research records (never sent to you) | 48 | 17 | -0.65R | -31.21R | 31.21R | 13 |
-| 🔵 TEST | 55 | 14 | -0.70R | -38.50R | 38.50R | 15 |
+| Silent research records (never sent to you) | 49 | 16 | -0.65R | -31.70R | 31.70R | 14 |
+| 🔵 TEST | 56 | 14 | -0.70R | -38.99R | 38.99R | 16 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 58 | 14 | -0.72R | -41.75R | 41.75R | 15 |
+| **All** | 59 | 14 | -0.72R | -42.24R | 42.24R | 16 |
 
 ## 🚨 Drift monitor
 
@@ -52,12 +52,12 @@ Warning signs (no pause yet):
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 1 | 0 | -1.07R | +0.02R | -1.07R | 1.07R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 100 | +0.89R | +0.16R | +0.89R | 0.00R | ✅ |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.25R | -1.02R | 1.02R | ✅ |
+| P07-SQUEEZE-RETEST-V5 | 1h | ZEC | 🔵 TEST | silent | 1 | 0 | -0.49R | +0.03R | -0.49R | 0.49R | ✅ |
 
 ## Equity curve (all stages, R after fees)
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-22 03:59 | -28.52R |
 | 2026-10-23 02:59 | -29.63R |
 | 2026-10-25 11:44 | -29.01R |
 | 2026-10-25 16:59 | -28.12R |
@@ -77,3 +77,4 @@ Warning signs (no pause yet):
 | 2026-10-31 00:59 | -39.50R |
 | 2026-11-01 23:59 | -40.55R |
 | 2026-11-02 00:29 | -41.75R |
+| 2026-11-03 10:59 | -42.24R |
