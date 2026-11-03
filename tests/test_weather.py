@@ -139,10 +139,66 @@ class Turning(unittest.TestCase):
         self.assertIn("BTC: turning down", scx.weather_line(w, "BTC"))
 
 
+class DailyTrend(unittest.TestCase):
+    """2026-11-03 (operator: "BTC fell from 87,000 to 76,000 and /weather says turning down"): when BTC's daily chart
+    clearly trends, the verdict names that trend and says the strategies still wait; a 1H bounce inside it is a
+    bounce, not "turning up". Display only: the recorded coin verdicts (the market types) are unchanged."""
+    def fall(self, n=400, drop=0.12):
+        c = np.r_[np.linspace(80, 100, n - 40), np.linspace(100, 100 * (1 - drop), 40)]
+        c = c * (1 + 0.004 * np.sin(np.arange(n)))                        # small daily wiggles
+        return c * 1.01, c * 0.99, c
+
+    def test_price_trend(self):
+        p = wx.price_trend(*self.fall())
+        self.assertEqual(p["dir"], "down")
+        self.assertLess(p["chg_pct"], -5)
+        self.assertEqual(p["swing"], "lower highs and lower lows")
+        h, lo, c = (200 - a for a in self.fall())                         # the mirror image: a rise
+        self.assertEqual(wx.price_trend(lo, h, c)["dir"], "up")
+        flat = np.full(400, 100.0) * (1 + 0.01 * np.sin(np.arange(400)))
+        self.assertEqual(wx.price_trend(flat * 1.01, flat * 0.99, flat)["dir"], "sideways")
+        self.assertIsNone(wx.price_trend(*(a[:50] for a in self.fall())))
+        t = wx.price_text(p)
+        self.assertTrue(t.startswith("DOWN · -"))
+        self.assertIn("below its 20-day", t)
+
+    def test_daily_view(self):
+        dn, up = dict(price=dict(dir="down")), dict(price=dict(dir="up"))
+        self.assertEqual(wx.daily_view("TURNING_DOWN", dn), "DOWNTREND_WAIT")
+        self.assertEqual(wx.daily_view("CHOPPY", dn), "DOWNTREND_WAIT")
+        self.assertEqual(wx.daily_view("TURNING_UP", dn), "BOUNCE_DOWNTREND")
+        self.assertEqual(wx.daily_view("TURNING_DOWN", up), "DIP_UPTREND")
+        self.assertEqual(wx.daily_view("CHOPPY", up), "UPTREND_WAIT")
+        for code in ("TREND_DOWN", "TREND_UP", "MIXED", "RANGE", "NEWS"):
+            self.assertEqual(wx.daily_view(code, dn), code)                # confirmed / other verdicts stay
+        self.assertEqual(wx.daily_view("CHOPPY", dict(price=dict(dir="sideways"))), "CHOPPY")
+        self.assertEqual(wx.daily_view("TURNING_DOWN", None), "TURNING_DOWN")
+        self.assertEqual(wx.coin_word(dict(verdict="CHOPPY", turning="down", price=dict(dir="down"))),
+                         "downtrend on the daily chart (not confirmed)")
+        self.assertEqual(wx.coin_word(dict(verdict="CHOPPY", turning="up", price=dict(dir="down"))),
+                         "bounce in a downtrend (daily)")
+        self.assertEqual(wx.coin_word(dict(verdict="DOWN", turning=None, price=dict(dir="down"))), "trend down")
+
+    def test_the_3_nov_case(self):
+        rc = Turning().recs("WEAK_BEAR", "UNCLEAR", mo4="down", su4="mixed")
+        regs = {k: dict(timeframes=rc, permission="NO TRADE", permission_reason="t") for k in ("BTC", "ETH", "SOL")}
+        w = wx.build(NOW, regs, {k: self.fall() for k in regs}, {}, {}, [])
+        self.assertEqual(w["verdict"]["code"], "DOWNTREND_WAIT")
+        self.assertEqual([c["verdict"] for c in w["coins"]], ["CHOPPY"] * 3)    # the recorded verdict is unchanged
+        t = w["telegram"]
+        self.assertIn("Downtrend - the strategies wait", t)
+        self.assertIn("BTC price trend (daily chart): <b>DOWN", t)
+        self.assertIn("Strategy filter (trades when 4H and 1H agree)", t)
+        self.assertIn("↘️ BTC: downtrend on the daily chart (not confirmed)", t)
+        self.assertNotIn("Turning", t)
+        self.assertIn("daily price trend DOWN", "\n".join(wx.md_lines(w)))
+
+
 def weather(perm_btc="NO TRADE", blackout=None, events=None):
     regs = {"BTC": regime(perm_btc, "WEAK_BULL", "TRANSITION", "WEAK_BEAR"), "ETH": regime("LONG allowed"),
             "SOL": regime("NO TRADE", "WEAK_BULL", "RANGE", "RANGE")}
-    return wx.build(NOW, regs, {"BTC": daily(), "ETH": daily(seed=2)}, {}, {"BTC": dict(change_24h=-2.0),
+    # seeds 4 / 5: sideways daily charts (2026-11-03: a trending daily chart now names the verdict - DailyTrend)
+    return wx.build(NOW, regs, {"BTC": daily(seed=4), "ETH": daily(seed=5)}, {}, {"BTC": dict(change_24h=-2.0),
                                                                           "ETH": dict(change_24h=-1.0),
                                                                           "SOL": dict(change_24h=0.0)},
                     events or [], blackout, dict(value=64, label="Greed"))

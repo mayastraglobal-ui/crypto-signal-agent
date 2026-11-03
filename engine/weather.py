@@ -72,6 +72,34 @@ VERDICTS = {
                    ["waiting for the confirmation - the LONG alerts then come by themselves",
                     "checking the stop of any open short"],
                    ["chasing the rally by hand before the confirmation", "shorting into the rise"]),
+    # 2026-11-03 (operator: "BTC fell from 87,000 to 76,000 and /weather says turning down"): the strategy filter
+    # (1D / 4H / 1H regimes, 50 / 200 averages) is slow on purpose, so a grinding fall stayed "not confirmed" and a
+    # 1H bounce inside it read "turning up". When BTC's daily price trend (price_trend: 30-day change and the 20- /
+    # 50-day averages - what the chart shows) points one way, the verdict now says so. Display only, like the rest.
+    "DOWNTREND_WAIT": ("🌧", "Downtrend - the strategies wait for a clean 4H / 1H",
+                       "BTC is falling on the daily chart (the price trend line below). The strategy filter is "
+                       "stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a "
+                       "grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.",
+                       ["no longs, no buying the dip", "checking the stop of any open long",
+                        "waiting for a SHORT alert - it often comes after a bounce fails"],
+                       ["buying the dip (catching a falling knife)",
+                        "shorting by hand right after a big red candle, at the lows"]),
+    "BOUNCE_DOWNTREND": ("🌦", "Bounce inside a downtrend",
+                         "Prices are rising on the 1H chart, but BTC's daily trend is still down (the price trend "
+                         "line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.",
+                         ["waiting - a failed bounce often sets up the next SHORT alert"],
+                         ["buying the bounce as if the trend had turned", "shorting by hand in the middle of it"]),
+    "UPTREND_WAIT": ("🌤", "Uptrend - the strategies wait for a clean 4H / 1H",
+                     "BTC is rising on the daily chart (the price trend line below). The strategy filter is "
+                     "stricter: it trades a LONG only when 4H and 1H both show a clean uptrend. A LONG alert comes "
+                     "once they agree.",
+                     ["no shorts against the trend", "waiting for a LONG alert - it often comes after a dip holds"],
+                     ["shorting the rise", "chasing a big green candle by hand"]),
+    "DIP_UPTREND": ("🌦", "Dip inside an uptrend",
+                    "Prices are falling on the 1H chart, but BTC's daily trend is still up (the price trend line "
+                    "below). It is a turn down only once 4H and 1D turn.",
+                    ["waiting - a dip that holds often sets up the next LONG alert"],
+                    ["shorting the dip as if the trend had turned", "buying by hand in the middle of the fall"]),
     "CHOPPY": ("🌫", "Choppy - stay out",
                "The timeframes disagree (for example 1D up, 1H down). Longs and shorts both get stopped out.",
                ["waiting until 1D, 4H and 1H agree - no trade is the right trade"],
@@ -125,6 +153,61 @@ def daily_stats(high, low, close, s=None):
                 usual_move_pct=_f(p50), move_8of10_pct=_f(p80), days=int(len(mv)), basis=basis,
                 price=price, band=[_f(price * (1 - p80 / 100), 6), _f(price * (1 + p80 / 100), 6)]
                 if p80 is not None else None)
+
+
+def price_trend(high, low, close, days=30, min_move=5.0):
+    """What the daily chart shows, in plain numbers (closed daily candles, oldest first): the change over `days`,
+    the 20- / 50- / 200-day averages and the swing of the last 3 x 10 days. dir = 'down' when the close is at least
+    min_move % below its level `days` ago AND below its 20- and 50-day averages; 'up' the same way up; else
+    'sideways'. None with fewer than 60 days. Display only (the verdict wording), never a signal."""
+    h, lo, c = (np.asarray(a, dtype=float) for a in (high, low, close))
+    if len(c) < max(60, days + 1):
+        return None
+    now = float(c[-1])
+    chg = (now / float(c[-1 - days]) - 1) * 100
+    sma = {n: float(c[-n:].mean()) if len(c) >= n else None for n in (20, 50, 200)}
+    hi = [float(h[-10 * (k + 1):len(h) - 10 * k].max()) for k in (2, 1, 0)]      # oldest block first
+    lw = [float(lo[-10 * (k + 1):len(lo) - 10 * k].min()) for k in (2, 1, 0)]
+    swing = ("lower highs and lower lows" if hi[0] > hi[1] > hi[2] and lw[0] > lw[1] > lw[2] else
+             "higher highs and higher lows" if hi[0] < hi[1] < hi[2] and lw[0] < lw[1] < lw[2] else None)
+    below = now < sma[20] and now < sma[50]
+    above = now > sma[20] and now > sma[50]
+    d = "down" if chg <= -min_move and below else "up" if chg >= min_move and above else "sideways"
+    near200 = sma[200] is not None and abs(now / sma[200] - 1) <= 0.02
+    return dict(dir=d, chg_pct=_f(chg, 1), days=days, sma20=_f(sma[20], 6), sma50=_f(sma[50], 6),
+                sma200=_f(sma[200], 6), swing=swing, near200=near200, price=now)
+
+
+def price_text(p):
+    """'DOWN · -9.4% in 30 days · below its 20-day (80,120) and 50-day (82,400) averages · lower highs and lower
+    lows' - the daily chart in words."""
+    if not p:
+        return None
+    side = "below" if p["dir"] == "down" else "above" if p["dir"] == "up" else None
+    out = [p["dir"].upper(), f"{_pct(p['chg_pct'])} in {p['days']} days"]
+    if side:
+        out.append(f"{side} its 20-day ({_price(p['sma20'])}) and 50-day ({_price(p['sma50'])}) averages")
+    else:
+        out.append(f"20-day average {_price(p['sma20'])}, 50-day {_price(p['sma50'])}")
+    if p.get("swing"):
+        out.append(p["swing"])
+    if p.get("near200"):
+        out.append(f"testing its 200-day average ({_price(p['sma200'])})")
+    return " · ".join(out)
+
+
+def daily_view(code, btc):
+    """The verdict with BTC's daily price trend: a CHOPPY / turning market whose daily chart clearly trends is named
+    for the daily trend (DOWNTREND_WAIT / BOUNCE_DOWNTREND and the up mirror). The strategy-confirmed TREND_UP /
+    TREND_DOWN, MIXED, RANGE and NEWS stay as they are."""
+    p = ((btc or {}).get("price") or {}).get("dir")
+    if code not in ("CHOPPY", "TURNING_DOWN", "TURNING_UP"):
+        return code
+    if p == "down":
+        return "BOUNCE_DOWNTREND" if code == "TURNING_UP" else "DOWNTREND_WAIT"
+    if p == "up":
+        return "DIP_UPTREND" if code == "TURNING_DOWN" else "UPTREND_WAIT"
+    return code
 
 
 def vol_label(pctile):
@@ -213,11 +296,21 @@ def turning(recs, permission):
 
 
 def coin_word(c):
-    """'turning down (not confirmed)' for a turning coin, else the verdict's word."""
-    return TURN_WORD.get(c.get("turning")) or COIN_WORD.get(c.get("verdict"), c.get("verdict"))
+    """'turning down (not confirmed)' for a turning coin, else the verdict's word. 2026-11-03: a coin whose daily
+    price trend points one way that its strategy verdict has not confirmed says so ('downtrend on the daily chart',
+    'bounce in a downtrend')."""
+    p, v, t = ((c.get("price") or {}).get("dir")), c.get("verdict"), c.get("turning")
+    if v in ("CHOPPY", "RANGE") and p == "down":                  # a confirmed UP / DOWN keeps its own word
+        return "bounce in a downtrend (daily)" if t == "up" else "downtrend on the daily chart (not confirmed)"
+    if v in ("CHOPPY", "RANGE") and p == "up":
+        return "dip in an uptrend (daily)" if t == "down" else "uptrend on the daily chart (not confirmed)"
+    return TURN_WORD.get(t) or COIN_WORD.get(v, v)
 
 
 def coin_icon(c):
+    p, v = (c.get("price") or {}).get("dir"), c.get("verdict")
+    if v in ("CHOPPY", "RANGE") and p in ("down", "up"):
+        return "↘️" if p == "down" else "↗️"
     return TURN_ICON.get(c.get("turning")) or COIN_ICON.get(c.get("verdict"), "⚪")
 
 
@@ -293,9 +386,10 @@ def build(now, regimes, daily, derivs, snap, events, blackout_now=None, fear_gre
             labels={tf: (recs.get(tf) or {}).get("label") for tf in ("1w", "1d", "4h", "1h")},
             adx={tf: _f(((recs.get(tf) or {}).get("values") or {}).get("adx"), 0) for tf in ("1d", "4h", "1h")},
             vol=daily_stats(*d, s=s) if d is not None else None,
+            price=price_trend(*d) if d is not None else None,
             crowd=crowding(hourly, fund, s),
             change_24h=_f((snap.get(c) or {}).get("change_24h"))))
-    code = market_verdict(coins, blackout_now)
+    code = daily_view(market_verdict(coins, blackout_now), next((x for x in coins if x["coin"] == "BTC"), None))
     icon, title, meaning, fits, avoid = VERDICTS[code]
     alts = [x["change_24h"] for x in coins if x["coin"] != "BTC" and x["change_24h"] is not None]
     btc = next((x for x in coins if x["coin"] == "BTC"), None)
@@ -366,7 +460,11 @@ def telegram(w):
     btc = next((c for c in w["coins"] if c["coin"] == "BTC"), None)
     if btc:
         lb = btc["labels"]
-        out.append(f"BTC trend: 1D {lb.get('1d') or '?'} · 4H {lb.get('4h') or '?'} · 1H {lb.get('1h') or '?'}")
+        pt = price_text(btc.get("price"))
+        if pt:
+            out.append(f"BTC price trend (daily chart): <b>{pt}</b>")
+        out.append(f"Strategy filter (trades when 4H and 1H agree): 1D {lb.get('1d') or '?'} · "
+                   f"4H {lb.get('4h') or '?'} · 1H {lb.get('1h') or '?'}")
         if btc.get("vol"):
             out.append(f"Volatility: {btc['vol']['vol_label']} (daily range {btc['vol']['atr_pct']:.1f}%, "
                        f"higher than {btc['vol']['vol_pctile']:.0f}% of the last year)")
@@ -413,7 +511,9 @@ def md_lines(w):
     for c in w["coins"]:
         vol = c.get("vol") or {}
         cr = c["crowd"]
-        out.append(f"- {c['coin']}: 1D {c['labels'].get('1d')} / 4H {c['labels'].get('4h')} / 1H "
+        pt = price_text(c.get("price"))
+        out.append(f"- {c['coin']}: " + (f"daily price trend {pt}; " if pt else "")
+                   + f"1D {c['labels'].get('1d')} / 4H {c['labels'].get('4h')} / 1H "
                    f"{c['labels'].get('1h')} ({c.get('why') or '-'}); volatility {vol.get('vol_label', 'unknown')}"
                    + (f" (higher than {vol['vol_pctile']:.0f}% of the last year)" if vol.get("vol_pctile") is not None
                       else "")

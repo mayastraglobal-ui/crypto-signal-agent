@@ -165,6 +165,11 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
     (funding, 24h open interest), altcoins vs BTC, Fear & Greed, events. Telegram `/weather`, the 08:20 briefing email
     (and "Market weather: x → y" in the 14:20 / 21:20 changes), Claude's fact sheets. Explains only - no signal, gate,
     size or approval reads it. Not included: BTC dominance (no data source in the agent yet) and a dashboard tile.
+    **2026-11-03** (operator: "BTC fell from 87,000 to 76,000 and /weather says turning down"): every coin also gets
+    its daily **price trend** - the 30-day change, the 20- / 50-day averages and the swing of the last 30 days, what
+    the chart shows. When BTC's daily chart trends and the strategy filter has not confirmed it, the verdict says
+    "Downtrend - the strategies wait for a clean 4H / 1H" (or "Bounce inside a downtrend", and the up mirrors)
+    instead of "Turning down / up - not confirmed" or "Choppy". Still display only.
 11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
     ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
     every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07

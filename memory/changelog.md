@@ -1150,3 +1150,9 @@ Newest entries at the bottom. Format: date · who · what · why.
 
 ## 2026-11-01 · Claude (BUILD mode, operator: "record reversal study") · reversal study recorded, no rule changed
 - `memory/experiments.md`: one record with the reversal study of 2026-10-31 (daily-trend filter, retest entry, swing / wider stop on the 20 alert cells x own coins, 7,067 trades since 2017). Every variant failed its fixed bar; 70% of losing trades first reach +0.3R in the backtest too. No strategy, gate or cost changed.
+
+## 2026-11-03 · Claude (BUILD mode, operator: "market clearly falling, /weather says turning down") · weather names the daily trend
+- BTC fell from 86,530 (4 Oct) to 76,816 (2 Nov), with lower highs and lower lows on the daily chart, but `/weather` said "Turning down - not confirmed": the strategy filter (1D / 4H / 1H regimes) read BTC 1D UNCLEAR (the 50-day average still above the 200-day; price at the 200-day) and 4H UNCLEAR (the 50-average's slope -0.81 ATR in 10 candles, needs 1.0; swings mixed), and a 1H bounce read "Turning up".
+- `engine/weather.py`: `price_trend()` per coin from the daily candles (30-day change, 20 / 50 / 200-day averages, last 3 x 10-day swing; down = 5%+ lower over 30 days and below the 20- and 50-day averages). When BTC's daily price trend points one way, a CHOPPY / turning verdict becomes DOWNTREND_WAIT ("Downtrend - the strategies wait for a clean 4H / 1H") or BOUNCE_DOWNTREND, and the up mirrors; a CHOPPY / RANGE coin says "downtrend on the daily chart (not confirmed)". `/weather` shows the price trend line and the strategy filter separately.
+- Display only: the strategy regimes, permissions, recorded market types, signals, gates and costs are unchanged.
+- Tests: `tests/test_weather.py` (DailyTrend: 3).
