@@ -204,8 +204,9 @@ class LiveCandles(unittest.TestCase):
 
     def rows(self, d1=((100, 101), (101, 99)), h4=((98, 98.5), (98.5, 98.2), (98.2, 97.9)),
              h1=((97.9, 98.0), (98.0, 97.95), (97.95, 98.1))):
-        mk = lambda done, now: [(self.T + i, o, c, True) for i, (o, c) in enumerate(done)] + \
-            [(self.T + 9, *now, False)]                                                # noqa: E731
+        q = lambda t, o, c, closed: (t, o, max(o, c) * 1.01, min(o, c) * 0.99, c, closed)  # noqa: E731
+        mk = lambda done, now: [q(self.T + i, o, c, True) for i, (o, c) in enumerate(done)] + \
+            [q(self.T + 9, *now, False)]                                                # noqa: E731
         return {"1d": mk(list(d1), (99, 99.5)), "4h": mk(list(h4), (97.9, 97.7)), "1h": mk(list(h1), (98.1, 98.4))}
 
     def test_trend_rule(self):
@@ -236,6 +237,8 @@ class LiveCandles(unittest.TestCase):
                             "11-03 17:30 Beijing", wx.strategy_note(w))
         lines = t.split("\n")
         self.assertEqual(lines[0], "📊 <b>BTC 98.40</b> · 11-03 17:30 Beijing")
+        self.assertEqual(lines[1], "🔴 <b>BEARISH · 2 of 3 timeframes red</b>")                  # A
+        self.assertIn("   Yesterday high 102.01 · low 98.01 → ↔️ now inside yesterday's range", lines)   # B
         for head in ("📅 <b>DAILY</b>", "⏱ <b>4 HOUR</b>", "⏰ <b>1 HOUR</b>"):
             self.assertIn(head, lines)
         self.assertIn("   Trend: <b>🔴 BEAR</b>  (🟢 +1.0% · 🔴 -2.0%)", lines)
@@ -248,6 +251,90 @@ class LiveCandles(unittest.TestCase):
         self.assertNotIn("average", t)
         self.assertIsNone(wx.candles_text(None, "x"))
         self.assertEqual(wx.strategy_note(None), [])
+
+    def test_summary_levels_and_change_note(self):
+        x = lambda d, h4, h1: {"1d": dict(trend=d), "4h": dict(trend=h4), "1h": dict(trend=h1)}  # noqa: E731
+        self.assertEqual(wx.overall(x("bear", "bear", "bear")), ("🔴", "BEARISH · all 3 timeframes red"))
+        self.assertEqual(wx.overall(x("bull", "bull", "bear"))[0], "🟢")
+        self.assertEqual(wx.overall(x("bull", "bear", "mixed"))[0], "⚪")
+        c = dict(price=95.0, **{"1d": dict(prev=dict(high=102.0, low=98.0))})
+        self.assertEqual(wx.range_side(c), "below")
+        self.assertIn("⬇️ now BELOW yesterday's low (weak)", wx.range_note(c))
+        self.assertEqual(wx.range_side(dict(c, price=103.0)), "above")
+        self.assertIsNone(wx.range_note(dict(price=1.0, **{"1d": {}})))
+        t = wx.trend_change_text("BTC", "4h", "bear", "bull", [dict(dir="bull", pct=1)] * 3, 77000)
+        self.assertIn("⏱ 4H trend changed · <b>BTC</b> 77,000", t)
+        self.assertIn("🔴 BEAR → 🟢 BULL", t)
+        self.assertIn("/trendalert off", t)
+
+    def notes_watcher(self, rows, state=None):
+        said = []
+
+        class Feed:
+            name = "fake"
+
+            def recent(s, coin, tf, n=3):
+                return rows(tf)
+        w = LW.Watcher.__new__(LW.Watcher)
+        w.cfg, w.feed, w.state, w.say = dict(universe=dict(own_coins=["BTC"])), Feed(), dict(state or {}), said.append
+        w._save_state, w._json = (lambda: None), (lambda rel: None)
+        return w, said
+
+    def test_morning_report_once_a_day(self):                                          # C
+        day = 1_762_128_000_000                                                         # 2026-11-03 00:00 UTC
+        w, said = self.notes_watcher(lambda tf: self.rows()[tf])
+        w.state["trend_seen"] = {"1d": 0, "4h": 0}                                     # D out of the way
+        LW.Watcher.TREND_TFS, keep = (), LW.Watcher.TREND_TFS
+        try:
+            self.assertEqual(w.candle_notes(day + 3 * 60_000), [])                     # 08:03 Beijing: not yet
+            self.assertEqual(w.candle_notes(day + 6 * 60_000), ["morning"])
+            self.assertIn("☀️ Morning candle report", said[0])
+            self.assertEqual(w.candle_notes(day + 30 * 60_000), [])                    # once a day
+            w.state["morning_day"] = None
+            self.assertEqual(w.candle_notes(day + 3 * 3_600_000), [])                  # 11:00 Beijing: too late
+            w.state["morning_on"] = False
+            self.assertEqual(w.candle_notes(day + 6 * 60_000), [])                     # /morning off
+        finally:
+            LW.Watcher.TREND_TFS = keep
+
+    def test_trend_change_note(self):                                                  # D
+        H4 = 4 * 3_600_000
+        t0 = 1_762_128_000_000                                                          # a 4H close
+        colours = {"v": [(1, 0.9), (1, 0.9), (1, 0.9)]}                                 # 3 red
+
+        def rows(tf):
+            if tf != "4h":
+                raise RuntimeError("only 4H in this test")
+            base = now["t"] // H4 * H4 - 3 * H4
+            return [(base + i * H4, o, o, c, c, True) for i, (o, c) in enumerate(colours["v"])] + \
+                [(base + 3 * H4, 1, 1, 1, 1, False)]
+        now = {"t": t0 + 2 * 60_000}
+        w, said = self.notes_watcher(rows, dict(morning_on=False))
+        w.candle_notes(now["t"])
+        self.assertEqual((w.state["trend_last"]["4h"], said), ("bear", []))           # first close: remembered only
+        w.candle_notes(now["t"] + 60_000)
+        self.assertEqual(said, [])                                                      # the same close: nothing
+        colours["v"] = [(1, 0.9), (1, 1.1), (1, 1.1)]                                   # 2 of 3 green
+        now["t"] = t0 + H4 + 2 * 60_000
+        self.assertEqual(w.candle_notes(now["t"]), ["4h"])
+        self.assertIn("🔴 BEAR → 🟢 BULL", said[0])
+        colours["v"] = [(1, 1.1), (1, 1.1), (1, 0.9)]
+        now["t"] = t0 + 2 * H4 + 30_000                                                 # under a minute after the close
+        self.assertEqual(w.candle_notes(now["t"]), [])
+        now["t"] = t0 + 2 * H4 + 2 * 60_000
+        w.state["trend_alert_on"] = False
+        self.assertEqual(w.candle_notes(now["t"]), [])                                  # /trendalert off: still bull
+        self.assertEqual(w.state["trend_last"]["4h"], "bull")
+
+    def test_commands(self):
+        w, _ = self.notes_watcher(lambda tf: [])
+        self.assertIn("is now <b>OFF</b>", LW.Watcher.command(w, "morning", "off", self.T))
+        self.assertFalse(w.state["morning_on"])
+        self.assertIn("<b>ON</b>", LW.Watcher.command(w, "trendalert", "", self.T))
+        for c in ("/morning on|off", "/trendalert on|off"):
+            self.assertIn(c, lv.HELP)
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("self.candle_notes(self.now_fn())", src)
 
     def test_watcher_command(self):
         class Feed:

@@ -231,21 +231,54 @@ def trend_of(cs):
 def candle_report(rows, order=None):
     """2026-11-03 (operator: "daily trend from yesterday's last 1 / 2 closed candles and today's live candle; 4H and
     1H the same with the last 2 / 3 closed candles"; then chose 1D 2 / 4H 3 / 1H 3, the majority colour, a tie -> the
-    bigger move). rows = {coin: {tf: [(open_time, open, close, closed) ...]}} oldest first, tf 1d / 4h / 1h, the
-    newest one may still be open (closed False). Per coin and timeframe: the closed candles used, their trend and the
-    live candle. Display only - never a signal."""
+    bigger move). rows = {coin: {tf: [(open_time, open, high, low, close, closed) ...]}} oldest first, tf 1d / 4h /
+    1h, the newest one may still be open (closed False). Per coin and timeframe: the closed candles used, their trend
+    and the live candle; for 1d also yesterday's high / low. Display only - never a signal."""
     out = []
     for coin in order or sorted(rows):
         r = rows.get(coin) or {}
         x = dict(coin=coin)
         for tf, k in TREND_N.items():
             cs = r.get(tf) or []
-            done = [candle(o, c) for _, o, c, closed in cs if closed][-k:]
-            live = [candle(o, c) for _, o, c, closed in cs if not closed][-1:]
+            done_raw = [q for q in cs if q[5]]
+            done = [candle(q[1], q[4]) for q in done_raw][-k:]
+            live = [candle(q[1], q[4]) for q in cs if not q[5]][-1:]
             x[tf] = dict(closed=done, trend=trend_of(done), now=live[0] if live else None)
-        x["price"] = next((float(cs[-1][2]) for cs in (r.get("1h"), r.get("4h"), r.get("1d")) if cs), None)
+            if tf == "1d" and done_raw:
+                x[tf]["prev"] = dict(high=float(done_raw[-1][2]), low=float(done_raw[-1][3]))
+        x["price"] = next((float(cs[-1][4]) for cs in (r.get("1h"), r.get("4h"), r.get("1d")) if cs), None)
         out.append(x)
     return dict(coins=out)
+
+
+def overall(x):
+    """A (operator 2026-11-03: "one line on top"): (icon, text) from the coin's Daily / 4H / 1H trends."""
+    t = [x[tf]["trend"] for tf in TREND_N]
+    bears, bulls = t.count("bear"), t.count("bull")
+    if bears >= 2:
+        return "🔴", "BEARISH · " + ("all 3 timeframes red" if bears == 3 else f"{bears} of 3 timeframes red")
+    if bulls >= 2:
+        return "🟢", "BULLISH · " + ("all 3 timeframes green" if bulls == 3 else f"{bulls} of 3 timeframes green")
+    return "⚪", "MIXED · the timeframes disagree"
+
+
+def range_side(x):
+    """B: 'below' / 'above' yesterday's daily range, 'inside', or None (no data)."""
+    pv, px = (x.get("1d") or {}).get("prev"), x.get("price")
+    if not pv or px is None:
+        return None
+    return "below" if px < pv["low"] else "above" if px > pv["high"] else "inside"
+
+
+def range_note(x):
+    """B (operator 2026-11-03: "yesterday's high and low"): where the price is against yesterday's daily candle."""
+    pv, side = (x.get("1d") or {}).get("prev"), range_side(x)
+    if side is None:
+        return None
+    lv = f"high {_price(pv['high'])} · low {_price(pv['low'])}"
+    return {"below": f"Yesterday {lv} → ⬇️ now BELOW yesterday's low (weak)",
+            "above": f"Yesterday {lv} → ⬆️ now ABOVE yesterday's high (strong)",
+            "inside": f"Yesterday {lv} → ↔️ now inside yesterday's range"}[side]
 
 
 def _c(x):
@@ -256,33 +289,49 @@ def _live(x):
     return f"{WORD[x['dir']]} {x['pct']:+.1f}%" if x else "?"
 
 
-def candles_text(rep, when, strategy=None):
-    """The candle report of /weather (Telegram HTML): BTC in full - DAILY / 4 HOUR / 1 HOUR, each with its trend
-    (from the closed candles) and its live candle - then one line per other coin, then `strategy` (short lines).
-    when = 'MM-DD HH:MM Beijing'."""
+def candles_text(rep, when, strategy=None, title=None):
+    """The candle report of /weather (Telegram HTML): BTC in full - the one-line summary (A), DAILY with yesterday's
+    high / low (B), 4 HOUR and 1 HOUR, each with its trend (from the closed candles) and its live candle - then one
+    line per other coin, then `strategy` (short lines). when = 'MM-DD HH:MM Beijing'; title = a first line (the
+    morning report, C)."""
     if not rep or not rep.get("coins"):
         return None
     btc = rep["coins"][0]
-    out = [f"📊 <b>{btc['coin']} {_price(btc['price'])}</b> · {when}"]
-    for tf, name, icon, live in (("1d", "DAILY", "📅", "Today live"), ("4h", "4 HOUR", "⏱", "Live candle"),
-                                 ("1h", "1 HOUR", "⏰", "Live candle")):
+    icon, summ = overall(btc)
+    out = ([f"<b>{title}</b>", ""] if title else []) + \
+        [f"📊 <b>{btc['coin']} {_price(btc['price'])}</b> · {when}", f"{icon} <b>{summ}</b>"]
+    for tf, name, ic, live in (("1d", "DAILY", "📅", "Today live"), ("4h", "4 HOUR", "⏱", "Live candle"),
+                               ("1h", "1 HOUR", "⏰", "Live candle")):
         x = btc[tf]
         used = (" · ".join(_c(c) for c in x["closed"]) if tf == "1d" else
                 " ".join(CANDLE_ICON[c["dir"]] for c in x["closed"]))
-        out += ["", f"{icon} <b>{name}</b>",
+        out += ["", f"{ic} <b>{name}</b>",
                 f"   Trend: <b>{WORD.get(x['trend'], '?')}</b>  ({used or '?'})",
                 f"   {live}: {_live(x['now'])}"]
+        if tf == "1d" and range_note(btc):
+            out.append(f"   {range_note(btc)}")
     if len(rep["coins"]) > 1:
         out += ["", "<b>Other coins</b>   Day · 4H · 1H trend (live)"]
         ic = lambda d: CANDLE_ICON.get(d, "⚪") if d != "mixed" else "⚪"  # noqa: E731
         for c in rep["coins"][1:]:
             cells = " · ".join(f"{ic(c[tf]['trend'])}({ic((c[tf]['now'] or {}).get('dir'))})" for tf in TREND_N)
-            out.append(f"<code>{c['coin']:<4}</code> {cells}")
+            mark = {"below": " ⬇️", "above": " ⬆️"}.get(range_side(c), "")
+            out.append(f"<code>{c['coin']:<4}</code> {cells}{mark}")
     out += ["", f"<i>Trend = the last {TREND_N['1d']} closed daily, {TREND_N['4h']} closed 4H and {TREND_N['1h']} "
-                "closed 1H candles (most colours win). A day starts 08:00 Beijing.</i>"]
+                "closed 1H candles (most colours win). ⬇️ / ⬆️ = below yesterday's low / above yesterday's high. "
+                "A day starts 08:00 Beijing.</i>"]
     if strategy:
         out += [""] + list(strategy)
     return "\n".join(out)
+
+
+def trend_change_text(coin, tf, old, new, closed, price):
+    """D (operator 2026-11-03: "a notice when the 4H or daily trend flips"): the Telegram note."""
+    name = {"1d": "📅 Daily", "4h": "⏱ 4H"}.get(tf, tf)
+    used = " ".join(CANDLE_ICON[c["dir"]] for c in closed)
+    return (f"{name} trend changed · <b>{coin}</b> {_price(price)}\n"
+            f"<b>{WORD.get(old, old)} → {WORD.get(new, new)}</b>  (last {len(closed)} closed: {used})\n"
+            "<i>Information only - not a trade signal. /trendalert off to stop these notes.</i>")
 
 
 def strategy_note(w, now=None):
