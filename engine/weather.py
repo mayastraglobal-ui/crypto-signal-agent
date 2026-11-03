@@ -326,8 +326,9 @@ def candles_text(rep, when, strategy=None, title=None):
 
 
 def trend_change_text(coin, tf, old, new, closed, price):
-    """D (operator 2026-11-03: "a notice when the 4H or daily trend flips"): the Telegram note."""
-    name = {"1d": "📅 Daily", "4h": "⏱ 4H"}.get(tf, tf)
+    """D (operator 2026-11-03: "a notice when the 4H or daily trend flips", then "1H option 1" - every 1H flip too):
+    the Telegram note."""
+    name = {"1d": "📅 Daily", "4h": "⏱ 4H", "1h": "⏰ 1H"}.get(tf, tf)
     used = " ".join(CANDLE_ICON[c["dir"]] for c in closed)
     return (f"{name} trend changed · <b>{coin}</b> {_price(price)}\n"
             f"<b>{WORD.get(old, old)} → {WORD.get(new, new)}</b>  (last {len(closed)} closed: {used})\n"

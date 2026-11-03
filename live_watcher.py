@@ -1254,7 +1254,7 @@ class Watcher:
                 self._save_state()
             on = self.state.get(key, True)
             what = ("☀️ The morning candle report (08:05 Beijing)" if cmd == "morning" else
-                    "🔔 The BTC trend-change notes (Daily / 4H)")
+                    "🔔 The BTC trend-change notes (Daily / 4H / 1H)")
             return f"{what} {'is' if arg not in ('on', 'off') else 'is now'} <b>{'ON' if on else 'OFF'}</b>. " \
                 f"/{cmd} {'off' if on else 'on'} to switch it {'off' if on else 'on'}."
         if cmd == "portfolio":
@@ -1328,12 +1328,12 @@ class Watcher:
         return f"I don't know /{cmd}. Send /help for the list."
 
     MORNING_UTC = (0, 5, 2)          # C: the morning report from 00:05 UTC (08:05 Beijing), sent until 02:00 UTC at most
-    TREND_TFS = ("1d", "4h")          # D: BTC's trend-change notes on these timeframes
+    TREND_TFS = ("1d", "4h", "1h")    # D: BTC's trend-change notes on these timeframes (1h: operator "1H option 1")
 
     def candle_notes(self, now_ms):
         """2026-11-03 (operator: "build C and D"). C: the /weather candle report once a day after the daily close
-        (08:05 Beijing; /morning off stops it). D: a note when BTC's Daily or 4H trend (the majority colour of the last
-        closed candles) flips between BULL and BEAR, checked once per candle close (/trendalert off stops it). Both
+        (08:05 Beijing; /morning off stops it). D: a note when BTC's Daily, 4H or 1H trend (the majority colour of the
+        last closed candles) flips between BULL and BEAR, checked once per candle close (/trendalert off stops it). Both
         are information, sent even during /pause; OKX not answering = tried again on the next pass. Returns notes."""
         sent = []
         t = dt.datetime.fromtimestamp(now_ms / 1000, dt.timezone.utc)

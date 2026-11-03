@@ -176,7 +176,7 @@ Nothing here is started until the operator names it. Suggested first, once PAPER
     Re-laid out the same day to the operator's plan: 📅 DAILY / ⏱ 4 HOUR / ⏰ 1 HOUR, each a trend from the last
     2 / 3 / 3 closed candles (majority colour) and the live candle, one line per other coin, 2 strategy lines.
     Then (operator: "build A B C D"): a one-line summary on top, yesterday's high / low, the report every morning at
-    08:05 Beijing (`/morning on|off`) and a note when BTC's Daily or 4H trend flips (`/trendalert on|off`).
+    08:05 Beijing (`/morning on|off`) and a note when BTC's Daily, 4H or 1H trend flips (`/trendalert on|off`).
 11. **Stock / gold research experiment (backtest only)**: run the existing strategies on gold and S&P 500 / Nasdaq
     ETFs (daily and 4H) to look for a second edge that doesn't move with crypto. Counted in the trials counter like
     every test; nothing is traded before it passes the same gates and paper trading. Notes from the 2026-10-07

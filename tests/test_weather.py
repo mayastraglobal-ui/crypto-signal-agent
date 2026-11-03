@@ -266,6 +266,8 @@ class LiveCandles(unittest.TestCase):
         self.assertIn("⏱ 4H trend changed · <b>BTC</b> 77,000", t)
         self.assertIn("🔴 BEAR → 🟢 BULL", t)
         self.assertIn("/trendalert off", t)
+        self.assertIn("⏰ 1H trend changed", wx.trend_change_text("BTC", "1h", "bull", "bear",
+                                                                  [dict(dir="bear", pct=-1)] * 3, 77000))
 
     def notes_watcher(self, rows, state=None):
         said = []
@@ -325,6 +327,26 @@ class LiveCandles(unittest.TestCase):
         w.state["trend_alert_on"] = False
         self.assertEqual(w.candle_notes(now["t"]), [])                                  # /trendalert off: still bull
         self.assertEqual(w.state["trend_last"]["4h"], "bull")
+
+    def test_1h_flip_note(self):                                                       # operator: "1H option 1"
+        self.assertEqual(LW.Watcher.TREND_TFS, ("1d", "4h", "1h"))
+        H1, t0 = 3_600_000, 1_762_128_000_000
+        colours = {"v": [(1, 1.1)] * 3}
+
+        def rows(tf):
+            if tf != "1h":
+                raise RuntimeError("only 1H in this test")
+            base = now["t"] // H1 * H1 - 3 * H1
+            return [(base + i * H1, o, o, c, c, True) for i, (o, c) in enumerate(colours["v"])] + \
+                [(base + 3 * H1, 1, 1, 1, 1, False)]
+        now = {"t": t0 + 2 * 60_000}
+        w, said = self.notes_watcher(rows, dict(morning_on=False))
+        w.candle_notes(now["t"])
+        colours["v"] = [(1, 1.1), (1, 0.9), (1, 0.9)]
+        now["t"] = t0 + H1 + 2 * 60_000
+        self.assertEqual(w.candle_notes(now["t"]), ["1h"])
+        self.assertIn("⏰ 1H trend changed", said[0])
+        self.assertIn("🟢 BULL → 🔴 BEAR", said[0])
 
     def test_commands(self):
         w, _ = self.notes_watcher(lambda tf: [])
