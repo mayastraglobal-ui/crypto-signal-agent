@@ -4,13 +4,12 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC",
-  "SUI"
+  "ZEC"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 840,
+ "runs": 841,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -31,7 +30,9 @@
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [],
+  "SUI": [
+   "volume_24h"
+  ],
   "AVAX": [],
   "ENA": [],
   "SAGA": [

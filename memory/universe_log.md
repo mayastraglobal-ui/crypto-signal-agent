@@ -940,3 +940,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-03 04:21 UTC
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-03 06:11 UTC
+- **EXCLUDED** SUI - 24h volume $50M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $50M < $50M
