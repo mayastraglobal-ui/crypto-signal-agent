@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-04 16:11",
+ "generated_utc": "2026-11-04 17:11",
  "book": {
-  "utc": "2026-11-04 16:11",
-  "beijing": "2026-11-05 00:11",
+  "utc": "2026-11-04 17:11",
+  "beijing": "2026-11-05 01:11",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -38,7 +38,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-04 16:11 UTC / 2026-11-05 00:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-04 17:11 UTC / 2026-11-05 01:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     ZEC \u00b7 LONG \u00b7 4h \u00b7 P12-LEADER-V2 v1.0 \u00b7 entry 1,306.10 \u00b7 stop 1,229.90 \u00b7 open +0.00R \u00b7 HOLD (VALIDATION)",
@@ -774,6 +774,28 @@
   },
   {
    "coin": "ZEC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -850,45 +872,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-04 16:11",
-   "id": "ZEC-4h-P12-LEADER-V1-2026-11-04 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 1293.40020757758,
-   "note": "4h signal closed - limit order placed"
-  },
-  {
-   "time_utc": "2026-11-04 16:11",
-   "id": "ZEC-4h-P12-LEADER-V2-2026-11-04 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1306.1,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-11-04 16:11",
-   "id": "ZEC-4h-P12-LEADER-V2-2026-11-04 15:59",
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1306.1,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
