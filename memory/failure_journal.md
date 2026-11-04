@@ -442,3 +442,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: low_relative_volume, wrong_session
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.09R
+- timestamp: 2026-11-04 05:21 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-11
+  - signal 2026-11-04 02:59 UTC, closed 2026-11-04 04:29 UTC, stage TEST
+  - MAE -1.08R / MFE +0.68R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)

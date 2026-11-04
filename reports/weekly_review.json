@@ -1,15 +1,15 @@
 {
  "track": {
   "total": {
-   "n": 60,
+   "n": 61,
    "wins": 8,
-   "win_rate": 13.3,
-   "avg_r": -0.722,
-   "total_r": -43.33,
-   "max_dd_r": 43.33,
-   "cur_loss_run": 17,
-   "max_loss_run": 17,
-   "sd": 0.846
+   "win_rate": 13.1,
+   "avg_r": -0.728,
+   "total_r": -44.42,
+   "max_dd_r": 44.42,
+   "cur_loss_run": 18,
+   "max_loss_run": 18,
+   "sd": 0.84
   },
   "yours": {
    "n": 4,
@@ -23,21 +23,21 @@
    "sd": 0.114
   },
   "silent": {
-   "n": 50,
+   "n": 51,
    "wins": 8,
-   "win_rate": 16.0,
-   "avg_r": -0.656,
-   "total_r": -32.78,
-   "max_dd_r": 32.78,
-   "cur_loss_run": 15,
-   "max_loss_run": 15,
-   "sd": 0.913
+   "win_rate": 15.7,
+   "avg_r": -0.664,
+   "total_r": -33.87,
+   "max_dd_r": 33.87,
+   "cur_loss_run": 16,
+   "max_loss_run": 16,
+   "sd": 0.906
   },
   "alerts_known": true,
   "paused": []
  },
  "week": "2026-W45",
- "utc": "2026-11-04 04:11",
+ "utc": "2026-11-04 05:21",
  "final": false,
  "rows": [
   {
@@ -420,6 +420,52 @@
     "win_rate": 36.6
    },
    "confidence": "-1.16R over 3 trades: too early to say anything",
+   "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "SUI",
+   "stage": "TEST",
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "tf": "30m",
+   "live": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.09,
+    "total_r": -1.09,
+    "sd": 0.0
+   },
+   "week": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.09,
+    "total_r": -1.09,
+    "sd": 0.0
+   },
+   "gross": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.03,
+    "total_r": -1.03,
+    "sd": 0.0
+   },
+   "by_market": {
+    "DOWN": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.09,
+     "total_r": -1.09,
+     "sd": 0.0
+    }
+   },
+   "backtest": {
+    "n": 147,
+    "avg_r": 0.087,
+    "win_rate": 37.4
+   },
+   "confidence": "-1.09R over 1 trade: too early to say anything",
    "sent": false
   },
   {
@@ -1301,8 +1347,8 @@
  "five_min": {
   "confirmed_n": 4,
   "confirmed_r": -1.0,
-  "all_n": 57,
-  "all_gross_r": -0.618,
+  "all_n": 58,
+  "all_gross_r": -0.625,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V1",
@@ -1370,7 +1416,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-04 04:11 UTC"
+   "text": "hourly scan: last run 2026-11-04 05:21 UTC"
   },
   {
    "ok": true,
@@ -1378,20 +1424,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-04 02:21 UTC (51 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-04 03:26 UTC (46 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 15"
+   "text": "TEST setups closed this week (GitHub record): 16"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 57,
-   "total_r": -40.09,
-   "avg_r": -0.703,
-   "week_n": 15,
-   "week_total_r": -14.07
+   "n": 58,
+   "total_r": -41.18,
+   "avg_r": -0.71,
+   "week_n": 16,
+   "week_total_r": -15.16
   },
   "PAPER": {
    "n": 0,
@@ -1408,11 +1454,11 @@
    "week_total_r": -1.06
   },
   "SILENT": {
-   "n": 50,
-   "total_r": -32.79,
-   "avg_r": -0.656,
-   "week_n": 14,
-   "week_total_r": -13.01
+   "n": 51,
+   "total_r": -33.88,
+   "avg_r": -0.664,
+   "week_n": 15,
+   "week_total_r": -14.1
   },
   "known": true
  },
@@ -1499,7 +1545,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-04 03:12",
+  "checked_utc": "2026-11-04 04:12",
   "lines": [
    "65 shock(s) this week, 45 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 25, broke yesterday's high 5, broke yesterday's low 15, volume spike 36",
@@ -1524,8 +1570,8 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 36,
-   "avg_r": -0.618,
+   "n": 37,
+   "avg_r": -0.63,
    "wins": 7
   },
   {
@@ -1547,5 +1593,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W45</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-1.1R) \u00b7 7 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 14 this week (-13.0R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 9 repair(s) judged - 7 beat their parent, 2 reached VALIDATION; 2 waiting for a test\n\n\u26a1 Shocks: 65 this week (45 sent) \u00b7 4h later 31 kept going, 34 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (your alerts, after fees): 4 closed \u00b7 -1.01R a trade \u00b7 -4.0R \u00b7 worst drawdown 4.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 36 (-0.62R) \u00b7 outside 17 (-1.03R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W45</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-1.1R) \u00b7 7 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 15 this week (-14.1R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 9 repair(s) judged - 7 beat their parent, 2 reached VALIDATION; 2 waiting for a test\n\n\u26a1 Shocks: 65 this week (45 sent) \u00b7 4h later 31 kept going, 34 reversed \u00b7 a strategy alert followed 2\n\n\ud83d\udcc8 Track record (your alerts, after fees): 4 closed \u00b7 -1.01R a trade \u00b7 -4.0R \u00b7 worst drawdown 4.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 37 (-0.63R) \u00b7 outside 17 (-1.03R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
