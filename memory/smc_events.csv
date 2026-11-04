@@ -28846,3 +28846,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-04 00:45,SUI,15m,FVG_FILLED,bull,,0.8777,0.8806,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-04 00:45,SUI,15m,FVG,bear,,0.8859,0.8918,1.228,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-04 01:00,SUI,15m,FVG_RETRACE,bear,,0.8859,0.8918,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-04 01:30,BTC,30m,FVG_RETRACE,bear,,77263.7,77421.19,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 01:15,BTC,15m,FVG_RETRACE,bear,,77263.7,77336.0,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 01:30,SOL,30m,FVG_RETRACE,bear,,92.54,92.78,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 01:15,SOL,15m,FVG_FILLED,bear,,92.25,92.58,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 02:00,XRP,1h,FVG,bear,,1.2626,1.2757,1.312,Asia,4h,RANGE,,smc-1.0,Binance
+2026-11-04 01:15,XRP,15m,SWEEP,bull,1.2537,,,0.35,Asia,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-04 01:15,XRP,15m,OB_INVALID,bull,,1.2561,1.2589,,Asia,1h,EXPANSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 01:30,XRP,15m,BREAKER_RETEST,bear,,1.2561,1.2589,,Asia,1h,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-04 01:30,ZEC,30m,BOS,bear,1201.71,,,0.128,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-04 01:45,ZEC,15m,CHOCH,bear,1196.26,,,0.137,Asia,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-04 01:45,ZEC,15m,ORDER_BLOCK,bear,,1202.69,1219.33,,Asia,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-04 02:00,ZEC,15m,OB_RETEST,bear,,1202.69,1219.33,,Asia,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-04 02:00,SUI,1h,FVG_RETRACE,bull,,0.8738,0.876,,Asia,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 02:00,SUI,1h,FVG,bear,,0.8888,0.8933,0.499,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-04 01:30,SUI,30m,FVG_RETRACE,bear,,0.8875,0.8933,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
