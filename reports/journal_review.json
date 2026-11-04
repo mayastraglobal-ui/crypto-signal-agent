@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-02 06:14",
+ "last_entry_utc": "2026-11-04 16:00",
  "days": 30,
  "all": {
-  "alerts": 6,
+  "alerts": 7,
   "took": 5,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
    "n": 5,
    "total_r": -5.0,
@@ -60,10 +60,10 @@
   "missing_result": 0
  },
  "recent": {
-  "alerts": 6,
+  "alerts": 7,
   "took": 5,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
    "n": 5,
    "total_r": -5.0,
@@ -157,6 +157,16 @@
    "plan_n": 1,
    "your_avg_r": -1.2,
    "your_n": 1
+  },
+  {
+   "cell": "P12-LEADER-V1 4h",
+   "alerts": 1,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
   },
   {
    "cell": "donchian_breakout-VEXIT-FDISP 4h",
