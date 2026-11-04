@@ -1547,3 +1547,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 1h FAILED 1548 trades -0.085R (unseen -0.162R); failed gates: average -0.08R (needs +0.10R), profit factor 0.87, recovery factor -0.86, Monte Carlo 95% worst drawdown per 100 trades 36.6R (limit 17R), longest drawdown 95% of the tested period, not profitable in BOTH train and unseen test.
   - teaches: the displacement repair did not rescue a P11 momentum card (the second one: P11-MOMENTUM-V1-FDISP 30m failed on 2026-10-28 with -0.232R over 2394 trades). The unseen part is worse than the train part. The momentum family does not respond to this repair, while the breakout cards (TRD-H4-BREAKOUT) did on slow timeframes.
   - next: stop this line. The same repair on a third P11 card would only raise the trials counter.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0135 | 2026-11-04 06:56 | P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry (-0.01R a trade with it, +0.23R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest. |

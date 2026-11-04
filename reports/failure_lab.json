@@ -1,21 +1,28 @@
 {
  "enabled": true,
- "allowed": 1,
- "considered": 183,
- "new": [
-  {
-   "id": "P01-BREAKOUT-V2-FDISP-FNOTEXT",
-   "tag": "overextended_entry",
-   "kind": "NOTEXT",
-   "parent": "P01-BREAKOUT-V2-FDISP@1.0|30m",
-   "evidence": "overextended_entry in 88% of losses, n=511 losing trades (P01-BREAKOUT-V2-FDISP@1.0 30m: 909 trades, avg +0.018R, BACKTESTING; trades with overextended_entry -0.014R, without +0.229R); repair NOTEXT: no entry more than 2 ATR beyond the 20 EMA (not overextended)"
-  }
- ],
+ "allowed": 0,
+ "considered": 0,
+ "new": [],
  "pending": [
   "P01-BREAKOUT-V5-FDISP",
   "P11-MOMENTUM-V3-FDISP"
  ],
  "results": [
+  {
+   "child": "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0|30m",
+   "parent": "P01-BREAKOUT-V2-FDISP@1.0|30m",
+   "tag": "overextended_entry",
+   "kind": "NOTEXT",
+   "status": "BACKTESTING",
+   "trades": 129,
+   "avg_r": 0.222,
+   "test_r": 0.337,
+   "parent_avg_r": 0.018,
+   "parent_test_r": 0.112,
+   "helped": true,
+   "passed": false,
+   "checked": "2026-11-04 06:56"
+  },
   {
    "child": "P01-BREAKOUT-V2-FDISP@1.0|30m",
    "parent": "P01-BREAKOUT-V2@1.0|30m",
@@ -44,7 +51,7 @@
    "parent_test_r": 0.186,
    "helped": false,
    "passed": false,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "P11-MOMENTUM-V1-FDISP@1.0|30m",
@@ -74,7 +81,7 @@
    "parent_test_r": 0.364,
    "helped": true,
    "passed": true,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -89,7 +96,7 @@
    "parent_test_r": 0.246,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -104,7 +111,7 @@
    "parent_test_r": 0.354,
    "helped": true,
    "passed": true,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -119,7 +126,7 @@
    "parent_test_r": 0.184,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -127,14 +134,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "FAILED",
-   "trades": 1096,
+   "trades": 1097,
    "avg_r": -0.018,
    "test_r": 0.068,
-   "parent_avg_r": -0.062,
-   "parent_test_r": 0.012,
+   "parent_avg_r": -0.063,
+   "parent_test_r": 0.01,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP@1.0|30m",
@@ -142,17 +149,22 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "BACKTESTING",
-   "trades": 927,
+   "trades": 928,
    "avg_r": 0.044,
    "test_r": 0.106,
-   "parent_avg_r": -0.019,
-   "parent_test_r": 0.044,
+   "parent_avg_r": -0.02,
+   "parent_test_r": 0.042,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-03 07:11"
+   "checked": "2026-11-04 06:56"
   }
  ],
  "by_kind": {
+  "NOTEXT": {
+   "tried": 3,
+   "helped": 3,
+   "passed": 2
+  },
   "DISP": {
    "tried": 6,
    "helped": 5,
@@ -162,14 +174,14 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
-  },
-  "NOTEXT": {
-   "tried": 2,
-   "helped": 2,
-   "passed": 2
   }
  },
  "by_tag": {
+  "overextended_entry": {
+   "tried": 3,
+   "helped": 3,
+   "passed": 2
+  },
   "false_breakout": {
    "tried": 6,
    "helped": 5,
@@ -179,11 +191,6 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
-  },
-  "overextended_entry": {
-   "tried": 2,
-   "helped": 2,
-   "passed": 2
   }
  },
  "retired": [],

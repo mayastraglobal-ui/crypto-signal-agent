@@ -434,3 +434,8 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-11-03 07:11 UTC
 - **P11-MOMENTUM-V3-FDISP@1.0 1h**: FORMALIZED → **FAILED** (avg -0.08R/trade (needs +0.10R); profit factor 0.87; recovery factor -0.86 (net -131.4R / max drawdown 153.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 36.6R - limit 17R; longest drawdown 3069 days = 95% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+
+## 2026-11-04 06:56 UTC
+- **P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 15m**: FORMALIZED → **FAILED** (avg -0.16R/trade (needs +0.10R); profit factor 0.77; recovery factor -0.76 (net -34.1R / max drawdown 45.1R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 41.6R - limit 17R; longest drawdown 1716 days = 95% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 1h**: FORMALIZED → **FAILED** (avg -0.09R/trade (needs +0.10R); profit factor 0.86; recovery factor -0.59 (net -9.9R / max drawdown 16.8R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 34.4R - limit 17R; longest drawdown 3285 days = 100% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m**: FORMALIZED → **BACKTESTING** (recovery factor 2.16 (net +28.7R / max drawdown 13.3R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 18.0R - limit 17R)

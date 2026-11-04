@@ -1680,3 +1680,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P11-MOMENTUM-V3-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 1h
   - limitations: Later entries than 30m (the first step can be half over); fewer signals.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-11-04 06:56 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V2-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-02
+  - title / source: engine failure lab: a repair of P01-BREAKOUT-V2-FDISP@1.0 for its loss tag overextended_entry
+  - URL: none recorded
+  - claim: P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry (-0.01R a trade with it, +0.23R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
