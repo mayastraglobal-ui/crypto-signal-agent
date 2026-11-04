@@ -1551,3 +1551,11 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
 |---|---|---|---|---|---|
 | EXP-0135 | 2026-11-04 06:56 | P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry (-0.01R a trade with it, +0.23R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest. |
+
+### Feedback: P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0
+- timestamp: 2026-11-04 15:40 UTC · source: Claude daily review 2026-11-04 · evidence: BACKTEST_EVIDENCE: 3 cells, 459 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 30m, 1h, 15m · regime: - · review: 2027-02-02
+  - parent: result: P01-BREAKOUT-V2-FDISP@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry (-0.01R a trade with it, +0.23R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest.
+  - result: 30m BACKTESTING 129 trades +0.222R (unseen +0.337R), held back by recovery factor 2.16 (needs 3) and Monte Carlo drawdown 18.0R (limit 17R); 1h FAILED 112 trades -0.088R (unseen +0.147R); 15m FAILED 218 trades -0.156R (unseen +0.037R).
+  - teaches: the same split as the two earlier NOTEXT repairs (TRD-H4-BREAKOUT-FDISP-FNOTEXT and TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT, my records of 2026-10-23): positive on 30m, negative on 1h and 15m. That is now 3 of 3 cards with the same shape. The samples are small (129, 79 and 91 trades on 30m) and the three cards are variants of one idea, so their trades overlap; I count it as a pattern worth watching, not yet a lesson.
+  - next: stop changing this card. If a later review wants to use the pattern, the test is a 30m-only card with parent 'experiment: Feedback: P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0', but the 30m trade counts must first reach at least 200 per card.
