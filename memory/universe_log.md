@@ -966,3 +966,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-04 04:11 UTC
 - **JOIN** BNB - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-04 07:58 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,347x the 1% order-book depth (flag only, not excluded)
