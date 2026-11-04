@@ -3,16 +3,15 @@
   "BTC",
   "ETH",
   "SOL",
+  "BNB",
   "XRP",
   "ZEC",
   "SUI"
  ],
- "in_streak": {
-  "BNB": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 865,
+ "runs": 866,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
