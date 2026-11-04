@@ -1,20 +1,20 @@
 # Weekly review · 2026-W45
 
-Made 2026-11-03 23:12 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-04 00:12 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-03)
-- ✅ hourly scan: last run 2026-11-03 23:12 UTC
+- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-03)
+- ✅ hourly scan: last run 2026-11-04 00:12 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-03 22:01 UTC (11 min ago)
-- ✅ TEST setups closed this week (GitHub record): 16
+- ✅ live watcher: last heartbeat 2026-11-03 23:05 UTC (8 min ago)
+- ✅ TEST setups closed this week (GitHub record): 15
 
 ## Totals
 
-- **Your alerts** (setups that could reach your Telegram): 7 closed since the start, -1.04R a trade; this week 2 (-1.90R)
+- **Your alerts** (setups that could reach your Telegram): 7 closed since the start, -1.04R a trade; this week 1 (-1.06R)
 - Silent research records (strategies NOT sent to you, kept to check the research): 50 closed, -0.66R a trade; this week 14 (-13.01R)
-- TEST: 57 closed setups since the start, -0.70R a trade; this week 16 (-14.91R) (both groups)
+- TEST: 57 closed setups since the start, -0.70R a trade; this week 15 (-14.07R) (both groups)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -77,7 +77,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 | Strategy | TF | Coin | Stage | Sent to you | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| P01-BREAKOUT-V1 | 4h | BTC | TEST | ✅ yes | 2 | 0 | -0.96R | -0.88R | 1 (-0.8R) | +0.36R | -0.96R over 2 trades: too early to say anything |
+| P01-BREAKOUT-V1 | 4h | BTC | TEST | ✅ yes | 2 | 0 | -0.96R | -0.88R | 0 (+0.0R) | +0.36R | -0.96R over 2 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | ETH | TEST | ✅ yes | 1 | 0 | -1.05R | -1.01R | 0 (+0.0R) | +0.25R | -1.05R over 1 trade: too early to say anything |
 | P01-BREAKOUT-V4 | 4h | ETH | TEST | ✅ yes | 1 | 0 | -1.05R | -1.01R | 0 (+0.0R) | +0.22R | -1.05R over 1 trade: too early to say anything |
 | P05-RANGE-REVERSAL-V4 | 4h | SOL | TEST | ✅ yes | 1 | 0 | -1.06R | -1.01R | 1 (-1.1R) | +0.28R | -1.06R over 1 trade: too early to say anything |
