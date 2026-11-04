@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-04 18:07",
+ "utc": "2026-11-04 19:11",
  "verdict": {
   "code": "BOUNCE_DOWNTREND",
   "icon": "\ud83c\udf26",
@@ -25,17 +25,17 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D UNCLEAR, 4H UNCLEAR, 1H EXPANSION)",
+   "why": "timeframes disagree (1D UNCLEAR, 4H UNCLEAR, 1H WEAK_BULL)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "UNCLEAR",
     "4h": "UNCLEAR",
-    "1h": "EXPANSION"
+    "1h": "WEAK_BULL"
    },
    "adx": {
     "1d": 23.0,
     "4h": 22.0,
-    "1h": 27.0
+    "1h": 29.0
    },
    "vol": {
     "atr_pct": 2.5,
@@ -64,27 +64,27 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 4.2,
+    "oi_24h_pct": 4.8,
     "label": "neutral"
    },
-   "change_24h": 3.79
+   "change_24h": 3.62
   },
   {
    "coin": "BNB",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H EXPANSION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "EXPANSION"
+    "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 27.0,
     "4h": 31.0,
-    "1h": 20.0
+    "1h": 22.0
    },
    "vol": {
     "atr_pct": 3.39,
@@ -113,27 +113,27 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 0.5,
+    "oi_24h_pct": -0.8,
     "label": "neutral"
    },
-   "change_24h": 2.93
+   "change_24h": 2.91
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H RANGE, 1H EXPANSION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H RANGE, 1H STRONG_BULL)",
    "labels": {
     "1w": "RANGE",
     "1d": "TRANSITION",
     "4h": "RANGE",
-    "1h": "EXPANSION"
+    "1h": "STRONG_BULL"
    },
    "adx": {
     "1d": 31.0,
     "4h": 19.0,
-    "1h": 34.0
+    "1h": 35.0
    },
    "vol": {
     "atr_pct": 3.39,
@@ -162,22 +162,22 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 8.0,
+    "oi_24h_pct": 5.5,
     "label": "neutral"
    },
-   "change_24h": 5.76
+   "change_24h": 5.99
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H EXPANSION)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "EXPANSION"
+    "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 34.0,
@@ -211,22 +211,22 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 0.2,
+    "oi_24h_pct": -1.3,
     "label": "neutral"
    },
-   "change_24h": 2.44
+   "change_24h": 2.1
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D WEAK_BEAR, 4H RANGE, 1H EXPANSION)",
+   "why": "timeframes disagree (1D WEAK_BEAR, 4H RANGE, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "WEAK_BEAR",
     "4h": "RANGE",
-    "1h": "EXPANSION"
+    "1h": "TRANSITION"
    },
    "adx": {
     "1d": 27.0,
@@ -260,10 +260,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 4.5,
+    "oi_24h_pct": 1.7,
     "label": "neutral"
    },
-   "change_24h": 4.63
+   "change_24h": 3.92
   },
   {
    "coin": "XRP",
@@ -280,7 +280,7 @@
    "adx": {
     "1d": 20.0,
     "4h": 18.0,
-    "1h": 29.0
+    "1h": 30.0
    },
    "vol": {
     "atr_pct": 3.79,
@@ -312,7 +312,7 @@
     "oi_24h_pct": 3.8,
     "label": "neutral"
    },
-   "change_24h": 2.49
+   "change_24h": 2.27
   },
   {
    "coin": "ZEC",
@@ -324,12 +324,12 @@
     "1w": "STRONG_BULL",
     "1d": "WEAK_BULL",
     "4h": "RANGE",
-    "1h": "STRONG_BULL"
+    "1h": "WEAK_BULL"
    },
    "adx": {
     "1d": 15.0,
     "4h": 15.0,
-    "1h": 39.0
+    "1h": 38.0
    },
    "vol": {
     "atr_pct": 8.73,
@@ -361,32 +361,32 @@
     "oi_24h_pct": 25.8,
     "label": "neutral"
    },
-   "change_24h": 6.71
+   "change_24h": 6.73
   }
  ],
- "alts_vs_btc_24h": -0.01,
+ "alts_vs_btc_24h": -0.21,
  "fear_greed": {
   "value": 34,
   "label": "Fear",
   "yesterday": 26
  },
  "btc_dominance": {
-  "pct": 59.552,
-  "utc": "2026-11-04 18:07",
-  "ch24": 0.3,
-  "ch7": 0.07,
+  "pct": 59.553,
+  "utc": "2026-11-04 19:11",
+  "ch24": 0.29,
+  "ch7": 0.1,
   "read": "BTC up + BTC.D up: BTC leads, altcoins lag"
  },
  "events": [
   {
    "start_utc": "2026-11-06 13:30",
    "name": "US jobs report / Employment Situation (Oct data)",
-   "hours": 43.4
+   "hours": 42.3
   },
   {
    "start_utc": "2026-11-10 13:30",
    "name": "US CPI (Oct data)",
-   "hours": 139.4
+   "hours": 138.3
   }
  ],
  "blackout_now": [],
@@ -399,5 +399,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-05 02:07 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -10.5% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H UNCLEAR \u00b7 1H EXPANSION\nVolatility: normal (daily range 2.5%, higher than 20% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.0% (75,907 \u2013 79,001) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +4.2% in 24h)\nAltcoins vs BTC (24h): -0.0%\nBTC dominance: 59.6% \u00b7 24h +0.30 pt \u00b7 7d +0.07 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Fear 34\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f BNB: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-05 03:11 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -10.5% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H UNCLEAR \u00b7 1H WEAK_BULL\nVolatility: normal (daily range 2.5%, higher than 20% of the last year)\nUsual range: BTC usually moves \u00b10.9% in 24h; on 8 of 10 similar days it closed within \u00b12.0% (75,907 \u2013 79,001) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +4.8% in 24h)\nAltcoins vs BTC (24h): -0.2%\nBTC dominance: 59.6% \u00b7 24h +0.29 pt \u00b7 7d +0.10 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Fear 34\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f BNB: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

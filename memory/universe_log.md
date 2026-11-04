@@ -976,3 +976,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-04 16:11 UTC
 - **FLAG** BTC - possible wash volume: 24h volume is 1,186x the 1% order-book depth (flag only, not excluded)
 - **EXCLUDED** SNDKB - only 146 days of history (need 180); 7-day average volume $34M < $50M
+
+## 2026-11-04 19:11 UTC
+- **EXCLUDED** SNDKB - only 146 days of history (need 180); 7-day average volume $34M < $50M; order book too thin: $248k within 1% (need $250k)
