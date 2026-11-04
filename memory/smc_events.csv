@@ -29239,3 +29239,57 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-04 07:30,SUI,15m,SWEEP,bear,0.9025,,,0.134,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-04 07:30,SUI,15m,BOS,bull,0.8983,,,0.587,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-04 07:45,SUI,15m,FVG,bull,,0.8987,0.9007,0.345,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:00,BTC,1h,SWEEP,bear,78254.17,,,0.228,London,4h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-04 08:00,BTC,1h,WEAK_BREAK,bull,78063.3,,,0.145,London,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-04 08:00,BTC,1h,OB_INVALID,bear,,77816.51,78063.3,,London,4h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 08:30,BTC,30m,SWEEP,bear,78405.66,,,0.206,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-04 08:00,ETH,4h,SWEEP,bear,2309.0,,,0.151,,1d,TRANSITION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 08:00,ETH,1h,SWEEP,bear,2309.0,,,0.244,London,4h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 09:00,ETH,1h,BOS,bull,2303.83,,,1.048,London,4h,RANGE,no displacement,smc-1.0,Binance
+2026-11-04 09:00,ETH,1h,OB_RETEST,bear,,2327.05,2339.71,,London,4h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-04 09:00,ETH,1h,FVG_FILLED,bear,,2294.88,2327.05,,London,4h,RANGE,,smc-1.0,Binance
+2026-11-04 08:00,ETH,30m,SWEEP,bear,2309.0,,,0.317,London,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 08:30,ETH,30m,FVG_RETRACE,bear,,2320.16,2331.36,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 08:00,ETH,15m,SWEEP,bear,2309.0,,,0.458,London,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 08:15,ETH,15m,BOS,bull,2306.43,,,0.799,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-04 08:30,ETH,15m,BREAKER_RETEST,bear,,2324.96,2333.31,,London,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-04 08:00,SOL,4h,SWEEP,bull,91.27,,,0.19,,1d,TRANSITION,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-11-04 09:00,SOL,1h,OB_RETEST,bear,,93.49,93.93,,London,4h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-04 08:15,SOL,15m,OB_RETEST,bear,,93.43,93.62,,London,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-04 08:15,SOL,15m,FVG_FILLED,bear,,93.29,93.43,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:45,SOL,15m,WEAK_BREAK,bull,93.32,,,0.062,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-04 08:00,BNB,4h,SWEEP,bull,691.66,,,0.65,,1d,TRANSITION,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-11-04 08:00,BNB,4h,CHOCH,bull,703.3,,,0.015,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-04 08:00,BNB,4h,ORDER_BLOCK,bull,,680.74,699.33,,,1d,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-04 08:00,BNB,4h,OB_INVALID,bear,,694.6,702.22,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 08:00,BNB,1h,BOS,bull,702.22,,,0.243,London,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-04 08:00,BNB,30m,FVG,bull,,701.18,702.39,0.314,London,1h,EXPANSION,,smc-1.0,Binance
+2026-11-04 09:00,BNB,30m,FVG_RETRACE,bull,,701.18,702.39,,London,1h,HIGH_VOL_RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-04 08:00,BNB,15m,FVG_RETRACE,bull,,701.74,702.47,,London,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-04 08:30,BNB,15m,SWEEP,bear,705.38,,,0.125,London,1h,EXPANSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-04 08:45,BNB,15m,BREAKER_RETEST,bull,,699.38,702.0,,London,1h,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-04 08:45,BNB,15m,FVG_FILLED,bull,,701.74,702.47,,London,1h,EXPANSION,,smc-1.0,Binance
+2026-11-04 08:30,XRP,15m,BOS,bull,1.2793,,,0.053,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-04 08:00,ZEC,4h,OB_INVALID,bear,,1237.73,1278.0,,,1d,WEAK_BULL,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 08:00,ZEC,1h,OB_INVALID,bear,,1256.72,1274.37,,London,4h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 08:00,ZEC,1h,FVG,bull,,1259.06,1266.6,0.282,London,4h,RANGE,,smc-1.0,Binance
+2026-11-04 09:00,ZEC,1h,SWEEP,bear,1290.83,,,0.178,London,4h,RANGE,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-11-04 08:00,ZEC,30m,SWEEP,bear,1285.29,,,0.121,London,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-04 08:30,ZEC,30m,SWEEP,bear,1290.83,,,0.229,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-04 08:00,ZEC,15m,SWEEP,bear,1285.29,,,0.168,London,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-04 08:15,ZEC,15m,OB_INVALID,bear,,1276.2,1285.29,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-04 08:45,ZEC,15m,BREAKER_RETEST,bull,,1276.2,1285.29,,London,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-04 08:00,SUI,4h,SWEEP,bear,0.9039,,,0.208,,1d,WEAK_BEAR,buy-side liquidity swept (PDH),smc-1.0,Binance
+2026-11-04 08:00,SUI,1h,SWEEP,bear,0.9039,,,0.351,London,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 09:00,SUI,1h,WEAK_BREAK,bull,0.9039,,,0.99,London,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-04 09:00,SUI,1h,FVG,bull,,0.8997,0.903,0.291,London,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-04 08:00,SUI,30m,SWEEP,bear,0.9039,,,0.448,London,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 08:00,SUI,30m,BOS,bull,0.9025,,,0.071,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-04 08:30,SUI,30m,SWEEP,bear,0.9144,,,0.203,London,1h,UNCLEAR,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-11-04 09:00,SUI,30m,FVG,bull,,0.9077,0.9126,0.575,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:00,SUI,15m,SWEEP,bear,0.9039,,,0.656,London,1h,UNCLEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-04 08:30,SUI,15m,SWEEP,bear,0.9144,,,0.286,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-04 08:30,SUI,15m,FVG_FILLED,bear,,0.8904,0.9152,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:30,SUI,15m,FVG_FILLED,bear,,0.9081,0.9115,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:30,SUI,15m,FVG,bull,,0.9077,0.9103,0.438,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 08:45,SUI,15m,FVG,bull,,0.911,0.9126,0.269,London,1h,UNCLEAR,,smc-1.0,Binance
