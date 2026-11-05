@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 19:11",
+ "generated_utc": "2026-11-05 20:11",
  "book": {
-  "utc": "2026-11-05 19:11",
-  "beijing": "2026-11-06 03:11",
+  "utc": "2026-11-05 20:11",
+  "beijing": "2026-11-06 04:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -34,7 +34,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 19:11 UTC / 2026-11-06 03:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 20:11 UTC / 2026-11-06 04:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -140,6 +140,28 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "close < prev(lowest(low,20))"
   },
   {
    "coin": "SUI",
@@ -261,6 +283,28 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/5",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/4",
+   "missing": null
   },
   {
    "coin": "BTC",
@@ -616,6 +660,61 @@
   },
   {
    "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -912,5 +1011,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-05 20:11",
+   "id": "BTC-4h-P02-EMA-PULLBACK-V4-2026-11-05 15:59",
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P02-EMA-PULLBACK-V4",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 76328.46282230927,
+   "note": "limit 76328.5 filled in the 2026-11-05 16:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-05 20:11",
+   "id": "BTC-4h-P02-EMA-PULLBACK-V4-2026-11-05 15:59",
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P02-EMA-PULLBACK-V4",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 76328.46282230927,
+   "note": "entry at 2026-11-05 16:00 UTC (limit)"
+  }
+ ]
 }

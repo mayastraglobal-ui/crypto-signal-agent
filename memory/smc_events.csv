@@ -30504,3 +30504,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-05 19:00,XRP,1h,SWEEP,bull,1.2339,,,0.359,,4h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-05 19:00,XRP,1h,FVG,bear,,1.2369,1.2409,0.29,,4h,UNCLEAR,,smc-1.0,Binance
 2026-11-05 19:00,ZEC,15m,BOS,bear,1229.88,,,0.19,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-05 20:00,BTC,4h,BREAKER_RETEST,bear,,76259.98,76732.99,,,1d,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-05 20:00,BTC,4h,FVG,bear,,77006.01,80228.32,2.67,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-05 19:30,BTC,30m,FVG_FILLED,bear,,76162.99,76378.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-05 19:30,BTC,15m,FVG_FILLED,bear,,76234.22,76378.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-05 20:00,ETH,4h,FVG,bear,,2287.11,2411.52,2.635,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-05 19:30,ETH,15m,SWEEP,bear,2261.11,,,0.32,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-05 19:45,ETH,15m,BOS,bull,2261.11,,,0.259,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-05 20:00,SOL,4h,FVG,bear,,91.59,95.79,1.842,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-05 20:00,SOL,30m,FVG_FILLED,bear,,89.92,90.19,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-05 20:00,BNB,4h,FVG,bear,,697.17,712.19,1.396,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-05 20:00,XRP,4h,SWEEP,bull,1.2355,,,0.273,,1d,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 20:00,XRP,4h,OB_INVALID,bull,,1.2449,1.2555,,,1d,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-05 20:00,XRP,4h,FVG,bear,,1.2599,1.3132,2.133,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-05 20:00,XRP,1h,FVG_RETRACE,bear,,1.2369,1.2409,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-05 20:00,XRP,1h,FVG_FILLED,bear,,1.2369,1.2409,,,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-05 20:00,XRP,15m,FVG,bull,,1.2406,1.2428,0.273,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-05 20:00,ZEC,4h,FVG,bear,,1289.79,1313.64,0.456,,1d,WEAK_BULL,,smc-1.0,Binance
+2026-11-05 20:00,SUI,4h,BREAKER_RETEST,bear,,0.8578,0.8964,,,1d,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-05 20:00,SUI,4h,FVG,bear,,0.8719,0.92,1.83,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-05 20:00,SUI,15m,FVG,bull,,0.8576,0.8604,0.346,,1h,TRANSITION,,smc-1.0,Binance
