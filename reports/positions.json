@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 20:11",
+ "generated_utc": "2026-11-05 21:21",
  "book": {
-  "utc": "2026-11-05 20:11",
-  "beijing": "2026-11-06 04:11",
+  "utc": "2026-11-05 21:21",
+  "beijing": "2026-11-06 05:21",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -34,7 +34,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 20:11 UTC / 2026-11-06 04:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 21:21 UTC / 2026-11-06 05:21 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -1011,32 +1011,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-05 20:11",
-   "id": "BTC-4h-P02-EMA-PULLBACK-V4-2026-11-05 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P02-EMA-PULLBACK-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 76328.46282230927,
-   "note": "limit 76328.5 filled in the 2026-11-05 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-05 20:11",
-   "id": "BTC-4h-P02-EMA-PULLBACK-V4-2026-11-05 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P02-EMA-PULLBACK-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 76328.46282230927,
-   "note": "entry at 2026-11-05 16:00 UTC (limit)"
-  }
- ]
+ "events_this_run": []
 }

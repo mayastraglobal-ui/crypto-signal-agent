@@ -13,7 +13,7 @@
  "suspended": {
   "SOXLB": "2026-11-05"
  },
- "runs": 904,
+ "runs": 905,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -164,9 +164,7 @@
   ]
  },
  "last_flags": {
-  "BTC": [
-   "wash_volume"
-  ],
+  "BTC": [],
   "ETH": [],
   "ZEC": [
    "wash_volume"
