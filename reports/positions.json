@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 18:11",
+ "generated_utc": "2026-11-05 19:11",
  "book": {
-  "utc": "2026-11-05 18:11",
-  "beijing": "2026-11-06 02:11",
+  "utc": "2026-11-05 19:11",
+  "beijing": "2026-11-06 03:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -34,7 +34,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 18:11 UTC / 2026-11-06 02:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 19:11 UTC / 2026-11-06 03:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -264,28 +264,6 @@
   },
   {
    "coin": "BTC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/5",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/4",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
    "tf": "4h",
    "strategy": "donchian_breakout",
    "version": "1.0",
@@ -440,28 +418,6 @@
   },
   {
    "coin": "ETH",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/5",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/4",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -660,28 +616,6 @@
   },
   {
    "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/5",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/4",
-   "missing": null
-  },
-  {
-   "coin": "SUI",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -778,28 +712,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/5",
-   "missing": null
-  },
-  {
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
   },
   {
    "coin": "XRP",
