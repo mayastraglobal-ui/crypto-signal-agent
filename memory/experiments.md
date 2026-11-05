@@ -1559,3 +1559,27 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 30m BACKTESTING 129 trades +0.222R (unseen +0.337R), held back by recovery factor 2.16 (needs 3) and Monte Carlo drawdown 18.0R (limit 17R); 1h FAILED 112 trades -0.088R (unseen +0.147R); 15m FAILED 218 trades -0.156R (unseen +0.037R).
   - teaches: the same split as the two earlier NOTEXT repairs (TRD-H4-BREAKOUT-FDISP-FNOTEXT and TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT, my records of 2026-10-23): positive on 30m, negative on 1h and 15m. That is now 3 of 3 cards with the same shape. The samples are small (129, 79 and 91 trades on 30m) and the three cards are variants of one idea, so their trades overlap; I count it as a pattern worth watching, not yet a lesson.
   - next: stop changing this card. If a later review wants to use the pattern, the test is a 30m-only card with parent 'experiment: Feedback: P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0', but the 30m trade counts must first reach at least 200 per card.
+
+### Feedback: TRD-H4-BREAKOUT-S3@1.0
+- timestamp: 2026-11-05 15:40 UTC · source: Claude daily review 2026-11-05 · evidence: BACKTEST_EVIDENCE: 4 cells, 5514 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-02-03
+  - parent: result: TRD-H4-BREAKOUT@1.0 1h
+  - hypothesis: The rule 'volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5' adds nothing to TRD-H4-BREAKOUT@1.0 (fewer rules = less room for overfitting).
+  - result: 1h BACKTESTING 1031 trades +0.138R (unseen +0.241R), only the Monte Carlo drawdown fails (23.0R vs 17R); 30m FAILED 941 trades -0.001R (flipped from BACKTESTING on 2026-11-05); 15m FAILED 1658 trades -0.044R; 5m FAILED 1884 trades -0.057R. Last record: 2026-10-12.
+  - teaches: the hypothesis held on 1h only (more trades than the parent, similar average). The fast cells never worked, and the 30m cell is now at -0.001R. This is the same slow-chart-only shape as the other breakout cards.
+  - next: stop changing the entry. The 1h cell is held back by drawdown, not by the entry.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0
+- timestamp: 2026-11-05 15:40 UTC · source: Claude daily review 2026-11-05 · evidence: BACKTEST_EVIDENCE: 4 cells, 3150 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: - · review: 2027-02-03
+  - parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout. One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 461 trades +0.171R (unseen +0.289R); 1h BACKTESTING 747 trades +0.125R (unseen +0.259R), drawdown 23.5R vs 17R; 15m FAILED 794 trades -0.014R; 5m FAILED 1148 trades -0.175R. Update to my records of 2026-10-31 and 2026-11-01.
+  - teaches: no change in meaning: slow cells about +0.12R to +0.17R, fast cells at or below zero, the drawdown unchanged at 23R. Its parent S3 lost its 30m BACKTESTING status today, while this repaired card kept it (461 trades vs 941 for the parent).
+  - next: no change; no further record for this card unless a cell reaches VALIDATION or FAILED on 1h or 30m.
+
+### Feedback: donchian_breakout-VEXIT-S4-FDISP@1.0
+- timestamp: 2026-11-05 15:40 UTC · source: Claude daily review 2026-11-05 · evidence: BACKTEST_EVIDENCE: 3 cells, 3154 trades · confidence: low · strategy: donchian_breakout-VEXIT-S4-FDISP v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: - · review: 2027-02-03
+  - parent: result: donchian_breakout-VEXIT-S4@1.1 30m
+  - hypothesis: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout. One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 4h VALIDATION 539 trades +0.231R (unseen +0.355R): t-statistic 3.63, needs 3.73 after 524 trials; HIGH OVERFITTING RISK: 56% of the profit from one window; 30m BACKTESTING 1078 trades +0.029R; 1h FAILED 1537 trades -0.009R.
+  - teaches: the 4h cell is back in VALIDATION for the third time since 2026-10-26. The trials bar rose from 3.71 to 3.73, so the same average needs more trades each week; the t value (3.63) is under the bar by 0.10.
+  - next: no change and no further record for this card until it is PAPER_TRADING or FAILED.
