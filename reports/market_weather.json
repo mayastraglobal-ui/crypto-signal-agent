@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-05 11:11",
+ "utc": "2026-11-05 12:16",
  "verdict": {
   "code": "TURNING_UP",
   "icon": "\ud83c\udf24",
@@ -36,7 +36,7 @@
    "adx": {
     "1d": 22.0,
     "4h": 24.0,
-    "1h": 36.0
+    "1h": 35.0
    },
    "vol": {
     "atr_pct": 2.69,
@@ -65,26 +65,26 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -50.7,
+    "oi_24h_pct": -2.0,
     "label": "neutral"
    },
-   "change_24h": 2.12
+   "change_24h": 2.65
   },
   {
    "coin": "BNB",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H RANGE)",
+   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H RANGE)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "TRANSITION",
-    "4h": "WEAK_BEAR",
+    "4h": "UNCLEAR",
     "1h": "RANGE"
    },
    "adx": {
     "1d": 27.0,
-    "4h": 24.0,
+    "4h": 23.0,
     "1h": 19.0
    },
    "vol": {
@@ -117,24 +117,24 @@
     "oi_24h_pct": -87.0,
     "label": "neutral"
    },
-   "change_24h": 1.96
+   "change_24h": 2.08
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D TRANSITION, 4H UNCLEAR, 1H WEAK_BULL)",
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H WEAK_BULL)",
    "labels": {
     "1w": "RANGE",
     "1d": "TRANSITION",
-    "4h": "UNCLEAR",
+    "4h": "TRANSITION",
     "1h": "WEAK_BULL"
    },
    "adx": {
     "1d": 29.0,
-    "4h": 24.0,
-    "1h": 35.0
+    "4h": 25.0,
+    "1h": 34.0
    },
    "vol": {
     "atr_pct": 3.58,
@@ -163,10 +163,10 @@
    },
    "crowd": {
     "funding_pct": 0.0071,
-    "oi_24h_pct": 0.4,
+    "oi_24h_pct": -65.2,
     "label": "neutral"
    },
-   "change_24h": 3.75
+   "change_24h": 4.29
   },
   {
    "coin": "SOL",
@@ -182,7 +182,7 @@
    },
    "adx": {
     "1d": 34.0,
-    "4h": 27.0,
+    "4h": 26.0,
     "1h": 26.0
    },
    "vol": {
@@ -212,10 +212,10 @@
    },
    "crowd": {
     "funding_pct": 0.0017,
-    "oi_24h_pct": -55.1,
+    "oi_24h_pct": -55.3,
     "label": "neutral"
    },
-   "change_24h": 3.05
+   "change_24h": 3.64
   },
   {
    "coin": "SUI",
@@ -232,7 +232,7 @@
    "adx": {
     "1d": 26.0,
     "4h": 17.0,
-    "1h": 22.0
+    "1h": 21.0
    },
    "vol": {
     "atr_pct": 5.86,
@@ -261,10 +261,10 @@
    },
    "crowd": {
     "funding_pct": 0.0045,
-    "oi_24h_pct": -62.0,
+    "oi_24h_pct": -62.5,
     "label": "neutral"
    },
-   "change_24h": 1.06
+   "change_24h": 1.88
   },
   {
    "coin": "XRP",
@@ -280,8 +280,8 @@
    },
    "adx": {
     "1d": 19.0,
-    "4h": 23.0,
-    "1h": 33.0
+    "4h": 25.0,
+    "1h": 34.0
    },
    "vol": {
     "atr_pct": 3.88,
@@ -310,10 +310,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -0.6,
+    "oi_24h_pct": -71.0,
     "label": "neutral"
    },
-   "change_24h": 2.09
+   "change_24h": 2.62
   },
   {
    "coin": "ZEC",
@@ -359,35 +359,35 @@
    },
    "crowd": {
     "funding_pct": -0.0005,
-    "oi_24h_pct": -66.8,
+    "oi_24h_pct": -68.3,
     "label": "neutral"
    },
-   "change_24h": 0.34
+   "change_24h": 2.42
   }
  ],
- "alts_vs_btc_24h": -0.1,
+ "alts_vs_btc_24h": -0.13,
  "fear_greed": {
   "value": 50,
   "label": "Neutral",
   "yesterday": 34
  },
  "btc_dominance": {
-  "pct": 60.078,
-  "utc": "2026-11-05 11:11",
-  "ch24": 0.13,
-  "ch7": 0.07,
-  "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
+  "pct": 60.103,
+  "utc": "2026-11-05 12:16",
+  "ch24": 0.78,
+  "ch7": 0.71,
+  "read": "BTC up + BTC.D up: BTC leads, altcoins lag"
  },
  "events": [
   {
    "start_utc": "2026-11-06 13:30",
    "name": "US jobs report / Employment Situation (Oct data)",
-   "hours": 26.3
+   "hours": 25.2
   },
   {
    "start_utc": "2026-11-10 13:30",
    "name": "US CPI (Oct data)",
-   "hours": 122.3
+   "hours": 121.2
   }
  ],
  "blackout_now": [],
@@ -400,5 +400,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf24 <b>Market weather \u00b7 11-05 19:11 Beijing</b>\nVerdict: <b>Turning up - not confirmed</b>\nPrices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.\n\nBTC price trend (daily chart): <b>SIDEWAYS \u00b7 -6.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H UNCLEAR \u00b7 1H WEAK_BULL\nVolatility: normal (daily range 2.7%, higher than 33% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (78,759 \u2013 82,249) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -50.7% in 24h)\nAltcoins vs BTC (24h): -0.1%\nBTC dominance: 60.1% \u00b7 24h +0.13 pt \u00b7 7d +0.07 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Neutral 50\n\n<b>Coins</b>\n\u2197\ufe0f BTC: turning up (not confirmed)\n\u2198\ufe0f BNB: downtrend on the daily chart (not confirmed)\n\u2197\ufe0f ETH: turning up (not confirmed)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\u2197\ufe0f XRP: turning up (not confirmed)\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\nFits today: waiting for the confirmation - the LONG alerts then come by themselves; checking the stop of any open short\nAvoid: chasing the rally by hand before the confirmation; shorting into the rise\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf24 <b>Market weather \u00b7 11-05 20:16 Beijing</b>\nVerdict: <b>Turning up - not confirmed</b>\nPrices are rising on the 1H chart (and on 15m / 30m), but the bigger trend (4H / 1D) has not turned yet. The trend strategies wait: a LONG alert comes only once 1H and 4H both point up.\n\nBTC price trend (daily chart): <b>SIDEWAYS \u00b7 -6.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H UNCLEAR \u00b7 1H WEAK_BULL\nVolatility: normal (daily range 2.7%, higher than 33% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (78,759 \u2013 82,249) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest -2.0% in 24h)\nAltcoins vs BTC (24h): -0.1%\nBTC dominance: 60.1% \u00b7 24h +0.78 pt \u00b7 7d +0.71 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Neutral 50\n\n<b>Coins</b>\n\u2197\ufe0f BTC: turning up (not confirmed)\n\u2198\ufe0f BNB: downtrend on the daily chart (not confirmed)\n\u2197\ufe0f ETH: turning up (not confirmed)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\u2197\ufe0f XRP: turning up (not confirmed)\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\nFits today: waiting for the confirmation - the LONG alerts then come by themselves; checking the stop of any open short\nAvoid: chasing the rally by hand before the confirmation; shorting into the rise\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
