@@ -29879,3 +29879,34 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-04 23:00,SUI,15m,FVG,bull,,0.9342,0.9381,0.621,,1h,EXPANSION,,smc-1.0,Binance
 2026-11-04 23:15,SUI,15m,FVG_RETRACE,bull,,0.9342,0.9381,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
 2026-11-04 23:15,SUI,15m,FVG_FILLED,bull,,0.9342,0.9381,,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-05 00:00,BTC,4h,FVG_RETRACE,bull,,78718.0,79952.75,,,1d,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,BTC,30m,FVG_RETRACE,bull,,80272.49,80654.0,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,BTC,15m,FVG,bear,,80562.01,80724.8,0.677,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-04 23:45,BTC,15m,FVG_RETRACE,bear,,80562.01,80724.8,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:45,BTC,15m,FVG_FILLED,bear,,80562.01,80724.8,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-05 00:00,ETH,4h,FVG_RETRACE,bull,,2339.27,2405.59,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,ETH,30m,FVG_RETRACE,bull,,2422.58,2433.7,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,ETH,15m,FVG_RETRACE,bull,,2420.55,2425.28,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,ETH,15m,FVG,bear,,2429.13,2436.27,0.723,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-04 23:45,ETH,15m,FVG_RETRACE,bear,,2429.13,2436.27,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,SOL,1h,FVG,bull,,95.07,95.38,0.295,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-04 23:30,SOL,30m,FVG_RETRACE,bull,,94.89,95.5,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,SOL,15m,FVG,bear,,95.66,96.01,0.744,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-04 23:45,SOL,15m,FVG_RETRACE,bear,,95.66,96.01,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,BNB,4h,FVG_RETRACE,bull,,705.7,713.76,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,BNB,30m,FVG_RETRACE,bull,,718.0,720.55,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:30,BNB,15m,FVG,bear,,719.73,721.85,1.054,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-04 23:45,BNB,15m,FVG_RETRACE,bear,,719.73,721.85,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,BNB,15m,FVG_FILLED,bear,,719.73,721.85,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-04 23:30,XRP,30m,FVG_RETRACE,bull,,1.3054,1.3116,,,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,XRP,30m,FVG_FILLED,bull,,1.3054,1.3116,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-05 00:00,XRP,30m,FVG,bear,,1.3087,1.3116,0.359,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-04 23:30,XRP,15m,FVG,bear,,1.3095,1.3119,0.471,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-05 00:00,XRP,15m,FVG_FILLED,bull,,1.3054,1.3094,,,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-04 23:30,ZEC,30m,FVG_RETRACE,bull,,1298.02,1305.43,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,ZEC,30m,FVG_FILLED,bull,,1298.02,1305.43,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-04 23:30,ZEC,15m,FVG,bear,,1310.59,1315.09,0.378,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-05 00:00,ZEC,15m,FVG_RETRACE,bull,,1298.02,1301.63,,,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-05 00:00,ZEC,15m,FVG_FILLED,bull,,1298.02,1301.63,,,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-05 00:00,SUI,30m,FVG_RETRACE,bull,,0.9223,0.9327,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-04 23:45,SUI,15m,FVG_RETRACE,bull,,0.9282,0.9327,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
