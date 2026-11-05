@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 07:03",
+ "generated_utc": "2026-11-05 08:25",
  "book": {
-  "utc": "2026-11-05 07:03",
-  "beijing": "2026-11-05 15:03",
+  "utc": "2026-11-05 08:25",
+  "beijing": "2026-11-05 16:25",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -20,7 +20,7 @@
     "tp1": 1458.4975090690377,
     "sim_tf": "4h",
     "since": "2026-11-04 15:59",
-    "open_r": 0.1,
+    "open_r": 0.16,
     "next_action": "HOLD \u00b7 watch: regime changed RANGE -> WEAK_BULL"
    }
   ],
@@ -38,10 +38,10 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 07:03 UTC / 2026-11-05 15:03 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 08:25 UTC / 2026-11-05 16:25 Beijing",
   "Active:    none",
   "Awaiting:  none",
-  "Paper:     ZEC \u00b7 LONG \u00b7 4h \u00b7 P12-LEADER-V2 v1.0 \u00b7 entry 1,306.10 \u00b7 stop 1,229.90 \u00b7 open +0.10R \u00b7 HOLD \u00b7 watch: regime changed RANGE -> WEAK_BULL (VALIDATION)",
+  "Paper:     ZEC \u00b7 LONG \u00b7 4h \u00b7 P12-LEADER-V2 v1.0 \u00b7 entry 1,306.10 \u00b7 stop 1,229.90 \u00b7 open +0.16R \u00b7 HOLD \u00b7 watch: regime changed RANGE -> WEAK_BULL (VALIDATION)",
   "Closed:    none",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -102,17 +102,6 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "BNB",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
    "coin": "BTC",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
@@ -121,17 +110,6 @@
    "direction": "LONG",
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
    "missing": "close > prev(highest(high,330))"
   },
   {
@@ -212,17 +190,6 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
    "coin": "BNB",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
@@ -276,6 +243,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "BNB",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "BNB",
@@ -364,6 +342,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "BTC",
@@ -892,6 +881,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
   },
   {
    "coin": "ZEC",

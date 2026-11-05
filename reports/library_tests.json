@@ -6,10 +6,10 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 939,
-   "avg_r": 0.152,
-   "test_avg_r": 0.263,
-   "tested_utc": "2026-11-04 06:56",
+   "trades": 1031,
+   "avg_r": 0.138,
+   "test_avg_r": 0.241,
+   "tested_utc": "2026-11-05 07:18",
    "library": true,
    "coins": {
     "BTC": {
@@ -67,6 +67,14 @@
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
+    },
+    "UNI": {
+     "n": 92,
+     "avg_r": -0.009,
+     "win_rate": 35.9,
+     "test_n": 0,
+     "test_avg_r": null,
+     "positive": false
     }
    }
   }
