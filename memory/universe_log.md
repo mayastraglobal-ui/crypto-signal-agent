@@ -995,3 +995,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-05 12:16 UTC
 - **EXCLUDED** SNDKB - only 147 days of history (need 180); 7-day average volume $36M < $50M; order book too thin: $241k within 1% (need $250k)
+
+## 2026-11-05 15:12 UTC
+- **EXCLUDED** SOXLB - only 121 days of history (need 180); 7-day average volume $24M < $50M; 24h move -32.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $80k within 1% (need $250k)

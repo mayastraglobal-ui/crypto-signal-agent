@@ -10,8 +10,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 898,
+ "suspended": {
+  "SOXLB": "2026-11-05"
+ },
+ "runs": 899,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -136,6 +138,7 @@
    "volume_7d"
   ],
   "SOXLB": [
+   "big_move",
    "history",
    "thin_book",
    "volume_7d"
