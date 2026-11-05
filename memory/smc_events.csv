@@ -30026,3 +30026,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-05 05:15,SUI,15m,WEAK_BREAK,bear,0.927,,,0.29,,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-11-05 05:30,SUI,15m,FVG,bear,,0.9257,0.9286,0.564,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-05 05:45,SUI,15m,FVG_RETRACE,bear,,0.9257,0.9286,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-05 07:00,ETH,15m,SWEEP,bear,2432.04,,,0.143,,1h,WEAK_BULL,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-05 07:00,ZEC,1h,BOS,bull,1322.66,,,0.154,,4h,WEAK_BULL,no displacement,smc-1.0,Binance
+2026-11-05 07:00,ZEC,30m,SWEEP,bear,1329.21,,,0.395,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-05 07:00,ZEC,15m,SWEEP,bear,1329.21,,,0.669,,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-05 07:00,ZEC,15m,FVG,bull,,1322.15,1325.4,0.359,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-05 06:30,SUI,30m,SWEEP,bull,0.9216,,,0.229,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance

@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 890,
+ "runs": 891,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -137,6 +137,7 @@
   ],
   "SOXLB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "BMT": [
@@ -163,7 +164,9 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [],
+  "ZEC": [
+   "wash_volume"
+  ],
   "XRP": [],
   "SOL": [],
   "PROVE": [
