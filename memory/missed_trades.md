@@ -1667,3 +1667,113 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the regime gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - ema_9_21_cross v1.0 30m: blocked by the regime gate
+
+### BTC up +5.0% (8.1x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 8.1x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: UNCLEAR · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the permission gate
+  - PB-B-GRADED v1.0 15m: no valid stop / target
+  - PB-B-GRADED v1.0 5m: no valid stop / target
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S7-SILVER-BULLET-noSMC v1.0 15m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### ETH up +7.8% (10.7x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 10.7x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: UNCLEAR · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### SOL up +6.2% (6.6x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.6x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: UNCLEAR · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the permission gate
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the regime gate
+
+### BNB up +4.5% (6.6x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.6x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: RANGE · review: 2026-11-12
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the regime gate
+  - PB-B-APLUS v1.0 5m: no valid stop / target
+  - PB-B-GRADED v1.0 5m: no valid stop / target
+  - PB-B-SWEEP v1.0 5m: signal
+  - PB-B-SWEEP-LIMIT v1.0 5m: no valid stop / target
+  - R4-BBRSI v1.0 1h: signal
+  - R4-BBRSI v1.0 30m: signal
+  - S8-PDH-PDL-SWEEP v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
+
+### XRP up +5.4% (6.9x ATR), 2026-11-04 02:00 -> 2026-11-04 15:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.9x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: XRP · timeframe: 1h · regime: EXPANSION · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the permission gate
+
+### ZEC up +12.4% (6.1x ATR), 2026-11-04 02:00 -> 2026-11-04 15:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.1x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: TRANSITION · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: blocked by the permission gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+
+### SUI up +7.9% (6.8x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 6.8x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 1h: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+
+### UNI up +7.9% (5.0x ATR), 2026-11-04 03:00 -> 2026-11-04 16:00
+- timestamp: 2026-11-05 07:18 UTC · source: engine: daily research run · evidence: FACT: move of 5.0x the 1H ATR within 12 hours; 182 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: UNI · timeframe: 1h · regime: RANGE · review: 2026-11-12
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 30m: blocked by the permission gate
