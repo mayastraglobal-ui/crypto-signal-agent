@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 21:21",
+ "generated_utc": "2026-11-05 22:09",
  "book": {
-  "utc": "2026-11-05 21:21",
-  "beijing": "2026-11-06 05:21",
+  "utc": "2026-11-05 22:09",
+  "beijing": "2026-11-06 06:09",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -34,7 +34,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 21:21 UTC / 2026-11-06 05:21 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 22:09 UTC / 2026-11-06 06:09 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -666,7 +666,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "0/5",
    "missing": null
   },
   {
@@ -677,7 +677,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "0/4",
    "missing": null
   },
   {
