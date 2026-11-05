@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-05 15:12 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-05 16:18 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 4 | 0 | -1.01R | -4.02R | 4.02R | 4 |
+| **Your alerts** (could reach your Telegram) | 5 | 0 | -1.01R | -5.05R | 5.05R | 5 |
 | Silent research records (never sent to you) | 51 | 16 | -0.66R | -33.87R | 33.87R | 16 |
-| 🔵 TEST | 58 | 14 | -0.71R | -41.17R | 41.17R | 18 |
+| 🔵 TEST | 59 | 14 | -0.71R | -42.19R | 42.19R | 19 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 61 | 13 | -0.73R | -44.42R | 44.42R | 18 |
+| **All** | 62 | 13 | -0.73R | -45.44R | 45.44R | 19 |
 
 ## 🚨 Drift monitor
 
@@ -31,6 +31,7 @@ Warning signs (no pause yet):
 | P05-RANGE-REVERSAL-V4 | 4h | SOL | 🔵 TEST | ✅ yes | 1 | 0 | -1.06R | +0.24R | -1.06R | 1.06R | ✅ |
 | P07-SQUEEZE-RETEST-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.11R | +0.23R | -1.11R | 1.11R | ✅ |
 | P07-SQUEEZE-RETEST-V4 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.11R | +0.41R | -1.11R | 1.11R | ✅ |
+| P12-LEADER-V1 | 4h | ZEC | 🔵 TEST | ✅ yes | 1 | 0 | -1.02R | +0.42R | -1.02R | 1.02R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.51R | -1.08R | 1.08R | ✅ |
 | donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.51R | -1.08R | 1.08R | ✅ |
 | donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.26R | -1.08R | 1.08R | ✅ |
@@ -60,7 +61,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-25 16:59 | -28.12R |
 | 2026-10-25 16:59 | -27.23R |
 | 2026-10-27 12:59 | -28.42R |
 | 2026-10-27 23:59 | -29.26R |
@@ -80,3 +80,4 @@ Warning signs (no pause yet):
 | 2026-11-03 10:59 | -42.24R |
 | 2026-11-03 12:59 | -43.33R |
 | 2026-11-04 04:29 | -44.42R |
+| 2026-11-05 15:59 | -45.44R |

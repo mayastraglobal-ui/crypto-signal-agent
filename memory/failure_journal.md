@@ -450,3 +450,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### ZEC LONG 4h P12-LEADER-V1 v1.0 - SL -1.02R
+- timestamp: 2026-11-05 16:18 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P12-LEADER-V1 v1.0 · asset: ZEC · timeframe: 4h · regime: RANGE · review: 2026-11-12
+  - signal 2026-11-04 15:59 UTC, closed 2026-11-05 15:59 UTC, stage TEST
+  - MAE -1.05R / MFE +0.55R
+  - at entry: session -, conditions: range_market, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ZEC LONG 4h P12-LEADER-V2 v1.0 - SL -1.03R
+- timestamp: 2026-11-05 16:18 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P12-LEADER-V2 v1.0 · asset: ZEC · timeframe: 4h · regime: RANGE · review: 2026-11-12
+  - signal 2026-11-04 15:59 UTC, closed 2026-11-05 15:59 UTC, stage VALIDATION
+  - MAE -1.22R / MFE +0.38R
+  - at entry: session -, conditions: range_market, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)

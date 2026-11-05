@@ -1,14 +1,14 @@
 {
- "last_entry_utc": "2026-11-04 18:40",
+ "last_entry_utc": "2026-11-05 16:00",
  "days": 30,
  "all": {
-  "alerts": 7,
+  "alerts": 8,
   "took": 6,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
-   "n": 5,
-   "total_r": -5.0,
+   "n": 6,
+   "total_r": -6.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -25,8 +25,8 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 6,
-   "total_r": -6.0,
+   "n": 7,
+   "total_r": -7.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -60,13 +60,13 @@
   "missing_result": 1
  },
  "recent": {
-  "alerts": 7,
+  "alerts": 8,
   "took": 6,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
-   "n": 5,
-   "total_r": -5.0,
+   "n": 6,
+   "total_r": -6.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -83,8 +83,8 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 6,
-   "total_r": -6.0,
+   "n": 7,
+   "total_r": -7.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -139,6 +139,16 @@
    "your_n": 1
   },
   {
+   "cell": "P02-EMA-PULLBACK-V4 4h",
+   "alerts": 1,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
+  },
+  {
    "cell": "P04-MACD-SUPERTREND-V5 30m",
    "alerts": 1,
    "took": 1,
@@ -163,8 +173,8 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": -1.0,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   },
@@ -205,6 +215,10 @@
   "P05-RANGE-REVERSAL-V4": {
    "n": 1,
    "avg_r": -1.0
+  },
+  "P12-LEADER-V1": {
+   "n": 1,
+   "avg_r": -1.0
   }
  },
  "compare_5m": {
@@ -228,8 +242,8 @@
     "wins": 0
    },
    "sent": {
-    "n": 4,
-    "total_r": -4.0,
+    "n": 5,
+    "total_r": -5.0,
     "avg_r": -1.0,
     "wins": 0
    }
