@@ -30490,3 +30490,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-05 17:00,ZEC,15m,FVG_FILLED,bull,,1247.75,1265.62,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-05 17:00,SUI,1h,FVG,bear,,0.8719,0.8809,0.59,,4h,RANGE,,smc-1.0,Binance
 2026-11-05 16:30,SUI,30m,FVG_RETRACE,bear,,0.8659,0.8809,,,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-05 18:00,BTC,30m,FVG,bear,,76162.99,76378.0,0.37,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-05 17:30,BTC,15m,FVG,bear,,76234.22,76378.0,0.297,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-05 18:00,SOL,30m,BOS,bear,89.22,,,0.02,,1h,EXPANSION,no displacement,smc-1.0,Binance
+2026-11-05 18:00,SOL,30m,FVG,bear,,89.92,90.19,0.266,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-05 18:00,SOL,15m,BOS,bear,89.22,,,0.026,,1h,EXPANSION,no displacement,smc-1.0,Binance
+2026-11-05 18:00,XRP,30m,SWEEP,bull,1.2339,,,0.111,,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 18:00,XRP,15m,SWEEP,bull,1.2339,,,0.138,,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 18:00,XRP,15m,BOS,bear,1.2384,,,0.34,,1h,EXPANSION,no displacement,smc-1.0,Binance

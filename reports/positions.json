@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-05 17:16",
+ "generated_utc": "2026-11-05 18:11",
  "book": {
-  "utc": "2026-11-05 17:16",
-  "beijing": "2026-11-06 01:16",
+  "utc": "2026-11-05 18:11",
+  "beijing": "2026-11-06 02:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -34,7 +34,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 17:16 UTC / 2026-11-06 01:16 Beijing",
+  "POSITION BOOK \u2014 2026-11-05 18:11 UTC / 2026-11-06 02:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -787,7 +787,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -798,7 +798,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -1000,84 +1000,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "BTC-1h-P01-BREAKOUT-V2-2026-11-05 15:59",
-   "coin": "BTC",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 76199.41462445528,
-   "note": "limit 76199.4 filled in the 2026-11-05 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "BTC-1h-P01-BREAKOUT-V2-2026-11-05 15:59",
-   "coin": "BTC",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 76199.41462445528,
-   "note": "entry at 2026-11-05 16:00 UTC (limit)"
-  },
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "SUI-1h-P01-BREAKOUT-V5-2026-11-05 15:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.8573710353767474,
-   "note": "limit 0.857371 filled in the 2026-11-05 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "SUI-1h-P01-BREAKOUT-V5-2026-11-05 15:59",
-   "coin": "SUI",
-   "tf": "1h",
-   "strategy": "P01-BREAKOUT-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.8573710353767474,
-   "note": "entry at 2026-11-05 16:00 UTC (limit)"
-  },
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "ETH-30m-P07-SQUEEZE-RETEST-V2-2026-11-05 16:59",
-   "coin": "ETH",
-   "tf": "30m",
-   "strategy": "P07-SQUEEZE-RETEST-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 2266.01,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-11-05 17:16",
-   "id": "ETH-30m-P07-SQUEEZE-RETEST-V2-2026-11-05 16:59",
-   "coin": "ETH",
-   "tf": "30m",
-   "strategy": "P07-SQUEEZE-RETEST-V2",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 2266.01,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
