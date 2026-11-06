@@ -447,3 +447,8 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **TRD-H4-BREAKOUT-S3-FDISP@1.0 15m**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.98; recovery factor -0.28 (net -11.2R / max drawdown 40.2R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 31.5R - limit 17R; longest drawdown 1602 days = 91% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: BACKTESTING → **VALIDATION** (multiple-testing bar: t-statistic 3.63 of the average trade, needs 3.73 after 524 trials; HIGH OVERFITTING RISK: 56% of the profit from window 5)
 - **macd_trend_cross@1.0 4h**: BACKTESTING → **FAILED** (avg -0.02R/trade (needs +0.10R); profit factor 0.95; recovery factor -0.14 (net -0.8R / max drawdown 5.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.0R - limit 17R; longest drawdown 1985 days = 61% of the tested period (limit 55%); only 9 unseen-test trades; not profitable in BOTH train and unseen test)
+
+## 2026-11-06 07:20 UTC
+- **TRD-H4-BREAKOUT-S3@1.0 30m**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.00 (net +0.2R / max drawdown 73.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 30.1R - limit 17R; longest drawdown 1709 days = 96% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-FDISP@1.0 4h**: PAPER_TRADING → **BACKTESTING** (failed the long-history test 2 runs in a row - leaves PAPER_TRADING)
+- **donchian_breakout-VEXIT-S4@1.0 4h**: PAPER_TRADING → **BACKTESTING** (failed the long-history test 2 runs in a row - leaves PAPER_TRADING)
