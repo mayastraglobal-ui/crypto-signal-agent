@@ -30674,3 +30674,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-06 04:30,ZEC,30m,FVG,bear,,1288.32,1307.54,0.83,Asia,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-06 05:00,SUI,1h,FVG_RETRACE,bull,,0.8435,0.8552,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-06 04:30,SUI,15m,FVG_FILLED,bull,,0.8536,0.8555,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 05:15,ETH,15m,WEAK_BREAK,bear,2227.64,,,0.508,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-06 06:00,BNB,1h,FVG_FILLED,bull,,690.15,692.8,,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-06 06:00,BNB,30m,FVG_FILLED,bull,,690.15,693.69,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 05:15,BNB,15m,BOS,bear,692.3,,,0.566,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-06 05:15,BNB,15m,FVG_RETRACE,bull,,690.15,691.78,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-06 05:15,BNB,15m,FVG_FILLED,bull,,692.11,693.69,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 05:45,BNB,15m,FVG_FILLED,bull,,690.15,691.78,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 06:00,XRP,1h,BOS,bear,1.2,,,0.052,,4h,EXPANSION,no displacement,smc-1.0,Binance
+2026-11-06 06:00,XRP,1h,FVG_FILLED,bull,,1.1973,1.215,,,4h,EXPANSION,,smc-1.0,Binance
+2026-11-06 05:30,XRP,30m,BOS,bear,1.2,,,0.186,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-06 05:30,XRP,15m,FVG,bear,,1.2012,1.2037,0.392,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-06 05:45,XRP,15m,FVG_RETRACE,bear,,1.2012,1.2037,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-06 05:30,ZEC,15m,FVG,bear,,1272.29,1276.65,0.301,,1h,WEAK_BULL,,smc-1.0,Binance
