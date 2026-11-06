@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-06 04:00",
+ "last_entry_utc": "2026-11-06 08:20",
  "days": 30,
  "all": {
   "alerts": 9,
-  "took": 7,
+  "took": 8,
   "skipped": 0,
-  "no_answer": 2,
+  "no_answer": 1,
   "plan_took": {
    "n": 6,
    "total_r": -6.0,
@@ -57,13 +57,13 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 2
  },
  "recent": {
   "alerts": 9,
-  "took": 7,
+  "took": 8,
   "skipped": 0,
-  "no_answer": 2,
+  "no_answer": 1,
   "plan_took": {
    "n": 6,
    "total_r": -6.0,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 2
  },
  "per_strategy": [
   {
@@ -171,7 +171,7 @@
   {
    "cell": "P07-SQUEEZE-RETEST-V3 4h",
    "alerts": 1,
-   "took": 0,
+   "took": 1,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,

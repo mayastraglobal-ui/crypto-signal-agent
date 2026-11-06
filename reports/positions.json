@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-06 08:16",
+ "generated_utc": "2026-11-06 09:11",
  "book": {
-  "utc": "2026-11-06 08:16",
-  "beijing": "2026-11-06 16:16",
+  "utc": "2026-11-06 09:11",
+  "beijing": "2026-11-06 17:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-06 08:16 UTC / 2026-11-06 16:16 Beijing",
+  "POSITION BOOK \u2014 2026-11-06 09:11 UTC / 2026-11-06 17:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
@@ -726,7 +726,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -917,32 +917,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-06 08:16",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-11-06 07:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.1816,
-   "note": "30m signal candle closed"
-  },
-  {
-   "time_utc": "2026-11-06 08:16",
-   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-11-06 07:29",
-   "coin": "XRP",
-   "tf": "30m",
-   "strategy": "P04-MACD-SUPERTREND-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.1816,
-   "note": ""
-  }
- ]
+ "events_this_run": []
 }
