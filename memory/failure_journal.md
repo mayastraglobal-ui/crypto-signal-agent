@@ -482,3 +482,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session London, conditions: overextended_entry, late_entry, no_displacement
   - what happened: false_breakout, indicator_lag
   - root cause / fix: (review)
+
+### SUI SHORT 1h P01-BREAKOUT-V5 v1.0 - exit-rule -0.40R
+- timestamp: 2026-11-06 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.40R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-13
+  - signal 2026-11-05 15:59 UTC, closed 2026-11-06 11:59 UTC, stage TEST
+  - MAE -0.49R / MFE +0.92R
+  - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
