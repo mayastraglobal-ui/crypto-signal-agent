@@ -3,7 +3,6 @@
   "BTC",
   "ETH",
   "SOL",
-  "BNB",
   "XRP",
   "ZEC",
   "SUI"
@@ -13,7 +12,7 @@
  "suspended": {
   "SOXLB": "2026-11-06"
  },
- "runs": 924,
+ "runs": 925,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -28,7 +27,9 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [],
+  "BNB": [
+   "volume_24h"
+  ],
   "UNI": [],
   "SUI": [],
   "AVAX": [],
