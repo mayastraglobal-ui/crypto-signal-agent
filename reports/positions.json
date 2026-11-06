@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-06 13:11",
+ "generated_utc": "2026-11-06 14:11",
  "book": {
-  "utc": "2026-11-06 13:11",
-  "beijing": "2026-11-06 21:11",
+  "utc": "2026-11-06 14:11",
+  "beijing": "2026-11-06 22:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,10 +20,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-06 13:11 UTC / 2026-11-06 21:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-06 14:11 UTC / 2026-11-06 22:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -42,19 +42,13 @@
   ],
   "upcoming_events": [
    {
-    "start_utc": "2026-11-06 13:30",
-    "end_utc": "2026-11-06 13:30",
-    "type": "NFP",
-    "name": "US jobs report / Employment Situation (Oct data)"
-   },
-   {
     "start_utc": "2026-11-10 13:30",
     "end_utc": "2026-11-10 13:30",
     "type": "CPI",
     "name": "US CPI (Oct data)"
    }
   ],
-  "next_event": "US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC",
+  "next_event": "US CPI (Oct data) 2026-11-10 13:30 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
@@ -651,7 +645,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -772,7 +766,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -783,7 +777,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {

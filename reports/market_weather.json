@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-06 13:11",
+ "utc": "2026-11-06 14:11",
  "verdict": {
   "code": "NEWS",
   "icon": "\u26c8",
@@ -63,10 +63,10 @@
    },
    "crowd": {
     "funding_pct": 0.0027,
-    "oi_24h_pct": 2.1,
+    "oi_24h_pct": 1.5,
     "label": "neutral"
    },
-   "change_24h": -4.61
+   "change_24h": -4.97
   },
   {
    "coin": "BNB",
@@ -83,7 +83,7 @@
    "adx": {
     "1d": 26.0,
     "4h": 26.0,
-    "1h": 34.0
+    "1h": 33.0
    },
    "vol": {
     "atr_pct": 3.89,
@@ -112,10 +112,10 @@
    },
    "crowd": {
     "funding_pct": 0.0098,
-    "oi_24h_pct": -6.6,
+    "oi_24h_pct": -7.1,
     "label": "neutral"
    },
-   "change_24h": -2.13
+   "change_24h": -2.22
   },
   {
    "coin": "ETH",
@@ -164,7 +164,7 @@
     "oi_24h_pct": 0.9,
     "label": "neutral"
    },
-   "change_24h": -6.25
+   "change_24h": -6.66
   },
   {
    "coin": "SOL",
@@ -181,7 +181,7 @@
    "adx": {
     "1d": 34.0,
     "4h": 28.0,
-    "1h": 37.0
+    "1h": 36.0
    },
    "vol": {
     "atr_pct": 5.07,
@@ -210,10 +210,10 @@
    },
    "crowd": {
     "funding_pct": 0.0054,
-    "oi_24h_pct": -2.6,
+    "oi_24h_pct": -3.3,
     "label": "neutral"
    },
-   "change_24h": -5.51
+   "change_24h": -5.68
   },
   {
    "coin": "SUI",
@@ -230,7 +230,7 @@
    "adx": {
     "1d": 26.0,
     "4h": 24.0,
-    "1h": 27.0
+    "1h": 26.0
    },
    "vol": {
     "atr_pct": 6.8,
@@ -259,10 +259,10 @@
    },
    "crowd": {
     "funding_pct": 0.0063,
-    "oi_24h_pct": -9.5,
+    "oi_24h_pct": -8.2,
     "label": "neutral"
    },
-   "change_24h": -5.14
+   "change_24h": -5.41
   },
   {
    "coin": "XRP",
@@ -308,10 +308,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -8.9,
+    "oi_24h_pct": -9.8,
     "label": "neutral"
    },
-   "change_24h": -9.23
+   "change_24h": -9.52
   },
   {
    "coin": "ZEC",
@@ -328,7 +328,7 @@
    "adx": {
     "1d": 14.0,
     "4h": 14.0,
-    "1h": 19.0
+    "1h": 20.0
    },
    "vol": {
     "atr_pct": 8.57,
@@ -357,43 +357,36 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -3.8,
+    "oi_24h_pct": -1.3,
     "label": "neutral"
    },
-   "change_24h": 1.04
+   "change_24h": -0.2
   }
  ],
- "alts_vs_btc_24h": -0.71,
+ "alts_vs_btc_24h": -0.58,
  "fear_greed": {
   "value": 28,
   "label": "Fear",
   "yesterday": 50
  },
  "btc_dominance": {
-  "pct": 59.192,
-  "utc": "2026-11-06 13:11",
-  "ch24": -0.27,
-  "ch7": 0.01,
+  "pct": 59.149,
+  "utc": "2026-11-06 14:11",
+  "ch24": -0.32,
+  "ch7": -0.03,
   "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [
   {
-   "start_utc": "2026-11-06 13:30",
-   "name": "US jobs report / Employment Situation (Oct data)",
-   "hours": 0.3
-  },
-  {
    "start_utc": "2026-11-10 13:30",
    "name": "US CPI (Oct data)",
-   "hours": 96.3
+   "hours": 95.3
   }
  ],
  "blackout_now": [
   "US jobs report / Employment Situation (Oct data)"
  ],
- "warnings": [
-  "High-impact event within 24 hours: no new trades from 1 hour before to 1 hour after."
- ],
+ "warnings": [],
  "settings": {
   "funding_long_pct": 0.03,
   "funding_short_pct": -0.01,
@@ -402,5 +395,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\u26c8 <b>Market weather \u00b7 11-06 21:11 Beijing</b>\nVerdict: <b>News risk - stay out</b>\nA high-impact event is close. Price can jump both ways in seconds.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -11.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H TRANSITION \u00b7 1H WEAK_BEAR\nVolatility: normal (daily range 3.1%, higher than 48% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.3% (74,355 \u2013 77,821) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0027%/8h, open interest +2.1% in 24h)\nAltcoins vs BTC (24h): -0.7%\nBTC dominance: 59.2% \u00b7 24h -0.27 pt \u00b7 7d +0.01 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f BNB: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US jobs report / Employment Situation (Oct data) 11-06 21:30 Beijing\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\n\u26a0\ufe0f High-impact event within 24 hours: no new trades from 1 hour before to 1 hour after.\n\nFits today: waiting until the event has passed\nAvoid: any new trade\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\u26c8 <b>Market weather \u00b7 11-06 22:11 Beijing</b>\nVerdict: <b>News risk - stay out</b>\nA high-impact event is close. Price can jump both ways in seconds.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -11.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D UNCLEAR \u00b7 4H TRANSITION \u00b7 1H WEAK_BEAR\nVolatility: normal (daily range 3.1%, higher than 48% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.3% (74,355 \u2013 77,821) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0027%/8h, open interest +1.5% in 24h)\nAltcoins vs BTC (24h): -0.6%\nBTC dominance: 59.1% \u00b7 24h -0.32 pt \u00b7 7d -0.03 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f BNB: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up\n\n<b>Events</b>\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\nFits today: waiting until the event has passed\nAvoid: any new trade\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
