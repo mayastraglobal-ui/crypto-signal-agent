@@ -1,15 +1,15 @@
 {
  "track": {
   "total": {
-   "n": 62,
-   "wins": 8,
-   "win_rate": 12.9,
-   "avg_r": -0.733,
-   "total_r": -45.44,
-   "max_dd_r": 45.44,
-   "cur_loss_run": 19,
-   "max_loss_run": 19,
-   "sd": 0.834
+   "n": 65,
+   "wins": 9,
+   "win_rate": 13.8,
+   "avg_r": -0.711,
+   "total_r": -46.23,
+   "max_dd_r": 46.23,
+   "cur_loss_run": 1,
+   "max_loss_run": 20,
+   "sd": 0.833
   },
   "yours": {
    "n": 5,
@@ -23,21 +23,21 @@
    "sd": 0.099
   },
   "silent": {
-   "n": 51,
-   "wins": 8,
-   "win_rate": 15.7,
-   "avg_r": -0.664,
-   "total_r": -33.87,
-   "max_dd_r": 33.87,
-   "cur_loss_run": 16,
-   "max_loss_run": 16,
-   "sd": 0.906
+   "n": 54,
+   "wins": 9,
+   "win_rate": 16.7,
+   "avg_r": -0.642,
+   "total_r": -34.66,
+   "max_dd_r": 34.66,
+   "cur_loss_run": 1,
+   "max_loss_run": 17,
+   "sd": 0.899
   },
   "alerts_known": true,
   "paused": []
  },
  "week": "2026-W45",
- "utc": "2026-11-06 09:11",
+ "utc": "2026-11-06 10:11",
  "final": false,
  "rows": [
   {
@@ -339,27 +339,34 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 2,
-    "win_rate": 50.0,
-    "avg_r": 0.119,
-    "total_r": 0.24,
-    "sd": 1.451690221775982
+    "n": 3,
+    "win_rate": 33.3,
+    "avg_r": 0.001,
+    "total_r": 0.0,
+    "sd": 1.0468185134014396
    },
    "week": {
-    "n": 0,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": 0.0,
-    "total_r": 0.0,
+    "avg_r": -0.236,
+    "total_r": -0.24,
     "sd": 0.0
    },
    "gross": {
-    "n": 2,
-    "win_rate": 50.0,
-    "avg_r": 0.266,
-    "total_r": 0.53,
-    "sd": 1.4644181438373398
+    "n": 3,
+    "win_rate": 33.3,
+    "avg_r": 0.127,
+    "total_r": 0.38,
+    "sd": 1.063184994877812
    },
    "by_market": {
+    "DOWN": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -0.236,
+     "total_r": -0.24,
+     "sd": 0.0
+    },
     "UP": {
      "n": 2,
      "win_rate": 50.0,
@@ -373,7 +380,7 @@
     "avg_r": 0.065,
     "win_rate": 38.2
    },
-   "confidence": "+0.12R over 2 trades: too early to say anything",
+   "confidence": "+0.00R over 3 trades: too early to say anything",
    "sent": false
   },
   {
@@ -1110,25 +1117,25 @@
    "version": "V5",
    "tf": "30m",
    "live": {
-    "n": 6,
-    "win_rate": 16.7,
-    "avg_r": -0.562,
-    "total_r": -3.37,
-    "sd": 1.4554194813409178
+    "n": 7,
+    "win_rate": 14.3,
+    "avg_r": -0.638,
+    "total_r": -4.47,
+    "sd": 1.3440430123502813
    },
    "week": {
-    "n": 0,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": 0.0,
-    "total_r": 0.0,
+    "avg_r": -1.099,
+    "total_r": -1.1,
     "sd": 0.0
    },
    "gross": {
-    "n": 6,
-    "win_rate": 16.7,
-    "avg_r": -0.458,
-    "total_r": -2.75,
-    "sd": 1.4495391911454711
+    "n": 7,
+    "win_rate": 14.3,
+    "avg_r": -0.54,
+    "total_r": -3.78,
+    "sd": 1.3409501428890955
    },
    "by_market": {
     "CHOPPY": {
@@ -1139,11 +1146,11 @@
      "sd": 1.5903982205724452
     },
     "DOWN": {
-     "n": 1,
+     "n": 2,
      "win_rate": 0.0,
-     "avg_r": -1.19,
-     "total_r": -1.19,
-     "sd": 0.0
+     "avg_r": -1.144,
+     "total_r": -2.29,
+     "sd": 0.0643467170879758
     }
    },
    "backtest": {
@@ -1151,7 +1158,7 @@
     "avg_r": 0.016,
     "win_rate": 36.5
    },
-   "confidence": "-0.56R over 6 trades: too early to say anything",
+   "confidence": "-0.64R over 7 trades: too early to say anything",
    "sent": false
   },
   {
@@ -1245,6 +1252,52 @@
    },
    "confidence": "-1.11R over 1 trade: too early to say anything",
    "sent": true
+  },
+  {
+   "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "strategy": 7,
+   "name": "Squeeze breakout & retest",
+   "version": "V2",
+   "tf": "30m",
+   "live": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 0.55,
+    "total_r": 0.55,
+    "sd": 0.0
+   },
+   "week": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 0.55,
+    "total_r": 0.55,
+    "sd": 0.0
+   },
+   "gross": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 0.627,
+    "total_r": 0.63,
+    "sd": 0.0
+   },
+   "by_market": {
+    "DOWN": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 0.55,
+     "total_r": 0.55,
+     "sd": 0.0
+    }
+   },
+   "backtest": {
+    "n": 117,
+    "avg_r": 0.061,
+    "win_rate": 34.2
+   },
+   "confidence": "+0.55R over 1 trade: too early to say anything",
+   "sent": false
   },
   {
    "key": "P07-SQUEEZE-RETEST-V4@1.0|4h",
@@ -1393,8 +1446,8 @@
  "five_min": {
   "confirmed_n": 5,
   "confirmed_r": -1.0,
-  "all_n": 59,
-  "all_gross_r": -0.632,
+  "all_n": 62,
+  "all_gross_r": -0.61,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V1",
@@ -1414,8 +1467,8 @@
     "strategy": "P04-MACD-SUPERTREND-V5",
     "confirmed_n": 1,
     "confirmed_r": -1.0,
-    "all_n": 9,
-    "all_gross_r": -0.425
+    "all_n": 10,
+    "all_gross_r": -0.485
    },
    {
     "strategy": "P05-RANGE-REVERSAL-V4",
@@ -1469,7 +1522,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-06 09:11 UTC"
+   "text": "hourly scan: last run 2026-11-06 10:11 UTC"
   },
   {
    "ok": true,
@@ -1477,20 +1530,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-06 07:26 UTC (51 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-06 08:30 UTC (43 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 8"
+   "text": "TEST setups closed this week (GitHub record): 11"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 59,
-   "total_r": -42.2,
-   "avg_r": -0.715,
-   "week_n": 8,
-   "week_total_r": -7.95
+   "n": 62,
+   "total_r": -42.99,
+   "avg_r": -0.693,
+   "week_n": 11,
+   "week_total_r": -8.74
   },
   "PAPER": {
    "n": 0,
@@ -1507,11 +1560,11 @@
    "week_total_r": -2.08
   },
   "SILENT": {
-   "n": 51,
-   "total_r": -33.88,
-   "avg_r": -0.664,
-   "week_n": 6,
-   "week_total_r": -5.87
+   "n": 54,
+   "total_r": -34.67,
+   "avg_r": -0.642,
+   "week_n": 9,
+   "week_total_r": -6.66
   },
   "known": true
  },
@@ -1597,7 +1650,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-06 08:17",
+  "checked_utc": "2026-11-06 09:13",
   "lines": [
    "66 shock(s) this week, 38 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 26, broke yesterday's high 5, broke yesterday's low 10, volume spike 38",
@@ -1622,9 +1675,9 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 38,
-   "avg_r": -0.641,
-   "wins": 7
+   "n": 41,
+   "avg_r": -0.613,
+   "wins": 8
   },
   {
    "verdict": "outside",
@@ -1645,5 +1698,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W45</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 8 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 6 this week (-5.9R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 11 repair(s) judged - 9 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 66 this week (38 sent) \u00b7 4h later 35 kept going, 31 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 5 closed \u00b7 -1.01R a trade \u00b7 -5.0R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 38 (-0.64R) \u00b7 outside 17 (-1.03R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W45</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 2 closed this week (-2.1R) \u00b7 8 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 9 this week (-6.7R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 11 repair(s) judged - 9 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 66 this week (38 sent) \u00b7 4h later 35 kept going, 31 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 5 closed \u00b7 -1.01R a trade \u00b7 -5.0R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 41 (-0.61R) \u00b7 outside 17 (-1.03R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

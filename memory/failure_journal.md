@@ -466,3 +466,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: range_market, late_entry
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 30m P01-BREAKOUT-V2 v1.0 - exit-rule -0.24R
+- timestamp: 2026-11-06 10:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.24R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 30m · regime: EXPANSION · review: 2026-11-13
+  - signal 2026-11-05 15:59 UTC, closed 2026-11-06 09:29 UTC, stage TEST
+  - MAE -0.90R / MFE +0.76R
+  - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - SL -1.10R
+- timestamp: 2026-11-06 10:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: WEAK_BEAR · review: 2026-11-13
+  - signal 2026-11-06 07:29 UTC, closed 2026-11-06 09:29 UTC, stage TEST
+  - MAE -1.08R / MFE +0.22R
+  - at entry: session London, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout, indicator_lag
+  - root cause / fix: (review)

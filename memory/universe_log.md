@@ -1020,3 +1020,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-06 09:11 UTC
 - **EXCLUDED** SNDKB - only 148 days of history (need 180); 7-day average volume $44M < $50M
+
+## 2026-11-06 10:11 UTC
+- **EXCLUDED** SNDKB - only 148 days of history (need 180); 7-day average volume $44M < $50M; order book too thin: $230k within 1% (need $250k)

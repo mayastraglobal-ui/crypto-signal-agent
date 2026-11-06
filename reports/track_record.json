@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-06 09:11",
+ "utc": "2026-11-06 10:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 62,
-  "wins": 8,
-  "win_rate": 12.9,
-  "avg_r": -0.733,
-  "total_r": -45.44,
-  "max_dd_r": 45.44,
-  "cur_loss_run": 19,
-  "max_loss_run": 19,
-  "sd": 0.834
+  "n": 65,
+  "wins": 9,
+  "win_rate": 13.8,
+  "avg_r": -0.711,
+  "total_r": -46.23,
+  "max_dd_r": 46.23,
+  "cur_loss_run": 1,
+  "max_loss_run": 20,
+  "sd": 0.833
  },
  "yours": {
   "n": 5,
@@ -32,29 +32,29 @@
   "sd": 0.099
  },
  "silent": {
-  "n": 51,
-  "wins": 8,
-  "win_rate": 15.7,
-  "avg_r": -0.664,
-  "total_r": -33.87,
-  "max_dd_r": 33.87,
-  "cur_loss_run": 16,
-  "max_loss_run": 16,
-  "sd": 0.906
+  "n": 54,
+  "wins": 9,
+  "win_rate": 16.7,
+  "avg_r": -0.642,
+  "total_r": -34.66,
+  "max_dd_r": 34.66,
+  "cur_loss_run": 1,
+  "max_loss_run": 17,
+  "sd": 0.899
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 59,
-   "wins": 8,
-   "win_rate": 13.6,
-   "avg_r": -0.715,
-   "total_r": -42.19,
-   "max_dd_r": 42.19,
-   "cur_loss_run": 19,
-   "max_loss_run": 19,
-   "sd": 0.852
+   "n": 62,
+   "wins": 9,
+   "win_rate": 14.5,
+   "avg_r": -0.693,
+   "total_r": -42.98,
+   "max_dd_r": 42.98,
+   "cur_loss_run": 1,
+   "max_loss_run": 20,
+   "sd": 0.849
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -226,15 +226,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 6,
+    "n": 7,
     "wins": 1,
-    "win_rate": 16.7,
-    "avg_r": -0.562,
-    "total_r": -3.37,
+    "win_rate": 14.3,
+    "avg_r": -0.638,
+    "total_r": -4.47,
     "max_dd_r": 4.58,
-    "cur_loss_run": 1,
+    "cur_loss_run": 2,
     "max_loss_run": 4,
-    "sd": 1.455
+    "sd": 1.344
    },
    "backtest": {
     "n": 501,
@@ -243,7 +243,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-10-20 13:59",
+   "last_utc": "2026-11-06 09:29",
    "sent": false
   },
   {
@@ -270,6 +270,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-25 11:44",
+   "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": 0.001,
+    "total_r": 0.0,
+    "max_dd_r": 1.14,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 1.047
+   },
+   "backtest": {
+    "n": 165,
+    "avg_r": 0.065,
+    "win_rate": 38.2
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-06 09:29",
    "sent": false
   },
   {
@@ -348,32 +374,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-22 01:59",
-   "sent": false
-  },
-  {
-   "key": "P01-BREAKOUT-V2@1.0|30m",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": 0.119,
-    "total_r": 0.24,
-    "max_dd_r": 0.91,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": 1.452
-   },
-   "backtest": {
-    "n": 165,
-    "avg_r": 0.065,
-    "win_rate": 38.2
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-21 23:59",
    "sent": false
   },
   {
@@ -739,6 +739,32 @@
    "why": [],
    "last_utc": "2026-10-22 03:59",
    "sent": true
+  },
+  {
+   "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 1,
+    "win_rate": 100.0,
+    "avg_r": 0.55,
+    "total_r": 0.55,
+    "max_dd_r": 0.0,
+    "cur_loss_run": 0,
+    "max_loss_run": 0,
+    "sd": null
+   },
+   "backtest": {
+    "n": 117,
+    "avg_r": 0.061,
+    "win_rate": 34.2
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-06 09:29",
+   "sent": false
   },
   {
    "key": "P07-SQUEEZE-RETEST-V4@1.0|4h",
@@ -1147,6 +1173,18 @@
   {
    "t": "2026-11-05 15:59",
    "r": -45.44
+  },
+  {
+   "t": "2026-11-06 09:29",
+   "r": -45.68
+  },
+  {
+   "t": "2026-11-06 09:29",
+   "r": -45.13
+  },
+  {
+   "t": "2026-11-06 09:29",
+   "r": -46.23
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
