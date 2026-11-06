@@ -594,3 +594,17 @@ BTC context: 1W WEAK_BULL (weak) · 1D UNCLEAR (weak) · 4H UNCLEAR (weak) · 1H
 | ZEC | STRONG_BULL (weak) | WEAK_BULL (weak) | RANGE (moderate) | WEAK_BULL (weak) | LONG allowed |
 | SUI | UNCLEAR (weak) | WEAK_BEAR (weak) | RANGE (moderate) | EXPANSION up (weak) | NO TRADE |
 | UNI | STRONG_BULL (strong) | TRANSITION (moderate) | RANGE (moderate) | WEAK_BULL (weak) | NO TRADE |
+
+## 2026-11-06 (logged 00:04 UTC · source Binance)
+BTC context: 1W WEAK_BULL (weak) · 1D UNCLEAR (weak) · 4H EXPANSION down (weak) · 1H STRONG_BEAR (moderate) → SHORT allowed
+
+| Coin | 1W | 1D | 4H | 1H | Permission |
+|---|---|---|---|---|---|
+| BTC | WEAK_BULL (weak) | UNCLEAR (weak) | EXPANSION down (weak) | STRONG_BEAR (moderate) | SHORT allowed |
+| ETH | RANGE (weak) | TRANSITION (weak) | EXPANSION down (weak) | WEAK_BEAR (weak) | SHORT allowed |
+| SOL | WEAK_BULL (weak) | TRANSITION (weak) | EXPANSION down (weak) | STRONG_BEAR (moderate) | SHORT allowed |
+| BNB | UNCLEAR (weak) | TRANSITION (weak) | TRANSITION (weak) | STRONG_BEAR (weak) | NO TRADE |
+| XRP | UNCLEAR (weak) | WEAK_BEAR (weak) | UNCLEAR (weak) | WEAK_BEAR (weak) | SHORT allowed |
+| ZEC | STRONG_BULL (weak) | WEAK_BULL (weak) | EXPANSION down (weak) | TRANSITION (weak) | NO TRADE |
+| SUI | UNCLEAR (weak) | WEAK_BEAR (weak) | EXPANSION down (weak) | STRONG_BEAR (weak) | SHORT allowed |
+| UNI | STRONG_BULL (strong) | TRANSITION (weak) | EXPANSION down (weak) | WEAK_BEAR (weak) | NO TRADE |

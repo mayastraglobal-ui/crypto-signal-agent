@@ -1,45 +1,28 @@
 {
- "generated_utc": "2026-11-05 23:11",
+ "generated_utc": "2026-11-06 00:04",
  "book": {
-  "utc": "2026-11-05 23:11",
-  "beijing": "2026-11-06 07:11",
+  "utc": "2026-11-06 00:04",
+  "beijing": "2026-11-06 08:04",
   "active": [],
   "awaiting": [],
   "paper": [],
-  "closed_today": [
-   {
-    "id": "ZEC-4h-P12-LEADER-V2-2026-11-04 15:59",
-    "coin": "ZEC",
-    "direction": "LONG",
-    "tf": "4h",
-    "strategy": "P12-LEADER-V2",
-    "version": "1.0",
-    "stage": "VALIDATION",
-    "state": "CLOSED",
-    "reason": "SL",
-    "result_r": -1.03,
-    "live": false
-   }
-  ],
+  "closed_today": [],
   "limit_orders": [],
   "day_r": 0.0,
   "week_r": 0.0,
-  "paper_day_r": -1.03,
+  "paper_day_r": 0.0,
   "heat": 0,
   "limits": {
    "day_r": -3,
    "week_r": -6,
    "heat": 3
   },
-  "empty": false
+  "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-05 23:11 UTC / 2026-11-06 07:11 Beijing",
-  "Active:    none",
-  "Awaiting:  none",
-  "Paper:     none",
-  "Closed:    ZEC LONG 4h P12-LEADER-V2 SL -1.03R (paper)",
-  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3 \u00b7 paper today -1.03R",
+  "POSITION BOOK \u2014 2026-11-06 00:04 UTC / 2026-11-06 08:04 Beijing",
+  "No open or pending positions.",
+  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Oct data) 2026-11-06 13:30 UTC"
  ],
  "risk": {
@@ -89,17 +72,6 @@
   {
    "coin": "BNB",
    "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "btc_ret(3) >= 3"
-  },
-  {
-   "coin": "BNB",
-   "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -144,28 +116,6 @@
   {
    "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -188,6 +138,17 @@
   {
    "coin": "ZEC",
    "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "btc_ret(3) >= 3"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -195,6 +156,17 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BNB",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
   },
   {
    "coin": "BNB",
@@ -292,7 +264,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -303,7 +275,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -468,7 +440,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -479,7 +451,62 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -580,6 +607,83 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
   },
   {
    "coin": "SOL",
@@ -688,7 +792,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -699,7 +803,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -727,9 +831,31 @@
   {
    "coin": "SUI",
    "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
    "strategy": "donchian_breakout-VEXIT-FDISP",
    "version": "1.0",
    "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "version": "1.0",
+   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "3/5",
@@ -836,6 +962,28 @@
   },
   {
    "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -932,17 +1080,6 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
   },
   {
    "coin": "ZEC",

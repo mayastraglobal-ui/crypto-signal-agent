@@ -30572,3 +30572,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-05 23:00,SUI,30m,SWEEP,bull,0.8404,,,0.257,,1h,STRONG_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
 2026-11-05 23:00,SUI,15m,SWEEP,bull,0.8404,,,0.391,,1h,STRONG_BEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
 2026-11-05 23:00,SUI,15m,BOS,bear,0.8417,,,0.09,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-06 00:00,BTC,1h,SWEEP,bull,75568.0,,,0.543,,4h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 23:30,BTC,30m,SWEEP,bull,75568.0,,,0.71,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-06 00:00,ETH,4h,SWEEP,bull,2226.44,,,0.427,,1d,TRANSITION,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-05 23:30,ETH,30m,SWEEP,bull,2208.4,,,0.108,,1h,WEAK_BEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-05 23:15,ETH,15m,SWEEP,bull,2208.4,,,0.16,,1h,WEAK_BEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-05 23:15,ETH,15m,WEAK_BREAK,bear,2219.15,,,0.229,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-06 00:00,SOL,4h,CHOCH,bear,89.86,,,0.232,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-06 00:00,SOL,4h,ORDER_BLOCK,bear,,95.79,97.08,,,1d,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-06 00:00,SOL,4h,OB_INVALID,bull,,89.86,92.99,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-06 00:00,SOL,1h,SWEEP,bull,88.76,,,0.39,,4h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 23:30,SOL,30m,SWEEP,bull,88.76,,,0.557,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 23:15,SOL,15m,BOS,bear,89.31,,,1.0,,1h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-05 23:15,SOL,15m,ORDER_BLOCK,bear,,89.76,90.2,,,1h,STRONG_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-06 00:00,BNB,1h,SWEEP,bull,686.48,,,0.515,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-05 23:30,BNB,30m,SWEEP,bull,686.48,,,0.69,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-06 00:00,XRP,4h,CHOCH,bear,1.242,,,1.393,,1d,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-06 00:00,XRP,4h,ORDER_BLOCK,bear,,1.3132,1.3271,,,1d,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-06 00:00,XRP,4h,OB_INVALID,bull,,1.2202,1.3441,,,1d,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-05 23:30,SUI,30m,WEAK_BREAK,bear,0.8404,,,0.139,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance

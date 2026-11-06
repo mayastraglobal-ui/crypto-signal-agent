@@ -11,9 +11,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "SOXLB": "2026-11-05"
+  "SOXLB": "2026-11-06"
  },
- "runs": 907,
+ "runs": 908,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -81,7 +81,8 @@
    "volume_7d"
   ],
   "HYPE": [
-   "history"
+   "history",
+   "volume_7d"
   ],
   "SAND": [
    "thin_book",
