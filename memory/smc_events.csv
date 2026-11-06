@@ -30931,3 +30931,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-06 17:45,SOL,15m,SWEEP,bull,89.84,,,0.243,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-06 18:00,SOL,15m,FVG,bear,,90.14,90.29,0.259,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-06 18:00,XRP,15m,FVG,bear,,1.1867,1.1922,0.741,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 18:15,SOL,15m,FVG_RETRACE,bear,,90.14,90.29,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-06 18:30,SOL,15m,FVG_FILLED,bear,,90.14,90.29,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-06 18:30,XRP,30m,FVG,bear,,1.1872,1.1921,0.509,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-06 19:00,XRP,30m,FVG_RETRACE,bear,,1.1872,1.1921,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-06 18:30,XRP,15m,FVG_RETRACE,bear,,1.1867,1.1922,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-06 18:45,SUI,15m,SWEEP,bear,0.8771,,,0.243,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
