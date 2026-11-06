@@ -4,15 +4,14 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC",
-  "SUI"
+  "ZEC"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {
   "SOXLB": "2026-11-06"
  },
- "runs": 930,
+ "runs": 931,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -31,7 +30,9 @@
    "volume_24h"
   ],
   "UNI": [],
-  "SUI": [],
+  "SUI": [
+   "volume_24h"
+  ],
   "AVAX": [],
   "ENA": [],
   "SAGA": [

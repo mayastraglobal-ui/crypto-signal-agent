@@ -1030,3 +1030,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-06 17:11 UTC
 - **EXCLUDED** BNB - 24h volume $45M < $50M
 - **LEAVE** BNB - not eligible: 24h volume $45M < $50M
+
+## 2026-11-06 23:16 UTC
+- **EXCLUDED** SUI - 24h volume $47M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $47M < $50M
