@@ -1,28 +1,28 @@
 {
- "checked_utc": "2026-11-06 23:15",
+ "checked_utc": "2026-11-07 00:10",
  "coins": {
   "BTC": {
    "state": "GOOD",
    "main_source": "okx",
    "research_rows": {
     "binance": 1430,
-    "binance_files": 9648
+    "binance_files": 9672
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 3824063193.693,
-    "ls_ratio": 3.03,
-    "taker_ratio": 1.8100141166654027,
-    "funding_pct": 0.00410739588384
+    "oi_usd": 3820345524.5776,
+    "ls_ratio": 3.05,
+    "taker_ratio": 0.6653813575141195,
+    "funding_pct": 0.006413995237000001
    },
    "problems": [],
    "fetch": {
@@ -32,7 +32,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
@@ -42,7 +42,7 @@
     "buckets": 872,
     "first_utc": "2026-10-27 01:50",
     "long_24h_usd": 11304016.0,
-    "short_24h_usd": 5507699.0
+    "short_24h_usd": 4961969.0
    }
   },
   "ETH": {
@@ -50,23 +50,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 1430,
-    "binance_files": 9648
+    "binance_files": 9672
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 1892413186.2974,
-    "ls_ratio": 3.61,
-    "taker_ratio": 1.4563062618995382,
-    "funding_pct": 0.0014241161601100001
+    "oi_usd": 1894781902.0882,
+    "ls_ratio": 3.6,
+    "taker_ratio": 1.0116178611730782,
+    "funding_pct": 0.00672938277021
    },
    "problems": [],
    "fetch": {
@@ -76,17 +76,17 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
     ]
    },
    "liquidations": {
-    "buckets": 1018,
+    "buckets": 1019,
     "first_utc": "2026-10-27 01:05",
-    "long_24h_usd": 7480167.0,
-    "short_24h_usd": 2788423.0
+    "long_24h_usd": 7494897.0,
+    "short_24h_usd": 2599392.0
    }
   },
   "SOL": {
@@ -94,23 +94,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 1430,
-    "binance_files": 9648
+    "binance_files": 9672
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 366246085.5983,
+    "oi_usd": NaN,
     "ls_ratio": 3.73,
-    "taker_ratio": 0.8503500873104674,
-    "funding_pct": 0.00463443055736
+    "taker_ratio": 1.2670071629515594,
+    "funding_pct": 0.006735111258060001
    },
    "problems": [],
    "fetch": {
@@ -120,7 +120,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
@@ -129,8 +129,8 @@
    "liquidations": {
     "buckets": 851,
     "first_utc": "2026-10-27 02:25",
-    "long_24h_usd": 1719499.0,
-    "short_24h_usd": 2009378.0
+    "long_24h_usd": 1719381.0,
+    "short_24h_usd": 1967709.0
    }
   },
   "XRP": {
@@ -138,23 +138,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 1430,
-    "binance_files": 9648
+    "binance_files": 9672
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 115470842.8995,
-    "ls_ratio": 4.06,
-    "taker_ratio": 0.8729457148844192,
-    "funding_pct": 0.00496585184757
+    "oi_usd": NaN,
+    "ls_ratio": 4.04,
+    "taker_ratio": 1.3633210295154106,
+    "funding_pct": 0.00040058209125
    },
    "problems": [],
    "fetch": {
@@ -164,7 +164,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
@@ -173,8 +173,8 @@
    "liquidations": {
     "buckets": 613,
     "first_utc": "2026-10-27 01:20",
-    "long_24h_usd": 1873258.0,
-    "short_24h_usd": 26963.0
+    "long_24h_usd": 1873228.0,
+    "short_24h_usd": 16110.0
    }
   },
   "ZEC": {
@@ -182,22 +182,22 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 1430,
-    "binance_files": 9648
+    "binance_files": 9672
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 184586588.1933,
-    "ls_ratio": 0.53,
-    "taker_ratio": 0.9497812939839257,
+    "oi_usd": NaN,
+    "ls_ratio": NaN,
+    "taker_ratio": 1.0220498748767037,
     "funding_pct": 0.01
    },
    "problems": [],
@@ -208,61 +208,17 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
     ]
    },
    "liquidations": {
-    "buckets": 1028,
+    "buckets": 1030,
     "first_utc": "2026-10-27 01:05",
-    "long_24h_usd": 1167440.0,
-    "short_24h_usd": 4192011.0
-   }
-  },
-  "SUI": {
-   "state": "GOOD",
-   "main_source": "okx",
-   "research_rows": {
-    "binance": 1430,
-    "binance_files": 9648
-   },
-   "age_h": -0.7,
-   "hours": 1737,
-   "first_utc": "2026-08-26",
-   "gaps_7d": 0,
-   "invalid": 0,
-   "sources": [
-    "okx"
-   ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
-   "last": {
-    "oi_usd": 33248246.4638,
-    "ls_ratio": 2.94,
-    "taker_ratio": 1.5234013654545764,
-    "funding_pct": 0.0019223973539500001
-   },
-   "problems": [],
-   "fetch": {
-    "source": "okx",
-    "sources": {
-     "okx": true,
-     "binance": false
-    },
-    "new_hourly": 720,
-    "backfilled_hours": 0,
-    "errors": [],
-    "blocked": [
-     "binance"
-    ]
-   },
-   "liquidations": {
-    "buckets": 252,
-    "first_utc": "2026-10-27 03:00",
-    "long_24h_usd": 714.0,
-    "short_24h_usd": 32176.0
+    "long_24h_usd": 1169128.0,
+    "short_24h_usd": 3913798.0
    }
   },
   "BNB": {
@@ -270,23 +226,23 @@
    "main_source": "okx",
    "research_rows": {
     "binance": 1354,
-    "binance_files": 9624
+    "binance_files": 9648
    },
-   "age_h": -0.7,
-   "hours": 1737,
+   "age_h": -0.8,
+   "hours": 1738,
    "first_utc": "2026-08-26",
    "gaps_7d": 0,
    "invalid": 0,
    "sources": [
     "okx"
    ],
-   "funding_rows": 227,
-   "funding_age_h": 7.3,
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
    "last": {
-    "oi_usd": 46471081.768,
-    "ls_ratio": 2.5,
-    "taker_ratio": 1.7206711066643816,
-    "funding_pct": 0.01
+    "oi_usd": 46347580.9279,
+    "ls_ratio": 2.49,
+    "taker_ratio": 1.295116218880997,
+    "funding_pct": 0.0015425746909
    },
    "problems": [],
    "fetch": {
@@ -296,7 +252,7 @@
      "binance": false
     },
     "new_hourly": 720,
-    "backfilled_hours": 0,
+    "backfilled_hours": 24,
     "errors": [],
     "blocked": [
      "binance"
@@ -307,6 +263,50 @@
     "first_utc": "2026-10-27 06:45",
     "long_24h_usd": 2824.0,
     "short_24h_usd": 3892.0
+   }
+  },
+  "SUI": {
+   "state": "GOOD",
+   "main_source": "okx",
+   "research_rows": {
+    "binance": 1430,
+    "binance_files": 9672
+   },
+   "age_h": -0.8,
+   "hours": 1738,
+   "first_utc": "2026-08-26",
+   "gaps_7d": 0,
+   "invalid": 0,
+   "sources": [
+    "okx"
+   ],
+   "funding_rows": 228,
+   "funding_age_h": 0.2,
+   "last": {
+    "oi_usd": 33306842.5196,
+    "ls_ratio": 2.89,
+    "taker_ratio": 0.8221424378905878,
+    "funding_pct": 0.0018398414404499999
+   },
+   "problems": [],
+   "fetch": {
+    "source": "okx",
+    "sources": {
+     "okx": true,
+     "binance": false
+    },
+    "new_hourly": 720,
+    "backfilled_hours": 24,
+    "errors": [],
+    "blocked": [
+     "binance"
+    ]
+   },
+   "liquidations": {
+    "buckets": 252,
+    "first_utc": "2026-10-27 03:00",
+    "long_24h_usd": 714.0,
+    "short_24h_usd": 32176.0
    }
   }
  }
