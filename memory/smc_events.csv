@@ -31330,3 +31330,38 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 21:00,ZEC,30m,BOS,bear,1250.9,,,0.355,,1h,UNCLEAR,with displacement,smc-1.0,Binance
 2026-11-07 21:00,ZEC,30m,ORDER_BLOCK,bear,,1266.66,1274.0,,,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
 2026-11-07 20:45,ZEC,15m,WEAK_BREAK,bear,1260.6,,,0.214,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-07 22:00,BTC,1h,SWEEP,bull,75600.82,,,0.142,,4h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-07 21:30,BTC,30m,FVG,bear,,75715.44,75753.13,0.392,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,BTC,30m,SWEEP,bull,75600.82,,,0.309,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-07 22:00,BTC,30m,FVG_RETRACE,bear,,75715.44,75753.13,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 21:00,BTC,15m,FVG,bear,,75728.01,75753.13,0.451,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 21:45,BTC,15m,SWEEP,bull,75600.82,,,0.517,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-07 22:00,BTC,15m,FVG_RETRACE,bear,,75728.01,75753.13,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,BTC,15m,FVG,bull,,75650.81,75683.99,0.528,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,ETH,30m,SWEEP,bull,2225.36,,,0.472,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-07 21:15,ETH,15m,OB_INVALID,bull,,2227.94,2232.05,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-07 21:15,ETH,15m,FVG,bear,,2229.67,2231.8,0.697,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 21:45,ETH,15m,BREAKER_RETEST,bear,,2227.94,2232.05,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-07 21:45,ETH,15m,FVG_RETRACE,bear,,2229.67,2231.8,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,ETH,15m,FVG_RETRACE,bear,,2233.01,2233.94,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,ETH,15m,FVG_FILLED,bear,,2229.67,2231.8,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 22:00,ETH,15m,FVG,bull,,2227.53,2229.3,0.532,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 22:00,SOL,1h,FVG,bear,,89.3,89.55,0.504,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 21:30,SOL,30m,FVG,bear,,89.14,89.46,1.113,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,SOL,30m,FVG_RETRACE,bear,,89.14,89.46,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 21:15,SOL,15m,FVG,bear,,89.14,89.37,1.092,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 21:45,SOL,15m,FVG_RETRACE,bear,,89.14,89.37,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,SOL,15m,FVG,bull,,88.93,89.11,0.821,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,XRP,1h,SWEEP,bull,1.1519,,,0.225,,4h,STRONG_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-07 21:30,XRP,30m,FVG,bear,,1.1572,1.16,0.587,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,XRP,30m,FVG_RETRACE,bear,,1.1572,1.16,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,XRP,30m,FVG_FILLED,bear,,1.1572,1.16,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,XRP,15m,FVG_RETRACE,bear,,1.1581,1.1606,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 22:00,XRP,15m,FVG_FILLED,bear,,1.1581,1.1606,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,XRP,15m,FVG,bull,,1.1557,1.1579,0.626,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 22:00,ZEC,1h,FVG,bear,,1251.84,1262.4,0.556,,4h,RANGE,,smc-1.0,Binance
+2026-11-07 21:30,ZEC,30m,SWEEP,bull,1241.19,,,0.4,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-07 21:30,ZEC,30m,FVG,bear,,1248.71,1260.0,0.988,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-07 22:00,ZEC,30m,FVG_RETRACE,bear,,1248.71,1260.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 21:15,ZEC,15m,FVG,bear,,1248.71,1258.4,1.278,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-07 21:45,ZEC,15m,FVG_RETRACE,bear,,1248.71,1258.4,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
