@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-07 04:00",
+ "last_entry_utc": "2026-11-07 16:00",
  "days": 30,
  "all": {
-  "alerts": 9,
+  "alerts": 10,
   "took": 8,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
    "n": 6,
    "total_r": -6.0,
@@ -60,10 +60,10 @@
   "missing_result": 1
  },
  "recent": {
-  "alerts": 9,
+  "alerts": 10,
   "took": 8,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
    "n": 6,
    "total_r": -6.0,
@@ -170,7 +170,7 @@
   },
   {
    "cell": "P07-SQUEEZE-RETEST-V3 4h",
-   "alerts": 1,
+   "alerts": 2,
    "took": 1,
    "skipped": 0,
    "plan_avg_r": null,
