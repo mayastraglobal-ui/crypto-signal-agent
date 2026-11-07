@@ -31100,3 +31100,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 08:15,XRP,15m,FVG,bull,,1.1743,1.1755,0.277,London,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-07 08:45,XRP,15m,OB_INVALID,bear,,1.1781,1.18,,London,1h,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-07 09:00,XRP,15m,BREAKER_RETEST,bull,,1.1781,1.18,,London,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-07 10:00,BTC,1h,SWEEP,bear,76208.25,,,0.14,London,4h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-07 09:30,BTC,30m,SWEEP,bear,76208.25,,,0.304,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-07 09:15,BTC,15m,SWEEP,bear,76208.25,,,0.71,London,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-07 09:30,BTC,15m,BREAKER_RETEST,bull,,76041.79,76102.52,,London,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-07 09:30,BTC,15m,FVG_RETRACE,bull,,76039.48,76091.42,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 10:00,BTC,15m,FVG_FILLED,bull,,76039.48,76091.42,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 09:30,ETH,30m,SWEEP,bear,2250.74,,,0.143,London,1h,WEAK_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-07 09:15,ETH,15m,SWEEP,bear,2250.74,,,0.304,London,1h,WEAK_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-07 09:45,SOL,15m,FVG,bear,,90.14,90.19,0.311,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-07 10:00,XRP,1h,FVG_RETRACE,bull,,1.1697,1.1755,,London,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 09:30,XRP,30m,FVG_RETRACE,bull,,1.1726,1.1755,,London,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 09:30,XRP,30m,FVG_FILLED,bull,,1.1726,1.1755,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 10:00,XRP,30m,FVG,bear,,1.1742,1.1763,0.325,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 09:15,XRP,15m,FVG_RETRACE,bull,,1.1743,1.1755,,London,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 09:30,XRP,15m,FVG_FILLED,bull,,1.1743,1.1755,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 10:00,ZEC,15m,SWEEP,bull,1318.15,,,0.347,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
