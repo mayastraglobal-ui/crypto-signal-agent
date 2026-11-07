@@ -31081,3 +31081,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 07:45,XRP,15m,FVG_FILLED,bear,,1.17,1.1728,,London,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-07 08:00,XRP,15m,FVG_RETRACE,bear,,1.1754,1.1781,,London,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-07 07:45,ZEC,15m,BOS,bull,1318.13,,,0.348,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-07 09:00,BTC,1h,WEAK_BREAK,bull,76102.52,,,0.296,London,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-07 08:30,BTC,30m,BOS,bull,76102.52,,,0.117,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-07 08:15,BTC,15m,OB_INVALID,bear,,76041.79,76102.52,,London,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-07 08:15,BTC,15m,FVG,bull,,76039.48,76091.42,0.802,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 09:00,ETH,30m,BOS,bull,2249.88,,,0.108,London,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-07 08:30,ETH,15m,SWEEP,bear,2248.0,,,0.124,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-07 08:45,ETH,15m,BOS,bull,2248.0,,,0.195,London,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-07 08:45,ETH,15m,FVG_FILLED,bear,,2247.43,2248.42,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 09:00,SOL,30m,SWEEP,bear,90.32,,,0.227,London,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-07 08:45,SOL,15m,WEAK_BREAK,bull,90.31,,,0.178,London,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-07 09:00,XRP,1h,FVG_FILLED,bear,,1.1699,1.1775,,London,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 09:00,XRP,1h,FVG,bull,,1.1697,1.1755,0.541,London,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-07 08:30,XRP,30m,FVG_FILLED,bear,,1.1754,1.1785,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 08:30,XRP,30m,FVG,bull,,1.1726,1.1755,0.432,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 08:15,XRP,15m,OB_RETEST,bear,,1.1781,1.18,,London,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-07 08:15,XRP,15m,FVG_FILLED,bear,,1.1754,1.1781,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 08:15,XRP,15m,FVG,bull,,1.1743,1.1755,0.277,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 08:45,XRP,15m,OB_INVALID,bear,,1.1781,1.18,,London,1h,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-07 09:00,XRP,15m,BREAKER_RETEST,bull,,1.1781,1.18,,London,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance

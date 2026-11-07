@@ -490,3 +490,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - exit-rule -0.39R
+- timestamp: 2026-11-07 09:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.39R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: STRONG_BEAR · review: 2026-11-14
+  - signal 2026-11-06 20:59 UTC, closed 2026-11-07 08:29 UTC, stage TEST
+  - MAE -0.67R / MFE +1.21R
+  - at entry: session outside killzones, conditions: no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### XRP SHORT 30m P04-MACD-SUPERTREND-V5 v1.0 - exit-rule -0.83R
+- timestamp: 2026-11-07 09:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.83R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V5 v1.0 · asset: XRP · timeframe: 30m · regime: STRONG_BEAR · review: 2026-11-14
+  - signal 2026-11-07 02:59 UTC, closed 2026-11-07 08:29 UTC, stage TEST
+  - MAE -0.96R / MFE +1.16R
+  - at entry: session Asia, conditions: no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
