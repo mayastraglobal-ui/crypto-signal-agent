@@ -31292,3 +31292,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 18:00,XRP,1h,FVG_RETRACE,bear,,1.1614,1.1662,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-07 17:15,XRP,15m,FVG_RETRACE,bear,,1.1617,1.1664,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-07 18:15,ZEC,15m,BOS,bull,1267.96,,,0.129,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-07 18:30,BTC,15m,FVG_FILLED,bull,,75820.0,75847.4,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 19:00,ETH,1h,FVG_RETRACE,bear,,2238.12,2244.63,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:30,ETH,30m,FVG_RETRACE,bear,,2238.12,2241.73,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 19:00,SOL,1h,FVG_FILLED,bear,,89.68,89.9,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 18:30,SOL,30m,FVG_FILLED,bear,,89.77,89.92,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-07 18:30,SOL,15m,BREAKER_RETEST,bull,,89.66,89.82,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-07 18:30,SOL,15m,FVG_FILLED,bear,,89.82,89.92,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-07 18:30,ZEC,15m,FVG_RETRACE,bear,,1273.15,1276.15,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:30,ZEC,15m,FVG,bull,,1266.17,1268.63,0.324,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-07 18:45,ZEC,15m,FVG_RETRACE,bull,,1266.17,1268.63,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
