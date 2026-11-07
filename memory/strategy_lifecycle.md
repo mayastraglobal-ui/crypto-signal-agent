@@ -452,3 +452,12 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **TRD-H4-BREAKOUT-S3@1.0 30m**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.00 (net +0.2R / max drawdown 73.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 30.1R - limit 17R; longest drawdown 1709 days = 96% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
 - **donchian_breakout-VEXIT-FDISP@1.0 4h**: PAPER_TRADING → **BACKTESTING** (failed the long-history test 2 runs in a row - leaves PAPER_TRADING)
 - **donchian_breakout-VEXIT-S4@1.0 4h**: PAPER_TRADING → **BACKTESTING** (failed the long-history test 2 runs in a row - leaves PAPER_TRADING)
+
+## 2026-11-07 06:31 UTC
+- **PB-B-APLUS@1.0 15m**: FAILED → **BACKTESTING** (only 79 trades; avg -0.11R/trade (needs +0.15R); profit factor 0.79; max drawdown 17.8R; longest drawdown 699 days = 98% of the tested period (limit 60%); not profitable in BOTH train and unseen test)
+- **TRD-H4-BREAKOUT-S3-FDISP@1.0 15m**: FAILED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.17 (net +6.2R / max drawdown 37.1R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 28.8R - limit 17R; longest drawdown 1368 days = 77% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-FDISP@1.0 4h**: BACKTESTING → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
+- **donchian_breakout-VEXIT-S4@1.0 4h**: BACKTESTING → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: VALIDATION → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 17.1R - limit 17R)
+- **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.02 (net +0.4R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 23.9R - limit 17R; longest drawdown 1909 days = 58% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **macd_trend_cross@1.0 4h**: FAILED → **BACKTESTING** (only 29 trades; avg -0.02R/trade (needs +0.10R); profit factor 0.97; recovery factor -0.11 (net -0.5R / max drawdown 4.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.9R - limit 17R; only 8 unseen-test trades; not profitable in BOTH train and unseen test)
