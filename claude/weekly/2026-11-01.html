@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Weekly research 2026-11-01</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Weekly research 2026-11-01</h1>
+<h2>Summary</h2>
+<ul><li>No LIVE, PAPER or VALIDATION signal closed this week. The Forward Test Program's TEST setups closed 16, for -9.87R after fees (53 closed since the start, -0.68R a trade). These are tests of unapproved strategies, not approved signals.</li><li>Your journal: 4 results, -1.17R a trade against a plan of -1.00R. Four trades say little yet.</li><li>The market weather is "Choppy - stay out". BTC is at 77,742 and Fear and Greed is 34 (Fear). The next event is the US jobs report on 2026-11-06 (13:30 UTC).</li><li>Two lab cards were added this week, from the idea queue: R4-HLHB and R4-AOMACD (both literature, both from the freqtrade-strategies project, which is also this week's reference project).</li><li>Two 4h trend cards moved into PAPER_TRADING: P13-TURTLE-C and donchian_breakout-VEXIT-S4 v1.0. Neither has closed a paper signal yet. P13-TURTLE-C and its three siblings have no edge block.</li><li>Research: 4 papers opened (a century of trend-following, support and resistance levels, the disposition effect, bitcoin's intraday rhythm). No calendar entry was added; the existing ones match the official pages.</li></ul>
+<h2>Email summary</h2>
+<ul><li>headline: Test setups lost again. Stay out.</li><li>sub: 16 TEST setups closed for -9.87R after fees; no approved strategy; jobs report on 2026-11-06.</li><li>next: Stay out before the jobs report on 2026-11-06 and treat TEST alerts as test records only.</li><li>improvement: Put cards with a paper behind them ahead of community strategy files in the idea queue, because both finished freqtrade cards failed.</li><li>test: Whether the 4h trend cards had many losing trades that first reached +1R.</li><li>fix: Give P13-TURTLE-C and its siblings an edge block before they go further.</li><li>study: Why trend-following has worked for 110 years, and why it still loses in choppy weeks.</li></ul>
+<h2>Research log (sources)</h2>
+<p>Every source below is a page I opened in this run. Papers come first (section 18 weights). For papers I read the abstract or the publisher's summary page, not the full text.</p>
+<table><tr><th>#</th><th>Source (opened)</th><th>What it is</th><th>Evidence class</th><th>Used for</th></tr><tr><td>1</td><td><a href="https://www.aqr.com/Insights/Research/Journal-Article/A-Century-of-Evidence-on-Trend-Following-Investing">https://www.aqr.com/Insights/Research/Journal-Article/A-Century-of-Evidence-on-Trend-Following-Investing</a></td><td>Hurst, Ooi, Pedersen (2017), A Century of Evidence on Trend-Following Investing, Journal of Portfolio Management</td><td>RESEARCH_FINDING</td><td>Strategy idea, market mechanics</td></tr><tr><td>2</td><td><a href="https://www.newyorkfed.org/research/epr/00v06n2/0007osle.html">https://www.newyorkfed.org/research/epr/00v06n2/0007osle.html</a></td><td>Osler (2000), Support for Resistance, NY Fed Economic Policy Review</td><td>RESEARCH_FINDING</td><td>SMC concept</td></tr><tr><td>3</td><td><a href="https://faculty.haas.berkeley.edu/odean/papers/disposition/disposition.html">https://faculty.haas.berkeley.edu/odean/papers/disposition/disposition.html</a></td><td>Odean (1998), Are Investors Reluctant to Realize Their Losses? (author's page with the abstract)</td><td>RESEARCH_FINDING</td><td>How traders lose</td></tr><tr><td>4</td><td><a href="https://econpapers.repec.org/RePEc:eee:riibaf:v:49:y:2019:i:c:p:71-81">https://econpapers.repec.org/RePEc:eee:riibaf:v:49:y:2019:i:c:p:71-81</a></td><td>Eross, McGroarty, Urquhart, Wolfe (2019), The intraday dynamics of bitcoin</td><td>RESEARCH_FINDING</td><td>Market mechanics review</td></tr><tr><td>5</td><td><a href="https://github.com/freqtrade/freqtrade-strategies">https://github.com/freqtrade/freqtrade-strategies</a> (hlhb.py and berlinguyinca/AwesomeMacd.py at commit f3340ce11f5bdf62f598522e64d1f5638eaa13f5)</td><td>Reference project R4</td><td>FACT (files); the strategies are UNVERIFIED_OPINION</td><td>Reference project, the two lab cards</td></tr><tr><td>6</td><td><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm,">https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm,</a> <a href="https://www.bea.gov/news/schedule">https://www.bea.gov/news/schedule</a> (and /full), <a href="https://www.bls.gov/schedule/news_release/cpi.htm">https://www.bls.gov/schedule/news_release/cpi.htm</a></td><td>Official calendars</td><td>FACT</td><td>Event calendar</td></tr></table>
+<p>New records at the end of <code>memory/research_sources.md</code>: [C25] (source 1), [C26] (source 2), [C27] (source 3), [C28] (source 4) and [R4] (source 5). Source 2 also has a record in <code>memory/smc_research.md</code>. Sources 1 and 4 support the new records <code>Trend persistence (time series momentum)</code> and <code>Review: Trading sessions and weekends</code> in <code>memory/market_mechanics.md</code>.</p>
+<h2>Strategy idea</h2>
+<p><strong>The gap:</strong> the 4h trend and breakout cards are the only family with a stable edge in the playbook, but their reason for working is written down for only some of them. P13-TURTLE-C is in PAPER_TRADING (+0.35R over 41 trades in RANGE) and V1 to V3 are in VALIDATION, and the fact sheet shows "NO EDGE BLOCK" for all four.</p>
+<p><strong>SOURCE → CLAIM (source 1, with Borgards from last week's record [C18]):</strong></p>
+<ol><li>A time series momentum strategy (long what has risen, short what has fallen) built back to 1880 was consistently profitable over the next 110 years in futures markets.</li><li>In 20 coins, momentum periods are larger and longer than in US stocks.</li></ol>
+<p><strong>FORMAL DEFINITION → RULES (no new card):</strong> the existing cards already are this idea: a close outside the 20-candle range (donchian), here with a volume rule and a time stop. A new card would be a duplicate. What is missing is the written reason (an edge block). I put a proposal in <code>memory/market_mechanics.md</code> (record <code>Trend persistence (time series momentum)</code>): type behavioural or forced_flow, works in trending regimes, fails in choppy ranges, kill rule unseen-data average below 0R. The operator changes strategy files.</p>
+<p><strong>Limits:</strong> the page does not give the markets, drawdowns or sideways-market results. The data are monthly futures, not crypto 4h candles. Our own tag <code>false_breakout</code> is systematic in 66 tests, which is the price of the idea.</p>
+<h2>SMC/ICT concept</h2>
+<p><strong>The concept: key levels and the break of structure.</strong> The ICT claim is that a close beyond the last swing (a "break of structure") shows the trend has changed or will continue, and that levels like the previous day's high and low are where price reacts.</p>
+<p><strong>What evidence exists (critical view, source 2):</strong></p>
+<ol><li>Levels published by six foreign exchange firms "help to predict intraday trend interruptions". That is real evidence that some levels matter.</li><li>But the abstract says interruptions of a trend, not reversals, gives no hit rate, and says the power varies by exchange rate and by firm.</li><li>Our numbers: S8-PDH-PDL-SWEEP-noSMC 30m lost -0.36R over 855 trades earlier in October. This week S5-SWEEP-MSS-FVG-noSMC 15m (the version without the SMC ingredient) went from BACKTESTING to FAILED (average +0.05R, profit factor 1.10, not profitable in both train and unseen test), and S7-SILVER-BULLET-noSMC 15m went to FAILED (not cost-viable: fees and slippage 0.28R a trade). The versions with the ingredient have too few trades against their twins, so the ingredient is still unproven.</li></ol>
+<p><strong>Why retail traders fail with it:</strong></p>
+<ol><li>A break of structure is known only after the candle closes, so the entry is late (<code>late_entry</code> is systematic in 6 tests).</li><li>The level a trader draws is not the level professional firms publish.</li><li>A pause is not a direction, and the stop sits where the pause ends.</li></ol>
+<p><strong>What to do:</strong> nothing by eye. The cards stay in testing against their twins. Record: <code>memory/smc_research.md</code>.</p>
+<h2>How traders lose money</h2>
+<p><strong>Case study: the disposition effect (source 3).</strong></p>
+<ol><li>In the trading records of 10,000 accounts at a large discount broker, investors strongly prefer to sell winners over losers.</li><li>Rebalancing and trading costs do not explain it, and later performance does not justify it.</li><li>The page does not give the years or the proportions, and the journal and year are not shown on it (they come from a search result).</li></ol>
+<p><strong>What we see ourselves:</strong></p>
+<ul><li>A rule-based exit avoids "holding losers", but a trade can still go well first and end at the stop. From the fact sheet's closed signals this week: SUI 30m P01-BREAKOUT-V5 ended at -0.64R after a best point of +1.791R (tagged <code>bad_target</code>), and SUI 1h P01-BREAKOUT-V5 at -1.04R after +1.531R. Most others never passed +0.8R.</li><li>Your journal: 4 results with a plan result of -1.00R and a real result of -1.17R, a gap of -0.17R a trade.</li></ul>
+<p><strong>Testable rule:</strong> how many losing trades of the 4h trend cards first reached +1R, and would a break-even stop at +1R have changed the result after fees? I wrote it as <code>Hypothesis: how many losing trades first reached +1R (from C27)</code> in <code>memory/experiments.md</code>. It needs at least 100 losing trades per cell.</p>
+<p><strong>For you:</strong> a TEST alert is a test record, not a trade instruction. If you take one, write your real entry and exit in the journal.</p>
+<h2>Candidates (added to the lab)</h2>
+<p>The fact sheet allowed 3 cards (added today 0 of 3, last 7 days 3 of 10). I added the <strong>two queued cards, copied unchanged</strong> (only <code>added</code> is today, which the queue already shows). Both are factory <code>literature</code>; that quota is now 2 of 2. The lab has 30 cards.</p>
+<p>I added no third card. The failure quota has one left, but the fact sheet's loss tags are already served by the Failure Lab's repairs (DISP helped 4 of 4). The market_structure, missed_move and lead_lag factories have no evidence ready: the futures history is 1597 hours, the BTC lead-lag correlations lie between about -0.012 and -0.030 (no clear link), and this week's three missed moves are one event (see Idea chains). Every extra test raises the trials counter (490 tests; PAPER_TRADING now needs t of at least 3.71).</p>
+<p><strong>Idea queue items added:</strong> R4-HLHB@1.0 and R4-AOMACD@1.0. Still waiting: R4-VOLSYS, R4-EMAOBV, R4-SUPER3, R4-S001, R4-ADXSMA, R4-SIMPLE.</p>
+<p><strong>R4-HLHB (4h and 1h).</strong></p>
+<ul><li><em>What it tests:</em> when a fast EMA cross (5 over 10) and an RSI(10) cross of 50 happen on the same candle with ADX above 25, a new trend leg begins.</li><li><em>Why:</em> a community forex-trend system (source 5), ported into our building blocks with an ATR stop and 2R / 3R targets, not the file's 32% stop.</li><li><em>Experiment-queue item:</em> it is the first card of the idea queue (record <code>Queue: ...</code> in <code>memory/experiments.md</code>).</li><li><em>Caveat I could not remove:</em> the file's price series is labelled "hl2", but in the page summary I got it is an average of open and close. The card uses the high-low midpoint. I did not see the lines myself, and the guard refuses a changed queue card, so I left it. The operator may want to check the file.</li></ul>
+<p><strong>R4-AOMACD (1h).</strong></p>
+<ul><li><em>What it tests:</em> when the Awesome Oscillator crosses up through zero while MACD is already above zero, a momentum leg starts (mirror image for shorts).</li><li><em>Why:</em> a community strategy file credited to Gert Wohlgemuth and ported from a C# project (source 5).</li><li><em>Experiment-queue item:</em> the second card of the idea queue.</li><li><em>Expectation:</em> low. The two earlier R4 cards, BBRSI and CLUC, both FAILED.</li></ul>
+<pre><code>- id: R4-HLHB
+  version: '1.0'
+  status: FORMALIZED
+  family: trend_following
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  source: R4 freqtrade-strategies, file user_data/strategies/hlhb.py (commit f3340ce) - the idea rewritten in our
+    building blocks; no code copied (GPL-3.0)
+  source_url: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/hlhb.py
+  evidence_class: 'UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any
+    idea'
+  factory: literature
+  factory_evidence: 'freqtrade-strategies hlhb.py: entries as in the file (RSI on the high-low midpoint, 4H as in
+    the file); its mirror-image exits are left to the stop, targets and time stop; first target 2R'
+  parent: 'source: [R4] freqtrade-strategies'
+  hypothesis: When a fast EMA cross and an RSI cross of 50 happen together with ADX above 25, a new trend leg starts.
+  timeframes:
+  - 4h
+  - 1h
+  description: 'The ''HLHB'' system: EMA 5 crosses EMA 10 while RSI(10) crosses 50 and ADX is above 25.'
+  params:
+    fast: 5
+    slow: 10
+    rsi_n: 10
+    adx_min: 25
+  long:
+  - cross_up(ema(close,{fast}), ema(close,{slow}))
+  - cross_up(rsi((high+low)/2,{rsi_n}), 50)
+  - adx(14) &gt; {adx_min}
+  short:
+  - cross_down(ema(close,{fast}), ema(close,{slow}))
+  - cross_down(rsi((high+low)/2,{rsi_n}), 50)
+  - adx(14) &gt; {adx_min}
+  stop:
+    method: atr
+    atr: 2.0
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 30
+  cooldown_bars: 0
+  known_weaknesses: Two crosses on the same candle are rare - few trades; whipsaws when ADX is high but fading.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: traders who fade the start of a move that momentum and trend strength already confirm
+    mechanism: trends persist once momentum (RSI 50) and direction (EMA cross) turn together with ADX &gt; 25
+    fails_when: choppy markets where the EMAs cross back and forth
+    kill_rule: unseen-data average below 0R, or walk-forward fails
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies hlhb.py (R4) - entries as in the file (RSI on the high-low midpoint,
+    4H as in the file); its mirror-image exits are left to the stop, targets and time stop; first target 2R'
+  added: '2026-11-01'
+- id: R4-AOMACD
+  version: '1.0'
+  status: FORMALIZED
+  family: momentum
+  gate: trend
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  source: R4 freqtrade-strategies, file user_data/strategies/berlinguyinca/AwesomeMacd.py (commit f3340ce) - the
+    idea rewritten in our building blocks; no code copied (GPL-3.0)
+  source_url: https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/berlinguyinca/AwesomeMacd.py
+  evidence_class: 'UNVERIFIED_OPINION: a community strategy file, published without evidence; tested here like any
+    idea'
+  factory: literature
+  factory_evidence: 'freqtrade-strategies berlinguyinca/AwesomeMacd.py: entry as in the file (AO = SMA5 - SMA34
+    of the high-low midpoint); mirror-image short; first target 2R'
+  parent: 'source: [R4] freqtrade-strategies'
+  hypothesis: When the Awesome Oscillator turns positive while MACD is already above zero, momentum resumes in the
+    trend.
+  timeframes:
+  - 1h
+  - 30m
+  description: MACD above zero and the Awesome Oscillator crossing above zero.
+  params:
+    ao_fast: 5
+    ao_slow: 34
+  long:
+  - macd_line(close) &gt; 0
+  - cross_up(sma((high+low)/2,{ao_fast}) - sma((high+low)/2,{ao_slow}), 0)
+  short:
+  - macd_line(close) &lt; 0
+  - cross_down(sma((high+low)/2,{ao_fast}) - sma((high+low)/2,{ao_slow}), 0)
+  stop:
+    method: atr
+    atr: 1.5
+  targets:
+    long:
+    - 2R
+    - 3R
+    short:
+    - 2R
+    - 3R
+    split:
+    - 0.5
+    - 0.5
+  time_stop_bars: 24
+  cooldown_bars: 0
+  known_weaknesses: Two lagging momentum indicators - late entries after the move is under way.
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who keep fading a trend whose momentum is turning back up
+    mechanism: 'momentum is persistent: a zero cross of the Awesome Oscillator inside a positive MACD marks a new
+      push'
+    fails_when: ranges, where both oscillators hover around zero
+    kill_rule: unseen-data average below 0R, or walk-forward fails
+  changelog:
+  - '1.0: rewritten from freqtrade-strategies AwesomeMacd.py (R4) - entry as in the file (AO = SMA5 - SMA34 of the
+    high-low midpoint); mirror-image short; first target 2R'
+  added: '2026-11-01'</code></pre>
+<h2>Event calendar</h2>
+<p><strong>Official pages opened:</strong> the Fed FOMC calendar, the BEA release schedule (and its "full" page), the BLS CPI page. I did not reopen the BLS jobs-report page this week; its dates (2026-11-06, 2026-12-04, 2027-01-08) were seen on it in the 2026-10-25 run.</p>
+<p><strong>Added:</strong> nothing. Every release up to the end of the 90-day window (2027-01-30) is in <code>events.yaml</code>, except the items below.</p>
+<p><strong>Could not confirm:</strong></p>
+<ul><li>January 2027 PCE and GDP. The BEA pages list only 2026; the 2027 schedule is a separate tab that did not come through. Nothing was added.</li><li>The Fed page does not list a press conference for the Dec 8-9, 2026 and Jan 26-27, 2027 meetings ("Not listed"), while <code>events.yaml</code> says "+ press conference" for December. The Oct 27-28 meeting is listed as having one.</li></ul>
+<p><strong>Existing entries re-checked on the official pages (all match):</strong></p>
+<ul><li><strong>CPI:</strong> 2026-11-10 (marked <code>indirect</code>, now seen on the BLS CPI page for October data), 2026-12-10 (marked <code>operator</code>, seen) and 2027-01-13 (seen).</li><li><strong>PCE and GDP:</strong> 2026-11-25 and 2026-12-23, 8:30 a.m., on the BEA page (the PCE entries are marked <code>official_search</code>).</li><li><strong>FOMC:</strong> Dec 8-9, 2026 and Jan 26-27, 2027 on the Fed page.</li><li>UTC times are right: US winter time began on 2026-11-01, so 8:30 a.m. is 13:30 UTC and 2:00 p.m. is 19:00 UTC.</li><li><strong>Nothing looks wrong.</strong> The operator may upgrade the <code>indirect</code>, <code>operator</code> and <code>official_search</code> marks; I did not edit them.</li><li><strong>Exchange incidents (Binance feed):</strong> nothing new in the next 7 days that touches a signal coin.</li></ul>
+<h2>Market mechanics and edges</h2>
+<p><strong>Review: Trading sessions and weekends. Verdict: KEEP, partly CONFIRMED</strong> (source 4, RESEARCH_FINDING).</p>
+<ol><li><strong>Confirmed:</strong> volume, volatility and liquidity differ by hour. Volatility peaks around the opening hours of the three major stock markets; liquidity is highest at those opens and lowest in the early morning.</li><li><strong>Not confirmed:</strong> the exact "12:00-16:00 UTC" window (the abstract gives no hours), and the weekend claim (not addressed).</li><li><strong>New record:</strong> <code>Trend persistence (time series momentum)</code> (sources 1 and last week's Borgards abstract) gives the mechanism behind the 4h trend cards.</li></ol>
+<p><strong>Edge blocks for PAPER / VALIDATION strategies (fact sheet "Edge blocks"):</strong></p>
+<ul><li><strong>PAPER, edge block present:</strong> donchian_breakout, -VEXIT, -VEXIT-S4 (v1.0 and v1.1) and -VEXIT-FDISP, all forced_flow. Playbook, WEAK_BEAR (BACKTEST): VEXIT-FDISP +0.32R over 119 trades, VEXIT-S4 v1.1 +0.30R over 164, VEXIT-S4 v1.0 +0.24R over 212. Closed paper signals this week: none.</li><li><strong>PAPER, NO edge block: P13-TURTLE-C 4h.</strong> Also none for P13-TURTLE-V1, V2 and V3 (VALIDATION; V1 beats its control twin; V1's t is 3.41, V2's 3.11, V3's 3.07, against the bar of 3.71 after 490 trials; V1 has the flag "50% of the profit from window 2").</li><li><strong>VALIDATION, NO edge block: P12-LEADER-V2 4h</strong> (+0.42R over 94 trades in RANGE, +0.18R over 81 in UNCLEAR in the playbook). Still missing since last week.</li><li><strong>For the operator:</strong> please add edge blocks to the P13-TURTLE and P12-LEADER cards. A proposal for the P13 cards is in the new <code>Trend persistence</code> record. A strategy without an edge is a pattern, not an idea.</li><li><strong>donchian_breakout-VEXIT-S4-FDISP 4h</strong> has an edge block. The strategy health line says it moved BACKTESTING → VALIDATION in the last 24 hours, and the 7-day list also shows a move back to BACKTESTING because its Monte Carlo 95% worst drawdown was 17.2R against the limit of 17R. I do not know which is final.</li></ul>
+<h2>Forward Test Program</h2>
+<p><strong>The week in 3 lines:</strong></p>
+<ol><li>TEST: 16 setups closed this week, -9.87R in total (53 closed since the start, -0.68R a trade after fees, -0.60R before fees). Your alerts: 1 closed (-0.84R). The silent research records: 15 closed (-9.03R).</li><li>PAPER: 0 closed signals.</li><li>System check: all parts ran. Nightly research ran on 6 of 7 days, the program re-tested 93 of 93 cells, the hourly scan ran at 03:11 UTC, and the live watcher heartbeat was 17 minutes old.</li></ol>
+<p><strong>Promotion candidates:</strong> none. Each needs 10+ closed live TEST setups, positive after fees, and a positive backtest on that coin. The largest cell, P03-FIB-PULLBACK-V5 1h SOL, has 7 setups at -0.35R after fees ("too early to say anything"). I never tell you to promote; you decide with the Telegram tap.</p>
+<p><strong>Demotions:</strong> none; the drift monitor paused nothing.</p>
+<p><strong>With vs without the 5m check:</strong> every TEST setup: 53, -0.60R a trade before fees. Watcher alerts (with the 5m check): 3 plan results, -1.00R. Three is far too few to compare. <strong>Before vs after fees:</strong> -0.60R before and -0.68R after, so fees made it worse but did not cause it.</p>
+<p><strong>Ideas for new versions:</strong> "none yet (each needs 10+ live trades)". No card written.</p>
+<p><strong>Failure Lab:</strong> repair record: DISP helped 4 of 4, NOTEXT helped 2 of 2, HTF helped 0 of 1. 2 repairs are waiting for their first test.</p>
+<ul><li>TRD-H4-BREAKOUT-FDISP-FNOTEXT 30m: +0.38R vs parent +0.17R, unseen +0.45R vs +0.35R (passed).</li><li>TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT 30m: +0.36R vs parent +0.16R (passed).</li><li>P02-EMA-PULLBACK-V4-S6-FHTF 4h: +0.06R vs parent +0.16R (did not help).</li><li>The two FNOTEXT cells are almost the same card, so they are one piece of evidence, not two. The <code>HIGH OVERFITTING RISK</code> flag from last week still applies to the 30m VALIDATION cells.</li></ul>
+<p><strong>Shock alarm:</strong> 60 shocks this week; 4 hours later 26 kept going and 34 reversed (average +0.22% in the shock's direction); only 2 of 60 were followed by a strategy alert. The five largest were on 2026-10-29 at about 20:45 UTC (BNB -5.3%, SUI -5.2%, ZEC -4.1%, SOL -3.5%) and 2026-10-30 00:19 UTC (SUI -3.6%). Four of those five went back up within 4 hours (+1.0%, +2.4%, +2.7%, +2.3%); the SUI one of 2026-10-30 kept falling (-5.5%). That is five cases, so it is a note, not a finding. It is the reason behind last week's hypothesis about shock size.</p>
+<p><strong>Location at the entry (information only):</strong> 35 setups at a zone or edge against the direction lost -0.60R a trade (7 won); 14 setups outside the 4H range lost -1.06R (0 won). The fact sheet counts a group only with 30+ setups: the first group passes (35), the second (14) does not.</p>
+<h2>Backtest vs paper vs live</h2>
+<ul><li><strong>LIVE:</strong> 0 closed. <strong>PAPER:</strong> 0 closed signals this week. The report card says "no cell with 5+ closed paper signals yet", so no paper-versus-backtest comparison is possible for P13-TURTLE-C or the VEXIT-S4 cells that just entered paper.</li><li><strong>TEST (live, unapproved) is clearly worse than the backtest.</strong> It made -0.68R a trade after fees against per-coin backtests between -0.01R and +0.41R (table "Every live strategy"). The biggest gaps: P01-BREAKOUT-V5 1h SUI, -0.91R over 4 setups against +0.09R, and P01-BREAKOUT-V5 30m SUI, -0.94R over 5 against +0.01R.</li><li><strong>What it may mean:</strong> (1) the per-coin backtests were picked after the fact, and most are close to +0.0R anyway; (2) most of this week's SUI and SOL setups were shorts, and the market is choppy; (3) the samples are tiny. The engine's own line for every cell is "too early to say anything".</li></ul>
+<h2>Timeframe models</h2>
+<p>All numbers are BACKTEST unless marked.</p>
+<ol><li><strong>4h trend and breakout cards stay the strongest:</strong> P01-BREAKOUT-V1 4h +0.18R over 1134 trades (t 4.15); the donchian chain: VEXIT 4h +0.249R over 854 trades, VEXIT-FDISP 4h +0.263R over 652, VEXIT-S4 v1.1 4h +0.239R over 675, VEXIT-S4-FDISP 4h +0.260R over 503; P02-EMA-PULLBACK-V4-S6-FHTF-S2 +0.118R over 1807.</li><li><strong>30m and 1h work only with a displacement filter and still fail the drawdown limit:</strong> TRD-H4-BREAKOUT-FDISP 30m +0.166R over 440 trades, 1h +0.130R over 675; TRD-H4-PULLBACK-S2 1h +0.155R over 1644. The idea chains name the drawdown, not the entry, as the blocker.</li><li><strong>15m and 5m lose nearly everywhere:</strong> liquidity_sweep_reversal 5m -0.68R over 3642 trades; this week TRD-H4-PULLBACK 15m, TRD-H4-BREAKOUT-S3-FDISP 15m and PB-B-APLUS 15m went to FAILED.</li><li><strong>Range and mean reversion fail:</strong> mean_reversion in RANGE -0.24R over 41720 trades.</li><li><strong>Too small to judge:</strong> the SMC cards (too few trades against their twins) and any cell that just entered paper.</li><li><strong>Simple reading:</strong> 4h is where an edge shows; 30m and 1h need a strong-candle filter; 15m and below lose after costs. This is a pattern, not a rule.</li></ol>
+<h2>Approval packs</h2>
+<ul><li><strong>None eligible</strong> (fact sheet: "none eligible"). There is no approval question this week.</li></ul>
+<h2>Reference project</h2>
+<p><strong>R4: freqtrade-strategies (community strategy ideas).</strong> The fact sheet says it was studied before on 2026-09-25. I opened the repository front page and two of its files, <code>hlhb.py</code> and <code>berlinguyinca/AwesomeMacd.py</code>, at commit <code>f3340ce11f5bdf62f598522e64d1f5638eaa13f5</code>. <code>git ls-remote</code> shows that this is still the head of the repository, as in the September record.</p>
+<p><strong>New points:</strong></p>
+<ol><li>The README says the strategies are "for educational purposes only" and "mostly should serve as a starting point", and that results depend heavily on pairs, timeframe and timerange.</li><li><code>hlhb.py</code>: 4h; RSI(10) crosses 50, EMA 5 crosses EMA 10, ADX above 25. A possible mismatch between its "hl2" label and what it averages (unconfirmed, see Candidates).</li><li><code>AwesomeMacd.py</code>: 1h; MACD above zero and the Awesome Oscillator crossing zero; credited to Gert Wohlgemuth and converted from a C# strategy in the Mynt project.</li><li>Neither file publishes results.</li></ol>
+<p><strong>What we take (an idea only):</strong> the two entry rules, tested as lab cards R4-HLHB and R4-AOMACD with our own stops and targets.</p>
+<p><strong>What we deliberately do NOT take:</strong> the code (nothing copied), the files' wide stops (about 32% and 25%) and ROI tables, and their exits.</p>
+<p><strong>Licence:</strong> GPL-3.0 (ideas only).</p>
+<p><strong>Hypothesis added:</strong> none for R4 this week. The one new hypothesis (from the disposition-effect paper) is not from this project.</p>
+<h2>Idea chains</h2>
+<ol><li><strong>Continue, carefully: <code>result: TRD-H4-BREAKOUT@1.0 30m</code> → FDISP → FNOTEXT.</strong> The 30m cell is in VALIDATION (FNOTEXT: 84 trades, +0.378R, unseen +0.445R). The engine's note: let it collect forward trades before any further change. It is nearly the same card as the S3 version (97 trades, +0.365R), so it counts once.</li><li><strong>Stop: TRD-H4-BREAKOUT-FDISP-S2 and -S3-FDISP-S2.</strong> The shared blocker is the drawdown limit, which no entry change has solved. If tested again, the engine suggests a risk-side change, not another removal.</li><li><strong>Stop: P02-EMA-PULLBACK-V4-S6 lines</strong> (S6-S6, FHTF-S2, P07-SQUEEZE-RETEST-V4-S2): "a third removal on the same data is curve-fitting; the open problem is the drawdown". The new FHTF-S4-S6 card is not tested yet; wait.</li><li><strong>Stop: the P01-BREAKOUT-V2-FDISP line</strong> (+0.003R and +0.012R), the P11-MOMENTUM-V1-FDISP line (FAILED, -0.239R over 2603 trades) and the R4 BBRSI and CLUC lines (both FAILED).</li><li><strong>Leave alone:</strong> donchian_breakout-VEXIT and -FDISP (already in PAPER_TRADING) and the 4h VEXIT-S4-FDISP cell.</li><li><strong>New:</strong> R4-HLHB and R4-AOMACD start their own chains (parent <code>source: [R4] freqtrade-strategies</code>).</li><li><strong>Missed strong moves (3):</strong> BTC, ETH and BNB all fell 5.6x to 7.1x ATR from 2026-10-29 19:00 UTC, the same evening as the shock cluster. The engine says a setup existed but was filtered out in all three, and "do NOT change a rule because of one move". One event, not three.</li></ol>
+<h2>Experiment queue for next week</h2>
+<ol><li>The first test results for R4-HLHB and R4-AOMACD, and for P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6.</li><li>When a slot is free: the limit-entry version of TRD-H4-BREAKOUT-FDISP 30m (from two weeks ago), or the next queue card R4-VOLSYS@1.0.</li><li>For the operator, by pull request: the hypotheses on shock size, on the drawdown percentile and on losing trades that first reached +1R, and edge blocks for P13-TURTLE-C, V1 to V3 and P12-LEADER-V2.</li><li>TEST program: 53 closed so far. The older hypothesis that TEST alerts from failing strategies lose on average now has more than the 30 it needed: -0.68R a trade over 53. Next step is the engine's, not a card.</li></ol>
+<h2>Process improvement</h2>
+<p><strong>Change:</strong> in the idea queue, put cards with a paper behind them ahead of cards ported from community strategy files, and re-rank the six waiting R4 cards after the results of R4-HLHB and R4-AOMACD.</p>
+<p><strong>Why (the numbers):</strong> the report card's pass rate for the literature factory is 1 of 7 cells reaching VALIDATION. Both finished R4 cards, BBRSI and CLUC, FAILED on every timeframe (BBRSI 30m -0.298R over 2905 trades, CLUC 30m -0.158R over 329). The R4 files publish no results. By contrast the 4h donchian and turtle cards, which come from long-documented ideas, are the ones in or near PAPER_TRADING. Each community card also raises the trials counter (490) and so the bar (t of at least 3.71) for every other card.</p>
+<p><strong>How to tell if it helped:</strong> within two weeks, the literature pass rate on the report card should be above 1 of 7, and the number of literature cells ending FAILED should fall.</p>
+<p><strong>Last week's proposal</strong> (reserve a daily slot for the Sunday run) was not needed this Sunday: the lab showed "added today: 0 of 3". The report card's item 11 says "none proposed" although last week's file had a <code>## Process improvement</code> section, so the card's reader may look for something else. The operator may want to check it.</p>
+<p>It is a proposal: the operator decides; I did not change any rule.</p>
+<h2>Pages that failed to open</h2>
+<ul><li><a href="https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/AwesomeMacd.py">https://github.com/freqtrade/freqtrade-strategies/blob/f3340ce11f5bdf62f598522e64d1f5638eaa13f5/user_data/strategies/AwesomeMacd.py</a> (404: the file is in the berlinguyinca folder; the right path opened)</li><li><a href="https://ideas.repec.org/a/bla/jfinan/v53y1998i5p1775-1798.html">https://ideas.repec.org/a/bla/jfinan/v53y1998i5p1775-1798.html</a> (404; the author's page opened instead)</li><li>the BEA 2027 schedule tab (its contents did not come through, so January 2027 PCE and GDP stay unconfirmed)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-11-01 03:52 UTC, finished 2026-11-01 04:50 UTC; problems: 2 pages gave 404 and the BEA 2027 tab did not load (see above); the engine report was 0.7 hours old</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/weekly/2026-11-01.md · Research signal. Not financial advice.</footer></main></body></html>
