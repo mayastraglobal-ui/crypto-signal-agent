@@ -31277,3 +31277,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 17:00,XRP,1h,FVG,bear,,1.1614,1.1662,0.509,,4h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-07 16:30,XRP,30m,FVG_RETRACE,bear,,1.1589,1.1662,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-07 16:30,XRP,15m,FVG_FILLED,bear,,1.1588,1.1609,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-07 18:00,BTC,1h,FVG_RETRACE,bear,,75802.44,75930.77,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 17:30,BTC,30m,FVG_RETRACE,bear,,75802.44,75848.01,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:00,BTC,30m,FVG_RETRACE,bear,,75858.95,75937.67,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:00,BTC,30m,FVG_FILLED,bear,,75802.44,75848.01,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 17:30,BTC,15m,FVG_RETRACE,bear,,75814.93,75848.01,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 17:45,BTC,15m,FVG_FILLED,bear,,75814.93,75848.01,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 18:00,BTC,15m,FVG,bull,,75820.0,75847.4,0.419,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-07 18:15,BTC,15m,FVG_RETRACE,bull,,75820.0,75847.4,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:00,SOL,1h,FVG_RETRACE,bear,,89.68,89.9,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:00,SOL,30m,FVG_RETRACE,bear,,89.77,89.92,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:15,SOL,15m,OB_INVALID,bear,,89.66,89.82,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-07 18:15,SOL,15m,FVG_RETRACE,bear,,89.82,89.92,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:00,XRP,1h,FVG_RETRACE,bear,,1.1614,1.1662,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 17:15,XRP,15m,FVG_RETRACE,bear,,1.1617,1.1664,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-07 18:15,ZEC,15m,BOS,bull,1267.96,,,0.129,,1h,UNCLEAR,no displacement,smc-1.0,Binance
