@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-07 02:11",
+ "generated_utc": "2026-11-07 03:16",
  "book": {
-  "utc": "2026-11-07 02:11",
-  "beijing": "2026-11-07 10:11",
+  "utc": "2026-11-07 03:16",
+  "beijing": "2026-11-07 11:16",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-07 02:11 UTC / 2026-11-07 10:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-07 03:16 UTC / 2026-11-07 11:16 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -434,7 +434,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -445,7 +445,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -658,5 +658,32 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-07 03:16",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-11-07 02:59",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1.1684,
+   "note": "30m signal candle closed"
+  },
+  {
+   "time_utc": "2026-11-07 03:16",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-11-07 02:59",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1.1684,
+   "note": ""
+  }
+ ]
 }
