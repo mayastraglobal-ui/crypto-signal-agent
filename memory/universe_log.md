@@ -1037,3 +1037,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-07 00:11 UTC
 - **EXCLUDED** SOXLB - only 123 days of history (need 180); 7-day average volume $37M < $50M; order book too thin: $143k within 1% (need $250k)
+
+## 2026-11-07 17:11 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,173x the 1% order-book depth (flag only, not excluded)
