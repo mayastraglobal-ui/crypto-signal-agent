@@ -285,3 +285,4 @@ time_utc,coin,side,triggers,move_pct,move_atr,vol_x,level,price,sent,after_1h_pc
 2026-11-07 15:49,BTC,DOWN,volume,-0.22,-1.2,5.1,,75612.0,sent,-0.18,-0.15,-0.04,-0.33,0,0
 2026-11-07 15:49,ETH,DOWN,volume,-0.36,-1.34,5.1,,2232.03,sent,-0.09,-0.04,0.22,-0.31,0,0
 2026-11-07 20:53,SOL,DOWN,volume+sweep_low,-0.48,-1.25,7.0,88.87,88.96,sent,-0.17,-0.48,0.38,-0.94,0,0
+2026-11-07 20:55,ZEC,DOWN,sweep_low,-1.39,-1.1,3.8,1247.44,1242.92,same wave,-0.34,-0.97,0.61,-1.66,0,0
