@@ -31406,3 +31406,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-07 23:00,ZEC,30m,FVG_FILLED,bear,,1248.71,1260.0,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-07 22:45,ZEC,15m,FVG_FILLED,bear,,1248.71,1258.4,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-07 22:45,ZEC,15m,FVG,bull,,1250.16,1253.71,0.489,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 00:15,BTC,15m,FVG_RETRACE,bull,,75819.43,75855.5,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 00:15,BTC,15m,FVG_FILLED,bull,,75819.43,75855.5,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:30,BTC,15m,FVG,bear,,75828.5,75855.5,0.43,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:45,BTC,15m,FVG,bear,,75796.06,75816.0,0.315,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:30,ETH,30m,FVG,bull,,2235.3,2237.81,0.55,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 00:30,ETH,15m,FVG_RETRACE,bull,,2235.3,2237.82,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 00:45,ETH,15m,BREAKER_RETEST,bull,,2233.79,2235.65,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-08 00:15,SOL,15m,FVG_RETRACE,bull,,89.47,89.7,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 00:45,SOL,15m,FVG_FILLED,bull,,89.47,89.7,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:45,SOL,15m,FVG,bear,,89.52,89.65,0.648,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:30,XRP,30m,SWEEP,bear,1.1647,,,0.146,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 00:15,XRP,15m,SWEEP,bear,1.1647,,,0.23,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 00:15,XRP,15m,FVG_RETRACE,bull,,1.1615,1.1627,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 00:30,XRP,15m,FVG_FILLED,bull,,1.1615,1.1627,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 00:30,ZEC,15m,FVG_RETRACE,bull,,1250.16,1253.71,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 00:45,ZEC,15m,FVG,bear,,1255.03,1257.0,0.305,,1h,TRANSITION,,smc-1.0,Binance
