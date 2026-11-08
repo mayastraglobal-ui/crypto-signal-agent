@@ -31585,3 +31585,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 07:45,ZEC,15m,BOS,bull,1265.0,,,0.09,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-08 08:30,BTC,15m,FVG_RETRACE,bull,,75871.01,75909.9,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-08 08:30,ETH,15m,FVG_RETRACE,bull,,2236.61,2238.65,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 09:30,ETH,30m,OB_RETEST,bull,,2232.69,2236.0,,London,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-08 09:15,ETH,15m,FVG_FILLED,bull,,2236.61,2238.65,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 09:30,ETH,15m,OB_RETEST,bull,,2232.89,2236.0,,London,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-08 09:30,ETH,15m,FVG,bear,,2237.53,2238.41,0.358,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 09:45,ETH,15m,FVG_RETRACE,bear,,2237.53,2238.41,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 09:45,ETH,15m,FVG_FILLED,bear,,2237.53,2238.41,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 10:00,ZEC,30m,SWEEP,bear,1268.36,,,0.248,London,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 09:45,ZEC,15m,SWEEP,bear,1268.69,,,0.335,London,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
