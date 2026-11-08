@@ -31429,3 +31429,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 01:15,SOL,15m,FVG_RETRACE,bear,,89.52,89.65,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-08 01:00,ZEC,15m,FVG_RETRACE,bear,,1255.03,1257.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-11-08 01:00,ZEC,15m,FVG_FILLED,bear,,1255.03,1257.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 01:30,ETH,30m,FVG_FILLED,bull,,2235.3,2237.81,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 01:30,ETH,15m,FVG_FILLED,bull,,2235.3,2237.82,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 02:00,SOL,15m,FVG_RETRACE,bull,,88.93,89.11,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 02:00,SOL,15m,FVG,bear,,89.25,89.33,0.426,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 01:45,ZEC,15m,WEAK_BREAK,bear,1250.38,,,0.263,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-08 01:45,ZEC,15m,FVG_FILLED,bull,,1250.16,1253.71,,Asia,1h,TRANSITION,,smc-1.0,Binance
