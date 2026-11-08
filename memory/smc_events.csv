@@ -31583,3 +31583,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 08:00,ETH,15m,FVG,bull,,2236.61,2238.65,0.803,London,1h,TRANSITION,,smc-1.0,Binance
 2026-11-08 08:00,SOL,15m,SWEEP,bear,89.43,,,0.119,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-08 07:45,ZEC,15m,BOS,bull,1265.0,,,0.09,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-08 08:30,BTC,15m,FVG_RETRACE,bull,,75871.01,75909.9,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 08:30,ETH,15m,FVG_RETRACE,bull,,2236.61,2238.65,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
