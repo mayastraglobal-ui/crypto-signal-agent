@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-11-08 06:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-08 07:40 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -40,7 +40,7 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 5 | 0 | -0.81R | +0.08R | -4.02R | 4.02R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 0 | -0.94R | +0.00R | -4.69R | 4.69R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 30m | SOL | 🔵 TEST | silent | 4 | 0 | -1.18R | +0.05R | -4.71R | 4.71R | ⚠️ watch |
-| P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 4 | 25 | -0.57R | +0.02R | -2.28R | 3.24R | ⚠️ watch |
+| P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 4 | 25 | -0.57R | +0.01R | -2.28R | 3.24R | ⚠️ watch |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 7 | 29 | -0.35R | +0.04R | -2.42R | 2.46R | ✅ |
 | P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 3 | 33 | -0.47R | +0.06R | -1.41R | 2.04R | ✅ |
 | P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 3 | 33 | -0.61R | +0.11R | -1.82R | 1.92R | ✅ |
