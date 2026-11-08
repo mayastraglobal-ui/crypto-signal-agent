@@ -327,3 +327,48 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - 24h volume now: 80M
   - strategies profitable on it in the research run (>= 5 trades): P02-EMA-PULLBACK-V1@1.0 4h (47 trades, +0.09R); P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h (252 trades, +0.07R); P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h (60 trades, +0.14R); P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (48 trades, +0.14R); P02-EMA-PULLBACK-V4-S6-S6@1.0 4h (59 trades, +0.15R); P02-EMA-PULLBACK-V4-S6@1.0 4h (58 trades, +0.13R); P03-FIB-PULLBACK-V1@1.0 4h (47 trades, +0.15R); P03-FIB-PULLBACK-V3@1.0 4h (15 trades, +0.00R)
   - interpretation: (review)
+
+### BTC - weekly facts 2026-11-08
+- timestamp: 2026-11-08 00:00 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: BTC · timeframe: 1d, 1h · regime: - · review: 2026-12-08
+  - daily range (last 90 days): median 2.4%, 90th percentile 5.3%
+  - 1D regime (last 90 days): TRANSITION 30%, WEAK_BULL 28%, RANGE 13%, UNCLEAR 13%, COMPRESSION 10%, STRONG_BULL 4%, EXPANSION 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 396M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (199 trades, +0.36R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 1h (22 trades, +0.03R); P01-BREAKOUT-V2-FDISP@1.0 15m (177 trades, +0.07R); P01-BREAKOUT-V2-FDISP@1.0 1h (256 trades, +0.25R); P01-BREAKOUT-V2-FDISP@1.0 30m (122 trades, +0.19R); P01-BREAKOUT-V2@1.0 15m (251 trades, +0.06R); P01-BREAKOUT-V2@1.0 1h (355 trades, +0.11R); P01-BREAKOUT-V2@1.0 30m (165 trades, +0.07R)
+  - interpretation: (review)
+
+### ETH - weekly facts 2026-11-08
+- timestamp: 2026-11-08 00:00 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: ETH · timeframe: 1d, 1h · regime: - · review: 2026-12-08
+  - daily range (last 90 days): median 3.2%, 90th percentile 6.4%
+  - 1D regime (last 90 days): TRANSITION 36%, WEAK_BULL 33%, STRONG_BULL 12%, COMPRESSION 10%, EXPANSION 4%, UNCLEAR 3%, RANGE 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 147M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (203 trades, +0.25R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (21 trades, +0.28R); P01-BREAKOUT-V2-FDISP@1.0 30m (127 trades, +0.10R); P01-BREAKOUT-V2@1.0 30m (174 trades, +0.12R); P01-BREAKOUT-V3@1.0 4h (68 trades, +0.22R); P01-BREAKOUT-V4-S1@1.0 4h (226 trades, +0.22R); P01-BREAKOUT-V4@1.0 4h (169 trades, +0.22R); P01-BREAKOUT-V5-FDISP@1.0 1h (542 trades, +0.01R)
+  - interpretation: (review)
+
+### SOL - weekly facts 2026-11-08
+- timestamp: 2026-11-08 00:00 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: SOL · timeframe: 1d, 1h · regime: - · review: 2026-12-08
+  - daily range (last 90 days): median 4.0%, 90th percentile 7.9%
+  - 1D regime (last 90 days): TRANSITION 50%, WEAK_BULL 28%, COMPRESSION 10%, EXPANSION 4%, RANGE 3%, STRONG_BULL 3%, UNCLEAR 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 53M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (127 trades, +0.30R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 15m (39 trades, +0.17R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (19 trades, +0.68R); P01-BREAKOUT-V2-FDISP@1.0 15m (181 trades, +0.02R); P01-BREAKOUT-V2-FDISP@1.0 1h (176 trades, +0.09R); P01-BREAKOUT-V2-FDISP@1.0 30m (136 trades, +0.05R); P01-BREAKOUT-V2@1.0 1h (247 trades, +0.02R); P01-BREAKOUT-V2@1.0 30m (176 trades, +0.05R)
+  - interpretation: (review)
+
+### XRP - weekly facts 2026-11-08
+- timestamp: 2026-11-08 00:00 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: XRP · timeframe: 1d, 1h · regime: - · review: 2026-12-08
+  - daily range (last 90 days): median 4.3%, 90th percentile 10.2%
+  - 1D regime (last 90 days): TRANSITION 53%, WEAK_BEAR 21%, WEAK_BULL 11%, UNCLEAR 7%, RANGE 4%, EXPANSION 3%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 75M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V1@1.0 4h (194 trades, +0.07R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 15m (21 trades, +0.07R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 1h (19 trades, +0.24R); P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (16 trades, +0.59R); P01-BREAKOUT-V2-FDISP@1.0 15m (169 trades, +0.04R); P01-BREAKOUT-V2-FDISP@1.0 1h (248 trades, +0.05R); P01-BREAKOUT-V2-FDISP@1.0 30m (119 trades, +0.02R); P01-BREAKOUT-V3@1.0 4h (64 trades, +0.23R)
+  - interpretation: (review)
+
+### ZEC - weekly facts 2026-11-08
+- timestamp: 2026-11-08 00:00 UTC · source: engine: hourly scan + daily research run · evidence: FACT: measured on closed candles / BACKTEST_EVIDENCE for the strategy lines · confidence: measured · strategy: - · asset: ZEC · timeframe: 1d, 1h · regime: - · review: 2026-12-08
+  - daily range (last 90 days): median 8.7%, 90th percentile 15.6%
+  - 1D regime (last 90 days): STRONG_BULL 44%, WEAK_BULL 20%, TRANSITION 13%, COMPRESSION 11%, UNCLEAR 4%, EXPANSION 3%, HIGH_VOL_RANGE 2%, RANGE 1%
+  - moves with (1h correlation >= 0.7): BTC+ETH+SOL+XRP+ZEC
+  - 24h volume now: 133M
+  - strategies profitable on it in the research run (>= 5 trades): P01-BREAKOUT-V4-S1@1.0 4h (217 trades, +0.04R); P02-EMA-PULLBACK-V1@1.0 4h (49 trades, +0.06R); P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 4h (254 trades, +0.06R); P02-EMA-PULLBACK-V4-S6-FHTF-S4-S6@1.0 4h (74 trades, +0.13R); P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 4h (61 trades, +0.12R); P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (49 trades, +0.12R); P02-EMA-PULLBACK-V4-S6-S6@1.0 4h (60 trades, +0.13R); P02-EMA-PULLBACK-V4-S6@1.0 4h (59 trades, +0.11R)
+  - interpretation: (review)

@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-07 22:11",
+ "generated_utc": "2026-11-08 00:00",
  "book": {
-  "utc": "2026-11-07 22:11",
-  "beijing": "2026-11-08 06:11",
+  "utc": "2026-11-08 00:00",
+  "beijing": "2026-11-08 08:00",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-07 22:11 UTC / 2026-11-08 06:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-08 00:00 UTC / 2026-11-08 08:00 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -63,17 +63,6 @@
   }
  },
  "watching": [
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close > prev(highest(high,330))"
-  },
   {
    "coin": "ETH",
    "tf": "4h",
@@ -168,32 +157,10 @@
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
   },
   {
    "coin": "BTC",
@@ -223,32 +190,10 @@
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/4",
-   "missing": null
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
   },
   {
    "coin": "BTC",
@@ -368,7 +313,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -379,7 +324,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -489,7 +434,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -665,7 +610,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -704,30 +649,17 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-11-07 22:11",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-07 20:59",
+   "time_utc": "2026-11-08 00:00",
+   "id": "SOL-30m-P01-BREAKOUT-V2-2026-11-07 20:59",
    "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 89.18259492117203,
-   "note": "limit 89.1826 filled in the 2026-11-07 21:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-07 22:11",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-07 20:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 89.18259492117203,
-   "note": "entry at 2026-11-07 21:00 UTC (limit)"
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.25R"
   }
  ]
 }
