@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-08 12:10",
+ "utc": "2026-11-08 13:10",
  "verdict": {
   "code": "DOWNTREND_WAIT",
   "icon": "\ud83c\udf27",
@@ -37,7 +37,7 @@
    "adx": {
     "1d": 19.0,
     "4h": 34.0,
-    "1h": 18.0
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 2.94,
@@ -66,10 +66,10 @@
    },
    "crowd": {
     "funding_pct": 0.0034,
-    "oi_24h_pct": -0.2,
+    "oi_24h_pct": 0.3,
     "label": "neutral"
    },
-   "change_24h": -0.06
+   "change_24h": 0.21
   },
   {
    "coin": "ETH",
@@ -86,7 +86,7 @@
    "adx": {
     "1d": 23.0,
     "4h": 28.0,
-    "1h": 22.0
+    "1h": 21.0
    },
    "vol": {
     "atr_pct": 3.9,
@@ -115,10 +115,10 @@
    },
    "crowd": {
     "funding_pct": 0.0052,
-    "oi_24h_pct": 0.4,
+    "oi_24h_pct": 0.6,
     "label": "neutral"
    },
-   "change_24h": -0.17
+   "change_24h": 0.03
   },
   {
    "coin": "SOL",
@@ -135,7 +135,7 @@
    "adx": {
     "1d": 34.0,
     "4h": 26.0,
-    "1h": 22.0
+    "1h": 21.0
    },
    "vol": {
     "atr_pct": 4.77,
@@ -167,7 +167,7 @@
     "oi_24h_pct": 1.4,
     "label": "neutral"
    },
-   "change_24h": -0.31
+   "change_24h": -0.07
   },
   {
    "coin": "XRP",
@@ -184,7 +184,7 @@
    "adx": {
     "1d": 19.0,
     "4h": 41.0,
-    "1h": 39.0
+    "1h": 37.0
    },
    "vol": {
     "atr_pct": 4.6,
@@ -213,10 +213,10 @@
    },
    "crowd": {
     "funding_pct": 0.0055,
-    "oi_24h_pct": 1.3,
+    "oi_24h_pct": 2.0,
     "label": "neutral"
    },
-   "change_24h": -0.33
+   "change_24h": 0.39
   },
   {
    "coin": "ZEC",
@@ -265,27 +265,27 @@
     "oi_24h_pct": 11.0,
     "label": "crowded long"
    },
-   "change_24h": -0.77
+   "change_24h": 0.07
   }
  ],
- "alts_vs_btc_24h": -0.26,
+ "alts_vs_btc_24h": -0.16,
  "fear_greed": {
   "value": 28,
   "label": "Fear",
   "yesterday": 25
  },
  "btc_dominance": {
-  "pct": 59.957,
-  "utc": "2026-11-08 12:10",
-  "ch24": 0.65,
-  "ch7": 0.04,
-  "read": "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
+  "pct": 59.972,
+  "utc": "2026-11-08 13:10",
+  "ch24": 0.66,
+  "ch7": 0.67,
+  "read": "BTC up + BTC.D up: BTC leads, altcoins lag"
  },
  "events": [
   {
    "start_utc": "2026-11-10 13:30",
    "name": "US CPI (Oct data)",
-   "hours": 49.3
+   "hours": 48.3
   }
  ],
  "blackout_now": [],
@@ -300,5 +300,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-08 20:10 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -7.2% in 30 days</b>\nStrategy alerts (need 4H and 1H to agree): 1D RANGE \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.9%, higher than 44% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (74,202 \u2013 77,533) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0034%/8h, open interest -0.2% in 24h)\nAltcoins vs BTC (24h): -0.3%\nBTC dominance: 60.0% \u00b7 24h +0.65 pt \u00b7 7d +0.04 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up \u00b7 crowded long\n\n<b>Events</b>\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\n\u26a0\ufe0f ZEC is crowded long: many traders are long and paying for it - a sharp move against them (a squeeze) is more likely than usual.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-08 21:10 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -7.2% in 30 days</b>\nStrategy alerts (need 4H and 1H to agree): 1D RANGE \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.9%, higher than 44% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (74,202 \u2013 77,533) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0034%/8h, open interest +0.3% in 24h)\nAltcoins vs BTC (24h): -0.2%\nBTC dominance: 60.0% \u00b7 24h +0.66 pt \u00b7 7d +0.67 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up \u00b7 crowded long\n\n<b>Events</b>\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\n\u26a0\ufe0f ZEC is crowded long: many traders are long and paying for it - a sharp move against them (a squeeze) is more likely than usual.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
