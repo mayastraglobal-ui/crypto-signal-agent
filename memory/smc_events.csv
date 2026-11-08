@@ -31803,3 +31803,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 17:00,ZEC,15m,FVG_RETRACE,bull,,1245.57,1250.0,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-08 17:00,ZEC,15m,FVG_RETRACE,bull,,1250.1,1252.31,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-08 17:00,ZEC,15m,FVG_FILLED,bull,,1250.1,1252.31,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:00,BTC,1h,FVG,bear,,75857.0,76000.0,0.843,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 17:30,BTC,30m,FVG,bear,,75857.0,76022.8,1.457,,1h,RANGE,,smc-1.0,Binance
+2026-11-08 17:15,BTC,15m,BREAKER_RETEST,bear,,75849.4,75871.01,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-08 17:15,BTC,15m,FVG,bear,,75857.0,75974.12,1.35,,1h,RANGE,,smc-1.0,Binance
+2026-11-08 18:15,BTC,15m,FVG_RETRACE,bear,,75857.0,75974.12,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:00,ETH,1h,FVG,bear,,2233.0,2238.0,0.687,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-08 17:30,ETH,30m,BREAKER_RETEST,bear,,2232.69,2236.0,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-08 17:30,ETH,30m,FVG,bear,,2233.0,2239.76,1.398,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 17:15,ETH,15m,BREAKER_RETEST,bear,,2232.89,2236.0,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-08 17:15,ETH,15m,FVG,bear,,2233.0,2236.1,0.836,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:15,ETH,15m,FVG_RETRACE,bear,,2233.0,2236.1,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:00,SOL,1h,FVG,bear,,89.25,89.52,0.563,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 17:30,SOL,30m,FVG,bear,,89.25,89.55,0.916,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:00,ZEC,1h,FVG,bear,,1253.14,1270.0,1.03,,4h,WEAK_BULL,,smc-1.0,Binance
+2026-11-08 17:30,ZEC,30m,FVG,bear,,1253.14,1260.01,0.617,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 17:15,ZEC,15m,FVG_FILLED,bull,,1245.57,1250.0,,,1h,COMPRESSION,,smc-1.0,Binance
