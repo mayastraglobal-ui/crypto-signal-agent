@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-08 03:11",
+ "generated_utc": "2026-11-08 04:11",
  "book": {
-  "utc": "2026-11-08 03:11",
-  "beijing": "2026-11-08 11:11",
+  "utc": "2026-11-08 04:11",
+  "beijing": "2026-11-08 12:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-08 03:11 UTC / 2026-11-08 11:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-08 04:11 UTC / 2026-11-08 12:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -77,6 +77,17 @@
   {
    "coin": "ZEC",
    "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "btc_ret(3) >= 3"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -553,17 +564,6 @@
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
@@ -610,7 +610,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -647,5 +647,97 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "XRP-4h-P07-SQUEEZE-RETEST-V3-2026-11-07 15:59",
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "P07-SQUEEZE-RETEST-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1.1648325564660391,
+   "note": "limit 1.16483 filled in the 2026-11-08 00:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "XRP-4h-P07-SQUEEZE-RETEST-V3-2026-11-07 15:59",
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "P07-SQUEEZE-RETEST-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1.1648325564660391,
+   "note": "entry at 2026-11-08 00:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "SOL-1h-P04-MACD-SUPERTREND-V2-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 89.21199711907005,
+   "note": "limit 89.212 filled in the 2026-11-08 03:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "SOL-1h-P04-MACD-SUPERTREND-V2-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 89.21199711907005,
+   "note": "entry at 2026-11-08 03:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 89.21199711907005,
+   "note": "limit 89.212 filled in the 2026-11-08 03:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 89.21199711907005,
+   "note": "entry at 2026-11-08 03:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-08 04:11",
+   "id": "BTC-1h-P01-BREAKOUT-V2-2026-11-05 15:59",
+   "coin": "BTC",
+   "tf": "1h",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TIME +0.10R"
+  }
+ ]
 }
