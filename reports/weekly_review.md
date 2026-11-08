@@ -1,13 +1,13 @@
 # Weekly review · 2026-W45
 
-Made 2026-11-08 07:40 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-08 08:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-07)
-- ✅ hourly scan: last run 2026-11-08 07:40 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-08)
+- ✅ hourly scan: last run 2026-11-08 08:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-08 06:00 UTC (12 min ago)
+- ✅ live watcher: last heartbeat 2026-11-08 07:05 UTC (37 min ago)
 - ✅ TEST setups closed this week (GitHub record): 14
 
 ## Totals
@@ -44,13 +44,13 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## Failure Lab (repairs for the loss causes)
 
+- new repair P11-MOMENTUM-V1-FRETEST: P11-MOMENTUM-V1@1.0 30m lost on false_breakout - testing RETEST
 - P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.22R vs parent +0.02R, unseen +0.34R vs +0.09R - helped
 - P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.07R vs +0.19R - did not help
-- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.37R - passed
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.37R vs +0.25R - helped
-- TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.40R vs parent +0.19R, unseen +0.55R vs +0.36R - passed
-- repair record: DISP helped 6 of 7, NOTEXT helped 3 of 3, HTF helped 0 of 1
-- 1 repair(s) waiting for their first test
+- P11-MOMENTUM-V1-FDISP@1.0 30m (DISP for false_breakout): -0.23R vs parent -0.22R, unseen -0.28R vs -0.22R - did not help
+- P11-MOMENTUM-V3-FDISP@1.0 1h (DISP for false_breakout): -0.09R vs parent -0.13R, unseen -0.16R vs -0.19R - helped
+- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.39R - passed
+- repair record: DISP helped 7 of 8, NOTEXT helped 3 of 3, HTF helped 0 of 1
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
@@ -88,7 +88,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 5 | 0 | -0.81R | -0.78R | 1 (-0.4R) | +0.08R | -0.81R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 5 | 0 | -0.94R | -0.88R | 0 (+0.0R) | +0.00R | -0.94R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 4 | 0 | -1.18R | -1.06R | 2 (-2.5R) | +0.05R | -1.18R over 4 trades: too early to say anything |
-| P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 4 | 25 | -0.57R | -0.52R | 1 (-1.1R) | +0.02R | -0.57R over 4 trades: too early to say anything |
+| P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 4 | 25 | -0.57R | -0.52R | 1 (-1.1R) | +0.01R | -0.57R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 15m | BTC | TEST | silent | 3 | 33 | -0.47R | -0.20R | 0 (+0.0R) | +0.06R | -0.47R over 3 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 1h | BTC | TEST | silent | 3 | 33 | -0.61R | -0.50R | 1 (+0.1R) | +0.11R | -0.61R over 3 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 3 | 33 | +0.00R | +0.13R | 1 (-0.2R) | +0.07R | +0.00R over 3 trades: too early to say anything |

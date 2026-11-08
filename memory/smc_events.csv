@@ -31564,3 +31564,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 06:45,XRP,15m,FVG_RETRACE,bull,,1.1639,1.1647,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-08 07:00,XRP,15m,FVG_FILLED,bull,,1.1639,1.1647,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-08 07:30,ZEC,15m,SWEEP,bear,1265.0,,,0.224,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 08:00,BTC,1h,WEAK_BREAK,bull,75924.0,,,0.313,London,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-08 08:00,BTC,30m,BOS,bull,75974.01,,,0.019,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-08 08:00,BTC,15m,SWEEP,bear,75986.69,,,0.24,London,1h,UNCLEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-08 08:00,BTC,15m,CHOCH,bull,75974.01,,,0.029,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-08 08:00,BTC,15m,ORDER_BLOCK,bull,,75849.4,75871.01,,London,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-08 08:00,BTC,15m,FVG_FILLED,bear,,75904.35,75929.63,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-08 08:00,BTC,15m,FVG,bull,,75871.01,75909.9,0.67,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-08 08:00,ETH,1h,WEAK_BREAK,bull,2241.37,,,0.006,London,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-08 08:00,ETH,30m,BOS,bull,2240.15,,,0.329,London,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-08 08:00,ETH,30m,ORDER_BLOCK,bull,,2232.69,2236.0,,London,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-08 08:00,ETH,30m,FVG_RETRACE,bear,,2242.36,2245.19,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 08:00,ETH,30m,FVG_FILLED,bear,,2238.12,2241.73,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 07:45,ETH,15m,FVG_FILLED,bear,,2235.29,2237.19,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 08:00,ETH,15m,CHOCH,bull,2240.15,,,0.517,London,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-08 08:00,ETH,15m,ORDER_BLOCK,bull,,2232.89,2236.0,,London,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-08 08:00,ETH,15m,FVG_FILLED,bear,,2240.41,2241.9,,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 08:00,ETH,15m,FVG,bull,,2236.61,2238.65,0.803,London,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 08:00,SOL,15m,SWEEP,bear,89.43,,,0.119,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 07:45,ZEC,15m,BOS,bull,1265.0,,,0.09,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
