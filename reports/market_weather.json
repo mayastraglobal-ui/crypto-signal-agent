@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-08 11:10",
+ "utc": "2026-11-08 12:10",
  "verdict": {
   "code": "DOWNTREND_WAIT",
   "icon": "\ud83c\udf27",
@@ -16,9 +16,9 @@
   ]
  },
  "breadth": {
-  "UP": 0,
+  "UP": 1,
   "DOWN": 1,
-  "RANGE": 1,
+  "RANGE": 0,
   "CHOPPY": 3
  },
  "coins": [
@@ -27,17 +27,17 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D RANGE, 4H STRONG_BEAR, 1H COMPRESSION)",
+   "why": "timeframes disagree (1D RANGE, 4H WEAK_BEAR, 1H COMPRESSION)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "RANGE",
-    "4h": "STRONG_BEAR",
+    "4h": "WEAK_BEAR",
     "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 19.0,
     "4h": 34.0,
-    "1h": 19.0
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 2.94,
@@ -66,10 +66,10 @@
    },
    "crowd": {
     "funding_pct": 0.0034,
-    "oi_24h_pct": -0.8,
+    "oi_24h_pct": -0.2,
     "label": "neutral"
    },
-   "change_24h": -0.08
+   "change_24h": -0.06
   },
   {
    "coin": "ETH",
@@ -86,7 +86,7 @@
    "adx": {
     "1d": 23.0,
     "4h": 28.0,
-    "1h": 24.0
+    "1h": 22.0
    },
    "vol": {
     "atr_pct": 3.9,
@@ -115,27 +115,27 @@
    },
    "crowd": {
     "funding_pct": 0.0052,
-    "oi_24h_pct": -0.0,
+    "oi_24h_pct": 0.4,
     "label": "neutral"
    },
-   "change_24h": -0.44
+   "change_24h": -0.17
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "down",
-   "why": "timeframes disagree (1D TRANSITION, 4H STRONG_BEAR, 1H UNCLEAR)",
+   "turning": null,
+   "why": "timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H UNCLEAR)",
    "labels": {
     "1w": "WEAK_BULL",
     "1d": "TRANSITION",
-    "4h": "STRONG_BEAR",
+    "4h": "WEAK_BEAR",
     "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 34.0,
     "4h": 26.0,
-    "1h": 24.0
+    "1h": 22.0
    },
    "vol": {
     "atr_pct": 4.77,
@@ -164,10 +164,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 0.9,
+    "oi_24h_pct": 1.4,
     "label": "neutral"
    },
-   "change_24h": -0.78
+   "change_24h": -0.31
   },
   {
    "coin": "XRP",
@@ -183,8 +183,8 @@
    },
    "adx": {
     "1d": 19.0,
-    "4h": 40.0,
-    "1h": 40.0
+    "4h": 41.0,
+    "1h": 39.0
    },
    "vol": {
     "atr_pct": 4.6,
@@ -213,26 +213,26 @@
    },
    "crowd": {
     "funding_pct": 0.0055,
-    "oi_24h_pct": 1.6,
+    "oi_24h_pct": 1.3,
     "label": "neutral"
    },
-   "change_24h": -0.98
+   "change_24h": -0.33
   },
   {
    "coin": "ZEC",
-   "verdict": "RANGE",
-   "permission": "NO TRADE",
+   "verdict": "UP",
+   "permission": "LONG allowed",
    "turning": null,
-   "why": "timeframes disagree (1D WEAK_BULL, 4H RANGE, 1H COMPRESSION)",
+   "why": "1D/4H bullish, 1W STRONG_BULL",
    "labels": {
     "1w": "STRONG_BULL",
     "1d": "WEAK_BULL",
-    "4h": "RANGE",
+    "4h": "WEAK_BULL",
     "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 14.0,
-    "4h": 13.0,
+    "4h": 12.0,
     "1h": 17.0
    },
    "vol": {
@@ -262,30 +262,30 @@
    },
    "crowd": {
     "funding_pct": 0.0846,
-    "oi_24h_pct": 9.1,
+    "oi_24h_pct": 11.0,
     "label": "crowded long"
    },
-   "change_24h": -2.21
+   "change_24h": -0.77
   }
  ],
- "alts_vs_btc_24h": -0.8,
+ "alts_vs_btc_24h": -0.26,
  "fear_greed": {
   "value": 28,
   "label": "Fear",
   "yesterday": 25
  },
  "btc_dominance": {
-  "pct": 59.99,
-  "utc": "2026-11-08 11:10",
-  "ch24": 0.08,
-  "ch7": 0.06,
-  "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
+  "pct": 59.957,
+  "utc": "2026-11-08 12:10",
+  "ch24": 0.65,
+  "ch7": 0.04,
+  "read": "BTC down + BTC.D up: flight to BTC - careful with altcoin longs"
  },
  "events": [
   {
    "start_utc": "2026-11-10 13:30",
    "name": "US CPI (Oct data)",
-   "hours": 50.3
+   "hours": 49.3
   }
  ],
  "blackout_now": [],
@@ -300,5 +300,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-08 19:10 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -7.2% in 30 days</b>\nStrategy alerts (need 4H and 1H to agree): 1D RANGE \u00b7 4H STRONG_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.9%, higher than 44% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (74,202 \u2013 77,533) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0034%/8h, open interest -0.8% in 24h)\nAltcoins vs BTC (24h): -0.8%\nBTC dominance: 60.0% \u00b7 24h +0.08 pt \u00b7 7d +0.06 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe1 ZEC: range \u00b7 crowded long\n\n<b>Events</b>\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\n\u26a0\ufe0f ZEC is crowded long: many traders are long and paying for it - a sharp move against them (a squeeze) is more likely than usual.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-08 20:10 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -7.2% in 30 days</b>\nStrategy alerts (need 4H and 1H to agree): 1D RANGE \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: normal (daily range 2.9%, higher than 44% of the last year)\nUsual range: BTC usually moves \u00b11.0% in 24h; on 8 of 10 similar days it closed within \u00b12.2% (74,202 \u2013 77,533) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0034%/8h, open interest -0.2% in 24h)\nAltcoins vs BTC (24h): -0.3%\nBTC dominance: 60.0% \u00b7 24h +0.65 pt \u00b7 7d +0.04 pt\n   BTC down + BTC.D up: flight to BTC - careful with altcoin longs\nMood (Fear & Greed): Fear 28\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\ud83d\udfe2 ZEC: trend up \u00b7 crowded long\n\n<b>Events</b>\n\u2022 US CPI (Oct data) 11-10 21:30 Beijing\n\n\u26a0\ufe0f ZEC is crowded long: many traders are long and paying for it - a sharp move against them (a squeeze) is more likely than usual.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
