@@ -31743,3 +31743,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 15:00,XRP,15m,OB_RETEST,bear,,1.1636,1.1676,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-11-08 14:45,ZEC,15m,FVG_RETRACE,bear,,1272.8,1276.28,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-08 14:45,ZEC,15m,FVG_FILLED,bear,,1272.8,1276.28,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 15:15,BTC,15m,FVG_FILLED,bear,,75966.35,76062.59,,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 15:30,BTC,15m,FVG_RETRACE,bull,,75982.0,76001.96,,Silver Bullet,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 15:30,SOL,30m,FVG,bull,,89.38,89.52,0.451,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 15:15,SOL,15m,FVG,bull,,89.42,89.52,0.463,Silver Bullet,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 16:00,XRP,1h,BOS,bear,1.1588,,,0.364,Silver Bullet,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-08 15:30,XRP,30m,BOS,bear,1.1588,,,0.068,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-08 15:30,XRP,15m,SWEEP,bull,1.1567,,,0.408,Silver Bullet,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-08 15:45,XRP,15m,BOS,bear,1.1567,,,0.153,Silver Bullet,1h,TRANSITION,no displacement,smc-1.0,Binance
