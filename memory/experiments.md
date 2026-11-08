@@ -1583,3 +1583,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 4h VALIDATION 539 trades +0.231R (unseen +0.355R): t-statistic 3.63, needs 3.73 after 524 trials; HIGH OVERFITTING RISK: 56% of the profit from one window; 30m BACKTESTING 1078 trades +0.029R; 1h FAILED 1537 trades -0.009R.
   - teaches: the 4h cell is back in VALIDATION for the third time since 2026-10-26. The trials bar rose from 3.71 to 3.73, so the same average needs more trades each week; the t value (3.63) is under the bar by 0.10.
   - next: no change and no further record for this card until it is PAPER_TRADING or FAILED.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0136 | 2026-11-08 06:38 | P02-EMA-PULLBACK-V4-S2@1.0 | mtf_pullback | 4h | The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |

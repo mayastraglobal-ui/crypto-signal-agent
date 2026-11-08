@@ -461,3 +461,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: VALIDATION → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 17.1R - limit 17R)
 - **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.02 (net +0.4R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 23.9R - limit 17R; longest drawdown 1909 days = 58% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
 - **macd_trend_cross@1.0 4h**: FAILED → **BACKTESTING** (only 29 trades; avg -0.02R/trade (needs +0.10R); profit factor 0.97; recovery factor -0.11 (net -0.5R / max drawdown 4.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.9R - limit 17R; only 8 unseen-test trades; not profitable in BOTH train and unseen test)
+
+## 2026-11-08 06:38 UTC
+- **P02-EMA-PULLBACK-V4-S2@1.0 4h**: FORMALIZED → **FAILED** (avg +0.10R/trade (needs +0.10R); profit factor 1.15; recovery factor 1.95 (net +114.7R / max drawdown 58.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 26.4R - limit 17R; not profitable in BOTH train and unseen test)
