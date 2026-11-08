@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-08 18:15",
+ "generated_utc": "2026-11-08 19:11",
  "book": {
-  "utc": "2026-11-08 18:15",
-  "beijing": "2026-11-09 02:15",
+  "utc": "2026-11-08 19:11",
+  "beijing": "2026-11-09 03:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-08 18:15 UTC / 2026-11-09 02:15 Beijing",
+  "POSITION BOOK \u2014 2026-11-08 19:11 UTC / 2026-11-09 03:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -691,5 +691,19 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-08 19:11",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.17R"
+  }
+ ]
 }

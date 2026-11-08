@@ -1,20 +1,20 @@
 # Weekly review · 2026-W45
 
-Made 2026-11-08 18:15 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-08 19:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-08)
-- ✅ hourly scan: last run 2026-11-08 18:15 UTC
+- ✅ hourly scan: last run 2026-11-08 19:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-08 16:50 UTC (11 min ago)
-- ✅ TEST setups closed this week (GitHub record): 14
+- ✅ live watcher: last heartbeat 2026-11-08 17:55 UTC (22 min ago)
+- ✅ TEST setups closed this week (GitHub record): 15
 
 ## Totals
 
 - **Your alerts** (setups that could reach your Telegram): 8 closed since the start, -1.04R a trade; this week 2 (-2.08R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 59 closed, -0.63R a trade; this week 12 (-7.43R)
-- TEST: 67 closed setups since the start, -0.68R a trade; this week 14 (-9.51R) (both groups)
+- Silent research records (strategies NOT sent to you, kept to check the research): 60 closed, -0.64R a trade; this week 13 (-8.60R)
+- TEST: 68 closed setups since the start, -0.69R a trade; this week 15 (-10.68R) (both groups)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -27,14 +27,14 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## With vs without the 5m check (before fees)
 
 - watcher alerts (5m-confirmed): 5 plan results, -1.00R a trade
-- every TEST setup (GitHub, no 5m check - your alerts and the silent records): 67, -0.60R a trade
+- every TEST setup (GitHub, no 5m check - your alerts and the silent records): 68, -0.61R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
   - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) -1.00R over 5 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
 - **your alerts**: 5 closed, -1.01R a trade, -5.05R, worst drawdown 5.05R (after fees)
-- silent research records: 59 closed, -0.63R a trade
+- silent research records: 60 closed, -0.64R a trade
 - paused by the drift monitor: nothing
 - the full table: reports/track_record.md
 
@@ -54,11 +54,11 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 74 shock(s) this week, 44 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 28, broke yesterday's high 5, broke yesterday's low 12, volume spike 41
-- by coin: SOL 15, BTC 14, ETH 14, ZEC 11, XRP 9, SUI 8, BNB 3
-- 4 hours later: 35 kept going, 39 reversed (average +0.16% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 4 of 74 - the strategies missed most shocks: material for the research (a reversal or sweep version)
+- 75 shock(s) this week, 45 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 28, broke yesterday's high 5, broke yesterday's low 12, volume spike 42
+- by coin: SOL 15, BTC 15, ETH 14, ZEC 11, XRP 9, SUI 8, BNB 3
+- 4 hours later: 35 kept going, 40 reversed (average +0.15% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 4 of 75 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-11-06 14:39 UTC ZEC UP +3.6% -> 4h later -0.2% (no strategy alert)
 -   2026-11-05 16:20 UTC ZEC UP +3.6% -> 4h later -3.2% (no strategy alert)
 -   2026-11-05 15:12 UTC ZEC DOWN -3.1% -> 4h later +0.3% (no strategy alert)
@@ -68,7 +68,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 ## 🧭 Location at the entry (4H structure, information only)
 
 - middle of the 4H range: 4 setup(s), +0.03R a trade after fees, 1 won
-- at a zone or edge against the direction: 45 setup(s), -0.61R a trade after fees, 9 won
+- at a zone or edge against the direction: 46 setup(s), -0.62R a trade after fees, 9 won
 - outside the 4H range (breakout): 18 setup(s), -0.99R a trade after fees, 0 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
@@ -84,7 +84,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P07-SQUEEZE-RETEST-V4 | 4h | BTC | TEST | ✅ yes | 1 | 0 | -1.11R | -1.03R | 0 (+0.0R) | +0.41R | -1.11R over 1 trade: too early to say anything |
 | P12-LEADER-V1 | 4h | ZEC | TEST | ✅ yes | 1 | 0 | -1.02R | -1.01R | 1 (-1.0R) | +0.41R | -1.02R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 9 | 11 | -0.63R | -0.54R | 3 (-2.3R) | +0.02R | -0.63R over 9 trades: too early to say anything |
-| P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | silent | 7 | 29 | -0.35R | -0.25R | 0 (+0.0R) | +0.04R | -0.35R over 7 trades: too early to say anything |
+| P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | silent | 8 | 25 | -0.45R | -0.35R | 1 (-1.2R) | +0.04R | -0.45R over 8 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 5 | 0 | -0.81R | -0.78R | 1 (-0.4R) | +0.08R | -0.81R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 5 | 0 | -0.94R | -0.88R | 0 (+0.0R) | +0.00R | -0.94R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 4 | 0 | -1.18R | -1.06R | 2 (-2.5R) | +0.05R | -1.18R over 4 trades: too early to say anything |

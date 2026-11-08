@@ -514,3 +514,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### SOL SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.17R
+- timestamp: 2026-11-08 19:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.17R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-15
+  - signal 2026-11-08 01:59 UTC, closed 2026-11-08 18:59 UTC, stage TEST
+  - MAE -1.09R / MFE +0.43R
+  - at entry: session Asia, conditions: wrong_session
+  - what happened: regime_mismatch
+  - root cause / fix: (review)

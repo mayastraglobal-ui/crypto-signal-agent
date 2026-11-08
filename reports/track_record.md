@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-08 18:15 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-08 19:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 5 | 0 | -1.01R | -5.05R | 5.05R | 5 |
-| Silent research records (never sent to you) | 59 | 17 | -0.63R | -37.43R | 37.53R | 17 |
-| 🔵 TEST | 67 | 15 | -0.68R | -45.75R | 45.85R | 20 |
+| Silent research records (never sent to you) | 60 | 17 | -0.64R | -38.60R | 38.60R | 17 |
+| 🔵 TEST | 68 | 15 | -0.69R | -46.92R | 46.92R | 20 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 70 | 14 | -0.70R | -49.00R | 49.10R | 20 |
+| **All** | 71 | 14 | -0.71R | -50.17R | 50.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -17,6 +17,7 @@ Updated 2026-11-08 18:15 UTC by the hourly scan (engine/track_record.py). Every 
 
 Warning signs (no pause yet):
 - P04-MACD-SUPERTREND-V5@1.0 30m on XRP: 4 losses in a row - in its backtest (36% won) a run that long shows up in 66% of 9-trade periods
+- P03-FIB-PULLBACK-V5@1.0 1h on SOL: 3 losses in a row - in its backtest (37% won) a run that long shows up in 83% of 8-trade periods
 - P01-BREAKOUT-V5@1.0 1h on SUI: 5 losses in a row - in its backtest (34% won) a run that long shows up in 13% of 5-trade periods
 - P01-BREAKOUT-V5@1.0 30m on SUI: 5 losses in a row - in its backtest (35% won) a run that long shows up in 12% of 5-trade periods
 - P01-BREAKOUT-V2@1.0 30m on SOL: 4 losses in a row - in its backtest (36% won) a run that long shows up in 16% of 4-trade periods
@@ -37,11 +38,11 @@ Warning signs (no pause yet):
 | donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.51R | -1.08R | 1.08R | ✅ |
 | donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.26R | -1.08R | 1.08R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 9 | 11 | -0.63R | +0.02R | -5.69R | 5.69R | ⚠️ watch |
+| P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 8 | 25 | -0.45R | +0.04R | -3.59R | 3.63R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 5 | 0 | -0.81R | +0.08R | -4.02R | 4.02R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 0 | -0.94R | +0.00R | -4.69R | 4.69R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 30m | SOL | 🔵 TEST | silent | 4 | 0 | -1.18R | +0.05R | -4.71R | 4.71R | ⚠️ watch |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 4 | 25 | -0.57R | +0.01R | -2.28R | 3.24R | ⚠️ watch |
-| P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 7 | 29 | -0.35R | +0.04R | -2.42R | 2.46R | ✅ |
 | P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 3 | 33 | -0.47R | +0.06R | -1.41R | 2.04R | ✅ |
 | P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 3 | 33 | -0.61R | +0.11R | -1.82R | 1.92R | ✅ |
 | P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 3 | 33 | +0.00R | +0.07R | +0.00R | 1.14R | ✅ |
@@ -63,7 +64,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-10-29 23:59 | -34.81R |
 | 2026-10-29 23:59 | -35.83R |
 | 2026-10-30 04:29 | -36.46R |
 | 2026-10-30 05:59 | -37.49R |
@@ -83,3 +83,4 @@ Warning signs (no pause yet):
 | 2026-11-07 08:29 | -47.85R |
 | 2026-11-07 23:59 | -49.10R |
 | 2026-11-08 03:59 | -49.00R |
+| 2026-11-08 18:59 | -50.17R |

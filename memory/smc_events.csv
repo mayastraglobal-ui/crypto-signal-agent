@@ -31819,3 +31819,43 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 18:00,ZEC,1h,FVG,bear,,1253.14,1270.0,1.03,,4h,WEAK_BULL,,smc-1.0,Binance
 2026-11-08 17:30,ZEC,30m,FVG,bear,,1253.14,1260.01,0.617,,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-08 17:15,ZEC,15m,FVG_FILLED,bull,,1245.57,1250.0,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 19:00,BTC,1h,FVG_RETRACE,bear,,75857.0,76000.0,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,BTC,30m,FVG_RETRACE,bear,,75857.0,76022.8,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-08 19:00,BTC,30m,FVG,bull,,75804.01,75908.65,0.889,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,BTC,15m,BREAKER_RETEST,bear,,75928.94,75996.21,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-08 18:30,BTC,15m,FVG,bull,,75804.01,75892.0,1.002,,1h,RANGE,,smc-1.0,Binance
+2026-11-08 19:00,ETH,1h,FVG_RETRACE,bear,,2233.0,2238.0,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,ETH,30m,FVG_RETRACE,bear,,2233.0,2239.76,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 19:00,ETH,30m,FVG,bull,,2231.48,2233.92,0.486,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,ETH,15m,FVG_FILLED,bear,,2233.0,2236.1,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,ETH,15m,FVG,bull,,2231.48,2233.63,0.557,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 19:00,SOL,1h,SWEEP,bear,89.93,,,0.167,,4h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 19:00,SOL,1h,FVG_RETRACE,bear,,89.25,89.52,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-08 19:00,SOL,1h,FVG_FILLED,bear,,89.25,89.52,,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-08 18:30,SOL,30m,SWEEP,bear,89.95,,,0.188,,1h,COMPRESSION,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-11-08 18:30,SOL,30m,OB_RETEST,bear,,89.52,89.77,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-08 18:30,SOL,30m,FVG_RETRACE,bear,,89.25,89.55,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,SOL,30m,FVG_FILLED,bear,,89.25,89.55,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 19:00,SOL,30m,FVG,bull,,89.2,89.54,0.971,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,SWEEP,bear,89.95,,,0.25,,1h,COMPRESSION,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,OB_RETEST,bear,,89.62,89.75,,,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,FVG_RETRACE,bear,,89.56,89.63,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,FVG_FILLED,bear,,89.56,89.63,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,FVG_RETRACE,bear,,89.46,89.55,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,FVG_FILLED,bear,,89.46,89.55,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,SOL,15m,FVG,bull,,89.2,89.41,0.79,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:45,SOL,15m,FVG,bull,,89.44,89.58,0.538,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 19:00,SOL,15m,FVG_RETRACE,bull,,89.44,89.58,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,XRP,15m,SWEEP,bear,1.1595,,,0.772,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-08 18:30,XRP,15m,FVG,bull,,1.1558,1.1572,0.375,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 18:45,XRP,15m,FVG_RETRACE,bull,,1.1558,1.1572,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:45,XRP,15m,FVG_FILLED,bull,,1.1558,1.1572,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-08 19:00,ZEC,1h,OB_RETEST,bear,,1266.04,1278.36,,,4h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-11-08 19:00,ZEC,1h,FVG_RETRACE,bear,,1253.14,1270.0,,,4h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,ZEC,30m,FVG_RETRACE,bear,,1262.74,1270.0,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,ZEC,30m,FVG_RETRACE,bear,,1253.14,1260.01,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,ZEC,30m,FVG_FILLED,bear,,1253.14,1260.01,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 19:00,ZEC,30m,FVG,bull,,1252.79,1260.75,0.706,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:30,ZEC,15m,FVG_RETRACE,bear,,1262.74,1266.5,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-08 18:30,ZEC,15m,FVG_FILLED,bear,,1262.74,1266.5,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-08 18:45,ZEC,15m,FVG,bull,,1256.5,1260.75,0.517,,1h,COMPRESSION,,smc-1.0,Binance
