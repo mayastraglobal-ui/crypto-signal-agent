@@ -206,3 +206,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END TRX price differs between exchanges (DEGRADED, 1.68%)
 - timestamp: 2026-10-31 09:48 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: TRX · timeframe: - · regime: - · review: 2026-11-30
   - problem first seen 2026-10-31 07:19 UTC UTC
+
+### START ETH 30m data: DEGRADED: volume 78x normal on candle 11-08 21:30 UTC (possible bad data)
+- timestamp: 2026-11-08 23:12 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: ETH · timeframe: - · regime: - · review: 2026-12-08
+  - signals from this data are blocked while it lasts

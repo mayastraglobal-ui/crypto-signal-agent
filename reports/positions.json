@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-08 21:21",
+ "generated_utc": "2026-11-08 23:12",
  "book": {
-  "utc": "2026-11-08 21:21",
-  "beijing": "2026-11-09 05:21",
+  "utc": "2026-11-08 23:12",
+  "beijing": "2026-11-09 07:12",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-08 21:21 UTC / 2026-11-09 05:21 Beijing",
+  "POSITION BOOK \u2014 2026-11-08 23:12 UTC / 2026-11-09 07:12 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -625,5 +625,84 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V2-2026-11-07 15:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TIME +0.85R"
+  },
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "XRP-30m-P04-MACD-SUPERTREND-V5-2026-11-07 15:29",
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "P04-MACD-SUPERTREND-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TIME +0.85R"
+  },
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-07 20:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "TP1_HIT",
+   "price": null,
+   "note": "TP1 reached - stop moved to breakeven"
+  },
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-07 20:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TP2 +2.43R"
+  },
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "SOL-1h-P04-MACD-SUPERTREND-V2-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "TP1_HIT",
+   "price": null,
+   "note": "TP1 reached - stop moved to breakeven"
+  },
+  {
+   "time_utc": "2026-11-08 23:12",
+   "id": "SOL-1h-P04-MACD-SUPERTREND-V2-2026-11-08 01:59",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P04-MACD-SUPERTREND-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TP2 +2.44R"
+  }
+ ]
 }
