@@ -32023,3 +32023,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-08 23:30,ZEC,15m,FVG,bull,,1210.14,1220.1,0.727,,1h,RANGE,,smc-1.0,Binance
 2026-11-08 23:45,ZEC,15m,FVG_RETRACE,bull,,1210.14,1220.1,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-09 00:00,ZEC,15m,FVG_FILLED,bull,,1210.14,1220.1,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-09 01:00,BTC,15m,FVG_FILLED,bear,,75064.01,75200.03,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-09 02:30,BTC,15m,WEAK_BREAK,bull,75494.01,,,0.061,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-09 01:15,ETH,15m,FVG_FILLED,bear,,2136.76,2150.13,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-09 02:30,ETH,15m,WEAK_BREAK,bull,2151.5,,,0.275,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-09 02:45,ETH,15m,FVG,bull,,2149.34,2153.23,0.265,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-09 03:00,ETH,15m,FVG_RETRACE,bull,,2149.34,2153.23,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-09 03:00,ETH,15m,FVG_FILLED,bull,,2149.34,2153.23,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-09 02:00,SOL,15m,FVG,bull,,87.5,87.71,0.299,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-09 02:15,SOL,15m,SWEEP,bear,88.24,,,0.114,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-09 02:15,SOL,15m,FVG_RETRACE,bull,,87.5,87.71,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-09 02:30,SOL,15m,WEAK_BREAK,bull,88.24,,,0.043,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-09 01:15,XRP,15m,FVG_FILLED,bear,,1.1205,1.1239,,Asia,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-09 02:00,ZEC,1h,FVG_RETRACE,bear,,1248.52,1258.69,,Asia,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-09 02:00,ZEC,1h,FVG_FILLED,bear,,1224.74,1241.11,,Asia,4h,RANGE,,smc-1.0,Binance
+2026-11-09 01:30,ZEC,30m,SWEEP,bear,1240.39,,,0.507,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-09 01:30,ZEC,30m,FVG_RETRACE,bear,,1248.52,1254.0,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-09 01:30,ZEC,30m,FVG_FILLED,bear,,1230.5,1241.11,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-09 02:30,ZEC,30m,WEAK_BREAK,bull,1240.39,,,0.123,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-09 01:15,ZEC,15m,SWEEP,bear,1240.39,,,0.668,Asia,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance

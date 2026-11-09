@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-09 00:44",
+ "generated_utc": "2026-11-09 03:02",
  "book": {
-  "utc": "2026-11-09 00:44",
-  "beijing": "2026-11-09 08:44",
+  "utc": "2026-11-09 03:02",
+  "beijing": "2026-11-09 11:02",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -55,7 +55,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-09 00:44 UTC / 2026-11-09 08:44 Beijing",
+  "POSITION BOOK \u2014 2026-11-09 03:02 UTC / 2026-11-09 11:02 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING)",
@@ -619,71 +619,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-09 00:44",
-   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-08 23:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.1132,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-11-09 00:44",
-   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-08 23:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.1132,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-11-09 00:44",
-   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-08 23:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.1132,
-   "note": "4h signal candle closed"
-  },
-  {
-   "time_utc": "2026-11-09 00:44",
-   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-08 23:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.1132,
-   "note": ""
-  },
-  {
-   "time_utc": "2026-11-09 00:44",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-08 23:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V3",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "",
-   "to_state": "AWAITING_FILL",
-   "price": 1.1186997629593753,
-   "note": "4h signal closed - limit order placed"
-  }
- ]
+ "events_this_run": []
 }
