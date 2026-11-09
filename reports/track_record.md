@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-11-09 03:02 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-09 08:09 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -39,22 +39,22 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 0 | -0.94R | +0.00R | -4.69R | 4.69R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 30m | SOL | 🔵 TEST | silent | 4 | 0 | -1.18R | +0.05R | -4.71R | 4.71R | ⚠️ watch |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 4 | 25 | -0.57R | +0.01R | -2.28R | 3.24R | ⚠️ watch |
-| P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 10 | 20 | -0.48R | +0.02R | -4.84R | 5.69R | ✅ |
+| P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 10 | 20 | -0.48R | +0.01R | -4.84R | 5.69R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 9 | 33 | -0.13R | +0.04R | -1.16R | 3.63R | ✅ |
 | P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 3 | 33 | -0.47R | +0.06R | -1.41R | 2.04R | ✅ |
 | P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 3 | 33 | -0.61R | +0.11R | -1.82R | 1.92R | ✅ |
 | P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 3 | 33 | +0.00R | +0.07R | +0.00R | 1.14R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | silent | 3 | 33 | -0.42R | +0.01R | -1.27R | 2.16R | ✅ |
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | silent | 2 | 0 | -0.74R | +0.01R | -1.49R | 1.49R | ✅ |
-| P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 2 | 50 | +0.69R | +0.02R | +1.38R | 1.07R | ✅ |
+| P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 2 | 50 | +0.69R | +0.03R | +1.38R | 1.07R | ✅ |
 | P01-BREAKOUT-V2 | 15m | XRP | 🔵 TEST | silent | 1 | 0 | -1.19R | -0.01R | -1.19R | 1.19R | ✅ |
 | P01-BREAKOUT-V2 | 1h | SOL | 🔵 TEST | silent | 1 | 0 | -1.08R | +0.02R | -1.08R | 1.08R | ✅ |
 | P01-BREAKOUT-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 0 | -1.09R | +0.08R | -1.09R | 1.09R | ✅ |
 | P01-BREAKOUT-V5 | 1h | BTC | 🔵 TEST | silent | 1 | 0 | -1.15R | +0.02R | -1.15R | 1.15R | ✅ |
 | P04-MACD-SUPERTREND-V1 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.14R | -1.02R | 1.02R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 15m | ETH | 🔵 TEST | silent | 1 | 0 | -0.96R | +0.00R | -0.96R | 0.96R | ✅ |
-| P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 100 | +0.89R | +0.16R | +0.89R | 0.00R | ✅ |
-| P04-MACD-SUPERTREND-V2 | 30m | XRP | 🔵 TEST | silent | 1 | 100 | +0.85R | +0.16R | +0.85R | 0.00R | ✅ |
+| P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 100 | +0.89R | +0.17R | +0.89R | 0.00R | ✅ |
+| P04-MACD-SUPERTREND-V2 | 30m | XRP | 🔵 TEST | silent | 1 | 100 | +0.85R | +0.14R | +0.85R | 0.00R | ✅ |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.25R | -1.02R | 1.02R | ✅ |
 | P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 1 | 100 | +0.55R | +0.06R | +0.55R | 0.00R | ✅ |
 | P07-SQUEEZE-RETEST-V5 | 1h | ZEC | 🔵 TEST | silent | 1 | 0 | -0.49R | +0.03R | -0.49R | 0.49R | ✅ |

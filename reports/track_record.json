@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-09 03:02",
+ "utc": "2026-11-09 08:09",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -211,9 +211,9 @@
     "sd": 1.198
    },
    "backtest": {
-    "n": 501,
-    "avg_r": 0.016,
-    "win_rate": 36.5
+    "n": 503,
+    "avg_r": 0.005,
+    "win_rate": 36.2
    },
    "verdict": "ok",
    "why": [],
@@ -341,9 +341,9 @@
     "sd": 1.136
    },
    "backtest": {
-    "n": 347,
-    "avg_r": 0.007,
-    "win_rate": 36.0
+    "n": 349,
+    "avg_r": 0.012,
+    "win_rate": 36.1
    },
    "verdict": "ok",
    "why": [],
@@ -419,9 +419,9 @@
     "sd": 2.481
    },
    "backtest": {
-    "n": 152,
-    "avg_r": 0.023,
-    "win_rate": 36.2
+    "n": 154,
+    "avg_r": 0.031,
+    "win_rate": 36.4
    },
    "verdict": "ok",
    "why": [],
@@ -653,9 +653,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 146,
-    "avg_r": 0.158,
-    "win_rate": 41.1
+    "n": 147,
+    "avg_r": 0.173,
+    "win_rate": 41.5
    },
    "verdict": "ok",
    "why": [],
@@ -679,9 +679,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 202,
-    "avg_r": 0.156,
-    "win_rate": 40.1
+    "n": 204,
+    "avg_r": 0.144,
+    "win_rate": 39.7
    },
    "verdict": "ok",
    "why": [],
