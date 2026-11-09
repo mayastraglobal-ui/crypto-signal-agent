@@ -464,3 +464,12 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-11-08 06:38 UTC
 - **P02-EMA-PULLBACK-V4-S2@1.0 4h**: FORMALIZED → **FAILED** (avg +0.10R/trade (needs +0.10R); profit factor 1.15; recovery factor 1.95 (net +114.7R / max drawdown 58.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 26.4R - limit 17R; not profitable in BOTH train and unseen test)
+
+## 2026-11-09 07:06 UTC
+- **P04-MACD-SUPERTREND-V3@1.0 4h**: BACKTESTING → **FAILED** (recovery factor 2.64 (net +28.2R / max drawdown 10.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 20.2R - limit 17R; not profitable in BOTH train and unseen test)
+- **P11-MOMENTUM-V1-FRETEST@1.0 30m**: FORMALIZED → **FAILED** (avg -0.10R/trade (needs +0.10R); profit factor 0.85; recovery factor -0.93 (net -352.6R / max drawdown 379.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 35.7R - limit 17R; longest drawdown 1732 days = 95% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P13-TURTLE-V3-S2@1.0 4h**: FORMALIZED → **VALIDATION** (multiple-testing bar: t-statistic 3.16 of the average trade, needs 3.74 after 538 trials; HIGH OVERFITTING RISK: 51% of the profit from window 2)
+- **TRD-H4-BREAKOUT-S3-S2@1.0 15m**: FORMALIZED → **FAILED** (avg -0.03R/trade (needs +0.10R); profit factor 0.95; recovery factor -0.54 (net -94.2R / max drawdown 174.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 31.5R - limit 17R; longest drawdown 1750 days = 96% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **TRD-H4-BREAKOUT-S3-S2@1.0 1h**: FORMALIZED → **BACKTESTING** (profit factor 1.18; Monte Carlo 95% worst drawdown per 100 trades 22.0R - limit 17R)
+- **TRD-H4-BREAKOUT-S3-S2@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.03R/trade (needs +0.10R); profit factor 1.05; recovery factor 0.77 (net +54.8R / max drawdown 70.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 26.9R - limit 17R; longest drawdown 1448 days = 79% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **TRD-H4-BREAKOUT-S3-S2@1.0 5m**: FORMALIZED → **FAILED** (avg -0.05R/trade (needs +0.10R); profit factor 0.93; recovery factor -0.66 (net -169.4R / max drawdown 254.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 33.5R - limit 17R; longest drawdown 705 days = 97% of the tested period (limit 55%); not profitable in BOTH train and unseen test)

@@ -1698,3 +1698,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
   - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P13-TURTLE-V3-S2@1.0 - V1, and the last 24 hours (6 candles) closed in the top 25% of their range, that range bigger than its 20-day average (a strong breakout day), and the coin above its own 200-day average (1200 candles).
+- timestamp: 2026-11-09 07:06 UTC · source: strategies_lab.yaml card P13-TURTLE-V3-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P13-TURTLE-V3-S2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-02-07
+  - title / source: engine rule-significance test: P13-TURTLE-V3@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'highest(high,6) - close <= 0.25 * (highest(high,6) - lowest(low,6))' adds nothing to P13-TURTLE-V3@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P13-TURTLE-V3-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 4h
+  - limitations: Fewer trades; a weak-looking start of a real trend is skipped; the other V1 weaknesses.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### TRD-H4-BREAKOUT-S3-S2@1.0 - Inside the 4H Donchian trend window: a close above the previous 20-candle high with 1.5x volume (shorts mirrored); limit entry at the close.
+- timestamp: 2026-11-09 07:06 UTC · source: strategies_lab.yaml card TRD-H4-BREAKOUT-S3-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: TRD-H4-BREAKOUT-S3-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m, 5m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION · review: 2027-02-07
+  - title / source: engine rule-significance test: TRD-H4-BREAKOUT-S3@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to TRD-H4-BREAKOUT-S3@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): TRD-H4-BREAKOUT-S3-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION, RANGE, TRANSITION on 1h, 30m, 15m, 5m
+  - limitations: Buys strength after a move: late entries in an old 4H trend; the limit at the close misses breakouts that never look back.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-V1-FRETEST@1.0 - 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down within 2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown step in 12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+- timestamp: 2026-11-09 07:06 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V1-FRETEST@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V1-FRETEST v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-02-07
+  - title / source: engine failure lab: a repair of P11-MOMENTUM-V1@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.39R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P11-MOMENTUM-V1-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
+  - test results: `memory/strategy_registry.csv` / report section 3
