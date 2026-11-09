@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 983,
+ "runs": 984,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -30,7 +30,10 @@
   ],
   "UNI": [],
   "SUI": [],
-  "AVAX": [],
+  "AVAX": [
+   "thin_book",
+   "volume_7d"
+  ],
   "ENA": [],
   "SAGA": [
    "big_move",
@@ -160,6 +163,11 @@
    "history",
    "thin_book",
    "volume_7d"
+  ],
+  "NVDAB": [
+   "history",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -222,6 +230,7 @@
    "data_degraded"
   ],
   "U": [],
-  "INTCB": []
+  "INTCB": [],
+  "NVDAB": []
  }
 }

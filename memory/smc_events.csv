@@ -32569,3 +32569,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-09 16:15,SUI,15m,FVG_FILLED,bull,,0.8618,0.8644,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-09 16:30,SUI,15m,FVG_FILLED,bull,,0.855,0.8568,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-09 16:30,SUI,15m,FVG,bear,,0.8594,0.8644,0.711,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-09 19:45,BTC,15m,FVG_RETRACE,bear,,75182.01,75402.47,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-09 20:00,BTC,15m,FVG,bull,,74729.21,74840.0,0.4,,1h,RANGE,,smc-1.0,Binance
+2026-11-09 19:45,ETH,15m,FVG_RETRACE,bear,,2138.57,2142.55,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-09 19:45,ETH,15m,FVG_FILLED,bear,,2138.57,2142.55,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-09 18:45,XRP,15m,FVG_RETRACE,bear,,1.0899,1.0928,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-09 18:45,XRP,15m,FVG_FILLED,bear,,1.0899,1.0928,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-09 20:00,ZEC,4h,CHOCH,bear,1180.02,,,0.147,,1d,RANGE,with displacement,smc-1.0,Binance
+2026-11-09 20:00,ZEC,4h,ORDER_BLOCK,bear,,1205.85,1235.99,,,1d,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-09 19:00,ZEC,1h,BREAKER_RETEST,bear,,1175.67,1214.93,,,4h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-09 19:45,ZEC,15m,WEAK_BREAK,bull,1178.46,,,0.543,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-09 20:00,SUI,4h,FVG,bull,,0.8345,0.8432,0.389,,1d,WEAK_BEAR,,smc-1.0,Binance

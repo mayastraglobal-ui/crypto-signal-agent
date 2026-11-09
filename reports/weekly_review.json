@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-09 18:41",
+ "utc": "2026-11-09 20:00",
  "final": false,
  "rows": [
   {
@@ -1667,7 +1667,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-09 18:41 UTC"
+   "text": "hourly scan: last run 2026-11-09 20:00 UTC"
   },
   {
    "ok": true,
@@ -1675,7 +1675,7 @@
   },
   {
    "ok": false,
-   "text": "live watcher SILENT: no heartbeat for 16h03m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
+   "text": "live watcher SILENT: no heartbeat for 22h32m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
   },
   {
    "ok": true,
@@ -1732,27 +1732,27 @@
   ]
  },
  "shocks": {
-  "n": 67,
-  "sent": 37,
-  "done": 67,
-  "kept": 31,
-  "reversed": 36,
-  "avg_after_4h": 0.24,
+  "n": 59,
+  "sent": 34,
+  "done": 59,
+  "kept": 28,
+  "reversed": 31,
+  "avg_after_4h": 0.4,
   "caught": 4,
   "by_coin": {
-   "ETH": 12,
-   "XRP": 9,
-   "BTC": 13,
-   "SOL": 13,
-   "ZEC": 9,
+   "XRP": 8,
+   "ETH": 11,
+   "SOL": 11,
    "SUI": 8,
+   "BTC": 11,
+   "ZEC": 7,
    "BNB": 3
   },
   "by_kind": {
-   "volume": 39,
-   "move": 24,
-   "sweep_low": 12,
-   "sweep_high": 4
+   "move": 22,
+   "sweep_high": 4,
+   "volume": 36,
+   "sweep_low": 9
   },
   "biggest": [
    {
@@ -1796,13 +1796,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-09 12:13",
+  "checked_utc": "2026-11-09 18:42",
   "lines": [
-   "67 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 24, broke yesterday's high 4, broke yesterday's low 12, volume spike 39",
-   "by coin: BTC 13, SOL 13, ETH 12, XRP 9, ZEC 9, SUI 8, BNB 3",
-   "4 hours later: 31 kept going, 36 reversed (average +0.24% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 4 of 67 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "59 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 22, broke yesterday's high 4, broke yesterday's low 9, volume spike 36",
+   "by coin: ETH 11, SOL 11, BTC 11, XRP 8, SUI 8, ZEC 7, BNB 3",
+   "4 hours later: 28 kept going, 31 reversed (average +0.40% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 4 of 59 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-11-06 14:39 UTC ZEC UP +3.6% -> 4h later -0.2% (no strategy alert)",
    "  2026-11-05 16:20 UTC ZEC UP +3.6% -> 4h later -3.2% (no strategy alert)",
    "  2026-11-05 15:12 UTC ZEC DOWN -3.1% -> 4h later +0.3% (no strategy alert)",
@@ -1844,5 +1844,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 3 closed this week (-3.1R) \u00b7 10 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 17 this week (-1.9R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f live watcher SILENT: no heartbeat for 16h03m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline\n\n\ud83d\udd27 Failure Lab: 12 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 67 this week (37 sent) \u00b7 4h later 31 kept going, 36 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 7 closed \u00b7 -1.02R a trade \u00b7 -7.2R \u00b7 worst drawdown 7.2R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 53 (-0.48R) \u00b7 outside 18 (-0.99R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 3 closed this week (-3.1R) \u00b7 10 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 17 this week (-1.9R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f live watcher SILENT: no heartbeat for 22h32m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline\n\n\ud83d\udd27 Failure Lab: 12 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 59 this week (34 sent) \u00b7 4h later 28 kept going, 31 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 7 closed \u00b7 -1.02R a trade \u00b7 -7.2R \u00b7 worst drawdown 7.2R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 53 (-0.48R) \u00b7 outside 18 (-0.99R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

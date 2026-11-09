@@ -1054,3 +1054,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** BNB - 7-day average volume $46M < $50M
 - **FLAG** ZEC - possible wash volume: 24h volume is 1,426x the 1% order-book depth (flag only, not excluded)
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-09 20:00 UTC
+- **EXCLUDED** NVDAB - only 151 days of history (need 180); 7-day average volume $15M < $50M; order book too thin: $201k within 1% (need $250k)
+- **EXCLUDED** AVAX - 7-day average volume $12M < $50M; order book too thin: $163k within 1% (need $250k)
