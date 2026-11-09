@@ -4,14 +4,13 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC"
+  "ZEC",
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 981,
+ "runs": 982,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -27,7 +26,6 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [],
@@ -167,7 +165,9 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [],
+  "ZEC": [
+   "wash_volume"
+  ],
   "XRP": [],
   "SOL": [],
   "PROVE": [

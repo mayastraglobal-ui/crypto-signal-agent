@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-09 08:09",
+ "generated_utc": "2026-11-09 12:12",
  "book": {
-  "utc": "2026-11-09 08:09",
-  "beijing": "2026-11-09 16:09",
+  "utc": "2026-11-09 12:12",
+  "beijing": "2026-11-09 20:12",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -20,7 +20,7 @@
     "tp1": 1.025203792649994,
     "sim_tf": "4h",
     "since": "2026-11-08 23:59",
-    "open_r": 0.66,
+    "open_r": 0.73,
     "next_action": "HOLD"
    },
    {
@@ -37,7 +37,7 @@
     "tp1": 1.025203792649994,
     "sim_tf": "4h",
     "since": "2026-11-08 23:59",
-    "open_r": 0.66,
+    "open_r": 0.73,
     "next_action": "HOLD"
    },
    {
@@ -54,7 +54,7 @@
     "tp1": 0.9927318416216785,
     "sim_tf": "4h",
     "since": "2026-11-09 07:59",
-    "open_r": -0.0,
+    "open_r": 0.07,
     "next_action": "HOLD"
    },
    {
@@ -71,6 +71,40 @@
     "tp1": 0.9927318416216785,
     "sim_tf": "4h",
     "since": "2026-11-09 07:59",
+    "open_r": 0.07,
+    "next_action": "HOLD"
+   },
+   {
+    "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-09 11:59",
+    "coin": "XRP",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "POSITION_ACTIVE",
+    "entry": 1.081,
+    "stop": 1.127110216389935,
+    "tp1": 0.9887795672201299,
+    "sim_tf": "4h",
+    "since": "2026-11-09 11:59",
+    "open_r": -0.0,
+    "next_action": "HOLD"
+   },
+   {
+    "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-09 11:59",
+    "coin": "XRP",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FDISP",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "POSITION_ACTIVE",
+    "entry": 1.081,
+    "stop": 1.127110216389935,
+    "tp1": 0.9887795672201299,
+    "sim_tf": "4h",
+    "since": "2026-11-09 11:59",
     "open_r": -0.0,
     "next_action": "HOLD"
    }
@@ -89,10 +123,10 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-09 08:09 UTC / 2026-11-09 16:09 Beijing",
+  "POSITION BOOK \u2014 2026-11-09 12:12 UTC / 2026-11-09 20:12 Beijing",
   "Active:    none",
   "Awaiting:  none",
-  "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.66R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.66R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING)",
+  "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.73R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.73R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +0.07R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +0.07R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING)",
   "Closed:    none",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US CPI (Oct data) 2026-11-10 13:30 UTC"
@@ -107,7 +141,7 @@
   "risk_pct": 0.5,
   "risk_note": "",
   "groups": [
-   "BTC+ETH+SOL+XRP+ZEC"
+   "BTC+ETH+SOL+SUI+XRP+ZEC"
   ],
   "blackout_now": [],
   "upcoming_events": [
@@ -138,6 +172,17 @@
   {
    "coin": "BTC",
    "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -158,51 +203,18 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout",
+   "strategy": "P12-LEADER-V2",
    "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
+   "stage": "VALIDATION",
+   "direction": "LONG",
    "state": "SETUP_FORMING",
    "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "btc_ret(3) >= 3"
   },
   {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -222,6 +234,17 @@
    "state": "SETUP_FORMING",
    "rules_true": "1/2",
    "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
   },
   {
    "coin": "BTC",
@@ -325,6 +348,28 @@
   {
    "coin": "ETH",
    "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -423,30 +468,140 @@
   },
   {
    "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V1",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
-   "strategy": "P12-LEADER-V2",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
@@ -455,7 +610,18 @@
    "missing": null
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -466,7 +632,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V1",
    "version": "1.0",
@@ -477,7 +643,7 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V1",
    "version": "1.0",
@@ -488,7 +654,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -499,7 +665,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
@@ -510,7 +676,7 @@
    "missing": null
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
@@ -521,7 +687,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-C",
    "version": "1.0",
@@ -532,7 +698,7 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "SOL",
+   "coin": "SUI",
    "tf": "4h",
    "strategy": "P13-TURTLE-C",
    "version": "1.0",
@@ -550,7 +716,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -561,8 +727,19 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
   },
   {
    "coin": "XRP",
@@ -612,6 +789,28 @@
    "coin": "XRP",
    "tf": "4h",
    "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "SHORT",
@@ -721,8 +920,8 @@
  ],
  "events_this_run": [
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-08 23:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-09 07:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "P01-BREAKOUT-V3",
@@ -730,12 +929,12 @@
    "stage": "TEST",
    "from_state": "AWAITING_FILL",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 1.1186997629593753,
-   "note": "limit 1.1187 filled in the 2026-11-09 00:00 UTC candle"
+   "price": 1.0899167598986452,
+   "note": "limit 1.08992 filled in the 2026-11-09 08:00 UTC candle"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-08 23:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-09 07:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "P01-BREAKOUT-V3",
@@ -743,25 +942,38 @@
    "stage": "TEST",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 1.1186997629593753,
-   "note": "entry at 2026-11-09 00:00 UTC (limit)"
+   "price": 1.0899167598986452,
+   "note": "entry at 2026-11-09 08:00 UTC (limit)"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-P07-SQUEEZE-RETEST-V3-2026-11-07 15:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-1h-TRD-H4-BREAKOUT-S3-2026-11-09 07:59",
    "coin": "XRP",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V3",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
    "version": "1.0",
    "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "TP1_HIT",
-   "price": 1.1648325564660391,
-   "note": "TP1 reached - stop moved to breakeven"
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1.0842,
+   "note": "limit 1.0842 filled in the 2026-11-09 08:00 UTC candle"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-1h-TRD-H4-BREAKOUT-S3-2026-11-09 07:59",
+   "coin": "XRP",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1.0842,
+   "note": "entry at 2026-11-09 08:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT",
@@ -769,12 +981,12 @@
    "stage": "PAPER_TRADING",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 1.0842,
+   "price": 1.081,
    "note": "4h signal candle closed"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-donchian_breakout-VEXIT-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT",
@@ -782,12 +994,12 @@
    "stage": "PAPER_TRADING",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 1.0842,
+   "price": 1.081,
    "note": ""
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT-FDISP",
@@ -795,12 +1007,12 @@
    "stage": "PAPER_TRADING",
    "from_state": "",
    "to_state": "ENTRY_TRIGGERED",
-   "price": 1.0842,
+   "price": 1.081,
    "note": "4h signal candle closed"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-donchian_breakout-VEXIT-FDISP-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "donchian_breakout-VEXIT-FDISP",
@@ -808,12 +1020,12 @@
    "stage": "PAPER_TRADING",
    "from_state": "ENTRY_TRIGGERED",
    "to_state": "POSITION_ACTIVE",
-   "price": 1.0842,
+   "price": 1.081,
    "note": ""
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "4h",
    "strategy": "P01-BREAKOUT-V3",
@@ -821,12 +1033,12 @@
    "stage": "TEST",
    "from_state": "",
    "to_state": "AWAITING_FILL",
-   "price": 1.0899167598986452,
+   "price": 1.086763777048742,
    "note": "4h signal closed - limit order placed"
   },
   {
-   "time_utc": "2026-11-09 08:09",
-   "id": "XRP-1h-TRD-H4-BREAKOUT-S3-2026-11-09 07:59",
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-1h-TRD-H4-BREAKOUT-S3-2026-11-09 11:59",
    "coin": "XRP",
    "tf": "1h",
    "strategy": "TRD-H4-BREAKOUT-S3",
@@ -834,7 +1046,20 @@
    "stage": "TEST",
    "from_state": "",
    "to_state": "AWAITING_FILL",
-   "price": 1.0842,
+   "price": 1.081,
+   "note": "1h signal closed - limit order placed"
+  },
+  {
+   "time_utc": "2026-11-09 12:12",
+   "id": "XRP-1h-P08-SESSION-BREAKOUT-V4-2026-11-09 11:59",
+   "coin": "XRP",
+   "tf": "1h",
+   "strategy": "P08-SESSION-BREAKOUT-V4",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "",
+   "to_state": "AWAITING_FILL",
+   "price": 1.0843236632918927,
    "note": "1h signal closed - limit order placed"
   }
  ]

@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-09 08:09",
+ "utc": "2026-11-09 12:12",
  "final": false,
  "rows": [
   {
@@ -963,9 +963,9 @@
     }
    },
    "backtest": {
-    "n": 152,
-    "avg_r": 0.023,
-    "win_rate": 36.2
+    "n": 154,
+    "avg_r": 0.031,
+    "win_rate": 36.4
    },
    "confidence": "+0.69R over 2 trades: too early to say anything",
    "sent": false
@@ -1009,9 +1009,9 @@
     }
    },
    "backtest": {
-    "n": 146,
-    "avg_r": 0.158,
-    "win_rate": 41.1
+    "n": 147,
+    "avg_r": 0.173,
+    "win_rate": 41.5
    },
    "confidence": "+0.89R over 1 trade: too early to say anything",
    "sent": false
@@ -1055,9 +1055,9 @@
     }
    },
    "backtest": {
-    "n": 202,
-    "avg_r": 0.156,
-    "win_rate": 40.1
+    "n": 204,
+    "avg_r": 0.144,
+    "win_rate": 39.7
    },
    "confidence": "+0.85R over 1 trade: too early to say anything",
    "sent": false
@@ -1154,9 +1154,9 @@
     }
    },
    "backtest": {
-    "n": 347,
-    "avg_r": 0.007,
-    "win_rate": 36.0
+    "n": 349,
+    "avg_r": 0.012,
+    "win_rate": 36.1
    },
    "confidence": "-0.42R over 3 trades: too early to say anything",
    "sent": false
@@ -1207,9 +1207,9 @@
     }
    },
    "backtest": {
-    "n": 501,
-    "avg_r": 0.016,
-    "win_rate": 36.5
+    "n": 503,
+    "avg_r": 0.005,
+    "win_rate": 36.2
    },
    "confidence": "-0.48R over 10 trades: not working so far",
    "sent": false
@@ -1571,11 +1571,11 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 6 of the last 7 days (last 2026-11-08)"
+   "text": "nightly research ran on 7 of the last 7 days (last 2026-11-09)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-09 08:09 UTC"
+   "text": "hourly scan: last run 2026-11-09 12:12 UTC"
   },
   {
    "ok": true,
@@ -1583,7 +1583,7 @@
   },
   {
    "ok": false,
-   "text": "live watcher SILENT: no heartbeat for 6h53m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
+   "text": "live watcher SILENT: no heartbeat for 12h00m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
   },
   {
    "ok": true,
@@ -1625,29 +1625,30 @@
   "judged": 12,
   "helped": 10,
   "passed": 2,
-  "pending": 0,
+  "pending": 1,
   "new": 1,
   "retired": [],
   "lines": [
-   "new repair P11-MOMENTUM-V1-FRETEST: P11-MOMENTUM-V1@1.0 30m lost on false_breakout - testing RETEST",
-   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.22R vs parent +0.02R, unseen +0.34R vs +0.09R - helped",
+   "new repair P11-MOMENTUM-V1-FRETEST-FDISP: P11-MOMENTUM-V1-FRETEST@1.0 30m lost on false_breakout - testing DISP",
+   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.24R vs parent +0.02R, unseen +0.37R vs +0.10R - helped",
    "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.07R vs +0.19R - did not help",
-   "P11-MOMENTUM-V1-FDISP@1.0 30m (DISP for false_breakout): -0.23R vs parent -0.22R, unseen -0.28R vs -0.22R - did not help",
-   "P11-MOMENTUM-V3-FDISP@1.0 1h (DISP for false_breakout): -0.09R vs parent -0.13R, unseen -0.16R vs -0.19R - helped",
-   "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.39R - passed",
-   "repair record: DISP helped 7 of 8, NOTEXT helped 3 of 3, HTF helped 0 of 1"
+   "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.40R - passed",
+   "TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.40R vs +0.26R - helped",
+   "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.40R vs parent +0.19R, unseen +0.55R vs +0.39R - passed",
+   "repair record: DISP helped 7 of 8, NOTEXT helped 3 of 3, HTF helped 0 of 1",
+   "1 repair(s) waiting for their first test"
   ]
  },
  "shocks": {
-  "n": 68,
-  "sent": 38,
-  "done": 68,
+  "n": 67,
+  "sent": 37,
+  "done": 67,
   "kept": 31,
-  "reversed": 37,
-  "avg_after_4h": 0.22,
+  "reversed": 36,
+  "avg_after_4h": 0.24,
   "caught": 4,
   "by_coin": {
-   "ETH": 13,
+   "ETH": 12,
    "XRP": 9,
    "BTC": 13,
    "SOL": 13,
@@ -1656,7 +1657,7 @@
    "BNB": 3
   },
   "by_kind": {
-   "volume": 40,
+   "volume": 39,
    "move": 24,
    "sweep_low": 12,
    "sweep_high": 4
@@ -1703,13 +1704,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-09 03:03",
+  "checked_utc": "2026-11-09 08:10",
   "lines": [
-   "68 shock(s) this week, 38 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 24, broke yesterday's high 4, broke yesterday's low 12, volume spike 40",
-   "by coin: ETH 13, BTC 13, SOL 13, XRP 9, ZEC 9, SUI 8, BNB 3",
-   "4 hours later: 31 kept going, 37 reversed (average +0.22% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 4 of 68 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "67 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 24, broke yesterday's high 4, broke yesterday's low 12, volume spike 39",
+   "by coin: BTC 13, SOL 13, ETH 12, XRP 9, ZEC 9, SUI 8, BNB 3",
+   "4 hours later: 31 kept going, 36 reversed (average +0.24% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 4 of 67 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-11-06 14:39 UTC ZEC UP +3.6% -> 4h later -0.2% (no strategy alert)",
    "  2026-11-05 16:20 UTC ZEC UP +3.6% -> 4h later -3.2% (no strategy alert)",
    "  2026-11-05 15:12 UTC ZEC DOWN -3.1% -> 4h later +0.3% (no strategy alert)",
@@ -1751,5 +1752,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-1.0R) \u00b7 8 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 16 this week (-0.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f live watcher SILENT: no heartbeat for 6h53m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline\n\n\ud83d\udd27 Failure Lab: 12 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 68 this week (38 sent) \u00b7 4h later 31 kept going, 37 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 5 closed \u00b7 -1.01R a trade \u00b7 -5.0R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 50 (-0.44R) \u00b7 outside 18 (-0.99R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 1 closed this week (-1.0R) \u00b7 8 since the start (-1.04R a trade, after fees)\nSilent research records (not sent to you): 16 this week (-0.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u26a0\ufe0f live watcher SILENT: no heartbeat for 12h00m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline\n\n\ud83d\udd27 Failure Lab: 12 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 67 this week (37 sent) \u00b7 4h later 31 kept going, 36 reversed \u00b7 a strategy alert followed 4\n\n\ud83d\udcc8 Track record (your alerts, after fees): 5 closed \u00b7 -1.01R a trade \u00b7 -5.0R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: middle 4 (+0.03R) \u00b7 against 50 (-0.44R) \u00b7 outside 18 (-0.99R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
