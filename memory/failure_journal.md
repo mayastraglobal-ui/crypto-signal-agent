@@ -522,3 +522,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: wrong_session
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### XRP SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-09 18:41 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: XRP · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-16
+  - signal 2026-11-09 07:59 UTC, closed 2026-11-09 12:59 UTC, stage TEST
+  - MAE -1.00R / MFE +0.29R
+  - at entry: session London, conditions: overextended_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### XRP SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-09 18:41 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: XRP · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-16
+  - signal 2026-11-09 11:59 UTC, closed 2026-11-09 12:59 UTC, stage TEST
+  - MAE -1.12R / MFE +0.05R
+  - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### XRP SHORT 1h P08-SESSION-BREAKOUT-V4 v1.0 - SL -1.07R
+- timestamp: 2026-11-09 18:41 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P08-SESSION-BREAKOUT-V4 v1.0 · asset: XRP · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-16
+  - signal 2026-11-09 11:59 UTC, closed 2026-11-09 12:59 UTC, stage TEST
+  - MAE -1.33R / MFE +0.23R
+  - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
