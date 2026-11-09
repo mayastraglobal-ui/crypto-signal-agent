@@ -210,3 +210,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START ETH 30m data: DEGRADED: volume 78x normal on candle 11-08 21:30 UTC (possible bad data)
 - timestamp: 2026-11-08 23:12 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: ETH · timeframe: - · regime: - · review: 2026-12-08
   - signals from this data are blocked while it lasts
+
+### END ETH 30m data: DEGRADED: volume 78x normal on candle 11-08 21:30 UTC (possible bad data)
+- timestamp: 2026-11-09 00:44 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ETH · timeframe: - · regime: - · review: 2026-12-09
+  - problem first seen 2026-11-08 23:12 UTC UTC

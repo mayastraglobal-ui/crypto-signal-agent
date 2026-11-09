@@ -1043,3 +1043,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-08 00:00 UTC
 - **EXCLUDED** BNB - 24h volume $11M < $50M; 7-day average volume $49M < $50M
+
+## 2026-11-09 00:44 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,165x the 1% order-book depth (flag only, not excluded)

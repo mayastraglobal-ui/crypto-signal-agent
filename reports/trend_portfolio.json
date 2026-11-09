@@ -1,16 +1,16 @@
 {
  "version": 1,
- "day_ms": 1794009600000,
- "day": "2026-11-07",
- "updated_utc": "2026-11-08 00:02",
+ "day_ms": 1794096000000,
+ "day": "2026-11-08",
+ "updated_utc": "2026-11-09 00:45",
  "started": "2026-10-28",
  "start_capital": 1000.0,
- "equity": 979.79,
- "invested_usd": 124.41,
+ "equity": 975.91,
+ "invested_usd": 92.94,
  "weights": {
   "BNB": 0.1111,
-  "BTC": 0.2222,
-  "ETH": 0.1111,
+  "BTC": 0.1111,
+  "ETH": 0.0,
   "SOL": 0.0,
   "SUI": 0.0,
   "XRP": 0.0,
@@ -22,37 +22,37 @@
    "n": 9,
    "weight": 0.1111,
    "yesterday": 0.1111,
-   "price": 696.2,
-   "usd": 15.55,
+   "price": 685.21,
+   "usd": 15.49,
    "change_usd": 0.0,
    "longest_on": 150
   },
   "BTC": {
-   "on": 2,
-   "n": 9,
-   "weight": 0.2222,
-   "yesterday": 0.2222,
-   "price": 75867.59,
-   "usd": 31.1,
-   "change_usd": 0.0,
-   "longest_on": 150
-  },
-  "ETH": {
    "on": 1,
    "n": 9,
    "weight": 0.1111,
-   "yesterday": 0.1111,
-   "price": 2240.24,
-   "usd": 15.55,
-   "change_usd": 0.0,
+   "yesterday": 0.2222,
+   "price": 74851.44,
+   "usd": 15.49,
+   "change_usd": -15.49,
    "longest_on": 150
+  },
+  "ETH": {
+   "on": 0,
+   "n": 9,
+   "weight": 0.0,
+   "yesterday": 0.1111,
+   "price": 2127.46,
+   "usd": 0.0,
+   "change_usd": -15.49,
+   "longest_on": 0
   },
   "SOL": {
    "on": 0,
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 89.81,
+   "price": 86.54,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -62,7 +62,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.8569,
+   "price": 0.8211,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -72,7 +72,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 1.164,
+   "price": 1.1132,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -82,8 +82,8 @@
    "n": 9,
    "weight": 0.4444,
    "yesterday": 0.4444,
-   "price": 1261.51,
-   "usd": 62.21,
+   "price": 1213.5,
+   "usd": 61.96,
    "change_usd": 0.0,
    "longest_on": 360
   }
@@ -242,6 +242,20 @@
     "XRP": 0.0,
     "ZEC": 0.4444
    }
+  },
+  {
+   "day": "2026-11-08",
+   "equity": 975.91,
+   "ret_pct": -0.396,
+   "weights": {
+    "BNB": 0.1111,
+    "BTC": 0.1111,
+    "ETH": 0.0,
+    "SOL": 0.0,
+    "SUI": 0.0,
+    "XRP": 0.0,
+    "ZEC": 0.4444
+   }
   }
  ],
  "lookbacks": [
@@ -256,16 +270,16 @@
   360
  ],
  "backtest": {
-  "since": "2024-02-13",
+  "since": "2024-02-14",
   "days": 999,
   "portfolio": {
-   "cagr_pct": 27.2,
-   "sharpe": 1.3,
+   "cagr_pct": 26.9,
+   "sharpe": 1.28,
    "max_dd_pct": 17.2
   },
   "hold": {
-   "cagr_pct": 48.8,
-   "sharpe": 0.95,
+   "cagr_pct": 45.2,
+   "sharpe": 0.91,
    "max_dd_pct": 51.5
   }
  },

@@ -1,9 +1,5 @@
 {
- "issues": {
-  "data|ETH|30m": "ETH 30m data: DEGRADED: volume 78x normal on candle 11-08 21:30 UTC (possible bad data)"
- },
- "since": {
-  "data|ETH|30m": "2026-11-08 23:12 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }
