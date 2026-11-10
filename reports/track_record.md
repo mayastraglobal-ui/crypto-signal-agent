@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-11-10 04:22 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-10 09:38 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -57,7 +57,7 @@ Warning signs (no pause yet):
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 1 | 100 | +0.89R | +0.17R | +0.89R | 0.00R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 30m | XRP | 🔵 TEST | silent | 1 | 100 | +0.85R | +0.14R | +0.85R | 0.00R | ✅ |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.25R | -1.02R | 1.02R | ✅ |
-| P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 1 | 100 | +0.55R | +0.06R | +0.55R | 0.00R | ✅ |
+| P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 1 | 100 | +0.55R | +0.07R | +0.55R | 0.00R | ✅ |
 | P07-SQUEEZE-RETEST-V5 | 1h | ZEC | 🔵 TEST | silent | 1 | 0 | -0.49R | +0.03R | -0.49R | 0.49R | ✅ |
 | P08-SESSION-BREAKOUT-V4 | 1h | XRP | 🔵 TEST | silent | 1 | 0 | -1.07R | +0.07R | -1.07R | 1.07R | ✅ |
 

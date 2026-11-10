@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-10 04:22",
+ "utc": "2026-11-10 09:38",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -809,9 +809,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 117,
-    "avg_r": 0.061,
-    "win_rate": 34.2
+    "n": 118,
+    "avg_r": 0.065,
+    "win_rate": 34.7
    },
    "verdict": "ok",
    "why": [],

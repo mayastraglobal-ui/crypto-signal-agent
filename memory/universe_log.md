@@ -1064,3 +1064,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-10 04:22 UTC
 - **FLAG** ZEC - possible wash volume: 24h volume is 1,101x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-10 09:38 UTC
+- **EXCLUDED** SUI - 24h volume $47M < $50M
+- **EXCLUDED** AVAX - 7-day average volume $17M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $47M < $50M

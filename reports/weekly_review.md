@@ -1,13 +1,13 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-10 04:22 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-10 09:38 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-09)
-- ✅ hourly scan: last run 2026-11-10 04:22 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-10)
+- ✅ hourly scan: last run 2026-11-10 09:38 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ⚠️ live watcher SILENT: no heartbeat for 30h45m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline
+- ⚠️ live watcher SILENT: no heartbeat for 32h14m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline
 - ✅ TEST setups closed this week (GitHub record): 20
 
 ## Totals
@@ -44,13 +44,13 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## Failure Lab (repairs for the loss causes)
 
-- new repair P11-MOMENTUM-V1-FRETEST-FDISP: P11-MOMENTUM-V1-FRETEST@1.0 30m lost on false_breakout - testing DISP
+- new repair donchian_breakout-VEXIT-S4-FDISP-FNOTEXT: donchian_breakout-VEXIT-S4-FDISP@1.0 30m lost on overextended_entry - testing NOTEXT
 - P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.24R vs parent +0.02R, unseen +0.37R vs +0.10R - helped
 - P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.07R vs +0.19R - did not help
-- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.40R - passed
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.40R vs +0.26R - helped
-- TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.40R vs parent +0.19R, unseen +0.55R vs +0.39R - passed
-- repair record: DISP helped 7 of 8, NOTEXT helped 3 of 3, HTF helped 0 of 1
+- P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help
+- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.42R - passed
+- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.42R vs +0.27R - helped
+- repair record: DISP helped 7 of 9, NOTEXT helped 3 of 3, HTF helped 0 of 1
 - 1 repair(s) waiting for their first test
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
@@ -106,6 +106,6 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | TEST | silent | 1 | 100 | +0.89R | +0.98R | 0 (+0.0R) | +0.17R | +0.89R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 30m | XRP | TEST | silent | 1 | 100 | +0.85R | +0.99R | 1 (+0.8R) | +0.14R | +0.85R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | TEST | silent | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.25R | -1.02R over 1 trade: too early to say anything |
-| P07-SQUEEZE-RETEST-V2 | 30m | ETH | TEST | silent | 1 | 100 | +0.55R | +0.63R | 1 (+0.6R) | +0.06R | +0.55R over 1 trade: too early to say anything |
+| P07-SQUEEZE-RETEST-V2 | 30m | ETH | TEST | silent | 1 | 100 | +0.55R | +0.63R | 1 (+0.6R) | +0.07R | +0.55R over 1 trade: too early to say anything |
 | P07-SQUEEZE-RETEST-V5 | 1h | ZEC | TEST | silent | 1 | 0 | -0.49R | -0.46R | 1 (-0.5R) | +0.03R | -0.49R over 1 trade: too early to say anything |
 | P08-SESSION-BREAKOUT-V4 | 1h | XRP | TEST | silent | 1 | 0 | -1.07R | -1.03R | 1 (-1.1R) | +0.07R | -1.07R over 1 trade: too early to say anything |
