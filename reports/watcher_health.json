@@ -1,8 +1,8 @@
 {
  "state": "SILENT",
- "checked_utc": "2026-11-10 02:55",
+ "checked_utc": "2026-11-10 04:24",
  "last_utc": "2026-11-08 20:10",
- "age_min": 1845,
+ "age_min": 1934,
  "heartbeat": {
   "utc": "2026-11-08 20:10",
   "started_utc": "2026-11-03 11:10",
@@ -28,5 +28,5 @@
   "code_old": false,
   "shock_on": true
  },
- "text": "live watcher SILENT: no heartbeat for 30h45m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
+ "text": "live watcher SILENT: no heartbeat for 32h14m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
 }
