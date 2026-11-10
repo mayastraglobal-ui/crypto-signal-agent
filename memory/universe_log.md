@@ -1072,3 +1072,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-10 17:40 UTC
 - **ELIGIBLE** SUI - passes every rule again
+
+## 2026-11-10 19:58 UTC
+- **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)

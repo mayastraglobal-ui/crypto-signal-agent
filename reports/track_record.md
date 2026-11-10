@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-10 17:40 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-10 19:58 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 8 | 12 | -0.58R | -4.68R | 7.15R | 7 |
+| **Your alerts** (could reach your Telegram) | 9 | 11 | -0.64R | -5.72R | 7.15R | 7 |
 | Silent research records (never sent to you) | 65 | 22 | -0.51R | -33.10R | 38.60R | 17 |
-| 🔵 TEST | 76 | 20 | -0.54R | -41.05R | 46.92R | 20 |
+| 🔵 TEST | 77 | 20 | -0.55R | -42.09R | 46.92R | 20 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 79 | 19 | -0.56R | -44.30R | 50.17R | 20 |
+| **All** | 80 | 19 | -0.57R | -45.34R | 50.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -20,13 +20,14 @@ Warning signs (no pause yet):
 - P01-BREAKOUT-V5@1.0 30m on SUI: 5 losses in a row - in its backtest (35% won) a run that long shows up in 12% of 5-trade periods
 - P01-BREAKOUT-V2@1.0 30m on SOL: 4 losses in a row - in its backtest (36% won) a run that long shows up in 16% of 4-trade periods
 - P03-FIB-PULLBACK-V5@1.0 1h on SUI: 3 losses in a row - in its backtest (38% won) a run that long shows up in 43% of 4-trade periods
+- TRD-H4-BREAKOUT-S3@1.0 1h on XRP: 3 losses in a row - in its backtest (44% won) a run that long shows up in 17% of 3-trade periods
 
 ## Per strategy and coin (live vs 5-year backtest)
 
 | Strategy | TF | Coin | Stage | Sent to you | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
+| TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | ✅ yes | 3 | 0 | -1.05R | +0.28R | -3.14R | 3.14R | ⚠️ watch |
 | P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 2 | 0 | -0.96R | +0.36R | -1.92R | 1.92R | ✅ |
-| TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | ✅ yes | 2 | 0 | -1.05R | +0.28R | -2.10R | 2.10R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
 | P05-RANGE-REVERSAL-V4 | 4h | SOL | 🔵 TEST | ✅ yes | 1 | 0 | -1.06R | +0.24R | -1.06R | 1.06R | ✅ |
@@ -66,7 +67,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-03 12:59 | -43.33R |
 | 2026-11-04 04:29 | -44.42R |
 | 2026-11-05 15:59 | -45.44R |
 | 2026-11-06 09:29 | -45.68R |
@@ -86,3 +86,4 @@ Warning signs (no pause yet):
 | 2026-11-09 12:59 | -45.70R |
 | 2026-11-09 12:59 | -46.77R |
 | 2026-11-10 15:59 | -44.30R |
+| 2026-11-10 18:59 | -45.34R |
