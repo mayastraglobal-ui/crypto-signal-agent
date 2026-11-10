@@ -33020,3 +33020,60 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-10 15:45,SUI,15m,FVG,bear,,0.8274,0.8364,1.157,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-10 16:00,SUI,15m,FVG,bear,,0.8152,0.8272,1.494,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-10 16:15,SUI,15m,FVG_RETRACE,bear,,0.8152,0.8272,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 20:00,BTC,4h,FVG,bear,,73679.66,74115.65,0.466,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-10 22:00,BTC,1h,FVG,bull,,73595.9,73779.99,0.326,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-10 23:00,BTC,1h,FVG_RETRACE,bull,,73595.9,73779.99,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 20:30,BTC,15m,SWEEP,bear,73679.66,,,0.246,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-10 20:45,BTC,15m,WEAK_BREAK,bull,73679.66,,,0.015,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 20:00,ETH,4h,FVG,bear,,2049.38,2084.0,0.878,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-10 20:00,ETH,1h,FVG,bull,,2031.8,2038.53,0.271,,4h,EXPANSION,,smc-1.0,Binance
+2026-11-10 21:00,ETH,1h,FVG_FILLED,bear,,2038.7,2058.55,,,4h,EXPANSION,,smc-1.0,Binance
+2026-11-10 22:00,ETH,1h,FVG,bull,,2048.49,2056.38,0.335,,4h,EXPANSION,,smc-1.0,Binance
+2026-11-10 23:00,ETH,1h,FVG_RETRACE,bull,,2048.49,2056.38,,,4h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-10 23:00,ETH,1h,FVG_FILLED,bull,,2048.49,2056.38,,,4h,EXPANSION,,smc-1.0,Binance
+2026-11-10 20:00,ETH,30m,FVG_RETRACE,bull,,2033.35,2038.88,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 21:00,ETH,30m,OB_RETEST,bear,,2058.55,2087.42,,,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-10 21:30,ETH,30m,FVG_FILLED,bear,,2038.7,2063.49,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:15,ETH,15m,WEAK_BREAK,bull,2049.38,,,0.08,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 21:15,ETH,15m,FVG_RETRACE,bear,,2064.87,2076.69,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 21:15,ETH,15m,FVG_FILLED,bear,,2028.01,2063.49,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:15,ETH,15m,FVG,bull,,2055.54,2059.24,0.335,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:30,ETH,15m,FVG_RETRACE,bull,,2055.54,2059.24,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 22:30,ETH,15m,FVG_FILLED,bull,,2055.54,2059.24,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 22:45,ETH,15m,FVG,bear,,2052.98,2056.73,0.416,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:00,SOL,4h,FVG,bear,,83.3,84.2,0.51,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-10 21:00,SOL,1h,FVG_FILLED,bear,,82.72,83.47,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 22:00,SOL,1h,FVG,bull,,83.05,83.3,0.25,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 23:00,SOL,1h,FVG_RETRACE,bull,,83.05,83.3,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 23:00,SOL,1h,FVG_FILLED,bull,,83.05,83.3,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:30,SOL,30m,FVG_FILLED,bear,,82.72,83.6,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:30,SOL,15m,WEAK_BREAK,bull,83.3,,,0.127,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 20:30,SOL,15m,FVG,bull,,83.04,83.19,0.279,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:45,SOL,15m,FVG_RETRACE,bull,,83.04,83.19,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 21:15,SOL,15m,FVG_FILLED,bear,,82.47,83.6,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 22:45,SOL,15m,FVG_FILLED,bull,,83.04,83.19,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:00,XRP,1h,FVG,bull,,1.0554,1.0643,0.583,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:00,XRP,1h,FVG_RETRACE,bull,,1.0554,1.0643,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 20:30,XRP,30m,FVG_RETRACE,bull,,1.0554,1.0634,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 23:00,XRP,30m,SWEEP,bull,1.0578,,,0.185,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-10 20:15,XRP,15m,FVG_RETRACE,bull,,1.0567,1.0634,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 22:45,XRP,15m,SWEEP,bull,1.0578,,,0.284,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-10 22:45,XRP,15m,FVG_FILLED,bull,,1.0567,1.0634,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 23:00,XRP,15m,FVG,bear,,1.0595,1.0614,0.333,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:00,ZEC,4h,FVG_FILLED,bull,,1027.8,1065.24,,,1d,RANGE,,smc-1.0,Binance
+2026-11-10 20:00,ZEC,4h,FVG,bear,,1101.37,1131.83,0.593,,1d,RANGE,,smc-1.0,Binance
+2026-11-10 21:00,ZEC,1h,BREAKER_RETEST,bear,,1049.01,1085.35,,,4h,EXPANSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-10 21:00,ZEC,1h,FVG_RETRACE,bear,,1045.91,1075.9,,,4h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-10 21:00,ZEC,30m,BREAKER_RETEST,bear,,1049.01,1066.25,,,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-10 21:00,ZEC,30m,FVG_FILLED,bear,,1029.93,1048.67,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:30,ZEC,30m,FVG,bull,,1043.56,1050.21,0.281,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 22:00,ZEC,30m,FVG_RETRACE,bear,,1063.48,1075.9,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 23:00,ZEC,30m,FVG_RETRACE,bull,,1043.56,1050.21,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 23:00,ZEC,30m,FVG_FILLED,bull,,1043.56,1050.21,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 20:45,ZEC,15m,WEAK_BREAK,bull,1045.91,,,0.176,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 20:45,ZEC,15m,FVG_FILLED,bear,,1031.76,1048.67,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-10 21:45,ZEC,15m,FVG_RETRACE,bear,,1063.48,1085.95,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 20:00,SUI,4h,FVG,bear,,0.8198,0.8283,0.391,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-10 23:00,SUI,1h,FVG_FILLED,bear,,0.8192,0.8242,,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-10 20:30,SUI,15m,SWEEP,bear,0.8198,,,0.428,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-10 21:15,SUI,15m,WEAK_BREAK,bull,0.8198,,,0.213,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
