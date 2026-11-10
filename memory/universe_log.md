@@ -1069,3 +1069,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** SUI - 24h volume $47M < $50M
 - **EXCLUDED** AVAX - 7-day average volume $17M < $50M
 - **LEAVE** SUI - not eligible: 24h volume $47M < $50M
+
+## 2026-11-10 17:40 UTC
+- **ELIGIBLE** SUI - passes every rule again

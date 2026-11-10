@@ -6,10 +6,12 @@
   "XRP",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {},
- "runs": 991,
+ "runs": 992,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,9 +31,7 @@
    "volume_7d"
   ],
   "UNI": [],
-  "SUI": [
-   "volume_24h"
-  ],
+  "SUI": [],
   "AVAX": [
    "volume_7d"
   ],
