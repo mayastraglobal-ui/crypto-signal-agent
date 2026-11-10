@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-10 01:59",
+ "generated_utc": "2026-11-10 02:54",
  "book": {
-  "utc": "2026-11-10 01:59",
-  "beijing": "2026-11-10 09:59",
+  "utc": "2026-11-10 02:54",
+  "beijing": "2026-11-10 10:54",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -123,7 +123,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-10 01:59 UTC / 2026-11-10 09:59 Beijing",
+  "POSITION BOOK \u2014 2026-11-10 02:54 UTC / 2026-11-10 10:54 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.33R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1572 \u00b7 open +0.33R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open -0.32R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open -0.32R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open -0.39R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open -0.39R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING)",
@@ -408,7 +408,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -419,7 +419,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -540,7 +540,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -551,7 +551,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {

@@ -32645,3 +32645,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-10 00:45,SUI,15m,FVG,bear,,0.8424,0.8442,0.454,,1h,RANGE,,smc-1.0,Binance
 2026-11-10 01:00,SUI,15m,FVG_RETRACE,bear,,0.8424,0.8442,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-10 01:15,SUI,15m,FVG_FILLED,bear,,0.8424,0.8442,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-10 02:45,BTC,15m,FVG,bear,,74892.01,74940.0,0.273,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-10 02:30,ETH,30m,SWEEP,bull,2122.02,,,0.176,Asia,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-10 02:45,ETH,15m,BOS,bear,2122.02,,,0.43,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-10 02:30,SOL,30m,BOS,bear,86.26,,,0.34,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-10 02:30,SOL,30m,FVG,bear,,86.3,86.48,0.366,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-10 02:15,SOL,15m,BOS,bear,86.26,,,0.571,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-10 02:30,SOL,15m,FVG,bear,,86.13,86.28,0.509,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-10 02:30,XRP,15m,BOS,bear,1.0964,,,0.393,Asia,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-10 02:45,XRP,15m,FVG,bear,,1.0942,1.0965,0.412,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-10 02:30,ZEC,30m,BOS,bear,1153.12,,,0.075,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 02:30,ZEC,15m,BOS,bear,1153.12,,,0.111,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-10 02:30,ZEC,15m,FVG_FILLED,bull,,1151.64,1155.3,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-10 02:45,ZEC,15m,FVG_RETRACE,bull,,1139.98,1142.6,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-10 02:15,SUI,15m,SWEEP,bull,0.84,,,0.3,Asia,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-10 02:15,SUI,15m,FVG_RETRACE,bull,,0.8371,0.8394,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-10 02:30,SUI,15m,BOS,bear,0.84,,,0.277,Asia,1h,RANGE,no displacement,smc-1.0,Binance
