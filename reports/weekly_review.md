@@ -1,20 +1,20 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-10 09:38 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-10 11:41 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-10)
-- ✅ hourly scan: last run 2026-11-10 09:38 UTC
+- ✅ hourly scan: last run 2026-11-10 11:41 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ⚠️ live watcher SILENT: no heartbeat for 32h14m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline
-- ✅ TEST setups closed this week (GitHub record): 20
+- ⚠️ live watcher SILENT: no heartbeat for 37h29m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline
+- ✅ TEST setups closed this week (GitHub record): 19
 
 ## Totals
 
 - **Your alerts** (setups that could reach your Telegram): 10 closed since the start, -1.04R a trade; this week 3 (-3.12R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 65 closed, -0.51R a trade; this week 17 (-1.90R)
-- TEST: 75 closed setups since the start, -0.58R a trade; this week 20 (-5.02R) (both groups)
+- Silent research records (strategies NOT sent to you, kept to check the research): 65 closed, -0.51R a trade; this week 16 (-1.41R)
+- TEST: 75 closed setups since the start, -0.58R a trade; this week 19 (-4.53R) (both groups)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -107,5 +107,5 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P04-MACD-SUPERTREND-V2 | 30m | XRP | TEST | silent | 1 | 100 | +0.85R | +0.99R | 1 (+0.8R) | +0.14R | +0.85R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | TEST | silent | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.25R | -1.02R over 1 trade: too early to say anything |
 | P07-SQUEEZE-RETEST-V2 | 30m | ETH | TEST | silent | 1 | 100 | +0.55R | +0.63R | 1 (+0.6R) | +0.07R | +0.55R over 1 trade: too early to say anything |
-| P07-SQUEEZE-RETEST-V5 | 1h | ZEC | TEST | silent | 1 | 0 | -0.49R | -0.46R | 1 (-0.5R) | +0.03R | -0.49R over 1 trade: too early to say anything |
+| P07-SQUEEZE-RETEST-V5 | 1h | ZEC | TEST | silent | 1 | 0 | -0.49R | -0.46R | 0 (+0.0R) | +0.03R | -0.49R over 1 trade: too early to say anything |
 | P08-SESSION-BREAKOUT-V4 | 1h | XRP | TEST | silent | 1 | 0 | -1.07R | -1.03R | 1 (-1.1R) | +0.07R | -1.07R over 1 trade: too early to say anything |
