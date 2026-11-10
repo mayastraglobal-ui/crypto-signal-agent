@@ -1725,3 +1725,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P11-MOMENTUM-V1-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
   - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P11-MOMENTUM-V1-FRETEST-FDISP@1.0 - 30m close below the 20-candle low with 1.5x volume, at least 3 of the operator's coins breaking down within 2 candles, BTC falling and this coin falling at least as hard as BTC (4 hours), only the 1st or 2nd breakdown step in 12 hours, RSI(14) still above 30 and price not more than 2.5 ATR below the EMA20 (longs mirrored).
+- timestamp: 2026-11-10 07:41 UTC · source: strategies_lab.yaml card P11-MOMENTUM-V1-FRETEST-FDISP@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P11-MOMENTUM-V1-FRETEST-FDISP v1.0 · asset: research coins · timeframe: 30m · regime: STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR · review: 2027-02-08
+  - title / source: engine failure lab: a repair of P11-MOMENTUM-V1-FRETEST@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: P11-MOMENTUM-V1-FRETEST@1.0 loses on false_breakout (-0.28R a trade with it, +0.29R without). One change - a strong candle (displacement) in the trade direction within the last 3 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P11-MOMENTUM-V1-FRETEST-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
+  - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
+  - test results: `memory/strategy_registry.csv` / report section 3

@@ -1,20 +1,20 @@
 {
- "updated_utc": "2026-11-09 07:06",
+ "updated_utc": "2026-11-10 07:41",
  "tested_tonight": [
-  4,
-  5,
+  6,
+  7,
   12,
   13
  ],
  "why": {
   "12": "P12-LEADER-V2@1.0 4h is VALIDATION - checked every night",
   "13": "P13-TURTLE-C@1.0 4h is PAPER_TRADING - checked every night",
-  "4": "tested longest ago (2026-11-03 07:11 UTC)",
-  "5": "tested longest ago (2026-11-04 06:56 UTC)"
+  "6": "tested longest ago (2026-11-04 06:56 UTC)",
+  "7": "tested longest ago (2026-11-05 07:18 UTC)"
  },
  "next_night": [
-  6,
-  7,
+  1,
+  8,
   12,
   13
  ],
@@ -4407,7 +4407,7 @@
    "id": "P06-VWAP-REVERSION-V1",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-04 06:56",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 1,
    "win_rate": 0.0,
    "avg_r": -1.089,
@@ -4506,7 +4506,7 @@
    "id": "P06-VWAP-REVERSION-V2",
    "tf": "1h",
    "status": "FAILED",
-   "tested_utc": "2026-11-04 06:56",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 84,
    "win_rate": 42.9,
    "avg_r": -0.204,
@@ -4607,15 +4607,15 @@
    "id": "P06-VWAP-REVERSION-V2",
    "tf": "30m",
    "status": "FAILED",
-   "tested_utc": "2026-11-04 06:56",
-   "trades": 957,
-   "win_rate": 40.1,
-   "avg_r": -0.234,
-   "gross_avg_r": -0.117,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 956,
+   "win_rate": 40.3,
+   "avg_r": -0.231,
+   "gross_avg_r": -0.115,
    "pf": 0.63,
-   "test_avg_r": -0.297,
-   "test_trades": 429,
-   "long_avg_r": -0.28,
+   "test_avg_r": -0.29,
+   "test_trades": 431,
+   "long_avg_r": -0.275,
    "short_avg_r": -0.19,
    "fees_avg_r": 0.117,
    "coins": {
@@ -4630,14 +4630,14 @@
      "test_avg_r": -0.408
     },
     "BTC": {
-     "n": 116,
-     "win_rate": 29.3,
-     "avg_r": -0.605,
-     "gross_avg_r": -0.397,
-     "total_r": -70.2,
+     "n": 117,
+     "win_rate": 29.9,
+     "avg_r": -0.585,
+     "gross_avg_r": -0.377,
+     "total_r": -68.4,
      "positive": false,
-     "test_n": 62,
-     "test_avg_r": -0.722
+     "test_n": 63,
+     "test_avg_r": -0.682
     },
     "ETH": {
      "n": 108,
@@ -4650,14 +4650,14 @@
      "test_avg_r": -0.357
     },
     "SOL": {
-     "n": 139,
-     "win_rate": 41.7,
-     "avg_r": -0.196,
-     "gross_avg_r": -0.101,
-     "total_r": -27.2,
+     "n": 140,
+     "win_rate": 42.1,
+     "avg_r": -0.189,
+     "gross_avg_r": -0.094,
+     "total_r": -26.5,
      "positive": false,
-     "test_n": 63,
-     "test_avg_r": -0.223
+     "test_n": 64,
+     "test_avg_r": -0.208
     },
     "SUI": {
      "n": 137,
@@ -4666,8 +4666,8 @@
      "gross_avg_r": 0.054,
      "total_r": -2.9,
      "positive": false,
-     "test_n": 49,
-     "test_avg_r": -0.041
+     "test_n": 48,
+     "test_avg_r": -0.052
     },
     "XRP": {
      "n": 102,
@@ -4680,14 +4680,14 @@
      "test_avg_r": -0.17
     },
     "ZEC": {
-     "n": 190,
-     "win_rate": 48.4,
+     "n": 187,
+     "win_rate": 48.7,
      "avg_r": 0.02,
      "gross_avg_r": 0.092,
-     "total_r": 3.8,
+     "total_r": 3.7,
      "positive": true,
-     "test_n": 54,
-     "test_avg_r": -0.047
+     "test_n": 55,
+     "test_avg_r": -0.038
     }
    },
    "positive_coins": [
@@ -4697,7 +4697,7 @@
     "avg -0.23R/trade (needs +0.10R)",
     "profit factor 0.63",
     "max drawdown 234.2R",
-    "longest drawdown 1694 days = 93% of the tested period (limit 60%)",
+    "longest drawdown 1699 days = 94% of the tested period (limit 60%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -4708,67 +4708,67 @@
    "id": "P06-VWAP-REVERSION-V2",
    "tf": "15m",
    "status": "FAILED",
-   "tested_utc": "2026-11-04 06:56",
-   "trades": 3954,
-   "win_rate": 34.5,
-   "avg_r": -0.336,
-   "gross_avg_r": -0.168,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 3963,
+   "win_rate": 34.6,
+   "avg_r": -0.334,
+   "gross_avg_r": -0.166,
    "pf": 0.56,
-   "test_avg_r": -0.399,
-   "test_trades": 1654,
-   "long_avg_r": -0.353,
-   "short_avg_r": -0.318,
+   "test_avg_r": -0.394,
+   "test_trades": 1658,
+   "long_avg_r": -0.352,
+   "short_avg_r": -0.316,
    "fees_avg_r": 0.168,
    "coins": {
     "BNB": {
-     "n": 698,
-     "win_rate": 32.4,
-     "avg_r": -0.442,
-     "gross_avg_r": -0.225,
-     "total_r": -308.7,
+     "n": 700,
+     "win_rate": 32.6,
+     "avg_r": -0.439,
+     "gross_avg_r": -0.221,
+     "total_r": -307.4,
      "positive": false,
-     "test_n": 260,
+     "test_n": 261,
      "test_avg_r": -0.565
     },
     "BTC": {
-     "n": 511,
-     "win_rate": 29.0,
-     "avg_r": -0.607,
-     "gross_avg_r": -0.319,
-     "total_r": -310.2,
+     "n": 513,
+     "win_rate": 29.2,
+     "avg_r": -0.601,
+     "gross_avg_r": -0.313,
+     "total_r": -308.5,
      "positive": false,
-     "test_n": 265,
-     "test_avg_r": -0.634
+     "test_n": 264,
+     "test_avg_r": -0.613
     },
     "ETH": {
-     "n": 443,
-     "win_rate": 31.8,
-     "avg_r": -0.44,
-     "gross_avg_r": -0.256,
-     "total_r": -195.0,
+     "n": 444,
+     "win_rate": 32.0,
+     "avg_r": -0.437,
+     "gross_avg_r": -0.253,
+     "total_r": -194.2,
      "positive": false,
-     "test_n": 218,
-     "test_avg_r": -0.443
+     "test_n": 219,
+     "test_avg_r": -0.437
     },
     "SOL": {
-     "n": 522,
-     "win_rate": 34.3,
-     "avg_r": -0.311,
-     "gross_avg_r": -0.177,
-     "total_r": -162.2,
+     "n": 524,
+     "win_rate": 34.4,
+     "avg_r": -0.309,
+     "gross_avg_r": -0.175,
+     "total_r": -161.8,
      "positive": false,
-     "test_n": 250,
-     "test_avg_r": -0.364
+     "test_n": 252,
+     "test_avg_r": -0.359
     },
     "SUI": {
-     "n": 538,
-     "win_rate": 38.3,
-     "avg_r": -0.161,
-     "gross_avg_r": -0.063,
-     "total_r": -86.4,
+     "n": 539,
+     "win_rate": 38.2,
+     "avg_r": -0.163,
+     "gross_avg_r": -0.065,
+     "total_r": -87.8,
      "positive": false,
      "test_n": 157,
-     "test_avg_r": -0.253
+     "test_avg_r": -0.26
     },
     "XRP": {
      "n": 464,
@@ -4777,27 +4777,27 @@
      "gross_avg_r": -0.166,
      "total_r": -154.8,
      "positive": false,
-     "test_n": 256,
-     "test_avg_r": -0.337
+     "test_n": 255,
+     "test_avg_r": -0.334
     },
     "ZEC": {
-     "n": 778,
-     "win_rate": 38.4,
-     "avg_r": -0.142,
-     "gross_avg_r": -0.037,
-     "total_r": -110.8,
+     "n": 779,
+     "win_rate": 38.5,
+     "avg_r": -0.14,
+     "gross_avg_r": -0.035,
+     "total_r": -109.3,
      "positive": false,
-     "test_n": 248,
-     "test_avg_r": -0.128
+     "test_n": 250,
+     "test_avg_r": -0.126
     }
    },
    "positive_coins": [],
    "why_not": [
     "not cost-viable: fees + slippage 0.28R per trade (stop must be \u2265 4x the round-trip cost)",
-    "avg -0.34R/trade (needs +0.10R)",
+    "avg -0.33R/trade (needs +0.10R)",
     "profit factor 0.56",
     "max drawdown 1329.4R",
-    "longest drawdown 1685 days = 92% of the tested period (limit 60%)",
+    "longest drawdown 1690 days = 93% of the tested period (limit 60%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -4808,7 +4808,7 @@
    "id": "P06-VWAP-REVERSION-V3",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-04 06:56",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 0,
    "win_rate": 0.0,
    "avg_r": 0.0,
@@ -4907,7 +4907,7 @@
    "id": "P06-VWAP-REVERSION-V4",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-04 06:56",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 1,
    "win_rate": 0.0,
    "avg_r": -1.089,
@@ -5006,17 +5006,17 @@
    "id": "P07-SQUEEZE-RETEST-V1",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 875,
-   "win_rate": 34.5,
-   "avg_r": 0.008,
-   "gross_avg_r": 0.047,
-   "pf": 1.01,
-   "test_avg_r": 0.161,
-   "test_trades": 273,
-   "long_avg_r": 0.039,
-   "short_avg_r": -0.034,
-   "fees_avg_r": 0.039,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 798,
+   "win_rate": 35.1,
+   "avg_r": 0.022,
+   "gross_avg_r": 0.062,
+   "pf": 1.04,
+   "test_avg_r": 0.158,
+   "test_trades": 253,
+   "long_avg_r": 0.052,
+   "short_avg_r": -0.021,
+   "fees_avg_r": 0.04,
    "coins": {
     "BNB": {
      "n": 134,
@@ -5025,8 +5025,8 @@
      "gross_avg_r": 0.018,
      "total_r": -3.7,
      "positive": false,
-     "test_n": 37,
-     "test_avg_r": 0.167
+     "test_n": 36,
+     "test_avg_r": 0.146
     },
     "BTC": {
      "n": 140,
@@ -5059,34 +5059,24 @@
      "test_avg_r": 0.31
     },
     "SUI": {
-     "n": 54,
-     "win_rate": 25.9,
-     "avg_r": -0.219,
-     "gross_avg_r": -0.191,
-     "total_r": -11.9,
+     "n": 56,
+     "win_rate": 25.0,
+     "avg_r": -0.249,
+     "gross_avg_r": -0.22,
+     "total_r": -13.9,
      "positive": false,
-     "test_n": 21,
-     "test_avg_r": -0.161
-    },
-    "UNI": {
-     "n": 80,
-     "win_rate": 28.7,
-     "avg_r": -0.125,
-     "gross_avg_r": -0.097,
-     "total_r": -10.0,
-     "positive": false,
-     "test_n": 22,
-     "test_avg_r": 0.165
+     "test_n": 23,
+     "test_avg_r": -0.237
     },
     "XRP": {
-     "n": 107,
-     "win_rate": 35.5,
-     "avg_r": 0.019,
-     "gross_avg_r": 0.055,
-     "total_r": 2.0,
+     "n": 108,
+     "win_rate": 36.1,
+     "avg_r": 0.042,
+     "gross_avg_r": 0.078,
+     "total_r": 4.5,
      "positive": true,
-     "test_n": 35,
-     "test_avg_r": 0.203
+     "test_n": 36,
+     "test_avg_r": 0.265
     },
     "ZEC": {
      "n": 116,
@@ -5106,11 +5096,10 @@
     "XRP"
    ],
    "why_not": [
-    "avg +0.01R/trade (needs +0.10R)",
-    "profit factor 1.01",
-    "recovery factor 0.17 (net +7.0R / max drawdown 41.0R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 28.8R - limit 17R",
-    "longest drawdown 2575 days = 78% of the tested period (limit 55%)",
+    "avg +0.02R/trade (needs +0.10R)",
+    "profit factor 1.04",
+    "recovery factor 0.49 (net +17.4R / max drawdown 35.2R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 28.0R - limit 17R",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5120,18 +5109,18 @@
    "version": "V2",
    "id": "P07-SQUEEZE-RETEST-V2",
    "tf": "1h",
-   "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 1180,
-   "win_rate": 33.8,
-   "avg_r": -0.009,
-   "gross_avg_r": 0.049,
-   "pf": 0.99,
-   "test_avg_r": -0.002,
-   "test_trades": 354,
-   "long_avg_r": 0.048,
-   "short_avg_r": -0.089,
-   "fees_avg_r": 0.058,
+   "status": "BACKTESTING",
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 1055,
+   "win_rate": 34.6,
+   "avg_r": 0.014,
+   "gross_avg_r": 0.074,
+   "pf": 1.02,
+   "test_avg_r": 0.015,
+   "test_trades": 319,
+   "long_avg_r": 0.072,
+   "short_avg_r": -0.07,
+   "fees_avg_r": 0.06,
    "coins": {
     "BNB": {
      "n": 191,
@@ -5164,44 +5153,34 @@
      "test_avg_r": -0.133
     },
     "SOL": {
-     "n": 124,
-     "win_rate": 38.7,
-     "avg_r": 0.01,
-     "gross_avg_r": 0.06,
-     "total_r": 1.3,
+     "n": 125,
+     "win_rate": 38.4,
+     "avg_r": 0.001,
+     "gross_avg_r": 0.051,
+     "total_r": 0.1,
      "positive": true,
-     "test_n": 43,
-     "test_avg_r": 0.061
+     "test_n": 44,
+     "test_avg_r": 0.032
     },
     "SUI": {
-     "n": 79,
-     "win_rate": 29.1,
-     "avg_r": -0.114,
-     "gross_avg_r": -0.07,
-     "total_r": -9.0,
+     "n": 80,
+     "win_rate": 30.0,
+     "avg_r": -0.082,
+     "gross_avg_r": -0.037,
+     "total_r": -6.6,
      "positive": false,
-     "test_n": 21,
-     "test_avg_r": -0.364
-    },
-    "UNI": {
-     "n": 129,
-     "win_rate": 27.1,
-     "avg_r": -0.202,
-     "gross_avg_r": -0.157,
-     "total_r": -26.1,
-     "positive": false,
-     "test_n": 39,
-     "test_avg_r": -0.167
+     "test_n": 22,
+     "test_avg_r": -0.239
     },
     "XRP": {
-     "n": 143,
-     "win_rate": 36.4,
-     "avg_r": 0.06,
-     "gross_avg_r": 0.119,
-     "total_r": 8.7,
+     "n": 145,
+     "win_rate": 35.9,
+     "avg_r": 0.045,
+     "gross_avg_r": 0.103,
+     "total_r": 6.5,
      "positive": true,
-     "test_n": 55,
-     "test_avg_r": 0.072
+     "test_n": 57,
+     "test_avg_r": 0.031
     },
     "ZEC": {
      "n": 147,
@@ -5221,11 +5200,10 @@
     "XRP"
    ],
    "why_not": [
-    "avg -0.01R/trade (needs +0.10R)",
-    "profit factor 0.99",
-    "recovery factor -0.12 (net -10.7R / max drawdown 89.6R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 30.3R - limit 17R",
-    "not profitable in BOTH train and unseen test"
+    "avg +0.01R/trade (needs +0.10R)",
+    "profit factor 1.02",
+    "recovery factor 0.23 (net +14.4R / max drawdown 62.6R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 30.1R - limit 17R"
    ]
   },
   "P07-SQUEEZE-RETEST-V2@1.0|30m": {
@@ -5235,17 +5213,17 @@
    "id": "P07-SQUEEZE-RETEST-V2",
    "tf": "30m",
    "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 1001,
-   "win_rate": 31.3,
-   "avg_r": -0.122,
-   "gross_avg_r": -0.037,
-   "pf": 0.82,
-   "test_avg_r": -0.129,
-   "test_trades": 329,
-   "long_avg_r": -0.185,
-   "short_avg_r": -0.049,
-   "fees_avg_r": 0.085,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 850,
+   "win_rate": 32.1,
+   "avg_r": -0.112,
+   "gross_avg_r": -0.023,
+   "pf": 0.83,
+   "test_avg_r": -0.174,
+   "test_trades": 281,
+   "long_avg_r": -0.198,
+   "short_avg_r": -0.009,
+   "fees_avg_r": 0.089,
    "coins": {
     "BNB": {
      "n": 118,
@@ -5254,58 +5232,48 @@
      "gross_avg_r": -0.175,
      "total_r": -34.0,
      "positive": false,
-     "test_n": 44,
-     "test_avg_r": -0.445
+     "test_n": 41,
+     "test_avg_r": -0.405
     },
     "BTC": {
-     "n": 124,
-     "win_rate": 21.0,
-     "avg_r": -0.53,
-     "gross_avg_r": -0.396,
-     "total_r": -65.8,
+     "n": 125,
+     "win_rate": 20.8,
+     "avg_r": -0.531,
+     "gross_avg_r": -0.397,
+     "total_r": -66.4,
      "positive": false,
-     "test_n": 33,
-     "test_avg_r": -0.435
+     "test_n": 34,
+     "test_avg_r": -0.441
     },
     "ETH": {
-     "n": 117,
-     "win_rate": 34.2,
-     "avg_r": 0.061,
-     "gross_avg_r": 0.158,
-     "total_r": 7.1,
+     "n": 118,
+     "win_rate": 34.7,
+     "avg_r": 0.065,
+     "gross_avg_r": 0.161,
+     "total_r": 7.7,
      "positive": true,
      "test_n": 41,
-     "test_avg_r": 0.251
+     "test_avg_r": 0.205
     },
     "SOL": {
-     "n": 143,
-     "win_rate": 36.4,
-     "avg_r": -0.017,
-     "gross_avg_r": 0.052,
-     "total_r": -2.5,
+     "n": 144,
+     "win_rate": 36.1,
+     "avg_r": -0.026,
+     "gross_avg_r": 0.044,
+     "total_r": -3.8,
      "positive": false,
-     "test_n": 55,
-     "test_avg_r": -0.146
+     "test_n": 52,
+     "test_avg_r": -0.241
     },
     "SUI": {
-     "n": 95,
-     "win_rate": 42.1,
-     "avg_r": 0.2,
-     "gross_avg_r": 0.257,
-     "total_r": 19.0,
+     "n": 96,
+     "win_rate": 41.7,
+     "avg_r": 0.185,
+     "gross_avg_r": 0.243,
+     "total_r": 17.8,
      "positive": true,
      "test_n": 29,
-     "test_avg_r": -0.028
-    },
-    "UNI": {
-     "n": 155,
-     "win_rate": 26.5,
-     "avg_r": -0.187,
-     "gross_avg_r": -0.122,
-     "total_r": -28.9,
-     "positive": false,
-     "test_n": 39,
-     "test_avg_r": 0.147
+     "test_avg_r": -0.034
     },
     "XRP": {
      "n": 117,
@@ -5314,8 +5282,8 @@
      "gross_avg_r": -0.053,
      "total_r": -16.6,
      "positive": false,
-     "test_n": 44,
-     "test_avg_r": -0.188
+     "test_n": 43,
+     "test_avg_r": -0.166
     },
     "ZEC": {
      "n": 132,
@@ -5324,8 +5292,8 @@
      "gross_avg_r": 0.06,
      "total_r": -0.1,
      "positive": false,
-     "test_n": 44,
-     "test_avg_r": -0.168
+     "test_n": 41,
+     "test_avg_r": -0.118
     }
    },
    "positive_coins": [
@@ -5333,11 +5301,11 @@
     "SUI"
    ],
    "why_not": [
-    "avg -0.12R/trade (needs +0.10R)",
-    "profit factor 0.82",
-    "recovery factor -0.84 (net -121.7R / max drawdown 144.7R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 39.1R - limit 17R",
-    "longest drawdown 1735 days = 96% of the tested period (limit 55%)",
+    "avg -0.11R/trade (needs +0.10R)",
+    "profit factor 0.83",
+    "recovery factor -0.81 (net -95.5R / max drawdown 117.4R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 37.3R - limit 17R",
+    "longest drawdown 1748 days = 96% of the tested period (limit 55%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5348,27 +5316,27 @@
    "id": "P07-SQUEEZE-RETEST-V2",
    "tf": "15m",
    "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 1988,
-   "win_rate": 28.9,
-   "avg_r": -0.23,
-   "gross_avg_r": -0.105,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 1681,
+   "win_rate": 29.1,
+   "avg_r": -0.231,
+   "gross_avg_r": -0.099,
    "pf": 0.69,
-   "test_avg_r": -0.248,
-   "test_trades": 640,
-   "long_avg_r": -0.237,
-   "short_avg_r": -0.223,
-   "fees_avg_r": 0.126,
+   "test_avg_r": -0.321,
+   "test_trades": 534,
+   "long_avg_r": -0.243,
+   "short_avg_r": -0.219,
+   "fees_avg_r": 0.132,
    "coins": {
     "BNB": {
-     "n": 246,
-     "win_rate": 23.6,
-     "avg_r": -0.418,
-     "gross_avg_r": -0.256,
-     "total_r": -102.8,
+     "n": 245,
+     "win_rate": 23.7,
+     "avg_r": -0.414,
+     "gross_avg_r": -0.253,
+     "total_r": -101.5,
      "positive": false,
-     "test_n": 71,
-     "test_avg_r": -0.303
+     "test_n": 67,
+     "test_avg_r": -0.355
     },
     "BTC": {
      "n": 261,
@@ -5377,58 +5345,48 @@
      "gross_avg_r": -0.076,
      "total_r": -73.3,
      "positive": false,
-     "test_n": 83,
-     "test_avg_r": -0.434
+     "test_n": 78,
+     "test_avg_r": -0.493
     },
     "ETH": {
-     "n": 257,
-     "win_rate": 27.2,
-     "avg_r": -0.263,
-     "gross_avg_r": -0.115,
+     "n": 258,
+     "win_rate": 27.1,
+     "avg_r": -0.262,
+     "gross_avg_r": -0.114,
      "total_r": -67.6,
      "positive": false,
-     "test_n": 94,
-     "test_avg_r": -0.108
+     "test_n": 92,
+     "test_avg_r": -0.113
     },
     "SOL": {
-     "n": 268,
-     "win_rate": 32.5,
-     "avg_r": -0.15,
-     "gross_avg_r": -0.053,
-     "total_r": -40.1,
+     "n": 267,
+     "win_rate": 32.2,
+     "avg_r": -0.161,
+     "gross_avg_r": -0.063,
+     "total_r": -42.9,
      "positive": false,
-     "test_n": 89,
-     "test_avg_r": -0.248
+     "test_n": 85,
+     "test_avg_r": -0.323
     },
     "SUI": {
-     "n": 202,
-     "win_rate": 29.2,
-     "avg_r": -0.18,
-     "gross_avg_r": -0.089,
-     "total_r": -36.3,
+     "n": 205,
+     "win_rate": 28.8,
+     "avg_r": -0.198,
+     "gross_avg_r": -0.104,
+     "total_r": -40.5,
      "positive": false,
-     "test_n": 72,
-     "test_avg_r": -0.298
-    },
-    "UNI": {
-     "n": 310,
-     "win_rate": 26.8,
-     "avg_r": -0.255,
-     "gross_avg_r": -0.162,
-     "total_r": -79.2,
-     "positive": false,
-     "test_n": 94,
-     "test_avg_r": -0.061
+     "test_n": 74,
+     "test_avg_r": -0.359
     },
     "XRP": {
-     "n": 201,
-     "win_rate": 32.8,
-     "avg_r": -0.142,
-     "gross_avg_r": -0.022,
-     "total_r": -28.6,
+     "n": 202,
+     "win_rate": 32.2,
+     "avg_r": -0.162,
+     "gross_avg_r": -0.041,
+     "total_r": -32.7,
      "positive": false,
-     "test_n": 60,
-     "test_avg_r": -0.173
+     "test_n": 61,
+     "test_avg_r": -0.214
     },
     "ZEC": {
      "n": 243,
@@ -5445,9 +5403,9 @@
    "why_not": [
     "avg -0.23R/trade (needs +0.10R)",
     "profit factor 0.69",
-    "recovery factor -0.98 (net -458.1R / max drawdown 468.6R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 47.6R - limit 17R",
-    "longest drawdown 1718 days = 94% of the tested period (limit 55%)",
+    "recovery factor -0.95 (net -388.8R / max drawdown 408.0R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 48.6R - limit 17R",
+    "longest drawdown 1722 days = 95% of the tested period (limit 55%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5458,16 +5416,16 @@
    "id": "P07-SQUEEZE-RETEST-V3",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 267,
-   "win_rate": 35.6,
-   "avg_r": 0.049,
-   "gross_avg_r": 0.085,
-   "pf": 1.08,
-   "test_avg_r": 0.042,
-   "test_trades": 84,
-   "long_avg_r": 0.061,
-   "short_avg_r": 0.034,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 252,
+   "win_rate": 35.7,
+   "avg_r": 0.054,
+   "gross_avg_r": 0.091,
+   "pf": 1.09,
+   "test_avg_r": 0.018,
+   "test_trades": 83,
+   "long_avg_r": 0.075,
+   "short_avg_r": 0.024,
    "fees_avg_r": 0.036,
    "coins": {
     "BNB": {
@@ -5477,8 +5435,8 @@
      "gross_avg_r": -0.0,
      "total_r": -1.6,
      "positive": false,
-     "test_n": 12,
-     "test_avg_r": -0.024
+     "test_n": 11,
+     "test_avg_r": -0.111
     },
     "BTC": {
      "n": 39,
@@ -5511,34 +5469,24 @@
      "test_avg_r": -0.155
     },
     "SUI": {
-     "n": 21,
-     "win_rate": 19.0,
-     "avg_r": -0.372,
-     "gross_avg_r": -0.344,
-     "total_r": -7.8,
+     "n": 23,
+     "win_rate": 17.4,
+     "avg_r": -0.43,
+     "gross_avg_r": -0.402,
+     "total_r": -9.9,
      "positive": false,
-     "test_n": 9,
-     "test_avg_r": -0.314
-    },
-    "UNI": {
-     "n": 18,
-     "win_rate": 33.3,
-     "avg_r": -0.014,
-     "gross_avg_r": 0.012,
-     "total_r": -0.3,
-     "positive": false,
-     "test_n": 3,
-     "test_avg_r": 0.499
+     "test_n": 11,
+     "test_avg_r": -0.446
     },
     "XRP": {
-     "n": 32,
-     "win_rate": 37.5,
-     "avg_r": 0.108,
-     "gross_avg_r": 0.141,
-     "total_r": 3.5,
+     "n": 33,
+     "win_rate": 39.4,
+     "avg_r": 0.179,
+     "gross_avg_r": 0.212,
+     "total_r": 5.9,
      "positive": true,
-     "test_n": 13,
-     "test_avg_r": 0.355
+     "test_n": 14,
+     "test_avg_r": 0.505
     },
     "ZEC": {
      "n": 32,
@@ -5559,9 +5507,9 @@
    ],
    "why_not": [
     "avg +0.05R/trade (needs +0.10R)",
-    "profit factor 1.08",
-    "recovery factor 0.71 (net +13.1R / max drawdown 18.5R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 27.0R - limit 17R"
+    "profit factor 1.09",
+    "recovery factor 0.71 (net +13.7R / max drawdown 19.4R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 25.6R - limit 17R"
    ]
   },
   "P07-SQUEEZE-RETEST-V4@1.0|4h": {
@@ -5571,17 +5519,17 @@
    "id": "P07-SQUEEZE-RETEST-V4",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 795,
-   "win_rate": 34.7,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 725,
+   "win_rate": 34.3,
    "avg_r": 0.057,
-   "gross_avg_r": 0.102,
+   "gross_avg_r": 0.103,
    "pf": 1.08,
-   "test_avg_r": 0.322,
-   "test_trades": 239,
-   "long_avg_r": 0.091,
-   "short_avg_r": 0.013,
-   "fees_avg_r": 0.045,
+   "test_avg_r": 0.294,
+   "test_trades": 221,
+   "long_avg_r": 0.095,
+   "short_avg_r": 0.006,
+   "fees_avg_r": 0.046,
    "coins": {
     "BNB": {
      "n": 121,
@@ -5590,8 +5538,8 @@
      "gross_avg_r": 0.17,
      "total_r": 14.2,
      "positive": true,
-     "test_n": 34,
-     "test_avg_r": 0.483
+     "test_n": 33,
+     "test_avg_r": 0.461
     },
     "BTC": {
      "n": 124,
@@ -5624,24 +5572,14 @@
      "test_avg_r": 0.33
     },
     "SUI": {
-     "n": 51,
-     "win_rate": 23.5,
-     "avg_r": -0.227,
-     "gross_avg_r": -0.194,
-     "total_r": -11.6,
+     "n": 53,
+     "win_rate": 22.6,
+     "avg_r": -0.258,
+     "gross_avg_r": -0.225,
+     "total_r": -13.7,
      "positive": false,
-     "test_n": 19,
-     "test_avg_r": -0.263
-    },
-    "UNI": {
-     "n": 72,
-     "win_rate": 37.5,
-     "avg_r": 0.028,
-     "gross_avg_r": 0.062,
-     "total_r": 2.0,
-     "positive": true,
-     "test_n": 19,
-     "test_avg_r": 0.459
+     "test_n": 21,
+     "test_avg_r": -0.337
     },
     "XRP": {
      "n": 99,
@@ -5669,14 +5607,13 @@
     "BTC",
     "ETH",
     "SOL",
-    "UNI",
     "XRP"
    ],
    "why_not": [
     "avg +0.06R/trade (needs +0.10R)",
     "profit factor 1.08",
-    "recovery factor 1.14 (net +45.7R / max drawdown 40.1R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 29.8R - limit 17R",
+    "recovery factor 1.11 (net +41.6R / max drawdown 37.6R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 31.1R - limit 17R",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5687,17 +5624,17 @@
    "id": "P07-SQUEEZE-RETEST-V5",
    "tf": "1h",
    "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 2827,
-   "win_rate": 32.2,
-   "avg_r": -0.059,
-   "gross_avg_r": 0.006,
-   "pf": 0.91,
-   "test_avg_r": -0.074,
-   "test_trades": 885,
-   "long_avg_r": -0.049,
-   "short_avg_r": -0.069,
-   "fees_avg_r": 0.065,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 2518,
+   "win_rate": 32.5,
+   "avg_r": -0.048,
+   "gross_avg_r": 0.019,
+   "pf": 0.92,
+   "test_avg_r": -0.067,
+   "test_trades": 800,
+   "long_avg_r": -0.039,
+   "short_avg_r": -0.058,
+   "fees_avg_r": 0.067,
    "coins": {
     "BNB": {
      "n": 432,
@@ -5730,44 +5667,34 @@
      "test_avg_r": -0.207
     },
     "SOL": {
-     "n": 344,
-     "win_rate": 34.3,
-     "avg_r": -0.06,
-     "gross_avg_r": -0.009,
-     "total_r": -20.5,
+     "n": 345,
+     "win_rate": 34.2,
+     "avg_r": -0.063,
+     "gross_avg_r": -0.012,
+     "total_r": -21.7,
      "positive": false,
-     "test_n": 101,
-     "test_avg_r": -0.143
+     "test_n": 102,
+     "test_avg_r": -0.154
     },
     "SUI": {
-     "n": 185,
-     "win_rate": 30.3,
-     "avg_r": -0.119,
-     "gross_avg_r": -0.069,
-     "total_r": -22.0,
+     "n": 186,
+     "win_rate": 30.6,
+     "avg_r": -0.105,
+     "gross_avg_r": -0.055,
+     "total_r": -19.6,
      "positive": false,
      "test_n": 49,
-     "test_avg_r": -0.161
-    },
-    "UNI": {
-     "n": 313,
-     "win_rate": 29.4,
-     "avg_r": -0.146,
-     "gross_avg_r": -0.096,
-     "total_r": -45.8,
-     "positive": false,
-     "test_n": 88,
-     "test_avg_r": -0.168
+     "test_avg_r": -0.162
     },
     "XRP": {
-     "n": 359,
-     "win_rate": 34.3,
-     "avg_r": -0.008,
-     "gross_avg_r": 0.058,
-     "total_r": -3.0,
+     "n": 361,
+     "win_rate": 34.1,
+     "avg_r": -0.014,
+     "gross_avg_r": 0.051,
+     "total_r": -5.2,
      "positive": false,
-     "test_n": 136,
-     "test_avg_r": 0.019
+     "test_n": 138,
+     "test_avg_r": 0.003
     },
     "ZEC": {
      "n": 353,
@@ -5784,11 +5711,11 @@
     "ZEC"
    ],
    "why_not": [
-    "avg -0.06R/trade (needs +0.10R)",
-    "profit factor 0.91",
-    "recovery factor -0.62 (net -165.7R / max drawdown 266.5R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 32.9R - limit 17R",
-    "longest drawdown 2082 days = 62% of the tested period (limit 55%)",
+    "avg -0.05R/trade (needs +0.10R)",
+    "profit factor 0.92",
+    "recovery factor -0.58 (net -120.8R / max drawdown 209.8R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 30.4R - limit 17R",
+    "longest drawdown 2089 days = 62% of the tested period (limit 55%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5799,17 +5726,17 @@
    "id": "P07-SQUEEZE-RETEST-V5",
    "tf": "30m",
    "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 2272,
-   "win_rate": 30.8,
-   "avg_r": -0.161,
-   "gross_avg_r": -0.067,
-   "pf": 0.77,
-   "test_avg_r": -0.145,
-   "test_trades": 747,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 1936,
+   "win_rate": 30.6,
+   "avg_r": -0.171,
+   "gross_avg_r": -0.074,
+   "pf": 0.75,
+   "test_avg_r": -0.179,
+   "test_trades": 652,
    "long_avg_r": -0.196,
-   "short_avg_r": -0.125,
-   "fees_avg_r": 0.093,
+   "short_avg_r": -0.145,
+   "fees_avg_r": 0.097,
    "coins": {
     "BNB": {
      "n": 287,
@@ -5818,68 +5745,58 @@
      "gross_avg_r": -0.128,
      "total_r": -74.9,
      "positive": false,
-     "test_n": 107,
-     "test_avg_r": -0.38
+     "test_n": 104,
+     "test_avg_r": -0.363
     },
     "BTC": {
-     "n": 267,
-     "win_rate": 26.6,
-     "avg_r": -0.402,
-     "gross_avg_r": -0.262,
-     "total_r": -107.3,
+     "n": 268,
+     "win_rate": 26.5,
+     "avg_r": -0.403,
+     "gross_avg_r": -0.264,
+     "total_r": -107.9,
      "positive": false,
      "test_n": 85,
-     "test_avg_r": -0.242
+     "test_avg_r": -0.235
     },
     "ETH": {
-     "n": 272,
-     "win_rate": 33.5,
-     "avg_r": -0.109,
-     "gross_avg_r": -0.007,
-     "total_r": -29.6,
+     "n": 271,
+     "win_rate": 33.2,
+     "avg_r": -0.118,
+     "gross_avg_r": -0.016,
+     "total_r": -32.0,
      "positive": false,
-     "test_n": 84,
-     "test_avg_r": 0.013
+     "test_n": 82,
+     "test_avg_r": -0.022
     },
     "SOL": {
-     "n": 341,
-     "win_rate": 30.5,
-     "avg_r": -0.168,
-     "gross_avg_r": -0.092,
-     "total_r": -57.4,
+     "n": 342,
+     "win_rate": 30.4,
+     "avg_r": -0.172,
+     "gross_avg_r": -0.095,
+     "total_r": -58.7,
      "positive": false,
-     "test_n": 117,
-     "test_avg_r": -0.237
+     "test_n": 114,
+     "test_avg_r": -0.283
     },
     "SUI": {
-     "n": 225,
-     "win_rate": 34.7,
-     "avg_r": -0.004,
-     "gross_avg_r": 0.064,
-     "total_r": -0.8,
+     "n": 226,
+     "win_rate": 34.5,
+     "avg_r": -0.009,
+     "gross_avg_r": 0.059,
+     "total_r": -2.1,
      "positive": false,
      "test_n": 66,
-     "test_avg_r": -0.101
-    },
-    "UNI": {
-     "n": 337,
-     "win_rate": 31.5,
-     "avg_r": -0.113,
-     "gross_avg_r": -0.041,
-     "total_r": -38.1,
-     "positive": false,
-     "test_n": 83,
-     "test_avg_r": 0.099
+     "test_avg_r": -0.103
     },
     "XRP": {
-     "n": 270,
-     "win_rate": 30.7,
-     "avg_r": -0.146,
-     "gross_avg_r": -0.049,
-     "total_r": -39.3,
+     "n": 269,
+     "win_rate": 30.9,
+     "avg_r": -0.142,
+     "gross_avg_r": -0.046,
+     "total_r": -38.2,
      "positive": false,
-     "test_n": 101,
-     "test_avg_r": -0.116
+     "test_n": 100,
+     "test_avg_r": -0.106
     },
     "ZEC": {
      "n": 273,
@@ -5888,17 +5805,17 @@
      "gross_avg_r": -0.0,
      "total_r": -17.4,
      "positive": false,
-     "test_n": 104,
-     "test_avg_r": -0.097
+     "test_n": 101,
+     "test_avg_r": -0.075
     }
    },
    "positive_coins": [],
    "why_not": [
-    "avg -0.16R/trade (needs +0.10R)",
-    "profit factor 0.77",
-    "recovery factor -0.97 (net -364.9R / max drawdown 377.2R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 42.2R - limit 17R",
-    "longest drawdown 1795 days = 98% of the tested period (limit 55%)",
+    "avg -0.17R/trade (needs +0.10R)",
+    "profit factor 0.75",
+    "recovery factor -0.97 (net -331.3R / max drawdown 340.7R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 41.3R - limit 17R",
+    "longest drawdown 1748 days = 96% of the tested period (limit 55%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -5909,27 +5826,27 @@
    "id": "P07-SQUEEZE-RETEST-V5",
    "tf": "15m",
    "status": "FAILED",
-   "tested_utc": "2026-11-05 07:18",
-   "trades": 4364,
-   "win_rate": 28.9,
-   "avg_r": -0.246,
-   "gross_avg_r": -0.11,
-   "pf": 0.68,
-   "test_avg_r": -0.258,
-   "test_trades": 1351,
-   "long_avg_r": -0.267,
-   "short_avg_r": -0.225,
-   "fees_avg_r": 0.136,
+   "tested_utc": "2026-11-10 07:41",
+   "trades": 3741,
+   "win_rate": 28.5,
+   "avg_r": -0.261,
+   "gross_avg_r": -0.119,
+   "pf": 0.66,
+   "test_avg_r": -0.292,
+   "test_trades": 1169,
+   "long_avg_r": -0.273,
+   "short_avg_r": -0.249,
+   "fees_avg_r": 0.143,
    "coins": {
     "BNB": {
      "n": 560,
      "win_rate": 23.9,
      "avg_r": -0.429,
      "gross_avg_r": -0.243,
-     "total_r": -240.0,
+     "total_r": -240.1,
      "positive": false,
-     "test_n": 165,
-     "test_avg_r": -0.351
+     "test_n": 161,
+     "test_avg_r": -0.374
     },
     "BTC": {
      "n": 540,
@@ -5938,77 +5855,67 @@
      "gross_avg_r": -0.148,
      "total_r": -201.3,
      "positive": false,
-     "test_n": 173,
-     "test_avg_r": -0.294
+     "test_n": 166,
+     "test_avg_r": -0.309
     },
     "ETH": {
-     "n": 512,
-     "win_rate": 28.7,
-     "avg_r": -0.272,
-     "gross_avg_r": -0.124,
-     "total_r": -139.5,
+     "n": 511,
+     "win_rate": 28.6,
+     "avg_r": -0.278,
+     "gross_avg_r": -0.129,
+     "total_r": -141.9,
      "positive": false,
-     "test_n": 179,
-     "test_avg_r": -0.246
+     "test_n": 174,
+     "test_avg_r": -0.244
     },
     "SOL": {
-     "n": 633,
-     "win_rate": 29.7,
-     "avg_r": -0.204,
-     "gross_avg_r": -0.096,
-     "total_r": -129.0,
+     "n": 632,
+     "win_rate": 29.6,
+     "avg_r": -0.209,
+     "gross_avg_r": -0.1,
+     "total_r": -131.8,
      "positive": false,
-     "test_n": 201,
-     "test_avg_r": -0.304
+     "test_n": 197,
+     "test_avg_r": -0.338
     },
     "SUI": {
-     "n": 447,
-     "win_rate": 31.1,
-     "avg_r": -0.119,
-     "gross_avg_r": -0.023,
-     "total_r": -53.1,
+     "n": 451,
+     "win_rate": 30.8,
+     "avg_r": -0.129,
+     "gross_avg_r": -0.033,
+     "total_r": -58.4,
      "positive": false,
-     "test_n": 127,
-     "test_avg_r": -0.243
-    },
-    "UNI": {
-     "n": 628,
-     "win_rate": 30.7,
-     "avg_r": -0.183,
-     "gross_avg_r": -0.083,
-     "total_r": -115.2,
-     "positive": false,
-     "test_n": 172,
-     "test_avg_r": -0.154
+     "test_n": 130,
+     "test_avg_r": -0.285
     },
     "XRP": {
-     "n": 504,
-     "win_rate": 29.6,
-     "avg_r": -0.223,
-     "gross_avg_r": -0.085,
-     "total_r": -112.3,
+     "n": 508,
+     "win_rate": 29.1,
+     "avg_r": -0.236,
+     "gross_avg_r": -0.099,
+     "total_r": -120.1,
      "positive": false,
-     "test_n": 169,
-     "test_avg_r": -0.209
+     "test_n": 173,
+     "test_avg_r": -0.241
     },
     "ZEC": {
-     "n": 540,
-     "win_rate": 30.4,
-     "avg_r": -0.154,
-     "gross_avg_r": -0.06,
-     "total_r": -83.3,
+     "n": 539,
+     "win_rate": 30.2,
+     "avg_r": -0.156,
+     "gross_avg_r": -0.062,
+     "total_r": -83.9,
      "positive": false,
-     "test_n": 165,
-     "test_avg_r": -0.257
+     "test_n": 168,
+     "test_avg_r": -0.249
     }
    },
    "positive_coins": [],
    "why_not": [
-    "avg -0.25R/trade (needs +0.10R)",
-    "profit factor 0.68",
-    "recovery factor -0.99 (net -1073.7R / max drawdown 1085.1R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 48.2R - limit 17R",
-    "longest drawdown 1710 days = 93% of the tested period (limit 55%)",
+    "avg -0.26R/trade (needs +0.10R)",
+    "profit factor 0.66",
+    "recovery factor -0.99 (net -977.4R / max drawdown 983.7R) - needs 3",
+    "Monte Carlo 95% worst drawdown per 100 trades 52.0R - limit 17R",
+    "longest drawdown 1724 days = 94% of the tested period (limit 55%)",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -8888,14 +8795,14 @@
    "id": "P12-LEADER-C",
    "tf": "4h",
    "status": "FAILED",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 2817,
    "win_rate": 41.5,
    "avg_r": -0.006,
    "gross_avg_r": 0.032,
    "pf": 0.99,
-   "test_avg_r": -0.088,
-   "test_trades": 702,
+   "test_avg_r": -0.091,
+   "test_trades": 701,
    "long_avg_r": -0.006,
    "short_avg_r": 0.0,
    "fees_avg_r": 0.037,
@@ -8907,8 +8814,8 @@
      "gross_avg_r": -0.027,
      "total_r": -33.9,
      "positive": false,
-     "test_n": 122,
-     "test_avg_r": -0.174
+     "test_n": 121,
+     "test_avg_r": -0.191
     },
     "BTC": {
      "n": 500,
@@ -8980,7 +8887,7 @@
     "avg -0.01R/trade (needs +0.10R)",
     "profit factor 0.99",
     "recovery factor -0.14 (net -15.9R / max drawdown 113.7R) - needs 3",
-    "Monte Carlo 95% worst drawdown per 100 trades 25.6R - limit 17R",
+    "Monte Carlo 95% worst drawdown per 100 trades 25.4R - limit 17R",
     "not profitable in BOTH train and unseen test"
    ]
   },
@@ -8991,7 +8898,7 @@
    "id": "P12-LEADER-V1",
    "tf": "4h",
    "status": "BACKTESTING",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 574,
    "win_rate": 43.7,
    "avg_r": 0.109,
@@ -9092,7 +8999,7 @@
    "id": "P12-LEADER-V2",
    "tf": "4h",
    "status": "VALIDATION",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 498,
    "win_rate": 47.2,
    "avg_r": 0.188,
@@ -9184,7 +9091,7 @@
     "ZEC"
    ],
    "why_not": [
-    "multiple-testing bar: t-statistic 3.41 of the average trade, needs 3.74 after 538 trials",
+    "multiple-testing bar: t-statistic 3.41 of the average trade, needs 3.74 after 540 trials",
     "\u00b120% test: look 3\u21922 gives +0.00R",
     "HIGH OVERFITTING RISK: 51% of the profit from window 2"
    ]
@@ -9196,14 +9103,14 @@
    "id": "P12-LEADER-V3",
    "tf": "1h",
    "status": "FAILED",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 837,
    "win_rate": 34.9,
    "avg_r": -0.034,
    "gross_avg_r": 0.012,
    "pf": 0.95,
-   "test_avg_r": -0.049,
-   "test_trades": 140,
+   "test_avg_r": -0.042,
+   "test_trades": 139,
    "long_avg_r": -0.034,
    "short_avg_r": 0.0,
    "fees_avg_r": 0.046,
@@ -9275,8 +9182,8 @@
      "gross_avg_r": 0.327,
      "total_r": 50.8,
      "positive": true,
-     "test_n": 47,
-     "test_avg_r": 0.121
+     "test_n": 46,
+     "test_avg_r": 0.147
     }
    },
    "positive_coins": [
@@ -9299,7 +9206,7 @@
    "id": "P13-TURTLE-C",
    "tf": "4h",
    "status": "PAPER_TRADING",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 467,
    "win_rate": 51.2,
    "avg_r": 0.214,
@@ -9400,7 +9307,7 @@
    "id": "P13-TURTLE-V1",
    "tf": "4h",
    "status": "VALIDATION",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 157,
    "win_rate": 40.8,
    "avg_r": 1.834,
@@ -9493,7 +9400,7 @@
     "ZEC"
    ],
    "why_not": [
-    "multiple-testing bar: t-statistic 3.44 of the average trade, needs 3.74 after 538 trials",
+    "multiple-testing bar: t-statistic 3.44 of the average trade, needs 3.74 after 540 trials",
     "HIGH OVERFITTING RISK: 52% of the profit from window 2"
    ]
   },
@@ -9504,7 +9411,7 @@
    "id": "P13-TURTLE-V2",
    "tf": "4h",
    "status": "VALIDATION",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 124,
    "win_rate": 46.0,
    "avg_r": 1.999,
@@ -9597,7 +9504,7 @@
     "ZEC"
    ],
    "why_not": [
-    "multiple-testing bar: t-statistic 3.12 of the average trade, needs 3.74 after 538 trials",
+    "multiple-testing bar: t-statistic 3.12 of the average trade, needs 3.74 after 540 trials",
     "HIGH OVERFITTING RISK: 50% of the profit from window 2"
    ]
   },
@@ -9608,7 +9515,7 @@
    "id": "P13-TURTLE-V3",
    "tf": "4h",
    "status": "VALIDATION",
-   "tested_utc": "2026-11-09 07:06",
+   "tested_utc": "2026-11-10 07:41",
    "trades": 128,
    "win_rate": 40.6,
    "avg_r": 1.921,
@@ -9701,7 +9608,7 @@
     "ZEC"
    ],
    "why_not": [
-    "multiple-testing bar: t-statistic 3.08 of the average trade, needs 3.74 after 538 trials",
+    "multiple-testing bar: t-statistic 3.08 of the average trade, needs 3.74 after 540 trials",
     "HIGH OVERFITTING RISK: 52% of the profit from window 2"
    ]
   }
