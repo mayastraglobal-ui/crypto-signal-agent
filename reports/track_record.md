@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-11 00:52 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-11 05:56 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 9 | 11 | -0.64R | -5.72R | 7.15R | 7 |
-| Silent research records (never sent to you) | 65 | 22 | -0.51R | -33.10R | 38.60R | 17 |
-| 🔵 TEST | 77 | 20 | -0.55R | -42.09R | 46.92R | 20 |
+| Silent research records (never sent to you) | 66 | 23 | -0.48R | -31.57R | 38.60R | 17 |
+| 🔵 TEST | 78 | 20 | -0.52R | -40.56R | 46.92R | 20 |
 | 🟡 PAPER | 3 | 0 | -1.08R | -3.25R | 3.25R | 3 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 80 | 19 | -0.57R | -45.34R | 50.17R | 20 |
+| **All** | 81 | 20 | -0.54R | -43.81R | 50.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -61,13 +61,13 @@ Warning signs (no pause yet):
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | 🔵 TEST | silent | 1 | 0 | -1.02R | +0.25R | -1.02R | 1.02R | ✅ |
 | P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 1 | 100 | +0.55R | +0.07R | +0.55R | 0.00R | ✅ |
 | P07-SQUEEZE-RETEST-V5 | 1h | ZEC | 🔵 TEST | silent | 1 | 0 | -0.49R | +0.03R | -0.49R | 0.49R | ✅ |
+| P08-SESSION-BREAKOUT-V3 | 1h | SOL | 🔵 TEST | silent | 1 | 100 | +1.53R | +0.11R | +1.53R | 0.00R | ✅ |
 | P08-SESSION-BREAKOUT-V4 | 1h | XRP | 🔵 TEST | silent | 1 | 0 | -1.07R | +0.07R | -1.07R | 1.07R | ✅ |
 
 ## Equity curve (all stages, R after fees)
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-04 04:29 | -44.42R |
 | 2026-11-05 15:59 | -45.44R |
 | 2026-11-06 09:29 | -45.68R |
 | 2026-11-06 09:29 | -45.13R |
@@ -87,3 +87,4 @@ Warning signs (no pause yet):
 | 2026-11-09 12:59 | -46.77R |
 | 2026-11-10 15:59 | -44.30R |
 | 2026-11-10 18:59 | -45.34R |
+| 2026-11-11 02:59 | -43.81R |
