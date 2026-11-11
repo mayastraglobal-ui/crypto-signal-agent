@@ -570,3 +570,43 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, late_entry, no_displacement
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.09R
+- timestamp: 2026-11-11 16:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 15:59 UTC, stage TEST
+  - MAE -1.03R / MFE +0.40R
+  - at entry: session Silver Bullet, conditions: overextended_entry, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
+
+### BTC SHORT 1h P08-SESSION-BREAKOUT-V4 v1.0 - SL -1.12R
+- timestamp: 2026-11-11 16:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.12R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P08-SESSION-BREAKOUT-V4 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 15:59 UTC, stage TEST
+  - MAE -1.20R / MFE +0.70R
+  - at entry: session Silver Bullet, conditions: overextended_entry, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.06R
+- timestamp: 2026-11-11 16:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 15:59 UTC, stage TEST
+  - MAE -1.25R / MFE +0.28R
+  - at entry: session Silver Bullet, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h P07-SQUEEZE-RETEST-V1 v1.0 - SL -1.05R
+- timestamp: 2026-11-11 16:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V1 v1.0 · asset: SOL · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 15:59 UTC, stage TEST
+  - MAE -1.01R / MFE +0.46R
+  - at entry: session -, conditions: overextended_entry
+  - what happened: -
+  - root cause / fix: (review)
+
+### SUI SHORT 1h P03-FIB-PULLBACK-V5 v1.0 - SL -1.08R
+- timestamp: 2026-11-11 16:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P03-FIB-PULLBACK-V5 v1.0 · asset: SUI · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 22:59 UTC, closed 2026-11-11 15:59 UTC, stage TEST
+  - MAE -1.66R / MFE +0.44R
+  - at entry: session outside killzones, conditions: low_relative_volume, wrong_session
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
