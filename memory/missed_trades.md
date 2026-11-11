@@ -2031,3 +2031,52 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 1h: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+
+### ETH down -4.7% (6.6x ATR), 2026-11-10 08:00 -> 2026-11-10 17:00
+- timestamp: 2026-11-11 07:00 UTC · source: engine: daily research run · evidence: FACT: move of 6.6x the 1H ATR within 12 hours; 193 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: blocked by the regime gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 1h: signal
+  - trend_pullback v1.0 30m: signal
+
+### SOL down -4.8% (5.8x ATR), 2026-11-10 07:00 -> 2026-11-10 17:00
+- timestamp: 2026-11-11 07:00 UTC · source: engine: daily research run · evidence: FACT: move of 5.8x the 1H ATR within 12 hours; 193 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: RANGE · review: 2026-11-18
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 1h: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - liquidity_sweep_reversal v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: signal
+  - trend_pullback v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 1h: blocked by the regime gate
+  - trend_pullback v1.0 30m: blocked by the regime gate
+
+### ZEC down -14.8% (8.3x ATR), 2026-11-10 14:00 -> 2026-11-10 17:00
+- timestamp: 2026-11-11 07:00 UTC · source: engine: daily research run · evidence: FACT: move of 8.3x the 1H ATR within 12 hours; 193 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ZEC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: signal
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 1h: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the permission gate
+  - trend_pullback v1.0 30m: blocked by the permission gate
+
+### BNB down -2.9% (6.0x ATR), 2026-11-10 08:00 -> 2026-11-10 17:00
+- timestamp: 2026-11-11 07:00 UTC · source: engine: daily research run · evidence: FACT: move of 6.0x the 1H ATR within 12 hours; 193 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: RANGE · review: 2026-11-18
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate

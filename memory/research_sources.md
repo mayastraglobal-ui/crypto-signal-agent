@@ -1734,3 +1734,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P11-MOMENTUM-V1-FRETEST-FDISP@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, RANGE, HIGH_VOL_RANGE, WEAK_BEAR, STRONG_BEAR, EXPANSION, COMPRESSION, TRANSITION, UNCLEAR on 30m
   - limitations: Fake breaks when only a few coins move; a sudden reversal after a news spike; misses moves that start stretched (one huge candle).
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-S4-FDISP-FNOTEXT@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-11-11 07:00 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-S4-FDISP-FNOTEXT@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-S4-FDISP-FNOTEXT v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-02-09
+  - title / source: engine failure lab: a repair of donchian_breakout-VEXIT-S4-FDISP@1.0 for its loss tag overextended_entry
+  - URL: https://www.nber.org/papers/w25882
+  - claim: donchian_breakout-VEXIT-S4-FDISP@1.0 loses on overextended_entry (+0.00R a trade with it, +0.23R without). One change - no entry more than 2 ATR beyond the 20 EMA (not overextended) - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-S4-FDISP-FNOTEXT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
