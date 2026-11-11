@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-11 16:32 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-11 21:15 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 12 | 17 | -0.63R | -7.51R | 7.51R | 7 |
+| **Your alerts** (could reach your Telegram) | 13 | 15 | -0.66R | -8.56R | 8.56R | 7 |
 | Silent research records (never sent to you) | 70 | 21 | -0.51R | -35.72R | 38.60R | 17 |
 | 🔵 TEST | 85 | 19 | -0.56R | -47.91R | 47.91R | 20 |
-| 🟡 PAPER | 4 | 25 | -0.72R | -2.89R | 3.25R | 3 |
+| 🟡 PAPER | 12 | 8 | -0.94R | -11.26R | 11.26R | 8 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 89 | 19 | -0.57R | -50.80R | 50.80R | 20 |
+| **All** | 97 | 18 | -0.61R | -59.17R | 59.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -28,6 +28,7 @@ Warning signs (no pause yet):
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
 | TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | ✅ yes | 3 | 0 | -1.05R | +0.29R | -3.14R | 3.14R | ⚠️ watch |
 | P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 2 | 0 | -0.96R | +0.36R | -1.92R | 1.92R | ✅ |
+| donchian_breakout | 4h | SOL | 🟡 PAPER | ✅ yes | 2 | 50 | -0.34R | +0.22R | -0.68R | 1.04R | ✅ |
 | P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.25R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.05R | +0.22R | -1.05R | 1.05R | ✅ |
 | P05-RANGE-REVERSAL-V4 | 4h | SOL | 🔵 TEST | ✅ yes | 1 | 0 | -1.06R | +0.24R | -1.06R | 1.06R | ✅ |
@@ -39,9 +40,15 @@ Warning signs (no pause yet):
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | 🔵 TEST | ✅ yes | 1 | 0 | -1.09R | +0.34R | -1.09R | 1.09R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | 🔵 TEST | ✅ yes | 1 | 0 | -1.06R | +0.17R | -1.06R | 1.06R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.51R | -1.08R | 1.08R | ✅ |
+| donchian_breakout-VEXIT-FDISP | 4h | ETH | 🟡 PAPER | ✅ yes | 1 | 0 | -1.05R | +0.39R | -1.05R | 1.05R | ✅ |
+| donchian_breakout-VEXIT-FDISP | 4h | SOL | 🟡 PAPER | ✅ yes | 1 | 0 | -1.04R | +0.22R | -1.04R | 1.04R | ✅ |
+| donchian_breakout-VEXIT-S4 | 4h | ETH | 🟡 PAPER | ✅ yes | 1 | 0 | -1.05R | +0.44R | -1.05R | 1.05R | ✅ |
+| donchian_breakout-VEXIT-S4 | 4h | SOL | 🟡 PAPER | ✅ yes | 1 | 0 | -1.04R | +0.27R | -1.04R | 1.04R | ✅ |
 | donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.51R | -1.08R | 1.08R | ✅ |
+| donchian_breakout-VEXIT | 4h | ETH | 🟡 PAPER | ✅ yes | 1 | 0 | -1.05R | +0.33R | -1.05R | 1.05R | ✅ |
+| donchian_breakout-VEXIT | 4h | SOL | 🟡 PAPER | ✅ yes | 1 | 0 | -1.04R | +0.20R | -1.04R | 1.04R | ✅ |
 | donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 1 | 0 | -1.08R | +0.26R | -1.08R | 1.08R | ✅ |
-| donchian_breakout | 4h | SOL | 🟡 PAPER | ✅ yes | 1 | 100 | +0.36R | +0.22R | +0.36R | 0.00R | ✅ |
+| donchian_breakout | 4h | ETH | 🟡 PAPER | ✅ yes | 1 | 0 | -1.05R | +0.19R | -1.05R | 1.05R | ✅ |
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 5 | 0 | -0.81R | +0.08R | -4.02R | 4.02R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 0 | -0.94R | +0.01R | -4.69R | 4.69R | ⚠️ watch |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 5 | 20 | -0.67R | +0.01R | -3.36R | 4.31R | ⚠️ watch |
@@ -75,14 +82,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-08 03:59 | -49.00R |
-| 2026-11-08 18:59 | -50.17R |
-| 2026-11-08 21:29 | -49.32R |
-| 2026-11-08 21:29 | -48.47R |
-| 2026-11-08 21:59 | -46.04R |
-| 2026-11-08 21:59 | -43.60R |
-| 2026-11-09 12:59 | -44.65R |
-| 2026-11-09 12:59 | -45.70R |
 | 2026-11-09 12:59 | -46.77R |
 | 2026-11-10 15:59 | -44.30R |
 | 2026-11-10 18:59 | -45.34R |
@@ -95,3 +94,11 @@ Warning signs (no pause yet):
 | 2026-11-11 15:59 | -48.68R |
 | 2026-11-11 15:59 | -49.72R |
 | 2026-11-11 15:59 | -50.80R |
+| 2026-11-11 19:59 | -51.85R |
+| 2026-11-11 19:59 | -52.90R |
+| 2026-11-11 19:59 | -53.95R |
+| 2026-11-11 19:59 | -55.00R |
+| 2026-11-11 19:59 | -56.04R |
+| 2026-11-11 19:59 | -57.08R |
+| 2026-11-11 19:59 | -58.13R |
+| 2026-11-11 19:59 | -59.17R |
