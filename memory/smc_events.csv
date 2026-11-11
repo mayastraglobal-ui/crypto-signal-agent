@@ -33452,3 +33452,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-11 20:15,ZEC,15m,FVG_FILLED,bear,,995.04,1005.21,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-11 20:15,ZEC,15m,FVG,bull,,995.85,999.49,0.284,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-11 20:30,ZEC,15m,FVG_RETRACE,bull,,995.85,999.49,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-11 22:00,BTC,15m,FVG,bear,,74526.01,74622.42,0.455,,1h,RANGE,,smc-1.0,Binance
+2026-11-11 22:30,BTC,15m,FVG_RETRACE,bear,,74526.01,74622.42,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-11 22:45,BTC,15m,WEAK_BREAK,bear,74194.0,,,0.488,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-11 22:00,ETH,30m,BOS,bear,2072.77,,,0.187,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-11 22:00,ETH,15m,BOS,bear,2072.77,,,0.278,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-11 22:45,ETH,15m,FVG_FILLED,bull,,2061.41,2070.53,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-11 22:30,SOL,30m,BOS,bear,84.53,,,0.204,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-11 22:30,SOL,30m,FVG_RETRACE,bull,,84.22,84.5,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-11 22:30,SOL,15m,BOS,bear,84.53,,,0.326,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-11 22:45,SOL,15m,FVG_FILLED,bull,,84.09,84.67,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-11 22:00,XRP,1h,FVG_FILLED,bear,,1.0643,1.0684,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-11 21:45,XRP,15m,FVG_RETRACE,bull,,1.0623,1.064,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-11 21:45,XRP,15m,FVG_FILLED,bull,,1.0623,1.064,,,1h,RANGE,,smc-1.0,Binance
+2026-11-11 22:45,XRP,15m,SWEEP,bull,1.0547,,,0.198,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-11 21:30,ZEC,15m,FVG_FILLED,bull,,995.85,999.49,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-11 22:30,ZEC,15m,SWEEP,bear,1007.88,,,0.596,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-11 22:45,ZEC,15m,SWEEP,bull,982.49,,,0.323,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
