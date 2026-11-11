@@ -1075,3 +1075,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-10 19:58 UTC
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-11 00:52 UTC
+- **EXCLUDED** SNDKB - only 153 days of history (need 180); order book too thin: $170k within 1% (need $250k)
