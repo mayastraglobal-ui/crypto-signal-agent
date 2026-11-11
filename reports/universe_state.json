@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 997,
+ "runs": 998,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,7 +26,6 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
@@ -137,8 +136,7 @@
    "volume_7d"
   ],
   "SNDKB": [
-   "history",
-   "thin_book"
+   "history"
   ],
   "SOXLB": [
    "history",

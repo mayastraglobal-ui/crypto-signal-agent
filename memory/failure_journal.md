@@ -554,3 +554,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, late_entry, no_displacement
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 1h P08-SESSION-BREAKOUT-V1 v1.0 - exit-rule -0.90R
+- timestamp: 2026-11-11 08:19 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.90R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P08-SESSION-BREAKOUT-V1 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 07:59 UTC, stage TEST
+  - MAE -0.81R / MFE +0.70R
+  - at entry: session Silver Bullet, conditions: overextended_entry, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)

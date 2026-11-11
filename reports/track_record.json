@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-11 06:49",
+ "utc": "2026-11-11 08:19",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 81,
+  "n": 82,
   "wins": 16,
-  "win_rate": 19.8,
-  "avg_r": -0.541,
-  "total_r": -43.81,
+  "win_rate": 19.5,
+  "avg_r": -0.545,
+  "total_r": -44.71,
   "max_dd_r": 50.17,
-  "cur_loss_run": 0,
+  "cur_loss_run": 1,
   "max_loss_run": 20,
-  "sd": 1.023
+  "sd": 1.018
  },
  "yours": {
   "n": 9,
@@ -32,29 +32,29 @@
   "sd": 1.166
  },
  "silent": {
-  "n": 66,
+  "n": 67,
   "wins": 15,
-  "win_rate": 22.7,
-  "avg_r": -0.478,
-  "total_r": -31.57,
+  "win_rate": 22.4,
+  "avg_r": -0.485,
+  "total_r": -32.47,
   "max_dd_r": 38.6,
-  "cur_loss_run": 0,
+  "cur_loss_run": 1,
   "max_loss_run": 17,
-  "sd": 1.043
+  "sd": 1.036
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 78,
+   "n": 79,
    "wins": 16,
-   "win_rate": 20.5,
-   "avg_r": -0.52,
-   "total_r": -40.56,
+   "win_rate": 20.3,
+   "avg_r": -0.525,
+   "total_r": -41.46,
    "max_dd_r": 46.92,
-   "cur_loss_run": 0,
+   "cur_loss_run": 1,
    "max_loss_run": 20,
-   "sd": 1.037
+   "sd": 1.031
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -99,9 +99,9 @@
     "sd": 0.263
    },
    "backtest": {
-    "n": 262,
-    "avg_r": 0.082,
-    "win_rate": 34.0
+    "n": 263,
+    "avg_r": 0.079,
+    "win_rate": 33.8
    },
    "verdict": "watch",
    "why": [
@@ -127,9 +127,9 @@
     "sd": 0.222
    },
    "backtest": {
-    "n": 346,
-    "avg_r": 0.001,
-    "win_rate": 35.0
+    "n": 348,
+    "avg_r": 0.005,
+    "win_rate": 35.1
    },
    "verdict": "watch",
    "why": [
@@ -155,13 +155,13 @@
     "sd": 0.055
    },
    "backtest": {
-    "n": 176,
-    "avg_r": 0.049,
-    "win_rate": 36.4
+    "n": 177,
+    "avg_r": 0.041,
+    "win_rate": 36.2
    },
    "verdict": "watch",
    "why": [
-    "4 losses in a row - in its backtest (36% won) a run that long shows up in 16% of 4-trade periods"
+    "4 losses in a row - in its backtest (36% won) a run that long shows up in 17% of 4-trade periods"
    ],
    "last_utc": "2026-11-07 23:59",
    "sent": false
@@ -211,13 +211,13 @@
     "sd": 0.006
    },
    "backtest": {
-    "n": 117,
-    "avg_r": 0.281,
-    "win_rate": 44.4
+    "n": 118,
+    "avg_r": 0.292,
+    "win_rate": 44.9
    },
    "verdict": "watch",
    "why": [
-    "3 losses in a row - in its backtest (44% won) a run that long shows up in 17% of 3-trade periods"
+    "3 losses in a row - in its backtest (45% won) a run that long shows up in 17% of 3-trade periods"
    ],
    "last_utc": "2026-11-10 18:59",
    "sent": true
@@ -291,9 +291,9 @@
     "sd": 1.006
    },
    "backtest": {
-    "n": 251,
-    "avg_r": 0.061,
-    "win_rate": 38.6
+    "n": 253,
+    "avg_r": 0.051,
+    "win_rate": 38.3
    },
    "verdict": "ok",
    "why": [],
@@ -317,9 +317,9 @@
     "sd": 0.643
    },
    "backtest": {
-    "n": 355,
-    "avg_r": 0.11,
-    "win_rate": 35.8
+    "n": 356,
+    "avg_r": 0.109,
+    "win_rate": 35.7
    },
    "verdict": "ok",
    "why": [],
@@ -343,9 +343,9 @@
     "sd": 1.047
    },
    "backtest": {
-    "n": 165,
-    "avg_r": 0.065,
-    "win_rate": 38.2
+    "n": 168,
+    "avg_r": 0.05,
+    "win_rate": 37.5
    },
    "verdict": "ok",
    "why": [],
@@ -421,9 +421,9 @@
     "sd": 0.506
    },
    "backtest": {
-    "n": 721,
-    "avg_r": 0.006,
-    "win_rate": 33.3
+    "n": 722,
+    "avg_r": 0.01,
+    "win_rate": 33.4
    },
    "verdict": "ok",
    "why": [],
@@ -499,9 +499,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 236,
-    "avg_r": -0.007,
-    "win_rate": 35.6
+    "n": 241,
+    "avg_r": -0.021,
+    "win_rate": 35.3
    },
    "verdict": "ok",
    "why": [],
@@ -551,9 +551,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 148,
-    "avg_r": 0.079,
-    "win_rate": 37.2
+    "n": 149,
+    "avg_r": 0.094,
+    "win_rate": 37.6
    },
    "verdict": "ok",
    "why": [],
@@ -603,9 +603,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 694,
+    "n": 695,
     "avg_r": 0.02,
-    "win_rate": 34.9
+    "win_rate": 34.8
    },
    "verdict": "ok",
    "why": [],
@@ -899,6 +899,32 @@
    "sent": false
   },
   {
+   "key": "P08-SESSION-BREAKOUT-V1@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -0.898,
+    "total_r": -0.9,
+    "max_dd_r": 0.9,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 229,
+    "avg_r": 0.04,
+    "win_rate": 38.4
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-11 07:59",
+   "sent": false
+  },
+  {
    "key": "P08-SESSION-BREAKOUT-V3@1.0|1h",
    "coin": "SOL",
    "stage": "TEST",
@@ -915,9 +941,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 44,
-    "avg_r": 0.114,
-    "win_rate": 38.6
+    "n": 45,
+    "avg_r": 0.143,
+    "win_rate": 40.0
    },
    "verdict": "ok",
    "why": [],
@@ -941,9 +967,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 185,
-    "avg_r": 0.073,
-    "win_rate": 37.3
+    "n": 186,
+    "avg_r": 0.066,
+    "win_rate": 37.1
    },
    "verdict": "ok",
    "why": [],
@@ -1381,6 +1407,10 @@
   {
    "t": "2026-11-11 02:59",
    "r": -43.81
+  },
+  {
+   "t": "2026-11-11 07:59",
+   "r": -44.71
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

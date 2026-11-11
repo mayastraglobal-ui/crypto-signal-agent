@@ -6,10 +6,10 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 939,
-   "avg_r": 0.152,
-   "test_avg_r": 0.269,
-   "tested_utc": "2026-11-10 07:41",
+   "trades": 940,
+   "avg_r": 0.154,
+   "test_avg_r": 0.274,
+   "tested_utc": "2026-11-11 07:00",
    "library": true,
    "coins": {
     "BTC": {
@@ -37,9 +37,9 @@
      "positive": true
     },
     "XRP": {
-     "n": 117,
-     "avg_r": 0.281,
-     "win_rate": 44.4,
+     "n": 118,
+     "avg_r": 0.292,
+     "win_rate": 44.9,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
