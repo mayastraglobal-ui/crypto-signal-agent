@@ -562,3 +562,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry, no_displacement
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### SOL SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.06R
+- timestamp: 2026-11-11 14:02 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-18
+  - signal 2026-11-10 15:59 UTC, closed 2026-11-11 13:59 UTC, stage TEST
+  - MAE -1.10R / MFE +0.35R
+  - at entry: session Silver Bullet, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
