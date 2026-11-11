@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 996,
+ "runs": 997,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,7 +29,9 @@
    "volume_24h",
    "volume_7d"
   ],
-  "UNI": [],
+  "UNI": [
+   "volume_7d"
+  ],
   "SUI": [],
   "AVAX": [
    "volume_7d"
@@ -165,6 +167,7 @@
   ],
   "NVDAB": [
    "history",
+   "thin_book",
    "volume_7d"
   ]
  },
