@@ -60,13 +60,13 @@
   "missing_result": 2
  },
  "recent": {
-  "alerts": 9,
-  "took": 8,
+  "alerts": 8,
+  "took": 7,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
-   "n": 5,
-   "total_r": -5.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
@@ -83,20 +83,20 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 6,
-   "total_r": -6.0,
+   "n": 5,
+   "total_r": -5.0,
    "avg_r": -1.0,
    "wins": 0
   },
   "yours": {
-   "n": 5,
-   "total_r": -6.0,
+   "n": 4,
+   "total_r": -4.8,
    "avg_r": -1.2,
    "wins": 0
   },
   "gap": {
-   "n": 5,
-   "total_r": -1.0,
+   "n": 4,
+   "total_r": -0.8,
    "avg_r": -0.2,
    "wins": 0
   },
