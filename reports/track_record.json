@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-12 03:57",
+ "utc": "2026-11-12 10:53",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -473,9 +473,9 @@
     "sd": 0.995
    },
    "backtest": {
-    "n": 99,
-    "avg_r": 0.221,
-    "win_rate": 60.6
+    "n": 100,
+    "avg_r": 0.222,
+    "win_rate": 61.0
    },
    "verdict": "ok",
    "why": [],
@@ -1097,9 +1097,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 175,
-    "avg_r": 0.341,
-    "win_rate": 46.3
+    "n": 176,
+    "avg_r": 0.333,
+    "win_rate": 46.0
    },
    "verdict": "ok",
    "why": [],
@@ -1123,9 +1123,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 203,
-    "avg_r": 0.063,
-    "win_rate": 36.0
+    "n": 204,
+    "avg_r": 0.058,
+    "win_rate": 35.8
    },
    "verdict": "ok",
    "why": [],
@@ -1149,9 +1149,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 120,
-    "avg_r": 0.169,
-    "win_rate": 40.0
+    "n": 121,
+    "avg_r": 0.164,
+    "win_rate": 39.7
    },
    "verdict": "ok",
    "why": [],
@@ -1201,9 +1201,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 126,
-    "avg_r": 0.391,
-    "win_rate": 45.2
+    "n": 127,
+    "avg_r": 0.379,
+    "win_rate": 44.9
    },
    "verdict": "ok",
    "why": [],
@@ -1227,9 +1227,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 70,
-    "avg_r": 0.221,
-    "win_rate": 45.7
+    "n": 71,
+    "avg_r": 0.203,
+    "win_rate": 45.1
    },
    "verdict": "ok",
    "why": [],
@@ -1253,9 +1253,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 123,
-    "avg_r": 0.437,
-    "win_rate": 45.5
+    "n": 124,
+    "avg_r": 0.425,
+    "win_rate": 45.2
    },
    "verdict": "ok",
    "why": [],
@@ -1331,9 +1331,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 153,
-    "avg_r": 0.326,
-    "win_rate": 43.1
+    "n": 154,
+    "avg_r": 0.317,
+    "win_rate": 42.9
    },
    "verdict": "ok",
    "why": [],
@@ -1409,9 +1409,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 155,
-    "avg_r": 0.192,
-    "win_rate": 58.1
+    "n": 156,
+    "avg_r": 0.184,
+    "win_rate": 57.7
    },
    "verdict": "ok",
    "why": [],
