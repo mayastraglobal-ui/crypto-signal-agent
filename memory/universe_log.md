@@ -1135,3 +1135,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-12 18:12 UTC
 - **EXCLUDED** NVDAB - only 154 days of history (need 180); 7-day average volume $40M < $50M
+
+## 2026-11-12 20:11 UTC
+- **EXCLUDED** BNB - 24h volume $50M < $50M; 7-day average volume $41M < $50M
