@@ -10,7 +10,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1009,
+ "runs": 1010,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -26,7 +26,6 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
@@ -167,6 +166,7 @@
   ],
   "NVDAB": [
    "history",
+   "thin_book",
    "volume_7d"
   ]
  },

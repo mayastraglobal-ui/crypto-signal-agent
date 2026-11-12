@@ -33899,3 +33899,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-12 13:30,SUI,15m,FVG,bear,,0.7967,0.7996,0.573,NY AM,1h,TRANSITION,,smc-1.0,Binance
 2026-11-12 13:45,SUI,15m,FVG_RETRACE,bear,,0.7967,0.7996,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-11-12 14:30,SUI,15m,SWEEP,bull,0.7841,,,0.332,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-12 17:00,BTC,1h,FVG_RETRACE,bear,,71734.01,72234.0,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-12 16:15,ETH,15m,FVG_FILLED,bear,,2015.88,2021.26,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-12 17:00,SOL,1h,FVG_FILLED,bear,,81.66,82.1,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-12 16:30,SOL,30m,FVG_FILLED,bear,,81.81,82.14,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:30,SOL,30m,FVG,bull,,81.25,81.49,0.371,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 17:00,SOL,30m,FVG_RETRACE,bull,,81.25,81.49,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-12 17:00,SOL,30m,FVG_FILLED,bull,,81.25,81.49,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:15,SOL,15m,FVG_FILLED,bear,,81.71,82.14,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:15,SOL,15m,FVG,bull,,81.17,81.49,0.591,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:45,SOL,15m,FVG_RETRACE,bull,,81.17,81.49,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-12 16:45,SOL,15m,FVG_FILLED,bull,,81.17,81.49,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 17:00,SUI,1h,FVG_FILLED,bear,,0.7956,0.7996,,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:15,SUI,15m,FVG_FILLED,bear,,0.7967,0.7996,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:15,SUI,15m,FVG,bull,,0.7893,0.7938,0.769,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:30,SUI,15m,FVG,bull,,0.7959,0.7984,0.432,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 16:45,SUI,15m,FVG_RETRACE,bull,,0.7959,0.7984,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-12 16:45,SUI,15m,FVG_FILLED,bull,,0.7959,0.7984,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-12 17:15,SUI,15m,FVG_RETRACE,bull,,0.7893,0.7938,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
