@@ -1138,3 +1138,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-12 20:11 UTC
 - **EXCLUDED** BNB - 24h volume $50M < $50M; 7-day average volume $41M < $50M
+
+## 2026-11-12 22:11 UTC
+- **FLAG** NVDAB - possible wash volume: 24h volume is 1,010x the 1% order-book depth (flag only, not excluded)
