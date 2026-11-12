@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-12 20:11",
+ "generated_utc": "2026-11-12 21:03",
  "book": {
-  "utc": "2026-11-12 20:11",
-  "beijing": "2026-11-13 04:11",
+  "utc": "2026-11-12 21:03",
+  "beijing": "2026-11-13 05:03",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -378,7 +378,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-12 20:11 UTC / 2026-11-13 04:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-12 21:03 UTC / 2026-11-13 05:03 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1132 \u00b7 open +1.82R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1132 \u00b7 open +1.82R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +1.12R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +1.12R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open +1.04R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open +1.04R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | SOL \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84.7000 \u00b7 stop 87.8968 \u00b7 open +0.96R \u00b7 HOLD (PAPER_TRADING) | SOL \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 84.7000 \u00b7 stop 87.8968 \u00b7 open +0.96R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 73,216.01 \u00b7 stop 73,216.01 \u00b7 open +0.82R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 73,216.01 \u00b7 stop 75,084.73 \u00b7 open +0.82R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 73,216.01 \u00b7 stop 75,084.73 \u00b7 open +0.82R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 73,216.01 \u00b7 stop 75,084.73 \u00b7 open +0.82R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.17R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.17R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.17R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 71,710.05 \u00b7 stop 73,595.38 \u00b7 open +0.01R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 71,710.05 \u00b7 stop 73,595.38 \u00b7 open +0.01R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 71,710.05 \u00b7 stop 73,595.38 \u00b7 open +0.01R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 71,710.05 \u00b7 stop 73,595.38 \u00b7 open +0.01R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0269 \u00b7 stop 1.0725 \u00b7 open -0.14R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1.0269 \u00b7 stop 1.0725 \u00b7 open -0.14R \u00b7 HOLD (PAPER_TRADING)",
@@ -1276,97 +1276,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "XRP-1h-P08-SESSION-BREAKOUT-V4-2026-11-12 13:59",
-   "coin": "XRP",
-   "tf": "1h",
-   "strategy": "P08-SESSION-BREAKOUT-V4",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "EXPIRED",
-   "price": null,
-   "note": "limit 1.03611 not filled within 6 1h candles - no trade"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "BTC-4h-P01-BREAKOUT-V1-2026-11-12 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 71945.71673230703,
-   "note": "limit 71945.7 filled in the 2026-11-12 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "BTC-4h-P01-BREAKOUT-V1-2026-11-12 15:59",
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 71945.71673230703,
-   "note": "entry at 2026-11-12 16:00 UTC (limit)"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-12 15:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V3",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1.032602385368161,
-   "note": "limit 1.0326 filled in the 2026-11-12 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "XRP-4h-P01-BREAKOUT-V3-2026-11-12 15:59",
-   "coin": "XRP",
-   "tf": "4h",
-   "strategy": "P01-BREAKOUT-V3",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1.032602385368161,
-   "note": "entry at 2026-11-12 16:00 UTC (limit)"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-12 18:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 81.81646808888048,
-   "note": "limit 81.8165 filled in the 2026-11-12 19:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-12 20:11",
-   "id": "SOL-1h-P03-FIB-PULLBACK-V5-2026-11-12 18:59",
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 81.81646808888048,
-   "note": "entry at 2026-11-12 19:00 UTC (limit)"
-  }
- ]
+ "events_this_run": []
 }
