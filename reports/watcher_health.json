@@ -1,11 +1,11 @@
 {
- "state": "SILENT",
- "checked_utc": "2026-11-12 13:00",
- "last_utc": "2026-11-08 20:10",
- "age_min": 5330,
+ "state": "OK",
+ "checked_utc": "2026-11-12 15:05",
+ "last_utc": "2026-11-12 15:02",
+ "age_min": 3,
  "heartbeat": {
-  "utc": "2026-11-08 20:10",
-  "started_utc": "2026-11-03 11:10",
+  "utc": "2026-11-12 15:02",
+  "started_utc": "2026-11-12 14:55",
   "feed": "OKX USDT perpetuals",
   "coins": [
    "BTC",
@@ -14,19 +14,19 @@
    "XRP",
    "ZEC"
   ],
-  "last_check_utc": "2026-11-08 20:10",
+  "last_check_utc": "2026-11-12 15:02",
   "last_check_ok": true,
   "fails": 0,
   "watching": {
    "LIVE": 0,
-   "PAPER": 4,
-   "TEST": 15
+   "PAPER": 5,
+   "TEST": 14
   },
-  "open_trades": 2,
+  "open_trades": 8,
   "paused": false,
   "tests_on": true,
   "code_old": false,
   "shock_on": true
  },
- "text": "live watcher SILENT: no heartbeat for 88h50m (last 2026-11-08 20:10 UTC) - the PC may be off, asleep or offline"
+ "text": "live watcher: last heartbeat 2026-11-12 15:02 UTC (3 min ago)"
 }

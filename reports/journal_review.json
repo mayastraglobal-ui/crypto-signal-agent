@@ -1,16 +1,74 @@
 {
- "last_entry_utc": "2026-11-08 00:05",
+ "last_entry_utc": "2026-11-12 15:01",
  "days": 30,
  "all": {
-  "alerts": 10,
-  "took": 9,
+  "alerts": 19,
+  "took": 17,
   "skipped": 0,
-  "no_answer": 1,
+  "no_answer": 2,
   "plan_took": {
-   "n": 6,
-   "total_r": -6.0,
+   "n": 8,
+   "total_r": -1.825,
+   "avg_r": -0.228,
+   "wins": 2
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 1,
+   "total_r": -1.0,
    "avg_r": -1.0,
    "wins": 0
+  },
+  "plan_all": {
+   "n": 9,
+   "total_r": -2.825,
+   "avg_r": -0.314,
+   "wins": 2
+  },
+  "yours": {
+   "n": 7,
+   "total_r": -4.58,
+   "avg_r": -0.654,
+   "wins": 1
+  },
+  "gap": {
+   "n": 7,
+   "total_r": -1.08,
+   "avg_r": -0.154,
+   "wins": 0
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 9
+ },
+ "recent": {
+  "alerts": 17,
+  "took": 15,
+  "skipped": 0,
+  "no_answer": 2,
+  "plan_took": {
+   "n": 6,
+   "total_r": 0.175,
+   "avg_r": 0.029,
+   "wins": 2
   },
   "plan_skipped": {
    "n": 0,
@@ -26,78 +84,20 @@
   },
   "plan_all": {
    "n": 7,
-   "total_r": -7.0,
-   "avg_r": -1.0,
-   "wins": 0
+   "total_r": -0.825,
+   "avg_r": -0.118,
+   "wins": 2
   },
   "yours": {
-   "n": 6,
-   "total_r": -7.08,
-   "avg_r": -1.18,
-   "wins": 0
-  },
-  "gap": {
-   "n": 6,
-   "total_r": -1.08,
-   "avg_r": -0.18,
-   "wins": 0
-  },
-  "early": {
-   "n": 0,
-   "plan": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   },
-   "yours": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   }
-  },
-  "missing_result": 2
- },
- "recent": {
-  "alerts": 8,
-  "took": 7,
-  "skipped": 0,
-  "no_answer": 1,
-  "plan_took": {
-   "n": 4,
-   "total_r": -4.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_skipped": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
-  },
-  "plan_no_answer": {
-   "n": 1,
-   "total_r": -1.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_all": {
    "n": 5,
-   "total_r": -5.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "yours": {
-   "n": 4,
-   "total_r": -4.8,
-   "avg_r": -1.2,
-   "wins": 0
+   "total_r": -2.3,
+   "avg_r": -0.46,
+   "wins": 1
   },
   "gap": {
-   "n": 4,
+   "n": 5,
    "total_r": -0.8,
-   "avg_r": -0.2,
+   "avg_r": -0.16,
    "wins": 0
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 2
+  "missing_result": 9
  },
  "per_strategy": [
   {
@@ -169,14 +169,24 @@
    "your_n": 1
   },
   {
-   "cell": "P07-SQUEEZE-RETEST-V3 4h",
-   "alerts": 2,
-   "took": 2,
+   "cell": "P07-SQUEEZE-RETEST-V1 4h",
+   "alerts": 1,
+   "took": 1,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,
    "your_avg_r": null,
    "your_n": 0
+  },
+  {
+   "cell": "P07-SQUEEZE-RETEST-V3 4h",
+   "alerts": 2,
+   "took": 2,
+   "skipped": 0,
+   "plan_avg_r": 2.5,
+   "plan_n": 1,
+   "your_avg_r": 2.5,
+   "your_n": 1
   },
   {
    "cell": "P12-LEADER-V1 4h",
@@ -189,9 +199,29 @@
    "your_n": 1
   },
   {
-   "cell": "donchian_breakout-VEXIT-FDISP 4h",
-   "alerts": 1,
+   "cell": "TRD-H4-BREAKOUT-S3 1h",
+   "alerts": 2,
    "took": 1,
+   "skipped": 0,
+   "plan_avg_r": 1.675,
+   "plan_n": 1,
+   "your_avg_r": null,
+   "your_n": 0
+  },
+  {
+   "cell": "donchian_breakout-VEXIT 4h",
+   "alerts": 2,
+   "took": 2,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
+  },
+  {
+   "cell": "donchian_breakout-VEXIT-FDISP 4h",
+   "alerts": 5,
+   "took": 5,
    "skipped": 0,
    "plan_avg_r": -1.0,
    "plan_n": 1,
@@ -226,9 +256,17 @@
    "n": 1,
    "avg_r": -1.0
   },
+  "P07-SQUEEZE-RETEST-V3": {
+   "n": 1,
+   "avg_r": 2.5
+  },
   "P12-LEADER-V1": {
    "n": 1,
    "avg_r": -1.0
+  },
+  "TRD-H4-BREAKOUT-S3": {
+   "n": 1,
+   "avg_r": 1.675
   }
  },
  "compare_5m": {
@@ -252,15 +290,16 @@
     "wins": 0
    },
    "sent": {
-    "n": 5,
-    "total_r": -5.0,
-    "avg_r": -1.0,
-    "wins": 0
+    "n": 6,
+    "total_r": -2.5,
+    "avg_r": -0.417,
+    "wins": 1
    }
   }
  },
  "findings": [
-  "Your real results are -0.18R per trade below the plan (6 trades). That is fees, slippage, late entries or early exits the backtest does not see: enter close to the alert price, use the limit entries, keep the stop and TPs on OKX. If it stays, the backtest costs may be too low for you - a decision for you, the agent never changes them."
+  "Your real results are -0.15R per trade below the plan (7 trades). That is fees, slippage, late entries or early exits the backtest does not see: enter close to the alert price, use the limit entries, keep the stop and TPs on OKX. If it stays, the backtest costs may be too low for you - a decision for you, the agent never changes them.",
+  "9 of 17 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
  ],
  "decisions": []
 }
