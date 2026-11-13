@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-13 20:12",
+ "generated_utc": "2026-11-13 21:11",
  "book": {
-  "utc": "2026-11-13 20:12",
-  "beijing": "2026-11-14 04:12",
+  "utc": "2026-11-13 21:11",
+  "beijing": "2026-11-14 05:11",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -581,7 +581,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-13 20:12 UTC / 2026-11-14 04:12 Beijing",
+  "POSITION BOOK \u2014 2026-11-13 21:11 UTC / 2026-11-14 05:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1132 \u00b7 open +1.94R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.1132 \u00b7 stop 1.1132 \u00b7 open +1.94R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +1.23R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0842 \u00b7 stop 1.1299 \u00b7 open +1.23R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open +1.15R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0810 \u00b7 stop 1.1271 \u00b7 open +1.15R \u00b7 HOLD \u00b7 watch: opposing displacement candle (PAPER_TRADING) | SOL \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 84.7000 \u00b7 stop 84.7000 \u00b7 open +1.37R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | SOL \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 84.7000 \u00b7 stop 84.7000 \u00b7 open +1.37R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.28R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.28R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0419 \u00b7 stop 1.0922 \u00b7 open +0.28R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 71,710.05 \u00b7 stop 71,710.05 \u00b7 open +1.41R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed WEAK_BEAR -> STRONG_BEAR (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 71,710.05 \u00b7 stop 71,710.05 \u00b7 open +1.41R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed WEAK_BEAR -> STRONG_BEAR (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 71,710.05 \u00b7 stop 71,710.05 \u00b7 open +1.41R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed WEAK_BEAR -> STRONG_BEAR (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0269 \u00b7 stop 1.0725 \u00b7 open -0.02R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1.0269 \u00b7 stop 1.0725 \u00b7 open -0.02R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 68,965.01 \u00b7 stop 71,075.83 \u00b7 open -0.05R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 68,965.01 \u00b7 stop 71,075.83 \u00b7 open -0.05R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 68,965.01 \u00b7 stop 71,075.83 \u00b7 open -0.05R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 1,934.57 \u00b7 stop 2,012.03 \u00b7 open -0.25R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,934.57 \u00b7 stop 2,012.03 \u00b7 open -0.25R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1,934.57 \u00b7 stop 2,012.03 \u00b7 open -0.25R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,934.57 \u00b7 stop 2,012.03 \u00b7 open -0.25R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1.0062 \u00b7 stop 1.0530 \u00b7 open -0.46R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.1 \u00b7 entry 1.0062 \u00b7 stop 1.0530 \u00b7 open -0.46R \u00b7 HOLD (PAPER_TRADING) | XRP \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1.0062 \u00b7 stop 1.0530 \u00b7 open -0.46R \u00b7 HOLD (PAPER_TRADING)",
@@ -1149,32 +1149,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-13 20:12",
-   "id": "ETH-4h-P07-SQUEEZE-RETEST-V1-2026-11-13 15:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 1945.46718404919,
-   "note": "limit 1945.47 filled in the 2026-11-13 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-13 20:12",
-   "id": "ETH-4h-P07-SQUEEZE-RETEST-V1-2026-11-13 15:59",
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P07-SQUEEZE-RETEST-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 1945.46718404919,
-   "note": "entry at 2026-11-13 16:00 UTC (limit)"
-  }
- ]
+ "events_this_run": []
 }

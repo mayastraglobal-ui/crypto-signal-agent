@@ -34347,3 +34347,6 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-13 19:45,XRP,15m,SWEEP,bear,1.029,,,0.133,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-13 20:00,ZEC,30m,FVG,bull,,949.05,955.19,0.419,,1h,RANGE,,smc-1.0,Binance
 2026-11-13 19:30,ZEC,15m,WEAK_BREAK,bull,955.03,,,0.351,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-13 20:45,ETH,15m,FVG_FILLED,bull,,1945.6,1948.14,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 21:00,ZEC,1h,FVG,bull,,949.05,954.69,0.269,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-13 21:00,ZEC,30m,FVG_RETRACE,bull,,949.05,955.19,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance

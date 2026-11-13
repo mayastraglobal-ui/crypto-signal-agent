@@ -9,7 +9,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1037,
+ "runs": 1038,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -142,6 +142,7 @@
   ],
   "SOXLB": [
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "BMT": [
@@ -165,7 +166,8 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history"
+   "history",
+   "thin_book"
   ]
  },
  "last_flags": {
