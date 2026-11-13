@@ -1,13 +1,13 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-13 08:13 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-13 08:18 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-12)
-- ✅ hourly scan: last run 2026-11-13 08:13 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-13)
+- ✅ hourly scan: last run 2026-11-13 08:18 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-13 06:06 UTC (3 min ago)
+- ✅ live watcher: last heartbeat 2026-11-13 07:13 UTC (62 min ago)
 - ✅ TEST setups closed this week (GitHub record): 40
 
 ## Totals
@@ -19,7 +19,7 @@ Made 2026-11-13 08:13 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## Promote to 🟡 PAPER (your tap)
 
-1. Fibonacci pullback (50-61.8% of the last swing) V5 1h on SOL - 10 live TEST setups, +0.13R a trade after fees (40% won); 5-year backtest on SOL +0.04R over 645 trades. +0.13R over 10 trades: still uncertain - could be luck.
+1. Fibonacci pullback (50-61.8% of the last swing) V5 1h on SOL - 10 live TEST setups, +0.13R a trade after fees (40% won); 5-year backtest on SOL +0.04R over 646 trades. +0.13R over 10 trades: still uncertain - could be luck.
 
 ## In paper
 - none
@@ -44,21 +44,21 @@ Made 2026-11-13 08:13 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## Failure Lab (repairs for the loss causes)
 
-- P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.24R vs parent +0.02R, unseen +0.37R vs +0.09R - helped
-- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.07R vs +0.19R - did not help
+- P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.02R, unseen +0.40R vs +0.11R - helped
+- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.20R - did not help
 - P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help
-- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.43R - passed
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.09R, unseen +0.43R vs +0.26R - helped
+- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.43R vs parent +0.19R, unseen +0.53R vs +0.44R - passed
+- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.44R vs +0.27R - helped
 - repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1
 - 1 repair(s) waiting for their first test
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 51 shock(s) this week, 33 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 28, broke yesterday's high 1, broke yesterday's low 10, volume spike 29
-- by coin: SOL 13, BTC 12, ETH 12, ZEC 8, XRP 4, SUI 2
-- 4 hours later: 17 kept going, 34 reversed (average -0.19% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 10 of 51 - the strategies missed most shocks: material for the research (a reversal or sweep version)
+- 56 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 28, broke yesterday's high 1, broke yesterday's low 12, volume spike 32
+- by coin: ETH 15, SOL 14, BTC 13, ZEC 8, XRP 4, SUI 2
+- 4 hours later: 20 kept going, 36 reversed (average -0.12% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 15 of 56 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)
 -   2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)
 -   2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)
@@ -93,7 +93,7 @@ Made 2026-11-13 08:13 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 10 | 20 | -0.48R | -0.39R | 4 (-1.5R) | +0.01R | -0.48R over 10 trades: not working so far |
 | P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 6 | 50 | +0.63R | +0.72R | 4 (+3.5R) | +0.05R | +0.63R over 6 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 6 | 17 | -0.81R | -0.71R | 3 (-1.4R) | +0.04R | -0.81R over 6 trades: too early to say anything |
-| P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 6 | 33 | -0.15R | -0.10R | 2 (+1.4R) | +0.01R | -0.15R over 6 trades: too early to say anything |
+| P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 6 | 33 | -0.15R | -0.10R | 2 (+1.4R) | +0.02R | -0.15R over 6 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 5 | 0 | -0.81R | -0.78R | 1 (-0.4R) | +0.08R | -0.81R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 5 | 0 | -0.94R | -0.88R | 0 (+0.0R) | +0.01R | -0.94R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 1h | BTC | TEST | silent | 4 | 50 | +0.16R | +0.25R | 2 (+2.6R) | +0.11R | +0.16R over 4 trades: too early to say anything |

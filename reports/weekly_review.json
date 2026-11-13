@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-13 08:13",
+ "utc": "2026-11-13 08:18",
  "final": false,
  "rows": [
   {
@@ -825,9 +825,9 @@
     }
    },
    "backtest": {
-    "n": 645,
-    "avg_r": 0.04,
-    "win_rate": 36.6
+    "n": 646,
+    "avg_r": 0.038,
+    "win_rate": 36.5
    },
    "confidence": "+0.13R over 10 trades: still uncertain - could be luck",
    "sent": false
@@ -878,9 +878,9 @@
     }
    },
    "backtest": {
-    "n": 346,
-    "avg_r": 0.012,
-    "win_rate": 37.6
+    "n": 349,
+    "avg_r": 0.018,
+    "win_rate": 37.8
    },
    "confidence": "-0.15R over 6 trades: too early to say anything",
    "sent": false
@@ -2066,12 +2066,12 @@
     "sd": 1.7118018090110005
    },
    "backtest": {
-    "n": 645,
-    "avg_r": 0.04,
-    "win_rate": 36.6
+    "n": 646,
+    "avg_r": 0.038,
+    "win_rate": 36.5
    },
    "confidence": "+0.13R over 10 trades: still uncertain - could be luck",
-   "why": "10 live TEST setups, +0.13R a trade after fees (40% won); 5-year backtest on SOL +0.04R over 645 trades"
+   "why": "10 live TEST setups, +0.13R a trade after fees (40% won); 5-year backtest on SOL +0.04R over 646 trades"
   }
  ],
  "paper": [],
@@ -2167,11 +2167,11 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 6 of the last 7 days (last 2026-11-12)"
+   "text": "nightly research ran on 7 of the last 7 days (last 2026-11-13)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-13 08:13 UTC"
+   "text": "hourly scan: last run 2026-11-13 08:18 UTC"
   },
   {
    "ok": true,
@@ -2179,7 +2179,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-13 06:06 UTC (3 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-13 07:13 UTC (62 min ago)"
   },
   {
    "ok": true,
@@ -2225,36 +2225,36 @@
   "new": 0,
   "retired": [],
   "lines": [
-   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.24R vs parent +0.02R, unseen +0.37R vs +0.09R - helped",
-   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.07R vs +0.19R - did not help",
+   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.02R, unseen +0.40R vs +0.11R - helped",
+   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.20R - did not help",
    "P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help",
-   "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.41R vs parent +0.19R, unseen +0.49R vs +0.43R - passed",
-   "TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.09R, unseen +0.43R vs +0.26R - helped",
+   "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.43R vs parent +0.19R, unseen +0.53R vs +0.44R - passed",
+   "TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.44R vs +0.27R - helped",
    "repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1",
    "1 repair(s) waiting for their first test"
   ]
  },
  "shocks": {
-  "n": 51,
-  "sent": 33,
-  "done": 51,
-  "kept": 17,
-  "reversed": 34,
-  "avg_after_4h": -0.19,
-  "caught": 10,
+  "n": 56,
+  "sent": 37,
+  "done": 56,
+  "kept": 20,
+  "reversed": 36,
+  "avg_after_4h": -0.12,
+  "caught": 15,
   "by_coin": {
    "ZEC": 8,
    "SUI": 2,
-   "SOL": 13,
-   "BTC": 12,
-   "ETH": 12,
+   "SOL": 14,
+   "BTC": 13,
+   "ETH": 15,
    "XRP": 4
   },
   "by_kind": {
-   "volume": 29,
+   "volume": 32,
    "sweep_high": 1,
    "move": 28,
-   "sweep_low": 10
+   "sweep_low": 12
   },
   "biggest": [
    {
@@ -2298,13 +2298,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-13 06:09",
+  "checked_utc": "2026-11-13 08:15",
   "lines": [
-   "51 shock(s) this week, 33 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 28, broke yesterday's high 1, broke yesterday's low 10, volume spike 29",
-   "by coin: SOL 13, BTC 12, ETH 12, ZEC 8, XRP 4, SUI 2",
-   "4 hours later: 17 kept going, 34 reversed (average -0.19% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 10 of 51 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "56 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 28, broke yesterday's high 1, broke yesterday's low 12, volume spike 32",
+   "by coin: ETH 15, SOL 14, BTC 13, ZEC 8, XRP 4, SUI 2",
+   "4 hours later: 20 kept going, 36 reversed (average -0.12% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 15 of 56 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)",
    "  2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)",
@@ -2353,5 +2353,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 11 closed this week (-1.1R) \u00b7 19 since the start (-0.49R a trade, after fees)\nSilent research records (not sent to you): 29 this week (+10.5R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 14 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 51 this week (33 sent) \u00b7 4h later 17 kept going, 34 reversed \u00b7 a strategy alert followed 10\n\n\ud83d\udcc8 Track record (your alerts, after fees): 16 closed \u00b7 -0.51R a trade \u00b7 -8.2R \u00b7 worst drawdown 8.6R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 68 (-0.32R) \u00b7 outside 39 (-0.22R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 11 closed this week (-1.1R) \u00b7 19 since the start (-0.49R a trade, after fees)\nSilent research records (not sent to you): 29 this week (+10.5R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 14 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 56 this week (37 sent) \u00b7 4h later 20 kept going, 36 reversed \u00b7 a strategy alert followed 15\n\n\ud83d\udcc8 Track record (your alerts, after fees): 16 closed \u00b7 -0.51R a trade \u00b7 -8.2R \u00b7 worst drawdown 8.6R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 68 (-0.32R) \u00b7 outside 39 (-0.22R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
