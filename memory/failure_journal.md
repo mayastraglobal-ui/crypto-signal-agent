@@ -746,3 +746,35 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### SOL SHORT 1h P04-MACD-SUPERTREND-V2 v1.0 - SL -1.07R
+- timestamp: 2026-11-13 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 02:59 UTC, closed 2026-11-13 13:59 UTC, stage TEST
+  - MAE -1.23R / MFE +1.56R
+  - at entry: session Asia, conditions: wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.08R
+- timestamp: 2026-11-13 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 13:59 UTC, stage TEST
+  - MAE -1.04R / MFE +1.16R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.06R
+- timestamp: 2026-11-13 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 13:59 UTC, stage TEST
+  - MAE -1.25R / MFE +0.88R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h P01-BREAKOUT-V2 v1.0 - SL -1.07R
+- timestamp: 2026-11-13 14:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-20
+  - signal 2026-11-13 05:59 UTC, closed 2026-11-13 13:59 UTC, stage TEST
+  - MAE -1.47R / MFE +0.31R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
