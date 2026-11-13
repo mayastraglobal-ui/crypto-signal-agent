@@ -1168,3 +1168,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-13 21:11 UTC
 - **EXCLUDED** NVDAB - only 155 days of history (need 180); order book too thin: $240k within 1% (need $250k)
 - **EXCLUDED** SOXLB - only 129 days of history (need 180); 7-day average volume $38M < $50M; order book too thin: $195k within 1% (need $250k)
+
+## 2026-11-13 22:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,054x the 1% order-book depth (flag only, not excluded)
