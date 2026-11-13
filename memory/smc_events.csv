@@ -33958,3 +33958,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-12 23:15,XRP,15m,FVG_RETRACE,bear,,1.0385,1.0409,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-13 00:00,XRP,15m,FVG_FILLED,bear,,1.0385,1.0409,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-12 23:15,ZEC,15m,FVG_FILLED,bear,,948.75,952.58,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-13 01:00,BTC,1h,BOS,bear,71255.02,,,0.298,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 00:30,BTC,30m,BOS,bear,71255.02,,,0.107,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 01:00,BTC,30m,SWEEP,bull,71113.06,,,1.304,,1h,WEAK_BEAR,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-11-13 00:45,BTC,15m,BOS,bear,71113.06,,,0.727,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 01:00,ETH,30m,SWEEP,bull,2007.05,,,0.577,,1h,WEAK_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-13 00:45,ETH,15m,BOS,bear,2008.92,,,0.455,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 01:00,SOL,30m,SWEEP,bull,81.13,,,0.21,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-13 00:45,SOL,15m,SWEEP,bull,81.11,,,0.268,,1h,STRONG_BEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-13 00:45,SOL,15m,BOS,bear,81.26,,,0.101,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 00:45,XRP,15m,CHOCH,bear,1.0335,,,0.572,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 00:45,XRP,15m,ORDER_BLOCK,bear,,1.0398,1.0422,,,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 01:00,XRP,15m,FVG,bear,,1.0368,1.0382,0.288,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 01:00,ZEC,1h,WEAK_BREAK,bull,963.2,,,0.019,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 01:00,ZEC,30m,WEAK_BREAK,bull,963.2,,,0.028,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 01:00,ZEC,15m,CHOCH,bull,963.2,,,0.04,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 01:00,ZEC,15m,ORDER_BLOCK,bull,,942.55,959.54,,,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
