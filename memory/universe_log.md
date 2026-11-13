@@ -1155,3 +1155,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-13 09:11 UTC
 - **EXCLUDED** NVDAB - only 155 days of history (need 180)
+
+## 2026-11-13 11:11 UTC
+- **EXCLUDED** NVDAB - only 155 days of history (need 180); one-day volume spike: 24h $221M is 3.1x the 7-day average

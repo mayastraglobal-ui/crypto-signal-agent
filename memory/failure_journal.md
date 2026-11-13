@@ -714,3 +714,35 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 30m P01-BREAKOUT-V2 v1.0 - exit-rule -0.56R
+- timestamp: 2026-11-13 11:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.56R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: ETH · timeframe: 30m · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 10:29 UTC, stage TEST
+  - MAE -0.67R / MFE +1.10R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 30m P07-SQUEEZE-RETEST-V2 v1.0 - SL -1.12R
+- timestamp: 2026-11-13 11:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.12R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V2 v1.0 · asset: ETH · timeframe: 30m · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 04:29 UTC, closed 2026-11-13 10:29 UTC, stage TEST
+  - MAE -1.04R / MFE +1.33R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.07R
+- timestamp: 2026-11-13 11:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-20
+  - signal 2026-11-13 05:59 UTC, closed 2026-11-13 10:59 UTC, stage TEST
+  - MAE -1.04R / MFE +0.18R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-13 11:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-20
+  - signal 2026-11-13 05:59 UTC, closed 2026-11-13 10:59 UTC, stage TEST
+  - MAE -1.01R / MFE +0.18R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
