@@ -33974,3 +33974,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-13 01:00,ZEC,30m,WEAK_BREAK,bull,963.2,,,0.028,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-11-13 01:00,ZEC,15m,CHOCH,bull,963.2,,,0.04,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
 2026-11-13 01:00,ZEC,15m,ORDER_BLOCK,bull,,942.55,959.54,,,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-13 01:30,XRP,30m,FVG,bear,,1.0358,1.0382,0.334,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 01:15,ZEC,15m,OB_RETEST,bull,,942.55,959.54,,Asia,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
