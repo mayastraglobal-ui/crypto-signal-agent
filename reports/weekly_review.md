@@ -1,13 +1,13 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-13 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-13 16:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-13)
-- ✅ hourly scan: last run 2026-11-13 15:11 UTC
+- ✅ hourly scan: last run 2026-11-13 16:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-13 13:41 UTC (31 min ago)
+- ✅ live watcher: last heartbeat 2026-11-13 14:45 UTC (27 min ago)
 - ✅ TEST setups closed this week (GitHub record): 44
 
 ## Totals
@@ -33,7 +33,7 @@ Made 2026-11-13 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## 📈 Live track record and drift monitor
 
-- **your alerts**: 18 closed, -0.57R a trade, -10.35R, worst drawdown 10.35R (after fees)
+- **your alerts**: 19 closed, -0.48R a trade, -9.10R, worst drawdown 10.35R (after fees)
 - silent research records: 86 closed, -0.34R a trade
 - paused by the drift monitor: nothing
 - the full table: reports/track_record.md
@@ -54,23 +54,23 @@ Made 2026-11-13 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 55 shock(s) this week, 36 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 28, broke yesterday's high 1, broke yesterday's low 12, volume spike 31
-- by coin: ETH 15, SOL 14, BTC 13, ZEC 7, XRP 4, SUI 2
-- 4 hours later: 19 kept going, 36 reversed (average -0.17% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 15 of 55 - the strategies missed most shocks: material for the research (a reversal or sweep version)
+- 50 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 25, broke yesterday's low 11, volume spike 30
+- by coin: ETH 14, SOL 13, BTC 12, ZEC 6, XRP 4, SUI 1
+- 4 hours later: 19 kept going, 31 reversed (average -0.12% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 15 of 50 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)
 -   2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)
 -   2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)
 -   2026-11-08 21:56 UTC XRP DOWN -3.7% -> 4h later -1.1% (a strategy alerted)
--   2026-11-06 14:39 UTC ZEC UP +3.6% -> 4h later -0.2% (no strategy alert)
+-   2026-11-10 15:34 UTC ZEC DOWN -3.4% -> 4h later +9.2% (no strategy alert)
 
 ## 🧭 Location at the entry (4H structure, information only)
 
 - at a zone or edge that fits the direction: 1 setup(s), -1.08R a trade after fees, 0 won
 - middle of the 4H range: 4 setup(s), +0.03R a trade after fees, 1 won
-- at a zone or edge against the direction: 70 setup(s), -0.34R a trade after fees, 19 won
-- outside the 4H range (breakout): 45 setup(s), -0.32R a trade after fees, 10 won
+- at a zone or edge against the direction: 74 setup(s), -0.38R a trade after fees, 19 won
+- outside the 4H range (breakout): 46 setup(s), -0.29R a trade after fees, 11 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
 ## Every live strategy / version / coin
