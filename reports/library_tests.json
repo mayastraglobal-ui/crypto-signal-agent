@@ -6,16 +6,16 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 943,
-   "avg_r": 0.15,
-   "test_avg_r": 0.262,
-   "tested_utc": "2026-11-12 07:39",
+   "trades": 945,
+   "avg_r": 0.155,
+   "test_avg_r": 0.277,
+   "tested_utc": "2026-11-13 07:11",
    "library": true,
    "coins": {
     "BTC": {
-     "n": 176,
-     "avg_r": 0.333,
-     "win_rate": 46.0,
+     "n": 177,
+     "avg_r": 0.345,
+     "win_rate": 46.3,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
@@ -53,9 +53,9 @@
      "positive": false
     },
     "BNB": {
-     "n": 141,
-     "avg_r": 0.131,
-     "win_rate": 38.3,
+     "n": 142,
+     "avg_r": 0.147,
+     "win_rate": 38.7,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true

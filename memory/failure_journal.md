@@ -674,3 +674,43 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry
   - what happened: -
   - root cause / fix: (review)
+
+### SOL SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-13 08:13 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: SOL · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 07:59 UTC, stage TEST
+  - MAE -1.22R / MFE +0.24R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.09R
+- timestamp: 2026-11-13 08:13 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 30m · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 06:59 UTC, stage TEST
+  - MAE -1.29R / MFE +0.31R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### XRP SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-13 08:13 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: XRP · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 07:59 UTC, stage TEST
+  - MAE -1.14R / MFE +0.21R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### XRP SHORT 1h P04-MACD-SUPERTREND-V2 v1.0 - SL -1.05R
+- timestamp: 2026-11-13 08:13 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: XRP · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - signal 2026-11-13 03:59 UTC, closed 2026-11-13 07:59 UTC, stage TEST
+  - MAE -1.02R / MFE +0.34R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.10R
+- timestamp: 2026-11-13 08:13 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 30m · regime: EXPANSION · review: 2026-11-20
+  - signal 2026-11-13 05:59 UTC, closed 2026-11-13 07:29 UTC, stage TEST
+  - MAE -1.13R / MFE +0.22R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
