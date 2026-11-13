@@ -33976,3 +33976,32 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-13 01:00,ZEC,15m,ORDER_BLOCK,bull,,942.55,959.54,,,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
 2026-11-13 01:30,XRP,30m,FVG,bear,,1.0358,1.0382,0.334,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-13 01:15,ZEC,15m,OB_RETEST,bull,,942.55,959.54,,Asia,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-13 03:00,BTC,30m,FVG,bear,,70529.13,70857.93,0.849,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-13 02:15,BTC,15m,BOS,bear,70688.0,,,0.301,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 02:15,BTC,15m,ORDER_BLOCK,bear,,70848.17,71234.01,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 02:30,BTC,15m,FVG,bear,,70739.49,70878.01,0.492,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 03:00,ETH,1h,SWEEP,bull,1983.82,,,0.551,Asia,4h,STRONG_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 02:30,ETH,30m,BOS,bear,2008.92,,,0.768,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-13 03:00,ETH,30m,SWEEP,bull,1983.82,,,0.754,Asia,1h,WEAK_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 03:00,ETH,30m,FVG,bear,,2000.47,2008.92,0.662,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 02:15,ETH,15m,BOS,bear,2000.75,,,0.345,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 02:15,ETH,15m,ORDER_BLOCK,bear,,2010.15,2013.59,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 02:30,ETH,15m,FVG,bear,,2007.59,2010.15,0.29,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 03:00,ETH,15m,SWEEP,bull,1983.82,,,0.96,Asia,1h,WEAK_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 03:00,SOL,1h,BOS,bear,80.46,,,0.328,Asia,4h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 03:00,SOL,1h,ORDER_BLOCK,bear,,81.35,81.82,,Asia,4h,STRONG_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 02:30,SOL,30m,BOS,bear,81.13,,,0.725,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 02:30,SOL,30m,ORDER_BLOCK,bear,,81.03,81.64,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 03:00,SOL,30m,FVG,bear,,80.8,81.23,0.774,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 02:15,SOL,15m,BOS,bear,81.03,,,0.622,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 02:15,SOL,15m,ORDER_BLOCK,bear,,81.28,81.68,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 02:30,SOL,15m,FVG,bear,,81.1,81.23,0.337,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 03:00,XRP,1h,SWEEP,bull,1.0164,,,0.226,Asia,4h,STRONG_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 03:00,XRP,30m,SWEEP,bull,1.0164,,,0.319,Asia,1h,WEAK_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 03:00,XRP,30m,FVG,bear,,1.0263,1.03,0.489,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-13 02:15,XRP,15m,SWEEP,bull,1.0247,,,0.293,Asia,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-13 02:15,XRP,15m,BOS,bear,1.0288,,,0.776,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-13 02:15,XRP,15m,ORDER_BLOCK,bear,,1.03,1.0329,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-13 03:00,XRP,15m,SWEEP,bull,1.0164,,,0.424,Asia,1h,WEAK_BEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-13 03:00,ZEC,30m,SWEEP,bull,942.55,,,0.219,Asia,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-13 03:00,ZEC,15m,SWEEP,bull,942.55,,,0.295,Asia,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance

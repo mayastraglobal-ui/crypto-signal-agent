@@ -1,9 +1,9 @@
 {
- "last_entry_utc": "2026-11-12 16:01",
+ "last_entry_utc": "2026-11-13 03:05",
  "days": 30,
  "all": {
-  "alerts": 21,
-  "took": 20,
+  "alerts": 23,
+  "took": 22,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 12
+  "missing_result": 14
  },
  "recent": {
-  "alerts": 19,
-  "took": 18,
+  "alerts": 21,
+  "took": 20,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 12
+  "missing_result": 14
  },
  "per_strategy": [
   {
@@ -200,8 +200,8 @@
   },
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
-   "alerts": 2,
-   "took": 2,
+   "alerts": 4,
+   "took": 4,
    "skipped": 0,
    "plan_avg_r": 1.675,
    "plan_n": 1,
@@ -299,7 +299,7 @@
  },
  "findings": [
   "Your real results are -0.15R per trade below the plan (7 trades). That is fees, slippage, late entries or early exits the backtest does not see: enter close to the alert price, use the limit entries, keep the stop and TPs on OKX. If it stays, the backtest costs may be too low for you - a decision for you, the agent never changes them.",
-  "12 of 20 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
+  "14 of 22 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
  ],
  "decisions": []
 }

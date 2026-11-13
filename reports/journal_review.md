@@ -2,11 +2,11 @@
 
 From journal/my_trades.csv on the branch `journal` (the live watcher's Telegram buttons, the plan result of every alert and your /result replies). Plan = the backtest rules followed on 5m candles, before fees. Report only: nothing here changes a strategy, a gate or a cost.
 
-Last journal entry: 2026-11-12 16:01 UTC
-- Last 30 days: 19 alerts · took 18 · skipped 0 · no answer 1
+Last journal entry: 2026-11-13 03:05 UTC
+- Last 30 days: 21 alerts · took 20 · skipped 0 · no answer 1
   - plan result: took +0.03R avg over 6 · skipped no result yet · no answer -1.00R avg over 1
   - your real results: -0.46R avg over 5 · gap to the plan -0.16R per trade (5)
-- All time: 21 alerts · took 20 · skipped 0 · no answer 1
+- All time: 23 alerts · took 22 · skipped 0 · no answer 1
   - plan result: took -0.23R avg over 8 · skipped no result yet · no answer -1.00R avg over 1
   - your real results: -0.65R avg over 7 · gap to the plan -0.15R per trade (7)
 - Per strategy (all time): cell · alerts · took · plan avg · your avg
@@ -18,7 +18,7 @@ Last journal entry: 2026-11-12 16:01 UTC
   - P07-SQUEEZE-RETEST-V1 4h · 1 · 1 · - · -
   - P07-SQUEEZE-RETEST-V3 4h · 2 · 2 · +2.50R (1) · +2.50R (1)
   - P12-LEADER-V1 4h · 1 · 1 · -1.00R (1) · -1.20R (1)
-  - TRD-H4-BREAKOUT-S3 1h · 2 · 2 · +1.68R (1) · -
+  - TRD-H4-BREAKOUT-S3 1h · 4 · 4 · +1.68R (1) · -
   - donchian_breakout-VEXIT 4h · 3 · 3 · - · -
   - donchian_breakout-VEXIT-FDISP 4h · 6 · 6 · -1.00R (1) · -1.20R (1)
   - donchian_breakout-VEXIT-S4 4h · 1 · 0 · -1.00R (1) · -
@@ -26,4 +26,4 @@ Last journal entry: 2026-11-12 16:01 UTC
   - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) -0.42R over 6 (plan results, before fees)
 - Findings:
   - Your real results are -0.15R per trade below the plan (7 trades). That is fees, slippage, late entries or early exits the backtest does not see: enter close to the alert price, use the limit entries, keep the stop and TPs on OKX. If it stays, the backtest costs may be too low for you - a decision for you, the agent never changes them.
-  - 12 of 20 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan.
+  - 14 of 22 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan.

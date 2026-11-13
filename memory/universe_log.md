@@ -1146,3 +1146,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** SUI - 24h volume $49M < $50M; 7-day average volume $46M < $50M
 - **EXCLUDED** NVDAB - only 155 days of history (need 180); one-day volume spike: 24h $247M is 3.5x the 7-day average
 - **LEAVE** SUI - not eligible: 24h volume $49M < $50M; 7-day average volume $46M < $50M
+
+## 2026-11-13 03:11 UTC
+- **EXCLUDED** SUI - 7-day average volume $46M < $50M
