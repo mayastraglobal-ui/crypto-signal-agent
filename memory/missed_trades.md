@@ -2080,3 +2080,125 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the permission gate
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### BTC down -5.2% (7.6x ATR), 2026-11-12 17:00 -> 2026-11-13 06:00
+- timestamp: 2026-11-13 07:11 UTC · source: engine: daily research run · evidence: FACT: move of 7.6x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-20
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P01-BREAKOUT-V2-FDISP v1.0 15m: blocked by the regime gate
+  - P01-BREAKOUT-V2-FDISP v1.0 1h: signal
+  - P01-BREAKOUT-V2-FDISP v1.0 30m: signal
+  - P01-BREAKOUT-V4-S1 v1.0 4h: signal
+  - P01-BREAKOUT-V5-FDISP v1.0 15m: blocked by the regime gate
+  - P01-BREAKOUT-V5-FDISP v1.0 1h: signal
+  - P01-BREAKOUT-V5-FDISP v1.0 30m: signal
+  - P02-EMA-PULLBACK-V4-S6-FHTF-S2 v1.0 4h: signal
+  - P03-FIB-PULLBACK-V2 v1.0 15m: signal
+  - P03-FIB-PULLBACK-V5 v1.0 15m: signal
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: signal
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: blocked by the regime gate
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-BREAKOUT v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT v1.0 1h: signal
+  - TRD-H4-BREAKOUT v1.0 30m: signal
+  - TRD-H4-BREAKOUT v1.0 5m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-FDISP v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-FDISP v1.0 1h: signal
+  - TRD-H4-BREAKOUT-FDISP v1.0 30m: signal
+  - TRD-H4-BREAKOUT-FDISP v1.0 5m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-S3 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 5m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: blocked by the permission gate
+  - TRD-H4-BREAKOUT-noT4 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-noT4 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: blocked by the permission gate
+  - TRD-H4-PULLBACK v1.0 15m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - donchian_breakout v1.0 1h: signal
+  - donchian_breakout v1.0 30m: signal
+  - donchian_breakout v1.0 4h: signal
+  - donchian_breakout-VEXIT v1.0 1h: signal
+  - donchian_breakout-VEXIT v1.0 30m: signal
+  - donchian_breakout-VEXIT v1.0 4h: signal
+  - donchian_breakout-VEXIT-FDISP v1.0 1h: signal
+  - donchian_breakout-VEXIT-FDISP v1.0 30m: signal
+  - donchian_breakout-VEXIT-FDISP v1.0 4h: signal
+  - donchian_breakout-VEXIT-S4 v1.0 1h: signal
+  - donchian_breakout-VEXIT-S4 v1.0 30m: signal
+  - donchian_breakout-VEXIT-S4 v1.0 4h: signal
+  - ema_9_21_cross v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+
+### ETH down -5.3% (6.8x ATR), 2026-11-12 23:00 -> 2026-11-13 06:00
+- timestamp: 2026-11-13 07:11 UTC · source: engine: daily research run · evidence: FACT: move of 6.8x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-20
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P03-FIB-PULLBACK-V2 v1.0 15m: signal
+  - P03-FIB-PULLBACK-V2 v1.0 30m: no valid stop / target
+  - P03-FIB-PULLBACK-V5 v1.0 15m: signal
+  - P03-FIB-PULLBACK-V5 v1.0 30m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: signal
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### BNB down -4.7% (7.5x ATR), 2026-11-12 23:00 -> 2026-11-13 06:00
+- timestamp: 2026-11-13 07:11 UTC · source: engine: daily research run · evidence: FACT: move of 7.5x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-20
+  - verdict: identifiable: at least one strategy had a valid signal before the move (research-only coin)
+  - P03-FIB-PULLBACK-V2 v1.0 15m: signal
+  - P03-FIB-PULLBACK-V2 v1.0 30m: signal
+  - P03-FIB-PULLBACK-V5 v1.0 15m: signal
+  - P03-FIB-PULLBACK-V5 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 30m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: signal
+  - liquidity_sweep_reversal v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
