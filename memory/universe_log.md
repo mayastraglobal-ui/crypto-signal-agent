@@ -1161,3 +1161,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-13 14:11 UTC
 - **EXCLUDED** NVDAB - only 155 days of history (need 180)
+
+## 2026-11-13 20:12 UTC
+- **EXCLUDED** SOXLB - only 129 days of history (need 180); 7-day average volume $38M < $50M
