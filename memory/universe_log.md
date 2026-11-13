@@ -1149,3 +1149,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-13 03:11 UTC
 - **EXCLUDED** SUI - 7-day average volume $46M < $50M
+
+## 2026-11-13 04:16 UTC
+- **EXCLUDED** BNB - 7-day average volume $37M < $50M
