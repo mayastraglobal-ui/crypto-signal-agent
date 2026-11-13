@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-13 04:00",
+ "last_entry_utc": "2026-11-13 06:00",
  "days": 30,
  "all": {
   "alerts": 27,
@@ -7,10 +7,10 @@
   "skipped": 0,
   "no_answer": 5,
   "plan_took": {
-   "n": 9,
-   "total_r": 0.675,
-   "avg_r": 0.075,
-   "wins": 3
+   "n": 10,
+   "total_r": 3.175,
+   "avg_r": 0.318,
+   "wins": 4
   },
   "plan_skipped": {
    "n": 0,
@@ -25,10 +25,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 10,
-   "total_r": -0.325,
-   "avg_r": -0.033,
-   "wins": 3
+   "n": 11,
+   "total_r": 2.175,
+   "avg_r": 0.198,
+   "wins": 4
   },
   "yours": {
    "n": 7,
@@ -65,10 +65,10 @@
   "skipped": 0,
   "no_answer": 5,
   "plan_took": {
-   "n": 7,
-   "total_r": 2.675,
-   "avg_r": 0.382,
-   "wins": 3
+   "n": 8,
+   "total_r": 5.175,
+   "avg_r": 0.647,
+   "wins": 4
   },
   "plan_skipped": {
    "n": 0,
@@ -83,10 +83,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 8,
-   "total_r": 1.675,
-   "avg_r": 0.209,
-   "wins": 3
+   "n": 9,
+   "total_r": 4.175,
+   "avg_r": 0.464,
+   "wins": 4
   },
   "yours": {
    "n": 5,
@@ -213,8 +213,8 @@
    "alerts": 3,
    "took": 3,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": 2.5,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   },
@@ -290,10 +290,10 @@
     "wins": 0
    },
    "sent": {
-    "n": 6,
-    "total_r": -2.5,
-    "avg_r": -0.417,
-    "wins": 1
+    "n": 7,
+    "total_r": 0.0,
+    "avg_r": 0.0,
+    "wins": 2
    }
   }
  },
