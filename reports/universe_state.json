@@ -4,13 +4,12 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC",
-  "SUI"
+  "ZEC"
  ],
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1016,
+ "runs": 1017,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -32,7 +31,10 @@
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [],
+  "SUI": [
+   "volume_24h",
+   "volume_7d"
+  ],
   "AVAX": [
    "volume_7d"
   ],
@@ -167,7 +169,7 @@
   ],
   "NVDAB": [
    "history",
-   "volume_7d"
+   "volume_spike"
   ]
  },
  "last_flags": {
