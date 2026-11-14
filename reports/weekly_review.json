@@ -1,26 +1,26 @@
 {
  "track": {
   "total": {
-   "n": 129,
-   "wins": 32,
-   "win_rate": 24.8,
-   "avg_r": -0.336,
-   "total_r": -43.34,
+   "n": 132,
+   "wins": 35,
+   "win_rate": 26.5,
+   "avg_r": -0.272,
+   "total_r": -35.97,
    "max_dd_r": 59.17,
    "cur_loss_run": 0,
    "max_loss_run": 20,
-   "sd": 1.268
+   "sd": 1.321
   },
   "yours": {
-   "n": 20,
-   "wins": 5,
-   "win_rate": 25.0,
-   "avg_r": -0.332,
-   "total_r": -6.63,
+   "n": 21,
+   "wins": 6,
+   "win_rate": 28.6,
+   "avg_r": -0.199,
+   "total_r": -4.18,
    "max_dd_r": 10.35,
    "cur_loss_run": 0,
    "max_loss_run": 7,
-   "sd": 1.339
+   "sd": 1.44
   },
   "silent": {
    "n": 86,
@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-14 03:11",
+ "utc": "2026-11-14 04:16",
  "final": false,
  "rows": [
   {
@@ -534,6 +534,52 @@
    },
    "confidence": "-1.09R over 1 trade: too early to say anything",
    "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V3@1.0|4h",
+   "coin": "XRP",
+   "stage": "TEST",
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V3",
+   "tf": "4h",
+   "live": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 2.457,
+    "total_r": 2.46,
+    "sd": 0.0
+   },
+   "week": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 2.457,
+    "total_r": 2.46,
+    "sd": 0.0
+   },
+   "gross": {
+    "n": 1,
+    "win_rate": 100.0,
+    "avg_r": 2.5,
+    "total_r": 2.5,
+    "sd": 0.0
+   },
+   "by_market": {
+    "DOWN": {
+     "n": 1,
+     "win_rate": 100.0,
+     "avg_r": 2.457,
+     "total_r": 2.46,
+     "sd": 0.0
+    }
+   },
+   "backtest": {
+    "n": 64,
+    "avg_r": 0.231,
+    "win_rate": 39.1
+   },
+   "confidence": "+2.46R over 1 trade: too early to say anything",
+   "sent": true
   },
   {
    "key": "P01-BREAKOUT-V4@1.0|4h",
@@ -2079,10 +2125,10 @@
  "refused": [],
  "ideas": [],
  "five_min": {
-  "confirmed_n": 9,
-  "confirmed_r": 0.075,
-  "all_n": 108,
-  "all_gross_r": -0.283,
+  "confirmed_n": 11,
+  "confirmed_r": 0.516,
+  "all_n": 109,
+  "all_gross_r": -0.258,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V1",
@@ -2113,6 +2159,13 @@
     "all_gross_r": -1.014
    },
    {
+    "strategy": "P07-SQUEEZE-RETEST-V1",
+    "confirmed_n": 1,
+    "confirmed_r": 2.5,
+    "all_n": 2,
+    "all_gross_r": -1.024
+   },
+   {
     "strategy": "P07-SQUEEZE-RETEST-V3",
     "confirmed_n": 1,
     "confirmed_r": 2.5,
@@ -2128,8 +2181,8 @@
    },
    {
     "strategy": "TRD-H4-BREAKOUT-S3",
-    "confirmed_n": 3,
-    "confirmed_r": 1.058,
+    "confirmed_n": 4,
+    "confirmed_r": 1.419,
     "all_n": 14,
     "all_gross_r": -0.519
    }
@@ -2155,10 +2208,10 @@
      "wins": 0
     },
     "sent": {
-     "n": 8,
-     "total_r": -1.0,
-     "avg_r": -0.125,
-     "wins": 2
+     "n": 9,
+     "total_r": 1.5,
+     "avg_r": 0.167,
+     "wins": 3
     }
    }
   },
@@ -2171,7 +2224,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-14 03:11 UTC"
+   "text": "hourly scan: last run 2026-11-14 04:16 UTC"
   },
   {
    "ok": true,
@@ -2179,20 +2232,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-14 01:36 UTC (37 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-14 02:41 UTC (32 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 45"
+   "text": "TEST setups closed this week (GitHub record): 46"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 108,
-   "total_r": -38.37,
-   "avg_r": -0.355,
-   "week_n": 45,
-   "week_total_r": 5.0
+   "n": 109,
+   "total_r": -35.91,
+   "avg_r": -0.329,
+   "week_n": 46,
+   "week_total_r": 7.46
   },
   "PAPER": {
    "n": 0,
@@ -2202,11 +2255,11 @@
    "week_total_r": 0
   },
   "YOURS": {
-   "n": 22,
-   "total_r": -9.08,
-   "avg_r": -0.413,
-   "week_n": 14,
-   "week_total_r": -0.76
+   "n": 23,
+   "total_r": -6.62,
+   "avg_r": -0.288,
+   "week_n": 15,
+   "week_total_r": 1.7
   },
   "SILENT": {
    "n": 86,
@@ -2297,7 +2350,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-14 02:13",
+  "checked_utc": "2026-11-14 03:13",
   "lines": [
    "51 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 25, broke yesterday's low 11, volume spike 31",
@@ -2336,9 +2389,9 @@
   {
    "verdict": "outside",
    "text": "outside the 4H range (breakout)",
-   "n": 46,
-   "avg_r": -0.289,
-   "wins": 11
+   "n": 49,
+   "avg_r": -0.12,
+   "wins": 14
   }
  ],
  "settings": {
@@ -2352,5 +2405,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 14 closed this week (-0.8R) \u00b7 22 since the start (-0.41R a trade, after fees)\nSilent research records (not sent to you): 31 this week (+5.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 14 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 51 this week (34 sent) \u00b7 4h later 19 kept going, 32 reversed \u00b7 a strategy alert followed 15\n\n\ud83d\udcc8 Track record (your alerts, after fees): 20 closed \u00b7 -0.33R a trade \u00b7 -6.6R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 75 (-0.34R) \u00b7 outside 46 (-0.29R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 15 closed this week (+1.7R) \u00b7 23 since the start (-0.29R a trade, after fees)\nSilent research records (not sent to you): 31 this week (+5.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 14 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 51 this week (34 sent) \u00b7 4h later 19 kept going, 32 reversed \u00b7 a strategy alert followed 15\n\n\ud83d\udcc8 Track record (your alerts, after fees): 21 closed \u00b7 -0.20R a trade \u00b7 -4.2R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 75 (-0.34R) \u00b7 outside 49 (-0.12R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

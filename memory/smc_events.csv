@@ -34464,3 +34464,33 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 02:30,ZEC,30m,SWEEP,bull,914.49,,,0.402,Asia,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-14 02:30,ZEC,15m,SWEEP,bull,914.49,,,0.615,Asia,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-14 02:30,ZEC,15m,BOS,bear,927.55,,,1.212,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 04:00,BTC,4h,BOS,bear,67568.0,,,0.704,,1d,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-14 04:00,BTC,4h,ORDER_BLOCK,bear,,68383.99,69134.01,,,1d,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 04:00,BTC,4h,BREAKER_RETEST,bull,,65834.0,67516.0,,,1d,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-14 04:00,BTC,1h,FVG,bear,,67758.0,68214.0,0.716,Asia,4h,EXPANSION,,smc-1.0,Binance
+2026-11-14 03:45,BTC,15m,BOS,bear,66915.0,,,0.108,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 03:45,BTC,15m,ORDER_BLOCK,bear,,67474.18,67828.01,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 03:45,BTC,15m,FVG,bear,,67430.12,67525.73,0.279,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,BTC,15m,FVG,bear,,67061.48,67288.0,0.654,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,ETH,4h,BOS,bear,1895.95,,,0.273,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-14 04:00,ETH,4h,OB_INVALID,bull,,1906.19,1919.15,,,1d,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-14 04:00,ETH,1h,FVG,bear,,1915.78,1926.17,0.467,Asia,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,ETH,15m,FVG,bear,,1893.42,1901.36,0.663,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,SOL,4h,BOS,bear,77.92,,,1.466,,1d,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 04:00,SOL,4h,ORDER_BLOCK,bear,,79.29,80.58,,,1d,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 04:00,SOL,4h,FVG_FILLED,bull,,76.45,76.85,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,SOL,4h,FVG_FILLED,bull,,77.17,77.43,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,SOL,4h,FVG,bear,,78.5,79.29,0.384,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 04:00,SOL,1h,FVG,bear,,76.34,76.93,0.554,Asia,4h,EXPANSION,,smc-1.0,Binance
+2026-11-14 03:30,SOL,30m,FVG_RETRACE,bear,,76.33,76.93,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-14 03:45,SOL,15m,SWEEP,bull,75.02,,,0.248,Asia,1h,EXPANSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 03:45,SOL,15m,FVG,bear,,75.77,76.0,0.392,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-14 04:00,XRP,4h,SWEEP,bull,0.9882,,,0.161,,1d,STRONG_BEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-14 04:00,XRP,4h,BOS,bear,0.9975,,,0.289,,1d,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 04:00,XRP,4h,OB_INVALID,bull,,0.9959,1.0021,,,1d,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-14 04:00,ZEC,1h,BOS,bear,914.49,,,0.513,Asia,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 04:00,ZEC,30m,BOS,bear,914.49,,,0.747,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 04:00,ZEC,30m,ORDER_BLOCK,bear,,914.19,938.95,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 04:00,ZEC,15m,BOS,bear,909.73,,,0.608,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 04:00,ZEC,15m,ORDER_BLOCK,bear,,926.72,938.95,,Asia,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 04:15,ZEC,15m,FVG,bear,,906.79,914.5,0.764,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
