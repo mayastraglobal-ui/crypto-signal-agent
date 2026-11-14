@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-14 17:10",
+ "last_entry_utc": "2026-11-14 17:12",
  "days": 30,
  "all": {
   "alerts": 36,
@@ -31,15 +31,15 @@
    "wins": 10
   },
   "yours": {
-   "n": 16,
-   "total_r": 15.32,
-   "avg_r": 0.957,
-   "wins": 10
+   "n": 17,
+   "total_r": 17.82,
+   "avg_r": 1.048,
+   "wins": 11
   },
   "gap": {
-   "n": 16,
+   "n": 17,
    "total_r": 3.32,
-   "avg_r": 0.208,
+   "avg_r": 0.195,
    "wins": 2
   },
   "early": {
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 18
+  "missing_result": 17
  },
  "recent": {
   "alerts": 34,
@@ -89,15 +89,15 @@
    "wins": 10
   },
   "yours": {
-   "n": 14,
-   "total_r": 17.6,
-   "avg_r": 1.257,
-   "wins": 10
+   "n": 15,
+   "total_r": 20.1,
+   "avg_r": 1.34,
+   "wins": 11
   },
   "gap": {
-   "n": 14,
+   "n": 15,
    "total_r": 3.6,
-   "avg_r": 0.257,
+   "avg_r": 0.24,
    "wins": 2
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 18
+  "missing_result": 17
  },
  "per_strategy": [
   {
@@ -225,8 +225,8 @@
    "skipped": 0,
    "plan_avg_r": 1.1,
    "plan_n": 5,
-   "your_avg_r": 1.25,
-   "your_n": 4
+   "your_avg_r": 1.5,
+   "your_n": 5
   },
   {
    "cell": "donchian_breakout-VEXIT-S4 4h",
@@ -302,8 +302,7 @@
   }
  },
  "findings": [
-  "Your real results are +0.21R per trade above the plan (16 trades) - your execution adds to the strategy.",
-  "18 of 35 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
+  "Your real results are +0.20R per trade above the plan (17 trades) - your execution adds to the strategy."
  ],
  "decisions": []
 }
