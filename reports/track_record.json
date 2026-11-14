@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-14 15:11",
+ "utc": "2026-11-14 16:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 135,
-  "wins": 38,
-  "win_rate": 28.1,
-  "avg_r": -0.212,
-  "total_r": -28.67,
+  "n": 140,
+  "wins": 43,
+  "win_rate": 30.7,
+  "avg_r": -0.117,
+  "total_r": -16.36,
   "max_dd_r": 59.17,
   "cur_loss_run": 0,
   "max_loss_run": 20,
-  "sd": 1.366
+  "sd": 1.431
  },
  "yours": {
   "n": 21,
@@ -32,41 +32,41 @@
   "sd": 1.44
  },
  "silent": {
-  "n": 87,
-  "wins": 23,
-  "win_rate": 26.4,
-  "avg_r": -0.309,
-  "total_r": -26.88,
+  "n": 88,
+  "wins": 24,
+  "win_rate": 27.3,
+  "avg_r": -0.278,
+  "total_r": -24.43,
   "max_dd_r": 38.6,
   "cur_loss_run": 0,
   "max_loss_run": 17,
-  "sd": 1.248
+  "sd": 1.276
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 110,
-   "wins": 28,
-   "win_rate": 25.5,
-   "avg_r": -0.304,
-   "total_r": -33.49,
+   "n": 112,
+   "wins": 30,
+   "win_rate": 26.8,
+   "avg_r": -0.255,
+   "total_r": -28.57,
    "max_dd_r": 47.91,
    "cur_loss_run": 0,
    "max_loss_run": 20,
-   "sd": 1.293
+   "sd": 1.333
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
-   "n": 25,
-   "wins": 10,
-   "win_rate": 40.0,
-   "avg_r": 0.193,
-   "total_r": 4.83,
+   "n": 28,
+   "wins": 13,
+   "win_rate": 46.4,
+   "avg_r": 0.436,
+   "total_r": 12.2,
    "max_dd_r": 11.26,
    "cur_loss_run": 0,
    "max_loss_run": 8,
-   "sd": 1.617
+   "sd": 1.683
   },
   "APPROVED": {
    "label": "\ud83d\udfe2 LIVE",
@@ -247,6 +247,32 @@
    "sent": false
   },
   {
+   "key": "P01-BREAKOUT-V2@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 6,
+    "wins": 3,
+    "win_rate": 50.0,
+    "avg_r": 0.338,
+    "total_r": 2.03,
+    "max_dd_r": 1.92,
+    "cur_loss_run": 0,
+    "max_loss_run": 2,
+    "sd": 1.701
+   },
+   "backtest": {
+    "n": 356,
+    "avg_r": 0.109,
+    "win_rate": 35.7
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-14 15:59",
+   "sent": false
+  },
+  {
    "key": "P01-BREAKOUT-V2@1.0|30m",
    "coin": "BTC",
    "stage": "TEST",
@@ -325,32 +351,6 @@
    "sent": false
   },
   {
-   "key": "P01-BREAKOUT-V2@1.0|1h",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 5,
-    "wins": 2,
-    "win_rate": 40.0,
-    "avg_r": -0.085,
-    "total_r": -0.43,
-    "max_dd_r": 1.92,
-    "cur_loss_run": 1,
-    "max_loss_run": 2,
-    "sd": 1.507
-   },
-   "backtest": {
-    "n": 356,
-    "avg_r": 0.109,
-    "win_rate": 35.7
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-13 13:59",
-   "sent": false
-  },
-  {
    "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
    "coin": "BTC",
    "stage": "TEST",
@@ -382,15 +382,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 3,
-    "wins": 1,
-    "win_rate": 33.3,
-    "avg_r": 0.178,
-    "total_r": 0.53,
+    "n": 4,
+    "wins": 2,
+    "win_rate": 50.0,
+    "avg_r": 0.751,
+    "total_r": 3.0,
     "max_dd_r": 1.92,
     "cur_loss_run": 0,
     "max_loss_run": 2,
-    "sd": 1.975
+    "sd": 1.979
    },
    "backtest": {
     "n": 199,
@@ -399,7 +399,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-13 07:59",
+   "last_utc": "2026-11-14 15:59",
    "sent": true
   },
   {
@@ -481,6 +481,32 @@
    "sent": false
   },
   {
+   "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
+   "coin": "BTC",
+   "stage": "PAPER_TRADING",
+   "label": "\ud83d\udfe1 PAPER",
+   "live": {
+    "n": 3,
+    "wins": 2,
+    "win_rate": 66.7,
+    "avg_r": 1.273,
+    "total_r": 3.82,
+    "max_dd_r": 1.08,
+    "cur_loss_run": 0,
+    "max_loss_run": 1,
+    "sd": 2.041
+   },
+   "backtest": {
+    "n": 115,
+    "avg_r": 0.531,
+    "win_rate": 47.0
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-14 15:59",
+   "sent": true
+  },
+  {
    "key": "donchian_breakout-VEXIT-S4@1.1|4h",
    "coin": "SOL",
    "stage": "PAPER_TRADING",
@@ -504,6 +530,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-14 03:59",
+   "sent": true
+  },
+  {
+   "key": "donchian_breakout-VEXIT@1.0|4h",
+   "coin": "BTC",
+   "stage": "PAPER_TRADING",
+   "label": "\ud83d\udfe1 PAPER",
+   "live": {
+    "n": 3,
+    "wins": 2,
+    "win_rate": 66.7,
+    "avg_r": 1.273,
+    "total_r": 3.82,
+    "max_dd_r": 1.08,
+    "cur_loss_run": 0,
+    "max_loss_run": 1,
+    "sd": 2.041
+   },
+   "backtest": {
+    "n": 143,
+    "avg_r": 0.524,
+    "win_rate": 46.9
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-14 15:59",
    "sent": true
   },
   {
@@ -716,32 +768,6 @@
   },
   {
    "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
-   "coin": "BTC",
-   "stage": "PAPER_TRADING",
-   "label": "\ud83d\udfe1 PAPER",
-   "live": {
-    "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": 0.679,
-    "total_r": 1.36,
-    "max_dd_r": 1.08,
-    "cur_loss_run": 0,
-    "max_loss_run": 1,
-    "sd": 2.494
-   },
-   "backtest": {
-    "n": 115,
-    "avg_r": 0.531,
-    "win_rate": 47.0
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-13 07:59",
-   "sent": true
-  },
-  {
-   "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
    "coin": "SOL",
    "stage": "PAPER_TRADING",
    "label": "\ud83d\udfe1 PAPER",
@@ -767,29 +793,29 @@
    "sent": true
   },
   {
-   "key": "donchian_breakout-VEXIT@1.0|4h",
+   "key": "donchian_breakout-VEXIT-S4@1.0|4h",
    "coin": "BTC",
    "stage": "PAPER_TRADING",
    "label": "\ud83d\udfe1 PAPER",
    "live": {
     "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": 0.679,
-    "total_r": 1.36,
-    "max_dd_r": 1.08,
+    "wins": 2,
+    "win_rate": 100.0,
+    "avg_r": 2.451,
+    "total_r": 4.9,
+    "max_dd_r": 0.0,
     "cur_loss_run": 0,
-    "max_loss_run": 1,
-    "sd": 2.494
+    "max_loss_run": 0,
+    "sd": 0.011
    },
    "backtest": {
-    "n": 143,
-    "avg_r": 0.524,
-    "win_rate": 46.9
+    "n": 161,
+    "avg_r": 0.453,
+    "win_rate": 45.3
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-13 07:59",
+   "last_utc": "2026-11-14 15:59",
    "sent": true
   },
   {
@@ -1443,32 +1469,6 @@
    "sent": true
   },
   {
-   "key": "donchian_breakout-VEXIT-S4@1.0|4h",
-   "coin": "BTC",
-   "stage": "PAPER_TRADING",
-   "label": "\ud83d\udfe1 PAPER",
-   "live": {
-    "n": 1,
-    "wins": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.443,
-    "total_r": 2.44,
-    "max_dd_r": 0.0,
-    "cur_loss_run": 0,
-    "max_loss_run": 0,
-    "sd": null
-   },
-   "backtest": {
-    "n": 161,
-    "avg_r": 0.453,
-    "win_rate": 45.3
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-13 07:59",
-   "sent": true
-  },
-  {
    "key": "donchian_breakout-VEXIT-S4@1.1|4h",
    "coin": "ETH",
    "stage": "PAPER_TRADING",
@@ -1847,6 +1847,18 @@
   {
    "t": "2026-11-14 14:29",
    "r": -28.67
+  },
+  {
+   "t": "2026-11-14 15:59",
+   "r": -23.75
+  },
+  {
+   "t": "2026-11-14 15:59",
+   "r": -18.82
+  },
+  {
+   "t": "2026-11-14 15:59",
+   "r": -16.36
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

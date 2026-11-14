@@ -1,9 +1,9 @@
 {
- "last_entry_utc": "2026-11-14 15:05",
+ "last_entry_utc": "2026-11-14 16:00",
  "days": 30,
  "all": {
-  "alerts": 32,
-  "took": 31,
+  "alerts": 36,
+  "took": 35,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 14
+  "missing_result": 18
  },
  "recent": {
-  "alerts": 30,
-  "took": 29,
+  "alerts": 34,
+  "took": 33,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 14
+  "missing_result": 18
  },
  "per_strategy": [
   {
@@ -210,8 +210,8 @@
   },
   {
    "cell": "donchian_breakout-VEXIT 4h",
-   "alerts": 5,
-   "took": 5,
+   "alerts": 7,
+   "took": 7,
    "skipped": 0,
    "plan_avg_r": 2.5,
    "plan_n": 2,
@@ -220,8 +220,8 @@
   },
   {
    "cell": "donchian_breakout-VEXIT-FDISP 4h",
-   "alerts": 10,
-   "took": 10,
+   "alerts": 12,
+   "took": 12,
    "skipped": 0,
    "plan_avg_r": 0.75,
    "plan_n": 4,
@@ -302,7 +302,8 @@
   }
  },
  "findings": [
-  "Your real results are +0.21R per trade above the plan (16 trades) - your execution adds to the strategy."
+  "Your real results are +0.21R per trade above the plan (16 trades) - your execution adds to the strategy.",
+  "18 of 35 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
  ],
  "decisions": []
 }
