@@ -1,15 +1,15 @@
 {
  "track": {
   "total": {
-   "n": 132,
-   "wins": 35,
-   "win_rate": 26.5,
-   "avg_r": -0.272,
-   "total_r": -35.97,
+   "n": 134,
+   "wins": 37,
+   "win_rate": 27.6,
+   "avg_r": -0.232,
+   "total_r": -31.07,
    "max_dd_r": 59.17,
    "cur_loss_run": 0,
    "max_loss_run": 20,
-   "sd": 1.321
+   "sd": 1.352
   },
   "yours": {
    "n": 21,
@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-14 07:35",
+ "utc": "2026-11-14 08:16",
  "final": false,
  "rows": [
   {
@@ -1016,9 +1016,9 @@
     }
    },
    "backtest": {
-    "n": 354,
-    "avg_r": 0.0,
-    "win_rate": 37.6
+    "n": 360,
+    "avg_r": 0.011,
+    "win_rate": 37.8
    },
    "confidence": "-0.96R over 1 trade: too early to say anything",
    "sent": false
@@ -1062,9 +1062,9 @@
     }
    },
    "backtest": {
-    "n": 154,
-    "avg_r": 0.031,
-    "win_rate": 36.4
+    "n": 156,
+    "avg_r": 0.03,
+    "win_rate": 36.5
    },
    "confidence": "+0.10R over 3 trades: too early to say anything",
    "sent": false
@@ -1108,9 +1108,9 @@
     }
    },
    "backtest": {
-    "n": 161,
-    "avg_r": 0.047,
-    "win_rate": 34.8
+    "n": 163,
+    "avg_r": 0.033,
+    "win_rate": 34.4
    },
    "confidence": "-1.05R over 1 trade: too early to say anything",
    "sent": false
@@ -1154,9 +1154,9 @@
     }
    },
    "backtest": {
-    "n": 147,
-    "avg_r": 0.173,
-    "win_rate": 41.5
+    "n": 148,
+    "avg_r": 0.166,
+    "win_rate": 41.2
    },
    "confidence": "+0.89R over 1 trade: too early to say anything",
    "sent": false
@@ -1200,9 +1200,9 @@
     }
    },
    "backtest": {
-    "n": 204,
-    "avg_r": 0.144,
-    "win_rate": 39.7
+    "n": 205,
+    "avg_r": 0.138,
+    "win_rate": 39.5
    },
    "confidence": "+0.85R over 1 trade: too early to say anything",
    "sent": false
@@ -1299,9 +1299,9 @@
     }
    },
    "backtest": {
-    "n": 349,
-    "avg_r": 0.012,
-    "win_rate": 36.1
+    "n": 351,
+    "avg_r": 0.006,
+    "win_rate": 35.9
    },
    "confidence": "-0.42R over 3 trades: too early to say anything",
    "sent": false
@@ -2220,11 +2220,11 @@
  "system": [
   {
    "ok": true,
-   "text": "nightly research ran on 6 of the last 7 days (last 2026-11-13)"
+   "text": "nightly research ran on 7 of the last 7 days (last 2026-11-14)"
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-14 07:35 UTC"
+   "text": "hourly scan: last run 2026-11-14 08:16 UTC"
   },
   {
    "ok": true,
@@ -2232,7 +2232,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-14 05:57 UTC (15 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-14 07:00 UTC (36 min ago)"
   },
   {
    "ok": true,
@@ -2271,41 +2271,40 @@
   "known": true
  },
  "failure_lab": {
-  "judged": 14,
-  "helped": 10,
+  "judged": 15,
+  "helped": 11,
   "passed": 2,
-  "pending": 1,
+  "pending": 0,
   "new": 0,
   "retired": [],
   "lines": [
-   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.02R, unseen +0.40R vs +0.11R - helped",
-   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.20R - did not help",
+   "P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.03R, unseen +0.40R vs +0.12R - helped",
+   "P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.21R - did not help",
+   "P11-MOMENTUM-V1-FDISP@1.0 30m (DISP for false_breakout): -0.23R vs parent -0.22R, unseen -0.28R vs -0.22R - did not help",
    "P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help",
-   "TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.43R vs parent +0.19R, unseen +0.53R vs +0.44R - passed",
-   "TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.44R vs +0.27R - helped",
-   "repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1",
-   "1 repair(s) waiting for their first test"
+   "P11-MOMENTUM-V1-FRETEST@1.0 30m (RETEST for false_breakout): -0.10R vs parent -0.22R, unseen -0.15R vs -0.22R - helped",
+   "repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1, RETEST helped 1 of 1"
   ]
  },
  "shocks": {
-  "n": 51,
-  "sent": 34,
-  "done": 51,
-  "kept": 19,
-  "reversed": 32,
-  "avg_after_4h": -0.18,
-  "caught": 15,
+  "n": 55,
+  "sent": 38,
+  "done": 55,
+  "kept": 20,
+  "reversed": 35,
+  "avg_after_4h": -0.21,
+  "caught": 18,
   "by_coin": {
    "ZEC": 6,
-   "SOL": 14,
-   "BTC": 12,
-   "ETH": 13,
-   "XRP": 5,
+   "SOL": 15,
+   "BTC": 13,
+   "ETH": 14,
+   "XRP": 6,
    "SUI": 1
   },
   "by_kind": {
-   "volume": 31,
-   "sweep_low": 11,
+   "volume": 34,
+   "sweep_low": 13,
    "move": 25
   },
   "biggest": [
@@ -2350,13 +2349,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-14 06:12",
+  "checked_utc": "2026-11-14 07:36",
   "lines": [
-   "51 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 25, broke yesterday's low 11, volume spike 31",
-   "by coin: SOL 14, ETH 13, BTC 12, ZEC 6, XRP 5, SUI 1",
-   "4 hours later: 19 kept going, 32 reversed (average -0.18% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 15 of 51 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
+   "55 shock(s) this week, 38 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 25, broke yesterday's low 13, volume spike 34",
+   "by coin: SOL 15, ETH 14, BTC 13, ZEC 6, XRP 6, SUI 1",
+   "4 hours later: 20 kept going, 35 reversed (average -0.21% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 18 of 55 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
    "  2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)",
    "  2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)",
@@ -2389,9 +2388,9 @@
   {
    "verdict": "outside",
    "text": "outside the 4H range (breakout)",
-   "n": 49,
-   "avg_r": -0.12,
-   "wins": 14
+   "n": 51,
+   "avg_r": -0.02,
+   "wins": 16
   }
  ],
  "settings": {
@@ -2405,5 +2404,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 15 closed this week (+1.7R) \u00b7 23 since the start (-0.29R a trade, after fees)\nSilent research records (not sent to you): 31 this week (+5.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 14 repair(s) judged - 10 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 51 this week (34 sent) \u00b7 4h later 19 kept going, 32 reversed \u00b7 a strategy alert followed 15\n\n\ud83d\udcc8 Track record (your alerts, after fees): 21 closed \u00b7 -0.20R a trade \u00b7 -4.2R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 75 (-0.34R) \u00b7 outside 49 (-0.12R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 15 closed this week (+1.7R) \u00b7 23 since the start (-0.29R a trade, after fees)\nSilent research records (not sent to you): 31 this week (+5.8R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 15 repair(s) judged - 11 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 55 this week (38 sent) \u00b7 4h later 20 kept going, 35 reversed \u00b7 a strategy alert followed 18\n\n\ud83d\udcc8 Track record (your alerts, after fees): 21 closed \u00b7 -0.20R a trade \u00b7 -4.2R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 1 (-1.08R) \u00b7 middle 4 (+0.03R) \u00b7 against 75 (-0.34R) \u00b7 outside 51 (-0.02R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

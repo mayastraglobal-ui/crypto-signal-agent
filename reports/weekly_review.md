@@ -1,13 +1,13 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-14 07:35 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-14 08:16 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-13)
-- ✅ hourly scan: last run 2026-11-14 07:35 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-14)
+- ✅ hourly scan: last run 2026-11-14 08:16 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-14 05:57 UTC (15 min ago)
+- ✅ live watcher: last heartbeat 2026-11-14 07:00 UTC (36 min ago)
 - ✅ TEST setups closed this week (GitHub record): 46
 
 ## Totals
@@ -44,21 +44,20 @@ Made 2026-11-14 07:35 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## Failure Lab (repairs for the loss causes)
 
-- P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.02R, unseen +0.40R vs +0.11R - helped
-- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.20R - did not help
+- P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.26R vs parent +0.03R, unseen +0.40R vs +0.12R - helped
+- P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.13R, unseen +0.09R vs +0.21R - did not help
+- P11-MOMENTUM-V1-FDISP@1.0 30m (DISP for false_breakout): -0.23R vs parent -0.22R, unseen -0.28R vs -0.22R - did not help
 - P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help
-- TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.43R vs parent +0.19R, unseen +0.53R vs +0.44R - passed
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.19R vs parent +0.10R, unseen +0.44R vs +0.27R - helped
-- repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1
-- 1 repair(s) waiting for their first test
+- P11-MOMENTUM-V1-FRETEST@1.0 30m (RETEST for false_breakout): -0.10R vs parent -0.22R, unseen -0.15R vs -0.22R - helped
+- repair record: DISP helped 6 of 9, NOTEXT helped 4 of 4, HTF helped 0 of 1, RETEST helped 1 of 1
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 51 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 25, broke yesterday's low 11, volume spike 31
-- by coin: SOL 14, ETH 13, BTC 12, ZEC 6, XRP 5, SUI 1
-- 4 hours later: 19 kept going, 32 reversed (average -0.18% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 15 of 51 - the strategies missed most shocks: material for the research (a reversal or sweep version)
+- 55 shock(s) this week, 38 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 25, broke yesterday's low 13, volume spike 34
+- by coin: SOL 15, ETH 14, BTC 13, ZEC 6, XRP 6, SUI 1
+- 4 hours later: 20 kept going, 35 reversed (average -0.21% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 18 of 55 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)
 -   2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)
 -   2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)
@@ -70,7 +69,7 @@ Made 2026-11-14 07:35 UTC by the hourly scan (engine/weekly_review.py). Live = t
 - at a zone or edge that fits the direction: 1 setup(s), -1.08R a trade after fees, 0 won
 - middle of the 4H range: 4 setup(s), +0.03R a trade after fees, 1 won
 - at a zone or edge against the direction: 75 setup(s), -0.34R a trade after fees, 20 won
-- outside the 4H range (breakout): 49 setup(s), -0.12R a trade after fees, 14 won
+- outside the 4H range (breakout): 51 setup(s), -0.02R a trade after fees, 16 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
 ## Every live strategy / version / coin
@@ -110,8 +109,8 @@ Made 2026-11-14 07:35 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P01-BREAKOUT-V2 | 30m | SUI | TEST | silent | 1 | 0 | -1.09R | -1.03R | 0 (+0.0R) | +0.09R | -1.09R over 1 trade: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | BTC | TEST | silent | 1 | 0 | -1.15R | -1.05R | 0 (+0.0R) | +0.02R | -1.15R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V1 | 4h | ZEC | TEST | silent | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.14R | -1.02R over 1 trade: too early to say anything |
-| P04-MACD-SUPERTREND-V2 | 15m | ETH | TEST | silent | 1 | 0 | -0.96R | -0.86R | 0 (+0.0R) | +0.00R | -0.96R over 1 trade: too early to say anything |
-| P04-MACD-SUPERTREND-V2 | 1h | XRP | TEST | silent | 1 | 0 | -1.05R | -1.02R | 1 (-1.1R) | +0.05R | -1.05R over 1 trade: too early to say anything |
+| P04-MACD-SUPERTREND-V2 | 15m | ETH | TEST | silent | 1 | 0 | -0.96R | -0.86R | 0 (+0.0R) | +0.01R | -0.96R over 1 trade: too early to say anything |
+| P04-MACD-SUPERTREND-V2 | 1h | XRP | TEST | silent | 1 | 0 | -1.05R | -1.02R | 1 (-1.1R) | +0.03R | -1.05R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | TEST | silent | 1 | 100 | +0.89R | +0.98R | 0 (+0.0R) | +0.17R | +0.89R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 30m | XRP | TEST | silent | 1 | 100 | +0.85R | +0.99R | 1 (+0.8R) | +0.14R | +0.85R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | TEST | silent | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.25R | -1.02R over 1 trade: too early to say anything |
