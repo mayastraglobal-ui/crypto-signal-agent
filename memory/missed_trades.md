@@ -2202,3 +2202,95 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - rsi2_dip_buy v1.0 15m: blocked by the regime gate
   - trend_pullback v1.0 15m: signal
   - trend_pullback v1.0 30m: signal
+
+### BTC down -4.0% (6.5x ATR), 2026-11-12 23:00 -> 2026-11-13 08:00
+- timestamp: 2026-11-14 06:57 UTC · source: engine: daily research run · evidence: FACT: move of 6.5x the 1H ATR within 12 hours; 191 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-21
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P02-EMA-PULLBACK-V4-S6-FHTF-S2 v1.0 4h: signal
+  - P07-SQUEEZE-RETEST-V4-S2 v1.0 4h: signal
+  - TRD-H4-BREAKOUT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - trend_pullback v1.0 15m: signal
+
+### ETH down -4.3% (5.5x ATR), 2026-11-12 23:00 -> 2026-11-13 09:00
+- timestamp: 2026-11-14 06:57 UTC · source: engine: daily research run · evidence: FACT: move of 5.5x the 1H ATR within 12 hours; 191 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-21
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P04-MACD-SUPERTREND-V2 v1.0 15m: signal
+  - P04-MACD-SUPERTREND-V5 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: signal
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### SOL down -6.5% (5.7x ATR), 2026-11-13 19:00 -> 2026-11-14 04:00
+- timestamp: 2026-11-14 06:57 UTC · source: engine: daily research run · evidence: FACT: move of 5.7x the 1H ATR within 12 hours; 191 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: UNCLEAR · review: 2026-11-21
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - R4-AOMACD v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: signal
+  - ema_9_21_cross v1.0 30m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 30m: blocked by the regime gate
+
+### BNB down -4.1% (6.5x ATR), 2026-11-12 23:00 -> 2026-11-13 08:00
+- timestamp: 2026-11-14 06:57 UTC · source: engine: daily research run · evidence: FACT: move of 6.5x the 1H ATR within 12 hours; 191 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-21
+  - verdict: identifiable: at least one strategy had a valid signal before the move (research-only coin)
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 30m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - ema_9_21_cross v1.0 5m: signal
+  - liquidity_sweep_reversal v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### SUI up +6.9% (5.1x ATR), 2026-11-13 04:00 -> 2026-11-13 15:00
+- timestamp: 2026-11-14 06:57 UTC · source: engine: daily research run · evidence: FACT: move of 5.1x the 1H ATR within 12 hours; 191 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-21
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the regime gate
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP v1.0 30m: blocked by the permission gate
+  - S8-PDH-PDL-SWEEP-5M v1.0 30m: blocked by the permission gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
