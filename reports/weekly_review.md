@@ -1,20 +1,20 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-14 08:16 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-14 09:14 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-14)
-- ✅ hourly scan: last run 2026-11-14 08:16 UTC
+- ✅ hourly scan: last run 2026-11-14 09:14 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-14 07:00 UTC (36 min ago)
-- ✅ TEST setups closed this week (GitHub record): 46
+- ✅ live watcher: last heartbeat 2026-11-14 08:06 UTC (11 min ago)
+- ✅ TEST setups closed this week (GitHub record): 44
 
 ## Totals
 
 - **Your alerts** (setups that could reach your Telegram): 23 closed since the start, -0.29R a trade; this week 15 (+1.70R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 86 closed, -0.34R a trade; this week 31 (+5.76R)
-- TEST: 109 closed setups since the start, -0.33R a trade; this week 46 (+7.46R) (both groups)
+- Silent research records (strategies NOT sent to you, kept to check the research): 86 closed, -0.34R a trade; this week 29 (+6.98R)
+- TEST: 109 closed setups since the start, -0.33R a trade; this week 44 (+8.68R) (both groups)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -29,7 +29,7 @@ Made 2026-11-14 08:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 - watcher alerts (5m-confirmed): 11 plan results, +0.52R a trade
 - every TEST setup (GitHub, no 5m check - your alerts and the silent records): 109, -0.26R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +0.40R over 10 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +0.59R over 11 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
@@ -90,7 +90,7 @@ Made 2026-11-14 08:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P07-SQUEEZE-RETEST-V4 | 4h | BTC | TEST | ✅ yes | 1 | 0 | -1.11R | -1.03R | 0 (+0.0R) | +0.41R | -1.11R over 1 trade: too early to say anything |
 | P12-LEADER-V1 | 4h | ZEC | TEST | ✅ yes | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.41R | -1.02R over 1 trade: too early to say anything |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | silent | 10 | 40 | +0.13R | +0.22R | 3 (+3.7R) | +0.04R | +0.13R over 10 trades: still uncertain - could be luck |
-| P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 10 | 20 | -0.48R | -0.39R | 3 (-0.4R) | +0.01R | -0.48R over 10 trades: not working so far |
+| P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 10 | 20 | -0.48R | -0.39R | 1 (+0.8R) | +0.01R | -0.48R over 10 trades: not working so far |
 | P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 6 | 50 | +0.63R | +0.72R | 3 (+3.8R) | +0.05R | +0.63R over 6 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 6 | 17 | -0.81R | -0.71R | 3 (-1.4R) | +0.04R | -0.81R over 6 trades: too early to say anything |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 6 | 33 | -0.15R | -0.10R | 2 (+1.4R) | +0.02R | -0.15R over 6 trades: too early to say anything |
