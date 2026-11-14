@@ -34695,3 +34695,38 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 20:00,XRP,4h,FVG,bear,,0.9731,0.9818,0.357,,1d,STRONG_BEAR,,smc-1.0,Binance
 2026-11-14 20:00,ZEC,4h,BOS,bear,880.5,,,0.628,,1d,RANGE,no displacement,smc-1.0,Binance
 2026-11-14 20:00,ZEC,4h,FVG_FILLED,bull,,847.85,933.7,,,1d,RANGE,,smc-1.0,Binance
+2026-11-14 21:00,BTC,1h,BOS,bear,65000.0,,,0.369,,4h,EXPANSION,with displacement,smc-1.0,Binance
+2026-11-14 21:00,BTC,1h,ORDER_BLOCK,bear,,65363.04,65858.01,,,4h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 21:00,BTC,30m,BOS,bear,65000.0,,,0.48,,1h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 21:00,BTC,30m,ORDER_BLOCK,bear,,65532.4,65858.01,,,1h,STRONG_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 20:45,BTC,15m,SWEEP,bull,65363.04,,,0.101,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:45,BTC,15m,FVG_FILLED,bull,,65349.0,65550.47,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 21:00,BTC,15m,BOS,bear,65363.04,,,1.772,,1h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 21:00,BTC,15m,ORDER_BLOCK,bear,,65377.47,65599.38,,,1h,STRONG_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 21:15,BTC,15m,FVG,bear,,64942.25,65328.76,0.952,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 21:00,ETH,1h,BOS,bear,1811.29,,,1.177,,4h,EXPANSION,with displacement,smc-1.0,Binance
+2026-11-14 21:00,ETH,1h,ORDER_BLOCK,bear,,1823.81,1841.39,,,4h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 21:00,ETH,30m,BOS,bear,1811.29,,,1.489,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-11-14 21:00,ETH,30m,ORDER_BLOCK,bear,,1827.8,1841.39,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 20:30,ETH,15m,SWEEP,bull,1823.81,,,0.286,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:45,ETH,15m,BOS,bear,1823.81,,,0.22,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 21:15,ETH,15m,FVG,bear,,1792.15,1816.16,1.381,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-14 21:00,SOL,30m,BOS,bear,71.93,,,1.665,,1h,EXPANSION,with displacement,smc-1.0,Binance
+2026-11-14 21:00,SOL,30m,ORDER_BLOCK,bear,,71.95,72.57,,,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 20:30,SOL,15m,SWEEP,bull,71.67,,,0.229,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:45,SOL,15m,BOS,bear,71.67,,,0.131,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 21:15,SOL,15m,FVG,bear,,70.89,71.31,0.569,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-14 20:30,XRP,30m,BOS,bear,0.9457,,,0.019,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 21:00,XRP,30m,FVG,bear,,0.9459,0.9505,0.372,,1h,EXPANSION,,smc-1.0,Binance
+2026-11-14 20:15,XRP,15m,BOS,bear,0.9457,,,0.1,,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 20:30,XRP,15m,FVG,bear,,0.9459,0.9507,0.571,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 20:45,XRP,15m,FVG_RETRACE,bear,,0.9459,0.9507,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-14 21:00,ZEC,1h,OB_RETEST,bull,,825.94,837.65,,,4h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-14 21:00,ZEC,1h,FVG_RETRACE,bull,,833.96,842.03,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-14 21:00,ZEC,1h,FVG_FILLED,bull,,833.96,842.03,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 20:30,ZEC,30m,SWEEP,bull,845.57,,,0.311,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 21:00,ZEC,30m,BOS,bear,845.57,,,0.962,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 20:30,ZEC,15m,SWEEP,bull,845.57,,,0.434,,1h,WEAK_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-14 20:45,ZEC,15m,BOS,bear,846.05,,,1.186,,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-14 20:45,ZEC,15m,ORDER_BLOCK,bear,,851.65,859.74,,,1h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-14 21:00,ZEC,15m,FVG,bear,,834.54,840.36,0.455,,1h,WEAK_BEAR,,smc-1.0,Binance
