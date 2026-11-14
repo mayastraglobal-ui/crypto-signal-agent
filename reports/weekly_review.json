@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-14 06:11",
+ "utc": "2026-11-14 07:35",
  "final": false,
  "rows": [
   {
@@ -1996,9 +1996,9 @@
     }
    },
    "backtest": {
-    "n": 204,
-    "avg_r": 0.058,
-    "win_rate": 35.8
+    "n": 205,
+    "avg_r": 0.053,
+    "win_rate": 35.6
    },
    "confidence": "-1.06R over 3 trades: too early to say anything",
    "sent": false
@@ -2042,9 +2042,9 @@
     }
    },
    "backtest": {
-    "n": 121,
-    "avg_r": 0.164,
-    "win_rate": 39.7
+    "n": 122,
+    "avg_r": 0.154,
+    "win_rate": 39.3
    },
    "confidence": "-1.05R over 2 trades: too early to say anything",
    "sent": true
@@ -2088,9 +2088,9 @@
     }
    },
    "backtest": {
-    "n": 118,
-    "avg_r": 0.292,
-    "win_rate": 44.9
+    "n": 119,
+    "avg_r": 0.281,
+    "win_rate": 44.5
    },
    "confidence": "-1.05R over 4 trades: too early to say anything",
    "sent": true
@@ -2224,7 +2224,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-14 06:11 UTC"
+   "text": "hourly scan: last run 2026-11-14 07:35 UTC"
   },
   {
    "ok": true,
@@ -2232,7 +2232,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-14 04:52 UTC (21 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-14 05:57 UTC (15 min ago)"
   },
   {
    "ok": true,
@@ -2350,7 +2350,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-14 05:13",
+  "checked_utc": "2026-11-14 06:12",
   "lines": [
    "51 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 25, broke yesterday's low 11, volume spike 31",

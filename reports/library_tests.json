@@ -6,10 +6,10 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 945,
-   "avg_r": 0.155,
-   "test_avg_r": 0.277,
-   "tested_utc": "2026-11-13 07:11",
+   "trades": 948,
+   "avg_r": 0.151,
+   "test_avg_r": 0.264,
+   "tested_utc": "2026-11-14 06:57",
    "library": true,
    "coins": {
     "BTC": {
@@ -21,25 +21,25 @@
      "positive": true
     },
     "ETH": {
-     "n": 204,
-     "avg_r": 0.058,
-     "win_rate": 35.8,
+     "n": 205,
+     "avg_r": 0.053,
+     "win_rate": 35.6,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
     },
     "SOL": {
-     "n": 121,
-     "avg_r": 0.164,
-     "win_rate": 39.7,
+     "n": 122,
+     "avg_r": 0.154,
+     "win_rate": 39.3,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
     },
     "XRP": {
-     "n": 118,
-     "avg_r": 0.292,
-     "win_rate": 44.9,
+     "n": 119,
+     "avg_r": 0.281,
+     "win_rate": 44.5,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
