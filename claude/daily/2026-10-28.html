@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily review 2026-10-28</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Daily review 2026-10-28</h1>
+<h2>Summary</h2>
+<ul><li>A quiet day for LIVE and PAPER: no signal closed, no open position, day and week at +0.00R. No halt.</li><li>One TEST record lost: BTC 4h P01-BREAKOUT-V1 SHORT, -0.84R (exit rule; MAE -0.958R, MFE +0.279R; tags false_breakout and regime_mismatch). It is a TEST record, not LIVE or PAPER.</li><li>The FOMC decision is today at 18:00 UTC; US GDP and PCE follow tomorrow at 12:30 UTC. The market weather is "Choppy - stay out". BTC is 80,599.27. Fear &amp; Greed is 51 (Neutral).</li><li>New status: the P13-TURTLE cards. <strong>P13-TURTLE-C 4h reached PAPER_TRADING</strong> (it passed every Phase 8 test; paper signals start, logged with PAPER emails). V1, V2 and V3 reached VALIDATION (t 3.41, 3.11 and 3.07 against a bar of 3.71; V1 has an overfitting warning: 50% of profit from one window).</li><li>Six coins show LONG 4h P13-TURTLE-V2 as SETUP_FORMING (VALIDATION, not signals).</li><li>The engine's files were flagged stale at the start; I refreshed them and rebuilt the fact sheet, which then showed no warning.</li><li>Curriculum C22 (Three Arrows Capital): leverage and correlated bets. One hypothesis queued.</li></ul>
+<h2>Email summary</h2>
+<ul><li>lesson: A repair that helped three breakout cards did not rescue a momentum card, so one repair is not a general fix.</li><li>tomorrow: Stand aside around the FOMC decision at 18:00 UTC and treat any PAPER entry as a test, not advice.</li><li>sub: No signals closed; a new 4h Turtle card entered paper trading.</li><li>watch: The FOMC decision at 18:00 UTC today and GDP and PCE tomorrow at 12:30 UTC.</li><li>avoid: Do not trade the first move after the decision.</li></ul>
+<h2>Results (LIVE / PAPER / VALIDATION)</h2>
+<table><tr><th>Book</th><th>Closed (last 24 h)</th><th>Won</th><th>Total</th></tr><tr><td>LIVE</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>PAPER</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>VALIDATION</td><td>0</td><td>0</td><td>+0.00R</td></tr></table>
+<ul><li>TEST record (engine, listed under VALIDATION): BTC 4h P01-BREAKOUT-V1 SHORT, -0.84R EXIT_RULE.</li><li>No live signal and no paper or validation signal logged. Watching (not signals): LONG 4h P13-TURTLE-V2 SETUP_FORMING on BTC, ETH, SOL, SUI, XRP and ZEC; P12-LEADER-V2 WATCH lines.</li><li>Position book: no open positions, heat 0/3.</li></ul>
+<h2>Losses and why</h2>
+<ol><li>BTC 4h P01-BREAKOUT-V1 SHORT: -0.84R, MAE -0.958R, MFE +0.279R. Engine tags: false_breakout, regime_mismatch.</li><li>Questions (section 17.3), short form:</li><li>Strategy: the P01-BREAKOUT-V1 4h cell is BACKTESTING (1133 trades, +0.18R in the lab table), so the strategy is not failing as a whole; one loss is within its normal range.</li><li>Regime: BTC was 1D RANGE and the weather was mixed, which fits regime_mismatch.</li><li>Timing/stop: the exit rule closed it at -0.84R before the stop (-1R); it was only +0.28R in profit at best.</li><li>Sample: 1 trade, random.</li><li>No failure_journal record: both tags are already in the engine's journal and one trade is not a lesson.</li></ol>
+<h2>Missed moves</h2>
+<ul><li>The engine found no strong missed move in this period.</li></ul>
+<h2>Regime</h2>
+<ul><li>Data state GOOD.</li><li>BTC 1W / 1D / 4H / 1H = STRONG_BULL / RANGE / TRANSITION / TRANSITION. Most coins are TRANSITION on 4H and 1H. 30m momentum is negative on all six coins (ZEC -3.1%).</li><li>Weather: "Choppy - stay out": the timeframes disagree, so longs and shorts both get stopped out.</li><li>Lifecycle changes: P11-MOMENTUM-V1-FDISP 30m FORMALIZED -&gt; FAILED; P13-TURTLE-C 4h -&gt; PAPER_TRADING; P13-TURTLE-V1, V2, V3 4h -&gt; VALIDATION.</li></ul>
+<h2>Refinements queued</h2>
+<ul><li>None. No failing cell has a new diagnosis. Lab cards added: none (3 allowed; the trials counter is at 490 and the bar is t &gt;= 3.71, and I have no card with real evidence behind it).</li></ul>
+<h2>Research loop</h2>
+<ul><li><strong>P11-MOMENTUM-V1-FDISP@1.0</strong> (parent: result: P11-MOMENTUM-V1@1.0 30m): 30m FAILED, 2394 trades, -0.232R (unseen -0.271R). Every gate failed. The displacement repair did not help here. Next: stop this line. Record <code>Feedback: P11-MOMENTUM-V1-FDISP@1.0</code> in <code>memory/experiments.md</code>.</li></ul>
+<h2>Curriculum</h2>
+<ul><li>Item C22, Three Arrows Capital. I opened a news-site summary: <a href="https://thefr.com/news/learning-from-three-arrows-capitals-collapse.">https://thefr.com/news/learning-from-three-arrows-capitals-collapse.</a> CNBC returned 403 and Learnsignal 429, so they are not cited. Class: CLAIM.</li><li>Points: few lenders received collateral, so the article estimates leverage of at least three times assets; some collateral was promised twice; returns came in rising markets only; the fund owed more than 2.8 billion USD in July 2022.</li><li>Record <code>[C22] ...</code> in <code>memory/research_sources.md</code>. Hypothesis (for the operator, an engine check): count correlated coins as one bet in the heat cap.</li></ul>
+<h2>Monthly clean-up</h2>
+<ul><li>Not this month (the clean-up runs on the first 3 days of a month; today is 2026-10-28).</li></ul>
+<h2>Reviews done</h2>
+<ul><li>The fact sheet still lists the same missed-move records. I reviewed them on 2026-10-23 (all KEEP); nothing new is known, so I wrote no duplicates.</li></ul>
+<h2>Lessons</h2>
+<ul><li>No new lesson today.</li></ul>
+<h2>Tomorrow</h2>
+<ul><li>Watch: the FOMC decision at 18:00 UTC today, then GDP and PCE at 12:30 UTC tomorrow.</li><li>Do NOT trade the first move after the decision, buy the dip, or short by hand. A PAPER email from P13-TURTLE-C is a test record, not advice.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li><a href="https://www.cnbc.com/2022/07/11/how-the-fall-of-three-arrows-or-3ac-dragged-down-crypto-investors.html/">https://www.cnbc.com/2022/07/11/how-the-fall-of-three-arrows-or-3ac-dragged-down-crypto-investors.html/</a> (403 blocked)</li><li><a href="https://www.learnsignal.com/blog/three-arrows-capital-collapse-case-study/">https://www.learnsignal.com/blog/three-arrows-capital-collapse-case-study/</a> (429 too many requests)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-10-28 15:32 UTC, finished 2026-10-28 15:55 UTC; problems: stale engine files at start (refreshed), two pages blocked</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/daily/2026-10-28.md · Research signal. Not financial advice.</footer></main></body></html>

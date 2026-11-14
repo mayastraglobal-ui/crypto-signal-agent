@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily review 2026-10-23</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Daily review 2026-10-23</h1>
+<h2>Summary</h2>
+<ul><li>A quiet day for LIVE and PAPER: no signal closed, no open position, day and week at +0.00R. No strategy changed status.</li><li>One VALIDATION-style TEST record closed: SUI 30m P01-BREAKOUT-V5 SHORT, -1.11R (tags false_breakout, regime_mismatch). It is a TEST record, not LIVE or PAPER.</li><li>Market weather is "Choppy - stay out". BTC is 81,715.24. Fear &amp; Greed is 50 (Neutral), down from 68 yesterday.</li><li>Six lab cards are waiting for feedback; I wrote all six (see Research loop). The pattern: removing a rule kept results and gave more trades, but the drawdown limit still blocks every cell.</li><li>Curriculum C14 (Taleb, from a book summary): outsized success is mostly luck, and rare large losses matter. One hypothesis queued.</li><li>Next event: FOMC on 2026-10-28 18:00 UTC, then US GDP and PCE on 2026-10-29 12:30 UTC.</li></ul>
+<h2>Email summary</h2>
+<ul><li>lesson: Removing a rule from a breakout card kept its result and gave more trades, but the drawdown limit still blocks every cell.</li><li>tomorrow: Stand aside in the choppy market and wait for the FOMC decision on October 28.</li><li>sub: No signal closed; one SUI test short lost 1.11R as a false breakout.</li><li>watch: The FOMC decision on 2026-10-28 18:00 UTC and the BTC options expiry on 2026-10-24 at 08:00 UTC.</li><li>avoid: Do not trade on headlines or on small moves in a choppy market.</li></ul>
+<h2>Results (LIVE / PAPER / VALIDATION)</h2>
+<table><tr><th>Book</th><th>Closed (last 24 h)</th><th>Won</th><th>Total</th></tr><tr><td>LIVE</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>PAPER</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>VALIDATION</td><td>0</td><td>0</td><td>+0.00R</td></tr></table>
+<ul><li>One TEST record closed (listed under the VALIDATION line by the engine): SUI 30m P01-BREAKOUT-V5 SHORT, -1.11R SL.</li><li>No live signal. Watch lines (not signals): P12-LEADER-V2 4h on BTC, ETH, SOL, SUI (long and short); XRP short 30m on two TRD-H4-BREAKOUT cards.</li><li>Position book: no open positions, heat 0/3, no halt.</li><li>The operator's journal: 3 alerts taken, plan -1.00R average, real -1.16R average (BACKTEST, PAPER and LIVE are not mixed here: this is the operator's own record, 3 trades).</li></ul>
+<h2>Losses and why</h2>
+<ol><li>SUI 30m P01-BREAKOUT-V5 SHORT: -1.11R, MAE -1.25R, MFE +0.674R. Engine tags: false_breakout, regime_mismatch.</li><li>Questions (section 17.3), short form:</li><li>Strategy: the cell is already FAILED (2795 trades, -0.08R).</li><li>Regime: the weather was "Choppy - stay out", so the regime tag fits.</li><li>Timing/stop: it was +0.67R in profit first, then reversed. One trade cannot say if the stop was wrong.</li><li>Sample: 1 trade. Random, not systematic.</li><li>Costs: the extra 0.11R beyond -1R is slippage/fees.</li><li>A root-cause record is in <code>memory/failure_journal.md</code> (MODEL_OUTPUT).</li></ol>
+<h2>Missed moves</h2>
+<ul><li>The engine found no strong missed move in this period.</li></ul>
+<h2>Regime</h2>
+<ul><li>Data state GOOD. Engine report 2026-10-23 17:30 UTC.</li><li>BTC 1W / 1D / 4H / 1H = STRONG_BULL / RANGE / UNCLEAR / TRANSITION. ETH, SOL, SUI, ZEC are mostly RANGE or TRANSITION; XRP is weak bearish.</li><li>Altcoins beat BTC by a median +0.8% over 24h. BTC dominance 59.43%, flat.</li><li>Futures: funding small and positive on all coins; BTC taker buy/sell 0.87.</li><li>Deribit: BTC options expire 2026-10-24 08:00 UTC (put/call 1.5, max pain 82,500).</li><li>Headlines are CLAIMs only; I did not open any: e.g. Cointelegraph reports Bitcoin seeking support above $81K as oil hits a six-month high.</li><li>Lifecycle changes: none.</li></ul>
+<h2>Refinements queued</h2>
+<ul><li>None. The failing cells' tags are unchanged and the one new loss is a single trade. Lab cards added: none (a card for the weak cells would only raise the trials bar, now 456 tests, t &gt;= 3.70).</li></ul>
+<h2>Research loop</h2>
+<p>Six Feedback records written in <code>memory/experiments.md</code>:</p>
+<ol><li>P02-EMA-PULLBACK-V4-S6-FHTF-S2@1.0 (4h, 1734 trades, +0.105R): held in part; stop this line.</li><li>TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 (30m VALIDATION +0.413R over 79 trades; other timeframes FAILED): works on 30m only.</li><li>TRD-H4-BREAKOUT-FDISP-S2@1.0 (1h +0.190R over 776 trades): held; blocker is the drawdown.</li><li>TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0 (30m VALIDATION +0.410R over 91 trades): same pattern.</li><li>TRD-H4-BREAKOUT-S3-FDISP-S2@1.0 (1h +0.172R over 891 trades): held again.</li><li>donchian_breakout-VEXIT-FDISP@1.0 (4h PAPER_TRADING +0.258R over 623 trades): no new edge; stop.</li></ol>
+<h2>Curriculum</h2>
+<ul><li>Item C14, Taleb "Fooled by Randomness" (2001). I opened a book summary: <a href="https://jamesclear.com/book-summaries/fooled-by-randomness.">https://jamesclear.com/book-summaries/fooled-by-randomness.</a> I did not read the book, so the class is CLAIM.</li><li>Main points: luck matters more than we think; survivorship hides failures; judge a bet by its downside.</li><li>Record <code>[C14] ...</code> in <code>memory/research_sources.md</code>. Hypothesis (HYPOTHESIS, for the operator, an engine check): add a tail-loss check (worst single loss) next to the Monte Carlo drawdown.</li></ul>
+<h2>Monthly clean-up</h2>
+<ul><li>Not this month.</li></ul>
+<h2>Reviews done</h2>
+<ul><li>27 missed-move records reviewed in <code>memory/missed_trades.md</code>, all KEEP: no new information on any of them, and no rule changes from single moves.</li></ul>
+<h2>Lessons</h2>
+<ul><li>No new lesson today. The candidate tags are old and already covered; the Feedback results are per-card notes, not new systematic findings.</li></ul>
+<h2>Tomorrow</h2>
+<ul><li>Watch: the BTC options expiry (2026-10-24 08:00 UTC), then the FOMC decision (2026-10-28 18:00 UTC).</li><li>Do NOT trade in the choppy weather, on headlines, or chase altcoin bounces. Wait for a LIVE entry email.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li>none</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-10-23 18:00 UTC, finished 2026-10-23 18:20 UTC; problems: none</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/daily/2026-10-23.md · Research signal. Not financial advice.</footer></main></body></html>
