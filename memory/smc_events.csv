@@ -34429,3 +34429,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 00:45,SOL,15m,FVG_FILLED,bull,,78.02,78.2,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-14 01:00,SOL,15m,FVG,bear,,78.08,78.23,0.324,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-14 01:15,SOL,15m,FVG,bear,,77.73,77.92,0.417,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-14 01:30,SOL,30m,FVG,bear,,77.73,78.2,0.718,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-14 02:00,SOL,30m,BOS,bear,77.19,,,0.214,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 01:45,SOL,15m,SWEEP,bull,77.19,,,0.156,Asia,1h,UNCLEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-14 02:00,SOL,15m,BOS,bear,77.19,,,0.313,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
