@@ -34564,3 +34564,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 12:00,SOL,4h,FVG_RETRACE,bear,,76.16,77.19,,,1d,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-14 12:15,XRP,15m,SWEEP,bear,0.9954,,,0.267,NY AM,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-14 12:15,XRP,15m,OB_INVALID,bear,,0.9919,0.995,,NY AM,1h,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-14 13:00,BTC,30m,SWEEP,bull,66966.79,,,0.155,NY AM,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 13:00,BTC,15m,SWEEP,bull,66966.79,,,0.267,NY AM,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 13:00,ETH,15m,BOS,bear,1903.43,,,0.479,NY AM,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 13:00,SOL,15m,SWEEP,bull,75.59,,,0.21,NY AM,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 12:30,XRP,30m,SWEEP,bear,0.9954,,,0.169,NY AM,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-14 13:00,XRP,30m,OB_RETEST,bear,,0.9968,1.0004,,NY AM,1h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-14 12:30,XRP,15m,BREAKER_RETEST,bull,,0.9919,0.995,,NY AM,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-14 13:00,ZEC,1h,SWEEP,bull,891.22,,,0.126,NY AM,4h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 13:00,ZEC,1h,BOS,bear,894.83,,,0.109,NY AM,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-14 12:30,ZEC,30m,SWEEP,bull,894.83,,,0.221,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 13:00,ZEC,30m,SWEEP,bull,891.22,,,0.193,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 13:00,ZEC,30m,BOS,bear,894.83,,,0.166,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-14 12:30,ZEC,15m,SWEEP,bull,894.83,,,0.348,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 12:45,ZEC,15m,SWEEP,bull,891.22,,,0.301,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 12:45,ZEC,15m,BOS,bear,894.83,,,0.346,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance

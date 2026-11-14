@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-14 12:16",
+ "utc": "2026-11-14 13:11",
  "final": false,
  "rows": [
   {
@@ -2224,7 +2224,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-14 12:16 UTC"
+   "text": "hourly scan: last run 2026-11-14 13:11 UTC"
   },
   {
    "ok": true,
@@ -2232,7 +2232,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-14 10:15 UTC (57 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-14 11:21 UTC (57 min ago)"
   },
   {
    "ok": true,
@@ -2349,7 +2349,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-14 11:12",
+  "checked_utc": "2026-11-14 12:18",
   "lines": [
    "54 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 25, broke yesterday's low 13, volume spike 33",
