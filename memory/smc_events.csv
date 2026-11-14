@@ -34559,3 +34559,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 10:00,ZEC,15m,SWEEP,bear,916.13,,,0.124,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-14 10:00,ZEC,15m,FVG_RETRACE,bear,,916.72,920.9,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-14 10:15,ETH,15m,FVG_RETRACE,bull,,1905.38,1908.24,,,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-14 12:00,BTC,4h,FVG_RETRACE,bear,,67460.01,67865.0,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-14 11:45,ETH,15m,FVG_FILLED,bull,,1905.38,1908.24,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 12:00,SOL,4h,FVG_RETRACE,bear,,76.16,77.19,,,1d,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-14 12:15,XRP,15m,SWEEP,bear,0.9954,,,0.267,NY AM,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-14 12:15,XRP,15m,OB_INVALID,bear,,0.9919,0.995,,NY AM,1h,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
