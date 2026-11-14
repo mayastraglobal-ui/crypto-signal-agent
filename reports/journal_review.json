@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-14 20:55",
+ "last_entry_utc": "2026-11-14 22:10",
  "days": 30,
  "all": {
   "alerts": 38,
@@ -7,10 +7,10 @@
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 19,
-   "total_r": 18.675,
-   "avg_r": 0.983,
-   "wins": 11
+   "n": 20,
+   "total_r": 21.175,
+   "avg_r": 1.059,
+   "wins": 12
   },
   "plan_skipped": {
    "n": 0,
@@ -25,10 +25,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 20,
-   "total_r": 17.675,
-   "avg_r": 0.884,
-   "wins": 11
+   "n": 21,
+   "total_r": 20.175,
+   "avg_r": 0.961,
+   "wins": 12
   },
   "yours": {
    "n": 17,
@@ -65,10 +65,10 @@
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 17,
-   "total_r": 20.675,
-   "avg_r": 1.216,
-   "wins": 11
+   "n": 18,
+   "total_r": 23.175,
+   "avg_r": 1.288,
+   "wins": 12
   },
   "plan_skipped": {
    "n": 0,
@@ -83,10 +83,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 18,
-   "total_r": 19.675,
-   "avg_r": 1.093,
-   "wins": 11
+   "n": 19,
+   "total_r": 22.175,
+   "avg_r": 1.167,
+   "wins": 12
   },
   "yours": {
    "n": 15,
@@ -203,8 +203,8 @@
    "alerts": 7,
    "took": 7,
    "skipped": 0,
-   "plan_avg_r": 1.419,
-   "plan_n": 4,
+   "plan_avg_r": 1.635,
+   "plan_n": 5,
    "your_avg_r": 2.067,
    "your_n": 3
   },
@@ -269,8 +269,8 @@
    "avg_r": -1.0
   },
   "TRD-H4-BREAKOUT-S3": {
-   "n": 4,
-   "avg_r": 1.419
+   "n": 5,
+   "avg_r": 1.635
   }
  },
  "compare_5m": {

@@ -1,20 +1,20 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-14 21:16 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-14 22:12 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-14)
-- ✅ hourly scan: last run 2026-11-14 21:16 UTC
+- ✅ hourly scan: last run 2026-11-14 22:12 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-14 20:01 UTC (11 min ago)
-- ✅ TEST setups closed this week (GitHub record): 53
+- ✅ live watcher: last heartbeat 2026-11-14 21:06 UTC (11 min ago)
+- ✅ TEST setups closed this week (GitHub record): 57
 
 ## Totals
 
-- **Your alerts** (setups that could reach your Telegram): 26 closed since the start, +0.03R a trade; this week 18 (+9.08R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 92 closed, -0.16R a trade; this week 35 (+21.63R)
-- TEST: 118 closed setups since the start, -0.12R a trade; this week 53 (+30.71R) (both groups)
+- **Your alerts** (setups that could reach your Telegram): 28 closed since the start, +0.20R a trade; this week 20 (+14.03R)
+- Silent research records (strategies NOT sent to you, kept to check the research): 94 closed, -0.10R a trade; this week 37 (+26.53R)
+- TEST: 122 closed setups since the start, -0.03R a trade; this week 57 (+40.56R) (both groups)
 - PAPER: 0 closed signals, - a trade; this week 0 (+0.00R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -27,14 +27,14 @@ Made 2026-11-14 21:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 ## With vs without the 5m check (before fees)
 
 - watcher alerts (5m-confirmed): 11 plan results, +0.52R a trade
-- every TEST setup (GitHub, no 5m check - your alerts and the silent records): 118, -0.05R a trade
+- every TEST setup (GitHub, no 5m check - your alerts and the silent records): 122, +0.04R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +0.89R over 13 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.00R over 14 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
-- **your alerts**: 21 closed, -0.20R a trade, -4.18R, worst drawdown 10.35R (after fees)
-- silent research records: 92 closed, -0.16R a trade
+- **your alerts**: 23 closed, +0.03R a trade, +0.77R, worst drawdown 10.35R (after fees)
+- silent research records: 94 closed, -0.10R a trade
 - paused by the drift monitor: nothing
 - the full table: reports/track_record.md
 
@@ -53,11 +53,11 @@ Made 2026-11-14 21:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 54 shock(s) this week, 36 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 25, broke yesterday's low 13, volume spike 33
-- by coin: SOL 15, ETH 15, BTC 12, XRP 6, ZEC 5, SUI 1
-- 4 hours later: 22 kept going, 32 reversed (average -0.14% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 21 of 54
+- 52 shock(s) this week, 35 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 25, broke yesterday's low 11, volume spike 32
+- by coin: ETH 15, SOL 14, BTC 12, XRP 6, ZEC 4, SUI 1
+- 4 hours later: 22 kept going, 30 reversed (average -0.11% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 21 of 52
 -   2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)
 -   2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)
 -   2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)
@@ -68,17 +68,17 @@ Made 2026-11-14 21:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 - at a zone or edge that fits the direction: 1 setup(s), -1.08R a trade after fees, 0 won
 - middle of the 4H range: 4 setup(s), +0.03R a trade after fees, 1 won
-- at a zone or edge against the direction: 81 setup(s), -0.13R a trade after fees, 26 won
-- outside the 4H range (breakout): 59 setup(s), +0.32R a trade after fees, 24 won
+- at a zone or edge against the direction: 84 setup(s), -0.04R a trade after fees, 29 won
+- outside the 4H range (breakout): 60 setup(s), +0.35R a trade after fees, 25 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
 ## Every live strategy / version / coin
 
 | Strategy | TF | Coin | Stage | Sent to you | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| TRD-H4-BREAKOUT-S3 | 1h | BTC | TEST | ✅ yes | 5 | 40 | +0.34R | +0.38R | 5 (+1.7R) | +0.34R | +0.34R over 5 trades: too early to say anything |
+| TRD-H4-BREAKOUT-S3 | 1h | BTC | TEST | ✅ yes | 6 | 50 | +0.69R | +0.74R | 6 (+4.2R) | +0.34R | +0.69R over 6 trades: too early to say anything |
+| TRD-H4-BREAKOUT-S3 | 1h | XRP | TEST | ✅ yes | 5 | 20 | -0.34R | -0.32R | 5 (-1.7R) | +0.28R | -0.34R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | BTC | TEST | ✅ yes | 4 | 50 | +0.75R | +0.81R | 2 (+4.9R) | +0.36R | +0.75R over 4 trades: too early to say anything |
-| TRD-H4-BREAKOUT-S3 | 1h | XRP | TEST | ✅ yes | 4 | 0 | -1.05R | -1.02R | 4 (-4.2R) | +0.28R | -1.05R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V3 | 4h | XRP | TEST | ✅ yes | 3 | 100 | +2.46R | +2.50R | 3 (+7.4R) | +0.23R | +2.46R over 3 trades: too early to say anything |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | TEST | ✅ yes | 2 | 0 | -1.05R | -1.02R | 2 (-2.1R) | +0.15R | -1.05R over 2 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | ETH | TEST | ✅ yes | 1 | 0 | -1.05R | -1.01R | 0 (+0.0R) | +0.25R | -1.05R over 1 trade: too early to say anything |
@@ -91,9 +91,9 @@ Made 2026-11-14 21:16 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P12-LEADER-V1 | 4h | ZEC | TEST | ✅ yes | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.41R | -1.02R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 11 | 27 | -0.22R | -0.12R | 2 (+3.3R) | +0.01R | -0.22R over 11 trades: not working so far |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | TEST | silent | 10 | 40 | +0.13R | +0.22R | 3 (+3.7R) | +0.04R | +0.13R over 10 trades: still uncertain - could be luck |
+| P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 7 | 57 | +0.89R | +0.98R | 4 (+6.2R) | +0.05R | +0.89R over 7 trades: too early to say anything |
+| P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 7 | 29 | -0.35R | -0.25R | 4 (+1.0R) | +0.04R | -0.35R over 7 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 1h | BTC | TEST | silent | 6 | 50 | +0.34R | +0.41R | 4 (+3.9R) | +0.11R | +0.34R over 6 trades: too early to say anything |
-| P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 6 | 50 | +0.63R | +0.72R | 3 (+3.8R) | +0.05R | +0.63R over 6 trades: too early to say anything |
-| P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 6 | 17 | -0.81R | -0.71R | 3 (-1.4R) | +0.04R | -0.81R over 6 trades: too early to say anything |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 6 | 33 | -0.15R | -0.10R | 2 (+1.4R) | +0.02R | -0.15R over 6 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 5 | 0 | -0.81R | -0.78R | 0 (+0.0R) | +0.08R | -0.81R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 5 | 0 | -0.94R | -0.88R | 0 (+0.0R) | +0.01R | -0.94R over 5 trades: too early to say anything |
