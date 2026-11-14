@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-14 14:11",
+ "utc": "2026-11-14 15:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 134,
-  "wins": 37,
-  "win_rate": 27.6,
-  "avg_r": -0.232,
-  "total_r": -31.07,
+  "n": 135,
+  "wins": 38,
+  "win_rate": 28.1,
+  "avg_r": -0.212,
+  "total_r": -28.67,
   "max_dd_r": 59.17,
   "cur_loss_run": 0,
   "max_loss_run": 20,
-  "sd": 1.352
+  "sd": 1.366
  },
  "yours": {
   "n": 21,
@@ -32,29 +32,29 @@
   "sd": 1.44
  },
  "silent": {
-  "n": 86,
-  "wins": 22,
-  "win_rate": 25.6,
-  "avg_r": -0.341,
-  "total_r": -29.29,
+  "n": 87,
+  "wins": 23,
+  "win_rate": 26.4,
+  "avg_r": -0.309,
+  "total_r": -26.88,
   "max_dd_r": 38.6,
-  "cur_loss_run": 9,
+  "cur_loss_run": 0,
   "max_loss_run": 17,
-  "sd": 1.22
+  "sd": 1.248
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 109,
-   "wins": 27,
-   "win_rate": 24.8,
-   "avg_r": -0.329,
-   "total_r": -35.9,
+   "n": 110,
+   "wins": 28,
+   "win_rate": 25.5,
+   "avg_r": -0.304,
+   "total_r": -33.49,
    "max_dd_r": 47.91,
    "cur_loss_run": 0,
    "max_loss_run": 20,
-   "sd": 1.272
+   "sd": 1.293
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -637,6 +637,32 @@
    "sent": false
   },
   {
+   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 1,
+    "win_rate": 50.0,
+    "avg_r": 0.72,
+    "total_r": 1.44,
+    "max_dd_r": 0.96,
+    "cur_loss_run": 0,
+    "max_loss_run": 1,
+    "sd": 2.382
+   },
+   "backtest": {
+    "n": 360,
+    "avg_r": 0.011,
+    "win_rate": 37.8
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-14 14:29",
+   "sent": false
+  },
+  {
    "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
    "coin": "ETH",
    "stage": "TEST",
@@ -972,32 +998,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-29 23:59",
-   "sent": false
-  },
-  {
-   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -0.964,
-    "total_r": -0.96,
-    "max_dd_r": 0.96,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 360,
-    "avg_r": 0.011,
-    "win_rate": 37.8
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-30 15:14",
    "sent": false
   },
   {
@@ -1845,8 +1845,8 @@
    "r": -33.52
   },
   {
-   "t": "2026-11-14 07:59",
-   "r": -31.07
+   "t": "2026-11-14 14:29",
+   "r": -28.67
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
