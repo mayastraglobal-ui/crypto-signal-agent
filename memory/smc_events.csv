@@ -34682,3 +34682,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-14 19:00,ZEC,1h,FVG_FILLED,bull,,850.0,854.62,,,4h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-14 18:30,ZEC,15m,SWEEP,bull,851.95,,,0.485,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-14 18:45,ZEC,15m,BOS,bear,851.95,,,0.007,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-14 20:00,BTC,4h,FVG,bear,,66189.88,66966.79,0.637,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-14 20:00,ETH,4h,SWEEP,bull,1822.06,,,0.243,,1d,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:00,ETH,4h,BREAKER_RETEST,bear,,1853.62,1897.8,,,1d,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-14 20:00,ETH,4h,FVG,bear,,1858.25,1894.46,0.813,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-14 19:30,ETH,15m,FVG_FILLED,bull,,1825.88,1840.39,,,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 20:00,SOL,4h,SWEEP,bull,71.98,,,0.154,,1d,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:00,SOL,4h,FVG_FILLED,bull,,73.07,73.58,,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 20:00,SOL,4h,FVG,bear,,73.95,75.07,0.552,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-14 19:30,SOL,30m,SWEEP,bull,71.93,,,0.306,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 19:30,SOL,15m,SWEEP,bull,71.93,,,0.421,,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-14 20:00,XRP,4h,FVG,bear,,0.9731,0.9818,0.357,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-14 20:00,ZEC,4h,BOS,bear,880.5,,,0.628,,1d,RANGE,no displacement,smc-1.0,Binance
+2026-11-14 20:00,ZEC,4h,FVG_FILLED,bull,,847.85,933.7,,,1d,RANGE,,smc-1.0,Binance
