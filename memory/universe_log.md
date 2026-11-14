@@ -1175,3 +1175,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-14 00:11 UTC
 - **FLAG** BTC - possible wash volume: 24h volume is 1,063x the 1% order-book depth (flag only, not excluded)
 - **EXCLUDED** NVDAB - only 156 days of history (need 180)
+
+## 2026-11-14 03:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,167x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** NVDAB - only 156 days of history (need 180); order book too thin: $245k within 1% (need $250k)

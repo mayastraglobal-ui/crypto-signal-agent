@@ -1,16 +1,74 @@
 {
- "last_entry_utc": "2026-11-13 13:36",
+ "last_entry_utc": "2026-11-14 03:05",
  "days": 30,
  "all": {
-  "alerts": 27,
-  "took": 26,
+  "alerts": 28,
+  "took": 27,
+  "skipped": 0,
+  "no_answer": 1,
+  "plan_took": {
+   "n": 14,
+   "total_r": 6.175,
+   "avg_r": 0.441,
+   "wins": 6
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 1,
+   "total_r": -1.0,
+   "avg_r": -1.0,
+   "wins": 0
+  },
+  "plan_all": {
+   "n": 15,
+   "total_r": 5.175,
+   "avg_r": 0.345,
+   "wins": 6
+  },
+  "yours": {
+   "n": 13,
+   "total_r": 7.82,
+   "avg_r": 0.602,
+   "wins": 7
+  },
+  "gap": {
+   "n": 13,
+   "total_r": 3.32,
+   "avg_r": 0.255,
+   "wins": 2
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 13
+ },
+ "recent": {
+  "alerts": 26,
+  "took": 25,
   "skipped": 0,
   "no_answer": 1,
   "plan_took": {
    "n": 12,
-   "total_r": 1.175,
-   "avg_r": 0.098,
-   "wins": 4
+   "total_r": 8.175,
+   "avg_r": 0.681,
+   "wins": 6
   },
   "plan_skipped": {
    "n": 0,
@@ -26,78 +84,20 @@
   },
   "plan_all": {
    "n": 13,
-   "total_r": 0.175,
-   "avg_r": 0.013,
-   "wins": 4
+   "total_r": 7.175,
+   "avg_r": 0.552,
+   "wins": 6
   },
   "yours": {
    "n": 11,
-   "total_r": 2.82,
-   "avg_r": 0.256,
-   "wins": 5
+   "total_r": 10.1,
+   "avg_r": 0.918,
+   "wins": 7
   },
   "gap": {
    "n": 11,
-   "total_r": 3.32,
-   "avg_r": 0.302,
-   "wins": 2
-  },
-  "early": {
-   "n": 0,
-   "plan": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   },
-   "yours": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   }
-  },
-  "missing_result": 14
- },
- "recent": {
-  "alerts": 25,
-  "took": 24,
-  "skipped": 0,
-  "no_answer": 1,
-  "plan_took": {
-   "n": 10,
-   "total_r": 3.175,
-   "avg_r": 0.318,
-   "wins": 4
-  },
-  "plan_skipped": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
-  },
-  "plan_no_answer": {
-   "n": 1,
-   "total_r": -1.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_all": {
-   "n": 11,
-   "total_r": 2.175,
-   "avg_r": 0.198,
-   "wins": 4
-  },
-  "yours": {
-   "n": 9,
-   "total_r": 5.1,
-   "avg_r": 0.567,
-   "wins": 5
-  },
-  "gap": {
-   "n": 9,
    "total_r": 3.6,
-   "avg_r": 0.4,
+   "avg_r": 0.327,
    "wins": 2
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 14
+  "missing_result": 13
  },
  "per_strategy": [
   {
@@ -173,10 +173,10 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
-   "your_avg_r": null,
-   "your_n": 0
+   "plan_avg_r": 2.5,
+   "plan_n": 1,
+   "your_avg_r": 2.5,
+   "your_n": 1
   },
   {
    "cell": "P07-SQUEEZE-RETEST-V3 4h",
@@ -200,13 +200,13 @@
   },
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
-   "alerts": 4,
-   "took": 4,
+   "alerts": 5,
+   "took": 5,
    "skipped": 0,
-   "plan_avg_r": 1.058,
-   "plan_n": 3,
-   "your_avg_r": 1.85,
-   "your_n": 2
+   "plan_avg_r": 1.419,
+   "plan_n": 4,
+   "your_avg_r": 2.067,
+   "your_n": 3
   },
   {
    "cell": "donchian_breakout-VEXIT 4h",
@@ -256,6 +256,10 @@
    "n": 1,
    "avg_r": -1.0
   },
+  "P07-SQUEEZE-RETEST-V1": {
+   "n": 1,
+   "avg_r": 2.5
+  },
   "P07-SQUEEZE-RETEST-V3": {
    "n": 1,
    "avg_r": 2.5
@@ -265,8 +269,8 @@
    "avg_r": -1.0
   },
   "TRD-H4-BREAKOUT-S3": {
-   "n": 3,
-   "avg_r": 1.058
+   "n": 4,
+   "avg_r": 1.419
   }
  },
  "compare_5m": {
@@ -290,16 +294,15 @@
     "wins": 0
    },
    "sent": {
-    "n": 8,
-    "total_r": -1.0,
-    "avg_r": -0.125,
-    "wins": 2
+    "n": 9,
+    "total_r": 1.5,
+    "avg_r": 0.167,
+    "wins": 3
    }
   }
  },
  "findings": [
-  "Your real results are +0.30R per trade above the plan (11 trades) - your execution adds to the strategy.",
-  "14 of 26 trades you took have no real result: send /result 1.2 (your result in R) after each trade so the agent can compare you with the plan."
+  "Your real results are +0.26R per trade above the plan (13 trades) - your execution adds to the strategy."
  ],
  "decisions": []
 }
