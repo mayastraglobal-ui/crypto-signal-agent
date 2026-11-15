@@ -1212,3 +1212,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-15 09:11 UTC
 - **FLAG** ETH - possible wash volume: 24h volume is 1,008x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-15 11:12 UTC
+- **FLAG** ETH - possible wash volume: 24h volume is 1,012x the 1% order-book depth (flag only, not excluded)
