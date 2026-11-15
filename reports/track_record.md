@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-15 07:46 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-15 08:16 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
-| **Your alerts** (could reach your Telegram) | 38 | 45 | +0.33R | +12.57R | 10.35R | 7 |
+| **Your alerts** (could reach your Telegram) | 39 | 44 | +0.30R | +11.54R | 10.35R | 7 |
 | Silent research records (never sent to you) | 108 | 32 | -0.06R | -6.22R | 38.60R | 17 |
-| 🔵 TEST | 150 | 35 | +0.07R | +10.02R | 47.91R | 20 |
-| 🟡 PAPER | 36 | 58 | +0.83R | +30.05R | 11.26R | 8 |
+| 🔵 TEST | 151 | 35 | +0.06R | +8.99R | 47.91R | 20 |
+| 🟡 PAPER | 38 | 55 | +0.74R | +27.99R | 11.26R | 8 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 186 | 40 | +0.21R | +40.06R | 59.17R | 20 |
+| **All** | 189 | 39 | +0.20R | +36.99R | 59.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -26,16 +26,16 @@ Warning signs (no pause yet):
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | 🔵 TEST | ✅ yes | 12 | 58 | +0.87R | +0.35R | +10.42R | 2.14R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | ✅ yes | 10 | 30 | -0.14R | +0.30R | -1.39R | 4.20R | ✅ |
+| P01-BREAKOUT-V3 | 4h | XRP | 🔵 TEST | ✅ yes | 5 | 80 | +1.76R | +0.23R | +8.82R | 1.02R | ✅ |
 | P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 4 | 50 | +0.75R | +0.36R | +3.00R | 1.92R | ✅ |
-| P01-BREAKOUT-V3 | 4h | XRP | 🔵 TEST | ✅ yes | 4 | 100 | +2.46R | +0.23R | +9.85R | 0.00R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | 🔵 TEST | ✅ yes | 4 | 25 | -0.17R | +0.17R | -0.66R | 2.11R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 4 | 75 | +1.57R | +0.53R | +6.28R | 1.08R | ✅ |
+| donchian_breakout-VEXIT-FDISP | 4h | XRP | 🟡 PAPER | ✅ yes | 4 | 75 | +1.58R | +0.23R | +6.32R | 1.03R | ✅ |
 | donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 4 | 75 | +1.57R | +0.52R | +6.28R | 1.08R | ✅ |
+| donchian_breakout-VEXIT | 4h | XRP | 🟡 PAPER | ✅ yes | 4 | 75 | +1.58R | +0.13R | +6.32R | 1.03R | ✅ |
 | donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 4 | 75 | +0.97R | +0.27R | +3.88R | 1.08R | ✅ |
-| donchian_breakout-VEXIT-FDISP | 4h | XRP | 🟡 PAPER | ✅ yes | 3 | 100 | +2.45R | +0.23R | +7.34R | 0.00R | ✅ |
 | donchian_breakout-VEXIT-S4 | 4h | SOL | 🟡 PAPER | ✅ yes | 3 | 33 | +0.12R | +0.29R | +0.37R | 2.08R | ✅ |
 | donchian_breakout-VEXIT | 4h | SOL | 🟡 PAPER | ✅ yes | 3 | 33 | +0.12R | +0.22R | +0.37R | 2.08R | ✅ |
-| donchian_breakout-VEXIT | 4h | XRP | 🟡 PAPER | ✅ yes | 3 | 100 | +2.45R | +0.13R | +7.34R | 0.00R | ✅ |
 | donchian_breakout | 4h | SOL | 🟡 PAPER | ✅ yes | 3 | 33 | -0.57R | +0.21R | -1.72R | 2.08R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | SOL | 🟡 PAPER | ✅ yes | 2 | 0 | -1.04R | +0.19R | -2.08R | 2.08R | ✅ |
 | donchian_breakout-VEXIT-S4 | 4h | BTC | 🟡 PAPER | ✅ yes | 2 | 100 | +2.45R | +0.45R | +4.90R | 0.00R | ✅ |
@@ -90,7 +90,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-14 03:59 | -40.88R |
 | 2026-11-14 07:59 | -33.52R |
 | 2026-11-14 15:59 | -26.21R |
 | 2026-11-14 15:59 | -18.82R |
@@ -109,4 +108,5 @@ Warning signs (no pause yet):
 | 2026-11-15 02:59 | +32.64R |
 | 2026-11-15 03:59 | +32.44R |
 | 2026-11-15 03:59 | +39.83R |
-| 2026-11-15 03:59 | +40.06R |
+| 2026-11-15 07:59 | +39.04R |
+| 2026-11-15 07:59 | +36.99R |
