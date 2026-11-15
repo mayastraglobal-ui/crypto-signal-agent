@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-15 09:10",
+ "last_entry_utc": "2026-11-15 09:28",
  "days": 30,
  "all": {
   "alerts": 42,
@@ -31,16 +31,16 @@
    "wins": 16
   },
   "yours": {
-   "n": 21,
-   "total_r": 27.82,
-   "avg_r": 1.325,
-   "wins": 15
+   "n": 22,
+   "total_r": 31.72,
+   "avg_r": 1.442,
+   "wins": 16
   },
   "gap": {
-   "n": 21,
-   "total_r": 3.32,
-   "avg_r": 0.158,
-   "wins": 2
+   "n": 22,
+   "total_r": 3.342,
+   "avg_r": 0.152,
+   "wins": 3
   },
   "early": {
    "n": 0,
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 16
  },
  "recent": {
   "alerts": 40,
@@ -89,16 +89,16 @@
    "wins": 16
   },
   "yours": {
-   "n": 19,
-   "total_r": 30.1,
-   "avg_r": 1.584,
-   "wins": 15
+   "n": 20,
+   "total_r": 34.0,
+   "avg_r": 1.7,
+   "wins": 16
   },
   "gap": {
-   "n": 19,
-   "total_r": 3.6,
-   "avg_r": 0.189,
-   "wins": 2
+   "n": 20,
+   "total_r": 3.622,
+   "avg_r": 0.181,
+   "wins": 3
   },
   "early": {
    "n": 0,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 16
  },
  "per_strategy": [
   {
@@ -145,8 +145,8 @@
    "skipped": 0,
    "plan_avg_r": 3.878,
    "plan_n": 1,
-   "your_avg_r": null,
-   "your_n": 0
+   "your_avg_r": 3.9,
+   "your_n": 1
   },
   {
    "cell": "P04-MACD-SUPERTREND-V5 30m",
@@ -306,7 +306,7 @@
   }
  },
  "findings": [
-  "Your real results are +0.16R per trade above the plan (21 trades) - your execution adds to the strategy."
+  "Your real results are +0.15R per trade above the plan (22 trades) - your execution adds to the strategy."
  ],
  "decisions": [
   {

@@ -962,3 +962,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry, late_entry
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.05R
+- timestamp: 2026-11-15 10:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-11-22
+  - signal 2026-11-14 20:59 UTC, closed 2026-11-15 09:59 UTC, stage TEST
+  - MAE -1.16R / MFE +1.37R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.06R
+- timestamp: 2026-11-15 10:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - signal 2026-11-14 21:59 UTC, closed 2026-11-15 09:59 UTC, stage TEST
+  - MAE -1.19R / MFE +1.74R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout, bad_target
+  - root cause / fix: (review)
+
+### SOL SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.04R
+- timestamp: 2026-11-15 10:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: SOL · timeframe: 1h · regime: EXPANSION · review: 2026-11-22
+  - signal 2026-11-14 21:59 UTC, closed 2026-11-15 09:59 UTC, stage TEST
+  - MAE -1.06R / MFE +1.03R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
