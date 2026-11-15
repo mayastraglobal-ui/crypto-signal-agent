@@ -1221,3 +1221,8 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-15 17:11 UTC
 - **FLAG** ETH - possible wash volume: 24h volume is 1,008x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-15 22:16 UTC
+- **EXCLUDED** BNB - 24h volume $49M < $50M
+- **EXCLUDED** ASTER - 7-day average volume $11M < $50M; order book too thin: $195k within 1% (need $250k)
+- **LEAVE** BNB - not eligible: 24h volume $49M < $50M
