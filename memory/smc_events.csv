@@ -35951,3 +35951,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-15 08:00,SUI,15m,SWEEP,bull,0.7128,,,0.355,London,1h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-15 08:00,SUI,15m,FVG_RETRACE,bull,,0.7092,0.7121,,London,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-15 08:15,SUI,15m,WEAK_BREAK,bear,0.7128,,,0.576,London,1h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-15 08:30,BTC,15m,FVG_FILLED,bear,,64100.0,64318.05,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:45,BTC,15m,FVG_FILLED,bear,,64540.13,64769.67,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:45,BTC,15m,FVG,bull,,64166.82,64501.32,0.812,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 09:00,BTC,15m,BOS,bull,65169.23,,,0.113,London,1h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-15 09:00,BTC,15m,ORDER_BLOCK,bull,,63887.75,64166.82,,London,1h,STRONG_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-15 09:00,ETH,1h,FVG_RETRACE,bear,,1801.38,1812.37,,London,4h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-15 09:00,ETH,1h,FVG_FILLED,bear,,1801.38,1812.37,,London,4h,EXPANSION,,smc-1.0,Binance
+2026-11-15 08:30,ETH,15m,FVG_FILLED,bear,,1784.73,1790.0,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:45,ETH,15m,FVG,bull,,1787.85,1795.06,0.547,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:30,SOL,15m,FVG_FILLED,bear,,70.04,70.25,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:45,SOL,15m,FVG,bull,,70.16,70.39,0.372,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:30,BNB,15m,FVG_FILLED,bull,,584.83,588.39,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:45,BNB,15m,FVG_FILLED,bear,,587.34,589.57,,London,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-15 08:30,XRP,15m,FVG_FILLED,bear,,0.9491,0.9541,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-15 08:30,SUI,15m,FVG_FILLED,bull,,0.7092,0.7121,,London,1h,STRONG_BEAR,,smc-1.0,Binance

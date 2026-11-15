@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-15 04:05",
+ "last_entry_utc": "2026-11-15 09:10",
  "days": 30,
  "all": {
   "alerts": 42,
@@ -7,10 +7,10 @@
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 24,
-   "total_r": 27.675,
-   "avg_r": 1.153,
-   "wins": 15
+   "n": 25,
+   "total_r": 31.553,
+   "avg_r": 1.262,
+   "wins": 16
   },
   "plan_skipped": {
    "n": 0,
@@ -25,10 +25,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 25,
-   "total_r": 26.675,
-   "avg_r": 1.067,
-   "wins": 15
+   "n": 26,
+   "total_r": 30.553,
+   "avg_r": 1.175,
+   "wins": 16
   },
   "yours": {
    "n": 21,
@@ -65,10 +65,10 @@
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 22,
-   "total_r": 29.675,
-   "avg_r": 1.349,
-   "wins": 15
+   "n": 23,
+   "total_r": 33.553,
+   "avg_r": 1.459,
+   "wins": 16
   },
   "plan_skipped": {
    "n": 0,
@@ -83,10 +83,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 23,
-   "total_r": 28.675,
-   "avg_r": 1.247,
-   "wins": 15
+   "n": 24,
+   "total_r": 32.553,
+   "avg_r": 1.356,
+   "wins": 16
   },
   "yours": {
    "n": 19,
@@ -143,8 +143,8 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
+   "plan_avg_r": 3.878,
+   "plan_n": 1,
    "your_avg_r": null,
    "your_n": 0
   },
@@ -248,6 +248,10 @@
    "n": 1,
    "avg_r": -1.0
   },
+  "P02-EMA-PULLBACK-V4": {
+   "n": 1,
+   "avg_r": 3.878
+  },
   "P04-MACD-SUPERTREND-V5": {
    "n": 1,
    "avg_r": -1.0
@@ -294,10 +298,10 @@
     "wins": 0
    },
    "sent": {
-    "n": 16,
-    "total_r": 15.5,
-    "avg_r": 0.969,
-    "wins": 9
+    "n": 17,
+    "total_r": 19.378,
+    "avg_r": 1.14,
+    "wins": 10
    }
   }
  },

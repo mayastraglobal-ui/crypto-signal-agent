@@ -11,7 +11,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1073,
+ "runs": 1074,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -171,7 +171,9 @@
   "BTC": [
    "wash_volume"
   ],
-  "ETH": [],
+  "ETH": [
+   "wash_volume"
+  ],
   "ZEC": [],
   "XRP": [],
   "SOL": [],
