@@ -922,3 +922,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, no_displacement, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### XRP SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.04R
+- timestamp: 2026-11-15 04:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: XRP · timeframe: 1h · regime: EXPANSION · review: 2026-11-22
+  - signal 2026-11-14 20:59 UTC, closed 2026-11-15 03:59 UTC, stage TEST
+  - MAE -1.33R / MFE +1.11R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
