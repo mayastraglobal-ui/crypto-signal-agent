@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-15 01:11",
+ "utc": "2026-11-15 02:11",
  "verdict": {
   "code": "TREND_DOWN",
   "icon": "\ud83c\udf27",
@@ -36,7 +36,7 @@
    "adx": {
     "1d": 29.0,
     "4h": 61.0,
-    "1h": 57.0
+    "1h": 58.0
    },
    "vol": {
     "atr_pct": 4.36,
@@ -65,10 +65,10 @@
    },
    "crowd": {
     "funding_pct": -0.0038,
-    "oi_24h_pct": -6.2,
+    "oi_24h_pct": -9.3,
     "label": "neutral"
    },
-   "change_24h": -7.95
+   "change_24h": -6.43
   },
   {
    "coin": "BNB",
@@ -85,7 +85,7 @@
    "adx": {
     "1d": 33.0,
     "4h": 55.0,
-    "1h": 55.0
+    "1h": 56.0
    },
    "vol": {
     "atr_pct": 4.39,
@@ -114,10 +114,10 @@
    },
    "crowd": {
     "funding_pct": -0.0034,
-    "oi_24h_pct": -89.8,
+    "oi_24h_pct": -89.9,
     "label": "neutral"
    },
-   "change_24h": -9.4
+   "change_24h": -7.59
   },
   {
    "coin": "ETH",
@@ -129,12 +129,12 @@
     "1w": "RANGE",
     "1d": "TRANSITION",
     "4h": "EXPANSION",
-    "1h": "EXPANSION"
+    "1h": "STRONG_BEAR"
    },
    "adx": {
     "1d": 31.0,
     "4h": 58.0,
-    "1h": 52.0
+    "1h": 53.0
    },
    "vol": {
     "atr_pct": 6.39,
@@ -163,10 +163,10 @@
    },
    "crowd": {
     "funding_pct": -0.0096,
-    "oi_24h_pct": -65.9,
+    "oi_24h_pct": -66.3,
     "label": "neutral"
    },
-   "change_24h": -10.51
+   "change_24h": -8.03
   },
   {
    "coin": "SOL",
@@ -178,12 +178,12 @@
     "1w": "UNCLEAR",
     "1d": "STRONG_BEAR",
     "4h": "EXPANSION",
-    "1h": "STRONG_BEAR"
+    "1h": "EXPANSION"
    },
    "adx": {
     "1d": 43.0,
     "4h": 55.0,
-    "1h": 52.0
+    "1h": 54.0
    },
    "vol": {
     "atr_pct": 6.94,
@@ -212,10 +212,10 @@
    },
    "crowd": {
     "funding_pct": -0.0117,
-    "oi_24h_pct": -57.7,
+    "oi_24h_pct": -10.9,
     "label": "leaning short"
    },
-   "change_24h": -11.07
+   "change_24h": -8.97
   },
   {
    "coin": "SUI",
@@ -232,7 +232,7 @@
    "adx": {
     "1d": 31.0,
     "4h": 40.0,
-    "1h": 49.0
+    "1h": 50.0
    },
    "vol": {
     "atr_pct": 8.55,
@@ -264,7 +264,7 @@
     "oi_24h_pct": -67.1,
     "label": "leaning short"
    },
-   "change_24h": -13.24
+   "change_24h": -10.55
   },
   {
    "coin": "XRP",
@@ -310,10 +310,10 @@
    },
    "crowd": {
     "funding_pct": -0.0005,
-    "oi_24h_pct": -67.5,
+    "oi_24h_pct": -68.1,
     "label": "neutral"
    },
-   "change_24h": -8.95
+   "change_24h": -6.87
   },
   {
    "coin": "ZEC",
@@ -362,20 +362,20 @@
     "oi_24h_pct": -71.6,
     "label": "neutral"
    },
-   "change_24h": -7.92
+   "change_24h": -5.1
   }
  ],
- "alts_vs_btc_24h": -2.0,
+ "alts_vs_btc_24h": -1.38,
  "fear_greed": {
   "value": 10,
   "label": "Extreme Fear",
   "yesterday": 13
  },
  "btc_dominance": {
-  "pct": 58.585,
-  "utc": "2026-11-15 01:11",
-  "ch24": -0.31,
-  "ch7": -0.71,
+  "pct": 58.546,
+  "utc": "2026-11-15 02:11",
+  "ch24": -0.4,
+  "ch7": -0.77,
   "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [],
@@ -391,5 +391,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-15 09:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -22.0% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D TRANSITION \u00b7 4H EXPANSION \u00b7 1H EXPANSION\nVolatility: high (daily range 4.4%, higher than 87% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.1% (62,155 \u2013 66,145) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0038%/8h, open interest -6.2% in 24h)\nAltcoins vs BTC (24h): -2.0%\nBTC dominance: 58.6% \u00b7 24h -0.31 pt \u00b7 7d -0.71 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 10\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 BNB: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down \u00b7 leaning short\n\ud83d\udd34 SUI: trend down \u00b7 leaning short\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 13% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-15 10:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -22.0% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D TRANSITION \u00b7 4H EXPANSION \u00b7 1H EXPANSION\nVolatility: high (daily range 4.4%, higher than 87% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.1% (62,155 \u2013 66,145) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0038%/8h, open interest -9.3% in 24h)\nAltcoins vs BTC (24h): -1.4%\nBTC dominance: 58.5% \u00b7 24h -0.40 pt \u00b7 7d -0.77 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 10\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 BNB: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down \u00b7 leaning short\n\ud83d\udd34 SUI: trend down \u00b7 leaning short\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 13% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
