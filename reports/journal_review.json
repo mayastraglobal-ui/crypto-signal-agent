@@ -1,9 +1,9 @@
 {
- "last_entry_utc": "2026-11-14 22:10",
+ "last_entry_utc": "2026-11-15 00:00",
  "days": 30,
  "all": {
-  "alerts": 38,
-  "took": 35,
+  "alerts": 42,
+  "took": 39,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
@@ -31,15 +31,15 @@
    "wins": 12
   },
   "yours": {
-   "n": 17,
-   "total_r": 17.82,
-   "avg_r": 1.048,
-   "wins": 11
+   "n": 19,
+   "total_r": 22.82,
+   "avg_r": 1.201,
+   "wins": 13
   },
   "gap": {
-   "n": 17,
+   "n": 19,
    "total_r": 3.32,
-   "avg_r": 0.195,
+   "avg_r": 0.175,
    "wins": 2
   },
   "early": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 19
  },
  "recent": {
-  "alerts": 36,
-  "took": 33,
+  "alerts": 40,
+  "took": 37,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
@@ -89,15 +89,15 @@
    "wins": 12
   },
   "yours": {
-   "n": 15,
-   "total_r": 20.1,
-   "avg_r": 1.34,
-   "wins": 11
+   "n": 17,
+   "total_r": 25.1,
+   "avg_r": 1.476,
+   "wins": 13
   },
   "gap": {
-   "n": 15,
+   "n": 17,
    "total_r": 3.6,
-   "avg_r": 0.24,
+   "avg_r": 0.212,
    "wins": 2
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 19
  },
  "per_strategy": [
   {
@@ -205,13 +205,13 @@
    "skipped": 0,
    "plan_avg_r": 1.635,
    "plan_n": 5,
-   "your_avg_r": 2.067,
-   "your_n": 3
+   "your_avg_r": 2.175,
+   "your_n": 4
   },
   {
    "cell": "donchian_breakout-VEXIT 4h",
-   "alerts": 9,
-   "took": 7,
+   "alerts": 10,
+   "took": 8,
    "skipped": 0,
    "plan_avg_r": 2.5,
    "plan_n": 2,
@@ -220,13 +220,13 @@
   },
   {
    "cell": "donchian_breakout-VEXIT-FDISP 4h",
-   "alerts": 12,
-   "took": 12,
+   "alerts": 15,
+   "took": 15,
    "skipped": 0,
    "plan_avg_r": 1.333,
    "plan_n": 6,
-   "your_avg_r": 1.5,
-   "your_n": 5
+   "your_avg_r": 1.667,
+   "your_n": 6
   },
   {
    "cell": "donchian_breakout-VEXIT-S4 4h",
@@ -302,7 +302,7 @@
   }
  },
  "findings": [
-  "Your real results are +0.20R per trade above the plan (17 trades) - your execution adds to the strategy."
+  "Your real results are +0.17R per trade above the plan (19 trades) - your execution adds to the strategy."
  ],
  "decisions": []
 }

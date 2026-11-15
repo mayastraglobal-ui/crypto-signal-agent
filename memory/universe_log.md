@@ -1194,3 +1194,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-14 23:14 UTC
 - **FLAG** BTC - possible wash volume: 24h volume is 1,156x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-15 00:11 UTC
+- **ELIGIBLE** BNB - passes every rule again
+- **ELIGIBLE** SUI - passes every rule again

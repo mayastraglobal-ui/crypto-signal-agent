@@ -6,10 +6,13 @@
   "XRP",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "BNB": 1,
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {},
- "runs": 1064,
+ "runs": 1065,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -24,15 +27,11 @@
    "thin_book",
    "volume_7d"
   ],
-  "BNB": [
-   "volume_7d"
-  ],
+  "BNB": [],
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [
-   "volume_7d"
-  ],
+  "SUI": [],
   "AVAX": [
    "volume_7d"
   ],

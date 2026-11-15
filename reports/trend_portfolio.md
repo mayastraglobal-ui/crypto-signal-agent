@@ -1,25 +1,26 @@
 # Trend portfolio (paper)
 
-Daily close 2026-11-13 (updated 2026-11-14 00:12 UTC). 9 trend signals per coin (lookbacks 5, 10, 20, 30, 60, 90, 150, 250, 360 days): ON at a close above the lookback's high, OFF below its ratcheting mid-line. Target = the share ON. Long only, no leverage, equal parts. Paper only (`docs/TREND_PORTFOLIO.md`).
+Daily close 2026-11-14 (updated 2026-11-15 00:12 UTC). 9 trend signals per coin (lookbacks 5, 10, 20, 30, 60, 90, 150, 250, 360 days): ON at a close above the lookback's high, OFF below its ratcheting mid-line. Target = the share ON. Long only, no leverage, equal parts. Paper only (`docs/TREND_PORTFOLIO.md`).
 
 | Coin | Trends up | Target | Yesterday | Paper position | Change today | Price |
 |---|---|---:|---:|---:|---:|---:|
-| BNB | 0/9 | 0% | 0% | $0.00 | - | 630.31 |
-| BTC | 0/9 | 0% | 0% | $0.00 | - | 68,314 |
-| ETH | 0/9 | 0% | 0% | $0.00 | - | 1,929.88 |
-| SOL | 0/9 | 0% | 0% | $0.00 | - | 78.19 |
-| SUI | 0/9 | 0% | 0% | $0.00 | - | 0.7962 |
-| XRP | 0/9 | 0% | 0% | $0.00 | - | 1.011 |
-| ZEC | 0/9 | 0% | 22% | $0.00 | $-31 | 934.44 |
+| BNB | 0/9 | 0% | 0% | $0.00 | - | 581.9 |
+| BTC | 0/9 | 0% | 0% | $0.00 | - | 64,150 |
+| ETH | 0/9 | 0% | 0% | $0.00 | - | 1,769.2 |
+| SOL | 0/9 | 0% | 0% | $0.00 | - | 70.28 |
+| SUI | 0/9 | 0% | 0% | $0.00 | - | 0.7011 |
+| XRP | 0/9 | 0% | 0% | $0.00 | - | 0.9144 |
+| ZEC | 0/9 | 0% | 0% | $0.00 | - | 863.91 |
 
 **Paper account: $961** (-3.90% since 2026-10-28, start $1,000) · invested $0.00.
 
-Backtest on the candles the scan has (since 2024-02-19, 999 days, costs included): portfolio +25.5% a year, Sharpe 1.23, worst drop 17.2% · holding the same coins +37.5% a year, Sharpe 0.82, worst drop 51.5%.
+Backtest on the candles the scan has (since 2024-02-20, 999 days, costs included): portfolio +25.2% a year, Sharpe 1.22, worst drop 17.2% · holding the same coins +33.7% a year, Sharpe 0.78, worst drop 51.5%.
 
 ## Paper account, last 30 days
 
 | Day | Account | Day's result |
 |---|---:|---:|
+| 2026-11-14 | $961 | +0.00% |
 | 2026-11-13 | $961 | -0.08% |
 | 2026-11-12 | $962 | -0.14% |
 | 2026-11-11 | $963 | -0.37% |
