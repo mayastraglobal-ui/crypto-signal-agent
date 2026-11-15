@@ -986,3 +986,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### SOL SHORT 1h P01-BREAKOUT-V2 v1.0 - SL -1.04R
+- timestamp: 2026-11-15 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SOL · timeframe: 1h · regime: EXPANSION · review: 2026-11-22
+  - signal 2026-11-14 21:59 UTC, closed 2026-11-15 11:59 UTC, stage TEST
+  - MAE -1.05R / MFE +1.16R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
