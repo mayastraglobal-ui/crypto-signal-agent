@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-15 02:11",
+ "utc": "2026-11-15 03:01",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,51 +10,51 @@
   "curve_points": 60
  },
  "total": {
-  "n": 164,
-  "wins": 66,
-  "win_rate": 40.2,
-  "avg_r": 0.239,
-  "total_r": 39.22,
+  "n": 180,
+  "wins": 69,
+  "win_rate": 38.3,
+  "avg_r": 0.17,
+  "total_r": 30.57,
   "max_dd_r": 59.17,
-  "cur_loss_run": 0,
+  "cur_loss_run": 8,
   "max_loss_run": 20,
-  "sd": 1.6
+  "sd": 1.568
  },
  "yours": {
-  "n": 30,
-  "wins": 14,
-  "win_rate": 46.7,
-  "avg_r": 0.486,
-  "total_r": 14.58,
+  "n": 36,
+  "wins": 16,
+  "win_rate": 44.4,
+  "avg_r": 0.343,
+  "total_r": 12.33,
   "max_dd_r": 10.35,
-  "cur_loss_run": 0,
+  "cur_loss_run": 4,
   "max_loss_run": 7,
-  "sd": 1.714
+  "sd": 1.641
  },
  "silent": {
-  "n": 97,
-  "wins": 33,
-  "win_rate": 34.0,
-  "avg_r": -0.024,
-  "total_r": -2.3,
+  "n": 107,
+  "wins": 34,
+  "win_rate": 31.8,
+  "avg_r": -0.081,
+  "total_r": -8.7,
   "max_dd_r": 38.6,
-  "cur_loss_run": 0,
+  "cur_loss_run": 4,
   "max_loss_run": 17,
-  "sd": 1.453
+  "sd": 1.422
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 132,
-   "wins": 49,
-   "win_rate": 37.1,
-   "avg_r": 0.131,
-   "total_r": 17.23,
+   "n": 148,
+   "wins": 52,
+   "win_rate": 35.1,
+   "avg_r": 0.058,
+   "total_r": 8.58,
    "max_dd_r": 47.91,
-   "cur_loss_run": 0,
+   "cur_loss_run": 8,
    "max_loss_run": 20,
-   "sd": 1.56
+   "sd": 1.519
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -139,6 +139,60 @@
    "sent": false
   },
   {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 4,
+    "wins": 1,
+    "win_rate": 25.0,
+    "avg_r": 0.071,
+    "total_r": 0.28,
+    "max_dd_r": 2.16,
+    "cur_loss_run": 3,
+    "max_loss_run": 3,
+    "sd": 1.6
+   },
+   "backtest": {
+    "n": 174,
+    "avg_r": 0.122,
+    "win_rate": 39.7
+   },
+   "verdict": "watch",
+   "why": [
+    "3 losses in a row - in its backtest (40% won) a run that long shows up in 39% of 4-trade periods"
+   ],
+   "last_utc": "2026-11-15 02:29",
+   "sent": false
+  },
+  {
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 12,
+    "wins": 7,
+    "win_rate": 58.3,
+    "avg_r": 0.868,
+    "total_r": 10.42,
+    "max_dd_r": 2.14,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 1.76
+   },
+   "backtest": {
+    "n": 177,
+    "avg_r": 0.345,
+    "win_rate": 46.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-15 02:59",
+   "sent": true
+  },
+  {
    "key": "P04-MACD-SUPERTREND-V5@1.0|30m",
    "coin": "XRP",
    "stage": "TEST",
@@ -191,72 +245,20 @@
    "sent": false
   },
   {
-   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 9,
-    "wins": 6,
-    "win_rate": 66.7,
-    "avg_r": 1.284,
-    "total_r": 11.56,
-    "max_dd_r": 2.14,
-    "cur_loss_run": 0,
-    "max_loss_run": 2,
-    "sd": 1.772
-   },
-   "backtest": {
-    "n": 177,
-    "avg_r": 0.345,
-    "win_rate": 46.3
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-15 01:59",
-   "sent": true
-  },
-  {
-   "key": "P01-BREAKOUT-V2@1.0|30m",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 7,
-    "wins": 4,
-    "win_rate": 57.1,
-    "avg_r": 0.885,
-    "total_r": 6.2,
-    "max_dd_r": 1.14,
-    "cur_loss_run": 0,
-    "max_loss_run": 2,
-    "sd": 1.614
-   },
-   "backtest": {
-    "n": 168,
-    "avg_r": 0.05,
-    "win_rate": 37.5
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-14 21:29",
-   "sent": false
-  },
-  {
    "key": "P01-BREAKOUT-V2@1.0|30m",
    "coin": "SOL",
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 7,
+    "n": 9,
     "wins": 2,
-    "win_rate": 28.6,
-    "avg_r": -0.346,
-    "total_r": -2.42,
+    "win_rate": 22.2,
+    "avg_r": -0.441,
+    "total_r": -3.97,
     "max_dd_r": 4.88,
-    "cur_loss_run": 0,
+    "cur_loss_run": 2,
     "max_loss_run": 4,
-    "sd": 1.46
+    "sd": 1.286
    },
    "backtest": {
     "n": 177,
@@ -265,7 +267,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-14 21:29",
+   "last_utc": "2026-11-15 02:59",
    "sent": false
   },
   {
@@ -274,15 +276,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 7,
-    "wins": 2,
-    "win_rate": 28.6,
-    "avg_r": -0.039,
-    "total_r": -0.28,
+    "n": 9,
+    "wins": 3,
+    "win_rate": 33.3,
+    "avg_r": -0.038,
+    "total_r": -0.35,
     "max_dd_r": 4.2,
     "cur_loss_run": 1,
     "max_loss_run": 4,
-    "sd": 1.72
+    "sd": 1.572
    },
    "backtest": {
     "n": 119,
@@ -291,8 +293,34 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-15 00:59",
+   "last_utc": "2026-11-15 02:59",
    "sent": true
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 8,
+    "wins": 4,
+    "win_rate": 50.0,
+    "avg_r": 0.641,
+    "total_r": 5.13,
+    "max_dd_r": 1.14,
+    "cur_loss_run": 1,
+    "max_loss_run": 2,
+    "sd": 1.647
+   },
+   "backtest": {
+    "n": 168,
+    "avg_r": 0.05,
+    "win_rate": 37.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-15 02:29",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V2@1.0|1h",
@@ -300,15 +328,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 6,
+    "n": 7,
     "wins": 3,
-    "win_rate": 50.0,
-    "avg_r": 0.338,
-    "total_r": 2.03,
+    "win_rate": 42.9,
+    "avg_r": 0.14,
+    "total_r": 0.98,
     "max_dd_r": 1.92,
-    "cur_loss_run": 0,
+    "cur_loss_run": 1,
     "max_loss_run": 2,
-    "sd": 1.701
+    "sd": 1.639
    },
    "backtest": {
     "n": 356,
@@ -317,7 +345,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-14 15:59",
+   "last_utc": "2026-11-15 02:59",
    "sent": false
   },
   {
@@ -352,15 +380,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 5,
+    "n": 6,
     "wins": 2,
-    "win_rate": 40.0,
-    "avg_r": 0.357,
-    "total_r": 1.79,
+    "win_rate": 33.3,
+    "avg_r": 0.124,
+    "total_r": 0.75,
     "max_dd_r": 3.17,
-    "cur_loss_run": 0,
+    "cur_loss_run": 1,
     "max_loss_run": 3,
-    "sd": 1.937
+    "sd": 1.824
    },
    "backtest": {
     "n": 205,
@@ -369,7 +397,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-15 01:59",
+   "last_utc": "2026-11-15 02:59",
    "sent": false
   },
   {
@@ -425,6 +453,32 @@
    "sent": true
   },
   {
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "SOL",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 4,
+    "wins": 1,
+    "win_rate": 25.0,
+    "avg_r": -0.166,
+    "total_r": -0.66,
+    "max_dd_r": 2.11,
+    "cur_loss_run": 1,
+    "max_loss_run": 2,
+    "sd": 1.764
+   },
+   "backtest": {
+    "n": 122,
+    "avg_r": 0.154,
+    "win_rate": 39.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-15 02:59",
+   "sent": true
+  },
+  {
    "key": "P01-BREAKOUT-V2@1.0|15m",
    "coin": "BTC",
    "stage": "TEST",
@@ -448,6 +502,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-25 11:44",
+   "sent": false
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": 0.126,
+    "total_r": 0.38,
+    "max_dd_r": 1.06,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": 1.975
+   },
+   "backtest": {
+    "n": 360,
+    "avg_r": 0.011,
+    "win_rate": 37.8
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-15 02:14",
    "sent": false
   },
   {
@@ -501,32 +581,6 @@
    "why": [],
    "last_utc": "2026-10-25 16:59",
    "sent": false
-  },
-  {
-   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
-   "coin": "SOL",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 3,
-    "wins": 1,
-    "win_rate": 33.3,
-    "avg_r": 0.123,
-    "total_r": 0.37,
-    "max_dd_r": 2.11,
-    "cur_loss_run": 0,
-    "max_loss_run": 2,
-    "sd": 2.041
-   },
-   "backtest": {
-    "n": 122,
-    "avg_r": 0.154,
-    "win_rate": 39.3
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-15 01:59",
-   "sent": true
   },
   {
    "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
@@ -737,29 +791,29 @@
    "sent": true
   },
   {
-   "key": "P01-BREAKOUT-V2@1.0|30m",
-   "coin": "ETH",
+   "key": "P01-BREAKOUT-V2@1.0|1h",
+   "coin": "SOL",
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
     "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": 0.942,
-    "total_r": 1.88,
-    "max_dd_r": 0.56,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": 2.123
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.056,
+    "total_r": -2.11,
+    "max_dd_r": 2.11,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.033
    },
    "backtest": {
-    "n": 174,
-    "avg_r": 0.122,
-    "win_rate": 39.7
+    "n": 247,
+    "avg_r": 0.02,
+    "win_rate": 34.4
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-13 10:29",
+   "last_utc": "2026-11-15 02:59",
    "sent": false
   },
   {
@@ -786,32 +840,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-15 14:59",
-   "sent": false
-  },
-  {
-   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": 0.72,
-    "total_r": 1.44,
-    "max_dd_r": 0.96,
-    "cur_loss_run": 0,
-    "max_loss_run": 1,
-    "sd": 2.382
-   },
-   "backtest": {
-    "n": 360,
-    "avg_r": 0.011,
-    "win_rate": 37.8
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-14 14:29",
    "sent": false
   },
   {
@@ -864,6 +892,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-13 10:29",
+   "sent": false
+  },
+  {
+   "key": "P08-SESSION-BREAKOUT-V4@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 1,
+    "win_rate": 50.0,
+    "avg_r": 0.443,
+    "total_r": 0.89,
+    "max_dd_r": 1.12,
+    "cur_loss_run": 0,
+    "max_loss_run": 1,
+    "sd": 2.212
+   },
+   "backtest": {
+    "n": 218,
+    "avg_r": 0.034,
+    "win_rate": 36.7
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-15 02:59",
    "sent": false
   },
   {
@@ -968,32 +1022,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-10-18 21:29",
-   "sent": false
-  },
-  {
-   "key": "P01-BREAKOUT-V2@1.0|1h",
-   "coin": "SOL",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.079,
-    "total_r": -1.08,
-    "max_dd_r": 1.08,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 247,
-    "avg_r": 0.02,
-    "win_rate": 34.4
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-10-29 14:59",
    "sent": false
   },
   {
@@ -1466,32 +1494,6 @@
   },
   {
    "key": "P08-SESSION-BREAKOUT-V4@1.0|1h",
-   "coin": "BTC",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.121,
-    "total_r": -1.12,
-    "max_dd_r": 1.12,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 218,
-    "avg_r": 0.034,
-    "win_rate": 36.7
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-11 15:59",
-   "sent": false
-  },
-  {
-   "key": "P08-SESSION-BREAKOUT-V4@1.0|1h",
    "coin": "XRP",
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
@@ -1655,12 +1657,8 @@
    "r": -1.31
   },
   {
-   "t": "2026-10-11 15:59",
-   "r": -3.69
-  },
-  {
    "t": "2026-10-13 02:59",
-   "r": -5.94
+   "r": -4.84
   },
   {
    "t": "2026-10-15 02:59",
@@ -1668,83 +1666,55 @@
   },
   {
    "t": "2026-10-15 14:59",
-   "r": -6.07
-  },
-  {
-   "t": "2026-10-15 14:59",
-   "r": -6.24
+   "r": -7.12
   },
   {
    "t": "2026-10-15 14:59",
    "r": -8.4
   },
   {
-   "t": "2026-10-15 15:29",
-   "r": -10.58
-  },
-  {
    "t": "2026-10-15 15:59",
-   "r": -10.67
+   "r": -9.62
   },
   {
    "t": "2026-10-15 15:59",
    "r": -12.75
   },
   {
-   "t": "2026-10-18 01:29",
-   "r": -14.93
-  },
-  {
-   "t": "2026-10-18 19:59",
-   "r": -13.64
+   "t": "2026-10-18 09:59",
+   "r": -16.04
   },
   {
    "t": "2026-10-18 21:59",
    "r": -15.97
   },
   {
-   "t": "2026-10-20 13:59",
-   "r": -18.25
-  },
-  {
-   "t": "2026-10-21 19:14",
-   "r": -20.29
+   "t": "2026-10-21 13:44",
+   "r": -19.61
   },
   {
    "t": "2026-10-21 23:59",
    "r": -20.05
   },
   {
-   "t": "2026-10-22 01:59",
-   "r": -21.96
-  },
-  {
    "t": "2026-10-22 03:59",
-   "r": -24.13
+   "r": -23.05
   },
   {
    "t": "2026-10-22 03:59",
    "r": -26.3
   },
   {
-   "t": "2026-10-22 03:59",
-   "r": -28.52
-  },
-  {
-   "t": "2026-10-25 11:44",
-   "r": -29.01
+   "t": "2026-10-23 02:59",
+   "r": -29.63
   },
   {
    "t": "2026-10-25 16:59",
    "r": -27.23
   },
   {
-   "t": "2026-10-27 23:59",
-   "r": -29.26
-  },
-  {
-   "t": "2026-10-29 13:59",
-   "r": -30.76
+   "t": "2026-10-29 10:59",
+   "r": -30.03
   },
   {
    "t": "2026-10-29 14:59",
@@ -1752,23 +1722,15 @@
   },
   {
    "t": "2026-10-29 23:59",
-   "r": -34.81
-  },
-  {
-   "t": "2026-10-30 04:29",
-   "r": -36.46
+   "r": -35.83
   },
   {
    "t": "2026-10-30 15:14",
    "r": -38.45
   },
   {
-   "t": "2026-11-01 23:59",
-   "r": -40.55
-  },
-  {
-   "t": "2026-11-03 10:59",
-   "r": -42.24
+   "t": "2026-11-02 00:29",
+   "r": -41.75
   },
   {
    "t": "2026-11-04 04:29",
@@ -1776,47 +1738,31 @@
   },
   {
    "t": "2026-11-06 09:29",
-   "r": -45.68
-  },
-  {
-   "t": "2026-11-06 09:29",
-   "r": -46.23
+   "r": -45.13
   },
   {
    "t": "2026-11-07 08:29",
    "r": -47.02
   },
   {
-   "t": "2026-11-07 23:59",
-   "r": -49.1
-  },
-  {
-   "t": "2026-11-08 18:59",
-   "r": -50.17
+   "t": "2026-11-08 03:59",
+   "r": -49.0
   },
   {
    "t": "2026-11-08 21:29",
    "r": -48.47
   },
   {
-   "t": "2026-11-08 21:59",
-   "r": -43.6
-  },
-  {
    "t": "2026-11-09 12:59",
-   "r": -45.7
+   "r": -44.65
   },
   {
    "t": "2026-11-10 15:59",
    "r": -44.3
   },
   {
-   "t": "2026-11-11 02:59",
-   "r": -43.81
-  },
-  {
-   "t": "2026-11-11 13:59",
-   "r": -45.77
+   "t": "2026-11-11 07:59",
+   "r": -44.71
   },
   {
    "t": "2026-11-11 15:59",
@@ -1824,11 +1770,7 @@
   },
   {
    "t": "2026-11-11 15:59",
-   "r": -48.68
-  },
-  {
-   "t": "2026-11-11 15:59",
-   "r": -50.8
+   "r": -49.72
   },
   {
    "t": "2026-11-11 19:59",
@@ -1836,11 +1778,7 @@
   },
   {
    "t": "2026-11-11 19:59",
-   "r": -55.0
-  },
-  {
-   "t": "2026-11-11 19:59",
-   "r": -57.08
+   "r": -56.04
   },
   {
    "t": "2026-11-11 19:59",
@@ -1848,11 +1786,7 @@
   },
   {
    "t": "2026-11-13 03:59",
-   "r": -54.29
-  },
-  {
-   "t": "2026-11-13 03:59",
-   "r": -49.36
+   "r": -51.83
   },
   {
    "t": "2026-11-13 05:29",
@@ -1860,11 +1794,7 @@
   },
   {
    "t": "2026-11-13 06:59",
-   "r": -41.11
-  },
-  {
-   "t": "2026-11-13 07:29",
-   "r": -43.3
+   "r": -42.2
   },
   {
    "t": "2026-11-13 07:59",
@@ -1872,59 +1802,39 @@
   },
   {
    "t": "2026-11-13 07:59",
-   "r": -34.12
-  },
-  {
-   "t": "2026-11-13 07:59",
-   "r": -32.72
+   "r": -31.67
   },
   {
    "t": "2026-11-13 07:59",
    "r": -34.83
   },
   {
-   "t": "2026-11-13 10:29",
-   "r": -36.51
-  },
-  {
    "t": "2026-11-13 10:59",
-   "r": -38.63
+   "r": -37.57
   },
   {
    "t": "2026-11-13 13:59",
    "r": -40.77
   },
   {
-   "t": "2026-11-13 13:59",
-   "r": -42.9
-  },
-  {
    "t": "2026-11-13 15:59",
-   "r": -42.69
+   "r": -41.65
   },
   {
    "t": "2026-11-13 15:59",
    "r": -44.76
   },
   {
-   "t": "2026-11-14 02:59",
-   "r": -43.34
-  },
-  {
    "t": "2026-11-14 03:59",
-   "r": -38.43
+   "r": -40.88
   },
   {
    "t": "2026-11-14 07:59",
    "r": -33.52
   },
   {
-   "t": "2026-11-14 14:29",
-   "r": -28.67
-  },
-  {
    "t": "2026-11-14 15:59",
-   "r": -23.75
+   "r": -26.21
   },
   {
    "t": "2026-11-14 15:59",
@@ -1932,11 +1842,7 @@
   },
   {
    "t": "2026-11-14 19:59",
-   "r": -13.92
-  },
-  {
-   "t": "2026-11-14 19:59",
-   "r": -9.01
+   "r": -11.47
   },
   {
    "t": "2026-11-14 20:59",
@@ -1944,11 +1850,7 @@
   },
   {
    "t": "2026-11-14 20:59",
-   "r": 0.78
-  },
-  {
-   "t": "2026-11-14 21:29",
-   "r": 5.67
+   "r": 3.24
   },
   {
    "t": "2026-11-14 21:59",
@@ -1956,31 +1858,43 @@
   },
   {
    "t": "2026-11-14 22:59",
-   "r": 15.56
-  },
-  {
-   "t": "2026-11-14 23:59",
-   "r": 20.48
+   "r": 18.04
   },
   {
    "t": "2026-11-14 23:59",
    "r": 25.41
   },
   {
-   "t": "2026-11-15 00:59",
-   "r": 26.85
-  },
-  {
    "t": "2026-11-15 01:59",
-   "r": 31.79
+   "r": 29.32
   },
   {
    "t": "2026-11-15 01:59",
    "r": 36.74
   },
   {
-   "t": "2026-11-15 01:59",
-   "r": 39.22
+   "t": "2026-11-15 02:29",
+   "r": 37.61
+  },
+  {
+   "t": "2026-11-15 02:29",
+   "r": 34.43
+  },
+  {
+   "t": "2026-11-15 02:59",
+   "r": 38.36
+  },
+  {
+   "t": "2026-11-15 02:59",
+   "r": 35.77
+  },
+  {
+   "t": "2026-11-15 02:59",
+   "r": 32.64
+  },
+  {
+   "t": "2026-11-15 02:59",
+   "r": 30.57
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
