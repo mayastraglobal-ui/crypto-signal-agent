@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W46",
- "utc": "2026-11-15 06:21",
+ "utc": "2026-11-15 07:46",
  "final": true,
  "rows": [
   {
@@ -2134,9 +2134,9 @@
     }
    },
    "backtest": {
-    "n": 177,
-    "avg_r": 0.345,
-    "win_rate": 46.3
+    "n": 179,
+    "avg_r": 0.349,
+    "win_rate": 46.4
    },
    "confidence": "+0.87R over 12 trades: promising, not proven",
    "sent": true
@@ -2180,9 +2180,9 @@
     }
    },
    "backtest": {
-    "n": 205,
-    "avg_r": 0.053,
-    "win_rate": 35.6
+    "n": 206,
+    "avg_r": 0.064,
+    "win_rate": 35.9
    },
    "confidence": "+0.12R over 6 trades: too early to say anything",
    "sent": false
@@ -2226,9 +2226,9 @@
     }
    },
    "backtest": {
-    "n": 122,
-    "avg_r": 0.154,
-    "win_rate": 39.3
+    "n": 123,
+    "avg_r": 0.173,
+    "win_rate": 39.8
    },
    "confidence": "-0.17R over 4 trades: too early to say anything",
    "sent": true
@@ -2272,9 +2272,9 @@
     }
    },
    "backtest": {
-    "n": 119,
-    "avg_r": 0.281,
-    "win_rate": 44.5
+    "n": 120,
+    "avg_r": 0.299,
+    "win_rate": 45.0
    },
    "confidence": "-0.14R over 10 trades: not working so far",
    "sent": true
@@ -2296,12 +2296,12 @@
     "sd": 1.75956918582276
    },
    "backtest": {
-    "n": 177,
-    "avg_r": 0.345,
-    "win_rate": 46.3
+    "n": 179,
+    "avg_r": 0.349,
+    "win_rate": 46.4
    },
    "confidence": "+0.87R over 12 trades: promising, not proven",
-   "why": "12 live TEST setups, +0.87R a trade after fees (58% won); 5-year backtest on BTC +0.34R over 177 trades"
+   "why": "12 live TEST setups, +0.87R a trade after fees (58% won); 5-year backtest on BTC +0.35R over 179 trades"
   },
   {
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
@@ -2430,7 +2430,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-15 06:21 UTC"
+   "text": "hourly scan: last run 2026-11-15 07:46 UTC"
   },
   {
    "ok": true,
@@ -2438,7 +2438,7 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-15 04:40 UTC (32 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-15 05:46 UTC (36 min ago)"
   },
   {
    "ok": true,
@@ -2493,16 +2493,16 @@
   ]
  },
  "shocks": {
-  "n": 55,
-  "sent": 37,
-  "done": 55,
-  "kept": 24,
-  "reversed": 31,
-  "avg_after_4h": -0.03,
+  "n": 57,
+  "sent": 39,
+  "done": 57,
+  "kept": 25,
+  "reversed": 32,
+  "avg_after_4h": -0.08,
   "caught": 24,
   "by_coin": {
    "SOL": 14,
-   "BTC": 13,
+   "BTC": 15,
    "ETH": 16,
    "XRP": 7,
    "ZEC": 4,
@@ -2510,8 +2510,8 @@
   },
   "by_kind": {
    "volume": 35,
-   "move": 26,
-   "sweep_low": 11
+   "move": 27,
+   "sweep_low": 12
   },
   "biggest": [
    {
@@ -2555,13 +2555,13 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-15 05:12",
+  "checked_utc": "2026-11-15 06:22",
   "lines": [
-   "55 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-   "by kind: fast move 26, broke yesterday's low 11, volume spike 35",
-   "by coin: ETH 16, SOL 14, BTC 13, XRP 7, ZEC 4, SUI 1",
-   "4 hours later: 24 kept going, 31 reversed (average -0.03% in the shock's direction)",
-   "followed by a strategy alert in the same direction within 4h: 24 of 55",
+   "57 shock(s) this week, 39 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+   "by kind: fast move 27, broke yesterday's low 12, volume spike 35",
+   "by coin: ETH 16, BTC 15, SOL 14, XRP 7, ZEC 4, SUI 1",
+   "4 hours later: 25 kept going, 32 reversed (average -0.08% in the shock's direction)",
+   "followed by a strategy alert in the same direction within 4h: 24 of 57",
    "  2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)",
    "  2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)",
    "  2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)",
@@ -2610,5 +2610,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 34 closed this week (+24.6R) \u00b7 42 since the start (+0.39R a trade, after fees)\nSilent research records (not sent to you): 49 this week (+31.2R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. TRD-H4-BREAKOUT-S3 1.0 1h \u00b7 BTC\n   +0.87R over 12 trades: promising, not proven\n2. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 15 repair(s) judged - 11 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 55 this week (37 sent) \u00b7 4h later 24 kept going, 31 reversed \u00b7 a strategy alert followed 24\n\n\ud83d\udcc8 Track record (your alerts, after fees): 38 closed \u00b7 +0.33R a trade \u00b7 +12.6R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 2 (+0.70R) \u00b7 middle 4 (+0.03R) \u00b7 against 102 (+0.14R) \u00b7 outside 75 (+0.38R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W46</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 34 closed this week (+24.6R) \u00b7 42 since the start (+0.39R a trade, after fees)\nSilent research records (not sent to you): 49 this week (+31.2R)\n\ud83d\udfe1 PAPER: 0 this week (+0.0R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. TRD-H4-BREAKOUT-S3 1.0 1h \u00b7 BTC\n   +0.87R over 12 trades: promising, not proven\n2. Fibonacci pullback (50-61.8% of the last swing) V5 1h \u00b7 SOL\n   +0.13R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 15 repair(s) judged - 11 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 57 this week (39 sent) \u00b7 4h later 25 kept going, 32 reversed \u00b7 a strategy alert followed 24\n\n\ud83d\udcc8 Track record (your alerts, after fees): 38 closed \u00b7 +0.33R a trade \u00b7 +12.6R \u00b7 worst drawdown 10.3R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 2 (+0.70R) \u00b7 middle 4 (+0.03R) \u00b7 against 102 (+0.14R) \u00b7 outside 75 (+0.38R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

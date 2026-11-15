@@ -1,13 +1,13 @@
 # Weekly review · 2026-W46
 
-Made 2026-11-15 06:21 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-15 07:46 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 6 of the last 7 days (last 2026-11-14)
-- ✅ hourly scan: last run 2026-11-15 06:21 UTC
+- ✅ hourly scan: last run 2026-11-15 07:46 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-15 04:40 UTC (32 min ago)
+- ✅ live watcher: last heartbeat 2026-11-15 05:46 UTC (36 min ago)
 - ✅ TEST setups closed this week (GitHub record): 83
 
 ## Totals
@@ -19,7 +19,7 @@ Made 2026-11-15 06:21 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## Promote to 🟡 PAPER (your tap)
 
-1. TRD-H4-BREAKOUT-S3 1.0 1h on BTC - 12 live TEST setups, +0.87R a trade after fees (58% won); 5-year backtest on BTC +0.34R over 177 trades. +0.87R over 12 trades: promising, not proven.
+1. TRD-H4-BREAKOUT-S3 1.0 1h on BTC - 12 live TEST setups, +0.87R a trade after fees (58% won); 5-year backtest on BTC +0.35R over 179 trades. +0.87R over 12 trades: promising, not proven.
 2. Fibonacci pullback (50-61.8% of the last swing) V5 1h on SOL - 10 live TEST setups, +0.13R a trade after fees (40% won); 5-year backtest on SOL +0.04R over 646 trades. +0.13R over 10 trades: still uncertain - could be luck.
 
 ## In paper
@@ -54,11 +54,11 @@ Made 2026-11-15 06:21 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 55 shock(s) this week, 37 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 26, broke yesterday's low 11, volume spike 35
-- by coin: ETH 16, SOL 14, BTC 13, XRP 7, ZEC 4, SUI 1
-- 4 hours later: 24 kept going, 31 reversed (average -0.03% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 24 of 55
+- 57 shock(s) this week, 39 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 27, broke yesterday's low 12, volume spike 35
+- by coin: ETH 16, BTC 15, SOL 14, XRP 7, ZEC 4, SUI 1
+- 4 hours later: 25 kept going, 32 reversed (average -0.08% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 24 of 57
 -   2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)
 -   2026-11-08 21:56 UTC ETH DOWN -5.2% -> 4h later -1.5% (no strategy alert)
 -   2026-11-08 21:56 UTC SOL DOWN -3.9% -> 4h later -2.7% (no strategy alert)
@@ -77,11 +77,11 @@ Made 2026-11-15 06:21 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 | Strategy | TF | Coin | Stage | Sent to you | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| TRD-H4-BREAKOUT-S3 | 1h | BTC | TEST | ✅ yes | 12 | 58 | +0.87R | +0.91R | 12 (+10.4R) | +0.34R | +0.87R over 12 trades: promising, not proven |
-| TRD-H4-BREAKOUT-S3 | 1h | XRP | TEST | ✅ yes | 10 | 30 | -0.14R | -0.11R | 10 (-1.4R) | +0.28R | -0.14R over 10 trades: not working so far |
+| TRD-H4-BREAKOUT-S3 | 1h | BTC | TEST | ✅ yes | 12 | 58 | +0.87R | +0.91R | 12 (+10.4R) | +0.35R | +0.87R over 12 trades: promising, not proven |
+| TRD-H4-BREAKOUT-S3 | 1h | XRP | TEST | ✅ yes | 10 | 30 | -0.14R | -0.11R | 10 (-1.4R) | +0.30R | -0.14R over 10 trades: not working so far |
 | P01-BREAKOUT-V1 | 4h | BTC | TEST | ✅ yes | 4 | 50 | +0.75R | +0.81R | 2 (+4.9R) | +0.36R | +0.75R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V3 | 4h | XRP | TEST | ✅ yes | 4 | 100 | +2.46R | +2.50R | 4 (+9.8R) | +0.23R | +2.46R over 4 trades: too early to say anything |
-| TRD-H4-BREAKOUT-S3 | 1h | SOL | TEST | ✅ yes | 4 | 25 | -0.17R | -0.14R | 4 (-0.7R) | +0.15R | -0.17R over 4 trades: too early to say anything |
+| TRD-H4-BREAKOUT-S3 | 1h | SOL | TEST | ✅ yes | 4 | 25 | -0.17R | -0.14R | 4 (-0.7R) | +0.17R | -0.17R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | ETH | TEST | ✅ yes | 1 | 0 | -1.05R | -1.01R | 0 (+0.0R) | +0.25R | -1.05R over 1 trade: too early to say anything |
 | P01-BREAKOUT-V4 | 4h | ETH | TEST | ✅ yes | 1 | 0 | -1.05R | -1.01R | 0 (+0.0R) | +0.22R | -1.05R over 1 trade: too early to say anything |
 | P05-RANGE-REVERSAL-V4 | 4h | SOL | TEST | ✅ yes | 1 | 0 | -1.06R | -1.01R | 0 (+0.0R) | +0.24R | -1.06R over 1 trade: too early to say anything |
@@ -96,7 +96,7 @@ Made 2026-11-15 06:21 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 8 | 50 | +0.64R | +0.73R | 5 (+5.1R) | +0.05R | +0.64R over 8 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 1h | BTC | TEST | silent | 7 | 43 | +0.14R | +0.21R | 4 (+2.8R) | +0.11R | +0.14R over 7 trades: too early to say anything |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 6 | 33 | -0.15R | -0.10R | 2 (+1.4R) | +0.02R | -0.15R over 6 trades: too early to say anything |
-| TRD-H4-BREAKOUT-S3 | 1h | ETH | TEST | silent | 6 | 33 | +0.12R | +0.15R | 6 (+0.8R) | +0.05R | +0.12R over 6 trades: too early to say anything |
+| TRD-H4-BREAKOUT-S3 | 1h | ETH | TEST | silent | 6 | 33 | +0.12R | +0.15R | 6 (+0.8R) | +0.06R | +0.12R over 6 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 5 | 0 | -0.81R | -0.78R | 0 (+0.0R) | +0.08R | -0.81R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 5 | 0 | -0.94R | -0.88R | 0 (+0.0R) | +0.01R | -0.94R over 5 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | ETH | TEST | silent | 4 | 25 | +0.07R | +0.12R | 4 (+0.3R) | +0.12R | +0.07R over 4 trades: too early to say anything |

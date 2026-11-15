@@ -304,5 +304,20 @@
  "findings": [
   "Your real results are +0.16R per trade above the plan (21 trades) - your execution adds to the strategy."
  ],
- "decisions": []
+ "decisions": [
+  {
+   "time_utc": "2026-11-15 07:18",
+   "week": "2026-W46",
+   "action": "promote",
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "BTC"
+  },
+  {
+   "time_utc": "2026-11-15 07:18",
+   "week": "2026-W46",
+   "action": "promote",
+   "key": "P03-FIB-PULLBACK-V5@1.0|1h",
+   "coin": "SOL"
+  }
+ ]
 }
