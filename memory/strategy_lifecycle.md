@@ -492,3 +492,10 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 ## 2026-11-14 06:57 UTC
 - **donchian_breakout-VEXIT-FDISP@1.0 4h**: BACKTESTING → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
 - **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: BACKTESTING → **VALIDATION** (multiple-testing bar: t-statistic 3.49 of the average trade, needs 3.74 after 546 trials; HIGH OVERFITTING RISK: 51% of the profit from window 5)
+
+## 2026-11-15 07:06 UTC
+- **P01-BREAKOUT-V2-FDISP-S1@1.0 15m**: FORMALIZED → **FAILED** (avg -0.09R/trade (needs +0.10R); profit factor 0.87; recovery factor -0.86 (net -177.3R / max drawdown 205.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 35.1R - limit 17R; longest drawdown 1758 days = 97% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P01-BREAKOUT-V2-FDISP-S1@1.0 1h**: FORMALIZED → **BACKTESTING** (avg +0.05R/trade (needs +0.10R); profit factor 1.08; recovery factor 1.71 (net +90.3R / max drawdown 52.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 26.3R - limit 17R)
+- **P01-BREAKOUT-V2-FDISP-S1@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.04R/trade (needs +0.10R); profit factor 1.07; recovery factor 0.79 (net +52.9R / max drawdown 67.0R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.7R - limit 17R; not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-FDISP@1.0 30m**: FAILED → **BACKTESTING** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.08 (net +5.8R / max drawdown 75.5R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 29.1R - limit 17R; longest drawdown 1650 days = 91% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **donchian_breakout-VEXIT-S4-FDISP@1.0 4h**: VALIDATION → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 17.1R - limit 17R)

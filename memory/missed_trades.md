@@ -2294,3 +2294,169 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 15m: blocked by the permission gate
   - liquidity_sweep_reversal v1.0 5m: blocked by the permission gate
+
+### BTC down -6.3% (8.1x ATR), 2026-11-14 13:00 -> 2026-11-15 02:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 8.1x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - P01-BREAKOUT-V2-FDISP v1.0 15m: signal
+  - P01-BREAKOUT-V2-FDISP-FNOTEXT v1.0 15m: signal
+  - P01-BREAKOUT-V2-FDISP-S1 v1.0 15m: signal
+  - P01-BREAKOUT-V5-FDISP v1.0 15m: signal
+  - S5-SWEEP-MSS-FVG-noSMC v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - bb_squeeze_breakout v1.0 15m: signal
+  - bb_squeeze_breakout v1.0 30m: signal
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### ETH down -8.6% (8.8x ATR), 2026-11-14 13:00 -> 2026-11-15 02:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 8.8x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT v1.0 15m: signal
+  - TRD-H4-BREAKOUT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 30m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - bb_squeeze_breakout v1.0 15m: signal
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### SOL down -10.1% (9.0x ATR), 2026-11-14 13:00 -> 2026-11-15 02:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 9.0x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SOL · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-FDISP-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-noT4 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - bb_squeeze_breakout v1.0 15m: signal
+  - ema_9_21_cross v1.0 15m: signal
+  - liquidity_sweep_reversal v1.0 5m: signal
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### BNB down -6.9% (7.8x ATR), 2026-11-14 11:00 -> 2026-11-14 23:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 7.8x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: signal
+  - TRD-H4-PULLBACK v1.0 30m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### XRP down -9.7% (9.1x ATR), 2026-11-14 13:00 -> 2026-11-14 23:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 9.1x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: XRP · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-BREAKOUT-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 15m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 1h: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 30m: signal
+  - TRD-H4-BREAKOUT-S3-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK v1.0 15m: signal
+  - TRD-H4-PULLBACK v1.0 30m: signal
+  - TRD-H4-PULLBACK v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-S2 v1.0 15m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 1h: signal
+  - TRD-H4-PULLBACK-S2 v1.0 30m: signal
+  - TRD-H4-PULLBACK-S2 v1.0 5m: no valid stop / target
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 30m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - liquidity_sweep_reversal v1.0 5m: signal
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - rsi2_dip_buy v1.0 30m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal
+  - trend_pullback v1.0 30m: signal
+
+### SUI down -11.5% (8.7x ATR), 2026-11-14 11:00 -> 2026-11-14 23:00
+- timestamp: 2026-11-15 07:06 UTC · source: engine: daily research run · evidence: FACT: move of 8.7x the 1H ATR within 12 hours; 192 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: SUI · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-22
+  - verdict: identifiable: at least one strategy had a valid signal before the move
+  - TRD-H4-PULLBACK-noT4 v1.0 15m: signal
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: no valid stop / target
+  - rsi2_dip_buy v1.0 15m: blocked by the regime gate
+  - trend_pullback v1.0 15m: signal

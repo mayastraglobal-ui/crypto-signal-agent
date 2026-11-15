@@ -1743,3 +1743,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): donchian_breakout-VEXIT-S4-FDISP-FNOTEXT@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V2-FDISP-S1@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-11-15 07:06 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V2-FDISP-S1@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V2-FDISP-S1 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-13
+  - title / source: engine rule-significance test: P01-BREAKOUT-V2-FDISP@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to P01-BREAKOUT-V2-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P01-BREAKOUT-V2-FDISP-S1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
