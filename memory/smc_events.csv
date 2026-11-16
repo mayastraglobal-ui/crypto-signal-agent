@@ -36276,3 +36276,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-15 23:30,ZEC,30m,FVG_RETRACE,bear,,915.56,919.17,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-16 00:00,ZEC,30m,WEAK_BREAK,bull,915.24,,,0.066,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-15 23:15,ZEC,15m,SWEEP,bear,915.24,,,0.523,,1h,RANGE,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-16 00:45,BTC,15m,SWEEP,bull,64700.0,,,0.109,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 00:45,BTC,15m,WEAK_BREAK,bear,64823.44,,,0.241,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 01:00,ETH,30m,SWEEP,bull,1814.0,,,0.519,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 00:45,ETH,15m,CHOCH,bear,1816.74,,,0.834,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-16 00:45,ETH,15m,ORDER_BLOCK,bear,,1826.49,1838.91,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-16 00:30,SOL,15m,FVG,bear,,72.39,72.52,0.308,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-16 00:45,SOL,15m,CHOCH,bear,71.91,,,0.948,,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-16 00:45,SOL,15m,ORDER_BLOCK,bear,,72.52,72.84,,,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-16 00:45,SOL,15m,FVG,bear,,72.14,72.33,0.429,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-16 01:00,SOL,15m,FVG_RETRACE,bear,,72.14,72.33,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-16 01:00,XRP,30m,FVG,bear,,0.9671,0.9692,0.25,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 00:30,XRP,15m,WEAK_BREAK,bear,0.9663,,,0.203,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 00:30,XRP,15m,FVG,bear,,0.9689,0.973,0.764,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 00:45,XRP,15m,FVG_FILLED,bull,,0.9619,0.9641,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 00:45,XRP,15m,FVG,bear,,0.9659,0.9679,0.35,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 01:00,XRP,15m,FVG_RETRACE,bear,,0.9659,0.9679,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-16 00:45,ZEC,15m,CHOCH,bear,900.12,,,0.482,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-16 00:45,ZEC,15m,ORDER_BLOCK,bear,,904.92,913.06,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-16 00:45,ZEC,15m,FVG_FILLED,bull,,895.12,898.76,,,1h,RANGE,,smc-1.0,Binance
