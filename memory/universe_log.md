@@ -1226,3 +1226,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** BNB - 24h volume $49M < $50M
 - **EXCLUDED** ASTER - 7-day average volume $11M < $50M; order book too thin: $195k within 1% (need $250k)
 - **LEAVE** BNB - not eligible: 24h volume $49M < $50M
+
+## 2026-11-16 00:12 UTC
+- **EXCLUDED** SUI - 24h volume $50M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $50M < $50M
