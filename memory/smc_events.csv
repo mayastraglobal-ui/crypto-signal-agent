@@ -36391,3 +36391,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-16 09:15,SOL,15m,BOS,bear,70.62,,,0.091,London,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-16 09:15,XRP,15m,CHOCH,bear,0.9496,,,0.842,London,1h,RANGE,with displacement,smc-1.0,Binance
 2026-11-16 09:15,XRP,15m,ORDER_BLOCK,bear,,0.953,0.9571,,London,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-16 10:00,BTC,1h,SWEEP,bull,64257.65,,,0.216,London,4h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 09:30,BTC,30m,SWEEP,bull,64257.65,,,0.344,London,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-16 09:30,BTC,15m,OB_RETEST,bull,,63887.75,64166.82,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-16 09:30,BTC,15m,FVG_FILLED,bull,,64166.82,64501.32,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-16 10:00,ETH,1h,SWEEP,bull,1794.43,,,0.147,London,4h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 10:00,ETH,1h,BOS,bear,1803.63,,,0.273,London,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-16 09:30,ETH,30m,SWEEP,bull,1794.43,,,0.231,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 09:30,ETH,30m,WEAK_BREAK,bear,1803.63,,,0.378,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 09:30,ETH,15m,SWEEP,bull,1794.43,,,0.335,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 10:00,SOL,1h,FVG_FILLED,bull,,70.53,70.96,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-16 09:30,SOL,30m,SWEEP,bull,70.62,,,0.265,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 09:30,XRP,30m,WEAK_BREAK,bear,0.9496,,,0.691,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 10:00,XRP,30m,FVG,bear,,0.9469,0.9513,0.586,London,1h,RANGE,,smc-1.0,Binance
+2026-11-16 09:30,XRP,15m,SWEEP,bull,0.9431,,,0.129,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 09:30,XRP,15m,FVG,bear,,0.9476,0.9513,0.685,London,1h,RANGE,,smc-1.0,Binance
+2026-11-16 10:15,XRP,15m,FVG_RETRACE,bear,,0.9476,0.9513,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
