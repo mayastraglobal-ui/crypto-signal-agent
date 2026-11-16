@@ -1026,3 +1026,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session NY AM, conditions: range_market
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### SOL SHORT 30m TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 - SL -1.06R
+- timestamp: 2026-11-16 18:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 · asset: SOL · timeframe: 30m · regime: RANGE · review: 2026-11-23
+  - signal 2026-11-16 15:29 UTC, closed 2026-11-16 17:29 UTC, stage VALIDATION
+  - MAE -1.03R / MFE +0.17R
+  - at entry: session Silver Bullet, conditions: range_market
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 30m TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 - SL -1.06R
+- timestamp: 2026-11-16 18:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 · asset: SOL · timeframe: 30m · regime: RANGE · review: 2026-11-23
+  - signal 2026-11-16 15:29 UTC, closed 2026-11-16 17:29 UTC, stage VALIDATION
+  - MAE -1.03R / MFE +0.17R
+  - at entry: session Silver Bullet, conditions: range_market
+  - what happened: false_breakout
+  - root cause / fix: (review)
