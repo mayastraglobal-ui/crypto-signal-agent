@@ -1,13 +1,13 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-16 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-16 16:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-16)
-- ✅ hourly scan: last run 2026-11-16 15:11 UTC
+- ✅ hourly scan: last run 2026-11-16 16:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-16 14:15 UTC (3 min ago)
+- ✅ live watcher: last heartbeat 2026-11-16 14:15 UTC (57 min ago)
 - ✅ TEST setups closed this week (GitHub record): 83
 
 ## Totals
@@ -33,7 +33,7 @@ Made 2026-11-16 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## 📈 Live track record and drift monitor
 
-- **your alerts**: 46 closed, +0.30R a trade, +13.88R, worst drawdown 10.35R (after fees)
+- **your alerts**: 47 closed, +0.32R a trade, +15.14R, worst drawdown 10.35R (after fees)
 - silent research records: 110 closed, -0.08R a trade
 - paused by the drift monitor: nothing
 - the full table: reports/track_record.md
@@ -70,7 +70,7 @@ Made 2026-11-16 15:11 UTC by the hourly scan (engine/weekly_review.py). Live = t
 - at a zone or edge that fits the direction: 2 setup(s), +0.70R a trade after fees, 1 won
 - middle of the 4H range: 4 setup(s), +0.03R a trade after fees, 1 won
 - at a zone or edge against the direction: 106 setup(s), +0.15R a trade after fees, 42 won
-- outside the 4H range (breakout): 84 setup(s), +0.29R a trade after fees, 35 won
+- outside the 4H range (breakout): 85 setup(s), +0.30R a trade after fees, 36 won
 - a difference counts only with 30+ setups in a group; then it is tested on 5 years before any rule
 
 ## Every live strategy / version / coin
