@@ -1,7 +1,13 @@
 {
- "updated_utc": "2026-11-15 07:06",
- "active": {},
- "via_promotion": [],
+ "updated_utc": "2026-11-16 07:13",
+ "active": {
+  "P03-FIB-PULLBACK-V5@1.0|1h": [
+   "SOL"
+  ]
+ },
+ "via_promotion": [
+  "P03-FIB-PULLBACK-V5@1.0|1h"
+ ],
  "demoted": [],
  "refused": []
 }

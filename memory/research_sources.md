@@ -1752,3 +1752,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P01-BREAKOUT-V2-FDISP-S1@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P05-RANGE-REVERSAL-V4-S1@1.0 - In a range, the previous candle closed outside the Bollinger band with RSI extreme, and this candle closes back inside; exit at the middle band.
+- timestamp: 2026-11-16 07:13 UTC · source: strategies_lab.yaml card P05-RANGE-REVERSAL-V4-S1@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P05-RANGE-REVERSAL-V4-S1 v1.0 · asset: research coins · timeframe: 4h · regime: RANGE, HIGH_VOL_RANGE, COMPRESSION · review: 2027-02-14
+  - title / source: engine rule-significance test: P05-RANGE-REVERSAL-V4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'prev(close) < prev(bb_lower(close,20,2.0)) / prev(close) > prev(bb_upper(close,20,2.0))' adds nothing to P05-RANGE-REVERSAL-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P05-RANGE-REVERSAL-V4-S1@1.0 makes money after fees in regimes RANGE, HIGH_VOL_RANGE, COMPRESSION on 4h
+  - limitations: Catches falling knives when a range breaks into a trend; the exit at the middle band often comes before 2R.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-FDISP-S2@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-11-16 07:13 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-FDISP-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-FDISP-S2 v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-02-14
+  - title / source: engine rule-significance test: donchian_breakout-VEXIT-FDISP@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to donchian_breakout-VEXIT-FDISP@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): donchian_breakout-VEXIT-FDISP-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-FRETEST@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-11-16 07:13 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-FRETEST@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-FRETEST v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-02-14
+  - title / source: engine failure lab: a repair of donchian_breakout-VEXIT@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: donchian_breakout-VEXIT@1.0 loses on false_breakout (-0.36R a trade with it, +0.44R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
