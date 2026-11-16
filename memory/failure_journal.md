@@ -1002,3 +1002,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 30m TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 - SL -1.11R
+- timestamp: 2026-11-16 15:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 · asset: BTC · timeframe: 30m · regime: RANGE · review: 2026-11-23
+  - signal 2026-11-16 12:29 UTC, closed 2026-11-16 14:59 UTC, stage VALIDATION
+  - MAE -2.48R / MFE +0.01R
+  - at entry: session NY AM, conditions: range_market
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 30m TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 - SL -1.09R
+- timestamp: 2026-11-16 15:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-FDISP-FNOTEXT v1.0 · asset: ETH · timeframe: 30m · regime: RANGE · review: 2026-11-23
+  - signal 2026-11-16 12:29 UTC, closed 2026-11-16 14:29 UTC, stage VALIDATION
+  - MAE -1.68R / MFE +0.02R
+  - at entry: session NY AM, conditions: range_market
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 30m TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 - SL -1.09R
+- timestamp: 2026-11-16 15:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.09R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT v1.0 · asset: ETH · timeframe: 30m · regime: RANGE · review: 2026-11-23
+  - signal 2026-11-16 12:29 UTC, closed 2026-11-16 14:29 UTC, stage VALIDATION
+  - MAE -1.68R / MFE +0.02R
+  - at entry: session NY AM, conditions: range_market
+  - what happened: false_breakout
+  - root cause / fix: (review)
