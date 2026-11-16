@@ -1230,3 +1230,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-16 00:12 UTC
 - **EXCLUDED** SUI - 24h volume $50M < $50M
 - **LEAVE** SUI - not eligible: 24h volume $50M < $50M
+
+## 2026-11-16 09:22 UTC
+- **EXCLUDED** NVDAB - only 158 days of history (need 180); order book too thin: $203k within 1% (need $250k)
