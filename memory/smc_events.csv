@@ -36609,3 +36609,12 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-16 17:15,ZEC,15m,SWEEP,bear,900.0,,,0.118,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-16 19:00,BTC,15m,SWEEP,bear,65150.0,,,0.126,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-16 19:00,ZEC,1h,FVG_RETRACE,bull,,876.4,884.61,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-16 20:00,XRP,15m,SWEEP,bull,0.9535,,,0.184,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 20:00,ZEC,1h,WEAK_BREAK,bull,902.12,,,0.101,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-16 20:00,ZEC,1h,OB_INVALID,bear,,886.05,896.54,,,4h,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-16 20:00,ZEC,30m,WEAK_BREAK,bull,901.56,,,0.178,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 20:00,ZEC,30m,OB_INVALID,bear,,890.57,900.0,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-16 20:00,ZEC,30m,OB_INVALID,bear,,868.2,896.91,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-16 20:00,ZEC,15m,WEAK_BREAK,bull,898.93,,,0.529,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 20:00,ZEC,15m,OB_INVALID,bear,,890.57,900.0,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-16 20:00,ZEC,15m,OB_INVALID,bear,,868.2,896.91,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
