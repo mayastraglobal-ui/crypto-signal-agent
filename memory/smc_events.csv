@@ -36331,3 +36331,28 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-16 05:00,SOL,30m,FVG_FILLED,bull,,71.58,72.0,,Asia,1h,RANGE,,smc-1.0,Binance
 2026-11-16 05:00,SOL,15m,FVG_FILLED,bull,,71.5,71.9,,Asia,1h,RANGE,,smc-1.0,Binance
 2026-11-16 05:00,SOL,15m,FVG,bear,,71.61,71.75,0.304,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-16 06:00,BTC,1h,BOS,bear,64530.12,,,0.09,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-16 06:00,BTC,30m,WEAK_BREAK,bear,64530.12,,,0.145,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 06:00,BTC,15m,SWEEP,bull,64381.06,,,0.114,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,BTC,15m,CHOCH,bear,64530.12,,,0.215,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-16 06:00,BTC,15m,ORDER_BLOCK,bear,,64635.32,64922.69,,,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-16 06:00,BTC,15m,OB_INVALID,bull,,64530.0,64807.15,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-16 05:15,ETH,15m,BOS,bear,1816.38,,,0.427,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 05:15,ETH,15m,FVG_FILLED,bull,,1811.97,1818.12,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 06:00,SOL,1h,SWEEP,bull,71.17,,,0.157,,4h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,SOL,30m,SWEEP,bull,71.17,,,0.242,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,SOL,30m,FVG_FILLED,bull,,71.15,71.63,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 05:30,SOL,15m,FVG_RETRACE,bear,,71.61,71.75,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-16 05:30,SOL,15m,FVG_FILLED,bear,,71.61,71.75,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 06:00,SOL,15m,SWEEP,bull,71.17,,,0.353,,1h,RANGE,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-16 06:00,SOL,15m,FVG_FILLED,bull,,71.15,71.42,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 06:00,XRP,1h,BOS,bear,0.9557,,,0.219,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-16 06:00,XRP,30m,WEAK_BREAK,bear,0.9557,,,0.352,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 06:00,XRP,30m,FVG_FILLED,bull,,0.9532,0.9573,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 05:15,XRP,15m,WEAK_BREAK,bear,0.9557,,,0.088,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-16 05:45,XRP,15m,FVG_FILLED,bull,,0.9532,0.9557,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 06:00,ZEC,1h,SWEEP,bull,877.3,,,0.253,,4h,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,ZEC,30m,SWEEP,bull,877.3,,,0.386,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,ZEC,30m,BOS,bear,880.36,,,0.021,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-16 06:00,ZEC,15m,SWEEP,bull,877.3,,,0.539,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-16 06:00,ZEC,15m,BOS,bear,880.36,,,0.029,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
