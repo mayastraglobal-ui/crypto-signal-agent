@@ -1233,3 +1233,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-16 09:22 UTC
 - **EXCLUDED** NVDAB - only 158 days of history (need 180); order book too thin: $203k within 1% (need $250k)
+
+## 2026-11-16 11:11 UTC
+- **EXCLUDED** NVDAB - only 158 days of history (need 180)
