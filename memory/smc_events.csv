@@ -36416,3 +36416,6 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-16 11:00,XRP,30m,FVG,bull,,0.9469,0.9492,0.305,,1h,RANGE,,smc-1.0,Binance
 2026-11-16 10:30,XRP,15m,OB_RETEST,bear,,0.953,0.9571,,,1h,RANGE,first return into the order block,smc-1.0,Binance
 2026-11-16 10:30,XRP,15m,FVG_FILLED,bear,,0.9476,0.9513,,,1h,RANGE,,smc-1.0,Binance
+2026-11-16 11:30,BTC,15m,FVG_RETRACE,bear,,64749.12,64891.8,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-16 11:30,ETH,30m,FVG_RETRACE,bear,,1812.17,1816.48,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-16 11:15,XRP,15m,FVG,bull,,0.9526,0.9541,0.294,,1h,RANGE,,smc-1.0,Binance
