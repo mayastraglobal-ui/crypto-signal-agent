@@ -36607,3 +36607,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-16 18:00,ZEC,1h,FVG,bull,,876.4,884.61,0.395,,4h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-16 17:30,ZEC,30m,SWEEP,bear,896.91,,,0.283,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-16 17:15,ZEC,15m,SWEEP,bear,900.0,,,0.118,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-16 19:00,BTC,15m,SWEEP,bear,65150.0,,,0.126,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-16 19:00,ZEC,1h,FVG_RETRACE,bull,,876.4,884.61,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
