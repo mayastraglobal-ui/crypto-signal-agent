@@ -1042,3 +1042,43 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: range_market
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### SOL SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.35R
+- timestamp: 2026-11-17 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.35R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: SOL · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-24
+  - signal 2026-11-14 19:59 UTC, closed 2026-11-17 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.32R / MFE +1.19R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h donchian_breakout v1.0 - exit-rule -0.78R
+- timestamp: 2026-11-17 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.78R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout v1.0 · asset: SOL · timeframe: 4h · regime: EXPANSION · review: 2026-11-24
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.75R / MFE +0.66R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.78R
+- timestamp: 2026-11-17 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.78R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: SOL · timeframe: 4h · regime: EXPANSION · review: 2026-11-24
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.75R / MFE +0.66R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h donchian_breakout-VEXIT-S4 v1.0 - exit-rule -0.78R
+- timestamp: 2026-11-17 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.78R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: SOL · timeframe: 4h · regime: EXPANSION · review: 2026-11-24
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.75R / MFE +0.66R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h P01-BREAKOUT-V1 v1.0 - exit-rule -0.65R
+- timestamp: 2026-11-17 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.65R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: SOL · timeframe: 4h · regime: EXPANSION · review: 2026-11-24
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 11:59 UTC, stage TEST
+  - MAE -0.63R / MFE +0.79R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
