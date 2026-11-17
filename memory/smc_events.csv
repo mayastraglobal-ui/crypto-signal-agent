@@ -36897,3 +36897,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 11:45,ZEC,15m,FVG,bull,,929.0,937.65,0.91,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-17 12:00,ZEC,15m,WEAK_BREAK,bull,948.48,,,0.223,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-17 12:00,ZEC,15m,FVG,bull,,938.0,943.3,0.56,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-17 13:00,BTC,1h,FVG,bull,,64456.01,64827.84,0.771,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 12:30,BTC,30m,FVG,bull,,64503.12,64827.84,1.078,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 12:15,BTC,15m,FVG_RETRACE,bull,,64503.12,64829.94,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 13:00,BTC,15m,SWEEP,bear,65094.6,,,0.188,NY AM,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 12:30,ETH,30m,FVG,bull,,1807.49,1812.27,0.391,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-17 12:15,ETH,15m,FVG_RETRACE,bull,,1807.49,1816.0,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 12:45,ETH,15m,FVG_RETRACE,bear,,1824.23,1826.86,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 13:00,SOL,1h,FVG,bull,,72.77,73.11,0.412,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 12:15,SOL,15m,FVG_RETRACE,bull,,73.08,73.27,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 13:00,XRP,1h,FVG,bull,,0.9605,0.9664,0.616,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 12:15,XRP,15m,FVG_RETRACE,bull,,0.9658,0.968,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 13:00,ZEC,1h,FVG_FILLED,bear,,940.62,954.69,,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-11-17 13:00,ZEC,1h,FVG,bull,,936.28,943.28,0.357,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-11-17 12:30,ZEC,30m,FVG_FILLED,bear,,943.43,954.69,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-17 12:30,ZEC,30m,FVG,bull,,938.0,943.28,0.393,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-17 12:15,ZEC,15m,FVG_RETRACE,bull,,938.0,943.3,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 12:30,ZEC,15m,FVG_FILLED,bear,,946.96,954.73,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
