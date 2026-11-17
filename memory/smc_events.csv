@@ -37053,3 +37053,10 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 20:00,BTC,4h,BOS,bear,63905.01,,,0.12,,1d,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-11-17 19:45,XRP,15m,BOS,bull,0.9641,,,0.111,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-17 20:00,XRP,15m,FVG,bull,,0.9626,0.9645,0.315,,1h,RANGE,,smc-1.0,Binance
+2026-11-17 20:45,BTC,15m,FVG,bull,,63816.52,63960.93,0.519,,1h,RANGE,,smc-1.0,Binance
+2026-11-17 21:00,BTC,15m,FVG_RETRACE,bull,,63816.52,63960.93,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 21:00,SOL,1h,FVG_RETRACE,bear,,73.04,73.41,,,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 20:30,SOL,15m,WEAK_BREAK,bull,72.98,,,0.173,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 20:30,SOL,15m,FVG_FILLED,bear,,72.58,73.1,,,1h,RANGE,,smc-1.0,Binance
+2026-11-17 20:15,XRP,15m,FVG_RETRACE,bull,,0.9626,0.9645,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 20:15,XRP,15m,FVG_FILLED,bull,,0.9626,0.9645,,,1h,RANGE,,smc-1.0,Binance
