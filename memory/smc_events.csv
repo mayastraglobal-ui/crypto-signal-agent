@@ -36665,3 +36665,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 01:15,BTC,15m,FVG_RETRACE,bear,,64739.67,64836.61,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-17 01:00,ETH,1h,FVG,bear,,1822.4,1828.13,0.303,,4h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-17 00:30,XRP,30m,FVG_RETRACE,bear,,0.9563,0.9584,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 02:00,BTC,1h,FVG_RETRACE,bear,,64932.04,65298.0,,Asia,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 01:30,BTC,30m,FVG_RETRACE,bear,,64674.25,64788.11,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 02:00,BTC,30m,FVG_RETRACE,bear,,64932.04,65180.0,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 02:00,BTC,30m,FVG_FILLED,bear,,64674.25,64788.11,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 01:45,BTC,15m,FVG_FILLED,bear,,64739.67,64836.61,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 02:00,ETH,1h,FVG_RETRACE,bear,,1822.4,1828.13,,Asia,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 02:00,ETH,30m,FVG_RETRACE,bear,,1823.74,1828.13,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 02:00,XRP,30m,FVG_FILLED,bear,,0.9563,0.9584,,Asia,1h,RANGE,,smc-1.0,Binance
