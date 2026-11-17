@@ -36678,3 +36678,41 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 03:15,SOL,15m,WEAK_BREAK,bull,72.05,,,0.219,Asia,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-17 03:15,XRP,15m,SWEEP,bear,0.9601,,,0.132,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-17 03:15,ZEC,15m,SWEEP,bear,912.39,,,0.221,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 04:00,BTC,30m,FVG_FILLED,bear,,64932.04,65180.0,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 04:00,BTC,30m,FVG,bull,,64632.48,64962.97,0.908,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 03:30,BTC,15m,WEAK_BREAK,bull,64932.4,,,0.337,Asia,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 03:30,BTC,15m,FVG_RETRACE,bear,,65014.29,65180.0,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 03:30,BTC,15m,FVG,bull,,64566.1,64652.27,0.346,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 03:45,BTC,15m,FVG_FILLED,bear,,65014.29,65180.0,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 03:45,BTC,15m,FVG,bull,,64697.18,64962.97,1.071,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 04:00,ETH,1h,FVG_FILLED,bear,,1822.4,1828.13,,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-11-17 03:30,ETH,30m,FVG_FILLED,bear,,1823.74,1828.13,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 04:00,ETH,30m,FVG,bull,,1819.37,1829.29,0.842,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:30,ETH,15m,BOS,bull,1825.92,,,0.469,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-17 03:30,ETH,15m,ORDER_BLOCK,bull,,1812.0,1817.52,,Asia,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-17 03:45,ETH,15m,FVG,bull,,1820.88,1829.29,1.039,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 04:00,SOL,1h,WEAK_BREAK,bull,72.27,,,0.674,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 03:30,SOL,30m,CHOCH,bull,72.27,,,0.505,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-17 03:30,SOL,30m,ORDER_BLOCK,bull,,71.59,72.05,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-17 04:00,SOL,30m,FVG,bull,,71.9,72.47,1.029,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:30,SOL,15m,FVG,bull,,71.87,72.08,0.526,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:45,SOL,15m,FVG,bull,,72.3,72.47,0.432,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 04:00,XRP,1h,WEAK_BREAK,bull,0.9648,,,0.267,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 03:30,XRP,30m,SWEEP,bear,0.9648,,,0.195,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 04:00,XRP,30m,BOS,bull,0.9648,,,0.399,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 04:00,XRP,30m,FVG,bull,,0.9572,0.9642,1.029,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:30,XRP,15m,SWEEP,bear,0.9648,,,0.281,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 03:30,XRP,15m,BOS,bull,0.9601,,,0.95,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 03:30,XRP,15m,FVG,bull,,0.9571,0.9594,0.481,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:45,XRP,15m,SWEEP,bear,0.967,,,0.272,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 03:45,XRP,15m,FVG,bull,,0.9607,0.9642,0.739,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 04:00,ZEC,1h,WEAK_BREAK,bull,916.14,,,0.381,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 03:30,ZEC,30m,CHOCH,bull,916.14,,,0.306,Asia,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-17 03:30,ZEC,30m,ORDER_BLOCK,bull,,902.74,910.53,,Asia,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-17 03:30,ZEC,30m,OB_RETEST,bear,,919.17,925.27,,Asia,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-17 03:30,ZEC,30m,FVG_FILLED,bear,,915.56,919.17,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 04:00,ZEC,30m,FVG,bull,,909.79,915.8,0.513,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 03:30,ZEC,15m,WEAK_BREAK,bull,912.39,,,0.927,Asia,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 03:45,ZEC,15m,SWEEP,bear,925.27,,,0.132,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 03:45,ZEC,15m,FVG,bull,,914.06,917.45,0.422,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-17 04:00,ZEC,15m,FVG_RETRACE,bull,,914.06,917.45,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
