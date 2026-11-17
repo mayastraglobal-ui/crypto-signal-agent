@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-17 07:11",
+ "utc": "2026-11-17 08:11",
  "verdict": {
   "code": "TREND_DOWN",
   "icon": "\ud83c\udf27",
@@ -31,11 +31,11 @@
     "1w": "UNCLEAR",
     "1d": "WEAK_BEAR",
     "4h": "WEAK_BEAR",
-    "1h": "RANGE"
+    "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 34.0,
-    "4h": 58.0,
+    "4h": 57.0,
     "1h": 12.0
    },
    "vol": {
@@ -64,11 +64,11 @@
     "price": 64882.87
    },
    "crowd": {
-    "funding_pct": 0.0045,
-    "oi_24h_pct": -4.4,
+    "funding_pct": 0.0014,
+    "oi_24h_pct": -5.1,
     "label": "neutral"
    },
-   "change_24h": 0.07
+   "change_24h": -0.21
   },
   {
    "coin": "ETH",
@@ -84,7 +84,7 @@
    },
    "adx": {
     "1d": 35.0,
-    "4h": 53.0,
+    "4h": 51.0,
     "1h": 19.0
    },
    "vol": {
@@ -113,11 +113,11 @@
     "price": 1820.67
    },
    "crowd": {
-    "funding_pct": -0.0025,
-    "oi_24h_pct": -2.1,
+    "funding_pct": -0.0021,
+    "oi_24h_pct": -1.2,
     "label": "neutral"
    },
-   "change_24h": 0.89
+   "change_24h": 1.0
   },
   {
    "coin": "SOL",
@@ -133,7 +133,7 @@
    },
    "adx": {
     "1d": 47.0,
-    "4h": 49.0,
+    "4h": 47.0,
     "1h": 13.0
    },
    "vol": {
@@ -162,11 +162,11 @@
     "price": 71.58
    },
    "crowd": {
-    "funding_pct": -0.0106,
-    "oi_24h_pct": 0.5,
+    "funding_pct": -0.0131,
+    "oi_24h_pct": 0.2,
     "label": "leaning short"
    },
-   "change_24h": 2.52
+   "change_24h": 2.34
   },
   {
    "coin": "XRP",
@@ -178,11 +178,11 @@
     "1w": "UNCLEAR",
     "1d": "STRONG_BEAR",
     "4h": "WEAK_BEAR",
-    "1h": "RANGE"
+    "1h": "COMPRESSION"
    },
    "adx": {
     "1d": 35.0,
-    "4h": 46.0,
+    "4h": 44.0,
     "1h": 12.0
    },
    "vol": {
@@ -211,11 +211,11 @@
     "price": 0.9553
    },
    "crowd": {
-    "funding_pct": -0.0071,
-    "oi_24h_pct": -1.0,
+    "funding_pct": -0.0046,
+    "oi_24h_pct": -3.1,
     "label": "neutral"
    },
-   "change_24h": 0.82
+   "change_24h": 0.52
   },
   {
    "coin": "ZEC",
@@ -231,8 +231,8 @@
    },
    "adx": {
     "1d": 22.0,
-    "4h": 47.0,
-    "1h": 17.0
+    "4h": 45.0,
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 13.47,
@@ -260,25 +260,25 @@
     "price": 904.64
    },
    "crowd": {
-    "funding_pct": 0.0004,
-    "oi_24h_pct": 9.1,
+    "funding_pct": -0.0009,
+    "oi_24h_pct": 11.5,
     "label": "neutral"
    },
-   "change_24h": 3.85
+   "change_24h": 3.29
   }
  ],
- "alts_vs_btc_24h": 1.64,
+ "alts_vs_btc_24h": 1.88,
  "fear_greed": {
   "value": 12,
   "label": "Extreme Fear",
   "yesterday": 10
  },
  "btc_dominance": {
-  "pct": 58.414,
-  "utc": "2026-11-17 07:11",
-  "ch24": -0.9,
-  "ch7": -1.84,
-  "read": "BTC up + BTC.D down: money rotating into altcoins (alt longs favored)"
+  "pct": 58.426,
+  "utc": "2026-11-17 08:11",
+  "ch24": -0.89,
+  "ch7": -1.83,
+  "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [],
  "blackout_now": [],
@@ -293,5 +293,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-17 15:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -20.4% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D WEAK_BEAR \u00b7 4H WEAK_BEAR \u00b7 1H RANGE\nVolatility: high (daily range 4.6%, higher than 90% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.2% (62,808 \u2013 66,958) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0045%/8h, open interest -4.4% in 24h)\nAltcoins vs BTC (24h): +1.6%\nBTC dominance: 58.4% \u00b7 24h -0.90 pt \u00b7 7d -1.84 pt\n   BTC up + BTC.D down: money rotating into altcoins (alt longs favored)\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 SOL: trend down \u00b7 leaning short\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 10% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-17 16:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -20.4% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D WEAK_BEAR \u00b7 4H WEAK_BEAR \u00b7 1H COMPRESSION\nVolatility: high (daily range 4.6%, higher than 90% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.2% (62,808 \u2013 66,958) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0014%/8h, open interest -5.1% in 24h)\nAltcoins vs BTC (24h): +1.9%\nBTC dominance: 58.4% \u00b7 24h -0.89 pt \u00b7 7d -1.83 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 SOL: trend down \u00b7 leaning short\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 10% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
