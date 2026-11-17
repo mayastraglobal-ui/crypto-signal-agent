@@ -1,23 +1,23 @@
 {
- "n": 46,
- "sent": 38,
- "done": 46,
- "kept": 19,
- "reversed": 27,
- "avg_after_4h": -0.17,
- "caught": 20,
+ "n": 41,
+ "sent": 34,
+ "done": 41,
+ "kept": 15,
+ "reversed": 26,
+ "avg_after_4h": -0.05,
+ "caught": 17,
  "by_coin": {
-  "ETH": 13,
-  "SOL": 10,
-  "XRP": 8,
-  "BTC": 11,
-  "ZEC": 3,
-  "SUI": 1
+  "ZEC": 2,
+  "BTC": 10,
+  "ETH": 12,
+  "SOL": 9,
+  "SUI": 1,
+  "XRP": 7
  },
  "by_kind": {
-  "move": 22,
-  "volume": 22,
-  "sweep_low": 8,
+  "move": 20,
+  "volume": 18,
+  "sweep_low": 6,
   "sweep_high": 1
  },
  "biggest": [
@@ -54,25 +54,25 @@
    "caught": false
   },
   {
-   "time_utc": "2026-11-10 13:49",
-   "coin": "ZEC",
+   "time_utc": "2026-11-15 02:12",
+   "coin": "BTC",
    "side": "UP",
-   "move_pct": 2.86,
-   "after_4h": -11.59,
+   "move_pct": 2.62,
+   "after_4h": 0.41,
    "caught": false
   }
  ],
- "checked_utc": "2026-11-17 13:06",
+ "checked_utc": "2026-11-17 13:58",
  "lines": [
-  "46 shock(s) this week, 38 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-  "by kind: fast move 22, broke yesterday's high 1, broke yesterday's low 8, volume spike 22",
-  "by coin: ETH 13, BTC 11, SOL 10, XRP 8, ZEC 3, SUI 1",
-  "4 hours later: 19 kept going, 27 reversed (average -0.17% in the shock's direction)",
-  "followed by a strategy alert in the same direction within 4h: 20 of 46",
+  "41 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+  "by kind: fast move 20, broke yesterday's high 1, broke yesterday's low 6, volume spike 18",
+  "by coin: ETH 12, BTC 10, SOL 9, XRP 7, ZEC 2, SUI 1",
+  "4 hours later: 15 kept going, 26 reversed (average -0.05% in the shock's direction)",
+  "followed by a strategy alert in the same direction within 4h: 17 of 41",
   "  2026-11-10 16:34 UTC ZEC DOWN -5.5% -> 4h later -0.6% (no strategy alert)",
   "  2026-11-15 02:17 UTC SOL UP +4.7% -> 4h later -0.8% (no strategy alert)",
   "  2026-11-15 02:17 UTC XRP UP +4.5% -> 4h later +0.7% (no strategy alert)",
   "  2026-11-10 15:34 UTC ZEC DOWN -3.4% -> 4h later +9.2% (no strategy alert)",
-  "  2026-11-10 13:49 UTC ZEC UP +2.9% -> 4h later -11.6% (no strategy alert)"
+  "  2026-11-15 02:12 UTC BTC UP +2.6% -> 4h later +0.4% (no strategy alert)"
  ]
 }
