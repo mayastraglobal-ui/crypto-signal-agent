@@ -37040,3 +37040,7 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 17:00,SOL,15m,OB_INVALID,bull,,72.06,72.42,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-17 16:15,XRP,15m,FVG_RETRACE,bear,,0.9613,0.9647,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-17 16:15,XRP,15m,FVG_FILLED,bear,,0.9613,0.9647,,,1h,RANGE,,smc-1.0,Binance
+2026-11-17 17:15,ETH,15m,BREAKER_RETEST,bear,,1779.16,1787.85,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 18:00,SOL,1h,BREAKER_RETEST,bear,,72.06,72.77,,,4h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 17:30,SOL,30m,BREAKER_RETEST,bear,,72.06,72.6,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 17:15,SOL,15m,BREAKER_RETEST,bear,,72.06,72.42,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
