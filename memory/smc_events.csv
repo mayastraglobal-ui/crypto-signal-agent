@@ -37021,3 +37021,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 15:45,ZEC,15m,FVG_FILLED,bull,,929.0,937.65,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
 2026-11-17 16:00,ZEC,15m,FVG_RETRACE,bull,,921.53,925.43,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-11-17 16:00,ZEC,15m,FVG_FILLED,bull,,921.53,925.43,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-17 17:00,BTC,1h,BOS,bear,64079.83,,,0.574,,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 17:00,BTC,1h,FVG,bear,,64483.33,64800.0,0.518,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 16:30,BTC,30m,BOS,bear,64079.83,,,0.4,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 16:15,BTC,15m,FVG_RETRACE,bear,,64239.99,64562.0,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 16:30,BTC,15m,BOS,bear,64079.83,,,0.46,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 16:45,BTC,15m,OB_INVALID,bull,,63887.75,64166.82,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 17:00,BTC,15m,BREAKER_RETEST,bear,,63887.75,64166.82,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 17:00,ETH,1h,BREAKER_RETEST,bear,,1787.11,1806.4,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 17:00,ETH,1h,FVG,bear,,1797.64,1807.53,0.439,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-17 16:30,ETH,30m,BREAKER_RETEST,bear,,1787.11,1806.4,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 16:15,ETH,15m,FVG_RETRACE,bear,,1787.53,1797.67,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 17:00,ETH,15m,OB_INVALID,bull,,1779.16,1787.85,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 17:00,SOL,1h,OB_INVALID,bull,,72.06,72.77,,,4h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 17:00,SOL,1h,FVG,bear,,73.04,73.41,0.367,,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 17:00,SOL,30m,OB_INVALID,bull,,72.06,72.6,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 16:15,SOL,15m,FVG_RETRACE,bear,,72.58,73.1,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 17:00,SOL,15m,OB_INVALID,bull,,72.06,72.42,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 16:15,XRP,15m,FVG_RETRACE,bear,,0.9613,0.9647,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 16:15,XRP,15m,FVG_FILLED,bear,,0.9613,0.9647,,,1h,RANGE,,smc-1.0,Binance
