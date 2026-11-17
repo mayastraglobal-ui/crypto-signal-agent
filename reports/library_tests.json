@@ -6,10 +6,10 @@
    "version": "1.0",
    "tf": "1h",
    "status": "BACKTESTING",
-   "trades": 955,
-   "avg_r": 0.163,
+   "trades": 956,
+   "avg_r": 0.162,
    "test_avg_r": 0.297,
-   "tested_utc": "2026-11-16 07:13",
+   "tested_utc": "2026-11-17 08:25",
    "library": true,
    "coins": {
     "BTC": {
@@ -61,9 +61,9 @@
      "positive": true
     },
     "SUI": {
-     "n": 53,
-     "avg_r": 0.064,
-     "win_rate": 37.7,
+     "n": 54,
+     "avg_r": 0.044,
+     "win_rate": 37.0,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
