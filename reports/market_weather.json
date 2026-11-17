@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-16 23:16",
+ "utc": "2026-11-17 00:11",
  "verdict": {
   "code": "TREND_DOWN",
   "icon": "\ud83c\udf27",
@@ -34,41 +34,41 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 31.0,
-    "4h": 61.0,
+    "1d": 34.0,
+    "4h": 59.0,
     "1h": 17.0
    },
    "vol": {
-    "atr_pct": 4.63,
+    "atr_pct": 4.62,
     "vol_pctile": 90.0,
     "vol_label": "high",
     "usual_move_pct": 1.51,
-    "move_8of10_pct": 3.24,
-    "days": 338,
+    "move_8of10_pct": 3.2,
+    "days": 339,
     "basis": "similar days",
-    "price": 65351.05,
+    "price": 64882.87,
     "band": [
-     63236.189907,
-     67465.910093
+     62807.957903,
+     66957.782097
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -19.9,
+    "chg_pct": -20.4,
     "days": 30,
-    "sma20": 75171.4785,
-    "sma50": 79843.7694,
-    "sma200": 72978.4725,
+    "sma20": 74370.1335,
+    "sma50": 79451.9868,
+    "sma200": 72921.154,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 65351.05
+    "price": 64882.87
    },
    "crowd": {
-    "funding_pct": 0.0061,
-    "oi_24h_pct": -3.1,
+    "funding_pct": 0.0045,
+    "oi_24h_pct": -5.1,
     "label": "neutral"
    },
-   "change_24h": 0.42
+   "change_24h": -0.62
   },
   {
    "coin": "ETH",
@@ -83,41 +83,41 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 33.0,
-    "4h": 56.0,
-    "1h": 19.0
+    "1d": 35.0,
+    "4h": 55.0,
+    "1h": 18.0
    },
    "vol": {
-    "atr_pct": 6.56,
+    "atr_pct": 6.61,
     "vol_pctile": 90.0,
     "vol_label": "high",
-    "usual_move_pct": 2.0,
-    "move_8of10_pct": 4.17,
-    "days": 318,
+    "usual_move_pct": 1.88,
+    "move_8of10_pct": 4.16,
+    "days": 306,
     "basis": "similar days",
-    "price": 1835.35,
+    "price": 1820.67,
     "band": [
-     1758.856446,
-     1911.843554
+     1744.989858,
+     1896.350142
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -24.3,
+    "chg_pct": -24.2,
     "days": 30,
-    "sma20": 2166.7855,
-    "sma50": 2380.4046,
-    "sma200": 2144.097,
+    "sma20": 2140.301,
+    "sma50": 2363.045,
+    "sma200": 2141.9128,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 1835.35
+    "price": 1820.67
    },
    "crowd": {
-    "funding_pct": -0.0027,
-    "oi_24h_pct": -1.8,
+    "funding_pct": -0.0025,
+    "oi_24h_pct": -2.0,
     "label": "neutral"
    },
-   "change_24h": 0.25
+   "change_24h": -0.51
   },
   {
    "coin": "SOL",
@@ -132,41 +132,41 @@
     "1h": "WEAK_BEAR"
    },
    "adx": {
-    "1d": 45.0,
-    "4h": 53.0,
-    "1h": 11.0
+    "1d": 47.0,
+    "4h": 51.0,
+    "1h": 10.0
    },
    "vol": {
-    "atr_pct": 7.0,
-    "vol_pctile": 89.0,
+    "atr_pct": 6.91,
+    "vol_pctile": 88.0,
     "vol_label": "high",
-    "usual_move_pct": 2.46,
-    "move_8of10_pct": 4.73,
-    "days": 438,
+    "usual_move_pct": 2.44,
+    "move_8of10_pct": 4.7,
+    "days": 439,
     "basis": "similar days",
-    "price": 72.77,
+    "price": 71.58,
     "band": [
-     69.327185,
-     76.212815
+     68.215325,
+     74.944675
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -30.3,
+    "chg_pct": -30.8,
     "days": 30,
-    "sma20": 88.922,
-    "sma50": 101.9404,
-    "sma200": 88.849,
+    "sma20": 87.4335,
+    "sma50": 100.9322,
+    "sma200": 88.79145,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 72.77
+    "price": 71.58
    },
    "crowd": {
-    "funding_pct": -0.001,
-    "oi_24h_pct": -5.7,
-    "label": "neutral"
+    "funding_pct": -0.0106,
+    "oi_24h_pct": -55.7,
+    "label": "leaning short"
    },
-   "change_24h": -0.55
+   "change_24h": -1.08
   },
   {
    "coin": "XRP",
@@ -177,45 +177,45 @@
    "labels": {
     "1w": "UNCLEAR",
     "1d": "STRONG_BEAR",
-    "4h": "STRONG_BEAR",
+    "4h": "WEAK_BEAR",
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 33.0,
-    "4h": 49.0,
-    "1h": 12.0
+    "1d": 35.0,
+    "4h": 47.0,
+    "1h": 11.0
    },
    "vol": {
-    "atr_pct": 6.74,
-    "vol_pctile": 88.0,
+    "atr_pct": 6.92,
+    "vol_pctile": 89.0,
     "vol_label": "high",
-    "usual_move_pct": 1.94,
-    "move_8of10_pct": 4.84,
-    "days": 274,
+    "usual_move_pct": 2.13,
+    "move_8of10_pct": 5.03,
+    "days": 268,
     "basis": "similar days",
-    "price": 0.9742,
+    "price": 0.9553,
     "band": [
-     0.927028,
-     1.021372
+     0.907219,
+     1.003381
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -25.7,
+    "chg_pct": -26.2,
     "days": 30,
-    "sma20": 1.164925,
-    "sma50": 1.301914,
-    "sma200": 1.255362,
+    "sma20": 1.146125,
+    "sma50": 1.290686,
+    "sma200": 1.253298,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 0.9742
+    "price": 0.9553
    },
    "crowd": {
-    "funding_pct": -0.0043,
-    "oi_24h_pct": -2.3,
+    "funding_pct": -0.0071,
+    "oi_24h_pct": -4.0,
     "label": "neutral"
    },
-   "change_24h": -1.21
+   "change_24h": -1.43
   },
   {
    "coin": "ZEC",
@@ -230,55 +230,55 @@
     "1h": "RANGE"
    },
    "adx": {
-    "1d": 21.0,
-    "4h": 49.0,
+    "1d": 22.0,
+    "4h": 48.0,
     "1h": 12.0
    },
    "vol": {
-    "atr_pct": 13.99,
-    "vol_pctile": 87.0,
+    "atr_pct": 13.47,
+    "vol_pctile": 86.0,
     "vol_label": "high",
-    "usual_move_pct": 3.38,
-    "move_8of10_pct": 8.53,
-    "days": 147,
+    "usual_move_pct": 3.13,
+    "move_8of10_pct": 8.26,
+    "days": 169,
     "basis": "similar days",
-    "price": 916.03,
+    "price": 904.64,
     "band": [
-     837.885012,
-     994.174988
+     829.888283,
+     979.391717
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -20.3,
+    "chg_pct": -19.8,
     "days": 30,
-    "sma20": 1158.7005,
-    "sma50": 1225.263,
-    "sma200": 797.32705,
+    "sma20": 1138.4525,
+    "sma50": 1211.6078,
+    "sma200": 800.0975,
     "swing": null,
     "near200": false,
-    "price": 916.03
+    "price": 904.64
    },
    "crowd": {
-    "funding_pct": 0.0091,
+    "funding_pct": 0.0004,
     "oi_24h_pct": 3.4,
     "label": "neutral"
    },
-   "change_24h": 0.69
+   "change_24h": -0.52
   }
  ],
- "alts_vs_btc_24h": -0.57,
+ "alts_vs_btc_24h": -0.18,
  "fear_greed": {
-  "value": 10,
+  "value": 12,
   "label": "Extreme Fear",
   "yesterday": 10
  },
  "btc_dominance": {
-  "pct": 58.698,
-  "utc": "2026-11-16 23:16",
-  "ch24": -0.69,
-  "ch7": -0.98,
-  "read": "BTC up + BTC.D down: money rotating into altcoins (alt longs favored)"
+  "pct": 58.6,
+  "utc": "2026-11-17 00:11",
+  "ch24": -0.75,
+  "ch7": -1.08,
+  "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [],
  "blackout_now": [],
@@ -293,5 +293,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-17 07:16 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -19.9% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D WEAK_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H RANGE\nVolatility: high (daily range 4.6%, higher than 90% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.2% (63,236 \u2013 67,466) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0061%/8h, open interest -3.1% in 24h)\nAltcoins vs BTC (24h): -0.6%\nBTC dominance: 58.7% \u00b7 24h -0.69 pt \u00b7 7d -0.98 pt\n   BTC up + BTC.D down: money rotating into altcoins (alt longs favored)\nMood (Fear & Greed): Extreme Fear 10\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 10% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-17 08:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -20.4% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D WEAK_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H RANGE\nVolatility: high (daily range 4.6%, higher than 90% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.2% (62,808 \u2013 66,958) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0045%/8h, open interest -5.1% in 24h)\nAltcoins vs BTC (24h): -0.2%\nBTC dominance: 58.6% \u00b7 24h -0.75 pt \u00b7 7d -1.08 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down \u00b7 leaning short\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 10% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
