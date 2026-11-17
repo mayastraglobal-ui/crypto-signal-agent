@@ -37044,3 +37044,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 18:00,SOL,1h,BREAKER_RETEST,bear,,72.06,72.77,,,4h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-11-17 17:30,SOL,30m,BREAKER_RETEST,bear,,72.06,72.6,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-11-17 17:15,SOL,15m,BREAKER_RETEST,bear,,72.06,72.42,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 19:00,ETH,1h,FVG_RETRACE,bear,,1797.64,1807.53,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 18:30,ETH,15m,WEAK_BREAK,bull,1793.52,,,0.521,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 18:30,ETH,15m,OB_RETEST,bear,,1797.67,1818.1,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-17 18:30,ETH,15m,FVG_FILLED,bear,,1787.53,1797.67,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 18:30,SOL,15m,SWEEP,bear,72.89,,,0.15,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 18:15,ZEC,15m,BOS,bear,919.3,,,0.002,,1h,UNCLEAR,no displacement,smc-1.0,Binance
