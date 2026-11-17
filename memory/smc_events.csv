@@ -36789,3 +36789,42 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-17 09:00,ZEC,30m,FVG_RETRACE,bull,,919.24,922.07,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-17 09:00,ZEC,30m,FVG_FILLED,bull,,919.24,922.07,,London,1h,RANGE,,smc-1.0,Binance
 2026-11-17 09:00,ZEC,15m,FVG,bear,,918.79,923.17,0.602,London,1h,RANGE,,smc-1.0,Binance
+2026-11-17 09:30,BTC,30m,SWEEP,bull,64303.64,,,0.406,London,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 09:30,BTC,15m,BREAKER_RETEST,bear,,64322.3,64594.01,,London,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 10:00,ETH,1h,SWEEP,bull,1810.73,,,0.271,London,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 10:00,ETH,1h,FVG,bear,,1820.61,1825.84,0.311,London,4h,TRANSITION,,smc-1.0,Binance
+2026-11-17 09:30,ETH,30m,SWEEP,bull,1810.67,,,0.441,London,1h,COMPRESSION,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-17 09:30,ETH,30m,WEAK_BREAK,bear,1816.06,,,0.434,London,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-17 09:30,ETH,30m,FVG,bear,,1820.61,1826.86,0.59,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 09:30,ETH,15m,SWEEP,bull,1810.67,,,0.65,London,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-17 09:30,ETH,15m,OB_INVALID,bull,,1812.0,1817.52,,London,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-17 09:30,ETH,15m,FVG,bear,,1813.94,1819.32,0.764,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 09:45,ETH,15m,BREAKER_RETEST,bear,,1812.0,1817.52,,London,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-17 09:45,ETH,15m,FVG_RETRACE,bear,,1813.94,1819.32,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,SOL,1h,FVG_FILLED,bull,,72.05,72.58,,London,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-17 09:30,SOL,30m,SWEEP,bull,72.1,,,0.124,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 09:30,SOL,30m,OB_RETEST,bull,,71.59,72.05,,London,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-17 10:00,SOL,30m,FVG_RETRACE,bear,,72.6,72.78,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,SOL,30m,FVG_FILLED,bear,,72.6,72.78,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-17 09:30,XRP,30m,SWEEP,bull,0.9539,,,0.206,London,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 09:30,XRP,30m,FVG,bear,,0.9579,0.9598,0.328,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 10:00,XRP,30m,FVG_RETRACE,bear,,0.9579,0.9598,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,XRP,30m,FVG_FILLED,bear,,0.9579,0.9598,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 09:30,XRP,15m,SWEEP,bull,0.9535,,,0.208,London,1h,COMPRESSION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-17 10:00,XRP,15m,FVG_RETRACE,bear,,0.9589,0.96,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,XRP,15m,FVG_FILLED,bear,,0.9589,0.96,,London,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-17 10:00,ZEC,1h,WEAK_BREAK,bull,934.11,,,0.032,London,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-17 10:00,ZEC,1h,FVG_RETRACE,bear,,940.62,954.69,,London,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-17 09:30,ZEC,30m,SWEEP,bull,909.03,,,0.142,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 09:30,ZEC,30m,FVG,bear,,916.76,922.13,0.514,London,1h,RANGE,,smc-1.0,Binance
+2026-11-17 10:00,ZEC,30m,SWEEP,bear,940.3,,,0.782,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 10:00,ZEC,30m,BOS,bull,928.38,,,0.6,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 10:00,ZEC,30m,FVG_RETRACE,bear,,943.43,954.69,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,ZEC,30m,FVG_RETRACE,bear,,916.76,922.13,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,ZEC,30m,FVG_FILLED,bear,,916.76,922.13,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-17 09:30,ZEC,15m,SWEEP,bull,909.03,,,0.208,London,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-17 09:45,ZEC,15m,FVG_RETRACE,bear,,918.79,923.17,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,ZEC,15m,SWEEP,bear,940.3,,,1.139,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-17 10:00,ZEC,15m,WEAK_BREAK,bull,928.38,,,0.873,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-17 10:00,ZEC,15m,FVG_RETRACE,bear,,946.96,954.73,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-17 10:00,ZEC,15m,FVG_FILLED,bear,,918.79,923.17,,London,1h,RANGE,,smc-1.0,Binance
