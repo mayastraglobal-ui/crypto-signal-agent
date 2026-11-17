@@ -1779,3 +1779,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): donchian_breakout-VEXIT-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P01-BREAKOUT-V2-FRETEST@1.0 - Price closes above the highest high of the last 20 candles with 1.5x volume and ADX above 20 (shorts: below the lowest low).
+- timestamp: 2026-11-17 08:25 UTC · source: strategies_lab.yaml card P01-BREAKOUT-V2-FRETEST@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P01-BREAKOUT-V2-FRETEST v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-15
+  - title / source: engine failure lab: a repair of P01-BREAKOUT-V2@1.0 for its loss tag false_breakout
+  - URL: none recorded
+  - claim: P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.52R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): P01-BREAKOUT-V2-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3

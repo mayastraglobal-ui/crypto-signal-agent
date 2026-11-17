@@ -510,3 +510,10 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **donchian_breakout-VEXIT-FRETEST@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.03R/trade (needs +0.10R); profit factor 1.04; recovery factor 0.93 (net +36.1R / max drawdown 38.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 27.6R - limit 17R; longest drawdown 1095 days = 60% of the tested period (limit 55%))
 - **donchian_breakout-VEXIT-FRETEST@1.0 4h**: FORMALIZED → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
 - **P03-FIB-PULLBACK-V5@1.0 1h**: FAILED → **PAPER_TRADING** (promoted to PAPER by the operator (weekly review): PAPER only on SOL)
+
+## 2026-11-17 08:25 UTC
+- **P01-BREAKOUT-V2-FRETEST@1.0 15m**: FORMALIZED → **BACKTESTING** (avg +0.07R/trade (needs +0.10R); profit factor 1.13; recovery factor 2.21 (net +138.7R / max drawdown 62.8R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.3R - limit 17R)
+- **P01-BREAKOUT-V2-FRETEST@1.0 1h**: FORMALIZED → **BACKTESTING** (avg +0.08R/trade (needs +0.10R); profit factor 1.14; Monte Carlo 95% worst drawdown per 100 trades 22.7R - limit 17R)
+- **P01-BREAKOUT-V2-FRETEST@1.0 30m**: FORMALIZED → **BACKTESTING** (avg +0.06R/trade (needs +0.10R); profit factor 1.11; recovery factor 1.94 (net +72.4R / max drawdown 37.4R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.7R - limit 17R)
+- **P03-FIB-PULLBACK-V4@1.0 4h**: FAILED → **BACKTESTING** (avg +0.02R/trade (needs +0.10R); profit factor 1.03; recovery factor 0.12 (net +5.9R / max drawdown 49.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 35.3R - limit 17R; longest drawdown 2053 days = 63% of the tested period (limit 55%))
+- **macd_trend_cross@1.0 1h**: BACKTESTING → **FAILED** (avg -0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor -0.01 (net -0.3R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.6R - limit 17R; longest drawdown 1919 days = 59% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
