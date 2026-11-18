@@ -821,10 +821,11 @@ def main():
 
     # ---------- PR 3: promotions to PAPER (the operator's tap) and demotions (by the paper record) ----------
     jrv = load_json(os.path.join(sc.REPORTS, "journal_review.json")) or {}
-    number_of = {sspec.key(c): prog.number(c) for c in program_cards}
-    promos = [p for p in wrv.parse_promotions(cfg.get("promotions"), jrv.get("decisions"))
-              if p["key"].split("|")[0] in number_of]               # program cards only
+    number_of = wrv.strategy_numbers({sspec.key(c): prog.number(c) for c in program_cards}, by_key)
+    promos, promo_unknown = wrv.known_promotions(wrv.parse_promotions(cfg.get("promotions"), jrv.get("decisions")),
+                                                 number_of)            # every card of this run (program, library, lab)
     promo_active, promo_demoted, promo_refused = wrv.active_promotions(promos, logdf, number_of, WR)
+    promo_refused += promo_unknown
 
     def status_of(ck):
         sid, rest = ck.split("@", 1)
