@@ -1,13 +1,13 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-18 08:34 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-18 09:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-17)
-- ✅ hourly scan: last run 2026-11-18 08:34 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-18)
+- ✅ hourly scan: last run 2026-11-18 09:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-18 06:20 UTC (52 min ago)
+- ✅ live watcher: last heartbeat 2026-11-18 08:30 UTC (6 min ago)
 - ✅ TEST setups closed this week (GitHub record): 88
 
 ## Totals
@@ -29,7 +29,7 @@ Made 2026-11-18 08:34 UTC by the hourly scan (engine/weekly_review.py). Live = t
 - watcher alerts (5m-confirmed): 15 plan results, +1.14R a trade
 - every TEST setup (GitHub, no 5m check - your alerts and the silent records): 167, +0.09R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.02R over 18 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +0.92R over 20 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
@@ -44,13 +44,12 @@ Made 2026-11-18 08:34 UTC by the hourly scan (engine/weekly_review.py). Live = t
 
 ## Failure Lab (repairs for the loss causes)
 
-- new repair P01-BREAKOUT-V2-FDISP-FRETEST: P01-BREAKOUT-V2-FDISP@1.0 30m lost on overextended_entry - testing RETEST
 - P01-BREAKOUT-V2-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.29R vs parent +0.04R, unseen +0.46R vs +0.16R - helped
+- P01-BREAKOUT-V2-FDISP-FRETEST@1.0 30m (RETEST for overextended_entry): +0.14R vs parent +0.04R, unseen +0.27R vs +0.16R - helped
 - P02-EMA-PULLBACK-V4-S6-FHTF@1.0 4h (HTF for regime_mismatch): +0.02R vs parent +0.14R, unseen +0.09R vs +0.23R - did not help
 - P11-MOMENTUM-V1-FRETEST-FDISP@1.0 30m (DISP for false_breakout): -0.09R vs parent -0.10R, unseen -0.15R vs -0.15R - did not help
 - TRD-H4-BREAKOUT-FDISP-FNOTEXT@1.0 30m (NOTEXT for overextended_entry): +0.37R vs parent +0.20R, unseen +0.42R vs +0.44R - passed
-- TRD-H4-BREAKOUT-FDISP@1.0 30m (DISP for false_breakout): +0.20R vs parent +0.09R, unseen +0.44R vs +0.26R - helped
-- repair record: DISP helped 6 of 9, NOTEXT helped 3 of 4, RETEST helped 2 of 2, HTF helped 0 of 1
+- repair record: DISP helped 6 of 9, NOTEXT helped 3 of 4, RETEST helped 3 of 3, HTF helped 0 of 1
 - 1 repair(s) waiting for their first test
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)

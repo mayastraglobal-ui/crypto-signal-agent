@@ -1,8 +1,8 @@
 {
  "state": "OK",
- "checked_utc": "2026-11-18 08:36",
+ "checked_utc": "2026-11-18 09:12",
  "last_utc": "2026-11-18 08:30",
- "age_min": 6,
+ "age_min": 42,
  "heartbeat": {
   "utc": "2026-11-18 08:30",
   "started_utc": "2026-11-12 14:55",
@@ -28,5 +28,5 @@
   "code_old": false,
   "shock_on": true
  },
- "text": "live watcher: last heartbeat 2026-11-18 08:30 UTC (6 min ago)"
+ "text": "live watcher: last heartbeat 2026-11-18 08:30 UTC (42 min ago)"
 }
