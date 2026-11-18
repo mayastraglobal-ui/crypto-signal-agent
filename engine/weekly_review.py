@@ -119,6 +119,24 @@ def paper_record(logdf, key, coin):
     return d.sort_values("closed_time_utc")["result_r"].astype(float).tolist() if len(d) else []
 
 
+def strategy_numbers(program, card_keys):
+    """{'id@ver': strategy number} for the promotion rules: a program card's number (program = {'id@ver': n}); any
+    other card of the run (library / lab - their 🔵 TEST alerts are offered here too) its own id, so the
+    one-per-strategy-per-coin rule treats it as a strategy of its own. 2026-11-18: TRD-H4-BREAKOUT-S3 (a library
+    card) on BTC was tapped on 15 Nov and the research run dropped it without a word - it only knew program cards."""
+    out = {k: k.split("@")[0] for k in card_keys}
+    out.update(program)
+    return out
+
+
+def known_promotions(promos, numbers):
+    """(the promotions of cards this run has, the others as refused dicts with a why) - nothing is dropped silently."""
+    known = [p for p in promos if p["key"].split("|")[0] in numbers]
+    unknown = [dict(p, why="no such strategy card in this run (check the id, version and timeframe)")
+               for p in promos if p["key"].split("|")[0] not in numbers]
+    return known, unknown
+
+
 def active_promotions(promos, logdf, number_of, S):
     """Which promotions are in force: oldest first, at most paper_max pairs, one per program strategy per coin, and
     never a pair whose paper record failed (demoted). number_of: {'id@ver': program strategy number}.

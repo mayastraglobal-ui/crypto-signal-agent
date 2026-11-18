@@ -84,6 +84,26 @@ class Promotions(unittest.TestCase):
         self.assertEqual(act2, {K1: ["BTC"]})
         self.assertIn("paper is full", ref2[0]["why"])
 
+    def test_library_and_lab_cards_can_be_promoted(self):
+        # 2026-11-18: TRD-H4-BREAKOUT-S3 (library) on BTC was tapped on 15 Nov and dropped by the research run
+        nums = WR.strategy_numbers({"P03-FIB-PULLBACK-V5@1.0": 3},
+                                   ["P03-FIB-PULLBACK-V5@1.0", "TRD-H4-BREAKOUT-S3@1.0", "donchian_breakout-VEXIT@1.0"])
+        self.assertEqual(nums["P03-FIB-PULLBACK-V5@1.0"], 3)
+        self.assertEqual(nums["TRD-H4-BREAKOUT-S3@1.0"], "TRD-H4-BREAKOUT-S3")
+        taps = [dict(time_utc="2026-11-15 07:18", action="promote", key="TRD-H4-BREAKOUT-S3@1.0|1h", coin="BTC"),
+                dict(time_utc="2026-11-15 07:18", action="promote", key="P03-FIB-PULLBACK-V5@1.0|1h", coin="SOL"),
+                dict(time_utc="2026-11-15 07:19", action="promote", key="GONE@1.0|1h", coin="ETH")]
+        known, unknown = WR.known_promotions(WR.parse_promotions([], taps), nums)
+        self.assertEqual(sorted(p["key"] for p in known), ["P03-FIB-PULLBACK-V5@1.0|1h", "TRD-H4-BREAKOUT-S3@1.0|1h"])
+        self.assertEqual([p["key"] for p in unknown], ["GONE@1.0|1h"])
+        self.assertIn("no such strategy card", unknown[0]["why"])               # reported, never dropped silently
+        act, _, ref = WR.active_promotions(known, log(), nums, S)
+        self.assertEqual(act, {"P03-FIB-PULLBACK-V5@1.0|1h": ["SOL"], "TRD-H4-BREAKOUT-S3@1.0|1h": ["BTC"]})
+        self.assertEqual(ref, [])
+        src = open(os.path.join(ROOT, "research.py"), encoding="utf-8").read()
+        self.assertIn("wrv.strategy_numbers(", src)
+        self.assertNotIn("# program cards only", src)
+
     def test_moves(self):
         st = {K1: "BACKTESTING", K2: "PAPER_TRADING", "X@1.0|1h": "PAPER_TRADING", "Y@1.0|1h": "PAPER_TRADING"}
         to, rel, via = WR.promotion_moves({K1: ["BTC"], "X@1.0|1h": ["BTC"]}, {K2, "Y@1.0|1h"}, st.get)
