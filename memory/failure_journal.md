@@ -1082,3 +1082,67 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### XRP SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.29R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.29R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: XRP · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-25
+  - signal 2026-11-14 15:59 UTC, closed 2026-11-17 23:59 UTC, stage PAPER_TRADING
+  - MAE -0.41R / MFE +1.64R
+  - at entry: session -, conditions: overextended_entry, no_displacement
+  - what happened: false_breakout, bad_target
+  - root cause / fix: (review)
+
+### XRP SHORT 4h P01-BREAKOUT-V3 v1.0 - exit-rule -0.16R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.16R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V3 v1.0 · asset: XRP · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-25
+  - signal 2026-11-14 15:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -0.29R / MFE +0.74R
+  - at entry: session -, conditions: overextended_entry, no_displacement
+  - what happened: -
+  - root cause / fix: (review)
+
+### XRP SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.67R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.67R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: XRP · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-25
+  - signal 2026-11-14 19:59 UTC, closed 2026-11-17 23:59 UTC, stage PAPER_TRADING
+  - MAE -0.79R / MFE +1.24R
+  - at entry: session -, conditions: overextended_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### XRP SHORT 4h P01-BREAKOUT-V3 v1.0 - exit-rule -0.54R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.54R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V3 v1.0 · asset: XRP · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-25
+  - signal 2026-11-14 19:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -0.66R / MFE +1.24R
+  - at entry: session -, conditions: overextended_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SOL SHORT 4h P01-BREAKOUT-V4 v1.0 - SL -1.03R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V4 v1.0 · asset: SOL · timeframe: 4h · regime: EXPANSION · review: 2026-11-25
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -1.15R / MFE +0.79R
+  - at entry: session -, conditions: overextended_entry, late_entry, no_displacement
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ZEC SHORT 4h P04-MACD-SUPERTREND-V1 v1.0 - SL -1.02R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V1 v1.0 · asset: ZEC · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-25
+  - signal 2026-11-14 23:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -1.09R / MFE +0.39R
+  - at entry: session -, conditions: htf_conflict, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
+
+### BTC SHORT 1h P08-SESSION-BREAKOUT-V1 v1.0 - SL -1.10R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P08-SESSION-BREAKOUT-V1 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-25
+  - signal 2026-11-17 15:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -1.16R / MFE +0.93R
+  - at entry: session Silver Bullet, conditions: range_market, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
+
+### BTC SHORT 1h P08-SESSION-BREAKOUT-V4 v1.0 - SL -1.10R
+- timestamp: 2026-11-18 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P08-SESSION-BREAKOUT-V4 v1.0 · asset: BTC · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-25
+  - signal 2026-11-17 15:59 UTC, closed 2026-11-17 23:59 UTC, stage TEST
+  - MAE -1.16R / MFE +0.93R
+  - at entry: session Silver Bullet, conditions: range_market, no_displacement
+  - what happened: regime_mismatch
+  - root cause / fix: (review)
