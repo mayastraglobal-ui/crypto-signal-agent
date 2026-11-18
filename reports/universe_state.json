@@ -9,7 +9,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1143,
+ "runs": 1144,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -166,8 +166,7 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history",
-   "thin_book"
+   "history"
   ],
   "ASTER": [
    "thin_book",
@@ -177,9 +176,7 @@
  "last_flags": {
   "BTC": [],
   "ETH": [],
-  "ZEC": [
-   "wash_volume"
-  ],
+  "ZEC": [],
   "XRP": [],
   "SOL": [],
   "PROVE": [
