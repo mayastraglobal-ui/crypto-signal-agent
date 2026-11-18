@@ -37328,3 +37328,37 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-18 15:45,XRP,15m,SWEEP,bull,0.977,,,0.316,Silver Bullet,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-18 16:00,XRP,15m,BOS,bear,0.977,,,0.046,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-18 16:00,ZEC,30m,WEAK_BREAK,bear,928.56,,,0.061,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 16:30,BTC,30m,FVG_FILLED,bull,,62819.71,64430.2,,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:30,BTC,30m,FVG,bear,,63128.61,63409.11,0.724,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 17:00,BTC,30m,FVG,bear,,62760.01,63000.07,0.609,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:15,BTC,15m,WEAK_BREAK,bear,63085.0,,,1.042,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 16:15,BTC,15m,FVG_FILLED,bull,,62819.71,63758.67,,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:30,BTC,15m,OB_RETEST,bull,,62100.0,62686.28,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-18 16:30,BTC,15m,FVG,bear,,62854.15,63000.07,0.48,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:45,BTC,15m,FVG,bear,,62600.01,62766.6,0.546,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 17:00,BTC,15m,FVG_RETRACE,bear,,62600.01,62766.6,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-18 17:00,ETH,1h,FVG_FILLED,bull,,1742.32,1813.14,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-18 16:30,ETH,30m,SWEEP,bull,1751.39,,,0.63,,1h,RANGE,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-18 17:00,ETH,30m,OB_RETEST,bull,,1714.35,1742.32,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-18 17:00,ETH,30m,FVG_FILLED,bull,,1737.03,1801.56,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-18 17:00,ETH,30m,FVG,bear,,1755.88,1761.01,0.365,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-18 16:30,ETH,15m,SWEEP,bull,1751.39,,,0.769,,1h,RANGE,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-18 16:30,ETH,15m,BOS,bear,1756.0,,,0.122,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 16:45,ETH,15m,FVG_FILLED,bull,,1737.03,1772.68,,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:45,ETH,15m,FVG,bear,,1755.88,1761.64,0.489,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 17:00,SOL,1h,OB_RETEST,bull,,71.71,73.04,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-18 16:30,SOL,30m,FVG,bear,,73.57,73.75,0.285,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-18 17:00,SOL,30m,FVG,bear,,72.84,73.15,0.491,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-18 16:15,SOL,15m,BOS,bear,73.45,,,0.457,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-18 16:45,SOL,15m,FVG,bear,,72.83,73.1,0.524,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-18 17:00,SOL,15m,FVG_RETRACE,bear,,72.83,73.1,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-18 17:00,XRP,1h,SWEEP,bull,0.9702,,,0.618,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 17:00,XRP,1h,OB_INVALID,bull,,0.9734,0.9785,,,4h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-18 16:30,XRP,30m,SWEEP,bull,0.9702,,,0.613,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:30,XRP,15m,SWEEP,bull,0.9662,,,0.153,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:45,XRP,15m,OB_INVALID,bull,,0.9689,0.9716,,,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-18 17:00,XRP,15m,BREAKER_RETEST,bear,,0.9689,0.9716,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-18 17:00,ZEC,1h,SWEEP,bull,915.28,,,0.127,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:30,ZEC,30m,SWEEP,bull,915.28,,,0.189,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:30,ZEC,15m,SWEEP,bull,914.28,,,0.125,,1h,RANGE,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-18 16:45,ZEC,15m,BOS,bear,919.63,,,0.008,,1h,RANGE,no displacement,smc-1.0,Binance
