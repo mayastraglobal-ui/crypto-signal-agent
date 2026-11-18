@@ -37451,3 +37451,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-18 21:00,XRP,30m,FVG_RETRACE,bear,,0.9688,0.9719,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-18 20:30,ZEC,15m,OB_RETEST,bear,,917.67,923.88,,,1h,RANGE,first return into the order block,smc-1.0,Binance
 2026-11-18 20:30,ZEC,15m,FVG_RETRACE,bear,,917.13,919.61,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-18 21:30,BTC,30m,OB_INVALID,bull,,62511.47,63470.85,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-18 22:00,BTC,30m,BREAKER_RETEST,bear,,62511.47,63470.85,,,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-18 22:00,ETH,1h,FVG_RETRACE,bear,,1759.33,1765.52,,,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-18 22:00,ETH,1h,FVG_FILLED,bear,,1759.33,1765.52,,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-18 22:00,ETH,30m,FVG_RETRACE,bear,,1763.52,1767.5,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-18 22:00,ETH,30m,FVG,bull,,1754.58,1761.22,0.537,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-18 21:45,ETH,15m,FVG,bull,,1757.97,1761.22,0.38,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-18 22:00,XRP,1h,FVG_RETRACE,bear,,0.9693,0.9767,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-18 22:00,XRP,30m,FVG_FILLED,bear,,0.9688,0.9719,,,1h,RANGE,,smc-1.0,Binance
+2026-11-18 21:30,XRP,15m,FVG_RETRACE,bear,,0.9705,0.9723,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-18 21:45,XRP,15m,FVG_FILLED,bear,,0.9705,0.9723,,,1h,RANGE,,smc-1.0,Binance
