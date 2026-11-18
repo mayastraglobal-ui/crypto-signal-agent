@@ -238,6 +238,27 @@ class Bot(unittest.TestCase):
         with mock.patch.dict(os.environ, {"TELEGRAM_CHAT_ID": ""}):
             self.assertFalse(self.w.commands_on())                               # no chat id: no polling
 
+    def test_failing_commands_are_reported(self):
+        # 2026-11-18: commands unanswered for hours, nothing said - after 15 minutes of failing reads one note
+        LW.tg_api.side_effect = lambda method, payload, *a, **k: (
+            False, "HTTP 409: Conflict: terminated by other getUpdates request")
+        with mock.patch.object(LW.time, "sleep"):
+            self.w.poll(5)
+            self.assertEqual(self.sent, [])
+            self.assertIn("failing: HTTP 409", self.w.commands_health(self.now))
+            self.now += 16 * 60_000
+            self.w.poll(5)
+            self.w.poll(5)
+        self.assertEqual(len(self.sent), 1)                                    # said once
+        self.assertIn("not reaching the watcher", self.sent[0][0])
+        self.assertIn("Only ONE watcher may use this bot token", self.sent[0][0])
+        LW.tg_api.side_effect = lambda method, payload, *a, **k: (True, [])
+        self.w.poll(5)
+        self.assertIn("work again", self.sent[-1][0])
+        self.assertEqual(self.w.commands_health(self.now), "read 0 min ago")
+        src = open(os.path.join(ROOT, "live_watcher.py"), encoding="utf-8").read()
+        self.assertIn("commands=self.commands_health(now_ms)", src)               # in the GitHub heartbeat
+
     def test_state_survives_a_restart(self):
         self.w.on_update(self.msg("/pause"), self.now)
         w2 = LW.Watcher(LW.SyntheticSwap(), send=True, git=False, now_fn=lambda: self.now)

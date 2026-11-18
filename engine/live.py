@@ -124,6 +124,19 @@ def watch_text(a, wait_min=30):
     return "\n".join(lines)
 
 
+RIDE_R = 10      # a target this far away (strategy 13: 40R) is no target - the channel exit closes the trade
+
+
+def rides_trend(a):
+    """True when the alert has no real target: a channel exit (strategy 13) and no target nearer than RIDE_R.
+    2026-11-18: the Donchian breakout cards also exit on a 10-candle channel but take TP1 2R / TP2 3R - their
+    PAPER alerts said "Target: none - ride the trend" and hid TP1 / TP2."""
+    if not a.get("chan_n"):
+        return False
+    rs = [a["d"] * (tp - a["entry"]) / a["R"] for tp in a.get("tps") or [] if a.get("R")]
+    return not rs or min(rs) >= RIDE_R
+
+
 def message(a):
     """Telegram text (HTML) of one alert (Forward Test Program layout, 2026-10-09). a = dict(label, coin, inst, d, tf,
     strategy, version, entry, R, tps, split, zone_r, size, risk_pct, max_hold, regimes, close_ms, sent_ms, confirm,
@@ -163,20 +176,26 @@ def message(a):
         zlo, zhi = sorted((a["entry"] - a["zone_r"] * a["R"], a["entry"] + a["zone_r"] * a["R"]))
         lines.append(f"Entry: <b>{fmt_px(a['entry'])}</b> (zone {fmt_px(zlo, a['entry'])} – {fmt_px(zhi, a['entry'])})")
     lines.append(f"Stop: <b>{fmt_px(stop, a['entry'])}</b> ({pct:.2f}% away)" + (f" · −{_usd(risk)}" if risk else ""))
+    ride = rides_trend(a)
     if a.get("chan_n"):                      # strategy 13: no fixed target, the trend exit closes the trade
         n, low = int(a["chan_n"]), "low" if a["d"] == 1 else "high"
         days = n * tfm.TF_MS[a["tf"]] / 86_400_000
         span = f"{days:g} days" if days >= 1 and days == int(days) else f"{n} candles"
-        lines.append("Target: none - ride the trend")
-        lines.append(f"Exit: a {a['tf'].upper()} close {'below' if a['d'] == 1 else 'above'} the {low}est {low} of the "
-                     f"last {span}" + (f" (now <b>{fmt_px(a['chan_line'], a['entry'])}</b>)" if a.get("chan_line") else "")
-                     + ". ✅ Took it = I tell you when it moves and when to close.")
-    for i, tp in enumerate([] if a.get("chan_n") else a["tps"]):
+        exit_line = (f"{'Exit' if ride else 'Early exit'}: a {a['tf'].upper()} close "
+                     f"{'below' if a['d'] == 1 else 'above'} the {low}est {low} of the last {span}"
+                     + (f" (now <b>{fmt_px(a['chan_line'], a['entry'])}</b>)" if a.get("chan_line") else "")
+                     + (". ✅ Took it = I tell you when it moves and when to close." if ride else
+                        " closes the rest before a target"))
+        if ride:
+            lines += ["Target: none - ride the trend", exit_line]
+    for i, tp in enumerate([] if ride else a["tps"]):
         share = a["split"][i] if a.get("split") and i < len(a["split"]) else None
         r_mult = a["d"] * (tp - a["entry"]) / a["R"]
         money = f" · +{_usd(r_mult * risk * share)} on the {share * 100:.0f}% closed" if risk and share else \
             (f" · +{_usd(r_mult * risk)}" if risk else "")
         lines.append(f"TP{i + 1}: <b>{fmt_px(tp, a['entry'])}</b> ({r_mult:.1f}R){money}")
+    if a.get("chan_n") and not ride:
+        lines.append(exit_line)              # the targets first, then the card's own early exit
     lines.append(SEP)
     if z.get("qty"):
         cap_note = " (capped by max leverage)" if z.get("capped") else ""
@@ -233,7 +252,7 @@ def message(a):
         lines.append(f"<i>{LABEL_NOTE[lab]}</i>")
     lines += ["No fill = no trade. Skip it if price reaches TP1 before your order fills." if lim else
               f"Valid for {a.get('valid_bars', 2)} {a['tf']} candles. Skip it if price reaches the stop"
-              + (" first." if a.get("chan_n") else " or TP1 first."),
+              + (" first." if ride else " or TP1 first."),
               f"Candle closed {bj(a['close_ms'] + 1)} · sent {bj(a['sent_ms'])}",
               "<i>Signal only - not financial advice. You place the order yourself.</i>"]
     return "\n".join(lines)

@@ -653,6 +653,7 @@ class Watcher:
         self.last_refresh = None  # (ms, note) of the newest GitHub refresh
         self.code_old = []        # watcher code files that differ from GitHub main
         self._poll_err = None
+        self.last_poll_ms, self.poll_fail_ms, self.poll_warned = None, None, False   # Telegram commands health
         self.jsync = JournalSync(JOURNAL)
         self.dsync = JournalSync(DECISIONS, remote="journal/decisions.csv")     # PR 3: promote taps
         self.hb = Heartbeat()                                                 # "I am running" for GitHub
@@ -1176,13 +1177,24 @@ class Watcher:
         if self.state.get("tg_offset") is not None:
             p["offset"] = int(self.state["tg_offset"])
         ok, res = tg_api("getUpdates", p, timeout=wait_s + 15)
+        now = self.now_fn()
         if not ok:
             if res != self._poll_err:
                 log(f"Telegram commands: {res}")
             self._poll_err = res
+            self.poll_fail_ms = getattr(self, "poll_fail_ms", None) or now
+            if now - self.poll_fail_ms >= self.POLL_WARN_MS and not getattr(self, "poll_warned", False):
+                self.poll_warned = True                  # 2026-11-18: say it once in Telegram (sending still works)
+                telegram("⚠️ Your Telegram commands are not reaching the watcher: " + html.escape(str(res)[:200])
+                         + ("\nAnother program is reading this bot's messages (a second watcher on another PC or a "
+                            "server, or a webhook). Only ONE watcher may use this bot token: stop the other one."
+                            if "409" in str(res) else "") + "\nAlerts and notes still arrive.")
             time.sleep(min(wait_s, 10))
             return
-        self._poll_err = None
+        self._poll_err, self.last_poll_ms, self.poll_fail_ms = None, now, None
+        if getattr(self, "poll_warned", False):
+            self.poll_warned = False
+            telegram("✅ Telegram commands work again.")
         for u in res or []:
             self.state["tg_offset"] = int(u["update_id"]) + 1
             try:
@@ -1198,6 +1210,8 @@ class Watcher:
             now = self.now_fn()
             if self.shock_ok() and now >= self.next_shock_ms:
                 self.shock_minute(now)
+                if self.commands_on():                   # 2026-11-18: commands always get a turn - a shock check
+                    self.poll(1)                         # slower than a minute (slow OKX) starved them for hours
                 now = self.now_fn()
             rem = (ms - now) / 1000
             if rem <= 0:
@@ -1994,8 +2008,13 @@ class Watcher:
     def shock_minute(self, now_ms):
         """Run the shock check once, then schedule the next one (minute boundary + check_delay_s). Never raises."""
         self.next_shock_ms = (now_ms // shk.M + 1) * shk.M + int(self.SH["check_delay_s"]) * 1000
+        t0 = time.time()
         try:
             self.shock_check(now_ms)
+            took = time.time() - t0
+            if took > 45 and not getattr(self, "_shock_slow", False):
+                log(f"shock check took {took:.0f} s (OKX slow?) - commands still get a turn between checks")
+            self._shock_slow = took > 45
             if self._shock_err:
                 log("shock check works again")
             self._shock_err = None
@@ -2130,6 +2149,17 @@ class Watcher:
         self._jsync_err = None if ok else note
         return ok, note
 
+    POLL_WARN_MS = 15 * 60_000            # Telegram commands failing this long -> one ⚠️ note in Telegram
+
+    def commands_health(self, now_ms):
+        """For the GitHub heartbeat (2026-11-18): when Telegram commands were last read, or why they fail."""
+        if not self.commands_on():
+            return "off"
+        if getattr(self, "_poll_err", None):
+            return f"failing: {str(self._poll_err)[:120]}"
+        last = getattr(self, "last_poll_ms", None)
+        return f"read {round((now_ms - last) / 60_000)} min ago" if last else "not read yet"
+
     def beat(self, now_ms):
         """The hourly "I am running" note for GitHub (Heartbeat). Never raises; a failure is logged once."""
         lt = self.last_tick
@@ -2140,7 +2170,8 @@ class Watcher:
                     watching={lab: sum(1 for _, _, x in self.watch if x == lab) for lab in ("LIVE", "PAPER", "TEST")},
                     open_trades=len(self.state.get("trades") or {}), paused=bool(self.paused(now_ms)),
                     tests_on=bool(self.state.get("tests_on", True)), code_old=bool(self.code_old),
-                    shock_on=bool(self.shock_ok() and self.state.get("shock_on", True)))
+                    shock_on=bool(self.shock_ok() and self.state.get("shock_on", True)),
+                    commands=self.commands_health(now_ms))
         ok, note = self.hb.push(now_ms, info)
         if note in ("off", "not due"):
             return ok, note

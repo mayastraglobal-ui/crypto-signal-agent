@@ -300,6 +300,18 @@ class Watcher(unittest.TestCase):
         self.assertEqual(calls[0], NOW + 5000)                                         # at once, then each minute
         self.assertEqual([c - NOW for c in calls[1:]], [k * M + 5000 for k in range(1, 6)])
 
+    def test_a_slow_shock_check_never_starves_the_commands(self):
+        # 2026-11-18: Telegram commands went unanswered for hours while alerts still came - a shock check slower
+        # than a minute (slow OKX) made the next one due at once, and the command poll never got a turn
+        polls = []
+        self.w.shock_check = lambda now: setattr(self, "now", self.now + 70_000)        # each check takes 70 s
+        self.w.poll = lambda s: polls.append(s) or setattr(self, "now", self.now + 1000)
+        sleep = lambda sec: setattr(self, "now", self.now + int(sec * 1000))           # noqa: E731
+        with mock.patch.object(LW.time, "sleep", sleep):
+            self.w.wait_until(NOW + 5 * M + 8000)
+        self.assertGreaterEqual(len(polls), 4)                     # one short poll after every shock check
+        self.assertTrue(all(p == 1 for p in polls))
+
 
 if __name__ == "__main__":
     unittest.main()

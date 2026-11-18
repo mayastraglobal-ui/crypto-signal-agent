@@ -203,6 +203,24 @@ class FollowUp(unittest.TestCase):
         self.assertNotIn("TP1", text)
         self.assertIn("TP1:", lv.message(alert(chan_n=None)))
 
+    def test_a_card_with_real_targets_keeps_tp1_and_tp2(self):
+        # 2026-11-18 (operator: "PAPER signals don't show TP1 / TP2"): donchian_breakout-VEXIT exits on a 10-candle
+        # channel AND takes 2R / 3R - its alerts said "Target: none - ride the trend" and hid both targets
+        dc = alert(label="PAPER", strategy="donchian_breakout-VEXIT", d=-1, entry=100.0, R=5.0, tps=[90.0, 85.0],
+                   split=[0.5, 0.5], chan_n=10, chan_line=104.0, max_hold=60)
+        text = lv.message(dc)
+        self.assertNotIn("ride the trend", text)
+        self.assertIn("TP1: <b>90.00</b> (2.0R)", text)
+        self.assertIn("TP2: <b>85.00</b> (3.0R)", text)
+        self.assertIn("Early exit: a 4H close above the highest high of the last 10 candles (now <b>104.00</b>) "
+                      "closes the rest before a target", text)
+        self.assertLess(text.index("TP2:"), text.index("Early exit"))      # the targets first
+        self.assertIn("or TP1 first.", text)
+        self.assertFalse(lv.rides_trend(dc))
+        self.assertTrue(lv.rides_trend(alert()))                         # strategy 13: 40R = no real target
+        self.assertTrue(lv.rides_trend(alert(tps=[])))
+        self.assertFalse(lv.rides_trend(alert(chan_n=None)))
+
     def test_channel_rule_only(self):
         self.assertEqual(fl.channel_exit(dict(exit_long=["close < prev(lowest(low,120))"]), 1), 120)
         self.assertEqual(fl.channel_exit(dict(exit_short=["close > prev(highest(high,10))"]), -1), 10)
