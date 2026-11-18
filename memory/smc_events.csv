@@ -37273,3 +37273,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-18 11:30,XRP,15m,FVG,bear,,0.9911,0.9969,1.073,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-18 11:45,XRP,15m,OB_RETEST,bull,,0.9837,0.9861,,,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
 2026-11-18 11:45,XRP,15m,FVG_FILLED,bull,,0.9863,0.9912,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-18 13:00,BTC,1h,BOS,bear,64136.0,,,0.105,NY AM,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-18 13:00,BTC,1h,FVG_RETRACE,bear,,64373.65,64562.0,,NY AM,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-18 12:30,BTC,30m,SWEEP,bull,64136.0,,,0.1,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 13:00,BTC,30m,FVG_FILLED,bull,,64088.85,64252.92,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-18 12:15,BTC,15m,SWEEP,bull,64136.0,,,0.165,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 13:00,BTC,15m,FVG,bear,,64178.0,64231.06,0.297,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-18 13:00,ETH,1h,BOS,bear,1796.83,,,0.094,NY AM,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-18 12:45,ETH,15m,WEAK_BREAK,bear,1795.48,,,0.341,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 12:15,SOL,15m,SWEEP,bull,74.35,,,0.259,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 12:45,SOL,15m,BOS,bear,74.35,,,0.379,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 13:00,XRP,1h,FVG,bear,,0.9889,0.9939,0.476,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-11-18 13:00,XRP,30m,FVG_FILLED,bull,,0.9812,0.9844,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-18 12:45,XRP,15m,OB_INVALID,bull,,0.9837,0.9861,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-18 12:45,XRP,15m,FVG_RETRACE,bull,,0.9808,0.982,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-18 12:45,XRP,15m,FVG_FILLED,bull,,0.9808,0.982,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-18 13:00,XRP,15m,BREAKER_RETEST,bear,,0.9837,0.9861,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-18 12:45,ZEC,15m,BOS,bear,931.69,,,0.061,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
