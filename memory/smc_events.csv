@@ -37313,3 +37313,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-18 14:45,XRP,15m,FVG_RETRACE,bear,,0.9911,0.9969,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-18 15:00,ZEC,30m,SWEEP,bull,928.56,,,0.917,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-18 14:45,ZEC,15m,BOS,bear,928.56,,,0.077,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 16:00,BTC,4h,BOS,bear,63336.0,,,0.183,,1d,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-18 15:15,BTC,15m,FVG_RETRACE,bear,,63700.2,63900.0,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-18 16:00,BTC,15m,SWEEP,bull,63085.0,,,0.303,Silver Bullet,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:00,BTC,15m,FVG,bear,,63286.0,63409.11,0.439,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-11-18 16:00,ETH,1h,FVG,bear,,1782.87,1790.36,0.422,Silver Bullet,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-18 15:30,ETH,30m,FVG,bear,,1782.87,1789.36,0.534,Silver Bullet,1h,RANGE,,smc-1.0,Binance
+2026-11-18 15:15,ETH,15m,FVG_RETRACE,bear,,1776.96,1790.39,,Silver Bullet,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-18 16:00,SOL,4h,FVG_RETRACE,bull,,73.04,74.06,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-18 15:30,SOL,30m,WEAK_BREAK,bear,74.1,,,0.306,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-18 15:45,SOL,15m,SWEEP,bull,73.45,,,0.179,Silver Bullet,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:00,XRP,30m,WEAK_BREAK,bear,0.9786,,,0.241,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-18 16:00,XRP,30m,OB_INVALID,bull,,0.9825,0.9863,,Silver Bullet,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-18 15:45,XRP,15m,SWEEP,bull,0.977,,,0.316,Silver Bullet,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-18 16:00,XRP,15m,BOS,bear,0.977,,,0.046,Silver Bullet,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-18 16:00,ZEC,30m,WEAK_BREAK,bear,928.56,,,0.061,Silver Bullet,1h,RANGE,no displacement,smc-1.0,Binance
