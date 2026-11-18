@@ -1,16 +1,8 @@
 {
  "enabled": true,
- "allowed": 1,
- "considered": 235,
- "new": [
-  {
-   "id": "P01-BREAKOUT-V2-FDISP-FRETEST",
-   "tag": "overextended_entry",
-   "kind": "RETEST",
-   "parent": "P01-BREAKOUT-V2-FDISP@1.0|30m",
-   "evidence": "overextended_entry in 88% of losses, n=518 losing trades (P01-BREAKOUT-V2-FDISP@1.0 30m: 928 trades, avg +0.043R, BACKTESTING; trades with overextended_entry +0.007R, without +0.284R); repair RETEST: wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles"
-  }
- ],
+ "allowed": 0,
+ "considered": 0,
+ "new": [],
  "pending": [
   "P01-BREAKOUT-V2-FRETEST"
  ],
@@ -28,7 +20,22 @@
    "parent_test_r": 0.16,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
+  },
+  {
+   "child": "P01-BREAKOUT-V2-FDISP-FRETEST@1.0|30m",
+   "parent": "P01-BREAKOUT-V2-FDISP@1.0|30m",
+   "tag": "overextended_entry",
+   "kind": "RETEST",
+   "status": "BACKTESTING",
+   "trades": 856,
+   "avg_r": 0.14,
+   "test_r": 0.271,
+   "parent_avg_r": 0.043,
+   "parent_test_r": 0.16,
+   "helped": true,
+   "passed": false,
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "P01-BREAKOUT-V2-FDISP@1.0|30m",
@@ -73,7 +80,7 @@
    "parent_test_r": 0.234,
    "helped": false,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "P11-MOMENTUM-V1-FDISP@1.0|30m",
@@ -96,14 +103,14 @@
    "tag": "false_breakout",
    "kind": "DISP",
    "status": "FAILED",
-   "trades": 1989,
-   "avg_r": -0.091,
+   "trades": 1994,
+   "avg_r": -0.092,
    "test_r": -0.155,
-   "parent_avg_r": -0.101,
-   "parent_test_r": -0.154,
+   "parent_avg_r": -0.102,
+   "parent_test_r": -0.155,
    "helped": false,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "P11-MOMENTUM-V1-FRETEST@1.0|30m",
@@ -148,7 +155,7 @@
    "parent_test_r": 0.439,
    "helped": false,
    "passed": true,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "TRD-H4-BREAKOUT-FDISP@1.0|30m",
@@ -159,11 +166,11 @@
    "trades": 408,
    "avg_r": 0.202,
    "test_r": 0.439,
-   "parent_avg_r": 0.092,
-   "parent_test_r": 0.255,
+   "parent_avg_r": 0.09,
+   "parent_test_r": 0.25,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT@1.0|30m",
@@ -178,7 +185,7 @@
    "parent_test_r": 0.427,
    "helped": true,
    "passed": true,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "TRD-H4-BREAKOUT-S3-FDISP@1.0|30m",
@@ -189,11 +196,11 @@
    "trades": 423,
    "avg_r": 0.201,
    "test_r": 0.427,
-   "parent_avg_r": 0.005,
-   "parent_test_r": 0.198,
+   "parent_avg_r": 0.004,
+   "parent_test_r": 0.19,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "donchian_breakout-VEXIT-FDISP@1.0|30m",
@@ -208,7 +215,7 @@
    "parent_test_r": 0.032,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "donchian_breakout-VEXIT-FRETEST@1.0|30m",
@@ -223,7 +230,7 @@
    "parent_test_r": 0.032,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP-FNOTEXT@1.0|30m",
@@ -238,7 +245,7 @@
    "parent_test_r": 0.124,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   },
   {
    "child": "donchian_breakout-VEXIT-S4-FDISP@1.0|30m",
@@ -253,7 +260,7 @@
    "parent_test_r": 0.039,
    "helped": true,
    "passed": false,
-   "checked": "2026-11-17 08:25"
+   "checked": "2026-11-18 07:54"
   }
  ],
  "by_kind": {
@@ -261,6 +268,11 @@
    "tried": 4,
    "helped": 3,
    "passed": 2
+  },
+  "RETEST": {
+   "tried": 3,
+   "helped": 3,
+   "passed": 0
   },
   "DISP": {
    "tried": 9,
@@ -271,17 +283,12 @@
    "tried": 1,
    "helped": 0,
    "passed": 0
-  },
-  "RETEST": {
-   "tried": 2,
-   "helped": 2,
-   "passed": 0
   }
  },
  "by_tag": {
   "overextended_entry": {
-   "tried": 4,
-   "helped": 3,
+   "tried": 5,
+   "helped": 4,
    "passed": 2
   },
   "false_breakout": {
