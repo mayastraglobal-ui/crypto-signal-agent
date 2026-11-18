@@ -1598,3 +1598,83 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
 | EXP-0145 | 2026-11-16 07:13 | donchian_breakout-VEXIT-FRETEST@1.0 | breakout | 4h, 1h, 30m | donchian_breakout-VEXIT@1.0 loses on false_breakout (-0.36R a trade with it, +0.44R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest. |
 | EXP-0146 | 2026-11-17 08:25 | P01-BREAKOUT-V2-FRETEST@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.52R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest. |
 | EXP-0147 | 2026-11-18 07:54 | P01-BREAKOUT-V2-FDISP-FRETEST@1.0 | breakout | 1h, 30m, 15m | P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry (+0.01R a trade with it, +0.28R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest. |
+
+### Feedback: P01-BREAKOUT-V2-FDISP-FRETEST@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 3 cells, 3503 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP-FRETEST v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: - · review: 2027-02-16
+  - parent: result: P01-BREAKOUT-V2-FDISP@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2-FDISP@1.0 loses on overextended_entry. One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 856 trades +0.140R (unseen +0.271R); 1h BACKTESTING 1352 trades +0.116R (unseen +0.129R); 15m BACKTESTING 1295 trades +0.079R (unseen +0.136R). Gates: Monte Carlo drawdown 20.6R to 23.8R vs 17R; the 15m cell also misses +0.10R and the profit factor (1.14).
+  - teaches: the retest (limit entry) change turned the parent's cells from about zero (+0.00R to +0.02R on 2026-11-02) to +0.08R to +0.14R, with the unseen part higher than the train part on all three. The 30m cell is within 0.03R of the +0.10R average bar; the engine's numbers already include no-fill trades (a limit order that does not fill is no trade).
+  - next: no change to the card. Watch it. A real second test of the retest entry would be the same one change on a different parent card; I leave that to the weekly research.
+
+### Feedback: P01-BREAKOUT-V2-FDISP-S1@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 3 cells, 5408 trades · confidence: low · strategy: P01-BREAKOUT-V2-FDISP-S1 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: - · review: 2027-02-16
+  - parent: result: P01-BREAKOUT-V2-FDISP@1.0 1h
+  - hypothesis: The rule 'close > prev(highest(high,20)) / close < prev(lowest(low,20))' adds nothing to P01-BREAKOUT-V2-FDISP@1.0 (fewer rules = less room for overfitting).
+  - result: 1h BACKTESTING 1990 trades +0.045R (unseen +0.075R); 30m BACKTESTING 1349 trades +0.037R; 15m FAILED 2069 trades -0.089R. All miss +0.10R and the drawdown (25.4R to 36.0R vs 17R).
+  - teaches: the simpler card has more trades but the average is not better than the parent's (+0.005R to +0.018R on 2026-11-02 for 1h and 30m); the rule removal did not help.
+  - next: stop this line.
+
+### Feedback: P01-BREAKOUT-V2-FRETEST@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 3 cells, 4861 trades · confidence: low · strategy: P01-BREAKOUT-V2-FRETEST v1.0 · asset: research coins · timeframe: 15m, 1h, 30m · regime: - · review: 2027-02-16
+  - parent: result: P01-BREAKOUT-V2@1.0 30m
+  - hypothesis: P01-BREAKOUT-V2@1.0 loses on false_breakout (-0.32R a trade with it, +0.52R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses.
+  - result: 15m BACKTESTING 1851 trades +0.073R (unseen +0.111R); 1h BACKTESTING 1824 trades +0.076R (unseen +0.092R); 30m BACKTESTING 1186 trades +0.061R (unseen +0.135R). Gates: average below +0.10R, profit factor 1.11 to 1.14, Monte Carlo drawdown 22.7R to 24.7R vs 17R.
+  - teaches: the retest change moved the original P01-BREAKOUT-V2 (FAILED around -0.01R) to +0.06R to +0.08R on all three timeframes, with the unseen part above the train part. Two cards (this one and the FDISP version) now agree, though they are variants of one idea and share trades.
+  - next: no change. Count the two FRETEST cards as one test. A third use of the same change on a different breakout card would be a real second test.
+
+### Feedback: P02-EMA-PULLBACK-V4-S2@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 1 cell, 1173 trades · confidence: low · strategy: P02-EMA-PULLBACK-V4-S2 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-02-16
+  - parent: result: P02-EMA-PULLBACK-V4@1.0 4h
+  - hypothesis: The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4@1.0 (fewer rules = less room for overfitting).
+  - result: 4h FAILED 1173 trades +0.106R (unseen -0.013R); failed gates: profit factor 1.16, recovery factor 2.14, Monte Carlo drawdown 27.4R vs 17R, not profitable in BOTH train and unseen test.
+  - teaches: removing the pullback-touch rule gave 1173 trades (the parent had 318 on 2026-10-23) and a positive train average, but the unseen part is negative: the extra trades do not hold up on new data. This is the clearest case so far of 'more trades from removing a rule' being a fit.
+  - next: stop this line.
+
+### Feedback: P05-RANGE-REVERSAL-V4-S1@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 1 cell, 428 trades · confidence: low · strategy: P05-RANGE-REVERSAL-V4-S1 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-02-16
+  - parent: result: P05-RANGE-REVERSAL-V4@1.0 4h
+  - hypothesis: The rule 'prev(close) < prev(bb_lower(close,20,2.0)) / prev(close) > prev(bb_upper(close,20,2.0))' adds nothing to P05-RANGE-REVERSAL-V4@1.0 (fewer rules = less room for overfitting).
+  - result: 4h BACKTESTING 428 trades +0.097R (unseen +0.226R); failed gates: average +0.10R (at the bar, shown as needing +0.10R), profit factor 1.15, max drawdown 21.7R.
+  - teaches: the cell is right at the average bar with an unseen part above the train part, on a small sample (428 trades). The parent P05-RANGE-REVERSAL-V4 lost as a TEST long on SOL on 2026-11-02 (-1.06R, trend_reversal), so I do not read much into it.
+  - next: no change; revisit only with 800 or more trades.
+
+### Feedback: P11-MOMENTUM-V1-FRETEST-FDISP@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 1 cell, 1994 trades · confidence: low · strategy: P11-MOMENTUM-V1-FRETEST-FDISP v1.0 · asset: research coins · timeframe: 30m · regime: - · review: 2027-02-16
+  - parent: result: P11-MOMENTUM-V1-FRETEST@1.0 30m
+  - hypothesis: P11-MOMENTUM-V1-FRETEST@1.0 loses on false_breakout (-0.28R a trade with it, +0.29R without). One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m FAILED 1994 trades -0.092R (unseen -0.155R); every gate failed (profit factor 0.86, Monte Carlo 37.0R vs 17R).
+  - teaches: a third P11 momentum card where the displacement repair did not help (after P11-MOMENTUM-V1-FDISP and -V3-FDISP). The momentum family does not respond to this repair.
+  - next: stop the P11 family; no more changes on it.
+
+### Feedback: P11-MOMENTUM-V1-FRETEST@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 1 cell, 3483 trades · confidence: low · strategy: P11-MOMENTUM-V1-FRETEST v1.0 · asset: research coins · timeframe: 30m · regime: - · review: 2027-02-16
+  - parent: result: P11-MOMENTUM-V1@1.0 30m
+  - hypothesis: P11-MOMENTUM-V1@1.0 loses on false_breakout (-0.51R a trade with it, +0.39R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles.
+  - result: 30m FAILED 3483 trades -0.102R (unseen -0.155R); every gate failed.
+  - teaches: the retest change that lifted the P01 breakout cards did not rescue the P11 momentum card (-0.23R in my record of 2026-10-28 to -0.10R here): a smaller loss, but not an edge. The change helps breakout cards and not momentum cards.
+  - next: stop the P11 family.
+
+### Feedback: P13-TURTLE-V3-S2@1.0
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 1 cell, 129 trades · confidence: low · strategy: P13-TURTLE-V3-S2 v1.0 · asset: research coins · timeframe: 4h · regime: - · review: 2027-02-16
+  - parent: result: P13-TURTLE-V3@1.0 4h
+  - hypothesis: The rule 'highest(high,6) - close <= 0.25 * (highest(high,6) - lowest(low,6))' adds nothing to P13-TURTLE-V3@1.0 (fewer rules = less room for overfitting).
+  - result: 4h VALIDATION 129 trades +1.961R (unseen +1.588R). The engine lists no failed gate.
+  - teaches: an average of +1.96R a trade is far above anything else in the lab (the next best 4h cells are about +0.25R). With 129 trades, in a market that fell from about 78,000 to about 63,700 on BTC, a short-biased or trend-riding card can look this good by chance and by regime. I treat it as a suspicious result, not a finding: the number is the engine's, the reading is mine.
+  - next: no change and no promotion. The engine keeps it in VALIDATION; the check to ask for is a second regime: does it still earn in a rising or sideways market? A hypothesis for the operator, not a card.
+
+### Feedback: TRD-H4-BREAKOUT-FDISP@1.0 (update 2026-11-18)
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 4 cells, 2720 trades · confidence: low · strategy: TRD-H4-BREAKOUT-FDISP v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-02-16
+  - parent: result: TRD-H4-BREAKOUT@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT@1.0 loses on false_breakout (-0.18R a trade with it, +0.64R without). One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 408 trades +0.202R (unseen +0.439R); 1h BACKTESTING 651 trades +0.157R (unseen +0.303R); 15m BACKTESTING 711 trades +0.020R; 5m FAILED 950 trades -0.167R. The best cell fails only the drawdown (22.1R vs 17R).
+  - teaches: the 30m and 1h cells improved since 2026-11-02 (+0.189R and +0.138R then) and the unseen part rose to +0.44R on 30m. Same shape: slow cells positive, fast cells weak.
+  - next: no change; no more records for this card until one cell passes the drawdown gate or fails.
+
+### Feedback: TRD-H4-BREAKOUT-S3-FDISP@1.0 (update 2026-11-18)
+- timestamp: 2026-11-18 15:45 UTC · source: Claude daily review 2026-11-18 · evidence: BACKTEST_EVIDENCE: 4 cells, 2829 trades · confidence: low · strategy: TRD-H4-BREAKOUT-S3-FDISP v1.0 · asset: research coins · timeframe: 30m, 1h, 15m, 5m · regime: - · review: 2027-02-16
+  - parent: result: TRD-H4-BREAKOUT-S3@1.0 30m
+  - hypothesis: TRD-H4-BREAKOUT-S3@1.0 loses on false_breakout. One change - displacement in the last 3 candles - should remove part of those losses.
+  - result: 30m BACKTESTING 423 trades +0.201R (unseen +0.427R); 1h BACKTESTING 691 trades +0.144R (unseen +0.314R); 15m BACKTESTING 732 trades +0.032R; 5m FAILED 983 trades -0.165R. The best cell fails only the drawdown (23.0R vs 17R).
+  - teaches: the same improvement as its sibling; the two are one idea and count as one test.
+  - next: no change; no more records for this card until one cell passes the drawdown gate or fails.
