@@ -1,13 +1,13 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-18 00:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-18 01:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 6 of the last 7 days (last 2026-11-17)
-- ✅ hourly scan: last run 2026-11-18 00:11 UTC
+- ✅ hourly scan: last run 2026-11-18 01:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-17 22:45 UTC (17 min ago)
+- ✅ live watcher: last heartbeat 2026-11-17 23:51 UTC (21 min ago)
 - ✅ TEST setups closed this week (GitHub record): 90
 
 ## Totals
@@ -29,7 +29,7 @@ Made 2026-11-18 00:11 UTC by the hourly scan (engine/weekly_review.py). Live = t
 - watcher alerts (5m-confirmed): 15 plan results, +1.14R a trade
 - every TEST setup (GitHub, no 5m check - your alerts and the silent records): 167, +0.09R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.14R over 17 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.02R over 18 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
