@@ -1146,3 +1146,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: range_market, no_displacement
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### ETH SHORT 15m P04-MACD-SUPERTREND-V2 v1.0 - SL -1.14R
+- timestamp: 2026-11-18 23:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.14R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: ETH · timeframe: 15m · regime: WEAK_BEAR · review: 2026-11-25
+  - signal 2026-11-18 20:29 UTC, closed 2026-11-18 23:14 UTC, stage TEST
+  - MAE -1.10R / MFE +0.09R
+  - at entry: session outside killzones, conditions: low_relative_volume, no_displacement, wrong_session
+  - what happened: indicator_lag
+  - root cause / fix: (review)
