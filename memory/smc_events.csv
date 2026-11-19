@@ -37708,3 +37708,36 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-19 11:30,ZEC,15m,BOS,bull,952.31,,,0.163,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-19 11:30,ZEC,15m,OB_INVALID,bear,,947.26,953.05,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-19 11:45,ZEC,15m,BREAKER_RETEST,bull,,947.26,953.05,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-19 12:30,BTC,15m,SWEEP,bull,63694.01,,,0.639,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 13:00,ETH,1h,FVG_RETRACE,bull,,1779.05,1793.88,,NY AM,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,ETH,30m,SWEEP,bull,1798.0,,,0.535,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 12:30,ETH,30m,FVG_RETRACE,bull,,1779.97,1793.88,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,ETH,15m,SWEEP,bull,1798.0,,,0.806,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 12:30,ETH,15m,WEAK_BREAK,bear,1801.65,,,0.459,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-19 12:30,ETH,15m,BREAKER_RETEST,bull,,1790.39,1794.27,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-19 12:30,ETH,15m,FVG_RETRACE,bull,,1784.34,1793.88,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:45,ETH,15m,FVG,bear,,1800.1,1802.34,0.345,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 13:00,ETH,15m,FVG_RETRACE,bear,,1800.1,1802.34,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 13:00,ETH,15m,FVG_FILLED,bear,,1800.1,1802.34,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 13:00,SOL,1h,FVG_RETRACE,bull,,73.61,74.23,,NY AM,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,SOL,30m,SWEEP,bull,74.27,,,0.343,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 12:30,SOL,30m,FVG_RETRACE,bull,,73.65,74.23,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,SOL,15m,SWEEP,bull,74.27,,,0.537,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 12:30,SOL,15m,FVG_RETRACE,bull,,73.87,74.23,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,SOL,15m,FVG_FILLED,bull,,74.53,74.7,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 12:45,SOL,15m,FVG,bear,,74.51,74.62,0.358,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 13:00,SOL,15m,FVG_RETRACE,bear,,74.51,74.62,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 13:00,SOL,15m,FVG_FILLED,bear,,74.51,74.62,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 12:30,XRP,15m,SWEEP,bull,0.9787,,,0.253,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 12:30,XRP,15m,OB_INVALID,bull,,0.982,0.9854,,NY AM,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-19 12:30,XRP,15m,FVG_RETRACE,bull,,0.9831,0.9844,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 12:30,XRP,15m,FVG_FILLED,bull,,0.9831,0.9844,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 12:30,XRP,15m,FVG_FILLED,bull,,0.9846,0.9887,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 12:45,XRP,15m,BREAKER_RETEST,bear,,0.982,0.9854,,NY AM,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-19 12:45,XRP,15m,FVG,bear,,0.9832,0.9853,0.481,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 13:00,XRP,15m,FVG_RETRACE,bear,,0.9832,0.9853,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 13:00,XRP,15m,FVG_FILLED,bear,,0.9832,0.9853,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 12:30,ZEC,15m,WEAK_BREAK,bear,945.25,,,0.249,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-19 12:45,ZEC,15m,FVG,bear,,947.21,949.4,0.337,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-19 13:00,ZEC,15m,FVG_RETRACE,bear,,947.21,949.4,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 13:00,ZEC,15m,FVG_FILLED,bear,,947.21,949.4,,NY AM,1h,RANGE,,smc-1.0,Binance

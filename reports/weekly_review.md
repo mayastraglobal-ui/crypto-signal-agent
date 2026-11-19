@@ -1,13 +1,13 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-19 12:16 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-19 13:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-19)
-- ✅ hourly scan: last run 2026-11-19 12:16 UTC
+- ✅ hourly scan: last run 2026-11-19 13:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-19 10:51 UTC (21 min ago)
+- ✅ live watcher: last heartbeat 2026-11-19 11:55 UTC (22 min ago)
 - ✅ TEST setups closed this week (GitHub record): 86
 
 ## Totals
@@ -55,11 +55,11 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 ## ⚡ Shock alarm (sudden moves between candle closes, information only)
 
-- 44 shock(s) this week, 33 sent to Telegram (the rest: over the daily cap, paused or /shock off)
-- by kind: fast move 16, broke yesterday's high 1, broke yesterday's low 9, volume spike 25
-- by coin: ETH 14, BTC 10, SOL 9, XRP 9, ZEC 2
-- 4 hours later: 17 kept going, 27 reversed (average -0.22% in the shock's direction)
-- followed by a strategy alert in the same direction within 4h: 16 of 44
+- 43 shock(s) this week, 32 sent to Telegram (the rest: over the daily cap, paused or /shock off)
+- by kind: fast move 16, broke yesterday's high 1, broke yesterday's low 8, volume spike 25
+- by coin: ETH 13, BTC 10, SOL 9, XRP 9, ZEC 2
+- 4 hours later: 16 kept going, 27 reversed (average -0.26% in the shock's direction)
+- followed by a strategy alert in the same direction within 4h: 16 of 43
 -   2026-11-15 02:17 UTC SOL UP +4.7% -> 4h later -0.8% (no strategy alert)
 -   2026-11-15 02:17 UTC XRP UP +4.5% -> 4h later +0.7% (no strategy alert)
 -   2026-11-15 02:12 UTC BTC UP +2.6% -> 4h later +0.4% (no strategy alert)
