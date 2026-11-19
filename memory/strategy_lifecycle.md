@@ -523,3 +523,7 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 - **P01-BREAKOUT-V2-FDISP-FRETEST@1.0 1h**: FORMALIZED → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 21.3R - limit 17R)
 - **P01-BREAKOUT-V2-FDISP-FRETEST@1.0 30m**: FORMALIZED → **BACKTESTING** (Monte Carlo 95% worst drawdown per 100 trades 20.6R - limit 17R)
 - **donchian_breakout-VEXIT-S4@1.1 4h**: BACKTESTING → **PAPER_TRADING** (passed every Phase 8 test - paper signals start (logged, PAPER emails))
+
+## 2026-11-19 07:51 UTC
+- **P04-MACD-SUPERTREND-V3@1.0 4h**: FAILED → **BACKTESTING** (recovery factor 2.87 (net +30.7R / max drawdown 10.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 19.3R - limit 17R)
+- **TRD-H4-BREAKOUT-S3@1.0 1h**: BACKTESTING → **PAPER_TRADING** (promoted to PAPER by the operator (weekly review): PAPER only on BTC)

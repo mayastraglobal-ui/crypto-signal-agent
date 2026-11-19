@@ -1,12 +1,16 @@
 {
- "updated_utc": "2026-11-18 07:54",
+ "updated_utc": "2026-11-19 07:51",
  "active": {
   "P03-FIB-PULLBACK-V5@1.0|1h": [
    "SOL"
+  ],
+  "TRD-H4-BREAKOUT-S3@1.0|1h": [
+   "BTC"
   ]
  },
  "via_promotion": [
-  "P03-FIB-PULLBACK-V5@1.0|1h"
+  "P03-FIB-PULLBACK-V5@1.0|1h",
+  "TRD-H4-BREAKOUT-S3@1.0|1h"
  ],
  "demoted": [],
  "refused": []
