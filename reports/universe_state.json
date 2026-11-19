@@ -8,8 +8,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 1180,
+ "suspended": {
+  "MMT": "2026-11-19"
+ },
+ "runs": 1181,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -175,7 +177,7 @@
    "volume_7d"
   ],
   "MMT": [
-   "spread",
+   "big_move",
    "thin_book",
    "volume_7d"
   ]

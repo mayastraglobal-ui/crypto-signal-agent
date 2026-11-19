@@ -37913,3 +37913,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-19 17:45,ZEC,15m,SWEEP,bear,927.5,,,0.198,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-19 17:45,ZEC,15m,FVG,bull,,912.49,915.48,0.32,,1h,RANGE,,smc-1.0,Binance
 2026-11-19 18:00,ZEC,15m,FVG_RETRACE,bull,,912.49,915.48,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 18:45,BTC,15m,FVG,bull,,62894.0,63029.43,0.383,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:00,BTC,15m,FVG_RETRACE,bull,,62894.0,63029.43,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 19:00,BTC,15m,FVG_FILLED,bull,,62894.0,63029.43,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:00,ETH,30m,FVG_RETRACE,bear,,1790.28,1795.11,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 18:45,ETH,15m,SWEEP,bear,1788.54,,,0.246,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-19 18:45,ETH,15m,FVG_RETRACE,bear,,1790.28,1796.16,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 18:45,ETH,15m,FVG,bull,,1774.73,1782.6,0.652,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:00,ETH,15m,FVG_RETRACE,bull,,1774.73,1782.6,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 18:30,SOL,30m,FVG_FILLED,bear,,73.94,74.43,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 18:30,SOL,15m,WEAK_BREAK,bull,74.08,,,1.087,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-19 18:30,SOL,15m,FVG_FILLED,bear,,73.84,74.43,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 18:45,SOL,15m,FVG,bull,,74.02,74.4,0.731,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:00,SOL,15m,FVG_RETRACE,bull,,74.02,74.4,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 19:00,XRP,1h,FVG_RETRACE,bear,,0.9791,0.9854,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-19 19:00,XRP,30m,FVG_FILLED,bear,,0.9762,0.9805,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 18:45,XRP,15m,SWEEP,bear,0.9791,,,0.196,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-19 18:45,XRP,15m,FVG_FILLED,bear,,0.9721,0.9805,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 18:45,XRP,15m,FVG,bull,,0.9717,0.9762,0.648,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:00,XRP,15m,FVG_RETRACE,bull,,0.9717,0.9762,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 18:15,ZEC,15m,FVG_FILLED,bull,,912.49,915.48,,,1h,RANGE,,smc-1.0,Binance
