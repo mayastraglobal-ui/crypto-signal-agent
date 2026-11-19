@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-19 07:11",
+ "utc": "2026-11-19 08:32",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,51 +10,51 @@
   "curve_points": 60
  },
  "total": {
-  "n": 232,
+  "n": 234,
   "wins": 97,
-  "win_rate": 41.8,
-  "avg_r": 0.182,
-  "total_r": 42.3,
+  "win_rate": 41.5,
+  "avg_r": 0.172,
+  "total_r": 40.14,
   "max_dd_r": 59.17,
-  "cur_loss_run": 10,
+  "cur_loss_run": 12,
   "max_loss_run": 20,
-  "sd": 1.495
+  "sd": 1.493
  },
  "yours": {
-  "n": 53,
+  "n": 54,
   "wins": 25,
-  "win_rate": 47.2,
-  "avg_r": 0.259,
-  "total_r": 13.72,
+  "win_rate": 46.3,
+  "avg_r": 0.234,
+  "total_r": 12.64,
   "max_dd_r": 10.35,
-  "cur_loss_run": 2,
+  "cur_loss_run": 3,
   "max_loss_run": 7,
-  "sd": 1.531
+  "sd": 1.527
  },
  "silent": {
-  "n": 114,
+  "n": 115,
   "wins": 35,
-  "win_rate": 30.7,
-  "avg_r": -0.111,
-  "total_r": -12.66,
+  "win_rate": 30.4,
+  "avg_r": -0.119,
+  "total_r": -13.74,
   "max_dd_r": 38.6,
-  "cur_loss_run": 6,
+  "cur_loss_run": 7,
   "max_loss_run": 17,
-  "sd": 1.416
+  "sd": 1.413
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 169,
+   "n": 171,
    "wins": 57,
-   "win_rate": 33.7,
-   "avg_r": 0.014,
-   "total_r": 2.42,
+   "win_rate": 33.3,
+   "avg_r": 0.002,
+   "total_r": 0.26,
    "max_dd_r": 47.91,
-   "cur_loss_run": 8,
+   "cur_loss_run": 10,
    "max_loss_run": 20,
-   "sd": 1.5
+   "sd": 1.496
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -88,15 +88,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 14,
+    "n": 15,
     "wins": 7,
-    "win_rate": 50.0,
-    "avg_r": 0.591,
-    "total_r": 8.28,
-    "max_dd_r": 4.24,
-    "cur_loss_run": 4,
-    "max_loss_run": 4,
-    "sd": 1.765
+    "win_rate": 46.7,
+    "avg_r": 0.48,
+    "total_r": 7.2,
+    "max_dd_r": 5.32,
+    "cur_loss_run": 5,
+    "max_loss_run": 5,
+    "sd": 1.755
    },
    "backtest": {
     "n": 179,
@@ -105,10 +105,38 @@
    },
    "verdict": "watch",
    "why": [
-    "4 losses in a row - in its backtest (46% won) a run that long shows up in 61% of 14-trade periods"
+    "5 losses in a row - in its backtest (46% won) a run that long shows up in 39% of 15-trade periods"
    ],
-   "last_utc": "2026-11-18 23:59",
+   "last_utc": "2026-11-19 07:59",
    "sent": true
+  },
+  {
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 8,
+    "wins": 2,
+    "win_rate": 25.0,
+    "avg_r": -0.172,
+    "total_r": -1.37,
+    "max_dd_r": 3.17,
+    "cur_loss_run": 3,
+    "max_loss_run": 3,
+    "sd": 1.636
+   },
+   "backtest": {
+    "n": 206,
+    "avg_r": 0.064,
+    "win_rate": 35.9
+   },
+   "verdict": "watch",
+   "why": [
+    "3 losses in a row - in its backtest (36% won) a run that long shows up in 84% of 8-trade periods"
+   ],
+   "last_utc": "2026-11-19 07:59",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V5@1.0|1h",
@@ -239,9 +267,9 @@
     "sd": 1.441
    },
    "backtest": {
-    "n": 503,
-    "avg_r": 0.005,
-    "win_rate": 36.2
+    "n": 502,
+    "avg_r": 0.014,
+    "win_rate": 36.5
    },
    "verdict": "ok",
    "why": [],
@@ -428,32 +456,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-15 02:59",
-   "sent": false
-  },
-  {
-   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 7,
-    "wins": 2,
-    "win_rate": 28.6,
-    "avg_r": -0.043,
-    "total_r": -0.3,
-    "max_dd_r": 3.17,
-    "cur_loss_run": 2,
-    "max_loss_run": 3,
-    "sd": 1.723
-   },
-   "backtest": {
-    "n": 206,
-    "avg_r": 0.064,
-    "win_rate": 35.9
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-15 09:59",
    "sent": false
   },
   {
@@ -655,9 +657,9 @@
     "sd": 1.731
    },
    "backtest": {
-    "n": 360,
-    "avg_r": 0.011,
-    "win_rate": 37.8
+    "n": 363,
+    "avg_r": 0.017,
+    "win_rate": 38.0
    },
    "verdict": "ok",
    "why": [],
@@ -785,9 +787,9 @@
     "sd": 2.026
    },
    "backtest": {
-    "n": 156,
-    "avg_r": 0.03,
-    "win_rate": 36.5
+    "n": 157,
+    "avg_r": 0.045,
+    "win_rate": 36.9
    },
    "verdict": "ok",
    "why": [],
@@ -811,9 +813,9 @@
     "sd": 1.136
    },
    "backtest": {
-    "n": 351,
-    "avg_r": 0.006,
-    "win_rate": 35.9
+    "n": 353,
+    "avg_r": 0.01,
+    "win_rate": 36.0
    },
    "verdict": "ok",
    "why": [],
@@ -993,9 +995,9 @@
     "sd": 0.001
    },
    "backtest": {
-    "n": 48,
-    "avg_r": 0.143,
-    "win_rate": 37.5
+    "n": 49,
+    "avg_r": 0.119,
+    "win_rate": 36.7
    },
    "verdict": "ok",
    "why": [],
@@ -1019,9 +1021,9 @@
     "sd": 1.135
    },
    "backtest": {
-    "n": 205,
-    "avg_r": 0.138,
-    "win_rate": 39.5
+    "n": 206,
+    "avg_r": 0.149,
+    "win_rate": 39.8
    },
    "verdict": "ok",
    "why": [],
@@ -1357,9 +1359,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 163,
-    "avg_r": 0.033,
-    "win_rate": 34.4
+    "n": 164,
+    "avg_r": 0.048,
+    "win_rate": 34.8
    },
    "verdict": "ok",
    "why": [],
@@ -1383,9 +1385,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 148,
-    "avg_r": 0.166,
-    "win_rate": 41.2
+    "n": 149,
+    "avg_r": 0.181,
+    "win_rate": 41.6
    },
    "verdict": "ok",
    "why": [],
@@ -1409,9 +1411,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 47,
-    "avg_r": 0.248,
-    "win_rate": 42.6
+    "n": 48,
+    "avg_r": 0.222,
+    "win_rate": 41.7
    },
    "verdict": "ok",
    "why": [],
@@ -2123,6 +2125,10 @@
   {
    "t": "2026-11-18 23:59",
    "r": 42.3
+  },
+  {
+   "t": "2026-11-19 07:59",
+   "r": 40.14
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

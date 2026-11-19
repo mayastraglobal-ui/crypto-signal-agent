@@ -5,11 +5,11 @@
    "name": "TRD-H4-BREAKOUT-S3",
    "version": "1.0",
    "tf": "1h",
-   "status": "BACKTESTING",
+   "status": "PAPER_TRADING",
    "trades": 956,
    "avg_r": 0.162,
    "test_avg_r": 0.286,
-   "tested_utc": "2026-11-18 07:54",
+   "tested_utc": "2026-11-19 07:51",
    "library": true,
    "coins": {
     "BTC": {

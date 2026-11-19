@@ -1162,3 +1162,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.07R
+- timestamp: 2026-11-19 08:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: RANGE · review: 2026-11-26
+  - signal 2026-11-18 14:59 UTC, closed 2026-11-19 07:59 UTC, stage TEST
+  - MAE -1.01R / MFE +1.24R
+  - at entry: session NY AM, conditions: range_market, no_displacement
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.08R
+- timestamp: 2026-11-19 08:32 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: RANGE · review: 2026-11-26
+  - signal 2026-11-18 16:59 UTC, closed 2026-11-19 07:59 UTC, stage TEST
+  - MAE -1.05R / MFE +0.66R
+  - at entry: session outside killzones, conditions: range_market, overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
