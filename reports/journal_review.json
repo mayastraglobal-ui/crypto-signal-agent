@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-18 20:00",
+ "last_entry_utc": "2026-11-19 01:41",
  "days": 30,
  "all": {
   "alerts": 44,
-  "took": 40,
+  "took": 41,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 3,
   "plan_took": {
    "n": 27,
    "total_r": 31.553,
@@ -57,13 +57,13 @@
     "wins": 0
    }
   },
-  "missing_result": 16
+  "missing_result": 17
  },
  "recent": {
   "alerts": 42,
-  "took": 38,
+  "took": 39,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 3,
   "plan_took": {
    "n": 25,
    "total_r": 33.553,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 16
+  "missing_result": 17
  },
  "per_strategy": [
   {
@@ -231,7 +231,7 @@
   {
    "cell": "donchian_breakout-VEXIT-FRETEST 4h",
    "alerts": 2,
-   "took": 1,
+   "took": 2,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,
