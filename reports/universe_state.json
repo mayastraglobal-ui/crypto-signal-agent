@@ -11,7 +11,7 @@
  "suspended": {
   "MMT": "2026-11-19"
  },
- "runs": 1182,
+ "runs": 1183,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -178,6 +178,7 @@
   ],
   "MMT": [
    "big_move",
+   "spread",
    "thin_book",
    "volume_7d"
   ]
