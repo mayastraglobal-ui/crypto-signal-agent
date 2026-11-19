@@ -1,23 +1,24 @@
 {
- "utc": "2026-11-19 02:12",
+ "utc": "2026-11-19 03:10",
  "verdict": {
-  "code": "MIXED",
-  "icon": "\u26c5",
-  "title": "Mixed day",
-  "meaning": "BTC has a direction, but most coins don't follow it.",
+  "code": "TREND_DOWN",
+  "icon": "\ud83c\udf27",
+  "title": "Trend day \u2193",
+  "meaning": "BTC and most coins point down on 1D / 4H / 1H.",
   "fits": [
-   "only coins whose own timeframes agree",
-   "smaller expectations"
+   "shorts with the trend, on bounces",
+   "only coins marked trend down"
   ],
   "avoid": [
-   "trading coins marked choppy"
+   "longs / buying the dip",
+   "chasing a candle that already fell"
   ]
  },
  "breadth": {
   "UP": 0,
-  "DOWN": 2,
+  "DOWN": 3,
   "RANGE": 0,
-  "CHOPPY": 3
+  "CHOPPY": 2
  },
  "coins": [
   {
@@ -64,10 +65,10 @@
    },
    "crowd": {
     "funding_pct": -0.001,
-    "oi_24h_pct": 3.3,
+    "oi_24h_pct": 3.1,
     "label": "neutral"
    },
-   "change_24h": -2.46
+   "change_24h": -3.07
   },
   {
    "coin": "ETH",
@@ -84,7 +85,7 @@
    "adx": {
     "1d": 38.0,
     "4h": 45.0,
-    "1h": 27.0
+    "1h": 26.0
    },
    "vol": {
     "atr_pct": 6.35,
@@ -113,10 +114,10 @@
    },
    "crowd": {
     "funding_pct": 0.0,
-    "oi_24h_pct": 1.2,
+    "oi_24h_pct": 0.0,
     "label": "neutral"
    },
-   "change_24h": -1.57
+   "change_24h": -2.32
   },
   {
    "coin": "SOL",
@@ -162,27 +163,27 @@
    },
    "crowd": {
     "funding_pct": -0.0004,
-    "oi_24h_pct": -1.7,
+    "oi_24h_pct": -3.3,
     "label": "neutral"
    },
-   "change_24h": -1.49
+   "change_24h": -2.43
   },
   {
    "coin": "XRP",
-   "verdict": "CHOPPY",
-   "permission": "NO TRADE",
+   "verdict": "DOWN",
+   "permission": "SHORT allowed",
    "turning": null,
-   "why": "timeframes disagree (1D STRONG_BEAR, 4H TRANSITION, 1H RANGE)",
+   "why": "1D/1H bearish, 1W UNCLEAR",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "STRONG_BEAR",
     "4h": "TRANSITION",
-    "1h": "RANGE"
+    "1h": "WEAK_BEAR"
    },
    "adx": {
     "1d": 38.0,
     "4h": 28.0,
-    "1h": 17.0
+    "1h": 18.0
    },
    "vol": {
     "atr_pct": 6.48,
@@ -211,10 +212,10 @@
    },
    "crowd": {
     "funding_pct": -0.0037,
-    "oi_24h_pct": -4.7,
+    "oi_24h_pct": -5.3,
     "label": "neutral"
    },
-   "change_24h": -1.27
+   "change_24h": -2.12
   },
   {
    "coin": "ZEC",
@@ -231,7 +232,7 @@
    "adx": {
     "1d": 23.0,
     "4h": 27.0,
-    "1h": 22.0
+    "1h": 23.0
    },
    "vol": {
     "atr_pct": 12.08,
@@ -263,32 +264,32 @@
     "oi_24h_pct": -5.4,
     "label": "neutral"
    },
-   "change_24h": -4.32
+   "change_24h": -6.04
   }
  ],
- "alts_vs_btc_24h": 0.93,
+ "alts_vs_btc_24h": 0.69,
  "fear_greed": {
   "value": 10,
   "label": "Extreme Fear",
   "yesterday": 11
  },
  "btc_dominance": {
-  "pct": 58.023,
-  "utc": "2026-11-19 02:12",
-  "ch24": -0.36,
-  "ch7": -1.82,
+  "pct": 58.002,
+  "utc": "2026-11-19 03:10",
+  "ch24": -0.37,
+  "ch7": -1.84,
   "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US GDP (Second Estimate), 3rd Quarter 2026",
-   "hours": 155.3
+   "hours": 154.3
   },
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US PCE / Personal Income and Outlays (Oct data)",
-   "hours": 155.3
+   "hours": 154.3
   }
  ],
  "blackout_now": [],
@@ -303,5 +304,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\u26c5 <b>Market weather \u00b7 11-19 10:12 Beijing</b>\nVerdict: <b>Mixed day</b>\nBTC has a direction, but most coins don't follow it.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -23.0% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H WEAK_BEAR\nVolatility: high (daily range 4.5%, higher than 89% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.0% (61,164 \u2013 64,973) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0010%/8h, open interest +3.3% in 24h)\nAltcoins vs BTC (24h): +0.9%\nBTC dominance: 58.0% \u00b7 24h -0.36 pt \u00b7 7d -1.82 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 10\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f XRP: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 11% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: only coins whose own timeframes agree; smaller expectations\nAvoid: trading coins marked choppy\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-19 11:10 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -23.0% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H WEAK_BEAR\nVolatility: high (daily range 4.5%, higher than 89% of the last year)\nUsual range: BTC usually moves \u00b11.5% in 24h; on 8 of 10 similar days it closed within \u00b13.0% (61,164 \u2013 64,973) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0010%/8h, open interest +3.1% in 24h)\nAltcoins vs BTC (24h): +0.7%\nBTC dominance: 58.0% \u00b7 24h -0.37 pt \u00b7 7d -1.84 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 10\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\ud83d\udd34 XRP: trend down\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 11% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
