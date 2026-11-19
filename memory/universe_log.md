@@ -1334,3 +1334,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-19 10:16 UTC
 - **EXCLUDED** NVDAB - only 161 days of history (need 180); order book too thin: $218k within 1% (need $250k)
+
+## 2026-11-19 16:11 UTC
+- **EXCLUDED** MMT - 7-day average volume $9M < $50M; order book too thin: $36k within 1% (need $250k)
+- **FLAG** MMT - price data DEGRADED - stays in the list, but no signals

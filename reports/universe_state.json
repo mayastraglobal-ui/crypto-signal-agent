@@ -9,7 +9,7 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1177,
+ "runs": 1178,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -173,6 +173,10 @@
   "ASTER": [
    "thin_book",
    "volume_7d"
+  ],
+  "MMT": [
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -235,6 +239,9 @@
   "U": [],
   "INTCB": [],
   "NVDAB": [],
-  "ASTER": []
+  "ASTER": [],
+  "MMT": [
+   "data_degraded"
+  ]
  }
 }
