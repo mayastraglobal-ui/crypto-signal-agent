@@ -1,10 +1,10 @@
 {
  "state": "OK",
- "checked_utc": "2026-11-18 23:17",
- "last_utc": "2026-11-18 22:55",
- "age_min": 22,
+ "checked_utc": "2026-11-19 00:12",
+ "last_utc": "2026-11-19 00:00",
+ "age_min": 12,
  "heartbeat": {
-  "utc": "2026-11-18 22:55",
+  "utc": "2026-11-19 00:00",
   "started_utc": "2026-11-18 16:25",
   "feed": "OKX USDT perpetuals",
   "coins": [
@@ -14,7 +14,7 @@
    "XRP",
    "ZEC"
   ],
-  "last_check_utc": "2026-11-18 22:55",
+  "last_check_utc": "2026-11-19 00:00",
   "last_check_ok": true,
   "fails": 0,
   "watching": {
@@ -27,7 +27,7 @@
   "tests_on": true,
   "code_old": false,
   "shock_on": true,
-  "commands": "read 0 min ago"
+  "commands": "read 1 min ago"
  },
- "text": "live watcher: last heartbeat 2026-11-18 22:55 UTC (22 min ago)"
+ "text": "live watcher: last heartbeat 2026-11-19 00:00 UTC (12 min ago)"
 }

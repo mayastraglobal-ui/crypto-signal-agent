@@ -1154,3 +1154,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: low_relative_volume, no_displacement, wrong_session
   - what happened: indicator_lag
   - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.07R
+- timestamp: 2026-11-19 00:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-26
+  - signal 2026-11-18 22:59 UTC, closed 2026-11-18 23:59 UTC, stage TEST
+  - MAE -1.01R / MFE +0.01R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
