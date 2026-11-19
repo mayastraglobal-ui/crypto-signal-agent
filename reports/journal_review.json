@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-19 04:50",
+ "last_entry_utc": "2026-11-19 22:00",
  "days": 30,
  "all": {
-  "alerts": 44,
+  "alerts": 45,
   "took": 41,
   "skipped": 0,
-  "no_answer": 3,
+  "no_answer": 4,
   "plan_took": {
    "n": 27,
    "total_r": 31.553,
@@ -60,10 +60,10 @@
   "missing_result": 17
  },
  "recent": {
-  "alerts": 42,
+  "alerts": 43,
   "took": 39,
   "skipped": 0,
-  "no_answer": 3,
+  "no_answer": 4,
   "plan_took": {
    "n": 25,
    "total_r": 33.553,
@@ -200,7 +200,7 @@
   },
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
-   "alerts": 7,
+   "alerts": 8,
    "took": 7,
    "skipped": 0,
    "plan_avg_r": 1.882,
