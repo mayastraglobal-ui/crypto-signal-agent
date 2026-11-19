@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-19 08:32",
+ "utc": "2026-11-19 09:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -21,26 +21,26 @@
   "sd": 1.493
  },
  "yours": {
-  "n": 54,
-  "wins": 25,
-  "win_rate": 46.3,
-  "avg_r": 0.234,
-  "total_r": 12.64,
-  "max_dd_r": 10.35,
-  "cur_loss_run": 3,
-  "max_loss_run": 7,
-  "sd": 1.527
+  "n": 32,
+  "wins": 20,
+  "win_rate": 62.5,
+  "avg_r": 0.56,
+  "total_r": 17.91,
+  "max_dd_r": 5.05,
+  "cur_loss_run": 2,
+  "max_loss_run": 5,
+  "sd": 1.41
  },
  "silent": {
-  "n": 115,
-  "wins": 35,
-  "win_rate": 30.4,
-  "avg_r": -0.119,
-  "total_r": -13.74,
-  "max_dd_r": 38.6,
-  "cur_loss_run": 7,
+  "n": 147,
+  "wins": 47,
+  "win_rate": 32.0,
+  "avg_r": -0.066,
+  "total_r": -9.71,
+  "max_dd_r": 41.01,
+  "cur_loss_run": 12,
   "max_loss_run": 17,
-  "sd": 1.413
+  "sd": 1.454
  },
  "alerts_known": true,
  "by_stage": {
@@ -108,7 +108,7 @@
     "5 losses in a row - in its backtest (46% won) a run that long shows up in 39% of 15-trade periods"
    ],
    "last_utc": "2026-11-19 07:59",
-   "sent": true
+   "sent": false
   },
   {
    "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
@@ -326,7 +326,7 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-15 03:59",
-   "sent": true
+   "sent": false
   },
   {
    "key": "donchian_breakout-VEXIT@1.0|4h",
@@ -482,7 +482,7 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-15 12:59",
-   "sent": true
+   "sent": false
   },
   {
    "key": "donchian_breakout-VEXIT@1.0|4h",
