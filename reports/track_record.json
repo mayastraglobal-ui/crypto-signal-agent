@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-19 22:11",
+ "utc": "2026-11-19 23:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 234,
+  "n": 235,
   "wins": 97,
-  "win_rate": 41.5,
-  "avg_r": 0.172,
-  "total_r": 40.14,
+  "win_rate": 41.3,
+  "avg_r": 0.166,
+  "total_r": 39.02,
   "max_dd_r": 59.17,
-  "cur_loss_run": 12,
+  "cur_loss_run": 13,
   "max_loss_run": 20,
-  "sd": 1.493
+  "sd": 1.492
  },
  "yours": {
   "n": 32,
@@ -32,29 +32,29 @@
   "sd": 1.41
  },
  "silent": {
-  "n": 147,
+  "n": 148,
   "wins": 47,
-  "win_rate": 32.0,
-  "avg_r": -0.066,
-  "total_r": -9.71,
+  "win_rate": 31.8,
+  "avg_r": -0.073,
+  "total_r": -10.82,
   "max_dd_r": 41.01,
-  "cur_loss_run": 12,
+  "cur_loss_run": 13,
   "max_loss_run": 17,
-  "sd": 1.454
+  "sd": 1.451
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 171,
+   "n": 172,
    "wins": 57,
-   "win_rate": 33.3,
-   "avg_r": 0.002,
-   "total_r": 0.26,
+   "win_rate": 33.1,
+   "avg_r": -0.005,
+   "total_r": -0.85,
    "max_dd_r": 47.91,
-   "cur_loss_run": 10,
+   "cur_loss_run": 11,
    "max_loss_run": 20,
-   "sd": 1.496
+   "sd": 1.494
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -823,6 +823,32 @@
    "sent": false
   },
   {
+   "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 3,
+    "wins": 1,
+    "win_rate": 33.3,
+    "avg_r": -0.561,
+    "total_r": -1.68,
+    "max_dd_r": 2.23,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.962
+   },
+   "backtest": {
+    "n": 119,
+    "avg_r": 0.074,
+    "win_rate": 35.3
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-19 22:59",
+   "sent": false
+  },
+  {
    "key": "P08-SESSION-BREAKOUT-V4@1.0|1h",
    "coin": "BTC",
    "stage": "TEST",
@@ -1028,32 +1054,6 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-14 20:59",
-   "sent": false
-  },
-  {
-   "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 2,
-    "wins": 1,
-    "win_rate": 50.0,
-    "avg_r": -0.283,
-    "total_r": -0.57,
-    "max_dd_r": 1.12,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": 1.179
-   },
-   "backtest": {
-    "n": 119,
-    "avg_r": 0.074,
-    "win_rate": 35.3
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-13 10:29",
    "sent": false
   },
   {
@@ -2127,8 +2127,8 @@
    "r": 42.3
   },
   {
-   "t": "2026-11-19 07:59",
-   "r": 40.14
+   "t": "2026-11-19 22:59",
+   "r": 39.02
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
