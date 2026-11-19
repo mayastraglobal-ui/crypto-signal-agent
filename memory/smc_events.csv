@@ -37933,3 +37933,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-19 18:45,XRP,15m,FVG,bull,,0.9717,0.9762,0.648,,1h,RANGE,,smc-1.0,Binance
 2026-11-19 19:00,XRP,15m,FVG_RETRACE,bull,,0.9717,0.9762,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-19 18:15,ZEC,15m,FVG_FILLED,bull,,912.49,915.48,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 20:00,BTC,4h,OB_INVALID,bull,,62516.93,62872.0,,,1d,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-19 20:00,BTC,4h,OB_INVALID,bull,,62716.0,63140.0,,,1d,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-19 20:00,BTC,1h,BOS,bear,62388.72,,,0.028,,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-19 19:15,BTC,15m,FVG,bear,,62893.57,63029.43,0.408,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:30,BTC,15m,FVG_RETRACE,bear,,62893.57,63029.43,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 19:15,ETH,15m,FVG_FILLED,bull,,1774.73,1782.6,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:15,ETH,15m,FVG,bear,,1777.95,1782.6,0.409,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:30,ETH,15m,FVG_RETRACE,bear,,1777.95,1782.6,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 19:30,ETH,15m,FVG_FILLED,bear,,1777.95,1782.6,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:15,SOL,15m,FVG_FILLED,bull,,74.02,74.4,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:15,SOL,15m,FVG,bear,,74.1,74.4,0.599,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:45,SOL,15m,BOS,bear,73.72,,,0.122,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-19 19:15,XRP,15m,FVG_FILLED,bull,,0.9717,0.9762,,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 19:15,XRP,15m,FVG,bear,,0.974,0.9762,0.335,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 20:00,ZEC,4h,FVG,bear,,929.28,938.5,0.271,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-19 20:00,ZEC,30m,SWEEP,bull,900.79,,,0.165,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 20:00,ZEC,30m,FVG,bear,,908.16,912.33,0.357,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-19 19:15,ZEC,15m,FVG,bear,,913.36,917.12,0.43,,1h,RANGE,,smc-1.0,Binance
+2026-11-19 20:00,ZEC,15m,SWEEP,bull,900.79,,,0.226,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-19 20:00,ZEC,15m,FVG_FILLED,bull,,899.5,906.61,,,1h,UNCLEAR,,smc-1.0,Binance
