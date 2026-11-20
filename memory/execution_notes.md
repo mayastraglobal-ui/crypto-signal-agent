@@ -222,3 +222,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END MMT 1d data: DEGRADED: volume 56x normal on candle 11-18 00:00 UTC (possible bad data); DEGRADED: volume 66x normal on candle 11-19 00:00 UTC (possible bad data)
 - timestamp: 2026-11-20 07:11 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: MMT · timeframe: - · regime: - · review: 2026-12-20
   - problem first seen 2026-11-19 16:11 UTC UTC
+
+### START MMT 1d data: DEGRADED: volume 56x normal on candle 11-18 00:00 UTC (possible bad data); DEGRADED: volume 66x normal on candle 11-19 00:00 UTC (possible bad data)
+- timestamp: 2026-11-20 11:11 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: MMT · timeframe: - · regime: - · review: 2026-12-20
+  - signals from this data are blocked while it lasts
