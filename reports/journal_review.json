@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-20 08:00",
+ "last_entry_utc": "2026-11-20 09:00",
  "days": 30,
  "all": {
-  "alerts": 46,
+  "alerts": 47,
   "took": 42,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 5,
   "plan_took": {
    "n": 27,
    "total_r": 31.553,
@@ -60,10 +60,10 @@
   "missing_result": 18
  },
  "recent": {
-  "alerts": 44,
+  "alerts": 45,
   "took": 40,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 5,
   "plan_took": {
    "n": 25,
    "total_r": 33.553,
@@ -147,6 +147,16 @@
    "plan_n": 1,
    "your_avg_r": 3.9,
    "your_n": 1
+  },
+  {
+   "cell": "P03-FIB-PULLBACK-V5 1h",
+   "alerts": 1,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
   },
   {
    "cell": "P04-MACD-SUPERTREND-V5 30m",

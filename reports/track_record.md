@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-20 08:22 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-20 09:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 32 | 62 | +0.56R | +17.91R | 5.05R | 5 |
-| Silent research records (never sent to you) | 151 | 31 | -0.09R | -14.16R | 41.01R | 17 |
-| 🔵 TEST | 175 | 33 | -0.02R | -4.19R | 47.91R | 20 |
+| Silent research records (never sent to you) | 152 | 31 | -0.10R | -14.88R | 41.01R | 17 |
+| 🔵 TEST | 176 | 32 | -0.03R | -4.91R | 47.91R | 20 |
 | 🟡 PAPER | 63 | 64 | +0.63R | +39.87R | 11.26R | 8 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 238 | 41 | +0.15R | +35.69R | 59.17R | 20 |
+| **All** | 239 | 41 | +0.15R | +34.96R | 59.17R | 20 |
 
 ## 🚨 Drift monitor
 
@@ -19,9 +19,9 @@ Warning signs (no pause yet):
 - TRD-H4-BREAKOUT-S3@1.0 1h on BTC: 5 losses in a row - in its backtest (46% won) a run that long shows up in 40% of 15-trade periods
 - TRD-H4-BREAKOUT-S3@1.0 1h on ETH: 3 losses in a row - in its backtest (36% won) a run that long shows up in 84% of 8-trade periods
 - P04-MACD-SUPERTREND-V2@1.0 15m on ETH: 4 losses in a row - in its backtest (38% won) a run that long shows up in 38% of 6-trade periods
+- P01-BREAKOUT-V2@1.0 30m on ETH: 4 losses in a row - in its backtest (39% won) a run that long shows up in 25% of 5-trade periods
 - P01-BREAKOUT-V5@1.0 1h on SUI: 5 losses in a row - in its backtest (34% won) a run that long shows up in 13% of 5-trade periods
 - P01-BREAKOUT-V5@1.0 30m on SUI: 5 losses in a row - in its backtest (35% won) a run that long shows up in 11% of 5-trade periods
-- P01-BREAKOUT-V2@1.0 30m on ETH: 3 losses in a row - in its backtest (39% won) a run that long shows up in 40% of 4-trade periods
 - P07-SQUEEZE-RETEST-V2@1.0 30m on ETH: 3 losses in a row - in its backtest (35% won) a run that long shows up in 47% of 4-trade periods
 - P01-BREAKOUT-V2@1.0 1h on SOL: 3 losses in a row - in its backtest (34% won) a run that long shows up in 28% of 3-trade periods
 
@@ -61,9 +61,9 @@ Warning signs (no pause yet):
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | 🔵 TEST | silent | 15 | 47 | +0.48R | +0.34R | +7.20R | 5.32R | ⚠️ watch |
 | TRD-H4-BREAKOUT-S3 | 1h | ETH | 🔵 TEST | silent | 8 | 25 | -0.17R | +0.06R | -1.37R | 3.17R | ⚠️ watch |
 | P04-MACD-SUPERTREND-V2 | 15m | ETH | 🔵 TEST | silent | 6 | 17 | -0.50R | +0.02R | -2.99R | 4.43R | ⚠️ watch |
+| P01-BREAKOUT-V2 | 30m | ETH | 🔵 TEST | silent | 5 | 20 | -0.09R | +0.12R | -0.44R | 2.88R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 5 | 0 | -0.81R | +0.08R | -4.02R | 4.02R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 0 | -0.94R | +0.01R | -4.69R | 4.69R | ⚠️ watch |
-| P01-BREAKOUT-V2 | 30m | ETH | 🔵 TEST | silent | 4 | 25 | +0.07R | +0.12R | +0.28R | 2.16R | ⚠️ watch |
 | P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 4 | 25 | -0.70R | +0.07R | -2.79R | 3.34R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 1h | SOL | 🔵 TEST | silent | 3 | 0 | -1.05R | +0.02R | -3.15R | 3.15R | ⚠️ watch |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 11 | 27 | -0.22R | +0.01R | -2.39R | 5.69R | ✅ |
@@ -100,7 +100,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-15 03:59 | +32.44R |
 | 2026-11-15 03:59 | +39.83R |
 | 2026-11-15 07:59 | +39.04R |
 | 2026-11-15 09:59 | +37.95R |
@@ -120,3 +119,4 @@ Warning signs (no pause yet):
 | 2026-11-18 23:59 | +42.30R |
 | 2026-11-19 22:59 | +39.02R |
 | 2026-11-20 08:14 | +35.69R |
+| 2026-11-20 08:29 | +34.96R |

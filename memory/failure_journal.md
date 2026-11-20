@@ -1210,3 +1210,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: low_relative_volume, no_displacement, wrong_session
   - what happened: -
   - root cause / fix: (review)
+
+### ETH SHORT 30m P01-BREAKOUT-V2 v1.0 - exit-rule -0.72R
+- timestamp: 2026-11-20 09:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.72R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: ETH · timeframe: 30m · regime: EXPANSION · review: 2026-11-27
+  - signal 2026-11-20 01:59 UTC, closed 2026-11-20 08:29 UTC, stage TEST
+  - MAE -0.76R / MFE +0.56R
+  - at entry: session Asia, conditions: no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
