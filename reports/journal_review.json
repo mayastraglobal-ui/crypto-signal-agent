@@ -1,16 +1,16 @@
 {
- "last_entry_utc": "2026-11-20 16:05",
+ "last_entry_utc": "2026-11-20 19:00",
  "days": 30,
  "all": {
-  "alerts": 50,
+  "alerts": 51,
   "took": 47,
   "skipped": 0,
-  "no_answer": 3,
+  "no_answer": 4,
   "plan_took": {
-   "n": 30,
-   "total_r": 38.849,
-   "avg_r": 1.295,
-   "wins": 20
+   "n": 31,
+   "total_r": 41.349,
+   "avg_r": 1.334,
+   "wins": 21
   },
   "plan_skipped": {
    "n": 0,
@@ -25,10 +25,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 32,
-   "total_r": 36.849,
-   "avg_r": 1.152,
-   "wins": 20
+   "n": 33,
+   "total_r": 39.349,
+   "avg_r": 1.192,
+   "wins": 21
   },
   "yours": {
    "n": 26,
@@ -60,15 +60,15 @@
   "missing_result": 20
  },
  "recent": {
-  "alerts": 47,
+  "alerts": 48,
   "took": 44,
   "skipped": 0,
-  "no_answer": 3,
+  "no_answer": 4,
   "plan_took": {
-   "n": 27,
-   "total_r": 41.849,
-   "avg_r": 1.55,
-   "wins": 20
+   "n": 28,
+   "total_r": 44.349,
+   "avg_r": 1.584,
+   "wins": 21
   },
   "plan_skipped": {
    "n": 0,
@@ -83,10 +83,10 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 29,
-   "total_r": 39.849,
-   "avg_r": 1.374,
-   "wins": 20
+   "n": 30,
+   "total_r": 42.349,
+   "avg_r": 1.412,
+   "wins": 21
   },
   "yours": {
    "n": 23,
@@ -210,7 +210,7 @@
   },
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
-   "alerts": 8,
+   "alerts": 9,
    "took": 8,
    "skipped": 0,
    "plan_avg_r": 1.882,
@@ -233,8 +233,8 @@
    "alerts": 15,
    "took": 15,
    "skipped": 0,
-   "plan_avg_r": 1.391,
-   "plan_n": 11,
+   "plan_avg_r": 1.483,
+   "plan_n": 12,
    "your_avg_r": 1.83,
    "your_n": 10
   },
@@ -318,10 +318,10 @@
     "wins": 0
    },
    "sent": {
-    "n": 22,
-    "total_r": 23.174,
-    "avg_r": 1.053,
-    "wins": 13
+    "n": 23,
+    "total_r": 25.674,
+    "avg_r": 1.116,
+    "wins": 14
    }
   }
  },

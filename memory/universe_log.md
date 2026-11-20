@@ -1397,3 +1397,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-20 17:16 UTC
 - **EXCLUDED** SOXLB - only 136 days of history (need 180); 7-day average volume $48M < $50M; 24h move -26.9% is beyond ±25% - suspended for the rest of the UTC day
+
+## 2026-11-20 19:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,076x the 1% order-book depth (flag only, not excluded)

@@ -13,7 +13,7 @@
   "MMT": "2026-11-20",
   "SOXLB": "2026-11-20"
  },
- "runs": 1203,
+ "runs": 1204,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -182,7 +182,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [],
   "XRP": [],
