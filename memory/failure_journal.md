@@ -1218,3 +1218,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 15m P01-BREAKOUT-V2 v1.0 - SL -1.10R
+- timestamp: 2026-11-20 22:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 15m · regime: EXPANSION · review: 2026-11-27
+  - signal 2026-11-20 18:59 UTC, closed 2026-11-20 21:44 UTC, stage TEST
+  - MAE -1.07R / MFE +0.69R
+  - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
