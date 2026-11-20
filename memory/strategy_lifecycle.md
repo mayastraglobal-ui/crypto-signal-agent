@@ -527,3 +527,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 ## 2026-11-19 07:51 UTC
 - **P04-MACD-SUPERTREND-V3@1.0 4h**: FAILED → **BACKTESTING** (recovery factor 2.87 (net +30.7R / max drawdown 10.7R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 19.3R - limit 17R)
 - **TRD-H4-BREAKOUT-S3@1.0 1h**: BACKTESTING → **PAPER_TRADING** (promoted to PAPER by the operator (weekly review): PAPER only on BTC)
+
+## 2026-11-20 07:41 UTC
+- **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.00 (net +0.0R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.1R - limit 17R; longest drawdown 1922 days = 59% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
