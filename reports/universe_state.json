@@ -13,7 +13,7 @@
   "MMT": "2026-11-20",
   "SOXLB": "2026-11-20"
  },
- "runs": 1204,
+ "runs": 1205,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -144,6 +144,7 @@
   "SOXLB": [
    "big_move",
    "history",
+   "thin_book",
    "volume_7d"
   ],
   "BMT": [
