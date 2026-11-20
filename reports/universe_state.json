@@ -13,7 +13,7 @@
   "MMT": "2026-11-20",
   "SOXLB": "2026-11-20"
  },
- "runs": 1201,
+ "runs": 1202,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -29,7 +29,6 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
@@ -169,7 +168,8 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history"
+   "history",
+   "thin_book"
   ],
   "ASTER": [
    "thin_book",

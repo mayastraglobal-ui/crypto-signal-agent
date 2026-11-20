@@ -1,16 +1,16 @@
 {
- "last_entry_utc": "2026-11-20 14:30",
+ "last_entry_utc": "2026-11-20 16:05",
  "days": 30,
  "all": {
-  "alerts": 47,
-  "took": 44,
+  "alerts": 50,
+  "took": 47,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 27,
-   "total_r": 31.553,
-   "avg_r": 1.169,
-   "wins": 17
+   "n": 30,
+   "total_r": 38.849,
+   "avg_r": 1.295,
+   "wins": 20
   },
   "plan_skipped": {
    "n": 0,
@@ -25,22 +25,22 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 29,
-   "total_r": 29.553,
-   "avg_r": 1.019,
-   "wins": 17
+   "n": 32,
+   "total_r": 36.849,
+   "avg_r": 1.152,
+   "wins": 20
   },
   "yours": {
-   "n": 23,
-   "total_r": 32.72,
-   "avg_r": 1.423,
-   "wins": 17
+   "n": 26,
+   "total_r": 40.02,
+   "avg_r": 1.539,
+   "wins": 20
   },
   "gap": {
-   "n": 23,
-   "total_r": 3.342,
-   "avg_r": 0.145,
-   "wins": 3
+   "n": 26,
+   "total_r": 3.346,
+   "avg_r": 0.129,
+   "wins": 4
   },
   "early": {
    "n": 0,
@@ -60,15 +60,15 @@
   "missing_result": 20
  },
  "recent": {
-  "alerts": 45,
-  "took": 42,
+  "alerts": 47,
+  "took": 44,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 25,
-   "total_r": 33.553,
-   "avg_r": 1.342,
-   "wins": 17
+   "n": 27,
+   "total_r": 41.849,
+   "avg_r": 1.55,
+   "wins": 20
   },
   "plan_skipped": {
    "n": 0,
@@ -83,22 +83,22 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 27,
-   "total_r": 31.553,
-   "avg_r": 1.169,
-   "wins": 17
+   "n": 29,
+   "total_r": 39.849,
+   "avg_r": 1.374,
+   "wins": 20
   },
   "yours": {
-   "n": 21,
-   "total_r": 35.0,
-   "avg_r": 1.667,
-   "wins": 17
+   "n": 23,
+   "total_r": 43.5,
+   "avg_r": 1.891,
+   "wins": 20
   },
   "gap": {
-   "n": 21,
-   "total_r": 3.622,
-   "avg_r": 0.172,
-   "wins": 3
+   "n": 23,
+   "total_r": 3.826,
+   "avg_r": 0.166,
+   "wins": 4
   },
   "early": {
    "n": 0,
@@ -153,10 +153,10 @@
    "alerts": 1,
    "took": 1,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
-   "your_avg_r": null,
-   "your_n": 0
+   "plan_avg_r": 2.5,
+   "plan_n": 1,
+   "your_avg_r": 2.5,
+   "your_n": 1
   },
   {
    "cell": "P04-MACD-SUPERTREND-V5 30m",
@@ -233,15 +233,15 @@
    "alerts": 15,
    "took": 15,
    "skipped": 0,
-   "plan_avg_r": 1.167,
-   "plan_n": 9,
-   "your_avg_r": 1.688,
-   "your_n": 8
+   "plan_avg_r": 1.391,
+   "plan_n": 11,
+   "your_avg_r": 1.83,
+   "your_n": 10
   },
   {
    "cell": "donchian_breakout-VEXIT-FRETEST 4h",
-   "alerts": 2,
-   "took": 2,
+   "alerts": 5,
+   "took": 5,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,
@@ -318,15 +318,15 @@
     "wins": 0
    },
    "sent": {
-    "n": 20,
-    "total_r": 18.378,
-    "avg_r": 0.919,
-    "wins": 11
+    "n": 22,
+    "total_r": 23.174,
+    "avg_r": 1.053,
+    "wins": 13
    }
   }
  },
  "findings": [
-  "Your real results match the plan (+0.14R per trade difference, 23 trades): the backtest's numbers hold for you."
+  "Your real results match the plan (+0.13R per trade difference, 26 trades): the backtest's numbers hold for you."
  ],
  "decisions": [
   {
