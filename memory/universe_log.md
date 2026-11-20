@@ -1377,3 +1377,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-20 11:11 UTC
 - **EXCLUDED** MMT - 7-day average volume $17M < $50M; 24h move +35.9% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $32k within 1% (need $250k)
+
+## 2026-11-20 12:11 UTC
+- **EXCLUDED** MMT - 7-day average volume $17M < $50M; suspended for the rest of the UTC day (moved more than ±25% earlier today); spread 0.119% > 0.1%; order book too thin: $25k within 1% (need $250k)

@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-20 09:00",
+ "last_entry_utc": "2026-11-20 12:10",
  "days": 30,
  "all": {
   "alerts": 47,
-  "took": 42,
+  "took": 44,
   "skipped": 0,
-  "no_answer": 5,
+  "no_answer": 3,
   "plan_took": {
    "n": 27,
    "total_r": 31.553,
@@ -57,13 +57,13 @@
     "wins": 0
    }
   },
-  "missing_result": 18
+  "missing_result": 20
  },
  "recent": {
   "alerts": 45,
-  "took": 40,
+  "took": 42,
   "skipped": 0,
-  "no_answer": 5,
+  "no_answer": 3,
   "plan_took": {
    "n": 25,
    "total_r": 33.553,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 18
+  "missing_result": 20
  },
  "per_strategy": [
   {
@@ -151,7 +151,7 @@
   {
    "cell": "P03-FIB-PULLBACK-V5 1h",
    "alerts": 1,
-   "took": 0,
+   "took": 1,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,
@@ -181,7 +181,7 @@
   {
    "cell": "P07-SQUEEZE-RETEST-V1 4h",
    "alerts": 2,
-   "took": 1,
+   "took": 2,
    "skipped": 0,
    "plan_avg_r": 2.5,
    "plan_n": 1,
