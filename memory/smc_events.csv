@@ -38116,3 +38116,30 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-20 02:30,XRP,15m,FVG_RETRACE,bear,,0.9565,0.9627,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-20 02:30,ZEC,30m,FVG,bear,,872.94,886.87,1.152,Asia,1h,EXPANSION,,smc-1.0,Binance
 2026-11-20 02:15,ZEC,15m,FVG,bear,,872.94,881.58,0.944,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 04:00,BTC,4h,BREAKER_RETEST,bear,,62516.93,62872.0,,,1d,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-20 04:00,BTC,4h,BREAKER_RETEST,bear,,62300.0,62863.1,,,1d,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-20 04:00,BTC,4h,FVG_RETRACE,bear,,62467.25,62780.07,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,BTC,30m,FVG_RETRACE,bear,,61767.98,62049.52,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,BTC,30m,FVG_FILLED,bear,,61767.98,62049.52,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 03:00,BTC,15m,FVG_RETRACE,bear,,62124.01,62288.01,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,BTC,15m,FVG_FILLED,bear,,61767.98,61980.71,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 03:15,BTC,15m,FVG_FILLED,bear,,62124.01,62288.01,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 04:00,ETH,4h,SWEEP,bull,1732.83,,,0.24,,1d,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-20 03:00,ETH,30m,FVG_RETRACE,bear,,1742.43,1754.1,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:30,ETH,30m,FVG_FILLED,bear,,1742.43,1754.1,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 03:15,ETH,15m,FVG_FILLED,bear,,1742.35,1753.23,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-20 04:00,SOL,4h,SWEEP,bull,72.22,,,0.361,,1d,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-20 03:00,SOL,30m,FVG_RETRACE,bear,,72.32,72.83,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,SOL,30m,FVG_FILLED,bear,,72.32,72.83,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 03:00,SOL,15m,FVG_FILLED,bear,,72.24,72.69,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 04:00,XRP,4h,SWEEP,bull,0.9548,,,0.322,,1d,STRONG_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-20 03:00,XRP,30m,FVG_RETRACE,bear,,0.9566,0.9603,,Asia,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:30,XRP,30m,OB_RETEST,bear,,0.9603,0.9693,,Asia,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-20 03:30,XRP,30m,FVG_FILLED,bear,,0.9566,0.9603,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 03:15,XRP,15m,FVG_FILLED,bear,,0.9565,0.9627,,Asia,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 04:00,XRP,15m,OB_RETEST,bear,,0.965,0.9693,,Asia,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-20 04:00,ZEC,4h,BOS,bear,891.5,,,0.764,,1d,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-20 03:00,ZEC,1h,FVG,bear,,875.69,883.57,0.467,Asia,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 04:00,ZEC,1h,FVG_RETRACE,bear,,875.69,883.57,,Asia,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,ZEC,30m,FVG_RETRACE,bear,,872.94,886.87,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-20 03:00,ZEC,15m,FVG_RETRACE,bear,,872.94,881.58,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance

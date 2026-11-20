@@ -1186,3 +1186,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 30m P07-SQUEEZE-RETEST-V2 v1.0 - SL -1.11R
+- timestamp: 2026-11-20 04:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V2 v1.0 · asset: ETH · timeframe: 30m · regime: EXPANSION · review: 2026-11-27
+  - signal 2026-11-20 02:29 UTC, closed 2026-11-20 03:29 UTC, stage TEST
+  - MAE -1.08R / MFE +0.15R
+  - at entry: session Asia, conditions: no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)

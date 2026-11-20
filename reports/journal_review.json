@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-19 22:00",
+ "last_entry_utc": "2026-11-20 03:15",
  "days": 30,
  "all": {
   "alerts": 45,
-  "took": 41,
+  "took": 42,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 3,
   "plan_took": {
    "n": 27,
    "total_r": 31.553,
@@ -57,13 +57,13 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 18
  },
  "recent": {
   "alerts": 43,
-  "took": 39,
+  "took": 40,
   "skipped": 0,
-  "no_answer": 4,
+  "no_answer": 3,
   "plan_took": {
    "n": 25,
    "total_r": 33.553,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 18
  },
  "per_strategy": [
   {
@@ -201,7 +201,7 @@
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
    "alerts": 8,
-   "took": 7,
+   "took": 8,
    "skipped": 0,
    "plan_avg_r": 1.882,
    "plan_n": 7,

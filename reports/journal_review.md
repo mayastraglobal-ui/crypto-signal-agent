@@ -2,11 +2,11 @@
 
 From journal/my_trades.csv on the branch `journal` (the live watcher's Telegram buttons, the plan result of every alert and your /result replies). Plan = the backtest rules followed on 5m candles, before fees. Report only: nothing here changes a strategy, a gate or a cost.
 
-Last journal entry: 2026-11-19 22:00 UTC
-- Last 30 days: 43 alerts · took 39 · skipped 0 · no answer 4
+Last journal entry: 2026-11-20 03:15 UTC
+- Last 30 days: 43 alerts · took 40 · skipped 0 · no answer 3
   - plan result: took +1.34R avg over 25 · skipped no result yet · no answer -1.00R avg over 2
   - your real results: +1.67R avg over 21 · gap to the plan +0.17R per trade (21)
-- All time: 45 alerts · took 41 · skipped 0 · no answer 4
+- All time: 45 alerts · took 42 · skipped 0 · no answer 3
   - plan result: took +1.17R avg over 27 · skipped no result yet · no answer -1.00R avg over 2
   - your real results: +1.42R avg over 23 · gap to the plan +0.14R per trade (23)
 - Per strategy (all time): cell · alerts · took · plan avg · your avg
@@ -18,7 +18,7 @@ Last journal entry: 2026-11-19 22:00 UTC
   - P07-SQUEEZE-RETEST-V1 4h · 1 · 1 · +2.50R (1) · +2.50R (1)
   - P07-SQUEEZE-RETEST-V3 4h · 2 · 2 · +2.50R (1) · +2.50R (1)
   - P12-LEADER-V1 4h · 1 · 1 · -1.00R (1) · -1.20R (1)
-  - TRD-H4-BREAKOUT-S3 1h · 8 · 7 · +1.88R (7) · +2.24R (5)
+  - TRD-H4-BREAKOUT-S3 1h · 8 · 8 · +1.88R (7) · +2.24R (5)
   - donchian_breakout-VEXIT 4h · 10 · 8 · +0.75R (4) · +2.50R (2)
   - donchian_breakout-VEXIT-FDISP 4h · 15 · 15 · +1.17R (9) · +1.69R (8)
   - donchian_breakout-VEXIT-FRETEST 4h · 2 · 2 · - · -
