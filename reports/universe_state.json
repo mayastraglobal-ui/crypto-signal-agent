@@ -4,14 +4,13 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC"
+  "ZEC",
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {},
- "runs": 1192,
+ "runs": 1193,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -167,8 +166,7 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history",
-   "thin_book"
+   "history"
   ],
   "ASTER": [
    "thin_book",
