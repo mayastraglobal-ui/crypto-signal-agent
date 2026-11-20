@@ -1194,3 +1194,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 15m P04-MACD-SUPERTREND-V2 v1.0 - SL -1.12R
+- timestamp: 2026-11-20 08:22 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.12R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: ETH · timeframe: 15m · regime: EXPANSION · review: 2026-11-27
+  - signal 2026-11-20 01:59 UTC, closed 2026-11-20 08:14 UTC, stage TEST
+  - MAE -1.02R / MFE +0.76R
+  - at entry: session Asia, conditions: range_market, no_displacement, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 15m P04-MACD-SUPERTREND-V2 v1.0 - SL -1.11R
+- timestamp: 2026-11-20 08:22 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.11R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: ETH · timeframe: 15m · regime: EXPANSION · review: 2026-11-27
+  - signal 2026-11-20 04:29 UTC, closed 2026-11-20 08:14 UTC, stage TEST
+  - MAE -1.18R / MFE +0.51R
+  - at entry: session Asia, conditions: low_relative_volume, no_displacement, wrong_session
+  - what happened: -
+  - root cause / fix: (review)

@@ -1364,3 +1364,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-20 07:11 UTC
 - **EXCLUDED** NVDAB - only 162 days of history (need 180)
 - **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)
+
+## 2026-11-20 08:22 UTC
+- **EXCLUDED** NVDAB - only 162 days of history (need 180); order book too thin: $219k within 1% (need $250k)

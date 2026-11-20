@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-20 07:11",
+ "utc": "2026-11-20 08:22",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 236,
+  "n": 238,
   "wins": 97,
-  "win_rate": 41.1,
-  "avg_r": 0.161,
-  "total_r": 37.91,
+  "win_rate": 40.8,
+  "avg_r": 0.15,
+  "total_r": 35.69,
   "max_dd_r": 59.17,
-  "cur_loss_run": 14,
+  "cur_loss_run": 16,
   "max_loss_run": 20,
-  "sd": 1.491
+  "sd": 1.489
  },
  "yours": {
   "n": 32,
@@ -32,29 +32,29 @@
   "sd": 1.41
  },
  "silent": {
-  "n": 149,
+  "n": 151,
   "wins": 47,
-  "win_rate": 31.5,
-  "avg_r": -0.08,
-  "total_r": -11.93,
+  "win_rate": 31.1,
+  "avg_r": -0.094,
+  "total_r": -14.16,
   "max_dd_r": 41.01,
-  "cur_loss_run": 14,
+  "cur_loss_run": 16,
   "max_loss_run": 17,
-  "sd": 1.449
+  "sd": 1.444
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 173,
+   "n": 175,
    "wins": 57,
-   "win_rate": 32.9,
-   "avg_r": -0.011,
-   "total_r": -1.96,
+   "win_rate": 32.6,
+   "avg_r": -0.024,
+   "total_r": -4.19,
    "max_dd_r": 47.91,
-   "cur_loss_run": 12,
+   "cur_loss_run": 14,
    "max_loss_run": 20,
-   "sd": 1.492
+   "sd": 1.488
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -99,13 +99,13 @@
     "sd": 1.755
    },
    "backtest": {
-    "n": 179,
-    "avg_r": 0.349,
-    "win_rate": 46.4
+    "n": 180,
+    "avg_r": 0.341,
+    "win_rate": 46.1
    },
    "verdict": "watch",
    "why": [
-    "5 losses in a row - in its backtest (46% won) a run that long shows up in 39% of 15-trade periods"
+    "5 losses in a row - in its backtest (46% won) a run that long shows up in 40% of 15-trade periods"
    ],
    "last_utc": "2026-11-19 07:59",
    "sent": false
@@ -127,15 +127,43 @@
     "sd": 1.636
    },
    "backtest": {
-    "n": 206,
-    "avg_r": 0.064,
-    "win_rate": 35.9
+    "n": 207,
+    "avg_r": 0.059,
+    "win_rate": 35.7
    },
    "verdict": "watch",
    "why": [
     "3 losses in a row - in its backtest (36% won) a run that long shows up in 84% of 8-trade periods"
    ],
    "last_utc": "2026-11-19 07:59",
+   "sent": false
+  },
+  {
+   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 6,
+    "wins": 1,
+    "win_rate": 16.7,
+    "avg_r": -0.498,
+    "total_r": -2.99,
+    "max_dd_r": 4.43,
+    "cur_loss_run": 4,
+    "max_loss_run": 4,
+    "sd": 1.423
+   },
+   "backtest": {
+    "n": 363,
+    "avg_r": 0.017,
+    "win_rate": 38.0
+   },
+   "verdict": "watch",
+   "why": [
+    "4 losses in a row - in its backtest (38% won) a run that long shows up in 38% of 6-trade periods"
+   ],
+   "last_utc": "2026-11-20 08:14",
    "sent": false
   },
   {
@@ -581,9 +609,9 @@
     "sd": 1.513
    },
    "backtest": {
-    "n": 352,
-    "avg_r": 0.025,
-    "win_rate": 38.1
+    "n": 353,
+    "avg_r": 0.021,
+    "win_rate": 38.0
    },
    "verdict": "ok",
    "why": [],
@@ -667,32 +695,6 @@
    "why": [],
    "last_utc": "2026-11-14 15:59",
    "sent": true
-  },
-  {
-   "key": "P04-MACD-SUPERTREND-V2@1.0|15m",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 4,
-    "wins": 1,
-    "win_rate": 25.0,
-    "avg_r": -0.19,
-    "total_r": -0.76,
-    "max_dd_r": 2.2,
-    "cur_loss_run": 2,
-    "max_loss_run": 2,
-    "sd": 1.731
-   },
-   "backtest": {
-    "n": 363,
-    "avg_r": 0.017,
-    "win_rate": 38.0
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-18 23:14",
-   "sent": false
   },
   {
    "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
@@ -2133,8 +2135,8 @@
    "r": 39.02
   },
   {
-   "t": "2026-11-20 03:29",
-   "r": 37.91
+   "t": "2026-11-20 08:14",
+   "r": 35.69
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
