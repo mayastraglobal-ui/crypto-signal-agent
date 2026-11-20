@@ -1394,3 +1394,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-20 16:11 UTC
 - **EXCLUDED** BNB - 7-day average volume $48M < $50M
 - **EXCLUDED** NVDAB - only 162 days of history (need 180); order book too thin: $227k within 1% (need $250k)
+
+## 2026-11-20 17:16 UTC
+- **EXCLUDED** SOXLB - only 136 days of history (need 180); 7-day average volume $48M < $50M; 24h move -26.9% is beyond ±25% - suspended for the rest of the UTC day
