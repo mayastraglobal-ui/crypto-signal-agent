@@ -1,21 +1,21 @@
 {
- "n": 44,
- "sent": 33,
- "done": 44,
- "kept": 16,
- "reversed": 28,
- "avg_after_4h": -0.36,
- "caught": 15,
+ "n": 42,
+ "sent": 31,
+ "done": 42,
+ "kept": 15,
+ "reversed": 27,
+ "avg_after_4h": -0.44,
+ "caught": 13,
  "by_coin": {
-  "ETH": 14,
-  "SOL": 9,
+  "ETH": 13,
   "BTC": 10,
   "XRP": 9,
+  "SOL": 8,
   "ZEC": 2
  },
  "by_kind": {
-  "sweep_low": 8,
   "volume": 25,
+  "sweep_low": 6,
   "move": 17,
   "sweep_high": 1
  },
@@ -61,13 +61,13 @@
    "caught": true
   }
  ],
- "checked_utc": "2026-11-20 02:12",
+ "checked_utc": "2026-11-20 03:00",
  "lines": [
-  "44 shock(s) this week, 33 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
-  "by kind: fast move 17, broke yesterday's high 1, broke yesterday's low 8, volume spike 25",
-  "by coin: ETH 14, BTC 10, SOL 9, XRP 9, ZEC 2",
-  "4 hours later: 16 kept going, 28 reversed (average -0.36% in the shock's direction)",
-  "followed by a strategy alert in the same direction within 4h: 15 of 44",
+  "42 shock(s) this week, 31 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
+  "by kind: fast move 17, broke yesterday's high 1, broke yesterday's low 6, volume spike 25",
+  "by coin: ETH 13, BTC 10, XRP 9, SOL 8, ZEC 2",
+  "4 hours later: 15 kept going, 27 reversed (average -0.44% in the shock's direction)",
+  "followed by a strategy alert in the same direction within 4h: 13 of 42 - the strategies missed most shocks: material for the research (a reversal or sweep version)",
   "  2026-11-15 02:17 UTC SOL UP +4.7% -> 4h later -0.8% (no strategy alert)",
   "  2026-11-15 02:17 UTC XRP UP +4.5% -> 4h later +0.7% (no strategy alert)",
   "  2026-11-15 02:12 UTC BTC UP +2.6% -> 4h later +0.4% (no strategy alert)",
