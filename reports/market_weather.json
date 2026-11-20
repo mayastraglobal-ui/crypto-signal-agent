@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-20 09:11",
+ "utc": "2026-11-20 10:11",
  "verdict": {
   "code": "TREND_DOWN",
   "icon": "\ud83c\udf27",
@@ -36,7 +36,7 @@
    "adx": {
     "1d": 42.0,
     "4h": 49.0,
-    "1h": 42.0
+    "1h": 43.0
    },
    "vol": {
     "atr_pct": 4.25,
@@ -65,10 +65,10 @@
    },
    "crowd": {
     "funding_pct": -0.0035,
-    "oi_24h_pct": 0.6,
+    "oi_24h_pct": -0.2,
     "label": "neutral"
    },
-   "change_24h": -3.18
+   "change_24h": -3.19
   },
   {
    "coin": "ETH",
@@ -114,10 +114,10 @@
    },
    "crowd": {
     "funding_pct": 0.0015,
-    "oi_24h_pct": -6.3,
+    "oi_24h_pct": -6.8,
     "label": "neutral"
    },
-   "change_24h": -3.05
+   "change_24h": -3.1
   },
   {
    "coin": "SOL",
@@ -134,7 +134,7 @@
    "adx": {
     "1d": 49.0,
     "4h": 23.0,
-    "1h": 30.0
+    "1h": 32.0
    },
    "vol": {
     "atr_pct": 5.97,
@@ -163,10 +163,10 @@
    },
    "crowd": {
     "funding_pct": -0.0,
-    "oi_24h_pct": -5.3,
+    "oi_24h_pct": -5.2,
     "label": "neutral"
    },
-   "change_24h": -2.92
+   "change_24h": -3.23
   },
   {
    "coin": "SUI",
@@ -183,7 +183,7 @@
    "adx": {
     "1d": 38.0,
     "4h": 32.0,
-    "1h": 37.0
+    "1h": 38.0
    },
    "vol": {
     "atr_pct": 7.26,
@@ -215,7 +215,7 @@
     "oi_24h_pct": -2.4,
     "label": "leaning short"
    },
-   "change_24h": -5.01
+   "change_24h": -4.61
   },
   {
    "coin": "XRP",
@@ -264,7 +264,7 @@
     "oi_24h_pct": -7.6,
     "label": "neutral"
    },
-   "change_24h": -2.71
+   "change_24h": -2.45
   },
   {
    "coin": "ZEC",
@@ -281,7 +281,7 @@
    "adx": {
     "1d": 24.0,
     "4h": 25.0,
-    "1h": 42.0
+    "1h": 44.0
    },
    "vol": {
     "atr_pct": 12.02,
@@ -310,35 +310,35 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -11.7,
+    "oi_24h_pct": -12.2,
     "label": "neutral"
    },
-   "change_24h": -10.38
+   "change_24h": -11.59
   }
  ],
- "alts_vs_btc_24h": 0.13,
+ "alts_vs_btc_24h": -0.04,
  "fear_greed": {
   "value": 12,
   "label": "Extreme Fear",
   "yesterday": 10
  },
  "btc_dominance": {
-  "pct": 57.99,
-  "utc": "2026-11-20 09:11",
-  "ch24": -0.15,
-  "ch7": -0.98,
-  "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
+  "pct": 58.002,
+  "utc": "2026-11-20 10:11",
+  "ch24": -0.89,
+  "ch7": -1.7,
+  "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US GDP (Second Estimate), 3rd Quarter 2026",
-   "hours": 124.3
+   "hours": 123.3
   },
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US PCE / Personal Income and Outlays (Oct data)",
-   "hours": 124.3
+   "hours": 123.3
   }
  ],
  "blackout_now": [],
@@ -353,5 +353,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-20 17:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -25.3% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H WEAK_BEAR\nVolatility: high (daily range 4.2%, higher than 84% of the last year)\nUsual range: BTC usually moves \u00b11.4% in 24h; on 8 of 10 similar days it closed within \u00b13.0% (60,130 \u2013 63,843) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0035%/8h, open interest +0.6% in 24h)\nAltcoins vs BTC (24h): +0.1%\nBTC dominance: 58.0% \u00b7 24h -0.15 pt \u00b7 7d -0.98 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down\n\ud83d\udd34 SUI: trend down \u00b7 leaning short\n\u2198\ufe0f XRP: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 16% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-20 18:11 Beijing</b>\nVerdict: <b>Trend day \u2193</b>\nBTC and most coins point down on 1D / 4H / 1H.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -25.3% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H STRONG_BEAR \u00b7 1H WEAK_BEAR\nVolatility: high (daily range 4.2%, higher than 84% of the last year)\nUsual range: BTC usually moves \u00b11.4% in 24h; on 8 of 10 similar days it closed within \u00b13.0% (60,130 \u2013 63,843) - measured from the past, not a forecast\nCrowding: neutral (funding -0.0035%/8h, open interest -0.2% in 24h)\nAltcoins vs BTC (24h): -0.0%\nBTC dominance: 58.0% \u00b7 24h -0.89 pt \u00b7 7d -1.70 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\ud83d\udd34 BTC: trend down\n\ud83d\udd34 ETH: trend down\n\ud83d\udd34 SOL: trend down\n\ud83d\udd34 SUI: trend down \u00b7 leaning short\n\u2198\ufe0f XRP: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 16% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: shorts with the trend, on bounces; only coins marked trend down\nAvoid: longs / buying the dip; chasing a candle that already fell\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
