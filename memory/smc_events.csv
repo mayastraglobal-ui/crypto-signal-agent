@@ -38025,3 +38025,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-19 23:00,XRP,15m,FVG_RETRACE,bull,,0.9567,0.9612,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-19 23:00,ZEC,1h,FVG_RETRACE,bear,,890.87,898.84,,,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-19 22:45,ZEC,15m,FVG,bull,,884.43,888.12,0.432,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-20 00:00,BTC,4h,SWEEP,bull,61544.56,,,0.105,,1d,STRONG_BEAR,"sell-side liquidity swept (PDL, PWL, equal lows, swing low)",smc-1.0,Binance
+2026-11-20 00:00,BTC,4h,BOS,bear,62062.97,,,0.069,,1d,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-20 00:00,BTC,4h,OB_INVALID,bull,,62300.0,62863.1,,,1d,STRONG_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-20 00:00,BTC,4h,FVG,bear,,62467.25,62780.07,0.283,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-19 23:30,BTC,30m,FVG_RETRACE,bull,,61756.17,62086.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-19 23:15,BTC,15m,FVG_RETRACE,bull,,61844.01,62086.0,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-19 23:45,BTC,15m,FVG_FILLED,bull,,61844.01,62086.0,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-19 23:30,ETH,30m,FVG_RETRACE,bull,,1748.23,1757.56,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-19 23:15,ETH,15m,FVG_RETRACE,bull,,1748.66,1757.56,,,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-19 23:45,ETH,15m,FVG_FILLED,bull,,1748.66,1757.56,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-19 23:30,SOL,30m,FVG_RETRACE,bull,,72.55,72.97,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-19 23:15,SOL,15m,FVG_RETRACE,bull,,72.57,72.97,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-20 00:00,XRP,4h,SWEEP,bull,0.9557,,,0.133,,1d,STRONG_BEAR,sell-side liquidity swept (PDL),smc-1.0,Binance
+2026-11-20 00:00,ZEC,4h,SWEEP,bull,891.5,,,0.392,,1d,UNCLEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-20 00:00,ZEC,4h,FVG,bear,,904.08,918.37,0.427,,1d,UNCLEAR,,smc-1.0,Binance
+2026-11-20 00:00,ZEC,1h,BREAKER_RETEST,bear,,897.22,911.85,,,4h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-19 23:30,ZEC,30m,FVG_RETRACE,bear,,894.31,898.84,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
