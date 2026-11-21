@@ -39324,3 +39324,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-21 15:00,SUI,1h,FVG,bull,,0.6401,0.6457,0.404,NY AM,4h,EXPANSION,,smc-1.0,Binance
 2026-11-21 14:30,SUI,30m,BREAKER_RETEST,bull,,0.6442,0.6484,,NY AM,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
 2026-11-21 14:15,SUI,15m,FVG_RETRACE,bull,,0.644,0.6496,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,BTC,4h,FVG_RETRACE,bear,,60025.24,61552.0,,,1d,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,BTC,1h,FVG_RETRACE,bull,,59175.0,60164.51,,Silver Bullet,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:30,BTC,30m,FVG_FILLED,bull,,59805.91,60200.0,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 15:30,BTC,15m,FVG_FILLED,bull,,59805.91,60403.69,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 15:30,ETH,15m,FVG_FILLED,bull,,1681.99,1698.47,,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 16:00,SOL,4h,FVG_RETRACE,bear,,69.77,71.66,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,SOL,1h,FVG_RETRACE,bull,,69.81,70.24,,Silver Bullet,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,XRP,4h,FVG_RETRACE,bear,,0.9217,0.9515,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,XRP,1h,FVG_RETRACE,bull,,0.9114,0.9241,,Silver Bullet,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:30,XRP,30m,FVG_RETRACE,bull,,0.9158,0.9241,,Silver Bullet,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:45,XRP,15m,FVG,bear,,0.9269,0.9294,0.363,Silver Bullet,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 16:00,ZEC,4h,BREAKER_RETEST,bear,,805.38,821.52,,,1d,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-21 16:00,ZEC,4h,FVG_RETRACE,bear,,792.57,818.36,,,1d,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 16:00,ZEC,4h,FVG,bull,,744.64,761.55,0.396,,1d,TRANSITION,,smc-1.0,Binance
+2026-11-21 16:00,SUI,1h,FVG_RETRACE,bull,,0.6401,0.6457,,Silver Bullet,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:30,SUI,15m,FVG_FILLED,bull,,0.644,0.6496,,Silver Bullet,1h,STRONG_BEAR,,smc-1.0,Binance
