@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-20 23:11",
+ "utc": "2026-11-21 00:16",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 259,
+  "n": 260,
   "wins": 116,
-  "win_rate": 44.8,
-  "avg_r": 0.302,
-  "total_r": 78.13,
+  "win_rate": 44.6,
+  "avg_r": 0.297,
+  "total_r": 77.1,
   "max_dd_r": 59.17,
-  "cur_loss_run": 1,
+  "cur_loss_run": 2,
   "max_loss_run": 20,
-  "sd": 1.548
+  "sd": 1.547
  },
  "yours": {
   "n": 33,
@@ -32,29 +32,29 @@
   "sd": 1.427
  },
  "silent": {
-  "n": 162,
+  "n": 163,
   "wins": 56,
-  "win_rate": 34.6,
-  "avg_r": 0.024,
-  "total_r": 3.82,
+  "win_rate": 34.4,
+  "avg_r": 0.017,
+  "total_r": 2.79,
   "max_dd_r": 41.01,
-  "cur_loss_run": 1,
+  "cur_loss_run": 2,
   "max_loss_run": 17,
-  "sd": 1.505
+  "sd": 1.502
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 188,
+   "n": 189,
    "wins": 68,
-   "win_rate": 36.2,
-   "avg_r": 0.099,
-   "total_r": 18.69,
+   "win_rate": 36.0,
+   "avg_r": 0.093,
+   "total_r": 17.65,
    "max_dd_r": 47.91,
-   "cur_loss_run": 1,
+   "cur_loss_run": 2,
    "max_loss_run": 20,
-   "sd": 1.544
+   "sd": 1.542
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -1187,6 +1187,32 @@
    "sent": false
   },
   {
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 1,
+    "win_rate": 50.0,
+    "avg_r": 0.724,
+    "total_r": 1.45,
+    "max_dd_r": 1.03,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": 2.486
+   },
+   "backtest": {
+    "n": 54,
+    "avg_r": 0.044,
+    "win_rate": 37.0
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-20 23:59",
+   "sent": false
+  },
+  {
    "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
    "coin": "ETH",
    "stage": "PAPER_TRADING",
@@ -1861,32 +1887,6 @@
    "why": [],
    "last_utc": "2026-11-05 15:59",
    "sent": true
-  },
-  {
-   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
-   "coin": "SUI",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.482,
-    "total_r": 2.48,
-    "max_dd_r": 0.0,
-    "cur_loss_run": 0,
-    "max_loss_run": 0,
-    "sd": null
-   },
-   "backtest": {
-    "n": 54,
-    "avg_r": 0.044,
-    "win_rate": 37.0
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-20 20:59",
-   "sent": false
   }
  ],
  "paused": [],
@@ -2153,8 +2153,8 @@
    "r": 79.19
   },
   {
-   "t": "2026-11-20 21:44",
-   "r": 78.13
+   "t": "2026-11-20 23:59",
+   "r": 77.1
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."
