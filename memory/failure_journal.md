@@ -1338,3 +1338,91 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - exit-rule -0.17R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.17R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-20 16:59 UTC, closed 2026-11-21 11:59 UTC, stage TEST
+  - MAE -0.48R / MFE +1.96R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout, bad_target
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - exit-rule -0.69R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.69R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: WEAK_BEAR · review: 2026-11-28
+  - signal 2026-11-20 18:59 UTC, closed 2026-11-21 11:59 UTC, stage TEST
+  - MAE -0.99R / MFE +1.41R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.04R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: STRONG_BEAR · review: 2026-11-28
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-21 11:59 UTC, stage TEST
+  - MAE -1.12R / MFE +1.22R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h donchian_breakout v1.0 - SL -1.03R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout v1.0 · asset: ETH · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.04R / MFE +0.36R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h donchian_breakout-VEXIT v1.0 - SL -1.03R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: ETH · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.04R / MFE +0.36R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h donchian_breakout-VEXIT-S4 v1.0 - SL -1.03R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: ETH · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.04R / MFE +0.36R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h donchian_breakout-VEXIT-FDISP v1.0 - SL -1.03R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: ETH · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.04R / MFE +0.36R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 4h donchian_breakout-VEXIT-FDISP-S2 v1.0 - SL -1.03R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP-S2 v1.0 · asset: ETH · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.04R / MFE +0.36R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### ZEC SHORT 4h donchian_breakout-VEXIT v1.0 - SL -1.01R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.01R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: ZEC · timeframe: 4h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage PAPER_TRADING
+  - MAE -1.05R / MFE +0.05R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.06R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage TEST
+  - MAE -1.43R / MFE +1.26R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V5 v1.0 - SL -1.06R
+- timestamp: 2026-11-21 12:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.06R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 11:59 UTC, stage TEST
+  - MAE -1.43R / MFE +1.26R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)

@@ -1,28 +1,11 @@
 {
- "generated_utc": "2026-11-21 11:11",
+ "generated_utc": "2026-11-21 12:11",
  "book": {
-  "utc": "2026-11-21 11:11",
-  "beijing": "2026-11-21 19:11",
+  "utc": "2026-11-21 12:11",
+  "beijing": "2026-11-21 20:11",
   "active": [],
   "awaiting": [],
   "paper": [
-   {
-    "id": "ETH-4h-donchian_breakout-2026-11-14 23:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "TP1_HIT",
-    "entry": 1769.2,
-    "stop": 1670.7268964816444,
-    "tp1": 1670.7268964816444,
-    "sim_tf": "4h",
-    "since": "2026-11-14 23:59",
-    "open_r": 1.4,
-    "next_action": "HOLD - stop at breakeven"
-   },
    {
     "id": "ETH-4h-donchian_breakout-VEXIT-2026-11-14 23:59",
     "coin": "ETH",
@@ -37,7 +20,7 @@
     "tp1": 1572.2537929632888,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.4,
+    "open_r": 1.18,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -54,7 +37,7 @@
     "tp1": 1572.2537929632888,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.4,
+    "open_r": 1.18,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -71,7 +54,7 @@
     "tp1": 1572.2537929632888,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.4,
+    "open_r": 1.18,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -88,7 +71,7 @@
     "tp1": 1572.2537929632888,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.4,
+    "open_r": 1.18,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -105,7 +88,7 @@
     "tp1": 555.7717821809185,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 2.18,
+    "open_r": 1.98,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -122,7 +105,7 @@
     "tp1": 529.6435643618371,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 2.18,
+    "open_r": 1.98,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -139,7 +122,7 @@
     "tp1": 529.6435643618371,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 2.18,
+    "open_r": 1.98,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -156,7 +139,7 @@
     "tp1": 529.6435643618371,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 2.18,
+    "open_r": 1.98,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -173,7 +156,7 @@
     "tp1": 529.6435643618371,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 2.18,
+    "open_r": 1.98,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -190,7 +173,7 @@
     "tp1": 0.6003786496338235,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.68,
+    "open_r": 1.45,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -207,7 +190,7 @@
     "tp1": 0.6003786496338235,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.68,
+    "open_r": 1.45,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -224,7 +207,7 @@
     "tp1": 0.6003786496338235,
     "sim_tf": "4h",
     "since": "2026-11-14 23:59",
-    "open_r": 1.68,
+    "open_r": 1.45,
     "next_action": "HOLD - stop at breakeven"
    },
    {
@@ -241,7 +224,7 @@
     "tp1": 57077.72221899291,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.62,
+    "open_r": 0.53,
     "next_action": "HOLD - stop at breakeven \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -258,7 +241,7 @@
     "tp1": 54679.97443798582,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.62,
+    "open_r": 0.53,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -275,7 +258,7 @@
     "tp1": 54679.97443798582,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.62,
+    "open_r": 0.53,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -292,7 +275,7 @@
     "tp1": 54679.97443798582,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.62,
+    "open_r": 0.53,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -309,7 +292,7 @@
     "tp1": 56460.95261793867,
     "sim_tf": "1h",
     "since": "2026-11-20 16:00",
-    "open_r": 1.02,
+    "open_r": 0.84,
     "next_action": "HOLD - stop at breakeven \u00b7 watch: opposing displacement candle; regime changed WEAK_BEAR -> STRONG_BEAR"
    },
    {
@@ -326,7 +309,7 @@
     "tp1": 1483.5342888985786,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.29,
+    "open_r": 0.03,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -343,7 +326,7 @@
     "tp1": 1483.5342888985786,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.29,
+    "open_r": 0.03,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -360,7 +343,7 @@
     "tp1": 1483.5342888985786,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.29,
+    "open_r": 0.03,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -377,7 +360,7 @@
     "tp1": 0.5737529398045784,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.92,
+    "open_r": 0.63,
     "next_action": "HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION"
    },
    {
@@ -394,7 +377,7 @@
     "tp1": 0.5737529398045784,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.92,
+    "open_r": 0.63,
     "next_action": "HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION"
    },
    {
@@ -411,7 +394,7 @@
     "tp1": 0.5737529398045784,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.92,
+    "open_r": 0.63,
     "next_action": "HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION"
    },
    {
@@ -428,25 +411,8 @@
     "tp1": 0.5737529398045784,
     "sim_tf": "4h",
     "since": "2026-11-20 15:59",
-    "open_r": 0.92,
+    "open_r": 0.63,
     "next_action": "HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION"
-   },
-   {
-    "id": "BTC-4h-donchian_breakout-2026-11-20 19:59",
-    "coin": "BTC",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "TP1_HIT",
-    "entry": 58558.66,
-    "stop": 58558.66,
-    "tp1": 56011.19563192199,
-    "sim_tf": "4h",
-    "since": "2026-11-20 19:59",
-    "open_r": 0.22,
-    "next_action": "HOLD - stop at breakeven \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
     "id": "BTC-4h-donchian_breakout-VEXIT-2026-11-20 19:59",
@@ -462,7 +428,7 @@
     "tp1": 53463.73126384397,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.22,
+    "open_r": 0.14,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -479,7 +445,7 @@
     "tp1": 53463.73126384397,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.22,
+    "open_r": 0.14,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -496,7 +462,7 @@
     "tp1": 53463.73126384397,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.22,
+    "open_r": 0.14,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -513,7 +479,7 @@
     "tp1": 54100.59735586347,
     "sim_tf": "4h",
     "since": "2026-11-20 20:00",
-    "open_r": 0.47,
+    "open_r": 0.39,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -530,7 +496,7 @@
     "tp1": 1516.6134198457687,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": -0.25,
+    "open_r": -0.49,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -547,7 +513,7 @@
     "tp1": 1425.2568396915374,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": -0.25,
+    "open_r": -0.49,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -564,7 +530,7 @@
     "tp1": 1425.2568396915374,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": -0.25,
+    "open_r": -0.49,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -581,7 +547,7 @@
     "tp1": 1425.2568396915374,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": -0.25,
+    "open_r": -0.49,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -598,7 +564,7 @@
     "tp1": 1448.0959847300953,
     "sim_tf": "4h",
     "since": "2026-11-20 20:00",
-    "open_r": -0.0,
+    "open_r": -0.24,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -615,7 +581,7 @@
     "tp1": 0.56078487267568,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.62,
+    "open_r": 0.33,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -632,7 +598,7 @@
     "tp1": 0.56078487267568,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.62,
+    "open_r": 0.33,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -649,7 +615,7 @@
     "tp1": 0.56078487267568,
     "sim_tf": "4h",
     "since": "2026-11-20 19:59",
-    "open_r": 0.62,
+    "open_r": 0.33,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -666,7 +632,7 @@
     "tp1": 0.57084926359122,
     "sim_tf": "4h",
     "since": "2026-11-20 20:00",
-    "open_r": 0.87,
+    "open_r": 0.58,
     "next_action": "HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION"
    },
    {
@@ -683,7 +649,7 @@
     "tp1": 53976.432356096,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.45,
+    "open_r": -0.53,
     "next_action": "HOLD"
    },
    {
@@ -700,7 +666,7 @@
     "tp1": 51212.43471219199,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.45,
+    "open_r": -0.53,
     "next_action": "HOLD"
    },
    {
@@ -717,7 +683,7 @@
     "tp1": 51212.43471219199,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.45,
+    "open_r": -0.53,
     "next_action": "HOLD"
    },
    {
@@ -734,7 +700,7 @@
     "tp1": 51212.43471219199,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.45,
+    "open_r": -0.53,
     "next_action": "HOLD"
    },
    {
@@ -751,7 +717,7 @@
     "tp1": 51212.43471219199,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.45,
+    "open_r": -0.53,
     "next_action": "HOLD"
    },
    {
@@ -768,92 +734,7 @@
     "tp1": 51903.434123167994,
     "sim_tf": "4h",
     "since": "2026-11-21 04:00",
-    "open_r": -0.2,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-2026-11-21 03:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 1572.29,
-    "stop": 1667.7475614595157,
-    "tp1": 1476.8324385404842,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.61,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 1572.29,
-    "stop": 1667.7475614595157,
-    "tp1": 1381.3748770809684,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.61,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-VEXIT-S4-2026-11-21 03:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-S4",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 1572.29,
-    "stop": 1667.7475614595157,
-    "tp1": 1381.3748770809684,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.61,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-2026-11-21 03:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FDISP",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 1572.29,
-    "stop": 1667.7475614595157,
-    "tp1": 1381.3748770809684,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.61,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-S2-2026-11-21 03:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FDISP-S2",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 1572.29,
-    "stop": 1667.7475614595157,
-    "tp1": 1381.3748770809684,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.61,
+    "open_r": -0.28,
     "next_action": "HOLD"
    },
    {
@@ -870,24 +751,7 @@
     "tp1": 1405.2392674458474,
     "sim_tf": "4h",
     "since": "2026-11-21 04:00",
-    "open_r": -0.36,
-    "next_action": "HOLD"
-   },
-   {
-    "id": "ZEC-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
-    "coin": "ZEC",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "POSITION_ACTIVE",
-    "entry": 690.41,
-    "stop": 770.0527397007089,
-    "tp1": 531.1245205985821,
-    "sim_tf": "4h",
-    "since": "2026-11-21 03:59",
-    "open_r": -0.44,
+    "open_r": -0.59,
     "next_action": "HOLD"
    },
    {
@@ -904,7 +768,7 @@
     "tp1": 0.5198619565417854,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.13,
+    "open_r": -0.38,
     "next_action": "HOLD"
    },
    {
@@ -921,7 +785,7 @@
     "tp1": 0.5198619565417854,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.13,
+    "open_r": -0.38,
     "next_action": "HOLD"
    },
    {
@@ -938,7 +802,7 @@
     "tp1": 0.5198619565417854,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.13,
+    "open_r": -0.38,
     "next_action": "HOLD"
    },
    {
@@ -955,7 +819,7 @@
     "tp1": 0.5198619565417854,
     "sim_tf": "4h",
     "since": "2026-11-21 03:59",
-    "open_r": -0.13,
+    "open_r": -0.38,
     "next_action": "HOLD"
    },
    {
@@ -972,7 +836,7 @@
     "tp1": 0.5312042119740622,
     "sim_tf": "4h",
     "since": "2026-11-21 04:00",
-    "open_r": 0.12,
+    "open_r": -0.13,
     "next_action": "HOLD"
    },
    {
@@ -989,7 +853,7 @@
     "tp1": 51851.84723274971,
     "sim_tf": "4h",
     "since": "2026-11-21 07:59",
-    "open_r": -0.0,
+    "open_r": -0.07,
     "next_action": "HOLD"
    },
    {
@@ -1006,7 +870,7 @@
     "tp1": 1419.5973858608993,
     "sim_tf": "4h",
     "since": "2026-11-21 07:59",
-    "open_r": -0.0,
+    "open_r": -0.21,
     "next_action": "HOLD"
    },
    {
@@ -1023,7 +887,7 @@
     "tp1": 0.5207432453602292,
     "sim_tf": "4h",
     "since": "2026-11-21 07:59",
-    "open_r": -0.0,
+    "open_r": -0.24,
     "next_action": "HOLD"
    }
   ],
@@ -1133,6 +997,32 @@
     "live": false
    },
    {
+    "id": "ETH-4h-donchian_breakout-2026-11-14 23:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "TRAIL",
+    "result_r": 1.251,
+    "live": false
+   },
+   {
+    "id": "BTC-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+    "coin": "BTC",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FRETEST",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "EXPIRED",
+    "reason": "EXPIRED",
+    "result_r": null,
+    "live": false
+   },
+   {
     "id": "ETH-4h-donchian_breakout-2026-11-20 15:59",
     "coin": "ETH",
     "direction": "SHORT",
@@ -1143,6 +1033,32 @@
     "state": "CLOSED",
     "reason": "BE",
     "result_r": 0.374,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FRETEST",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "EXPIRED",
+    "reason": "EXPIRED",
+    "result_r": null,
+    "live": false
+   },
+   {
+    "id": "SUI-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+    "coin": "SUI",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FRETEST",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "EXPIRED",
+    "reason": "EXPIRED",
+    "result_r": null,
     "live": false
    },
    {
@@ -1159,6 +1075,19 @@
     "live": false
    },
    {
+    "id": "BTC-4h-donchian_breakout-2026-11-20 19:59",
+    "coin": "BTC",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "BE",
+    "result_r": 0.369,
+    "live": false
+   },
+   {
     "id": "BTC-1h-TRD-H4-BREAKOUT-S3-2026-11-21 03:59",
     "coin": "BTC",
     "direction": "SHORT",
@@ -1169,6 +1098,84 @@
     "state": "CLOSED",
     "reason": "SL",
     "result_r": -1.045,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-2026-11-21 03:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.027,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.027,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-VEXIT-S4-2026-11-21 03:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-S4",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.027,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-2026-11-21 03:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FDISP",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.027,
+    "live": false
+   },
+   {
+    "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-S2-2026-11-21 03:59",
+    "coin": "ETH",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT-FDISP-S2",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.027,
+    "live": false
+   },
+   {
+    "id": "ZEC-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
+    "coin": "ZEC",
+    "direction": "SHORT",
+    "tf": "4h",
+    "strategy": "donchian_breakout-VEXIT",
+    "version": "1.0",
+    "stage": "PAPER_TRADING",
+    "state": "CLOSED",
+    "reason": "SL",
+    "result_r": -1.015,
     "live": false
    },
    {
@@ -1185,56 +1192,10 @@
     "live": false
    }
   ],
-  "limit_orders": [
-   {
-    "id": "BTC-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
-    "coin": "BTC",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FRETEST",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "AWAITING_FILL",
-    "limit": 60074.90694525177,
-    "stop": 62472.654726258865,
-    "signal": "2026-11-20 15:59",
-    "valid_bars": 5,
-    "bars": 4
-   },
-   {
-    "id": "ETH-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
-    "coin": "ETH",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FRETEST",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "AWAITING_FILL",
-    "limit": 1677.0744638876777,
-    "stop": 1763.0923194383884,
-    "signal": "2026-11-20 15:59",
-    "valid_bars": 5,
-    "bars": 4
-   },
-   {
-    "id": "SUI-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
-    "coin": "SUI",
-    "direction": "SHORT",
-    "tf": "4h",
-    "strategy": "donchian_breakout-VEXIT-FRETEST",
-    "version": "1.0",
-    "stage": "PAPER_TRADING",
-    "state": "AWAITING_FILL",
-    "limit": 0.6626808825244277,
-    "stop": 0.7022044126221385,
-    "signal": "2026-11-20 15:59",
-    "valid_bars": 5,
-    "bars": 4
-   }
-  ],
+  "limit_orders": [],
   "day_r": 0.0,
   "week_r": 0.0,
-  "paper_day_r": 18.2,
+  "paper_day_r": 13.67,
   "heat": 0,
   "limits": {
    "day_r": -3,
@@ -1244,13 +1205,12 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-21 11:11 UTC / 2026-11-21 19:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-21 12:11 UTC / 2026-11-21 20:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
-  "Limit:     BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 60,074.91 \u00b7 4/5 candles waited | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 1,677.07 \u00b7 4/5 candles waited | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 0.662681 \u00b7 4/5 candles waited",
-  "Paper:     ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,670.73 \u00b7 open +1.40R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.40R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.40R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.40R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4-FDISP v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.40R \u00b7 HOLD - stop at breakeven (VALIDATION) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 581.9000 \u00b7 stop 555.7718 \u00b7 open +2.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +2.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +2.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +2.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4-FDISP v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +2.18R \u00b7 HOLD - stop at breakeven (VALIDATION) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.68R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.68R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.68R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 59,475.47 \u00b7 stop 59,475.47 \u00b7 open +0.62R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 1h \u00b7 TRD-H4-BREAKOUT-S3 v1.0 \u00b7 entry 59,475.47 \u00b7 stop 59,475.47 \u00b7 open +1.02R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle; regime changed WEAK_BEAR -> STRONG_BEAR (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.29R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.29R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.29R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.92R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.92R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.92R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.92R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 58,558.66 \u00b7 stop 58,558.66 \u00b7 open +0.22R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.22R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.22R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.22R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 59,195.53 \u00b7 stop 61,742.99 \u00b7 open +0.47R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.25R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.25R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.25R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.25R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 1,630.81 \u00b7 stop 1,722.17 \u00b7 open -0.00R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.62R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 0.651364 \u00b7 stop 0.691622 \u00b7 open +0.87R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.45R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.45R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.45R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.45R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.45R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 57,431.43 \u00b7 stop 60,195.43 \u00b7 open -0.20R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 1,572.29 \u00b7 stop 1,667.75 \u00b7 open -0.61R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,572.29 \u00b7 stop 1,667.75 \u00b7 open -0.61R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,572.29 \u00b7 stop 1,667.75 \u00b7 open -0.61R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,572.29 \u00b7 stop 1,667.75 \u00b7 open -0.61R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 1,572.29 \u00b7 stop 1,667.75 \u00b7 open -0.61R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 1,596.15 \u00b7 stop 1,691.61 \u00b7 open -0.36R \u00b7 HOLD (PAPER_TRADING) | ZEC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 690.4100 \u00b7 stop 770.0527 \u00b7 open -0.44R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.13R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.13R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.13R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.13R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 0.621942 \u00b7 stop 0.667311 \u00b7 open +0.12R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 57,997.00 \u00b7 stop 61,069.58 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 1,630.93 \u00b7 stop 1,736.60 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6164 \u00b7 stop 0.664228 \u00b7 open -0.00R \u00b7 HOLD (PAPER_TRADING)",
-  "Closed:    ETH SHORT 4h donchian_breakout-VEXIT TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-S4 TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-FDISP TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-S4-FDISP TP2 +2.45R (paper) | BTC SHORT 4h donchian_breakout TP3 +1.84R (paper) | BTC SHORT 4h donchian_breakout-VEXIT TP2 +2.44R (paper) | BTC SHORT 4h donchian_breakout-VEXIT-S4 TP2 +2.44R (paper) | BTC SHORT 4h donchian_breakout-VEXIT-FDISP TP2 +2.44R (paper) | ETH SHORT 4h donchian_breakout BE +0.37R (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 BE +0.97R (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 SL -1.04R (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 SL -1.04R (paper)",
-  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3 \u00b7 paper today +18.20R",
+  "Paper:     ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.18R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4-FDISP v1.0 \u00b7 entry 1,769.20 \u00b7 stop 1,769.20 \u00b7 open +1.18R \u00b7 HOLD - stop at breakeven (VALIDATION) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 581.9000 \u00b7 stop 555.7718 \u00b7 open +1.98R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +1.98R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +1.98R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +1.98R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BNB \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4-FDISP v1.0 \u00b7 entry 581.9000 \u00b7 stop 581.9000 \u00b7 open +1.98R \u00b7 HOLD - stop at breakeven (VALIDATION) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.45R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.45R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.7011 \u00b7 stop 0.7011 \u00b7 open +1.45R \u00b7 HOLD - stop at breakeven (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 59,475.47 \u00b7 stop 59,475.47 \u00b7 open +0.53R \u00b7 HOLD - stop at breakeven \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.53R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.53R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 59,475.47 \u00b7 stop 61,873.22 \u00b7 open +0.53R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 1h \u00b7 TRD-H4-BREAKOUT-S3 v1.0 \u00b7 entry 59,475.47 \u00b7 stop 59,475.47 \u00b7 open +0.84R \u00b7 HOLD - stop at breakeven \u00b7 watch: opposing displacement candle; regime changed WEAK_BEAR -> STRONG_BEAR (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.03R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.03R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,655.57 \u00b7 stop 1,741.59 \u00b7 open +0.03R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.63R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.63R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.63R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6528 \u00b7 stop 0.692324 \u00b7 open +0.63R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.14R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.14R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 58,558.66 \u00b7 stop 61,106.12 \u00b7 open +0.14R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 59,195.53 \u00b7 stop 61,742.99 \u00b7 open +0.39R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.49R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.49R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.49R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 1,607.97 \u00b7 stop 1,699.33 \u00b7 open -0.49R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 1,630.81 \u00b7 stop 1,722.17 \u00b7 open -0.24R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.33R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.33R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6413 \u00b7 stop 0.681558 \u00b7 open +0.33R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 0.651364 \u00b7 stop 0.691622 \u00b7 open +0.58R \u00b7 HOLD \u00b7 watch: regime changed STRONG_BEAR -> EXPANSION (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.53R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.53R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.53R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.53R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 56,740.43 \u00b7 stop 59,504.43 \u00b7 open -0.53R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 57,431.43 \u00b7 stop 60,195.43 \u00b7 open -0.28R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 1,596.15 \u00b7 stop 1,691.61 \u00b7 open -0.59R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.38R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-S4 v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.38R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.38R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6106 \u00b7 stop 0.655969 \u00b7 open -0.38R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST v1.0 \u00b7 entry 0.621942 \u00b7 stop 0.667311 \u00b7 open -0.13R \u00b7 HOLD (PAPER_TRADING) | BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 57,997.00 \u00b7 stop 61,069.58 \u00b7 open -0.07R \u00b7 HOLD (PAPER_TRADING) | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 1,630.93 \u00b7 stop 1,736.60 \u00b7 open -0.21R \u00b7 HOLD (PAPER_TRADING) | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FDISP-S2 v1.0 \u00b7 entry 0.6164 \u00b7 stop 0.664228 \u00b7 open -0.24R \u00b7 HOLD (PAPER_TRADING)",
+  "Closed:    ETH SHORT 4h donchian_breakout-VEXIT TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-S4 TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-FDISP TP2 +2.45R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-S4-FDISP TP2 +2.45R (paper) | BTC SHORT 4h donchian_breakout TP3 +1.84R (paper) | BTC SHORT 4h donchian_breakout-VEXIT TP2 +2.44R (paper) | BTC SHORT 4h donchian_breakout-VEXIT-S4 TP2 +2.44R (paper) | BTC SHORT 4h donchian_breakout-VEXIT-FDISP TP2 +2.44R (paper) | ETH SHORT 4h donchian_breakout TRAIL +1.25R (paper) | BTC SHORT 4h donchian_breakout-VEXIT-FRETEST EXPIRED (paper) | ETH SHORT 4h donchian_breakout BE +0.37R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-FRETEST EXPIRED (paper) | SUI SHORT 4h donchian_breakout-VEXIT-FRETEST EXPIRED (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 BE +0.97R (paper) | BTC SHORT 4h donchian_breakout BE +0.37R (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 SL -1.04R (paper) | ETH SHORT 4h donchian_breakout SL -1.03R (paper) | ETH SHORT 4h donchian_breakout-VEXIT SL -1.03R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-S4 SL -1.03R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-FDISP SL -1.03R (paper) | ETH SHORT 4h donchian_breakout-VEXIT-FDISP-S2 SL -1.03R (paper) | ZEC SHORT 4h donchian_breakout-VEXIT SL -1.01R (paper) | BTC SHORT 1h TRD-H4-BREAKOUT-S3 SL -1.04R (paper)",
+  "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3 \u00b7 paper today +13.67R",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Second Estimate), 3rd Quarter 2026 2026-11-25 13:30 UTC"
  ],
  "risk": {
@@ -1311,134 +1271,24 @@
   {
    "coin": "BTC",
    "tf": "4h",
-   "strategy": "donchian_breakout",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "BTC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FRETEST",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "1h",
-   "strategy": "TRD-H4-BREAKOUT-S3",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.1",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FRETEST",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
    "coin": "ETH",
@@ -1453,14 +1303,14 @@
   },
   {
    "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < fib_618"
+   "rules_true": "3/4",
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
    "coin": "SUI",
@@ -1476,145 +1326,35 @@
   {
    "coin": "SUI",
    "tf": "4h",
-   "strategy": "donchian_breakout",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
-   "coin": "SUI",
+   "coin": "XRP",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.1",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FRETEST",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "1h",
-   "strategy": "TRD-H4-BREAKOUT-S3",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "1/2",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
    "coin": "ZEC",
    "tf": "4h",
-   "strategy": "donchian_breakout",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "2/3",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4",
-   "version": "1.1",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < prev(lowest(low,20))"
-  },
-  {
-   "coin": "ZEC",
-   "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FRETEST",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "3/4",
-   "missing": "close < prev(lowest(low,20))"
+   "missing": "volume > vol_sma(20) * 1.5"
   },
   {
    "coin": "BTC",
@@ -1624,7 +1364,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -1652,12 +1392,56 @@
   {
    "coin": "BTC",
    "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
    "strategy": "donchian_breakout-VEXIT-S4",
    "version": "1.1",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/4",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -1681,6 +1465,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "BTC",
@@ -1795,6 +1590,17 @@
   {
    "coin": "ETH",
    "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "1h",
    "strategy": "P03-FIB-PULLBACK-V5",
    "version": "1.0",
    "stage": "PAPER_TRADING",
@@ -1811,7 +1617,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -1822,7 +1628,62 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
    "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -1846,6 +1707,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "ETH",
@@ -1955,6 +1827,17 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -1982,6 +1865,72 @@
   {
    "coin": "SOL",
    "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "R4-HLHB",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -2000,6 +1949,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "SOL",
@@ -2119,7 +2079,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -2147,6 +2107,61 @@
   {
    "coin": "SUI",
    "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -2165,6 +2180,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "SUI",
@@ -2323,6 +2349,61 @@
   {
    "coin": "XRP",
    "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -2341,6 +2422,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "XRP",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "XRP",
@@ -2455,6 +2547,17 @@
   {
    "coin": "ZEC",
    "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "1h",
    "strategy": "P03-FIB-PULLBACK-V5",
    "version": "1.0",
    "stage": "PAPER_TRADING",
@@ -2471,7 +2574,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "1/5",
    "missing": null
   },
   {
@@ -2482,7 +2585,62 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
    "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -2506,6 +2664,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "ZEC",
@@ -2618,5 +2787,318 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": []
+ "events_this_run": [
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "BTC-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "AWAITING_FILL",
+   "to_state": "EXPIRED",
+   "price": null,
+   "note": "limit 60074.9 not filled within 5 4h candles - no trade"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "AWAITING_FILL",
+   "to_state": "EXPIRED",
+   "price": null,
+   "note": "limit 1677.07 not filled within 5 4h candles - no trade"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P01-BREAKOUT-V1-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P01-BREAKOUT-V1",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1666.3222319438387,
+   "note": "limit 1666.32 filled in the 2026-11-21 08:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P01-BREAKOUT-V1-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P01-BREAKOUT-V1",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1666.3222319438387,
+   "note": "entry at 2026-11-21 08:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P01-BREAKOUT-V3-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P01-BREAKOUT-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1666.3222319438387,
+   "note": "limit 1666.32 filled in the 2026-11-21 08:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P01-BREAKOUT-V3-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P01-BREAKOUT-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1666.3222319438387,
+   "note": "entry at 2026-11-21 08:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P04-MACD-SUPERTREND-V1-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V1",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1666.3222319438387,
+   "note": "limit 1666.32 filled in the 2026-11-21 08:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P04-MACD-SUPERTREND-V1-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V1",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1666.3222319438387,
+   "note": "entry at 2026-11-21 08:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P04-MACD-SUPERTREND-V3-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "AWAITING_FILL",
+   "to_state": "ENTRY_TRIGGERED",
+   "price": 1666.3222319438387,
+   "note": "limit 1666.32 filled in the 2026-11-21 08:00 UTC candle"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-P04-MACD-SUPERTREND-V3-2026-11-20 15:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P04-MACD-SUPERTREND-V3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "ENTRY_TRIGGERED",
+   "to_state": "POSITION_ACTIVE",
+   "price": 1666.3222319438387,
+   "note": "entry at 2026-11-21 08:00 UTC (limit)"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "SUI-4h-donchian_breakout-VEXIT-FRETEST-2026-11-20 15:59",
+   "coin": "SUI",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "AWAITING_FILL",
+   "to_state": "EXPIRED",
+   "price": null,
+   "note": "limit 0.662681 not filled within 5 4h candles - no trade"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-2026-11-14 23:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "TRAIL +1.25R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-1h-TRD-H4-BREAKOUT-S3-2026-11-20 16:59",
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.17R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-1h-TRD-H4-BREAKOUT-S3-2026-11-20 18:59",
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "EXIT_RULE -0.69R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "BTC-4h-donchian_breakout-2026-11-20 19:59",
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "TP1_HIT",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "BE +0.37R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-1h-TRD-H4-BREAKOUT-S3-2026-11-20 19:59",
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.04R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-2026-11-21 03:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.03R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.03R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-VEXIT-S4-2026-11-21 03:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.03R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-2026-11-21 03:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.03R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ETH-4h-donchian_breakout-VEXIT-FDISP-S2-2026-11-21 03:59",
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP-S2",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.03R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "ZEC-4h-donchian_breakout-VEXIT-2026-11-21 03:59",
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.01R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "SUI-30m-P01-BREAKOUT-V2-2026-11-21 03:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.06R"
+  },
+  {
+   "time_utc": "2026-11-21 12:11",
+   "id": "SUI-30m-P01-BREAKOUT-V5-2026-11-21 03:59",
+   "coin": "SUI",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V5",
+   "version": "1.0",
+   "stage": "TEST",
+   "from_state": "POSITION_ACTIVE",
+   "to_state": "CLOSED",
+   "price": null,
+   "note": "SL -1.06R"
+  }
+ ]
 }
