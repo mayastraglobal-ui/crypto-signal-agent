@@ -1426,3 +1426,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
   - what happened: volatility_spike, false_breakout
   - root cause / fix: (review)
+
+### SUI SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.03R
+- timestamp: 2026-11-21 13:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 12:59 UTC, stage TEST
+  - MAE -1.15R / MFE +0.87R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike
+  - root cause / fix: (review)
+
+### SUI SHORT 1h P01-BREAKOUT-V2 v1.0 - SL -1.03R
+- timestamp: 2026-11-21 13:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 12:59 UTC, stage TEST
+  - MAE -1.02R / MFE +1.00R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### SUI SHORT 1h P01-BREAKOUT-V5 v1.0 - SL -1.03R
+- timestamp: 2026-11-21 13:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 12:59 UTC, stage TEST
+  - MAE -1.02R / MFE +1.00R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
