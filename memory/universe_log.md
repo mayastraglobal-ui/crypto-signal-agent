@@ -1406,3 +1406,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-21 00:16 UTC
 - **EXCLUDED** SOXLB - only 137 days of history (need 180); 24h move -26.2% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $199k within 1% (need $250k)
+
+## 2026-11-21 06:16 UTC
+- **FLAG** ETH - possible wash volume: 24h volume is 1,075x the 1% order-book depth (flag only, not excluded)
