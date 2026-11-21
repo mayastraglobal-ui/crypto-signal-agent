@@ -12,7 +12,7 @@
  "suspended": {
   "SOXLB": "2026-11-21"
  },
- "runs": 1223,
+ "runs": 1224,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -178,6 +178,11 @@
    "spread",
    "thin_book",
    "volume_7d"
+  ],
+  "RWUSD": [
+   "history",
+   "stablecoin",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -249,6 +254,7 @@
   "ASTER": [],
   "MMT": [
    "data_degraded"
-  ]
+  ],
+  "RWUSD": []
  }
 }

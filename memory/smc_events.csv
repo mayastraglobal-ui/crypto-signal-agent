@@ -39307,3 +39307,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-21 13:45,SUI,15m,SWEEP,bear,0.6512,,,0.665,NY AM,1h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-21 13:45,SUI,15m,FVG_FILLED,bear,,0.6413,0.6458,,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
 2026-11-21 14:00,SUI,15m,FVG,bull,,0.644,0.6496,0.902,NY AM,1h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-21 15:00,BTC,1h,FVG,bull,,59175.0,60164.51,1.018,NY AM,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 14:30,BTC,30m,FVG,bull,,59805.91,60200.0,0.585,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-21 15:00,BTC,30m,FVG_RETRACE,bull,,59805.91,60200.0,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 14:15,BTC,15m,FVG_RETRACE,bull,,59805.91,60403.69,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 14:15,ETH,15m,FVG_RETRACE,bull,,1681.99,1698.47,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:00,SOL,1h,FVG,bull,,69.81,70.24,0.346,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-21 14:30,SOL,30m,FVG,bull,,69.97,70.32,0.421,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 15:00,SOL,30m,FVG_RETRACE,bull,,69.97,70.32,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 14:15,SOL,15m,FVG_RETRACE,bull,,69.97,70.36,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 15:00,XRP,1h,FVG,bull,,0.9114,0.9241,0.814,NY AM,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 14:30,XRP,30m,FVG,bull,,0.9158,0.9241,0.774,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 14:15,XRP,15m,FVG_RETRACE,bull,,0.9158,0.9253,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 14:15,ZEC,15m,FVG_RETRACE,bull,,789.61,795.53,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 14:15,ZEC,15m,FVG_FILLED,bull,,789.61,795.53,,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-21 15:00,SUI,1h,FVG,bull,,0.6401,0.6457,0.404,NY AM,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 14:30,SUI,30m,BREAKER_RETEST,bull,,0.6442,0.6484,,NY AM,1h,STRONG_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-21 14:15,SUI,15m,FVG_RETRACE,bull,,0.644,0.6496,,NY AM,1h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
