@@ -39003,3 +39003,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-21 04:00,SUI,30m,ORDER_BLOCK,bear,,0.6442,0.6484,,Asia,1h,EXPANSION,last bullish candle before the displacement,smc-1.0,Binance
 2026-11-21 04:00,SUI,30m,FVG,bear,,0.6317,0.6381,0.719,Asia,1h,EXPANSION,,smc-1.0,Binance
 2026-11-21 04:00,SUI,15m,FVG,bear,,0.6134,0.6316,2.717,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 05:00,BTC,1h,FVG,bear,,56842.02,58578.45,2.049,Asia,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:30,BTC,30m,FVG,bear,,56842.02,58144.08,2.224,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:30,BTC,15m,FVG,bear,,55988.76,56400.0,0.928,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:45,BTC,15m,FVG_RETRACE,bear,,55988.76,56400.0,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 05:00,BTC,15m,FVG_FILLED,bear,,55988.76,56400.0,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 05:00,ETH,1h,FVG,bear,,1574.21,1616.29,1.54,Asia,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:30,ETH,30m,FVG,bear,,1574.21,1605.0,1.621,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:30,ETH,15m,FVG,bear,,1558.06,1562.97,0.353,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:45,ETH,15m,FVG_RETRACE,bear,,1558.06,1562.97,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 05:00,ETH,15m,FVG_FILLED,bear,,1558.06,1562.97,,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 05:00,SOL,1h,FVG,bear,,66.5,68.42,1.652,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-11-21 04:30,SOL,30m,FVG,bear,,66.5,67.74,1.536,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 05:00,XRP,1h,FVG,bear,,0.884,0.9011,1.167,Asia,4h,TRANSITION,,smc-1.0,Binance
+2026-11-21 04:30,XRP,30m,FVG,bear,,0.8835,0.8924,0.873,Asia,1h,EXPANSION,,smc-1.0,Binance
+2026-11-21 05:00,XRP,30m,FVG_RETRACE,bear,,0.8835,0.8924,,Asia,1h,EXPANSION,first retrace into the gap,smc-1.0,Binance
+2026-11-21 05:00,SUI,1h,FVG,bear,,0.6132,0.6381,1.895,Asia,4h,EXPANSION,,smc-1.0,Binance
+2026-11-21 04:30,SUI,30m,FVG,bear,,0.6132,0.6316,1.938,Asia,1h,EXPANSION,,smc-1.0,Binance
