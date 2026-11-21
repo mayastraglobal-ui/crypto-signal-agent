@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>No signal - BTC back above 83,000, still choppy</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>No signal - BTC back above 83,000, still choppy</h1>
+<h2>Summary</h2>
+<ul><li>Engine report: 2026-10-09 12:24 UTC (1.0 hours old). Data state: GOOD.</li><li>No open positions. No live signal. Nothing is being watched. <strong>No trade is a valid result.</strong></li><li>BTC recovered to 83,246.82 (30m +0.8%). The big ~$1.80bn options expiry passed this morning.</li><li>Market weather: <strong>"Choppy - stay out."</strong> SOL, ZEC and XRP now have <strong>no veto on a short</strong> (4H and 1H down); ETH and BNB lost theirs. That is <strong>not</strong> a signal.</li><li>Altcoins still lag BTC (24h median -2.6%). Fear &amp; Greed is 59.</li><li><strong>US CPI (Sep data) on 2026-10-14 12:30 UTC.</strong> Blackout 11:30-13:30 UTC that day.</li></ul>
+<h2>Email summary</h2>
+<ul><li>headline: No signal. BTC recovers, market still choppy.</li><li>sub: BTC is back near 83,246 after the options expiry; altcoins still lag and the charts disagree.</li><li>do: Wait for a LIVE entry email and mark the CPI blackout on 2026-10-14.</li><li>dont: Don't short SOL, ZEC or XRP just because their veto lifted.</li><li>mood: Calm</li></ul>
+<h2>Position book</h2>
+<pre><code>POSITION BOOK — 2026-10-09 12:24 UTC / 2026-10-09 20:24 Beijing
+No open or pending positions.
+Day: +0.00R (limit -3R) · Week: +0.00R (limit -6R) · Heat: 0/3
+Risk:      no halt · risk per trade 0.5% · NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC</code></pre>
+<p>(<em>R</em> = the amount you risk on one trade. <em>Heat</em> = open live positions, out of 3 allowed.)</p>
+<h2>Market regime</h2>
+<p><strong>Market weather: Choppy - stay out.</strong> The timeframes disagree, so longs and shorts both tend to get stopped out. BTC's usual 24h move is about ±1.0% (8 of 10 similar days stayed within ±2.1%) - this is measured from past days, <strong>not a forecast</strong>.</p>
+<p>A <em>regime</em> is the market's "mood" on one timeframe: trending (BULL/BEAR), changing (TRANSITION) or UNCLEAR. <em>ROC</em> is the % price change over the last 30m window.</p>
+<ul><li><strong>BTC</strong> 83,246.82: daily trend UP, 4H SIDEWAYS · Fear &amp; Greed 59 (Greed). 1W / 1D / 4H / 1H: TRANSITION / WEAK_BULL / TRANSITION / TRANSITION · 30m +0.8% ROC.</li><li><strong>ETH</strong> 2,506.61: WEAK_BULL / TRANSITION / WEAK_BEAR / TRANSITION · +0.3%.</li><li><strong>SOL</strong> 111.3100: WEAK_BULL / WEAK_BULL / WEAK_BEAR / WEAK_BEAR · +0.6%.</li><li><strong>ZEC</strong> 1,234.62: WEAK_BULL / WEAK_BULL / WEAK_BEAR / WEAK_BEAR · +0.7%.</li><li><strong>XRP</strong> 1.4016: TRANSITION / TRANSITION / WEAK_BEAR / WEAK_BEAR · +0.1%.</li><li><strong>BNB</strong> 743.7800: WEAK_BULL / WEAK_BULL / TRANSITION / WEAK_BEAR · +0.0%.</li><li><strong>SUI</strong> 1.0714: UNCLEAR / TRANSITION / TRANSITION / TRANSITION · +0.4%.</li></ul>
+<p>Open interest (open futures contracts) is still falling (ETH -9.3%, SUI -10.0% in 24h): leveraged traders are leaving. BNB's funding is negative ("leaning short" crowding).</p>
+<p><strong>Playbook (BACKTEST facts per regime, not signals):</strong></p>
+<ol><li><strong>WEAK_BEAR</strong> (ETH, SOL, ZEC, XRP 4h; SOL, ZEC, XRP, BNB 1h): most families lost money (breakout -0.06R over 10620 trades, mtf_pullback -0.11R over 13360 trades). The winners (best: donchian_breakout-VEXIT-S4 v1.1 4h (lab) +0.28R over 244 trades) are only in BACKTESTING or FAILED.</li><li><strong>TRANSITION</strong> (BTC 4h/1h, ETH 1h, BNB 4h, SUI 4h/1h): the strategies that made money are BACKTESTING or FAILED; sweep-reversal strategies lost (liquidity_sweep_reversal v1.0 5m -0.50R over 528 trades). Most strategies are unreliable here.</li></ol>
+<p>What it means in plain words: BTC has calmed down and is "changing" on most charts, while several altcoins still lean down. No approved strategy has an edge in this mix. <strong>So the plan is to stand aside.</strong></p>
+<h2>Bull vs bear</h2>
+<p><strong>Whole market</strong></p>
+<ul><li>Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 1.0 h old; day +0.0R / week +0.0R, no halt)</li></ul>
+<p><strong>BTC</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.0 ATR in 10 candles))</li><li>Bear case: no clear direction on 1W TRANSITION, 4H TRANSITION, 1H TRANSITION</li><li>Risk manager: LONG: VETO - BTC regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H TRANSITION)) · SHORT: VETO - same reason</li></ul>
+<p><strong>ETH</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.2 ATR in 10 candles))</li><li>Bear case: 4H WEAK_BEAR (EMA-fast falling (-1.6 ATR in 10 candles); swing structure down (LH/LL)); no clear direction on 1D TRANSITION, 1H TRANSITION</li><li>Risk manager: LONG: VETO - ETH regime: NO TRADE (timeframes disagree (1D TRANSITION, 4H WEAK_BEAR, 1H TRANSITION)) · SHORT: VETO - same reason</li></ul>
+<p><strong>SOL</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.0 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.1 ATR in 10 candles))</li><li>Bear case: 4H WEAK_BEAR (EMA-fast falling (-1.2 ATR in 10 candles); swing structure down (LH/LL)); 1H WEAK_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-1.0 ATR in 10 candles))</li><li>Risk manager: LONG: VETO - SOL regime: SHORT allowed (4H/1H bearish, 1W WEAK_BULL) · SHORT: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 1.0 h old; day +0.0R / week +0.0R, no halt; SOL regime: SHORT allowed)</li></ul>
+<p><strong>ZEC</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+3.0 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: 4H WEAK_BEAR (EMA-fast falling (-1.1 ATR in 10 candles); swing structure down (LH/LL)); 1H WEAK_BEAR (close below EMA-fast below EMA-slow; swing structure down (LH/LL))</li><li>Risk manager: LONG: VETO - ZEC regime: SHORT allowed (4H/1H bearish, 1W WEAK_BULL) · SHORT: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 1.0 h old; day +0.0R / week +0.0R, no halt; ZEC regime: SHORT allowed)</li></ul>
+<p><strong>XRP</strong></p>
+<ul><li>Bull case: no bullish timeframe</li><li>Bear case: 4H WEAK_BEAR (EMA-fast falling (-1.2 ATR in 10 candles); swing structure down (LH/LL)); 1H WEAK_BEAR (close below EMA-fast below EMA-slow; swing structure down (LH/LL)); no clear direction on 1W TRANSITION, 1D TRANSITION</li><li>Risk manager: LONG: VETO - XRP regime: SHORT allowed (4H/1H bearish, 1W TRANSITION) · SHORT: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 1.0 h old; day +0.0R / week +0.0R, no halt; XRP regime: SHORT allowed)</li></ul>
+<p><strong>BNB</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.0 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: 1H WEAK_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-1.1 ATR in 10 candles)); no clear direction on 4H TRANSITION</li><li>Risk manager: LONG: VETO - BNB regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H WEAK_BEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>SUI</strong></p>
+<ul><li>Bull case: no bullish timeframe</li><li>Bear case: no clear direction on 1W UNCLEAR, 1D TRANSITION, 4H TRANSITION, 1H TRANSITION</li><li>Risk manager: LONG: VETO - SUI regime: NO TRADE (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)) · SHORT: VETO - same reason</li></ul>
+<p>"No veto" on a SOL, ZEC or XRP short is <strong>not</strong> a reason to trade. There is no signal on any of them.</p>
+<h2>News and events</h2>
+<p>All headlines are <strong>CLAIMs</strong> from the hourly feed (fetched 2026-10-09 12:26 UTC, fresh). They are not evidence for a trade.</p>
+<ol><li><strong>2026-10-09 - Recovery.</strong> CoinDesk reports Trump's Iran pledge is underpinning crypto gains and bitcoin bears face liquidation pressure; a CoinDesk live blog says Bitcoin climbed back above $83,000. Why it matters: the main driver of this week's drop eased; short sellers being forced out can push prices up for a while. <a href="https://www.coindesk.com/daybook-us/2026/10/09/trump-s-iran-pledge-underpins-crypto-gains-as-bitcoin-bears-face-liquidation-pressure">https://www.coindesk.com/daybook-us/2026/10/09/trump-s-iran-pledge-underpins-crypto-gains-as-bitcoin-bears-face-liquidation-pressure</a></li><li><strong>2026-10-09 - ETF outflows.</strong> Cointelegraph reports October outflows from Bitcoin and Ether ETFs are nearing $1B. CoinDesk reports XRP ETFs were the only crypto funds with inflows on Thursday. Why it matters: fund demand is still weak for BTC and ETH. <a href="https://cointelegraph.com/markets/bitcoin-ether-etfs-october-outflows-billion">https://cointelegraph.com/markets/bitcoin-ether-etfs-october-outflows-billion</a> · <a href="https://www.coindesk.com/business/2026/10/09/live-updates-xrp-etfs-the-only-ones-in-green-as-btc-eth-zec-funds-post-outflows">https://www.coindesk.com/business/2026/10/09/live-updates-xrp-etfs-the-only-ones-in-green-as-btc-eth-zec-funds-post-outflows</a></li><li><strong>2026-10-09 - BTC to exchanges.</strong> Cointelegraph reports speculators moved 55K BTC to exchanges amid $1.1B of liquidations. Why it matters: coins sent to exchanges are often sent to be sold. <a href="https://cointelegraph.com/markets/bitcoin-speculators-btc-exchanges-crypto-liquidation">https://cointelegraph.com/markets/bitcoin-speculators-btc-exchanges-crypto-liquidation</a></li><li><strong>2026-10-09 - ZEC.</strong> CoinDesk reports Zcash developers set a January target for quantum-resistant payments. A tech story for ZEC. <a href="https://www.coindesk.com/tech/2026/10/09/zcash-developers-set-january-target-for-quantum-resistant-payments-after-bunker-mode-scare">https://www.coindesk.com/tech/2026/10/09/zcash-developers-set-january-target-for-quantum-resistant-payments-after-bunker-mode-scare</a></li><li><strong>2026-10-09 - SOL.</strong> CoinDesk reports Solana is about to halve its block times. A tech story for SOL. <a href="https://www.coindesk.com/tech/2026/10/09/solana-is-about-to-halve-its-block-times-as-final-200-millisecond-upgrade-nears">https://www.coindesk.com/tech/2026/10/09/solana-is-about-to-halve-its-block-times-as-final-200-millisecond-upgrade-nears</a></li><li><strong>Binance:</strong> Binance Alpha is removing several small tokens (2026-10-09); none of our 7 coins. <a href="https://www.binance.com/en/support/announcement/56476c15963b4c0cb113ab0e22613c5c">https://www.binance.com/en/support/announcement/56476c15963b4c0cb113ab0e22613c5c</a></li></ol>
+<p><strong>Options expiries (Deribit, 08:00 UTC).</strong> An <em>expiry</em> is when options contracts end; prices can be pulled toward the <em>max pain</em> level.</p>
+<ul><li>2026-10-10: BTC ~$0.18bn (max pain 83,000); ETH ~$0.06bn (max pain 2,520).</li><li>2026-10-11: BTC ~$0.17bn (max pain 82,000). Both are small.</li></ul>
+<p><strong>Calendar (high-impact, next 7 days):</strong></p>
+<ul><li><strong>US CPI (Sep data): 2026-10-14 12:30 UTC.</strong> <em>CPI</em> is the US inflation report. The engine blocks live entries from 11:30 to 13:30 UTC that day. It is already in the engine's calendar.</li></ul>
+<h2>Signals explained</h2>
+<p>No signal - no trade is a valid result.</p>
+<ul><li>No live signal, no paper or validation signal, and no watched setup this run.</li><li>Lab note: TRD-H4-PULLBACK@1.0 1h and bb_squeeze_breakout@1.0 1h moved to FAILED in the last 24 hours. None is a signal.</li></ul>
+<h2>Do and don't today</h2>
+<p><strong>Do</strong></p>
+<ul><li>Wait for a LIVE entry email before any trade.</li><li>Respect the vetoes; the engine calls this a choppy, stay-out day.</li><li>Mark 2026-10-14 11:30-13:30 UTC (CPI blackout) in your calendar.</li></ul>
+<p><strong>Don't</strong></p>
+<ul><li>Don't short SOL, ZEC or XRP just because their veto lifted.</li><li>Don't buy the BTC recovery on the Iran headline.</li><li>Don't trade from lab or BACKTESTING results.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li>none (no extra pages opened; the hourly feed was fresh, so no web search was needed)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-10-09 13:22 UTC, finished 2026-10-09 13:30 UTC; problems: none</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/briefings/2026-10-09-2120.md · Research signal. Not financial advice.</footer></main></body></html>
