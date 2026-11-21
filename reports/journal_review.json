@@ -1,74 +1,74 @@
 {
- "last_entry_utc": "2026-11-21 03:00",
+ "last_entry_utc": "2026-11-21 04:06",
  "days": 30,
  "all": {
+  "alerts": 57,
+  "took": 54,
+  "skipped": 0,
+  "no_answer": 3,
+  "plan_took": {
+   "n": 38,
+   "total_r": 58.849,
+   "avg_r": 1.549,
+   "wins": 28
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 2,
+   "total_r": -2.0,
+   "avg_r": -1.0,
+   "wins": 0
+  },
+  "plan_all": {
+   "n": 40,
+   "total_r": 56.849,
+   "avg_r": 1.421,
+   "wins": 28
+  },
+  "yours": {
+   "n": 37,
+   "total_r": 67.52,
+   "avg_r": 1.825,
+   "wins": 31
+  },
+  "gap": {
+   "n": 37,
+   "total_r": 10.346,
+   "avg_r": 0.28,
+   "wins": 6
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 16
+ },
+ "recent": {
   "alerts": 54,
   "took": 51,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
-   "n": 33,
-   "total_r": 46.349,
-   "avg_r": 1.405,
-   "wins": 23
-  },
-  "plan_skipped": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
-  },
-  "plan_no_answer": {
-   "n": 2,
-   "total_r": -2.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_all": {
    "n": 35,
-   "total_r": 44.349,
-   "avg_r": 1.267,
-   "wins": 23
-  },
-  "yours": {
-   "n": 32,
-   "total_r": 55.02,
-   "avg_r": 1.719,
-   "wins": 26
-  },
-  "gap": {
-   "n": 32,
-   "total_r": 10.346,
-   "avg_r": 0.323,
-   "wins": 6
-  },
-  "early": {
-   "n": 0,
-   "plan": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   },
-   "yours": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   }
-  },
-  "missing_result": 18
- },
- "recent": {
-  "alerts": 51,
-  "took": 48,
-  "skipped": 0,
-  "no_answer": 3,
-  "plan_took": {
-   "n": 30,
-   "total_r": 49.349,
-   "avg_r": 1.645,
-   "wins": 23
+   "total_r": 61.849,
+   "avg_r": 1.767,
+   "wins": 28
   },
   "plan_skipped": {
    "n": 0,
@@ -83,21 +83,21 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 32,
-   "total_r": 47.349,
-   "avg_r": 1.48,
-   "wins": 23
+   "n": 37,
+   "total_r": 59.849,
+   "avg_r": 1.618,
+   "wins": 28
   },
   "yours": {
-   "n": 29,
-   "total_r": 58.5,
-   "avg_r": 2.017,
-   "wins": 26
+   "n": 34,
+   "total_r": 71.0,
+   "avg_r": 2.088,
+   "wins": 31
   },
   "gap": {
-   "n": 29,
+   "n": 34,
    "total_r": 10.826,
-   "avg_r": 0.373,
+   "avg_r": 0.318,
    "wins": 6
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 18
+  "missing_result": 16
  },
  "per_strategy": [
   {
@@ -184,9 +184,9 @@
    "took": 2,
    "skipped": 0,
    "plan_avg_r": 2.5,
-   "plan_n": 1,
+   "plan_n": 2,
    "your_avg_r": 2.5,
-   "your_n": 1
+   "your_n": 2
   },
   {
    "cell": "P07-SQUEEZE-RETEST-V3 4h",
@@ -210,8 +210,8 @@
   },
   {
    "cell": "TRD-H4-BREAKOUT-S3 1h",
-   "alerts": 9,
-   "took": 9,
+   "alerts": 10,
+   "took": 10,
    "skipped": 0,
    "plan_avg_r": 1.959,
    "plan_n": 8,
@@ -233,20 +233,20 @@
    "alerts": 15,
    "took": 15,
    "skipped": 0,
-   "plan_avg_r": 1.483,
-   "plan_n": 12,
-   "your_avg_r": 1.942,
-   "your_n": 12
+   "plan_avg_r": 1.628,
+   "plan_n": 14,
+   "your_avg_r": 2.021,
+   "your_n": 14
   },
   {
    "cell": "donchian_breakout-VEXIT-FRETEST 4h",
-   "alerts": 8,
-   "took": 8,
+   "alerts": 10,
+   "took": 10,
    "skipped": 0,
-   "plan_avg_r": null,
-   "plan_n": 0,
-   "your_avg_r": null,
-   "your_n": 0
+   "plan_avg_r": 2.5,
+   "plan_n": 2,
+   "your_avg_r": 2.5,
+   "your_n": 2
   },
   {
    "cell": "donchian_breakout-VEXIT-S4 4h",
@@ -281,7 +281,7 @@
    "avg_r": -1.0
   },
   "P07-SQUEEZE-RETEST-V1": {
-   "n": 1,
+   "n": 2,
    "avg_r": 2.5
   },
   "P07-SQUEEZE-RETEST-V3": {
@@ -318,15 +318,15 @@
     "wins": 0
    },
    "sent": {
-    "n": 24,
-    "total_r": 28.174,
-    "avg_r": 1.174,
-    "wins": 15
+    "n": 29,
+    "total_r": 40.674,
+    "avg_r": 1.403,
+    "wins": 20
    }
   }
  },
  "findings": [
-  "Your real results are +0.32R per trade above the plan (32 trades) - your execution adds to the strategy."
+  "Your real results are +0.28R per trade above the plan (37 trades) - your execution adds to the strategy."
  ],
  "decisions": [
   {
