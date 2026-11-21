@@ -4105,3 +4105,82 @@
     kind: RETEST
     tf: 30m
     parent_cell: P01-BREAKOUT-V2-FDISP@1.0|30m
+- id: P03-FIB-PULLBACK-V4-S2
+  version: '1.0'
+  status: FORMALIZED
+  family: mtf_pullback
+  gate: intraday
+  regimes:
+  - STRONG_BULL
+  - WEAK_BULL
+  - STRONG_BEAR
+  - WEAK_BEAR
+  - EXPANSION
+  source: 'engine rule-significance test: P03-FIB-PULLBACK-V4@1.0 without one entry rule'
+  evidence_class: BACKTEST_EVIDENCE
+  parent: 'result: P03-FIB-PULLBACK-V4@1.0 4h'
+  hypothesis: 'The rule ''low <= fib_500 / high >= fib_500'' adds nothing to P03-FIB-PULLBACK-V4@1.0: the simpler
+    card without it should do at least as well on new data (fewer rules = less room for overfitting).'
+  timeframes:
+  - 4h
+  description: After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8%
+    with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+  params:
+    fast: 20
+    slow: 50
+  long:
+  - fib_dir > 0
+  - close > fib_618
+  - close > open
+  - ema(close,{fast}) > ema(close,{slow})
+  short:
+  - fib_dir < 0
+  - close < fib_618
+  - close < open
+  - ema(close,{fast}) < ema(close,{slow})
+  stop:
+    method: structure
+    long_level: fib_786
+    short_level: fib_786
+    buffer_atr: 0.2
+    max_width_atr: 3.0
+    min_width_atr: 0.8
+  targets:
+    long:
+    - 2R
+    - 10R
+    short:
+    - 2R
+    - 10R
+    split:
+    - 0.5
+    - 0.5
+  manage:
+    trail:
+      atr_n: 22
+      atr_x: 3.0
+  time_stop_bars: 60
+  cooldown_bars: 0
+  known_weaknesses: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci
+    building blocks existed but were never used).
+  edge:
+    type: behavioural
+    works_in:
+    - STRONG_BULL
+    - WEAK_BULL
+    - STRONG_BEAR
+    - WEAK_BEAR
+    who_pays: late sellers who treat a normal retracement as a reversal and short into support
+    mechanism: many traders watch the same Fibonacci levels, so orders cluster at 50-61.8% and the pullback tends
+      to stop there inside a trend
+    fails_when: 'a trend that is ending: the retracement goes past 78.6% and becomes a reversal'
+    kill_rule: FAILED when the unseen-data part of the backtest turns negative; demoted by the weekly review when
+      its live results turn negative
+  changelog:
+  - '1.0 (2026-11-21): P03-FIB-PULLBACK-V4@1.0 without entry rule ''low <= fib_500 / high >= fib_500'' (rule significance
+    test)'
+  added: '2026-11-21'
+  factory: variant_search
+  variant_of: P03-FIB-PULLBACK-V4@1.0
+  factory_evidence: 'P03-FIB-PULLBACK-V4@1.0 4h: with the rule 258 trades avg +0.030R; without rule 2 (low <= fib_500
+    / high >= fib_500): 492 trades avg +0.153R - the rule does not improve the result'

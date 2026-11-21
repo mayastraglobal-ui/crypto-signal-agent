@@ -530,3 +530,7 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-11-20 07:41 UTC
 - **macd_trend_cross@1.0 1h**: FAILED → **BACKTESTING** (avg +0.00R/trade (needs +0.10R); profit factor 1.00; recovery factor 0.00 (net +0.0R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 24.1R - limit 17R; longest drawdown 1922 days = 59% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+
+## 2026-11-21 07:39 UTC
+- **R4-HLHB@1.0 4h**: FAILED → **VALIDATION** (multiple-testing bar: t-statistic 1.59 of the average trade, needs 3.76 after 578 trials; HIGH OVERFITTING RISK: 64% of the profit from window 2)
+- **TRD-H4-PULLBACK@1.0 1h**: FAILED → **BACKTESTING** (avg +0.03R/trade (needs +0.10R); profit factor 1.05; recovery factor 0.54 (net +23.8R / max drawdown 44.3R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.9R - limit 17R; longest drawdown 2049 days = 62% of the tested period (limit 55%))
