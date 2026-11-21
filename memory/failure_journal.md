@@ -1234,3 +1234,83 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session outside killzones, conditions: overextended_entry, late_entry, no_displacement, wrong_session
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### BTC SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.08R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.08R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.29R / MFE +1.51R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike
+  - root cause / fix: (review)
+
+### BTC SHORT 15m P01-BREAKOUT-V2 v1.0 - SL -1.10R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.10R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: BTC · timeframe: 15m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 04:14 UTC, closed 2026-11-21 06:44 UTC, stage TEST
+  - MAE -1.52R / MFE +0.89R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: -
+  - root cause / fix: (review)
+
+### ETH SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.04R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.59R / MFE +0.64R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 1h P01-BREAKOUT-V5 v1.0 - SL -1.04R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.47R / MFE +0.64R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### ETH SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.07R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: ETH · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -2.40R / MFE +0.97R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P04-MACD-SUPERTREND-V2 v1.0 - exit-rule -0.90R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.90R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P04-MACD-SUPERTREND-V2 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -0.93R / MFE +1.26R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h TRD-H4-BREAKOUT-S3 v1.0 - SL -1.04R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: TRD-H4-BREAKOUT-S3 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 04:59 UTC, closed 2026-11-21 06:59 UTC, stage PAPER_TRADING
+  - MAE -1.07R / MFE +0.69R
+  - at entry: session Asia, conditions: overextended_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V2 v1.0 - SL -1.05R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 04:29 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.41R / MFE +0.64R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V5 v1.0 - SL -1.05R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 30m · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 04:29 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.41R / MFE +0.64R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)
+
+### BTC SHORT 1h P07-SQUEEZE-RETEST-V2 v1.0 - SL -1.05R
+- timestamp: 2026-11-21 07:12 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.05R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P07-SQUEEZE-RETEST-V2 v1.0 · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-28
+  - signal 2026-11-21 05:59 UTC, closed 2026-11-21 06:59 UTC, stage TEST
+  - MAE -1.67R / MFE +0.69R
+  - at entry: session outside killzones, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: volatility_spike, false_breakout
+  - root cause / fix: (review)

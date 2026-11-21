@@ -1,43 +1,43 @@
 {
  "track": {
   "total": {
-   "n": 269,
-   "wins": 125,
-   "win_rate": 46.5,
-   "avg_r": 0.369,
-   "total_r": 99.24,
+   "n": 284,
+   "wins": 130,
+   "win_rate": 45.8,
+   "avg_r": 0.338,
+   "total_r": 95.87,
    "max_dd_r": 59.17,
-   "cur_loss_run": 0,
+   "cur_loss_run": 9,
    "max_loss_run": 20,
-   "sd": 1.57
+   "sd": 1.558
   },
   "yours": {
-   "n": 36,
+   "n": 37,
    "wins": 24,
-   "win_rate": 66.7,
-   "avg_r": 0.771,
-   "total_r": 27.77,
+   "win_rate": 64.9,
+   "avg_r": 0.722,
+   "total_r": 26.73,
    "max_dd_r": 5.05,
-   "cur_loss_run": 0,
+   "cur_loss_run": 1,
    "max_loss_run": 5,
-   "sd": 1.459
+   "sd": 1.469
   },
   "silent": {
-   "n": 164,
-   "wins": 57,
+   "n": 178,
+   "wins": 62,
    "win_rate": 34.8,
-   "avg_r": 0.032,
-   "total_r": 5.26,
+   "avg_r": 0.017,
+   "total_r": 2.94,
    "max_dd_r": 41.01,
-   "cur_loss_run": 0,
+   "cur_loss_run": 8,
    "max_loss_run": 17,
-   "sd": 1.51
+   "sd": 1.491
   },
   "alerts_known": true,
   "paused": []
  },
  "week": "2026-W47",
- "utc": "2026-11-21 06:16",
+ "utc": "2026-11-21 07:12",
  "final": false,
  "rows": [
   {
@@ -201,25 +201,25 @@
    "version": "V2",
    "tf": "15m",
    "live": {
-    "n": 5,
-    "win_rate": 40.0,
-    "avg_r": -0.494,
-    "total_r": -2.47,
-    "sd": 0.8184079056314156
+    "n": 6,
+    "win_rate": 33.3,
+    "avg_r": -0.594,
+    "total_r": -3.57,
+    "sd": 0.7722918489793867
    },
    "week": {
-    "n": 2,
-    "win_rate": 50.0,
-    "avg_r": -0.528,
-    "total_r": -1.06,
-    "sd": 0.8061017305526643
+    "n": 3,
+    "win_rate": 33.3,
+    "avg_r": -0.718,
+    "total_r": -2.15,
+    "sd": 0.6578908217427367
    },
    "gross": {
-    "n": 5,
-    "win_rate": 40.0,
-    "avg_r": -0.304,
-    "total_r": -1.52,
-    "sd": 0.8905281017463739
+    "n": 6,
+    "win_rate": 33.3,
+    "avg_r": -0.426,
+    "total_r": -2.55,
+    "sd": 0.8500975630283072
    },
    "by_market": {
     "CHOPPY": {
@@ -230,11 +230,11 @@
      "sd": 0.0
     },
     "DOWN": {
-     "n": 2,
-     "win_rate": 50.0,
-     "avg_r": -0.528,
-     "total_r": -1.06,
-     "sd": 0.8061017305526643
+     "n": 3,
+     "win_rate": 33.3,
+     "avg_r": -0.718,
+     "total_r": -2.15,
+     "sd": 0.6578908217427367
     },
     "UP": {
      "n": 2,
@@ -249,7 +249,7 @@
     "avg_r": 0.077,
     "win_rate": 39.1
    },
-   "confidence": "-0.49R over 5 trades: too early to say anything",
+   "confidence": "-0.59R over 6 trades: too early to say anything",
    "sent": false
   },
   {
@@ -406,33 +406,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 8,
+    "n": 10,
     "win_rate": 50.0,
-    "avg_r": 0.641,
-    "total_r": 5.13,
-    "sd": 1.6465230682519192
+    "avg_r": 0.65,
+    "total_r": 6.5,
+    "sd": 1.6751027033190136
    },
    "week": {
-    "n": 2,
+    "n": 4,
     "win_rate": 50.0,
-    "avg_r": 0.681,
-    "total_r": 1.36,
-    "sd": 2.479823481621222
+    "avg_r": 0.685,
+    "total_r": 2.74,
+    "sd": 2.034899567546271
    },
    "gross": {
-    "n": 8,
+    "n": 10,
     "win_rate": 50.0,
-    "avg_r": 0.728,
-    "total_r": 5.83,
-    "sd": 1.6443262569471164
+    "avg_r": 0.73,
+    "total_r": 7.3,
+    "sd": 1.671547253960301
    },
    "by_market": {
     "DOWN": {
-     "n": 6,
+     "n": 8,
      "win_rate": 50.0,
-     "avg_r": 0.814,
-     "total_r": 4.89,
-     "sd": 1.7969599606001243
+     "avg_r": 0.783,
+     "total_r": 6.26,
+     "sd": 1.7905390598922997
     },
     "UP": {
      "n": 2,
@@ -447,7 +447,7 @@
     "avg_r": 0.085,
     "win_rate": 38.4
    },
-   "confidence": "+0.64R over 8 trades: too early to say anything",
+   "confidence": "+0.65R over 10 trades: promising, not proven",
    "sent": false
   },
   {
@@ -459,33 +459,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 5,
-    "win_rate": 20.0,
-    "avg_r": -0.088,
-    "total_r": -0.44,
-    "sd": 1.4299096824624975
+    "n": 8,
+    "win_rate": 37.5,
+    "avg_r": 0.049,
+    "total_r": 0.39,
+    "sd": 1.2621454452637382
    },
    "week": {
-    "n": 3,
-    "win_rate": 0.0,
-    "avg_r": -0.775,
-    "total_r": -2.32,
-    "sd": 0.2560943836426978
+    "n": 6,
+    "win_rate": 33.3,
+    "avg_r": -0.248,
+    "total_r": -1.49,
+    "sd": 0.9502575791156136
    },
    "gross": {
-    "n": 5,
-    "win_rate": 20.0,
-    "avg_r": -0.037,
-    "total_r": -0.18,
-    "sd": 1.4337136045947252
+    "n": 8,
+    "win_rate": 37.5,
+    "avg_r": 0.097,
+    "total_r": 0.77,
+    "sd": 1.2626783820231386
    },
    "by_market": {
     "DOWN": {
-     "n": 5,
-     "win_rate": 20.0,
-     "avg_r": -0.088,
-     "total_r": -0.44,
-     "sd": 1.4299096824624975
+     "n": 8,
+     "win_rate": 37.5,
+     "avg_r": 0.049,
+     "total_r": 0.39,
+     "sd": 1.2621454452637382
     }
    },
    "backtest": {
@@ -493,7 +493,7 @@
     "avg_r": 0.125,
     "win_rate": 39.4
    },
-   "confidence": "-0.09R over 5 trades: too early to say anything",
+   "confidence": "+0.05R over 8 trades: too early to say anything",
    "sent": false
   },
   {
@@ -551,33 +551,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 1,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.09,
-    "total_r": -1.09,
-    "sd": 0.0
+    "avg_r": -1.07,
+    "total_r": -2.14,
+    "sd": 0.028991378028648554
    },
    "week": {
-    "n": 0,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": 0.0,
-    "total_r": 0.0,
+    "avg_r": -1.049,
+    "total_r": -1.05,
     "sd": 0.0
    },
    "gross": {
-    "n": 1,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.03,
-    "total_r": -1.03,
-    "sd": 0.0
+    "avg_r": -1.023,
+    "total_r": -2.05,
+    "sd": 0.009899494936611674
    },
    "by_market": {
     "DOWN": {
-     "n": 1,
+     "n": 2,
      "win_rate": 0.0,
-     "avg_r": -1.09,
-     "total_r": -1.09,
-     "sd": 0.0
+     "avg_r": -1.07,
+     "total_r": -2.14,
+     "sd": 0.028991378028648554
     }
    },
    "backtest": {
@@ -585,7 +585,7 @@
     "avg_r": 0.117,
     "win_rate": 38.4
    },
-   "confidence": "-1.09R over 1 trade: too early to say anything",
+   "confidence": "-1.07R over 2 trades: too early to say anything",
    "sent": false
   },
   {
@@ -781,25 +781,25 @@
    "version": "V5",
    "tf": "1h",
    "live": {
-    "n": 2,
+    "n": 3,
     "win_rate": 0.0,
-    "avg_r": -0.744,
-    "total_r": -1.49,
-    "sd": 0.5062884553295681
+    "avg_r": -0.842,
+    "total_r": -2.52,
+    "sd": 0.39595496376902933
    },
    "week": {
-    "n": 0,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": 0.0,
-    "total_r": 0.0,
+    "avg_r": -1.037,
+    "total_r": -1.04,
     "sd": 0.0
    },
    "gross": {
-    "n": 2,
+    "n": 3,
     "win_rate": 0.0,
-    "avg_r": -0.683,
-    "total_r": -1.37,
-    "sd": 0.4956818536117699
+    "avg_r": -0.793,
+    "total_r": -2.38,
+    "sd": 0.399627743447991
    },
    "by_market": {
     "CHOPPY": {
@@ -810,11 +810,11 @@
      "sd": 0.0
     },
     "DOWN": {
-     "n": 1,
+     "n": 2,
      "win_rate": 0.0,
-     "avg_r": -0.386,
-     "total_r": -0.39,
-     "sd": 0.0
+     "avg_r": -0.712,
+     "total_r": -1.42,
+     "sd": 0.4603265145524424
     }
    },
    "backtest": {
@@ -822,7 +822,7 @@
     "avg_r": 0.013,
     "win_rate": 33.5
    },
-   "confidence": "-0.74R over 2 trades: too early to say anything",
+   "confidence": "-0.84R over 3 trades: too early to say anything",
    "sent": false
   },
   {
@@ -880,25 +880,25 @@
    "version": "V5",
    "tf": "30m",
    "live": {
-    "n": 5,
+    "n": 6,
     "win_rate": 0.0,
-    "avg_r": -0.938,
-    "total_r": -4.69,
-    "sd": 0.22183484847967416
+    "avg_r": -0.957,
+    "total_r": -5.74,
+    "sd": 0.20350593766931388
    },
    "week": {
-    "n": 0,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": 0.0,
-    "total_r": 0.0,
+    "avg_r": -1.049,
+    "total_r": -1.05,
     "sd": 0.0
    },
    "gross": {
-    "n": 5,
+    "n": 6,
     "win_rate": 0.0,
-    "avg_r": -0.88,
-    "total_r": -4.4,
-    "sd": 0.2097467520606696
+    "avg_r": -0.903,
+    "total_r": -5.42,
+    "sd": 0.19562353300834404
    },
    "by_market": {
     "CHOPPY": {
@@ -909,11 +909,11 @@
      "sd": 0.009609023536933008
     },
     "DOWN": {
-     "n": 2,
+     "n": 3,
      "win_rate": 0.0,
-     "avg_r": -0.701,
-     "total_r": -1.4,
-     "sd": 0.09121677477306463
+     "avg_r": -0.817,
+     "total_r": -2.45,
+     "sd": 0.21129205695750447
     }
    },
    "backtest": {
@@ -921,7 +921,7 @@
     "avg_r": 0.012,
     "win_rate": 35.3
    },
-   "confidence": "-0.94R over 5 trades: too early to say anything",
+   "confidence": "-0.96R over 6 trades: too early to say anything",
    "sent": false
   },
   {
@@ -1368,33 +1368,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 2,
-    "win_rate": 100.0,
-    "avg_r": 1.675,
-    "total_r": 3.35,
-    "sd": 1.1101576464628797
+    "n": 3,
+    "win_rate": 66.7,
+    "avg_r": 0.816,
+    "total_r": 2.45,
+    "sd": 1.6822211507408888
    },
    "week": {
-    "n": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.46,
-    "total_r": 2.46,
-    "sd": 0.0
+    "n": 2,
+    "win_rate": 50.0,
+    "avg_r": 0.779,
+    "total_r": 1.56,
+    "sd": 2.377292998349173
    },
    "gross": {
-    "n": 2,
-    "win_rate": 100.0,
-    "avg_r": 1.738,
-    "total_r": 3.48,
-    "sd": 1.076923627747112
+    "n": 3,
+    "win_rate": 66.7,
+    "avg_r": 0.87,
+    "total_r": 2.61,
+    "sd": 1.6855332489551587
    },
    "by_market": {
     "DOWN": {
-     "n": 2,
-     "win_rate": 100.0,
-     "avg_r": 1.675,
-     "total_r": 3.35,
-     "sd": 1.1101576464628797
+     "n": 3,
+     "win_rate": 66.7,
+     "avg_r": 0.816,
+     "total_r": 2.45,
+     "sd": 1.6822211507408888
     }
    },
    "backtest": {
@@ -1402,7 +1402,7 @@
     "avg_r": 0.181,
     "win_rate": 41.6
    },
-   "confidence": "+1.68R over 2 trades: too early to say anything",
+   "confidence": "+0.82R over 3 trades: too early to say anything",
    "sent": false
   },
   {
@@ -1793,6 +1793,52 @@
    },
    "confidence": "-1.05R over 1 trade: too early to say anything",
    "sent": true
+  },
+  {
+   "key": "P07-SQUEEZE-RETEST-V2@1.0|1h",
+   "coin": "BTC",
+   "stage": "TEST",
+   "strategy": 7,
+   "name": "Squeeze breakout & retest",
+   "version": "V2",
+   "tf": "1h",
+   "live": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.055,
+    "total_r": -1.05,
+    "sd": 0.0
+   },
+   "week": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.055,
+    "total_r": -1.05,
+    "sd": 0.0
+   },
+   "gross": {
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.023,
+    "total_r": -1.02,
+    "sd": 0.0
+   },
+   "by_market": {
+    "DOWN": {
+     "n": 1,
+     "win_rate": 0.0,
+     "avg_r": -1.055,
+     "total_r": -1.05,
+     "sd": 0.0
+    }
+   },
+   "backtest": {
+    "n": 196,
+    "avg_r": 0.057,
+    "win_rate": 35.7
+   },
+   "confidence": "-1.05R over 1 trade: too early to say anything",
+   "sent": false
   },
   {
    "key": "P07-SQUEEZE-RETEST-V2@1.0|30m",
@@ -2263,33 +2309,33 @@
    "version": "V4",
    "tf": "1h",
    "live": {
-    "n": 3,
-    "win_rate": 33.3,
-    "avg_r": -0.07,
-    "total_r": -0.21,
-    "sd": 1.7990634600628552
+    "n": 4,
+    "win_rate": 50.0,
+    "avg_r": 0.378,
+    "total_r": 1.51,
+    "sd": 1.7212381928909974
    },
    "week": {
-    "n": 2,
-    "win_rate": 50.0,
-    "avg_r": 0.455,
-    "total_r": 0.91,
-    "sd": 2.1948594488030437
+    "n": 3,
+    "win_rate": 66.7,
+    "avg_r": 0.878,
+    "total_r": 2.63,
+    "sd": 1.7162432811230464
    },
    "gross": {
-    "n": 3,
-    "win_rate": 33.3,
-    "avg_r": -0.007,
-    "total_r": -0.02,
-    "sd": 1.7874775523066018
+    "n": 4,
+    "win_rate": 50.0,
+    "avg_r": 0.435,
+    "total_r": 1.74,
+    "sd": 1.7063137655972498
    },
    "by_market": {
     "DOWN": {
-     "n": 3,
-     "win_rate": 33.3,
-     "avg_r": -0.07,
-     "total_r": -0.21,
-     "sd": 1.7990634600628552
+     "n": 4,
+     "win_rate": 50.0,
+     "avg_r": 0.378,
+     "total_r": 1.51,
+     "sd": 1.7212381928909974
     }
    },
    "backtest": {
@@ -2297,7 +2343,7 @@
     "avg_r": 0.037,
     "win_rate": 36.8
    },
-   "confidence": "-0.07R over 3 trades: too early to say anything",
+   "confidence": "+0.38R over 4 trades: too early to say anything",
    "sent": false
   },
   {
@@ -2401,33 +2447,33 @@
    "version": "1.0",
    "tf": "1h",
    "live": {
-    "n": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.467,
-    "total_r": 2.47,
-    "sd": 0.0
+    "n": 2,
+    "win_rate": 50.0,
+    "avg_r": 0.713,
+    "total_r": 1.43,
+    "sd": 2.4812376951835953
    },
    "week": {
-    "n": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.467,
-    "total_r": 2.47,
-    "sd": 0.0
+    "n": 2,
+    "win_rate": 50.0,
+    "avg_r": 0.713,
+    "total_r": 1.43,
+    "sd": 2.4812376951835953
    },
    "gross": {
-    "n": 1,
-    "win_rate": 100.0,
-    "avg_r": 2.5,
-    "total_r": 2.5,
-    "sd": 0.0
+    "n": 2,
+    "win_rate": 50.0,
+    "avg_r": 0.741,
+    "total_r": 1.48,
+    "sd": 2.486894549433088
    },
    "by_market": {
     "DOWN": {
-     "n": 1,
-     "win_rate": 100.0,
-     "avg_r": 2.467,
-     "total_r": 2.47,
-     "sd": 0.0
+     "n": 2,
+     "win_rate": 50.0,
+     "avg_r": 0.713,
+     "total_r": 1.43,
+     "sd": 2.4812376951835953
     }
    },
    "backtest": {
@@ -2435,7 +2481,7 @@
     "avg_r": 0.341,
     "win_rate": 46.1
    },
-   "confidence": "+2.47R over 1 trade: too early to say anything",
+   "confidence": "+0.71R over 2 trades: too early to say anything",
    "sent": true
   },
   {
@@ -2493,33 +2539,33 @@
    "version": "1.0",
    "tf": "1h",
    "live": {
-    "n": 10,
-    "win_rate": 40.0,
-    "avg_r": 0.357,
-    "total_r": 3.57,
-    "sd": 1.8237661430250438
+    "n": 12,
+    "win_rate": 41.7,
+    "avg_r": 0.292,
+    "total_r": 3.51,
+    "sd": 1.7111025751623634
    },
    "week": {
-    "n": 7,
-    "win_rate": 57.1,
-    "avg_r": 0.964,
-    "total_r": 6.75,
-    "sd": 1.8866259502589473
+    "n": 9,
+    "win_rate": 55.6,
+    "avg_r": 0.742,
+    "total_r": 6.68,
+    "sd": 1.7649742522516048
    },
    "gross": {
-    "n": 10,
-    "win_rate": 40.0,
-    "avg_r": 0.388,
-    "total_r": 3.88,
-    "sd": 1.8179806287930207
+    "n": 12,
+    "win_rate": 41.7,
+    "avg_r": 0.321,
+    "total_r": 3.85,
+    "sd": 1.7063459341439817
    },
    "by_market": {
     "DOWN": {
-     "n": 10,
-     "win_rate": 40.0,
-     "avg_r": 0.357,
-     "total_r": 3.57,
-     "sd": 1.8237661430250438
+     "n": 12,
+     "win_rate": 41.7,
+     "avg_r": 0.292,
+     "total_r": 3.51,
+     "sd": 1.7111025751623634
     }
    },
    "backtest": {
@@ -2527,7 +2573,7 @@
     "avg_r": 0.059,
     "win_rate": 35.7
    },
-   "confidence": "+0.36R over 10 trades: still uncertain - could be luck",
+   "confidence": "+0.29R over 12 trades: still uncertain - could be luck",
    "sent": false
   },
   {
@@ -2671,6 +2717,28 @@
  ],
  "promote": [
   {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "BTC",
+   "strategy": 1,
+   "name": "Breakout (Donchian + volume + ADX)",
+   "version": "V2",
+   "tf": "30m",
+   "live": {
+    "n": 10,
+    "win_rate": 50.0,
+    "avg_r": 0.65,
+    "total_r": 6.5,
+    "sd": 1.6751027033190136
+   },
+   "backtest": {
+    "n": 172,
+    "avg_r": 0.085,
+    "win_rate": 38.4
+   },
+   "confidence": "+0.65R over 10 trades: promising, not proven",
+   "why": "10 live TEST setups, +0.65R a trade after fees (50% won); 5-year backtest on BTC +0.09R over 172 trades"
+  },
+  {
    "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
    "coin": "ETH",
    "strategy": "TRD-H4-BREAKOUT-S3",
@@ -2678,19 +2746,19 @@
    "version": "1.0",
    "tf": "1h",
    "live": {
-    "n": 10,
-    "win_rate": 40.0,
-    "avg_r": 0.357,
-    "total_r": 3.57,
-    "sd": 1.8237661430250438
+    "n": 12,
+    "win_rate": 41.7,
+    "avg_r": 0.292,
+    "total_r": 3.51,
+    "sd": 1.7111025751623634
    },
    "backtest": {
     "n": 207,
     "avg_r": 0.059,
     "win_rate": 35.7
    },
-   "confidence": "+0.36R over 10 trades: still uncertain - could be luck",
-   "why": "10 live TEST setups, +0.36R a trade after fees (40% won); 5-year backtest on ETH +0.06R over 207 trades"
+   "confidence": "+0.29R over 12 trades: still uncertain - could be luck",
+   "why": "12 live TEST setups, +0.29R a trade after fees (42% won); 5-year backtest on ETH +0.06R over 207 trades"
   }
  ],
  "paper": [
@@ -2713,8 +2781,8 @@
  "five_min": {
   "confirmed_n": 16,
   "confirmed_r": 1.222,
-  "all_n": 195,
-  "all_gross_r": 0.224,
+  "all_n": 209,
+  "all_gross_r": 0.2,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V1",
@@ -2727,8 +2795,8 @@
     "strategy": "P01-BREAKOUT-V5",
     "confirmed_n": 1,
     "confirmed_r": -1.0,
-    "all_n": 13,
-    "all_gross_r": -0.823
+    "all_n": 15,
+    "all_gross_r": -0.849
    },
    {
     "strategy": "P02-EMA-PULLBACK-V4",
@@ -2776,8 +2844,8 @@
     "strategy": "TRD-H4-BREAKOUT-S3",
     "confirmed_n": 7,
     "confirmed_r": 1.882,
-    "all_n": 44,
-    "all_gross_r": 0.237
+    "all_n": 46,
+    "all_gross_r": 0.226
    }
   ],
   "side_by_side": {
@@ -2817,7 +2885,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-21 06:16 UTC"
+   "text": "hourly scan: last run 2026-11-21 07:12 UTC"
   },
   {
    "ok": true,
@@ -2825,41 +2893,41 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-21 05:01 UTC (11 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-21 06:10 UTC (7 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 86"
+   "text": "TEST setups closed this week (GitHub record): 100"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 195,
-   "total_r": 32.47,
-   "avg_r": 0.167,
-   "week_n": 86,
-   "week_total_r": 68.37
+   "n": 209,
+   "total_r": 30.15,
+   "avg_r": 0.144,
+   "week_n": 100,
+   "week_total_r": 66.05
   },
   "PAPER": {
-   "n": 1,
-   "total_r": 2.47,
-   "avg_r": 2.47,
-   "week_n": 1,
-   "week_total_r": 2.47
+   "n": 2,
+   "total_r": 1.43,
+   "avg_r": 0.715,
+   "week_n": 2,
+   "week_total_r": 1.43
   },
   "YOURS": {
-   "n": 32,
-   "total_r": 29.67,
-   "avg_r": 0.927,
-   "week_n": 20,
-   "week_total_r": 31.65
+   "n": 33,
+   "total_r": 28.63,
+   "avg_r": 0.868,
+   "week_n": 21,
+   "week_total_r": 30.61
   },
   "SILENT": {
-   "n": 164,
-   "total_r": 5.27,
-   "avg_r": 0.032,
-   "week_n": 67,
-   "week_total_r": 39.19
+   "n": 178,
+   "total_r": 2.95,
+   "avg_r": 0.017,
+   "week_n": 81,
+   "week_total_r": 36.87
   },
   "known": true
  },
@@ -2944,7 +3012,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-21 05:12",
+  "checked_utc": "2026-11-21 06:17",
   "lines": [
    "39 shock(s) this week, 30 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 21, broke yesterday's high 1, broke yesterday's low 5, volume spike 19",
@@ -2976,16 +3044,16 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 142,
-   "avg_r": 0.356,
-   "wins": 70
+   "n": 144,
+   "avg_r": 0.38,
+   "wins": 72
   },
   {
    "verdict": "outside",
    "text": "outside the 4H range (breakout)",
-   "n": 118,
-   "avg_r": 0.432,
-   "wins": 53
+   "n": 131,
+   "avg_r": 0.331,
+   "wins": 56
   }
  ],
  "settings": {
@@ -2999,5 +3067,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W47</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 20 closed this week (+31.6R) \u00b7 32 since the start (+0.93R a trade, after fees)\nSilent research records (not sent to you): 67 this week (+39.2R)\n\ud83d\udfe1 PAPER: 1 this week (+2.5R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. TRD-H4-BREAKOUT-S3 1.0 1h \u00b7 ETH\n   +0.36R over 10 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 17 repair(s) judged - 12 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 39 this week (30 sent) \u00b7 4h later 17 kept going, 22 reversed \u00b7 a strategy alert followed 10\n\n\ud83d\udcc8 Track record (your alerts, after fees): 36 closed \u00b7 +0.77R a trade \u00b7 +27.8R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 2 (+0.70R) \u00b7 middle 4 (+0.03R) \u00b7 against 142 (+0.36R) \u00b7 outside 118 (+0.43R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W47</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 21 closed this week (+30.6R) \u00b7 33 since the start (+0.87R a trade, after fees)\nSilent research records (not sent to you): 81 this week (+36.9R)\n\ud83d\udfe1 PAPER: 2 this week (+1.4R)\n\n<b>Ready for \ud83d\udfe1 PAPER</b> (tap to promote):\n1. Breakout (Donchian + volume + ADX) V2 30m \u00b7 BTC\n   +0.65R over 10 trades: promising, not proven\n2. TRD-H4-BREAKOUT-S3 1.0 1h \u00b7 ETH\n   +0.29R over 12 trades: still uncertain - could be luck\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 17 repair(s) judged - 12 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 39 this week (30 sent) \u00b7 4h later 17 kept going, 22 reversed \u00b7 a strategy alert followed 10\n\n\ud83d\udcc8 Track record (your alerts, after fees): 37 closed \u00b7 +0.72R a trade \u00b7 +26.7R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 2 (+0.70R) \u00b7 middle 4 (+0.03R) \u00b7 against 144 (+0.38R) \u00b7 outside 131 (+0.33R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
