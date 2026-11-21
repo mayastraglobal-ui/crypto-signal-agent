@@ -1424,3 +1424,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-21 15:11 UTC
 - **EXCLUDED** RWUSD - only 39 days of history (need 180); 7-day average volume $20M < $50M; behaves like a stablecoin (price stayed within ±0.03% for 30 days)
+
+## 2026-11-21 23:02 UTC
+- **FLAG** ZEC - possible wash volume: 24h volume is 1,057x the 1% order-book depth (flag only, not excluded)

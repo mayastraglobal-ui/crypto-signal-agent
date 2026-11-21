@@ -39370,3 +39370,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-21 21:45,XRP,15m,BOS,bear,0.9305,,,0.201,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-21 21:30,ZEC,30m,SWEEP,bear,796.51,,,0.299,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-21 21:15,ZEC,15m,WEAK_BREAK,bull,796.51,,,0.003,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-21 22:45,BTC,15m,FVG_FILLED,bull,,60190.92,60278.95,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-21 23:00,SOL,30m,SWEEP,bull,70.12,,,0.187,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 22:15,SOL,15m,BOS,bear,70.41,,,0.469,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-21 22:15,XRP,15m,FVG_RETRACE,bull,,0.9265,0.9281,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 22:15,ZEC,15m,BOS,bear,786.24,,,0.09,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-21 22:15,ZEC,15m,ORDER_BLOCK,bear,,791.67,794.98,,,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-21 23:00,ZEC,15m,SWEEP,bull,781.34,,,0.152,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 22:30,SUI,30m,SWEEP,bull,0.6449,,,0.17,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 23:00,SUI,30m,BOS,bear,0.6449,,,0.077,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-21 22:15,SUI,15m,SWEEP,bull,0.6449,,,0.34,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 23:00,SUI,15m,BOS,bear,0.6449,,,0.154,,1h,UNCLEAR,no displacement,smc-1.0,Binance
