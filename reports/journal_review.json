@@ -1,11 +1,11 @@
 {
- "last_entry_utc": "2026-11-21 08:00",
+ "last_entry_utc": "2026-11-21 08:46",
  "days": 30,
  "all": {
   "alerts": 62,
-  "took": 55,
+  "took": 58,
   "skipped": 0,
-  "no_answer": 7,
+  "no_answer": 4,
   "plan_took": {
    "n": 40,
    "total_r": 56.849,
@@ -57,13 +57,13 @@
     "wins": 0
    }
   },
-  "missing_result": 15
+  "missing_result": 18
  },
  "recent": {
   "alerts": 59,
-  "took": 52,
+  "took": 55,
   "skipped": 0,
-  "no_answer": 7,
+  "no_answer": 4,
   "plan_took": {
    "n": 37,
    "total_r": 59.849,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 15
+  "missing_result": 18
  },
  "per_strategy": [
   {
@@ -241,7 +241,7 @@
   {
    "cell": "donchian_breakout-VEXIT-FDISP-S2 4h",
    "alerts": 4,
-   "took": 0,
+   "took": 3,
    "skipped": 0,
    "plan_avg_r": null,
    "plan_n": 0,
