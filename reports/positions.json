@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-21 01:11",
+ "generated_utc": "2026-11-21 02:11",
  "book": {
-  "utc": "2026-11-21 01:11",
-  "beijing": "2026-11-21 09:11",
+  "utc": "2026-11-21 02:11",
+  "beijing": "2026-11-21 10:11",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -900,7 +900,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-21 01:11 UTC / 2026-11-21 09:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-21 02:11 UTC / 2026-11-21 10:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Limit:     BTC \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 60,074.91 \u00b7 2/5 candles waited | ETH \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 1,677.07 \u00b7 2/5 candles waited | SUI \u00b7 SHORT \u00b7 4h \u00b7 donchian_breakout-VEXIT-FRETEST (PAPER_TRADING) \u00b7 limit 0.662681 \u00b7 2/5 candles waited",
@@ -1054,6 +1054,17 @@
   },
   {
    "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "high >= fib_500"
+  },
+  {
+   "coin": "SOL",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -1095,17 +1106,6 @@
    "state": "SETUP_FORMING",
    "rules_true": "3/4",
    "missing": "volume > vol_sma(20) * 1.5"
-  },
-  {
-   "coin": "XRP",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "high >= fib_500"
   },
   {
    "coin": "ZEC",
@@ -1192,7 +1192,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -1457,17 +1457,6 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -1776,6 +1765,17 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
    "missing": null
   },
   {
