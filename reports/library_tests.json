@@ -6,24 +6,24 @@
    "version": "1.0",
    "tf": "1h",
    "status": "PAPER_TRADING",
-   "trades": 958,
-   "avg_r": 0.159,
-   "test_avg_r": 0.277,
-   "tested_utc": "2026-11-20 07:41",
+   "trades": 964,
+   "avg_r": 0.166,
+   "test_avg_r": 0.296,
+   "tested_utc": "2026-11-21 07:39",
    "library": true,
    "coins": {
     "BTC": {
-     "n": 180,
-     "avg_r": 0.341,
-     "win_rate": 46.1,
+     "n": 181,
+     "avg_r": 0.353,
+     "win_rate": 46.4,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
     },
     "ETH": {
-     "n": 207,
-     "avg_r": 0.059,
-     "win_rate": 35.7,
+     "n": 209,
+     "avg_r": 0.065,
+     "win_rate": 35.9,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
@@ -45,25 +45,25 @@
      "positive": true
     },
     "ZEC": {
-     "n": 131,
-     "avg_r": -0.029,
-     "win_rate": 35.9,
+     "n": 132,
+     "avg_r": -0.036,
+     "win_rate": 35.6,
      "test_n": 0,
      "test_avg_r": null,
      "positive": false
     },
     "SUI": {
-     "n": 54,
-     "avg_r": 0.044,
-     "win_rate": 37.0,
+     "n": 55,
+     "avg_r": 0.088,
+     "win_rate": 38.2,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
     },
     "BNB": {
-     "n": 143,
-     "avg_r": 0.163,
-     "win_rate": 39.2,
+     "n": 144,
+     "avg_r": 0.179,
+     "win_rate": 39.6,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true

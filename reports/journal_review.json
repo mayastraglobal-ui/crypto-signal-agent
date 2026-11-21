@@ -1,104 +1,104 @@
 {
- "last_entry_utc": "2026-11-21 07:00",
+ "last_entry_utc": "2026-11-21 08:00",
  "days": 30,
  "all": {
-  "alerts": 58,
+  "alerts": 62,
   "took": 55,
   "skipped": 0,
-  "no_answer": 3,
+  "no_answer": 7,
   "plan_took": {
+   "n": 40,
+   "total_r": 56.849,
+   "avg_r": 1.421,
+   "wins": 28
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 2,
+   "total_r": -2.0,
+   "avg_r": -1.0,
+   "wins": 0
+  },
+  "plan_all": {
+   "n": 42,
+   "total_r": 54.849,
+   "avg_r": 1.306,
+   "wins": 28
+  },
+  "yours": {
+   "n": 39,
+   "total_r": 67.52,
+   "avg_r": 1.731,
+   "wins": 32
+  },
+  "gap": {
+   "n": 39,
+   "total_r": 12.346,
+   "avg_r": 0.317,
+   "wins": 7
+  },
+  "early": {
+   "n": 0,
+   "plan": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   },
+   "yours": {
+    "n": 0,
+    "total_r": 0.0,
+    "avg_r": null,
+    "wins": 0
+   }
+  },
+  "missing_result": 15
+ },
+ "recent": {
+  "alerts": 59,
+  "took": 52,
+  "skipped": 0,
+  "no_answer": 7,
+  "plan_took": {
+   "n": 37,
+   "total_r": 59.849,
+   "avg_r": 1.618,
+   "wins": 28
+  },
+  "plan_skipped": {
+   "n": 0,
+   "total_r": 0.0,
+   "avg_r": null,
+   "wins": 0
+  },
+  "plan_no_answer": {
+   "n": 2,
+   "total_r": -2.0,
+   "avg_r": -1.0,
+   "wins": 0
+  },
+  "plan_all": {
    "n": 39,
    "total_r": 57.849,
    "avg_r": 1.483,
    "wins": 28
   },
-  "plan_skipped": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
-  },
-  "plan_no_answer": {
-   "n": 2,
-   "total_r": -2.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_all": {
-   "n": 41,
-   "total_r": 55.849,
-   "avg_r": 1.362,
-   "wins": 28
-  },
   "yours": {
-   "n": 37,
-   "total_r": 67.52,
-   "avg_r": 1.825,
-   "wins": 31
-  },
-  "gap": {
-   "n": 37,
-   "total_r": 10.346,
-   "avg_r": 0.28,
-   "wins": 6
-  },
-  "early": {
-   "n": 0,
-   "plan": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   },
-   "yours": {
-    "n": 0,
-    "total_r": 0.0,
-    "avg_r": null,
-    "wins": 0
-   }
-  },
-  "missing_result": 17
- },
- "recent": {
-  "alerts": 55,
-  "took": 52,
-  "skipped": 0,
-  "no_answer": 3,
-  "plan_took": {
    "n": 36,
-   "total_r": 60.849,
-   "avg_r": 1.69,
-   "wins": 28
-  },
-  "plan_skipped": {
-   "n": 0,
-   "total_r": 0.0,
-   "avg_r": null,
-   "wins": 0
-  },
-  "plan_no_answer": {
-   "n": 2,
-   "total_r": -2.0,
-   "avg_r": -1.0,
-   "wins": 0
-  },
-  "plan_all": {
-   "n": 38,
-   "total_r": 58.849,
-   "avg_r": 1.549,
-   "wins": 28
-  },
-  "yours": {
-   "n": 34,
    "total_r": 71.0,
-   "avg_r": 2.088,
-   "wins": 31
+   "avg_r": 1.972,
+   "wins": 32
   },
   "gap": {
-   "n": 34,
-   "total_r": 10.826,
-   "avg_r": 0.318,
-   "wins": 6
+   "n": 36,
+   "total_r": 12.826,
+   "avg_r": 0.356,
+   "wins": 7
   },
   "early": {
    "n": 0,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 17
+  "missing_result": 15
  },
  "per_strategy": [
   {
@@ -213,10 +213,10 @@
    "alerts": 11,
    "took": 11,
    "skipped": 0,
-   "plan_avg_r": 1.631,
-   "plan_n": 9,
-   "your_avg_r": 2.314,
-   "your_n": 7
+   "plan_avg_r": 1.368,
+   "plan_n": 10,
+   "your_avg_r": 1.8,
+   "your_n": 9
   },
   {
    "cell": "donchian_breakout-VEXIT 4h",
@@ -237,6 +237,16 @@
    "plan_n": 14,
    "your_avg_r": 2.021,
    "your_n": 14
+  },
+  {
+   "cell": "donchian_breakout-VEXIT-FDISP-S2 4h",
+   "alerts": 4,
+   "took": 0,
+   "skipped": 0,
+   "plan_avg_r": null,
+   "plan_n": 0,
+   "your_avg_r": null,
+   "your_n": 0
   },
   {
    "cell": "donchian_breakout-VEXIT-FRETEST 4h",
@@ -326,7 +336,7 @@
   }
  },
  "findings": [
-  "Your real results are +0.28R per trade above the plan (37 trades) - your execution adds to the strategy."
+  "Your real results are +0.32R per trade above the plan (39 trades) - your execution adds to the strategy."
  ],
  "decisions": [
   {
