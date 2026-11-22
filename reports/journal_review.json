@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-22 10:11",
+ "last_entry_utc": "2026-11-22 12:21",
  "days": 30,
  "all": {
   "alerts": 62,
@@ -7,9 +7,9 @@
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
-   "n": 44,
-   "total_r": 52.849,
-   "avg_r": 1.201,
+   "n": 46,
+   "total_r": 50.849,
+   "avg_r": 1.105,
    "wins": 28
   },
   "plan_skipped": {
@@ -25,21 +25,21 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 47,
-   "total_r": 49.849,
-   "avg_r": 1.061,
+   "n": 49,
+   "total_r": 47.849,
+   "avg_r": 0.977,
    "wins": 28
   },
   "yours": {
-   "n": 43,
-   "total_r": 63.52,
-   "avg_r": 1.477,
+   "n": 45,
+   "total_r": 61.52,
+   "avg_r": 1.367,
    "wins": 32
   },
   "gap": {
-   "n": 43,
+   "n": 45,
    "total_r": 12.346,
-   "avg_r": 0.287,
+   "avg_r": 0.274,
    "wins": 7
   },
   "early": {
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 11
+  "missing_result": 9
  },
  "recent": {
   "alerts": 59,
@@ -65,9 +65,9 @@
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
-   "n": 41,
-   "total_r": 55.849,
-   "avg_r": 1.362,
+   "n": 43,
+   "total_r": 53.849,
+   "avg_r": 1.252,
    "wins": 28
   },
   "plan_skipped": {
@@ -83,21 +83,21 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 44,
-   "total_r": 52.849,
-   "avg_r": 1.201,
+   "n": 46,
+   "total_r": 50.849,
+   "avg_r": 1.105,
    "wins": 28
   },
   "yours": {
-   "n": 40,
-   "total_r": 67.0,
-   "avg_r": 1.675,
+   "n": 42,
+   "total_r": 65.0,
+   "avg_r": 1.548,
    "wins": 32
   },
   "gap": {
-   "n": 40,
+   "n": 42,
    "total_r": 12.826,
-   "avg_r": 0.321,
+   "avg_r": 0.305,
    "wins": 7
   },
   "early": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 11
+  "missing_result": 9
  },
  "per_strategy": [
   {
@@ -244,19 +244,19 @@
    "took": 3,
    "skipped": 0,
    "plan_avg_r": -1.0,
-   "plan_n": 2,
+   "plan_n": 3,
    "your_avg_r": -1.0,
-   "your_n": 1
+   "your_n": 2
   },
   {
    "cell": "donchian_breakout-VEXIT-FRETEST 4h",
    "alerts": 10,
    "took": 10,
    "skipped": 0,
-   "plan_avg_r": 0.75,
-   "plan_n": 4,
-   "your_avg_r": 0.75,
-   "your_n": 4
+   "plan_avg_r": 0.4,
+   "plan_n": 5,
+   "your_avg_r": 0.4,
+   "your_n": 5
   },
   {
    "cell": "donchian_breakout-VEXIT-S4 4h",
@@ -328,15 +328,15 @@
     "wins": 0
    },
    "sent": {
-    "n": 33,
-    "total_r": 36.674,
-    "avg_r": 1.111,
+    "n": 35,
+    "total_r": 34.674,
+    "avg_r": 0.991,
     "wins": 20
    }
   }
  },
  "findings": [
-  "Your real results are +0.29R per trade above the plan (43 trades) - your execution adds to the strategy."
+  "Your real results are +0.27R per trade above the plan (45 trades) - your execution adds to the strategy."
  ],
  "decisions": [
   {

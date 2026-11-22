@@ -2,13 +2,13 @@
 
 From journal/my_trades.csv on the branch `journal` (the live watcher's Telegram buttons, the plan result of every alert and your /result replies). Plan = the backtest rules followed on 5m candles, before fees. Report only: nothing here changes a strategy, a gate or a cost.
 
-Last journal entry: 2026-11-22 10:11 UTC
+Last journal entry: 2026-11-22 12:21 UTC
 - Last 30 days: 59 alerts · took 55 · skipped 0 · no answer 4
-  - plan result: took +1.36R avg over 41 · skipped no result yet · no answer -1.00R avg over 3
-  - your real results: +1.68R avg over 40 · gap to the plan +0.32R per trade (40)
+  - plan result: took +1.25R avg over 43 · skipped no result yet · no answer -1.00R avg over 3
+  - your real results: +1.55R avg over 42 · gap to the plan +0.30R per trade (42)
 - All time: 62 alerts · took 58 · skipped 0 · no answer 4
-  - plan result: took +1.20R avg over 44 · skipped no result yet · no answer -1.00R avg over 3
-  - your real results: +1.48R avg over 43 · gap to the plan +0.29R per trade (43)
+  - plan result: took +1.10R avg over 46 · skipped no result yet · no answer -1.00R avg over 3
+  - your real results: +1.37R avg over 45 · gap to the plan +0.27R per trade (45)
 - Per strategy (all time): cell · alerts · took · plan avg · your avg
   - P01-BREAKOUT-V1 4h · 1 · 1 · -1.00R (1) · -1.20R (1)
   - P01-BREAKOUT-V5 1h · 1 · 1 · -1.00R (1) · -1.20R (1)
@@ -22,10 +22,10 @@ Last journal entry: 2026-11-22 10:11 UTC
   - TRD-H4-BREAKOUT-S3 1h · 11 · 11 · +1.15R (11) · +1.52R (10)
   - donchian_breakout-VEXIT 4h · 10 · 8 · +1.10R (5) · +2.50R (4)
   - donchian_breakout-VEXIT-FDISP 4h · 15 · 15 · +1.63R (14) · +2.02R (14)
-  - donchian_breakout-VEXIT-FDISP-S2 4h · 4 · 3 · -1.00R (2) · -1.00R (1)
-  - donchian_breakout-VEXIT-FRETEST 4h · 10 · 10 · +0.75R (4) · +0.75R (4)
+  - donchian_breakout-VEXIT-FDISP-S2 4h · 4 · 3 · -1.00R (3) · -1.00R (2)
+  - donchian_breakout-VEXIT-FRETEST 4h · 10 · 10 · +0.40R (5) · +0.40R (5)
   - donchian_breakout-VEXIT-S4 4h · 1 · 0 · -1.00R (1) · -
 - With vs without the 5m check (the same setups):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.11R over 33 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +0.99R over 35 (plan results, before fees)
 - Findings:
-  - Your real results are +0.29R per trade above the plan (43 trades) - your execution adds to the strategy.
+  - Your real results are +0.27R per trade above the plan (45 trades) - your execution adds to the strategy.
