@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-22 15:11",
+ "utc": "2026-11-22 16:16",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,26 +10,26 @@
   "curve_points": 60
  },
  "total": {
-  "n": 365,
+  "n": 367,
   "wins": 152,
-  "win_rate": 41.6,
-  "avg_r": 0.186,
-  "total_r": 67.92,
+  "win_rate": 41.4,
+  "avg_r": 0.179,
+  "total_r": 65.88,
   "max_dd_r": 59.17,
-  "cur_loss_run": 20,
+  "cur_loss_run": 22,
   "max_loss_run": 22,
-  "sd": 1.496
+  "sd": 1.495
  },
  "yours": {
-  "n": 50,
+  "n": 51,
   "wins": 31,
-  "win_rate": 62.0,
-  "avg_r": 0.556,
-  "total_r": 27.79,
+  "win_rate": 60.8,
+  "avg_r": 0.525,
+  "total_r": 26.77,
   "max_dd_r": 5.05,
-  "cur_loss_run": 2,
+  "cur_loss_run": 3,
   "max_loss_run": 5,
-  "sd": 1.408
+  "sd": 1.412
  },
  "silent": {
   "n": 197,
@@ -58,14 +58,14 @@
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
-   "n": 117,
+   "n": 119,
    "wins": 62,
-   "win_rate": 53.0,
-   "avg_r": 0.424,
-   "total_r": 49.64,
-   "max_dd_r": 27.17,
-   "cur_loss_run": 13,
-   "max_loss_run": 13,
+   "win_rate": 52.1,
+   "avg_r": 0.4,
+   "total_r": 47.59,
+   "max_dd_r": 29.22,
+   "cur_loss_run": 15,
+   "max_loss_run": 15,
    "sd": 1.465
   },
   "APPROVED": {
@@ -1537,6 +1537,32 @@
    "sent": true
   },
   {
+   "key": "donchian_breakout-VEXIT-FDISP-S2@1.0|4h",
+   "coin": "SUI",
+   "stage": "PAPER_TRADING",
+   "label": "\ud83d\udfe1 PAPER",
+   "live": {
+    "n": 2,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.026,
+    "total_r": -2.05,
+    "max_dd_r": 2.05,
+    "cur_loss_run": 2,
+    "max_loss_run": 2,
+    "sd": 0.001
+   },
+   "backtest": {
+    "n": 49,
+    "avg_r": 0.166,
+    "win_rate": 38.8
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-22 15:59",
+   "sent": true
+  },
+  {
    "key": "donchian_breakout-VEXIT-FRETEST@1.0|4h",
    "coin": "BTC",
    "stage": "PAPER_TRADING",
@@ -2317,32 +2343,6 @@
    "sent": true
   },
   {
-   "key": "donchian_breakout-VEXIT-FDISP-S2@1.0|4h",
-   "coin": "SUI",
-   "stage": "PAPER_TRADING",
-   "label": "\ud83d\udfe1 PAPER",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.027,
-    "total_r": -1.03,
-    "max_dd_r": 1.03,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 49,
-    "avg_r": 0.166,
-    "win_rate": 38.8
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-22 11:59",
-   "sent": true
-  },
-  {
    "key": "donchian_breakout-VEXIT-FDISP@1.0|4h",
    "coin": "SUI",
    "stage": "PAPER_TRADING",
@@ -2366,6 +2366,32 @@
    "verdict": "ok",
    "why": [],
    "last_utc": "2026-11-22 11:59",
+   "sent": true
+  },
+  {
+   "key": "donchian_breakout-VEXIT-FRETEST@1.0|4h",
+   "coin": "SUI",
+   "stage": "PAPER_TRADING",
+   "label": "\ud83d\udfe1 PAPER",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.024,
+    "total_r": -1.02,
+    "max_dd_r": 1.02,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 48,
+    "avg_r": 0.077,
+    "win_rate": 27.1
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-22 15:59",
    "sent": true
   },
   {
@@ -2721,8 +2747,8 @@
    "r": 72.03
   },
   {
-   "t": "2026-11-22 11:59",
-   "r": 67.92
+   "t": "2026-11-22 15:59",
+   "r": 65.88
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

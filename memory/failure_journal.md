@@ -1786,3 +1786,19 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry, late_entry
   - what happened: -
   - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FRETEST v1.0 - SL -1.02R
+- timestamp: 2026-11-22 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FRETEST v1.0 · asset: SUI · timeframe: 4h · regime: EXPANSION · review: 2026-11-29
+  - signal 2026-11-21 03:59 UTC, closed 2026-11-22 15:59 UTC, stage PAPER_TRADING
+  - MAE -1.03R / MFE +0.74R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FDISP-S2 v1.0 - SL -1.02R
+- timestamp: 2026-11-22 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP-S2 v1.0 · asset: SUI · timeframe: 4h · regime: EXPANSION · review: 2026-11-29
+  - signal 2026-11-21 07:59 UTC, closed 2026-11-22 15:59 UTC, stage PAPER_TRADING
+  - MAE -1.09R / MFE +0.16R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout
+  - root cause / fix: (review)

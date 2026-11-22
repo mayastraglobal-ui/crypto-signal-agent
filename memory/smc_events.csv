@@ -39720,3 +39720,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 15:00,XRP,30m,FVG_RETRACE,bear,,0.9252,0.9285,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-22 14:45,XRP,15m,FVG_RETRACE,bear,,0.9252,0.928,,NY AM,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-22 15:00,ZEC,15m,WEAK_BREAK,bull,797.18,,,0.095,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-22 16:00,BTC,4h,FVG_FILLED,bear,,60025.24,61552.0,,,1d,EXPANSION,,smc-1.0,Binance
+2026-11-22 16:00,BTC,4h,FVG,bull,,59668.02,60464.01,0.545,,1d,EXPANSION,,smc-1.0,Binance
+2026-11-22 16:15,BTC,15m,BOS,bull,61068.0,,,0.046,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-22 16:00,ETH,4h,WEAK_BREAK,bull,1716.58,,,0.039,,1d,EXPANSION,no displacement,smc-1.0,Binance
+2026-11-22 16:00,ETH,4h,FVG,bull,,1671.51,1695.76,0.528,,1d,EXPANSION,,smc-1.0,Binance
+2026-11-22 16:00,SOL,4h,SWEEP,bear,71.12,,,0.164,,1d,STRONG_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
