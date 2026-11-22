@@ -1678,3 +1678,7 @@ Append-only count of every strategy version ever tested (AGENT_PROMPT.md section
   - result: 30m BACKTESTING 423 trades +0.201R (unseen +0.427R); 1h BACKTESTING 691 trades +0.144R (unseen +0.314R); 15m BACKTESTING 732 trades +0.032R; 5m FAILED 983 trades -0.165R. The best cell fails only the drawdown (23.0R vs 17R).
   - teaches: the same improvement as its sibling; the two are one idea and count as one test.
   - next: no change; no more records for this card until one cell passes the drawdown gate or fails.
+
+| # | First tested (UTC) | Strategy | Family | Timeframes | Hypothesis |
+|---|---|---|---|---|---|
+| EXP-0148 | 2026-11-22 07:23 | P03-FIB-PULLBACK-V4-S2@1.0 | mtf_pullback | 4h | The rule 'low <= fib_500 / high >= fib_500' adds nothing to P03-FIB-PULLBACK-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting). |

@@ -1,14 +1,19 @@
 {
- "updated_utc": "2026-11-21 07:39",
+ "updated_utc": "2026-11-22 07:23",
  "active": {
+  "P01-BREAKOUT-V2@1.0|30m": [
+   "BTC"
+  ],
   "P03-FIB-PULLBACK-V5@1.0|1h": [
    "SOL"
   ],
   "TRD-H4-BREAKOUT-S3@1.0|1h": [
-   "BTC"
+   "BTC",
+   "ETH"
   ]
  },
  "via_promotion": [
+  "P01-BREAKOUT-V2@1.0|30m",
   "P03-FIB-PULLBACK-V5@1.0|1h",
   "TRD-H4-BREAKOUT-S3@1.0|1h"
  ],

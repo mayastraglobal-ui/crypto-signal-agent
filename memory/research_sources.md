@@ -1797,3 +1797,12 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P01-BREAKOUT-V2-FDISP-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
   - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V4-S2@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-11-22 07:23 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V4-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V4-S2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-20
+  - title / source: engine rule-significance test: P03-FIB-PULLBACK-V4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'low <= fib_500 / high >= fib_500' adds nothing to P03-FIB-PULLBACK-V4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3

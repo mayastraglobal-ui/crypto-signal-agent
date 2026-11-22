@@ -2751,3 +2751,35 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - rsi2_dip_buy v1.0 15m: blocked by the regime gate
   - trend_pullback v1.0 15m: signal
   - trend_pullback v1.0 30m: signal
+
+### BTC up +8.5% (5.7x ATR), 2026-11-21 05:00 -> 2026-11-21 14:00
+- timestamp: 2026-11-22 07:23 UTC · source: engine: daily research run · evidence: FACT: move of 5.7x the 1H ATR within 12 hours; 219 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BTC · timeframe: 1h · regime: EXPANSION · review: 2026-11-29
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the permission gate
+  - R4-BBRSI v1.0 1h: blocked by the regime gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - R4-CLUC v1.0 15m: blocked by the regime gate
+  - R4-CLUC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+  - liquidity_sweep_reversal v1.0 5m: blocked by the regime gate
+
+### ETH up +8.9% (5.3x ATR), 2026-11-21 05:00 -> 2026-11-21 14:00
+- timestamp: 2026-11-22 07:23 UTC · source: engine: daily research run · evidence: FACT: move of 5.3x the 1H ATR within 12 hours; 219 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: ETH · timeframe: 1h · regime: EXPANSION · review: 2026-11-29
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the permission gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - R4-CLUC v1.0 15m: blocked by the regime gate
+  - R4-CLUC v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate
+
+### BNB up +7.5% (5.2x ATR), 2026-11-21 05:00 -> 2026-11-21 14:00
+- timestamp: 2026-11-22 07:23 UTC · source: engine: daily research run · evidence: FACT: move of 5.2x the 1H ATR within 12 hours; 219 strategy / timeframe tests checked · confidence: measured on closed candles · strategy: all · asset: BNB · timeframe: 1h · regime: EXPANSION · review: 2026-11-29
+  - verdict: a setup existed but was filtered out (see which gate) - do NOT change a rule because of one move (research-only coin)
+  - P01-BREAKOUT-V4-S1 v1.0 4h: blocked by the permission gate
+  - R4-BBRSI v1.0 30m: blocked by the regime gate
+  - R4-CLUC v1.0 15m: blocked by the regime gate
+  - R4-CLUC v1.0 30m: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 1h: blocked by the regime gate
+  - S8-PDH-PDL-SWEEP-noSMC v1.0 30m: blocked by the regime gate
+  - TRD-H4-PULLBACK-noT4 v1.0 5m: blocked by the permission gate

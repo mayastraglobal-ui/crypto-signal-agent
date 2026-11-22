@@ -534,3 +534,8 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 ## 2026-11-21 07:39 UTC
 - **R4-HLHB@1.0 4h**: FAILED → **VALIDATION** (multiple-testing bar: t-statistic 1.59 of the average trade, needs 3.76 after 578 trials; HIGH OVERFITTING RISK: 64% of the profit from window 2)
 - **TRD-H4-PULLBACK@1.0 1h**: FAILED → **BACKTESTING** (avg +0.03R/trade (needs +0.10R); profit factor 1.05; recovery factor 0.54 (net +23.8R / max drawdown 44.3R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 25.9R - limit 17R; longest drawdown 2049 days = 62% of the tested period (limit 55%))
+
+## 2026-11-22 07:23 UTC
+- **P03-FIB-PULLBACK-V4-S2@1.0 4h**: FORMALIZED → **BACKTESTING** (profit factor 1.19; recovery factor 2.14 (net +73.6R / max drawdown 34.4R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 26.9R - limit 17R)
+- **macd_trend_cross@1.0 1h**: BACKTESTING → **FAILED** (avg -0.01R/trade (needs +0.10R); profit factor 0.99; recovery factor -0.04 (net -1.0R / max drawdown 25.9R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 23.8R - limit 17R; longest drawdown 1924 days = 59% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+- **P01-BREAKOUT-V2@1.0 30m**: BACKTESTING → **PAPER_TRADING** (promoted to PAPER by the operator (weekly review): PAPER only on BTC)
