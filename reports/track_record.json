@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-22 07:11",
+ "utc": "2026-11-22 08:15",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,13 +10,13 @@
   "curve_points": 60
  },
  "total": {
-  "n": 339,
+  "n": 340,
   "wins": 150,
-  "win_rate": 44.2,
-  "avg_r": 0.26,
-  "total_r": 88.07,
+  "win_rate": 44.1,
+  "avg_r": 0.256,
+  "total_r": 86.88,
   "max_dd_r": 59.17,
-  "cur_loss_run": 18,
+  "cur_loss_run": 19,
   "max_loss_run": 20,
   "sd": 1.517
  },
@@ -32,29 +32,29 @@
   "sd": 1.407
  },
  "silent": {
-  "n": 193,
+  "n": 194,
   "wins": 67,
-  "win_rate": 34.7,
-  "avg_r": -0.007,
-  "total_r": -1.28,
+  "win_rate": 34.5,
+  "avg_r": -0.013,
+  "total_r": -2.47,
   "max_dd_r": 41.01,
-  "cur_loss_run": 0,
+  "cur_loss_run": 1,
   "max_loss_run": 17,
-  "sd": 1.457
+  "sd": 1.456
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 236,
+   "n": 237,
    "wins": 89,
-   "win_rate": 37.7,
-   "avg_r": 0.116,
-   "total_r": 27.44,
+   "win_rate": 37.6,
+   "avg_r": 0.111,
+   "total_r": 26.24,
    "max_dd_r": 47.91,
-   "cur_loss_run": 7,
+   "cur_loss_run": 8,
    "max_loss_run": 20,
-   "sd": 1.517
+   "sd": 1.516
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -295,9 +295,9 @@
     "sd": 1.657
    },
    "backtest": {
-    "n": 181,
-    "avg_r": 0.353,
-    "win_rate": 46.4
+    "n": 182,
+    "avg_r": 0.345,
+    "win_rate": 46.2
    },
    "verdict": "ok",
    "why": [],
@@ -503,9 +503,9 @@
     "sd": 1.161
    },
    "backtest": {
-    "n": 153,
-    "avg_r": 0.268,
-    "win_rate": 58.8
+    "n": 154,
+    "avg_r": 0.269,
+    "win_rate": 59.1
    },
    "verdict": "ok",
    "why": [],
@@ -581,9 +581,9 @@
     "sd": 1.071
    },
    "backtest": {
-    "n": 157,
-    "avg_r": 0.19,
-    "win_rate": 58.0
+    "n": 158,
+    "avg_r": 0.192,
+    "win_rate": 58.2
    },
    "verdict": "ok",
    "why": [],
@@ -1023,9 +1023,9 @@
     "sd": 1.721
    },
    "backtest": {
-    "n": 220,
-    "avg_r": 0.037,
-    "win_rate": 36.8
+    "n": 222,
+    "avg_r": 0.039,
+    "win_rate": 36.9
    },
    "verdict": "ok",
    "why": [],
@@ -1049,9 +1049,9 @@
     "sd": 1.708
    },
    "backtest": {
-    "n": 55,
-    "avg_r": 0.088,
-    "win_rate": 38.2
+    "n": 56,
+    "avg_r": 0.068,
+    "win_rate": 37.5
    },
    "verdict": "ok",
    "why": [],
@@ -1153,9 +1153,9 @@
     "sd": 2.005
    },
    "backtest": {
-    "n": 231,
-    "avg_r": 0.045,
-    "win_rate": 38.5
+    "n": 233,
+    "avg_r": 0.051,
+    "win_rate": 38.6
    },
    "verdict": "ok",
    "why": [],
@@ -1499,6 +1499,32 @@
    "why": [],
    "last_utc": "2026-11-20 15:59",
    "sent": true
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|15m",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 1,
+    "wins": 0,
+    "win_rate": 0.0,
+    "avg_r": -1.193,
+    "total_r": -1.19,
+    "max_dd_r": 1.19,
+    "cur_loss_run": 1,
+    "max_loss_run": 1,
+    "sd": null
+   },
+   "backtest": {
+    "n": 262,
+    "avg_r": 0.014,
+    "win_rate": 35.1
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-22 08:14",
+   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V2@1.0|15m",
@@ -2167,9 +2193,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 128,
-    "avg_r": 0.577,
-    "win_rate": 49.2
+    "n": 129,
+    "avg_r": 0.564,
+    "win_rate": 48.8
    },
    "verdict": "ok",
    "why": [],
@@ -2219,9 +2245,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 119,
-    "avg_r": 0.081,
-    "win_rate": 35.3
+    "n": 120,
+    "avg_r": 0.072,
+    "win_rate": 35.0
    },
    "verdict": "ok",
    "why": [],
@@ -2505,8 +2531,8 @@
    "r": 91.14
   },
   {
-   "t": "2026-11-21 15:59",
-   "r": 88.07
+   "t": "2026-11-22 08:14",
+   "r": 86.88
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

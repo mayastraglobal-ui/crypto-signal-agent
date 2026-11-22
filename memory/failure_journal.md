@@ -1594,3 +1594,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry, late_entry
   - what happened: false_breakout
   - root cause / fix: (review)
+
+### SUI SHORT 15m P01-BREAKOUT-V2 v1.0 - SL -1.19R
+- timestamp: 2026-11-22 08:15 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.19R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V2 v1.0 · asset: SUI · timeframe: 15m · regime: WEAK_BEAR · review: 2026-11-29
+  - signal 2026-11-22 03:14 UTC, closed 2026-11-22 08:14 UTC, stage TEST
+  - MAE -1.91R / MFE +0.54R
+  - at entry: session Asia, conditions: overextended_entry, late_entry, wrong_session
+  - what happened: false_breakout
+  - root cause / fix: (review)

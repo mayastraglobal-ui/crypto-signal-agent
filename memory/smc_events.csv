@@ -39542,3 +39542,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 06:30,XRP,30m,FVG_RETRACE,bear,,0.918,0.9195,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
 2026-11-22 06:30,ZEC,30m,WEAK_BREAK,bull,784.56,,,0.239,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
 2026-11-22 06:30,ZEC,30m,FVG,bull,,771.94,779.77,0.711,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:15,BTC,15m,WEAK_BREAK,bull,59290.91,,,0.363,London,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-22 08:15,BTC,15m,OB_INVALID,bear,,59252.82,59354.47,,London,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-22 08:15,ETH,15m,WEAK_BREAK,bull,1671.51,,,0.884,London,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-22 08:15,ETH,15m,FVG_RETRACE,bear,,1680.51,1685.35,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:15,ETH,15m,FVG_FILLED,bear,,1673.96,1677.96,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:15,SOL,15m,FVG_FILLED,bear,,69.19,69.41,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:00,XRP,4h,FVG_FILLED,bull,,0.9127,0.9228,,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 08:15,XRP,15m,CHOCH,bull,0.9192,,,0.063,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-22 08:15,XRP,15m,ORDER_BLOCK,bull,,0.9139,0.9159,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 08:15,XRP,15m,FVG_FILLED,bear,,0.9171,0.9205,,London,1h,RANGE,,smc-1.0,Binance
