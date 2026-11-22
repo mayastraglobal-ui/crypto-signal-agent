@@ -39758,3 +39758,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 18:30,ZEC,15m,BOS,bear,792.37,,,0.394,,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-22 18:30,ZEC,15m,FVG,bear,,794.52,796.68,0.38,,1h,RANGE,,smc-1.0,Binance
 2026-11-22 19:15,ZEC,15m,SWEEP,bull,788.97,,,0.277,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-22 21:00,BTC,30m,FVG_RETRACE,bear,,60965.25,61207.94,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-22 20:30,BTC,15m,SWEEP,bull,60625.85,,,0.228,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-22 21:15,BTC,15m,FVG,bull,,60668.77,60869.33,1.015,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-22 21:00,ETH,15m,BOS,bull,1717.01,,,0.79,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-22 21:00,ETH,15m,FVG_FILLED,bear,,1716.29,1720.39,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-22 21:15,ETH,15m,SWEEP,bear,1724.46,,,0.497,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 21:15,ETH,15m,FVG,bull,,1716.56,1718.83,0.427,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-22 20:15,SOL,15m,WEAK_BREAK,bear,70.17,,,0.438,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-22 20:30,SOL,15m,FVG,bear,,70.07,70.23,0.651,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 20:45,SOL,15m,FVG_RETRACE,bear,,70.07,70.23,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-22 21:00,SOL,15m,FVG_FILLED,bear,,70.07,70.23,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 20:15,XRP,15m,WEAK_BREAK,bear,0.9259,,,0.297,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-22 20:30,XRP,15m,FVG,bear,,0.9262,0.9275,0.409,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 21:00,XRP,15m,FVG_RETRACE,bear,,0.9262,0.9275,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-22 21:00,XRP,15m,FVG_FILLED,bear,,0.9262,0.9275,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 20:30,ZEC,15m,BOS,bear,787.51,,,0.029,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-22 21:15,ZEC,15m,FVG_RETRACE,bear,,794.52,796.68,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-22 21:15,ZEC,15m,FVG_FILLED,bear,,794.52,796.68,,,1h,COMPRESSION,,smc-1.0,Binance
