@@ -1440,3 +1440,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-22 07:11 UTC
 - **EXCLUDED** SUI - 24h volume $43M < $50M
 - **LEAVE** SUI - not eligible: 24h volume $43M < $50M
+
+## 2026-11-22 10:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,081x the 1% order-book depth (flag only, not excluded)

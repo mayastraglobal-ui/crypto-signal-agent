@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-22 08:15",
+ "utc": "2026-11-22 10:11",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 340,
+  "n": 343,
   "wins": 150,
-  "win_rate": 44.1,
-  "avg_r": 0.256,
-  "total_r": 86.88,
+  "win_rate": 43.7,
+  "avg_r": 0.243,
+  "total_r": 83.42,
   "max_dd_r": 59.17,
-  "cur_loss_run": 19,
-  "max_loss_run": 20,
-  "sd": 1.517
+  "cur_loss_run": 22,
+  "max_loss_run": 22,
+  "sd": 1.516
  },
  "yours": {
   "n": 47,
@@ -32,29 +32,29 @@
   "sd": 1.407
  },
  "silent": {
-  "n": 194,
+  "n": 197,
   "wins": 67,
-  "win_rate": 34.5,
-  "avg_r": -0.013,
-  "total_r": -2.47,
+  "win_rate": 34.0,
+  "avg_r": -0.03,
+  "total_r": -5.93,
   "max_dd_r": 41.01,
-  "cur_loss_run": 1,
+  "cur_loss_run": 4,
   "max_loss_run": 17,
-  "sd": 1.456
+  "sd": 1.451
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 237,
+   "n": 240,
    "wins": 89,
-   "win_rate": 37.6,
-   "avg_r": 0.111,
-   "total_r": 26.24,
+   "win_rate": 37.1,
+   "avg_r": 0.095,
+   "total_r": 22.79,
    "max_dd_r": 47.91,
-   "cur_loss_run": 8,
+   "cur_loss_run": 11,
    "max_loss_run": 20,
-   "sd": 1.516
+   "sd": 1.513
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -172,15 +172,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 4,
+    "n": 5,
     "wins": 1,
-    "win_rate": 25.0,
-    "avg_r": -0.699,
-    "total_r": -2.79,
-    "max_dd_r": 3.34,
-    "cur_loss_run": 3,
-    "max_loss_run": 3,
-    "sd": 0.833
+    "win_rate": 20.0,
+    "avg_r": -0.796,
+    "total_r": -3.98,
+    "max_dd_r": 4.53,
+    "cur_loss_run": 4,
+    "max_loss_run": 4,
+    "sd": 0.753
    },
    "backtest": {
     "n": 122,
@@ -189,9 +189,9 @@
    },
    "verdict": "watch",
    "why": [
-    "3 losses in a row - in its backtest (34% won) a run that long shows up in 48% of 4-trade periods"
+    "4 losses in a row - in its backtest (34% won) a run that long shows up in 34% of 5-trade periods"
    ],
-   "last_utc": "2026-11-20 03:29",
+   "last_utc": "2026-11-22 08:29",
    "sent": false
   },
   {
@@ -310,15 +310,15 @@
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
    "live": {
-    "n": 11,
+    "n": 12,
     "wins": 6,
-    "win_rate": 54.5,
-    "avg_r": 0.677,
-    "total_r": 7.44,
-    "max_dd_r": 1.14,
-    "cur_loss_run": 0,
+    "win_rate": 50.0,
+    "avg_r": 0.526,
+    "total_r": 6.31,
+    "max_dd_r": 1.28,
+    "cur_loss_run": 1,
     "max_loss_run": 2,
-    "sd": 1.592
+    "sd": 1.605
    },
    "backtest": {
     "n": 173,
@@ -327,7 +327,7 @@
    },
    "verdict": "ok",
    "why": [],
-   "last_utc": "2026-11-21 07:29",
+   "last_utc": "2026-11-22 08:29",
    "sent": false
   },
   {
@@ -462,6 +462,32 @@
   },
   {
    "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "ETH",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 9,
+    "wins": 3,
+    "win_rate": 33.3,
+    "avg_r": -0.083,
+    "total_r": -0.74,
+    "max_dd_r": 3.19,
+    "cur_loss_run": 2,
+    "max_loss_run": 4,
+    "sd": 1.245
+   },
+   "backtest": {
+    "n": 182,
+    "avg_r": 0.142,
+    "win_rate": 40.1
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-22 08:29",
+   "sent": false
+  },
+  {
+   "key": "P01-BREAKOUT-V2@1.0|30m",
    "coin": "SOL",
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
@@ -511,32 +537,6 @@
    "why": [],
    "last_utc": "2026-11-21 15:59",
    "sent": true
-  },
-  {
-   "key": "P01-BREAKOUT-V2@1.0|30m",
-   "coin": "ETH",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 8,
-    "wins": 3,
-    "win_rate": 37.5,
-    "avg_r": 0.049,
-    "total_r": 0.4,
-    "max_dd_r": 2.88,
-    "cur_loss_run": 1,
-    "max_loss_run": 4,
-    "sd": 1.262
-   },
-   "backtest": {
-    "n": 182,
-    "avg_r": 0.142,
-    "win_rate": 40.1
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-21 06:59",
-   "sent": false
   },
   {
    "key": "P01-BREAKOUT-V3@1.0|4h",
@@ -2531,8 +2531,12 @@
    "r": 91.14
   },
   {
-   "t": "2026-11-22 08:14",
-   "r": 86.88
+   "t": "2026-11-22 08:29",
+   "r": 85.74
+  },
+  {
+   "t": "2026-11-22 08:29",
+   "r": 83.42
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

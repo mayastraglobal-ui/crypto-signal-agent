@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-22 08:15 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-22 10:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 47 | 64 | +0.60R | +28.33R | 5.05R | 5 |
-| Silent research records (never sent to you) | 194 | 34 | -0.01R | -2.47R | 41.01R | 17 |
-| 🔵 TEST | 237 | 38 | +0.11R | +26.24R | 47.91R | 20 |
+| Silent research records (never sent to you) | 197 | 34 | -0.03R | -5.93R | 41.01R | 17 |
+| 🔵 TEST | 240 | 37 | +0.10R | +22.79R | 47.91R | 20 |
 | 🟡 PAPER | 103 | 59 | +0.59R | +60.64R | 16.18R | 11 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 340 | 44 | +0.26R | +86.88R | 59.17R | 20 |
+| **All** | 343 | 44 | +0.24R | +83.42R | 59.17R | 22 |
 
 ## 🚨 Drift monitor
 
@@ -18,7 +18,7 @@ Updated 2026-11-22 08:15 UTC by the hourly scan (engine/track_record.py). Every 
 Warning signs (no pause yet):
 - TRD-H4-BREAKOUT-S3@1.0 1h on ETH: 4 losses in a row - in its backtest (36% won) a run that long shows up in 89% of 15-trade periods
 - P04-MACD-SUPERTREND-V2@1.0 15m on ETH: 4 losses in a row - in its backtest (38% won) a run that long shows up in 38% of 6-trade periods
-- P07-SQUEEZE-RETEST-V2@1.0 30m on ETH: 3 losses in a row - in its backtest (34% won) a run that long shows up in 48% of 4-trade periods
+- P07-SQUEEZE-RETEST-V2@1.0 30m on ETH: 4 losses in a row - in its backtest (34% won) a run that long shows up in 34% of 5-trade periods
 - P01-BREAKOUT-V2@1.0 1h on SOL: 3 losses in a row - in its backtest (34% won) a run that long shows up in 28% of 3-trade periods
 - P01-BREAKOUT-V2@1.0 30m on SUI: 3 losses in a row - in its backtest (39% won) a run that long shows up in 23% of 3-trade periods
 - P01-BREAKOUT-V5@1.0 1h on ETH: 3 losses in a row - in its backtest (34% won) a run that long shows up in 29% of 3-trade periods
@@ -71,17 +71,17 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 30m | SUI | 🔵 TEST | silent | 7 | 0 | -0.97R | +0.02R | -6.80R | 6.80R | 🚨 paused |
 | TRD-H4-BREAKOUT-S3 | 1h | ETH | 🔵 TEST | silent | 15 | 33 | +0.11R | +0.07R | +1.61R | 3.17R | ⚠️ watch |
 | P04-MACD-SUPERTREND-V2 | 15m | ETH | 🔵 TEST | silent | 6 | 17 | -0.50R | +0.02R | -2.99R | 4.43R | ⚠️ watch |
-| P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 4 | 25 | -0.70R | +0.04R | -2.79R | 3.34R | ⚠️ watch |
+| P07-SQUEEZE-RETEST-V2 | 30m | ETH | 🔵 TEST | silent | 5 | 20 | -0.80R | +0.04R | -3.98R | 4.53R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 1h | SOL | 🔵 TEST | silent | 3 | 0 | -1.05R | +0.02R | -3.15R | 3.15R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 30m | SUI | 🔵 TEST | silent | 3 | 0 | -1.06R | +0.12R | -3.20R | 3.20R | ⚠️ watch |
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | silent | 3 | 0 | -0.84R | +0.02R | -2.52R | 2.52R | ⚠️ watch |
-| P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 11 | 54 | +0.68R | +0.10R | +7.44R | 1.14R | ✅ |
+| P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 12 | 50 | +0.53R | +0.10R | +6.31R | 1.28R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 11 | 27 | -0.22R | +0.01R | -2.39R | 5.69R | ✅ |
 | P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 10 | 40 | -0.01R | +0.11R | -0.14R | 2.17R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 10 | 40 | +0.13R | +0.04R | +1.30R | 3.63R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | silent | 10 | 30 | -0.14R | +0.30R | -1.39R | 4.20R | ✅ |
+| P01-BREAKOUT-V2 | 30m | ETH | 🔵 TEST | silent | 9 | 33 | -0.08R | +0.14R | -0.74R | 3.19R | ✅ |
 | P01-BREAKOUT-V2 | 30m | SOL | 🔵 TEST | silent | 9 | 22 | -0.44R | +0.07R | -3.97R | 4.88R | ✅ |
-| P01-BREAKOUT-V2 | 30m | ETH | 🔵 TEST | silent | 8 | 38 | +0.05R | +0.14R | +0.40R | 2.88R | ✅ |
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 7 | 14 | -0.57R | +0.08R | -4.01R | 5.05R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 7 | 43 | +0.23R | +0.03R | +1.57R | 4.31R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | 🔵 TEST | silent | 7 | 29 | -0.25R | +0.17R | -1.78R | 2.15R | ✅ |
@@ -115,7 +115,6 @@ Warning signs (no pause yet):
 
 | Closed | Running total |
 |---|---:|
-| 2026-11-20 15:59 | +52.18R |
 | 2026-11-20 19:59 | +64.44R |
 | 2026-11-20 19:59 | +76.70R |
 | 2026-11-21 03:59 | +79.54R |
@@ -134,4 +133,5 @@ Warning signs (no pause yet):
 | 2026-11-21 15:59 | +101.46R |
 | 2026-11-21 15:59 | +96.29R |
 | 2026-11-21 15:59 | +91.14R |
-| 2026-11-22 08:14 | +86.88R |
+| 2026-11-22 08:29 | +85.74R |
+| 2026-11-22 08:29 | +83.42R |

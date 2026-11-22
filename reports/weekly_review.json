@@ -1,15 +1,15 @@
 {
  "track": {
   "total": {
-   "n": 340,
+   "n": 343,
    "wins": 150,
-   "win_rate": 44.1,
-   "avg_r": 0.256,
-   "total_r": 86.88,
+   "win_rate": 43.7,
+   "avg_r": 0.243,
+   "total_r": 83.42,
    "max_dd_r": 59.17,
-   "cur_loss_run": 19,
-   "max_loss_run": 20,
-   "sd": 1.517
+   "cur_loss_run": 22,
+   "max_loss_run": 22,
+   "sd": 1.516
   },
   "yours": {
    "n": 47,
@@ -23,21 +23,21 @@
    "sd": 1.407
   },
   "silent": {
-   "n": 194,
+   "n": 197,
    "wins": 67,
-   "win_rate": 34.5,
-   "avg_r": -0.013,
-   "total_r": -2.47,
+   "win_rate": 34.0,
+   "avg_r": -0.03,
+   "total_r": -5.93,
    "max_dd_r": 41.01,
-   "cur_loss_run": 1,
+   "cur_loss_run": 4,
    "max_loss_run": 17,
-   "sd": 1.456
+   "sd": 1.451
   },
   "alerts_known": true,
   "paused": []
  },
  "week": "2026-W47",
- "utc": "2026-11-22 08:15",
+ "utc": "2026-11-22 10:11",
  "final": true,
  "rows": [
   {
@@ -498,33 +498,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 11,
-    "win_rate": 54.5,
-    "avg_r": 0.677,
-    "total_r": 7.44,
-    "sd": 1.5915589384454019
+    "n": 12,
+    "win_rate": 50.0,
+    "avg_r": 0.526,
+    "total_r": 6.31,
+    "sd": 1.6050806455713929
    },
    "week": {
-    "n": 3,
-    "win_rate": 66.7,
-    "avg_r": 0.772,
-    "total_r": 2.32,
-    "sd": 1.7770135996478285
+    "n": 4,
+    "win_rate": 50.0,
+    "avg_r": 0.296,
+    "total_r": 1.18,
+    "sd": 1.73627906743127
    },
    "gross": {
-    "n": 11,
-    "win_rate": 54.5,
-    "avg_r": 0.753,
-    "total_r": 8.29,
-    "sd": 1.587675808446823
+    "n": 12,
+    "win_rate": 50.0,
+    "avg_r": 0.604,
+    "total_r": 7.24,
+    "sd": 1.6002485791749714
    },
    "by_market": {
     "DOWN": {
-     "n": 9,
-     "win_rate": 55.6,
-     "avg_r": 0.8,
-     "total_r": 7.2,
-     "sd": 1.675725075236919
+     "n": 10,
+     "win_rate": 50.0,
+     "avg_r": 0.607,
+     "total_r": 6.07,
+     "sd": 1.6942971961521063
     },
     "UP": {
      "n": 2,
@@ -539,7 +539,7 @@
     "avg_r": 0.099,
     "win_rate": 38.7
    },
-   "confidence": "+0.68R over 11 trades: promising, not proven",
+   "confidence": "+0.53R over 12 trades: promising, not proven",
    "sent": false
   },
   {
@@ -551,33 +551,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 8,
-    "win_rate": 37.5,
-    "avg_r": 0.049,
-    "total_r": 0.39,
-    "sd": 1.2621454452637382
+    "n": 9,
+    "win_rate": 33.3,
+    "avg_r": -0.083,
+    "total_r": -0.74,
+    "sd": 1.2452051147412533
    },
    "week": {
-    "n": 4,
-    "win_rate": 50.0,
-    "avg_r": 0.028,
-    "total_r": 0.11,
-    "sd": 1.075735097503098
+    "n": 5,
+    "win_rate": 40.0,
+    "avg_r": -0.205,
+    "total_r": -1.03,
+    "sd": 1.0676215153320956
    },
    "gross": {
-    "n": 8,
-    "win_rate": 37.5,
-    "avg_r": 0.097,
-    "total_r": 0.77,
-    "sd": 1.2626783820231386
+    "n": 9,
+    "win_rate": 33.3,
+    "avg_r": -0.03,
+    "total_r": -0.27,
+    "sd": 1.2408399820730758
    },
    "by_market": {
     "DOWN": {
-     "n": 8,
-     "win_rate": 37.5,
-     "avg_r": 0.049,
-     "total_r": 0.39,
-     "sd": 1.2621454452637382
+     "n": 9,
+     "win_rate": 33.3,
+     "avg_r": -0.083,
+     "total_r": -0.74,
+     "sd": 1.2452051147412533
     }
    },
    "backtest": {
@@ -585,7 +585,7 @@
     "avg_r": 0.142,
     "win_rate": 40.1
    },
-   "confidence": "+0.05R over 8 trades: too early to say anything",
+   "confidence": "-0.08R over 9 trades: too early to say anything",
    "sent": false
   },
   {
@@ -2079,33 +2079,33 @@
    "version": "V2",
    "tf": "30m",
    "live": {
-    "n": 4,
-    "win_rate": 25.0,
-    "avg_r": -0.699,
-    "total_r": -2.79,
-    "sd": 0.8325048047909394
+    "n": 5,
+    "win_rate": 20.0,
+    "avg_r": -0.796,
+    "total_r": -3.98,
+    "sd": 0.7527933315326326
    },
    "week": {
-    "n": 2,
+    "n": 3,
     "win_rate": 0.0,
-    "avg_r": -1.114,
-    "total_r": -2.23,
-    "sd": 0.004242640687119289
+    "avg_r": -1.137,
+    "total_r": -3.41,
+    "sd": 0.039949968710876395
    },
    "gross": {
-    "n": 4,
-    "win_rate": 25.0,
-    "avg_r": -0.621,
-    "total_r": -2.49,
-    "sd": 0.8323338673072643
+    "n": 5,
+    "win_rate": 20.0,
+    "avg_r": -0.709,
+    "total_r": -3.54,
+    "sd": 0.7467872521675769
    },
    "by_market": {
     "DOWN": {
-     "n": 4,
-     "win_rate": 25.0,
-     "avg_r": -0.699,
-     "total_r": -2.79,
-     "sd": 0.8325048047909394
+     "n": 5,
+     "win_rate": 20.0,
+     "avg_r": -0.796,
+     "total_r": -3.98,
+     "sd": 0.7527933315326326
     }
    },
    "backtest": {
@@ -2113,7 +2113,7 @@
     "avg_r": 0.045,
     "win_rate": 34.4
    },
-   "confidence": "-0.70R over 4 trades: too early to say anything",
+   "confidence": "-0.80R over 5 trades: too early to say anything",
    "sent": false
   },
   {
@@ -2776,11 +2776,11 @@
     "sd": 1.7546460448925711
    },
    "week": {
-    "n": 3,
+    "n": 2,
     "win_rate": 0.0,
-    "avg_r": -1.073,
-    "total_r": -3.22,
-    "sd": 0.010016652800877825
+    "avg_r": -1.079,
+    "total_r": -2.16,
+    "sd": 0.006363961030678855
    },
    "gross": {
     "n": 15,
@@ -2822,11 +2822,11 @@
     "sd": 1.5729894953180559
    },
    "week": {
-    "n": 9,
-    "win_rate": 33.3,
-    "avg_r": 0.096,
-    "total_r": 0.86,
-    "sd": 1.5004449340112418
+    "n": 8,
+    "win_rate": 37.5,
+    "avg_r": 0.239,
+    "total_r": 1.91,
+    "sd": 1.5372017655002683
    },
    "gross": {
     "n": 15,
@@ -2868,11 +2868,11 @@
     "sd": 1.4197147265425913
    },
    "week": {
-    "n": 3,
-    "win_rate": 33.3,
-    "avg_r": -0.373,
-    "total_r": -1.12,
-    "sd": 1.1593210656816917
+    "n": 1,
+    "win_rate": 0.0,
+    "avg_r": -1.044,
+    "total_r": -1.04,
+    "sd": 0.0
    },
    "gross": {
     "n": 7,
@@ -3019,8 +3019,8 @@
  "five_min": {
   "confirmed_n": 16,
   "confirmed_r": 1.222,
-  "all_n": 237,
-  "all_gross_r": 0.164,
+  "all_n": 240,
+  "all_gross_r": 0.149,
   "by_strategy": [
    {
     "strategy": "P01-BREAKOUT-V1",
@@ -3123,7 +3123,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-22 08:15 UTC"
+   "text": "hourly scan: last run 2026-11-22 10:11 UTC"
   },
   {
    "ok": true,
@@ -3131,20 +3131,20 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-22 07:00 UTC (12 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-22 08:05 UTC (11 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 86"
+   "text": "TEST setups closed this week (GitHub record): 85"
   }
  ],
  "totals": {
   "TEST": {
-   "n": 237,
-   "total_r": 26.25,
-   "avg_r": 0.111,
-   "week_n": 86,
-   "week_total_r": 17.27
+   "n": 240,
+   "total_r": 22.8,
+   "avg_r": 0.095,
+   "week_n": 85,
+   "week_total_r": 16.0
   },
   "PAPER": {
    "n": 5,
@@ -3161,11 +3161,11 @@
    "week_total_r": 24.16
   },
   "SILENT": {
-   "n": 194,
-   "total_r": -2.46,
-   "avg_r": -0.013,
-   "week_n": 60,
-   "week_total_r": -4.58
+   "n": 197,
+   "total_r": -5.91,
+   "avg_r": -0.03,
+   "week_n": 59,
+   "week_total_r": -5.85
   },
   "known": true
  },
@@ -3250,7 +3250,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-22 07:12",
+  "checked_utc": "2026-11-22 08:16",
   "lines": [
    "41 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 22, broke yesterday's high 1, broke yesterday's low 9, volume spike 17",
@@ -3268,8 +3268,8 @@
   {
    "verdict": "good",
    "text": "at a zone or edge that fits the direction",
-   "n": 2,
-   "avg_r": 0.7,
+   "n": 4,
+   "avg_r": -0.23,
    "wins": 1
   },
   {
@@ -3282,8 +3282,8 @@
   {
    "verdict": "against",
    "text": "at a zone or edge against the direction",
-   "n": 152,
-   "avg_r": 0.386,
+   "n": 153,
+   "avg_r": 0.376,
    "wins": 78
   },
   {
@@ -3305,5 +3305,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W47</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 31 closed this week (+24.2R) \u00b7 48 since the start (+0.65R a trade, after fees)\nSilent research records (not sent to you): 60 this week (-4.6R)\n\ud83d\udfe1 PAPER: 5 this week (+2.3R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 18 repair(s) judged - 13 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 41 this week (34 sent) \u00b7 4h later 12 kept going, 29 reversed \u00b7 a strategy alert followed 7\n\n\ud83d\udcc8 Track record (your alerts, after fees): 47 closed \u00b7 +0.60R a trade \u00b7 +28.3R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 2 (+0.70R) \u00b7 middle 4 (+0.03R) \u00b7 against 152 (+0.39R) \u00b7 outside 179 (+0.17R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W47</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 31 closed this week (+24.2R) \u00b7 48 since the start (+0.65R a trade, after fees)\nSilent research records (not sent to you): 59 this week (-5.8R)\n\ud83d\udfe1 PAPER: 5 this week (+2.3R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 18 repair(s) judged - 13 beat their parent, 2 reached VALIDATION; 0 waiting for a test\n\n\u26a1 Shocks: 41 this week (34 sent) \u00b7 4h later 12 kept going, 29 reversed \u00b7 a strategy alert followed 7\n\n\ud83d\udcc8 Track record (your alerts, after fees): 47 closed \u00b7 +0.60R a trade \u00b7 +28.3R \u00b7 worst drawdown 5.0R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 4 (-0.23R) \u00b7 middle 4 (+0.03R) \u00b7 against 153 (+0.38R) \u00b7 outside 179 (+0.17R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }

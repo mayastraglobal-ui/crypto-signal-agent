@@ -39552,3 +39552,94 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 08:15,XRP,15m,CHOCH,bull,0.9192,,,0.063,London,1h,RANGE,with displacement,smc-1.0,Binance
 2026-11-22 08:15,XRP,15m,ORDER_BLOCK,bull,,0.9139,0.9159,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
 2026-11-22 08:15,XRP,15m,FVG_FILLED,bear,,0.9171,0.9205,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 09:00,BTC,1h,FVG_FILLED,bear,,59606.29,60012.07,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:00,BTC,1h,CHOCH,bull,60568.01,,,0.906,London,4h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,1h,ORDER_BLOCK,bull,,58768.51,59327.46,,London,4h,STRONG_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,1h,OB_RETEST,bear,,61319.92,61990.01,,London,4h,STRONG_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-22 10:00,BTC,1h,FVG_FILLED,bear,,60025.24,61344.74,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:00,BTC,1h,FVG,bull,,59235.71,59659.13,0.616,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,BTC,30m,FVG_RETRACE,bear,,59848.02,60012.07,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,BTC,30m,FVG_FILLED,bear,,59606.29,59815.05,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 09:00,BTC,30m,FVG_FILLED,bear,,59848.02,60012.07,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 09:00,BTC,30m,FVG,bull,,59213.15,59553.98,0.889,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 10:00,BTC,30m,CHOCH,bull,60568.01,,,1.416,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,30m,ORDER_BLOCK,bull,,59026.0,59235.71,,London,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,30m,FVG_FILLED,bear,,60442.2,61344.74,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:30,BTC,15m,BREAKER_RETEST,bull,,59252.82,59354.47,,London,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-22 08:30,BTC,15m,FVG_RETRACE,bear,,59848.02,60041.03,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,BTC,15m,FVG_FILLED,bear,,59646.63,59815.05,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:45,BTC,15m,SWEEP,bear,60352.16,,,0.227,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 08:45,BTC,15m,FVG_RETRACE,bear,,60041.04,60086.84,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:45,BTC,15m,FVG_FILLED,bear,,60041.04,60086.84,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:45,BTC,15m,FVG_FILLED,bear,,59848.02,60041.03,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:45,BTC,15m,FVG,bull,,59450.0,59676.68,0.783,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 09:00,BTC,15m,FVG_RETRACE,bull,,59450.0,59676.68,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:00,BTC,15m,CHOCH,bull,60410.0,,,2.365,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,15m,ORDER_BLOCK,bull,,59659.13,59848.01,,London,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,BTC,15m,FVG_FILLED,bear,,60925.13,61344.74,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 09:00,ETH,1h,SWEEP,bear,1691.11,,,0.475,London,4h,STRONG_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-22 09:00,ETH,1h,FVG_RETRACE,bear,,1674.39,1683.12,,London,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 09:00,ETH,1h,FVG_FILLED,bear,,1674.39,1683.12,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:00,ETH,1h,CHOCH,bull,1690.01,,,1.505,London,4h,STRONG_BEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,ETH,1h,ORDER_BLOCK,bull,,1648.35,1665.31,,London,4h,STRONG_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,ETH,1h,FVG,bull,,1668.52,1683.34,0.753,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,ETH,30m,SWEEP,bear,1691.11,,,0.307,London,1h,WEAK_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-22 08:30,ETH,30m,FVG_RETRACE,bear,,1680.51,1683.12,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,ETH,30m,FVG_FILLED,bear,,1680.51,1683.12,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,ETH,30m,FVG_RETRACE,bear,,1674.39,1677.96,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,ETH,30m,FVG_FILLED,bear,,1674.39,1677.96,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 09:00,ETH,30m,FVG,bull,,1668.52,1681.3,1.156,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 10:00,ETH,30m,BOS,bull,1690.01,,,2.445,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,ETH,30m,ORDER_BLOCK,bull,,1649.57,1665.31,,London,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 08:30,ETH,15m,SWEEP,bear,1691.11,,,0.42,London,1h,WEAK_BEAR,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-22 08:30,ETH,15m,OB_RETEST,bear,,1685.7,1689.07,,London,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-22 08:30,ETH,15m,FVG_FILLED,bear,,1680.51,1685.35,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,ETH,15m,FVG,bull,,1668.52,1672.5,0.513,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 08:45,ETH,15m,SWEEP,bear,1697.64,,,0.193,London,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 09:45,ETH,15m,OB_INVALID,bear,,1685.7,1689.07,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-22 10:00,ETH,15m,CHOCH,bull,1699.14,,,2.075,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-22 10:00,ETH,15m,ORDER_BLOCK,bull,,1683.63,1689.99,,London,1h,UNCLEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 09:00,SOL,1h,FVG_FILLED,bear,,69.75,70.22,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:00,SOL,1h,FVG,bull,,69.39,69.64,0.323,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,SOL,30m,OB_RETEST,bear,,70.22,70.46,,London,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-22 08:30,SOL,30m,FVG_RETRACE,bear,,70.08,70.22,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,SOL,30m,FVG_FILLED,bear,,70.08,70.22,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:30,SOL,30m,FVG_FILLED,bear,,69.75,70.02,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:30,SOL,30m,FVG_FILLED,bear,,69.17,69.41,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 09:00,SOL,30m,FVG,bull,,69.39,69.66,0.584,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 09:30,SOL,30m,FVG_RETRACE,bull,,69.39,69.66,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:00,SOL,30m,CHOCH,bull,70.52,,,0.428,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-22 10:00,SOL,30m,ORDER_BLOCK,bull,,69.64,70.18,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,SOL,30m,OB_INVALID,bear,,70.22,70.46,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-22 08:30,SOL,15m,SWEEP,bear,69.86,,,1.242,London,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 08:30,SOL,15m,OB_RETEST,bear,,70.22,70.36,,London,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-22 08:30,SOL,15m,FVG_RETRACE,bear,,70.08,70.24,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,SOL,15m,FVG_FILLED,bear,,69.71,70.02,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:30,SOL,15m,FVG,bull,,69.35,69.45,0.301,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 08:45,SOL,15m,WEAK_BREAK,bull,69.86,,,0.12,London,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-22 08:45,SOL,15m,FVG_FILLED,bear,,70.08,70.24,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 10:00,SOL,15m,CHOCH,bull,70.33,,,1.087,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-22 10:00,SOL,15m,ORDER_BLOCK,bull,,69.64,69.99,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 10:00,SOL,15m,OB_INVALID,bear,,70.22,70.36,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-22 09:00,XRP,1h,FVG_FILLED,bear,,0.9231,0.929,,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:00,XRP,1h,FVG,bull,,0.9173,0.9241,0.673,London,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 08:30,XRP,30m,CHOCH,bull,0.9232,,,0.429,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-22 08:30,XRP,30m,ORDER_BLOCK,bull,,0.9139,0.9165,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 08:30,XRP,30m,FVG_FILLED,bear,,0.9231,0.9281,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 08:30,XRP,30m,FVG_FILLED,bear,,0.918,0.9195,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 09:00,XRP,30m,FVG,bull,,0.9173,0.924,1.147,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 08:30,XRP,15m,FVG_RETRACE,bear,,0.9236,0.9281,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:30,XRP,15m,FVG_FILLED,bear,,0.9236,0.9281,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 08:45,XRP,15m,FVG_RETRACE,bear,,0.9288,0.9312,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 08:45,XRP,15m,FVG_FILLED,bear,,0.9288,0.9312,,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 08:45,XRP,15m,FVG,bull,,0.9209,0.9242,0.79,London,1h,RANGE,,smc-1.0,Binance
+2026-11-22 09:00,XRP,15m,FVG_RETRACE,bull,,0.9209,0.9242,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:00,XRP,15m,BOS,bull,0.9321,,,0.978,London,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-22 10:00,XRP,15m,ORDER_BLOCK,bull,,0.9246,0.9285,,London,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-22 09:00,ZEC,1h,SWEEP,bear,800.15,,,0.295,London,4h,STRONG_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 10:00,ZEC,1h,WEAK_BREAK,bull,800.15,,,0.094,London,4h,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-22 09:00,ZEC,30m,SWEEP,bear,800.15,,,0.476,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 10:00,ZEC,30m,WEAK_BREAK,bull,797.02,,,0.451,London,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-22 08:45,ZEC,15m,SWEEP,bear,801.51,,,0.478,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 10:00,ZEC,15m,SWEEP,bear,805.0,,,0.164,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 10:00,ZEC,15m,OB_INVALID,bear,,791.67,794.98,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
