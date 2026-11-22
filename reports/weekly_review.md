@@ -1,13 +1,13 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-22 10:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-22 11:02 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-22)
-- ✅ hourly scan: last run 2026-11-22 10:11 UTC
+- ✅ hourly scan: last run 2026-11-22 11:02 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-22 08:05 UTC (11 min ago)
+- ✅ live watcher: last heartbeat 2026-11-22 09:10 UTC (62 min ago)
 - ✅ TEST setups closed this week (GitHub record): 85
 
 ## Totals
@@ -31,7 +31,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 - watcher alerts (5m-confirmed): 16 plan results, +1.22R a trade
 - every TEST setup (GitHub, no 5m check - your alerts and the silent records): 240, +0.15R a trade
 - the same setups side by side (live watcher twins, `confirm_5m.compare_tfs`):
-  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.25R over 31 (plan results, before fees)
+  - 4h: every setup without the 5m check -1.00R over 2 · the ones the 5m check passed none yet · the ones it rejected -1.00R over 2 · alerts sent (5m entry) +1.11R over 33 (plan results, before fees)
 
 ## 📈 Live track record and drift monitor
 
@@ -58,8 +58,8 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 
 - 41 shock(s) this week, 34 sent to Telegram (the rest: over the daily cap, paused or /shock off)
 - by kind: fast move 22, broke yesterday's high 1, broke yesterday's low 9, volume spike 17
-- by coin: ETH 11, BTC 10, XRP 8, SOL 7, SUI 3, ZEC 2
-- 4 hours later: 12 kept going, 29 reversed (average -0.44% in the shock's direction)
+- by coin: ETH 11, BTC 9, XRP 8, SOL 7, ZEC 3, SUI 3
+- 4 hours later: 13 kept going, 28 reversed (average -0.37% in the shock's direction)
 - followed by a strategy alert in the same direction within 4h: 7 of 41 - the strategies missed most shocks: material for the research (a reversal or sweep version)
 -   2026-11-21 06:51 UTC SUI UP +4.4% -> 4h later -0.3% (no strategy alert)
 -   2026-11-21 06:46 UTC ETH UP +3.5% -> 4h later +0.9% (no strategy alert)

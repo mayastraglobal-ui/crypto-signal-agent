@@ -39643,3 +39643,22 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 08:45,ZEC,15m,SWEEP,bear,801.51,,,0.478,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-22 10:00,ZEC,15m,SWEEP,bear,805.0,,,0.164,London,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-22 10:00,ZEC,15m,OB_INVALID,bear,,791.67,794.98,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-22 11:00,BTC,1h,FVG,bull,,60410.0,60702.15,0.43,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:30,BTC,30m,FVG,bull,,60130.01,60819.86,1.483,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 11:00,BTC,30m,FVG_RETRACE,bull,,60130.01,60819.86,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:15,BTC,15m,FVG,bull,,60298.07,60819.86,1.407,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 10:45,BTC,15m,FVG_RETRACE,bull,,60298.07,60819.86,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 11:00,ETH,1h,FVG,bull,,1699.14,1706.24,0.37,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 10:30,ETH,30m,FVG,bull,,1695.22,1708.71,1.058,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 11:00,ETH,30m,FVG_RETRACE,bull,,1695.22,1708.71,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:15,ETH,15m,FVG,bull,,1698.95,1710.08,1.099,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 10:30,ETH,15m,FVG_RETRACE,bull,,1698.95,1710.08,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 10:30,SOL,30m,BREAKER_RETEST,bull,,70.22,70.46,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-22 10:30,SOL,30m,FVG,bull,,70.18,70.42,0.47,,1h,RANGE,,smc-1.0,Binance
+2026-11-22 10:15,SOL,15m,FVG,bull,,70.14,70.42,0.683,,1h,RANGE,,smc-1.0,Binance
+2026-11-22 10:15,XRP,15m,FVG,bull,,0.9283,0.9304,0.42,,1h,RANGE,,smc-1.0,Binance
+2026-11-22 11:00,XRP,15m,FVG_RETRACE,bull,,0.9283,0.9304,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 11:00,ZEC,1h,SWEEP,bear,807.95,,,0.101,,4h,STRONG_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-22 10:30,ZEC,30m,SWEEP,bear,807.95,,,0.156,,1h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-22 10:15,ZEC,15m,SWEEP,bear,807.95,,,0.21,,1h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-22 11:00,ZEC,15m,BREAKER_RETEST,bull,,791.67,794.98,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
