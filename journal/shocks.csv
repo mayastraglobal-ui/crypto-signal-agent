@@ -393,3 +393,4 @@ time_utc,coin,side,triggers,move_pct,move_atr,vol_x,level,price,sent,after_1h_pc
 2026-11-22 08:36,XRP,UP,volume,1.18,1.68,5.0,,0.9312,same wave,-0.78,-1.05,0.77,-1.29,0,0
 2026-11-22 09:57,BTC,UP,move+sweep_high,1.55,2.08,5.0,60970.0,61096.0,sent,-0.21,-0.58,0.9,-1.1,0,0
 2026-11-22 09:57,ETH,UP,volume+sweep_high,1.21,1.61,5.8,1716.0,1714.2,sent,-0.17,-0.57,1.13,-1.2,0,0
+2026-11-22 12:31,SOL,UP,sweep_high,-0.83,-1.01,3.9,71.07,70.28,sent,-0.36,0.28,0.4,-0.8,0,0
