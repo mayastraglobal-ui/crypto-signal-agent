@@ -352,6 +352,20 @@
    "action": "promote",
    "key": "P03-FIB-PULLBACK-V5@1.0|1h",
    "coin": "SOL"
+  },
+  {
+   "time_utc": "2026-11-22 05:30",
+   "week": "2026-W47",
+   "action": "promote",
+   "key": "P01-BREAKOUT-V2@1.0|30m",
+   "coin": "BTC"
+  },
+  {
+   "time_utc": "2026-11-22 05:30",
+   "week": "2026-W47",
+   "action": "promote",
+   "key": "TRD-H4-BREAKOUT-S3@1.0|1h",
+   "coin": "ETH"
   }
  ]
 }
