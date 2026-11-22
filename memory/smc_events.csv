@@ -39706,3 +39706,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 12:30,ZEC,15m,BOS,bear,792.07,,,1.057,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-22 12:45,ZEC,15m,FVG,bear,,791.22,796.68,0.682,NY AM,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-22 13:00,ZEC,15m,FVG_RETRACE,bear,,791.22,796.68,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 14:00,SOL,1h,FVG,bear,,70.34,70.6,0.345,NY AM,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-22 14:00,SOL,15m,SWEEP,bull,70.0,,,0.602,NY AM,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-22 14:00,SOL,15m,OB_RETEST,bull,,69.64,69.99,,NY AM,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-22 14:00,XRP,1h,FVG,bear,,0.9249,0.9285,0.36,NY AM,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 14:00,XRP,15m,SWEEP,bull,0.9196,,,0.29,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-22 13:30,ZEC,15m,FVG_FILLED,bear,,791.22,796.68,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
