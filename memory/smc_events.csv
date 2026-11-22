@@ -39483,3 +39483,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 03:00,SUI,15m,FVG,bear,,0.6414,0.6441,1.133,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-22 03:15,SUI,15m,FVG_FILLED,bull,,0.6373,0.6391,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-22 03:15,SUI,15m,FVG_RETRACE,bear,,0.6414,0.6441,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 05:00,BTC,1h,FVG_RETRACE,bear,,59606.29,60012.07,,Asia,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:30,BTC,30m,FVG_RETRACE,bear,,59606.29,59815.05,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:15,BTC,15m,FVG_RETRACE,bear,,59646.63,59815.05,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:30,ETH,30m,FVG_RETRACE,bear,,1664.56,1667.96,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:30,ETH,30m,FVG_FILLED,bear,,1664.56,1667.96,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 04:15,ETH,15m,FVG_RETRACE,bear,,1666.0,1667.96,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:15,ETH,15m,FVG_FILLED,bear,,1666.0,1667.96,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 05:00,SOL,1h,FVG_RETRACE,bear,,69.75,70.22,,Asia,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:30,SOL,30m,FVG_RETRACE,bear,,69.75,70.02,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 05:00,XRP,1h,FVG_RETRACE,bear,,0.9231,0.929,,Asia,4h,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:30,XRP,30m,FVG_RETRACE,bear,,0.9231,0.9281,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:15,ZEC,15m,FVG_RETRACE,bear,,776.28,777.91,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 04:15,ZEC,15m,FVG_FILLED,bear,,776.28,777.91,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 04:15,ZEC,15m,FVG,bull,,765.49,768.85,0.554,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-22 04:45,ZEC,15m,FVG_RETRACE,bull,,765.49,768.85,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
