@@ -39381,3 +39381,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-21 23:00,SUI,30m,BOS,bear,0.6449,,,0.077,,1h,UNCLEAR,no displacement,smc-1.0,Binance
 2026-11-21 22:15,SUI,15m,SWEEP,bull,0.6449,,,0.34,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-21 23:00,SUI,15m,BOS,bear,0.6449,,,0.154,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-21 23:15,ETH,15m,SWEEP,bull,1677.09,,,0.318,,1h,WEAK_BEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-22 00:00,SOL,4h,FVG_RETRACE,bull,,69.44,70.12,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 23:30,XRP,30m,FVG_RETRACE,bear,,0.9313,0.933,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 23:30,XRP,30m,FVG_FILLED,bear,,0.9313,0.933,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 00:00,XRP,30m,FVG,bull,,0.9295,0.9319,0.382,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-21 23:15,XRP,15m,SWEEP,bull,0.9267,,,0.264,,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 23:15,XRP,15m,FVG_FILLED,bull,,0.9265,0.9281,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-21 23:30,XRP,15m,FVG,bull,,0.9285,0.9305,0.566,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-21 23:45,XRP,15m,FVG,bull,,0.9306,0.9327,0.606,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-22 00:00,XRP,15m,FVG_RETRACE,bull,,0.9306,0.9327,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-22 00:00,ZEC,1h,FVG,bear,,785.57,791.46,0.32,,4h,STRONG_BEAR,,smc-1.0,Binance
+2026-11-21 23:30,ZEC,30m,SWEEP,bull,778.83,,,0.178,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-21 23:30,ZEC,15m,SWEEP,bull,778.83,,,0.307,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-22 00:00,SUI,4h,FVG_RETRACE,bull,,0.6361,0.6436,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-21 23:15,SUI,15m,SWEEP,bull,0.6436,,,0.431,,1h,UNCLEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-21 23:45,SUI,15m,FVG,bull,,0.6466,0.6479,0.512,,1h,UNCLEAR,,smc-1.0,Binance

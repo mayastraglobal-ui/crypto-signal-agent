@@ -1,20 +1,20 @@
 # Weekly review · 2026-W47
 
-Made 2026-11-21 23:02 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-22 00:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-21)
-- ✅ hourly scan: last run 2026-11-21 23:02 UTC
+- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-21)
+- ✅ hourly scan: last run 2026-11-22 00:11 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-21 21:20 UTC (52 min ago)
-- ✅ TEST setups closed this week (GitHub record): 112
+- ✅ live watcher: last heartbeat 2026-11-21 22:20 UTC (43 min ago)
+- ✅ TEST setups closed this week (GitHub record): 110
 
 ## Totals
 
-- **Your alerts** (setups that could reach your Telegram): 48 closed since the start, +0.65R a trade; this week 33 (+25.62R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 193 closed, -0.01R a trade; this week 84 (+3.21R)
-- TEST: 236 closed setups since the start, +0.12R a trade; this week 112 (+26.52R) (both groups)
+- **Your alerts** (setups that could reach your Telegram): 48 closed since the start, +0.65R a trade; this week 32 (+23.14R)
+- Silent research records (strategies NOT sent to you, kept to check the research): 193 closed, -0.01R a trade; this week 83 (+0.73R)
+- TEST: 236 closed setups since the start, +0.12R a trade; this week 110 (+21.56R) (both groups)
 - PAPER: 5 closed signals, +0.46R a trade; this week 5 (+2.31R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -79,7 +79,7 @@ Made 2026-11-21 23:02 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | Strategy | TF | Coin | Stage | Sent to you | Live | Win % | After fees | Before fees | This week | Backtest | Confidence |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | PAPER | ✅ yes | 5 | 60 | +0.46R | +0.49R | 5 (+2.3R) | +0.35R | +0.46R over 5 trades: too early to say anything |
-| P01-BREAKOUT-V3 | 4h | XRP | TEST | ✅ yes | 8 | 62 | +1.17R | +1.21R | 5 (+2.0R) | +0.26R | +1.17R over 8 trades: too early to say anything |
+| P01-BREAKOUT-V3 | 4h | XRP | TEST | ✅ yes | 8 | 62 | +1.17R | +1.21R | 4 (-0.5R) | +0.26R | +1.17R over 8 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | BTC | TEST | ✅ yes | 7 | 57 | +0.98R | +1.03R | 3 (+3.9R) | +0.39R | +0.98R over 7 trades: too early to say anything |
 | P01-BREAKOUT-V1 | 4h | ETH | TEST | ✅ yes | 4 | 25 | -0.16R | -0.13R | 3 (+0.4R) | +0.25R | -0.16R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V4 | 4h | ETH | TEST | ✅ yes | 4 | 50 | +0.31R | +0.35R | 3 (+2.3R) | +0.22R | +0.31R over 4 trades: too early to say anything |
@@ -131,7 +131,7 @@ Made 2026-11-21 23:02 UTC by the hourly scan (engine/weekly_review.py). Live = t
 | P04-MACD-SUPERTREND-V1 | 4h | ETH | TEST | silent | 1 | 100 | +2.48R | +2.50R | 1 (+2.5R) | +0.15R | +2.48R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 1h | XRP | TEST | silent | 1 | 0 | -1.05R | -1.02R | 0 (+0.0R) | +0.05R | -1.05R over 1 trade: too early to say anything |
 | P04-MACD-SUPERTREND-V4 | 4h | ZEC | TEST | silent | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.22R | -1.02R over 1 trade: too early to say anything |
-| P07-SQUEEZE-RETEST-V1 | 4h | ETH | TEST | silent | 1 | 100 | +2.48R | +2.50R | 1 (+2.5R) | +0.09R | +2.48R over 1 trade: too early to say anything |
+| P07-SQUEEZE-RETEST-V1 | 4h | ETH | TEST | silent | 1 | 100 | +2.48R | +2.50R | 0 (+0.0R) | +0.09R | +2.48R over 1 trade: too early to say anything |
 | P07-SQUEEZE-RETEST-V2 | 1h | BTC | TEST | silent | 1 | 0 | -1.05R | -1.02R | 1 (-1.1R) | +0.04R | -1.05R over 1 trade: too early to say anything |
 | P07-SQUEEZE-RETEST-V5 | 1h | ZEC | TEST | silent | 1 | 0 | -0.49R | -0.46R | 0 (+0.0R) | +0.02R | -0.49R over 1 trade: too early to say anything |
 | P08-SESSION-BREAKOUT-V2 | 30m | SOL | TEST | silent | 1 | 100 | +2.44R | +2.50R | 0 (+0.0R) | +0.07R | +2.44R over 1 trade: too early to say anything |
