@@ -39662,3 +39662,8 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 10:30,ZEC,30m,SWEEP,bear,807.95,,,0.156,,1h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
 2026-11-22 10:15,ZEC,15m,SWEEP,bear,807.95,,,0.21,,1h,RANGE,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
 2026-11-22 11:00,ZEC,15m,BREAKER_RETEST,bull,,791.67,794.98,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-22 12:00,BTC,4h,WEAK_BREAK,bull,60996.0,,,0.047,,1d,EXPANSION,no displacement,smc-1.0,Binance
+2026-11-22 12:00,ETH,4h,SWEEP,bear,1716.58,,,0.159,,1d,EXPANSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-22 12:00,ETH,4h,OB_RETEST,bear,,1717.82,1755.14,,,1d,EXPANSION,first return into the order block,smc-1.0,Binance
+2026-11-22 12:00,XRP,15m,WEAK_BREAK,bear,0.9291,,,0.117,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-22 12:00,XRP,15m,OB_RETEST,bull,,0.9246,0.9285,,,1h,RANGE,first return into the order block,smc-1.0,Binance
