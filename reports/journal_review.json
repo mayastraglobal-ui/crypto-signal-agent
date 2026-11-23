@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-23 04:01",
+ "last_entry_utc": "2026-11-23 14:00",
  "days": 30,
  "all": {
   "alerts": 62,
@@ -7,10 +7,10 @@
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
-   "n": 48,
-   "total_r": 48.849,
-   "avg_r": 1.018,
-   "wins": 28
+   "n": 53,
+   "total_r": 51.849,
+   "avg_r": 0.978,
+   "wins": 32
   },
   "plan_skipped": {
    "n": 0,
@@ -19,16 +19,16 @@
    "wins": 0
   },
   "plan_no_answer": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
   "plan_all": {
-   "n": 51,
-   "total_r": 45.849,
-   "avg_r": 0.899,
-   "wins": 28
+   "n": 57,
+   "total_r": 47.849,
+   "avg_r": 0.839,
+   "wins": 32
   },
   "yours": {
    "n": 47,
@@ -65,10 +65,10 @@
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
-   "n": 45,
-   "total_r": 51.849,
-   "avg_r": 1.152,
-   "wins": 28
+   "n": 50,
+   "total_r": 54.849,
+   "avg_r": 1.097,
+   "wins": 32
   },
   "plan_skipped": {
    "n": 0,
@@ -77,16 +77,16 @@
    "wins": 0
   },
   "plan_no_answer": {
-   "n": 3,
-   "total_r": -3.0,
+   "n": 4,
+   "total_r": -4.0,
    "avg_r": -1.0,
    "wins": 0
   },
   "plan_all": {
-   "n": 48,
-   "total_r": 48.849,
-   "avg_r": 1.018,
-   "wins": 28
+   "n": 54,
+   "total_r": 50.849,
+   "avg_r": 0.942,
+   "wins": 32
   },
   "yours": {
    "n": 44,
@@ -223,8 +223,8 @@
    "alerts": 10,
    "took": 8,
    "skipped": 0,
-   "plan_avg_r": 1.1,
-   "plan_n": 5,
+   "plan_avg_r": 0.833,
+   "plan_n": 9,
    "your_avg_r": 2.5,
    "your_n": 4
   },
@@ -233,8 +233,8 @@
    "alerts": 15,
    "took": 15,
    "skipped": 0,
-   "plan_avg_r": 1.628,
-   "plan_n": 14,
+   "plan_avg_r": 1.586,
+   "plan_n": 15,
    "your_avg_r": 2.021,
    "your_n": 14
   },
@@ -253,8 +253,8 @@
    "alerts": 10,
    "took": 10,
    "skipped": 0,
-   "plan_avg_r": 0.167,
-   "plan_n": 6,
+   "plan_avg_r": 0.0,
+   "plan_n": 7,
    "your_avg_r": 0.167,
    "your_n": 6
   },
@@ -328,10 +328,10 @@
     "wins": 0
    },
    "sent": {
-    "n": 37,
-    "total_r": 32.674,
-    "avg_r": 0.883,
-    "wins": 20
+    "n": 43,
+    "total_r": 34.674,
+    "avg_r": 0.806,
+    "wins": 24
    }
   }
  },
