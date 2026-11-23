@@ -1478,3 +1478,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-23 19:11 UTC
 - **EXCLUDED** NVDAB - only 165 days of history (need 180); one-day volume spike: 24h $245M is 3.0x the 7-day average; suspended for the rest of the UTC day (moved more than ±25% earlier today)
 - **EXCLUDED** SOXLB - only 139 days of history (need 180); 24h move +26.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $222k within 1% (need $250k)
+
+## 2026-11-23 20:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,147x the 1% order-book depth (flag only, not excluded)

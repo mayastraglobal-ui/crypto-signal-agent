@@ -1,15 +1,15 @@
 # 📈 Live track record
 
-Updated 2026-11-23 19:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-23 20:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
 | **Your alerts** (could reach your Telegram) | 54 | 57 | +0.45R | +24.39R | 5.47R | 6 |
-| Silent research records (never sent to you) | 198 | 34 | -0.04R | -6.96R | 41.01R | 17 |
-| 🔵 TEST | 260 | 36 | +0.06R | +14.49R | 47.91R | 20 |
+| Silent research records (never sent to you) | 199 | 34 | -0.04R | -7.99R | 41.01R | 17 |
+| 🔵 TEST | 261 | 36 | +0.05R | +13.47R | 47.91R | 20 |
 | 🟡 PAPER | 140 | 51 | +0.34R | +47.62R | 34.80R | 19 |
 | 🟢 LIVE | 0 | - | - | +0.00R | 0.00R | 0 |
-| **All** | 400 | 41 | +0.15R | +62.11R | 59.17R | 30 |
+| **All** | 401 | 41 | +0.15R | +61.09R | 59.17R | 30 |
 
 ## 🚨 Drift monitor
 
@@ -130,6 +130,7 @@ Warning signs (no pause yet):
 | P08-SESSION-BREAKOUT-V2 | 30m | XRP | 🔵 TEST | silent | 1 | 100 | +2.44R | +0.06R | +2.44R | 0.00R | ✅ |
 | P08-SESSION-BREAKOUT-V3 | 1h | SOL | 🔵 TEST | silent | 1 | 100 | +1.53R | +0.19R | +1.53R | 0.00R | ✅ |
 | P08-SESSION-BREAKOUT-V4 | 1h | XRP | 🔵 TEST | silent | 1 | 0 | -1.07R | +0.08R | -1.07R | 1.07R | ✅ |
+| P12-LEADER-V1 | 4h | SUI | 🔵 TEST | silent | 1 | 0 | -1.03R | +0.03R | -1.03R | 1.03R | ✅ |
 
 ## Equity curve (all stages, R after fees)
 
@@ -154,4 +155,4 @@ Warning signs (no pause yet):
 | 2026-11-23 11:59 | +61.36R |
 | 2026-11-23 11:59 | +57.29R |
 | 2026-11-23 15:59 | +61.30R |
-| 2026-11-23 15:59 | +62.11R |
+| 2026-11-23 19:59 | +61.09R |

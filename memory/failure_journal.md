@@ -1970,3 +1970,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: overextended_entry, late_entry
   - what happened: false_breakout, regime_mismatch
   - root cause / fix: (review)
+
+### SUI LONG 4h P12-LEADER-V1 v1.0 - SL -1.03R
+- timestamp: 2026-11-23 20:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.03R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P12-LEADER-V1 v1.0 · asset: SUI · timeframe: 4h · regime: TRANSITION · review: 2026-11-30
+  - signal 2026-11-23 15:59 UTC, closed 2026-11-23 19:59 UTC, stage TEST
+  - MAE -1.13R / MFE +0.24R
+  - at entry: session -, conditions: htf_conflict, overextended_entry, late_entry
+  - what happened: false_breakout, indicator_lag
+  - root cause / fix: (review)
