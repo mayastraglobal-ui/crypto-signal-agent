@@ -40455,3 +40455,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 17:30,SUI,30m,FVG,bear,,0.7041,0.7081,0.369,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-23 17:30,SUI,15m,FVG_RETRACE,bear,,0.7037,0.7101,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 18:00,SUI,15m,FVG,bear,,0.6919,0.6953,0.395,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 18:15,ETH,15m,FVG_RETRACE,bear,,1747.18,1754.54,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-23 19:00,SOL,15m,WEAK_BREAK,bear,73.25,,,0.04,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 19:00,XRP,1h,FVG,bear,,0.9594,0.9662,0.446,,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-23 18:30,XRP,30m,FVG,bear,,0.9594,0.9661,0.506,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 18:30,XRP,15m,BREAKER_RETEST,bull,,0.9473,0.9519,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 19:00,ZEC,1h,FVG,bear,,821.69,831.16,0.448,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-23 18:30,ZEC,30m,FVG,bear,,821.69,828.72,0.379,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 18:15,ZEC,15m,BREAKER_RETEST,bull,,801.39,814.82,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 19:00,SUI,1h,FVG,bear,,0.6917,0.695,0.264,,4h,TRANSITION,,smc-1.0,Binance
+2026-11-23 18:30,SUI,30m,FVG,bear,,0.6917,0.6953,0.34,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 19:00,SUI,15m,BREAKER_RETEST,bull,,0.6761,0.6837,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
