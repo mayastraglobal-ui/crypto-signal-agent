@@ -40009,3 +40009,6 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 10:00,ZEC,15m,FVG_RETRACE,bull,,796.84,800.53,,London,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 10:00,ZEC,15m,FVG_FILLED,bull,,796.84,800.53,,London,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-23 10:15,ZEC,15m,FVG,bear,,797.34,800.95,0.535,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-23 10:45,ETH,15m,FVG_RETRACE,bear,,1724.95,1727.08,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-23 11:00,ETH,15m,FVG_FILLED,bear,,1724.95,1727.08,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 11:00,ZEC,30m,FVG_FILLED,bull,,789.51,792.46,,,1h,COMPRESSION,,smc-1.0,Binance

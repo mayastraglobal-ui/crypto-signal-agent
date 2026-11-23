@@ -1454,3 +1454,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 ## 2026-11-23 10:16 UTC
 - **EXCLUDED** SOXLB - only 139 days of history (need 180)
 - **EXCLUDED** NVDAB - only 165 days of history (need 180)
+
+## 2026-11-23 11:11 UTC
+- **EXCLUDED** SOXLB - only 139 days of history (need 180); order book too thin: $222k within 1% (need $250k)
+- **EXCLUDED** NVDAB - only 165 days of history (need 180); order book too thin: $199k within 1% (need $250k)
