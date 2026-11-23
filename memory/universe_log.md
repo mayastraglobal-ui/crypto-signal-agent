@@ -1443,3 +1443,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-22 10:11 UTC
 - **FLAG** BTC - possible wash volume: 24h volume is 1,081x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-23 05:11 UTC
+- **EXCLUDED** SOXLB - only 139 days of history (need 180)
