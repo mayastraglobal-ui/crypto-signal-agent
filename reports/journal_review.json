@@ -1,5 +1,5 @@
 {
- "last_entry_utc": "2026-11-23 14:15",
+ "last_entry_utc": "2026-11-23 16:56",
  "days": 30,
  "all": {
   "alerts": 62,
@@ -31,16 +31,16 @@
    "wins": 33
   },
   "yours": {
-   "n": 47,
-   "total_r": 59.52,
-   "avg_r": 1.266,
-   "wins": 32
+   "n": 53,
+   "total_r": 65.52,
+   "avg_r": 1.236,
+   "wins": 38
   },
   "gap": {
-   "n": 47,
-   "total_r": 12.346,
-   "avg_r": 0.263,
-   "wins": 7
+   "n": 53,
+   "total_r": 14.346,
+   "avg_r": 0.271,
+   "wins": 8
   },
   "early": {
    "n": 0,
@@ -57,7 +57,7 @@
     "wins": 0
    }
   },
-  "missing_result": 7
+  "missing_result": 1
  },
  "recent": {
   "alerts": 58,
@@ -89,16 +89,16 @@
    "wins": 33
   },
   "yours": {
-   "n": 43,
-   "total_r": 64.2,
-   "avg_r": 1.493,
-   "wins": 32
+   "n": 49,
+   "total_r": 70.2,
+   "avg_r": 1.433,
+   "wins": 38
   },
   "gap": {
-   "n": 43,
-   "total_r": 13.026,
-   "avg_r": 0.303,
-   "wins": 7
+   "n": 49,
+   "total_r": 15.026,
+   "avg_r": 0.307,
+   "wins": 8
   },
   "early": {
    "n": 0,
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 7
+  "missing_result": 1
  },
  "per_strategy": [
   {
@@ -225,8 +225,8 @@
    "skipped": 0,
    "plan_avg_r": 0.85,
    "plan_n": 10,
-   "your_avg_r": 2.5,
-   "your_n": 4
+   "your_avg_r": 1.75,
+   "your_n": 8
   },
   {
    "cell": "donchian_breakout-VEXIT-FDISP 4h",
@@ -235,8 +235,8 @@
    "skipped": 0,
    "plan_avg_r": 1.586,
    "plan_n": 15,
-   "your_avg_r": 2.021,
-   "your_n": 14
+   "your_avg_r": 1.953,
+   "your_n": 15
   },
   {
    "cell": "donchian_breakout-VEXIT-FDISP-S2 4h",
@@ -255,8 +255,8 @@
    "skipped": 0,
    "plan_avg_r": 0.0,
    "plan_n": 7,
-   "your_avg_r": 0.167,
-   "your_n": 6
+   "your_avg_r": 0.286,
+   "your_n": 7
   },
   {
    "cell": "donchian_breakout-VEXIT-S4 4h",
@@ -336,7 +336,7 @@
   }
  },
  "findings": [
-  "Your real results are +0.26R per trade above the plan (47 trades) - your execution adds to the strategy."
+  "Your real results are +0.27R per trade above the plan (53 trades) - your execution adds to the strategy."
  ],
  "decisions": [
   {
