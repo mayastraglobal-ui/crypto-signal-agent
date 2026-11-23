@@ -6,12 +6,15 @@
   "XRP",
   "ZEC"
  ],
- "in_streak": {},
+ "in_streak": {
+  "SUI": 1
+ },
  "out_streak": {},
  "suspended": {
-  "SOXLB": "2026-11-23"
+  "SOXLB": "2026-11-23",
+  "NVDAB": "2026-11-23"
  },
- "runs": 1269,
+ "runs": 1270,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -27,15 +30,12 @@
    "volume_7d"
   ],
   "BNB": [
-   "volume_24h",
    "volume_7d"
   ],
   "UNI": [
    "volume_7d"
   ],
-  "SUI": [
-   "volume_24h"
-  ],
+  "SUI": [],
   "AVAX": [
    "volume_7d"
   ],
@@ -168,8 +168,8 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history",
-   "thin_book"
+   "big_move",
+   "history"
   ],
   "ASTER": [
    "thin_book",
@@ -188,7 +188,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [],
   "XRP": [],

@@ -254,3 +254,27 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### START ZEC 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)
 - timestamp: 2026-11-23 14:11 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-12-23
   - signals from this data are blocked while it lasts
+
+### END BTC 5m data: DEGRADED: volume 56x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: BTC · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC
+
+### END ETH 5m data: DEGRADED: volume 55x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ETH · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC
+
+### END SOL 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: SOL · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC
+
+### END SUI 5m data: DEGRADED: volume 83x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: SUI · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC
+
+### END XRP 5m data: DEGRADED: volume 59x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: XRP · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC
+
+### END ZEC 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)
+- timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-12-23
+  - problem first seen 2026-11-23 14:11 UTC UTC

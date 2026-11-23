@@ -1,19 +1,5 @@
 {
- "issues": {
-  "data|BTC|5m": "BTC 5m data: DEGRADED: volume 56x normal on candle 11-23 13:55 UTC (possible bad data)",
-  "data|ETH|5m": "ETH 5m data: DEGRADED: volume 55x normal on candle 11-23 13:55 UTC (possible bad data)",
-  "data|SOL|5m": "SOL 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)",
-  "data|XRP|5m": "XRP 5m data: DEGRADED: volume 59x normal on candle 11-23 13:55 UTC (possible bad data)",
-  "data|ZEC|5m": "ZEC 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)",
-  "data|SUI|5m": "SUI 5m data: DEGRADED: volume 83x normal on candle 11-23 13:55 UTC (possible bad data)"
- },
- "since": {
-  "data|BTC|5m": "2026-11-23 14:11 UTC",
-  "data|ETH|5m": "2026-11-23 14:11 UTC",
-  "data|SOL|5m": "2026-11-23 14:11 UTC",
-  "data|XRP|5m": "2026-11-23 14:11 UTC",
-  "data|ZEC|5m": "2026-11-23 14:11 UTC",
-  "data|SUI|5m": "2026-11-23 14:11 UTC"
- },
+ "issues": {},
+ "since": {},
  "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }

@@ -1464,3 +1464,9 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-23 14:11 UTC
 - **EXCLUDED** SOXLB - only 139 days of history (need 180); 24h move +29.0% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $154k within 1% (need $250k)
+
+## 2026-11-23 15:00 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,131x the 1% order-book depth (flag only, not excluded)
+- **EXCLUDED** BNB - 7-day average volume $43M < $50M
+- **ELIGIBLE** SUI - passes every rule again
+- **EXCLUDED** NVDAB - only 165 days of history (need 180); 24h move +26.1% is beyond ±25% - suspended for the rest of the UTC day

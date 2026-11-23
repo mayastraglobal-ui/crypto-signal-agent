@@ -1,6 +1,6 @@
 {
- "checked_utc": "2026-11-23 14:11",
- "run": 1269,
+ "checked_utc": "2026-11-23 15:00",
+ "run": 1270,
  "signal": [
   "BTC",
   "ETH",
@@ -12,7 +12,9 @@
   "BNB",
   "SUI"
  ],
- "waiting": {},
+ "waiting": {
+  "SUI": 1
+ },
  "leaving": {},
  "empty_slots": 2,
  "rules": {
@@ -32,41 +34,58 @@
  },
  "events": [
   {
-   "coin": "SOXLB",
+   "coin": "BTC",
+   "action": "FLAG",
+   "why": "possible wash volume: 24h volume is 1,131x the 1% order-book depth (flag only, not excluded)"
+  },
+  {
+   "coin": "BNB",
    "action": "EXCLUDED",
-   "why": "only 139 days of history (need 180); 24h move +29.0% is beyond \u00b125% - suspended for the rest of the UTC day; order book too thin: $154k within 1% (need $250k)"
+   "why": "7-day average volume $43M < $50M"
+  },
+  {
+   "coin": "SUI",
+   "action": "ELIGIBLE",
+   "why": "passes every rule again"
+  },
+  {
+   "coin": "NVDAB",
+   "action": "EXCLUDED",
+   "why": "only 165 days of history (need 180); 24h move +26.1% is beyond \u00b125% - suspended for the rest of the UTC day"
   }
  ],
  "candidates": [
   {
    "coin": "BTC",
-   "vol_24h": 7958373576.94533,
-   "change_24h": 4.154,
+   "vol_24h": 9619535012.0298,
+   "change_24h": 3.507,
    "listing_days": 999,
    "vol_7d_avg": 8950709238.448887,
    "stable_dev_pct": 18.872055866743963,
-   "spread_pct": 0.00015818242071073707,
-   "depth_bid_usdt": 13191942.458389996,
-   "depth_ask_usdt": 10256900.60645,
+   "spread_pct": 0.0007930044321017711,
+   "depth_bid_usdt": 8701399.001589999,
+   "depth_ask_usdt": 8504827.096430002,
    "venue": "OKX USDT perpetuals",
    "status": "SIGNAL",
    "volume_rank": 1,
    "eligible": true,
    "reasons": [],
-   "flags": [],
+   "flags": [
+    "possible wash volume: 24h volume is 1,131x the 1% order-book depth (flag only, not excluded)"
+   ],
    "in_streak": 0,
    "out_streak": 0
   },
   {
    "coin": "ETH",
-   "vol_24h": 4933403568.797339,
-   "change_24h": 5.484,
+   "vol_24h": 6241319554.49848,
+   "change_24h": 4.149,
    "listing_days": 999,
    "vol_7d_avg": 6718841100.623563,
    "stable_dev_pct": 22.168963106393868,
-   "spread_pct": 0.0005558411961697487,
-   "depth_bid_usdt": 11219370.734690003,
-   "depth_ask_usdt": 11658860.023759998,
+   "spread_pct": 0.0005609988022670469,
+   "depth_bid_usdt": 14113932.532719985,
+   "depth_ask_usdt": 8565522.061730005,
    "venue": "OKX USDT perpetuals",
    "status": "SIGNAL",
    "volume_rank": 2,
@@ -78,14 +97,14 @@
   },
   {
    "coin": "SOL",
-   "vol_24h": 711258880.9789,
-   "change_24h": 7.721,
+   "vol_24h": 890915991.8069999,
+   "change_24h": 9.073,
    "listing_days": 999,
    "vol_7d_avg": 798962233.7966429,
    "stable_dev_pct": 20.11288732530493,
-   "spread_pct": 0.013203934772550215,
-   "depth_bid_usdt": 10495980.208800003,
-   "depth_ask_usdt": 8963593.2671,
+   "spread_pct": 0.013045463440076845,
+   "depth_bid_usdt": 6567107.2156,
+   "depth_ask_usdt": 5647171.875100001,
    "venue": "OKX USDT perpetuals",
    "status": "SIGNAL",
    "volume_rank": 3,
@@ -97,20 +116,19 @@
   },
   {
    "coin": "BNB",
-   "vol_24h": 44337391.49499999,
-   "change_24h": 3.288,
+   "vol_24h": 50781228.0744,
+   "change_24h": 2.736,
    "listing_days": 999,
    "vol_7d_avg": 42772996.947871424,
    "stable_dev_pct": 18.65644666660985,
-   "spread_pct": 0.010443318886732708,
-   "depth_bid_usdt": 1501265.6795000008,
-   "depth_ask_usdt": 1416043.8621999982,
+   "spread_pct": 0.0017442722460105713,
+   "depth_bid_usdt": 2458971.577599998,
+   "depth_ask_usdt": 1519942.6968000007,
    "venue": "OKX USDT perpetuals",
    "status": "RESEARCH",
    "volume_rank": 8,
    "eligible": false,
    "reasons": [
-    "24h volume $44M < $50M",
     "7-day average volume $43M < $50M"
    ],
    "flags": [],
@@ -119,14 +137,14 @@
   },
   {
    "coin": "XRP",
-   "vol_24h": 202660719.6961,
-   "change_24h": 6.589,
+   "vol_24h": 268177520.27,
+   "change_24h": 7.53,
    "listing_days": 999,
    "vol_7d_avg": 269016411.78171426,
    "stable_dev_pct": 19.269909935465567,
-   "spread_pct": 0.010173457449513097,
-   "depth_bid_usdt": 6109656.4953999985,
-   "depth_ask_usdt": 5305070.358999999,
+   "spread_pct": 0.010050756319411928,
+   "depth_bid_usdt": 5195750.898399998,
+   "depth_ask_usdt": 5544354.284199997,
    "venue": "OKX USDT perpetuals",
    "status": "SIGNAL",
    "volume_rank": 6,
@@ -138,14 +156,14 @@
   },
   {
    "coin": "ZEC",
-   "vol_24h": 696676255.6448,
-   "change_24h": 5.889,
+   "vol_24h": 901224244.7247,
+   "change_24h": 8.756,
    "listing_days": 999,
    "vol_7d_avg": 997442676.5228571,
    "stable_dev_pct": 30.564349973454384,
-   "spread_pct": 0.0011895627762005252,
-   "depth_bid_usdt": 2110443.7645,
-   "depth_ask_usdt": 2761862.2443999997,
+   "spread_pct": 0.001153542239831918,
+   "depth_bid_usdt": 2127223.0581000005,
+   "depth_ask_usdt": 1491574.3437999992,
    "venue": "OKX USDT perpetuals",
    "status": "SIGNAL",
    "volume_rank": 5,
@@ -157,41 +175,39 @@
   },
   {
    "coin": "SUI",
-   "vol_24h": 44204766.008,
-   "change_24h": 7.521,
+   "vol_24h": 58450874.812,
+   "change_24h": 8.938,
    "listing_days": 999,
    "vol_7d_avg": 50603474.461142845,
    "stable_dev_pct": 21.18755264692541,
-   "spread_pct": 0.014115322182227255,
-   "depth_bid_usdt": 716178.6532,
-   "depth_ask_usdt": 655155.0878999999,
+   "spread_pct": 0.013944084222267169,
+   "depth_bid_usdt": 761441.1105000001,
+   "depth_ask_usdt": 902484.3061000002,
    "venue": "OKX USDT perpetuals",
    "status": "RESEARCH",
    "volume_rank": null,
-   "eligible": false,
-   "reasons": [
-    "24h volume $44M < $50M"
-   ],
+   "eligible": true,
+   "reasons": [],
    "flags": [],
-   "in_streak": 0,
+   "in_streak": 1,
    "out_streak": 0
   },
   {
    "coin": "NVDAB",
-   "vol_24h": 107811588.98957,
-   "change_24h": 19.857,
+   "vol_24h": 171816991.70577,
+   "change_24h": 26.053,
    "listing_days": 165,
    "vol_7d_avg": 81601374.23881857,
    "stable_dev_pct": 28.345735694295783,
-   "spread_pct": 0.025081514923496383,
-   "depth_bid_usdt": 226345.19380000018,
-   "depth_ask_usdt": 72177.56465,
+   "spread_pct": 0.0059564582898954084,
+   "depth_bid_usdt": 314366.74746000004,
+   "depth_ask_usdt": 351240.7751300001,
    "status": "EXCLUDED",
    "volume_rank": 4,
    "eligible": false,
    "reasons": [
     "only 165 days of history (need 180)",
-    "order book too thin: $72k within 1% (need $250k)"
+    "24h move +26.1% is beyond \u00b125% - suspended for the rest of the UTC day"
    ],
    "flags": [],
    "in_streak": 0,
@@ -199,21 +215,21 @@
   },
   {
    "coin": "SOXLB",
-   "vol_24h": 79098712.09738,
-   "change_24h": 29.0,
+   "vol_24h": 98181998.34275,
+   "change_24h": 26.629,
    "listing_days": 139,
    "vol_7d_avg": 70747914.11006857,
    "stable_dev_pct": 60.35641822988129,
-   "spread_pct": 0.09119927040583481,
-   "depth_bid_usdt": 153946.28593999997,
-   "depth_ask_usdt": 212852.42128999994,
+   "spread_pct": 0.0465874679711065,
+   "depth_bid_usdt": 577259.9586,
+   "depth_ask_usdt": 241474.38841,
    "status": "EXCLUDED",
    "volume_rank": 7,
    "eligible": false,
    "reasons": [
     "only 139 days of history (need 180)",
-    "24h move +29.0% is beyond \u00b125% - suspended for the rest of the UTC day",
-    "order book too thin: $154k within 1% (need $250k)"
+    "24h move +26.6% is beyond \u00b125% - suspended for the rest of the UTC day",
+    "order book too thin: $241k within 1% (need $250k)"
    ],
    "flags": [],
    "in_streak": 0,
@@ -223,6 +239,7 @@
  "excluded_by_list": {
   "USDC": "stablecoin / wrapped / staked token (exclusion list)",
   "NEAR": "AI/compute-narrative token (exclusion list)",
-  "USD1": "stablecoin / wrapped / staked token (exclusion list)"
+  "USD1": "stablecoin / wrapped / staked token (exclusion list)",
+  "RLUSD": "stablecoin / wrapped / staked token (exclusion list)"
  }
 }
