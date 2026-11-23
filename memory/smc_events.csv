@@ -39799,3 +39799,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-22 22:30,ZEC,15m,SWEEP,bull,785.52,,,0.22,,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-22 22:45,ZEC,15m,FVG,bear,,788.82,794.33,1.163,,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-22 23:00,ZEC,15m,FVG_RETRACE,bear,,788.82,794.33,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-22 23:30,BTC,30m,SWEEP,bear,61118.01,,,0.545,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 23:30,BTC,30m,FVG_FILLED,bear,,60965.25,61207.94,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 00:00,BTC,30m,BOS,bull,61118.01,,,0.47,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-22 23:15,BTC,15m,SWEEP,bear,61118.01,,,0.864,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 23:15,BTC,15m,FVG_FILLED,bear,,60918.0,61209.47,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-22 23:45,BTC,15m,BOS,bull,61118.01,,,0.82,,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-22 23:45,BTC,15m,ORDER_BLOCK,bull,,60796.82,61288.63,,,1h,TRANSITION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-23 00:00,BTC,15m,OB_RETEST,bull,,60796.82,61288.63,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-22 23:15,ETH,15m,FVG_FILLED,bear,,1720.4,1722.69,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 00:00,SOL,30m,SWEEP,bear,70.75,,,0.126,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-23 00:00,SOL,30m,FVG,bull,,70.4,70.56,0.415,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 23:15,SOL,15m,SWEEP,bear,70.55,,,0.706,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 23:30,SOL,15m,BOS,bull,70.55,,,0.22,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-22 23:45,SOL,15m,SWEEP,bear,70.75,,,0.108,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-22 23:30,XRP,30m,SWEEP,bear,0.9297,,,0.104,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-23 00:00,XRP,30m,FVG,bull,,0.9251,0.9271,0.417,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-22 23:15,ZEC,15m,FVG_FILLED,bear,,788.82,794.33,,,1h,COMPRESSION,,smc-1.0,Binance
