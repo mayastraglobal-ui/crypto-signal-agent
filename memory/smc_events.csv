@@ -39824,3 +39824,16 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 01:00,SOL,30m,FVG_RETRACE,bull,,70.4,70.56,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 00:30,XRP,30m,FVG_RETRACE,bull,,0.9251,0.9271,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 00:30,XRP,30m,FVG_FILLED,bull,,0.9251,0.9271,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-23 02:00,ETH,30m,SWEEP,bull,1710.02,,,0.269,Asia,1h,TRANSITION,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-23 02:00,ETH,30m,WEAK_BREAK,bear,1711.51,,,0.096,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 01:15,ETH,15m,SWEEP,bull,1711.51,,,0.105,Asia,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-23 02:00,ETH,15m,SWEEP,bull,1710.02,,,0.351,Asia,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 02:00,ETH,15m,WEAK_BREAK,bear,1711.51,,,0.125,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 02:00,SOL,30m,FVG_FILLED,bull,,70.4,70.56,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-23 02:00,SOL,15m,WEAK_BREAK,bear,70.48,,,0.138,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-23 02:00,XRP,1h,SWEEP,bull,0.9183,,,0.105,Asia,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 01:30,XRP,30m,WEAK_BREAK,bear,0.9201,,,0.123,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-23 02:00,XRP,30m,SWEEP,bull,0.9183,,,0.16,Asia,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 01:15,XRP,15m,SWEEP,bull,0.9201,,,0.579,Asia,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 01:30,XRP,15m,WEAK_BREAK,bear,0.9201,,,0.162,Asia,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-23 02:00,XRP,15m,SWEEP,bull,0.9183,,,0.212,Asia,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
