@@ -1806,3 +1806,30 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - derived hypothesis (tested): P03-FIB-PULLBACK-V4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
   - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
   - test results: `memory/strategy_registry.csv` / report section 3
+
+### P03-FIB-PULLBACK-V5-S2@1.0 - After an up-leg, price retraces into the 50% - 61.8% Fibonacci zone and closes back up above 61.8% with a green candle, EMA20 above EMA50; stop below 78.6% (shorts mirrored).
+- timestamp: 2026-11-23 08:07 UTC · source: strategies_lab.yaml card P03-FIB-PULLBACK-V5-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P03-FIB-PULLBACK-V5-S2 v1.0 · asset: research coins · timeframe: 1h, 30m, 15m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-21
+  - title / source: engine rule-significance test: P03-FIB-PULLBACK-V5@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'low <= fib_500 / high >= fib_500' adds nothing to P03-FIB-PULLBACK-V5@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P03-FIB-PULLBACK-V5-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 1h, 30m, 15m
+  - limitations: The 'right' swing is ambiguous; in a real reversal the 61.8% breaks; first tested here (Fibonacci building blocks existed but were never used).
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### P02-EMA-PULLBACK-V4-S6-FHTF-S4-S2@1.0 - In a trend (EMA20 above EMA50) price dips to the 20 EMA and closes back above it with RSI 40-65, above the VWAP anchored at the last swing low (shorts mirrored).
+- timestamp: 2026-11-23 08:07 UTC · source: strategies_lab.yaml card P02-EMA-PULLBACK-V4-S6-FHTF-S4-S2@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: P02-EMA-PULLBACK-V4-S6-FHTF-S4-S2 v1.0 · asset: research coins · timeframe: 4h · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION · review: 2027-02-21
+  - title / source: engine rule-significance test: P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0 without one entry rule
+  - URL: none recorded
+  - claim: The rule 'low <= ema(close,20) / high >= ema(close,20)' adds nothing to P02-EMA-PULLBACK-V4-S6-FHTF-S4@1.0: the simpler card without it should do at least as well on new data (fewer rules = less room for overfitting).
+  - derived hypothesis (tested): P02-EMA-PULLBACK-V4-S6-FHTF-S4-S2@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION on 4h
+  - limitations: Fails in ranges (every EMA touch looks like a pullback); late in a trend the bounce is often the last one.
+  - test results: `memory/strategy_registry.csv` / report section 3
+
+### donchian_breakout-VEXIT-S4-FRETEST@1.0 - Turtle-style breakout: price closes above the highest high of the last 20 candles with strong volume.
+- timestamp: 2026-11-23 08:07 UTC · source: strategies_lab.yaml card donchian_breakout-VEXIT-S4-FRETEST@1.0 · evidence: BACKTEST_EVIDENCE: not tested when recorded · confidence: untested idea · strategy: donchian_breakout-VEXIT-S4-FRETEST v1.0 · asset: research coins · timeframe: 4h, 1h, 30m · regime: STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION · review: 2027-02-21
+  - title / source: engine failure lab: a repair of donchian_breakout-VEXIT-S4@1.1 for its loss tag false_breakout
+  - URL: https://www.nber.org/papers/w25882
+  - claim: donchian_breakout-VEXIT-S4@1.1 loses on false_breakout (-0.33R a trade with it, +0.47R without). One change - wait for a retest: limit order 0.5 ATR back from the signal close, valid 5 candles - should remove part of those losses and keep the rest.
+  - derived hypothesis (tested): donchian_breakout-VEXIT-S4-FRETEST@1.0 makes money after fees in regimes STRONG_BULL, WEAK_BULL, STRONG_BEAR, WEAK_BEAR, EXPANSION, COMPRESSION on 4h, 1h, 30m
+  - limitations: Many false breakouts in chop; wide stops; most of the profit comes from a few big trends.
+  - test results: `memory/strategy_registry.csv` / report section 3
