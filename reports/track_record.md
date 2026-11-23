@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-11-23 07:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-23 09:03 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -17,36 +17,36 @@ Updated 2026-11-23 07:11 UTC by the hourly scan (engine/track_record.py). Every 
 
 Warning signs (no pause yet):
 - TRD-H4-BREAKOUT-S3@1.0 1h on ETH: 4 losses in a row - in its backtest (36% won) a run that long shows up in 89% of 15-trade periods
-- P01-BREAKOUT-V1@1.0 4h on BTC: 3 losses in a row - in its backtest (45% won) a run that long shows up in 71% of 9-trade periods
-- donchian_breakout-VEXIT-FDISP@1.0 4h on BTC: 3 losses in a row - in its backtest (47% won) a run that long shows up in 67% of 9-trade periods
-- donchian_breakout-VEXIT@1.0 4h on BTC: 3 losses in a row - in its backtest (47% won) a run that long shows up in 67% of 9-trade periods
-- donchian_breakout-VEXIT-S4@1.0 4h on BTC: 3 losses in a row - in its backtest (46% won) a run that long shows up in 58% of 7-trade periods
+- P01-BREAKOUT-V1@1.0 4h on BTC: 3 losses in a row - in its backtest (45% won) a run that long shows up in 72% of 9-trade periods
+- donchian_breakout-VEXIT-FDISP@1.0 4h on BTC: 3 losses in a row - in its backtest (47% won) a run that long shows up in 68% of 9-trade periods
+- donchian_breakout-VEXIT@1.0 4h on BTC: 3 losses in a row - in its backtest (47% won) a run that long shows up in 68% of 9-trade periods
+- donchian_breakout-VEXIT-S4@1.0 4h on BTC: 3 losses in a row - in its backtest (45% won) a run that long shows up in 59% of 7-trade periods
 - donchian_breakout-VEXIT@1.0 4h on ETH: 3 losses in a row - in its backtest (43% won) a run that long shows up in 64% of 7-trade periods
 - P04-MACD-SUPERTREND-V2@1.0 15m on ETH: 4 losses in a row - in its backtest (38% won) a run that long shows up in 38% of 6-trade periods
-- donchian_breakout-VEXIT-FDISP@1.0 4h on ETH: 3 losses in a row - in its backtest (45% won) a run that long shows up in 51% of 6-trade periods
+- donchian_breakout-VEXIT-FDISP@1.0 4h on ETH: 3 losses in a row - in its backtest (45% won) a run that long shows up in 52% of 6-trade periods
 - P01-BREAKOUT-V1@1.0 4h on ETH: 3 losses in a row - in its backtest (40% won) a run that long shows up in 51% of 5-trade periods
 - P07-SQUEEZE-RETEST-V2@1.0 30m on ETH: 4 losses in a row - in its backtest (34% won) a run that long shows up in 34% of 5-trade periods
-- donchian_breakout-VEXIT-S4@1.0 4h on ETH: 3 losses in a row - in its backtest (44% won) a run that long shows up in 32% of 4-trade periods
+- donchian_breakout-VEXIT-S4@1.0 4h on ETH: 3 losses in a row - in its backtest (44% won) a run that long shows up in 33% of 4-trade periods
 - P01-BREAKOUT-V2@1.0 1h on SOL: 3 losses in a row - in its backtest (34% won) a run that long shows up in 28% of 3-trade periods
 - P01-BREAKOUT-V2@1.0 30m on SUI: 3 losses in a row - in its backtest (39% won) a run that long shows up in 23% of 3-trade periods
-- P01-BREAKOUT-V3@1.0 4h on BTC: 3 losses in a row - in its backtest (52% won) a run that long shows up in 11% of 3-trade periods
-- P01-BREAKOUT-V3@1.0 4h on ETH: 3 losses in a row - in its backtest (44% won) a run that long shows up in 17% of 3-trade periods
+- P01-BREAKOUT-V3@1.0 4h on BTC: 3 losses in a row - in its backtest (51% won) a run that long shows up in 12% of 3-trade periods
+- P01-BREAKOUT-V3@1.0 4h on ETH: 3 losses in a row - in its backtest (44% won) a run that long shows up in 18% of 3-trade periods
 - P01-BREAKOUT-V5@1.0 1h on ETH: 3 losses in a row - in its backtest (34% won) a run that long shows up in 29% of 3-trade periods
 
 ## Per strategy and coin (live vs 5-year backtest)
 
 | Strategy | TF | Coin | Stage | Sent to you | Closed | Win % | Live avg | Backtest avg | Total | Worst DD | Check |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 9 | 44 | +0.60R | +0.39R | +5.38R | 2.51R | ⚠️ watch |
-| donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 9 | 56 | +0.93R | +0.55R | +8.35R | 2.80R | ⚠️ watch |
-| donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 9 | 56 | +0.93R | +0.54R | +8.35R | 2.80R | ⚠️ watch |
-| donchian_breakout-VEXIT-S4 | 4h | BTC | 🟡 PAPER | ✅ yes | 7 | 57 | +1.00R | +0.47R | +6.98R | 2.80R | ⚠️ watch |
-| donchian_breakout-VEXIT | 4h | ETH | 🟡 PAPER | ✅ yes | 7 | 43 | +0.46R | +0.33R | +3.20R | 3.10R | ⚠️ watch |
-| donchian_breakout-VEXIT-FDISP | 4h | ETH | 🟡 PAPER | ✅ yes | 6 | 33 | +0.12R | +0.40R | +0.74R | 3.10R | ⚠️ watch |
-| P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 5 | 20 | -0.34R | +0.25R | -1.68R | 3.08R | ⚠️ watch |
-| donchian_breakout-VEXIT-S4 | 4h | ETH | 🟡 PAPER | ✅ yes | 4 | 25 | -0.16R | +0.39R | -0.66R | 3.10R | ⚠️ watch |
-| P01-BREAKOUT-V3 | 4h | BTC | 🔵 TEST | ✅ yes | 3 | 0 | -0.84R | +0.57R | -2.51R | 2.51R | ⚠️ watch |
-| P01-BREAKOUT-V3 | 4h | ETH | 🔵 TEST | ✅ yes | 3 | 0 | -1.03R | +0.22R | -3.08R | 3.08R | ⚠️ watch |
+| P01-BREAKOUT-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 9 | 44 | +0.60R | +0.38R | +5.38R | 2.51R | ⚠️ watch |
+| donchian_breakout-VEXIT-FDISP | 4h | BTC | 🟡 PAPER | ✅ yes | 9 | 56 | +0.93R | +0.53R | +8.35R | 2.80R | ⚠️ watch |
+| donchian_breakout-VEXIT | 4h | BTC | 🟡 PAPER | ✅ yes | 9 | 56 | +0.93R | +0.53R | +8.35R | 2.80R | ⚠️ watch |
+| donchian_breakout-VEXIT-S4 | 4h | BTC | 🟡 PAPER | ✅ yes | 7 | 57 | +1.00R | +0.46R | +6.98R | 2.80R | ⚠️ watch |
+| donchian_breakout-VEXIT | 4h | ETH | 🟡 PAPER | ✅ yes | 7 | 43 | +0.46R | +0.32R | +3.20R | 3.10R | ⚠️ watch |
+| donchian_breakout-VEXIT-FDISP | 4h | ETH | 🟡 PAPER | ✅ yes | 6 | 33 | +0.12R | +0.38R | +0.74R | 3.10R | ⚠️ watch |
+| P01-BREAKOUT-V1 | 4h | ETH | 🔵 TEST | ✅ yes | 5 | 20 | -0.34R | +0.24R | -1.68R | 3.08R | ⚠️ watch |
+| donchian_breakout-VEXIT-S4 | 4h | ETH | 🟡 PAPER | ✅ yes | 4 | 25 | -0.16R | +0.38R | -0.66R | 3.10R | ⚠️ watch |
+| P01-BREAKOUT-V3 | 4h | BTC | 🔵 TEST | ✅ yes | 3 | 0 | -0.84R | +0.55R | -2.51R | 2.51R | ⚠️ watch |
+| P01-BREAKOUT-V3 | 4h | ETH | 🔵 TEST | ✅ yes | 3 | 0 | -1.03R | +0.20R | -3.08R | 3.08R | ⚠️ watch |
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | 🟡 PAPER | ✅ yes | 20 | 50 | +0.47R | +0.34R | +9.50R | 5.32R | ✅ |
 | donchian_breakout-VEXIT | 4h | XRP | 🟡 PAPER | ✅ yes | 10 | 70 | +0.96R | +0.13R | +9.57R | 1.03R | ✅ |
 | donchian_breakout | 4h | BTC | 🟡 PAPER | ✅ yes | 9 | 78 | +0.64R | +0.27R | +5.78R | 1.08R | ✅ |
@@ -55,24 +55,24 @@ Warning signs (no pause yet):
 | donchian_breakout-VEXIT | 4h | SOL | 🟡 PAPER | ✅ yes | 7 | 43 | -0.05R | +0.22R | -0.37R | 2.08R | ✅ |
 | donchian_breakout | 4h | SOL | 🟡 PAPER | ✅ yes | 7 | 57 | -0.16R | +0.21R | -1.10R | 2.08R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | XRP | 🟡 PAPER | ✅ yes | 6 | 83 | +1.50R | +0.23R | +9.03R | 1.03R | ✅ |
-| P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 4 | 50 | +0.31R | +0.22R | +1.25R | 1.05R | ✅ |
+| P01-BREAKOUT-V4 | 4h | ETH | 🔵 TEST | ✅ yes | 4 | 50 | +0.31R | +0.21R | +1.25R | 1.05R | ✅ |
 | P07-SQUEEZE-RETEST-V1 | 4h | BTC | 🔵 TEST | ✅ yes | 3 | 67 | +1.28R | +0.25R | +3.83R | 1.11R | ✅ |
 | donchian_breakout-VEXIT-FDISP | 4h | SOL | 🟡 PAPER | ✅ yes | 3 | 33 | -0.58R | +0.19R | -1.75R | 2.08R | ✅ |
 | donchian_breakout-VEXIT-S4 | 4h | SOL | 🟡 PAPER | ✅ yes | 3 | 33 | +0.12R | +0.29R | +0.37R | 2.08R | ✅ |
 | donchian_breakout-VEXIT-S4 | 4h | XRP | 🟡 PAPER | ✅ yes | 3 | 100 | +1.38R | +0.12R | +4.14R | 0.00R | ✅ |
 | P01-BREAKOUT-V1 | 4h | SOL | 🔵 TEST | ✅ yes | 2 | 50 | -0.09R | +0.31R | -0.18R | 0.65R | ✅ |
 | P01-BREAKOUT-V4 | 4h | SOL | 🔵 TEST | ✅ yes | 2 | 50 | +0.23R | +0.32R | +0.47R | 1.03R | ✅ |
-| P01-BREAKOUT-V4 | 4h | SUI | 🔵 TEST | ✅ yes | 2 | 50 | +0.25R | +0.22R | +0.50R | 1.02R | ✅ |
+| P01-BREAKOUT-V4 | 4h | SUI | 🔵 TEST | ✅ yes | 2 | 50 | +0.25R | +0.25R | +0.50R | 1.02R | ✅ |
 | P07-SQUEEZE-RETEST-V3 | 4h | BTC | 🔵 TEST | ✅ yes | 2 | 100 | +2.47R | +0.44R | +4.94R | 0.00R | ✅ |
-| donchian_breakout-VEXIT-FDISP-S2 | 4h | BTC | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.49R | -2.07R | 2.07R | ✅ |
-| donchian_breakout-VEXIT-FDISP-S2 | 4h | ETH | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.45R | -2.06R | 2.06R | ✅ |
-| donchian_breakout-VEXIT-FDISP-S2 | 4h | SUI | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.17R | -2.05R | 2.05R | ✅ |
+| donchian_breakout-VEXIT-FDISP-S2 | 4h | BTC | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.48R | -2.07R | 2.07R | ✅ |
+| donchian_breakout-VEXIT-FDISP-S2 | 4h | ETH | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.44R | -2.06R | 2.06R | ✅ |
+| donchian_breakout-VEXIT-FDISP-S2 | 4h | SUI | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.14R | -2.05R | 2.05R | ✅ |
 | donchian_breakout-VEXIT-FRETEST | 4h | BTC | 🟡 PAPER | ✅ yes | 2 | 0 | -0.90R | +0.56R | -1.80R | 1.80R | ✅ |
 | donchian_breakout-VEXIT-FRETEST | 4h | ETH | 🟡 PAPER | ✅ yes | 2 | 0 | -1.03R | +0.46R | -2.05R | 2.05R | ✅ |
 | donchian_breakout-VEXIT-S4 | 4h | SOL | 🟡 PAPER | ✅ yes | 2 | 50 | -0.22R | +0.22R | -0.44R | 0.78R | ✅ |
-| donchian_breakout-VEXIT-S4 | 4h | ETH | 🟡 PAPER | ✅ yes | 2 | 50 | +0.70R | +0.44R | +1.40R | 1.05R | ✅ |
-| P01-BREAKOUT-V1 | 4h | SUI | 🔵 TEST | ✅ yes | 1 | 0 | -1.02R | +0.17R | -1.02R | 1.02R | ✅ |
-| P01-BREAKOUT-V3 | 4h | SUI | 🔵 TEST | ✅ yes | 1 | 0 | -1.02R | +0.29R | -1.02R | 1.02R | ✅ |
+| donchian_breakout-VEXIT-S4 | 4h | ETH | 🟡 PAPER | ✅ yes | 2 | 50 | +0.70R | +0.43R | +1.40R | 1.05R | ✅ |
+| P01-BREAKOUT-V1 | 4h | SUI | 🔵 TEST | ✅ yes | 1 | 0 | -1.02R | +0.20R | -1.02R | 1.02R | ✅ |
+| P01-BREAKOUT-V3 | 4h | SUI | 🔵 TEST | ✅ yes | 1 | 0 | -1.02R | +0.40R | -1.02R | 1.02R | ✅ |
 | P01-BREAKOUT-V4 | 4h | BNB | 🔵 TEST | ✅ yes | 1 | 100 | +1.80R | +0.18R | +1.80R | 0.00R | ✅ |
 | P02-EMA-PULLBACK-V4 | 4h | BTC | 🔵 TEST | ✅ yes | 1 | 100 | +3.77R | +0.21R | +3.77R | 0.00R | ✅ |
 | P04-MACD-SUPERTREND-V3 | 4h | ETH | 🔵 TEST | ✅ yes | 1 | 0 | -1.03R | +0.32R | -1.03R | 1.03R | ✅ |
@@ -97,7 +97,7 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 1h | ETH | 🔵 TEST | silent | 3 | 0 | -0.84R | +0.02R | -2.52R | 2.52R | ⚠️ watch |
 | P01-BREAKOUT-V2 | 30m | BTC | 🔵 TEST | silent | 12 | 50 | +0.53R | +0.10R | +6.31R | 1.28R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | 🔵 TEST | silent | 11 | 27 | -0.22R | +0.01R | -2.39R | 5.69R | ✅ |
-| P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 10 | 40 | -0.01R | +0.11R | -0.14R | 2.17R | ✅ |
+| P01-BREAKOUT-V2 | 1h | BTC | 🔵 TEST | silent | 10 | 40 | -0.01R | +0.12R | -0.14R | 2.17R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SOL | 🔵 TEST | silent | 10 | 40 | +0.13R | +0.04R | +1.30R | 3.63R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | XRP | 🔵 TEST | silent | 10 | 30 | -0.14R | +0.30R | -1.39R | 4.20R | ✅ |
 | P01-BREAKOUT-V2 | 30m | ETH | 🔵 TEST | silent | 9 | 33 | -0.08R | +0.14R | -0.74R | 3.19R | ✅ |
@@ -105,14 +105,14 @@ Warning signs (no pause yet):
 | P01-BREAKOUT-V5 | 1h | SUI | 🔵 TEST | silent | 7 | 14 | -0.57R | +0.08R | -4.01R | 5.05R | ✅ |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 7 | 43 | +0.23R | +0.03R | +1.57R | 4.31R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | 🔵 TEST | silent | 7 | 29 | -0.25R | +0.17R | -1.78R | 2.15R | ✅ |
-| P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 6 | 33 | -0.59R | +0.08R | -3.57R | 3.57R | ✅ |
+| P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 6 | 33 | -0.59R | +0.09R | -3.57R | 3.57R | ✅ |
 | P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | silent | 4 | 50 | +0.30R | +0.01R | +1.19R | 2.16R | ✅ |
 | P08-SESSION-BREAKOUT-V4 | 1h | BTC | 🔵 TEST | silent | 4 | 50 | +0.38R | +0.04R | +1.51R | 1.12R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SUI | 🔵 TEST | silent | 4 | 50 | +0.35R | +0.07R | +1.39R | 2.07R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 3 | 33 | +0.10R | +0.04R | +0.31R | 1.07R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | 🔵 TEST | silent | 3 | 67 | +0.82R | +0.18R | +2.45R | 0.90R | ✅ |
 | P08-SESSION-BREAKOUT-V1 | 1h | BTC | 🔵 TEST | silent | 3 | 33 | +0.16R | +0.05R | +0.48R | 2.00R | ✅ |
-| P01-BREAKOUT-V2 | 1h | SUI | 🔵 TEST | silent | 2 | 50 | +0.01R | +0.14R | +0.02R | 1.03R | ✅ |
+| P01-BREAKOUT-V2 | 1h | SUI | 🔵 TEST | silent | 2 | 50 | +0.01R | +0.15R | +0.02R | 1.03R | ✅ |
 | P04-MACD-SUPERTREND-V1 | 4h | ETH | 🔵 TEST | silent | 2 | 50 | +0.72R | +0.15R | +1.44R | 1.03R | ✅ |
 | P04-MACD-SUPERTREND-V1 | 4h | ZEC | 🔵 TEST | silent | 2 | 0 | -1.02R | +0.12R | -2.04R | 2.04R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 30m | XRP | 🔵 TEST | silent | 2 | 100 | +1.65R | +0.15R | +3.31R | 0.00R | ✅ |
