@@ -40021,3 +40021,23 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 12:00,ZEC,15m,FVG,bull,,792.21,794.58,0.404,,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-23 12:15,ZEC,15m,FVG_RETRACE,bull,,792.21,794.58,,NY AM,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 12:15,ZEC,15m,FVG_FILLED,bull,,792.21,794.58,,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-23 13:00,BTC,30m,SWEEP,bull,61139.36,,,0.222,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 12:30,BTC,15m,SWEEP,bull,61276.83,,,0.211,NY AM,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-23 12:45,BTC,15m,WEAK_BREAK,bear,61276.83,,,0.144,NY AM,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 13:00,BTC,15m,SWEEP,bull,61139.36,,,0.354,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 13:00,ETH,1h,SWEEP,bull,1715.24,,,0.134,NY AM,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 13:00,ETH,30m,SWEEP,bull,1715.24,,,0.21,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 12:30,ETH,15m,SWEEP,bull,1718.88,,,0.228,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 13:00,ETH,15m,SWEEP,bull,1715.24,,,0.323,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 13:00,SOL,30m,FVG,bear,,72.4,72.52,0.27,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-23 12:30,SOL,15m,FVG_FILLED,bull,,72.38,72.54,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-23 12:45,SOL,15m,WEAK_BREAK,bear,72.15,,,0.171,NY AM,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-23 13:00,SOL,15m,SWEEP,bull,71.94,,,0.361,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 13:00,SOL,15m,FVG_FILLED,bull,,71.87,72.0,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-23 13:00,ZEC,30m,SWEEP,bull,784.76,,,0.117,NY AM,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 12:30,ZEC,15m,SWEEP,bull,788.0,,,0.143,NY AM,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 12:30,ZEC,15m,FVG,bear,,792.52,794.58,0.36,NY AM,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-23 12:45,ZEC,15m,SWEEP,bull,784.76,,,0.14,NY AM,1h,COMPRESSION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 12:45,ZEC,15m,WEAK_BREAK,bear,788.0,,,0.295,NY AM,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-23 12:45,ZEC,15m,OB_INVALID,bull,,786.88,794.91,,NY AM,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-23 13:00,ZEC,15m,BREAKER_RETEST,bear,,786.88,794.91,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
