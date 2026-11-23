@@ -40527,3 +40527,17 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 20:15,SUI,15m,FVG_RETRACE,bear,,0.6805,0.6826,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
 2026-11-23 21:00,SUI,15m,OB_RETEST,bull,,0.6678,0.6715,,,1h,TRANSITION,first return into the order block,smc-1.0,Binance
 2026-11-23 21:00,SUI,15m,FVG_FILLED,bull,,0.6715,0.6998,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 22:00,ETH,30m,SWEEP,bull,1715.37,,,0.153,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 21:45,ETH,15m,OB_INVALID,bull,,1719.78,1727.68,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-23 22:00,ETH,15m,SWEEP,bull,1715.37,,,0.237,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 22:00,ETH,15m,BREAKER_RETEST,bear,,1719.78,1727.68,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 22:00,SOL,30m,SWEEP,bull,72.39,,,0.43,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-23 21:45,SOL,15m,WEAK_BREAK,bear,72.39,,,0.035,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 22:00,SOL,15m,FVG_FILLED,bull,,72.25,72.39,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 21:30,XRP,30m,BREAKER_RETEST,bear,,0.9383,0.9424,,,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 21:30,XRP,15m,SWEEP,bull,0.9349,,,0.137,,1h,UNCLEAR,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-23 22:00,ZEC,1h,WEAK_BREAK,bear,783.72,,,0.328,,4h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 22:00,ZEC,1h,OB_INVALID,bull,,783.72,795.68,,,4h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-23 22:00,ZEC,30m,WEAK_BREAK,bear,783.72,,,0.443,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-23 22:00,ZEC,30m,OB_INVALID,bull,,783.72,791.04,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-23 21:45,ZEC,15m,FVG_FILLED,bull,,787.47,793.11,,,1h,TRANSITION,,smc-1.0,Binance
