@@ -1470,3 +1470,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 - **EXCLUDED** BNB - 7-day average volume $43M < $50M
 - **ELIGIBLE** SUI - passes every rule again
 - **EXCLUDED** NVDAB - only 165 days of history (need 180); 24h move +26.1% is beyond ±25% - suspended for the rest of the UTC day
+
+## 2026-11-23 16:16 UTC
+- **EXCLUDED** SOXLB - only 139 days of history (need 180); 24h move +28.2% is beyond ±25% - suspended for the rest of the UTC day
+- **JOIN** SUI - on your coin list and passes every rule (2 runs in a row)

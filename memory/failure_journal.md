@@ -1866,3 +1866,107 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: -
   - what happened: regime_mismatch
   - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.54R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.54R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.56R / MFE +1.63R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-S4 v1.0 - exit-rule -0.54R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.54R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.56R / MFE +1.63R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FDISP v1.0 - exit-rule -0.54R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.54R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.56R / MFE +1.63R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FDISP-S2 v1.0 - exit-rule -0.54R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.54R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP-S2 v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.56R / MFE +1.63R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h P01-BREAKOUT-V1 v1.0 - exit-rule -0.41R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.41R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage TEST
+  - MAE -0.43R / MFE +1.76R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h P01-BREAKOUT-V3 v1.0 - exit-rule -0.41R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.41R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V3 v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 11:59 UTC, stage TEST
+  - MAE -0.43R / MFE +1.76R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h P01-BREAKOUT-V4 v1.0 - SL -1.04R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.04R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V4 v1.0 · asset: SUI · timeframe: 4h · regime: WEAK_BEAR · review: 2026-11-30
+  - signal 2026-11-20 15:59 UTC, closed 2026-11-23 15:59 UTC, stage TEST
+  - MAE -1.92R / MFE +1.76R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: volatility_spike, false_breakout, regime_mismatch, bad_target
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT v1.0 - exit-rule -0.81R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.81R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.83R / MFE +1.32R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-S4 v1.0 - exit-rule -0.81R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.81R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-S4 v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.83R / MFE +1.32R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FDISP v1.0 - exit-rule -0.81R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.81R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FDISP v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.83R / MFE +1.32R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 4h donchian_breakout-VEXIT-FRETEST v1.0 - exit-rule -0.56R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: PAPER_TRADING result -0.56R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: donchian_breakout-VEXIT-FRETEST v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage PAPER_TRADING
+  - MAE -0.58R / MFE +1.57R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 4h P01-BREAKOUT-V1 v1.0 - exit-rule -0.68R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.68R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V1 v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage TEST
+  - MAE -0.71R / MFE +1.44R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)
+
+### SUI SHORT 4h P01-BREAKOUT-V3 v1.0 - exit-rule -0.68R
+- timestamp: 2026-11-23 16:16 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -0.68R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V3 v1.0 · asset: SUI · timeframe: 4h · regime: STRONG_BEAR · review: 2026-11-30
+  - signal 2026-11-20 19:59 UTC, closed 2026-11-23 11:59 UTC, stage TEST
+  - MAE -0.71R / MFE +1.44R
+  - at entry: session -, conditions: overextended_entry, late_entry
+  - what happened: false_breakout, regime_mismatch
+  - root cause / fix: (review)

@@ -4,17 +4,16 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC"
+  "ZEC",
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {
   "SOXLB": "2026-11-23",
   "NVDAB": "2026-11-23"
  },
- "runs": 1270,
+ "runs": 1271,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -144,8 +143,7 @@
   ],
   "SOXLB": [
    "big_move",
-   "history",
-   "thin_book"
+   "history"
   ],
   "BMT": [
    "big_move",

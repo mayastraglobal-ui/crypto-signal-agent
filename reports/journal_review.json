@@ -60,14 +60,14 @@
   "missing_result": 7
  },
  "recent": {
-  "alerts": 59,
-  "took": 55,
+  "alerts": 58,
+  "took": 54,
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
-   "n": 51,
-   "total_r": 55.849,
-   "avg_r": 1.095,
+   "n": 50,
+   "total_r": 56.849,
+   "avg_r": 1.137,
    "wins": 33
   },
   "plan_skipped": {
@@ -83,21 +83,21 @@
    "wins": 0
   },
   "plan_all": {
-   "n": 55,
-   "total_r": 51.849,
-   "avg_r": 0.943,
+   "n": 54,
+   "total_r": 52.849,
+   "avg_r": 0.979,
    "wins": 33
   },
   "yours": {
-   "n": 44,
-   "total_r": 63.0,
-   "avg_r": 1.432,
+   "n": 43,
+   "total_r": 64.2,
+   "avg_r": 1.493,
    "wins": 32
   },
   "gap": {
-   "n": 44,
-   "total_r": 12.826,
-   "avg_r": 0.292,
+   "n": 43,
+   "total_r": 13.026,
+   "avg_r": 0.303,
    "wins": 7
   },
   "early": {
