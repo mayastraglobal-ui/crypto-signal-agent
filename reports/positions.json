@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-23 20:11",
+ "generated_utc": "2026-11-23 21:11",
  "book": {
-  "utc": "2026-11-23 20:11",
-  "beijing": "2026-11-24 04:11",
+  "utc": "2026-11-23 21:11",
+  "beijing": "2026-11-24 05:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -320,7 +320,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-23 20:11 UTC / 2026-11-24 04:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-23 21:11 UTC / 2026-11-24 05:11 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     none",
@@ -1165,45 +1165,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-23 20:11",
-   "id": "SUI-4h-P12-LEADER-V1-2026-11-23 15:59",
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.7099414295220763,
-   "note": "limit 0.709941 filled in the 2026-11-23 16:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-23 20:11",
-   "id": "SUI-4h-P12-LEADER-V1-2026-11-23 15:59",
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.7099414295220763,
-   "note": "entry at 2026-11-23 16:00 UTC (limit)"
-  },
-  {
-   "time_utc": "2026-11-23 20:11",
-   "id": "SUI-4h-P12-LEADER-V1-2026-11-23 15:59",
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "POSITION_ACTIVE",
-   "to_state": "CLOSED",
-   "price": null,
-   "note": "SL -1.03R"
-  }
- ]
+ "events_this_run": []
 }
