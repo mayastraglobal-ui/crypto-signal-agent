@@ -9,8 +9,11 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 1279,
+ "suspended": {
+  "NVDAB": "2026-11-24",
+  "SOXLB": "2026-11-24"
+ },
+ "runs": 1280,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -139,6 +142,7 @@
    "thin_book"
   ],
   "SOXLB": [
+   "big_move",
    "history",
    "thin_book"
   ],
@@ -163,7 +167,9 @@
    "volume_7d"
   ],
   "NVDAB": [
-   "history"
+   "big_move",
+   "history",
+   "thin_book"
   ],
   "ASTER": [
    "thin_book",
@@ -182,7 +188,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [],
   "XRP": [],
