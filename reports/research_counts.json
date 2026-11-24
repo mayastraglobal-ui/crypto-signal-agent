@@ -1654,5 +1654,33 @@
   "near_duplicates": 35,
   "ideas": 100,
   "new_cards": 1
+ },
+ {
+  "date": "2026-11-24",
+  "run_utc": "2026-11-24 10:14",
+  "backtests": 1652,
+  "per_coin": {
+   "BNB": 236,
+   "BTC": 236,
+   "ETH": 236,
+   "SOL": 236,
+   "SUI": 236,
+   "XRP": 236,
+   "ZEC": 236
+  },
+  "strategies": 116,
+  "tests": 236,
+  "tests_per_coin": 236,
+  "coins": 7,
+  "best_avg_r": 1.999,
+  "best_cell": "P13-TURTLE-V2 v1.0 4h",
+  "cells_testing": 119,
+  "cells_failed": 157,
+  "cells_paper": 12,
+  "lab_cards": 53,
+  "sources": 58,
+  "near_duplicates": 36,
+  "ideas": 101,
+  "new_cards": 1
  }
 ]
