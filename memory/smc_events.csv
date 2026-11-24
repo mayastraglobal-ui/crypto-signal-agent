@@ -41047,3 +41047,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-24 21:00,SUI,15m,FVG_FILLED,bear,,0.6452,0.6466,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 21:45,ETH,15m,FVG,bull,,1676.39,1678.77,0.299,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 21:30,ZEC,30m,FVG,bull,,720.79,725.15,0.384,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 23:00,SOL,30m,WEAK_BREAK,bull,69.85,,,0.253,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-24 23:00,SOL,30m,FVG,bull,,69.59,69.74,0.279,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 22:45,SOL,15m,WEAK_BREAK,bull,69.82,,,0.435,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-24 23:00,SOL,15m,FVG,bull,,69.76,69.93,0.518,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 23:00,ZEC,15m,OB_INVALID,bear,,732.73,743.81,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-24 23:00,ZEC,15m,FVG,bull,,737.35,740.68,0.47,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 23:00,SUI,30m,FVG,bull,,0.6463,0.6489,0.464,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 22:15,SUI,15m,SWEEP,bear,0.6471,,,0.262,,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-24 22:30,SUI,15m,WEAK_BREAK,bull,0.6471,,,0.615,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-24 22:30,SUI,15m,FVG_FILLED,bear,,0.6472,0.6491,,,1h,WEAK_BEAR,,smc-1.0,Binance
