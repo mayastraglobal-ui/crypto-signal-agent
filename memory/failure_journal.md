@@ -1978,3 +1978,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session -, conditions: htf_conflict, overextended_entry, late_entry
   - what happened: false_breakout, indicator_lag
   - root cause / fix: (review)
+
+### SUI SHORT 30m P01-BREAKOUT-V5 v1.0 - SL -1.07R
+- timestamp: 2026-11-24 19:11 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: TEST result -1.07R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P01-BREAKOUT-V5 v1.0 · asset: SUI · timeframe: 30m · regime: WEAK_BEAR · review: 2026-12-01
+  - signal 2026-11-24 15:29 UTC, closed 2026-11-24 18:29 UTC, stage TEST
+  - MAE -1.01R / MFE +0.15R
+  - at entry: session Silver Bullet, conditions: overextended_entry
+  - what happened: -
+  - root cause / fix: (review)
