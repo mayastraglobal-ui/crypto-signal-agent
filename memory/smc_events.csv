@@ -40752,3 +40752,11 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-24 07:45,SUI,15m,FVG_FILLED,bull,,0.6684,0.6709,,London,1h,RANGE,,smc-1.0,Binance
 2026-11-24 07:45,SUI,15m,FVG,bear,,0.6706,0.6718,0.297,London,1h,RANGE,,smc-1.0,Binance
 2026-11-24 08:00,SUI,15m,FVG,bear,,0.669,0.6701,0.284,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 08:30,SOL,30m,FVG_RETRACE,bull,,71.09,71.36,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 09:00,SOL,30m,FVG_FILLED,bull,,71.09,71.36,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 08:30,ZEC,15m,FVG_RETRACE,bear,,757.55,760.3,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 09:00,ZEC,15m,FVG_FILLED,bear,,757.55,760.3,,London,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 08:30,SUI,30m,OB_INVALID,bull,,0.6651,0.6712,,London,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-24 09:00,SUI,30m,BREAKER_RETEST,bear,,0.6651,0.6712,,London,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 09:00,SUI,15m,FVG_RETRACE,bear,,0.669,0.6701,,London,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 09:00,SUI,15m,FVG_FILLED,bear,,0.669,0.6701,,London,1h,WEAK_BEAR,,smc-1.0,Binance
