@@ -41005,3 +41005,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-24 17:00,ZEC,30m,FVG_FILLED,bull,,708.04,727.5,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 16:45,ZEC,15m,FVG_FILLED,bull,,708.04,715.18,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 17:00,SUI,1h,BREAKER_RETEST,bear,,0.6408,0.6485,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 17:30,BTC,30m,OB_RETEST,bear,,60060.01,60687.53,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 18:00,BTC,30m,FVG,bull,,59678.96,59885.07,0.425,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 18:00,ETH,30m,FVG,bull,,1675.81,1679.66,0.262,,1h,RANGE,,smc-1.0,Binance
+2026-11-24 17:30,SOL,30m,BREAKER_RETEST,bear,,69.64,70.18,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 17:15,SOL,15m,BREAKER_RETEST,bear,,69.64,69.99,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 17:15,SOL,15m,OB_RETEST,bear,,69.67,70.14,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 17:15,SOL,15m,FVG_FILLED,bear,,69.34,69.67,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 18:00,XRP,1h,BREAKER_RETEST,bear,,0.913,0.9208,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 17:30,XRP,30m,BREAKER_RETEST,bear,,0.913,0.9181,,,1h,WEAK_BEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-24 17:30,XRP,30m,OB_RETEST,bear,,0.9189,0.9277,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 18:00,XRP,30m,FVG,bull,,0.9148,0.9195,0.585,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 17:45,XRP,15m,OB_RETEST,bear,,0.9235,0.9277,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 17:45,XRP,15m,FVG_FILLED,bear,,0.9167,0.921,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 18:00,XRP,15m,FVG,bull,,0.92,0.9218,0.305,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 17:30,SUI,30m,OB_RETEST,bear,,0.6468,0.6542,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 18:00,SUI,30m,FVG,bull,,0.6437,0.6486,0.681,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 17:15,SUI,15m,OB_RETEST,bear,,0.6484,0.6536,,,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 17:15,SUI,15m,FVG_FILLED,bear,,0.6427,0.6484,,,1h,WEAK_BEAR,,smc-1.0,Binance

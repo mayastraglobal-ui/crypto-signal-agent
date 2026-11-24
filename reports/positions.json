@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-24 17:11",
+ "generated_utc": "2026-11-24 18:11",
  "book": {
-  "utc": "2026-11-24 17:11",
-  "beijing": "2026-11-25 01:11",
+  "utc": "2026-11-24 18:11",
+  "beijing": "2026-11-25 02:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-24 17:11 UTC / 2026-11-25 01:11 Beijing",
+  "POSITION BOOK \u2014 2026-11-24 18:11 UTC / 2026-11-25 02:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Second Estimate), 3rd Quarter 2026 2026-11-25 13:30 UTC"
@@ -70,17 +70,6 @@
  },
  "watching": [
   {
-   "coin": "BTC",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "high >= fib_500"
-  },
-  {
    "coin": "ETH",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
@@ -92,17 +81,6 @@
    "missing": "btc_ret(3) >= 3"
   },
   {
-   "coin": "ZEC",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "high >= fib_500"
-  },
-  {
    "coin": "BTC",
    "tf": "1h",
    "strategy": "TRD-H4-BREAKOUT-S3",
@@ -111,6 +89,17 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -759,7 +748,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "3/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -915,6 +904,17 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
   },
   {
    "coin": "ZEC",

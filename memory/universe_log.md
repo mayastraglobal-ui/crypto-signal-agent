@@ -1521,3 +1521,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-24 17:11 UTC
 - **EXCLUDED** SOXLB - only 140 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)
+
+## 2026-11-24 18:11 UTC
+- **EXCLUDED** SOXLB - only 140 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today); order book too thin: $190k within 1% (need $250k)
