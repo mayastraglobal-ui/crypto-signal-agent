@@ -1493,3 +1493,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-24 02:11 UTC
 - **EXCLUDED** NVDAB - only 166 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)
+
+## 2026-11-24 04:11 UTC
+- **FLAG** BTC - possible wash volume: 24h volume is 1,026x the 1% order-book depth (flag only, not excluded)
