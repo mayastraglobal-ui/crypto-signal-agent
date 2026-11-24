@@ -1518,3 +1518,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-24 15:11 UTC
 - **EXCLUDED** BNB - 24h volume $39M < $50M; 7-day average volume $46M < $50M
+
+## 2026-11-24 17:11 UTC
+- **EXCLUDED** SOXLB - only 140 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)

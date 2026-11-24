@@ -40991,3 +40991,17 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-24 15:15,SUI,15m,OB_RETEST,bull,,0.6371,0.6401,,Silver Bullet,1h,WEAK_BEAR,first return into the order block,smc-1.0,Binance
 2026-11-24 15:30,SUI,15m,FVG,bear,,0.6427,0.6484,0.98,Silver Bullet,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 15:45,SUI,15m,FVG_RETRACE,bear,,0.6427,0.6484,,Silver Bullet,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 17:00,BTC,1h,SWEEP,bull,59390.86,,,0.111,,4h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-24 17:00,BTC,1h,OB_RETEST,bull,,58768.51,59327.46,,,4h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-24 17:00,BTC,30m,SWEEP,bull,59390.86,,,0.151,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-24 16:45,BTC,15m,SWEEP,bull,59390.86,,,0.191,,1h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-24 17:00,ETH,1h,WEAK_BREAK,bear,1672.7,,,0.218,,4h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-24 17:00,ETH,1h,OB_RETEST,bull,,1648.35,1665.31,,,4h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-24 17:00,ETH,30m,OB_RETEST,bull,,1649.57,1665.31,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-24 16:45,ETH,15m,SWEEP,bull,1667.56,,,0.275,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-24 17:00,XRP,1h,OB_INVALID,bull,,0.913,0.9208,,,4h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-24 17:00,XRP,30m,OB_INVALID,bull,,0.913,0.9181,,,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-24 17:00,ZEC,1h,FVG_FILLED,bull,,707.33,723.86,,,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-24 17:00,ZEC,30m,FVG_FILLED,bull,,708.04,727.5,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 16:45,ZEC,15m,FVG_FILLED,bull,,708.04,715.18,,,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 17:00,SUI,1h,BREAKER_RETEST,bear,,0.6408,0.6485,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
