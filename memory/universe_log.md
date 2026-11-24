@@ -1508,3 +1508,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-24 11:41 UTC
 - **EXCLUDED** NVDAB - only 166 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)
+
+## 2026-11-24 12:16 UTC
+- **EXCLUDED** SOXLB - only 140 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)
