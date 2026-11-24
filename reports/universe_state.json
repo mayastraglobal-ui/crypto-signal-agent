@@ -13,7 +13,7 @@
   "NVDAB": "2026-11-24",
   "SOXLB": "2026-11-24"
  },
- "runs": 1298,
+ "runs": 1299,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -88,7 +88,8 @@
    "volume_7d"
   ],
   "HYPE": [
-   "history"
+   "history",
+   "volume_7d"
   ],
   "SAND": [
    "thin_book",
