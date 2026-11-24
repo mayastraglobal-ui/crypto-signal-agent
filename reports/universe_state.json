@@ -13,7 +13,7 @@
   "NVDAB": "2026-11-24",
   "SOXLB": "2026-11-24"
  },
- "runs": 1291,
+ "runs": 1292,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -143,7 +143,8 @@
   ],
   "SOXLB": [
    "big_move",
-   "history"
+   "history",
+   "thin_book"
   ],
   "BMT": [
    "big_move",
@@ -186,7 +187,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [],
   "XRP": [],

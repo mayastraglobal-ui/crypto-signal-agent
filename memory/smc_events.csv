@@ -40824,3 +40824,13 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-24 12:00,SOL,15m,FVG_FILLED,bear,,70.53,70.66,,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 12:00,SOL,15m,FVG,bull,,70.32,70.42,0.255,,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-24 12:00,SUI,1h,FVG_RETRACE,bear,,0.661,0.6637,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-24 12:30,BTC,30m,FVG,bull,,59861.27,60226.32,0.926,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 13:00,BTC,30m,FVG_RETRACE,bull,,59861.27,60226.32,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 12:30,BTC,15m,FVG_RETRACE,bull,,60050.0,60226.42,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 12:45,BTC,15m,SWEEP,bear,60564.0,,,0.289,NY AM,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-24 13:00,ETH,1h,FVG,bull,,1689.29,1694.53,0.274,NY AM,4h,TRANSITION,,smc-1.0,Binance
+2026-11-24 12:30,ETH,30m,FVG,bull,,1687.67,1695.56,0.643,NY AM,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-24 13:00,ETH,30m,BOS,bull,1703.65,,,0.053,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-24 13:00,ETH,30m,FVG_RETRACE,bull,,1687.67,1695.56,,NY AM,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-24 12:45,ETH,15m,WEAK_BREAK,bull,1703.65,,,0.128,NY AM,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-24 13:00,SUI,1h,WEAK_BREAK,bear,0.6571,,,0.144,NY AM,4h,TRANSITION,no displacement,smc-1.0,Binance
