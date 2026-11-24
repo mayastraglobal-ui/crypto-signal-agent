@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-23 23:16",
+ "utc": "2026-11-24 00:12",
  "verdict": {
   "code": "DOWNTREND_WAIT",
   "icon": "\ud83c\udf27",
@@ -27,98 +27,98 @@
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D EXPANSION, 4H TRANSITION, 1H TRANSITION)",
+   "why": "timeframes disagree (1D STRONG_BEAR, 4H TRANSITION, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
-    "1d": "EXPANSION",
+    "1d": "STRONG_BEAR",
     "4h": "TRANSITION",
     "1h": "TRANSITION"
    },
    "adx": {
     "1d": 49.0,
-    "4h": 34.0,
-    "1h": 32.0
+    "4h": 33.0,
+    "1h": 31.0
    },
    "vol": {
-    "atr_pct": 5.31,
-    "vol_pctile": 95.0,
-    "vol_label": "high",
-    "usual_move_pct": 1.58,
-    "move_8of10_pct": 3.44,
-    "days": 215,
+    "atr_pct": 5.59,
+    "vol_pctile": 96.0,
+    "vol_label": "extreme",
+    "usual_move_pct": 1.71,
+    "move_8of10_pct": 3.56,
+    "days": 157,
     "basis": "similar days",
-    "price": 61271.08,
+    "price": 61270.93,
     "band": [
-     59164.918066,
-     63377.241934
+     59092.68286,
+     63449.17714
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -24.5,
+    "chg_pct": -24.3,
     "days": 30,
-    "sma20": 69419.3575,
-    "sma50": 76762.0222,
-    "sma200": 72384.85685,
+    "sma20": 68610.211,
+    "sma50": 76256.8408,
+    "sma200": 72291.1815,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 61271.08
+    "price": 61270.93
    },
    "crowd": {
-    "funding_pct": 0.0033,
-    "oi_24h_pct": -4.6,
+    "funding_pct": 0.0054,
+    "oi_24h_pct": -52.7,
     "label": "neutral"
    },
-   "change_24h": 0.72
+   "change_24h": -0.18
   },
   {
    "coin": "ETH",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "down",
-   "why": "timeframes disagree (1D EXPANSION, 4H TRANSITION, 1H TRANSITION)",
+   "why": "timeframes disagree (1D WEAK_BEAR, 4H TRANSITION, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
-    "1d": "EXPANSION",
+    "1d": "WEAK_BEAR",
     "4h": "TRANSITION",
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 46.0,
+    "1d": 45.0,
     "4h": 30.0,
-    "1h": 32.0
+    "1h": 30.0
    },
    "vol": {
-    "atr_pct": 6.73,
-    "vol_pctile": 92.0,
+    "atr_pct": 7.08,
+    "vol_pctile": 93.0,
     "vol_label": "high",
-    "usual_move_pct": 2.08,
-    "move_8of10_pct": 4.22,
-    "days": 290,
+    "usual_move_pct": 1.81,
+    "move_8of10_pct": 3.97,
+    "days": 256,
     "basis": "similar days",
-    "price": 1724.33,
+    "price": 1710.65,
     "band": [
-     1651.522835,
-     1797.137165
+     1642.765936,
+     1778.534064
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -27.8,
+    "chg_pct": -27.5,
     "days": 30,
-    "sma20": 1977.7925,
-    "sma50": 2248.595,
-    "sma200": 2123.9049,
+    "sma20": 1949.5865,
+    "sma50": 2228.2692,
+    "sma200": 2121.00285,
     "swing": null,
     "near200": false,
-    "price": 1724.33
+    "price": 1710.65
    },
    "crowd": {
-    "funding_pct": 0.002,
-    "oi_24h_pct": -2.3,
+    "funding_pct": -0.0069,
+    "oi_24h_pct": -1.8,
     "label": "neutral"
    },
-   "change_24h": -0.23
+   "change_24h": -1.13
   },
   {
    "coin": "SOL",
@@ -133,218 +133,218 @@
     "1h": "TRANSITION"
    },
    "adx": {
-    "1d": 52.0,
+    "1d": 50.0,
     "4h": 28.0,
-    "1h": 31.0
+    "1h": 29.0
    },
    "vol": {
-    "atr_pct": 6.76,
-    "vol_pctile": 87.0,
+    "atr_pct": 7.16,
+    "vol_pctile": 92.0,
     "vol_label": "high",
-    "usual_move_pct": 2.44,
-    "move_8of10_pct": 4.74,
-    "days": 463,
+    "usual_move_pct": 2.58,
+    "move_8of10_pct": 4.88,
+    "days": 428,
     "basis": "similar days",
-    "price": 70.73,
+    "price": 72.03,
     "band": [
-     67.378916,
-     74.081084
+     68.516902,
+     75.543098
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -31.2,
+    "chg_pct": -29.6,
     "days": 30,
-    "sma20": 80.203,
-    "sma50": 95.3134,
-    "sma200": 88.39355,
+    "sma20": 79.163,
+    "sma50": 94.322,
+    "sma200": 88.3116,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 70.73
+    "price": 72.03
    },
    "crowd": {
-    "funding_pct": 0.0008,
-    "oi_24h_pct": -1.5,
+    "funding_pct": -0.0081,
+    "oi_24h_pct": -0.9,
     "label": "neutral"
    },
-   "change_24h": 2.09
+   "change_24h": 1.58
   },
   {
    "coin": "SUI",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D STRONG_BEAR, 4H TRANSITION, 1H TRANSITION)",
+   "why": "timeframes disagree (1D STRONG_BEAR, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "RANGE",
     "1d": "STRONG_BEAR",
     "4h": "TRANSITION",
-    "1h": "TRANSITION"
+    "1h": "UNCLEAR"
    },
    "adx": {
-    "1d": 43.0,
-    "4h": 36.0,
-    "1h": 25.0
+    "1d": 42.0,
+    "4h": 34.0,
+    "1h": 24.0
    },
    "vol": {
-    "atr_pct": 8.5,
-    "vol_pctile": 81.0,
+    "atr_pct": 8.59,
+    "vol_pctile": 84.0,
     "vol_label": "high",
-    "usual_move_pct": 2.88,
+    "usual_move_pct": 2.93,
     "move_8of10_pct": 5.58,
-    "days": 545,
+    "days": 549,
     "basis": "similar days",
-    "price": 0.6567,
+    "price": 0.6743,
     "band": [
-     0.620065,
-     0.693335
+     0.636644,
+     0.711956
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -31.7,
+    "chg_pct": -28.2,
     "days": 30,
-    "sma20": 0.77954,
-    "sma50": 0.917956,
-    "sma200": 0.848402,
+    "sma20": 0.768565,
+    "sma50": 0.907276,
+    "sma200": 0.846932,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 0.6567
+    "price": 0.6743
    },
    "crowd": {
-    "funding_pct": -0.0034,
-    "oi_24h_pct": 0.0,
+    "funding_pct": -0.0016,
+    "oi_24h_pct": -63.2,
     "label": "neutral"
    },
-   "change_24h": 2.42
+   "change_24h": 2.59
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": null,
-   "why": "timeframes disagree (1D STRONG_BEAR, 4H UNCLEAR, 1H UNCLEAR)",
+   "why": "timeframes disagree (1D STRONG_BEAR, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "STRONG_BEAR",
-    "4h": "UNCLEAR",
+    "4h": "TRANSITION",
     "1h": "UNCLEAR"
    },
    "adx": {
-    "1d": 43.0,
-    "4h": 24.0,
-    "1h": 22.0
+    "1d": 42.0,
+    "4h": 25.0,
+    "1h": 21.0
    },
    "vol": {
-    "atr_pct": 6.38,
-    "vol_pctile": 85.0,
+    "atr_pct": 6.78,
+    "vol_pctile": 90.0,
     "vol_label": "high",
-    "usual_move_pct": 1.91,
-    "move_8of10_pct": 4.49,
-    "days": 295,
+    "usual_move_pct": 1.93,
+    "move_8of10_pct": 4.63,
+    "days": 273,
     "basis": "similar days",
-    "price": 0.929,
+    "price": 0.9407,
     "band": [
-     0.887265,
-     0.970735
+     0.897187,
+     0.984213
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -28.3,
+    "chg_pct": -27.6,
     "days": 30,
-    "sma20": 1.051645,
-    "sma50": 1.22551,
-    "sma200": 1.239733,
+    "sma20": 1.034845,
+    "sma50": 1.213912,
+    "sma200": 1.237501,
     "swing": "lower highs and lower lows",
     "near200": false,
-    "price": 0.929
+    "price": 0.9407
    },
    "crowd": {
-    "funding_pct": 0.0037,
-    "oi_24h_pct": -2.1,
+    "funding_pct": -0.0089,
+    "oi_24h_pct": -2.6,
     "label": "neutral"
    },
-   "change_24h": 1.47
+   "change_24h": 1.16
   },
   {
    "coin": "ZEC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "down",
-   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H TRANSITION)",
+   "turning": null,
+   "why": "timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)",
    "labels": {
     "1w": "TRANSITION",
     "1d": "TRANSITION",
     "4h": "TRANSITION",
-    "1h": "TRANSITION"
+    "1h": "UNCLEAR"
    },
    "adx": {
     "1d": 29.0,
-    "4h": 31.0,
-    "1h": 26.0
+    "4h": 29.0,
+    "1h": 25.0
    },
    "vol": {
-    "atr_pct": 13.21,
-    "vol_pctile": 86.0,
+    "atr_pct": 13.95,
+    "vol_pctile": 88.0,
     "vol_label": "high",
-    "usual_move_pct": 3.42,
-    "move_8of10_pct": 8.14,
-    "days": 188,
+    "usual_move_pct": 3.29,
+    "move_8of10_pct": 8.4,
+    "days": 158,
     "basis": "similar days",
-    "price": 798.63,
+    "price": 776.93,
     "band": [
-     733.639109,
-     863.620891
+     711.671342,
+     842.188658
     ]
    },
    "price": {
     "dir": "down",
-    "chg_pct": -32.5,
+    "chg_pct": -35.7,
     "days": 30,
-    "sma20": 1023.001,
-    "sma50": 1148.2882,
-    "sma200": 812.27495,
+    "sma20": 1000.8955,
+    "sma50": 1136.7794,
+    "sma200": 813.2861,
     "swing": "lower highs and lower lows",
-    "near200": true,
-    "price": 798.63
+    "near200": false,
+    "price": 776.93
    },
    "crowd": {
-    "funding_pct": 0.0063,
-    "oi_24h_pct": -5.0,
+    "funding_pct": 0.0092,
+    "oi_24h_pct": -69.1,
     "label": "neutral"
    },
-   "change_24h": -2.16
+   "change_24h": -3.32
   }
  ],
- "alts_vs_btc_24h": 0.75,
+ "alts_vs_btc_24h": 1.34,
  "fear_greed": {
   "value": 11,
   "label": "Extreme Fear",
   "yesterday": 11
  },
  "btc_dominance": {
-  "pct": 58.096,
-  "utc": "2026-11-23 23:16",
-  "ch24": -0.76,
-  "ch7": -0.6,
-  "read": "BTC up + BTC.D down: money rotating into altcoins (alt longs favored)"
+  "pct": 58.054,
+  "utc": "2026-11-24 00:12",
+  "ch24": -0.81,
+  "ch7": -0.55,
+  "read": "BTC down + BTC.D down: altcoins falling less than BTC"
  },
  "events": [
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US GDP (Second Estimate), 3rd Quarter 2026",
-   "hours": 38.2
+   "hours": 37.3
   },
   {
    "start_utc": "2026-11-25 13:30",
    "name": "US PCE / Personal Income and Outlays (Oct data)",
-   "hours": 38.2
+   "hours": 37.3
   }
  ],
  "blackout_now": [],
  "warnings": [
-  "BTC's daily range is high (top 5% of the year): stops need room - the alerts' size at your fixed % risk already gets smaller when the stop is wider."
+  "BTC's daily range is extreme (top 4% of the year): stops need room - the alerts' size at your fixed % risk already gets smaller when the stop is wider."
  ],
  "settings": {
   "funding_long_pct": 0.03,
@@ -354,5 +354,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-24 07:16 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.5% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D EXPANSION \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: high (daily range 5.3%, higher than 95% of the last year)\nUsual range: BTC usually moves \u00b11.6% in 24h; on 8 of 10 similar days it closed within \u00b13.4% (59,165 \u2013 63,377) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0033%/8h, open interest -4.6% in 24h)\nAltcoins vs BTC (24h): +0.8%\nBTC dominance: 58.1% \u00b7 24h -0.76 pt \u00b7 7d -0.60 pt\n   BTC up + BTC.D down: money rotating into altcoins (alt longs favored)\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f XRP: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is high (top 5% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-24 08:12 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.3% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H TRANSITION \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.6%, higher than 96% of the last year)\nUsual range: BTC usually moves \u00b11.7% in 24h; on 8 of 10 similar days it closed within \u00b13.6% (59,093 \u2013 63,449) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0054%/8h, open interest -52.7% in 24h)\nAltcoins vs BTC (24h): +1.3%\nBTC dominance: 58.1% \u00b7 24h -0.81 pt \u00b7 7d -0.55 pt\n   BTC down + BTC.D down: altcoins falling less than BTC\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SUI: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f XRP: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n<b>Events</b>\n\u2022 US GDP (Second Estimate), 3rd Quarter 2026 11-25 21:30 Beijing\n\u2022 US PCE / Personal Income and Outlays (Oct data) 11-25 21:30 Beijing\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 4% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }

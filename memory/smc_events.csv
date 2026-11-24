@@ -40569,3 +40569,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-23 22:45,SUI,15m,OB_INVALID,bull,,0.6678,0.6715,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-23 23:00,SUI,15m,SWEEP,bull,0.6651,,,0.211,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
 2026-11-23 23:00,SUI,15m,BREAKER_RETEST,bear,,0.6678,0.6715,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 23:30,BTC,15m,FVG,bull,,61256.66,61405.52,0.497,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 23:45,BTC,15m,FVG_RETRACE,bull,,61256.66,61405.52,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-23 23:45,BTC,15m,FVG_FILLED,bull,,61256.66,61405.52,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-24 00:00,BTC,15m,FVG,bear,,61327.33,61405.52,0.262,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-24 00:00,ETH,1h,BREAKER_RETEST,bear,,1713.33,1726.48,,,4h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 23:30,ETH,30m,BREAKER_RETEST,bear,,1713.33,1723.21,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-23 23:30,XRP,15m,FVG,bull,,0.939,0.9406,0.262,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-23 23:45,XRP,15m,FVG_RETRACE,bull,,0.939,0.9406,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-23 23:45,XRP,15m,FVG_FILLED,bull,,0.939,0.9406,,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-24 00:00,ZEC,4h,BOS,bear,776.98,,,0.001,,1d,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-24 00:00,ZEC,1h,FVG_RETRACE,bear,,777.64,787.59,,,4h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-23 23:30,ZEC,30m,FVG_RETRACE,bear,,777.64,789.31,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-24 00:00,SUI,4h,FVG_RETRACE,bull,,0.6589,0.6643,,,1d,STRONG_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-23 23:30,SUI,30m,FVG_RETRACE,bear,,0.6702,0.6726,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-23 23:30,SUI,30m,FVG_FILLED,bear,,0.6702,0.6726,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-23 23:30,SUI,15m,FVG,bull,,0.6679,0.6695,0.298,,1h,TRANSITION,,smc-1.0,Binance
