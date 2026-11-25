@@ -11,7 +11,7 @@
  "suspended": {
   "SOXLB": "2026-11-25"
  },
- "runs": 1308,
+ "runs": 1309,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -145,8 +145,7 @@
   ],
   "SOXLB": [
    "big_move",
-   "history",
-   "thin_book"
+   "history"
   ],
   "BMT": [
    "big_move",
