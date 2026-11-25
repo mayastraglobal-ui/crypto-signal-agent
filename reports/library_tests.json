@@ -8,8 +8,8 @@
    "status": "PAPER_TRADING",
    "trades": 967,
    "avg_r": 0.165,
-   "test_avg_r": 0.287,
-   "tested_utc": "2026-11-24 10:14",
+   "test_avg_r": 0.288,
+   "tested_utc": "2026-11-25 09:03",
    "library": true,
    "coins": {
     "BTC": {
@@ -52,18 +52,18 @@
      "test_avg_r": null,
      "positive": false
     },
-    "SUI": {
-     "n": 56,
-     "avg_r": 0.068,
-     "win_rate": 37.5,
-     "test_n": 0,
-     "test_avg_r": null,
-     "positive": true
-    },
     "BNB": {
      "n": 145,
      "avg_r": 0.185,
      "win_rate": 40.0,
+     "test_n": 0,
+     "test_avg_r": null,
+     "positive": true
+    },
+    "SUI": {
+     "n": 56,
+     "avg_r": 0.068,
+     "win_rate": 37.5,
      "test_n": 0,
      "test_avg_r": null,
      "positive": true
