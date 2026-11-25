@@ -1527,3 +1527,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-24 21:11 UTC
 - **EXCLUDED** HYPE - only 61 days of history (need 180); 7-day average volume $49M < $50M
+
+## 2026-11-25 00:16 UTC
+- **EXCLUDED** NVDAB - only 167 days of history (need 180)
