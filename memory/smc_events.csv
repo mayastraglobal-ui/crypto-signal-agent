@@ -41152,3 +41152,9 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-25 04:30,SOL,30m,FVG_FILLED,bull,,68.93,69.07,,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-11-25 04:15,SOL,15m,FVG_FILLED,bull,,68.89,69.1,,Asia,1h,TRANSITION,,smc-1.0,Binance
 2026-11-25 05:00,SOL,15m,FVG,bear,,68.89,69.1,0.572,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-25 06:00,SOL,1h,SWEEP,bull,68.57,,,0.248,,4h,UNCLEAR,"sell-side liquidity swept (PDL, swing low)",smc-1.0,Binance
+2026-11-25 06:00,SOL,30m,SWEEP,bull,68.5,,,0.255,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-25 06:00,SOL,30m,FVG_FILLED,bull,,68.41,68.73,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-25 05:15,SOL,15m,FVG_RETRACE,bear,,68.89,69.1,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-25 05:45,SOL,15m,SWEEP,bull,68.5,,,0.362,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-25 05:45,SOL,15m,FVG_FILLED,bull,,68.41,68.7,,,1h,TRANSITION,,smc-1.0,Binance
