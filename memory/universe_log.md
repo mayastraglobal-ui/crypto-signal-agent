@@ -1543,3 +1543,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-25 17:34 UTC
 - **EXCLUDED** SOXLB - only 141 days of history (need 180); suspended for the rest of the UTC day (moved more than ±25% earlier today)
+
+## 2026-11-25 18:15 UTC
+- **ELIGIBLE** SUI - passes every rule again
