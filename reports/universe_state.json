@@ -4,16 +4,15 @@
   "ETH",
   "SOL",
   "XRP",
-  "ZEC"
+  "ZEC",
+  "SUI"
  ],
- "in_streak": {
-  "SUI": 1
- },
+ "in_streak": {},
  "out_streak": {},
  "suspended": {
   "SOXLB": "2026-11-25"
  },
- "runs": 1319,
+ "runs": 1320,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -187,7 +186,9 @@
   ]
  },
  "last_flags": {
-  "BTC": [],
+  "BTC": [
+   "wash_volume"
+  ],
   "ETH": [],
   "ZEC": [],
   "XRP": [],
