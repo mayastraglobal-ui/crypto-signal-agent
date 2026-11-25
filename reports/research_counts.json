@@ -1,27 +1,5 @@
 [
  {
-  "date": "2026-09-26",
-  "run_utc": "2026-09-26 06:28",
-  "backtests": 460,
-  "per_coin": {
-   "ADA": 46,
-   "BNB": 46,
-   "BTC": 46,
-   "ENA": 46,
-   "ETH": 46,
-   "SOL": 46,
-   "SUI": 46,
-   "UNI": 46,
-   "XRP": 46,
-   "ZEC": 46
-  },
-  "strategies": 20,
-  "tests": 46,
-  "tests_per_coin": 46,
-  "coins": 10,
-  "new_cards": 1
- },
- {
   "date": "2026-09-27",
   "run_utc": "2026-09-27 00:50",
   "backtests": 408,
@@ -1682,5 +1660,33 @@
   "near_duplicates": 36,
   "ideas": 101,
   "new_cards": 1
+ },
+ {
+  "date": "2026-11-25",
+  "run_utc": "2026-11-25 09:03",
+  "backtests": 1645,
+  "per_coin": {
+   "BNB": 235,
+   "BTC": 235,
+   "ETH": 235,
+   "SOL": 235,
+   "SUI": 235,
+   "XRP": 235,
+   "ZEC": 235
+  },
+  "strategies": 115,
+  "tests": 235,
+  "tests_per_coin": 235,
+  "coins": 7,
+  "best_avg_r": 1.999,
+  "best_cell": "P13-TURTLE-V2 v1.0 4h",
+  "cells_testing": 119,
+  "cells_failed": 158,
+  "cells_paper": 12,
+  "lab_cards": 53,
+  "sources": 58,
+  "near_duplicates": 37,
+  "ideas": 99,
+  "new_cards": 0
  }
 ]
