@@ -2,16 +2,16 @@
 
 What kind of day it is, from the hourly scan's own numbers (engine/weather.py). Explains the market only: it never creates a signal or changes a rule.
 
-- verdict (2026-11-25 09:55 UTC): **Trend day ↓** - BTC and most coins point down on 1D / 4H / 1H.
+- verdict (2026-11-25 10:09 UTC): **Trend day ↓** - BTC and most coins point down on 1D / 4H / 1H.
 - coins: BTC trend down, ETH trend down, SOL downtrend on the daily chart (not confirmed), XRP downtrend on the daily chart (not confirmed), ZEC trend down
 - fits: shorts with the trend, on bounces; only coins marked trend down · avoid: longs / buying the dip; chasing a candle that already fell
 - BTC: daily price trend DOWN · -25.4% in 30 days · lower highs and lower lows; 1D STRONG_BEAR / 4H UNCLEAR / 1H WEAK_BEAR (1D/1H bearish, 1W UNCLEAR); volatility extreme (higher than 96% of the last year); usual 24h move ±1.7%, 8 of 10 similar days within ±3.5%; crowding neutral (funding +0.0063%/8h, OI +1.5% 24h)
 - ETH: daily price trend DOWN · -27.9% in 30 days · lower highs and lower lows; 1D WEAK_BEAR / 4H RANGE / 1H WEAK_BEAR (1D/1H bearish, 1W UNCLEAR); volatility high (higher than 92% of the last year); usual 24h move ±2.0%, 8 of 10 similar days within ±4.3%; crowding neutral (funding +0.0040%/8h, OI -1.2% 24h)
-- SOL: daily price trend DOWN · -31.3% in 30 days · lower highs and lower lows; 1D STRONG_BEAR / 4H RANGE / 1H TRANSITION (timeframes disagree (1D STRONG_BEAR, 4H RANGE, 1H TRANSITION)); volatility high (higher than 92% of the last year); usual 24h move ±2.6%, 8 of 10 similar days within ±4.9%; crowding neutral (funding +0.0079%/8h, OI -1.2% 24h)
+- SOL: daily price trend DOWN · -31.3% in 30 days · lower highs and lower lows; 1D STRONG_BEAR / 4H RANGE / 1H TRANSITION (timeframes disagree (1D STRONG_BEAR, 4H RANGE, 1H TRANSITION)); volatility high (higher than 92% of the last year); usual 24h move ±2.6%, 8 of 10 similar days within ±4.9%; crowding neutral (funding +0.0079%/8h, OI -0.8% 24h)
 - XRP: daily price trend DOWN · -28.6% in 30 days · lower highs and lower lows; 1D STRONG_BEAR / 4H UNCLEAR / 1H RANGE (timeframes disagree (1D STRONG_BEAR, 4H UNCLEAR, 1H RANGE)); volatility high (higher than 90% of the last year); usual 24h move ±1.9%, 8 of 10 similar days within ±4.7%; crowding neutral (funding +0.0019%/8h, OI +3.2% 24h)
 - ZEC: daily price trend DOWN · -39.1% in 30 days · lower highs and lower lows; 1D WEAK_BEAR / 4H WEAK_BEAR / 1H RANGE (1D/4H bearish, 1W TRANSITION); volatility high (higher than 88% of the last year); usual 24h move ±3.1%, 8 of 10 similar days within ±8.2%; crowding neutral (funding +0.0100%/8h, OI -1.2% 24h)
-- altcoins vs BTC (24h, median): -0.7%
-- BTC dominance (CoinGecko): 58.54%, 24h -0.01 pt, 7d -0.55 pt - BTC.D flat - no clear rotation between BTC and the altcoins
+- altcoins vs BTC (24h, median): -0.8%
+- BTC dominance (CoinGecko): 58.59%, 24h +0.03 pt, 7d -0.51 pt - BTC.D flat - no clear rotation between BTC and the altcoins
 - event: US GDP (Second Estimate), 3rd Quarter 2026 2026-11-25 13:30 UTC
 - event: US PCE / Personal Income and Outlays (Oct data) 2026-11-25 13:30 UTC
 - warning: High-impact event within 24 hours: no new trades from 1 hour before to 1 hour after.

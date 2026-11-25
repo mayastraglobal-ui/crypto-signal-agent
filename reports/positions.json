@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-25 09:55",
+ "generated_utc": "2026-11-25 10:09",
  "book": {
-  "utc": "2026-11-25 09:55",
-  "beijing": "2026-11-25 17:55",
+  "utc": "2026-11-25 10:09",
+  "beijing": "2026-11-25 18:09",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-25 09:55 UTC / 2026-11-25 17:55 Beijing",
+  "POSITION BOOK \u2014 2026-11-25 10:09 UTC / 2026-11-25 18:09 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Second Estimate), 3rd Quarter 2026 2026-11-25 13:30 UTC"
@@ -70,6 +70,17 @@
  },
  "watching": [
   {
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "high >= fib_500"
+  },
+  {
    "coin": "ZEC",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
@@ -99,7 +110,7 @@
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "2/5",
+   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -265,17 +276,6 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "3/5",
    "missing": null
   },
   {
