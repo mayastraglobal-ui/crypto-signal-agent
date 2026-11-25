@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-25 10:09",
+ "generated_utc": "2026-11-25 11:57",
  "book": {
-  "utc": "2026-11-25 10:09",
-  "beijing": "2026-11-25 18:09",
+  "utc": "2026-11-25 11:57",
+  "beijing": "2026-11-25 19:57",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-25 10:09 UTC / 2026-11-25 18:09 Beijing",
+  "POSITION BOOK \u2014 2026-11-25 11:57 UTC / 2026-11-25 19:57 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US GDP (Second Estimate), 3rd Quarter 2026 2026-11-25 13:30 UTC"
@@ -70,7 +70,29 @@
  },
  "watching": [
   {
-   "coin": "ETH",
+   "coin": "BTC",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "high >= fib_500"
+  },
+  {
+   "coin": "XRP",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "4/5",
+   "missing": "high >= fib_500"
+  },
+  {
+   "coin": "ZEC",
    "tf": "1h",
    "strategy": "P03-FIB-PULLBACK-V5",
    "version": "1.0",
@@ -104,6 +126,171 @@
   },
   {
    "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/5",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/3",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V1",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V1",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/4",
+   "missing": null
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-V3",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close > prev(highest(high,330))"
+  },
+  {
+   "coin": "BTC",
+   "tf": "4h",
+   "strategy": "P13-TURTLE-C",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "ETH",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
    "tf": "1h",
    "strategy": "P03-FIB-PULLBACK-V5",
    "version": "1.0",
@@ -114,7 +301,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
    "version": "1.0",
@@ -125,7 +312,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "version": "1.0",
@@ -136,7 +323,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
@@ -147,7 +334,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
    "version": "1.0",
@@ -158,7 +345,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -169,7 +356,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -180,7 +367,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V1",
    "version": "1.0",
@@ -191,7 +378,7 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V1",
    "version": "1.0",
@@ -202,7 +389,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -213,7 +400,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V2",
    "version": "1.0",
@@ -224,7 +411,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
@@ -235,7 +422,7 @@
    "missing": null
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3",
    "version": "1.0",
@@ -246,7 +433,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-C",
    "version": "1.0",
@@ -257,7 +444,7 @@
    "missing": "close > prev(highest(high,330))"
   },
   {
-   "coin": "BTC",
+   "coin": "ETH",
    "tf": "4h",
    "strategy": "P13-TURTLE-C",
    "version": "1.0",
@@ -268,7 +455,7 @@
    "missing": "close < 0"
   },
   {
-   "coin": "ETH",
+   "coin": "SOL",
    "tf": "1h",
    "strategy": "TRD-H4-BREAKOUT-S3",
    "version": "1.0",
@@ -279,7 +466,18 @@
    "missing": null
   },
   {
-   "coin": "ETH",
+   "coin": "SOL",
+   "tf": "1h",
+   "strategy": "P03-FIB-PULLBACK-V5",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
+   "missing": null
+  },
+  {
+   "coin": "SOL",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
    "version": "1.0",
@@ -290,7 +488,7 @@
    "missing": null
   },
   {
-   "coin": "ETH",
+   "coin": "SOL",
    "tf": "30m",
    "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
    "version": "1.0",
@@ -301,138 +499,6 @@
    "missing": null
   },
   {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3-S2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/3",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3-S2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "1/3",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V1",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/2",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/4",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close > prev(highest(high,330))"
-  },
-  {
-   "coin": "ETH",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-C",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
    "coin": "SOL",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
@@ -563,6 +629,39 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "XRP",
+   "tf": "1h",
+   "strategy": "TRD-H4-BREAKOUT-S3",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/2",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/5",
+   "missing": null
+  },
+  {
+   "coin": "XRP",
+   "tf": "30m",
+   "strategy": "TRD-H4-BREAKOUT-S3-FDISP-FNOTEXT",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "2/4",
+   "missing": null
   },
   {
    "coin": "XRP",
@@ -715,7 +814,7 @@
    "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
-   "rules_true": "1/5",
+   "rules_true": "2/5",
    "missing": null
   },
   {
@@ -727,6 +826,17 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "1/4",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "30m",
+   "strategy": "P01-BREAKOUT-V2",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "1/3",
    "missing": null
   },
   {
