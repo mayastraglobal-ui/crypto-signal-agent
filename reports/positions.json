@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-25 19:22",
+ "generated_utc": "2026-11-25 20:10",
  "book": {
-  "utc": "2026-11-25 19:22",
-  "beijing": "2026-11-26 03:22",
+  "utc": "2026-11-25 20:10",
+  "beijing": "2026-11-26 04:10",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-25 19:22 UTC / 2026-11-26 03:22 Beijing",
+  "POSITION BOOK \u2014 2026-11-25 20:10 UTC / 2026-11-26 04:10 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5%"
@@ -57,7 +57,7 @@
  },
  "watching": [
   {
-   "coin": "ETH",
+   "coin": "SOL",
    "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
@@ -70,24 +70,46 @@
   {
    "coin": "ZEC",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "strategy": "donchian_breakout",
    "version": "1.0",
    "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "within(displacement_down, 3)"
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
   },
   {
    "coin": "ZEC",
    "tf": "4h",
-   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "strategy": "donchian_breakout-VEXIT",
    "version": "1.0",
-   "stage": "VALIDATION",
+   "stage": "PAPER_TRADING",
    "direction": "SHORT",
    "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "within(displacement_down, 3)"
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "2/3",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4",
+   "version": "1.1",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
   },
   {
    "coin": "ZEC",
@@ -101,6 +123,28 @@
    "missing": "within(displacement_down, 3)"
   },
   {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FRETEST",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "SETUP_FORMING",
+   "rules_true": "3/4",
+   "missing": "close < prev(lowest(low,20))"
+  },
+  {
    "coin": "BTC",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
@@ -108,7 +152,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/3",
+   "rules_true": "1/3",
    "missing": null
   },
   {
@@ -196,7 +240,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -260,6 +304,17 @@
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
+   "direction": "LONG",
+   "state": "WATCH",
+   "rules_true": "1/3",
+   "missing": null
+  },
+  {
+   "coin": "ETH",
+   "tf": "4h",
+   "strategy": "P12-LEADER-V2",
+   "version": "1.0",
+   "stage": "VALIDATION",
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/1",
@@ -317,7 +372,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -357,28 +412,6 @@
    "coin": "SOL",
    "tf": "4h",
    "strategy": "P13-TURTLE-V3-S2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "LONG",
-   "state": "WATCH",
-   "rules_true": "0/3",
-   "missing": null
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P13-TURTLE-V3-S2",
-   "version": "1.0",
-   "stage": "VALIDATION",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "0/1",
-   "missing": "close < 0"
-  },
-  {
-   "coin": "SOL",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
    "direction": "LONG",
@@ -389,6 +422,17 @@
   {
    "coin": "SOL",
    "tf": "4h",
+   "strategy": "P13-TURTLE-V3-S2",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "0/1",
+   "missing": "close < 0"
+  },
+  {
+   "coin": "SOL",
+   "tf": "4h",
    "strategy": "P12-LEADER-V2",
    "version": "1.0",
    "stage": "VALIDATION",
@@ -449,7 +493,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -493,7 +537,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/3",
+   "rules_true": "1/3",
    "missing": null
   },
   {
@@ -581,7 +625,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "2/4",
    "missing": null
   },
   {
@@ -713,7 +757,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
@@ -748,6 +792,28 @@
    "state": "WATCH",
    "rules_true": "0/1",
    "missing": "close < 0"
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-FDISP",
+   "version": "1.0",
+   "stage": "PAPER_TRADING",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
+  },
+  {
+   "coin": "ZEC",
+   "tf": "4h",
+   "strategy": "donchian_breakout-VEXIT-S4-FDISP",
+   "version": "1.0",
+   "stage": "VALIDATION",
+   "direction": "SHORT",
+   "state": "WATCH",
+   "rules_true": "3/5",
+   "missing": null
   },
   {
    "coin": "ZEC",
@@ -856,7 +922,7 @@
    "stage": "VALIDATION",
    "direction": "LONG",
    "state": "WATCH",
-   "rules_true": "0/4",
+   "rules_true": "1/4",
    "missing": null
   },
   {
