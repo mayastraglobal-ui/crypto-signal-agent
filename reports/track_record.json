@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-26 07:08",
+ "utc": "2026-11-26 09:30",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -99,13 +99,13 @@
     "sd": 0.179
    },
    "backtest": {
-    "n": 353,
-    "avg_r": 0.016,
-    "win_rate": 35.4
+    "n": 354,
+    "avg_r": 0.019,
+    "win_rate": 35.6
    },
    "verdict": "drift",
    "why": [
-    "8 losses in a row - in its backtest (35% won) a run that long shows up in 3% of 8-trade periods"
+    "8 losses in a row - in its backtest (36% won) a run that long shows up in 3% of 8-trade periods"
    ],
    "last_utc": "2026-11-24 18:29",
    "sent": false
@@ -295,9 +295,9 @@
     "sd": 0.753
    },
    "backtest": {
-    "n": 122,
-    "avg_r": 0.045,
-    "win_rate": 34.4
+    "n": 123,
+    "avg_r": 0.035,
+    "win_rate": 34.1
    },
    "verdict": "watch",
    "why": [
@@ -435,8 +435,8 @@
     "sd": 0.396
    },
    "backtest": {
-    "n": 728,
-    "avg_r": 0.016,
+    "n": 729,
+    "avg_r": 0.014,
     "win_rate": 33.5
    },
    "verdict": "watch",
@@ -829,9 +829,9 @@
     "sd": 0.751
    },
    "backtest": {
-    "n": 268,
-    "avg_r": 0.079,
-    "win_rate": 34.0
+    "n": 269,
+    "avg_r": 0.075,
+    "win_rate": 33.8
    },
    "verdict": "ok",
    "why": [],
@@ -855,9 +855,9 @@
     "sd": 1.701
    },
    "backtest": {
-    "n": 354,
-    "avg_r": 0.028,
-    "win_rate": 38.1
+    "n": 355,
+    "avg_r": 0.031,
+    "win_rate": 38.3
    },
    "verdict": "ok",
    "why": [],
@@ -1973,9 +1973,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 701,
-    "avg_r": 0.023,
-    "win_rate": 35.0
+    "n": 702,
+    "avg_r": 0.022,
+    "win_rate": 34.9
    },
    "verdict": "ok",
    "why": [],
@@ -2259,9 +2259,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 122,
-    "avg_r": 0.133,
-    "win_rate": 36.1
+    "n": 123,
+    "avg_r": 0.149,
+    "win_rate": 36.6
    },
    "verdict": "ok",
    "why": [],
@@ -2285,9 +2285,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 124,
-    "avg_r": 0.415,
-    "win_rate": 42.7
+    "n": 125,
+    "avg_r": 0.426,
+    "win_rate": 43.2
    },
    "verdict": "ok",
    "why": [],
@@ -2311,9 +2311,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 356,
-    "avg_r": 0.016,
-    "win_rate": 32.9
+    "n": 358,
+    "avg_r": 0.013,
+    "win_rate": 32.7
    },
    "verdict": "ok",
    "why": [],
@@ -2597,9 +2597,9 @@
     "sd": null
    },
    "backtest": {
-    "n": 120,
-    "avg_r": 0.072,
-    "win_rate": 35.0
+    "n": 121,
+    "avg_r": 0.063,
+    "win_rate": 34.7
    },
    "verdict": "ok",
    "why": [],
