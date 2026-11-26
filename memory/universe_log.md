@@ -1572,3 +1572,7 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-26 15:50 UTC
 - **EXCLUDED** SOXLB - only 142 days of history (need 180); 24h move +29.6% is beyond ±25% - suspended for the rest of the UTC day
+
+## 2026-11-26 18:11 UTC
+- **EXCLUDED** SUI - 24h volume $46M < $50M
+- **LEAVE** SUI - not eligible: 24h volume $46M < $50M
