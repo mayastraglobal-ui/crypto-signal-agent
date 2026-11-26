@@ -1986,3 +1986,11 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
   - at entry: session Silver Bullet, conditions: overextended_entry
   - what happened: -
   - root cause / fix: (review)
+
+### ZEC LONG 4h P12-LEADER-V2 v1.0 - SL -1.02R
+- timestamp: 2026-11-26 16:59 UTC · source: engine: hourly scan (reports/signals_log.csv) · evidence: FACT: VALIDATION result -1.02R after costs; tags by fixed rules · confidence: one trade - an example, not a pattern · strategy: P12-LEADER-V2 v1.0 · asset: ZEC · timeframe: 4h · regime: WEAK_BEAR · review: 2026-12-03
+  - signal 2026-11-25 23:59 UTC, closed 2026-11-26 15:59 UTC, stage VALIDATION
+  - MAE -1.96R / MFE +0.32R
+  - at entry: session -, conditions: range_market
+  - what happened: -
+  - root cause / fix: (review)
