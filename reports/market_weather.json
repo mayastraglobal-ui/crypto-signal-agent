@@ -1,16 +1,18 @@
 {
- "utc": "2026-11-26 09:30",
+ "utc": "2026-11-26 11:14",
  "verdict": {
-  "code": "BOUNCE_DOWNTREND",
-  "icon": "\ud83c\udf26",
-  "title": "Bounce inside a downtrend",
-  "meaning": "Prices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.",
+  "code": "DOWNTREND_WAIT",
+  "icon": "\ud83c\udf27",
+  "title": "Downtrend - the strategies wait for a clean 4H / 1H",
+  "meaning": "BTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.",
   "fits": [
-   "waiting - a failed bounce often sets up the next SHORT alert"
+   "no longs, no buying the dip",
+   "checking the stop of any open long",
+   "waiting for a SHORT alert - it often comes after a bounce fails"
   ],
   "avoid": [
-   "buying the bounce as if the trend had turned",
-   "shorting by hand in the middle of it"
+   "buying the dip (catching a falling knife)",
+   "shorting by hand right after a big red candle, at the lows"
   ]
  },
  "breadth": {
@@ -24,7 +26,7 @@
    "coin": "BTC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "up",
+   "turning": null,
    "why": "timeframes disagree (1D STRONG_BEAR, 4H UNCLEAR, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
@@ -64,10 +66,10 @@
    },
    "crowd": {
     "funding_pct": 0.0067,
-    "oi_24h_pct": 1.5,
+    "oi_24h_pct": 0.9,
     "label": "neutral"
    },
-   "change_24h": 3.15
+   "change_24h": 3.13
   },
   {
    "coin": "ETH",
@@ -113,16 +115,16 @@
    },
    "crowd": {
     "funding_pct": 0.0074,
-    "oi_24h_pct": 0.5,
+    "oi_24h_pct": -0.5,
     "label": "neutral"
    },
-   "change_24h": 3.68
+   "change_24h": 3.1
   },
   {
    "coin": "SOL",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": "up",
+   "turning": null,
    "why": "timeframes disagree (1D STRONG_BEAR, 4H RANGE, 1H TRANSITION)",
    "labels": {
     "1w": "UNCLEAR",
@@ -133,7 +135,7 @@
    "adx": {
     "1d": 48.0,
     "4h": 16.0,
-    "1h": 30.0
+    "1h": 29.0
    },
    "vol": {
     "atr_pct": 7.34,
@@ -162,10 +164,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": -1.3,
+    "oi_24h_pct": -4.1,
     "label": "neutral"
    },
-   "change_24h": 5.1
+   "change_24h": 4.25
   },
   {
    "coin": "SUI",
@@ -182,7 +184,7 @@
    "adx": {
     "1d": 41.0,
     "4h": 20.0,
-    "1h": 34.0
+    "1h": 33.0
    },
    "vol": {
     "atr_pct": 8.75,
@@ -211,10 +213,10 @@
    },
    "crowd": {
     "funding_pct": 0.0073,
-    "oi_24h_pct": -0.8,
+    "oi_24h_pct": -1.0,
     "label": "neutral"
    },
-   "change_24h": 4.95
+   "change_24h": 4.92
   },
   {
    "coin": "XRP",
@@ -260,16 +262,16 @@
    },
    "crowd": {
     "funding_pct": 0.003,
-    "oi_24h_pct": -1.8,
+    "oi_24h_pct": -2.1,
     "label": "neutral"
    },
-   "change_24h": 4.07
+   "change_24h": 4.31
   },
   {
    "coin": "ZEC",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
-   "turning": null,
+   "turning": "down",
    "why": "timeframes disagree (1D WEAK_BEAR, 4H RANGE, 1H UNCLEAR)",
    "labels": {
     "1w": "TRANSITION",
@@ -280,7 +282,7 @@
    "adx": {
     "1d": 31.0,
     "4h": 17.0,
-    "1h": 23.0
+    "1h": 21.0
    },
    "vol": {
     "atr_pct": 12.97,
@@ -309,24 +311,24 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 6.0,
+    "oi_24h_pct": 3.0,
     "label": "neutral"
    },
-   "change_24h": 2.81
+   "change_24h": 0.27
   }
  ],
- "alts_vs_btc_24h": 0.92,
+ "alts_vs_btc_24h": 1.12,
  "fear_greed": {
   "value": 11,
   "label": "Extreme Fear",
   "yesterday": 13
  },
  "btc_dominance": {
-  "pct": 58.729,
-  "utc": "2026-11-26 09:30",
-  "ch24": 0.19,
-  "ch7": 0.59,
-  "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
+  "pct": 58.677,
+  "utc": "2026-11-26 11:14",
+  "ch24": 0.2,
+  "ch7": -0.22,
+  "read": "BTC up + BTC.D up: BTC leads, altcoins lag"
  },
  "events": [],
  "blackout_now": [],
@@ -341,5 +343,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-26 17:30 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.6% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.8%, higher than 96% of the last year)\nUsual range: BTC usually moves \u00b11.7% in 24h; on 8 of 10 similar days it closed within \u00b13.6% (58,303 \u2013 62,613) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0067%/8h, open interest +1.5% in 24h)\nAltcoins vs BTC (24h): +0.9%\nBTC dominance: 58.7% \u00b7 24h +0.19 pt \u00b7 7d +0.59 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 4% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf27 <b>Market weather \u00b7 11-26 19:14 Beijing</b>\nVerdict: <b>Downtrend - the strategies wait for a clean 4H / 1H</b>\nBTC is falling on the daily chart (the price trend line below). The strategy filter is stricter: it trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out early shorts. A SHORT alert comes once they agree.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.6% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.8%, higher than 96% of the last year)\nUsual range: BTC usually moves \u00b11.7% in 24h; on 8 of 10 similar days it closed within \u00b13.6% (58,303 \u2013 62,613) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0067%/8h, open interest +0.9% in 24h)\nAltcoins vs BTC (24h): +1.1%\nBTC dominance: 58.7% \u00b7 24h +0.20 pt \u00b7 7d -0.22 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: downtrend on the daily chart (not confirmed)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\u2198\ufe0f ZEC: downtrend on the daily chart (not confirmed)\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 4% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: no longs, no buying the dip; checking the stop of any open long; waiting for a SHORT alert - it often comes after a bounce fails\nAvoid: buying the dip (catching a falling knife); shorting by hand right after a big red candle, at the lows\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
