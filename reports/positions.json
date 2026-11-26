@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-26 12:55",
+ "generated_utc": "2026-11-26 13:13",
  "book": {
-  "utc": "2026-11-26 12:55",
-  "beijing": "2026-11-26 20:55",
+  "utc": "2026-11-26 13:13",
+  "beijing": "2026-11-26 21:13",
   "active": [],
   "awaiting": [],
   "paper": [
@@ -38,7 +38,7 @@
   "empty": false
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-26 12:55 UTC / 2026-11-26 20:55 Beijing",
+  "POSITION BOOK \u2014 2026-11-26 13:13 UTC / 2026-11-26 21:13 Beijing",
   "Active:    none",
   "Awaiting:  none",
   "Paper:     ZEC \u00b7 LONG \u00b7 4h \u00b7 P12-LEADER-V2 v1.0 \u00b7 entry 771.4100 \u00b7 stop 715.8564 \u00b7 open -0.81R \u00b7 HOLD \u00b7 watch: regime changed WEAK_BEAR -> RANGE (VALIDATION)",
@@ -870,32 +870,5 @@
    "missing": "close < 0"
   }
  ],
- "events_this_run": [
-  {
-   "time_utc": "2026-11-26 12:55",
-   "id": "SUI-4h-P12-LEADER-V1-2026-11-26 07:59",
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "AWAITING_FILL",
-   "to_state": "ENTRY_TRIGGERED",
-   "price": 0.6650777379301214,
-   "note": "limit 0.665078 filled in the 2026-11-26 08:00 UTC candle"
-  },
-  {
-   "time_utc": "2026-11-26 12:55",
-   "id": "SUI-4h-P12-LEADER-V1-2026-11-26 07:59",
-   "coin": "SUI",
-   "tf": "4h",
-   "strategy": "P12-LEADER-V1",
-   "version": "1.0",
-   "stage": "TEST",
-   "from_state": "ENTRY_TRIGGERED",
-   "to_state": "POSITION_ACTIVE",
-   "price": 0.6650777379301214,
-   "note": "entry at 2026-11-26 08:00 UTC (limit)"
-  }
- ]
+ "events_this_run": []
 }
