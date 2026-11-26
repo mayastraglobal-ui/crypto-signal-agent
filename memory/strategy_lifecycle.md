@@ -558,3 +558,6 @@ BACKTESTING = tested, not good enough yet · VALIDATION = passed the backtest ga
 
 ## 2026-11-25 09:03 UTC
 - **P11-MOMENTUM-V3-FRETEST@1.0 1h**: FORMALIZED → **FAILED** (avg -0.09R/trade (needs +0.10R); profit factor 0.87; recovery factor -0.79 (net -173.3R / max drawdown 218.2R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 35.1R - limit 17R; longest drawdown 2977 days = 92% of the tested period (limit 55%); not profitable in BOTH train and unseen test)
+
+## 2026-11-26 08:50 UTC
+- **P07-SQUEEZE-RETEST-V2@1.0 1h**: BACKTESTING → **FAILED** (avg +0.01R/trade (needs +0.10R); profit factor 1.01; recovery factor 0.15 (net +9.1R / max drawdown 62.6R) - needs 3; Monte Carlo 95% worst drawdown per 100 trades 29.0R - limit 17R; not profitable in BOTH train and unseen test)

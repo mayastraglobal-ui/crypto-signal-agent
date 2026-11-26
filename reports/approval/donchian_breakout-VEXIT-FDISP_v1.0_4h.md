@@ -1,6 +1,6 @@
 # Approval pack: donchian_breakout-VEXIT-FDISP v1.0 4h
 
-Written by the engine on 2026-11-25 09:03 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
+Written by the engine on 2026-11-26 08:50 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
 
 **Question: Approve donchian_breakout-VEXIT-FDISP v1.0 4h for live emails? (yes/no)**
 
@@ -8,7 +8,7 @@ Written by the engine on 2026-11-25 09:03 UTC (AGENT_PROMPT.md section 21). Numb
 
 To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):
 ```
-  - {strategy: donchian_breakout-VEXIT-FDISP, version: "1.0", tf: 4h, date: 2026-11-25}
+  - {strategy: donchian_breakout-VEXIT-FDISP, version: "1.0", tf: 4h, date: 2026-11-26}
 ```
 The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.
 **Check the trades before you say yes:**
@@ -16,9 +16,9 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 - TradingView: open https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/main/reports/pine/donchian_breakout-VEXIT-FDISP_v1.0_4h.pine (`reports/pine/donchian_breakout-VEXIT-FDISP_v1.0_4h.pine`), copy it into TradingView's Pine Editor and add it to a chart - it draws the same signals and trades
 
 ## 0. Bull vs bear (the engine's numbers only - Phase 18)
-- Bull case: unseen part of the backtest (last 30%): +0.252R per trade over 221 trades; whole history: +0.269R per trade over 639 trades, profit factor 1.51; walk-forward: 4 of 5 time windows profitable, together +0.273R; costs +50%: +0.234R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 7 coin(s): BNB, BTC, ETH, SOL, SUI, XRP, ZEC; paper trading: +0.57R per signal over 30 closed signals
-- Bear case: worst drawdown in the backtest: 22.8R · wins 42% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 23.1R, expected worst losing streak 15 in a row; systematic loss tags: false_breakout, trend_reversal (369 losing trades)
-- Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.7 h old; day +0.0R / week +0.0R, no halt; 1 of 5 signal coins are in one of its regimes on 4H now (ZEC))
+- Bull case: unseen part of the backtest (last 30%): +0.249R per trade over 219 trades; whole history: +0.269R per trade over 639 trades, profit factor 1.51; walk-forward: 5 of 5 time windows profitable, together +0.273R; costs +50%: +0.234R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 7 coin(s): BNB, BTC, ETH, SOL, SUI, XRP, ZEC; paper trading: +0.57R per signal over 30 closed signals
+- Bear case: worst drawdown in the backtest: 22.8R · wins 42% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 22.6R, expected worst losing streak 15 in a row; systematic loss tags: false_breakout, trend_reversal (369 losing trades)
+- Risk manager: VETO - 0 of 6 signal coins are in one of its regimes on 4H now - regime against
 - A veto means "not now": wait until the risk manager has no veto before you say yes. No veto is never a reason to say yes - the decision stays yours.
 
 ## 1. Definition and lineage
@@ -33,19 +33,19 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 2. Backtest (Layers A / B)
 - Layer B, whole history: 639 trades · avg +0.269R · win rate 42% · profit factor 1.51 · max drawdown 22.8R
-- Layer B, develop part (first 70%): 418 trades · avg +0.278R · win rate 43% · profit factor 1.53 · max drawdown 10.7R
-- Layer B, unseen part (last 30%): 221 trades · avg +0.252R · win rate 41% · profit factor 1.46 · max drawdown 15.3R
+- Layer B, develop part (first 70%): 420 trades · avg +0.279R · win rate 43% · profit factor 1.54 · max drawdown 10.7R
+- Layer B, unseen part (last 30%): 219 trades · avg +0.249R · win rate 41% · profit factor 1.45 · max drawdown 15.3R
 - long / short: +0.289R (346) / +0.245R (293)
 - coins with an edge: BNB, BTC, ETH, SOL, SUI, XRP, ZEC
-- Layer A (last 15 days): 15 trades, avg +0.581R
+- Layer A (last 15 days): 12 trades, avg +0.697R
 
 ## 3. Walk-forward (Layer C)
-- 4 of 5 windows profitable, all judged windows together +0.273R over 582 trades - passed
+- 5 of 5 windows profitable, all judged windows together +0.273R over 582 trades - passed
   - window 0: 57 trades, +0.232R (warm-up)
   - window 1: 83 trades, +0.621R (profitable)
   - window 2: 124 trades, +0.257R (profitable)
-  - window 3: 91 trades, +0.237R (profitable)
-  - window 4: 132 trades, -0.015R (losing)
+  - window 3: 93 trades, +0.210R (profitable)
+  - window 4: 130 trades, +0.001R (profitable)
   - window 5: 152 trades, +0.366R (profitable)
 
 ## 4. Paper trading
@@ -75,7 +75,7 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 - without rule 2 (close > prev(highest(high,20)) / close < prev(lowest(low,20))): 813 trades, +0.256R - the rule improves the result
 - without rule 3 (volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5): 713 trades, +0.262R - the rule improves the result
 - without rule 4 (adx(14) > 20 / adx(14) > 20): 723 trades, +0.236R - the rule improves the result
-- without rule 5 (within(displacement_up, 3) / within(displacement_down, 3)): 831 trades, +0.265R - the rule improves the result
+- without rule 5 (within(displacement_up, 3) / within(displacement_down, 3)): 832 trades, +0.263R - the rule improves the result
 
 ## 7. Cost stress test
 - fees, slippage and funding +50%: 640 trades · avg +0.234R · win rate 41% · profit factor 1.42 · max drawdown 23.3R
@@ -85,11 +85,11 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 ## 8. Risk metrics
 - max drawdown (backtest): 22.8R · average hold 15 candles
 - live risk per trade: 0.5% of the account for the first 30 days, then at most 1% (risk engine, section 15)
-- Monte Carlo (1000 random orders of the same 639 trades): 95% worst drawdown 23.1R (median 14.8R, as it happened 18.6R)
-- **expected worst losing streak: 15 losses in a row** (95% of the random orders stay at or below it; median 11, as it happened 10) - expect it before you judge the strategy broken
+- Monte Carlo (1000 random orders of the same 639 trades): 95% worst drawdown 22.6R (median 14.8R, as it happened 18.6R)
+- **expected worst losing streak: 15 losses in a row** (95% of the random orders stay at or below it; median 10, as it happened 10) - expect it before you judge the strategy broken
 - family table (trend group, active mode): verdict PAPER_TRADING (old rule: BACKTESTING)
-  - recovery factor 7.55 (net +171.9R / max drawdown 22.8R) · Monte Carlo 95% worst drawdown per 100 trades 16.3R · longest drawdown 529 days (16% of the tested period)
-  - **if approved, suspended at a live drawdown of 16.3R; paper retired at 16.3R** (own Monte Carlo 95% worst drawdown per 100 trades (cap 17R))
+  - recovery factor 7.55 (net +171.9R / max drawdown 22.8R) · Monte Carlo 95% worst drawdown per 100 trades 16.2R · longest drawdown 529 days (16% of the tested period)
+  - **if approved, suspended at a live drawdown of 16.2R; paper retired at 16.2R** (own Monte Carlo 95% worst drawdown per 100 trades (cap 17R))
 - lookahead / recursive check: passed
 
 ## 9. Why it loses (failure attribution)
@@ -105,7 +105,7 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
   - Timing: losers rarely went our way (median best point +0.48R).
   - Stop / target: stopped out and then TP1 reached anyway in 22% of losses; target nearly reached (≥ 80%) in 6%. Measured stop changes (±20% test): stop atr 2.0→1.6 → +0.18R; stop atr 2.0→2.4 → +0.33R.
   - Costs: +0.33R per trade before fees and slippage, +0.27R after.
-  - Other timeframes: best is 1h at +0.02R per trade.
+  - Other timeframes: best is 1h at +0.01R per trade.
 
 ## 10. Known limitations
 - backtests and paper results are history, not a promise; the future can differ
