@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-26 04:54",
+ "utc": "2026-11-26 06:37",
  "verdict": {
   "code": "BOUNCE_DOWNTREND",
   "icon": "\ud83c\udf26",
@@ -35,7 +35,7 @@
    "adx": {
     "1d": 50.0,
     "4h": 22.0,
-    "1h": 26.0
+    "1h": 29.0
    },
    "vol": {
     "atr_pct": 5.83,
@@ -64,10 +64,10 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 3.2,
+    "oi_24h_pct": 2.2,
     "label": "neutral"
    },
-   "change_24h": 3.18
+   "change_24h": 2.5
   },
   {
    "coin": "ETH",
@@ -84,7 +84,7 @@
    "adx": {
     "1d": 45.0,
     "4h": 17.0,
-    "1h": 27.0
+    "1h": 28.0
    },
    "vol": {
     "atr_pct": 6.94,
@@ -113,10 +113,10 @@
    },
    "crowd": {
     "funding_pct": 0.0067,
-    "oi_24h_pct": 0.3,
+    "oi_24h_pct": -3.2,
     "label": "neutral"
    },
-   "change_24h": 2.66
+   "change_24h": 1.83
   },
   {
    "coin": "SOL",
@@ -162,10 +162,10 @@
    },
    "crowd": {
     "funding_pct": 0.007,
-    "oi_24h_pct": -2.6,
+    "oi_24h_pct": -2.1,
     "label": "neutral"
    },
-   "change_24h": 3.43
+   "change_24h": 3.14
   },
   {
    "coin": "SUI",
@@ -182,7 +182,7 @@
    "adx": {
     "1d": 41.0,
     "4h": 20.0,
-    "1h": 32.0
+    "1h": 34.0
    },
    "vol": {
     "atr_pct": 8.75,
@@ -211,10 +211,10 @@
    },
    "crowd": {
     "funding_pct": 0.0054,
-    "oi_24h_pct": 1.8,
+    "oi_24h_pct": 0.3,
     "label": "neutral"
    },
-   "change_24h": 4.59
+   "change_24h": 3.79
   },
   {
    "coin": "XRP",
@@ -231,7 +231,7 @@
    "adx": {
     "1d": 40.0,
     "4h": 21.0,
-    "1h": 28.0
+    "1h": 30.0
    },
    "vol": {
     "atr_pct": 6.78,
@@ -260,10 +260,10 @@
    },
    "crowd": {
     "funding_pct": 0.0057,
-    "oi_24h_pct": 2.8,
+    "oi_24h_pct": 1.5,
     "label": "neutral"
    },
-   "change_24h": 4.51
+   "change_24h": 3.8
   },
   {
    "coin": "ZEC",
@@ -280,7 +280,7 @@
    "adx": {
     "1d": 31.0,
     "4h": 18.0,
-    "1h": 28.0
+    "1h": 27.0
    },
    "vol": {
     "atr_pct": 12.97,
@@ -309,23 +309,23 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 4.4,
+    "oi_24h_pct": 2.0,
     "label": "neutral"
    },
-   "change_24h": 4.71
+   "change_24h": 2.31
   }
  ],
- "alts_vs_btc_24h": 1.33,
+ "alts_vs_btc_24h": 0.64,
  "fear_greed": {
   "value": 11,
   "label": "Extreme Fear",
   "yesterday": 13
  },
  "btc_dominance": {
-  "pct": 57.943,
-  "utc": "2026-11-26 04:54",
-  "ch24": 0.24,
-  "ch7": -0.19,
+  "pct": 57.888,
+  "utc": "2026-11-26 06:37",
+  "ch24": 0.2,
+  "ch7": -0.18,
   "read": "BTC up + BTC.D up: BTC leads, altcoins lag"
  },
  "events": [],
@@ -341,5 +341,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-26 12:54 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.6% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.8%, higher than 96% of the last year)\nUsual range: BTC usually moves \u00b11.7% in 24h; on 8 of 10 similar days it closed within \u00b13.6% (58,303 \u2013 62,613) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +3.2% in 24h)\nAltcoins vs BTC (24h): +1.3%\nBTC dominance: 57.9% \u00b7 24h +0.24 pt \u00b7 7d -0.19 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\u2198\ufe0f ZEC: bounce in a downtrend (daily)\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 4% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-26 14:37 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -24.6% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H UNCLEAR \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.8%, higher than 96% of the last year)\nUsual range: BTC usually moves \u00b11.7% in 24h; on 8 of 10 similar days it closed within \u00b13.6% (58,303 \u2013 62,613) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0100%/8h, open interest +2.2% in 24h)\nAltcoins vs BTC (24h): +0.6%\nBTC dominance: 57.9% \u00b7 24h +0.20 pt \u00b7 7d -0.18 pt\n   BTC up + BTC.D up: BTC leads, altcoins lag\nMood (Fear & Greed): Extreme Fear 11\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f SUI: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\u2198\ufe0f ZEC: bounce in a downtrend (daily)\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 4% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
