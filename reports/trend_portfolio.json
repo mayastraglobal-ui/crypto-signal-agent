@@ -1,8 +1,8 @@
 {
  "version": 1,
- "day_ms": 1795478400000,
- "day": "2026-11-24",
- "updated_utc": "2026-11-25 00:17",
+ "day_ms": 1795564800000,
+ "day": "2026-11-25",
+ "updated_utc": "2026-11-26 00:37",
  "started": "2026-10-28",
  "start_capital": 1000.0,
  "equity": 961.03,
@@ -22,7 +22,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 548.62,
+   "price": 554.03,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -32,7 +32,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 59832.0,
+   "price": 60458.01,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -42,7 +42,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 1680.11,
+   "price": 1692.65,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -52,7 +52,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 69.69,
+   "price": 70.47,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -62,7 +62,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.6485,
+   "price": 0.6675,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -72,7 +72,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.9251,
+   "price": 0.9379,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -82,7 +82,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 739.77,
+   "price": 771.41,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -480,6 +480,20 @@
     "XRP": 0.0,
     "ZEC": 0.0
    }
+  },
+  {
+   "day": "2026-11-25",
+   "equity": 961.03,
+   "ret_pct": 0.0,
+   "weights": {
+    "BNB": 0.0,
+    "BTC": 0.0,
+    "ETH": 0.0,
+    "SOL": 0.0,
+    "SUI": 0.0,
+    "XRP": 0.0,
+    "ZEC": 0.0
+   }
   }
  ],
  "lookbacks": [
@@ -494,7 +508,7 @@
   360
  ],
  "backtest": {
-  "since": "2024-03-01",
+  "since": "2024-03-02",
   "days": 999,
   "portfolio": {
    "cagr_pct": 24.8,
@@ -502,7 +516,7 @@
    "max_dd_pct": 17.2
   },
   "hold": {
-   "cagr_pct": 25.1,
+   "cagr_pct": 24.9,
    "sharpe": 0.67,
    "max_dd_pct": 51.5
   }
