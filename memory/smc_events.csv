@@ -41983,3 +41983,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-26 21:00,ZEC,1h,FVG_FILLED,bear,,707.8,720.47,,,4h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-26 20:30,ZEC,30m,FVG_FILLED,bear,,717.4,720.47,,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-26 20:15,ZEC,15m,FVG_FILLED,bear,,717.4,720.49,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-26 21:30,BTC,30m,WEAK_BREAK,bull,60768.0,,,0.527,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-26 21:45,BTC,15m,FVG,bull,,60825.21,60878.68,0.35,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-26 22:00,BTC,15m,FVG_RETRACE,bull,,60825.21,60878.68,,,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-26 22:00,BTC,15m,FVG_FILLED,bull,,60825.21,60878.68,,,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-26 21:45,ETH,15m,SWEEP,bear,1708.72,,,0.325,,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-26 21:45,ETH,15m,OB_INVALID,bear,,1701.44,1707.82,,,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-26 22:00,ETH,15m,BREAKER_RETEST,bull,,1701.44,1707.82,,,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-26 22:00,SOL,1h,BOS,bull,71.59,,,0.081,,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-26 22:00,SOL,30m,WEAK_BREAK,bull,71.59,,,0.122,,1h,COMPRESSION,no displacement,smc-1.0,Binance
+2026-11-26 21:30,SOL,15m,SWEEP,bear,71.59,,,0.155,,1h,COMPRESSION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-26 21:45,SOL,15m,BOS,bull,71.59,,,0.437,,1h,COMPRESSION,no displacement,smc-1.0,Binance
