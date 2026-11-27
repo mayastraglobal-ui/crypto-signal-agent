@@ -1579,3 +1579,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-27 16:11 UTC
 - **EXCLUDED** SOXLB - only 143 days of history (need 180)
+
+## 2026-11-27 19:13 UTC
+- **EXCLUDED** PORTAL - 7-day average volume $320k < $50M; 24h move +215.4% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $61k within 1% (need $250k)

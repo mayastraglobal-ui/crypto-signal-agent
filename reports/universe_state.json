@@ -8,8 +8,10 @@
  ],
  "in_streak": {},
  "out_streak": {},
- "suspended": {},
- "runs": 1359,
+ "suspended": {
+  "PORTAL": "2026-11-27"
+ },
+ "runs": 1360,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -181,6 +183,11 @@
    "history",
    "stablecoin",
    "volume_7d"
+  ],
+  "PORTAL": [
+   "big_move",
+   "thin_book",
+   "volume_7d"
   ]
  },
  "last_flags": {
@@ -247,6 +254,7 @@
   "MMT": [
    "data_degraded"
   ],
-  "RWUSD": []
+  "RWUSD": [],
+  "PORTAL": []
  }
 }
