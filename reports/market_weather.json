@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-27 11:13",
+ "utc": "2026-11-27 12:11",
  "verdict": {
   "code": "BOUNCE_DOWNTREND",
   "icon": "\ud83c\udf26",
@@ -34,7 +34,7 @@
    },
    "adx": {
     "1d": 50.0,
-    "4h": 16.0,
+    "4h": 15.0,
     "1h": 27.0
    },
    "vol": {
@@ -64,10 +64,10 @@
    },
    "crowd": {
     "funding_pct": 0.0049,
-    "oi_24h_pct": 2.8,
+    "oi_24h_pct": 2.5,
     "label": "neutral"
    },
-   "change_24h": 1.73
+   "change_24h": 1.54
   },
   {
    "coin": "ETH",
@@ -113,10 +113,10 @@
    },
    "crowd": {
     "funding_pct": 0.008,
-    "oi_24h_pct": 3.1,
+    "oi_24h_pct": 2.5,
     "label": "neutral"
    },
-   "change_24h": 1.83
+   "change_24h": 1.16
   },
   {
    "coin": "SOL",
@@ -132,7 +132,7 @@
    },
    "adx": {
     "1d": 47.0,
-    "4h": 13.0,
+    "4h": 14.0,
     "1h": 31.0
    },
    "vol": {
@@ -162,27 +162,27 @@
    },
    "crowd": {
     "funding_pct": 0.01,
-    "oi_24h_pct": 5.9,
+    "oi_24h_pct": 5.0,
     "label": "neutral"
    },
-   "change_24h": 3.8
+   "change_24h": 3.31
   },
   {
    "coin": "XRP",
    "verdict": "CHOPPY",
    "permission": "NO TRADE",
    "turning": "up",
-   "why": "timeframes disagree (1D WEAK_BEAR, 4H RANGE, 1H WEAK_BULL)",
+   "why": "timeframes disagree (1D WEAK_BEAR, 4H UNCLEAR, 1H STRONG_BULL)",
    "labels": {
     "1w": "UNCLEAR",
     "1d": "WEAK_BEAR",
-    "4h": "RANGE",
-    "1h": "WEAK_BULL"
+    "4h": "UNCLEAR",
+    "1h": "STRONG_BULL"
    },
    "adx": {
     "1d": 39.0,
     "4h": 20.0,
-    "1h": 27.0
+    "1h": 28.0
    },
    "vol": {
     "atr_pct": 6.63,
@@ -214,7 +214,7 @@
     "oi_24h_pct": 3.2,
     "label": "neutral"
    },
-   "change_24h": 3.06
+   "change_24h": 2.42
   },
   {
    "coin": "ZEC",
@@ -231,7 +231,7 @@
    "adx": {
     "1d": 31.0,
     "4h": 19.0,
-    "1h": 18.0
+    "1h": 17.0
    },
    "vol": {
     "atr_pct": 15.18,
@@ -260,23 +260,23 @@
    },
    "crowd": {
     "funding_pct": 0.0067,
-    "oi_24h_pct": 12.9,
+    "oi_24h_pct": 8.2,
     "label": "neutral"
    },
-   "change_24h": 4.2
+   "change_24h": 3.9
   }
  ],
- "alts_vs_btc_24h": 1.7,
+ "alts_vs_btc_24h": 1.33,
  "fear_greed": {
   "value": 12,
   "label": "Extreme Fear",
   "yesterday": 11
  },
  "btc_dominance": {
-  "pct": 58.771,
-  "utc": "2026-11-27 11:13",
-  "ch24": 0.09,
-  "ch7": 0.72,
+  "pct": 58.807,
+  "utc": "2026-11-27 12:11",
+  "ch24": 0.06,
+  "ch7": 0.75,
   "read": "BTC.D flat - no clear rotation between BTC and the altcoins"
  },
  "events": [],
@@ -292,5 +292,5 @@
   "min_similar": 30
  },
  "note": "Explains the market. It never creates a signal and never changes a rule, a size or an approval.",
- "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-27 19:13 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -25.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H RANGE \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.7%, higher than 95% of the last year)\nUsual range: BTC usually moves \u00b11.6% in 24h; on 8 of 10 similar days it closed within \u00b13.5% (58,473 \u2013 62,682) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0049%/8h, open interest +2.8% in 24h)\nAltcoins vs BTC (24h): +1.7%\nBTC dominance: 58.8% \u00b7 24h +0.09 pt \u00b7 7d +0.72 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\ud83d\udd34 ZEC: trend down\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 5% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
+ "telegram": "\ud83c\udf26 <b>Market weather \u00b7 11-27 20:11 Beijing</b>\nVerdict: <b>Bounce inside a downtrend</b>\nPrices are rising on the 1H chart, but BTC's daily trend is still down (the price trend line below). Most bounces in a downtrend fail; it is a turn up only once 4H and 1D turn.\n\nBTC price trend (daily chart): <b>DOWN \u00b7 -25.1% in 30 days \u00b7 lower highs and lower lows</b>\nStrategy alerts (need 4H and 1H to agree): 1D STRONG_BEAR \u00b7 4H RANGE \u00b7 1H TRANSITION\nVolatility: extreme (daily range 5.7%, higher than 95% of the last year)\nUsual range: BTC usually moves \u00b11.6% in 24h; on 8 of 10 similar days it closed within \u00b13.5% (58,473 \u2013 62,682) - measured from the past, not a forecast\nCrowding: neutral (funding +0.0049%/8h, open interest +2.5% in 24h)\nAltcoins vs BTC (24h): +1.3%\nBTC dominance: 58.8% \u00b7 24h +0.06 pt \u00b7 7d +0.75 pt\n   BTC.D flat - no clear rotation between BTC and the altcoins\nMood (Fear & Greed): Extreme Fear 12\n\n<b>Coins</b>\n\u2198\ufe0f BTC: bounce in a downtrend (daily)\n\u2198\ufe0f ETH: bounce in a downtrend (daily)\n\u2198\ufe0f SOL: bounce in a downtrend (daily)\n\u2198\ufe0f XRP: bounce in a downtrend (daily)\n\ud83d\udd34 ZEC: trend down\n\n\u26a0\ufe0f BTC&#x27;s daily range is extreme (top 5% of the year): stops need room - the alerts&#x27; size at your fixed % risk already gets smaller when the stop is wider.\n\nFits today: waiting - a failed bounce often sets up the next SHORT alert\nAvoid: buying the bounce as if the trend had turned; shorting by hand in the middle of it\n\n<i>Explains the market only - it never creates a signal or changes your risk rules.</i>"
 }
