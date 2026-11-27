@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-27 13:02",
+ "generated_utc": "2026-11-27 14:11",
  "book": {
-  "utc": "2026-11-27 13:02",
-  "beijing": "2026-11-27 21:02",
+  "utc": "2026-11-27 14:11",
+  "beijing": "2026-11-27 22:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,10 +20,10 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-27 13:02 UTC / 2026-11-27 21:02 Beijing",
+  "POSITION BOOK \u2014 2026-11-27 14:11 UTC / 2026-11-27 22:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
-  "Risk:      no halt \u00b7 risk per trade 0.5%"
+  "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Nov data) 2026-12-04 13:30 UTC"
  ],
  "risk": {
   "day_r": 0.0,
@@ -38,8 +38,15 @@
    "BTC+ETH+SOL+XRP+ZEC"
   ],
   "blackout_now": [],
-  "upcoming_events": [],
-  "next_event": null,
+  "upcoming_events": [
+   {
+    "start_utc": "2026-12-04 13:30",
+    "end_utc": "2026-12-04 13:30",
+    "type": "NFP",
+    "name": "US jobs report / Employment Situation (Nov data)"
+   }
+  ],
+  "next_event": "US jobs report / Employment Situation (Nov data) 2026-12-04 13:30 UTC",
   "calendar_warning": null,
   "transitions": [],
   "no_trade": [],
