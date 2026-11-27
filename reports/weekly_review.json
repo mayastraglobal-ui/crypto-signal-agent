@@ -37,7 +37,7 @@
   "paused": []
  },
  "week": "2026-W48",
- "utc": "2026-11-27 03:12",
+ "utc": "2026-11-27 04:11",
  "final": false,
  "rows": [
   {
@@ -2270,11 +2270,11 @@
     "sd": 0.7527933315326326
    },
    "week": {
-    "n": 2,
+    "n": 1,
     "win_rate": 0.0,
-    "avg_r": -1.147,
-    "total_r": -2.29,
-    "sd": 0.05091168824543146
+    "avg_r": -1.183,
+    "total_r": -1.18,
+    "sd": 0.0
    },
    "gross": {
     "n": 5,
@@ -3353,7 +3353,7 @@
   },
   {
    "ok": true,
-   "text": "hourly scan: last run 2026-11-27 03:12 UTC"
+   "text": "hourly scan: last run 2026-11-27 04:11 UTC"
   },
   {
    "ok": true,
@@ -3361,11 +3361,11 @@
   },
   {
    "ok": true,
-   "text": "live watcher: last heartbeat 2026-11-27 01:57 UTC (15 min ago)"
+   "text": "live watcher: last heartbeat 2026-11-27 03:00 UTC (13 min ago)"
   },
   {
    "ok": true,
-   "text": "TEST setups closed this week (GitHub record): 91"
+   "text": "TEST setups closed this week (GitHub record): 90"
   }
  ],
  "totals": {
@@ -3373,8 +3373,8 @@
    "n": 263,
    "total_r": 14.88,
    "avg_r": 0.057,
-   "week_n": 91,
-   "week_total_r": 15.73
+   "week_n": 90,
+   "week_total_r": 16.84
   },
   "PAPER": {
    "n": 5,
@@ -3394,8 +3394,8 @@
    "n": 201,
    "total_r": -6.58,
    "avg_r": -0.033,
-   "week_n": 53,
-   "week_total_r": 4.24
+   "week_n": 52,
+   "week_total_r": 5.35
   },
   "known": true
  },
@@ -3480,7 +3480,7 @@
     "caught": false
    }
   ],
-  "checked_utc": "2026-11-27 02:12",
+  "checked_utc": "2026-11-27 03:13",
   "lines": [
    "45 shock(s) this week, 36 sent to Telegram (the rest: over the daily cap, paused or /shock off)",
    "by kind: fast move 28, broke yesterday's high 6, broke yesterday's low 7, volume spike 25",
@@ -3535,5 +3535,5 @@
   "idea_fee_gap_r": 0.15,
   "idea_5m_gap_r": 0.2
  },
- "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W48</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 43 closed this week (+13.8R) \u00b7 67 since the start (+0.35R a trade, after fees)\nSilent research records (not sent to you): 53 this week (+4.2R)\n\ud83d\udfe1 PAPER: 5 this week (+2.3R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 20 repair(s) judged - 15 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 45 this week (36 sent) \u00b7 4h later 16 kept going, 29 reversed \u00b7 a strategy alert followed 6\n\n\ud83d\udcc8 Track record (your alerts, after fees): 54 closed \u00b7 +0.45R a trade \u00b7 +24.4R \u00b7 worst drawdown 5.5R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 4 (-0.23R) \u00b7 middle 4 (+0.03R) \u00b7 against 166 (+0.32R) \u00b7 outside 226 (+0.06R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
+ "telegram": "\ud83d\udcca <b>Weekly review \u00b7 2026-W48</b>\n\ud83d\udd35 <b>Your TEST alerts</b>: 43 closed this week (+13.8R) \u00b7 67 since the start (+0.35R a trade, after fees)\nSilent research records (not sent to you): 52 this week (+5.3R)\n\ud83d\udfe1 PAPER: 5 this week (+2.3R)\n\nNothing ready for PAPER yet: each needs 10+ live TEST setups, positive after fees.\n\nSystem check: \u2705 all parts ran\n\n\ud83d\udd27 Failure Lab: 20 repair(s) judged - 15 beat their parent, 2 reached VALIDATION; 1 waiting for a test\n\n\u26a1 Shocks: 45 this week (36 sent) \u00b7 4h later 16 kept going, 29 reversed \u00b7 a strategy alert followed 6\n\n\ud83d\udcc8 Track record (your alerts, after fees): 54 closed \u00b7 +0.45R a trade \u00b7 +24.4R \u00b7 worst drawdown 5.5R (/track)\n\n\ud83d\udd2c 4h with vs without the 5m check: passed - (0) \u00b7 rejected -1.00R (2) - same setups, before fees\n\n\ud83e\udded By 4H location: good 4 (-0.23R) \u00b7 middle 4 (+0.03R) \u00b7 against 166 (+0.32R) \u00b7 outside 226 (+0.06R)\n\n<i>PAPER is practice. Real-money (LIVE) signals still need 20 good paper signals and your approval.</i>"
 }
