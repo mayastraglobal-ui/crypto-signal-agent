@@ -42077,3 +42077,96 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-27 02:00,XRP,1h,FVG_RETRACE,bear,,0.9477,0.9516,,Asia,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-27 01:45,ZEC,15m,FVG_RETRACE,bull,,701.33,703.39,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-27 01:45,ZEC,15m,FVG_FILLED,bull,,701.33,703.39,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,BTC,1h,SWEEP,bear,61682.01,,,0.519,Asia,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-11-27 03:00,BTC,1h,BOS,bull,61006.0,,,0.817,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 02:30,BTC,30m,SWEEP,bear,61682.01,,,0.844,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs)",smc-1.0,Binance
+2026-11-27 02:30,BTC,30m,CHOCH,bull,61006.0,,,2.207,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:30,BTC,30m,ORDER_BLOCK,bull,,60614.0,60796.01,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 03:00,BTC,30m,FVG,bull,,60796.01,61307.69,1.623,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:15,BTC,15m,CHOCH,bull,61006.0,,,1.701,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:15,BTC,15m,ORDER_BLOCK,bull,,60664.0,60796.01,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:15,BTC,15m,OB_INVALID,bear,,60702.34,60956.34,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 02:15,BTC,15m,FVG_FILLED,bear,,60820.76,60878.68,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,BTC,15m,SWEEP,bear,61770.01,,,0.563,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-11-27 02:30,BTC,15m,FVG,bull,,60744.01,61172.67,1.833,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,ETH,1h,SWEEP,bear,1730.0,,,0.723,Asia,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-11-27 03:00,ETH,1h,BOS,bull,1710.38,,,0.943,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 02:30,ETH,30m,SWEEP,bear,1730.0,,,0.896,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-11-27 02:30,ETH,30m,CHOCH,bull,1710.38,,,2.186,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:30,ETH,30m,ORDER_BLOCK,bull,,1698.19,1702.65,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:30,ETH,30m,FVG_FILLED,bear,,1699.06,1705.11,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,ETH,30m,FVG,bull,,1702.65,1721.03,1.773,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-27 02:15,ETH,15m,CHOCH,bull,1704.73,,,2.151,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:15,ETH,15m,ORDER_BLOCK,bull,,1698.48,1702.65,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:15,ETH,15m,OB_INVALID,bear,,1705.62,1710.38,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 02:15,ETH,15m,FVG_FILLED,bear,,1699.72,1705.11,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,ETH,15m,SWEEP,bear,1730.0,,,1.085,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-27 02:30,ETH,15m,FVG,bull,,1702.1,1713.07,1.432,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:45,ETH,15m,OB_RETEST,bear,,1738.65,1749.59,,Asia,1h,COMPRESSION,first return into the order block,smc-1.0,Binance
+2026-11-27 02:45,ETH,15m,FVG,bull,,1723.7,1726.72,0.378,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,ETH,15m,FVG_RETRACE,bull,,1723.7,1726.72,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 03:00,ETH,15m,FVG_FILLED,bull,,1723.7,1726.72,,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-27 03:00,SOL,1h,SWEEP,bear,72.69,,,0.468,Asia,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-27 03:00,SOL,1h,BOS,bull,71.84,,,0.919,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 02:30,SOL,30m,SWEEP,bear,72.69,,,0.497,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, equal highs, swing high)",smc-1.0,Binance
+2026-11-27 02:30,SOL,30m,CHOCH,bull,71.84,,,1.988,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:30,SOL,30m,ORDER_BLOCK,bull,,70.84,71.2,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 03:00,SOL,30m,FVG,bull,,71.5,72.34,1.877,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,CHOCH,bull,71.84,,,1.216,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,ORDER_BLOCK,bull,,71.34,71.5,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,OB_INVALID,bear,,71.55,71.84,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,FVG_RETRACE,bear,,72.15,72.42,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,FVG_FILLED,bear,,72.15,72.42,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:15,SOL,15m,FVG_FILLED,bear,,71.34,71.62,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,SOL,15m,SWEEP,bear,72.69,,,0.618,Asia,1h,COMPRESSION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 02:30,SOL,15m,OB_INVALID,bear,,71.37,72.15,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 02:30,SOL,15m,FVG,bull,,71.5,72.03,1.603,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,XRP,1h,SWEEP,bear,0.9638,,,0.462,Asia,4h,WEAK_BEAR,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-27 03:00,XRP,1h,BOS,bull,0.9578,,,0.202,Asia,4h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 03:00,XRP,1h,FVG_FILLED,bear,,0.9594,0.9662,,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,XRP,1h,FVG_FILLED,bear,,0.9477,0.9516,,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,XRP,1h,FVG,bull,,0.947,0.9493,0.299,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,SWEEP,bear,0.9638,,,0.73,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,CHOCH,bull,0.9559,,,1.392,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,ORDER_BLOCK,bull,,0.942,0.9466,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,FVG_FILLED,bear,,0.9594,0.9661,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,FVG_RETRACE,bear,,0.9499,0.9532,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:30,XRP,30m,FVG_FILLED,bear,,0.9499,0.9532,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,XRP,30m,FVG,bull,,0.9493,0.9591,1.8,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,SWEEP,bear,0.9578,,,0.76,Asia,1h,COMPRESSION,"buy-side liquidity swept (equal highs, swing high)",smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,CHOCH,bull,0.9559,,,0.276,Asia,1h,COMPRESSION,with displacement,smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,ORDER_BLOCK,bull,,0.9463,0.9487,,Asia,1h,COMPRESSION,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,OB_INVALID,bear,,0.9532,0.9559,,Asia,1h,COMPRESSION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,FVG_RETRACE,bear,,0.9514,0.9536,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:15,XRP,15m,FVG_FILLED,bear,,0.9514,0.9536,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,XRP,15m,SWEEP,bear,0.9638,,,0.927,Asia,1h,COMPRESSION,"buy-side liquidity swept (PDH, swing high)",smc-1.0,Binance
+2026-11-27 02:30,XRP,15m,BREAKER_RETEST,bull,,0.9532,0.9559,,Asia,1h,COMPRESSION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 02:30,XRP,15m,FVG_FILLED,bear,,0.9617,0.9663,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:30,XRP,15m,FVG,bull,,0.9493,0.9559,1.651,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 02:45,XRP,15m,FVG,bull,,0.96,0.9611,0.271,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,XRP,15m,FVG_RETRACE,bull,,0.96,0.9611,,Asia,1h,COMPRESSION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 03:00,XRP,15m,FVG_FILLED,bull,,0.96,0.9611,,Asia,1h,COMPRESSION,,smc-1.0,Binance
+2026-11-27 03:00,ZEC,1h,BOS,bull,723.63,,,0.988,Asia,4h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-27 03:00,ZEC,1h,ORDER_BLOCK,bull,,676.98,696.19,,Asia,4h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 03:00,ZEC,1h,FVG_FILLED,bear,,734.01,743.66,,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,ZEC,1h,FVG_FILLED,bear,,696.19,714.65,,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,BOS,bull,723.63,,,1.588,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,ORDER_BLOCK,bull,,701.25,708.61,,Asia,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,FVG_RETRACE,bear,,741.24,743.76,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,FVG_FILLED,bear,,741.24,743.76,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,FVG_FILLED,bear,,734.01,736.47,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,30m,FVG_FILLED,bear,,705.11,714.65,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,ZEC,30m,FVG,bull,,708.61,737.77,2.237,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 02:15,ZEC,15m,SWEEP,bear,723.63,,,0.566,Asia,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 02:15,ZEC,15m,FVG_RETRACE,bear,,715.36,718.98,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:15,ZEC,15m,FVG_FILLED,bear,,715.36,718.98,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:15,ZEC,15m,FVG_RETRACE,bear,,709.26,714.65,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:15,ZEC,15m,FVG_FILLED,bear,,709.26,714.65,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,BOS,bull,723.63,,,2.027,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,ORDER_BLOCK,bull,,703.39,708.53,,Asia,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,FVG_RETRACE,bear,,741.24,743.87,,Asia,1h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,FVG_FILLED,bear,,741.24,743.87,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,FVG_FILLED,bear,,733.5,736.47,,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:30,ZEC,15m,FVG,bull,,708.53,720.04,1.158,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 02:45,ZEC,15m,FVG,bull,,727.9,740.4,1.27,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 03:00,ZEC,15m,FVG_RETRACE,bull,,727.9,740.4,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
