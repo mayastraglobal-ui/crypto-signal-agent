@@ -42195,3 +42195,25 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-27 04:45,XRP,15m,FVG_FILLED,bear,,0.9617,0.9629,,Asia,1h,COMPRESSION,,smc-1.0,Binance
 2026-11-27 05:00,ZEC,1h,FVG_FILLED,bear,,752.23,760.25,,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-27 04:15,ZEC,15m,FVG_FILLED,bear,,760.94,762.67,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 06:00,BTC,30m,SWEEP,bear,61881.03,,,0.327,,1h,UNCLEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 05:15,BTC,15m,SWEEP,bear,61722.86,,,0.263,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 05:30,BTC,15m,BOS,bull,61722.86,,,0.155,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-27 05:30,BTC,15m,FVG,bull,,61532.98,61615.59,0.366,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 05:45,BTC,15m,SWEEP,bear,61881.03,,,0.458,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 05:30,ETH,30m,BOS,bull,1739.02,,,0.734,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-27 05:30,ETH,30m,ORDER_BLOCK,bull,,1727.45,1733.93,,,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 05:15,ETH,15m,BOS,bull,1739.02,,,0.347,,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-27 05:15,ETH,15m,ORDER_BLOCK,bull,,1731.12,1737.04,,,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-27 05:30,ETH,15m,FVG,bull,,1737.04,1740.77,0.455,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 05:45,ETH,15m,SWEEP,bear,1749.59,,,0.687,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 05:45,ETH,15m,FVG_FILLED,bear,,1747.18,1754.54,,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 06:00,ETH,15m,FVG_RETRACE,bull,,1737.04,1740.77,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 05:15,SOL,15m,SWEEP,bear,73.21,,,0.149,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 05:45,SOL,15m,SWEEP,bear,73.43,,,0.23,,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-27 06:15,SOL,15m,BOS,bull,73.21,,,0.176,,1h,UNCLEAR,no displacement,smc-1.0,Binance
+2026-11-27 06:00,XRP,30m,BOS,bull,0.9671,,,0.634,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-27 06:00,XRP,30m,FVG,bull,,0.9637,0.9651,0.253,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 05:45,XRP,15m,BOS,bull,0.9671,,,0.274,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-27 06:00,XRP,15m,FVG,bull,,0.9664,0.9682,0.454,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 06:00,ZEC,30m,FVG_FILLED,bear,,761.38,765.76,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 05:15,ZEC,15m,FVG_RETRACE,bear,,764.27,766.93,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
