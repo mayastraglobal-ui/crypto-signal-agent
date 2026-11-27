@@ -42461,3 +42461,19 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-27 16:45,ZEC,15m,BOS,bull,749.0,,,0.822,,1h,RANGE,with displacement,smc-1.0,Binance
 2026-11-27 16:45,ZEC,15m,ORDER_BLOCK,bull,,736.35,742.43,,,1h,RANGE,last bearish candle before the displacement,smc-1.0,Binance
 2026-11-27 17:00,ZEC,15m,FVG,bull,,745.46,748.83,0.326,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 17:45,BTC,15m,FVG,bear,,59772.47,59882.35,0.295,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 18:00,BTC,15m,FVG_RETRACE,bear,,59772.47,59882.35,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 18:00,BTC,15m,FVG_FILLED,bear,,59772.47,59882.35,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 17:30,SOL,30m,FVG_RETRACE,bull,,71.72,71.88,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 18:00,SOL,30m,FVG_FILLED,bull,,71.72,71.88,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 17:30,SOL,15m,FVG_RETRACE,bull,,71.72,71.87,,,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 17:45,SOL,15m,FVG_FILLED,bull,,71.72,71.87,,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 17:45,XRP,15m,WEAK_BREAK,bear,0.9463,,,0.596,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-27 17:15,ZEC,15m,OB_RETEST,bull,,736.35,742.43,,,1h,RANGE,first return into the order block,smc-1.0,Binance
+2026-11-27 17:15,ZEC,15m,FVG_RETRACE,bull,,745.46,748.83,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 17:15,ZEC,15m,FVG_FILLED,bull,,745.46,748.83,,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 17:30,ZEC,15m,OB_INVALID,bull,,736.35,742.43,,,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 17:45,ZEC,15m,FVG,bear,,735.8,742.07,0.621,,1h,RANGE,,smc-1.0,Binance
+2026-11-27 18:00,ZEC,15m,BREAKER_RETEST,bear,,736.35,742.43,,,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 18:00,ZEC,15m,FVG_RETRACE,bear,,735.8,742.07,,,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 18:00,ZEC,15m,FVG_FILLED,bear,,735.8,742.07,,,1h,RANGE,,smc-1.0,Binance
