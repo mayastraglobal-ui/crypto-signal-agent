@@ -42226,3 +42226,27 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-27 06:45,ZEC,15m,FVG,bear,,759.65,762.0,0.28,,1h,TRANSITION,,smc-1.0,Binance
 2026-11-27 07:00,ZEC,15m,FVG_FILLED,bull,,746.12,748.86,,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-27 07:00,ZEC,15m,FVG,bear,,750.6,756.06,0.668,,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 08:00,BTC,4h,WEAK_BREAK,bull,61622.38,,,0.045,,1d,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 08:00,BTC,4h,FVG,bull,,61006.0,61336.73,0.301,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-27 07:45,BTC,15m,CHOCH,bear,61644.38,,,0.576,London,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-27 07:45,BTC,15m,ORDER_BLOCK,bear,,61777.83,61908.3,,London,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 07:45,BTC,15m,FVG_RETRACE,bull,,61532.98,61615.59,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:45,BTC,15m,FVG_FILLED,bull,,61532.98,61615.59,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 08:00,BTC,15m,OB_RETEST,bear,,61777.83,61908.3,,London,1h,UNCLEAR,first return into the order block,smc-1.0,Binance
+2026-11-27 08:00,ETH,4h,WEAK_BREAK,bull,1730.0,,,0.145,,1d,STRONG_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 08:00,ETH,4h,FVG,bull,,1710.38,1725.75,0.416,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-27 07:45,ETH,15m,OB_INVALID,bull,,1731.12,1737.04,,London,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 08:00,ETH,15m,BREAKER_RETEST,bear,,1731.12,1737.04,,London,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 08:00,SOL,4h,FVG,bull,,71.84,72.51,0.405,,1d,STRONG_BEAR,,smc-1.0,Binance
+2026-11-27 08:00,XRP,4h,WEAK_BREAK,bull,0.9638,,,0.682,,1d,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-27 08:00,XRP,1h,FVG_RETRACE,bear,,0.9737,0.9883,,London,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:30,XRP,30m,FVG_RETRACE,bear,,0.9737,0.9833,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:15,XRP,15m,FVG_RETRACE,bear,,0.975,0.9833,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:30,XRP,15m,FVG,bull,,0.9729,0.9753,0.614,London,1h,RANGE,,smc-1.0,Binance
+2026-11-27 07:45,XRP,15m,FVG_RETRACE,bull,,0.9729,0.9753,,London,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 08:00,ZEC,4h,FVG,bull,,723.63,737.65,0.354,,1d,WEAK_BEAR,,smc-1.0,Binance
+2026-11-27 08:00,ZEC,1h,FVG_RETRACE,bull,,708.61,739.65,,London,4h,WEAK_BEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 08:00,ZEC,30m,FVG_RETRACE,bull,,708.61,737.77,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:15,ZEC,15m,FVG_RETRACE,bear,,750.6,756.06,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 07:15,ZEC,15m,FVG_FILLED,bear,,750.6,756.06,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 08:00,ZEC,15m,FVG,bear,,744.15,748.2,0.478,London,1h,UNCLEAR,,smc-1.0,Binance
