@@ -1,13 +1,13 @@
 # Weekly review · 2026-W48
 
-Made 2026-11-27 09:43 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-27 10:26 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
-- ✅ nightly research ran on 6 of the last 7 days (last 2026-11-26)
-- ✅ hourly scan: last run 2026-11-27 09:43 UTC
+- ✅ nightly research ran on 7 of the last 7 days (last 2026-11-27)
+- ✅ hourly scan: last run 2026-11-27 10:26 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-27 07:55 UTC (11 min ago)
+- ✅ live watcher: last heartbeat 2026-11-27 09:01 UTC (43 min ago)
 - ✅ TEST setups closed this week (GitHub record): 87
 
 ## Totals
@@ -50,7 +50,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 - P01-BREAKOUT-V2-FDISP-FRETEST@1.0 30m (RETEST for overextended_entry): +0.14R vs parent +0.05R, unseen +0.27R vs +0.17R - helped
 - P01-BREAKOUT-V2-FDISP@1.0 30m (DISP for false_breakout): +0.05R vs parent +0.01R, unseen +0.17R vs +0.10R - helped
 - P01-BREAKOUT-V2-FRETEST@1.0 30m (RETEST for false_breakout): +0.06R vs parent +0.01R, unseen +0.15R vs +0.10R - helped
-- P01-BREAKOUT-V5-FDISP@1.0 15m (DISP for false_breakout): -0.13R vs parent -0.12R, unseen -0.11R vs -0.13R - did not help
+- P01-BREAKOUT-V5-FDISP@1.0 15m (DISP for false_breakout): -0.13R vs parent -0.12R, unseen -0.12R vs -0.13R - did not help
 - repair record: DISP helped 6 of 9, RETEST helped 6 of 6, NOTEXT helped 3 of 4, HTF helped 0 of 1
 - 1 repair(s) waiting for their first test
 
