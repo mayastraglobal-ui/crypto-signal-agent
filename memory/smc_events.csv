@@ -42298,3 +42298,99 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-27 14:00,ETH,15m,FVG_FILLED,bear,,1725.19,1726.77,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-27 14:00,XRP,1h,FVG_RETRACE,bull,,0.9637,0.9684,,NY AM,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-27 13:30,XRP,30m,FVG_RETRACE,bull,,0.9668,0.9684,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,BTC,1h,CHOCH,bear,60390.65,,,2.949,NY AM,4h,RANGE,with displacement,smc-1.0,Binance
+2026-11-27 15:00,BTC,1h,ORDER_BLOCK,bear,,61586.0,61747.99,,NY AM,4h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,BTC,1h,FVG_RETRACE,bull,,58991.97,59485.9,,NY AM,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,BTC,1h,FVG_FILLED,bull,,60869.88,61319.45,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-11-27 15:00,BTC,30m,OB_INVALID,bull,,60614.0,60796.01,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,BTC,30m,FVG_RETRACE,bull,,58718.01,59122.0,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,BTC,30m,FVG_FILLED,bull,,60796.01,61307.69,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 14:30,BTC,15m,SWEEP,bull,61301.97,,,0.306,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,SWEEP,bull,59915.0,,,0.66,NY AM,1h,TRANSITION,"sell-side liquidity swept (PDL, equal lows, swing low)",smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,BOS,bear,61301.97,,,6.185,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,ORDER_BLOCK,bear,,61388.01,61518.2,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,BREAKER_RETEST,bull,,60702.34,60956.34,,NY AM,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,OB_INVALID,bull,,60664.0,60796.01,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,FVG_RETRACE,bull,,60744.01,61172.67,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:45,BTC,15m,FVG_FILLED,bull,,60744.01,61172.67,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,BTC,15m,OB_INVALID,bull,,60169.99,60333.0,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,BTC,15m,FVG,bear,,60273.71,61250.0,2.839,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,CHOCH,bear,1683.88,,,2.21,NY AM,4h,RANGE,with displacement,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,ORDER_BLOCK,bear,,1717.97,1725.19,,NY AM,4h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,FVG_FILLED,bull,,1662.0,1675.83,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,FVG_RETRACE,bull,,1693.76,1698.19,,NY AM,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,FVG_FILLED,bull,,1693.76,1698.19,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-11-27 15:00,ETH,1h,FVG_FILLED,bull,,1704.73,1721.97,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,BREAKER_RETEST,bull,,1655.12,1663.41,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,BREAKER_RETEST,bull,,1642.5,1654.44,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,OB_INVALID,bull,,1698.19,1702.65,,NY AM,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,FVG_RETRACE,bull,,1648.28,1657.93,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,FVG_FILLED,bull,,1694.13,1699.5,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 15:00,ETH,30m,FVG_FILLED,bull,,1702.65,1721.03,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,SWEEP,bull,1683.37,,,1.107,NY AM,1h,UNCLEAR,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,CHOCH,bear,1715.25,,,3.962,NY AM,1h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,ORDER_BLOCK,bear,,1722.0,1726.63,,NY AM,1h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,BREAKER_RETEST,bull,,1705.62,1710.38,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,OB_INVALID,bull,,1698.48,1702.65,,NY AM,1h,UNCLEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,FVG_RETRACE,bull,,1693.44,1697.84,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,FVG_FILLED,bull,,1693.44,1697.84,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,FVG_RETRACE,bull,,1702.1,1713.07,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:45,ETH,15m,FVG_FILLED,bull,,1702.1,1713.07,,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 15:00,ETH,15m,BREAKER_RETEST,bull,,1658.37,1665.52,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 15:00,ETH,15m,BREAKER_RETEST,bull,,1645.12,1654.44,,NY AM,1h,UNCLEAR,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 15:00,ETH,15m,FVG_RETRACE,bull,,1647.19,1654.59,,NY AM,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,ETH,15m,FVG,bear,,1692.3,1716.06,2.117,NY AM,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 15:00,SOL,1h,SWEEP,bull,70.84,,,0.364,NY AM,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-27 15:00,SOL,1h,FVG_RETRACE,bull,,71.59,72.37,,NY AM,4h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,SOL,1h,FVG_FILLED,bull,,71.59,72.37,,NY AM,4h,RANGE,,smc-1.0,Binance
+2026-11-27 14:30,SOL,30m,SWEEP,bull,72.89,,,0.514,NY AM,1h,WEAK_BULL,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,SWEEP,bull,70.84,,,0.508,NY AM,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,CHOCH,bear,72.89,,,4.813,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,ORDER_BLOCK,bear,,73.21,73.53,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,OB_RETEST,bull,,70.84,71.2,,NY AM,1h,TRANSITION,first return into the order block,smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,FVG_RETRACE,bull,,71.5,72.34,,NY AM,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,FVG_FILLED,bull,,71.5,72.34,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,SOL,30m,FVG,bear,,73.04,73.21,0.306,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 14:30,SOL,15m,SWEEP,bull,72.86,,,0.641,NY AM,1h,WEAK_BULL,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-27 14:30,SOL,15m,FVG,bear,,73.22,73.3,0.281,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,CHOCH,bear,72.89,,,3.658,NY AM,1h,WEAK_BULL,with displacement,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,ORDER_BLOCK,bear,,73.3,73.53,,NY AM,1h,WEAK_BULL,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,BREAKER_RETEST,bull,,71.37,72.15,,NY AM,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,BREAKER_RETEST,bull,,71.55,71.84,,NY AM,1h,WEAK_BULL,failed order block retested from the other side,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,OB_RETEST,bull,,71.34,71.5,,NY AM,1h,WEAK_BULL,first return into the order block,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,FVG_RETRACE,bull,,71.5,72.03,,NY AM,1h,WEAK_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:45,SOL,15m,FVG_FILLED,bull,,71.5,72.03,,NY AM,1h,WEAK_BULL,,smc-1.0,Binance
+2026-11-27 15:00,SOL,15m,SWEEP,bull,70.82,,,0.483,NY AM,1h,TRANSITION,sell-side liquidity swept (equal lows),smc-1.0,Binance
+2026-11-27 15:00,SOL,15m,OB_INVALID,bull,,71.34,71.5,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,SOL,15m,FVG,bear,,71.9,72.69,1.733,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,CHOCH,bear,0.9417,,,0.381,NY AM,4h,UNCLEAR,with displacement,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,ORDER_BLOCK,bear,,0.977,0.9858,,NY AM,4h,UNCLEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,FVG_RETRACE,bull,,0.947,0.9493,,NY AM,4h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,FVG_FILLED,bull,,0.947,0.9493,,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,FVG_FILLED,bull,,0.9493,0.9591,,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 15:00,XRP,1h,FVG_FILLED,bull,,0.9637,0.9684,,NY AM,4h,UNCLEAR,,smc-1.0,Binance
+2026-11-27 14:30,XRP,30m,FVG_RETRACE,bull,,0.9637,0.9651,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:30,XRP,30m,FVG_FILLED,bull,,0.9637,0.9651,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-27 14:30,XRP,30m,FVG_FILLED,bull,,0.9668,0.9684,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-27 15:00,XRP,30m,CHOCH,bear,0.9579,,,3.422,NY AM,1h,TRANSITION,with displacement,smc-1.0,Binance
+2026-11-27 15:00,XRP,30m,ORDER_BLOCK,bear,,0.9699,0.9741,,NY AM,1h,TRANSITION,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,XRP,30m,OB_INVALID,bull,,0.942,0.9466,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,XRP,30m,FVG_FILLED,bull,,0.9493,0.9591,,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,XRP,30m,FVG,bear,,0.9648,0.9691,0.6,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 14:15,XRP,15m,FVG_RETRACE,bull,,0.9664,0.9682,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:15,XRP,15m,FVG_FILLED,bull,,0.9664,0.9682,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-27 14:30,XRP,15m,FVG,bear,,0.9667,0.9691,0.622,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-27 14:45,XRP,15m,OB_RETEST,bull,,0.9463,0.9487,,NY AM,1h,STRONG_BULL,first return into the order block,smc-1.0,Binance
+2026-11-27 14:45,XRP,15m,FVG_RETRACE,bull,,0.9493,0.9559,,NY AM,1h,STRONG_BULL,first retrace into the gap,smc-1.0,Binance
+2026-11-27 14:45,XRP,15m,FVG_FILLED,bull,,0.9493,0.9559,,NY AM,1h,STRONG_BULL,,smc-1.0,Binance
+2026-11-27 15:00,XRP,15m,OB_INVALID,bull,,0.9463,0.9487,,NY AM,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-27 15:00,XRP,15m,FVG,bear,,0.9523,0.9611,1.533,NY AM,1h,TRANSITION,,smc-1.0,Binance
+2026-11-27 15:00,ZEC,1h,CHOCH,bear,737.65,,,0.846,NY AM,4h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-27 15:00,ZEC,1h,ORDER_BLOCK,bear,,753.33,763.51,,NY AM,4h,WEAK_BEAR,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 15:00,ZEC,30m,CHOCH,bear,737.65,,,1.277,NY AM,1h,RANGE,with displacement,smc-1.0,Binance
+2026-11-27 15:00,ZEC,30m,ORDER_BLOCK,bear,,755.81,763.34,,NY AM,1h,RANGE,last bullish candle before the displacement,smc-1.0,Binance
+2026-11-27 14:30,ZEC,15m,SWEEP,bull,748.95,,,0.223,NY AM,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-27 14:45,ZEC,15m,WEAK_BREAK,bear,748.95,,,1.826,NY AM,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-27 14:45,ZEC,15m,FVG_FILLED,bull,,727.9,740.4,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-27 14:45,ZEC,15m,FVG_FILLED,bull,,744.15,746.77,,NY AM,1h,RANGE,,smc-1.0,Binance
+2026-11-27 15:00,ZEC,15m,FVG,bear,,739.28,747.5,0.96,NY AM,1h,RANGE,,smc-1.0,Binance
