@@ -1,12 +1,12 @@
 # Approval pack: donchian_breakout v1.0 4h
 
-Written by the engine on 2026-11-26 08:50 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
+Written by the engine on 2026-11-27 09:00 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
 
 **Question: Approve donchian_breakout v1.0 4h for live emails? (yes/no)**
 
 To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):
 ```
-  - {strategy: donchian_breakout, version: "1.0", tf: 4h, date: 2026-11-26}
+  - {strategy: donchian_breakout, version: "1.0", tf: 4h, date: 2026-11-27}
 ```
 The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.
 **Check the trades before you say yes:**
@@ -15,8 +15,8 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 0. Bull vs bear (the engine's numbers only - Phase 18)
 - Bull case: unseen part of the backtest (last 30%): +0.154R per trade over 284 trades; whole history: +0.162R per trade over 857 trades, profit factor 1.38; walk-forward: 5 of 5 time windows profitable, together +0.162R; costs +50%: +0.129R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 6 coin(s): BNB, BTC, ETH, SOL, XRP, ZEC; paper trading: +0.29R per signal over 25 closed signals
-- Bear case: worst drawdown in the backtest: 16.3R · wins 56% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 22.1R, expected worst losing streak 10 in a row; systematic loss tags: false_breakout, trend_reversal, regime_mismatch, stop_too_tight (377 losing trades)
-- Risk manager: VETO - 0 of 6 signal coins are in one of its regimes on 4H now - regime against
+- Bear case: worst drawdown in the backtest: 16.3R · wins 56% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 21.0R, expected worst losing streak 11 in a row; systematic loss tags: false_breakout, trend_reversal, regime_mismatch, stop_too_tight (377 losing trades)
+- Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.9 h old; day +0.0R / week +0.0R, no halt; 1 of 5 signal coins are in one of its regimes on 4H now (ZEC))
 - A veto means "not now": wait until the risk manager has no veto before you say yes. No veto is never a reason to say yes - the decision stays yours.
 
 ## 1. Definition and lineage
@@ -70,7 +70,7 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 6b. Rule significance (the card with ONE entry rule removed at a time)
 - without rule 1 (htf_up / htf_down): 1176 trades, +0.125R - the rule improves the result
-- without rule 2 (close > prev(highest(high,20)) / close < prev(lowest(low,20))): 1522 trades, +0.091R - the rule improves the result
+- without rule 2 (close > prev(highest(high,20)) / close < prev(lowest(low,20))): 1523 trades, +0.091R - the rule improves the result
 - without rule 3 (volume > vol_sma(20) * 1.5 / volume > vol_sma(20) * 1.5): 1096 trades, +0.135R - the rule improves the result
 - without rule 4 (adx(14) > 20 / adx(14) > 20): 968 trades, +0.157R - the rule improves the result
 
@@ -82,11 +82,11 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 ## 8. Risk metrics
 - max drawdown (backtest): 16.3R · average hold 11 candles
 - live risk per trade: 0.5% of the account for the first 30 days, then at most 1% (risk engine, section 15)
-- Monte Carlo (1000 random orders of the same 857 trades): 95% worst drawdown 22.1R (median 14.0R, as it happened 10.9R)
-- **expected worst losing streak: 10 losses in a row** (95% of the random orders stay at or below it; median 8, as it happened 6) - expect it before you judge the strategy broken
+- Monte Carlo (1000 random orders of the same 857 trades): 95% worst drawdown 21.0R (median 14.2R, as it happened 10.7R)
+- **expected worst losing streak: 11 losses in a row** (95% of the random orders stay at or below it; median 7, as it happened 6) - expect it before you judge the strategy broken
 - family table (trend group, active mode): verdict PAPER_TRADING (old rule: BACKTESTING)
-  - recovery factor 8.55 (net +139.0R / max drawdown 16.3R) · Monte Carlo 95% worst drawdown per 100 trades 14.1R · longest drawdown 584 days (18% of the tested period)
-  - **if approved, suspended at a live drawdown of 14.1R; paper retired at 14.1R** (own Monte Carlo 95% worst drawdown per 100 trades (cap 17R))
+  - recovery factor 8.55 (net +139.0R / max drawdown 16.3R) · Monte Carlo 95% worst drawdown per 100 trades 14.2R · longest drawdown 584 days (18% of the tested period)
+  - **if approved, suspended at a live drawdown of 14.2R; paper retired at 14.2R** (own Monte Carlo 95% worst drawdown per 100 trades (cap 17R))
 - lookahead / recursive check: passed
 
 ## 9. Why it loses (failure attribution)

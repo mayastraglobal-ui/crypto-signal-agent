@@ -1,6 +1,6 @@
 # Approval pack: donchian_breakout-VEXIT v1.0 4h
 
-Written by the engine on 2026-11-26 08:50 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
+Written by the engine on 2026-11-27 09:00 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
 
 **Question: Approve donchian_breakout-VEXIT v1.0 4h for live emails? (yes/no)**
 
@@ -8,7 +8,7 @@ Written by the engine on 2026-11-26 08:50 UTC (AGENT_PROMPT.md section 21). Numb
 
 To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):
 ```
-  - {strategy: donchian_breakout-VEXIT, version: "1.0", tf: 4h, date: 2026-11-26}
+  - {strategy: donchian_breakout-VEXIT, version: "1.0", tf: 4h, date: 2026-11-27}
 ```
 The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.
 **Check the trades before you say yes:**
@@ -17,8 +17,8 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 0. Bull vs bear (the engine's numbers only - Phase 18)
 - Bull case: unseen part of the backtest (last 30%): +0.245R per trade over 277 trades; whole history: +0.263R per trade over 832 trades, profit factor 1.50; walk-forward: 5 of 5 time windows profitable, together +0.256R; costs +50%: +0.232R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 7 coin(s): BNB, BTC, ETH, SOL, SUI, XRP, ZEC; paper trading: +0.51R per signal over 40 closed signals
-- Bear case: worst drawdown in the backtest: 19.8R · wins 42% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 23.5R, expected worst losing streak 16 in a row; systematic loss tags: false_breakout, trend_reversal (487 losing trades)
-- Risk manager: VETO - 0 of 6 signal coins are in one of its regimes on 4H now - regime against
+- Bear case: worst drawdown in the backtest: 19.8R · wins 42% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 23.1R, expected worst losing streak 16 in a row; systematic loss tags: false_breakout, trend_reversal (487 losing trades)
+- Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.9 h old; day +0.0R / week +0.0R, no halt; 1 of 5 signal coins are in one of its regimes on 4H now (ZEC))
 - A veto means "not now": wait until the risk manager has no veto before you say yes. No veto is never a reason to say yes - the decision stays yours.
 
 ## 1. Definition and lineage
@@ -84,7 +84,7 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 ## 8. Risk metrics
 - max drawdown (backtest): 19.8R · average hold 15 candles
 - live risk per trade: 0.5% of the account for the first 30 days, then at most 1% (risk engine, section 15)
-- Monte Carlo (1000 random orders of the same 832 trades): 95% worst drawdown 23.5R (median 15.6R, as it happened 17.9R)
+- Monte Carlo (1000 random orders of the same 832 trades): 95% worst drawdown 23.1R (median 15.3R, as it happened 17.9R)
 - **expected worst losing streak: 16 losses in a row** (95% of the random orders stay at or below it; median 11, as it happened 11) - expect it before you judge the strategy broken
 - family table (trend group, active mode): verdict PAPER_TRADING (old rule: BACKTESTING)
   - recovery factor 11.08 (net +218.8R / max drawdown 19.8R) · Monte Carlo 95% worst drawdown per 100 trades 16.3R · longest drawdown 430 days (13% of the tested period)
