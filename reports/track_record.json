@@ -1,5 +1,5 @@
 {
- "utc": "2026-11-28 07:11",
+ "utc": "2026-11-28 08:08",
  "settings": {
   "enabled": true,
   "streak_p": 0.05,
@@ -10,15 +10,15 @@
   "curve_points": 60
  },
  "total": {
-  "n": 403,
-  "wins": 165,
-  "win_rate": 40.9,
+  "n": 404,
+  "wins": 166,
+  "win_rate": 41.1,
   "avg_r": 0.155,
-  "total_r": 62.47,
+  "total_r": 62.59,
   "max_dd_r": 59.17,
   "cur_loss_run": 0,
   "max_loss_run": 30,
-  "sd": 1.46
+  "sd": 1.458
  },
  "yours": {
   "n": 54,
@@ -32,29 +32,29 @@
   "sd": 1.405
  },
  "silent": {
-  "n": 201,
-  "wins": 68,
-  "win_rate": 33.8,
-  "avg_r": -0.033,
-  "total_r": -6.6,
+  "n": 202,
+  "wins": 69,
+  "win_rate": 34.2,
+  "avg_r": -0.032,
+  "total_r": -6.48,
   "max_dd_r": 41.01,
   "cur_loss_run": 0,
   "max_loss_run": 17,
-  "sd": 1.453
+  "sd": 1.449
  },
  "alerts_known": true,
  "by_stage": {
   "TEST": {
    "label": "\ud83d\udd35 TEST",
-   "n": 263,
-   "wins": 94,
-   "win_rate": 35.7,
-   "avg_r": 0.056,
-   "total_r": 14.85,
+   "n": 264,
+   "wins": 95,
+   "win_rate": 36.0,
+   "avg_r": 0.057,
+   "total_r": 14.98,
    "max_dd_r": 47.91,
    "cur_loss_run": 0,
    "max_loss_run": 20,
-   "sd": 1.482
+   "sd": 1.479
   },
   "PAPER_TRADING": {
    "label": "\ud83d\udfe1 PAPER",
@@ -1697,6 +1697,32 @@
    "sent": true
   },
   {
+   "key": "P12-LEADER-V1@1.0|4h",
+   "coin": "SUI",
+   "stage": "TEST",
+   "label": "\ud83d\udd35 TEST",
+   "live": {
+    "n": 2,
+    "wins": 1,
+    "win_rate": 50.0,
+    "avg_r": -0.452,
+    "total_r": -0.9,
+    "max_dd_r": 1.03,
+    "cur_loss_run": 0,
+    "max_loss_run": 1,
+    "sd": 0.813
+   },
+   "backtest": {
+    "n": 52,
+    "avg_r": 0.011,
+    "win_rate": 38.5
+   },
+   "verdict": "ok",
+   "why": [],
+   "last_utc": "2026-11-28 07:59",
+   "sent": false
+  },
+  {
    "key": "donchian_breakout-VEXIT-FDISP-S2@1.0|4h",
    "coin": "BTC",
    "stage": "PAPER_TRADING",
@@ -2452,32 +2478,6 @@
   },
   {
    "key": "P12-LEADER-V1@1.0|4h",
-   "coin": "SUI",
-   "stage": "TEST",
-   "label": "\ud83d\udd35 TEST",
-   "live": {
-    "n": 1,
-    "wins": 0,
-    "win_rate": 0.0,
-    "avg_r": -1.027,
-    "total_r": -1.03,
-    "max_dd_r": 1.03,
-    "cur_loss_run": 1,
-    "max_loss_run": 1,
-    "sd": null
-   },
-   "backtest": {
-    "n": 52,
-    "avg_r": 0.011,
-    "win_rate": 38.5
-   },
-   "verdict": "ok",
-   "why": [],
-   "last_utc": "2026-11-23 19:59",
-   "sent": false
-  },
-  {
-   "key": "P12-LEADER-V1@1.0|4h",
    "coin": "ZEC",
    "stage": "TEST",
    "label": "\ud83d\udd35 TEST",
@@ -2907,6 +2907,10 @@
   {
    "t": "2026-11-25 11:59",
    "r": 62.47
+  },
+  {
+   "t": "2026-11-28 07:59",
+   "r": 62.59
   }
  ],
  "note": "Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your \u2705 / \u274c are in the journal review."

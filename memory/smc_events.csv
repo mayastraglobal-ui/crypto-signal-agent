@@ -42635,3 +42635,14 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-28 06:45,SOL,15m,FVG,bull,,71.36,71.44,0.338,,1h,UNCLEAR,,smc-1.0,Binance
 2026-11-28 07:00,SOL,15m,FVG_RETRACE,bull,,71.36,71.44,,,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
 2026-11-28 06:30,ZEC,15m,FVG_FILLED,bear,,743.79,746.03,,,1h,RANGE,,smc-1.0,Binance
+2026-11-28 08:00,BTC,1h,SWEEP,bull,59580.0,,,1.021,London,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:30,BTC,30m,SWEEP,bull,59513.3,,,1.481,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:15,BTC,15m,SWEEP,bull,59513.3,,,2.404,London,1h,TRANSITION,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
+2026-11-28 07:15,ETH,15m,SWEEP,bull,1647.61,,,1.712,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:15,SOL,15m,SWEEP,bull,70.99,,,0.998,London,1h,UNCLEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:15,SOL,15m,FVG_FILLED,bull,,71.36,71.44,,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-28 07:30,SOL,15m,FVG,bear,,71.26,71.38,0.457,London,1h,UNCLEAR,,smc-1.0,Binance
+2026-11-28 07:45,SOL,15m,FVG_RETRACE,bear,,71.26,71.38,,London,1h,UNCLEAR,first retrace into the gap,smc-1.0,Binance
+2026-11-28 08:00,XRP,1h,SWEEP,bull,0.9417,,,0.352,London,4h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:30,XRP,30m,SWEEP,bull,0.9404,,,0.289,London,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 07:15,XRP,15m,SWEEP,bull,0.9404,,,0.435,London,1h,TRANSITION,"sell-side liquidity swept (equal lows, swing low)",smc-1.0,Binance
