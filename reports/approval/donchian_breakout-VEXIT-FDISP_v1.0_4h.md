@@ -1,6 +1,6 @@
 # Approval pack: donchian_breakout-VEXIT-FDISP v1.0 4h
 
-Written by the engine on 2026-11-27 09:00 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
+Written by the engine on 2026-11-28 08:22 UTC (AGENT_PROMPT.md section 21). Numbers only - the decision is yours.
 
 **Question: Approve donchian_breakout-VEXIT-FDISP v1.0 4h for live emails? (yes/no)**
 
@@ -8,7 +8,7 @@ Written by the engine on 2026-11-27 09:00 UTC (AGENT_PROMPT.md section 21). Numb
 
 To say yes, add this under `approvals:` in `config.yaml` (on GitHub: open the file, pencil icon, commit):
 ```
-  - {strategy: donchian_breakout-VEXIT-FDISP, version: "1.0", tf: 4h, date: 2026-11-27}
+  - {strategy: donchian_breakout-VEXIT-FDISP, version: "1.0", tf: 4h, date: 2026-11-28}
 ```
 The next daily research run moves it to APPROVED. To undo, delete the line. Saying nothing = no.
 **Check the trades before you say yes:**
@@ -16,9 +16,9 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 - TradingView: open https://github.com/mayastraglobal-ui/crypto-signal-agent/blob/main/reports/pine/donchian_breakout-VEXIT-FDISP_v1.0_4h.pine (`reports/pine/donchian_breakout-VEXIT-FDISP_v1.0_4h.pine`), copy it into TradingView's Pine Editor and add it to a chart - it draws the same signals and trades
 
 ## 0. Bull vs bear (the engine's numbers only - Phase 18)
-- Bull case: unseen part of the backtest (last 30%): +0.249R per trade over 219 trades; whole history: +0.269R per trade over 639 trades, profit factor 1.51; walk-forward: 5 of 5 time windows profitable, together +0.273R; costs +50%: +0.234R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 7 coin(s): BNB, BTC, ETH, SOL, SUI, XRP, ZEC; paper trading: +0.57R per signal over 30 closed signals
+- Bull case: unseen part of the backtest (last 30%): +0.255R per trade over 218 trades; whole history: +0.269R per trade over 639 trades, profit factor 1.51; walk-forward: 5 of 5 time windows profitable, together +0.273R; costs +50%: +0.234R per trade; every parameter -20% / +20% stays profitable (12 variants); an edge on 7 coin(s): BNB, BTC, ETH, SOL, SUI, XRP, ZEC; paper trading: +0.57R per signal over 30 closed signals
 - Bear case: worst drawdown in the backtest: 22.8R · wins 42% of trades; by bad luck alone (Monte Carlo): 95% worst drawdown 23.1R, expected worst losing streak 15 in a row; systematic loss tags: false_breakout, trend_reversal (369 losing trades)
-- Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.9 h old; day +0.0R / week +0.0R, no halt; 1 of 5 signal coins are in one of its regimes on 4H now (ZEC))
+- Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.2 h old; day +0.0R / week +0.0R, no halt; 1 of 5 signal coins are in one of its regimes on 4H now (ZEC))
 - A veto means "not now": wait until the risk manager has no veto before you say yes. No veto is never a reason to say yes - the decision stays yours.
 
 ## 1. Definition and lineage
@@ -33,11 +33,11 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 2. Backtest (Layers A / B)
 - Layer B, whole history: 639 trades · avg +0.269R · win rate 42% · profit factor 1.51 · max drawdown 22.8R
-- Layer B, develop part (first 70%): 420 trades · avg +0.279R · win rate 43% · profit factor 1.54 · max drawdown 10.7R
-- Layer B, unseen part (last 30%): 219 trades · avg +0.249R · win rate 41% · profit factor 1.45 · max drawdown 15.3R
+- Layer B, develop part (first 70%): 421 trades · avg +0.276R · win rate 43% · profit factor 1.53 · max drawdown 11.7R
+- Layer B, unseen part (last 30%): 218 trades · avg +0.255R · win rate 41% · profit factor 1.46 · max drawdown 15.3R
 - long / short: +0.289R (346) / +0.245R (293)
 - coins with an edge: BNB, BTC, ETH, SOL, SUI, XRP, ZEC
-- Layer A (last 15 days): 12 trades, avg +0.697R
+- Layer A (last 15 days): 9 trades, avg +0.500R
 
 ## 3. Walk-forward (Layer C)
 - 5 of 5 windows profitable, all judged windows together +0.273R over 582 trades - passed
@@ -50,7 +50,7 @@ The next daily research run moves it to APPROVED. To undo, delete the line. Sayi
 
 ## 4. Paper trading
 - 30 closed paper signals, average +0.57R, last 20 average +0.33R, drawdown 7.0R
-- backtest on unseen data +0.25R vs paper +0.57R (allowed gap 0.30R)
+- backtest on unseen data +0.26R vs paper +0.57R (allowed gap 0.30R)
 
 ## 5. Control twin (the same idea without its special ingredient)
 - none: too few trades to compare
