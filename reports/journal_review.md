@@ -2,18 +2,18 @@
 
 From journal/my_trades.csv on the branch `journal` (the live watcher's Telegram buttons, the plan result of every alert and your /result replies). Plan = the backtest rules followed on 5m candles, before fees. Report only: nothing here changes a strategy, a gate or a cost.
 
-Last journal entry: 2026-11-23 16:56 UTC
-- Last 30 days: 57 alerts · took 54 · skipped 0 · no answer 3
+Last journal entry: 2026-11-28 18:00 UTC
+- Last 30 days: 58 alerts · took 55 · skipped 0 · no answer 3
   - plan result: took +1.14R avg over 50 · skipped no result yet · no answer -1.00R avg over 3
   - your real results: +1.43R avg over 49 · gap to the plan +0.31R per trade (49)
-- All time: 62 alerts · took 58 · skipped 0 · no answer 4
+- All time: 63 alerts · took 59 · skipped 0 · no answer 4
   - plan result: took +0.98R avg over 54 · skipped no result yet · no answer -1.00R avg over 4
   - your real results: +1.24R avg over 53 · gap to the plan +0.27R per trade (53)
 - Per strategy (all time): cell · alerts · took · plan avg · your avg
   - P01-BREAKOUT-V1 4h · 1 · 1 · -1.00R (1) · -1.20R (1)
   - P01-BREAKOUT-V5 1h · 1 · 1 · -1.00R (1) · -1.20R (1)
   - P02-EMA-PULLBACK-V4 4h · 1 · 1 · +3.88R (1) · +3.90R (1)
-  - P03-FIB-PULLBACK-V5 1h · 1 · 1 · +2.50R (1) · +2.50R (1)
+  - P03-FIB-PULLBACK-V5 1h · 2 · 2 · +2.50R (1) · +2.50R (1)
   - P04-MACD-SUPERTREND-V5 30m · 1 · 1 · -1.00R (1) · -1.08R (1)
   - P05-RANGE-REVERSAL-V4 4h · 1 · 1 · -1.00R (1) · -1.20R (1)
   - P07-SQUEEZE-RETEST-V1 4h · 2 · 2 · +2.50R (2) · +2.50R (2)

@@ -1,8 +1,8 @@
 {
- "generated_utc": "2026-11-28 17:00",
+ "generated_utc": "2026-11-28 18:11",
  "book": {
-  "utc": "2026-11-28 17:00",
-  "beijing": "2026-11-29 01:00",
+  "utc": "2026-11-28 18:11",
+  "beijing": "2026-11-29 02:11",
   "active": [],
   "awaiting": [],
   "paper": [],
@@ -20,7 +20,7 @@
   "empty": true
  },
  "text": [
-  "POSITION BOOK \u2014 2026-11-28 17:00 UTC / 2026-11-29 01:00 Beijing",
+  "POSITION BOOK \u2014 2026-11-28 18:11 UTC / 2026-11-29 02:11 Beijing",
   "No open or pending positions.",
   "Day: +0.00R (limit -3R) \u00b7 Week: +0.00R (limit -6R) \u00b7 Heat: 0/3",
   "Risk:      no halt \u00b7 risk per trade 0.5% \u00b7 NEXT EVENT US jobs report / Employment Situation (Nov data) 2026-12-04 13:30 UTC"
@@ -64,7 +64,7 @@
  },
  "watching": [
   {
-   "coin": "BTC",
+   "coin": "ZEC",
    "tf": "1h",
    "strategy": "P03-FIB-PULLBACK-V5",
    "version": "1.0",
@@ -72,18 +72,7 @@
    "direction": "SHORT",
    "state": "SETUP_FORMING",
    "rules_true": "4/5",
-   "missing": "close < open"
-  },
-  {
-   "coin": "SOL",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "SETUP_FORMING",
-   "rules_true": "4/5",
-   "missing": "close < open"
+   "missing": "fib_dir < 0"
   },
   {
    "coin": "BTC",
@@ -259,17 +248,6 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
-   "missing": null
-  },
-  {
-   "coin": "ETH",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "3/5",
    "missing": null
   },
   {
@@ -732,17 +710,6 @@
    "direction": "SHORT",
    "state": "WATCH",
    "rules_true": "0/2",
-   "missing": null
-  },
-  {
-   "coin": "ZEC",
-   "tf": "1h",
-   "strategy": "P03-FIB-PULLBACK-V5",
-   "version": "1.0",
-   "stage": "PAPER_TRADING",
-   "direction": "SHORT",
-   "state": "WATCH",
-   "rules_true": "3/5",
    "missing": null
   },
   {

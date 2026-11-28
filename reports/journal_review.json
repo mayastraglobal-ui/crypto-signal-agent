@@ -1,9 +1,9 @@
 {
- "last_entry_utc": "2026-11-23 16:56",
+ "last_entry_utc": "2026-11-28 18:00",
  "days": 30,
  "all": {
-  "alerts": 62,
-  "took": 58,
+  "alerts": 63,
+  "took": 59,
   "skipped": 0,
   "no_answer": 4,
   "plan_took": {
@@ -57,11 +57,11 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 2
  },
  "recent": {
-  "alerts": 57,
-  "took": 54,
+  "alerts": 58,
+  "took": 55,
   "skipped": 0,
   "no_answer": 3,
   "plan_took": {
@@ -115,7 +115,7 @@
     "wins": 0
    }
   },
-  "missing_result": 1
+  "missing_result": 2
  },
  "per_strategy": [
   {
@@ -150,8 +150,8 @@
   },
   {
    "cell": "P03-FIB-PULLBACK-V5 1h",
-   "alerts": 1,
-   "took": 1,
+   "alerts": 2,
+   "took": 2,
    "skipped": 0,
    "plan_avg_r": 2.5,
    "plan_n": 1,
