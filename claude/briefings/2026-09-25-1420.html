@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Engine report is STALE (5.9 hours old) - do not act on signals until it updates</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Engine report is STALE (5.9 hours old) - do not act on signals until it updates</h1>
+<h2>Summary</h2>
+<ul><li>⚠ <strong>The engine report is STALE.</strong> It is from 2026-09-25 00:26 UTC, 5.9 hours old. The hourly scan may have failed. <strong>Do not act on this agent's signals until a fresh report appears.</strong></li><li>Data state (as of that report): GOOD.</li><li>No open positions. No live signal. <strong>No trade is a valid result.</strong></li><li>Only one coin is being watched: ZEC LONG, 4h Donchian breakout, VALIDATION stage. It is not a signal.</li><li>New <code>events.yaml</code> lists <strong>US PCE on 2026-09-30 12:30 UTC</strong> and <strong>US jobs report (NFP) on 2026-10-02 12:30 UTC</strong>. The stale engine report does not show them yet.</li><li>No news page could be opened in this run, so this briefing has <strong>no verified news</strong>.</li></ul>
+<h2>Position book</h2>
+<pre><code>POSITION BOOK — 2026-09-25 00:26 UTC / 2026-09-25 08:26 Beijing
+No open or pending positions.
+Day: +0.00R (limit -3R) · Week: +0.00R (limit -6R) · Heat: 0/3
+Risk:      no halt · risk per trade 0.5% · ⚠ calendar not maintained - no event listed for the next 7 days (config.yaml -&gt; events)</code></pre>
+<p>(This is the book from the stale 00:26 UTC report. <em>R</em> = the amount risked on one trade. <em>Heat</em> = open live positions out of 3 allowed.)</p>
+<h2>Market regime</h2>
+<p>All values are from the 00:26 UTC report (stale). A <em>regime</em> is the market's "mood" on one timeframe: trending (BULL/BEAR), sideways (RANGE), changing (TRANSITION), moving hard (EXPANSION) or UNCLEAR.</p>
+<ul><li><strong>BTC:</strong> daily trend UP, 4H trend UP · Fear &amp; Greed 71 (Greed). 1W / 1D / 4H / 1H: TRANSITION / WEAK_BULL / TRANSITION / UNCLEAR.</li><li><strong>ETH:</strong> UNCLEAR / WEAK_BULL / TRANSITION / RANGE.</li><li><strong>XRP:</strong> TRANSITION / TRANSITION / WEAK_BULL / UNCLEAR.</li><li><strong>ZEC:</strong> WEAK_BULL / STRONG_BULL / WEAK_BULL / RANGE.</li><li><strong>SOL:</strong> TRANSITION / WEAK_BULL / UNCLEAR / UNCLEAR.</li><li><strong>BNB:</strong> WEAK_BULL / STRONG_BULL / UNCLEAR / UNCLEAR.</li><li><strong>UNI:</strong> EXPANSION / EXPANSION / TRANSITION / RANGE.</li></ul>
+<p>What it means:</p>
+<ol><li>The daily picture leans up for most coins.</li><li>The weekly and 1H pictures are mostly TRANSITION, UNCLEAR or RANGE. The trend is not settled.</li><li>All 7 coins had small negative 30m momentum at that time.</li><li>Mixed regimes make breakouts less reliable. Waiting fits better than acting, especially with a stale report.</li></ol>
+<h2>News and events</h2>
+<p><strong>Verified news: not available.</strong> Every news page I tried was blocked by this run's network (CoinDesk, Cointelegraph, The Block, CryptoRank). Only sources I opened may be used, so I list no news items.</p>
+<p>A web search <em>headline</em> (not opened, <strong>not evidence</strong>) mentioned a large crypto options expiry on Friday 2026-09-25. Big expiries can bring sharp moves. Treat this as a hint only.</p>
+<p><strong>Event calendar.</strong> The fact sheet (from the stale report) lists none. But the repository's new <code>events.yaml</code> lists these for the next 7 days:</p>
+<ul><li><strong>2026-09-30 12:30 UTC</strong> - US PCE / Personal Income and Outlays (Aug data). Checked as <code>official_search</code>.</li><li><strong>2026-10-02 12:30 UTC</strong> - US jobs report / Employment Situation (Sep data). Checked as <code>official_search</code>.</li></ul>
+<p>The engine should pick these up on its next good scan. The risk blackout is no live entry from 60 minutes before to 60 minutes after each event. If the next report still says "calendar not maintained", the engine is not reading <code>events.yaml</code> - please check. No CPI or FOMC date falls in the next 7 days in that file (next CPI 2026-10-14, next FOMC 2026-10-28).</p>
+<h2>Signals explained</h2>
+<p><strong>Live signals (APPROVED):</strong> none. <strong>Paper / validation signals:</strong> 0.</p>
+<p><strong>Watched setup: ZEC LONG · 4h · donchian_breakout v1.0 · stage VALIDATION · state WATCH</strong></p>
+<ul><li>What it is: a <em>Donchian breakout</em> buys when price closes above the highest high of a recent window.</li><li>The engine reports 2 of 4 rules true. Two are still missing.</li><li>ZEC's daily regime is STRONG_BULL and 4H is WEAK_BULL, which suits a breakout strategy.</li><li>But 1H is RANGE and 30m momentum was -0.7% ROC. Price was not pushing up.</li><li>The strategy has no test results yet on the engine's scoreboard (trades, win rate, average R: not available).</li><li>What would cancel it: dropped from the watch list, the 4h/1D regime turns RANGE or bearish, or the rules stay unmet.</li><li>Setup or entry trigger? <strong>Only a setup.</strong></li><li>Stage: <strong>VALIDATION.</strong> Only LIVE (APPROVED) signals are for acting on. <strong>Do not trade this.</strong></li></ul>
+<p>No signal - no trade is a valid result.</p>
+<h2>Do and don't today</h2>
+<p><strong>Do</strong></p>
+<ul><li>Check why the engine report is 5.9 hours old (the scan workflow on GitHub).</li><li>Check that the next report shows the PCE (09-30) and NFP (10-02) events from <code>events.yaml</code>.</li><li>Wait for a fresh report and a LIVE (APPROVED) signal before thinking about any trade.</li></ul>
+<p><strong>Don't</strong></p>
+<ul><li>Don't act on any signal while the report is STALE.</li><li>Don't trade the ZEC watch. It is a VALIDATION-stage setup with no tested results.</li><li>Don't trade around the options expiry on headlines alone.</li><li>Don't chase a candle that has already moved.</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/briefings/2026-09-25-1420.md · Research signal. Not financial advice.</footer></main></body></html>

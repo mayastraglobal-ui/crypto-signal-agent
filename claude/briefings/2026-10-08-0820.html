@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>No signal - 1H charts turn strongly down, every coin on veto</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>No signal - 1H charts turn strongly down, every coin on veto</h1>
+<h2>Summary</h2>
+<ul><li>Engine report: 2026-10-07 23:16 UTC (1.1 hours old). Data state: GOOD.</li><li>No open positions. No live signal. Nothing is being watched. <strong>No trade is a valid result.</strong></li><li>BTC is at 83,225.89. On the 1H chart <strong>BTC, ETH, XRP, SOL and UNI are now STRONG_BEAR</strong> (falling hard), while the daily charts are still mildly up.</li><li><strong>All seven coins are on VETO</strong>, long and short: the timeframes disagree.</li><li><strong>US CPI (Sep data) is on 2026-10-14 12:30 UTC</strong> - now in the engine's calendar. Blackout 11:30-13:30 UTC that day.</li><li>BTC options: ~$0.38bn expire today 08:00 UTC (max pain 84,500); the big ~$1.84bn expiry (max pain 84,000) is tomorrow 2026-10-09 08:00 UTC.</li></ul>
+<h2>Email summary</h2>
+<ul><li>headline: No signal. Hourly charts falling, all vetoed.</li><li>sub: BTC is near 83,225 and five coins are strongly down on the 1H chart; CPI is on 2026-10-14.</li><li>do: Wait for a LIVE entry email before any trade.</li><li>dont: Don't buy the dip against the falling hourly trend.</li><li>mood: Risk-off</li></ul>
+<h2>Position book</h2>
+<pre><code>POSITION BOOK — 2026-10-07 23:16 UTC / 2026-10-08 07:16 Beijing
+No open or pending positions.
+Day: +0.00R (limit -3R) · Week: +0.00R (limit -6R) · Heat: 0/3
+Risk:      no halt · risk per trade 0.5% · NEXT EVENT US CPI (Sep data) 2026-10-14 12:30 UTC</code></pre>
+<p>(<em>R</em> = the amount you risk on one trade. <em>Heat</em> = open live positions, out of 3 allowed.)</p>
+<h2>Market regime</h2>
+<p>A <em>regime</em> is the market's "mood" on one timeframe: trending (BULL/BEAR), sideways (RANGE), quiet and squeezed (COMPRESSION), changing (TRANSITION), moving hard (EXPANSION) or UNCLEAR. <em>ROC</em> is the % price change over the last 30m window.</p>
+<ul><li><strong>BTC</strong> 83,225.89: daily trend UP, 4H SIDEWAYS · Fear &amp; Greed 71 (Greed). 1W / 1D / 4H / 1H: TRANSITION / WEAK_BULL / UNCLEAR / STRONG_BEAR · 30m +0.1% ROC.</li><li><strong>ETH</strong> 2,569.80: WEAK_BULL / WEAK_BULL / TRANSITION / STRONG_BEAR · +0.7%.</li><li><strong>XRP</strong> 1.4175: TRANSITION / WEAK_BULL / UNCLEAR / STRONG_BEAR · -0.1%.</li><li><strong>SOL</strong> 116.0000: WEAK_BULL / WEAK_BULL / UNCLEAR / STRONG_BEAR · -0.3%.</li><li><strong>ZEC</strong> 1,329.15: WEAK_BULL / WEAK_BULL / COMPRESSION / RANGE · +1.6%.</li><li><strong>BNB</strong> 771.9900: WEAK_BULL / STRONG_BULL / TRANSITION / TRANSITION · +0.3%.</li><li><strong>UNI</strong> 7.8470: EXPANSION / WEAK_BULL / TRANSITION / STRONG_BEAR · +0.2%.</li></ul>
+<p>Note: UNI is new in the signal list; SUI left it.</p>
+<p><strong>Playbook (BACKTEST facts per regime, not signals):</strong></p>
+<ol><li><strong>STRONG_BEAR</strong> (BTC, ETH, XRP, SOL, UNI 1h): every strategy family lost money here (breakout -0.17R over 2901 trades, mtf_pullback -0.14R over 4317 trades). The only winner (TRD-H4-BREAKOUT v1.0 30m +0.17R over 40 trades) is only in BACKTESTING. <strong>Buying dips against this trend is a "no trade".</strong></li><li><strong>UNCLEAR</strong> (BTC 4h, XRP 4h, SOL 4h): <strong>no tested strategy made money.</strong> Standing aside is the playbook.</li><li><strong>TRANSITION</strong> (ETH 4h, BNB 4h/1h, UNI 4h): the strategies that made money are all BACKTESTING or FAILED. Most strategies are unreliable here.</li><li><strong>COMPRESSION</strong> (ZEC 4h) and <strong>RANGE</strong> (ZEC 1h): breakouts lost in COMPRESSION (-0.21R over 430 trades); mean reversion lost in RANGE (-0.18R over 14931 trades).</li></ol>
+<p>What it means in plain words: yesterday's drop continued. The short-term (1H) trend is now firmly down on most coins, while the daily trend is still mildly up. When the charts fight each other, no approved strategy has an edge. <strong>So the plan is to stand aside.</strong></p>
+<h2>Bull vs bear</h2>
+<p><strong>Whole market</strong></p>
+<ul><li>Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 1.1 h old; day +0.0R / week +0.0R, no halt)</li></ul>
+<p><strong>BTC</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.2 ATR in 10 candles))</li><li>Bear case: 1H STRONG_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-1.6 ATR in 10 candles)); no clear direction on 1W TRANSITION, 4H UNCLEAR</li><li>Risk manager: LONG: VETO - BTC regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H UNCLEAR, 1H STRONG_BEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>ETH</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.2 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.2 ATR in 10 candles))</li><li>Bear case: 1H STRONG_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-2.2 ATR in 10 candles)); no clear direction on 4H TRANSITION</li><li>Risk manager: LONG: VETO - ETH regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>XRP</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: 1H STRONG_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-1.8 ATR in 10 candles)); no clear direction on 1W TRANSITION, 4H UNCLEAR</li><li>Risk manager: LONG: VETO - XRP regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H UNCLEAR, 1H STRONG_BEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>SOL</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.0 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.4 ATR in 10 candles))</li><li>Bear case: 1H STRONG_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-1.4 ATR in 10 candles)); no clear direction on 4H UNCLEAR</li><li>Risk manager: LONG: VETO - SOL regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H UNCLEAR, 1H STRONG_BEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>ZEC</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+3.0 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: no clear direction on 4H COMPRESSION, 1H RANGE</li><li>Risk manager: LONG: VETO - ZEC regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H COMPRESSION, 1H RANGE)) · SHORT: VETO - same reason</li></ul>
+<p><strong>BNB</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.0 ATR in 10 candles)); 1D STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.0 ATR in 10 candles))</li><li>Bear case: no clear direction on 4H TRANSITION, 1H TRANSITION</li><li>Risk manager: LONG: VETO - BNB regime: NO TRADE (timeframes disagree (1D STRONG_BULL, 4H TRANSITION, 1H TRANSITION)) · SHORT: VETO - same reason</li></ul>
+<p><strong>UNI</strong></p>
+<ul><li>Bull case: 1W EXPANSION (close above EMA-fast above EMA-slow; EMA-fast rising (+2.7 ATR in 10 candles)); 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.2 ATR in 10 candles))</li><li>Bear case: 1H STRONG_BEAR (close below EMA-fast below EMA-slow; EMA-fast falling (-2.4 ATR in 10 candles)); no clear direction on 4H TRANSITION</li><li>Risk manager: LONG: VETO - UNI regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H TRANSITION, 1H STRONG_BEAR)) · SHORT: VETO - same reason</li></ul>
+<h2>News and events</h2>
+<p>All headlines are <strong>CLAIMs</strong> from the hourly feed (fetched 2026-10-07 23:17 UTC, fresh). They are not evidence for a trade.</p>
+<ol><li><strong>2026-10-07 - BTC low and bonds.</strong> Cointelegraph reports Bitcoin dropped to $82.7K, an October low, as a bond sell-off resumed on Iran worries. Why it matters: falling bond prices (rising yields) and geopolitical stress tend to hurt risky assets like crypto. <a href="https://cointelegraph.com/markets/bitcoin-price-drops-to-827k-october-low-as-bond-sell-off-resumes-on-iran-nerves">https://cointelegraph.com/markets/bitcoin-price-drops-to-827k-october-low-as-bond-sell-off-resumes-on-iran-nerves</a></li><li><strong>2026-10-07 - ETH buyer stops.</strong> CoinDesk reports Tom Lee says Bitmine will stop buying ETH. Why it matters: a steady buyer leaving removes some demand for ETH. <a href="https://www.coindesk.com/markets/2026/10/07/ether-is-about-to-lose-a-steady-buyer-as-tom-lee-says-bitmine-will-stop-token-purchases">https://www.coindesk.com/markets/2026/10/07/ether-is-about-to-lose-a-steady-buyer-as-tom-lee-says-bitmine-will-stop-token-purchases</a></li><li><strong>2026-10-07 - ZEC ETF.</strong> The Block reports Grayscale says its Zcash ETF has passed $1 billion. Why it matters: steady fund demand may explain why ZEC held up better (+1.6% in 30m) than the others. <a href="https://www.theblock.co/news/markets/2026-10-07-grayscale-crypto-etf-market-beyond-bitcoin-ether-417953">https://www.theblock.co/news/markets/2026-10-07-grayscale-crypto-etf-market-beyond-bitcoin-ether-417953</a></li><li><strong>2026-10-07 - US derivatives.</strong> Cointelegraph reports Coinbase is bringing Deribit's derivatives liquidity to the US. Exchange news, no direct trade impact. <a href="https://cointelegraph.com/news/coinbase-deribit-us-crypto-options-perpetual-futures">https://cointelegraph.com/news/coinbase-deribit-us-crypto-options-perpetual-futures</a></li><li><strong>2026-10-07 - Regulation.</strong> Cointelegraph reports the House Financial Services chair says SEC and CFTC actions "fall short" of the CLARITY bill. Slow-moving. <a href="https://cointelegraph.com/news/sec-cftc-crypto-regulations-fall-short-clarity-bill">https://cointelegraph.com/news/sec-cftc-crypto-regulations-fall-short-clarity-bill</a></li><li><strong>Binance:</strong> STG token merged into ZRO (completed 2026-10-07); new bStocks pairs. Nothing about our 7 coins. <a href="https://www.binance.com/en/support/announcement/b109477116f6463a91151946e9ac0fdf">https://www.binance.com/en/support/announcement/b109477116f6463a91151946e9ac0fdf</a></li></ol>
+<p><strong>Options expiries (Deribit, 08:00 UTC).</strong> An <em>expiry</em> is when options contracts end; prices can be pulled toward the <em>max pain</em> level.</p>
+<ul><li>Today 2026-10-08: BTC ~$0.38bn (put/call 0.66, max pain 84,500); ETH ~$0.11bn (max pain 2,600).</li><li>Tomorrow 2026-10-09: BTC ~$1.84bn (put/call 1.12, max pain 84,000); ETH ~$0.32bn (max pain 2,650). This is the big one this week.</li></ul>
+<p><strong>Calendar (high-impact, next 7 days):</strong></p>
+<ul><li><strong>US CPI (Sep data): 2026-10-14 12:30 UTC.</strong> <em>CPI</em> is the US inflation report; it often moves crypto sharply. The engine blocks live entries from 11:30 to 13:30 UTC that day. It is already in the engine's calendar, so nothing needs adding to <code>events.yaml</code>.</li></ul>
+<h2>Signals explained</h2>
+<p>No signal - no trade is a valid result.</p>
+<ul><li>No live signal, no paper or validation signal, and no watched setup this run.</li><li>Lab note: many new lab cards (PB-<em>, TRD-H4-</em>) were tested in the last 24 hours; several FAILED, others are in BACKTESTING. None is a signal.</li></ul>
+<h2>Do and don't today</h2>
+<p><strong>Do</strong></p>
+<ul><li>Wait for a LIVE entry email before any trade.</li><li>Respect the vetoes: all seven coins say "not now".</li><li>Be careful around 08:00 UTC today and tomorrow, when options expire (tomorrow's is ~$1.84bn).</li><li>Mark 2026-10-14 11:30-13:30 UTC (CPI blackout) in your calendar.</li></ul>
+<p><strong>Don't</strong></p>
+<ul><li>Don't buy the dip against the falling 1H trend.</li><li>Don't short just because the hourly chart is red; the daily trend still points up and shorts are vetoed.</li><li>Don't trade on the bond or Iran headlines.</li><li>Don't trade from lab or BACKTESTING results.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li>none (no extra pages opened; the hourly feed was fresh, so no web search was needed)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-10-08 00:20 UTC, finished 2026-10-08 00:27 UTC; problems: none (the previous run, 2026-10-07 21:20 Beijing, failed: tool permission checks errored, so no briefing was written for that slot)</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/briefings/2026-10-08-0820.md · Research signal. Not financial advice.</footer></main></body></html>

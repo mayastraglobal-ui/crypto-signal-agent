@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Daily review 2026-11-03</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>Daily review 2026-11-03</h1>
+<h2>Summary</h2>
+<ul><li>A quiet day for LIVE and PAPER: no signal closed, no open position, day and week at +0.00R. No halt.</li><li>Two TEST records lost: ZEC 1h P07-SQUEEZE-RETEST-V5 SHORT (-0.49R, exit rule) and SUI 1h P03-FIB-PULLBACK-V5 SHORT (-1.09R, tag regime_mismatch). They are TEST records, not LIVE or PAPER.</li><li>The engine's weather changed to "Downtrend - the strategies wait for a clean 4H / 1H". BTC is 77,394.01 (77,869.12 yesterday). Fear &amp; Greed dropped to 26 (Fear), the lowest in this series of reviews. BTC volume is 1110M.</li><li>Only one status change: P11-MOMENTUM-V3-FDISP 1h FORMALIZED -&gt; FAILED. Its feedback record is written.</li><li>The event calendar now lists US jobs on 2026-11-06 at 13:30 UTC and US CPI on 2026-11-10 at 13:30 UTC.</li><li>Today is still within the first 3 days of the month; the monthly clean-up was done on 2026-11-01 and the engine shows the same numbers.</li></ul>
+<h2>Email summary</h2>
+<ul><li>lesson: The repair that helped slow breakout cards did not rescue a momentum card, so a repair is not a general fix.</li><li>tomorrow: Stand aside while the market is in a downtrend and wait for the jobs report on November 6.</li><li>sub: No signals closed; fear deepened and two test shorts lost.</li><li>watch: The US jobs report on 2026-11-06 at 13:30 UTC and US CPI on 2026-11-10 at 13:30 UTC.</li><li>avoid: Do not buy the dip and do not short by hand before 4H and 1H both show a clean downtrend.</li></ul>
+<h2>Results (LIVE / PAPER / VALIDATION)</h2>
+<table><tr><th>Book</th><th>Closed (last 24 h)</th><th>Won</th><th>Total</th></tr><tr><td>LIVE</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>PAPER</td><td>0</td><td>0</td><td>+0.00R</td></tr><tr><td>VALIDATION</td><td>0</td><td>0</td><td>+0.00R</td></tr></table>
+<ul><li>TEST records (engine, listed under VALIDATION): ZEC 1h P07-SQUEEZE-RETEST-V5 SHORT -0.49R EXIT_RULE; SUI 1h P03-FIB-PULLBACK-V5 SHORT -1.09R SL.</li><li>No live signal. Watching (not signals): LONG 4h P13-TURTLE-V2 SETUP_FORMING on BTC, ETH, SUI, XRP and ZEC.</li><li>Position book: no open positions, heat 0/3.</li></ul>
+<h2>Losses and why</h2>
+<ol><li>ZEC 1h P07-SQUEEZE-RETEST-V5 SHORT: -0.49R, MAE -0.526R, MFE +0.726R. No tags from the engine.</li><li>SUI 1h P03-FIB-PULLBACK-V5 SHORT: -1.09R SL, MAE -1.59R, MFE +1.224R. Tag: regime_mismatch.</li><li>Questions (section 17.3), short form:</li><li>Strategy: P03-FIB-PULLBACK-V5 is FAILED on every lab timeframe (1h: 5126 trades, -0.12R on 2026-10-23). P07-SQUEEZE-RETEST-V5 is a weak 1h card.</li><li>Timing/stop/target: both trades were well in profit first (+0.73R and +1.22R) and then reversed. The SUI trade went 1.59R against the entry, more than its 1R stop, which fits slippage on a fast move. The stop-width tests in earlier fact sheets found no stop change that rescued a failing cell, so I propose no change.</li><li>Regime: the short was taken in a market that bounced (ZEC +3.7% and SUI +2.7% on 30m momentum today).</li><li>Sample: 2 trades, 2 cards: random.</li><li>No failure_journal record: the engine's tag covers it.</li></ol>
+<h2>Missed moves</h2>
+<ul><li>The engine found no strong missed move in this period.</li></ul>
+<h2>Regime</h2>
+<ul><li>Data state GOOD.</li><li>BTC 1W / 1D / 4H / 1H = WEAK_BULL / UNCLEAR / TRANSITION / WEAK_BEAR. XRP is in COMPRESSION on 4H; SOL is STRONG_BEAR on 4H; ZEC is in a range on 1D and 4H.</li><li>Weather: "Downtrend - the strategies wait for a clean 4H / 1H". The engine trades a SHORT only when 4H and 1H both show a clean downtrend, because a grinding fall with bounces stops out shorts.</li><li>Fear &amp; Greed 26 is third-party data, not a signal.</li><li>Lifecycle change: P11-MOMENTUM-V3-FDISP 1h FORMALIZED -&gt; FAILED.</li></ul>
+<h2>Refinements queued</h2>
+<ul><li>None. No failing cell has a new diagnosis. Lab cards added: none (2 allowed; none has the evidence).</li></ul>
+<h2>Research loop</h2>
+<ul><li><strong>P11-MOMENTUM-V3-FDISP@1.0</strong> (parent: result: P11-MOMENTUM-V3@1.0 1h): 1h FAILED, 1548 trades, -0.085R (unseen -0.162R); every gate failed. The displacement repair did not help here, as with P11-MOMENTUM-V1-FDISP on 2026-10-28. Next: stop this line. Record <code>Feedback: P11-MOMENTUM-V3-FDISP@1.0</code> in <code>memory/experiments.md</code>.</li></ul>
+<h2>Curriculum</h2>
+<ul><li>The plan is complete (24 of 24) and repeats C01. The 2026-11-01 review of C01 stands; I read nothing new and wrote no record.</li></ul>
+<h2>Monthly clean-up</h2>
+<ul><li>Done on 2026-11-01. The engine shows the same result today (no duplicate lessons; the stop_too_tight lesson STILL HOLDS at 40 tests), so I wrote no new Merged or Re-check record.</li></ul>
+<h2>Reviews done</h2>
+<ul><li>The fact sheet lists no memory review due.</li></ul>
+<h2>Lessons</h2>
+<ul><li>No new lesson today.</li></ul>
+<h2>Tomorrow</h2>
+<ul><li>Watch: the US jobs report on 2026-11-06 at 13:30 UTC and US CPI on 2026-11-10 at 13:30 UTC.</li><li>Do NOT buy the dip, short by hand before 4H and 1H agree, or trade on fear headlines.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li>none</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-11-03 15:23 UTC, finished 2026-11-03 15:45 UTC; problems: none</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/daily/2026-11-03.md · Research signal. Not financial advice.</footer></main></body></html>

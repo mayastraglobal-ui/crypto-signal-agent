@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>No signal - BTC now on VETO both ways, UNI joins the coin list</title><style>
+:root{--bg:#F4F1EA;--card:#FFFFFF;--line:#E3DED3;--text:#1B1F24;--muted:#5B6470;--teal:#0F5E63;--tile:#F6F4EF}
+@media (prefers-color-scheme: dark){:root{--bg:#15181B;--card:#1E2226;--line:#2E3338;--text:#E8E6E1;--muted:#9AA3AD;
+--teal:#5FB3B8;--tile:#262B30}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;overflow-wrap:anywhere}
+nav{font-size:13px;margin:4px 2px 12px;color:var(--muted)} nav a{color:var(--teal)}
+h1{font-size:24px;line-height:1.25;margin:0 0 12px} h2{font-size:18px;margin:26px 0 8px;color:var(--teal)}
+h3{font-size:16px;margin:18px 0 6px} a{color:var(--teal)}
+code{font-family:'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px;background:var(--tile);padding:1px 4px;
+border-radius:4px} pre{background:var(--tile);padding:12px;border-radius:8px;overflow-x:auto} pre code{padding:0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+ul,ol{padding-left:22px} li{margin:3px 0} footer{color:var(--muted);font-size:12px;margin:14px 4px}
+</style></head><body><main><nav><a href="../../index.html">← Dashboard</a> · written by Claude from the engine's numbers</nav><article><h1>No signal - BTC now on VETO both ways, UNI joins the coin list</h1>
+<h2>Summary</h2>
+<ul><li>Engine report: 2026-09-27 13:17 UTC (0.1 hours old). Data state: GOOD.</li><li>No open positions. No live signal. Nothing is being watched. <strong>No trade is a valid result.</strong></li><li><strong>BTC is now on VETO for both long and short</strong>: its timeframes disagree (1D WEAK_BULL, 4H COMPRESSION, 1H RANGE). A veto means "not now".</li><li>UNI replaced ENA in the engine's 7-coin signal list. UNI fell 2.6% in the last 30m window.</li><li>BTC 1h is in <strong>RANGE</strong>, where no tested strategy made money. <strong>Standing aside is the playbook.</strong></li><li>Next: BTC/ETH options expire 2026-09-28 08:00 UTC. On <strong>2026-09-30 12:30 UTC</strong>, US GDP and PCE come out at the same time.</li></ul>
+<h2>Email summary</h2>
+<ul><li>headline: No signal. BTC on veto both ways.</li><li>sub: BTC sits near 84,802 but its timeframes disagree; UNI joined the list and Fear and Greed is 70.</li><li>do: Wait for a LIVE entry email before any trade.</li><li>dont: Don't trade BTC in either direction while its veto stands.</li><li>mood: Calm</li></ul>
+<h2>Position book</h2>
+<pre><code>POSITION BOOK — 2026-09-27 13:17 UTC / 2026-09-27 21:17 Beijing
+No open or pending positions.
+Day: +0.00R (limit -3R) · Week: +0.00R (limit -6R) · Heat: 0/3
+Risk:      no halt · risk per trade 0.5% · NEXT EVENT US GDP (Third Estimate), 2nd Quarter 2026 2026-09-30 12:30 UTC</code></pre>
+<p>(<em>R</em> = the amount you risk on one trade. <em>Heat</em> = open live positions, out of 3 allowed.)</p>
+<h2>Market regime</h2>
+<p>A <em>regime</em> is the market's "mood" on one timeframe: trending (BULL), sideways (RANGE), changing (TRANSITION), moving hard (EXPANSION), squeezed tight (COMPRESSION) or UNCLEAR. <em>ROC</em> is the % price change over the last 30m window.</p>
+<ul><li><strong>BTC</strong> 84,802.01: daily trend UP, 4H trend UP · Fear &amp; Greed 70 (Greed). 1W / 1D / 4H / 1H: TRANSITION / WEAK_BULL / COMPRESSION / RANGE · 30m +0.0% ROC.</li><li><strong>ETH</strong> 2,707.36: UNCLEAR / WEAK_BULL / COMPRESSION / WEAK_BULL · -0.4%.</li><li><strong>ZEC</strong> 1,656.01: WEAK_BULL / STRONG_BULL / WEAK_BULL / STRONG_BULL · -0.6%.</li><li><strong>SOL</strong> 123.3700: TRANSITION / WEAK_BULL / STRONG_BULL / WEAK_BULL · -0.6%.</li><li><strong>XRP</strong> 1.5352: TRANSITION / TRANSITION / TRANSITION / UNCLEAR · -0.2%.</li><li><strong>SUI</strong> 1.2579: RANGE / EXPANSION / STRONG_BULL / STRONG_BULL · -0.5%.</li><li><strong>UNI</strong> 9.8200: EXPANSION / STRONG_BULL / TRANSITION / WEAK_BULL · -2.6%.</li></ul>
+<p><strong>Playbook (BACKTEST facts per regime, not signals):</strong></p>
+<ol><li><strong>RANGE</strong> (now on BTC 1h): <strong>no tested strategy made money.</strong> Mean reversion lost -0.20R over 12020 trades. <strong>Standing aside is the playbook.</strong></li><li><strong>COMPRESSION</strong> (now on BTC 4h, ETH 4h): only bb_squeeze_breakout v1.0 1h made money, a tiny +0.02R over 49 trades, and it is still BACKTESTING. Wait for a close outside the range.</li><li><strong>WEAK_BULL</strong> (now on ETH 1h, ZEC 4h, SOL 1h, UNI 1h): the breakout family was flat (+0.00R over 2389 trades). Two 4h breakout strategies made money (donchian_breakout-VEXIT v1.0 4h (lab) +0.38R over 166 trades; donchian_breakout v1.0 4h +0.23R over 172 trades). Both are only in <strong>BACKTESTING</strong>.</li><li><strong>STRONG_BULL</strong> (now on ZEC 1h, SOL 4h, SUI 4h/1h): all families lost money (breakout -0.09R over 967 trades). Only 4h breakout strategies made money, all still BACKTESTING.</li><li><strong>TRANSITION</strong> (XRP 4h, UNI 4h) and <strong>UNCLEAR</strong> (XRP 1h): most strategies are unreliable, or there is no evidence either way.</li></ol>
+<p>What it means in plain words: some 4h breakout ideas look promising in tests, but none has passed yet. No approved strategy has an edge in the regimes showing now. <strong>So the plan is to stand aside.</strong></p>
+<h2>Bull vs bear</h2>
+<p><strong>Whole market</strong></p>
+<ul><li>Risk manager: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.1 h old; day +0.0R / week +0.0R, no halt)</li></ul>
+<p><strong>BTC</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.4 ATR in 10 candles))</li><li>Bear case: no clear direction on 1W TRANSITION, 4H COMPRESSION, 1H RANGE</li><li>Risk manager: LONG: VETO - BTC regime: NO TRADE (timeframes disagree (1D WEAK_BULL, 4H COMPRESSION, 1H RANGE)) · SHORT: VETO - same reason</li></ul>
+<p><strong>ETH</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.3 ATR in 10 candles)); 1H WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: no clear direction on 1W UNCLEAR, 4H COMPRESSION</li><li>Risk manager: LONG: no veto (no high-impact event within 60 min; heat 0 of 3 open live positions; data GOOD, report 0.1 h old; day +0.0R / week +0.0R, no halt; ETH regime: LONG allowed) · SHORT: VETO - ETH regime: LONG allowed (1D/1H bullish, 1W UNCLEAR)</li></ul>
+<p><strong>ZEC</strong></p>
+<ul><li>Bull case: 1W WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+2.4 ATR in 10 candles)); 1D STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.7 ATR in 10 candles)); 4H WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL)); 1H STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.5 ATR in 10 candles))</li><li>Bear case: no bearish timeframe</li><li>Risk manager: LONG: no veto (ZEC regime: LONG allowed) · SHORT: VETO - ZEC regime: LONG allowed (1D/4H/1H bullish, 1W WEAK_BULL)</li></ul>
+<p><strong>SOL</strong></p>
+<ul><li>Bull case: 1D WEAK_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.4 ATR in 10 candles)); 4H STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.3 ATR in 10 candles)); 1H WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: no clear direction on 1W TRANSITION</li><li>Risk manager: LONG: no veto (SOL regime: LONG allowed) · SHORT: VETO - SOL regime: LONG allowed (1D/4H/1H bullish, 1W TRANSITION)</li></ul>
+<p><strong>XRP</strong></p>
+<ul><li>Bull case: no bullish timeframe</li><li>Bear case: no clear direction on 1W TRANSITION, 1D TRANSITION, 4H TRANSITION, 1H UNCLEAR</li><li>Risk manager: LONG: VETO - XRP regime: NO TRADE (timeframes disagree (1D TRANSITION, 4H TRANSITION, 1H UNCLEAR)) · SHORT: VETO - same reason</li></ul>
+<p><strong>SUI</strong></p>
+<ul><li>Bull case: 1D EXPANSION (EMA-fast rising (+1.0 ATR in 10 candles); ADX 36 = strong trend); 4H STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.7 ATR in 10 candles)); 1H STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.4 ATR in 10 candles))</li><li>Bear case: no clear direction on 1W RANGE</li><li>Risk manager: LONG: no veto (SUI regime: LONG allowed) · SHORT: VETO - SUI regime: LONG allowed (1D/4H/1H bullish, 1W RANGE)</li></ul>
+<p><strong>UNI</strong></p>
+<ul><li>Bull case: 1W EXPANSION (close above EMA-fast above EMA-slow; EMA-fast rising (+2.0 ATR in 10 candles)); 1D STRONG_BULL (close above EMA-fast above EMA-slow; EMA-fast rising (+1.6 ATR in 10 candles)); 1H WEAK_BULL (close above EMA-fast above EMA-slow; swing structure up (HH/HL))</li><li>Bear case: no clear direction on 4H TRANSITION</li><li>Risk manager: LONG: no veto (UNI regime: LONG allowed) · SHORT: VETO - UNI regime: LONG allowed (1D/1H bullish, 1W EXPANSION)</li></ul>
+<p>"No veto" is <strong>never</strong> a reason to trade. It only means the risk checks did not block a long. There is no strategy signal. (<em>EMA</em> = a moving average of price. <em>ATR</em> = the average size of one candle's move. <em>ADX</em> = a trend-strength gauge.)</p>
+<h2>News and events</h2>
+<p>Feeds fetched 2026-09-27 13:18 UTC (fresh). Headlines are <strong>CLAIMs</strong>, not evidence.</p>
+<ul><li><strong>2026-09-27 12:00 · CoinDesk:</strong> an analysis of how months of work on the US crypto Clarity Act fell apart. <em>Why it matters:</em> a US crypto market-structure law looks stalled, which affects the regulation mood. <a href="https://www.coindesk.com/news-analysis/2026/09/27/how-months-of-work-on-the-clarity-act-all-fell-apart">https://www.coindesk.com/news-analysis/2026/09/27/how-months-of-work-on-the-clarity-act-all-fell-apart</a></li><li><strong>2026-09-27 09:57 · Cointelegraph:</strong> Bitcoin miner Riot Platforms repays a $200M credit facility and releases collateral. <em>Why it matters:</em> miners under less debt pressure have less need to sell BTC. It is a small, indirect factor. <a href="https://cointelegraph.com/news/riot-platforms-repays-200m-credit-facility-releases-collateral">https://cointelegraph.com/news/riot-platforms-repays-200m-credit-facility-releases-collateral</a></li><li>No headline in the feeds names one of our 7 coins directly.</li></ul>
+<p><strong>Options expiry (Deribit).</strong> An <em>options expiry</em> is when many option contracts end. Price can be pulled toward <em>max pain</em> (the strike where option buyers get the least), and it can swing around the expiry.</p>
+<ul><li>BTC 2026-09-28 08:00 UTC (in 19 h): open interest 4,099.6 BTC (~$0.35bn), put/call 0.65, max pain 84,000.</li><li>ETH 2026-09-28 08:00 UTC (in 19 h): open interest 31,014.0 ETH (~$0.08bn), put/call 2.12 (many more puts than calls), max pain 2,680.</li></ul>
+<p><strong>Futures (engine):</strong> <em>funding</em> (the fee longs pay shorts) is slightly negative on BTC (-0.0018%) and ZEC (-0.0125%), and small and positive on the others. The <em>long/short ratio</em> is high on XRP (2.81), so many traders there are long. Crowded longs can unwind fast.</p>
+<p><strong>Binance notices:</strong> no listing or delisting of our 7 signal coins.</p>
+<p><strong>Event calendar (engine, next 7 days):</strong></p>
+<ul><li>2026-09-30 12:30 UTC - US GDP (Third Estimate), 2nd Quarter 2026</li><li>2026-09-30 12:30 UTC - US PCE / Personal Income and Outlays (Aug data)</li><li>2026-10-02 12:30 UTC - US jobs report / Employment Situation (Sep data)</li></ul>
+<p>No CPI or FOMC falls in the next 7 days, so nothing is missing from the calendar.</p>
+<h2>Signals explained</h2>
+<p><strong>Live signals (APPROVED):</strong> none. <strong>Paper / validation signals:</strong> 0. <strong>Watched setups:</strong> none.</p>
+<p>Strategy health (BACKTEST, last 24 hours), the same list as this morning:</p>
+<ol><li>Moved to FAILED: R4-BBRSI v1.0 (1h and 30m) and donchian_breakout-VEXIT v1.0 (1h and 30m).</li><li>Moved to BACKTESTING: donchian_breakout-VEXIT v1.0 4h, bb_squeeze_breakout v1.0 1h, macd_trend_cross v1.0 4h.</li><li>None of them is approved. None sends trade emails.</li></ol>
+<p>No signal - no trade is a valid result.</p>
+<h2>Do and don't today</h2>
+<p><strong>Do</strong></p>
+<ul><li>Wait for a LIVE (APPROVED) signal email before thinking about any trade.</li><li>Let the 2026-09-28 08:00 UTC options expiry pass before judging BTC and ETH.</li><li>Note the blackouts: 2026-09-30 11:30-13:30 UTC (GDP and PCE) and 2026-10-02 11:30-13:30 UTC (jobs report).</li></ul>
+<p><strong>Don't</strong></p>
+<ul><li>Don't trade BTC in either direction. Its veto means "not now".</li><li>Don't treat "no veto" on ETH, ZEC, SOL, SUI or UNI as a buy signal.</li><li>Don't act on a BACKTESTING strategy's good test numbers. Only approved (LIVE) strategies count.</li><li>Don't trade from headlines. They are claims, not signals.</li></ul>
+<h2>Pages that failed to open</h2>
+<ul><li>none (this run used only the engine's feeds file; no web pages were opened)</li></ul>
+<h2>Run log</h2>
+<ul><li>run: started 2026-09-27 13:21 UTC, finished 2026-09-27 13:27 UTC; problems: none</li></ul>
+<p><strong>Research signal. Not financial advice.</strong></p></article><footer>Source: reports/claude/briefings/2026-09-27-2120.md · Research signal. Not financial advice.</footer></main></body></html>
