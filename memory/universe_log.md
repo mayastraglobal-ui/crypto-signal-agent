@@ -1597,3 +1597,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-28 15:11 UTC
 - **EXCLUDED** PORTAL - 7-day average volume $9M < $50M; 24h move -38.2% is beyond ±25% - suspended for the rest of the UTC day; spread 0.134% > 0.1%; order book too thin: $47k within 1% (need $250k)
+
+## 2026-11-28 16:11 UTC
+- **EXCLUDED** PORTAL - 7-day average volume $9M < $50M; 24h move -47.6% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $35k within 1% (need $250k)
