@@ -1,20 +1,20 @@
 # Weekly review · 2026-W48
 
-Made 2026-11-28 11:11 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
+Made 2026-11-28 12:12 UTC by the hourly scan (engine/weekly_review.py). Live = the program's 🔵 TEST setups (the GitHub record, no 5m check) and 🟡 PAPER signals, closed, after fees unless it says before fees. Promotion to PAPER needs the operator's tap; LIVE still needs the full pass bar and the approval line.
 
 ## System check
 
 - ✅ nightly research ran on 7 of the last 7 days (last 2026-11-28)
-- ✅ hourly scan: last run 2026-11-28 11:11 UTC
+- ✅ hourly scan: last run 2026-11-28 12:12 UTC
 - ✅ program rotation: 93 of 93 strategy / timeframe tests re-tested in the last 7 days
-- ✅ live watcher: last heartbeat 2026-11-28 09:51 UTC (20 min ago)
-- ✅ TEST setups closed this week (GitHub record): 51
+- ✅ live watcher: last heartbeat 2026-11-28 10:52 UTC (20 min ago)
+- ✅ TEST setups closed this week (GitHub record): 46
 
 ## Totals
 
 - **Your alerts** (setups that could reach your Telegram): 67 closed since the start, +0.35R a trade; this week 32 (-4.78R)
-- Silent research records (strategies NOT sent to you, kept to check the research): 202 closed, -0.03R a trade; this week 20 (-9.23R)
-- TEST: 264 closed setups since the start, +0.06R a trade; this week 51 (-14.97R) (both groups)
+- Silent research records (strategies NOT sent to you, kept to check the research): 202 closed, -0.03R a trade; this week 15 (-5.22R)
+- TEST: 264 closed setups since the start, +0.06R a trade; this week 46 (-10.96R) (both groups)
 - PAPER: 5 closed signals, +0.46R a trade; this week 1 (+0.96R)
 
 ## Promote to 🟡 PAPER (your tap)
@@ -103,7 +103,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P07-SQUEEZE-RETEST-V4 | 4h | BTC | TEST | ✅ yes | 1 | 0 | -1.11R | -1.03R | 0 (+0.0R) | +0.43R | -1.11R over 1 trade: too early to say anything |
 | P12-LEADER-V1 | 4h | ZEC | TEST | ✅ yes | 1 | 0 | -1.02R | -1.01R | 0 (+0.0R) | +0.41R | -1.02R over 1 trade: too early to say anything |
 | TRD-H4-BREAKOUT-S3 | 1h | BTC | TEST | silent | 15 | 47 | +0.48R | +0.52R | 0 (+0.0R) | +0.34R | +0.48R over 15 trades: promising, not proven |
-| TRD-H4-BREAKOUT-S3 | 1h | ETH | TEST | silent | 15 | 33 | +0.11R | +0.14R | 3 (-1.9R) | +0.07R | +0.11R over 15 trades: still uncertain - could be luck |
+| TRD-H4-BREAKOUT-S3 | 1h | ETH | TEST | silent | 15 | 33 | +0.11R | +0.14R | 0 (+0.0R) | +0.07R | +0.11R over 15 trades: still uncertain - could be luck |
 | P01-BREAKOUT-V2 | 30m | BTC | TEST | silent | 12 | 50 | +0.53R | +0.60R | 1 (-1.1R) | +0.10R | +0.53R over 12 trades: promising, not proven |
 | P04-MACD-SUPERTREND-V5 | 30m | XRP | TEST | silent | 11 | 27 | -0.22R | -0.12R | 0 (+0.0R) | +0.01R | -0.22R over 11 trades: not working so far |
 | P01-BREAKOUT-V2 | 1h | BTC | TEST | silent | 10 | 40 | -0.01R | +0.04R | 0 (+0.0R) | +0.12R | -0.01R over 10 trades: not working so far |
@@ -111,7 +111,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | TRD-H4-BREAKOUT-S3 | 1h | XRP | TEST | silent | 10 | 30 | -0.14R | -0.11R | 0 (+0.0R) | +0.30R | -0.14R over 10 trades: not working so far |
 | P01-BREAKOUT-V2 | 30m | ETH | TEST | silent | 9 | 33 | -0.08R | -0.03R | 1 (-1.1R) | +0.14R | -0.08R over 9 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 30m | SOL | TEST | silent | 9 | 22 | -0.44R | -0.36R | 0 (+0.0R) | +0.07R | -0.44R over 9 trades: too early to say anything |
-| P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 8 | 0 | -0.98R | -0.93R | 2 (-2.1R) | +0.02R | -0.98R over 8 trades: too early to say anything |
+| P01-BREAKOUT-V5 | 30m | SUI | TEST | silent | 8 | 0 | -0.98R | -0.93R | 1 (-1.1R) | +0.02R | -0.98R over 8 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | SUI | TEST | silent | 7 | 14 | -0.57R | -0.55R | 2 (+0.0R) | +0.07R | -0.57R over 7 trades: too early to say anything |
 | P03-FIB-PULLBACK-V5 | 1h | SUI | TEST | silent | 7 | 43 | +0.23R | +0.27R | 0 (+0.0R) | +0.03R | +0.23R over 7 trades: too early to say anything |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | TEST | silent | 7 | 29 | -0.25R | -0.23R | 0 (+0.0R) | +0.17R | -0.25R over 7 trades: too early to say anything |
@@ -122,7 +122,7 @@ None this week (each needs 10+ closed live TEST setups, positive after fees, and
 | P08-SESSION-BREAKOUT-V4 | 1h | BTC | TEST | silent | 4 | 50 | +0.38R | +0.43R | 0 (+0.0R) | +0.04R | +0.38R over 4 trades: too early to say anything |
 | TRD-H4-BREAKOUT-S3 | 1h | SUI | TEST | silent | 4 | 50 | +0.35R | +0.37R | 2 (-0.1R) | +0.07R | +0.35R over 4 trades: too early to say anything |
 | P01-BREAKOUT-V2 | 1h | SOL | TEST | silent | 3 | 0 | -1.05R | -1.02R | 0 (+0.0R) | +0.02R | -1.05R over 3 trades: too early to say anything |
-| P01-BREAKOUT-V2 | 30m | SUI | TEST | silent | 3 | 0 | -1.06R | -1.02R | 1 (-1.1R) | +0.12R | -1.06R over 3 trades: too early to say anything |
+| P01-BREAKOUT-V2 | 30m | SUI | TEST | silent | 3 | 0 | -1.06R | -1.02R | 0 (+0.0R) | +0.12R | -1.06R over 3 trades: too early to say anything |
 | P01-BREAKOUT-V5 | 1h | ETH | TEST | silent | 3 | 0 | -0.84R | -0.79R | 0 (+0.0R) | +0.01R | -0.84R over 3 trades: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | TEST | silent | 3 | 33 | +0.10R | +0.15R | 0 (+0.0R) | +0.04R | +0.10R over 3 trades: too early to say anything |
 | P04-MACD-SUPERTREND-V2 | 30m | SUI | TEST | silent | 3 | 67 | +0.82R | +0.87R | 0 (+0.0R) | +0.19R | +0.82R over 3 trades: too early to say anything |
