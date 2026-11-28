@@ -11,7 +11,7 @@
  "suspended": {
   "PORTAL": "2026-11-28"
  },
- "runs": 1378,
+ "runs": 1379,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -186,7 +186,6 @@
   ],
   "PORTAL": [
    "big_move",
-   "spread",
    "thin_book",
    "volume_7d"
   ]

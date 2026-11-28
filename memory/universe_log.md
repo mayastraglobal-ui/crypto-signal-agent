@@ -1591,3 +1591,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-28 07:11 UTC
 - **FLAG** BTC - possible wash volume: 24h volume is 1,142x the 1% order-book depth (flag only, not excluded)
+
+## 2026-11-28 14:16 UTC
+- **EXCLUDED** PORTAL - 7-day average volume $9M < $50M; 24h move -34.4% is beyond ±25% - suspended for the rest of the UTC day; order book too thin: $44k within 1% (need $250k)
