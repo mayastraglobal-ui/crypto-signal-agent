@@ -1585,3 +1585,6 @@ JOIN / LEAVE = signal list (top 7) · EXCLUDED / ELIGIBLE = rule results · FLAG
 
 ## 2026-11-28 00:12 UTC
 - **FLAG** PORTAL - price data DEGRADED - stays in the list, but no signals
+
+## 2026-11-28 02:13 UTC
+- **EXCLUDED** PORTAL - 7-day average volume $9M < $50M; 24h move +232.1% is beyond ±25% - suspended for the rest of the UTC day; spread 0.145% > 0.1%; order book too thin: $9k within 1% (need $250k)

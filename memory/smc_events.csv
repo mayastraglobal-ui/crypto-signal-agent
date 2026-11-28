@@ -42540,3 +42540,21 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-28 00:45,XRP,15m,OB_INVALID,bear,,0.9483,0.9498,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-28 01:00,XRP,15m,SWEEP,bear,0.951,,,0.168,,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
 2026-11-28 01:00,XRP,15m,BREAKER_RETEST,bull,,0.9483,0.9498,,,1h,TRANSITION,failed order block retested from the other side,smc-1.0,Binance
+2026-11-28 01:30,BTC,30m,BOS,bull,60047.24,,,0.262,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 02:00,BTC,30m,FVG,bull,,60020.29,60115.9,0.369,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 01:15,BTC,15m,FVG_FILLED,bull,,59876.86,59923.09,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 01:30,BTC,15m,FVG,bull,,59999.63,60069.87,0.468,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:00,SOL,30m,FVG,bull,,71.82,71.99,0.405,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 01:15,SOL,15m,FVG_FILLED,bear,,71.61,71.93,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:00,SOL,15m,FVG_FILLED,bear,,72.1,72.26,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:00,XRP,1h,SWEEP,bear,0.9543,,,0.11,Asia,4h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-28 01:30,XRP,30m,SWEEP,bear,0.9543,,,0.117,Asia,1h,TRANSITION,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-28 01:15,XRP,15m,WEAK_BREAK,bull,0.951,,,0.103,Asia,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 01:30,XRP,15m,SWEEP,bear,0.9543,,,0.204,Asia,1h,TRANSITION,buy-side liquidity swept (equal highs),smc-1.0,Binance
+2026-11-28 02:00,ZEC,30m,FVG,bull,,739.05,750.07,1.039,Asia,1h,RANGE,,smc-1.0,Binance
+2026-11-28 01:15,ZEC,15m,OB_INVALID,bear,,733.6,738.24,,Asia,1h,WEAK_BEAR,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-28 01:30,ZEC,15m,SWEEP,bear,755.7,,,0.103,Asia,1h,WEAK_BEAR,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-28 01:30,ZEC,15m,CHOCH,bull,750.0,,,0.023,Asia,1h,WEAK_BEAR,with displacement,smc-1.0,Binance
+2026-11-28 01:30,ZEC,15m,ORDER_BLOCK,bull,,731.68,738.72,,Asia,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
+2026-11-28 01:30,ZEC,15m,FVG,bull,,739.05,744.9,0.862,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-28 01:45,ZEC,15m,FVG,bull,,745.9,750.07,0.597,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
