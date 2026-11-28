@@ -42656,3 +42656,5 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-28 08:30,ZEC,15m,WEAK_BREAK,bear,734.91,,,0.087,London,1h,RANGE,no displacement,smc-1.0,Binance
 2026-11-28 08:45,ZEC,15m,OB_INVALID,bull,,731.68,738.72,,London,1h,RANGE,closed through the order block - it becomes a breaker,smc-1.0,Binance
 2026-11-28 09:00,ZEC,15m,BREAKER_RETEST,bear,,731.68,738.72,,London,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
+2026-11-28 09:45,SOL,15m,BOS,bear,70.94,,,0.258,London,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 10:00,XRP,30m,FVG_RETRACE,bear,,0.9423,0.944,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
