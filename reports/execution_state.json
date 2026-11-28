@@ -1,5 +1,9 @@
 {
- "issues": {},
- "since": {},
+ "issues": {
+  "data|PORTAL|1d": "PORTAL 1d data: DEGRADED: volume 115x normal on candle 11-27 00:00 UTC (possible bad data)"
+ },
+ "since": {
+  "data|PORTAL|1d": "2026-11-28 00:12 UTC"
+ },
  "fees": "{\"long\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"market\": \"futures\", \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}, \"short\": {\"funding_pct_per_8h\": 0.01, \"funding_real_x\": 1.0, \"maker_fee_pct\": 0.02, \"slippage_pct\": 0.05, \"taker_fee_pct\": 0.05}}"
 }

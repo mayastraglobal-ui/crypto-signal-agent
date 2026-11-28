@@ -278,3 +278,7 @@ Every entry is a record: a `###` title, one line `- timestamp: … · source: �
 ### END ZEC 5m data: DEGRADED: volume 51x normal on candle 11-23 13:55 UTC (possible bad data)
 - timestamp: 2026-11-23 15:00 UTC · source: engine: hourly scan (data check) · evidence: FACT: the data passes the checks again · confidence: measured · strategy: - · asset: ZEC · timeframe: - · regime: - · review: 2026-12-23
   - problem first seen 2026-11-23 14:11 UTC UTC
+
+### START PORTAL 1d data: DEGRADED: volume 115x normal on candle 11-27 00:00 UTC (possible bad data)
+- timestamp: 2026-11-28 00:12 UTC · source: engine: hourly scan (data check) · evidence: FACT: measured by engine/data_quality.py · confidence: measured · strategy: - · asset: PORTAL · timeframe: - · regime: - · review: 2026-12-28
+  - signals from this data are blocked while it lasts

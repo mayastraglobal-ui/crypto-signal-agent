@@ -9,9 +9,9 @@
  "in_streak": {},
  "out_streak": {},
  "suspended": {
-  "PORTAL": "2026-11-27"
+  "PORTAL": "2026-11-28"
  },
- "runs": 1364,
+ "runs": 1365,
  "last_eligibility": {
   "BTC": [],
   "ETH": [],
@@ -255,6 +255,8 @@
    "data_degraded"
   ],
   "RWUSD": [],
-  "PORTAL": []
+  "PORTAL": [
+   "data_degraded"
+  ]
  }
 }

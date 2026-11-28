@@ -1,25 +1,26 @@
 # Trend portfolio (paper)
 
-Daily close 2026-11-26 (updated 2026-11-27 01:39 UTC). 9 trend signals per coin (lookbacks 5, 10, 20, 30, 60, 90, 150, 250, 360 days): ON at a close above the lookback's high, OFF below its ratcheting mid-line. Target = the share ON. Long only, no leverage, equal parts. Paper only (`docs/TREND_PORTFOLIO.md`).
+Daily close 2026-11-27 (updated 2026-11-28 00:13 UTC). 9 trend signals per coin (lookbacks 5, 10, 20, 30, 60, 90, 150, 250, 360 days): ON at a close above the lookback's high, OFF below its ratcheting mid-line. Target = the share ON. Long only, no leverage, equal parts. Paper only (`docs/TREND_PORTFOLIO.md`).
 
 | Coin | Trends up | Target | Yesterday | Paper position | Change today | Price |
 |---|---|---:|---:|---:|---:|---:|
-| BNB | 0/9 | 0% | 0% | $0.00 | - | 554.21 |
-| BTC | 0/9 | 0% | 0% | $0.00 | - | 60,577.2 |
-| ETH | 0/9 | 0% | 0% | $0.00 | - | 1,689.85 |
-| SOL | 0/9 | 0% | 0% | $0.00 | - | 71.03 |
-| SUI | 0/9 | 0% | 0% | $0.00 | - | 0.6685 |
-| XRP | 0/9 | 0% | 0% | $0.00 | - | 0.9438 |
-| ZEC | 0/9 | 0% | 0% | $0.00 | - | 682.52 |
+| BNB | 0/9 | 0% | 0% | $0.00 | - | 554.72 |
+| BTC | 0/9 | 0% | 0% | $0.00 | - | 59,923.1 |
+| ETH | 0/9 | 0% | 0% | $0.00 | - | 1,662.48 |
+| SOL | 0/9 | 0% | 0% | $0.00 | - | 71.66 |
+| SUI | 0/9 | 0% | 0% | $0.00 | - | 0.6734 |
+| XRP | 0/9 | 0% | 0% | $0.00 | - | 0.9489 |
+| ZEC | 0/9 | 0% | 0% | $0.00 | - | 735.54 |
 
 **Paper account: $961** (-3.90% since 2026-10-28, start $1,000) · invested $0.00.
 
-Backtest on the candles the scan has (since 2024-03-03, 999 days, costs included): portfolio +24.7% a year, Sharpe 1.2, worst drop 17.2% · holding the same coins +24.6% a year, Sharpe 0.66, worst drop 51.5%.
+Backtest on the candles the scan has (since 2024-03-04, 999 days, costs included): portfolio +24.8% a year, Sharpe 1.21, worst drop 17.2% · holding the same coins +24.0% a year, Sharpe 0.66, worst drop 51.5%.
 
 ## Paper account, last 30 days
 
 | Day | Account | Day's result |
 |---|---:|---:|
+| 2026-11-27 | $961 | +0.00% |
 | 2026-11-26 | $961 | +0.00% |
 | 2026-11-25 | $961 | +0.00% |
 | 2026-11-24 | $961 | +0.00% |
@@ -49,4 +50,3 @@ Backtest on the candles the scan has (since 2024-03-03, 999 days, costs included
 | 2026-10-31 | $987 | -0.10% |
 | 2026-10-30 | $988 | +0.25% |
 | 2026-10-29 | $985 | -1.44% |
-| 2026-10-28 | $1,000 | -0.02% |

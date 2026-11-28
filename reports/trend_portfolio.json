@@ -1,8 +1,8 @@
 {
  "version": 1,
- "day_ms": 1795651200000,
- "day": "2026-11-26",
- "updated_utc": "2026-11-27 01:39",
+ "day_ms": 1795737600000,
+ "day": "2026-11-27",
+ "updated_utc": "2026-11-28 00:13",
  "started": "2026-10-28",
  "start_capital": 1000.0,
  "equity": 961.03,
@@ -22,7 +22,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 554.21,
+   "price": 554.72,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -32,7 +32,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 60577.18,
+   "price": 59923.1,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -42,7 +42,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 1689.85,
+   "price": 1662.48,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -52,7 +52,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 71.03,
+   "price": 71.66,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -62,7 +62,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.6685,
+   "price": 0.6734,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -72,7 +72,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 0.9438,
+   "price": 0.9489,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -82,7 +82,7 @@
    "n": 9,
    "weight": 0.0,
    "yesterday": 0.0,
-   "price": 682.52,
+   "price": 735.54,
    "usd": 0.0,
    "change_usd": 0.0,
    "longest_on": 0
@@ -508,6 +508,20 @@
     "XRP": 0.0,
     "ZEC": 0.0
    }
+  },
+  {
+   "day": "2026-11-27",
+   "equity": 961.03,
+   "ret_pct": 0.0,
+   "weights": {
+    "BNB": 0.0,
+    "BTC": 0.0,
+    "ETH": 0.0,
+    "SOL": 0.0,
+    "SUI": 0.0,
+    "XRP": 0.0,
+    "ZEC": 0.0
+   }
   }
  ],
  "lookbacks": [
@@ -522,15 +536,15 @@
   360
  ],
  "backtest": {
-  "since": "2024-03-03",
+  "since": "2024-03-04",
   "days": 999,
   "portfolio": {
-   "cagr_pct": 24.7,
-   "sharpe": 1.2,
+   "cagr_pct": 24.8,
+   "sharpe": 1.21,
    "max_dd_pct": 17.2
   },
   "hold": {
-   "cagr_pct": 24.6,
+   "cagr_pct": 24.0,
    "sharpe": 0.66,
    "max_dd_pct": 51.5
   }
