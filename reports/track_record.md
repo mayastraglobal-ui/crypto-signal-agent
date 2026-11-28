@@ -1,6 +1,6 @@
 # 📈 Live track record
 
-Updated 2026-11-28 08:08 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
+Updated 2026-11-28 09:11 UTC by the hourly scan (engine/track_record.py). Every TEST / PAPER / LIVE setup the hourly scan recorded (entry at the signal close, after fees). 'Your alerts' = the setups that could reach your Telegram (versions of one setup counted once); the silent research records are the other positive program pairs GitHub keeps for the research. The alerts actually sent and your ✅ / ❌ are in the journal review.
 
 | Stage | Closed | Win % | Average | Total | Worst drawdown | Longest losing run |
 |---|---:|---:|---:|---:|---:|---:|
@@ -106,7 +106,7 @@ Warning signs (no pause yet):
 | P03-FIB-PULLBACK-V5 | 1h | SUI | 🔵 TEST | silent | 7 | 43 | +0.23R | +0.03R | +1.57R | 4.31R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SOL | 🔵 TEST | silent | 7 | 29 | -0.25R | +0.17R | -1.78R | 2.15R | ✅ |
 | P01-BREAKOUT-V2 | 15m | BTC | 🔵 TEST | silent | 6 | 33 | -0.59R | +0.09R | -3.57R | 3.57R | ✅ |
-| P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 60 | +0.73R | +0.01R | +3.65R | 2.16R | ✅ |
+| P04-MACD-SUPERTREND-V5 | 30m | SUI | 🔵 TEST | silent | 5 | 60 | +0.73R | +0.02R | +3.65R | 2.16R | ✅ |
 | P08-SESSION-BREAKOUT-V4 | 1h | BTC | 🔵 TEST | silent | 4 | 50 | +0.38R | +0.04R | +1.51R | 1.12R | ✅ |
 | TRD-H4-BREAKOUT-S3 | 1h | SUI | 🔵 TEST | silent | 4 | 50 | +0.35R | +0.07R | +1.39R | 2.07R | ✅ |
 | P04-MACD-SUPERTREND-V2 | 1h | SOL | 🔵 TEST | silent | 3 | 33 | +0.10R | +0.04R | +0.31R | 1.07R | ✅ |
