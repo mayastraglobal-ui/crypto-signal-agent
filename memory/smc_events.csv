@@ -42558,3 +42558,20 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-28 01:30,ZEC,15m,ORDER_BLOCK,bull,,731.68,738.72,,Asia,1h,WEAK_BEAR,last bearish candle before the displacement,smc-1.0,Binance
 2026-11-28 01:30,ZEC,15m,FVG,bull,,739.05,744.9,0.862,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
 2026-11-28 01:45,ZEC,15m,FVG,bull,,745.9,750.07,0.597,Asia,1h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-28 03:00,BTC,30m,FVG_RETRACE,bull,,60020.29,60115.9,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-28 03:00,BTC,30m,FVG_FILLED,bull,,60020.29,60115.9,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:45,BTC,15m,FVG_RETRACE,bull,,59999.63,60069.87,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-28 02:45,BTC,15m,FVG_FILLED,bull,,59999.63,60069.87,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 03:00,BTC,15m,FVG,bear,,59993.52,60140.0,1.09,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 03:00,ETH,15m,FVG,bear,,1665.82,1668.1,0.513,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:30,SOL,30m,FVG_RETRACE,bull,,71.82,71.99,,Asia,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-28 03:00,SOL,30m,FVG_FILLED,bull,,71.82,71.99,,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:45,SOL,15m,FVG,bear,,72.01,72.08,0.268,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 03:00,SOL,15m,FVG,bear,,71.8,71.98,0.697,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 02:45,XRP,15m,FVG,bear,,0.9525,0.954,0.528,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 03:00,XRP,15m,FVG,bear,,0.9512,0.9523,0.396,Asia,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 03:00,ZEC,1h,FVG,bull,,739.05,746.83,0.49,Asia,4h,WEAK_BEAR,,smc-1.0,Binance
+2026-11-28 02:30,ZEC,30m,SWEEP,bear,760.55,,,0.184,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-28 03:00,ZEC,30m,FVG_RETRACE,bull,,739.05,750.07,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
+2026-11-28 02:30,ZEC,15m,SWEEP,bear,760.55,,,0.285,Asia,1h,RANGE,buy-side liquidity swept (swing high),smc-1.0,Binance
+2026-11-28 03:00,ZEC,15m,FVG_RETRACE,bull,,745.9,750.07,,Asia,1h,RANGE,first retrace into the gap,smc-1.0,Binance
