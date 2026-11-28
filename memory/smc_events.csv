@@ -42658,3 +42658,18 @@ known_utc,coin,tf,event,direction,level,zone_low,zone_high,size_atr,killzone_ny,
 2026-11-28 09:00,ZEC,15m,BREAKER_RETEST,bear,,731.68,738.72,,London,1h,RANGE,failed order block retested from the other side,smc-1.0,Binance
 2026-11-28 09:45,SOL,15m,BOS,bear,70.94,,,0.258,London,1h,TRANSITION,no displacement,smc-1.0,Binance
 2026-11-28 10:00,XRP,30m,FVG_RETRACE,bear,,0.9423,0.944,,London,1h,TRANSITION,first retrace into the gap,smc-1.0,Binance
+2026-11-28 11:00,BTC,30m,SWEEP,bull,59188.34,,,0.6,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 11:00,BTC,30m,FVG,bear,,59361.1,59521.81,0.67,,1h,TRANSITION,,smc-1.0,Binance
+2026-11-28 10:15,BTC,15m,BOS,bear,59508.46,,,0.49,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 11:00,BTC,15m,SWEEP,bull,59188.34,,,0.908,,1h,TRANSITION,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 11:00,ETH,15m,BOS,bear,1647.68,,,0.18,,1h,WEAK_BEAR,no displacement,smc-1.0,Binance
+2026-11-28 11:00,SOL,30m,BOS,bear,70.76,,,0.029,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 11:00,SOL,30m,OB_INVALID,bull,,70.84,71.2,,,1h,TRANSITION,closed through the order block - it becomes a breaker,smc-1.0,Binance
+2026-11-28 10:45,SOL,15m,BOS,bear,70.83,,,0.131,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 11:00,XRP,30m,BOS,bear,0.939,,,0.198,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 11:00,XRP,15m,BOS,bear,0.939,,,0.307,,1h,TRANSITION,no displacement,smc-1.0,Binance
+2026-11-28 11:00,ZEC,1h,SWEEP,bull,721.7,,,0.177,,4h,WEAK_BEAR,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 11:00,ZEC,30m,SWEEP,bull,721.7,,,0.284,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 10:30,ZEC,15m,SWEEP,bull,729.17,,,0.115,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
+2026-11-28 10:45,ZEC,15m,WEAK_BREAK,bear,729.17,,,0.14,,1h,RANGE,no displacement,smc-1.0,Binance
+2026-11-28 11:00,ZEC,15m,SWEEP,bull,721.7,,,0.444,,1h,RANGE,sell-side liquidity swept (swing low),smc-1.0,Binance
